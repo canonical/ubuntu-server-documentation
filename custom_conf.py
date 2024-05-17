@@ -19,7 +19,7 @@ import datetime
 ############################################################
 
 # Product name
-project = 'Documentation starter pack'
+project = 'Ubuntu Server'
 author = 'Canonical Group Ltd'
 
 # The title you want to display for the documentation in the sidebar.
@@ -179,7 +179,7 @@ custom_required_modules = []
 
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
-    'doc-cheat-sheet*',
+    'cheatsheets/',
     ]
 
 # Add CSS files (located in .sphinx/_static/)

@@ -1,5 +1,4 @@
-Starter pack
-============
+# Ubuntu Server documentation
 
 This starter pack contains the files you need to quickly set up your Sphinx documentation.
 
@@ -17,4 +16,4 @@ More information is available in the `reStructuredText style guide`_.
    :hidden:
    :maxdepth: 2
 
-   ReadMe <readme>
+   ReadMe <../readme.rst>
