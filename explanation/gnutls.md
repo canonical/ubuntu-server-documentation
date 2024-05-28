@@ -7,7 +7,7 @@ This config file can be used to disable (or mark as insecure) algorithms and
 protocols in a system-wide manner, overriding the library defaults. Note that,
 intentionally, any algorithms or protocols that were disabled or marked as insecure cannot then be re-enabled or marked as secure.
 
-There are many configuration options available for GnuTLs, and we strongly
+There are many configuration options available for GnuTLS, and we strongly
 recommend that you carefully read the upstream documentation listed in the
 References section at the end of this page if creating this file or making changes to it.
 
@@ -257,7 +257,7 @@ Connecting to '10.0.100.87:443'...
 *** Received alert [40]: Handshake failed
 ```
 
-And given GnuTLS's behavior regarding re-enabling a cipher that was once removed, we cannot allow AES128 from the command line either:
+And given GnuTLS' behaviour regarding re-enabling a cipher that was once removed, we cannot allow AES128 from the command line either:
 
 ```console
 $ gnutls-cli --priority="NORMAL:+AES-128-GCM"  j-server.lxd

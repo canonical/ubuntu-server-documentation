@@ -21,7 +21,7 @@ If you're not sure how or where to get started with a topic, these introductory 
 | Security ||
 || [Introduction to security](explanation/introduction-to-security.md) |
 || [Introduction to crypto libraries](explanation/introduction-to-crypto-libraries.md) |
-|| [Introduction to Wireguard VPN](explanation/introduction-to-wireguard-vpn.md)
+|| [Introduction to WireGuard VPN](explanation/introduction-to-wireguard-vpn.md)
 | Useful services ||
 || [Introduction to mail servers](explanation/introduction-to-mail-services.md) |
 || [Introduction to web servers](explanation/introduction-to-web-servers.md)
@@ -107,6 +107,7 @@ If you're not sure how or where to get started with a topic, these introductory 
 || [About 'apt upgrade' and phased updates](explanation/about-apt-upgrade-and-phased-updates.md) |
 || [Third party repository usage](explanation/third-party-repository-usage.md) |
 || [Changing package files](explanation/changing-package-files.md) |
+|| [Advance testing of updates in best practice server deployments](explanation/advance-testing-of-updates-in-best-practice-server-deployments.md) |
 |||
 
 ## Web servers
@@ -190,6 +191,7 @@ explanation/iscsi-initiator-or-client.md
 explanation/about-apt-upgrade-and-phased-updates.md
 explanation/third-party-repository-usage.md
 explanation/changing-package-files.md
+explanation/advance-testing-of-updates-in-best-practice-server-deployments.md
 explanation/about-web-servers.md
 explanation/about-squid-proxy-servers.md
 explanation/tuned.md

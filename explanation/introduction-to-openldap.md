@@ -12,9 +12,9 @@ that it's understood as such.
 
 - An **entry** consists of a set of **attributes**.
 
-- An **attribute** has a **key** (a name or description) and one or more **values**. Every attribute must be defined in at least one **objectClass**.
+- An **attribute** has a **key** (a name or description) and one or more **values**. Every attribute must be defined in at least one **`objectClass`**.
 
-- Attributes and objectClasses are defined in **schemas** (an objectClass is considered a special kind of attribute).
+- Attributes and `objectClasses` are defined in **schemas** (an `objectClass` is considered a special kind of attribute).
 
 - Each entry has a unique identifier: its **Distinguished Name** (DN or dn). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
 

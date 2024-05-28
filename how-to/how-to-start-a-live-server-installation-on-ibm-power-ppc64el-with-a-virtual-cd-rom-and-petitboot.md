@@ -351,4 +351,4 @@ The initial Subiquity installer screen will show up in the console:
 
 ```
 
-From this point, you can follow the normal Subiquity installation. For more details, refer to the [Subquity installer documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html).
+From this point, you can follow the normal Subiquity installation. For more details, refer to the [Subiquity installer documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html).

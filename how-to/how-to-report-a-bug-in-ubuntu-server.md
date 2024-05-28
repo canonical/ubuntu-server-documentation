@@ -2,7 +2,7 @@
 
 The Ubuntu project, including Ubuntu Server, [uses Launchpad](https://launchpad.net/) as its bug tracker. To file a bug, you will first need to [create a Launchpad account](https://help.launchpad.net/YourAccount/NewAccount).
 
-## Report bugs with apport-cli
+## Report bugs with `apport-cli`
 
 The preferred way to report a bug is with the `apport-cli` command. This command collects information from the machine on which it is run and publishes it to the bug report on Launchpad.
 
@@ -66,7 +66,7 @@ Choices:
 Please choose (1/C):  1
 ```
     
-The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the [Debian alternatives system](https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html). Examples of text-based browsers to install include links, elinks, lynx, and w3m. You can also manually point an existing browser at the given URL.
+The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the [Debian alternatives system](https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html). Examples of text-based browsers to install include links, ELinks, lynx, and w3m. You can also manually point an existing browser at the given URL.
 
 ### V: View
 

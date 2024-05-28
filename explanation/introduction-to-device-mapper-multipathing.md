@@ -45,7 +45,7 @@ For detailed setup instructions for multipath configuration see [DM-Multipath co
 
 ## Multipath devices
 
-Without multipath, each path from a server node to a storage controller is treated by the system as a separate device, even when the I/O path connects the same server node to the same storage controller. Multipath provides a way of organizing the I/O paths logically, by creating a single device on top of the underlying paths.
+Without multipath, each path from a server node to a storage controller is treated by the system as a separate device, even when the I/O path connects the same server node to the same storage controller. Multipath provides a way of organising the I/O paths logically, by creating a single device on top of the underlying paths.
 
 ### Multipath device identifiers
 

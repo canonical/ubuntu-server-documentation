@@ -1,6 +1,6 @@
 # Join a simple domain with the rid backend
 
-Let's expand on the configuration we had for the *rid* backend and complete the `/etc/samba/smb.conf` configuration file with the remaining details. We are joining a single domain called *EXAMPLE.INTERNAL*. The new configuration options were added at the end of the *[global]* section:
+Let's expand on the configuration we had for the *rid* backend and complete the `/etc/samba/smb.conf` configuration file with the remaining details. We are joining a single domain called `EXAMPLE.INTERNAL`. The new configuration options were added at the end of the `[global]` section:
 
     [global]
         security = ads
@@ -57,18 +57,18 @@ You can now revert the `hostnamectl` change from before, and set the hostname ba
 
     sudo hostnamectl hostname n1
 
-As the last step of the process, the *winbind* service must be restarted:
+As the last step of the process, the `winbind` service must be restarted:
 
     sudo systemctl restart winbind.service
 
 ## Verifying the join
 
-The quickest way to test the integrity of the domain join is via the *wbinfo* command:
+The quickest way to test the integrity of the domain join is via the `wbinfo` command:
 
     $ sudo wbinfo -t
     checking the trust secret for domain EXAMPLE via RPC calls succeeded
 
-The next verification step should be to actually try to resolve an existing username from the domain. In the *EXAMPLE.INTERNAL* domain, for example, we have some test users we can check:
+The next verification step should be to actually try to resolve an existing username from the domain. In the `EXAMPLE.INTERNAL` domain, for example, we have some test users we can check:
 
     $ id jammy@example.internal
     uid=1001103(EXAMPLE\jammy) gid=1000513(EXAMPLE\domain users) groups=1000513(EXAMPLE\domain users),1001103(EXAMPLE\jammy)
@@ -89,6 +89,5 @@ And finally, attempt a console login:
 
 The output above also shows the automatic on-demand home directory creation, according to the template defined in `/etc/samba/smb.conf`.
 
-> **NOTE**
->
-> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when refered to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+> **Note**:
+> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when referred to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.

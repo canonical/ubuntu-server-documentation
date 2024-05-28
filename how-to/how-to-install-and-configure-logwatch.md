@@ -2,7 +2,7 @@
 
 Logs are an invaluable source of information about problems that may arise in your server.  [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
 
-## Install `logwatch`
+## Install Logwatch
 
 Install `logwatch` using the following command:
 
@@ -52,21 +52,22 @@ sudo logwatch --detail Low --range today
 ```
 
 The report produced should look something like this:
+
+```text
+################### Logwatch 7.4.3 (12/07/16) ####################
+       Processing Initiated: Fri Apr 24 16:58:14 2020
+       Date Range Processed: today
+                             ( 2020-Apr-24 )
+                             Period is day.
+       Detail Level of Output: 0
+       Type of Output/Format: stdout / text
+       Logfiles for Host: `host1.mydomain.org`
+##################################################################
  
->  ################### Logwatch 7.4.3 (12/07/16) ####################
->         Processing Initiated: Fri Apr 24 16:58:14 2020
->         Date Range Processed: today
->                               ( 2020-Apr-24 )
->                               Period is day.
->         Detail Level of Output: 0
->         Type of Output/Format: stdout / text
->         Logfiles for Host: `host1.mydomain.org`
->  ##################################################################
-> 
->  --------------------- pam_unix Begin ------------------------
-> 
->  sudo:
->     Sessions Opened:
->        bryce -> root: 1 Time(s)
-> 
-> 
+--------------------- pam_unix Begin ------------------------
+ 
+sudo:
+   Sessions Opened:
+      bryce -> root: 1 Time(s)
+ 
+ 

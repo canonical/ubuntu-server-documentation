@@ -67,11 +67,11 @@ To use the tool, point it at the server you want to scan:
 $ sslscan j-server.lxd
 ```
 
-And you will get a report of the ciphers and algorithms supported by that server. [Consult its manpage](https://manpages.ubuntu.com/manpages/jammy/man1/sslscan.1.html) for more details.
+And you will get a report of the ciphers and algorithms supported by that server. [Consult its manpage](https://manpages.ubuntu.com/manpages/man1/sslscan.1.html) for more details.
 
 ## References
 
 * [OpenSSL s_server](https://manpages.ubuntu.com/manpages/kinetic/en/man1/openssl-s_server.1ssl.html)
 * [OpenSSL s_client](https://manpages.ubuntu.com/manpages/kinetic/en/man1/openssl-s_client.1ssl.html)
-* [sslscan](https://manpages.ubuntu.com/manpages/jammy/man1/sslscan.1.html)
-* [https://badssl.com](https://badssl.com/): excellent website that can be used to test a client against a multitude of certificates, algorithms, key sizes, protocol versions, and more.
+* [`sslscan`](https://manpages.ubuntu.com/manpages/man1/sslscan.1.html)
+* [`https://badssl.com`](https://badssl.com/): excellent website that can be used to test a client against a multitude of certificates, algorithms, key sizes, protocol versions, and more.

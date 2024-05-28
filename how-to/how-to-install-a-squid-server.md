@@ -25,7 +25,7 @@ sudo chmod a-w /etc/squid/squid.conf.original
 
 ### Change TCP port
 
-To set your Squid server to listen on TCP port 8888 instead of the default TCP port 3128, change the **http\_port** directive as such:
+To set your Squid server to listen on TCP port 8888 instead of the default TCP port 3128, change the **`http_port`** directive as such:
 
 ```text
 http_port 8888
@@ -33,7 +33,7 @@ http_port 8888
 
 ### Set the hostname
 
-Change the **visible\_hostname** directive to give the Squid server a specific hostname. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
+Change the **`visible_hostname`** directive to give the Squid server a specific hostname. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
     
 ```text
 visible_hostname weezie
@@ -41,7 +41,7 @@ visible_hostname weezie
 
 ### Configure on-disk cache
 
-The default setting is to use on-memory cache. By changing the **cache\_dir** directive you can configure use of an on-disk cache. The `cache_dir` directive takes the following arguments:
+The default setting is to use on-memory cache. By changing the **`cache_dir`** directive you can configure use of an on-disk cache. The `cache_dir` directive takes the following arguments:
 
 ```text
 cache_dir <Type> <Directory-Name> <Fs-specific-data> [options]
@@ -73,7 +73,7 @@ Using Squid's access control, you can configure use of Squid-proxied Internet se
    acl fortytwo_network src 192.168.42.0/24
     ```
 
-* Then, add the following to the **top** of the http\_access section of your `/etc/squid/squid.conf` file:
+* Then, add the following to the **top** of the `http_access` section of your `/etc/squid/squid.conf` file:
     
    ```text
    http_access allow fortytwo_network
@@ -103,7 +103,7 @@ sudo systemctl restart squid.service
 ```
 
 > **Note**:
-> If a formerly customised squid3 was used to set up the spool at `/var/log/squid3` to be a mountpoint, but otherwise kept the default configuration, the upgrade will fail. The upgrade tries to rename/move files as needed, but it can't do so for an active mountpoint. In that case you will need to adapt either the mountpoint or the config in `/etc/squid/squid.conf` so that they match.
+> If a formerly customised squid3 was used to set up the spool at `/var/log/squid3` to be a mount point, but otherwise kept the default configuration, the upgrade will fail. The upgrade tries to rename/move files as needed, but it can't do so for an active mount point. In that case you will need to adapt either the mount point or the config in `/etc/squid/squid.conf` so that they match.
 > The same applies if the **include** config statement was used to pull in more files from the old path at `/etc/squid3/`. In those cases you should move and adapt your configuration accordingly.
 
 ## Further reading

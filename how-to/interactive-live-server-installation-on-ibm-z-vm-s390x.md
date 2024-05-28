@@ -1,6 +1,5 @@
 # Interactive live server installation on IBM z/VM (s390x)
 
-
 Doing an interactive (manual) live installation as described here - meaning without specifying a parmfile - has been supported in Ubuntu Server since LTS 20.04.5 ('Focal').
 
 The following guide assumes that a z/VM guest has been defined, and that it is able to either reach the public `cdimage.ubuntu.com` server or an internal FTP or HTTP server that hosts an Ubuntu Server 20.04 installer image, like this [20.04 (a.k.a. Focal) daily live image](http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso)
@@ -86,7 +85,7 @@ url: ftp://10.11.12.2:21/ubuntu-live-server-20.04.5/ubuntu-20.04.5-live-server-s
 http_proxy (optional):  
 ```
 
-Ensure that the same version of the ISO image that was used to extract the installer files -- kernel and initrd -- is referenced at the 'url:' setting. It can be at a different location, for example directly referencing the public `cdimage.ubuntu.com` server: http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso
+Ensure that the same version of the ISO image that was used to extract the installer files -- kernel and initrd -- is referenced at the '`url:`' setting. It can be at a different location, for example directly referencing the public `cdimage.ubuntu.com` server: `http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso`
 
 The boot-up of the live-server installation now completes:
 
@@ -925,8 +924,8 @@ the exact distribution terms for each program are described in the individual fi
   
 Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by applicable law.
   
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
+To run a command as administrator (user "root"), use `sudo <command>`.
+See `man sudo_root` for details.
   
 ubuntu@10.222.111.24:~$ uptime
  17:50:09 up 1 min,  1 user,  load average: 0.08, 0.11, 0.05

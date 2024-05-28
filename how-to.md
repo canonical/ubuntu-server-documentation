@@ -15,7 +15,7 @@ The following installation guides are more advanced than our getting started tut
 || [arm64 netboot install](how-to/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64.md) |
 | ppc64el ||
 || [ppc64el netboot install](how-to/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md) |
-|| [Virtual CDROM and Petitboot on ppc64el](how-to/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md) |
+|| [Virtual CD-ROM and Petitboot on ppc64el](how-to/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md) |
 | s390x ||
 || [s390x install via z/VM](how-to/interactive-live-server-installation-on-ibm-z-vm-s390x.md) |
 || [IBM z/VM autoinstall on s390x](how-to/non-interactive-ibm-z-vm-autoinstall-s390x.md) |

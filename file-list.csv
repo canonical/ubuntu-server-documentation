@@ -160,6 +160,7 @@ iscsi-initiator-or-client,iSCSI initiator (or client),11572,explanation,/t/-/115
 about-apt-upgrade-and-phased-updates,About `apt upgrade` and phased updates,33649,explanation,/t/-/33649
 third-party-repository-usage,Third party repository usage,37974,explanation,/t/-/37974
 changing-package-files,Changing package files,33148,explanation,/t/-/33148
+advance-testing-of-updates-in-best-practice-server-deployments,Advance testing of updates in best practice server deployments,45385,explanation,/t/-/45385
 about-web-servers,About web servers,11509,explanation,/t/-/11509
 about-squid-proxy-servers,About Squid proxy servers,11511,explanation,/t/-/11511
 tuned,TuneD,42014,explanation,/t/-/42014

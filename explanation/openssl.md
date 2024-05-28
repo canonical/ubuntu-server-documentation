@@ -246,7 +246,7 @@ Unable to establish SSL connection.
 
 ### Drop AES128 entirely
 
-If we want to still allow TLS v1.2, but just drop AES128, then we need to configure the ciphers separatedly for TLS v1.3 and v1.2 or lower:
+If we want to still allow TLS v1.2, but just drop AES128, then we need to configure the ciphers separately for TLS v1.3 and v1.2 or lower:
 
 ```INI
 [system_default_sect]

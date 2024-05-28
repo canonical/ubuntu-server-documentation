@@ -97,7 +97,7 @@ sudo crontab -e
 ```
 
 > **Note**:
-> Using sudo with the `crontab -e` command edits the *root* user's `crontab`. This is necessary if you are backing up directories only the root user has access to.
+> Using `sudo` with the `crontab -e` command edits the *root* user's `crontab`. This is necessary if you are backing up directories only the root user has access to.
 
 As an example, if we add the following entry to the `crontab` file:
 
@@ -129,6 +129,7 @@ Once an archive has been created, it is important to test the archive. The archi
   The `-C` option to `tar` redirects the extracted files to the specified directory. The above example will extract the `/etc/hosts` file to `/tmp/etc/hosts`. `tar` recreates the directory structure that it contains. Also, notice the leading "`/`" is left off the path of the file to restore.
 
 - To restore all files in the archive enter the following:
+
   ```bash
   cd /
   sudo tar -xzvf /mnt/backup/host-Monday.tgz
@@ -141,7 +142,7 @@ Once an archive has been created, it is important to test the archive. The archi
 
 - For more information on shell scripting see the [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/)
 
-- The [CronHowto Wiki Page](https://help.ubuntu.com/community/CronHowto) contains details on advanced cron options.
+- The [Cron How-to Wiki Page](https://help.ubuntu.com/community/CronHowto) contains details on advanced cron options.
 
 - See the [GNU tar Manual](http://www.gnu.org/software/tar/manual/index.html) for more tar options.
 
@@ -149,10 +150,10 @@ Once an archive has been created, it is important to test the archive. The archi
 
 - The shell script uses tar to create the archive, but there many other command line utilities that can be used. For example:
     
-  - [cpio](http://www.gnu.org/software/cpio/): used to copy files to and from archives.
+  - [`cpio`](http://www.gnu.org/software/cpio/): used to copy files to and from archives.
     
-  - [dd](http://www.gnu.org/software/coreutils/): part of the coreutils package. A low level utility that can copy data from one format to another.
+  - [`dd`](http://www.gnu.org/software/coreutils/): part of the coreutils package. A low level utility that can copy data from one format to another.
    
-  - [rsnapshot](http://www.rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the [Tools - rsnapshot](how-to-install-and-configure-rsnapshot.md) for some information.
+  - [`rsnapshot`](http://www.rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the [Tools - rsnapshot](how-to-install-and-configure-rsnapshot.md) for some information.
     
-  - [rsync](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html): a flexible utility used to create incremental copies of files.
+  - [`rsync`](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html): a flexible utility used to create incremental copies of files.

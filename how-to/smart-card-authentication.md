@@ -11,7 +11,7 @@ One of the most popular uses for smart cards is to control access to computer sy
 The following packages must be installed to obtain a smart card configuration on Ubuntu:
  
 * **`pcscd`**: contains the drivers needed to communicate with the CCID smart card readers
-* **`opensc-pkcs11`**: contains the smart card drivers, such as Personal Identify Verification (PIV) or Common Access Card (CAC)
+* **`opensc-pkcs11`**: (optional, depending on your smartcard hardware) contains the smart card drivers, such as Personal Identify Verification (PIV) or Common Access Card (CAC)
 * **`sssd`**: the authentication daemon that manages smart card access and certificate verification
 
 To install these packages, run the following command in your terminal:
