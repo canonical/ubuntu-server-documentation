@@ -136,6 +136,7 @@ redirects = {}
 # Links to ignore when checking links
 linkcheck_ignore = [
     'http://127.0.0.1:8000'
+    'https://manpages.ubuntu.com'
     ]
 
 # Pages on which to ignore anchors
@@ -161,6 +162,7 @@ custom_myst_extensions = []
 # sphinx_reredirects, sphinxcontrib.jquery, sphinxext.opengraph
 custom_extensions = [
     'sphinx_tabs.tabs',
+    'sphinxcontrib.mermaid',
     'canonical.youtube-links',
     'canonical.related-links',
     'canonical.custom-rst-roles',
@@ -175,7 +177,10 @@ custom_extensions = [
 # pyspelling, sphinx, sphinx-autobuild, sphinx-copybutton, sphinx-design,
 # sphinx-notfound-page, sphinx-reredirects, sphinx-tabs, sphinxcontrib-jquery,
 # sphinxext-opengraph
-custom_required_modules = []
+custom_required_modules = [
+    'sphinxcontrib-mermaid',
+    'gitpython'
+    ]
 
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
@@ -203,6 +208,12 @@ disable_feedback_button = False
 # (https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags)
 custom_tags = []
 
+# Add files or directories that should be excluded from processing.
+custom_excludes = [
+    'doc-cheat-sheet*',
+    'readme.rst'
+    ]
+
 ############################################################
 ### Additional configuration
 ############################################################
@@ -210,7 +221,7 @@ custom_tags = []
 ## Add any configuration that is not covered by the common conf.py file.
 
 # Define a :center: role that can be used to center the content of table cells.
-rst_prolog = '''
-.. role:: center
-   :class: align-center
-'''
+#rst_prolog = '''
+#.. role:: center
+#   :class: align-center
+#'''

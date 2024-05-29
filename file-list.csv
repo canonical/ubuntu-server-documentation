@@ -1,0 +1,184 @@
+index,Ubuntu Server documentation,11322,landing page,/t/-/11322
+tutorial,Ubuntu Server tutorials,29948,landing page,/t/-/29948
+basic-installation,Basic installation,11320,tutorial,/t/-/11320
+attach-your-ubuntu-pro-subscription,Attach your Ubuntu Pro subscription,26222,tutorial,/t/-/26222
+how-to,Ubuntu Server how-to guides,29950,landing page,/t/-/29950
+how-to-netboot-the-server-installer-on-amd64,How to netboot the server installer on amd64,16620,how-to,/t/-/16620
+netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64,"Netboot the server installer via UEFI PXE on ARM (aarch64, arm64) and x86_64 (amd64)",19240,how-to,/t/-/19240
+netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot,Netboot the live server installer on IBM Power (ppc64el) with Petitboot,15348,how-to,/t/-/15348
+how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot,How to start a live server installation on IBM Power (ppc64el) with a virtual CD-ROM and Petitboot,16694,how-to,/t/-/16694
+interactive-live-server-installation-on-ibm-z-vm-s390x,Interactive live server installation on IBM z/VM (s390x),16604,how-to,/t/-/16604
+non-interactive-ibm-z-vm-autoinstall-s390x,Non-interactive IBM z/VM autoinstall (s390x),16995,how-to,/t/-/16995
+interactive-live-server-installation-on-ibm-z-lpar-s390x,Interactive live server installation on IBM Z LPAR (s390x),16601,how-to,/t/-/16601
+non-interactive-ibm-z-lpar-autoinstall-s390x,Non-interactive IBM Z LPAR autoinstall (s390x),16988,how-to,/t/-/16988
+virtualisation-with-qemu,Virtualisation with QEMU,11523,how-to,/t/-/11523
+create-qemu-vms-with-up-to-1024-vcpus,Create QEMU VMs with up to 1024 vCPUs,43901,how-to,/t/-/43901
+boot-arm64-virtual-machines-on-qemu,Boot ARM64 virtual machines on QEMU,44038,how-to,/t/-/44038
+how-to-create-a-vm-with-multipass,How to create a VM with Multipass,11983,how-to,/t/-/11983
+create-cloud-image-vms-with-uvtool,Create cloud image VMs with UVtool,11524,how-to,/t/-/11524
+libvirt,Libvirt,11522,how-to,/t/-/11522
+virtual-machine-manager,Virtual Machine Manager,13436,how-to,/t/-/13436
+how-to-enable-nested-virtualization,How to enable nested virtualization,41694,how-to,/t/-/41694
+lxc-containers,LXC containers,11526,how-to,/t/-/11526
+lxd-containers,LXD containers,11525,how-to,/t/-/11525
+docker-for-system-admins,Docker for system admins,39799,how-to,/t/-/39799
+how-to-set-up-ubuntu-on-hyper-v,How to set up Ubuntu on Hyper-V,43642,how-to,/t/-/43642
+network-file-system-nfs,Network File System (NFS),11571,how-to,/t/-/11571
+set-up-an-ftp-server,Set up an FTP server,11319,how-to,/t/-/11319
+how-to-install-and-configure-isc-kea,How to install and configure isc-kea,36290,how-to,/t/-/36290
+how-to-install-and-configure-isc-dhcp-server,How to install and configure isc-dhcp-server,36288,how-to,/t/-/36288
+use-timedatectl-and-timesyncd,Use timedatectl and timesyncd,36310,how-to,/t/-/36310
+how-to-serve-the-network-time-protocol-with-chrony,How to serve the Network Time Protocol with chrony,36311,how-to,/t/-/36311
+how-to-use-dpdk-with-open-vswitch,How to use DPDK with Open vSwitch,13085,how-to,/t/-/13085
+domain-name-service-dns,Domain Name Service (DNS),11318,how-to,/t/-/11318
+member-server-in-an-active-directory-domain,Member server in an Active Directory domain,11893,how-to,/t/-/11893
+samba-as-a-file-server,Samba as a file server,11889,how-to,/t/-/11889
+samba-as-a-print-server,Samba as a print server,11890,how-to,/t/-/11890
+share-access-controls,Share access controls,11891,how-to,/t/-/11891
+samba-apparmor-profile,Samba AppArmor profile,29296,how-to,/t/-/29296
+how-to-mount-cifs-shares-permanently,How to mount CIFS shares permanently,43366,how-to,/t/-/43366
+nt4-domain-controller-legacy,NT4 domain controller (legacy),11892,how-to,/t/-/11892
+openldap-backend-legacy,OpenLDAP backend (legacy),15698,how-to,/t/-/15698
+join-a-domain-with-winbind-preparation,Join a domain with winbind: preparation,44784,how-to,/t/-/44784
+join-a-simple-domain-with-the-rid-backend,Join a simple domain with the rid backend,44785,how-to,/t/-/44785
+join-a-forest-with-the-rid-backend,Join a forest with the rid backend,44786,how-to,/t/-/44786
+join-a-forest-with-the-autorid-backend,Join a forest with the autorid backend,44787,how-to,/t/-/44787
+how-to-install-a-kerberos-server,How to install a Kerberos server,11331,how-to,/t/-/11331
+how-to-configure-kerberos-service-principals,How to configure Kerberos service principals,27819,how-to,/t/-/27819
+kerberos-encryption-types,Kerberos encryption types,35258,how-to,/t/-/35258
+how-to-set-up-a-secondary-kdc,How to set up a secondary KDC,27820,how-to,/t/-/27820
+how-to-set-up-basic-workstation-authentication,How to set up basic workstation authentication,27821,how-to,/t/-/27821
+how-to-set-up-kerberos-with-openldap-backend,How to set up Kerberos with OpenLDAP backend,15356,how-to,/t/-/15356
+how-to-set-up-sssd-with-active-directory,How to set up SSSD with Active Directory,27888,how-to,/t/-/27888
+how-to-set-up-sssd-with-ldap,How to set up SSSD with LDAP,27895,how-to,/t/-/27895
+how-to-set-up-sssd-with-ldap-and-kerberos,How to set up SSSD with LDAP and Kerberos,27896,how-to,/t/-/27896
+troubleshooting-sssd,Troubleshooting SSSD,27897,how-to,/t/-/27897
+install-and-configure-ldap,Install and configure LDAP,11329,how-to,/t/-/11329
+ldap-access-control,LDAP access control,15583,how-to,/t/-/15583
+openldap-replication,OpenLDAP replication,15508,how-to,/t/-/15508
+how-to-set-up-ldap-users-and-groups,How to set up LDAP users and groups,11330,how-to,/t/-/11330
+ldap-and-transport-layer-security-tls,LDAP and Transport Layer Security (TLS),11578,how-to,/t/-/11578
+backup-and-restore-openldap,Backup and restore OpenLDAP,27902,how-to,/t/-/27902
+install-and-configure-a-mysql-server,Install and configure a MySQL server,11515,how-to,/t/-/11515
+install-and-configure-postgresql,Install and configure PostgreSQL,11516,how-to,/t/-/11516
+install-and-configure-postfix,Install and configure Postfix,11325,how-to,/t/-/11325
+install-and-configure-dovecot,Install and configure Dovecot,11880,how-to,/t/-/11880
+install-and-configure-exim4,Install and configure Exim4,11530,how-to,/t/-/11530
+install-and-configure-a-cups-print-server,Install and configure a CUPS print server,11573,how-to,/t/-/11573
+how-to-install-and-configure-bacula,How to install and configure Bacula,11520,how-to,/t/-/11520
+how-to-install-and-configure-rsnapshot,How to install and configure rsnapshot,15236,how-to,/t/-/15236
+how-to-back-up-using-shell-scripts,How to back up using shell scripts,11518,how-to,/t/-/11518
+etckeeper,etckeeper,11906,how-to,/t/-/11906
+how-to-install-and-configure-gitolite,How to install and configure gitolite,11900,how-to,/t/-/11900
+how-to-install-a-squid-server,How to install a Squid server,36595,how-to,/t/-/36595
+how-to-install-apache2,How to install Apache2,36682,how-to,/t/-/36682
+how-to-configure-apache2-settings,How to configure Apache2 settings,36683,how-to,/t/-/36683
+how-to-use-apache2-modules,How to use Apache2 modules,36684,how-to,/t/-/36684
+how-to-install-nginx,How to install nginx,39679,how-to,/t/-/39679
+how-to-configure-nginx,How to configure nginx,39680,how-to,/t/-/39680
+how-to-use-nginx-modules,How to use nginx modules,39683,how-to,/t/-/39683
+how-to-install-and-configure-php,How to install and configure PHP,11514,how-to,/t/-/11514
+how-to-install-and-configure-ruby-on-rails,How to install and configure Ruby on Rails,11513,how-to,/t/-/11513
+get-started-with-lamp-applications,Get started with LAMP applications,11902,how-to,/t/-/11902
+how-to-install-and-configure-phpmyadmin,How to install and configure phpMyAdmin,36608,how-to,/t/-/36608
+how-to-install-and-configure-wordpress,How to install and configure WordPress,36606,how-to,/t/-/36606
+how-to-manage-logical-volumes,How to manage logical volumes,44115,how-to,/t/-/44115
+nvidia-drivers-installation,NVIDIA drivers installation,39022,how-to,/t/-/39022
+gpu-virtualization-with-qemu-kvm,GPU virtualization with QEMU/KVM,39024,how-to,/t/-/39024
+package-management,Package management,11908,how-to,/t/-/11908
+how-to-upgrade-your-release,How to upgrade your release,11576,how-to,/t/-/11576
+how-to-report-a-bug-in-ubuntu-server,How to report a bug in Ubuntu Server,11508,how-to,/t/-/11508
+kernel-crash-dump,Kernel crash dump,11575,how-to,/t/-/11575
+how-to-install-and-use-puppet,How to install and use Puppet,11897,how-to,/t/-/11897
+openssh-server,OpenSSH server,11896,how-to,/t/-/11896
+how-to-install-and-use-openvpn,How to install and use OpenVPN,11894,how-to,/t/-/11894
+install-a-root-ca-certificate-in-the-trust-store,Install a root CA certificate in the trust store,25020,how-to,/t/-/25020
+firewalls,Firewalls,11883,how-to,/t/-/11883
+apparmor,AppArmor,11884,how-to,/t/-/11884
+smart-card-authentication,Smart card authentication,26009,how-to,/t/-/26009
+smart-card-authentication-with-ssh,Smart card authentication with SSH,26010,how-to,/t/-/26010
+user-management,User management,11881,how-to,/t/-/11881
+console-security,Console security,11882,how-to,/t/-/11882
+wireguard-vpn-peer-to-site,Wireguard VPN peer-to-site,30237,how-to,/t/-/30237
+wireguard-vpn-peer-to-site-on-router,WireGuard VPN peer-to-site (on router),30238,how-to,/t/-/30238
+wireguard-on-an-internal-system,WireGuard on an internal system,30239,how-to,/t/-/30239
+wireguard-vpn-site-to-site,WireGuard VPN site-to-site,30380,how-to,/t/-/30380
+using-the-vpn-as-the-default-gateway,Using the VPN as the default gateway,30325,how-to,/t/-/30325
+common-tasks-in-wireguard-vpn,Common tasks in WireGuard VPN,30241,how-to,/t/-/30241
+security-tips-for-wireguard-vpn,Security tips for WireGuard VPN,30242,how-to,/t/-/30242
+troubleshooting-wireguard-vpn,Troubleshooting WireGuard VPN,30240,how-to,/t/-/30240
+distributed-replicated-block-device-drbd,Distributed Replicated Block Device (DRBD),11314,how-to,/t/-/11314
+set-up-your-lma-stack,Set up your LMA stack,19151,how-to,/t/-/19151
+how-to-install-and-configure-logwatch,How to install and configure Logwatch,15590,how-to,/t/-/15590
+how-to-install-and-configure-munin,How to install and configure Munin,11904,how-to,/t/-/11904
+how-to-install-and-configure-nagios-core-3,How to install and configure Nagios Core 3,11903,how-to,/t/-/11903
+how-to-use-nagios-with-munin,How to use Nagios with Munin,11326,how-to,/t/-/11326
+explanation,Ubuntu Server explanation guides,29951,landing page,/t/-/29951
+introduction-to-virtualization,Introduction to virtualization,11521,explanation,/t/-/11521
+introduction-to-networking,Introduction to networking,36315,explanation,/t/-/36315
+introduction-to-samba,Introduction to Samba,11888,explanation,/t/-/11888
+introduction-to-active-directory-integration,Introduction to Active Directory integration,44778,explanation,/t/-/44778
+introduction-to-device-mapper-multipathing,Introduction to device mapper multipathing,11316,explanation,/t/-/11316
+introduction-to-kerberos,Introduction to Kerberos,27818,explanation,/t/-/27818
+introduction-to-network-user-authentication-with-sssd,Introduction to network user authentication with SSSD,11579,explanation,/t/-/11579
+introduction-to-openldap,Introduction to OpenLDAP,27901,explanation,/t/-/27901
+introduction-to-security,Introduction to security,11887,explanation,/t/-/11887
+introduction-to-crypto-libraries,Introduction to crypto libraries,34534,explanation,/t/-/34534
+introduction-to-wireguard-vpn,Introduction to Wireguard VPN,30236,explanation,/t/-/30236
+introduction-to-mail-services,Introduction to mail services,11324,explanation,/t/-/11324
+introduction-to-web-servers,Introduction to web servers,11510,explanation,/t/-/11510
+introduction-to-backups,Introduction to backups,11312,explanation,/t/-/11312
+introduction-to-databases,Introduction to databases,11315,explanation,/t/-/11315
+introduction-to-high-availability,Introduction to High Availability,15813,explanation,/t/-/15813
+vm-tools-in-the-ubuntu-space,VM tools in the Ubuntu space,41038,explanation,/t/-/41038
+using-qemu-for-microvms,Using QEMU for microVMs,40861,explanation,/t/-/40861
+upgrading-the-machine-type-of-your-vm,Upgrading the machine type of your VM,40862,explanation,/t/-/40862
+container-tools-in-the-ubuntu-space,Container tools in the Ubuntu space,41385,explanation,/t/-/41385
+about-openstack,About OpenStack,23973,explanation,/t/-/23973
+networking-key-concepts,Networking key concepts,11875,explanation,/t/-/11875
+configuring-networks,Configuring networks,11876,explanation,/t/-/11876
+about-dynamic-host-configuration-protocol-dhcp,About Dynamic Host Configuration Protocol (DHCP),11877,explanation,/t/-/11877
+about-time-synchronisation,About time synchronisation,11878,explanation,/t/-/11878
+about-dpdk,About DPDK,11879,explanation,/t/-/11879
+choosing-an-integration-method,Choosing an integration method,44779,explanation,/t/-/44779
+security-identifiers-sids,Security identifiers (SIDs),44780,explanation,/t/-/44780
+identity-mapping-idmap-backends,Identity Mapping (idmap) backends,44781,explanation,/t/-/44781
+the-rid-idmap-backend,The rid idmap backend,44782,explanation,/t/-/44782
+the-autorid-idmap-backend,The autorid idmap backend,44783,explanation,/t/-/44783
+openvpn-client-implementations,OpenVPN client implementations,11895,explanation,/t/-/11895
+certificates,Certificates,11885,explanation,/t/-/11885
+openssl,OpenSSL,34536,explanation,/t/-/34536
+gnutls,GnuTLS,34535,explanation,/t/-/34535
+network-security-services-nss,Network Security Services (NSS),35168,explanation,/t/-/35168
+java-cryptography-configuration,Java cryptography configuration,35201,explanation,/t/-/35201
+bind-9-dnssec-cryptography-selection,BIND 9 DNSSEC cryptography selection,35253,explanation,/t/-/35253
+openssh-crypto-configuration,OpenSSH crypto configuration,35287,explanation,/t/-/35287
+troubleshooting-tls-ssl,Troubleshooting TLS/SSL,34537,explanation,/t/-/34537
+choosing-between-the-arm64-and-arm64-largemem-installer-options,Choosing between the arm64 and arm64+largemem installer options,42659,explanation,/t/-/42659
+about-logical-volume-management-lvm,About Logical Volume Management (LVM),44093,explanation,/t/-/44093
+iscsi-initiator-or-client,iSCSI initiator (or client),11572,explanation,/t/-/11572
+about-apt-upgrade-and-phased-updates,About `apt upgrade` and phased updates,33649,explanation,/t/-/33649
+third-party-repository-usage,Third party repository usage,37974,explanation,/t/-/37974
+changing-package-files,Changing package files,33148,explanation,/t/-/33148
+advance-testing-of-updates-in-best-practice-server-deployments,Advance testing of updates in best practice server deployments,45385,explanation,/t/-/45385
+about-web-servers,About web servers,11509,explanation,/t/-/11509
+about-squid-proxy-servers,About Squid proxy servers,11511,explanation,/t/-/11511
+tuned,TuneD,42014,explanation,/t/-/42014
+pacemaker-resource-agents,Pacemaker Resource Agents,24100,explanation,/t/-/24100
+pacemaker-fence-agents,Pacemaker fence agents,24028,explanation,/t/-/24028
+configuring-device-mapper-multipathing,Configuring device mapper multipathing,11569,explanation,/t/-/11569
+multipath-configuration-examples,Multipath configuration examples,11568,explanation,/t/-/11568
+common-multipath-tasks-and-procedures,Common multipath tasks and procedures,11317,explanation,/t/-/11317
+reference,Ubuntu Server reference,29949,landing page,/t/-/29949
+system-requirements,System requirements,44193,reference,/t/-/44193
+cloud-images,Cloud images,20336,reference,/t/-/20336
+migrate-from-crmsh-to-pcs,Migrate from crmsh to pcs,34818,reference,/t/-/34818
+basic-backup-shell-script,Basic backup shell script,36419,reference,/t/-/36419
+archive-rotation-shell-script,Archive rotation shell script,11519,reference,/t/-/11519
+about-debuginfod,About debuginfod,30534,reference,/t/-/30534
+debug-symbol-packages,Debug symbol packages,43282,reference,/t/-/43282
+byobu,Byobu,11907,reference,/t/-/11907
+pam-motd,pam_motd,11905,reference,/t/-/11905
+introduction-to-rock-images,Introduction to ROCK images,27993,reference,/t/-/27993
+rock-customisation-with-docker,ROCK customisation with Docker,28042,reference,/t/-/28042
+multi-node-rock-configuration-with-docker-compose,Multi-node ROCK configuration with Docker-Compose,28708,reference,/t/-/28708
