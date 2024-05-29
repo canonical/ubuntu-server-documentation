@@ -78,10 +78,10 @@ sp-clean-doc:
 	rm -rf $(SPHINXDIR)/.doctrees
 
 sp-spelling: sp-html
-	. $(VENV) ; python3 -m pyspelling -c $(SPHINXDIR)/spellingcheck.yaml -j $(shell nproc)
+	. $(VENV) ; python3 -m pyspelling -c $(SPHINXDIR)/spellingcheck.yaml -j $(shell nproc) >> spellcheck.txt
 
 sp-linkcheck: sp-install
-	. $(VENV) ; $(SPHINXBUILD) -b linkcheck "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	. $(VENV) ; $(SPHINXBUILD) -b linkcheck "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) >> linkcheck.txt
 
 sp-woke: sp-woke-install
 	woke *.rst **/*.rst --exit-1-on-failure \

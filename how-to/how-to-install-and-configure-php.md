@@ -79,6 +79,6 @@ You can save the content in a file -- `phpinfo.php` for example -- and place it 
 
 - For more in depth information see [the php.net documentation](http://www.php.net/docs.php).
 
-- There are a plethora of books on PHP 7 and PHP 8. A good book from O'Reilly is [Learning PHP](http://oreilly.com/catalog/0636920043034/), which includes an exploration of PHP 7's enhancements to the language.
+- There are a plethora of books on PHP 7 and PHP 8. A good book from O'Reilly is "Learning PHP", which includes an exploration of PHP 7's enhancements to the language.
 
 - Also, see the [Apache MySQL PHP Ubuntu Wiki](https://help.ubuntu.com/community/ApacheMySQLPHP) page for more information.

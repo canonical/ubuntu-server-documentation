@@ -140,7 +140,7 @@ $ systemctl reload wg-quick@wg0
 
 ## Adding a smartphone peer
 
-WireGuard can be installed on many different platforms, and smartphones are included. The upstream installation page has [links for Android](https://www.wireguard.com/install/#android-play-store-f-droid) and [for iOS apps](https://www.wireguard.com/install/#ios-app-store).
+WireGuard can be installed on many different platforms, and smartphones are included. The [upstream installation page](https://www.wireguard.com/install/) has links for Android and for iOS apps.
 
 Such a mobile client can be configured more easily with the use of QR codes.
 

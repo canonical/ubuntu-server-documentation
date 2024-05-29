@@ -37,7 +37,7 @@ While use of `ntpd` is no longer recommended, this also still applies to `ntpd` 
 - [Freedesktop.org info on timedatectl](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
 - [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
 
-- [Chrony FAQ](https://chrony.tuxfamily.org/faq.html)
+- [Chrony FAQ](https://chrony-project.org/faq.html)
 - [Feeding chrony from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
 
 - Also see the [Ubuntu Time wiki page](https://help.ubuntu.com/community/UbuntuTime) for more information.

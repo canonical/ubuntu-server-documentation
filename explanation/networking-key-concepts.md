@@ -68,4 +68,4 @@ Daemons are special system applications which typically execute continuously in 
 
   - Also, see the [TCP/IP Tutorial and Technical Overview](http://www.redbooks.ibm.com/abstracts/gg243376.html) IBM Redbook.
 
-  - Another resource is O'Reilly's [TCP/IP Network Administration](http://oreilly.com/catalog/9780596002978/).
+  - Another resource is O'Reilly's "TCP/IP Network Administration".

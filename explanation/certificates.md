@@ -168,4 +168,4 @@ For applications that can be configured to use a CA certificate, you should also
 
 - For more information on OpenSSL see the [OpenSSL Home Page](https://www.openssl.org/).
 
-- Also, O'Reilly's [Network Security with OpenSSL](http://oreilly.com/catalog/9780596002701/) is a good in-depth reference.
+- Also, O'Reilly's "Network Security with OpenSSL" is a good in-depth reference.

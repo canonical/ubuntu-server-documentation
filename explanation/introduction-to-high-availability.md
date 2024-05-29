@@ -61,7 +61,7 @@ Packages in this list are supported just like any other package available in  **
 | `crmsh` |[Ubuntu](https://launchpad.net/ubuntu/+source/crmsh) \| [Upstream](https://github.com/ClusterLabs/crmsh)
 | `pcs*` |[Ubuntu](https://launchpad.net/ubuntu/+source/pcs) \| [Upstream](https://github.com/ClusterLabs/pcs/)
 | `cluster-glue` |[Ubuntu](https://launchpad.net/ubuntu/+source/cluster-glue) \| [Upstream](https://github.com/ClusterLabs/cluster-glue)
-| `drbd-utils` |[Ubuntu](https://launchpad.net/ubuntu/+source/drbd-utils) \| [Upstream](https://www.linbit.com/drbd/)
+| `drbd-utils` |[Ubuntu](https://launchpad.net/ubuntu/+source/drbd-utils) \| [Upstream](https://linbit.com/drbd/)
 | `dlm` |[Ubuntu](https://launchpad.net/ubuntu/+source/dlm) \| [Upstream](https://pagure.io/dlm)
 | `gfs2-utils` |[Ubuntu](https://launchpad.net/ubuntu/+source/gfs2-utils) \| [Upstream](https://pagure.io/gfs2-utils)
 | `keepalived` |[Ubuntu](https://launchpad.net/ubuntu/+source/keepalived) \| [Upstream](https://www.keepalived.org/)
@@ -92,7 +92,7 @@ Packages in this list are supported just like any other package available in  **
 
 - **gfs2-utils** - Global File System 2 - filesystem tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
 
-- **Keepalived** - Keepalived provides simple and robust facilities for loadbalancing and high-availability to Linux system and Linux based infrastructures. Loadbalancing framework relies on well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module providing Layer4 loadbalancing. Keepalived implements a set of checkers to dynamically and adaptively maintain and manage loadbalanced server pool according their health. On the other hand high-availability is achieved by [VRRP](http://datatracker.ietf.org/wg/vrrp/) protocol.
+- **Keepalived** - Keepalived provides simple and robust facilities for loadbalancing and high-availability to Linux system and Linux based infrastructures. Loadbalancing framework relies on well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module providing Layer4 loadbalancing. Keepalived implements a set of checkers to dynamically and adaptively maintain and manage loadbalanced server pool according their health. On the other hand high-availability is achieved by [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
 
 ### Ubuntu HA Community Packages
 
@@ -136,7 +136,7 @@ Packages in this list aren't necessarily **HA** related packages, but they have 
 * **LVM2** in a Shared-Storage Cluster Scenario:
 <BR>**CLVM** - supported before **Ubuntu 20.04**
 A distributed lock manager (DLM) is used to broker concurrent LVM metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a desire to get a lock on a particular set of objects.
-<br>**[lvmlockd](http://manpages.ubuntu.com/manpages/focal/man8/lvmlockd.8.html)** - supported after **Ubuntu 20.04**
+<br>**[lvmlockd](http://manpages.ubuntu.com/manpages/man8/lvmlockd.8.html)** - supported after **Ubuntu 20.04**
 As of 2017, a stable LVM component that is designed to replace  `clvmd`  by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.<BR>
 The lvmlockd benefits over clvm are:<BR><BR>
   - lvmlockd supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
@@ -151,9 +151,9 @@ The server guide does not have the intent to document every existing option for 
 
 - ClusterLabs
   - [Clusters From Scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Clusters_from_Scratch/index.html)
-  - [Managing Pacemaker Clusters](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Pacemaker_Administration/index.html)
-  - [Pacemaker Configuration Explained](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Pacemaker_Explained/index.html)
-  - [Pacemaker Remote - Scaling HA Clusters](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Pacemaker_Remote/index.html)
+  - [Managing Pacemaker Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html)
+  - [Pacemaker Configuration Explained](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html)
+  - [Pacemaker Remote - Scaling HA Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html)
 - Other
   - [Ubuntu Bionic HA in Shared Disk Environments (Azure)](https://discourse.ubuntu.com/t/ubuntu-high-availability-corosync-pacemaker-shared-disk-environments/14874)
 
