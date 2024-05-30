@@ -55,6 +55,10 @@ with open(csv_file_list, newline='', encoding='utf-8') as filelist:
         url = f"https://discourse.ubuntu.com/raw/{index_number}"
         print(f"getting {url}")
 
+        # Create a MyST compatible heading anchor for the page from the file
+        # name/slug - in this way we don't have to mess around with file paths
+        myst_anchor = f"({page_slug})=\n"   
+        
         # Save title from spreadsheet
         h1_title = f"# {page_title}\n"
 
@@ -81,6 +85,7 @@ with open(csv_file_list, newline='', encoding='utf-8') as filelist:
             excluding_comments = '\n'.join(excluding_comments)
 
             with open(doc_filename, "w") as contents:
+                contents.write(myst_anchor)
                 contents.write(h1_title)
                 contents.write(excluding_comments)
 
@@ -215,12 +220,14 @@ for file, folder in zip(landing_pages, folders):
         
 # Now, finally, we need to replace the contents of main_landing_page into 
 # the index.md page to get rid of the navigation and redirect tables
-file_with_nav = "main_landing_page.txt"
-file_to_replace = "index.md"
-with open(file_with_nav, 'r') as f:
-    contents = f.read()
-    
-    with open(file_to_replace, 'w') as i:
-        i.write(contents)
+file_with_nav = ["main_landing_page.txt", "main-tutorial.txt", "main-how-to.txt", "main-explanation.txt", "main-reference.txt"]
+file_to_replace = ["index.md", "tutorial.md", "how-to.md", "explanation.md", "reference.md"]
+
+for navfile, replacement in zip(file_with_nav, file_to_replace):
+    with open(navfile, 'r') as f:
+        contents = f.read()
+        
+        with open(replacement, 'w') as i:
+            i.write(contents)
 
 
