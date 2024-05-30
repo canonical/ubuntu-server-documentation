@@ -1,3 +1,4 @@
+(nt4-domain-controller-legacy)=
 # NT4 domain controller (legacy)
 
 > **Note**:

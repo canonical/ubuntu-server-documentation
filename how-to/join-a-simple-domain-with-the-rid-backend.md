@@ -1,3 +1,4 @@
+(join-a-simple-domain-with-the-rid-backend)=
 # Join a simple domain with the rid backend
 
 Let's expand on the configuration we had for the *rid* backend and complete the `/etc/samba/smb.conf` configuration file with the remaining details. We are joining a single domain called `EXAMPLE.INTERNAL`. The new configuration options were added at the end of the `[global]` section:

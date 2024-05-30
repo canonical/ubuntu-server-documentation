@@ -1,3 +1,4 @@
+(about-web-servers)=
 # About web servers
 
 The primary function of a **web server** is to store, process and deliver **web pages** to clients. The clients communicate with the server by sending HTTP requests.

@@ -1,3 +1,4 @@
+(openssl)=
 # OpenSSL
 
 OpenSSL is probably the most well known cryptographic library, used by thousands of projects and applications.

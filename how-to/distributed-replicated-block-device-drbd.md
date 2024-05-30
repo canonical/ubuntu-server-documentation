@@ -1,3 +1,4 @@
+(distributed-replicated-block-device-drbd)=
 # Distributed Replicated Block Device (DRBD)
 
 Distributed Replicated Block Device (DRBD) mirrors block devices between multiple hosts. The replication is transparent to other applications on the host systems. Any block device hard disks, partitions, RAID devices, logical volumes, etc can be mirrored.

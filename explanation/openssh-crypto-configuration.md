@@ -1,3 +1,4 @@
+(openssh-crypto-configuration)=
 # OpenSSH crypto configuration
 
 Establishing an SSH connection to a remote service involves multiple stages. Each one of these stages will use some form of encryption, and there are configuration settings that control which cryptographic algorithms can be used at each step.

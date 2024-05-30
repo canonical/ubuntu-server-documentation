@@ -1,3 +1,4 @@
+(how-to-manage-logical-volumes)=
 # How to manage logical volumes
 
 The Ubuntu Server installer has the ability to set up and install to LVM partitions, and this is the supported way of doing so. If you would like to know more about any of the topics in this page, refer to our [explanation of logical volume management (LVM)](../explanation/about-logical-volume-management-lvm.md).

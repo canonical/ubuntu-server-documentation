@@ -1,3 +1,4 @@
+(networking-key-concepts)=
 # Networking key concepts
 
 This section provides high-level information pertaining to networking, including an overview of network concepts and detailed discussion of popular network protocols.

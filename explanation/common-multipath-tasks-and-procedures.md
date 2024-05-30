@@ -1,3 +1,4 @@
+(common-multipath-tasks-and-procedures)=
 # Common multipath tasks and procedures
 
 This section shows examples of common configuration procedures and tasks. Before moving on with this section it's a good idea to read or be familiar with the topics in these pages:

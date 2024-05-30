@@ -1,3 +1,4 @@
+(kernel-crash-dump)=
 # Kernel crash dump
 
 

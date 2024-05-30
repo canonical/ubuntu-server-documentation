@@ -1,3 +1,4 @@
+(kerberos-encryption-types)=
 # Kerberos encryption types
 
 Encryption is at the heart of Kerberos, and it supports multiple cryptographic algorithms. The default choices are good enough for most deployments, but specific situations might need to tweak these settings.

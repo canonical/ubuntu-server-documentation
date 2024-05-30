@@ -1,3 +1,4 @@
+(bind-9-dnssec-cryptography-selection)=
 # BIND 9 DNSSEC cryptography selection
 
 Domain Name System Security Extensions (DNSSEC), which provides a set of security features to DNS, is a broad topic. In this article, we will briefly show DNSSEC validation happening on a `bind9` DNS server, and then introduce the topic of how we can disable certain cryptographic algorithms from being used in this validation.

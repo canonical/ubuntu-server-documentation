@@ -1,3 +1,4 @@
+(how-to-use-apache2-modules)=
 # How to use Apache2 modules
 
 Apache2 is a modular server. This implies that only the most basic functionality is included in the core server. Extended features are available through modules which can be loaded into Apache2. 

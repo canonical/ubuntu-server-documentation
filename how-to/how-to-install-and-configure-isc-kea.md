@@ -1,3 +1,4 @@
+(how-to-install-and-configure-isc-kea)=
 # How to install and configure isc-kea
 
 In this guide we show how to install and configure `isc-kea` in Ubuntu 23.04

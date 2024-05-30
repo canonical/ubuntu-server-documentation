@@ -1,3 +1,4 @@
+(configuring-device-mapper-multipathing)=
 # Configuring device mapper multipathing
 
 It is recommended that you first read the [device mapper multipathing introduction](introduction-to-device-mapper-multipathing.md) if you are unfamiliar with the concepts and terms. For consistency, we refer to device mapper multipathing as **multipath**.

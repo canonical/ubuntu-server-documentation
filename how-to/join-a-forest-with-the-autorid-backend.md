@@ -1,3 +1,4 @@
+(join-a-forest-with-the-autorid-backend)=
 # Join a forest with the autorid backend
 
 Joining a more complex Active Directory forest with the autorid backend is very similar to the rid backend. The only difference is in the idmap configuration in `/etc/samba/smb.conf`:

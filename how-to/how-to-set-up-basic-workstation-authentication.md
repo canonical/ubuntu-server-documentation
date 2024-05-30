@@ -1,3 +1,4 @@
+(how-to-set-up-basic-workstation-authentication)=
 # How to set up basic workstation authentication
 
 

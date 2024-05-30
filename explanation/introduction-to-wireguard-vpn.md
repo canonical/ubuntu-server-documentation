@@ -1,3 +1,4 @@
+(introduction-to-wireguard-vpn)=
 # Introduction to Wireguard VPN
 
 WireGuard is a simple, fast and modern VPN implementation. It is widely deployed and can be used cross-platform.

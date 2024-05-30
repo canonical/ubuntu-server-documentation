@@ -1,3 +1,4 @@
+(how-to-install-a-kerberos-server)=
 # How to install a Kerberos server
 
 For this discussion, we will create an MIT Kerberos domain with the following features (edit them to fit your needs):

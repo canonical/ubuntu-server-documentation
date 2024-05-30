@@ -1,3 +1,4 @@
+(backup-and-restore-openldap)=
 # Backup and restore OpenLDAP
 
 Now we have LDAP running just the way we want, it is time to ensure we can save all of our work and restore it as needed.

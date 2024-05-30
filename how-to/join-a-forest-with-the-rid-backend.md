@@ -1,3 +1,4 @@
+(join-a-forest-with-the-rid-backend)=
 # Join a forest with the rid backend
 
 It's also possible to join an Active Directory forest using the *rid* identity mapping backend. To better understand what is involved, and why it is tricky, let's reuse the example where we joined a single domain with this backend:

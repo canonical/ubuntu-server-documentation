@@ -1,3 +1,4 @@
+(openldap-replication)=
 # OpenLDAP replication
 
 The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy (high availability) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.

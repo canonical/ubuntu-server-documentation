@@ -1,3 +1,4 @@
+(smart-card-authentication)=
 # Smart card authentication
 
 

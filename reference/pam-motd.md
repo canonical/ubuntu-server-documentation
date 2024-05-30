@@ -1,3 +1,4 @@
+(pam-motd)=
 # pam_motd
 
 

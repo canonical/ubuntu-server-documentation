@@ -1,3 +1,4 @@
+(how-to-set-up-ldap-users-and-groups)=
 # How to set up LDAP users and groups
 
 

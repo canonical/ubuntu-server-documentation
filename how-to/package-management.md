@@ -1,3 +1,4 @@
+(package-management)=
 # Package management
 
 Ubuntu features a comprehensive package management system for installing, upgrading, configuring, and removing software.

@@ -1,3 +1,4 @@
+(debug-symbol-packages)=
 # Debug symbol packages
 
 If you want to debug a crash – whether in a project you are developing yourself or from a third-party package – or if you frequently need the debug symbols for specific libraries, it might be helpful to install them permanently on your system if you can’t use debuginfod.

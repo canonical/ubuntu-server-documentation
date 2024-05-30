@@ -4,8 +4,9 @@ This section of our documentation contains step-by-step tutorials to help outlin
 
 We hope our tutorials make as few assumptions as possible and are broadly accessible to anyone with an interest in Ubuntu Server. They should also be a good place to start learning about Ubuntu Server in general, how it works, and what it's capable of.
 
-## Core tutorial
-In our **core tutorial**, you will learn how to set up an Ubuntu Server; from installing using a bootable USB device, to navigating the Server installer menu.
+## Getting started
+
+Here, you will learn how to set up an Ubuntu Server; from installing using a bootable USB device, to navigating the Server installer menu.
 
 |||
 |--|--|
@@ -20,8 +21,8 @@ The Ubuntu installer has its own documentation. For more guidance on installing 
 | The Server installer ||
 || [Operating the Server installer](https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/operate-server-installer.html) |
 || [Screen-by-screen installer guide](https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/screen-by-screen.html) |
-| | [Configuring storage](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/configure-storage.html) |
-| | [Troubleshooting the installer](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/report-bugs.html) |
+|| [Configuring storage](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/configure-storage.html) |
+|| [Troubleshooting the installer](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/report-bugs.html) |
 |||
 
 ## Next steps

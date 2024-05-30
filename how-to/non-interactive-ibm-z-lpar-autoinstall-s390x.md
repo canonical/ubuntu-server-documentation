@@ -1,3 +1,4 @@
+(non-interactive-ibm-z-lpar-autoinstall-s390x)=
 # Non-interactive IBM Z LPAR autoinstall (s390x)
 
 This non-interactive installation uses ‘autoinstall’, which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by ‘…’, to limit the size of this document).

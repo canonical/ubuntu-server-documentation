@@ -1,3 +1,4 @@
+(multi-node-rock-configuration-with-docker-compose)=
 # Multi-node ROCK configuration with Docker-Compose
 
 

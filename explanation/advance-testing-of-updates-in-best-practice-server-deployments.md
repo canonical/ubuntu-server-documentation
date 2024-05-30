@@ -1,3 +1,4 @@
+(advance-testing-of-updates-in-best-practice-server-deployments)=
 # Advance testing of updates in best practice server deployments
 
 If you manage production server deployments with demanding reliability needs, you probably follow best practices with automated testing of Ubuntu updates in your environment before you deploy them. If an update causes a problem for you, you can hold it back from your production deployments while the problem is resolved.

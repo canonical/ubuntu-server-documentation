@@ -1,3 +1,4 @@
+(wireguard-vpn-site-to-site)=
 # WireGuard VPN site-to-site
 
 Another usual VPN configuration where one could deploy WireGuard is to connect two distinct networks over the internet. Here is a simplified diagram:

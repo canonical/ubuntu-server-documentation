@@ -1,3 +1,4 @@
+(wireguard-on-an-internal-system)=
 # WireGuard on an internal system
 
 Sometimes it's not possible to install WireGuard [on the home router itself](wireguard-vpn-peer-to-site-on-router.md). Perhaps it's a closed system to which you do not have access, or there is no easy build for that architecture, or any of the other possible reasons.

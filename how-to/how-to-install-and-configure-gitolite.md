@@ -1,3 +1,4 @@
+(how-to-install-and-configure-gitolite)=
 # How to install and configure gitolite
 
 Gitolite provides a traditional source control management server for git, with multiple users and access rights management. 

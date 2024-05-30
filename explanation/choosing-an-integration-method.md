@@ -1,3 +1,4 @@
+(choosing-an-integration-method)=
 # Choosing an integration method
 
 There are multiple mechanisms to join an Ubuntu system to an Active Directory tree (single domain) or a forest (multiple domains with trust relationships). It's important to understand the features, pros, and cons, of each method, and cross reference those with what is the objective of the integration.

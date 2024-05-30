@@ -1,3 +1,4 @@
+(set-up-your-lma-stack)=
 # Set up your LMA stack
 
 > **LMA to COS**

@@ -1,3 +1,4 @@
+(migrate-from-crmsh-to-pcs)=
 # Migrate from crmsh to pcs
 
 From Ubuntu 23.04 Lunar Lobster onwards, `pcs` is the recommended and supported tool for setting up and managing Corosync/Pacemaker clusters in Ubuntu. This is the final Ubuntu release where `crmsh` will be supported (but not recommended) so users will have time to migrate away from `crmsh`.

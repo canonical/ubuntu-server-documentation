@@ -1,3 +1,4 @@
+(basic-installation)=
 # Basic installation
 
 This chapter provides an overview of how to install Ubuntu Server Edition. You can also refer to this guide on [how to operate the installer](https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/operate-server-installer.html) for more information on using the installer, and to this [screen-by-screen reference guide](https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/screen-by-screen.html) for more information about each of the installer screens.

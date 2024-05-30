@@ -1,3 +1,4 @@
+(archive-rotation-shell-script)=
 # Archive rotation shell script
 
 The [simple backup shell script](basic-backup-shell-script.md) only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.

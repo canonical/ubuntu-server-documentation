@@ -1,3 +1,4 @@
+(install-and-configure-ldap)=
 # Install and configure LDAP
 
 Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/software/man.cgi?query=slapd) creates a minimal working configuration with a top level entry, and an administrator's Distinguished Name (DN). 
