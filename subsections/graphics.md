@@ -1,15 +1,15 @@
 # Graphics
 
-## On-system GPU
+```{toctree}
+:caption: On-system GPU
+:titlesonly:
 
-* {ref}`Nvidia driver installation <nvidia-drivers-installation>`
-
-## Virtual GPU
-
-* {ref}`Virtualised GPU with QEMU/KVM <gpu-virtualization-with-qemu-kvm>
+Nvidia driver installation <../how-to/nvidia-drivers-installation.md>
+```
 
 ```{toctree}
-:hidden:
-Nvidia driver installation <../how-to/nvidia-drivers-installation.md>
+:caption: Virtual GPU
+:titlesonly:
+
 Virtualised GPU with QEMU/KVM <../how-to/gpu-virtualization-with-qemu-kvm.md>
 ```

@@ -1,17 +1,8 @@
-## Security
-
-* {ref}`OpenSSH <openssh-server>`
-* {ref}`OpenVPN <how-to-install-and-use-openvpn>`
-* {ref}`CA trust store <install-a-root-ca-certificate-in-the-trust-store>`
-* {ref}`Firewall <firewalls>`
-* {ref}`AppArmor <apparmor>`
-* {ref}`Smart card authentication <smart-card-authentication>`
-* {ref}`Smart card SSH <smart-card-authentication-with-ssh>`
-* {ref}`User management <user-management>`
-* {ref}`Console security <console-security>`
+# Security
 
 ```{toctree}
-:hidden:
+:titlesonly:
+
 OpenSSH <../how-to/openssh-server.md>
 OpenVPN <../how-to/how-to-install-and-use-openvpn.md>
 CA trust store <../how-to/install-a-root-ca-certificate-in-the-trust-store.md>

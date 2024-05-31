@@ -2,25 +2,37 @@
 
 The following installation guides are more advanced than our getting started tutorial, but can be applied to specific scenarios. If you are looking for a more straightforward installation, refer to our {ref}`basic installation tutorial <basic-installation>`.
  
-## AMD
+```{toctree}
+:caption: AMD
+:titlesonly:
 
-* {ref}`amd64 netboot install <how-to-netboot-the-server-installer-on-amd64>`
+amd64 netboot install <../how-to/how-to-netboot-the-server-installer-on-amd64.md>
+```
 
-## ARM
+```{toctree}
+:caption: ARM
+:titlesonly:
 
-* {ref}`arm64 netboot install <netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64>`
+arm64 netboot install <../how-to/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64.md>
+```
 
-## ppc64el
+```{toctree}
+:caption: ppc64el
+:titlesonly:
 
-* {ref}`ppc64el netboot install <netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot>`
-* {ref}`Virtual CD-ROM and Petitboot on ppc64el <how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot>`
+ppc64el netboot install <../how-to/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md>
+Virtual CD-ROM and Petitboot on ppc64el <../how-to/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md>
+```
 
-## s390x
+```{toctree}
+:caption: s390x
+:titlesonly:
 
-* {ref}`s390x install via z/VM <interactive-live-server-installation-on-ibm-z-vm-s390x>`
-* {ref}`IBM z/VM autoinstall on s390x <non-interactive-ibm-z-vm-autoinstall-s390x>`
-* {ref}`s390x install via LPAR <interactive-live-server-installation-on-ibm-z-lpar-s390x>`
-* {ref}`IBM LPAR autoinstall on s390x <non-interactive-ibm-z-lpar-autoinstall-s390x>`
+s390x install via z/VM <../how-to/interactive-live-server-installation-on-ibm-z-vm-s390x.md>
+IBM z/VM autoinstall on s390x <../how-to/non-interactive-ibm-z-vm-autoinstall-s390x.md>
+s390x install via LPAR <../how-to/interactive-live-server-installation-on-ibm-z-lpar-s390x.md>
+IBM LPAR autoinstall on s390x <../how-to/non-interactive-ibm-z-lpar-autoinstall-s390x.md>
+```
 
 The Ubuntu installer now has its own documentation for automatic (or "hands-off" installations). For more guidance on auto-installing Ubuntu with the installer, you can refer to these guides from the Ubuntu installer documentation (note: these pages will redirect you outside of the Server Guide).
 
@@ -31,14 +43,3 @@ The Ubuntu installer now has its own documentation for automatic (or "hands-off"
 * [Autoinstall quickstart on s390x](https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-quickstart-s390x.html)
 
 
-```{toctree}
-:hidden:
-amd64 netboot install <../how-to/how-to-netboot-the-server-installer-on-amd64.md>
-arm64 netboot install <../how-to/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64.md>
-ppc64el netboot install <../how-to/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md>
-Virtual CD-ROM and Petitboot on ppc64el <../how-to/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md>
-s390x install via z/VM <../how-to/interactive-live-server-installation-on-ibm-z-vm-s390x.md>
-IBM z/VM autoinstall on s390x <../how-to/non-interactive-ibm-z-vm-autoinstall-s390x.md>
-s390x install via LPAR <../how-to/interactive-live-server-installation-on-ibm-z-lpar-s390x.md>
-IBM LPAR autoinstall on s390x <../how-to/non-interactive-ibm-z-lpar-autoinstall-s390x.md>
-```
