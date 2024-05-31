@@ -1,5 +1,5 @@
-(introduction-to-virtualization)=
-# Introduction to virtualization
+(Introduction-to-virtualisation)=
+# Introduction to virtualisation
 
 Virtualization is a technology that allows you to create safe, isolated environments on your server. For developers, this often means creating self-contained sandboxes for development and testing that cannot negatively affect the host machine. For systems administrators, it allows resources to be scaled to meet changing demand, giving greater control and flexibility in managing infrastructure.
 

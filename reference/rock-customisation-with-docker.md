@@ -1,5 +1,5 @@
 (rock-customisation-with-docker)=
-# ROCK customisation with Docker
+# Rock customisation with Docker
 
 
 In the [last section](https://discourse.ubuntu.com/t/docker-images-introduction/27993) we looked at the basics of how to start and stop containers.  Here we'll apply our own modifications to the images.

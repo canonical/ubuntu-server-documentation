@@ -1,5 +1,5 @@
 (about-apt-upgrade-and-phased-updates)=
-# About `apt upgrade` and phased updates
+# About apt upgrade and phased updates
 
 
 You may have noticed recently that updating your system with `apt upgrade` sometimes produces a weird message about packages being kept back...like this one:
