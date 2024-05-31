@@ -1,7 +1,9 @@
 # High Availability
 
+* {ref}`Distributed Replicated Block Device (DRBD) <distributed-replicated-block-device-drbd>`
+
 ```{toctree}
-:titlesonly:
+:hidden:
 
 Distributed Replicated Block Device (DRBD) <../how-to/distributed-replicated-block-device-drbd.md>
 ```

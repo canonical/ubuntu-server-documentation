@@ -34,6 +34,7 @@ Ubuntu 18.04 LTS (Bionic Beaver): [PDF](https://assets.ubuntu.com/v1/8f8ea0cf-18
 
 ```{toctree}
 :hidden:
+
 Tutorial <tutorial.md>
 How-to guides <how-to.md>
 Explanation <explanation.md>

@@ -1,7 +1,9 @@
 # Storage
 
+* {ref}`Manage logical volumes <how-to-manage-logical-volumes>`
+
 ```{toctree}
-:titlesonly:
+:hidden:
 
 Manage logical volumes <../how-to/how-to-manage-logical-volumes.md>
 ```

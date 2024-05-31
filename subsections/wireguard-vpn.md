@@ -1,7 +1,16 @@
 # WireGuard VPN
 
+* {ref}`Peer-to-site <wireguard-vpn-peer-to-site>`
+* {ref}`Peer-to-site (on router) <wireguard-vpn-peer-to-site-on-router>`
+* {ref}`Peer-to-site (inside device) <wireguard-on-an-internal-system>`
+* {ref}`Site-to-site <wireguard-vpn-site-to-site>`
+* {ref}`Default gateway <using-the-vpn-as-the-default-gateway>`
+* {ref}`Common tasks <common-tasks-in-wireguard-vpn>`
+* {ref}`Security tips <security-tips-for-wireguard-vpn>`
+* {ref}`Troubleshooting <troubleshooting-wireguard-vpn>`
+
 ```{toctree}
-:titlesonly:
+:hidden:
 
 Peer-to-site <../how-to/wireguard-vpn-peer-to-site.md>
 Peer-to-site (on router) <../how-to/wireguard-vpn-peer-to-site-on-router.md>

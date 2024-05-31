@@ -1,8 +1,12 @@
 # Containers
 
+* {ref}`LXC <lxc-containers>`
+* {ref}`LXD <lxd-containers>`
+* {ref}`Docker for system admins <docker-for-system-admins>`
+
+
 ```{toctree}
-:caption: Containers
-:titlesonly:
+:hidden:
 
 LXC <../how-to/lxc-containers.md>
 LXD <../how-to/lxd-containers.md>
