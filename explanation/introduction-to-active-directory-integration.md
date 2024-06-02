@@ -1,3 +1,4 @@
+(introduction-to-active-directory-integration)=
 # Introduction to Active Directory integration
 
 <div align="center">

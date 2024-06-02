@@ -1,4 +1,5 @@
-# Introduction to ROCK images
+(introduction-to-rock-images)=
+# Introduction to rock images
 
 
 ## What are ROCKs? ##

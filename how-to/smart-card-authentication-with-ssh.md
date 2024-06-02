@@ -1,3 +1,4 @@
+(smart-card-authentication-with-ssh)=
 # Smart card authentication with SSH
 
 

@@ -1,4 +1,5 @@
-# Multi-node ROCK configuration with Docker-Compose
+(multi-node-rock-configuration-with-docker-compose)=
+# Multi-node rock configuration with Docker-Compose
 
 
 The [prior section](https://discourse.ubuntu.com/t/rock-images-container-customization-with-docker/28042) explained the use of a single container for running a single software instance, but the principle benefit of using ROCKs is the ability to easily create and architecturally organize, or "orchestrate", them to operate together in a modular fashion.

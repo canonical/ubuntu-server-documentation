@@ -1,3 +1,4 @@
+(choosing-between-the-arm64-and-arm64-largemem-installer-options)=
 # Choosing between the arm64 and arm64+largemem installer options
 
 From 22.04.4 onwards, Ubuntu will provide both 4k and 64k page size kernel ISOs for ARM servers.

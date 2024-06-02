@@ -1,3 +1,4 @@
+(security-tips-for-wireguard-vpn)=
 # Security tips for WireGuard VPN
 
 

@@ -1,3 +1,4 @@
+(identity-mapping-idmap-backends)=
 # Identity Mapping (idmap) backends
 
 In order to have Domain users and groups from an Active Directory system appear in an Ubuntu system as valid, they need to have Linux specific attributes. Some of these attributes map directly to equivalent ones in Active Directory, some need to be translated to something else, and others do not exist at all. This is the problem that the Identity Mapping Backends (`idmap`) try to solve.

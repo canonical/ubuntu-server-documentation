@@ -1,3 +1,4 @@
+(how-to-upgrade-your-release)=
 # How to upgrade your release
 
 In this page we show how to upgrade an Ubuntu Server or Ubuntu cloud image to the next release.

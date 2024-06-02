@@ -1,3 +1,4 @@
+(virtual-machine-manager)=
 # Virtual Machine Manager
 
 The [Virtual Machine Manager](https://virt-manager.org/), through the `virt-manager` package, provides a graphical user interface (GUI) for managing local and remote virtual machines. In addition to the `virt-manager` utility itself, the package also contains a collection of other helpful tools like `virt-install`, `virt-clone` and `virt-viewer`.

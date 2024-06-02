@@ -1,3 +1,4 @@
+(how-to-install-and-configure-isc-dhcp-server)=
 # How to install and configure isc-dhcp-server
 
 > **Note**:

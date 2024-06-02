@@ -1,3 +1,4 @@
+(third-party-repository-usage)=
 # Third party repository usage
 
 Ubuntu is an operating system with thousands of packages and snaps available to its users, but it is humanly (and sometimes technically!) impossible to make all software out there available in the official repositories. There are situations where you may want to install a package that is not maintained by Ubuntu, but *is* maintained by a third party entity. We don’t recommend using third party APT repositories, but we know that users sometimes have no other option – so let’s take a look at some of the pitfalls, alternatives, and mitigations.

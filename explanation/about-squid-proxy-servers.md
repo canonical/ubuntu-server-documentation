@@ -1,3 +1,4 @@
+(about-squid-proxy-servers)=
 # About Squid proxy servers
 
 [Squid](http://www.squid-cache.org/) is a proxy caching server which provides proxy and cache services for Hyper Text Transport Protocol (HTTP), File Transfer Protocol (FTP), and other popular network protocols. 

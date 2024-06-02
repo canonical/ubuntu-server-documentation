@@ -1,3 +1,4 @@
+(how-to-install-and-configure-bacula)=
 # How to install and configure Bacula
 
 [Bacula](http://www.bacula.org/) is a backup management tool that enables you to backup, restore, and verify data across your network. There are Bacula clients for Linux, Windows, and Mac OS X -- making it a cross-platform and network-wide solution.

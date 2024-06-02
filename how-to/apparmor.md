@@ -1,3 +1,4 @@
+(apparmor)=
 # AppArmor
 
 [AppArmor](https://apparmor.net/) is an easy-to-use Linux Security Module implementation that restricts applications' capabilities and permissions with **profiles** that are set per-program. It provides mandatory access control (MAC) to supplement the more traditional UNIX model of discretionary access control (DAC).

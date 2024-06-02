@@ -1,3 +1,4 @@
+(console-security)=
 # Console security
 
 

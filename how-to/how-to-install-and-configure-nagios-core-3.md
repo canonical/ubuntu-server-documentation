@@ -1,3 +1,4 @@
+(how-to-install-and-configure-nagios-core-3)=
 # How to install and configure Nagios Core 3
 
 > **Note**:

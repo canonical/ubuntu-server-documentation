@@ -1,3 +1,4 @@
+(about-openstack)=
 # About OpenStack
 
 OpenStack is the most popular open source cloud computing platform that enables the management of distributed compute, network and storage resources in the data centre.

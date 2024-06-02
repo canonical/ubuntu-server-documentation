@@ -1,3 +1,4 @@
+(java-cryptography-configuration)=
 # Java cryptography configuration
 
 The Java cryptographic settings are large and complex, with many layers and policies. Here we will focus on one aspect of it, which is how to apply some basic filters to the set of cryptographic algorithms available to applications. The references section at the end contains links to more information.

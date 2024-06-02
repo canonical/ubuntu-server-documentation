@@ -1,3 +1,4 @@
+(user-management)=
 # User management
 
 User management is a critical part of maintaining a secure system. Ineffective user and privilege management often leads to a system being compromised. Therefore, it is important that you understand how to protect your server through simple and effective user account management techniques.

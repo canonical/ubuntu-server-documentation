@@ -1,3 +1,4 @@
+(security-identifiers-sids)=
 # Security identifiers (SIDs)
 
 One of the more challenging aspects of integrating with Active Directory is called Identity Mapping. Windows entities (users, groups, computers, etc) have identifiers called SID, which stands for *Security IDentifier*. This is not just a number: it has a structure and is composed of several values. Linux users and groups identifiers, on the other hand, are a single number..

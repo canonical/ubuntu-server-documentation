@@ -1,3 +1,4 @@
+(about-debuginfod)=
 # About debuginfod
 
 [`debuginfod`](https://sourceware.org/elfutils/Debuginfod.html) is a service for software developers. It helps with diagnosing issues in software and centralises the storage of debug symbols, source code, etc.

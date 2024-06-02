@@ -1,3 +1,4 @@
+(how-to-set-up-a-secondary-kdc)=
 # How to set up a secondary KDC
 
 Once you have one Key Distribution Center (KDC) on your network, it is good practice to have a secondary KDC in case the primary becomes unavailable. 

@@ -1,3 +1,4 @@
+(introduction-to-samba)=
 # Introduction to Samba
 
 Computer networks are often comprised of diverse systems. While operating a network made up entirely of Ubuntu desktop and server computers would definitely be fun, some network environments require both Ubuntu and Microsoft Windows systems working together in harmony. 

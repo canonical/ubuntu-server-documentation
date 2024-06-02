@@ -1,3 +1,4 @@
+(the-autorid-idmap-backend)=
 # The autorid idmap backend
 
 The [autorid](https://manpages.ubuntu.com/manpages/noble/man8/idmap_autorid.8.html) identity mapping backend, like the *rid* one, also provides an algorithmic mapping between SIDs and Linux IDs, with the advantage that it can also automatically cope with Active Directory deployed across multiple domains. There is no need to pre-allocate ranges for each specific existing or future domain. Some planning is required, though:

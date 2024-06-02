@@ -1,3 +1,4 @@
+(etckeeper)=
 # etckeeper
 
 [etckeeper](https://etckeeper.branchable.com/) allows the contents of `/etc` to be stored in a Version Control System (VCS) repository. It integrates with APT and automatically commits changes to `/etc` when packages are installed or upgraded.

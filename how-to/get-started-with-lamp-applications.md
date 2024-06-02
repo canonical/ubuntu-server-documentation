@@ -1,3 +1,4 @@
+(get-started-with-lamp-applications)=
 # Get started with LAMP applications
 
 ## Overview

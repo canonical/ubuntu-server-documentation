@@ -1,3 +1,4 @@
+(samba-as-a-file-server)=
 # Samba as a file server
 
 One of the most common ways to network Ubuntu and Windows computers is to configure Samba as a *file server*. It can be set up to share files with Windows clients, as we'll see in this section. 

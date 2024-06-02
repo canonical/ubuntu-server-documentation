@@ -1,3 +1,4 @@
+(how-to-set-up-sssd-with-ldap)=
 # How to set up SSSD with LDAP
 
 SSSD can also use LDAP for authentication, authorisation, and user/group information. In this section we will configure a host to authenticate users from an OpenLDAP directory.

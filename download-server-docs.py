@@ -5,6 +5,8 @@ import requests
 import csv
 import os
 import re
+import shutil
+from glob import glob
 
 root_dir = os.getcwd()
 folders = ["tutorial", "how-to", "explanation", "reference"]
@@ -12,6 +14,7 @@ landing_pages = ["tutorial.md","how-to.md","explanation.md","reference.md"]
 
 # csv file containing pages to be downloaded/saved/organised
 csv_file_list = 'file-list.csv'
+
 
 # The markdown script also copies all the comments, each separated by a dashed
 # line - we want to exclude everything after this marker:
@@ -55,6 +58,10 @@ with open(csv_file_list, newline='', encoding='utf-8') as filelist:
         url = f"https://discourse.ubuntu.com/raw/{index_number}"
         print(f"getting {url}")
 
+        # Create a MyST compatible heading anchor for the page from the file
+        # name/slug - in this way we don't have to mess around with file paths
+        myst_anchor = f"({page_slug})=\n"   
+        
         # Save title from spreadsheet
         h1_title = f"# {page_title}\n"
 
@@ -81,6 +88,7 @@ with open(csv_file_list, newline='', encoding='utf-8') as filelist:
             excluding_comments = '\n'.join(excluding_comments)
 
             with open(doc_filename, "w") as contents:
+                contents.write(myst_anchor)
                 contents.write(h1_title)
                 contents.write(excluding_comments)
 
@@ -215,12 +223,182 @@ for file, folder in zip(landing_pages, folders):
         
 # Now, finally, we need to replace the contents of main_landing_page into 
 # the index.md page to get rid of the navigation and redirect tables
-file_with_nav = "main_landing_page.txt"
-file_to_replace = "index.md"
-with open(file_with_nav, 'r') as f:
-    contents = f.read()
-    
-    with open(file_to_replace, 'w') as i:
-        i.write(contents)
+file_with_nav = ["main_landing_page.txt"]
+file_to_replace = ["index.md"]
 
+for navfile, replacement in zip(file_with_nav, file_to_replace):
+    with open(navfile, 'r') as f:
+        contents = f.read()
+        
+        with open(replacement, 'w') as i:
+            i.write(contents)
+
+# ---------------------------------------------------------------------------
+# Diataxis and structure: landing pages for sections/topics
+# ---------------------------------------------------------------------------
+
+print("Creating topic landing pages")
+
+if os.path.isdir("subsections"):
+    shutil.rmtree("subsections")
+
+os.mkdir("subsections")
+
+# Opening the csv file again!
+with open(csv_file_list, newline='') as filelist:
+    reader = csv.reader(filelist)
+
+    # Variable to track previous subsection and subsubsection names
+    prev_pagetype = None
+    prev_subsection = None
+    prev_subsubsection = None
+    doc_filename = None
+        
+    toc_contents = ""
+    list_contents = ""
+            
+    # Loop over file and for each row, extract info
+    for index, row in enumerate(reader):
+
+        # Save contents of row into more descriptive variables
+        page_slug = row[0]
+        page_title = row[1]
+        page_type = row[3]
+        subsection_name = row[5]
+        subsubsection_name = row[6]
+
+        if subsection_name == '--':
+            continue
+            
+        if subsection_name != prev_subsection:
+            if doc_filename:    
+                with open(doc_filename, "w") as contents:
+                    contents.write(myst_anchor)
+                    contents.write(h1_title)
+                    contents.write(list_contents)
+                    contents.write("\n")
+                    contents.write(f"```{{toctree}}\n")
+                    contents.write(f":hidden:\n")
+                    contents.write(toc_contents)
+                    contents.write("```")        
+
+            # Re-initialise the contents counter
+            toc_contents = ""
+            list_contents = ""
+            
+            # Create the file for this subsection/section combo
+            subsection = subsection_name.lower()
+            subsection = subsection.replace(' ','-')
+            doc_filename = f"subsections/{page_type}-{subsection}.md"
+
+            # Create the bits that need to be generated 
+            myst_anchor = f"({page_type}-{subsection})=\n\n"       
+            h1_title = f"# {subsection_name}\n\n"
+
+            list_contents += f"* {{ref}}`{page_title} <{page_slug}>`\n"
+            toc_contents += f"{page_title} <../{page_type}/{page_slug}.md>\n"
+            
+            prev_subsection = subsection_name
+
+        else:
+            if (subsubsection_name != '--') and (subsubsection_name != prev_subsubsection):
+                list_contents += f"**{subsubsection_name}**\n\n"
+
+            list_contents += f"* {{ref}}`{page_title} <{page_slug}>`\n"
+            toc_contents += f"{page_title} <../{page_type}/{page_slug}.md>\n"
+            
+            prev_subsubsection = subsubsection_name
+
+        with open(doc_filename, "w") as contents:
+            contents.write(myst_anchor)
+            contents.write(h1_title)
+            contents.write(list_contents)
+            contents.write("\n")
+            contents.write(f"```{{toctree}}\n")
+            contents.write(f":hidden:\n")
+            contents.write(toc_contents)
+            contents.write("```")                
+
+# ---------------------------------------------------------------------------
+# Diataxis and structure: Diataxis landing pages
+# ---------------------------------------------------------------------------
+
+print("Creating Diaxtaxis landing pages")
+
+tutorial_intro = f"This section of our documentation contains step-by-step tutorials to help outline what Ubuntu Server is capable of while helping you achieve specific aims.\n\nWe hope our tutorials make as few assumptions as possible and are broadly accessible to anyone with an interest in Ubuntu Server. They should also be a good place to start learning about Ubuntu Server in general, how it works, and what it's capable of.\n\n"
+
+howto_intro = f"If you have a specific goal, but are already familiar with Ubuntu Server, our **how-to guides** have more in-depth detail than our tutorials and can be applied to a broader set of applications. They’ll help you achieve an end result but may require you to understand and adapt the steps to fit your specific requirements.\n\n"      
+
+explanation_intro = f"Our explanatory and conceptual guides are written to provide a better understanding of how Ubuntu Server works and how it can be used and configured. They enable you to expand your knowledge, making the operating system easier to use.\n\nIf you're not sure how or where to get started with a topic, try our introductory pages for a high-level overview and relevant links (with context!) to help you navigate to the guides and other materials of most interest to you.\n\n"
+
+reference_intro = f"Our reference section is used for quickly checking what software and commands are available, and how to interact with various tools.\n\n"
+
+# Delete these after
+folders = ["tutorial", "how-to", "explanation", "reference"]
+landing_pages = ["tutorial.md","how-to.md","explanation.md","reference.md"]
+intros = [tutorial_intro, howto_intro, explanation_intro, reference_intro]
+
+# Remove previous landing pages
+for page in landing_pages:
+    if os.path.isfile(page):
+        os.remove(page)
+
+for page, folder, intro in zip(landing_pages, folders, intros):
+    doc_filename = page
+
+    toc_contents = ""
+    list_contents = ""
+    myst_anchor = ""
+    h1_header = ""
+            
+    # Variable to track previous subsection and subsubsection names
+    prev_subsection = None
+
+    # Opening the csv file yet again!
+    with open(csv_file_list, newline='') as filelist:
+        reader = csv.reader(filelist)
+
+        # Loop over file and for each row, extract info
+        for index, row in enumerate(reader):
+
+            # Save contents of row into more descriptive variables
+            page_slug = row[0]
+            page_title = row[1]
+            page_type = row[3]
+            subsection_name = row[5]
+
+            if page_slug == folder:
+                myst_anchor = f"({page_slug})=\n\n"
+                h1_header = f"# {page_title}\n\n"
+
+            if (page_type == folder) and (subsection_name != prev_subsection):
+
+                subsection = subsection_name.lower()
+                subsection = subsection.replace(' ','-')
+            
+                list_contents += f"## {subsection_name}\n\n"
+                list_contents += f"```{{include}} subsections/{page_type}-{subsection}.md\n"                    
+                list_contents += f":start-line: 4\n"
+                list_contents += f":heading-offset: 1\n"
+                list_contents += f":end-before: ```\n"
+                list_contents += f"```\n\n"
+                
+                toc_contents += f"subsections/{page_type}-{subsection}.md\n"             
+
+            prev_subsection = subsection_name
+
+        with open(doc_filename, "a") as contents:
+            # Create the bits that need to be generated 
+            contents.write(myst_anchor)
+            contents.write(h1_header)
+            contents.write(intro)
+
+            contents.write(list_contents)
+
+            contents.write("\n")
+            contents.write(f"```{{toctree}}\n")
+            contents.write(f":hidden:\n")
+            contents.write(f":titlesonly:\n")
+            contents.write(toc_contents)
+            contents.write(f"```")
 

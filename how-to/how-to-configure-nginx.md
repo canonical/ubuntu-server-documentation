@@ -1,3 +1,4 @@
+(how-to-configure-nginx)=
 # How to configure nginx
 
 Once you have [installed nginx](../how-to.md), you can customise it for your use with the configuration options explained in this guide.

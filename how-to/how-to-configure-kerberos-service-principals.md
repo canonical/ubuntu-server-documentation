@@ -1,3 +1,4 @@
+(how-to-configure-kerberos-service-principals)=
 # How to configure Kerberos service principals
 
 

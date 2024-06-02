@@ -1,3 +1,4 @@
+(how-to-use-nagios-with-munin)=
 # How to use Nagios with Munin
 
 > **Note**:

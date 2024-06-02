@@ -1,3 +1,4 @@
+(introduction-to-high-availability)=
 # Introduction to High Availability
 
 

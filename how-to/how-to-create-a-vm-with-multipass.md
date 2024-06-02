@@ -1,3 +1,4 @@
+(how-to-create-a-vm-with-multipass)=
 # How to create a VM with Multipass
 
 

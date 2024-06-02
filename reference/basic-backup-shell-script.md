@@ -1,3 +1,4 @@
+(basic-backup-shell-script)=
 # Basic backup shell script
 
 The following shell script uses tar to create an archive file on a remotely mounted NFS file system. The archive filename is determined using additional command line utilities.

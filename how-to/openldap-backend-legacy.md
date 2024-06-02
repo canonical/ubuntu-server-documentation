@@ -1,3 +1,4 @@
+(openldap-backend-legacy)=
 # OpenLDAP backend (legacy)
 
 > **Note**:

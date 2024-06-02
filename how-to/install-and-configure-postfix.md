@@ -1,3 +1,4 @@
+(install-and-configure-postfix)=
 # Install and configure Postfix
 
 > **Note**:
