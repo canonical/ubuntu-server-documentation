@@ -295,6 +295,9 @@ with open(csv_file_list, newline='') as filelist:
             myst_anchor = f"({page_type}-{subsection})=\n\n"       
             h1_title = f"# {subsection_name}\n\n"
 
+            if subsubsection_name != '--':
+                list_contents += f"\n\n**{subsubsection_name}**\n\n"
+                
             list_contents += f"* {{ref}}`{page_title} <{page_slug}>`\n"
             toc_contents += f"{page_title} <../{page_type}/{page_slug}.md>\n"
             
@@ -302,7 +305,7 @@ with open(csv_file_list, newline='') as filelist:
 
         else:
             if (subsubsection_name != '--') and (subsubsection_name != prev_subsubsection):
-                list_contents += f"**{subsubsection_name}**\n\n"
+                list_contents += f"\n\n**{subsubsection_name}**\n\n"
 
             list_contents += f"* {{ref}}`{page_title} <{page_slug}>`\n"
             toc_contents += f"{page_title} <../{page_type}/{page_slug}.md>\n"

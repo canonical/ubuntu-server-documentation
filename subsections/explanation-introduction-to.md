@@ -2,29 +2,43 @@
 
 # Introduction to
 
+
+
+**Virtualisation**
+
 * {ref}`Introduction to virtualisation <Introduction-to-virtualisation>`
+
+
 **Networking**
 
 * {ref}`Introduction to networking <introduction-to-networking>`
 * {ref}`Introduction to Samba <introduction-to-samba>`
 * {ref}`Introduction to Active Directory integration <introduction-to-active-directory-integration>`
 * {ref}`Introduction to device mapper multipathing <introduction-to-device-mapper-multipathing>`
+
+
 **Authentication and access**
 
 * {ref}`Introduction to Kerberos <introduction-to-kerberos>`
 * {ref}`Introduction to network user authentication with SSSD <introduction-to-network-user-authentication-with-sssd>`
 * {ref}`Introduction to OpenLDAP <introduction-to-openldap>`
+
+
 **Security**
 
 * {ref}`Introduction to security <introduction-to-security>`
 * {ref}`Introduction to crypto libraries <introduction-to-crypto-libraries>`
 * {ref}`Introduction to Wireguard VPN <introduction-to-wireguard-vpn>`
+
+
 **Useful services**
 
 * {ref}`Introduction to mail services <introduction-to-mail-services>`
 * {ref}`Introduction to web servers <introduction-to-web-servers>`
 * {ref}`Introduction to backups <introduction-to-backups>`
 * {ref}`Introduction to databases <introduction-to-databases>`
+
+
 **High Availability**
 
 * {ref}`Introduction to High Availability <introduction-to-high-availability>`

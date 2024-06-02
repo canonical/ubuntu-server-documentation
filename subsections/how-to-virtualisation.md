@@ -2,18 +2,28 @@
 
 # Virtualisation
 
+
+
+**Virtual machines**
+
 * {ref}`Virtualisation with QEMU <virtualisation-with-qemu>`
+
+
 **Virtual machines**
 
 * {ref}`Create QEMU VMs with up to 1024 vCPUs <create-qemu-vms-with-up-to-1024-vcpus>`
 * {ref}`Boot ARM64 virtual machines on QEMU <boot-arm64-virtual-machines-on-qemu>`
 * {ref}`How to create a VM with Multipass <how-to-create-a-vm-with-multipass>`
 * {ref}`Create cloud image VMs with UVtool <create-cloud-image-vms-with-uvtool>`
+
+
 **VM tooling**
 
 * {ref}`Libvirt <libvirt>`
 * {ref}`Virtual Machine Manager <virtual-machine-manager>`
 * {ref}`How to enable nested virtualization <how-to-enable-nested-virtualization>`
+
+
 **Ubuntu in other virtual environments**
 
 * {ref}`How to set up Ubuntu on Hyper-V <how-to-set-up-ubuntu-on-hyper-v>`
