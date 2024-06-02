@@ -2,14 +2,24 @@
 
 # Virtualisation
 
+
+
+**About virtual machines**
+
 * {ref}`VM tools in the Ubuntu space <vm-tools-in-the-ubuntu-space>`
+
+
 **Using virtual machines**
 
 * {ref}`Using QEMU for microVMs <using-qemu-for-microvms>`
 * {ref}`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
+
+
 **About containers**
 
 * {ref}`About OpenStack <about-openstack>`
+
+
 **Other virtualisation tools**
 
 * {ref}`Container tools in the Ubuntu space <container-tools-in-the-ubuntu-space>`

@@ -2,7 +2,13 @@
 
 # Graphics
 
+
+
+**On-system GPU**
+
 * {ref}`NVIDIA drivers installation <nvidia-drivers-installation>`
+
+
 **Virtual GPU**
 
 * {ref}`GPU virtualization with QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
