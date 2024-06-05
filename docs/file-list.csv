@@ -23,7 +23,7 @@ how-to-set-up-ubuntu-on-hyper-v,How to set up Ubuntu on Hyper-V,43642,how-to,/t/
 lxc-containers,LXC containers,11526,how-to,/t/-/11526,Containers,--
 lxd-containers,LXD containers,11525,how-to,/t/-/11525,Containers,--
 docker-for-system-admins,Docker for system admins,39799,how-to,/t/-/39799,Containers,--
-how-to-run-rocks-on-your-server,How to run rocks on your server,28708,how-to,t-/28708,Containers,--
+how-to-run-rocks-on-your-server,How to run rocks on your server,28708,how-to,/t/-/28708,Containers,--
 network-file-system-nfs,Network File System (NFS),11571,how-to,/t/-/11571,Networking,--
 set-up-an-ftp-server,Set up an FTP server,11319,how-to,/t/-/11319,Networking,--
 how-to-install-and-configure-isc-kea,How to install and configure isc-kea,36290,how-to,/t/-/36290,Networking,--
@@ -115,7 +115,7 @@ how-to-install-and-configure-munin,How to install and configure Munin,11904,how-
 how-to-install-and-configure-nagios-core-3,How to install and configure Nagios Core 3,11903,how-to,/t/-/11903,Observability,--
 how-to-use-nagios-with-munin,How to use Nagios with Munin,11326,how-to,/t/-/11326,Observability,--
 explanation,Ubuntu Server explanation guides,29951,landing page,/t/-/29951,--,--
-Introduction-to-virtualisation,Introduction to virtualisation,11521,explanation,/t/-/11521,Introduction to,Virtualisation
+introduction-to-virtualisation,Introduction to virtualisation,11521,explanation,/t/-/11521,Introduction to,Virtualisation
 introduction-to-networking,Introduction to networking,36315,explanation,/t/-/36315,Introduction to,Networking
 introduction-to-samba,Introduction to Samba,11888,explanation,/t/-/11888,Introduction to,Networking
 introduction-to-active-directory-integration,Introduction to Active Directory integration,44778,explanation,/t/-/44778,Introduction to,Networking
@@ -136,7 +136,7 @@ using-qemu-for-microvms,Using QEMU for microVMs,40861,explanation,/t/-/40861,Vir
 upgrading-the-machine-type-of-your-vm,Upgrading the machine type of your VM,40862,explanation,/t/-/40862,Virtualisation,Using virtual machines
 about-openstack,About OpenStack,23973,explanation,/t/-/23973,Virtualisation,Other virtualisation tools
 container-tools-in-the-ubuntu-space,Container tools in the Ubuntu space,41385,explanation,/t/-/41385,Virtualisation,Containers
-About-rock-images,About rock images,27993,explanation,t-/27993,Virtualisation,Containers
+about-rock-images,About rock images,27993,explanation,/t/-/27993,Virtualisation,Containers
 networking-key-concepts,Networking key concepts,11875,explanation,/t/-/11875,Networking,--
 configuring-networks,Configuring networks,11876,explanation,/t/-/11876,Networking,--
 about-dynamic-host-configuration-protocol-dhcp,About Dynamic Host Configuration Protocol (DHCP),11877,explanation,/t/-/11877,Networking,--
@@ -181,6 +181,3 @@ about-debuginfod,About debuginfod,30534,reference,/t/-/30534,Debugging,--
 debug-symbol-packages,Debug symbol packages,43282,reference,/t/-/43282,Debugging,--
 byobu,Byobu,11907,reference,/t/-/11907,Other tools,--
 pam-motd,pam_motd,11905,reference,/t/-/11905,Other tools,--
-introduction-to-rock-images,Introduction to rock images,27993,reference,/t/-/27993,Rock images,--
-rock-customisation-with-docker,Rock customisation with Docker,28042,reference,/t/-/28042,Rock images,--
-multi-node-rock-configuration-with-docker-compose,Multi-node rock configuration with Docker-Compose,28708,reference,/t/-/28708,Rock images,--

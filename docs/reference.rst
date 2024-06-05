@@ -41,12 +41,6 @@ Other tools
 .. include:: subsections/reference-other-tools.rst
     :start-line: 4
 
-Rock images
-===========
-
-.. include:: subsections/reference-rock-images.rst
-    :start-line: 4
-
 
 
 .. toctree::
@@ -59,4 +53,3 @@ Rock images
     subsections/reference-backups-and-version-control.rst
     subsections/reference-debugging.rst
     subsections/reference-other-tools.rst
-    subsections/reference-rock-images.rst
