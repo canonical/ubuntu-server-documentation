@@ -63,8 +63,8 @@ PDFs and previous releases
 Below are links to the previous Ubuntu Server release server guides as well as
 an offline copy of the current version of this site:
 
-* Ubuntu 20.04 LTS (Focal Fossa) and later: `PDF <https://assets.ubuntu.com/ubuntu-server-guide>`_
-* Ubuntu 18.04 LTS (Bionic Beaver): `PDF <https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf>`_
+* `Ubuntu 20.04 LTS (Focal Fossa) PDF <https://canonical-server-pdf-test.readthedocs-hosted.com/_/downloads/en/latest/pdf/>`_
+* `Ubuntu 18.04 LTS (Bionic Beaver) PDF <https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf>`_
 
 .. toctree::
    :hidden:
