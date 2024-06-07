@@ -1,5 +1,5 @@
 (lxc-containers)=
-# LXC containers
+# LXC
 
 
 Containers are a lightweight virtualization technology. They are more akin to an enhanced chroot than to full virtualization like QEMU or VMware, both because they do not emulate hardware and because containers share the same operating system as the host. Containers are similar to Solaris zones or BSD jails. Linux-vserver and OpenVZ are two pre-existing, independently developed implementations of containers-like functionality for Linux. In fact, containers came about as a result of the work to upstream the vserver and OpenVZ functionality.

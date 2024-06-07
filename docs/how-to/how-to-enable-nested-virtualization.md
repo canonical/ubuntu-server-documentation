@@ -1,5 +1,5 @@
 (how-to-enable-nested-virtualization)=
-# How to enable nested virtualization
+# Nested virtualization
 
 > **Disclaimer**:
 > Nested virtualization is enabled by default on Ubuntu. If you are using Ubuntu, it's unlikely that you will need to manually enable the feature. If you check (using the steps below) and discover that nested virtualization is enabled, then you will not need to do anything further.

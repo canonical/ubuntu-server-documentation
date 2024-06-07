@@ -1,5 +1,5 @@
 (netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64)=
-# Netboot the server installer via UEFI PXE on ARM (aarch64, arm64) and x86_64 (amd64)
+# arm64 netboot install
 
 
 This document provides the steps needed to install a system via netbooting and the live server installer (Subiquity) in UEFI mode with Ubuntu 20.04 (or later).

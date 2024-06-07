@@ -1,5 +1,5 @@
 (how-to-install-and-configure-isc-kea)=
-# How to install and configure isc-kea
+# Install isc-kea
 
 In this guide we show how to install and configure `isc-kea` in Ubuntu 23.04
 or greater. [Kea](https://www.isc.org/kea/) is the DHCP server developed by ISC to replace `isc-dhcp`. It is newer and designed for more modern network environments.

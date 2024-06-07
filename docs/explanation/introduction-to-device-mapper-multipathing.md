@@ -1,5 +1,5 @@
 (introduction-to-device-mapper-multipathing)=
-# Introduction to device mapper multipathing
+# Device mapper multipathing
 
 Device mapper multipathing (which we will refer to as **multipath**) allows you to configure multiple input/output (I/O) paths between server nodes and storage arrays into a single device. These I/O paths are physical storage area network (SAN) connections that can include separate cables, switches, and controllers.
 

@@ -3,13 +3,13 @@
 Multipath
 **********
 
-* :ref:`Configuring device mapper multipathing <configuring-device-mapper-multipathing>`
-* :ref:`Multipath configuration examples <multipath-configuration-examples>`
-* :ref:`Common multipath tasks and procedures <common-multipath-tasks-and-procedures>`
+* :ref:`Configuration options and overview <configuring-device-mapper-multipathing>`
+* :ref:`Configuration examples <multipath-configuration-examples>`
+* :ref:`Common tasks and procedures <common-multipath-tasks-and-procedures>`
 
 .. toctree::
     :hidden:
 
-    Configuring device mapper multipathing <../explanation/configuring-device-mapper-multipathing.md>
-    Multipath configuration examples <../explanation/multipath-configuration-examples.md>
-    Common multipath tasks and procedures <../explanation/common-multipath-tasks-and-procedures.md>
+    Configuration options and overview <../explanation/configuring-device-mapper-multipathing>
+    Configuration examples <../explanation/multipath-configuration-examples>
+    Common tasks and procedures <../explanation/common-multipath-tasks-and-procedures>

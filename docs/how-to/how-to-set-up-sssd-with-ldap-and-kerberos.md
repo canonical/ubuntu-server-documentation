@@ -1,5 +1,5 @@
 (how-to-set-up-sssd-with-ldap-and-kerberos)=
-# How to set up SSSD with LDAP and Kerberos
+# SSSD with LDAP and Kerberos
 
 With SSSD we can create a setup that is very similar to Active Directory in terms of the technologies used: using LDAP for users and groups, and Kerberos for authentication.
 

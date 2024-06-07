@@ -8,4 +8,4 @@ Next steps
 .. toctree::
     :hidden:
 
-    Attach your Ubuntu Pro subscription <../tutorial/attach-your-ubuntu-pro-subscription.md>
+    Attach your Ubuntu Pro subscription <../tutorial/attach-your-ubuntu-pro-subscription>

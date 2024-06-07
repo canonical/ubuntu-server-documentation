@@ -1,9 +1,9 @@
 .. _reference:
 
-Ubuntu Server reference
-***********************
+Reference
+*********
 
-Our reference section is used for quickly checking what software and commands are available, and how to interact with various tools.
+.. include:: intro_reference.txt
 
 Server installation
 ===================

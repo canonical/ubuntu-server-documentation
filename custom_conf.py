@@ -163,11 +163,11 @@ custom_myst_extensions = []
 custom_extensions = [
     'sphinx_tabs.tabs',
     'sphinxcontrib.mermaid',
-    'canonical.youtube-links',
-    'canonical.related-links',
-    'canonical.custom-rst-roles',
-    'canonical.terminal-output',
-    'notfound.extension'
+#    'canonical.youtube-links',
+#    'canonical.related-links',
+#    'canonical.custom-rst-roles',
+#    'canonical.terminal-output',
+#    'notfound.extension'
     ]
 
 # Add custom required Python modules that must be added to the
@@ -214,6 +214,11 @@ custom_excludes = [
     'readme.rst'
     ]
 
+# Allow Sphinx to use both rst and md
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 ############################################################
 ### Additional configuration
 ############################################################

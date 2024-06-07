@@ -8,4 +8,4 @@ System tuning
 .. toctree::
     :hidden:
 
-    TuneD <../explanation/tuned.md>
+    TuneD <../explanation/tuned>

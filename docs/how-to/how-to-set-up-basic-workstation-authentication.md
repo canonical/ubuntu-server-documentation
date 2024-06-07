@@ -1,5 +1,5 @@
 (how-to-set-up-basic-workstation-authentication)=
-# How to set up basic workstation authentication
+# Basic workstation authentication
 
 
 In this section we'll look at configuring a Linux system as a Kerberos client. This will allow access to any "Kerber-ised" services once a user has successfully logged into the system.

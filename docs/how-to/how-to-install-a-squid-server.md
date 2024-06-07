@@ -1,5 +1,5 @@
 (how-to-install-a-squid-server)=
-# How to install a Squid server
+# Install a Squid server
 
 Squid is a filtering and caching mechanism for web servers that can optimise bandwidth and performance. For more information about Squid proxy servers, [refer to this guide](../explanation/about-squid-proxy-servers.md).
 

@@ -1,5 +1,5 @@
 (install-and-configure-a-cups-print-server)=
-# Install and configure a CUPS print server
+# Set up a CUPS print server
 
 The [Common UNIX Printing System, or CUPS](https://openprinting.github.io/cups/doc/overview.html), is the most widely-used way to manage printing and print services in Ubuntu. This freely-available printing system has become the standard for printing in most Linux distributions, and uses the standard Internet Printing Protocol (IPP) to handle network printing.
 

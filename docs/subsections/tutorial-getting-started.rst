@@ -8,4 +8,4 @@ Getting started
 .. toctree::
     :hidden:
 
-    Basic installation <../tutorial/basic-installation.md>
+    Basic installation <../tutorial/basic-installation>

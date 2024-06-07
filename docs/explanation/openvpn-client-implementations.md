@@ -1,5 +1,5 @@
 (openvpn-client-implementations)=
-# OpenVPN client implementations
+# OpenVPN clients
 
 
 ## Linux Network-Manager GUI for OpenVPN

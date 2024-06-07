@@ -1,5 +1,5 @@
 (how-to-create-a-vm-with-multipass)=
-# How to create a VM with Multipass
+# Multipass
 
 
 [Multipass](https://multipass.run) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.

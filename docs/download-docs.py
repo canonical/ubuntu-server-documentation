@@ -50,6 +50,10 @@ def extract_info(markdown_line):
 # and index numbers (from the Discourse post) must be unique.
 csv_file_list = 'file_list.csv'
 
+# Introductory text inserted before any of the links/sections on the Diataxis
+# landing pages. Change this to be appropriate for your product.
+intros = ["intro_tutorial.txt", "intro_how-to.txt", "intro_explanation.txt", "intro_reference.txt"]
+
 
 # ----------- STATIC VARIABLES:
 # Declare variables that I can loop over when generating or checking against
@@ -79,13 +83,13 @@ def clear_old_stuff():
     # Diataxis scaffolding (fully generated, not downloaded) -> remake folder.
     if os.path.isdir("subsections"):
         shutil.rmtree("subsections")
-        os.mkdir("subsections")
+    os.mkdir("subsections")
 
     for folder in folders:
         if os.path.isdir(folder):
             shutil.rmtree(folder)
-            os.mkdir(folder)
-            os.mkdir(os.path.join(folder, 'images')) 
+        os.mkdir(folder)
+        os.mkdir(os.path.join(folder, 'images')) 
 
 # ----------------------------------------------------------------------------- 
 # Section 1: Create page files + download/save images
@@ -305,7 +309,7 @@ with open(csv_file_list, newline='') as filelist:
                 list_contents += f"\n\n**{subsubsection_name}**\n\n"
 
             list_contents += f"* :ref:`{page_title} <{page_slug}>`\n"
-            toc_contents += f"    {page_title} <../{page_type}/{page_slug}.md>\n"
+            toc_contents += f"    {page_title} <../{page_type}/{page_slug}>\n"
 
             prev_subsection = subsection_name
 
@@ -314,7 +318,7 @@ with open(csv_file_list, newline='') as filelist:
                 list_contents += f"\n\n**{subsubsection_name}**\n\n"
 
             list_contents += f"* :ref:`{page_title} <{page_slug}>`\n"
-            toc_contents += f"    {page_title} <../{page_type}/{page_slug}.md>\n"
+            toc_contents += f"    {page_title} <../{page_type}/{page_slug}>\n"
             
             prev_subsubsection = subsubsection_name
 
@@ -336,17 +340,8 @@ with open(csv_file_list, newline='') as filelist:
 
 print("Creating Diaxtaxis landing pages")
 
-# Introductory text (inserted before any of the links/sections
-tutorial_intro = f"This section of our documentation contains step-by-step tutorials to help outline what Ubuntu Server is capable of while helping you achieve specific aims.\n\nWe hope our tutorials make as few assumptions as possible and are broadly accessible to anyone with an interest in Ubuntu Server. They should also be a good place to start learning about Ubuntu Server in general, how it works, and what it's capable of.\n\n"
-howto_intro = f"If you have a specific goal, but are already familiar with Ubuntu Server, our **how-to guides** have more in-depth detail than our tutorials and can be applied to a broader set of applications. They’ll help you achieve an end result but may require you to understand and adapt the steps to fit your specific requirements.\n\n"      
-explanation_intro = f"Our explanatory and conceptual guides are written to provide a better understanding of how Ubuntu Server works and how it can be used and configured. They enable you to expand your knowledge, making the operating system easier to use.\n\nIf you're not sure how or where to get started with a topic, try our introductory pages for a high-level overview and relevant links (with context!) to help you navigate to the guides and other materials of most interest to you.\n\n"
-reference_intro = f"Our reference section is used for quickly checking what software and commands are available, and how to interact with various tools.\n\n"
-
-intros = [tutorial_intro, howto_intro, explanation_intro, reference_intro]
-
 # Create files
 for page, folder, intro in zip(landing_pages, folders, intros):
-    print(page)
     doc_filename = page
 
     toc_contents = ""
@@ -396,7 +391,7 @@ for page, folder, intro in zip(landing_pages, folders, intros):
             contents.write(f"{h1_header}\n")
             contents.write(f"{h1_ul}\n\n")
 
-            contents.write(f"{intro}")
+            contents.write(f".. include:: {intro}\n\n")
 
             contents.write(f"{list_contents}\n\n")
 
@@ -405,4 +400,4 @@ for page, folder, intro in zip(landing_pages, folders, intros):
             contents.write(f"    :titlesonly:\n\n")
             contents.write(toc_contents)
 
-
+print("All done! Enjoy your offline Discourse docs \o/")

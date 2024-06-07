@@ -9,5 +9,5 @@ Web services
 .. toctree::
     :hidden:
 
-    About web servers <../explanation/about-web-servers.md>
-    About Squid proxy servers <../explanation/about-squid-proxy-servers.md>
+    About web servers <../explanation/about-web-servers>
+    About Squid proxy servers <../explanation/about-squid-proxy-servers>

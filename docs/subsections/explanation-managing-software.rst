@@ -11,7 +11,7 @@ Managing software
 .. toctree::
     :hidden:
 
-    About apt upgrade and phased updates <../explanation/about-apt-upgrade-and-phased-updates.md>
-    Third party repository usage <../explanation/third-party-repository-usage.md>
-    Changing package files <../explanation/changing-package-files.md>
-    Advance testing of updates in best practice server deployments <../explanation/advance-testing-of-updates-in-best-practice-server-deployments.md>
+    About apt upgrade and phased updates <../explanation/about-apt-upgrade-and-phased-updates>
+    Third party repository usage <../explanation/third-party-repository-usage>
+    Changing package files <../explanation/changing-package-files>
+    Advance testing of updates in best practice server deployments <../explanation/advance-testing-of-updates-in-best-practice-server-deployments>

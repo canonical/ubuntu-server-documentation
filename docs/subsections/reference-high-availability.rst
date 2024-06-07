@@ -8,4 +8,4 @@ High Availability
 .. toctree::
     :hidden:
 
-    Migrate from crmsh to pcs <../reference/migrate-from-crmsh-to-pcs.md>
+    Migrate from crmsh to pcs <../reference/migrate-from-crmsh-to-pcs>

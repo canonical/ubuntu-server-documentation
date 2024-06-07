@@ -1,5 +1,5 @@
 (about-dynamic-host-configuration-protocol-dhcp)=
-# About Dynamic Host Configuration Protocol (DHCP)
+# About DHCP
 
 The Dynamic Host Configuration Protocol (DHCP) is a network service that enables host computers to be automatically assigned settings from a server as opposed to manually configuring each network host. Computers configured to be DHCP clients have no control over the settings they receive from the DHCP server, and the configuration is transparent to the computer's user.
 

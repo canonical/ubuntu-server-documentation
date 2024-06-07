@@ -1,5 +1,5 @@
 (join-a-domain-with-winbind-preparation)=
-# Join a domain with winbind: preparation
+# Prepare to join a domain
 
 Choosing the identity mapping backend, and planning its ranges, is the first and most important aspect of joining a domain. To actually perform the join, however, a few more configuration steps are necessary. These steps are common to both backend types, the only difference being the actual idmap configuration.
 

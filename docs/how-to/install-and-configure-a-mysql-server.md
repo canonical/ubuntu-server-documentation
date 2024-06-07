@@ -1,5 +1,5 @@
 (install-and-configure-a-mysql-server)=
-# Install and configure a MySQL server
+# MySQL
 
 [MySQL](https://www.mysql.com/) is a fast, multi-threaded, multi-user, and robust SQL database server. It is intended for mission-critical, heavy-load production systems and mass-deployed software.
 

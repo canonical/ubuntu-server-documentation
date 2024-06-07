@@ -33,20 +33,40 @@ The Documentation starter pack includes:
 * build checks for links, spelling, and inclusive language
 * customisation support layered above a core configuration
 
-The structure you will be interested in is:
+The bits you will be interested in is:
 
-root dir:
-- ``index.rst`` file: this is static and unlikely to change much, so change
-  the text to be appropriate for your product. This needs to be in rst, not 
-  markdown, so use the current one as an example for your project.
-- ``custom_conf.py``: this is where you can set URLs and other info for your
-  project, which controls how it's shown on the rendered docs. See the
-  starter pack readme for further instructions.
-- ``docs/``: only needs two files:
+In the root dir:
+- ``index.rst`` file
+- ``custom_conf.py``: this is where you can set URLs and other info for your project, which controls how it's shown on the rendered docs. See the `starter pack readme <https://github.com/canonical/sphinx-docs-starter-pack/blob/main/readme.rst>`_ for further instructions.
 
-   - ``download-docs.py``: Downloads all your Discourse docs and creates the
-     rst scaffolding Sphinx needs.
-   - ``file-list.csv``: Feeds the ``download-docs.py`` file. 
+In the ``docs`` dir:
+
+- ``extract-files.py``: Creates the ``file-list.csv`` file needed to download all the docs. It is not present in the repo by default as you need to generate the one for your own docs.
+- ``download-docs.py``: Downloads all your Discourse docs and creates the rst scaffolding Sphinx needs.
+- Four plain text files for correctly inserting the relevant intro text on your Diataxis landing pages.
+
+Set up your static bits
+=======================
+
+Index page
+----------
+
+You will want to convert the contents of the current markdown index page into
+restructuredtext, since this is what Sphinx prefers. This page is largely
+static and unlikely to change much, so use the current index page as an example
+and drop in the appropriate text for your product.
+
+Landing page text
+-----------------
+
+The landing page text is also unlikely to change much, if ever, once it's been
+set. Replace the text in the following files to match your Diataxis landing
+page content (as it exists in Discourse):
+
+- intro_tutorial.txt
+- intro_how-to.txt
+- intro_explanation.txt
+- intro_reference.txt
 
 Get a file-list.csv file
 ========================
@@ -56,7 +76,7 @@ script generate it from the index page navigation table from Discourse.
 
 To use this script, you will need to know the Discourse post number of the
 page (e.g. the Server index is ``11322``) and you'll need to specify the name
-of the project (e.g. ``Ubuntu Server Documentation``). You can call the script
+of the project (e.g. ``"Ubuntu Server Documentation"`` - with the quotation marks). You can call the script
 by navigating to the ``docs/`` folder and running it as follows:
 
 .. code-block::
@@ -112,3 +132,11 @@ run the following:
     make install
     make html
 
+Additional info
+===============
+
+It's likely that the spelling checks and link checks will throw a LOT of errors.
+I used the ``.custom_wordlist.txt`` file to avoid having to deal with them while
+trying to get the docs to build. Remember to fix them later!
+
+(Same with broken links)

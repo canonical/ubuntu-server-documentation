@@ -1,5 +1,5 @@
 (multipath-configuration-examples)=
-# Multipath configuration examples
+# Configuration examples
 
 Before moving on with this section we suggesting reading or being familiar with the topics covered in:
 

@@ -1,5 +1,5 @@
 (pacemaker-resource-agents)=
-# Pacemaker Resource Agents
+# Pacemaker resource agents
 
 
 From the ClusterLabs definition:

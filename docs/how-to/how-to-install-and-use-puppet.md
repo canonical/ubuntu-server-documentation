@@ -1,5 +1,5 @@
 (how-to-install-and-use-puppet)=
-# How to install and use Puppet
+# Puppet
 
 Puppet is a cross-platform framework for system administrators to perform common tasks using code.
 

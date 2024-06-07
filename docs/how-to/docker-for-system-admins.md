@@ -1,5 +1,5 @@
 (docker-for-system-admins)=
-# Docker for system admins
+# Docker for sysadmins
 
 
 Containers are widely used across multiple server workloads (databases and web servers, for instance), and understanding how to properly set up your server to run them is becoming more important for systems administrators. In this explanatory page, we are going to discuss some of the most important factors a system administrator needs to consider when setting up the environment to run Docker containers.

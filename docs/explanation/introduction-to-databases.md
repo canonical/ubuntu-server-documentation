@@ -1,5 +1,5 @@
 (introduction-to-databases)=
-# Introduction to databases
+# Databases
 
 
 Ubuntu provides two popular database servers. They are:

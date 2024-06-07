@@ -7,13 +7,13 @@ Virtualisation
 
 **About virtual machines**
 
-* :ref:`VM tools in the Ubuntu space <vm-tools-in-the-ubuntu-space>`
+* :ref:`VM tools overview <vm-tools-in-the-ubuntu-space>`
 
 
 **Using virtual machines**
 
-* :ref:`Using QEMU for microVMs <using-qemu-for-microvms>`
-* :ref:`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
+* :ref:`QEMU microVMs <using-qemu-for-microvms>`
+* :ref:`Upgrade VM machine type <upgrading-the-machine-type-of-your-vm>`
 
 
 **Other virtualisation tools**
@@ -23,15 +23,15 @@ Virtualisation
 
 **Containers**
 
-* :ref:`Container tools in the Ubuntu space <container-tools-in-the-ubuntu-space>`
-* :ref:`About rock images <About-rock-images>`
+* :ref:`Container tools overview <container-tools-in-the-ubuntu-space>`
+* :ref:`About rock images <about-rock-images>`
 
 .. toctree::
     :hidden:
 
-    VM tools in the Ubuntu space <../explanation/vm-tools-in-the-ubuntu-space.md>
-    Using QEMU for microVMs <../explanation/using-qemu-for-microvms.md>
-    Upgrading the machine type of your VM <../explanation/upgrading-the-machine-type-of-your-vm.md>
-    About OpenStack <../explanation/about-openstack.md>
-    Container tools in the Ubuntu space <../explanation/container-tools-in-the-ubuntu-space.md>
-    About rock images <../explanation/About-rock-images.md>
+    VM tools overview <../explanation/vm-tools-in-the-ubuntu-space>
+    QEMU microVMs <../explanation/using-qemu-for-microvms>
+    Upgrade VM machine type <../explanation/upgrading-the-machine-type-of-your-vm>
+    About OpenStack <../explanation/about-openstack>
+    Container tools overview <../explanation/container-tools-in-the-ubuntu-space>
+    About rock images <../explanation/about-rock-images>

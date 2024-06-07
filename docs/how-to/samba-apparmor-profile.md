@@ -1,5 +1,5 @@
 (samba-apparmor-profile)=
-# Samba AppArmor profile
+# Create AppArmor profile
 
 Ubuntu comes with the AppArmor security module, which provides mandatory access controls. The default AppArmor profile for Samba may need to be adapted to your configuration. More details on using AppArmor can be found [in this guide](https://ubuntu.com/server/docs/security-apparmor).
 

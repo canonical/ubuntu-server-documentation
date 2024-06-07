@@ -1,5 +1,5 @@
 (get-started-with-lamp-applications)=
-# Get started with LAMP applications
+# Get started with LAMP
 
 ## Overview
 

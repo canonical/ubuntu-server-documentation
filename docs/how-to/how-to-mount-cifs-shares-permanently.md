@@ -1,5 +1,5 @@
 (how-to-mount-cifs-shares-permanently)=
-# How to mount CIFS shares permanently
+# Mount CIFS shares permanently
 
 Common Internet File System (CIFS) shares are a file-sharing protocol used (mainly) in Windows for accessing files and resources (such as printers) over a network.
 

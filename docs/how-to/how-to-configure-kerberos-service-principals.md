@@ -1,5 +1,5 @@
 (how-to-configure-kerberos-service-principals)=
-# How to configure Kerberos service principals
+# Configure service principals
 
 
 The specific steps to enable Kerberos for a service can vary, but in general both of the following are needed:
