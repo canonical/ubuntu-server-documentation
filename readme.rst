@@ -20,6 +20,15 @@ The scaffolding required by Sphinx/RTD is created automatically by the same
 script that downloads the markdown content. 
 
 
+Clone the repo
+==============
+
+.. code-block::
+
+    git clone git@github.com:s-makin/discourse-offline-helper <your-new-repository-name>
+    cd <your-new-repository-name>
+
+
 In this repo...
 ================
 
@@ -45,6 +54,7 @@ In the ``docs`` dir:
 - ``download-docs.py``: Downloads all your Discourse docs and creates the rst scaffolding Sphinx needs.
 - Four plain text files for correctly inserting the relevant intro text on your Diataxis landing pages.
 
+
 Set up your static bits
 =======================
 
@@ -67,6 +77,7 @@ page content (as it exists in Discourse):
 - intro_how-to.txt
 - intro_explanation.txt
 - intro_reference.txt
+
 
 Get a file-list.csv file
 ========================
@@ -102,6 +113,7 @@ track your Discourse docs, you should fill in the columns in this order:
 * Section (The header of any second-level navigation)
 * Sub-section (if there is one, this will insert mini-headers on the landing pages)
 
+
 Fetching the docs
 =================
 
@@ -131,6 +143,7 @@ run the following:
 
     make install
     make html
+
 
 Additional info
 ===============
