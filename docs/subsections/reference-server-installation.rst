@@ -8,4 +8,4 @@ Server installation
 .. toctree::
     :hidden:
 
-    System requirements <../reference/system-requirements.md>
+    System requirements <../reference/system-requirements>

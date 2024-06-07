@@ -8,4 +8,4 @@ Server installation
 .. toctree::
     :hidden:
 
-    Choosing between the arm64 and arm64+largemem installer options <../explanation/choosing-between-the-arm64-and-arm64-largemem-installer-options.md>
+    Choosing between the arm64 and arm64+largemem installer options <../explanation/choosing-between-the-arm64-and-arm64-largemem-installer-options>

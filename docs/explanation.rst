@@ -1,16 +1,14 @@
 .. _explanation:
 
-Ubuntu Server explanation guides
-********************************
+Explanation
+***********
 
-Our explanatory and conceptual guides are written to provide a better understanding of how Ubuntu Server works and how it can be used and configured. They enable you to expand your knowledge, making the operating system easier to use.
+.. include:: intro_explanation.txt
 
-If you're not sure how or where to get started with a topic, try our introductory pages for a high-level overview and relevant links (with context!) to help you navigate to the guides and other materials of most interest to you.
+Introduction to...
+==================
 
-Introduction to
-===============
-
-.. include:: subsections/explanation-introduction-to.rst
+.. include:: subsections/explanation-introduction-to....rst
     :start-line: 4
 
 Virtualisation
@@ -91,7 +89,7 @@ Multipath
     :hidden:
     :titlesonly:
 
-    subsections/explanation-introduction-to.rst
+    subsections/explanation-introduction-to....rst
     subsections/explanation-virtualisation.rst
     subsections/explanation-networking.rst
     subsections/explanation-active-directory-integration.rst

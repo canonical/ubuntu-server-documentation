@@ -1,5 +1,5 @@
 (introduction-to-active-directory-integration)=
-# Introduction to Active Directory integration
+# Active Directory integration
 
 <div align="center">
   <img src='upload://wED3v3RPDxOke8AExUHZMMP55tf.png'>

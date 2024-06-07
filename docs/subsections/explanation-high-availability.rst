@@ -3,11 +3,11 @@
 High Availability
 ******************
 
-* :ref:`Pacemaker Resource Agents <pacemaker-resource-agents>`
+* :ref:`Pacemaker resource agents <pacemaker-resource-agents>`
 * :ref:`Pacemaker fence agents <pacemaker-fence-agents>`
 
 .. toctree::
     :hidden:
 
-    Pacemaker Resource Agents <../explanation/pacemaker-resource-agents.md>
-    Pacemaker fence agents <../explanation/pacemaker-fence-agents.md>
+    Pacemaker resource agents <../explanation/pacemaker-resource-agents>
+    Pacemaker fence agents <../explanation/pacemaker-fence-agents>

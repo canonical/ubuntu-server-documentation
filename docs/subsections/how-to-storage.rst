@@ -3,9 +3,9 @@
 Storage
 ********
 
-* :ref:`How to manage logical volumes <how-to-manage-logical-volumes>`
+* :ref:`Manage logical volumes <how-to-manage-logical-volumes>`
 
 .. toctree::
     :hidden:
 
-    How to manage logical volumes <../how-to/how-to-manage-logical-volumes.md>
+    Manage logical volumes <../how-to/how-to-manage-logical-volumes>

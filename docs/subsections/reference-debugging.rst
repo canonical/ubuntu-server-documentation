@@ -9,5 +9,5 @@ Debugging
 .. toctree::
     :hidden:
 
-    About debuginfod <../reference/about-debuginfod.md>
-    Debug symbol packages <../reference/debug-symbol-packages.md>
+    About debuginfod <../reference/about-debuginfod>
+    Debug symbol packages <../reference/debug-symbol-packages>

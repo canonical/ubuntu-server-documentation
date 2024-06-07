@@ -9,5 +9,5 @@ Backups and version control
 .. toctree::
     :hidden:
 
-    Basic backup shell script <../reference/basic-backup-shell-script.md>
-    Archive rotation shell script <../reference/archive-rotation-shell-script.md>
+    Basic backup shell script <../reference/basic-backup-shell-script>
+    Archive rotation shell script <../reference/archive-rotation-shell-script>

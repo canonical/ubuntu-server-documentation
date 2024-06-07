@@ -1,5 +1,5 @@
 (introduction-to-network-user-authentication-with-sssd)=
-# Introduction to network user authentication with SSSD
+# SSSD
 
 The [System Security Services Daemon (SSSD)](https://sssd.io/) is actually a collection of daemons that handle authentication, authorisation, and user and group information from a variety of network sources. It's a useful tool for administrators of Linux and UNIX-based systems, particularly in enterprise systems which may need to integrate with other directory, access control and authentication services. 
 

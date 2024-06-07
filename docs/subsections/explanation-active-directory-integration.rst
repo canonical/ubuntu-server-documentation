@@ -12,8 +12,8 @@ Active Directory integration
 .. toctree::
     :hidden:
 
-    Choosing an integration method <../explanation/choosing-an-integration-method.md>
-    Security identifiers (SIDs) <../explanation/security-identifiers-sids.md>
-    Identity Mapping (idmap) backends <../explanation/identity-mapping-idmap-backends.md>
-    The rid idmap backend <../explanation/the-rid-idmap-backend.md>
-    The autorid idmap backend <../explanation/the-autorid-idmap-backend.md>
+    Choosing an integration method <../explanation/choosing-an-integration-method>
+    Security identifiers (SIDs) <../explanation/security-identifiers-sids>
+    Identity Mapping (idmap) backends <../explanation/identity-mapping-idmap-backends>
+    The rid idmap backend <../explanation/the-rid-idmap-backend>
+    The autorid idmap backend <../explanation/the-autorid-idmap-backend>

@@ -1,5 +1,5 @@
 (nt4-domain-controller-legacy)=
-# NT4 domain controller (legacy)
+# NT4 domain controller
 
 > **Note**:
 > This section is flagged as *legacy* because nowadays, Samba can be deployed in full Active Directory domain controller mode, and the old-style NT4 Primary Domain Controller is deprecated.

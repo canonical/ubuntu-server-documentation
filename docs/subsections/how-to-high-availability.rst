@@ -8,4 +8,4 @@ High Availability
 .. toctree::
     :hidden:
 
-    Distributed Replicated Block Device (DRBD) <../how-to/distributed-replicated-block-device-drbd.md>
+    Distributed Replicated Block Device (DRBD) <../how-to/distributed-replicated-block-device-drbd>

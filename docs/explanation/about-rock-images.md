@@ -1,4 +1,4 @@
-(About-rock-images)=
+(about-rock-images)=
 # About rock images
 
 A rock is an [Ubuntu-based container image](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#). Rocks are [OCI-compliant](https://opencontainers.org/) and thus compatible with all popular container management tools (such as Docker and Kubernetes) and container registries (such as Docker Hub and Amazon ECR). They are built to be secure and stable by design.

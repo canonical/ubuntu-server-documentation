@@ -1,5 +1,5 @@
 (about-logical-volume-management-lvm)=
-# About Logical Volume Management (LVM)
+# About LVM
 
 [Logical Volume Management](https://en.wikipedia.org/wiki/Logical_volume_management), or LVM, provides a method of allocating and managing space on mass-storage devices that is more advanced and flexible than the traditional method of partitioning storage volumes.
 

@@ -1,5 +1,5 @@
 (set-up-an-ftp-server)=
-# Set up an FTP server
+# File Transfer Protocol (FTP)
 
 
 File Transfer Protocol (FTP) is a TCP protocol for downloading files between computers. In the past, it has also been used for uploading but, as that method does not use encryption, user credentials as well as data transferred in the clear and are easily intercepted. So if you are here looking for a way to upload and download files securely, see the [OpenSSH documentation](openssh-server.md)  instead.

@@ -14,10 +14,10 @@ Cryptography
 .. toctree::
     :hidden:
 
-    OpenSSL <../explanation/openssl.md>
-    GnuTLS <../explanation/gnutls.md>
-    Network Security Services (NSS) <../explanation/network-security-services-nss.md>
-    Java cryptography configuration <../explanation/java-cryptography-configuration.md>
-    BIND 9 DNSSEC cryptography selection <../explanation/bind-9-dnssec-cryptography-selection.md>
-    OpenSSH crypto configuration <../explanation/openssh-crypto-configuration.md>
-    Troubleshooting TLS/SSL <../explanation/troubleshooting-tls-ssl.md>
+    OpenSSL <../explanation/openssl>
+    GnuTLS <../explanation/gnutls>
+    Network Security Services (NSS) <../explanation/network-security-services-nss>
+    Java cryptography configuration <../explanation/java-cryptography-configuration>
+    BIND 9 DNSSEC cryptography selection <../explanation/bind-9-dnssec-cryptography-selection>
+    OpenSSH crypto configuration <../explanation/openssh-crypto-configuration>
+    Troubleshooting TLS/SSL <../explanation/troubleshooting-tls-ssl>

@@ -1,9 +1,9 @@
 .. _how-to:
 
-Ubuntu Server how-to guides
-***************************
+How-to guides
+*************
 
-If you have a specific goal, but are already familiar with Ubuntu Server, our **how-to guides** have more in-depth detail than our tutorials and can be applied to a broader set of applications. They’ll help you achieve an end result but may require you to understand and adapt the steps to fit your specific requirements.
+.. include:: intro_how-to.txt
 
 Server installation
 ===================

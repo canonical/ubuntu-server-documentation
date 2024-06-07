@@ -1,5 +1,5 @@
 (member-server-in-an-active-directory-domain)=
-# Member server in an Active Directory domain
+# Join Active Directory
 
 A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from [Network User Authentication with SSSD](https://discourse.ubuntu.com/t/service-sssd/11579), where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
 

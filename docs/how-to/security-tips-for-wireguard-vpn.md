@@ -1,5 +1,5 @@
 (security-tips-for-wireguard-vpn)=
-# Security tips for WireGuard VPN
+# Security tips
 
 
 Here are some security tips for your WireGuard deployment.

@@ -1,5 +1,5 @@
 (how-to-set-up-ubuntu-on-hyper-v)=
-# How to set up Ubuntu on Hyper-V
+# Ubuntu on Hyper-V
 
 Hyper-V is a native [type 1 hypervisor](https://en.wikipedia.org/wiki/Hypervisor#Classification) developed by Microsoft for the Windows family of operating systems, similar to Xen or VMWare ESXi. It was first released for Windows Server in 2008, and has been available without additional charge since Windows Server 2012 and Windows 8.
 

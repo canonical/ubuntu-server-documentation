@@ -9,5 +9,5 @@ Other tools
 .. toctree::
     :hidden:
 
-    Byobu <../reference/byobu.md>
-    pam_motd <../reference/pam-motd.md>
+    Byobu <../reference/byobu>
+    pam_motd <../reference/pam-motd>

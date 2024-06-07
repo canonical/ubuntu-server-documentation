@@ -1,5 +1,5 @@
 (how-to-install-and-configure-logwatch)=
-# How to install and configure Logwatch
+# Install Logwatch
 
 Logs are an invaluable source of information about problems that may arise in your server.  [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
 

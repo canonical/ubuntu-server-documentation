@@ -1,5 +1,5 @@
 (gpu-virtualization-with-qemu-kvm)=
-# GPU virtualization with QEMU/KVM
+# vGPU with QEMU/KVM
 
 ## Graphics
 

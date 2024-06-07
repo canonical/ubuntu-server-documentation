@@ -1,5 +1,5 @@
 (netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot)=
-# Netboot the live server installer on IBM Power (ppc64el) with Petitboot
+# ppc64el netboot install
 
 Open a terminal window on your workstation and make sure the ‘ipmitool’ package is installed.
 

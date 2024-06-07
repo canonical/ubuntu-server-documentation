@@ -1,5 +1,5 @@
 (how-to-install-and-use-openvpn)=
-# How to install and use OpenVPN
+# OpenVPN
 
 OpenVPN is a flexible, reliable and secure Virtual Private Networking (VPN) solution. It belongs to the family of SSL/TLS VPN stacks (different from IPSec VPNs). This chapter will show how to install and configure OpenVPN to create a VPN.
 

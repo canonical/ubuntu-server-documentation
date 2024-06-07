@@ -4,6 +4,10 @@ import os
 import re
 import requests
 
+# Tidy up - remove the pre-existing list of pages (if it exists)
+if os.path.isfile("file_list.csv"):
+    os.remove("file_list.csv")
+
 # Set up the argument parser
 parser = argparse.ArgumentParser(description='Specify the Discourse post number of the index page for your project')
 parser.add_argument('index_no', type=int, help='Discourse post number of the index page')
@@ -82,6 +86,9 @@ with open("temp.csv", newline='', encoding='utf-8') as file:
         slug = row[2]
         slug = slug.strip()
         name_or_url = row[3]
+        # Trim spaces from the front and back of strings
+        name_or_url = name_or_url.lstrip()
+        name_or_url = name_or_url.rstrip()
 
         match = re.search(pattern, name_or_url)
         if match:
@@ -144,8 +151,7 @@ with open("file_list.csv", "w") as final_csv:
     final_csv.write(actual_csv_contents)
 
 # Tidy up - remove the temp file
-if os.path.isfile("temp.csv"):
-    os.remove("temp.csv")
+os.remove("temp.csv")
 
 
 

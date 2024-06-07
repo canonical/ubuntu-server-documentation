@@ -1,5 +1,5 @@
 (introduction-to-kerberos)=
-# Introduction to Kerberos
+# Kerberos
 
 
 Kerberos is a network authentication system based on the principal of a trusted third party. The other two parties being the user and the service the user wishes to authenticate to. Not all services and applications can use Kerberos, but for those that can, it brings the network environment one step closer to being Single Sign On (SSO).

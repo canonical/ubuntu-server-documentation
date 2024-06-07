@@ -1,5 +1,5 @@
 (nvidia-drivers-installation)=
-# NVIDIA drivers installation
+# Install NVIDIA drivers
 
 This page shows how to install the NVIDIA drivers from the command line, using either the `ubuntu-drivers` tool (recommended), or APT.
 

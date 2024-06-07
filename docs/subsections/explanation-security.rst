@@ -3,11 +3,11 @@
 Security
 *********
 
-* :ref:`OpenVPN client implementations <openvpn-client-implementations>`
+* :ref:`OpenVPN clients <openvpn-client-implementations>`
 * :ref:`Certificates <certificates>`
 
 .. toctree::
     :hidden:
 
-    OpenVPN client implementations <../explanation/openvpn-client-implementations.md>
-    Certificates <../explanation/certificates.md>
+    OpenVPN clients <../explanation/openvpn-client-implementations>
+    Certificates <../explanation/certificates>

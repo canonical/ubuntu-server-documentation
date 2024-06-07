@@ -8,4 +8,4 @@ Cloud images
 .. toctree::
     :hidden:
 
-    Cloud images <../reference/cloud-images.md>
+    Cloud images <../reference/cloud-images>
