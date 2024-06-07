@@ -1,7 +1,7 @@
 :orphan:
 
-Discourse PDF/versioning
-########################
+Discourse: offline helper (PDF/versioning)
+##########################################
 
 This content provides the means to download documentation from Discourse and 
 convert it to Sphinx, so that it can be built in ReadTheDocs, which in turn 
