@@ -26,6 +26,7 @@ import re
 import requests
 import shutil
 
+
 # ----------- FUNCTIONS:
 # Set length of heading underlines
 def h1_underline(header_text):
@@ -42,11 +43,12 @@ def extract_info(markdown_line):
     matches = re.findall(pattern, markdown_line)
     return matches 
 
+
 # ----------- INPUT:
 # csv file containing pages to be downloaded/saved/organised. Each row in the
 # csv file corresponds to a page in the Discourse documentation. Page slugs
 # and index numbers (from the Discourse post) must be unique.
-csv_file_list = 'file-list.csv'
+csv_file_list = 'file_list.csv'
 
 
 # ----------- STATIC VARIABLES:
@@ -62,6 +64,7 @@ eof_marker = "-------------------------"
 
 # File to store the mapping of numbers to filenames
 num_to_filename = "filename_mapping.txt"
+
 
 # ----------- CLEANUP PREVIOUS RUN:
 # Remove all files and folders before re-downloading the current/up-to-date
