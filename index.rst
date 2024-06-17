@@ -9,6 +9,8 @@ public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
 
+View our official documentation online at: `<https://ubuntu.com/server/docs>`_
+
 In this documentation
 =========================
 
@@ -45,17 +47,14 @@ in the forum". This link will take you to the Server Discourse forum for the
 specific page you are viewing. There you can share your comments or let us
 know about bugs with any page. 
 
-* `Read our Code of Conduct <https://ubuntu.com/community/code-of-conduct>`_
-* `Get support <https://ubuntu.com/support/community-support>`_
-* `Join the Discourse forum <https://discourse.ubuntu.com/c/server/17>`_
-* `Download <https://ubuntu.com/server>`_
-* Find out how to
-  `contribute to the Server Guide <https://discourse.ubuntu.com/t/-/38717>`_,
-  or let us know your
-  `feedback and suggestions <https://discourse.ubuntu.com/t/-/38718>`_.
+* Read our `Code of Conduct`_
+* `Get support`_
+* `Join the Discourse forum`_
+* `Download`_
+* Find out how to `contribute to the Server Guide`_, or let us know your
+  `feedback and suggestions`_.
 
-Thinking about using Ubuntu Server for your next project?
-`Get in touch! <https://ubuntu.com/server/contact-us?product=server>`_
+Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 
 PDFs and previous releases
 --------------------------
@@ -63,8 +62,8 @@ PDFs and previous releases
 Below are links to the previous Ubuntu Server release server guides as well as
 an offline copy of the current version of this site:
 
-* `Current PDF <https://canonical-server-pdf-test.readthedocs-hosted.com/_/downloads/en/latest/pdf/>`_ (for Ubuntu 20.04 LTS onwards)
-* `Ubuntu 18.04 LTS PDF <https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf>`_
+* `Current PDF`_ (for Ubuntu 20.04 LTS onwards)
+* `Ubuntu 18.04 LTS PDF`_
 
 .. toctree::
    :hidden:
@@ -90,3 +89,13 @@ an offline copy of the current version of this site:
 
    Reference <docs/reference.rst>
 
+.. LINKS
+.. _Code of Conduct: https://ubuntu.com/community/code-of-conduct
+.. _Get support: https://ubuntu.com/support/community-support
+.. _Join the Discourse forum: https://discourse.ubuntu.com/c/server/17
+.. _Download: https://ubuntu.com/server
+.. _contribute to the Server Guide: https://discourse.ubuntu.com/t/-/38717
+.. _feedback and suggestions: https://discourse.ubuntu.com/t/-/38718
+.. _Get in touch!: https://ubuntu.com/server/contact-us?product=server
+.. _Current PDF: https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/
+.. _Ubuntu 18.04 LTS PDF: https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf
