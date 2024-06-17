@@ -1,7 +1,7 @@
-.. _explanation-introduction-to...:
+.. _explanation-introduction-to:
 
-Introduction to...
-*******************
+Introduction to
+****************
 
 
 

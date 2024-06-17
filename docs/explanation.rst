@@ -5,10 +5,10 @@ Explanation
 
 .. include:: intro_explanation.txt
 
-Introduction to...
-==================
+Introduction to
+===============
 
-.. include:: subsections/explanation-introduction-to....rst
+.. include:: subsections/explanation-introduction-to.rst
     :start-line: 4
 
 Virtualisation
@@ -89,7 +89,7 @@ Multipath
     :hidden:
     :titlesonly:
 
-    subsections/explanation-introduction-to....rst
+    subsections/explanation-introduction-to.rst
     subsections/explanation-virtualisation.rst
     subsections/explanation-networking.rst
     subsections/explanation-active-directory-integration.rst

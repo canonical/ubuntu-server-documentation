@@ -85,10 +85,10 @@ sudo ufw --dry-run allow http
     :ufw-user-limit - [0:0]
     :ufw-user-limit-accept - [0:0]
     ### RULES ###
-        
+
     ### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0
     -A ufw-user-input -p tcp --dport 80 -j ACCEPT
-        
+
     ### END RULES ###
     -A ufw-user-input -j RETURN
     -A ufw-user-output -j RETURN
@@ -198,10 +198,10 @@ Now add rules to the `/etc/ufw/before.rules` file. The default rules only config
 # nat Table rules
 *nat
 :POSTROUTING ACCEPT [0:0]
-        
+
 # Forward traffic from eth1 through eth0.
 -A POSTROUTING -s 192.168.0.0/24 -o eth0 -j MASQUERADE
-        
+
 # don't delete the 'COMMIT' line or these nat table rules won't be processed
 COMMIT
 ```
