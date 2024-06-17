@@ -115,22 +115,22 @@ how-to-install-and-configure-munin,Install Munin,11904,how-to,/t/-/11904,Observa
 how-to-install-and-configure-nagios-core-3,Install Nagios Core 3,11903,how-to,/t/-/11903,Observability,--
 how-to-use-nagios-with-munin,Use Nagios with Munin,11326,how-to,/t/-/11326,Observability,--
 explanation,Explanation,29951,landing page,/t/-/29951,--,--
-introduction-to-virtualization,Virtualisation,11521,explanation,/t/-/11521,Introduction to...,Virtualisation
-introduction-to-networking,Networking,36315,explanation,/t/-/36315,Introduction to...,Networking
-introduction-to-samba,Samba,11888,explanation,/t/-/11888,Introduction to...,Networking
-introduction-to-active-directory-integration,Active Directory integration,44778,explanation,/t/-/44778,Introduction to...,Networking
-introduction-to-device-mapper-multipathing,Device mapper multipathing,11316,explanation,/t/-/11316,Introduction to...,Networking
-introduction-to-kerberos,Kerberos,27818,explanation,/t/-/27818,Introduction to...,Authentication and access
-introduction-to-network-user-authentication-with-sssd,SSSD,11579,explanation,/t/-/11579,Introduction to...,Authentication and access
-introduction-to-openldap,OpenLDAP,27901,explanation,/t/-/27901,Introduction to...,Authentication and access
-introduction-to-security,Security,11887,explanation,/t/-/11887,Introduction to...,Security
-introduction-to-crypto-libraries,Cryptographic libraries,34534,explanation,/t/-/34534,Introduction to...,Security
-introduction-to-wireguard-vpn,WireGuard VPN,30236,explanation,/t/-/30236,Introduction to...,Security
-introduction-to-mail-services,Mail servers,11324,explanation,/t/-/11324,Introduction to...,Useful services
-introduction-to-web-servers,Web servers,11510,explanation,/t/-/11510,Introduction to...,Useful services
-introduction-to-backups,Backups,11312,explanation,/t/-/11312,Introduction to...,Useful services
-introduction-to-databases,Databases,11315,explanation,/t/-/11315,Introduction to...,Useful services
-introduction-to-high-availability,High Availability,15813,explanation,/t/-/15813,Introduction to...,High Availability
+introduction-to-virtualization,Virtualisation,11521,explanation,/t/-/11521,Introduction to,Virtualisation
+introduction-to-networking,Networking,36315,explanation,/t/-/36315,Introduction to,Networking
+introduction-to-samba,Samba,11888,explanation,/t/-/11888,Introduction to,Networking
+introduction-to-active-directory-integration,Active Directory integration,44778,explanation,/t/-/44778,Introduction to,Networking
+introduction-to-device-mapper-multipathing,Device mapper multipathing,11316,explanation,/t/-/11316,Introduction to,Networking
+introduction-to-kerberos,Kerberos,27818,explanation,/t/-/27818,Introduction to,Authentication and access
+introduction-to-network-user-authentication-with-sssd,SSSD,11579,explanation,/t/-/11579,Introduction to,Authentication and access
+introduction-to-openldap,OpenLDAP,27901,explanation,/t/-/27901,Introduction to,Authentication and access
+introduction-to-security,Security,11887,explanation,/t/-/11887,Introduction to,Security
+introduction-to-crypto-libraries,Cryptographic libraries,34534,explanation,/t/-/34534,Introduction to,Security
+introduction-to-wireguard-vpn,WireGuard VPN,30236,explanation,/t/-/30236,Introduction to,Security
+introduction-to-mail-services,Mail servers,11324,explanation,/t/-/11324,Introduction to,Useful services
+introduction-to-web-servers,Web servers,11510,explanation,/t/-/11510,Introduction to,Useful services
+introduction-to-backups,Backups,11312,explanation,/t/-/11312,Introduction to,Useful services
+introduction-to-databases,Databases,11315,explanation,/t/-/11315,Introduction to,Useful services
+introduction-to-high-availability,High Availability,15813,explanation,/t/-/15813,Introduction to,High Availability
 vm-tools-in-the-ubuntu-space,VM tools overview,41038,explanation,/t/-/41038,Virtualisation,About virtual machines
 using-qemu-for-microvms,QEMU microVMs,40861,explanation,/t/-/40861,Virtualisation,Using virtual machines
 upgrading-the-machine-type-of-your-vm,Upgrade VM machine type,40862,explanation,/t/-/40862,Virtualisation,Using virtual machines
