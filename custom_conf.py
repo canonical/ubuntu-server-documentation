@@ -230,3 +230,119 @@ source_suffix = {
 #.. role:: center
 #   :class: align-center
 #'''
+
+## PDF specific config
+
+pdf_subtitle = ''
+
+latex_engine = 'xelatex'
+# This whole thing is a hack and a half, but it works.
+latex_elements = {
+    'pointsize': '11pt',
+    'fncychap': '',
+    'preamble': r'''
+%\usepackage{charter}
+%\usepackage[defaultsans]{lato}
+%\usepackage{inconsolata}
+\setmainfont[Path = ../../.sphinx/fonts/, UprightFont = *-R, BoldFont = *-B, ItalicFont=*-RI]{Ubuntu}
+\setmonofont[Path = ../../.sphinx/fonts/, UprightFont = *-R]{UbuntuMono}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{breakable}
+\usepackage{lastpage}
+\usepackage{tabto}
+\usepackage{ifthen}
+\usepackage{etoolbox}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{titlesec}
+\usepackage{fontspec}
+\graphicspath{ {../../.sphinx/images/} }
+\definecolor{yellowgreen}{RGB}{154, 205, 50}
+\definecolor{title}{RGB}{76, 17, 48}
+\definecolor{subtitle}{RGB}{116, 27, 71}
+\definecolor{label}{RGB}{119, 41, 100}
+\definecolor{copyright}{RGB}{174, 167, 159}
+\makeatletter
+\def\tcb@finalize@environment{%
+  \color{.}% hack for xelatex
+  \tcb@layer@dec%
+}
+\makeatother
+\newenvironment{sphinxclassprompt}{\color{yellowgreen}\setmonofont[Color = 9ACD32, Path = ../../.sphinx/fonts/, UprightFont = *-R]{UbuntuMono}}{}
+\tcbset{enhanced jigsaw, colback=black, fontupper=\color{white}}
+\newtcolorbox{termbox}{use color stack, breakable, colupper=white, halign=flush left}
+\newenvironment{sphinxclassterminal}{\setmonofont[Color = white, Path = ../../.sphinx/fonts/, UprightFont = *-R]{UbuntuMono}\sphinxsetup{VerbatimColor={black}}\begin{termbox}}{\end{termbox}}
+\newcommand{\dimtorightedge}{%
+  \dimexpr\paperwidth-1in-\hoffset-\oddsidemargin\relax}
+\newcommand{\dimtotop}{%
+  \dimexpr\height-1in-\voffset-\topmargin-\headheight-\headsep\relax}
+\newtoggle{tpage}
+\AtBeginEnvironment{titlepage}{\global\toggletrue{tpage}}
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage\ of \pageref*{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{normal}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage\ of \pageref*{LastPage}}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+\fancypagestyle{titlepage}{%
+    \fancyhf{}
+    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© ''' + str(datetime.date.today().year) + r''' Canonical Ltd. All rights reserved. \newline Confidential and proprietary, do not share without permission.}}
+}
+\newcommand\sphinxbackoftitlepage{\thispagestyle{titlepage}}
+\titleformat{\chapter}[block]{\Huge \color{title} \bfseries\filright}{\thechapter .}{1.5ex}{}
+\titlespacing{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\section}[block]{\huge \bfseries\filright}{\thesection .}{1.5ex}{} 
+\titlespacing{\section}{0pt}{0pt}{0pt}
+\titleformat{\subsection}[block]{\Large \bfseries\filright}{\thesubsection .}{1.5ex}{} 
+\titlespacing{\subsection}{0pt}{0pt}{0pt}
+\setcounter{tocdepth}{1}
+\renewcommand\pagenumbering[1]{}
+''',
+    'sphinxsetup': 'verbatimwithframe=false, pre_border-radius=0pt, verbatimvisiblespace=\\phantom{}, verbatimcontinued=\\phantom{}',
+    'extraclassoptions': 'openany,oneside',
+    'maketitle': r'''
+\begin{titlepage}
+\begin{flushleft}
+        \hbox
+        {%
+            \makebox[\dimtorightedge]{}%
+            \makebox[0pt][r]
+            {\raisebox{0pt}[\dimtotop]{\includegraphics[width=\paperwidth]{title-page-header}}}%
+        }
+\end{flushleft}
+\Huge \textcolor{title}{''' + project + r'''}
+
+\Large \textcolor{subtitle}{\textit{''' + pdf_subtitle + r'''}}
+
+\vfill
+
+\AddToHook{shipout/background}{
+    \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=south east, inner sep=0] at (current page.south east) {
+    \includegraphics[width=3.46in]{title-page-footer}
+    };
+    \end{tikzpicture}
+}
+\thispagestyle{titlepage}
+\end{titlepage}
+\RemoveFromHook{shipout/background}
+\AddToHook{shipout/background}{
+      \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=south west, align=left, inner sep=0] at (current page.south west) {
+        \includegraphics[width=6.72in]{normal-page-footer}
+      };
+      \end{tikzpicture}
+      \begin{tikzpicture}[remember picture,overlay]
+      \node[anchor=north east, opacity=0.5, inner sep=35] at (current page.north east) {
+        \includegraphics[width=4cm]{normal-page-header}
+      };
+      \end{tikzpicture}
+    }
+''',
+}
