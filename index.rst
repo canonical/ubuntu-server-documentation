@@ -1,6 +1,10 @@
 Ubuntu Server documentation
 ###########################
 
+.. only:: latex
+
+   .. rubric:: Overview
+
 **Ubuntu Server** is a version of the Ubuntu operating system designed and
 engineered as a backbone for the internet.
 
@@ -11,8 +15,14 @@ scale-out performance available.
 
 View our official documentation online at: `<https://ubuntu.com/server/docs>`_
 
-In this documentation
-=========================
+.. only:: html
+
+   In this documentation
+   =========================
+
+.. only:: latex
+
+   .. rubric:: In this documentation
 
 .. grid:: 1 1 2 2
    :gutter: 3
@@ -34,9 +44,15 @@ In this documentation
 
        Technical information - package specifications, APIs, architecture
 
-Project and community
-=====================
+.. only:: html
 
+   Project and community
+   =====================
+   
+.. only:: latex
+
+   .. rubric:: Project and community
+   
 Ubuntu Server is a member of the Ubuntu family. It's an open source project
 that welcomes community projects, contributions, suggestions, fixes and
 constructive feedback.
@@ -56,8 +72,14 @@ know about bugs with any page.
 
 Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 
-PDFs and previous releases
---------------------------
+.. only:: html
+
+   PDFs and previous releases
+   --------------------------
+
+.. only:: latex
+
+   .. rubric:: PDFs and previous releases
 
 Below are links to the previous Ubuntu Server release server guides as well as
 an offline copy of the current version of this site:
