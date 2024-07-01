@@ -256,6 +256,10 @@ latex_elements = {
 \usepackage{graphicx}
 \usepackage{titlesec}
 \usepackage{fontspec}
+\usepackage{tikz}
+\usepackage{changepage}
+\usepackage{array}
+\usepackage{tabularx}
 \graphicspath{ {../../.sphinx/images/} }
 \definecolor{yellowgreen}{RGB}{154, 205, 50}
 \definecolor{title}{RGB}{76, 17, 48}
@@ -292,7 +296,7 @@ latex_elements = {
 }
 \fancypagestyle{titlepage}{%
     \fancyhf{}
-    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© ''' + str(datetime.date.today().year) + r''' Canonical Ltd. All rights reserved. \newline Confidential and proprietary, do not share without permission.}}
+    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© 2024 Canonical Ltd. All rights reserved. \newline Confidential and proprietary, do not share without permission.}}
 }
 \newcommand\sphinxbackoftitlepage{\thispagestyle{titlepage}}
 \titleformat{\chapter}[block]{\Huge \color{title} \bfseries\filright}{\thechapter .}{1.5ex}{}
@@ -309,38 +313,44 @@ latex_elements = {
     'maketitle': r'''
 \begin{titlepage}
 \begin{flushleft}
-        \hbox
-        {%
-            \makebox[\dimtorightedge]{}%
-            \makebox[0pt][r]
-            {\raisebox{0pt}[\dimtotop]{\includegraphics[width=\paperwidth]{title-page-header}}}%
-        }
-\end{flushleft}
-\Huge \textcolor{title}{''' + project + r'''}
-
-\Large \textcolor{subtitle}{\textit{''' + pdf_subtitle + r'''}}
-
-\vfill
-
-\AddToHook{shipout/background}{
     \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=south east, inner sep=0] at (current page.south east) {
-    \includegraphics[width=3.46in]{title-page-footer}
+    \includegraphics[width=\paperwidth, height=\paperheight]{front-page}
     };
     \end{tikzpicture}
-}
-\thispagestyle{titlepage}
+\end{flushleft}
+
+\vspace*{3cm}
+
+\begin{adjustwidth}{8cm}{0pt}
+\begin{flushleft}
+    \huge \textcolor{white}{\textbf{}{\raggedright{''' + project + r'''}}}
+\end{flushleft}
+\end{adjustwidth}
+
+\vspace{15cm}
+
+\begin{adjustwidth}{8cm}{0pt}
+\begin{tabularx}{0.5\textwidth}{ l l }
+    \textcolor{lightgray}{© 2024 Canonical Ltd.}        &  \textcolor{lightgray}{Confidential}        \\
+    \textcolor{lightgray}{All rights reserved.}         &  \textcolor{lightgray}{and proprietary,}    \\
+                                                        &  \textcolor{lightgray}{do not share}        \\
+                                                        &  \textcolor{lightgray}{without permission.} \\
+                                 
+\end{tabularx}
+\end{adjustwidth}
+
 \end{titlepage}
 \RemoveFromHook{shipout/background}
 \AddToHook{shipout/background}{
       \begin{tikzpicture}[remember picture,overlay]
       \node[anchor=south west, align=left, inner sep=0] at (current page.south west) {
-        \includegraphics[width=6.72in]{normal-page-footer}
+        \includegraphics[width=\paperwidth]{normal-page-footer}
       };
       \end{tikzpicture}
       \begin{tikzpicture}[remember picture,overlay]
       \node[anchor=north east, opacity=0.5, inner sep=35] at (current page.north east) {
-        \includegraphics[width=4cm]{normal-page-header}
+        \includegraphics[width=4cm]{Canonical-logo-4x}
       };
       \end{tikzpicture}
     }
