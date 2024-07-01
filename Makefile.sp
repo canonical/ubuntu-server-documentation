@@ -105,7 +105,7 @@ sp-pdf-prep: sp-install
 	@. $(VENV); (dpkg-query -W -f='$${Status}' tex-gyre 2>/dev/null | grep -c "ok installed" >/dev/null && echo "Package tex-gyre is installed") || (echo "PDF generation requires the installation of the following packages: latexmk fonts-freefont-otf fonts-ibm-plex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-font-utils texlive-lang-cjk texlive-xetex plantuml xindy tex-gyre dvipng" && echo "" && echo "make pdf-prep-force will install these packages" && echo "" && echo "Please be aware these packages will be installed to your system" && false)
 	@. $(VENV); (dpkg-query -W -f='$${Status}' dvipng 2>/dev/null | grep -c "ok installed" >/dev/null && echo "Package dvipng is installed") || (echo "PDF generation requires the installation of the following packages: latexmk fonts-freefont-otf fonts-ibm-plex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-font-utils texlive-lang-cjk texlive-xetex plantuml xindy tex-gyre dvipng" && echo "" && echo "make pdf-prep-force will install these packages" && echo "" && echo "Please be aware these packages will be installed to your system" && false)
 
-sp-pdf-prep-force: sp-install
+sp-pdf-prep-force:
 	@. $(VENV); apt-get update
 	@. $(VENV); apt-get upgrade -y
 	@. $(VENV); apt-get install --no-install-recommends -y latexmk fonts-freefont-otf fonts-ibm-plex texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended texlive-font-utils texlive-lang-cjk texlive-xetex plantuml xindy tex-gyre dvipng \
