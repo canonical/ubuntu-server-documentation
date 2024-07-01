@@ -328,7 +328,7 @@ latex_elements = {
 \end{flushleft}
 \end{adjustwidth}
 
-\vspace{15cm}
+\vfill
 
 \begin{adjustwidth}{8cm}{0pt}
 \begin{tabularx}{0.5\textwidth}{ l l }
