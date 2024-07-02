@@ -183,7 +183,7 @@ $ dpkg -S /etc/rsyslog.conf
 rsyslog: /etc/rsyslog.con
 ```
 
-To restore that file you can re-install the package, telling `dpdk` to bring any missing files back.
+To restore that file you can re-install the package, telling `dpkg` to bring any missing files back.
 To do so you pass `dpkg` options through `apt` using `-o Dpkg::Options::="` and then set `--force-...` depending on what action you want. For example:
 
 ```bash

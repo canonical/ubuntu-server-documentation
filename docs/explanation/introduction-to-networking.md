@@ -9,9 +9,11 @@ In this overview, we'll take a look at some of the key principles involved in ne
 
 If you're new to networking, our explanatory ["Networking key concepts"](networking-key-concepts.md) section provides an overview of some important concepts. It includes detailed discussion of the popular network protocols: TCP/IP; IP routing; TCP and UDP; and ICMP.
 
-## Configuring networks
+## Network configuration with Netplan
 
-Ubuntu ships with a number of graphical utilities to configure your network devices. Our explanatory guide on ["configuring networks"](configuring-networks.md) is geared toward server administrators focuses on managing your network on the command line.
+Network configuration on Ubuntu is handled through [Netplan](https://netplan.io/), which provides a high-level, distribution-agnostic way to define how the network on your system should be set up via a [YAML configuration file](https://netplan.readthedocs.io/en/stable/netplan-yaml/). 
+ 
+Read [more about Netplan](about-netplan.md), or check out our explanatory guide on ["configuring networks"](configuring-networks.md), which is geared toward server administrators.
 
 ## Network tools and services
 

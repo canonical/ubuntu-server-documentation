@@ -1,16 +1,17 @@
 (configuring-networks)=
 # Configuring networks
 
+Network configuration on Ubuntu is handled through [Netplan](https://netplan.io/), which provides a high-level, distribution-agnostic way to define how the network on your system should be set up via a [YAML configuration file](https://netplan.readthedocs.io/en/stable/netplan-yaml/).
 
-Ubuntu ships with a number of graphical utilities to configure your network devices. This document is geared toward server administrators and will focus on managing your network on the command line.
+While Netplan is a configuration abstraction renderer that covers all aspects of network configuration, here we will outline the underlying system elements like IP addresses, ethernet devices, name resolution and so on. We will refer to the related Netplan settings where appropriate, but we do recommend studying [the Netplan documentation](https://netplan.readthedocs.io/en/stable/) in general.
 
 ## Ethernet interfaces
 
-Ethernet interfaces are identified by the system using predictable network interface names. These names can appear as *eno1* or *enp0s25*. However, in some cases an interface may still use the kernel *eth\#* style of naming.
+Ethernet interfaces are identified by the system using predictable network interface names. These names can appear as `eno1` or `enp0s25`. However, in some cases an interface may still use the kernel *eth\#* style of naming.
 
 ### Identify Ethernet interfaces
 
-To quickly identify all available Ethernet interfaces, you can use the ip command as shown below.
+To quickly identify all available Ethernet interfaces, you can use the `ip` command as shown below.
 
 ```
 ip a
