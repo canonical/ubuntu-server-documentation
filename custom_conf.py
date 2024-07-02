@@ -332,10 +332,10 @@ latex_elements = {
 
 \begin{adjustwidth}{8cm}{0pt}
 \begin{tabularx}{0.5\textwidth}{ l l }
-    \textcolor{lightgray}{}                    & \textcolor{lightgray}{© 2024 Canonical Ltd.}  \\
-    \textcolor{lightgray}{}                    & \textcolor{lightgray}{All rights reserved.}   \\
-    \textcolor{lightgray}{}                    &                                               \\
-    \textcolor{lightgray}{}                    &                                               \\
+    \hspace{3cm}  & \textcolor{lightgray}{© 2024 Canonical Ltd.}  \\
+    \hspace{3cm}  & \textcolor{lightgray}{All rights reserved.}   \\
+    \hspace{3cm}  &                                               \\
+    \hspace{3cm}  &                                               \\
                                  
 \end{tabularx}
 \end{adjustwidth}
