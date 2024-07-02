@@ -296,7 +296,7 @@ latex_elements = {
 }
 \fancypagestyle{titlepage}{%
     \fancyhf{}
-    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© 2024 Canonical Ltd. All rights reserved. \newline Confidential and proprietary, do not share without permission.}}
+    \fancyfoot[L]{\footnotesize \textcolor{copyright}{© 2024 Canonical Ltd. All rights reserved.}}
 }
 \newcommand\sphinxbackoftitlepage{\thispagestyle{titlepage}}
 \titleformat{\chapter}[block]{\Huge \color{title} \bfseries\filright}{\thechapter .}{1.5ex}{}
@@ -332,10 +332,10 @@ latex_elements = {
 
 \begin{adjustwidth}{8cm}{0pt}
 \begin{tabularx}{0.5\textwidth}{ l l }
-    \textcolor{lightgray}{© 2024 Canonical Ltd.}        &  \textcolor{lightgray}{Confidential}        \\
-    \textcolor{lightgray}{All rights reserved.}         &  \textcolor{lightgray}{and proprietary,}    \\
-                                                        &  \textcolor{lightgray}{do not share}        \\
-                                                        &  \textcolor{lightgray}{without permission.} \\
+    \textcolor{lightgray}{}                    & \textcolor{lightgray}{© 2024 Canonical Ltd.}  \\
+    \textcolor{lightgray}{}                    & \textcolor{lightgray}{All rights reserved.}   \\
+    \textcolor{lightgray}{}                    &                                               \\
+    \textcolor{lightgray}{}                    &                                               \\
                                  
 \end{tabularx}
 \end{adjustwidth}
