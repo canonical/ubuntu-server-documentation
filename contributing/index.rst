@@ -20,7 +20,7 @@ The Open Documentation Academy
 Ubuntu Server is a proud member of the Canonical
 `Open Documentation Academy`_ (ODA). If you are a newcomer to making open
 source contributions, or new to technical writing and want to boost your
-skills -- or both! -- we will be glad to offer the help and support you need.
+skills -- or both! -- we will be glad to help.
 
 Check out the ODA repository for guidance and useful resources on getting
 started.
@@ -31,7 +31,7 @@ Prerequisites
 There are some prerequisites to contributing to Ubuntu Server documentation.
 
 - **Code of Conduct**
-  You need to read, and agree to, the Ubuntu `Code of Conduct`_. By
+  You will need to read and agree to the Ubuntu `Code of Conduct`_. By
   participating, you implicitly agree to abide by the Code of Conduct. 
 
 - **GitHub account**
@@ -65,97 +65,70 @@ Contribution types
 ==================
 
 There are many different ways to contribute to the Ubuntu Server documentation,
-including options that don't require any coding knowledge. To find out more,
-check out the :ref:`contrib-types` page.
-
-
-
-
-
-
-
-
-1) :ref:`Find an issue to work on <finding-issues>`
+including many options that don't require any coding knowledge. To find out
+more, check out the :ref:`contrib-types` page.
 
 General workflow
+================
+
+Most contributions are made on GitHub by working on your machine and submitting
+your changes in a pull request (PR) via the command line. This workflow is
+outlined in these broad steps:
+
+- :ref:`Find an issue to work on <finding-issues>`
+- :ref:`Fetch the documentation to your machine <build-locally>`
+- Work on the issue (:ref:`get help <get-help>` if you need it!)
+- :ref:`Test your contribution <doc-testing>`
+- :ref:`Submit it for review <submit-work>`
+
+The Ubuntu Server documentation is very large and comprehensive! If you can't
+find an issue you want to work on, feel free to look around the docs and
+see what improvements you think you can make.
+
+For spelling and grammatical changes on a page, which are quick and easy to
+submit, feel free to create a PR. For more substantial changes or suggestions,
+we suggest creating an issue first, so that we can discuss and agree on an
+approach before you spend time working on it.
+
+Make sure you check the issue list before submitting a PR - if you start
+working on a task that is listed and already assigned to someone else, we
+unfortunately won't be able to accept your PR.
+
+Thank you!
+==========
+
+Lastly, we would like to thank you for spending your time to help make the
+Ubuntu Server documentation better. Every step in the right direction is a step
+worth taking, no matter how large or small.
+
+Our contributors
 ----------------
 
+**SecondSkoll**, who has styled our PDF and added the ability to build it
+locally:
 
-Files and structure
-===================
-
-The structural elements, such as landing pages, are written in reStructuredText
-(``.rst`` file types).
-
-The documentation pages themselves are written in standard Markdown (``.md``
-file types) with MyST support for more advanced elements if you want it.
-
-
-
-Graphics
-========
-
-You can use Mermaid to create diagrams and flow charts if you wish. Mermaid
-has an `online generator`_ tool to help you become familiar with the syntax.
-
-
-
-Workshops and getting help
-==========================
-
-Each issue should contain a description of the task to be completed, and some
-suggestions for how you might want to tackle it if there are several options.
-
-
-For questions specific to each task, add a comment on the issue you’ve been assigned:
-
-https://github.com/canonical/open-documentation-academy/issues 117
-
-If you’ve not been able to work on the task for a while, please also leave a comment to let us know. This helps us know you intend to complete a task, and to keep our task list status up-to-date.
-
-For more general questions, we recommend creating a post on our forum here, but you’re also welcome to ask on our Matrix group:
-
-https://matrix.to/#/#documentation:ubuntu.com 12
-
-Submitting your work
-====================
-
-Submissions should be through the Open Documentation Academy GitHub repository. We will provide help and documentation to do this, but an overview of the process is as follows:
-
-    Fork the Open Documentation Academy GitHub repository 15 to your own GitHub account. https://github.com/canonical/open-documentation-academy
-    Write or edit the document for your issue. See the issue details for how this needs to be formatted and structured.
-    Add then commit your work file or files to your repository.
-    Create a Pull Request https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request in your repository against our Open Documentation Academy repository. Link your pull request to your issue https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue 2, typically be adding fixes #<issue-number to your description.
-
-The Open Documentation Academy team will be in touch to review your work. This is where the collaboration begins!
-
-See Resources https://discourse.ubuntu.com/t/resources/42770/ for our communication channels, and for further reading.
-
-Testing your changes
-====================
-
-Reviews
-=======
-
-Get some guidance
-=================
+* PR: `Fix PDF build issues <https://github.com/canonical/ubuntu-server-documentation/pull/9>`_
+* PR: `Adds entrypoint for local PDF generation <https://github.com/canonical/ubuntu-server-documentation/pull/10>`_
 
 .. toctree::
    :maxdepth: 1
+   :hidden:
    
    self
-   gh-issues.rst
    contrib-types.rst
-   writing-guidance
+   gh-issues.rst
+   build-locally.rst
+   writing-guidance.rst
+   submit-contribution.rst
+   get-help.rst
 
-
+.. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/ethos/code-of-conduct
 .. _GitHub account: https://github.com/
 .. _hosted in GitHub: https://github.com/canonical/ubuntu-server-documentation
 .. _GitHub's web interface: https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
 .. _online generator: https://mermaid.live/
 .. _Open Documentation Academy: https://github.com/canonical/open-documentation-academy
-.. _use this link: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee
 .. _more about the CLA: https://ubuntu.com/legal/contributors
 .. _sign the CLA: https://ubuntu.com/legal/contributors/agreement
-.. _the issues list: https://github.com/canonical/ubuntu-server-documentation/issues
+
