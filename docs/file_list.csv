@@ -1,4 +1,4 @@
-index,Ubuntu Server Documentation,11322,landing page,/t/-/11322,--,--
+index,Ubuntu Server documentation,11322,landing page,/t/-/11322,--,--
 tutorial,Tutorials,29948,landing page,/t/-/29948,--,--
 basic-installation,Basic installation,11320,tutorial,/t/-/11320,Getting started,--
 attach-your-ubuntu-pro-subscription,Attach your Ubuntu Pro subscription,26222,tutorial,/t/-/26222,Next steps,--
@@ -139,6 +139,7 @@ container-tools-in-the-ubuntu-space,Container tools overview,41385,explanation,/
 about-rock-images,About rock images,27993,explanation,/t/-/27993,Virtualisation,Containers
 networking-key-concepts,Networking key concepts,11875,explanation,/t/-/11875,Networking,--
 configuring-networks,Configuring networks,11876,explanation,/t/-/11876,Networking,--
+about-netplan,About Netplan,46063,explanation,/t/-/46063,Networking,--
 about-dynamic-host-configuration-protocol-dhcp,About DHCP,11877,explanation,/t/-/11877,Networking,--
 about-time-synchronisation,Time synchronisation,11878,explanation,/t/-/11878,Networking,--
 about-dpdk,The DPDK library,11879,explanation,/t/-/11879,Networking,--
