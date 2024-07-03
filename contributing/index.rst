@@ -104,8 +104,8 @@ worth taking, no matter how large or small.
 Our contributors
 ----------------
 
-**SecondSkoll**, who has styled our PDF and added the ability to build it
-locally:
+Thanks to **SecondSkoll**, who has styled our PDF and added the ability to
+build it locally:
 
 * PR: `Fix PDF build issues <https://github.com/canonical/ubuntu-server-documentation/pull/9>`_
 * PR: `Adds entrypoint for local PDF generation <https://github.com/canonical/ubuntu-server-documentation/pull/10>`_
