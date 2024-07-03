@@ -238,6 +238,7 @@ pdf_subtitle = ''
 latex_engine = 'xelatex'
 # This whole thing is a hack and a half, but it works.
 latex_elements = {
+    'papersize': 'a4paper',
     'pointsize': '11pt',
     'fncychap': '',
     'preamble': r'''
@@ -315,7 +316,7 @@ latex_elements = {
 \begin{flushleft}
     \begin{tikzpicture}[remember picture,overlay]
     \node[anchor=south east, inner sep=0] at (current page.south east) {
-    \includegraphics[width=\paperwidth, height=\paperheight]{front-page}
+    \includegraphics[width=\paperwidth, height=\paperheight]{front-page-light}
     };
     \end{tikzpicture}
 \end{flushleft}

@@ -20,6 +20,8 @@ help:
         "* check spelling:                            make spelling \n" \
         "* check inclusive language:                  make woke \n" \
         "* check accessibility:                       make pa11y \n" \
+        "* build PDF:                                 make pdf \n" \
+        "* force install packages for PDF generation: make pdf-prep-force \n" \
         "* other possible targets:                    make <TAB twice> \n" \
         "------------------------------------------------------------- \n"
 
