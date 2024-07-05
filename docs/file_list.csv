@@ -109,7 +109,7 @@ common-tasks-in-wireguard-vpn,Common tasks,30241,how-to,/t/-/30241,WireGuard VPN
 security-tips-for-wireguard-vpn,Security tips,30242,how-to,/t/-/30242,WireGuard VPN,--
 troubleshooting-wireguard-vpn,Troubleshooting,30240,how-to,/t/-/30240,WireGuard VPN,--
 distributed-replicated-block-device-drbd,Distributed Replicated Block Device (DRBD),11314,how-to,/t/-/11314,High Availability,--
-set-up-your-lma-stack,[Logging,11314,how-to,/t/-/11314,Observability,--
+set-up-your-lma-stack,Set up your LMA stack,19151,how-to,/t/-/19151,Observability,--
 how-to-install-and-configure-logwatch,Install Logwatch,15590,how-to,/t/-/15590,Observability,--
 how-to-install-and-configure-munin,Install Munin,11904,how-to,/t/-/11904,Observability,--
 how-to-install-and-configure-nagios-core-3,Install Nagios Core 3,11903,how-to,/t/-/11903,Observability,--
