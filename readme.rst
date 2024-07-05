@@ -28,3 +28,10 @@ with any page.
 * `Join the Discourse forum <https://discourse.ubuntu.com/c/server/17>`_
 * `Download Ubuntu Server <https://ubuntu.com/server>`_
 * :ref:`Find out how to contribute <contribute>`
+
+Offline version
+===============
+
+You can :ref:`build this documentation locally <build-locally>`, or you can
+access `the PDF version <https://documentation.ubuntu.com/server/>`_ of this
+documentation from Read the Docs.
