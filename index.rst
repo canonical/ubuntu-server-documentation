@@ -67,8 +67,8 @@ know about bugs with any page.
 * `Get support`_
 * `Join the Discourse forum`_
 * `Download`_
-* Find out how to `contribute to the Server Guide`_, or let us know your
-  `feedback and suggestions`_.
+* Find out how to :ref:`contribute to the Server Guide <contribute>`, or let
+  us know your `feedback and suggestions`_.
 
 Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 
@@ -111,12 +111,17 @@ an offline copy of the current version of this site:
 
    Reference <docs/reference.rst>
 
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   
+   Contributing <contributing/index.rst>
+
 .. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/code-of-conduct
 .. _Get support: https://ubuntu.com/support/community-support
 .. _Join the Discourse forum: https://discourse.ubuntu.com/c/server/17
 .. _Download: https://ubuntu.com/server
-.. _contribute to the Server Guide: https://discourse.ubuntu.com/t/-/38717
 .. _feedback and suggestions: https://discourse.ubuntu.com/t/-/38718
 .. _Get in touch!: https://ubuntu.com/server/contact-us?product=server
 .. _Current PDF: https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/
