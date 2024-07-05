@@ -3,14 +3,10 @@
 Testing your changes
 ====================
 
-Before pushing your changes or creating a pull request, it's a good idea to
-first test the documentation to ensure you don't have any spelling errors,
-broken links, or similar. 
-
-We run automatic checks on the documentation for these things, so you will see
-a summary of any errors when you submit your pull request, but it will help us
-to review your PR more efficiently if these checks are run (and passing) before
-you submit.
+Before pushing your changes or creating a pull request, you should first test
+the documentation to catch any spelling errors, broken links, or similar. 
+This allows the reviewers to focus on the main changes you are proposing and
+makes the review process more efficient.
 
 You can run:
 
@@ -27,7 +23,7 @@ Manual testing
 
 If your contribution contains any code or process steps, it's a good idea to do
 a final run-through of your guide from start to finish in a clean environment,
-just to make sure the experience is as you expected.
+just to make sure everything works as you expected.
 
 Particularly check the code snippets -- does the output in your terminal match
 what you've presented in the guide?

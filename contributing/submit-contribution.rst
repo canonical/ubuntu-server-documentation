@@ -36,7 +36,7 @@ Submit a pull request
 - `Link your pull request to your issue`_, typically by adding
   ``fixes #<issue-number>`` to your description.
 
-- Give your pull request a description, and click on submit!
+- Give your pull request a description and click on submit!
 
 Read the Docs preview
 ---------------------
@@ -61,7 +61,7 @@ you can make the suggested changes, and the reviewer will approve the PR.
 
 If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen
-your contribution, but this is a collaboration, after all! It's quite normal to
+your contribution. This is a collaboration, after all! It's quite normal to
 have some back-and-forth on a PR, but it should be a respectful dialogue on all
 sides. 
 

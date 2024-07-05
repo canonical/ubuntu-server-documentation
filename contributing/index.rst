@@ -6,10 +6,10 @@ Contribute to this documentation
 Contributing to documentation can be a fantastic way to get started as a
 contributor to open source projects, no matter your level of experience!
 
-The Ubuntu Server Guide is a collaborative effort between Canonical and the
-Ubuntu community, and ALL types of contributions are welcome; whether you're
-new to Ubuntu Server and want to highlight something you found confusing, or
-you're an expert and want to create guides to help others.
+The Ubuntu Server documentation is a collaborative effort between Canonical
+and the Ubuntu community. All types of contributions are welcome, whether you
+are new to Ubuntu Server and want to highlight something you found confusing,
+or you're an expert and want to create "how-to" guides to help others.
 
 We hope to make it as easy as possible to contribute. If you find any part of
 our process doesn't work well for you, please let us know!
@@ -18,11 +18,11 @@ The Open Documentation Academy
 ==============================
 
 Ubuntu Server is a proud member of the Canonical
-`Open Documentation Academy`_ (ODA). If you are a newcomer to making open
+`Open Documentation Academy`_ (CODA). If you are a newcomer to making open
 source contributions, or new to technical writing and want to boost your
 skills -- or both! -- we will be glad to help.
 
-Check out the ODA repository for guidance and useful resources on getting
+Check out the CODA repository for guidance and useful resources on getting
 started.
 
 Prerequisites
@@ -76,12 +76,12 @@ your changes in a pull request (PR) via the command line. This workflow is
 outlined in these broad steps:
 
 - :ref:`Find an issue to work on <finding-issues>`
-- :ref:`Fetch the documentation to your machine <build-locally>`
+- :ref:`Clone the documentation to your machine <build-locally>`
 - Work on the issue (:ref:`get help <get-help>` if you need it!)
 - :ref:`Test your contribution <doc-testing>`
 - :ref:`Submit it for review <submit-work>`
 
-The Ubuntu Server documentation is very large and comprehensive! If you can't
+The Ubuntu Server documentation is very large and comprehensive. If you can't
 find an issue you want to work on, feel free to look around the docs and
 see what improvements you think you can make.
 
@@ -92,7 +92,7 @@ approach before you spend time working on it.
 
 Make sure you check the issue list before submitting a PR - if you start
 working on a task that is listed and already assigned to someone else, we
-unfortunately won't be able to accept your PR.
+won't be able to accept your PR.
 
 Thank you!
 ==========

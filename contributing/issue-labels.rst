@@ -45,9 +45,9 @@ Diataxis
 ^^^^^^^^
 
 We use `Diátaxis <https://diataxis.fr/>`_ to organise our documentation. This
-label is used to suggest what organisational category the page in question
-belongs to. If you have a preference for writing how-to guides, for instance,
-you may want to filter by the ``how-to`` label.
+label is used to suggest what documentation type the page in question belongs
+to. If you have a preference for writing how-to guides, for instance, you may
+want to filter by the ``how-to`` label.
 
 If you want to suggest a missing guide, or have ideas about content you want to
 create, please make an issue first so we can discuss/agree upon the scope and

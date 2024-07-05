@@ -3,19 +3,20 @@
 Build the documentation locally
 *******************************
 
-We use the "fork and pull" method, which means that you should create your own
-fork of the repository. If you're not sure what this means or need some help
-getting started, check out the `working with git`_ guide from the Open
-Documentation Academy which will walk you through the process. Just remember
-to change all instances of ``open-documentation-academy`` to
+To contribute to the Ubuntu Server documentation you will first need to create
+your own fork of the repository, then clone that fork to your machine. If
+you're not sure what this means or need some help getting started, check out
+the `working with git`_ guide from the Open Documentation Academy which will
+walk you through the process and explain this terminology. Just remember to
+change all instances of ``open-documentation-academy`` in the commands to
 ``ubuntu-server-documentation``!
 
 If you're already familiar with the process, then use the steps below to clone
 the repository and build the documentation. Don't forget to set up your own
 fork!
 
-Fetch the docs
-==============
+Get the docs
+============
 
 Before you can start working on an issue, first you will need to download the
 documentation. To do this, you can run:
@@ -25,7 +26,7 @@ documentation. To do this, you can run:
    git clone git@github.com:canonical/ubuntu-server-documentation.git
 
 This will create a new folder on your machine called
-"ubuntu-server-documentation", containing the contents of this repository.
+``ubuntu-server-documentation`` that contains the contents of this repository.
 
 You can then navigate to this folder using:
 
@@ -36,8 +37,8 @@ You can then navigate to this folder using:
 Install required software
 =========================
 
-Before you start, make sure you have ``make``, ``python3``, ``python3-venv``,
-and ``python3-pip`` installed on your system:
+To build the documentation, you will first need to install some necessary
+dependencies on your system with the following commands:
 
 .. code-block:: bash
 
@@ -45,14 +46,31 @@ and ``python3-pip`` installed on your system:
    sudo apt install make python3 python3-venv python3-pip
    make install
 
-The first time you run this command it will install all the dependencies
-required to build the documentation. 
+Create a new branch
+===================
 
-When working on documentation
-=============================
+Before making any changes, ensure the ``main`` branch on your machine is
+up-to-date with any recent changes made to the remote repository:
 
-If you are actively working on a change to the documentation, we recommend you
-use the command:
+.. code-block:: bash
+
+   git pull
+
+Now, create a branch and switch to it with the following:
+
+.. code-block:: bash
+
+   git checkout -b my-new-branch
+
+Remember to give your branch a more descriptive name than ``my-new-branch``.
+In this way, even if you are working on multiple branches, you will know at a
+glance what each of them is for.
+
+Work on the docs
+================
+
+You're now ready to start working on the docs! You should run the following
+command before you start, to build a live preview:
 
 .. code-block:: bash
 
@@ -61,29 +79,14 @@ use the command:
 This will build **and serve** the documentation at
 `http://127.0.0.1:8000/ <http://127.0.0.1:8000/>`_.
 It will watch the folder, and whenever you save changes to a file, this URL
-will give you a live preview of your changes (or warn you if something has gone
-horribly wrong!).
+will give update the preview to show your changes (or warn you if something has
+gone horribly wrong!).
 
 .. note::
    If you have problems getting the documentation to run on your machine,
    reach out to the team or leave a comment on your issue to get additional
    support.
-
-Create a new branch
--------------------
-
-For any set of changes you want to make, you should create a branch on your own
-fork of the repository. 
-
-.. code-block:: bash
-
-   git pull
-   git checkout -b my-new-branch
-
-Whenever you are on the main branch and want to create a new branch, it's a
-good idea to run ``git pull`` first, so that any recent changes are sync'ed
-to your machine.
-
+   
 Writing guidance
 ----------------
 

@@ -26,14 +26,14 @@ use the in-page table of contents to navigate the page.
 
 ## (Optional) information on using the package
 
-If there are best practices, examples, or other things you want to include that
-might help the reader, feel free to do so!
+If there are best practices, examples, or other information you want to include
+that might help the reader, feel free to do so!
 
 ## Further reading
 
-Often when you are researching a topic you will come up with a reference list
-of resources you found helpful. Try to use reputable links (such as official
-upstream documentation or books).
+Often when you are researching a topic you will come up with a list of
+resources you found helpful. Try to use reputable links such as official
+upstream documentation or books.
 
 * [Some links that](https://example1.com)
 * [Will help the reader](https://example2.com)

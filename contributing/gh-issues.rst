@@ -8,11 +8,11 @@ We use GitHub issues to track documentation tasks. Start by checking out
 use labels to help filter the tasks that need to be done and to show whether
 they’re assigned to someone or not.
 
-Get assigned to the issue
--------------------------
+Get an issue assigned
+---------------------
 
 When you find a task you want to work on, leave a comment on the issue saying
-you’d like to adopt the task, with an estimated date for when you hope to
+you’d like to be assigned the task, with an estimated date for when you hope to
 complete it. One of the documentation maintainers will respond and assign
 that task to you.
 

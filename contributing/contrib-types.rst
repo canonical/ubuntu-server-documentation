@@ -26,15 +26,12 @@ accomplish a specific task, or an explanation of a topic.
 Coding options
 --------------
 
-We sometimes have issues that require knowledge of a specific coding language,
-or some sort of technical expertise (e.g. how to create GitHub actions or Vale
-rules) to fulfil.
+Some issues require specific knowledge or technical expertise, such as:
 
 - Creating vale rules
-- Improving our GitHub actions and workflows
+- Improving GitHub actions and workflows
 - Creating graphics from code `using Mermaid`_
 - Fixing incorrect code snippets in the documentation
-- etc!
 
 `Find coding issues to work on`_.
 
@@ -46,7 +43,7 @@ documentation directly to fix:
 
 - Spelling and grammatical errors.
 - Updating broken links.
-- Things you didn't understand or that could be explained more clearly.
+- Unclear explanations or imprecise language.
 - Testing tutorials and how-to guide steps.
 - Fixing or creating graphics from code using Mermaid. If you are not familiar
   with the syntax, they have a live `online generator`_ tool that will create
@@ -54,7 +51,7 @@ documentation directly to fix:
 
 `Find low-code issues to work on`_.
 
-Non-code options
+No-code options
 ----------------
 
 If you spot something in the documentation that could be improved (or needs to
@@ -67,20 +64,21 @@ Since we use GitHub issues to track problems with the documentation, creating
 issues is a great way to contribute. You can use the "Give feedback" button at
 the top of any page in the documentation to report the issue you have found.
 
-Take care to describe the issue in as much detail as needed for someone else
-understand it. Usually, this would include a link to the affected page or
-section, a description of the problem, and optionally, a suggested solution.
+Take care to describe any issue in detail so that the reviewer can understand
+the problem clearly. A detailed issue might include a link to the affected part
+of the documentation, a description of the problem and -- optionally -- a
+suggested solution.
 
 This can also be a method for suggesting improvements or giving any other
 feedback you might want to share!
 
-User experience testing
+User-experience testing
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-We want the server guide to be as accessible as possible. If you have feedback
-about any aspect of your experience of using our documentation, this is
-incredibly valuable to us! If you have identified any areas we can improve upon
-please let us know by opening an issue.
+We want the Ubuntu Server documentation to be as accessible as possible. If
+you have feedback about any aspect of your experience of using our
+documentation, this is incredibly valuable to us! If you have identified any
+areas we can improve upon please let us know by opening an issue.
 
 Please check the issues list first to see if someone has already reported the
 same (or a similar) issue -- if they have, then leave your thoughts as a reply
@@ -90,18 +88,19 @@ for us to understand the impact and gather opinions from affected readers.
 Copy editing
 ^^^^^^^^^^^^
 
-You can edit files in the GitHub web interface if you don't want to work on the
-command line. To do this, select the pencil icon next to the "Give feedback"
-button. For details about how to use the web editor, you can
-`refer to their documentation`_ which has several handy guides.
+You can edit individual documentation pages directly in the GitHub web
+interface if you don't want to work on the command line. To do this, select
+the pencil icon next to the "Give feedback" button. For details about how to
+use the web editor, you can `refer to their documentation`_ which has several
+handy guides.
 
-`Find non-code issues to work on`_.
+`Find no-code issues to work on`_.
 
-.. _using Mermaid: https://mermaid.js.org/
-.. _online generator: https://mermaid.live/
+.. _using Mermaid: https://mermaid.live/
+.. _online generator: https://www.mermaidchart.com/app/dashboard
 .. _refer to their documentation: https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
 .. _issues list: https://github.com/canonical/ubuntu-server-documentation/issues
 .. _Find technical issues to work on: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Atechnical
 .. _Find coding issues to work on: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Acoding
 .. _Find low-code issues to work on: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Alow-code
-.. _Find non-code issues to work on: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Anon-code
+.. _Find no-code issues to work on: https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Ano-code
