@@ -1,5 +1,3 @@
-:orphan:
-
 Ubuntu Server documentation
 ###########################
 

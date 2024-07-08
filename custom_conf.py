@@ -49,7 +49,7 @@ copyright = '%s, %s' % (datetime.date.today().year, author)
 # don't know yet)
 # NOTE: If no ogp_* variable is defined (e.g. if you remove this section) the
 # sphinxext.opengraph extension will be disabled.
-ogp_site_url = 'https://canonical-starter-pack.readthedocs-hosted.com/'
+ogp_site_url = 'https://documentation.ubuntu.com/server/'
 # The documentation website name (usually the same as the product name)
 ogp_site_name = project
 # The URL of an image or logo that is used in the preview
@@ -67,7 +67,7 @@ html_context = {
     # For example: "ubuntu.com/lxd" or "microcloud.is"
     # If there is no product website, edit the header template to remove the
     # link (see the readme for instructions).
-    'product_page': 'documentation.ubuntu.com',
+    'product_page': 'ubuntu.com/server',
 
     # Add your product tag (the orange part of your logo, will be used in the
     # header) to ".sphinx/_static" and change the path here (start with "_static")
@@ -77,7 +77,7 @@ html_context = {
     # Change to the discourse instance you want to be able to link to
     # using the :discourse: metadata at the top of a file
     # (use an empty value if you don't want to link)
-    'discourse': 'https://discourse.ubuntu.com',
+    'discourse': 'https://discourse.ubuntu.com/c/server/17',
 
     # Change to the Mattermost channel you want to link to
     # (use an empty value if you don't want to link)
@@ -89,14 +89,14 @@ html_context = {
 
     # Change to the GitHub URL for your project
     # This is used, for example, to link to the source files and allow creating GitHub issues directly from the documentation.
-    'github_url': 'https://github.com/canonical/sphinx-docs-starter-pack',
+    'github_url': 'https://github.com/canonical/ubuntu-server-documentation',
 
     # Change to the branch for this version of the documentation
     'github_version': 'main',
 
     # Change to the folder that contains the documentation
     # (usually "/" or "/docs/")
-    'github_folder': '/',
+    'github_folder': '/docs/',
 
     # Change to an empty value if your GitHub repo doesn't have issues enabled.
     # This will disable the feedback button and the issue link in the footer.
@@ -115,7 +115,7 @@ html_context = {
 
 # If your project is on documentation.ubuntu.com, specify the project
 # slug (for example, "lxd") here.
-slug = ""
+slug = "server"
 
 ############################################################
 ### Redirects
@@ -163,6 +163,7 @@ custom_myst_extensions = []
 custom_extensions = [
     'sphinx_tabs.tabs',
     'sphinxcontrib.mermaid',
+    'sphinxcontrib.jquery',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -185,7 +186,16 @@ custom_required_modules = [
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
     'cheatsheets/',
+    'docs/contributing/doc-templates/',
+    'doc-cheat-sheet*',
+    'readme.rst'
     ]
+
+# Allow Sphinx to use both rst and md
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # Add CSS files (located in .sphinx/_static/)
 custom_html_css_files = []
@@ -208,17 +218,6 @@ disable_feedback_button = False
 # (https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#tags)
 custom_tags = []
 
-# Add files or directories that should be excluded from processing.
-custom_excludes = [
-    'doc-cheat-sheet*',
-    'readme.rst'
-    ]
-
-# Allow Sphinx to use both rst and md
-source_suffix = {
-    '.rst': 'restructuredtext',
-    '.md': 'markdown',
-}
 ############################################################
 ### Additional configuration
 ############################################################
@@ -231,7 +230,9 @@ source_suffix = {
 #   :class: align-center
 #'''
 
-## PDF specific config
+############################################################
+### PDF configuration
+############################################################
 
 pdf_subtitle = ''
 

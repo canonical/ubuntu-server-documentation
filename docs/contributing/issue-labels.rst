@@ -99,7 +99,7 @@ substantial problems.
   content. This may require follow-up updates.
 
 Server labels
-^^^^^^^^^^^^
+^^^^^^^^^^^^^
 
 The set of :guilabel:`Server:` issues labels are for the maintainers of the
 repository to flag up possible problems with the listed issue or pull request.

@@ -38,11 +38,15 @@ View our official documentation online at: `<https://ubuntu.com/server/docs>`_
 
    .. grid-item-card:: :ref:`Explanation <explanation>`
 
-       Concepts - discussion and clarification of key topics
+       Concepts -
+       :ref:`Overviews of key topics <explanation-introduction-to>`, as well as 
+       more in-depth discussion and clarification 
 
    .. grid-item-card:: :ref:`Reference <reference>`
 
-       Technical information - package specifications, APIs, architecture
+       Technical information -
+       :ref:`system requirements <system-requirements>`,
+       package specifications and architecture
 
 .. only:: html
 
@@ -57,18 +61,16 @@ Ubuntu Server is a member of the Ubuntu family. It's an open source project
 that welcomes community projects, contributions, suggestions, fixes and
 constructive feedback.
 
-If you find any errors or have suggestions for improvements to pages, please
-use the link at the bottom of each topic titled: "Help improve this document
-in the forum". This link will take you to the Server Discourse forum for the
-specific page you are viewing. There you can share your comments or let us
-know about bugs with any page. 
+If you find any errors or have suggestions for improvements, please use the
+"Give feedback" button at the top of every page. This will take you to
+GitHub where you can share your comments or let us know about bugs with any
+page.
 
 * Read our `Code of Conduct`_
 * `Get support`_
 * `Join the Discourse forum`_
 * `Download`_
-* Find out how to :ref:`contribute to the Server Guide <contribute>`, or let
-  us know your `feedback and suggestions`_.
+* Find out how to :ref:`contribute to the Server Guide <contribute>`
 
 Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 
@@ -115,14 +117,13 @@ an offline copy of the current version of this site:
    :hidden:
    :maxdepth: 2
    
-   Contributing <contributing/index.rst>
+   Contributing <docs/contributing.rst>
 
 .. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/code-of-conduct
 .. _Get support: https://ubuntu.com/support/community-support
 .. _Join the Discourse forum: https://discourse.ubuntu.com/c/server/17
 .. _Download: https://ubuntu.com/server
-.. _feedback and suggestions: https://discourse.ubuntu.com/t/-/38718
 .. _Get in touch!: https://ubuntu.com/server/contact-us?product=server
 .. _Current PDF: https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/
 .. _Ubuntu 18.04 LTS PDF: https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf
