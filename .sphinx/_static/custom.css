@@ -199,6 +199,30 @@ body[data-theme="dark"] .sphinx-tabs-tab {
     background: var(--color-background-primary);
 }
 
+/** Make sure the feedback button container renders in the correct location**/
+.content-icon-container {
+    width: 100%;
+    margin: 10px;
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.article-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    display: flex;
+    clear: both;
+    width: 100%;
+    margin-top: 10px;
+}
+
 .sphinx-tabs-tab, .sd-tab-set>label{
     color: var(--color-brand-primary);
     font-family: var(--font-stack);
