@@ -1,6 +1,6 @@
 .. _how-to-high-availability:
 
-High Availability
+High availability
 ******************
 
 * :ref:`Distributed Replicated Block Device (DRBD) <distributed-replicated-block-device-drbd>`

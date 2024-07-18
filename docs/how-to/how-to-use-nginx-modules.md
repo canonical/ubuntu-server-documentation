@@ -1,5 +1,5 @@
 (how-to-use-nginx-modules)=
-# nginx modules
+# How to use nginx modules
 
 Like other web servers, nginx supports dynamically loaded modules to provide in-server support for programming languages, security mechanisms, and so on. Ubuntu provides a number of these modules as separate packages that are either installed simultaneously with nginx, or can be installed separately. 
 

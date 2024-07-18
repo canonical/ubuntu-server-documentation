@@ -1,5 +1,5 @@
 (using-qemu-for-microvms)=
-# QEMU microVMs
+# Using QEMU for microVMs
 
 MicroVMs are a special case of virtual machines (VMs), which were designed to be used in a container-like way to provide better isolation than containers, but which are optimised for initialisation speed and minimal resource use. 
 

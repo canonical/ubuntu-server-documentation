@@ -1,5 +1,5 @@
 (how-to-set-up-kerberos-with-openldap-backend)=
-# Kerberos with OpenLDAP backend
+# How to set up Kerberos with OpenLDAP backend
 
 Kerberos supports a few different database backends. The default one (which we have used in our other Kerberos guides so far) is called `db2`. The [DB types documentation](https://web.mit.edu/kerberos/krb5-latest/doc/admin/dbtypes.html) shows all the options, one of which is LDAP.
 

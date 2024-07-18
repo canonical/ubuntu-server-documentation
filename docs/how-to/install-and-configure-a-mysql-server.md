@@ -1,5 +1,5 @@
 (install-and-configure-a-mysql-server)=
-# MySQL
+# Install and configure a MySQL server
 
 [MySQL](https://www.mysql.com/) is a fast, multi-threaded, multi-user, and robust SQL database server. It is intended for mission-critical, heavy-load production systems and mass-deployed software.
 
@@ -169,3 +169,23 @@ The top section provides general information about the database server, and the 
 The following example is part of a report from a production database showing potential benefits from increasing the query cache:
 
 ```text
+-------- Recommendations -----------------------------------------------------
+General recommendations:
+    Run OPTIMIZE TABLE to defragment tables for better performance
+    Increase table_cache gradually to avoid file descriptor limits
+Variables to adjust:
+    key_buffer_size (> 1.4G)
+    query_cache_size (> 32M)
+    table_cache (> 64)
+    innodb_buffer_pool_size (>= 22G)
+```
+
+Obviously, performance optimisation strategies vary from application to application; what works best for WordPress might not be the best for Drupal or Joomla. Performance can depend on the types of queries, use of indexes, how efficient the database design is and so on.
+
+You may find it useful to spend some time searching for database tuning tips based on the applications you're using. Once you've reached the point of diminishing returns from database configuration adjustments, look to the application itself for improvements, or invest in more powerful hardware and/or scale up the database environment.
+
+## Further reading
+
+- Full documentation is available in both online and offline formats from the [MySQL Developers portal](http://dev.mysql.com/doc/)
+
+- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by Thomas Nield as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.

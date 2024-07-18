@@ -1,5 +1,5 @@
 (how-to-configure-nginx)=
-# nginx settings
+# How to configure nginx
 
 Once you have [installed nginx](../how-to.rst), you can customise it for your use with the configuration options explained in this guide.
 

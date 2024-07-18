@@ -1,5 +1,5 @@
 (iscsi-initiator-or-client)=
-# iSCSI
+# iSCSI initiator (or client)
 
 
 >Wikipedia [iSCSI Definition](https://en.wikipedia.org/wiki/ISCSI):

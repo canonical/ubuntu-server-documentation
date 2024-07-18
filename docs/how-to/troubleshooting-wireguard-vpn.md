@@ -1,5 +1,5 @@
 (troubleshooting-wireguard-vpn)=
-# Troubleshooting
+# Troubleshooting WireGuard VPN
 
 The following general checklist should help as a first set of steps to try when you run into problems with WireGuard.
 

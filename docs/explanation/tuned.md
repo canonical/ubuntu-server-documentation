@@ -97,10 +97,10 @@ After the `[main]` section, the list of plugins (ways of tuning your system) can
 
 Let's take look at the predefined `hpc-compute` profile in more detail as an example. You can find the configuration of this profile in `/usr/lib/tuned/hpc-compute/tuned.conf`:
 
-```text
-\#
-\# tuned configuration
-\#
+```ini
+#
+# tuned configuration
+#
 
 [main]
 summary=Optimize for HPC compute workloads
@@ -108,36 +108,36 @@ description=Configures virtual memory, CPU governors, and network settings for H
 include=latency-performance
 
 [vm]
-\# Most HPC application can take advantage of hugepages. Force them to on.
+# Most HPC application can take advantage of hugepages. Force them to on.
 transparent_hugepages=always
 
 [disk]
-\# Increase the readahead value to support large, contiguous, files.
+# Increase the readahead value to support large, contiguous, files.
 readahead=>4096
 
 [sysctl]
-\# Keep a reasonable amount of memory free to support large mem requests
+# Keep a reasonable amount of memory free to support large mem requests
 vm.min_free_kbytes=135168
 
-\# Most HPC applications are NUMA aware. Enabling zone reclaim ensures
-\# memory is reclaimed and reallocated from local pages. Disabling
-\# automatic NUMA balancing prevents unwanted memory unmapping.
+# Most HPC applications are NUMA aware. Enabling zone reclaim ensures
+# memory is reclaimed and reallocated from local pages. Disabling
+# automatic NUMA balancing prevents unwanted memory unmapping.
 vm.zone_reclaim_mode=1
 kernel.numa_balancing=0
 
-\# Busy polling helps reduce latency in the network receive path
-\# by allowing socket layer code to poll the receive queue of a
-\# network device, and disabling network interrupts.
-\# busy_read value greater than 0 enables busy polling. Recommended
-\# net.core.busy_read value is 50.
-\# busy_poll value greater than 0 enables polling globally.
-\# Recommended net.core.busy_poll value is 50
+# Busy polling helps reduce latency in the network receive path
+# by allowing socket layer code to poll the receive queue of a
+# network device, and disabling network interrupts.
+# busy_read value greater than 0 enables busy polling. Recommended
+# net.core.busy_read value is 50.
+# busy_poll value greater than 0 enables polling globally.
+# Recommended net.core.busy_poll value is 50
 net.core.busy_read=50
 net.core.busy_poll=50
 
-\# TCP fast open reduces network latency by enabling data exchange
-\# during the sender's initial TCP SYN. The value 3 enables fast open
-\# on client and server connections.
+# TCP fast open reduces network latency by enabling data exchange
+# during the sender's initial TCP SYN. The value 3 enables fast open
+# on client and server connections.
 net.ipv4.tcp_fastopen=3
 ```
 
@@ -151,15 +151,8 @@ The sections that follow `[main]` represent the configuration of tuning plugins.
 
 The content of this profile can be overwritten if needed, by creating the file `/etc/tuned/hpc-compute/tuned.conf` with the desired content. The content in `/etc/tuned` always takes precedence over `/usr/lib/tuned`. One can also extend this profile by creating a custom profile and including `hpc-compute`.
 
-## Known issue in Ubuntu
-
-There is a known issue that a user should be aware of when using TuneD in Ubuntu:
-
-* Any predefined or customised profile making use of the **scheduler** and the **irqbalance** tuning plugins will not work, because those two plugins depend on the `perf` Python module which is not provided by Ubuntu. There is a request to provide the needed Python module in [LP: #2051560](https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2051560).
-
-## <sup>*1</sup> This is a universe package
-
-Ubuntu ships this software as part of its [universe repository](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
+> \*1: This is a universe package
+> Ubuntu ships this software as part of its [universe repository](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
 
 ## Further reading
 

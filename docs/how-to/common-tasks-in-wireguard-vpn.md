@@ -1,5 +1,5 @@
 (common-tasks-in-wireguard-vpn)=
-# Common tasks
+# Common tasks in WireGuard VPN
 
 Here are some common tasks and other useful tips that can help you in your WireGuard deployment.
 

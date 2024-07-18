@@ -1,5 +1,5 @@
 (how-to-use-nagios-with-munin)=
-# Use Nagios with Munin
+# How to use Nagios with Munin
 
 > **Note**:
 > Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.

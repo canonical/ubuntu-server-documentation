@@ -1,5 +1,5 @@
 (how-to-install-nginx)=
-# Install nginx
+# How to install nginx
 
 The nginx HTTP server is a powerful alternative to [Apache](how-to-install-apache2.md). In this guide, we will demonstrate how to install and use nginx for web services.
 

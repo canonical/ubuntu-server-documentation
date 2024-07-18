@@ -1,5 +1,5 @@
 (libvirt)=
-# Libvirt and virsh
+# Libvirt
 
 
 The [libvirt library](https://libvirt.org/) is used to interface with many different virtualisation technologies. Before getting started with libvirt it is best to make sure your hardware supports the necessary virtualisation extensions for [Kernel-based Virtual Machine (KVM)](https://www.linux-kvm.org/page/Main_Page). To check this, enter the following from a terminal prompt:

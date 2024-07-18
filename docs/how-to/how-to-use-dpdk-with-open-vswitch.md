@@ -1,5 +1,5 @@
 (how-to-use-dpdk-with-open-vswitch)=
-# Use Open vSwitch with DPDK
+# How to use Open vSwitch with DPDK
 
 
 Since [DPDK is *just* a library](https://ubuntu.com/server/docs/network-dpdk), it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.

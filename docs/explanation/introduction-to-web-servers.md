@@ -1,5 +1,5 @@
 (introduction-to-web-servers)=
-# Web servers
+# Introduction to web servers
 
 Web servers are used to serve web pages requested by client computers. Clients typically request and view web pages using web browser applications such as Firefox, Opera, Chromium, or Internet Explorer.
 

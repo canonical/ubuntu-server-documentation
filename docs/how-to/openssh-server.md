@@ -1,5 +1,5 @@
 (openssh-server)=
-# OpenSSH
+# OpenSSH server
 
 OpenSSH is a powerful collection of tools for remotely controlling networked computers and transferring data between them. Here we'll describe some of the configuration settings possible with the OpenSSH server application and how to change them on your Ubuntu system.
 

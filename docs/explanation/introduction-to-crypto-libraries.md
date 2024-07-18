@@ -1,5 +1,5 @@
 (introduction-to-crypto-libraries)=
-# Cryptographic libraries
+# Introduction to cryptographic libraries
 
 The cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. What an application developer decides to use can be governed by many aspects, such as:
 

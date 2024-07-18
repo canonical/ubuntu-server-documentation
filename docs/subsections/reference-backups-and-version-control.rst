@@ -3,6 +3,8 @@
 Backups and version control
 ****************************
 
+Example shell scripts for backing up your system.
+
 * :ref:`Basic backup shell script <basic-backup-shell-script>`
 * :ref:`Archive rotation shell script <archive-rotation-shell-script>`
 

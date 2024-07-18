@@ -1,5 +1,5 @@
 (ldap-access-control)=
-# Set up access control
+# Set up LDAP access control
 
 
 The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or ACLs.

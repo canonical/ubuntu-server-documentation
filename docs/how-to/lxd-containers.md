@@ -1,5 +1,5 @@
 (lxd-containers)=
-# LXD
+# LXD containers
 
 
 [LXD](https://ubuntu.com/lxd) (pronounced lex-dee) is the lightervisor, or lightweight container hypervisor. LXC (lex-see) is a program which creates and administers "containers" on a local system. It also provides an API to allow higher level managers, such as LXD, to administer containers. In a sense, one could compare LXC to QEMU, while comparing LXD to libvirt.

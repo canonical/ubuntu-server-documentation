@@ -1,5 +1,5 @@
 (smart-card-authentication-with-ssh)=
-# Smart card SSH
+# Smart card authentication with SSH
 
 
 One of the authentication methods supported by the SSH protocol is public key authentication. A public key is copied to the SSH server where it is stored and marked as authorized. The owner of the corresponding private key in the smart card can then SSH login to the server.

@@ -1,5 +1,5 @@
 (ldap-and-transport-layer-security-tls)=
-# LDAP and TLS
+# LDAP and Transport Layer Security (TLS)
 
 
 When authenticating to an OpenLDAP server it is best to do so using an encrypted session. This can be accomplished using Transport Layer Security (TLS).

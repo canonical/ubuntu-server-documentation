@@ -1,5 +1,5 @@
 (how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot)=
-# Virtual CD-ROM and Petitboot install on ppc64el
+# How to start a live server installation on IBM Power (ppc64el) with a virtual CD-ROM and Petitboot
 
 > **Note**:
 > Not all IBM Power machines come with the capability of installing via a virtual CD-ROM! However, it is also possible to [boot the installer over the network](netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md).

@@ -1,5 +1,5 @@
 (how-to-install-and-configure-isc-dhcp-server)=
-# Install isc-dhcp-server
+# How to install and configure isc-dhcp-server
 
 > **Note**:
 > Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/). It has been replaced by [Kea](https://www.isc.org/kea/).

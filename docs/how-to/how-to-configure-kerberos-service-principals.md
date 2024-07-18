@@ -1,5 +1,5 @@
 (how-to-configure-kerberos-service-principals)=
-# Configure service principals
+# How to configure Kerberos service principals
 
 
 The specific steps to enable Kerberos for a service can vary, but in general both of the following are needed:
@@ -39,3 +39,28 @@ This is why we needed to run `kadmin` with `sudo`: so that it can write to `/etc
 $ sudo klist -k
 Keytab name: FILE:/etc/krb5.keytab
 KVNO Principal
+---- --------------------------------------------------------------------------
+   2 ldap/ldap-server.example.com@EXAMPLE.COM
+   2 ldap/ldap-server.example.com@EXAMPLE.COM
+```
+
+If you don't have the `kadmin` utility on the target host, one alternative is to extract the keys on a different host and into a different file, and then transfer this file *securely* to the target server. For example:
+
+```text
+kadmin:  ktadd -k /home/ubuntu/ldap.keytab ldap/ldap-server.example.com
+Entry for principal ldap/ldap-server.example.com with kvno 3, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/home/ubuntu/ldap.keytab.
+Entry for principal ldap/ldap-server.example.com with kvno 3, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/home/ubuntu/ldap.keytab.
+````
+
+> **Note**:
+> Notice how the `kvno` changed from `2` to `3` in the example above, when using `ktadd` a second time? This is the key version, and it invalidated the previously extracted key with `kvno 2`. Every time a key is extracted with `ktadd`, its version is bumped and that invalidates the previous ones!
+
+In this case, as long as the target location is writable, you don't even have to run `kadmin` with `sudo`.
+
+Then use `scp` to transfer it to the target host:
+
+```bash
+$ scp /home/ubuntu/ldap.keytab ldap-server.example.com:
+```
+
+And over there copy it to `/etc/krb5.keytab`, making sure it's mode `0600` and owned by `root:root`.

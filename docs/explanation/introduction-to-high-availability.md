@@ -1,5 +1,5 @@
 (introduction-to-high-availability)=
-# High Availability
+# Introduction to High Availability
 
 
 A definition of High Availability Clusters [from Wikipedia:](https://en.wikipedia.org/wiki/High-availability_cluster)

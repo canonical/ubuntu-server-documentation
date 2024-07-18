@@ -6,15 +6,12 @@ Samba
 * :ref:`Join Active Directory <member-server-in-an-active-directory-domain>`
 * :ref:`Set up a file server <samba-as-a-file-server>`
 * :ref:`Set up a print server <samba-as-a-print-server>`
-* :ref:`Share access controls <share-access-controls>`
-* :ref:`Create AppArmor profile <samba-apparmor-profile>`
+* :ref:`Set up share access controls <share-access-controls>`
+* :ref:`Create an AppArmor profile <samba-apparmor-profile>`
 * :ref:`Mount CIFS shares permanently <how-to-mount-cifs-shares-permanently>`
 
-
-**Legacy pages**
-
-* :ref:`NT4 domain controller <nt4-domain-controller-legacy>`
-* :ref:`OpenLDAP backend <openldap-backend-legacy>`
+* :ref:`NT4 domain controller <nt4-domain-controller-legacy>` (legacy)
+* :ref:`OpenLDAP backend <openldap-backend-legacy>` (legacy)
 
 .. toctree::
     :hidden:

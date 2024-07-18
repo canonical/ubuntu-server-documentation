@@ -13,8 +13,6 @@ public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
 
-View our official documentation online at: `<https://ubuntu.com/server/docs>`_
-
 .. only:: html
 
    In this documentation
@@ -69,7 +67,7 @@ page.
 * Read our `Code of Conduct`_
 * `Get support`_
 * `Join the Discourse forum`_
-* `Download`_
+* `Download`_ Ubuntu Server
 * Find out how to :ref:`contribute to the Server Guide <contribute>`
 
 Thinking about using Ubuntu Server for your next project? `Get in touch!`_

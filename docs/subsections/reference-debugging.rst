@@ -3,6 +3,8 @@
 Debugging
 **********
 
+These pages are for those interested in packaging and Ubuntu development.
+
 * :ref:`About debuginfod <about-debuginfod>`
 * :ref:`Debug symbol packages <debug-symbol-packages>`
 

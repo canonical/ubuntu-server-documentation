@@ -1,5 +1,5 @@
 (how-to-install-and-configure-wordpress)=
-# Install WordPress
+# How to install and configure WordPress
 
 [Wordpress](https://wordpress.com/) is a blog tool, publishing platform and content management system (CMS) implemented in PHP and licensed under the [GNU General Public License (GPL) v2 or later](https://en-gb.wordpress.org/about/license/).
 

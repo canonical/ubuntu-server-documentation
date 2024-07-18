@@ -1,30 +1,27 @@
 .. _explanation-virtualisation:
 
-Virtualisation
-***************
-
+Virtualisation and containers
+*****************************
 
 
 **About virtual machines**
 
-* :ref:`VM tools overview <vm-tools-in-the-ubuntu-space>`
-
+* :ref:`Overview of VM tools in Ubuntu <vm-tools-in-the-ubuntu-space>`
 
 **Using virtual machines**
 
-* :ref:`QEMU microVMs <using-qemu-for-microvms>`
-* :ref:`Upgrade VM machine type <upgrading-the-machine-type-of-your-vm>`
+* :ref:`Using QEMU for microVMs <using-qemu-for-microvms>`
+* :ref:`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
 
+**About containers**
+
+* :ref:`Overview of container tools in Ubuntu <container-tools-in-the-ubuntu-space>`
+* :ref:`About rock images <about-rock-images>`
 
 **Other virtualisation tools**
 
 * :ref:`About OpenStack <about-openstack>`
 
-
-**Containers**
-
-* :ref:`Container tools overview <container-tools-in-the-ubuntu-space>`
-* :ref:`About rock images <about-rock-images>`
 
 .. toctree::
     :hidden:

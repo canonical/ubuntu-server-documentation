@@ -1,5 +1,5 @@
 (how-to-configure-apache2-settings)=
-# Apache2 settings
+# How to configure Apache2 settings
 
 After you have [installed Apache2](how-to-install-apache2.md), you will likely need to configure it. In this explanatory guide, we will explain the Apache2 server essential configuration parameters.
 

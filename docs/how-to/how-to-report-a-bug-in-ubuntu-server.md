@@ -1,5 +1,5 @@
 (how-to-report-a-bug-in-ubuntu-server)=
-# Reporting bugs
+# How to report a but in Ubuntu Server
 
 The Ubuntu project, including Ubuntu Server, [uses Launchpad](https://launchpad.net/) as its bug tracker. To file a bug, you will first need to [create a Launchpad account](https://help.launchpad.net/YourAccount/NewAccount).
 

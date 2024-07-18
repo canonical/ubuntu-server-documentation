@@ -1,6 +1,6 @@
 .. _explanation-high-availability:
 
-High Availability
+High availability
 ******************
 
 * :ref:`Pacemaker resource agents <pacemaker-resource-agents>`

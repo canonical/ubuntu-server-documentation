@@ -1,5 +1,5 @@
 (how-to-install-and-configure-munin)=
-# Install Munin
+# How to install and configure Munin
 
 The monitoring of essential servers and services is an important part of system administration. This guide will show you how to set up [Munin](https://munin-monitoring.org/) for performance monitoring.
 

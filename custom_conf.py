@@ -186,7 +186,7 @@ custom_required_modules = [
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
     'cheatsheets/',
-    'docs/contributing/doc-templates/',
+    'docs/contributing/doc-templates/*',
     'doc-cheat-sheet*',
     'readme.rst'
     ]
@@ -326,7 +326,7 @@ latex_elements = {
 
 \begin{adjustwidth}{8cm}{0pt}
 \begin{flushleft}
-    \huge \textcolor{white}{\textbf{}{\raggedright{''' + project + r'''}}}
+    \huge \textcolor{black}{\textbf{}{\raggedright{''' + project + r'''}}}
 \end{flushleft}
 \end{adjustwidth}
 

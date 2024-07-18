@@ -3,36 +3,30 @@
 Web services
 *************
 
-
-
 **Proxy servers**
 
 * :ref:`Install a Squid server <how-to-install-a-squid-server>`
 
-
 **Apache**
 
 * :ref:`Install Apache2 <how-to-install-apache2>`
-* :ref:`Apache2 settings <how-to-configure-apache2-settings>`
-* :ref:`Apache2 modules <how-to-use-apache2-modules>`
-
+* :ref:`Configure Apache2 <how-to-configure-apache2-settings>`
+* :ref:`Extend Apache2 with modules <how-to-use-apache2-modules>`
 
 **Nginx**
 
 * :ref:`Install nginx <how-to-install-nginx>`
-* :ref:`nginx settings <how-to-configure-nginx>`
-* :ref:`nginx modules <how-to-use-nginx-modules>`
-
+* :ref:`Configure nginx <how-to-configure-nginx>`
+* :ref:`Extend nginx with modules <how-to-use-nginx-modules>`
 
 **Web programming**
 
 * :ref:`Install PHP <how-to-install-and-configure-php>`
 * :ref:`Install Ruby on Rails <how-to-install-and-configure-ruby-on-rails>`
 
-
 **LAMP applications**
 
-* :ref:`Get started with LAMP <get-started-with-lamp-applications>`
+* :ref:`Get started with LAMP applications <get-started-with-lamp-applications>`
 * :ref:`Install phpMyAdmin <how-to-install-and-configure-phpmyadmin>`
 * :ref:`Install WordPress <how-to-install-and-configure-wordpress>`
 

@@ -4,6 +4,8 @@
 
 Canonical produces a variety of cloud-specific images, which are available directly via the clouds themselves, as well as on [https://cloud-images.ubuntu.com](https://cloud-images.ubuntu.com).
 
+For expanded documentation, please see the separate [public-cloud documentation.](https://documentation.ubuntu.com/public-cloud/en/latest/)
+
 ## Public clouds
 
 ### Compute offerings
