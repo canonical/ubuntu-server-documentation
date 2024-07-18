@@ -22,7 +22,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
   Length: 700952576 (668M) [application/x-iso9660-image]
   Saving to: ‘focal-live-server-s390x.iso’
   
-  focal-live-server-s 100%[===================>] 668.48M  2.73MB/s    in 4m 54s  
+  focal-live-server-s 100%[===================>] 668.48M  2.73MB/s    in 4m 54s
   
   2020-06-26 12:23:42 (2.27 MB/s) - ‘focal-live-server-s390x.iso’ saved [700952576/700952576]
   admin@installserver:~$

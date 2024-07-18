@@ -1,9 +1,7 @@
 (introduction-to-active-directory-integration)=
-# Active Directory integration
+# Introduction to Active Directory integration
 
-<div align="center">
-  <img src='upload://wED3v3RPDxOke8AExUHZMMP55tf.png'>
-</div>
+![Active Directory](images/ad_integration.png)
 
 Active Directory deployments can range from single-domain, one tree, with one or more servers, up to multiple domains and servers geographically dispersed spawning a structure that is referred to as a "forest". Furthermore, such a forest is not necessarily static, allowing its multiple delegated administrators to add and remove domains from it. Depending on the desired level of integration and the complexity of the domain or forest, joining an Ubuntu system to Active Directory requires different tooling, configuration, and planning.
 

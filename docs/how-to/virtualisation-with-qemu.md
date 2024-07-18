@@ -1,5 +1,5 @@
 (virtualisation-with-qemu)=
-# QEMU
+# Virtualisation with QEMU
 
 
 [QEMU](http://wiki.qemu.org/Main_Page) is a machine emulator that can run operating systems and programs for one machine on a different machine. However, it is more often used as a virtualiser in collaboration with [KVM](https://www.linux-kvm.org/page/Main_Page) kernel components. In that case it uses the hardware virtualisation technology to virtualise guests.

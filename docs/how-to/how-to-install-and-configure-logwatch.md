@@ -1,5 +1,6 @@
 (how-to-install-and-configure-logwatch)=
-# Install Logwatch
+# How to install and configure Logwatch
+
 
 Logs are an invaluable source of information about problems that may arise in your server.  [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
 
@@ -72,3 +73,75 @@ sudo:
       bryce -> root: 1 Time(s)
  
  
+---------------------- pam_unix End -------------------------
+ 
+ 
+--------------------- rsnapshot Begin ------------------------
+ 
+ERRORS:
+    /usr/bin/rsnapshot hourly: completed, but with some errors: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host2:/etc/: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host2:/home/: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host2:/proc/uptime: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host3:/etc/: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host3:/home/: 5 Time(s)
+    /usr/bin/rsync returned 127 while processing root@host3:/proc/uptime: 5 Time(s)
+ 
+ 
+---------------------- rsnapshot End -------------------------
+ 
+ 
+--------------------- SSHD Begin ------------------------
+ 
+ 
+Users logging in through sshd:
+   bryce:
+      192.168.1.123 (`host4.mydomain.org`): 1 time
+ 
+---------------------- SSHD End -------------------------
+ 
+ 
+--------------------- Sudo (secure-log) Begin ------------------------
+ 
+ 
+bryce => root
+\-------------
+/bin/bash                      -   1 Time(s).
+ 
+---------------------- Sudo (secure-log) End -------------------------
+ 
+ 
+--------------------- Disk Space Begin ------------------------
+ 
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sdc1       220G   19G  190G   9% /
+/dev/loop1      157M  157M     0 100% /snap/gnome-3-28-1804/110
+/dev/loop11     1.0M  1.0M     0 100% /snap/gnome-logs/81
+/dev/md5        9.1T  7.3T  1.8T  81% /srv/Products
+/dev/md6        9.1T  5.6T  3.5T  62% /srv/Archives
+/dev/loop14     3.8M  3.8M     0 100% /snap/gnome-system-monitor/127
+/dev/loop17      15M   15M     0 100% /snap/gnome-characters/399
+/dev/loop18     161M  161M     0 100% /snap/gnome-3-28-1804/116
+/dev/loop6       55M   55M     0 100% /snap/core18/1668
+/dev/md1        1.8T  1.3T  548G  71% /srv/Staff
+/dev/md0        3.6T  3.5T   84G  98% /srv/Backup
+/dev/loop2      1.0M  1.0M     0 100% /snap/gnome-logs/93
+/dev/loop5       15M   15M     0 100% /snap/gnome-characters/495
+/dev/loop8      3.8M  3.8M     0 100% /snap/gnome-system-monitor/135
+/dev/md7        3.6T  495G  3.0T  15% /srv/Customers
+/dev/loop9       55M   55M     0 100% /snap/core18/1705
+/dev/loop10      94M   94M     0 100% /snap/core/8935
+/dev/loop0       55M   55M     0 100% /snap/gtk-common-themes/1502
+/dev/loop4       63M   63M     0 100% /snap/gtk-common-themes/1506
+/dev/loop3       94M   94M     0 100% /snap/core/9066
+
+/srv/Backup (/dev/md0) => 98% Used. Warning. Disk Filling up.
+ 
+---------------------- Disk Space End -------------------------
+ 
+ 
+###################### Logwatch End #########################
+```
+
+## Further reading
+- The [Ubuntu manpage for Logwatch](https://manpages.ubuntu.com/manpages/en/man8/logwatch.8.html) contains many more detailed options.

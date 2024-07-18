@@ -1,5 +1,5 @@
 (create-cloud-image-vms-with-uvtool)=
-# UVtool
+# Create cloud image VMs with UVtool
 
 With Ubuntu being one of the most popular operating systems on many cloud platforms, the availability of stable and secure cloud images has become very important. Since Ubuntu 12.04, the use of cloud images outside of a cloud infrastructure has been improved so that it is now possible to use those images to create a virtual machine without needing a complete installation.
 

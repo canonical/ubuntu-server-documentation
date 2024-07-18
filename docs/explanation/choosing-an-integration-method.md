@@ -9,3 +9,19 @@ Three main criteria need to be evaluated:
 * Deterministic Linux ID: is it important that the same Active Directory user obtains the same Linux ID on all joined systems? For example, if NFS exports will be used between the joined systems.
 
 |Requirement / Method     |sssd|idmap\_rid  |idmap\_autorid|
+|-------------------------|:--:|:----------:|:------------:|
+| Deterministic ID        | ✅ |    ✅      |      ❌      |
+| Undetermined  ID        | ✅ |    ✅      |      ✅      |
+| Member server           | ❌ |    ✅      |      ✅      |
+| Not a member server     | ✅ |    ✅      |      ✅      |
+| AD multidomain (forest) | ❌ |    ❌(\*)  |      ✅      |
+| AD single domain        | ✅ |    ✅      |      ✅      |
+
+(\*) The *idmap_rid* choice for multidomain Active Directory is doable, but with important caveats that are better explained in the [Joining a forest with the rid backend](../how-to/join-a-forest-with-the-rid-backend.md) howto.
+
+Before going into the details of each integration method, it's a good idea to familiarise yourself with the other basic concepts of Active Directory integration. These are shown next:
+
+* [Security identifiers](security-identifiers-sids.md)
+* [Identity mapping backends](identity-mapping-idmap-backends.md)
+* [The rid idmap backend](the-rid-idmap-backend.md)
+* [The autorid idmap backend](the-autorid-idmap-backend.md)

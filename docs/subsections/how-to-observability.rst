@@ -3,7 +3,7 @@
 Observability
 **************
 
-* :ref:`Set up your LMA stack <set-up-your-lma-stack>`
+* :ref:`Logging, monitoring, and Alerting (LMA) <set-up-your-lma-stack>`
 * :ref:`Install Logwatch <how-to-install-and-configure-logwatch>`
 * :ref:`Install Munin <how-to-install-and-configure-munin>`
 * :ref:`Install Nagios Core 3 <how-to-install-and-configure-nagios-core-3>`

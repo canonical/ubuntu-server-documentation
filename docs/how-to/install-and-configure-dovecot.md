@@ -1,5 +1,5 @@
 (install-and-configure-dovecot)=
-# Install Dovecot
+# Install and configure Dovecot
 
 ## Install Dovecot
 

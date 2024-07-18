@@ -1,5 +1,5 @@
 (install-and-configure-postgresql)=
-# PostgreSQL
+# Install and configure PostgreSQL
 
 [PostgreSQL](https://www.postgresql.org/) (commonly referred to as "Postgres") is an object-relational database system that has all the features of traditional commercial database systems, but with enhancements to be found in next-generation database management systems (DBMS).
 

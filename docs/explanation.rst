@@ -1,18 +1,21 @@
 .. _explanation:
 
-Explanation
-***********
+Ubuntu Server explanation guides
+********************************
 
-.. include:: intro_explanation.txt
+Our explanatory and conceptual guides are written to provide a better
+understanding of how Ubuntu Server works and how it can be used and configured.
+They enable you to expand your knowledge, making the operating system easier
+to use.
 
-Introduction to
-===============
+Introduction to...
+==================
 
 .. include:: subsections/explanation-introduction-to.rst
     :start-line: 4
 
-Virtualisation
-==============
+Virtualisation and containers
+=============================
 
 .. include:: subsections/explanation-virtualisation.rst
     :start-line: 4

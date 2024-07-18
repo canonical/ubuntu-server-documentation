@@ -1,5 +1,5 @@
 (upgrading-the-machine-type-of-your-vm)=
-# Upgrade VM machine type
+# Upgrading the machine type of your VM
 
 Upgrading the machine type of a virtual machine (VM) can be thought of in the same way as buying (virtual) hardware of the same spec but with a newer release date. Whereas to upgrade a physical machine you might buy an improved CPU, more RAM, or increased storage, with a virtual machine you can change the configuration to achieve the same results. 
 

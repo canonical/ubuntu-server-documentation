@@ -1,5 +1,5 @@
 (interactive-live-server-installation-on-ibm-z-vm-s390x)=
-# s390x install via z/VM
+# Interactive live server installation on IBM z/VM (s390x)
 
 Doing an interactive (manual) live installation as described here - meaning without specifying a parmfile - has been supported in Ubuntu Server since LTS 20.04.5 ('Focal').
 

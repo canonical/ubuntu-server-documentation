@@ -12,7 +12,7 @@ Graphics
 
 **Virtual GPU**
 
-* :ref:`vGPU with QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
+* :ref:`Virtualised GPU (vGPU) with QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
 
 .. toctree::
     :hidden:

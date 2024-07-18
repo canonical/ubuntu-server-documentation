@@ -1,5 +1,5 @@
 (install-and-configure-postfix)=
-# Install Postfix
+# Install and configure Postfix
 
 > **Note**:
 > This guide does not cover setting up Postfix *Virtual Domains*. For information on Virtual Domains and other advanced configurations see the references list at the end of this page.

@@ -1,5 +1,5 @@
 (how-to-set-up-sssd-with-active-directory)=
-# SSSD with Active Directory
+# How to set up SSSD with Active Directory
 
 This section describes the use of SSSD to authenticate user logins against an Active Directory via using SSSD's "ad" provider. At the end, Active Directory users will be able to log in on the host using their AD credentials. Group membership will also be maintained.
 

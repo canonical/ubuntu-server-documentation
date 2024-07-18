@@ -1,5 +1,5 @@
 (samba-as-a-print-server)=
-# Set up a print server
+# Set up Samba as a print server
 
 Another common way to network Ubuntu and Windows computers is to configure Samba as a *print server*. This will allow it to share printers installed on an Ubuntu server, whether locally or over the network.
 

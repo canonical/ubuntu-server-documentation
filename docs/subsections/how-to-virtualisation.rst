@@ -3,31 +3,25 @@
 Virtualisation
 ***************
 
-
-
-**Virtual machines**
+**Virtual machines (VMs)**
 
 * :ref:`QEMU <virtualisation-with-qemu>`
-
-
-**Virtual machines**
-
-* :ref:`QEMU VMs with up to 1024 vCPUs <create-qemu-vms-with-up-to-1024-vcpus>`
-* :ref:`ARM64 VMs on QEMU <boot-arm64-virtual-machines-on-qemu>`
-* :ref:`Multipass <how-to-create-a-vm-with-multipass>`
-* :ref:`UVtool <create-cloud-image-vms-with-uvtool>`
+* :ref:`Create QEMU VMs with up to 1024 vCPUs <create-qemu-vms-with-up-to-1024-vcpus>`
+* :ref:`Boot ARM64 VMs on QEMU <boot-arm64-virtual-machines-on-qemu>`
+* :ref:`Create VMs with Multipass <how-to-create-a-vm-with-multipass>`
+* :ref:`Create cloud image VMs with UVtool <create-cloud-image-vms-with-uvtool>`
 
 
 **VM tooling**
 
-* :ref:`Libvirt and virsh <libvirt>`
-* :ref:`virt-manager <virtual-machine-manager>`
-* :ref:`Nested virtualization <how-to-enable-nested-virtualization>`
+* :ref:`How to use the libvirt library with virsh <libvirt>`
+* :ref:`How to use virt-manager and other virt* tools <virtual-machine-manager>`
+* :ref:`How to enable nested virtualisation <how-to-enable-nested-virtualization>`
 
 
-**Other virtual tools**
+**Ubuntu in other virtual environments**
 
-* :ref:`Ubuntu on Hyper-V <how-to-set-up-ubuntu-on-hyper-v>`
+* :ref:`Setting up Ubuntu on Hyper-V <how-to-set-up-ubuntu-on-hyper-v>` (Windows 11)
 
 .. toctree::
     :hidden:

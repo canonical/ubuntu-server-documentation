@@ -1,5 +1,5 @@
 (certificates)=
-# Certificates
+# About certificates
 
 One of the most common forms of cryptography today is **public-key** cryptography. Public-key cryptography uses a **public key** and a **private key**. The system works by encrypting information using the public key. The information can then only be decrypted using the private key.
 

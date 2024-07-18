@@ -1,5 +1,5 @@
 (openldap-backend-legacy)=
-# OpenLDAP backend
+# OpenLDAP backend (legacy)
 
 > **Note**:
 > This section is flagged as *legacy* because nowadays, Samba 4 is best integrated with its own LDAP server in Active Directory mode. Integrating Samba with LDAP as described here covers the NT4 mode, which has been deprecated for many years.

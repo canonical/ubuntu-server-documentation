@@ -1,5 +1,5 @@
 (member-server-in-an-active-directory-domain)=
-# Join Active Directory
+# Member server in an Active Directory domain
 
 A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from [Network User Authentication with SSSD](https://discourse.ubuntu.com/t/service-sssd/11579), where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
 
@@ -170,3 +170,71 @@ $ sudo smbstatus
 
 Samba version 4.15.5-Ubuntu
 PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing
+----------------------------------------------------------------------------------------------------------------------------------------
+3631    INTEXAMPLE\ubuntu INTEXAMPLE\domain users 10.0.16.1 (ipv4:10.0.16.1:39534)          SMB3_11           -                    partial(AES-128-CMAC)
+
+Service      pid     Machine       Connected at                     Encryption   Signing
+---------------------------------------------------------------------------------------------
+storage      3631    10.0.16.1     Wed Jun 29 17:42:54 2022 UTC     -            -
+
+No locked files
+```
+
+You can also restrict access to the share as usual. Just keep in mind the syntax for the domain users. For example, to restrict access to the `[storage]` share we just created to *only* members of the `LTS Releases` domain group, add the `valid users` parameter like below:
+
+```text
+[storage]
+    path = /storage
+    comment = Storage share
+    writable = yes
+    guest ok = no
+    valid users = "@INTEXAMPLE\ LTS Releases"
+```
+
+### Choose an `idmap` backend
+
+`realm` made some choices for us when we joined the domain. A very important one is the `idmap` backend, and it might need changing for more complex setups.
+
+User and group identifiers on the AD side are not directly usable as identifiers on the Linux site. A *mapping* needs to be performed.
+
+Winbind supports several `idmap` backends, and each one has its own man page. The three main ones are:
+
+- [`idmap_ad`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_ad.8.html)
+- [`idmap_autorid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_autorid.8.html)
+- [`idmap_rid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_rid.8.html)
+
+Choosing the correct backend for each deployment type needs careful planing. Upstream has some guidelines at [Choosing an `idmap` backend](https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member#Choosing_an_idmap_backend), and each man page has more details and recommendations.
+
+The `realm` tool selects (by default) the `rid` backend. This backend uses an algorithm to calculate the Unix user and group IDs from the respective RID value on the AD side. You might need to review the `idmap config` settings in `/etc/samba/smb.conf` and make sure they can accommodate the number of users and groups that exist in the domain, and that the range does not overlap with users from other sources.
+
+For example, these settings:
+
+```text
+idmap config * : range = 10000-999999
+idmap config intexample : backend = rid
+idmap config intexample : range = 2000000-2999999
+idmap config * : backend = tdb
+```
+
+Will reserve the `2,000,000` through `2,999,999` range for user and group ID allocations on the Linux side for the `intexample` domain. The default backend (`*`, which acts as a "globbing" catch-all rule) is used for the `BUILTIN` user and groups, and other domains (if they exist). It's important that these ranges do not overlap.
+
+The `Administrator` user we inspected before with `getent passwd` can give us a glimpse of how these ranges are used (output format changed for clarity):
+
+```bash
+$ id INTEXAMPLE\\Administrator
+uid=2000500(INTEXAMPLE\administrator)
+gid=2000513(INTEXAMPLE\domain users)
+groups=2000513(INTEXAMPLE\domain users),
+       2000500(INTEXAMPLE\administrator),
+       2000572(INTEXAMPLE\denied rodc password replication group),
+       2000519(INTEXAMPLE\enterprise admins),
+       2000518(INTEXAMPLE\schema admins),
+       2000520(INTEXAMPLE\group policy creator owners),
+       2000512(INTEXAMPLE\domain admins),
+       10001(BUILTIN\users),
+       10000(BUILTIN\administrators)
+```
+
+## Further reading
+
+ * [The Samba Wiki](https://wiki.samba.org)

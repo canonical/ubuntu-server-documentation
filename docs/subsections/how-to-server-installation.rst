@@ -3,8 +3,6 @@
 Server installation
 ********************
 
-
-
 **amd64**
 
 * :ref:`amd64 netboot install <how-to-netboot-the-server-installer-on-amd64>`

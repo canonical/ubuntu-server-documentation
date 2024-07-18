@@ -1,5 +1,5 @@
 (install-and-configure-exim4)=
-# Install Exim4
+# Install and configure Exim4
 
 ## Install Exim4
 

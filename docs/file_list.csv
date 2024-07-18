@@ -1,7 +1,7 @@
 index,Ubuntu Server documentation,11322,landing page,/t/-/11322,--,--
-tutorial,Tutorials,29948,landing page,/t/-/29948,--,--
-basic-installation,Basic installation,11320,tutorial,/t/-/11320,Getting started,--
-attach-your-ubuntu-pro-subscription,Attach your Ubuntu Pro subscription,26222,tutorial,/t/-/26222,Next steps,--
+tutorial,Tutorial,29948,landing page,/t/-/29948,--,--
+basic-installation,Basic installation,11320,tutorial,/t/-/11320,,
+attach-your-ubuntu-pro-subscription,Attach your Ubuntu Pro subscription,26222,tutorial,/t/-/26222,,
 how-to,How-to guides,29950,landing page,/t/-/29950,--,--
 how-to-netboot-the-server-installer-on-amd64,amd64 netboot install,16620,how-to,/t/-/16620,Server installation,amd64
 netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64,arm64 netboot install,19240,how-to,/t/-/19240,Server installation,arm64

@@ -1,5 +1,5 @@
 (how-to-create-a-vm-with-multipass)=
-# Multipass
+# How to create a VM with Multipass
 
 
 [Multipass](https://multipass.run) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.
@@ -173,3 +173,20 @@ Launched: engaged-amberjack
 
 $ virsh list
  Id    Name                           State
+----------------------------------------------------
+ 15    engaged-amberjack              running
+```
+
+For more detailed and comprehensive instructions on changing your drivers, refer to the [Multipass drivers documentation](https://multipass.run/docs/set-up-the-driver).
+
+## Get help
+
+You can use the following commands on the CLI:
+
+```bash
+multipass help
+multipass help <command>
+multipass help --all
+```
+
+Or, check out the [Multipass documentation](https://multipass.run/docs) for more details on how to use it.

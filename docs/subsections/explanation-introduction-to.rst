@@ -1,48 +1,49 @@
 .. _explanation-introduction-to:
 
-Introduction to
-****************
+Introduction to...
+******************
 
-
+If you're not sure how or where to get started with a topic, these introductory
+pages will give you a high-level overview and relevant links (with context!) to
+help you navigate to the guides and other materials of most interest to you.
 
 **Virtualisation**
 
-* :ref:`Virtualisation <introduction-to-virtualization>`
-
+* :ref:`Introduction to virtualisation <introduction-to-virtualization>`
 
 **Networking**
 
-* :ref:`Networking <introduction-to-networking>`
-* :ref:`Samba <introduction-to-samba>`
-* :ref:`Active Directory integration <introduction-to-active-directory-integration>`
-* :ref:`Device mapper multipathing <introduction-to-device-mapper-multipathing>`
+* :ref:`Introduction to networking <introduction-to-networking>`
+* :ref:`Introduction to Samba <introduction-to-samba>`
+* :ref:`Introduction to Active Directory integration <introduction-to-active-directory-integration>`
+* :ref:`Introduction to Device mapper multipathing <introduction-to-device-mapper-multipathing>`
 
 
 **Authentication and access**
 
-* :ref:`Kerberos <introduction-to-kerberos>`
-* :ref:`SSSD <introduction-to-network-user-authentication-with-sssd>`
-* :ref:`OpenLDAP <introduction-to-openldap>`
+* :ref:`Introduction to Kerberos <introduction-to-kerberos>`
+* :ref:`Introduction to SSSD <introduction-to-network-user-authentication-with-sssd>`
+* :ref:`Introduction to OpenLDAP <introduction-to-openldap>`
 
 
 **Security**
 
-* :ref:`Security <introduction-to-security>`
-* :ref:`Cryptographic libraries <introduction-to-crypto-libraries>`
-* :ref:`WireGuard VPN <introduction-to-wireguard-vpn>`
+* :ref:`Introduction to security <introduction-to-security>`
+* :ref:`Introduction to cryptographic libraries <introduction-to-crypto-libraries>`
+* :ref:`Introduction to WireGuard VPN <introduction-to-wireguard-vpn>`
 
 
 **Useful services**
 
-* :ref:`Mail servers <introduction-to-mail-services>`
-* :ref:`Web servers <introduction-to-web-servers>`
-* :ref:`Backups <introduction-to-backups>`
-* :ref:`Databases <introduction-to-databases>`
+* :ref:`Introduction to mail servers <introduction-to-mail-services>`
+* :ref:`Introduction to web servers <introduction-to-web-servers>`
+* :ref:`Introduction to backups <introduction-to-backups>`
+* :ref:`Introduction to databases <introduction-to-databases>`
 
 
 **High Availability**
 
-* :ref:`High Availability <introduction-to-high-availability>`
+* :ref:`Introduction to High Availability <introduction-to-high-availability>`
 
 .. toctree::
     :hidden:

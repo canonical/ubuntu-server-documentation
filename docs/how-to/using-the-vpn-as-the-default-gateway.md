@@ -1,5 +1,5 @@
 (using-the-vpn-as-the-default-gateway)=
-# Default gateway
+# Using the VPN as the default gateway
 
 WireGuard can be set up to route all traffic through the VPN, and not just specific remote networks. There could be many reasons to do this, but mostly they are related to privacy.
 

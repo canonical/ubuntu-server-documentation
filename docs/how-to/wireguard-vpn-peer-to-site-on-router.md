@@ -1,5 +1,5 @@
 (wireguard-vpn-peer-to-site-on-router)=
-# Peer-to-site (on router)
+# WireGuard VPN peer-to-site (on router)
 
 
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.

@@ -1,5 +1,5 @@
 (how-to-install-and-configure-phpmyadmin)=
-# Install phpMyAdmin
+# How to install and configure phpMyAdmin
 
 [phpMyAdmin](https://www.phpmyadmin.net/) is a LAMP application specifically written for administering MySQL servers. Written in PHP, and accessed through a web browser, phpMyAdmin provides a graphical interface for database administration tasks.
 

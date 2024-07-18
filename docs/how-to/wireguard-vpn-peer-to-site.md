@@ -1,5 +1,5 @@
 (wireguard-vpn-peer-to-site)=
-# Peer-to-site
+# WireGuard VPN peer-to-site
 
 
 To help understand the WireGuard concepts, we will show some practical setups that hopefully match many scenarios out there.
