@@ -4,7 +4,7 @@
 
 The [libvirt library](https://libvirt.org/) is used to interface with many different virtualisation technologies. Before getting started with libvirt it is best to make sure your hardware supports the necessary virtualisation extensions for [Kernel-based Virtual Machine (KVM)](https://www.linux-kvm.org/page/Main_Page). To check this, enter the following from a terminal prompt:
 
-```
+```bash
 kvm-ok
 ```
 
@@ -66,31 +66,31 @@ There are several utilities available to manage virtual machines and libvirt. Th
 
 - To list running virtual machines:
 
-  ```console
+  ```bash
   virsh list
   ```
 
 - To start a virtual machine:
 
-  ```console
+  ```bash
   virsh start <guestname>
   ```
 
 - Similarly, to start a virtual machine at boot:
 
-  ```console
+  ```bash
   virsh autostart <guestname>
   ```
 
 - Reboot a virtual machine with:
   
-  ```console
+  ```bash
   virsh reboot <guestname>
   ```
 
 - The **state** of virtual machines can be saved to a file in order to be restored later. The following will save the virtual machine state into a file named according to the date:
 
-  ```console
+  ```bash
   virsh save <guestname> save-my.state
   ```
 
@@ -98,25 +98,25 @@ There are several utilities available to manage virtual machines and libvirt. Th
 
 - A saved virtual machine can be restored using:
 
-  ```console
+  ```bash
   virsh restore save-my.state
   ```
 
 - To shut down a virtual machine you can do:
 
-  ```console
+  ```bash
   virsh shutdown <guestname>
   ```
 
 - A CD-ROM device can be mounted in a virtual machine by entering:
 
-  ```console
+  ```bash
   virsh attach-disk <guestname> /dev/cdrom /media/cdrom
   ```
 
 - To change the definition of a guest, `virsh` exposes the domain via:
 
-  ```console
+  ```bash
   virsh edit <guestname>
   ```
 
@@ -131,7 +131,7 @@ Editing the XML directly certainly is the most powerful way, but also the most c
 
 You can pass connection strings to `virsh` - as well as to most other tools for managing virtualisation.
 
-  ```console
+```bash
 virsh --connect qemu:///system
 ```
 
@@ -206,7 +206,7 @@ Virtual functions are usually assigned via their PCI ID (domain, bus, slot, func
 > **Note**:
 > To get the virtual function in the first place is very device dependent and can therefore not be fully covered here. But in general it involves setting up an IOMMU, registering via [VFIO](https://www.kernel.org/doc/Documentation/vfio.txt) and sometimes requesting a number of VFs. Here an example on ppc64el to get 4 VFs on a device:
 > 
-> ``` bash
+> ```bash
 > $ sudo modprobe vfio-pci
 > # identify device
 > $ lspci -n -s 0005:01:01.3
@@ -354,7 +354,7 @@ address sizes   : 39 bits physical, 48 bits virtual
 Since libvirt version 8.7.0 (>= Ubuntu 22.10 Lunar), `maxphysaddr` can be controlled via the [CPU model and topology section](https://libvirt.org/formatdomain.html#cpu-model-and-topology) of the guest configuration. 
 If one needs just a large guest, like before when using the `-hpb` types, all that is needed is the following libvirt guest xml configuration:
 
-```
+```xml
   <maxphysaddr mode='passthrough' />
 ```
 
@@ -362,13 +362,13 @@ Since libvirt 9.2.0 and 9.3.0 (>= Ubuntu 23.10 Mantic), an explicit number of em
 
 But now, one can either set a fix value of addressing bits:
 
-```
+```xml
   <maxphysaddr mode='emulate' bits='42'/>
 ```
 
 Or use the best available by a given hardware, without going over a certain limit to retain some compute node compatibility.
 
-```
+```xml
   <maxphysaddr mode='passthrough' limit='41/>
 ```
 

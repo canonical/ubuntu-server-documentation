@@ -7,19 +7,19 @@ The [Virtual Machine Manager](https://virt-manager.org/), through the `virt-mana
 
 To install `virt-manager`, enter:
 
-```console
+```bash
 sudo apt install virt-manager
 ```
 
 Since `virt-manager` requires a Graphical User Interface (GUI) environment we recommend installing it on a workstation or test machine instead of a production server. To connect to the local libvirt service, enter:
 
-```console
+```bash
 virt-manager
 ```
 
 You can connect to the libvirt service running on another host by entering the following in a terminal prompt:
 
-```console
+```bash
 virt-manager -c qemu+ssh://virtnode1.mydomain.com/system
 ```
 
@@ -62,13 +62,13 @@ The Virtual Machine Viewer application, through `virt-viewer`, allows you to con
 
 If `virt-viewer` is not already installed, you can install it from the terminal with the following command:
 
-```console
+```bash
 sudo apt install virt-viewer
 ```
 
 Once a virtual machine is installed and running you can connect to the virtual machine's console by using:
 
-```console
+```bash
 virt-viewer <guestname>
 ```
 
@@ -78,7 +78,7 @@ The UI will show a window representing the virtual screen of the guest, just lik
 
 Similarly to `virt-manager`, `virt-viewer` can also connect to a remote host using SSH with key authentication:
 
-```console
+```bash
 virt-viewer -c qemu+ssh://virtnode1.mydomain.com/system <guestname>
 ```
 
@@ -94,13 +94,13 @@ If configured to use a **bridged** network interface you can also set up SSH acc
 
 To install `virt-install`, if it is not installed already, run the following from a terminal prompt:
 
-```console
+```bash
 sudo apt install virtinst
 ```
 
 There are several options available when using `virt-install`. For example:
 
-```console
+```bash
 virt-install \
  --name web_devel \
  --ram 8192 \
@@ -135,7 +135,7 @@ After launching `virt-install` you can connect to the virtual machine's console 
 
 The `virt-clone` application can be used to copy one virtual machine to another. For example:
 
-```console
+```bash
 virt-clone --auto-clone --original focal
 ```
 

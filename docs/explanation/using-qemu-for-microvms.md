@@ -19,7 +19,7 @@ QEMU provides additional components that were added to support this special use 
 
 As an example, if you happen to already have a stripped-down workload that has all it would execute contained in an initrd, you might run it like this:
 
-```console
+```bash
 qemu-system-x86_64 \
  -M ubuntu-q35 \
  -cpu host \
@@ -39,7 +39,7 @@ To run the same basic command with `microvm` you would run it with with type `mi
 
 Our command then becomes:
 
-```console
+```bash
 qemu-system-x86_64 \
  -M microvm ubuntu-q35 \
  -cpu host \
@@ -57,7 +57,7 @@ qemu-system-x86_64 \
 
 To run the basic command with `qboot` instead, we would use the `qboot bios` by adding `-bios /usr/share/qemu/bios-microvm.bin`.
 
-```console
+```bash
 qemu-system-x86_64 \
  -M ubuntu-q35 \
  -cpu host \
@@ -82,7 +82,7 @@ sudo apt install qemu-system-x86-microvm
 
 Then, our basic command will look like this:
 
-```console
+```bash
 qemu-system-x86_64 \
  -M microvm \
  -bios /usr/share/qemu/bios-microvm.bin \
