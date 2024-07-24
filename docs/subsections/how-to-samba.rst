@@ -3,6 +3,7 @@
 Samba
 ******
 
+* :ref:`Provision a Samba Active Directory Domain Controller <how-to-provision-samba-ad-controller>`
 * :ref:`Join Active Directory <member-server-in-an-active-directory-domain>`
 * :ref:`Set up a file server <samba-as-a-file-server>`
 * :ref:`Set up a print server <samba-as-a-print-server>`
@@ -16,6 +17,7 @@ Samba
 .. toctree::
     :hidden:
 
+    Samba AD Domain Controller <../how-to/how-to-provision-samba-ad-controller>
     Join Active Directory <../how-to/member-server-in-an-active-directory-domain>
     Set up a file server <../how-to/samba-as-a-file-server>
     Set up a print server <../how-to/samba-as-a-print-server>
