@@ -14,7 +14,7 @@ While there *are* more user-friendly and comfortable ways, the quickest way to g
 > This example is just for illustration purposes - it is not generally recommended without verifying the checksums; [Multipass](https://discourse.ubuntu.com/t/virtualization-multipass/11983) and [UVTool](https://discourse.ubuntu.com/t/virtualization-uvt/11524) are much better ways to get actual guests easily.
 
 ```bash
-sudo qemu-system-x86_64 -enable-kvm -cdrom http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso
+qemu-system-x86_64 -enable-kvm -cdrom http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso
 ```
 
 Downloading the ISO provides for faster access at runtime. We can now allocate the space for the VM:

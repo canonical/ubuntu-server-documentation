@@ -38,7 +38,7 @@ You need to fetch the ARM64 variant of the Ubuntu cloud image you would like to 
 If you have access to an ARM64 host, you should be able to create and launch an ARM64 virtual machine there. Note that the command below assumes that you have already set up a network bridge to be used by the virtual machine.
 
 ```bash
-sudo qemu-system-aarch64 \
+qemu-system-aarch64 \
  -enable-kvm \
  -m 1024 \
  -cpu host \
@@ -56,7 +56,7 @@ sudo qemu-system-aarch64 \
 You can also emulate an ARM64 virtual machine on an x86 host. To do that:
 
 ```bash
-sudo qemu-system-aarch64 \
+qemu-system-aarch64 \
  -m 2048\
  -cpu max \
  -M virt \
