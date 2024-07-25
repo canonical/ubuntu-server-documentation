@@ -10,7 +10,7 @@ Virtualisation and containers
 
 **Using virtual machines**
 
-* :ref:`Using QEMU for microVMs <using-qemu-for-microvms>`
+* :ref:`QEMU microvm <qemu-microvm>`
 * :ref:`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
 
 **About containers**
@@ -27,7 +27,7 @@ Virtualisation and containers
     :hidden:
 
     VM tools overview <../explanation/vm-tools-in-the-ubuntu-space>
-    QEMU microVMs <../explanation/using-qemu-for-microvms>
+    QEMU microvm <../explanation/qemu-microvm>
     Upgrade VM machine type <../explanation/upgrading-the-machine-type-of-your-vm>
     About OpenStack <../explanation/about-openstack>
     Container tools overview <../explanation/container-tools-in-the-ubuntu-space>
