@@ -28,7 +28,7 @@ Web services
 
 * :ref:`Get started with LAMP applications <get-started-with-lamp-applications>`
 * :ref:`Install phpMyAdmin <how-to-install-and-configure-phpmyadmin-legacy>`
-* :ref:`Install WordPress <how-to-install-and-configure-wordpress>`
+* :ref:`Install WordPress <how-to-install-and-configure-wordpress-legacy>`
 
 .. toctree::
     :hidden:
@@ -44,4 +44,4 @@ Web services
     Install Ruby on Rails <../how-to/how-to-install-and-configure-ruby-on-rails>
     Get started with LAMP <../how-to/get-started-with-lamp-applications>
     Install phpMyAdmin <../how-to/how-to-install-and-configure-phpmyadmin-legacy>
-    Install WordPress <../how-to/how-to-install-and-configure-wordpress>
+    Install WordPress <../how-to/how-to-install-and-configure-wordpress-legacy>

@@ -43,4 +43,4 @@ Whichever scripting language you choose, you will need to have installed and con
 	
 ### LAMP applications
 
-Once your LAMP stack is up-and-running, you'll need some applications to use with it. Some popular LAMP applications include wikis, management software, and Content Management Systems (CMSs) like WordPress. This guides will show you how to install and configure [WordPress](../how-to/how-to-install-and-configure-wordpress.md) as part of your LAMP stack.
+Once your LAMP stack is up-and-running, you'll need some applications to use with it. Some popular LAMP applications include wikis, management software, and Content Management Systems (CMSs) like WordPress.
