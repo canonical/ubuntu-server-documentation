@@ -1,12 +1,10 @@
 .. _tutorial:
 
-Ubuntu Server tutorials
-***********************
+Ubuntu Server tutorial
+**********************
 
-We hope our tutorials make as few assumptions as possible and are broadly
-accessible to anyone with an interest in Ubuntu Server. They should also be a
-good place to start learning about Ubuntu Server in general, how it works, and
-what it’s capable of.
+This tutorial should be a good place to start learning about Ubuntu Server in
+general, how it works, and what it’s capable of.
 
 In our "Getting started" tutorial you will learn how to set up an Ubuntu
 Server; from installing using a bootable USB device, to navigating the Server
@@ -38,7 +36,7 @@ order.
 
 * :ref:`Attach your Ubuntu Pro subscription <attach-your-ubuntu-pro-subscription>`
 
-If you have a specific goal, but are already familiar with Ubuntu Server, take
+If you have a specific goal, and are already familiar with Ubuntu Server, take
 a look at our :ref:`How-to guides <how-to>`. These have more in-depth detail
 and can be applied to a broader set of applications.
 
