@@ -25,9 +25,9 @@ By default, dynamic tuning is enabled. To disable it, edit the `/etc/tuned/tuned
 
 ## Profiles
 
-TuneD works with profiles, which are configuration files listing the tuning plugins and their options. Many predefined profiles are already shipped with the TuneD package, you can see them in `/usr/lib/tuned`. After installing the TuneD package, one can also use the `tuned-adm list` command to get a brief summary of all of the available profiles.
+TuneD works with profiles, which are configuration files listing the tuning plugins and their options. Many predefined profiles are already shipped with the TuneD package in the directory `/usr/lib/tuned`. After installing the TuneD package, the `tuned-adm list` command will output a brief summary of all of the available profiles, and `tuned-adm list plugins -v` will list the plugins and their options.
 
-Once the package is installed in a system, a profile is activated by default depending on the environment. These are the default profiles for each type of environment:
+Once the package is installed in a system, a profile is activated by default depending on the detected environment. These are the default profiles for each type of environment:
 
 | Environment | Default profile |
 | --- | --- |
@@ -36,47 +36,99 @@ Once the package is installed in a system, a profile is activated by default dep
 | Containers | `default` |
 | Other cases | `balanced` |
 
-### Available profiles
+### Anatomy of a profile
+Tuned profiles are grouped by directory in `/usr/lib/tuned/<profile>` or `/etc/tuned/<profile>`, and are defined in a `tuned.conf` file within that directory.  That file has an INI structure which looks like this:
+
+```ini
+[main]
+include=PROFILE # if inheriting from another profile
+summary=A short summary
+description=A short description
+
+[plugin instance]
+type=TYPE
+replace=REPLACE
+enabled=ENABLED
+devices=DEVICES
+... other plugin-specific options ...
+```
+
+Here is a brief explanation of these configuration parameters:
+
+* `type`: This is the plugin type. A list of all types can be obtained with the command `tuned-adm list plugins`.
+* `replace`: This can take the values `true` or `false`, and is used to control what happens when two plugins of the same type are trying to configure the same devices. If `true`, then the plugin defined last replaces all options.
+* `enabled`: This also accepts the values `true` or `false`, and is used to control if a plugin should remain enabled or disabled when inheriting from another profile.
+* `devices`: A comma separated list of device names (without the `/dev/` prefix) which represents the devices this plugin should act on. If not specified, all compatible devices found, now or in the future, will be used. This parameter also accepts simple globbing and negation rules, so that you can specify `nvme*` for all `/dev/nvme*` devices, or `!sda` to not include `/dev/sda`.
+* plugin-specific options: These can be seen in the output of the `tuned-adm list plugins -v` command, for each listed plugin.
+
+See the [tuned.conf manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html) for details on the syntax of this configuration file.
+
+The plugin instance concept can be useful if you want to apply different tuning parameters to diferent devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
+```ini
+[fast_storage]
+type=disk
+devices=nvme0n*
+... options for these devices
+
+[slow_storage]
+type=disk
+devices=sda, sdb
+... options for these devices
+```
+
+### Available profiles and plugins
 
 The list of available profiles can be found using the following command:
 
+    tuned-adm list profiles
+
+Which will result in a long list (output truncated for brevity):
+
+    Available profiles:
+    - accelerator-performance     - Throughput performance based tuning with disabled higher latency STOP states
+    - atomic-guest                - Optimize virtual guests based on the Atomic variant
+    - atomic-host                 - Optimize bare metal systems running the Atomic variant
+    (...)
+
+Here are some useful commands regarding profiles:
+
+* `tuned-adm active`: Shows which profile is currently enabled.
+* `tuned-adm recommend`: Shows the recommended profile for this system.
+* `tuned-adm profile <name>`: Switch to the named profile, applying its settings.
+
+The list of plugin types can be obtained with the `tuned-adm list plugins`, and to see plugin-specific options, run `tuned-adm list plugins -v`. Unfortunately at the moment the documentation of those options is only present in the source code of each plugin.
+
+For example, the `cpu` plugin options are:
 ```
-root@tuned:~# tuned-adm list
-Available profiles:
-[...]
+cpu
+	load_threshold
+	latency_low
+	latency_high
+	force_latency
+	governor
+	sampling_down_factor
+	energy_perf_bias
+	min_perf_pct
+	max_perf_pct
+	no_turbo
+	pm_qos_resume_latency_us
+	energy_performance_preference
 ```
-
-You can also check which profile is enabled:
-
-```console
-root@tuned:~# tuned-adm active
-Current active profile: virtual-guest
-```
-
-You can see the recommended profile:
-
-```console
-root@tuned:~# tuned-adm recommend
-virtual-guest
-```
-
-And you can switch to another profile:
-
-```console
-root@tuned:~# tuned-adm profile default
-root@tuned:~# tuned-adm active
-Current active profile: default
-```
+And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
 
 ### Customising a profile 
 
-For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. In order to do that, you should follow these steps:
+For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
 
-* Inside `/etc/tuned`, create a directory with the name of your new profile.
-* Inside the newly created directory, create a file called `tuned.conf`.
-* Write your custom configuration in the `tuned.conf` file.
+Custom profiles live in `/etc/tuned/<profile>/tuned.conf`. There are 3 ways they can be created:
 
-After that, the new profile will be visible by TuneD via the `tuned-adm list` command. This is a simple example of a customised profile (it could be created in `/etc/tuned/custom-profile/tuned.conf`):
+* Copy an existing profile from `/usr/lib/tuned/<profile>` to `/etc/tuned/<profile>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
+* Create an entirely new profile in `/etc/tuned/<profile>` from scratch.
+* Create a new profile in `/etc/tuned/<new-profile>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and ihnerit the rest from the existing profile in `/usr/lib/tuned/<profile>`.
+
+After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
+
+Here is a simple example of a customised profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/postgresql` profile. The child profile is defined in `/etc/tuned/mypostgresql/tuned.conf`:
 
 ```text
 [main]
@@ -88,10 +140,28 @@ latency_low=10
 latency_high=10000
 ```
 
-In the `[main]` section, the `include` keyword can be used to include any other predefined profile (in this example we are including the `postgresql` one).
+The inheritance is specified via the `include` option in the `[main]` section.
 
-After the `[main]` section, the list of plugins (ways of tuning your system) can be introduced, with all the options (here, there is just one plugin called `cpu` being used). For more information about the syntax and the list of plugins and their options, please refer to the [upstream documentation](https://github.com/redhat-performance/tuned/tree/master/doc/manual/).
+After the `[main]` section come the plugins that we want to override, and their new settings. Settings not specified here will take the value defined in the parent profile, `postgresql` in this case. If you want to completely ignore whatever the `cpu` plugin defined in the parent profile, use the `replace=true` setting.
 
+### Merging profiles
+There are some profiles that are neither a parent profile, nor a child profile. They only specify a few plugins and settings, and no inheritance relationship. By themselves, they are not useful, but they can be merged with an existing profile on-the-fly.
+
+Here is an example which applies the base profile `cpu-partitioning` and then overlays `intel-sst` on top:
+
+    sudo tuned-adm profile cpu-partitioning intel-sst
+
+In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hardcoded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
+
+Another example of merging profiles is the combining of the `powersave` profile with another one:
+
+    sudo tuned-adm profile virtual-guest powersave
+
+This would optimise the system for a virtual guest, and then apply power saving parameters on top.
+
+```{warning}
+Just because `tuned-adm` accepted to merge two profiles doesn't mean it makes sense. There is no checking done on the resulting merged parameters, and the second profile could completely revert what the first profile adjusted.
+```
 
 ## An example profile: hpc-compute
 
