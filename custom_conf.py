@@ -81,11 +81,11 @@ html_context = {
 
     # Change to the Mattermost channel you want to link to
     # (use an empty value if you don't want to link)
-    'mattermost': 'https://chat.canonical.com/canonical/channels/documentation',
+    'mattermost': 'https://chat.canonical.com/canonical/channels/server',
 
     # Change to the Matrix channel you want to link to
     # (use an empty value if you don't want to link)
-    'matrix': 'https://matrix.to/#/#documentation:ubuntu.com',
+    'matrix': '',
 
     # Change to the GitHub URL for your project
     # This is used, for example, to link to the source files and allow creating GitHub issues directly from the documentation.
@@ -96,7 +96,7 @@ html_context = {
 
     # Change to the folder that contains the documentation
     # (usually "/" or "/docs/")
-    'github_folder': '/docs/',
+    'github_folder': '/',
 
     # Change to an empty value if your GitHub repo doesn't have issues enabled.
     # This will disable the feedback button and the issue link in the footer.
