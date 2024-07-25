@@ -99,6 +99,101 @@ MyISAM also supports the FULLTEXT data type, which allows very fast searches of 
 
 It also lacks journaling, which makes it harder for data to be recovered after a crash. The following link provides some points for consideration about using [MyISAM on a production database](http://www.mysqlperformanceblog.com/2006/06/17/using-myisam-in-production/).
 
+## Backups
+
+MySQL databases should be backed up regularly. Backups can be accomplished through several methods.
+
+### mysqldump
+
+mysqldump is a built-in tool that performs [logical backups](https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_logical_backup) for MySQL. It is useful for backing up smaller databases, allows backups to be edited prior to a restore, and can be used for exporting to csv and XML.
+
+To dump the data of a publicly available database on the local MySQL server into a file, run the following:
+
+```bash
+mysqldump [database name] > dump.sql
+```
+
+For restricted databases, specify a user with the proper permissions using `-u`:
+
+```bash
+mysqldump -u root [database name] > dump.sql
+```
+
+To restore a database from the backup file, run the `mysql` command and pipe the file through stdin:
+
+```bash
+mysql -u root [database name] < dump.sql
+```
+
+See the [upstream documentation](https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html) for more information.
+
+### MySQL Shell Dump Utility
+
+MySQL Shell, supported in Ubuntu 24.04 LTS and later, contains a set of utilities for dumping, backing up, and restoring MySQL data. It provides a programmatic option for logical backups with filtering options. This method is recommended for smaller backups to remote locations.
+
+To install MySQL Shell, run the following:
+
+```bash
+sudo apt install mysql-shell
+```
+
+Run the following to connect to the local MySQL server on Ubuntu with MySQL Shell in Python mode:
+
+```bash
+mysqlsh --socket=/var/run/mysqld/mysqld.sock --no-password --python
+```
+
+Initiate a local backup of all data in Python mode with:
+```python
+util.dump_instance("/tmp/worlddump")
+```
+
+Dump a specific set of tables with `dump_tables`:
+
+```python
+util.dump_tables("database name", ["table 1", "table 2"], "/tmp/tabledump")
+```
+
+To restore dumped data, use the [dump loading utility](https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-load-dump.html).
+
+```python
+util.load_dump("/tmp/worlddump")
+```
+
+> **Note**:
+> To restore data from a local file, `local_infile` needs to be enabled on the MySQL server. Activate this by accessing the server with the `mysql` command and entering `SET GLOBAL local_infile=1;`
+
+See the [MySQL Shell dump documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-utilities-dump-instance-schema.html) for more information.
+
+### Percona Xtrabackup
+
+Also supported in Ubuntu 24.04 LTS and later, Percona Xtrabackup is a tool for creating [physical backups](https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_physical_backup). It is similar to the commercial offering of [MySQL Enterprise Backup](https://www.mysql.com/products/enterprise/backup.html). Of the three solutions provided here, this is recommended for backing up MySQL databases in a scalable manner.
+
+To install Xtrabackup, run the following command from a terminal prompt:
+
+```bash
+sudo apt install percona-xtrabackup
+```
+
+Create a new backup with the `xtrabackup` command. This can be done while the server is running.
+
+```bash
+xtrabackup --backup --target-dir=/tmp/worlddump
+```
+
+To restore from a backup, service will need to be interrupted. This can be achieved with the following:
+
+```bash
+sudo systemctl stop mysql
+xtrabackup --prepare --target-dir=/tmp/worlddump
+sudo rm -rf /var/lib/mysql
+sudo xtrabackup --copy-back --target-dir=/tmp/worlddump --datadir=/var/lib/mysql
+sudo chown -R mysql:mysql /var/lib/mysql
+sudo systemctl start mysql
+```
+
+For more information, see [Percona's upstream documentation](https://docs.percona.com/percona-xtrabackup/8.0/).
+
 ## Advanced configuration
 
 ### Creating a tuned configuration
