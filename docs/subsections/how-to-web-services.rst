@@ -24,12 +24,6 @@ Web services
 * :ref:`Install PHP <how-to-install-and-configure-php>`
 * :ref:`Install Ruby on Rails <how-to-install-and-configure-ruby-on-rails>`
 
-**LAMP applications**
-
-* :ref:`Get started with LAMP applications <get-started-with-lamp-applications>`
-* :ref:`Install phpMyAdmin <how-to-install-and-configure-phpmyadmin>`
-* :ref:`Install WordPress <how-to-install-and-configure-wordpress>`
-
 .. toctree::
     :hidden:
 
@@ -42,6 +36,3 @@ Web services
     nginx modules <../how-to/how-to-use-nginx-modules>
     Install PHP <../how-to/how-to-install-and-configure-php>
     Install Ruby on Rails <../how-to/how-to-install-and-configure-ruby-on-rails>
-    Get started with LAMP <../how-to/get-started-with-lamp-applications>
-    Install phpMyAdmin <../how-to/how-to-install-and-configure-phpmyadmin>
-    Install WordPress <../how-to/how-to-install-and-configure-wordpress>

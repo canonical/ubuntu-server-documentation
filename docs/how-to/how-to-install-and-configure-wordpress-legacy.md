@@ -1,5 +1,8 @@
-(how-to-install-and-configure-wordpress)=
+(how-to-install-and-configure-wordpress-legacy)=
 # How to install and configure WordPress
+
+> **Note**:
+> This section is flagged as *legacy* because while WordPress remains an important and widely used tool for blogging and website management, web applications are less in scope for the Ubuntu Server project these days.
 
 [Wordpress](https://wordpress.com/) is a blog tool, publishing platform and content management system (CMS) implemented in PHP and licensed under the [GNU General Public License (GPL) v2 or later](https://en-gb.wordpress.org/about/license/).
 
