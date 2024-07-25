@@ -1,9 +1,10 @@
 (boot-arm64-virtual-machines-on-qemu)=
 # Boot ARM64 virtual machines on QEMU
 
-:::{note}
-{include} ../notices/qemu-user-group-notice.md
-:::
+```{note}
+```{include} ../notices/qemu-user-group-notice.md
+```
+```
 
 Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (e.g. on an x86 host) or accelerated with KVM if you have an ARM64 host. This page describes how to do both.
 
