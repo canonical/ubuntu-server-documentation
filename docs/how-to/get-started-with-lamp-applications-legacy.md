@@ -1,5 +1,8 @@
-(get-started-with-lamp-applications)=
-# Get started with LAMP applications
+(get-started-with-lamp-applications-legacy)=
+# Get started with LAMP applications (legacy)
+
+> **Note**:
+> This section is flagged as *legacy* because these days there are many popular web application frameworks and stacks, and with the introduction of PostgresQL, Nginx, and Javascript for web application development LAMP is more of a historical interest than a modern best practice.
 
 ## Overview
 
