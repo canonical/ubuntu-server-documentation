@@ -74,15 +74,12 @@ Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 
 .. only:: html
 
-   PDFs and previous releases
-   --------------------------
+   PDF versions
+   ------------
 
 .. only:: latex
 
-   .. rubric:: PDFs and previous releases
-
-Below are links to the previous Ubuntu Server release server guides as well as
-an offline copy of the current version of this site:
+   .. rubric:: PDF versions
 
 * `Current PDF`_ (for Ubuntu 20.04 LTS onwards)
 * `Ubuntu 18.04 LTS PDF`_
