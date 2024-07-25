@@ -96,14 +96,8 @@ an offline copy of the current version of this site:
 .. toctree::
    :hidden:
    :maxdepth: 2
-   
-   How-to guides <docs/how-to.rst>
-   
-.. toctree::
-   :hidden:
-   :maxdepth: 2
 
-   Explanation <docs/explanation.rst>
+   How-to guides <docs/how-to.rst>
 
 .. toctree::
    :hidden:
@@ -114,7 +108,13 @@ an offline copy of the current version of this site:
 .. toctree::
    :hidden:
    :maxdepth: 2
-   
+
+   Explanation <docs/explanation.rst>
+
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+
    Contributing <docs/contributing.rst>
 
 .. LINKS
