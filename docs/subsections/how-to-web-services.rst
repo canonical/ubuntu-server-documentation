@@ -27,7 +27,7 @@ Web services
 **LAMP applications**
 
 * :ref:`Get started with LAMP applications <get-started-with-lamp-applications>`
-* :ref:`Install phpMyAdmin <how-to-install-and-configure-phpmyadmin>`
+* :ref:`Install phpMyAdmin <how-to-install-and-configure-phpmyadmin-legacy>`
 * :ref:`Install WordPress <how-to-install-and-configure-wordpress>`
 
 .. toctree::
@@ -43,5 +43,5 @@ Web services
     Install PHP <../how-to/how-to-install-and-configure-php>
     Install Ruby on Rails <../how-to/how-to-install-and-configure-ruby-on-rails>
     Get started with LAMP <../how-to/get-started-with-lamp-applications>
-    Install phpMyAdmin <../how-to/how-to-install-and-configure-phpmyadmin>
+    Install phpMyAdmin <../how-to/how-to-install-and-configure-phpmyadmin-legacy>
     Install WordPress <../how-to/how-to-install-and-configure-wordpress>

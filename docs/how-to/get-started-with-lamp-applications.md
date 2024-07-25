@@ -3,7 +3,7 @@
 
 ## Overview
 
-LAMP installations (Linux + Apache + MySQL + PHP/Perl/Python) are a popular setup for Ubuntu servers. There are a plethora of Open Source applications written using the LAMP application stack. Some popular LAMP applications include **wikis**, **management software** such as phpMyAdmin, and  **Content Management Systems (CMSs)** like WordPress.
+LAMP installations (Linux + Apache + MySQL + PHP/Perl/Python) are a popular setup for Ubuntu servers. There are a plethora of Open Source applications written using the LAMP application stack. Some popular LAMP applications include **wikis**, **management software**, and  **Content Management Systems (CMSs)** like WordPress.
 
 One advantage of LAMP is the substantial flexibility for different database, web server, and scripting languages. Popular substitutes for MySQL include PostgreSQL and SQLite. Python, Perl, and Ruby are also frequently used instead of PHP. While Nginx, Cherokee and Lighttpd can replace Apache.
 
@@ -41,6 +41,6 @@ A disadvantage of using this approach is that the application files are not plac
 
 When a new LAMP application version is released, follow the same installation process to apply updates to the application.
 
-Fortunately, a number of LAMP applications are already packaged for Ubuntu, and are available for installation in the same way as non-LAMP applications (some applications may need extra configuration and setup steps). Two popular examples are phpMyAdmin and WordPress.
+Fortunately, a number of LAMP applications are already packaged for Ubuntu, and are available for installation in the same way as non-LAMP applications (some applications may need extra configuration and setup steps). One popular example is WordPress.
 
-Refer to our guides on how to [install phpMyAdmin](how-to-install-and-configure-phpmyadmin.md) and how to [install WordPress](how-to-install-and-configure-wordpress.md) for more information on those applications.
+Refer to our guide and how to [install WordPress](how-to-install-and-configure-wordpress.md) for more information on those applications.
