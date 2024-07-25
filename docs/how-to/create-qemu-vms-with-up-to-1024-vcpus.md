@@ -1,9 +1,10 @@
 (create-qemu-vms-with-up-to-1024-vcpus)=
 # Create QEMU VMs with up to 1024 vCPUs
 
-:::{note}
-{include} ../notices/qemu-user-group-notice.md
-:::
+```{note}
+```{include} ../notices/qemu-user-group-notice.md
+```
+```
 
 For a long time, QEMU only supported launching virtual machines with 288 vCPUs or fewer. While this was acceptable a decade ago, nowadays it is more common to see processors with 300+ physical cores available. For this reason, QEMU has been modified to support virtual machines with up to 1024 vCPUs. The caveat is that the user has to provide a few specific (and not trivial to guess) command line options to enable such a feature, and that is the gap that this document aims to fill.
 
