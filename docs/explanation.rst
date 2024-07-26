@@ -72,7 +72,7 @@ System tuning
 =============
 
 .. include:: subsections/explanation-system-tuning.rst
-    :start-line: 4
+    :start-after: _end-system-tuning-intro:
 
 High Availability
 =================
