@@ -7,6 +7,7 @@ Managing software
 * :ref:`Third party repository usage <third-party-repository-usage>`
 * :ref:`Changing package files <changing-package-files>`
 * :ref:`Advance testing of updates in best practice server deployments <advance-testing-of-updates-in-best-practice-server-deployments>`
+* :ref:`Configuration managers <config-managers>`
 
 .. toctree::
     :hidden:
@@ -15,3 +16,4 @@ Managing software
     Third party repository usage <../explanation/third-party-repository-usage>
     Changing package files <../explanation/changing-package-files>
     Advance testing of updates in best practice server deployments <../explanation/advance-testing-of-updates-in-best-practice-server-deployments>
+    Configuration managers <../explanation/config-managers>

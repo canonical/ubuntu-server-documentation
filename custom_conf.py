@@ -188,7 +188,8 @@ custom_excludes = [
     'cheatsheets/',
     'docs/contributing/doc-templates/*',
     'doc-cheat-sheet*',
-    'readme.rst'
+    'readme.rst',
+    'legacy/*.md',
     ]
 
 # Allow Sphinx to use both rst and md
