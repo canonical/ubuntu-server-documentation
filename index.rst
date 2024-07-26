@@ -67,7 +67,8 @@ page.
 * Read our `Code of Conduct`_
 * `Get support`_
 * `Join the Discourse forum`_
-* `Download`_ Ubuntu Server
+* Get in touch via the ``#ubuntu-server`` `IRC channel on Libera`_
+* `Download Ubuntu Server`_
 * Find out how to :ref:`contribute to the Server Guide <contribute>`
 
 Thinking about using Ubuntu Server for your next project? `Get in touch!`_
@@ -118,7 +119,8 @@ Thinking about using Ubuntu Server for your next project? `Get in touch!`_
 .. _Code of Conduct: https://ubuntu.com/community/code-of-conduct
 .. _Get support: https://ubuntu.com/support/community-support
 .. _Join the Discourse forum: https://discourse.ubuntu.com/c/server/17
-.. _Download: https://ubuntu.com/server
+.. _Download Ubuntu Server: https://ubuntu.com/server
+.. _IRC channel on Libera: https://kiwiirc.com/nextclient/irc.libera.chat/ubuntu-server
 .. _Get in touch!: https://ubuntu.com/server/contact-us?product=server
 .. _Current PDF: https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/
 .. _Ubuntu 18.04 LTS PDF: https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf
