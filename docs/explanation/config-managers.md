@@ -44,18 +44,6 @@ environments where detailed reporting is desired.
 
 * **Language**: Puppet domain-specific language (DSL), based on Ruby.
 
-## Juju
-
-[Juju](https://juju.is/docs/juju) is slightly different, in that it doesn't
-only handle configuration management, but also orchestrates and manages
-applications across different cloud providers. It uses the concept of reusable
-"charms"; these include all the hooks and scripts needed to manage an
-application stack throughout its lifecycle. Juju can use the same bundle of
-charms to deploy to multiple different cloud-based platforms, making it a
-cloud-agnostic way.
-
-* Language: YAML (for defining charms and bundles), Python (for charms).
-
 ## Further reading
 
 * For a comparison of all open source configuration management software, refer
