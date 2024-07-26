@@ -31,7 +31,6 @@ improve your system it to suit your needs by:
 
 .. _end-system-tuning-intro:
 
-* :ref:`lscpu - display information about the CPU architecture <perf-tune-lscpu>`
 * :ref:`hwloc & lstopo - obtain the hierarchical map of key computing elements <perf-tune-hwloc>`
 * :ref:`numactl - Control NUMA policy for processes or shared memory <perf-tune-numactl>`
 * :ref:`cpupower - Check and control CPU governers, power and frequency <perf-tune-cpupower>`
@@ -40,7 +39,6 @@ improve your system it to suit your needs by:
 .. toctree::
     :hidden:
 
-    lscpu <../explanation/perf-tune-lscpu>
     hwloc <../explanation/perf-tune-hwloc>
     numactl <../explanation/perf-tune-numactl>
     cpupower <../explanation/perf-tune-cpupower>
