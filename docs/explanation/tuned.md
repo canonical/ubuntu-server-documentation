@@ -37,7 +37,7 @@ Once the package is installed in a system, a profile is activated by default dep
 | Other cases | `balanced` |
 
 ### Anatomy of a profile
-Tuned profiles are grouped by directory in `/usr/lib/tuned/<profile>` or `/etc/tuned/<profile>`, and are defined in a `tuned.conf` file within that directory.  That file has an INI structure which looks like this:
+Tuned profiles are defined by directory in `/usr/lib/tuned/<profile>` or `/etc/tuned/<profile>`, and are defined in a `tuned.conf` file within that directory.  That file has an INI structure which looks like this:
 
 ```ini
 [main]
