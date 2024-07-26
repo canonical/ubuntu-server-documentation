@@ -32,7 +32,6 @@ improve your system it to suit your needs by:
 .. _end-system-tuning-intro:
 
 * :ref:`hwloc & lstopo - obtain the hierarchical map of key computing elements <perf-tune-hwloc>`
-* :ref:`numactl - Control NUMA policy for processes or shared memory <perf-tune-numactl>`
 * :ref:`cpupower - Check and control CPU governers, power and frequency <perf-tune-cpupower>`
 * :ref:`TuneD - dynamic adaptive system tuning daemon<perf-tune-tuned>`
 
