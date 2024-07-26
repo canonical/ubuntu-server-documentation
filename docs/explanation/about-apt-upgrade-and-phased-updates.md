@@ -62,7 +62,7 @@ Again, please only do this if you really know what you're doing and are absolute
 
 Phased updates have been part of the update-manager on Ubuntu Desktop for quite a while (since 13.04, in fact!), but were [implemented in APT in 21.04](https://discourse.ubuntu.com/t/phased-updates-in-apt-in-21-04/20345). It now works on all versions of Ubuntu (including Ubuntu Server, Raspberry Pi, and containers). Since this includes the 22.04 LTS, it's now getting a lot more attention as a result!
 
-# How does it actually work?
+## How does it actually work?
 
 Phased updates depend on a value derived from your machine's "Machine ID", as well as the package name and package version. The neat thing about this is that phasing is determined completely at the client end; no identifiable information (or indeed any new information at all) is ever sent to the server to achieve update phasing.
 
