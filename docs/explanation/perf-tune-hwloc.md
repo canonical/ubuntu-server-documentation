@@ -2,8 +2,9 @@
 # hwloc
 
 > Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See
-> :ref:`<explanation-system-tuning-disclaimer>` for the general reasons for that.
+> system or after doing so applying this knowledge. See our common
+> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+> the general reasons for that.
 
 The default installed package hwloc-nox provides various tools to discover the
 topology of the chip internal structures as well as any association devices

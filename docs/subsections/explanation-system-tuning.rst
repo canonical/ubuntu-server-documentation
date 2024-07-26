@@ -9,25 +9,29 @@ it for a given workload.
 
 .. _explanation-system-tuning-disclaimer:
 
-Disclaimer - To tune you need to know your system and workload
-**************************************************************
+.. note::
+   Disclaimer - To tune you need to know your system and workload
 
-Almost all tunable parameters can be good for one and bad for another type of
-workload or environment. If the system could do it for you, it probably would
-be the default setting already.
+   Almost all tunable parameters can be good for one and bad for another type of
+   workload or environment. If the system could do it for you, it probably would
+   be the default setting already.
 
-Not even the goal of tuning is the same for everyone; do you want to improve
-latency, throughput, thermal or work-unit-per-power? But those default settings
-generally have to aim for a good compromise on all of these aspects, no matter
-what you will do with your system.
+   Not even the goal of tuning is the same for everyone; do you want to improve
+   latency, throughput, thermal or work-unit-per-power? But those default settings
+   generally have to aim for a good compromise on all of these aspects, no matter
+   what you will do with your system.
 
-Therefore you have to know your workload, your system and the important metrics
-of what you want to achieve. The more you know, the more you'll be able to
-improve your system it to suit your needs by:
+   Therefore you have to know your workload, your system and the important metrics
+   of what you want to achieve. The more you know, the more you'll be able to
+   improve your system it to suit your needs by:
 
-* Identifying bottlenecks as unblocking them usually has the biggest impact for your workload
-* Identifying where your needs are different from the generic assumptions to change related tunables
-* Identifying architectural mismatches between the solution and your needs to allow adapting
+   * Identifying bottlenecks as unblocking them usually has the biggest impact for your workload
+   * Identifying where your needs are different from the generic assumptions to change related tunables
+   * Identifying architectural mismatches between the solution and your needs to allow adapting
+
+To identify those aspects and to then apply static or dynamic tuning Ubuntu
+carries various tools, a few of them are outlined in more detail in the
+following sections.
 
 .. _end-system-tuning-intro:
 
@@ -39,6 +43,5 @@ improve your system it to suit your needs by:
     :hidden:
 
     hwloc <../explanation/perf-tune-hwloc>
-    numactl <../explanation/perf-tune-numactl>
     cpupower <../explanation/perf-tune-cpupower>
     TuneD <../explanation/perf-tune-tuned>

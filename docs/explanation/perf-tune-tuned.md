@@ -2,8 +2,9 @@
 # TuneD
 
 > Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See
-> :ref:`<explanation-system-tuning-disclaimer>` for the general reasons for that.
+> system or after doing so applying this knowledge. See our common
+> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+> the general reasons for that.
 
 The same is true for the TuneD profiles - they are only suggestions and starting
 points for a few named workload categories that allow you to react dynamically.

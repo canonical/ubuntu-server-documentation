@@ -2,22 +2,24 @@
 # CPU Governers and the cpupower tool
 
 > Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See
-> :ref:`<explanation-system-tuning-disclaimer>` for the general reasons for that.
+> system or after doing so applying this knowledge. See our common
+> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+> the general reasons for that.
 
-# CPU Governers
+## CPU Governers
 
 The kernel provides several CPU governors which can be configured per cores to
 optimize for different needs.
 
 | **governor** | Design philosophy |
+|--------------|-------------------|
 | ondemand | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
 | conservative | Similar to ondemand, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behaviour is more suitable in a battery powered environment. |
 | performance | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being underutilized. |
 | powersave | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
 | Userspace | Allows a userspace program to control the CPU frequency |
 
-Please see [Linux CPUFreq Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
+Please see the [Linux CPUFreq Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
 for a more extensive discussion and explanation of the available Linux CPU governors.
 
 While those can be checked and changed directly in sysfs at
@@ -25,7 +27,7 @@ While those can be checked and changed directly in sysfs at
 which comes with the package `linux-tools-common` makes this easier by providing
 a commandline interface and providing access to several related values.
 
-# Monitor CPU frequency
+## Monitor CPU frequency
 
 Before changing anything look at the current frequencies via `cpupower monitor`.
 Many systems have various potential monitors, and by default one sees
@@ -91,7 +93,7 @@ $ sudo cpupower monitor -i 60 -m Mperf,RAPL
    3| 62,04| 37,96|  1852||616950936|145911797|375373063|71556823
 ```
 
-# Get details about the boundaries for the CPU frequency
+##Get details about the boundaries for the CPU frequency
 
 There are more details influencing the CPU frequency like the used
 driver to control the hardware, the min and max frequencies and potential
@@ -120,7 +122,7 @@ By default this checks the CPU it is executed on, the argument `-c` can be set
 to either a number representing a core or `all` to get the info for all
 available CPUs.
 
-# Get details about the idle-states
+##Get details about the idle-states
 
 [Idle states](https://docs.kernel.org/admin-guide/pm/cpuidle.html)
 represent situations when a CPU enters a state of suspension to save power.
@@ -198,7 +200,7 @@ $ sudo cpupower monitor
    3|  3,86| 13,68|  0,00|  0,00|| 68,40| 31,60|  1990||13733058|2706597|7438396|3080986||  0,03|  2,52|  6,35|  4,92| 15,97|  0,00|  1,52|  0,00|  0,00
 ```
 
-# What should I do with all of this?
+##What should I do with all of this?
 
 All this information is usually only _data_ without any insight until you
 either:
@@ -232,7 +234,7 @@ As all commands of cpupower can be for a sub-set of CPUs one can use `-c` here
 as well if that matches what is needed for more complex scenarios.
 
 ```bash
-# Set conservative only on the 8 cores of one socket in a numa aware system
+#Set conservative only on the 8 cores of one socket in a numa aware system
 $ cpupower -c 0-7 frequency-set -g conservative
 ```
 
