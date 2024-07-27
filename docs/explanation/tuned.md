@@ -25,7 +25,7 @@ By default, dynamic tuning is enabled. To disable it, edit the `/etc/tuned/tuned
 
 ## Profiles
 
-TuneD works with profiles, which are configuration files listing the tuning plugins and their options. Many predefined profiles are already shipped with the TuneD package in the directory `/usr/lib/tuned`. After installing the TuneD package, the `tuned-adm list` command will output a brief summary of all of the available profiles, and `tuned-adm list plugins -v` will list the plugins and their options.
+TuneD works with profiles, which are configuration files grouping tuning plugins and their options. Many predefined profiles are already shipped with the TuneD package in the directory `/usr/lib/tuned`. After installing the TuneD package, the `tuned-adm list` command will output a brief summary of all of the available profiles, and `tuned-adm list plugins -v` will list the plugins and their options.
 
 Once the package is installed in a system, a profile is activated by default depending on the detected environment. These are the default profiles for each type of environment:
 
@@ -50,7 +50,15 @@ type=TYPE
 replace=REPLACE
 enabled=ENABLED
 devices=DEVICES
+
+[another plugin instance]
+type=TYPE
+replace=REPLACE
+enabled=ENABLED
+devices=DEVICES
 ... other plugin-specific options ...
+
+...
 ```
 
 Here is a brief explanation of these configuration parameters:
