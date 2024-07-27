@@ -85,7 +85,7 @@ html_context = {
 
     # Change to the Matrix channel you want to link to
     # (use an empty value if you don't want to link)
-    'matrix': '',
+    'IRC': 'https://kiwiirc.com/nextclient/irc.libera.chat/ubuntu-server',
 
     # Change to the GitHub URL for your project
     # This is used, for example, to link to the source files and allow creating GitHub issues directly from the documentation.
