@@ -11,7 +11,7 @@ This page will demonstrate how to install and configure Puppet in a client/serve
 
 Before configuring Puppet, you may want to add a DNS `CNAME` record for `puppet.example.com`, where `example.com` is your domain.
 
-By default, Puppet clients check DNS for `puppet.example.com` as the puppet server name, or **Puppet Master**. See [Domain Name Server](domain-name-service-dns.md) for more details.
+By default, Puppet clients check DNS for `puppet.example.com` as the puppet server name, or **Puppet Master**. See [Domain Name Server](../docs/how-to/domain-name-service-dns.md) for more details.
 
 If you do not want to use DNS, you can add entries to the server and client `/etc/hosts` file. For example, in the Puppet server's `/etc/hosts` file add:
 
