@@ -1,32 +1,40 @@
 (perf-tune-hwloc)=
 # hwloc
 
-> Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See our common
+> System tuning tools are either about better understanding the system's
+> performance, or applying such knowledge to improve it. See our common
 > {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
 > the general reasons for that.
 
-The default installed package hwloc-nox provides various tools to discover the
-topology of the chip internal structures as well as any association devices
+The default installed package `hwloc-nox` provides various tools to discover the
+topology of the chip internal structures as well as any associated devices
 like PCI cards, NVME devices and memory.
 
 By default the tools provide command line interfaces, but it can also render
-those complex relations in a GUI environment.
+those complex relations in a GUI environment. Depending on which one you want
+to use you can install them with `apt install hwloc-nox` or `apt install hwloc`
+respectively.
 
-It can be important to sensitive workloads to align the cpu cores
-it runs on to be close to the nodes where the related devices is attached
+It can be important with a sensitive workload to align the CPU cores
+it runs on, to be close to the nodes where the related devices are attached
 to the system. That will help to avoid crossing topology boundaries that
-add additional latencies. But for that one needs tools to inspect the
-cpu and device topology on the system.
+add additional latencies. But for that, one needs tools to inspect the
+CPU and device topology on the system.
 
 ## hwloc-info - hierarchy and details
 
-`hwloc-info` will by default just provide a summary of the topology, which
-is the the topology levels that are present on this system.
+By default, `hwloc-info` provides a summary of the topology levels that are
+present on this system.
+
+Command:
 
 ```bash
-$ apt install hwloc-nox
-$ hwloc-info 
+hwloc-info
+```
+
+Output (example on a laptop):
+
+```bash
 depth 0:           1 Machine (type #0)
  depth 1:          1 Package (type #1)
   depth 2:         1 L3Cache (type #6)
@@ -41,11 +49,18 @@ Special depth -5:  4 PCIDev (type #15)
 Special depth -6:  3 OSDev (type #16)
 ```
 
-But the tool also allows to get detailed information on any of these
-elements, example to get details on the first core.
+But the tool also allows us to get detailed information on any of these
+elements. Here is an example to get details on the first core.
+
+Command:
 
 ```bash
-$ hwloc-info -p core:0
+hwloc-info -p core:0
+```
+
+Output:
+
+```bash
 Core L#0
  type = Core
  full type = Core
@@ -71,19 +86,24 @@ Core L#0
  cpukind info FrequencyBaseMHz = 1800
 ```
 
-See the [hwloc-info](https://manpages.ubuntu.com/manpages/noble/man1/hwloc-info.1.html)
+See the [`hwloc-info`](https://manpages.ubuntu.com/manpages/noble/man1/hwloc-info.1.html)
 man page for a list of all the potential objects that can be queried.
 
 ## hwloc-ls - system topology in CLI
 
 If executed without graphical capabilities `hwloc-ls` will provide a text
 representation of the CPU, its caches and how they relate to each other
-between cores, sockets and to hardware that is in the system.
+between cores, sockets and hardware in the system.
+
+Command:
 
 ```bash
-$ apt install hwloc-nox
-# example on a laptop
 hwloc-ls
+```
+
+Output (example on a laptop):
+
+```bash
 Machine (31GB total)
   Package L#0
     NUMANode L#0 (P#0 31GB)
@@ -104,8 +124,9 @@ Machine (31GB total)
       Net "enp0s31f6"
 ```
 
+Output (example on a server - shortened for readbility):
+
 ```bash
-# example on a server (shortened for readbility)
 Package L#0
     NUMANode L#0 (P#0 378GB)
     L3 L#0 (32MB)
@@ -151,9 +172,15 @@ Package L#0
 Instead of `hwloc-nox` there also is `hwloc` with graphical capabilities which
 would render the same in a graphical representation.
 
+Command:
+
 ```bash
-$ apt install hwloc-nox
-$ hwloc-ls
+hwloc-ls
+```
+
+Output (CLI shows navigation info, the real content is in the GUI):
+
+```bash
 Keyboard shortcuts:
  Zooming, scrolling and closing:
   Zoom-in or out ...................... + -
@@ -180,10 +207,12 @@ Keyboard shortcuts:
   Export to file with current config .. E
 ```
 
+Output (GUI):
+
 ![hwlowc-ls UI](images/hwloc-example.png)
 
 ## Further reading
 
-* [hwloc-ls man page](https://manpages.ubuntu.com/manpages/noble/en/man1/lstopo.1.html)
-* [hwloc man page](https://manpages.ubuntu.com/manpages/noble/en/man7/hwloc.7.html)
-* [hwloc-diff man page](https://manpages.ubuntu.com/manpages/noble/en/man1/hwloc-diff.1.html)
+* [`hwloc-ls` man page](https://manpages.ubuntu.com/manpages/noble/en/man1/lstopo.1.html)
+* [`hwloc` man page](https://manpages.ubuntu.com/manpages/noble/en/man7/hwloc.7.html)
+* [`hwloc-diff` man page](https://manpages.ubuntu.com/manpages/noble/en/man1/hwloc-diff.1.html)
