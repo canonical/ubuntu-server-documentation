@@ -1,5 +1,13 @@
-(tuned)=
+(perf-tune-tuned)=
 # TuneD
+
+> Any tool related to system tuning is either about better understanding the
+> system or after doing so applying this knowledge. See our common
+> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+> the general reasons for that.
+
+The same is true for the TuneD profiles - they are only suggestions and starting
+points for a few named workload categories that allow you to react dynamically.
 
 [TuneD](https://tuned-project.org/)<sup>*1</sup> is a service used to tune your system and optimise the performance under certain workloads. At the core of TuneD are **profiles**, which tune your system for different use cases. TuneD is distributed with a number of predefined profiles for use cases such as:
 
@@ -10,8 +18,6 @@
 It is possible to modify the rules defined for each profile and customise how to tune a particular device. When you switch to another profile or deactivate TuneD, all changes made to the system settings by the previous profile revert back to their original state.
 
 You can also configure TuneD to dynamically react to changes in device usage and adjust settings to improve the performance of active devices and reduce the power consumption of inactive devices.
-
-Almost all tunable parameters can be good for one and bad for another type of workload or environment. Not even the goal of tuning is the same for everyone; do you want to improve latency, throughput, thermal or work-per-power? The system defaults generally aim for a good compromise on all of these, no matter what you will do with your system. The same is true for the TuneD profiles - they are only suggestions and starting points for a few named workload categories that allow you to react dynamically. But those can't be perfect either - the more you know about your workload, your system and what you want to achieve with your tuning, the more you'll be able to improve it to suit your needs.
 
 ## Static vs. dynamic tuning
 
