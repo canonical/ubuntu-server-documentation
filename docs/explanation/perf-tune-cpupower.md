@@ -1,5 +1,5 @@
 (perf-tune-cpupower)=
-# CPU Governers and the cpupower tool
+# CPU Governors and the cpupower tool
 
 > System tuning tools are either about better understanding the system's
 > performance, or applying such knowledge to improve it. See our common
