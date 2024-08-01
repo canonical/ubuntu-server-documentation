@@ -9,48 +9,53 @@ are available, and how to interact with various tools.
 Server installation
 ===================
 
-.. include:: subsections/reference-server-installation.rst
+.. include:: reference/installation.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Cloud images
 ============
 
-.. include:: subsections/reference-cloud-images.rst
+.. include:: reference/clouds.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 High Availability
 =================
 
-.. include:: subsections/reference-high-availability.rst
+.. include:: reference/high-availability.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Backups and version control
 ===========================
 
-.. include:: subsections/reference-backups-and-version-control.rst
+.. include:: reference/backups.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Debugging
 =========
 
-.. include:: subsections/reference-debugging.rst
+.. include:: reference/debugging.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Other tools
 ===========
 
-.. include:: subsections/reference-other-tools.rst
+.. include:: reference/other-tools.rst
     :start-line: 4
-
+    :end-before: .. toctree::
 
 
 .. toctree::
     :hidden:
     :titlesonly:
 
-    subsections/reference-server-installation.rst
-    subsections/reference-cloud-images.rst
-    subsections/reference-high-availability.rst
-    subsections/reference-backups-and-version-control.rst
-    subsections/reference-debugging.rst
-    subsections/reference-other-tools.rst
+    reference/installation.rst
+    reference/clouds.rst
+    reference/high-availability.rst
+    reference/backups.rst
+    reference/debugging.rst
+    reference/other-tools.rst
