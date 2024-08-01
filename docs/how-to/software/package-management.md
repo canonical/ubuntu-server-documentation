@@ -63,7 +63,7 @@ sudo apt update
 sudo apt upgrade
 ```
     
-For details on how to upgrade to a new Ubuntu release, see our [guide on upgrading releases](how-to-upgrade-your-release.md). For further information about using APT, read the comprehensive [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide), or type `apt help`.
+For details on how to upgrade to a new Ubuntu release, see our {ref}`guide on upgrading releases <upgrade-your-release>`. For further information about using APT, read the comprehensive [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide), or type `apt help`.
 
 ## Aptitude
 
@@ -215,7 +215,7 @@ You can edit the file to enable and disable repositories. For example, to disabl
 
 In addition to the officially-supported package repositories available for Ubuntu, there are also community-maintained repositories which add thousands more packages for potential installation. Two of the most popular are the *Universe* and *Multiverse* repositories. These repositories are not officially supported by Ubuntu, but because they are maintained by the community they generally provide packages which are safe for use with your Ubuntu computer.
 
-For more information, see our guide on [using third-party repositories](../explanation/third-party-repository-usage.md).
+For more information, see our guide on {ref}`using third-party repositories <third-party-repository-usage>`.
 
 > **Warning**:
 > Be advised that packages in Universe and Multiverse are not officially supported and do not receive security patches, except through Ubuntu Pro's [Expanded Security Maintenance](https://ubuntu.com/security/esm). A subscription to [Ubuntu Pro](https://ubuntu.com/pro) is free for personal use on up to five machines.
