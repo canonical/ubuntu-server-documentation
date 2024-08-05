@@ -1,11 +1,14 @@
 (third-party-repository-usage)=
 # Third party repository usage
 
-Ubuntu is an operating system with thousands of packages and snaps available to its users, but it is humanly (and sometimes technically!) impossible to make all software out there available in the official repositories. There are situations where you may want to install a package that is not maintained by Ubuntu, but *is* maintained by a third party entity. We don’t recommend using third party APT repositories, but we know that users sometimes have no other option – so let’s take a look at some of the pitfalls, alternatives, and mitigations.
+Ubuntu is an operating system with thousands of packages and snaps available to its users, but it is humanly (and sometimes technically!) impossible to make all software out there available in the official repositories. There are situations where you may want to install a package that is not maintained by Ubuntu, but *is* maintained by a third party entity.
 
-## Why **not** use third party APT repositories?
+## Why **not** use third party software?
 
-While having access to the software you want to use is great, it is crucial to understand the risks involved in using third party APT repositories.
+While having access to the software you want to use is great, it is crucial to understand the risks involved in using third party software - whether it's an individual deb package, or an APT repository. Although this page will focus on third party APT repositories, the same risks are inherent in third party packages as well.
+
+Although we don’t recommend using third party software, we know that users sometimes have no other option – so let’s take a look at some of the pitfalls, alternatives, and mitigations.
+
 
 ### Security risk
 
