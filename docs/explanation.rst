@@ -11,97 +11,109 @@ to use.
 Introduction to...
 ==================
 
-.. include:: subsections/explanation-introduction-to.rst
+.. include:: explanation/introduction-to.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Virtualisation and containers
 =============================
 
-.. include:: subsections/explanation-virtualisation.rst
+.. include:: explanation/virtualisation.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Networking
 ==========
 
-.. include:: subsections/explanation-networking.rst
+.. include:: explanation/networking.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Active Directory integration
 ============================
 
-.. include:: subsections/explanation-active-directory-integration.rst
+.. include:: explanation/active-directory.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Security
 ========
 
-.. include:: subsections/explanation-security.rst
+.. include:: explanation/security.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Cryptography
 ============
 
-.. include:: subsections/explanation-cryptography.rst
+.. include:: explanation/cryptography.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Server installation
 ===================
 
-.. include:: subsections/explanation-server-installation.rst
+.. include:: explanation/installation.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Storage
 =======
 
-.. include:: subsections/explanation-storage.rst
+.. include:: explanation/storage.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Managing software
 =================
 
-.. include:: subsections/explanation-managing-software.rst
+.. include:: explanation/software.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Web services
 ============
 
-.. include:: subsections/explanation-web-services.rst
+.. include:: explanation/web-services.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 System tuning
 =============
 
-.. include:: subsections/explanation-system-tuning.rst
+.. include:: explanation/performance.rst
     :start-after: _end-system-tuning-intro:
+    :end-before: .. toctree::
 
 High Availability
 =================
 
-.. include:: subsections/explanation-high-availability.rst
+.. include:: explanation/high-availability.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Multipath
 =========
 
-.. include:: subsections/explanation-multipath.rst
+.. include:: explanation/multipath.rst
     :start-line: 4
-
+    :end-before: .. toctree::
 
 
 .. toctree::
     :hidden:
     :titlesonly:
 
-    subsections/explanation-introduction-to.rst
-    subsections/explanation-virtualisation.rst
-    subsections/explanation-networking.rst
-    subsections/explanation-active-directory-integration.rst
-    subsections/explanation-security.rst
-    subsections/explanation-cryptography.rst
-    subsections/explanation-server-installation.rst
-    subsections/explanation-storage.rst
-    subsections/explanation-managing-software.rst
-    subsections/explanation-web-services.rst
-    subsections/explanation-system-tuning.rst
-    subsections/explanation-high-availability.rst
-    subsections/explanation-multipath.rst
+    explanation/introduction-to.rst
+    explanation/virtualisation.rst
+    explanation/networking.rst
+    explanation/active-directory.rst
+    explanation/security.rst
+    explanation/cryptography.rst
+    explanation/installation.rst
+    explanation/storage.rst
+    explanation/software.rst
+    explanation/web-services.rst
+    explanation/performance.rst
+    explanation/high-availability.rst
+    explanation/multipath.rst

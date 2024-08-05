@@ -1,5 +1,3 @@
-.. _issue-labels:
-
 Issue labels
 ------------
 

@@ -155,6 +155,8 @@ custom_linkcheck_anchors_ignore_for_url = []
 # NOTE: Remove this variable to disable the MyST parser extensions.
 custom_myst_extensions = []
 
+myst_heading_anchors = 3
+
 # Add custom Sphinx extensions as needed.
 # This array contains recommended extensions that should be used.
 # NOTE: The following extensions are handled automatically and do

@@ -17,8 +17,9 @@ tutorial, but can be applied to specific scenarios. If you are looking for a
 more straightforward installation, refer to our
 :ref:`basic installation <basic-installation>` tutorial.
 
-.. include:: subsections/how-to-server-installation.rst
+.. include:: how-to/installation.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 **The Server installer**
 
@@ -34,26 +35,30 @@ the installer, refer to these guides from the Ubuntu installer documentation
 Virtualisation
 ==============
 
-.. include:: subsections/how-to-virtualisation.rst
+.. include:: how-to/virtualisation.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Containers
 ==========
 
-.. include:: subsections/how-to-containers.rst
+.. include:: how-to/containers.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Networking
 ==========
 
-.. include:: subsections/how-to-networking.rst
+.. include:: how-to/networking.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Samba
 =====
 
-.. include:: subsections/how-to-samba.rst
+.. include:: how-to/samba.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Authentication and access
 =========================
@@ -61,98 +66,107 @@ Authentication and access
 Kerberos
 --------
 
-.. include:: subsections/how-to-kerberos.rst
+.. include:: how-to/kerberos.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Network user authentication with SSSD
 -------------------------------------
 
-.. include:: subsections/how-to-network-user-authentication-with-sssd.rst
+.. include:: how-to/sssd.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 OpenLDAP
 --------
 
-.. include:: subsections/how-to-openldap.rst
+.. include:: how-to/openldap.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Active Directory integration
 ----------------------------
 
-.. include:: subsections/how-to-active-directory-integration.rst
+.. include:: how-to/active-directory.rst
     :start-line: 4
+    :end-before: .. toctree::
     
 Databases
 =========
 
-.. include:: subsections/how-to-databases.rst
+.. include:: how-to/databases.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Mail services
 =============
 
-.. include:: subsections/how-to-mail-services.rst
+.. include:: how-to/mail-services.rst
     :start-line: 4
-
-Printing
-========
-
-.. include:: subsections/how-to-printing.rst
-    :start-line: 4
+    :end-before: .. toctree::
 
 Backups and version control
 ===========================
 
-.. include:: subsections/how-to-backups-and-version-control.rst
+.. include:: how-to/backups.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Web services
 ============
 
-.. include:: subsections/how-to-web-services.rst
+.. include:: how-to/web-services.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Storage
 =======
 
-.. include:: subsections/how-to-storage.rst
+.. include:: how-to/storage.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Graphics
 ========
 
-.. include:: subsections/how-to-graphics.rst
+.. include:: how-to/graphics.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Managing software
 =================
 
-.. include:: subsections/how-to-managing-software.rst
+.. include:: how-to/software.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Security
 ========
 
-.. include:: subsections/how-to-security.rst
+.. include:: how-to/security.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 WireGuard VPN
 =============
 
-.. include:: subsections/how-to-wireguard-vpn.rst
+.. include:: how-to/wireguard-vpn.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 High Availability
 =================
 
-.. include:: subsections/how-to-high-availability.rst
+.. include:: how-to/high-availability.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 Observability
 =============
 
-.. include:: subsections/how-to-observability.rst
+.. include:: how-to/observability.rst
     :start-line: 4
+    :end-before: .. toctree::
 
 .. LINKS
 .. _Introduction to Automated Server installer: https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html
@@ -163,24 +177,23 @@ Observability
     :hidden:
     :titlesonly:
 
-    subsections/how-to-server-installation.rst
-    subsections/how-to-virtualisation.rst
-    subsections/how-to-containers.rst
-    subsections/how-to-networking.rst
-    subsections/how-to-samba.rst
-    subsections/how-to-active-directory-integration.rst
-    subsections/how-to-kerberos.rst
-    subsections/how-to-network-user-authentication-with-sssd.rst
-    subsections/how-to-openldap.rst
-    subsections/how-to-databases.rst
-    subsections/how-to-mail-services.rst
-    subsections/how-to-printing.rst
-    subsections/how-to-backups-and-version-control.rst
-    subsections/how-to-web-services.rst
-    subsections/how-to-storage.rst
-    subsections/how-to-graphics.rst
-    subsections/how-to-managing-software.rst
-    subsections/how-to-security.rst
-    subsections/how-to-wireguard-vpn.rst
-    subsections/how-to-high-availability.rst
-    subsections/how-to-observability.rst
+    how-to/installation.rst
+    how-to/virtualisation.rst
+    how-to/containers.rst
+    how-to/networking.rst
+    how-to/samba.rst
+    how-to/active-directory.rst
+    how-to/kerberos.rst
+    how-to/sssd.rst
+    how-to/openldap.rst
+    how-to/databases.rst
+    how-to/mail-services.rst
+    how-to/backups.rst
+    how-to/web-services.rst
+    how-to/storage.rst
+    how-to/graphics.rst
+    how-to/software.rst
+    how-to/security.rst
+    how-to/wireguard-vpn.rst
+    how-to/high-availability.rst
+    how-to/observability.rst

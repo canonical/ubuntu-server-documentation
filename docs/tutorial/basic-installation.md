@@ -21,7 +21,7 @@ The recommended minimal system requirements for this tutorial are:
  * RAM: 2 GiB or more
  * Disk: 5 GiB or more
 
-If you are looking for more general system requirements, [refer to this page](../reference/system-requirements.md). 
+If you are looking for more general system requirements, {ref}`refer to this page <system-requirements>`. 
 
 ## Perform a system back up
 
@@ -36,9 +36,9 @@ Any time you partition your disk, you should be prepared to lose everything on t
 You can obtain the amd64 server download from https://releases.ubuntu.com/. Select the version you wish to install and select the "server install image" download. Note that the server download includes the installer.
 
 There are platform specific how-to guides for installations on:
-* [s390x LPAR](https://discourse.ubuntu.com../how-to/interactive-live-server-installation-on-ibm-z-lpar-s390x.md)
-* [z/VM](https://discourse.ubuntu.com../how-to/interactive-live-server-installation-on-ibm-z-vm-s390x.md)
-* [ppc64el](https://discourse.ubuntu.com../how-to/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md)
+* {ref}`s390x LPAR <interactive-live-server-installation-on-ibm-z-lpar-s390x>`
+* {ref}`z/VM <interactive-live-server-installation-on-ibm-z-vm-s390x>`
+* {ref}`ppc64el <how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot>`
 
 ## Create a bootable USB
 
