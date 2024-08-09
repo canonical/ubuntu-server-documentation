@@ -89,31 +89,31 @@ Thinking about using Ubuntu Server for your next project? `Get in touch!`_
    :hidden:
    :maxdepth: 2
 
-   Tutorial <docs/tutorial.rst>
+   Tutorial <tutorial/index.rst>
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   How-to guides <docs/how-to.rst>
+   How-to guides <how-to/index.rst>
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   Reference <docs/reference.rst>
+   Reference <reference/index.rst>
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   Explanation <docs/explanation.rst>
+   Explanation <explanation/index.rst>
 
 .. toctree::
    :hidden:
    :maxdepth: 2
 
-   Contributing <docs/contributing.rst>
+   Contributing <contributing/index.rst>
 
 .. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/code-of-conduct

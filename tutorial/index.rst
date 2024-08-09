@@ -59,5 +59,5 @@ you to expand your knowledge of the operating system and additional software.
    :titlesonly:
    :hidden:
    
-   tutorial/basic-installation
-   tutorial/attach-your-ubuntu-pro-subscription
+   basic-installation
+   attach-your-ubuntu-pro-subscription

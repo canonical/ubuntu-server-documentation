@@ -17,7 +17,7 @@ tutorial, but can be applied to specific scenarios. If you are looking for a
 more straightforward installation, refer to our
 :ref:`basic installation <basic-installation>` tutorial.
 
-.. include:: how-to/installation.rst
+.. include:: installation.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -35,28 +35,28 @@ the installer, refer to these guides from the Ubuntu installer documentation
 Virtualisation
 ==============
 
-.. include:: how-to/virtualisation.rst
+.. include:: virtualisation.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Containers
 ==========
 
-.. include:: how-to/containers.rst
+.. include:: containers.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Networking
 ==========
 
-.. include:: how-to/networking.rst
+.. include:: networking.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Samba
 =====
 
-.. include:: how-to/samba.rst
+.. include:: samba.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -66,105 +66,105 @@ Authentication and access
 Kerberos
 --------
 
-.. include:: how-to/kerberos.rst
+.. include:: kerberos.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Network user authentication with SSSD
 -------------------------------------
 
-.. include:: how-to/sssd.rst
+.. include:: sssd.rst
     :start-line: 4
     :end-before: .. toctree::
 
 OpenLDAP
 --------
 
-.. include:: how-to/openldap.rst
+.. include:: openldap.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Active Directory integration
 ----------------------------
 
-.. include:: how-to/active-directory.rst
+.. include:: active-directory.rst
     :start-line: 4
     :end-before: .. toctree::
     
 Databases
 =========
 
-.. include:: how-to/databases.rst
+.. include:: databases.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Mail services
 =============
 
-.. include:: how-to/mail-services.rst
+.. include:: mail-services.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Backups and version control
 ===========================
 
-.. include:: how-to/backups.rst
+.. include:: backups.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Web services
 ============
 
-.. include:: how-to/web-services.rst
+.. include:: web-services.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Storage
 =======
 
-.. include:: how-to/storage.rst
+.. include:: storage.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Graphics
 ========
 
-.. include:: how-to/graphics.rst
+.. include:: graphics.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Managing software
 =================
 
-.. include:: how-to/software.rst
+.. include:: software.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Security
 ========
 
-.. include:: how-to/security.rst
+.. include:: security.rst
     :start-line: 4
     :end-before: .. toctree::
 
 WireGuard VPN
 =============
 
-.. include:: how-to/wireguard-vpn.rst
+.. include:: wireguard-vpn.rst
     :start-line: 4
     :end-before: .. toctree::
 
 High Availability
 =================
 
-.. include:: how-to/high-availability.rst
+.. include:: high-availability.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Observability
 =============
 
-.. include:: how-to/observability.rst
+.. include:: observability.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -177,23 +177,23 @@ Observability
     :hidden:
     :titlesonly:
 
-    how-to/installation.rst
-    how-to/virtualisation.rst
-    how-to/containers.rst
-    how-to/networking.rst
-    how-to/samba.rst
-    how-to/active-directory.rst
-    how-to/kerberos.rst
-    how-to/sssd.rst
-    how-to/openldap.rst
-    how-to/databases.rst
-    how-to/mail-services.rst
-    how-to/backups.rst
-    how-to/web-services.rst
-    how-to/storage.rst
-    how-to/graphics.rst
-    how-to/software.rst
-    how-to/security.rst
-    how-to/wireguard-vpn.rst
-    how-to/high-availability.rst
-    how-to/observability.rst
+    installation.rst
+    virtualisation.rst
+    containers.rst
+    networking.rst
+    samba.rst
+    active-directory.rst
+    kerberos.rst
+    sssd.rst
+    openldap.rst
+    databases.rst
+    mail-services.rst
+    backups.rst
+    web-services.rst
+    storage.rst
+    graphics.rst
+    software.rst
+    security.rst
+    wireguard-vpn.rst
+    high-availability.rst
+    observability.rst

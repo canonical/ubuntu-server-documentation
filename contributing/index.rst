@@ -115,12 +115,12 @@ build it locally:
    :hidden:
    
    self
-   contributing/contrib-types.rst
-   contributing/gh-issues.rst
-   contributing/build-locally.rst
-   contributing/writing-guidance.rst
-   contributing/submit-contribution.rst
-   contributing/get-help.rst
+   contrib-types.rst
+   gh-issues.rst
+   build-locally.rst
+   writing-guidance.rst
+   submit-contribution.rst
+   get-help.rst
 
 .. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/ethos/code-of-conduct

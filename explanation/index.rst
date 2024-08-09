@@ -11,91 +11,91 @@ to use.
 Introduction to...
 ==================
 
-.. include:: explanation/introduction-to.rst
+.. include:: introduction-to.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Virtualisation and containers
 =============================
 
-.. include:: explanation/virtualisation.rst
+.. include:: virtualisation.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Networking
 ==========
 
-.. include:: explanation/networking.rst
+.. include:: networking.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Active Directory integration
 ============================
 
-.. include:: explanation/active-directory.rst
+.. include:: active-directory.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Security
 ========
 
-.. include:: explanation/security.rst
+.. include:: security.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Cryptography
 ============
 
-.. include:: explanation/cryptography.rst
+.. include:: cryptography.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Server installation
 ===================
 
-.. include:: explanation/installation.rst
+.. include:: installation.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Storage
 =======
 
-.. include:: explanation/storage.rst
+.. include:: storage.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Managing software
 =================
 
-.. include:: explanation/software.rst
+.. include:: software.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Web services
 ============
 
-.. include:: explanation/web-services.rst
+.. include:: web-services.rst
     :start-line: 4
     :end-before: .. toctree::
 
 System tuning
 =============
 
-.. include:: explanation/performance.rst
+.. include:: performance.rst
     :start-after: _end-system-tuning-intro:
     :end-before: .. toctree::
 
 High Availability
 =================
 
-.. include:: explanation/high-availability.rst
+.. include:: high-availability.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Multipath
 =========
 
-.. include:: explanation/multipath.rst
+.. include:: multipath.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -104,16 +104,16 @@ Multipath
     :hidden:
     :titlesonly:
 
-    explanation/introduction-to.rst
-    explanation/virtualisation.rst
-    explanation/networking.rst
-    explanation/active-directory.rst
-    explanation/security.rst
-    explanation/cryptography.rst
-    explanation/installation.rst
-    explanation/storage.rst
-    explanation/software.rst
-    explanation/web-services.rst
-    explanation/performance.rst
-    explanation/high-availability.rst
-    explanation/multipath.rst
+    introduction-to.rst
+    virtualisation.rst
+    networking.rst
+    active-directory.rst
+    security.rst
+    cryptography.rst
+    installation.rst
+    storage.rst
+    software.rst
+    web-services.rst
+    performance.rst
+    high-availability.rst
+    multipath.rst
