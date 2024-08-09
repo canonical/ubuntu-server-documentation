@@ -163,7 +163,7 @@ myst_heading_anchors = 3
 # not need to be added here: myst_parser, sphinx_copybutton, sphinx_design,
 # sphinx_reredirects, sphinxcontrib.jquery, sphinxext.opengraph
 custom_extensions = [
-    'sphinx_tabs.tabs',
+#    'sphinx_tabs.tabs',
     'sphinxcontrib.mermaid',
     'sphinxcontrib.jquery',
 #    'canonical.youtube-links',
@@ -188,7 +188,7 @@ custom_required_modules = [
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
     'cheatsheets/',
-    'docs/contributing/doc-templates/*',
+    'doc-templates/*',
     'doc-cheat-sheet*',
     'readme.rst',
     'legacy/*.md',
@@ -232,6 +232,8 @@ custom_tags = []
 #.. role:: center
 #   :class: align-center
 #'''
+
+suppress_warnings = ['orphan']
 
 ############################################################
 ### PDF configuration
