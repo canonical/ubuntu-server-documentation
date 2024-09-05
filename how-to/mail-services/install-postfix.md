@@ -68,8 +68,7 @@ To configure Postfix for SMTP-AUTH using SASL (Dovecot SASL), run these commands
 sudo postconf -e 'smtpd_sasl_type = dovecot'
 sudo postconf -e 'smtpd_sasl_path = private/auth'
 sudo postconf -e 'smtpd_sasl_local_domain ='
-sudo postconf -e 'smtpd_sasl_security_options = noanonymous,noplaintext'
-sudo postconf -e 'smtpd_sasl_tls_security_options = noanonymous'
+sudo postconf -e 'smtpd_sasl_security_options = noanonymous'
 sudo postconf -e 'broken_sasl_auth_clients = yes'
 sudo postconf -e 'smtpd_sasl_auth_enable = yes'
 sudo postconf -e 'smtpd_recipient_restrictions = \
@@ -79,7 +78,7 @@ permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
 > **Note**:
 > The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
 
-There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The options "noanonymous,noplaintext" prevent the use of mechanisms that permit anonymous authentication or that transmit credentials unencrypted.
+There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "noanonymous" prevents the use of mechanisms that permit anonymous authentication.
 
 ### Configure TLS
 
