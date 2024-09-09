@@ -29,6 +29,6 @@ Here we will cover a simpler case more resembling what a home network could be l
 
 This diagram represents a typical simple home network setup. You have a router/modem, usually provided by the ISP (Internet Service Provider), and some internal devices like a Raspberry PI perhaps, a NAS (Network Attached Storage), and some other device.
 
-There are basically two approaches that can be taken here: install WireGuard [on the router](https://discourse.ubuntu.comwireguard-vpn-peer-to-site-on-router.md), or on [another system in the home network](https://discourse.ubuntu.comwireguard-on-an-internal-system.md).
+There are basically two approaches that can be taken here: install WireGuard {ref}`on the router <wireguard-vpn-peer-to-site-on-router>`, or on {ref}`another system in the home network <wireguard-on-an-internal-system>`.
 
 Note that in this scenario the "fixed" side, the home network, normally won't have a WireGuard `Endpoint` configured, as the peer is typically "on the road" and will have a dynamic IP address.
