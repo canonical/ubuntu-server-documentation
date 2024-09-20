@@ -38,7 +38,7 @@ For example, in the case of the `10.10.10.0/24` network, the DHCP server on the 
 | Network | `10.10.10.0/24` |
 | Usable addresses | `10.10.10.2` -- `10.10.10.254` (`.1` is the router) |
 | DHCP range | `10.10.10.50` -- `10.10.10.254` |
-| VPN range | `10.10.10.10` -- `10.10.10.59` |
+| VPN range | `10.10.10.10` -- `10.10.10.49` |
 |||
 
 Or via any other layout that is better suited for your case. In this way, the router will never hand out a DHCP address that conflicts with one that we selected for a VPN user.
