@@ -20,12 +20,30 @@ For some of these events (kernel panic, NMI) the kernel will react automatically
 
 When a kernel panic occurs, the kernel relies on the *kexec* mechanism to quickly reboot a new instance of the kernel in a pre-reserved section of memory that had been allocated when the system booted (see below). This permits the existing memory area to remain untouched in order to safely copy its contents to storage.
 
+## KDump enabled by default
+
+Starting in Oracular Oriole (24.10) the kernel crash dump facility may be enabled by default at install time of standard installs of Ubuntu Desktop or Ubuntu Server that meet the following requirements:
+ - the system has at least than 4 CPU threads
+ -  the system has at least 6GB of RAM, and less than 2TB of RAM
+ - The free space available in /var is more than 5 times the amount of RAM and swap space
+ - and the CPU architecture is
+   - amd64 or s390x, or
+   - arm64 and UEFI is used
+
+On machines with it enabled (either by default or by manual installation), it can be disabled via the command:
+
+```bash
+sudo apt remove kdump-tools
+```
+
+On machines that do not meet these requirements and on pre-24.10 releases, the kernel crash dump facility can be enabled manually by following the installation instructions that follow.
+
 ## Installation
 
 The kernel crash dump utility is installed with the following command:
 
 ```bash
-sudo apt install linux-crashdump
+sudo apt install kdump-tools
 ```
 
 > **Note**:
