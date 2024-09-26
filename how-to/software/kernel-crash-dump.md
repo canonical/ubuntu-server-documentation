@@ -22,10 +22,10 @@ When a kernel panic occurs, the kernel relies on the *kexec* mechanism to quickl
 
 ## KDump enabled by default
 
-Starting in Oracular Oriole (24.10) the kernel crash dump facility may be enabled by default at install time of standard installs of Ubuntu Desktop or Ubuntu Server that meet the following requirements:
- - the system has at least than 4 CPU threads
- -  the system has at least 6GB of RAM, and less than 2TB of RAM
- - The free space available in /var is more than 5 times the amount of RAM and swap space
+Starting in Oracular Oriole (24.10) the kernel crash dump facility will be enabled by default during standard Ubuntu Desktop or Ubuntu Server installations on systems that meet the following requirements:
+ - the system has at least 4 CPU threads
+ - the system has at least 6GB of RAM, and less than 2TB of RAM
+ - the free space available in `/var` is more than 5 times the amount of RAM and swap space
  - and the CPU architecture is
    - amd64 or s390x, or
    - arm64 and UEFI is used
