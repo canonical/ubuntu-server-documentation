@@ -35,13 +35,16 @@ following sections.
 
 .. _end-system-tuning-intro:
 
+* Profile-Guided Optimization :ref:`PGO <perf-pgo>`
 * Obtain the hierarchical map of key computing elements using :ref:`hwloc and lstopo <perf-tune-hwloc>`
 * Check and control CPU governors, power and frequency with :ref:`cpupower <perf-tune-cpupower>`
 * Dynamic, adaptive system tuning :ref:`with TuneD <perf-tune-tuned>`
 
+
 .. toctree::
     :hidden:
 
+    Profile-Guided Optimization <performance/perf-pgo>
     hwloc <performance/perf-tune-hwloc>
     cpupower <performance/perf-tune-cpupower>
     TuneD <performance/perf-tune-tuned>
