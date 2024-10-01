@@ -15,9 +15,9 @@ options {
 };
 ```
 
-This can be quickly checked with the help of `dig`. Right after you installed `bind9`, you can probe ask it about the `isc.org` domain:
+This can be quickly checked with the help of `dig`. Right after you installed `bind9`, you can run `dig` and ask it about the `isc.org` domain:
 
-```bash
+```text
 $ dig @127.0.0.1 isc.org +dnssec +multiline
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 isc.org +dnssec +multiline
@@ -46,11 +46,11 @@ isc.org.		300 IN RRSIG A 13 2 300 (
 ;; MSG SIZE  rcvd: 183
 ```
 
-We can see that a `RRSIG` DNSSEC record was returned, but the key information in this output is the `ad` flag near the top. That stands for "authenticated data", and means that the DNSSEC records in the response were validated.
+We can see that a `RRSIG` DNSSEC record was returned, but the important information in this output is the `ad` flag near the top. That stands for "authenticated data", and means that the DNSSEC records in the response were validated.
 
 To see an example where this verification fails, we can use the `www.dnssec-failed.org` domain, which is specially crafted for this:
 
-```bash
+```text
 $ dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 www.dnssec-failed.org +dnssec +multiline
@@ -80,7 +80,7 @@ Here we see that:
 
 In the `bind9` logs, we will see DNSSEC validation errors:
 
-```bash
+```text
 $ journalctl -u named.service -n 10
 
 Apr 19 13:41:50 j named[3018]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
@@ -91,7 +91,7 @@ Apr 19 13:41:50 j named[3018]: broken trust chain resolving 'www.dnssec-failed.o
 
 We can run `dig` with the `+cd` command line parameter which disables this verification, but notice that still we don't get the `ad` flag in the reply:
 
-```bash
+```text
 $ dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline +cd
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 www.dnssec-failed.org +dnssec +multiline +cd
@@ -167,13 +167,13 @@ disable-algorithms "." {
 
 And restart BIND:
 
-```bash
+```text
 sudo systemctl restart bind9.service
 ```
 
 Now the `ad` flag is gone, meaning that this answer wasn't validated:
 
-```bash
+```text
 $ dig @127.0.0.1 isc.org +dnssec +multiline
 
 ; <<>> DiG 9.18.1-1ubuntu1-Ubuntu <<>> @127.0.0.1 isc.org +dnssec +multiline
