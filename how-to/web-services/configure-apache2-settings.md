@@ -153,7 +153,7 @@ This section briefly explains some basic Apache2 daemon configuration settings.
 
 ## Extending Apache2
 
-Now that you know how to configure Apache2, you may also want to know [how to extend Apache2](https://discourse.ubuntu.comhow-to-use-apache2-modules.md) with modules.
+Now that you know how to configure Apache2, you may also want to know {ref}`how to extend Apache2 <use-apache2-modules>` with modules.
 
 ## Further reading
 
