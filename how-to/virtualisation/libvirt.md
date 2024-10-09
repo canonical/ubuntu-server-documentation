@@ -430,13 +430,7 @@ And in the guest this can now be used based on the tag `myfs` like:
 sudo mount -t virtiofs myfs /mnt/
 ```
 
-Compared to other Host/Guest file sharing options -- commonly Samba, NFS or 9P -- `virtiofs` is usually much faster and also more compatible with usual file system semantics. For some extra compatibility in regard to filesystem semantics one can add:
-
-```xml
-<binary xattr='on'>
-  <lock posix='on' flock='on'/>
-</binary>
-```
+Compared to other Host/Guest file sharing options -- commonly Samba, NFS or 9P -- `virtiofs` is usually much faster and also more compatible with usual file system semantics.
 
 See the [libvirt domain/filesytem](https://libvirt.org/formatdomain.html#filesystems) documentation for further details on these.
 
