@@ -164,7 +164,7 @@ myst_heading_anchors = 3
 # sphinx_reredirects, sphinxcontrib.jquery, sphinxext.opengraph
 custom_extensions = [
 #    'sphinx_tabs.tabs',
-    'sphinxcontrib.mermaid',
+#    'sphinxcontrib.mermaid',
     'sphinxcontrib.jquery',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
