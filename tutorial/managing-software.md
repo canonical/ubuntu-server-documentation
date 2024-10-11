@@ -3,35 +3,53 @@
 
 If you are new to Ubuntu, you may be wondering what to do after installation.
 After all, Ubuntu is endlessly customisable according to your needs.
-
-To help you get the most from your Ubuntu experience, this tutorial will walk
-you through managing the software on your Ubuntu machine. Although we'll be
-using Ubuntu Server as our example, this tutorial is equally applicable to the
-Ubuntu Desktop.
-
 There are two types of software found in Ubuntu: **Debian packages** and
 **snaps** -- we will learn about both!
 
+To help you get the most from your Ubuntu experience, this tutorial will walk
+you through managing the software on your Ubuntu machine. This tutorial can
+be completed using both Ubuntu Server and Ubuntu Desktop.
+
+To avoid making changes to your computer we will set up a virtual machine (VM),
+which will provide us with a safe environment to run the commands in. Multipass
+is great for quickly creating Ubuntu virtual machines, so we will use that.
+
+## Prerequisites
+
+* **Knowledge:**
+
+  None! You don't even need to use an Ubuntu machine -- Multipass will give us
+  an Ubuntu environment to play with.
+
+* **Hardware:**
+
+  The default Multipass VM will need **5 GiB of disk space**, and
+  **1 GiB of memory**.
+
+* **Software: -- Multipass**
+
+  * On Ubuntu, you can install Multipass by running the following command in
+    your terminal (you can open a terminal window by pressing <kbd>Ctrl</kbd> +
+    <kbd>Alt</kbd> + <kbd>T</kbd> together):
+
+    ```bash
+    sudo snap install multipass
+    ```
+
+    Or you can install it directly from
+    [the Multipass page](https://snapcraft.io/multipass) in the online snap
+    store (make sure to select the "latest/stable" version from the dropdown
+    menu next to the install button).
+
+  * Multipass can be installed on Windows, Mac and other Linux distributions
+    [using these instructions](https://multipass.run/docs/tutorial#install-multipass).
+
 ## Create the virtual machine
 
-To avoid making changes to your computer we will set up a virtual machine (VM)
-to launch our server and run the commands.
-
-Multipass is great for quickly creating Ubuntu virtual machines, so we will use
-that. On Ubuntu, you can install Multipass by running the following command in
-your terminal:
-
-```bash
-sudo snap install multipass
-```
-
-Multipass can also be installed on Windows, Mac and other Linux distributions
-[using these instructions](https://multipass.run/docs/tutorial#install-multipass).
-
-Once you have installed Multipass, it is straightforward to launch a new VM.
-Let us launch our VM using the 24.04 LTS release (`noble`), and let's also give
-it the name `tutorial` using the following command. The default VM created with
-this command will need **5 GiB of disk space**, and **1 GiB of memory**:
+Once you have installed and run Multipass, it is straightforward to launch a
+new VM. Let us launch a VM using the Ubuntu 24.04 LTS release (codename `noble`),
+and let's give our VM the name `tutorial` using the following command in our
+terminal window:
 
 ```bash
 multipass launch noble --name tutorial
@@ -41,8 +59,8 @@ Multipass will download the most recent daily **image** and create the VM for
 us. It may take a little time, depending on the speed of your internet
 connection.
 
-The **image** is the collection of files we need to install and run Ubuntu. We
-don't need to specify "server" or "desktop" anywhere in our command, because
+An Ubuntu **image** is a collection of files we need to install and run Ubuntu.
+We don't need to specify "server" or "desktop" anywhere in our command, because
 the image is the same for both. The only difference between Ubuntu Server and
 Ubuntu Desktop is the subset of software packages we use from the image - we
 will see this later!
@@ -61,7 +79,8 @@ changes to `tutorial`:
 ubuntu@tutorial
 ```
 
-This shows that we are inside the VM, where we will run all of our commands. 
+This shows that we are inside the VM, and this is where we will run all our
+commands.
 
 ## Updating the system with APT
 
@@ -69,16 +88,19 @@ The first thing we always want to do with a new system (whether a VM or a
 "live" machine) is to run an update to make sure we have the latest versions
 of all the default software. 
 
-Debian packages, commonly referred to as **"debs"** are the standard software
-in Ubuntu. They can be identified by the `.deb` file extension and usually come
-in a pre-compiled binary format (so you don't need to compile it yourself).
+Debian packages, commonly referred to as **debs**, are the standard software
+in Ubuntu. They can be identified by the `.deb` file extension. 
 
-Your system software (and other deb packages) are handled through the
-[Advanced Packaging Tool](https://ubuntu.com/server/docs/package-management#advanced-packaging-tool)
-(APT). APT is a package *repository*; it contains both the **database** of the
-packages available in Ubuntu, and it contains the **packages** themselves.
+Every Linux distribution has their own preferred **package manager** for
+installing, updating and removing packages. In Ubuntu, the default package
+manager is [Advanced Packaging Tool](https://wiki.debian.org/AptCLI) (or APT,
+for short).
 
-There are two commands we need for updating our system: `update` and `upgrade`,
+APT handles all of your system software (and other deb packages). APT is a
+*repository*; it contains both the **database** of all the available packages
+in Ubuntu, and it stores the **packages** themselves.
+
+There are two APT commands we need to update our system: `update` and `upgrade`,
 which we will always run in that order.
 
 ### apt update
@@ -125,8 +147,8 @@ The output tells us:
 - the hardware version the update is for (e.g. `amd64`), and
 - what package version is currently installed (e.g. `13ubuntu10`)
 
-The specific packages included in this list will change over time, but the
-output will be structured like this:
+The specific packages included in this list changes over time, so the exact
+packages shown will be different, but the output will be structured like this:
 
 ```text
 Listing... Done
@@ -139,19 +161,22 @@ cloud-init/noble-updates 24.2-0ubuntu1~24.04.2 all [upgradable from: 24.1.3-0ubu
 
 ### apt upgrade
 
-The `apt upgrade` command is about the **packages** on your system. After we
-have updated the database by running `apt update` we can upgrade the packages
-to their newest versions by running:
+The `apt upgrade` command is about the **packages** on your system. It looks at
+the metadata in the package index we just updated, finds the packages with
+available upgrades, and lists them for us.
+
+After we have updated the database (which we did by running `apt update`) we can
+then upgrade the packages to their newest versions by running:
 
 ```bash
 sudo apt upgrade
 ```
 
-The `upgrade` command looks at the metadata in the package index we just
-updated, finds the packages with available upgrades, and lists them for us. It
-also asks us to confirm if we want to do the upgrade. Let's type <kbd>Y</kbd>
-to confirm that we want to, and the upgrade will proceed. This may take a few
-minutes.
+When we run this command, it will ask us to confirm if the summary of proposed
+changes that will be made to our system is what we want.
+
+Let's type <kbd>Y</kbd>, then press <kbd>Enter</kbd> to confirm that yes, we do
+want that, and then the upgrade will proceed. This may take a few minutes.
 
 ```{tip}
 You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran
@@ -248,32 +273,51 @@ In many places, you will see reference to `apt-get` and `apt-cache` instead of
 (e.g. `apt-get install ipcalc`).
 
 APT has recently been streamlined, so although it uses `apt-get` and
-`apt-cache` "behind the scenes", you don't need to worry about remembering
-which command to use -- you can use `apt` directly. To find out more,
-refer to the manual pages for these commands. Type `man apt`, `man apt-get` or
-`man apt-cache` in your terminal to access them.
+`apt-cache` "behind the scenes", we don't need to worry about remembering
+which command to use -- we can use `apt` directly. To find out more about
+these packages and how to use them (or indeed, any package in Ubuntu!) we can
+refer to the manual pages. Run `man apt`, `man apt-get` or `man apt-cache` in
+the terminal to access the manuals for these packages on the command line, or
+view the same content in the
+[online manual pages](https://manpages.ubuntu.com/).
 
 ## Installing deb packages
 
-For the following examples, we're going to use two popular webserver packages:
-Apache2 and nginx. However, we won't install anything just yet -- let's just
-take a look at the commands involved to understand what's happening.
+For the examples for this section, we're going to use the popular webserver
+package Apache2. However, we **don't** want to install anything just yet! Let's
+cover some of the more important information we need to understand first. When
+we run a command that asks us "`Do you want to continue? [Y/n]`", make sure to
+type <kbd>N</kbd> for "no" and then press <kbd>Enter</kbd> -- we only want to
+see the output of the commands for now.
 
-Installing deb packages using APT is done using the `apt install` command. We
-can install a single package:
+Installing deb packages using APT is done using the `apt install` command.
+We can install either a single package, or a list of packages at once, by
+including their names in a space-separated list after the `install` command, in
+this format:
 
-```bash
-sudo apt install apache2
+```text
+sudo apt install <package 1> <package 2> <package 3>
 ```
 
-Or multiple packages at once, by including them in a space-separated list like
-this:
+### About `sudo`
 
-```bash
-sudo apt install apache2 nginx
-```
+We've seen the `sudo` prefix in a couple of commands already, and you may be
+wondering what that's about. In Linux, system tasks (like installing software)
+need elevated administrator permissions. These permissions are often called
+"root access", and a user with root access is called a "root user".
 
-### Dependencies
+However, it can be dangerous to operate your machine as a root user -- since
+root access gives you full system control the whole time, it allows you to
+change or delete important system files. It's very easy to accidentally break
+your system in root mode!
+
+Instead, we use `sudo` (which is short for `superuser do`). This command is a 
+safety feature that grants regular users *temporary* (per command) admin
+privileges to make system changes. It's still important for us to always
+understand what a command does before we run it, but using `sudo` means we
+purposefully limit any potential mistakes to a single command.
+
+### About dependencies
 
 As we hinted earlier, packages often come with **dependencies** -- other
 packages that *your* package needs so it can function. Sometimes, a package
@@ -282,14 +326,14 @@ dependencies, then installing a package via `apt` will also install any
 dependencies, which ensures the software can function properly.
 
 We can see what dependencies a package has using the `install` command. Let's
-run the following command, but we don't want to proceed yet, so let's type
-<kbd>n</kbd> when it prompts us:
+run the following command, but remember, we **don't** want to proceed with the
+install yet, so let's type <kbd>N</kbd> when it asks us if we want to continue:
 
 ```bash
 sudo apt install apache2
 ```
 
-The output below tells us:
+The output should be similar to the below. It tells us:
 - which packages we have but don't need (we'll talk about that in the
   "autoremove" section),
 - additional packages that will be installed (these are our dependencies),
@@ -302,18 +346,14 @@ The output below tells us:
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
-The following packages were automatically installed and are no longer required:
-  linux-headers-6.8.0-39 linux-headers-6.8.0-39-generic linux-image-6.8.0-39-generic linux-modules-6.8.0-39-generic linux-tools-6.8.0-39
-  linux-tools-6.8.0-39-generic
-Use 'sudo apt autoremove' to remove them.
 The following additional packages will be installed:
   apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
 Suggested packages:
   apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser
 The following NEW packages will be installed:
   apache2 apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
-0 upgraded, 10 newly installed, 0 to remove and 0 not upgraded.
-Need to get 2083 kB of archives.
+0 upgraded, 10 newly installed, 0 to remove and 2 not upgraded.
+Need to get 2084 kB of archives.
 After this operation, 8094 kB of additional disk space will be used.
 Do you want to continue? [Y/n] 
 ```
@@ -345,8 +385,6 @@ If we look only at the sections on dependencies, we can see that `ssl-cert` is
 a recommended package:
 
 ```text
-Package: apache2
-Version: 2.4.58-1ubuntu8.4
 [...]
 Provides: httpd, httpd-cgi
 Pre-Depends: init-system-helpers (>= 1.54~)
@@ -358,8 +396,8 @@ Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-brow
 
 In Ubuntu, the default configuration of `apt install` is set to install
 recommended packages alongside `depends`, so when we ran the
-`apt install apache2` command, `ssl-cert` was included in the packages
-to be installed (even though it's only recommended, and not strictly needed).
+`apt install apache2` command, `ssl-cert` was included in the proposed packages
+to be installed (even though it's only recommended, not strictly needed).
 
 We can override this behaviour by passing the `--no-install-recommends` flag to
 our command, like this:
@@ -368,13 +406,11 @@ our command, like this:
 sudo apt install apache2 --no-install-recommends
 ```
 
-Then the output becomes the following (let's type <kbd>n</kbd> at the prompt
-again to avoid installing for now):
+Then the output becomes the following (type <kbd>n</kbd> at the prompt again to
+avoid installing for now):
 
 ```text
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
+[...]
 The following additional packages will be installed:
   apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
 Suggested packages:
@@ -384,8 +420,7 @@ Recommended packages:
 The following NEW packages will be installed:
   apache2 apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
 0 upgraded, 9 newly installed, 0 to remove and 25 not upgraded.
-Need to get 2065 kB of archives.
-After this operation, 8026 kB of additional disk space will be used.
+[...]
 ```
 
 Now, we see that `ssl-cert` is only mentioned as a recommended package, but is
@@ -416,21 +451,20 @@ E: You don't have enough free space in /var/cache/apt/archives/.
 ```
 
 This is because each of these suggested packages also comes with their own
-lists of dependencies, including suggested, all of which would also be
-installed. It's perhaps clear to see why this is not the default setting!
+lists of dependencies, including suggested packages, all of which would *also*
+be installed. It's perhaps clear to see why this is not the default setting!
 
 #### What if we remove a dependency?
 
 We'll go into more detail about removing packages later, but for now, let's see
-what happens if we remove a required dependency. First, we should (finally!)
-install the `apache2` package:
+what happens if we remove a required *dependency*. First, we should (finally!)
+install the `apache2` package. Now when we are asked whether we want to
+continue, let's press <kbd>Y</kbd> and then <kbd>Enter</kbd> to confirm, and
+APT will install the package:
 
 ```bash
 sudo apt install apache2
 ```
-
-Now when we are prompted whether we want to continue, let's press <kbd>Y</kbd>
-to install the package.
 
 One of the required dependencies is the `apache2-data` package. Let's try to
 remove it using `apt remove`:
@@ -440,7 +474,7 @@ sudo apt remove apache2-data
 ```
 
 Once again, `apt` won't proceed without confirmation, so we get the following
-output:
+output -- let's take a look before we confirm anything:
 
 ```text
 [...]
@@ -449,7 +483,7 @@ The following packages were automatically installed and are no longer required:
 Use 'sudo apt autoremove' to remove them.
 The following packages will be REMOVED:
   apache2 apache2-data
-0 upgraded, 0 newly installed, 2 to remove and 25 not upgraded.
+0 upgraded, 0 newly installed, 2 to remove and 2 not upgraded.
 After this operation, 1342 kB disk space will be freed.
 Do you want to continue? [Y/n]
 ```
@@ -463,14 +497,15 @@ here that we want to understand before we proceed.
   These were other dependencies that `apache2` needed, but none of them depend
   upon `apache2-data`, so even if we remove `apache2` and `apache2-data` they
   would still be functional -- they just aren't used by any other installed
-  packages...and so have no reason to be there anymore.
+  packages...and so have no reason to be there anymore. They won't be removed,
+  APT is helpfully telling us so we're aware of them.
 
 - "The following packages will be REMOVED"
 
-  These are the packages that will be removed directly - we've told `apt` we
-  want to remove `apache2-data`, so that's included, but it also will remove
-  `apache2` itself! This is because `apache2-data` is a required dependency,
-  and `apache2` won't function *at all* without it.
+  These are the packages that will be removed directly - we've told APT we
+  want to remove `apache2-data`, so we expect that to be included, but it will
+  also remove `apache2` itself! This is because `apache2-data` is a required
+  dependency, and `apache2` won't function *at all* without it.
 
 Let's now choose <kbd>Y</kbd> to confirm we want to remove this dependency.
 
@@ -485,14 +520,15 @@ redundant packages -- the `autoremove` command:
 sudo apt autoremove
 ```
 
-Once again, `apt` gives us a summary of the operation we requested, but let's
-choose <kbd>n</kbd> for now:
+When we run this command, `apt` once again gives us a summary of the operation
+we requested, but let's choose <kbd>N</kbd> for now when it asks if we want to
+continue:
 
 ```text
 [...]
 The following packages will be REMOVED:
   apache2-bin apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
-0 upgraded, 0 newly installed, 8 to remove and 6 not upgraded.
+0 upgraded, 0 newly installed, 8 to remove and 2 not upgraded.
 After this operation, 6751 kB disk space will be freed.
 Do you want to continue? [Y/n] 
 ```
@@ -527,7 +563,7 @@ ssl-cert set to manually installed.
 The following packages were automatically installed and are no longer required:
   apache2-bin apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
 Use 'sudo apt autoremove' to remove them.
-0 upgraded, 0 newly installed, 0 to remove and 6 not upgraded.
+0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
 ```
 
 If the `ssl-cert` package is manually installed on our system, by us, then
@@ -539,18 +575,32 @@ test this, just to make sure!
 sudo apt autoremove
 ```
 
-Select <kbd>Y</kbd> when prompted this time, and then we can run
+This time we'll select <kbd>Y</kbd> when prompted, and then we can run
 `apt list ssl-cert` to quickly see if our `ssl-cert` package is still on the
 system:
 
 ```bash
-ubuntu@tutorial:~$ apt list ssl-cert
+apt list ssl-cert
+```
+
+Which gives us this output, confirming that `ssl-cert` is currently installed:
+
+```bash
 Listing... Done
 ssl-cert/noble,now 1.1.2ubuntu1 all [installed]
 ```
 
 If you're curious, you can also run `apt list apache2` to see how the output
 differs for a package that was once installed and then removed!
+
+Anyway, we're not quite finished with the Apache2 package, so let's reinstall
+it:
+
+```bash
+sudo apt install apache2
+```
+
+And this time select <kbd>Y</kbd> to confirm when it asks.
 
 ## Customise configuration
 
@@ -571,7 +621,8 @@ it directly:
 dpkg --listfiles ssl-cert
 ```
 
-This gives us the following list of files and their directory structure:
+This gives us the following list of files and their directory structure (the
+end of the list is truncated for brevity):
 
 ```text
 /.
@@ -591,11 +642,6 @@ diverted by base-files to: /lib.usr-is-merged
 /usr/share/doc
 /usr/share/doc/ssl-cert
 /usr/share/doc/ssl-cert/README
-/usr/share/doc/ssl-cert/changelog.gz
-/usr/share/doc/ssl-cert/copyright
-/usr/share/lintian
-/usr/share/lintian/overrides
-/usr/share/lintian/overrides/ssl-cert
 [...]
 ```
 
@@ -613,11 +659,18 @@ This will provide us with the package name for the given file:
 ssl-cert: /usr/share/ssl-cert/ssleay.cnf
 ```
 
+Although this seems obvious to us, because we already know the source of this
+file, the `dpkg` search function is really useful for tracking down the sources
+of files we don't know about!
+
 ### Conffiles
 
 Most of a package's configuration is handled through
 [configuration files](https://www.debian.org/doc/debian-policy/ap-pkg-conffiles.html#automatic-handling-of-configuration-files-by-dpkg)
-(often known as **conffiles**).
+(often known as **conffiles**). Conffiles often contain things like file paths,
+logs and debugging configuration, kernel parameters (which can be changed to
+optimise system performance), access control, and other configuration settings.
+The actual parameters available will vary from one package to another.
 
 Package conffiles are different from all other files delivered in a package.
 A package may have any number of conffiles (including none!). Conffiles are
@@ -653,14 +706,19 @@ there. As we saw before, the only thing conffiles have in common is that the
 package maintainer decided to mark them as such.
 
 But that's our clue! So once more, `dpkg` can come to our rescue. The
-following command will show us the subset of files in a package that have been
-marked as "conffiles" by the maintainer:
+following command will show us (`--show`) the subset of files in the `apache2`
+package that have been marked as "`Conffiles`" (`-f='${Conffiles}\n'`) by the
+maintainer and shows each on a new line (`\n`) in the output:
 
 ```bash
 dpkg-query --show -f='${Conffiles}\n' apache2
 ```
 
-Unlike `dpkg --listfiles`, this query *also* gives us a string of letters and
+If you want to understand more about what this command does, you can refer to
+the manual page by typing `man dpkg-query --show`, and it will talk you through
+all the options.
+
+Unlike `dpkg --listfiles`, `dpkg-query` *also* gives us a string of letters and
 numbers. This string is known as the **"MD5 checksum"** or **"MD5 hash"**. 
 
 ```text
@@ -672,13 +730,13 @@ numbers. This string is known as the **"MD5 checksum"** or **"MD5 hash"**.
 [...]
 ```
 
-We see the checksum of a specific file by running this command:
+We can see the checksum of a specific file by running this command:
 
 ```bash
 md5sum /etc/apache2/apache2.conf
 ```
 
-Which returns us the checksum followed by the file:
+Which returns us the checksum followed by the file and its location:
 
 ```bash
 354c9e6d2b88a0a3e0548f853840674c  /etc/apache2/apache2.conf
@@ -704,7 +762,14 @@ command and use `sed` to make that change in the conffile:
 sudo sed -e 's/LogLevel warn/LogLevel debug/' -i /etc/apache2/apache2.conf
 ```
 
-Then, we'll restart our Apache2 server so that we can activate our configuration
+We won't be prompted to confirm if we want to make these changes -- but we do
+need root access so we use `sudo` in our command. As we hinted in the section
+about `sudo`, the fact that we can make these changes without needing to
+confirm is why it can be so easy to break your system when you're operating as
+root! Try running the command without the `sudo`, and you will get a "permission
+denied" error.
+
+Next, we'll restart our Apache2 server so that we can activate our configuration
 changes:
 
 ```bash
@@ -782,9 +847,15 @@ default content. If we then verify once more...
 dpkg --verify apache2
 ```
 
-...we can see that our change to the conffile has been preserved because
-`dpkg` the checksums are different, but the `a2enmod` file isn't
-listed anymore because it has been restored to the default. Phew!
+Then we'll get this output:
+
+```text
+??5?????? c /etc/apache2/apache2.conf
+```
+
+...so we can see that our change to the conffile has been preserved because
+the checksums are different, but the `a2enmod` file isn't listed anymore
+because it has been restored to the default. Phew!
 
 ```{note}
 We can use `sudo apt install <package>` to upgrade an installed package, but
@@ -1086,6 +1157,63 @@ We can view the file by running the following command:
 cat /etc/apt/sources.list.d/ubuntu.sources
 ```
 
+We're about to see a lot of different terminology, so let's take a look at an
+overview first, and then look step by step at the different layers of sources.
+
+```{mermaid}
+---
+config:
+  look: handDrawn
+  theme: neutral
+---
+flowchart TD
+    A[Ubuntu Package Archive] --> B([Splits into Ubuntu **series**])
+
+    subgraph two [ ]
+    B --> C[...]
+    B --> D[mantic]
+    B --> E[noble]
+    B --> F[oracular]
+    B --> G[...]
+    end
+   
+    E --> H([Each series splits into **pockets**])
+    subgraph three [ ]
+    H --> I[release]
+    H --> J[security]
+    H --> K[updates]
+    H --> L[proposed]
+    H --> M[backports]
+    end
+
+    K --> N([Each pocket is made of four **components**])
+    subgraph four [ ]
+    N --> O[main]
+    N --> P[universe]
+    N --> Q[restricted]
+    N --> R[multiverse]
+    end
+```
+
+
+
+
+The Ubuntu package archive is the source of all the packages in APT. 
+
+Every Ubuntu release (`noble`, `jammy`, etc) is also split into **pockets**
+which are related to the development/release lifecycle:
+
+- **release** contains the packages as they are at release time.
+- **proposed** contains package updates while they are being tested.
+- Once an update is released, they come from either **security** or **updates**
+  depending on whether they are a security-related update or not.
+- And **backports**, which contains packages that were not available at release
+  time.
+
+This is why earlier, we saw that some updates came from `noble-updates` or
+`noble-security`. The original version of the apache2 package that we saw came
+from `noble` -- the release pocket only takes the name of the Ubuntu release. 
+
 The APT repository is split into four **components**:
 
 |                          | Open source     | Closed source   |
@@ -1106,26 +1234,19 @@ The APT repository is split into four **components**:
 - **multiverse** contains community-maintained proprietary software -- these
   packages are completely unsupported by Canonical.
 
-Every Ubuntu release (`noble`, `jammy`, etc) is also split into **pockets**
-which are related to the development/release lifecycle:
-
-- **release** contains the packages as they are at release time.
-- **proposed** contains package updates while they are being tested.
-- Once an update is released, they come from either **security** or **updates**
-  depending on whether they are a security-related update or not.
-- And **backports**, which contains packages that were not available at release
-  time.
-
-This is why earlier, we saw that some updates came from `noble-updates` or
-`noble-security`. The original version of the apache2 package that we saw came
-from `noble` -- the release pocket only takes the name of the Ubuntu release. 
 
 If you would like more information about the Ubuntu release process, or to
 learn more about the sort of terminology you might come across, you may
 be interested in the
 [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/).
 
-### Building from source
+## (Optional) building from source
+
+```{note}
+This next section is a bit more complex, so if you're happy with what we've
+covered so far and want to :ref:`skip on ahead <tutorial_snaps>`, you can!
+Otherwise, read on...
+```
 
 Although APT is the preferred way to install packages on your system, due to
 its ability to handle depedencies and keep software up-to-date, not every
@@ -1151,7 +1272,7 @@ We've already seen how to handle missing or conflicting dependecies, and we
 have also seen how to verify checksums -- these are both important aspects to
 installing packages from source, so let's put our new knowledge to work!
 
-#### Downloading the files
+### Downloading the files
 
 Now that we're running an old version of `apache2` on our system, let us build
 the most up-to-date development version (`2.4.62` at the time of writing) from
@@ -1170,7 +1291,7 @@ do! Let's first download the tarball:
 wget https://dlcdn.apache.org/httpd/httpd-2.4.62.tar.gz
 ```
 
-#### Verifying the checksums
+### Verifying the checksums
 
 For this particular version of `apache` there is no MD5 checksum file so we
 can't use the `md5sum` tool we used earlier. But, there *are* SHA256 and SHA512
@@ -1202,7 +1323,7 @@ definitely wouldn't want to install it if the check fails!
 In our case, since we obtained the package from a trusted source (the official
 website) and the checksums matched, we can proceed with the installation.
 
-#### Unpacking and installing
+### Unpacking and installing
 
 First,  let's "un-tar" the tarball:
 
@@ -1296,6 +1417,7 @@ If a particular package is not available in the APT repositories, it's often
 worth checking to see if the software is available as a **snap** before we
 resort to building packages ourselves from the source. 
 
+(tutorial_snaps)=
 ## Snaps
 
 Snaps are a newer, self-contained software format that were developed to be
