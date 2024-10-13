@@ -51,8 +51,7 @@ sp-pa11y-install:
 		}
 
 sp-install: $(VENVDIR)
-	sudo apt-get update
-	sudo apt-get install --assume-yes distro-info
+	command -v distro-info || (sudo apt-get update; sudo apt-get install --assume-yes distro-info)
 
 sp-run: sp-install
 	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
