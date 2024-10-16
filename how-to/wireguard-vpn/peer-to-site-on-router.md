@@ -130,16 +130,6 @@ $ sudo wg-quick up wg0
 [#] ip link set mtu 1378 up dev wg0
 ```
 
-Verify you have a `wg0` interface with an address of `10.10.11.1/24`:
-
-```bash
-$ ip a show dev wg0
-9: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1378 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/none
-    inet 10.10.11.1/24 scope global wg0
-       valid_lft forever preferred_lft forever
-```
-
 Verify you have a `wg0` interface up with an address of `10.10.11.1/24`:
 
 ```bash
