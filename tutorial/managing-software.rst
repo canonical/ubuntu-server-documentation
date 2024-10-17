@@ -10,7 +10,7 @@ There are two types of software found in Ubuntu: **Debian packages** and
 
 To help you get the most from your Ubuntu experience, this tutorial will walk
 you through managing the software on your Ubuntu machine. This tutorial can
-be completed using both Ubuntu Server and Ubuntu Desktop.
+be completed using either Ubuntu Server or Ubuntu Desktop.
 
 To avoid making changes to your computer we will set up a virtual machine (VM),
 which will provide us with a safe environment to run the commands in. Multipass
@@ -66,8 +66,8 @@ connection.
 An Ubuntu **image** is a collection of files we need to install and run Ubuntu.
 We don't need to specify "server" or "desktop" anywhere in our command, because
 the image is the same for both. The only difference between Ubuntu Server and
-Ubuntu Desktop is the subset of software packages we use from the image - we
-will see this later!
+Ubuntu Desktop is the subset of software packages we use from the Ubuntu
+Archive - we will see this later!
 
 Now we can access the VM by running:
 
@@ -75,7 +75,7 @@ Now we can access the VM by running:
 
     multipass shell tutorial
 
-We will get a "Welcome to Ubuntu 24.04 LTS" message. Notice that when we run
+We will get a "Welcome to Ubuntu" message. Notice that when we run
 this command, the terminal username changes to ``ubuntu`` and the hostname
 changes to ``tutorial``:
 
@@ -89,24 +89,25 @@ commands.
 Updating the system with APT
 ============================
 
-The first thing we always want to do with a new system (whether a VM or a
-"live" machine) is to run an update to make sure we have the latest versions
-of all the default software. 
+The first thing we always want to do with a new system (whether a VM, container,
+bare metal, or cloud instance) is to make sure we have the latest versions
+of all the pre-installed software. 
 
 Debian packages, commonly referred to as **debs**, are the standard software
-in Ubuntu. They can be identified by the ``.deb`` file extension. 
+package format in Ubuntu. They can be identified by the ``.deb`` file extension. 
 
 Every Linux distribution has their own preferred **package manager** for
 installing, updating and removing packages. In Ubuntu, the default package
 manager is `Advanced Packaging Tool <https://wiki.debian.org/AptCLI>`_ (or APT,
 for short).
 
-APT handles all of your system software (and other deb packages). APT is a
-*repository*; it contains both the **database** of all the available packages
-in Ubuntu, and it stores the **packages** themselves.
+APT handles all of your system software (and other deb packages). It provides an
+interface to the Ubuntu Archive *repository*, so it can access both the
+**database** of all the packages available in Ubuntu, and the means to handle
+the **packages** themselves.
 
-There are two APT commands we need to update our system: ``update`` and ``upgrade``,
-which we will always run in that order.
+There are two APT commands we need to update our system: ``update`` and
+``upgrade``, which we will always run in that order.
 
 apt update
 ----------
@@ -168,12 +169,14 @@ packages shown will be different, but the output will be structured like this:
 apt upgrade
 -----------
 
-The ``apt upgrade`` command is about the **packages** on your system. It looks at
-the metadata in the package index we just updated, finds the packages with
-available upgrades, and lists them for us.
+The ``apt upgrade`` command is about the **packages** on your system. It looks
+at the metadata in the package index we just updated, finds the packages with
+available upgrades, and lists them for us. Once we've checked the proposed
+upgrade and are happy to proceed, it will then install the newer versions for
+us.
 
-After we have updated the database (which we did by running ``apt update``) we can
-then upgrade the packages to their newest versions by running:
+After we have updated the database (which we did by running ``apt update``) we
+can then upgrade the packages to their newest versions by running:
 
 .. code-block:: bash
 
@@ -201,14 +204,15 @@ each package. For example:
     Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libopeniscsiusr amd64 2.1.9-3ubuntu5.1 [49.1 kB]
 
 APT combines the various elements; the package name (``libopeniscsiusr``),
-version (``2.1.9-3ubuntu5.1``), source (``noble-updates/main``), etc into a single
-URL that it can use for the download. It then unpacks the package and applies
-the upgrade to the system.
+version (``2.1.9-3ubuntu5.1``), source (``noble-updates/main``), etc into a
+single URL that it can use for the download. The package is then unpacked, and
+the upgrade applied to the system.
 
 .. note::
-    These commands only upgrade the packages for the release of Ubuntu that we are
-    using (24.04 LTS). If we wanted to upgrade to the next release of Ubuntu, we
-    would use the ``do-release-upgrade`` command. See this guide on
+    These commands only upgrade the packages for the release of Ubuntu that we
+    are using (24.04 LTS). If we wanted to upgrade the entire system to the
+    next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the
+    ``do-release-upgrade`` command. See this guide on
     :ref:`how to upgrade your release <upgrade-your-release>` for more information.
 
 It's important to know that ``apt upgrade`` will only handle packages that can be
@@ -220,12 +224,13 @@ versions, but it *could* end up removing some packages -- so although
 ``apt upgrade`` is safe to use unattended (in a script, for example), you should
 only use ``dist-upgrade`` when you can pay attention to it.
 
-Searching APT
--------------
+Searching with APT
+------------------
 
 Now we're up-to-date, we can start exploring! As with any other database, we
-can search APT to find software. Let's say that we want to find a webserver,
-for example. We can run the following command:
+can search the list of available packages using APT in order to find software.
+Let's say that we want to find a webserver, for example. We can run the
+following command:
 
 .. code-block:: bash
 
@@ -343,9 +348,10 @@ might depend on a specific version of another package. If a package has
 dependencies, then installing a package via ``apt`` will also install any
 dependencies, which ensures the software can function properly.
 
-We can see what dependencies a package has using the ``install`` command. Let's
-run the following command, but remember, we **don't** want to proceed with the
-install yet, so let's type :kbd:`N` when it asks us if we want to continue:
+APT tells us how it will resolve any dependency conflicts or issues when we run
+the ``install`` command. Let's try this for ourselves, but remember, we
+**don't** want to proceed with the install yet, so let's type :kbd:`N` when it
+asks us if we want to continue:
 
 .. code-block:: bash
 
@@ -388,7 +394,8 @@ which we'll briefly look at here. The most common ones you might come
 across are: ``depends``, ``recommends``, and ``suggests`` (although there are
 others!), so we'll take a look at these three.
 
-- **depends**: Absolutely required, the package won't work without it.
+- **depends**: Absolutely required, the package won't work without it. If we try
+  to remove a package that is depended on by another, both will be removed! 
 - **recommends**: Strongly dependent, but not absolutely necessary (which means
   the package will work better with it, but can still function without it)
 - **suggests**: Not needed, but may enhance the usefulness of the package in
@@ -527,8 +534,16 @@ here that we want to understand before we proceed.
   want to remove ``apache2-data``, so we expect that to be included, but it will
   also remove ``apache2`` itself! This is because ``apache2-data`` is a required
   dependency, and ``apache2`` won't function *at all* without it.
-
+  
 Let's now choose :kbd:`Y` to confirm we want to remove this dependency.
+
+.. warning::
+   Removing dependencies can, at worst, cause a system to become unusable -- you
+   should always be careful when doing so. If you remove a dependency that is
+   part of a chain, the removals will cascade up the chain as each dependency
+   and the package that depends on it are removed. You can end up removing more
+   than you originally anticipated!
+
 
 Autoremove dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -576,7 +591,10 @@ We can solve this problem, and un-flag the ``ssl-cert`` package for removal, by
 
     sudo apt install ssl-cert
 
-This sets ``ssl-cert`` to **manually installed**.
+This sets ``ssl-cert`` to **manually installed**. We might well wonder "why
+didn't APT didn't ask us to confirm anything this time?". In this case, it's
+because ``ssl-cert`` is already present on the system so APT doesn't need to
+install anything new.
 
 .. code-block:: text
 
@@ -699,9 +717,10 @@ The actual parameters available will vary from one package to another.
 
 Package conffiles are different from all other files delivered in a package.
 A package may have any number of conffiles (including none!). Conffiles are
-explicitly marked by the package maintainer during development to protect them
-from being automatically upgraded, whilst all other types of files are not --
-any changes you make to regular files *will be overwritten* during an upgrade. 
+explicitly marked by the package maintainer during development to protect local
+configuration from being overwritten during upgrades so that your changes are
+saved. This is not the case for any other types of files -- changes you make to
+regular files in that package *will be overwritten* during an upgrade. 
 
 How upgrades are handled
 ------------------------
@@ -712,16 +731,16 @@ understand how such conflicts are handled.
 
 We can show the four possible upgrade scenarios using the following table. What
 happens during an upgrade depends on whether the conffile on our system has
-been changed by us ("changed/not changed by user"), and whether the default
-content has been changed by the package maintainer ("same as/changed from
-default"):
+been changed by us ("changed/not changed by user"), and whether the version's
+default content has been changed by the package maintainer ("changed/not
+changed by maintainer"):
 
-========================== =================== =========================
-The conffile is...         **same as default** **changed from default**
-========================== =================== =========================
-**...changed by user**     Keep user's changes Ask user                 
-**...not changed by user** No changes to make  Apply changes from update
-========================== =================== =========================
+========================== ============================= =========================
+The conffile is...         **not changed by maintainer** **changed by maintainer**
+========================== ============================= =========================
+**...changed by user**     Keep user's changes           Ask user                 
+**...not changed by user** No changes to make            Apply changes from update
+========================== ============================= =========================
 
 So we can see that if we do make changes to a conffile, APT will never
 overwrite our changes without asking us first. 
@@ -1271,10 +1290,10 @@ series (respectively). Pockets are usually appended to the end of the series,
 and it's quite common to see the hyphen (``-``) included when referring to
 pockets. 
 
-Remember that the original version of the ``apache2`` package that we saw came
-from ``noble`` -- the ``-release`` pocket only includes the software that was
-part of the original LTS release, and so it takes the name of the Ubuntu series
-by default (i.e., the ``-release`` pocket is implied). 
+Remember -- the original version of the ``apache2`` package we saw came from
+``noble``. The ``-release`` pocket only includes the software that was part of
+the original LTS release, and so it takes the name of the Ubuntu series by
+default (i.e., the ``-release`` pocket is implied). 
 
 Components
 ^^^^^^^^^^
@@ -1293,7 +1312,7 @@ officially supported by Canonical or are maintained by the Ubuntu Community:
 
 - **main** contains the open-source packages that are officially supported by
   Canonical. These packages are either installed on every Ubuntu machine, or
-  are very widely used for various types of systems.
+  are very widely used for various types of systems and use-cases.
 - **universe** holds all other open-source packages in Ubuntu, which are
   typically maintained by the Debian and Ubuntu communities, but may also
   include additional security coverage from Canonical under
@@ -1310,13 +1329,8 @@ come across, you may be interested in the
 `Ubuntu Packaging Guide <https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/>`_,
 which is a great resource containing all this information (and much more!).
 
-(Optional) building from source
-===============================
-
-.. note::
-    This next section is a bit more of a challenge, so if you're happy with
-    what we've covered so far and want to :ref:`skip on ahead <tutorial_snaps>`,
-    you can! Otherwise, read on...
+Installing a .deb file
+======================
 
 Although APT is the preferred way to install packages on your system, due to
 its ability to handle depedencies and keep software up-to-date, not every
@@ -1324,190 +1338,30 @@ package is available in the APT repository -- especially if they are so old
 they are no longer maintained, or conversely, are the newest version still in
 development!
 
-We can handle deb packages that aren't in the APT repository using ``dpkg`` --
-all we need is to download the deb, and we can run a command like this to
+We can install .deb files that aren't in the APT repository using ``dpkg`` --
+all we need is to download the .deb file, and we can run a command like this to
 install it:
 
 .. code-block:: bash
 
-    sudo dpkg -i <package name>
+    sudo dpkg -i <file-name.deb>
 
-However, it is also possible to obtain software by building it from the source.
-Doing this requres us to handle all the dependencies manually, and is is best
-avoided if possible on a live system as it can become quite complicated and can
-:ref:`have unintended consequences <third-party-repository-usage>`. But --
-since we are using a VM anyway, let us take a look at how this can be done for
-our Apache2 package!
-
-We've already seen how to handle missing or conflicting dependecies, and we
-have also seen how to verify checksums -- these are both important aspects to
-installing packages from source, so let's put our new knowledge to work!
-
-Downloading the files
----------------------
-
-Now that we're running an old version of ``apache2`` on our system, let us build
-the most up-to-date development version (``2.4.62`` at the time of writing) from
-source.
-
-We are fortunate, since Apache2 has instructions for building the package on the
-`Apache2 download site <https://httpd.apache.org/download.cgi#apache24>`_. The
-instructions are different for every package (and not every package comes
-with instructions), but the principles are similar.
-
-All the package files are contained in a compressed single file called a
-"tarball" (which has the ``.tar.gz`` file extension). The maintainers should
-also provide the files needed to verify the package -- in the case of Apache2,
-they do! Let's first download the tarball:
+But -- APT is helpful here too. Even if we get a .deb file that isn't from the
+Ubuntu Archive, we can still install it with APT so that if there are
+dependencies that can be resolved automatically from the Archive -- they will
+be!
 
 .. code-block:: bash
 
-    wget https://dlcdn.apache.org/httpd/httpd-2.4.62.tar.gz
+    sudo apt install ./file-name.deb
 
-Verifying the checksums
------------------------
+If we ever do want to install a .deb file, APT is definitely the most
+convenient way to do it. We may still need to handle *some* dependencies
+manually, but now we have the knowledge to be able to do that.
 
-For this particular version of ``apache`` there is no MD5 checksum file so we
-can't use the ``md5sum`` tool we used earlier. But, there *are* SHA256 and
-SHA512 checksum files. Let's download the SHA256 checksum file -- it's advised
-to download these from the official source, so let's do that:
-
-.. code-block:: bash
-
-    wget https://downloads.apache.org/httpd/httpd-2.4.62.tar.gz.sha256
-
-Then we can verify the package download against that checksum using the
-``sha256sum`` tool (which comes pre-installed, just like ``md5sum`` was):
-
-.. code-block:: bash
-
-    sha256sum -c httpd-2.4.62.tar.gz.sha256
-
-Which should return:
-
-.. code-block:: bash
-
-    httpd-2.4.62.tar.gz: OK
-
-This tells us that the package file is validated. If the output returned
-``FAILED`` then we would know something is wrong with it. In that case, we would
-want to download the file again (from a trusted source, preferably). We
-definitely wouldn't want to install it if the check fails! 
-
-In our case, since we obtained the package from a trusted source (the official
-website) and the checksums matched, we can proceed with the installation.
-
-Unpacking and installing
-------------------------
-
-First,  let's "un-tar" the tarball:
-
-.. code-block:: bash
-
-    tar -xvzf httpd-2.4.62.tar.gz
-
-This will unpack the contents of the tarball into a directory of the same name,
-which we can change to:
-
-.. code-block:: bash
-
-    cd httpd-2.4.62
-
-If we run ``ls --all`` we can see a list of all the files that are contained in
-the package.
-
-There are a couple of dependencies that we'll want to install that don't come
-packaged with the development version, so let's install those now:
-
-.. code-block:: bash
-
-    sudo apt install autoconf libtool-bin
-
-Next we'll want to configure the source tree, which will make sure that the
-package is configured according to our wishes when it's installed -- there are
-lots of options available, but for Apache2 the prefix is the most important
-option, so let's set that (for the sake of this example, we'll just set it to
-the default location that Apache2 uses anyway):
-
-.. code-block:: bash
-
-    ./configure --prefix=/usr/local/apache2
-
-Configuration is an important step, because this is where the Makefile is
-created. The Makefile is a cript that contains all the instructions we set here,
-as well as the general instructions that will allow us to install the package.
-It will take a few moments as it checks all the files to make sure everything
-is as it expects.
-
-Next, we want to run ``make`` and ``make install`` to compile and install the
-software according to the instructions in the Makefile:
-
-.. code-block:: bash
-
-    make
-    make install
-
-Now at this point, we could consider ourselves done, but installing this way
-means that there's no easy way to uninstall or update the package in the
-future since the package managers (``apt`` and ``dpkg``) can't track them. So
-one thing we can do is to create an installable deb package (which will help to
-make updating and removal easier!) -- to do that, we can use the ``fpm``
-utility. This is a Ruby package that needs to be installed via ``gem``, so first
-we need to install Ruby and some other dependencies:
-
-.. code-block:: bash
-
-    sudo apt install ruby ruby-dev gcc
-    sudo gem install fpm
-
-As we saw earlier in the tutorial, we'll need to confirm that we want to proceed
-so choose :kbd:`Y`. Then we can create the package using ``fpm``:
-
-.. code-block:: bash
-
-    fpm -s dir -t deb -n apache2-custom -v 2.4.62 /usr/local/apache2
-
-You're probably wondering what all these options do! 
-
-* ``-s dir`` sets the input type to ``dir`` -- a directory containing all the
-  files needed to run the program.
-* ``-t deb`` sets the output type to ``deb`` -- a ``.deb`` package.
-* ``-n apache2-custom`` sets the name we want to give to our package.
-* ``-v 2.4.62`` sets our version number -- for simplicity, we want to use the
-  same one as the Apache2 developers.
-* ``/usr/local/apache2`` tells ``fpm`` where to find our sources.
-
-Now if we do ``ls`` again we will see a new file has turned up:
-
-.. code-block:: bash
-
-    apache2-custom_2.4.62_amd64.deb
-
-Now that we have a deb file, we can install it using ``dpkg`` and the ``-i``
-option we saw earlier:
-
-.. code-block:: bash
-
-    sudo dpkg -i apache2-custom_2.4.62_amd64.deb
-
-If we then wanted to remove it later, we could do so again using ``dpkg``.
-Let's do that now:
-
-.. code-block:: bash
-
-    sudo dpkg -r apache2-custom
-
-However, this will often leave a lot of files behind and certainly doesn't
-provide a clean uninstall. You will often need to check the Makefile to see
-where other files might have been placed, and manually remove them. It also
-won't remove any dependencies -- or even track the dependencies we installed,
-so we'd need to remove those manually too!
-
-Definitely not an easy process! Luckily, most of the packages you might ever
-want to install will be found through APT. If a particular package is not
-available in the APT repositories, it's worth checking to see if the software
-is available as a **snap** before we resort to building packages ourselves from
-the source. 
+Luckily, most of the packages you will ever need are likely to be found through
+APT. If it's not, it's worth checking if the software is available as a **snap**
+instead.
 
 .. _tutorial_snaps:
 
@@ -1590,7 +1444,7 @@ tutorial, so let's do a quick recap of what we've learned:
 * We even learned how to downgrade to older versions of APT packages, and all
   about APT sources.
 
-**Customising packages**
+**Customising package configuration**
 
 * How to find the conffiles in a package:
   * ``dpkg-query --show -f='${Conffiles}\n' <package>``
