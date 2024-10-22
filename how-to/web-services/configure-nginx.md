@@ -91,7 +91,7 @@ While establishing an HTTP website on port 80 is a good starting point (and perh
 server {
         listen                80;
         server_name           our-site.org www.our-site.org;
-        return                301 https://$host$request_url;
+        return                301 https://$host$request_uri;
 }
 
 server {
