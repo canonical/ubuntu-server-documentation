@@ -80,9 +80,7 @@ It depends.
 
 Let's analyze the simple scenario of a system on a local network performing a DNS query for a domain.
 
-    (picture)
-    laptop, LAN, recursive DNS server in LAN which queries internet DNS servers
-    (/picture)
+![Simple DNS](../images/ubuntu-local-recursive-dns.png)
 
 Here we have:
 
