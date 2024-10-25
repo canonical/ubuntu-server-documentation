@@ -89,9 +89,7 @@ Here we have:
 
 Let's zoom in a little bit on that Ubuntu system:
 
-    (picture)
-    app -> stub resolver -> queries sent out to recursive DNS servers
-    (/picture)
+![Stub Resolver](../images/ubuntu-stub-resolver.png)
 
 When an application needs to translate a hostname to an IP address, it uses standard glibc calls for that job. That is called a stub resolver, or simply a "dns client". This is a very simple client in the sense that it does not perform recursive queries: it expects to dispatch the DNS query to a recursive DNS server, which will do all the hard work.
 
