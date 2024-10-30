@@ -127,10 +127,7 @@ Well, any DNS server can perform the validation. Let's look at two scenarios, an
 
 When a recursive DNS server is also performing DNSSEC validation, it's called a *Validating Resolver*. That will typically be the DNS server on your local network, your company's, or in some cases even your ISP's.
 
-    (picture)
-    laptop, LAN, recursive DNS server in LAN querying external DNS servers
-    the local DNS server is also marked as being a Validating Resolver
-    (/picture)
+![Validating Resolver](../images/ubuntu-local-validating-resolver.png)
 
 In Ubuntu, the default configuration of the `bind9` DNS server is to act as a validating resolver. This can be seen in `/etc/bind/named.conf.options` after installing the `bind9` package:
 
