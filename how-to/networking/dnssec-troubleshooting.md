@@ -1,3 +1,4 @@
+(dnssec-troubleshooting)=
 # Basic DNSSEC troubleshooting
 
 The troubleshooting tips that will be shown here are mostly meant for a DNSSEC zone hosted by the bind9 DNS server, but some of the tools and techniques apply to other scenarios as well.

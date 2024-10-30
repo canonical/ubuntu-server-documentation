@@ -1,3 +1,4 @@
+(install-dnssec)=
 # Installing DNS Security Extensions (DNSSEC)
 
 DNSSEC is a set of security extensions to DNS which allow DNS data to be verified for authenticity and integrity.
