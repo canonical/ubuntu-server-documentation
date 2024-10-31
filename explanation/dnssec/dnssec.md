@@ -126,7 +126,7 @@ Well, any DNS server can perform the validation. Let's look at two scenarios, an
 
 ### Validating Resolver
 
-When a recursive DNS server is also performing DNSSEC validation, it's called a *Validating Resolver*. That will typically be the DNS server on your local network, your company's, or in some cases even your ISP's.
+When a recursive DNS server is also performing DNSSEC validation, it's called a *Validating Resolver*. That will typically be the DNS server on your local network, at your company, or in some cases at your ISP.
 
 ![Validating Resolver](../images/ubuntu-local-validating-resolver.png)
 
