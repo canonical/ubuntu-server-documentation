@@ -213,7 +213,7 @@ But even when the validation is local, simpler clients might not get the full pi
     $ host www.dnssec-failed.org
     Host www.dnssec-failed.org not found: 2(SERVFAIL)
 
-# References
+## References
 
  * DNSSEC - What Is It and Why Is It Important: https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en
  * Tool to visualize the DNSSEC chain of trust of a domain: https://dnsviz.net/
