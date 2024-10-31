@@ -1,3 +1,4 @@
+(dnssec)=
 # DNSSEC
 
 DNS (Domain Name System) is a mapping system between names and IP (Internet Protocol) addresses. Besides this main purpose that allows us to use friendly names instead of a sequence of numbers to reach a web site, it also stores a lot of information about a particular domain, such as:
