@@ -25,7 +25,7 @@ It's important to note that DNSSEC, however, will NOT encrypt the data: it is st
 
 DNSSEC is based on public key cryptography, meaning that every DNS zone has a public/private key pair. The private key is used to sign the zone's DNS records, and the corresponding public key can be used to very those signatures. This public key is also published in the zone, and anyone fetching records can also fetch the public key to verify the signature of the data.
 
-The question then becomes, how to trust that this public key is authentic? Turns out the key is also signed: it's signed by the parent zone's key, which is also signed by its parent, and so on, all the way to the top: the root DNS zone. Those last keys are trusted implicitly, and all DNS resolvers have it as an anchor. This sequence of keys and signatures all the way to the top is called the chain of trust.
+The question then becomes, how to trust that this public key is authentic? Turns out the key is also signed: it's signed by the parent zone's key, which is also signed by its parent, and so on, all the way to the top: the root DNS zone. Those last keys are trusted implicitly, and all DNS resolvers have it as a trust anchor. This sequence of keys and signatures all the way to the top is called the chain of trust.
 
 The public key cryptography behind SSL/TLS is similar, but there we have the Certificate Authority entity (CA) that issues the certificates and vouches for them. Every single web browser or other SSL/TLS client or operating system needs to have a "bootstrap" list of CAs that it will trust by default, and there are dozens. In DNSSEC, the only bootstrap public key the resolver needs is the root zone one. It's as if there was only one trusted CA.
 
