@@ -180,7 +180,7 @@ Taking that line, the actual record to send to the parent zone just needs a litt
     example.internal. 3600 IN DNSKEY 257 3 13 (jkmS5hfyY3nSww4tD9Fy5d+GGc3A/zR1CFUxmN8T2TKTkgGWp8dusllM 7TrIZTEg6wZxmMs754/ftoTA6jmM1g==);
 
 
-# References
+## References
 
  * The DNSSEC Guide from bind9: https://bind9.readthedocs.io/en/stable/dnssec-guide.html
  * Easy-Start Guide for Signing Authoritative Zones: https://bind9.readthedocs.io/en/stable/dnssec-guide.html#signing

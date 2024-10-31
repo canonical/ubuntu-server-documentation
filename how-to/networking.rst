@@ -36,8 +36,8 @@ and our :ref:`introduction to Samba <introduction-to-samba>`.
     Network File System (NFS) <networking/install-nfs>
     File Transfer Protocol (FTP) <networking/ftp>
     Domain Name Service (DNS) <networking/install-dns>
-    DNS Security Extensions (DNSSEC) <install-dnssec>
-    DNSSEC Troubleshooting <dnssec-troubleshooting>
+    DNS Security Extensions (DNSSEC) <networking/install-dnssec>
+    DNSSEC Troubleshooting <networking/dnssec-troubleshooting>
     Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
     Install isc-kea <networking/install-isc-kea>
     Install isc-dhcp-server <networking/install-isc-dhcp-server>

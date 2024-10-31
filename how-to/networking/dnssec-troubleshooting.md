@@ -254,7 +254,7 @@ There are some public third-party web-based tools that will check the status of 
  * https://dnsviz.net/: Returns a graphical diagram showing the chain of trust and where it breaks down, if that's the case.
  * https://dnssec-debugger.verisignlabs.com/: A DNSSEC debugger which also shows the chain of trust and where it breaks down, in a table format.
 
-# References
+## References
 
  * bind9's guide to DNSSEC troubleshooting: https://bind9.readthedocs.io/en/latest/dnssec-guide.html#basic-dnssec-troubleshooting
  * `delv` manpage: https://manpages.ubuntu.com/manpages/noble/man1/delv.1.html
