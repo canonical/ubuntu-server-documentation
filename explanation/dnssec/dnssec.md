@@ -68,7 +68,7 @@ As an example, when a query is performed by a client that declares it understand
 
 ## Other uses
 
-DNSSEC suddenly made it more attractive and secure to store other types of information in DNS zones. Although it has always been possible to store SRV, TXT and other generic records in DNS, now these can be signed, and can thus be relied upon to be true. A well known initiative that leverages DNSSEC for this purpose is DANE: DNS-based Authentication of Named Entities (RFC 6394, RFC 6698, RFC 7671, RFC 7672, RFC 7673).
+DNSSEC makes it more attractive and secure to store other types of information in DNS zones. Although it has always been possible to store SRV, TXT and other generic records in DNS, now these can be signed, and can thus be relied upon to be true. A well known initiative that leverages DNSSEC for this purpose is DANE: DNS-based Authentication of Named Entities (RFC 6394, RFC 6698, RFC 7671, RFC 7672, RFC 7673).
 
 For example, imagine if the SSH fingerprints for a host you are logging into for the first time were also stored in DNS, and secured via DNSSEC. Instead of being prompted if you recognize the fingerprint, and wish to proceed, all this verification could happen in the background via DNSSEC and the SSHFP resource record published in the DNS zone for that host. OpenSSH is already capable of this via the configuration option `VerifyHostKeyDNS`.
 
