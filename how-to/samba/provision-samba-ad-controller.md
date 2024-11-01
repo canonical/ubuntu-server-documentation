@@ -208,7 +208,7 @@ The output should have no errors, and show the DNS records for each query:
 
 And, of course, our own hostname must be in DNS as well:
 
-    dig @localhost +short -t A $(hostname)
+    dig @localhost +short -t A $(hostname -f)
 
 The above command should return your own IP address.
 
