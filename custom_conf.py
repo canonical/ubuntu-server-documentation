@@ -164,14 +164,15 @@ myst_heading_anchors = 3
 # sphinx_reredirects, sphinxcontrib.jquery, sphinxext.opengraph
 custom_extensions = [
 #    'sphinx_tabs.tabs',
-    'sphinxcontrib.mermaid',
+    'myst_parser',
     'sphinxcontrib.jquery',
+    'sphinxcontrib.mermaid',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
 #    'canonical.terminal-output',
 #    'notfound.extension'
-    ]
+]
 
 # Add custom required Python modules that must be added to the
 # .sphinx/requirements.txt file.
@@ -182,8 +183,7 @@ custom_extensions = [
 # sphinxext-opengraph
 custom_required_modules = [
     'sphinxcontrib-mermaid',
-    'gitpython'
-    ]
+]
 
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
@@ -192,7 +192,7 @@ custom_excludes = [
     'doc-cheat-sheet*',
     'readme.rst',
     'legacy/*.md',
-    ]
+]
 
 # Allow Sphinx to use both rst and md
 source_suffix = {

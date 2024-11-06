@@ -34,6 +34,7 @@ collection of related tutorials and topics that will help you learn more about
 how it works and what’s available to you. These tutorials can be viewed in any
 order.
 
+* :ref:`Managing software in Ubuntu Server <managing-software>`
 * :ref:`Attach your Ubuntu Pro subscription <attach-your-ubuntu-pro-subscription>`
 
 If you have a specific goal, and are already familiar with Ubuntu Server, take
@@ -58,6 +59,7 @@ you to expand your knowledge of the operating system and additional software.
 .. toctree::
    :titlesonly:
    :hidden:
-   
+
    basic-installation
+   managing-software
    attach-your-ubuntu-pro-subscription
