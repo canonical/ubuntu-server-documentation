@@ -2,19 +2,15 @@
 # Introduction to eBPF
 
 [eBPF](https://ebpf.io/) is a powerful tool for server and system
-administrators. It provides the ability to extract plenty of contextual
-information from systems or processes, offering several capabilities for
-monitoring, debugging, and securing systems with little overhead given it runs
-in kernel-space. On one hand there is no need for context-switching, making it
-very fast compared to solutions implemented in user-space. On the other hand it
-has access to the kernel data structures, allowing it to be more capable than
-tools limited to the interfaces exposed to user-space.
+administrators, often described as a lightweight, sandboxed virtual
+machine within the kernel. It is commonly used for performance monitoring,
+security, and network traffic processing without the need to modify or rebuild
+the kernel.
 
-eBPF is often described as a lightweight virtual machine within the kernel.
-This virtual machine is exposed to the user-space and is able to safely run
-sandboxed programs in the kernel-space. eBPF is commonly used for performance
-monitoring, security, and network traffic processing without the need to modify
-or rebuild the kernel.
+Since it runs in the kernel space, there is no need for context-switching,
+making it very fast compared to solutions implemented in user-space. It also
+has access to the kernel data structures, providing more capabilities than
+tools limited to the interfaces exposed to user-space.
 
 BPF, which stands for "Berkeley Packet Filter", was originally designed to
 perform network packet filtering. Over time, its capabilities were extended far
@@ -100,9 +96,7 @@ is a `bpftrace` script, as described above. You will see that many of these
 tools have both a `-bpfcc` and a `.bt` version. Do read their manpages (and
 perhaps the scripts) to choose which suits you best.
 
-## Example use cases
-
-### What commands are executed?
+## Example - What commands are executed?
 
 A trivial, yet powerful command of these tools is `execsnoop-bpfcc` which
 allows one to answer common questions that should not be common - like "what
@@ -114,8 +108,8 @@ Ubuntu.
 
 For that you'd run `execsnoop-bpfcc` with the following arguments:
 
-* -Uu root - to reduce the noisy output only to things done in root context (like here the package install)
-* -T - to get time info along the log
+* `-Uu root` - to reduce the noisy output only to things done in root context (like here the package install)
+* `-T` - to get time info along the log
 
 ```
 # In one console run:
@@ -144,43 +138,47 @@ TIME     UID   PCOMM            PID     PPID    RET ARGS
 10:58:17 1000  vte-urlencode-c  1323227 1322857   0 /usr/libexec/vte-urlencode-cwd
 ```
 
-### Which files is my qemu loading?
+## You can modify it to your needs
 
-Another practical application of eBPF - this time meant to evolve into more as
-the example goes along. Let’s say you want to verify which binary files are
+Let us look at another practical application of eBPF. This time meant to show
+another use-case, but also evolve it into more by modifying it.
+
+### Which files is my QEMU loading?
+
+Let’s say you want to verify which binary files are
 loaded with a particular command line of QEMU. That is a truly complex program
-and sometimes it can be hard to make the connection from a commandline to the
+and sometimes it can be hard to make the connection from a command line to the
 files used from /usr/share/qemu. This is already hard to answer when you define
-the qemu commandline, but even more when more useful layers of abstraction are
-used like libvirt or LXD or even things on top like openstack.
+the QEMU command line, but even more when more useful layers of abstraction are
+used like libvirt or LXD or even things on top like OpenStack.
 
-You could definitely use strace to do so, but that would likely add some
-overhead to the investigation process (since strace uses ptrace, and context
-switching may be required). Furthermore imagine you want to generally monitor a
-system for this, but on a host running many VMs, here strace quickly comes to
-its limits.
+You could definitely use `strace` to do so, but that would add quite some
+overhead to the investigation process (since `strace` uses `ptrace`, and context
+switching may be required).
+Furthermore, if you would want to generally monitor a system for this,
+especially on a host running many VMs, `strace` quickly reaches its limits.
 
-Instead, you can use `opensnoop` to trace open() syscalls. We use
+Instead, you can use `opensnoop` to trace `open()` syscalls. We use
 `opensnoop-bpfcc` to have more parameters to tune it to our needs. The example
 will use the following arguments:
 
-* --full-path - Show full path for open calls using a relative path.
-* --name qemu-system-x86 - only care about files opened by qemu; The mindful
+* `--full-path` - Show full path for open calls using a relative path.
+* `--name qemu-system-x86` - only care about files opened by QEMU; The mindful
   reader will wonder why this isn't qemu-system-x86_64, but you'd see in
   unfiltered output of opensnoop that it is length limited, so only the shorter
   qemu-system-x86 can be used.
 
 ```
-# This will collect a log of files opened by qemu
+# This will collect a log of files opened by QEMU
 $ sudo /usr/sbin/opensnoop-bpfcc --full-path --name qemu-system-x86
 #
-# If now you in another console or anyone on this system in general runs qemu,
+# If now you in another console or anyone on this system in general runs QEMU,
 # this would log the files opened
 #
 # For example calling LXD for an ephemeral VM
 $ lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
 #
-# Will here in opensnoop deliver a barrage of files opened
+# Will in opensnoop deliver a barrage of files opened
 1308728 qemu-system-x86    -1   2 PID    COMM               FD ERR PATH
 /snap/lxd/current/zfs-2.2/lib/glibc-hwcaps/x86-64-v3/libpixman-1.so.0
 1308728 qemu-system-x86    -1   2 /snap/lxd/current/zfs-2.2/lib/glibc-hwcaps/x86-64-v2/libpixman-1.so.0
@@ -190,20 +188,23 @@ $ lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
 1313104 qemu-system-x86    20   0 /dev/fd/4
 ```
 
-Of course the qemu process opens plenty of things: shared libraries, config
-files, entries in /{sys,dev,proc}, and much more. But here we can see them all
+Of course the QEMU process opens plenty of things: shared libraries, config
+files, entries in `/{sys,dev,proc}`, and much more. But here we can see them all
 as they happen across all of the system.
 
 
-### But I'm only interested in a particular kind of files
+### But I'm only interested in a particular kind of file
 
-Imagine you only wanted to verify which .bin files this is loading. Of course,
-we could just use `grep` on the output, but this whole section is about
-realizing that these bpf examples are exactly that: Examples to get you
-started, to start beeing hooked and adapt them to your own needs, and to one
-day create your very own eBPF solutions from scratch. So while
-`opensnoop-bpfcc` as of right now has no option to filter on the file names, it
-could ...
+Imagine you only wanted to verify which `.bin` files this is loading. Of course, 
+we could just use `grep` on the output, but this whole section is about showing
+eBPF examples to get you started. So here we make the simplest change --
+modifying the python wrapper around the tracing eBPF code.
+Once you understand how to do this, you can go further in adapting them to your
+own needs by delving into the eBPF code itself, and from there to create your
+very own eBPF solutions from scratch.
+
+So while `opensnoop-bpfcc` as of right now has no option to filter on the file
+names, it could ...
 
 ```
 $ sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
@@ -279,7 +280,7 @@ PID     COMM               FD ERR PATH
 ### Use it elsewhere, the limit is your imagination
 
 And just like with all the other tools and examples, the limit is your
-imagination. Wanted to know which files in /etc your complex intertwined
+imagination. Wanted to know which files in `/etc` your complex intertwined
 apache config is really loading?
 
 ```
@@ -315,7 +316,7 @@ since it's a ring).  The "Possibly lost .. samples" message is a hint about
 this happening.  This is conceptually the same for almost all kernel tracing
 facilities, they are not allowed to slow down the kernel, you can't really say
 "wait until I've consumed".  Most of the time this is fine, but advanced users
-might need to aggregate on the BPF side to reduce what needs to be picked up by
+might need to aggregate on the eBPF side to reduce what needs to be picked up by
 userspace.  And despite having lower overhead, eBPF tools still need to find
 their balance between buffering, dropping events and consuming CPU.  See the
 [same discussion](https://github.com/iovisor/bcc/issues/1033) in the example
