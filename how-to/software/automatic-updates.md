@@ -63,7 +63,7 @@ The local download archive is cleaned every week. On servers upgraded to newer v
 
 The results of `unattended-upgrades` will be logged to `/var/log/unattended-upgrades`.
 
-### Notifications
+## Notifications
 
 Configuring `Unattended-Upgrade::Mail` in `/etc/apt/apt.conf.d/50unattended-upgrades` will enable `unattended-upgrades` to email an administrator detailing any packages that need upgrading or have problems.
 
