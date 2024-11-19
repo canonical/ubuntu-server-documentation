@@ -201,9 +201,11 @@ It is crucial to be rigorous when profiling the program you want to optimize.  H
 
 * Consider whether you are dealing with code that has already been highly optimized.  In fact, this is exactly the case with our example: OpenSSL is an ubiquitous cryptographic library that has received *a lot* of attention from several developers, and it is expected that cryptographic libraries are extremely optimized.  This is the major factor that explains why we have seen minimal performance gains in our experiment: the library is already pretty performant as it is.
 
+* We also have written a [blog post](https://ubuntu.com/blog/profile-guided-optimization-a-case-study) detailing a PGO case study which rendered performance improvements in the order of 5% to 10%.  It is a great example of how powerful this optimization technique can be when dealing with specialized workloads.
+
 ## Alternative scenario: profiling the program using other approaches
 
-We do not always have well behaved programs that can be profiled like `openssl speed`.  Sometimes, the program might take a long time to finish running the workload, which ends up generating huge `perfdata` files that can prove very challenging for `autofdo` to process.  For example, we profiled QEMU internally and, when executing a workload that took around 3 hours to complete, the `perfdata` generated had a size of several gigabytes.
+We do not always have well behaved programs that can be profiled like `openssl speed`.  Sometimes, the program might take a long time to finish running the workload, which ends up generating huge `perfdata` files that can prove very challenging for `autofdo` to process.  For example, we [profiled QEMU internally](https://ubuntu.com/blog/profile-guided-optimization-a-case-study) and, when executing a workload that took around 3 hours to complete, the `perfdata` generated had a size of several gigabytes.
 
 In order to reduce the size of the `perfdata` that is collected, you might want to play with `perf record`'s `-F` option, which specifies the frequency at which the profiling will be done.  Using `-F 99` (i.e., profile at 99 hertz) is indicated by some `perf` experts because it avoids accidentally sampling the program in lockstep with some other periodic activity.
 
