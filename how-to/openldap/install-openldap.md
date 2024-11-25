@@ -54,7 +54,7 @@ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
 ```
 should produce
 
-```console
+```text
 dn: cn=config
 
 dn: cn=module{0},cn=config
@@ -96,17 +96,13 @@ This is what the `dc=example,dc=com` DIT looks like:
 ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 ```
 should produce
-
-```console
+```text
 dn: dc=example,dc=com
 ```
 
-NOTE: Originally included `dn: cn=admin,dc=example,dc=com` but this is not output by the command.
-
-Where the entries mean the following:
+Where the entry means the following:
 
 - **`dc=example,dc=com`**: Base of the DIT
-- **`cn=admin,dc=example,dc=com`**: Administrator (rootDN) for this DIT (set up during package install)
 
 Notice how we used two different authentication mechanisms:
 
@@ -122,7 +118,7 @@ In both cases we only got the results that the server access-control lists (ACLs
 ldapwhoami -x
 ```
 should produce
-```console
+```text
 anonymous
 ```
 and
@@ -130,7 +126,7 @@ and
 ldapwhoami -x -D cn=admin,dc=example,dc=com -W
 ```
 should ask you to enter the administrator password you chose when you configured the `slapd` package and produce the correct output:
-```
+```text
 Enter LDAP Password:
 dn:cn=admin,dc=example,dc=com
 ```
@@ -213,7 +209,7 @@ Add the content:
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
 ```
 enter your admin password and you should see
-```console
+```text
 adding new entry "ou=People,dc=example,dc=com"
 adding new entry "ou=Groups,dc=example,dc=com"
 adding new entry "cn=miners,ou=Groups,dc=example,dc=com"
@@ -226,7 +222,7 @@ We can check that the information has been correctly added with the `ldapsearch`
 $ ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
 ```
 should give the result
-```console
+```text
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
 gidNumber: 5000
@@ -248,7 +244,7 @@ Notice we set the `userPassword` field for the "john" entry to the cryptic value
 $ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,dc=com
 ```
 which will prompt for the new password (the `-S` option) and then your admin password
-```console
+```text
 New password:
 Re-enter new password:
 Enter LDAP Password:
@@ -284,7 +280,7 @@ Then issue the command:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
 ```
 to see
-```console
+```text
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
@@ -295,7 +291,7 @@ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// \
   -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
 ```
 which should output
-```console
+```text
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
 olcDbIndex: cn,uid eq
@@ -311,7 +307,7 @@ First, run `slappasswd` to get the hash for the new password you want:
 slappasswd
 ```
 and enter and confirm the new password
-```console
+```text
 New password:
 Re-enter new password:
 {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
@@ -339,7 +335,7 @@ We still have the actual **`cn=admin,dc=example,dc=com`** DN in the **`dc=exampl
 ldappasswd -x -D cn=admin,dc=example,dc=com -W -S
 ```
 again entering and confirming the new password and then entering the current one.
-```console
+```text
 New password:
 Re-enter new password:
 Enter LDAP Password:  <-- current password, about to be changed
