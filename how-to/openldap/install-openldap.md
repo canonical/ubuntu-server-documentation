@@ -50,17 +50,29 @@ The configuration of `slapd` itself is stored under this suffix. Changes to it c
 This is what the `slapd-config` DIT looks like via the LDAP protocol (listing only the DNs):
 
 ```bash 
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
+```
+should produce
 
+```console
 dn: cn=config
+
 dn: cn=module{0},cn=config
+
 dn: cn=schema,cn=config
+
 dn: cn={0}core,cn=schema,cn=config
+
 dn: cn={1}cosine,cn=schema,cn=config
+
 dn: cn={2}nis,cn=schema,cn=config
+
 dn: cn={3}inetorgperson,cn=schema,cn=config
+
 dn: olcDatabase={-1}frontend,cn=config
+
 dn: olcDatabase={0}config,cn=config
+
 dn: olcDatabase={1}mdb,cn=config
 ```
 
@@ -81,11 +93,15 @@ Where the entries mean the following:
 This is what the `dc=example,dc=com` DIT looks like:
 
 ```bash    
-$ ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
-
-dn: dc=example,dc=com
-dn: cn=admin,dc=example,dc=com
+ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 ```
+should produce
+
+```console
+dn: dc=example,dc=com
+```
+
+NOTE: Originally included `dn: cn=admin,dc=example,dc=com` but this is not output by the command.
 
 Where the entries mean the following:
 
@@ -103,12 +119,18 @@ This is using a SASL bind (no `-x` was provided), and further specifying the `EX
 In both cases we only got the results that the server access-control lists (ACLs) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
 ```bash
-$ ldapwhoami -x
-
+ldapwhoami -x
+```
+should produce
+```console
 anonymous
-
-$ ldapwhoami -x -D cn=admin,dc=example,dc=com -W
-
+```
+and
+```bash
+ldapwhoami -x -D cn=admin,dc=example,dc=com -W
+```
+should ask you to enter the administrator password you chose when you configured the `slapd` package and produce the correct output:
+```
 Enter LDAP Password:
 dn:cn=admin,dc=example,dc=com
 ```
@@ -123,12 +145,18 @@ When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authenti
 Here are the SASL EXTERNAL examples:
 
 ```bash
-$ ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
-
+ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
+```
+should produce
+```
 dn:gidNumber=1000+uidNumber=1000,cn=peercred,cn=external,cn=auth
-
-$ sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
-
+```
+and
+```bash
+sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
+```
+should produce
+```
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
@@ -182,11 +210,11 @@ homeDirectory: /home/john
 Add the content:
 
 ```bash
-$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
-
-Enter LDAP Password: ********
+ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
+```
+enter your admin password and you should see
+```console
 adding new entry "ou=People,dc=example,dc=com"
-
 adding new entry "ou=Groups,dc=example,dc=com"
 adding new entry "cn=miners,ou=Groups,dc=example,dc=com"
 adding new entry "uid=john,ou=People,dc=example,dc=com"
@@ -196,7 +224,9 @@ We can check that the information has been correctly added with the `ldapsearch`
 
 ```bash
 $ ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
-
+```
+should give the result
+```console
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
 gidNumber: 5000
@@ -208,17 +238,28 @@ Here we used an LDAP "filter": `(uid=john)`. LDAP filters are very flexible and 
 (&(objectClass=posixGroup)(memberUid=john))
 ```
 
+NOTE: Replacing `(uid=john)` with this doesn't actually return anything. A filter that the user could try would be pretty helpful.
+
 That is a logical "AND" between two attributes. Filters are very important in LDAP and mastering their syntax is extremely helpful. They are used for simple queries like this, but can also select what content is to be replicated to a secondary server, or even in complex ACLs. The full specification is defined in [RFC 4515](http://www.rfc-editor.org/rfc/rfc4515.txt).
 
 Notice we set the `userPassword` field for the "john" entry to the cryptic value `{CRYPT}x`. This essentially is an invalid password, because no hashing will produce just `x`. It's a common pattern when adding a user entry without a default password. To change the password to something valid, you can now use `ldappasswd`:
 
 ```bash
 $ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,dc=com
-
+```
+which will prompt for the new password (the `-S` option) and then your admin password
+```console
 New password:
 Re-enter new password:
 Enter LDAP Password:
 ```
+
+After changing John's password, you can use his account as the binding dn to query the database, like so:
+```
+ldapsearch -x -LLL -D uid=john,ou=People,dc=example,dc=com -W \
+  -b dc=example,dc=com
+```
+and you should see all of the info in the database that John has access to.
 
 > **Note**:
 > Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
@@ -240,17 +281,21 @@ olcDbIndex: mail eq,sub
 Then issue the command:
 
 ```bash
-$ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
-
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
+```
+to see
+```console
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
 You can confirm the change in this way:
 
 ```bash    
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcDatabase={1}mdb)' olcDbIndex
-
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// \
+  -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
+```
+which should output
+```console
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
 olcDbIndex: cn,uid eq
@@ -262,37 +307,39 @@ olcDbIndex: mail eq,sub
 ### Change the RootDN password:
 
 First, run `slappasswd` to get the hash for the new password you want:
-
 ```bash
-$ slappasswd
-
+slappasswd
+```
+and enter and confirm the new password
+```console
 New password:
 Re-enter new password:
 {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
 ```
 
-Now prepare a `changerootpw.ldif` file with this content:
-
+Now prepare a `changerootpw.ldif` file with this content (replacing the last line with the hash you got from the previous command):
 ```text
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
 replace: olcRootPW
-olcRootPW: {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
+olcRootPW: {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo 
 ```
 
 Finally, run the `ldapmodify` command:
-
 ```bash
 $ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
-
+```
+to hopefully see
+```
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
 We still have the actual **`cn=admin,dc=example,dc=com`** DN in the **`dc=example,dc=com`** database, so let's change that too. Since this is a regular entry in this database suffix, we can use `ldappasswd`:
-
 ```bash
-$ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S
-
+ldappasswd -x -D cn=admin,dc=example,dc=com -W -S
+```
+again entering and confirming the new password and then entering the current one.
+```console
 New password:
 Re-enter new password:
 Enter LDAP Password:  <-- current password, about to be changed
@@ -308,8 +355,10 @@ Schemas can only be added to `cn=config` if they are in LDIF format. If not, the
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 
 ```bash
-$ sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif
-
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif
+```
+to see the output
+```
 adding new entry "cn=corba,cn=schema,cn=config"
 ```
 
