@@ -65,13 +65,13 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 1. Download the latest live server ISO for the release you want to install:
 
    ```
-   wget http://cdimage.ubuntu.com/ubuntu-server/daily-live/current/focal-live-server-amd64.iso
+   wget http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
    ```
 
 2. Mount it:
 
    ```
-   mount ubuntu-19.10-live-server-amd64.iso /mnt
+   mount noble-live-server-amd64.iso /mnt
    ```
 
 3. Copy the kernel and `initrd` from it to where the `dnsmasq` serves TFTP from:
@@ -86,7 +86,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
    ```
    apt download shim-signed
-   dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed -O > /srv/tftp/bootx64.efi
+   dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O > /srv/tftp/bootx64.efi
    ```
 
 2. Copy the signed GRUB binary into place:
@@ -135,7 +135,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
         
     export linux_gfx_mode
         
-    menuentry 'Ubuntu 20.04' {
+    menuentry 'Ubuntu 24.04' {
             gfxmode $linux_gfx_mode
             linux /vmlinux $vt_handoff quiet splash
             initrd /initrd
@@ -147,7 +147,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 1. Download `pxelinux.0` and put it into place:
 
    ```
-   wget http://archive.ubuntu.com/ubuntu/dists/eoan/main/installer-amd64/current/images/netboot/ubuntu-installer/amd64/pxelinux.0
+   wget http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/pxelinux.0
    mkdir -p /srv/tftp
    mv pxelinux.0 /srv/tftp/
    ```
@@ -165,7 +165,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
     LABEL install
       KERNEL vmlinuz
       INITRD initrd
-      APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/daily-live/current/focal-live-server-amd64.iso
+      APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
    ```
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
 
