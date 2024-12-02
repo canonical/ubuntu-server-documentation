@@ -1,0 +1,9 @@
+# Comment lines start with a hash (#) and are ignored
+# Each redirect should appear on its own line
+# Do not include a file extension
+# Paths don't need a slash in front of them
+# We are using the dirhtml builder so we need a trailing slash at the end
+# The paths should match what's in the build directory
+# Example:
+# redirect/from redirect/to
+
