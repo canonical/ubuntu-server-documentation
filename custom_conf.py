@@ -167,6 +167,7 @@ custom_extensions = [
     'myst_parser',
     'sphinxcontrib.jquery',
     'sphinxcontrib.mermaid',
+    'sphinxext.rediraffe',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -183,7 +184,12 @@ custom_extensions = [
 # sphinxext-opengraph
 custom_required_modules = [
     'sphinxcontrib-mermaid',
+    'sphinxext-rediraffe',
 ]
+
+# Add redirects, so they can be updated here to land with docs being moved
+rediraffe_branch = "main"
+rediraffe_redirects = "redirects.txt"
 
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
