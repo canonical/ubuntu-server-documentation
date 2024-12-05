@@ -1,9 +1,16 @@
-# Comment lines start with a hash (#) and are ignored
-# Each redirect should appear on its own line
-# Do not include a file extension
-# Paths don't need a slash in front of them
-# We are using the dirhtml builder so we need a trailing slash at the end
-# The paths should match what's in the build directory
+# The redirects.txt file stores all the redirects for the published docs
+# If you change a filename, move or delete a file, you need a redirect here.
+# - Comment lines start with a hash (#) and are ignored
+# - Each redirect should appear on its own line
+
+# We are using the dirhtml builder, so files are treated as directories:
+# - A file is built like `filename/index.html`, not `filename.html`
+# - *Do* include a trailing slash at the end of the path
+# - *Do not* include a file extension or you'll get errors
+# - Paths don't need a slash in front of them
+
 # Example:
-# redirect/from redirect/to
+# redirect/from/file/ redirect/to/file/
+
+explanation/intro-to/ explanation/introduction-to/
 
