@@ -38,7 +38,7 @@ sudo ubuntu-drivers list
 or, for servers:
 
 ```bash
-sudo ubuntu-drivers list --gpgpu
+sudo ubuntu-drivers --gpgpu list
 ```
 
 You should see a list such as the following:
@@ -77,15 +77,15 @@ sudo ubuntu-drivers install nvidia:535
 You can either rely on automatic detection, which will install the driver that is considered the best match for your hardware:
 
 ```bash
-sudo ubuntu-drivers install --gpgpu
+sudo ubuntu-drivers --gpgpu install
 ```
 
-Or you can tell the `ubuntu-drivers` tool which driver you would like installed. If this is the case, you will have to use the driver version (such as `535`) and the `-server` suffix that you saw when you used the `ubuntu-drivers list --gpgpu` command.
+Or you can tell the `ubuntu-drivers` tool which driver you would like installed. If this is the case, you will have to use the driver version (such as `535`) and the `-server` suffix that you saw when you used the `ubuntu-drivers --gpgpu list` command.
 
 Let's assume we want to install the `535-server` driver (listed as `nvidia-driver-535-server`):
 
 ```bash
-sudo ubuntu-drivers install --gpgpu nvidia:535-server
+sudo ubuntu-drivers --gpgpu install nvidia:535-server
 ```
 
 You will also want to install the following additional components:
