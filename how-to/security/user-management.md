@@ -246,7 +246,7 @@ Then add your permitted SSH users to the group `sshlogin`, and restart the SSH s
 
 ```bash
 sudo adduser username sshlogin
-sudo systemctl restart sshd.service
+sudo systemctl restart ssh.service
 ```
 
 ### External user database authentication

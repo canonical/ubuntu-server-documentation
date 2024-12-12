@@ -53,7 +53,7 @@ Banner /etc/issue.net
 After making changes to the `/etc/ssh/sshd_config` file, save the file. Then, restart the `sshd` server application to effect the changes using the following command:
 
 ```bash
-sudo systemctl restart sshd.service
+sudo systemctl restart ssh.service
 ```
 
 > **Warning**:
