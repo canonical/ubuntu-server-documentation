@@ -119,7 +119,7 @@ Edit `/etc/openvpn/myserver.conf` to make sure the following lines are pointing 
 ca ca.crt
 cert myservername.crt
 key myservername.key
-dh dh2048.pem
+dh dh.pem
 ```
 
 Complete this set with a TLS Authentication (TA) key in `etc/openvpn` for `tls-auth` like this:
