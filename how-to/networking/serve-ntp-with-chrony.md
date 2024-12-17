@@ -1,5 +1,5 @@
 (serve-ntp-with-chrony)=
-# How to server the Network Time Protocol with Chrony
+# How to serve the Network Time Protocol with Chrony
 
 `timesyncd` and `timedatectl` will generally do the right thing in keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server. 
 
