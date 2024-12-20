@@ -61,7 +61,7 @@ Here are the configuration settings that control the cryptographic algorithms se
 
 To check what effect a configuration change has on the server, it's helpful to use the `-T` parameter and `grep` the output for the configuration key you want to inspect. For example, to check the current value of the `Ciphers` configuration setting after having set `Ciphers ^3des-cbc` in `sshd_config`:
 
-```console
+```bash
 $ sudo sshd -T | grep ciphers
 
 ciphers 3des-cbc,chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
@@ -79,7 +79,7 @@ One way to examine which algorithm was selected is to add the `-v` parameter to 
 
 For example, assuming password-less public key authentication is being used (so no password prompt), we can use this command to initiate the connection and exit right away:
 
-```console
+```bash
 $ ssh -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
@@ -88,7 +88,7 @@ debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit
 
 In the above case, the `chacha20` cipher was automatically selected. We can influence this decision and only offer one algorithm:
 
-```console
+```bash
 $ ssh -v -c aes128-ctr <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: aes128-ctr MAC: umac-64-etm@openssh.com compression: none
@@ -103,7 +103,7 @@ Let's configure an OpenSSH server to only offer the AES 256 bit variant of symme
 
 First, let's see what the default is:
 
-```console
+```bash
 $ sudo sshd -T | grep ciphers
 
 ciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
@@ -131,7 +131,7 @@ $ sudo systemctl restart ssh.service
 
 After we restart the service, clients will no longer be able to use AES 128 to connect to it:
 
-```console
+```bash
 $ ssh -c aes128-ctr <server>
 
 Unable to negotiate with 10.0.102.49 port 22: no matching cipher found. Their offer: chacha20-poly1305@openssh.com,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com
@@ -141,7 +141,7 @@ Unable to negotiate with 10.0.102.49 port 22: no matching cipher found. Their of
 
 If we just want to prioritise a particular cipher, we can use the "`^`" character to move it to the front of the list, without disabling any other cipher:
 
-```console
+```bash
 $ ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: aes256-ctr MAC: umac-64-etm@openssh.com compression: none
@@ -150,7 +150,7 @@ debug1: kex: client->server cipher: aes256-ctr MAC: umac-64-etm@openssh.com comp
 
 In this way, if the server we are connecting to does not support AES 256, the negotiation will pick up the next one from the list. If we do that on the server via `Ciphers -aes256*`, this is what the same client, with the same command line, now reports:
 
-```console
+```bash
 $ ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none

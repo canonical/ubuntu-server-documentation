@@ -43,14 +43,14 @@ $ echo | openssl s_client -connect server:port 2>&1 | grep ^New
 
 That will generally show the TLS version used, and the selected cipher:
 
-```console
+```bash
 $ echo | openssl s_client -connect j-server.lxd:443 2>&1  | grep ^New
 New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
 ```
 
 The ciphers and protocols can also be selected with the same command line options as the server:
 
-```console
+```bash
 $ echo | openssl s_client -connect j-server.lxd:443 -no_tls1_3 2>&1  | grep ^New
 New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
 

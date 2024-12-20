@@ -65,14 +65,14 @@ The package dependencies are a good way to check what is needed at runtime by th
 
 To find out the package that owns a file, use `dpkg -S`. For example:
 
-```console
+```bash
 $ dpkg -S /usr/bin/lynx
 lynx: /usr/bin/lynx
 ```
 
 Then, with the package name in hand, check its dependencies. It's best to also look for `Recommends`, as they are installed by default. Continuing with the example from before, we have:
 
-```console
+```bash
 $ dpkg -s lynx | grep -E "^(Depends|Recommends)"
 Depends: libbsd0 (>= 0.0), libbz2-1.0, libc6 (>= 2.34), libgnutls30 (>= 3.7.0), libidn2-0 (>= 2.0.0), libncursesw6 (>= 6), libtinfo6 (>= 6), zlib1g (>= 1:1.1.4), lynx-common
 Recommends: mime-support
@@ -86,7 +86,7 @@ The dynamic libraries that are needed by an application should always be correct
 
 A very helpful tool that is installed in all Ubuntu systems is `ldd`. It will list all the dynamic libraries that are needed by the given binary, including dependencies of dependencies, i.e. it's recursive. Going back to the `lynx` example:
 
-```console
+```bash
 $ ldd /usr/bin/lynx
     linux-vdso.so.1 (0x00007ffffd2df000)
     libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007feb69d77000)
@@ -114,7 +114,7 @@ Another way to check for such dependencies, but without the recursion, is via `o
 
 The way to use it is to grep for the `NEEDED` string:
 
-```console
+```bash
 $ objdump -x /usr/bin/lynx|grep NEEDED
   NEEDED               libz.so.1
   NEEDED               libbz2.so.1.0
@@ -128,7 +128,7 @@ $ objdump -x /usr/bin/lynx|grep NEEDED
 
 Finally, if you want to see the dependency *tree*, you can use `lddtree` from the `pax-utils` package:
 
-```console
+```bash
 $ lddtree /usr/bin/lynx
 lynx => /usr/bin/lynx (interpreter => /lib64/ld-linux-x86-64.so.2)
     libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
@@ -159,14 +159,14 @@ Identifying which libraries were used in a static build is a bit more involved. 
 
 For example, let's try to discover which crypto libraries, if any, the `rclone` tool uses. First, let's try the packaging dependencies:
 
-```console
+```bash
 $ dpkg -s rclone | grep -E "^(Depends|Recommends)"
 Depends: libc6 (>= 2.34)
 ```
 
 Uh, that's a short list. But `rclone` definitely supports encryption, so what is going on? Turns out this is a tool written in the Go language, and that uses static linking of libraries. So let's try to inspect the package data more carefully, and this time look for the `Built-Using` header:
 
-```console
+```bash
 $ dpkg -s rclone | grep Built-Using
 Built-Using: go-md2man-v2 (= 2.0.1+ds1-1), golang-1.18 (= 1.18-1ubuntu1), golang-bazil-fuse (= 0.0~git20160811.0.371fbbd-3), ...
 ```
@@ -175,7 +175,7 @@ Ok, this time we have a lot of information (truncated above for brevity, since i
 
 If the `Built-Using` header was not there, or didn't yield any clues, we could try one more step and look for the build dependencies. These can be found in the `debian/control` file of the source package. In the case of `rclone` for Ubuntu Jammy, that can be seen at https://git.launchpad.net/ubuntu/+source/rclone/tree/debian/control?h=ubuntu/jammy-devel#n7, and a quick look at the `Build-Depends` list shows us the `golang-golang-x-crypto-dev` build dependency, whose source package is `golang-go.crypto` as expected:
 
-```console
+```bash
 $ apt-cache show golang-golang-x-crypto-dev | grep ^Source:
 Source: golang-go.crypto
 ```
