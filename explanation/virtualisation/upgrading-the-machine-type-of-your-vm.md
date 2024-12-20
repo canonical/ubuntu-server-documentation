@@ -34,13 +34,13 @@ There is no integrated single command to update the machine type via `virsh` or 
 
 First shutdown your machine and wait until it has reached that state:
 
-```console
+```bash
 virsh shutdown <your_machine>
 ```
 
 You can check the status of the machine with the following command:
 
-```console
+```bash
 virsh list --inactive
 ```
 
@@ -48,14 +48,14 @@ virsh list --inactive
 
 Once the machine is listed as "shut off", you can then edit the machine definition and find the type in the `type` tag given at the machine attribute.
 
-```console
+```bash
 virsh edit <your_machine>
 <type arch='x86_64' machine='pc-i440fx-bionic'>hvm</type>
 ```
 
 Change this to the value you want. If you need to check what machine types are available via the `kvm -M ?` command first, then note that while upstream types are provided for convenience, only Ubuntu types are supported. There you can also see what the current default would be, as in this example: 
 
-```console
+```bash
 $ kvm -M ?
 pc-i440fx-xenial       Ubuntu 16.04 PC (i440FX + PIIX, 1996) (default)
 ...
@@ -69,7 +69,7 @@ We strongly recommend that you change to newer types (if possible), not only to 
 
 After this you can start your guest again. You can check the current machine type from guest and host depending on your needs.
 
-```console
+```bash
 virsh start <your_machine>
 # check from host, via dumping the active xml definition
 virsh dumpxml <your_machine> | xmllint --xpath "string(//domain/os/type/@machine)" -

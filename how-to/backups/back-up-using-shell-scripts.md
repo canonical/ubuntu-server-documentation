@@ -71,7 +71,7 @@ The `cron` utility can be used to automate use of the script. The `cron` daemon 
 
 `cron` is configured through entries in a `crontab` file. `crontab` files are separated into fields:
 
-```console
+```bash
 # m h dom mon dow   command
 ```
 
