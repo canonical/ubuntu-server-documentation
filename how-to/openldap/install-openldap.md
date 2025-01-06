@@ -158,6 +158,7 @@ dn: cn=miners,ou=Groups,dc=example,dc=com
 objectClass: posixGroup
 cn: miners
 gidNumber: 5000
+memberUid: john
 
 dn: uid=john,ou=People,dc=example,dc=com
 objectClass: inetOrgPerson
@@ -188,7 +189,9 @@ Enter LDAP Password: ********
 adding new entry "ou=People,dc=example,dc=com"
 
 adding new entry "ou=Groups,dc=example,dc=com"
+
 adding new entry "cn=miners,ou=Groups,dc=example,dc=com"
+
 adding new entry "uid=john,ou=People,dc=example,dc=com"
 ```
 
