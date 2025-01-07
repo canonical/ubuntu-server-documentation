@@ -41,7 +41,21 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 | Other cases | `balanced` |
 
 ### Anatomy of a profile
-Tuned profiles are defined by directory in `/usr/lib/tuned/<profile>` or `/etc/tuned/<profile>`, and are defined in a `tuned.conf` file within that directory.  That file has an INI structure which looks like this:
+
+Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile>`,
+those added by the administrator should be placed in `/etc/tuned/<profile>`.
+
+> In tuned version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
+> of these files changed. An upgrade will migrate custom profiles, since most
+> users are not yet on that new release the further document will use the old
+> paths in the examples.
+> Predefined profiles:
+>   `/usr/lib/tuned/<profile>` -> `/usr/lib/tuned/profiles/<profile>`
+> User defined profiles:
+>   `/etc/tuned/<profile>` -> `/etc/tuned/profiles/<profile>`
+
+In each of these `<profile>` directories a file `tuned.conf` defines that profile.
+That file has an INI structure which looks like this:
 
 ```ini
 [main]
@@ -132,7 +146,7 @@ And their description can be found in `/usr/lib/python3/dist-packages/tuned/plug
 
 For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
 
-Custom profiles live in `/etc/tuned/<profile>/tuned.conf`. There are 3 ways they can be created:
+Custom profiles live in `/etc/tuned/<profile>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
 
 * Copy an existing profile from `/usr/lib/tuned/<profile>` to `/etc/tuned/<profile>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
 * Create an entirely new profile in `/etc/tuned/<profile>` from scratch.
