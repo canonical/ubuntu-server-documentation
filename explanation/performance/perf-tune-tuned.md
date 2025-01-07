@@ -21,7 +21,7 @@ You can also configure TuneD to dynamically react to changes in device usage and
 
 ## Static vs. dynamic tuning
 
-TuneD can perform two types of tuning: **static** and **dynamic**. 
+TuneD can perform two types of tuning: **static** and **dynamic**.
 
 * Static tuning mainly consists of applying predefined `sysctl` and `sysfs` settings and the one-shot activation of several configuration tools such as `ethtool`.
 
@@ -128,7 +128,7 @@ cpu
 ```
 And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
 
-### Customising a profile 
+### Customising a profile
 
 For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
 
