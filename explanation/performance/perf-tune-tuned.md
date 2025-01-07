@@ -42,19 +42,19 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 
 ### Anatomy of a profile
 
-Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile>`,
-those added by the administrator should be placed in `/etc/tuned/<profile>`.
+Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile-name>`,
+those added by the administrator should be placed in `/etc/tuned/<profile-name>`.
 
 > In tuned version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
 > of these files changed. An upgrade will migrate custom profiles, since most
 > users are not yet on that new release the further document will use the old
 > paths in the examples.
 > Predefined profiles:
->   `/usr/lib/tuned/<profile>` -> `/usr/lib/tuned/profiles/<profile>`
+>   `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
 > User defined profiles:
->   `/etc/tuned/<profile>` -> `/etc/tuned/profiles/<profile>`
+>   `/etc/tuned/<profile-name>` -> `/etc/tuned/profiles/<profile-name>`
 
-In each of these `<profile>` directories a file `tuned.conf` defines that profile.
+In each of these `<profile-name>` directories a file `tuned.conf` defines that profile.
 That file has an INI structure which looks like this:
 
 ```ini
@@ -146,11 +146,11 @@ And their description can be found in `/usr/lib/python3/dist-packages/tuned/plug
 
 For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
 
-Custom profiles live in `/etc/tuned/<profile>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
+Custom profiles live in `/etc/tuned/<profile-name>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
 
-* Copy an existing profile from `/usr/lib/tuned/<profile>` to `/etc/tuned/<profile>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
-* Create an entirely new profile in `/etc/tuned/<profile>` from scratch.
-* Create a new profile in `/etc/tuned/<new-profile>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/<profile>`.
+* Copy an existing profile from `/usr/lib/tuned/<profile-name>` to `/etc/tuned/<profile-name>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
+* Create an entirely new profile in `/etc/tuned/<new-profile-name>` from scratch.
+* Create a new profile in `/etc/tuned/<new-profile-name>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/<profile-name>`.
 
 After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
 
