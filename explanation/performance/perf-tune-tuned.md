@@ -245,8 +245,6 @@ The sections that follow `[main]` represent the configuration of tuning plugins.
 * The second plugin used is `disk`, which is used to set the `readahead` value to at least `4096`.
 * Finally, the `sysctl` plugin is configured to set several variables in `sysfs` (the comments in the example explain the rationale behind each change).
 
-The content of this profile can be overwritten if needed, by creating the file `/etc/tuned/hpc-compute/tuned.conf` with the desired content. The content in `/etc/tuned` always takes precedence over `/usr/lib/tuned`. One can also extend this profile by creating a custom profile and including `hpc-compute`.
-
 > \*1: This is a universe package
 > Ubuntu ships this software as part of its [universe repository](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
 
