@@ -45,10 +45,10 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile-name>`,
 those added by the administrator should be placed in `/etc/tuned/<profile-name>`.
 
-> In tuned version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
-> of these files changed. An upgrade will migrate custom profiles, since most
-> users are not yet on that new release the further document will use the old
-> paths in the examples.
+> In TuneD version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
+> of these files changed. An upgrade will migrate any custom profiles, however
+> since most users are not yet on the new release, the rest of this page uses
+> the old paths in the examples.
 > Predefined profiles:
 >   `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
 > User defined profiles:
