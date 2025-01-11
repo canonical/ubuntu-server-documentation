@@ -230,29 +230,21 @@ To disable AppArmor, you must do the following:
     sudo systemctl disable apparmor.service
     ```
 
-* Edit `/etc/default/grub` and add the following to the GRUB configuration to disable the AppArmor kernel module from loading at boot time:
-
-    ```
-    apparmor=0
-    security=""
-    ```
+* Edit `/etc/default/grub` and add `apparmor=0` to `GRUB_CMDLINE_LINUX` in `/etc/default/grub`
 
 * Run `sudo update-grub` to refresh the boot configuration
 * Reboot the system.
 
 ### Re-enable AppArmor
 
-* Remove the following lines from `/etc/default/grub` or comment them out by putting a `#` at the beginning of the lines:
-    ```
-    apparmor=0
-    security=""
-    ```
+* Remove the `apparmor=0` item from `GRUB_CMDLINE_LINUX` in `/etc/default/grub`.
 
 * Re-enable the `apparmor.service` SystemD unit
 
     ```
     sudo systemctl enable apparmor.service
     ```
+    
 * Run `sudo update-grub` to update your system boot configuration.
 * Reboot your system.
 
