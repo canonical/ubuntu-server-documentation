@@ -76,20 +76,6 @@ sudo rm /etc/apparmor.d/disable/profile.name
 cat /etc/apparmor.d/profile.name | sudo apparmor_parser -a
 ```
 
-AppArmor can be disabled, and the kernel module unloaded, by entering the following:
-
-```bash
-sudo systemctl stop apparmor.service
-sudo systemctl disable apparmor.service
-```
-
-To re-enable AppArmor, enter:
-
-```bash
-sudo systemctl enable apparmor.service
-sudo systemctl start apparmor.service
-```
-
 > **Note**:
 > Replace `profile.name` with the name of the profile you want to manipulate. Also, replace `/path/to/bin/` with the actual executable file path. For example, for the `ping` command use `/bin/ping`.
 
@@ -224,6 +210,51 @@ Profiles are meant to provide security and so can't be too permissive. But often
 * Modify a local override:
   * To mitigate the drawbacks of above approaches, **local includes** were introduced, adding the ability to write arbitrary rules that not run into issues during upgrades that modify the packaged rule.
   * The files can be found in `/etc/apparmor.d/local/` and exist for the packages that are known to sometimes need slight tweaks for special setups.
+
+
+## Disabling or Re-enabling AppArmor
+
+Starting with Ubuntu 24.04 and later, the AppArmor services are baked into the Ubuntu Kernel, and require special steps to fully disable or re-enable.
+
+### Disable AppArmor
+
+> WARNING! Disabling AppArmor reduces the security of your system! You should only disable apparmor if you understand the security implications 
+> of disabling the service!
+
+To disable AppArmor, you must do the following:
+
+* Stop and disable the `apparmor.service` in SystemD to prevent AppArmor profiles from being loaded:
+
+    ```
+    sudo systemctl stop apparmor.service
+    sudo systemctl disable apparmor.service
+    ```
+
+* Edit `/etc/default/grub` and add the following to the GRUB configuration to disable the AppArmor kernel module from loading at boot time:
+
+    ```
+    apparmor=0
+    security=""
+    ```
+
+* Run `sudo update-grub` to refresh the boot configuration
+* Reboot the system.
+
+### Re-enable AppArmor
+
+* Remove the following lines from `/etc/default/grub` or comment them out by putting a `#` at the beginning of the lines:
+    ```
+    apparmor=0
+    security=""
+    ```
+
+* Re-enable the `apparmor.service` SystemD unit
+
+    ```
+    sudo systemctl enable apparmor.service
+    ```
+* Run `sudo update-grub` to update your system boot configuration.
+* Reboot your system.
 
 ## Further reading
 
