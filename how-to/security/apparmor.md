@@ -223,30 +223,47 @@ Starting with Ubuntu 24.04 and later, the AppArmor services are baked into the U
 
 To disable AppArmor, you must do the following:
 
-* Stop and disable the `apparmor.service` in SystemD to prevent AppArmor profiles from being loaded:
-
-    ```
-    sudo systemctl stop apparmor.service
-    sudo systemctl disable apparmor.service
-    ```
-
 * Edit `/etc/default/grub` and add `apparmor=0` to `GRUB_CMDLINE_LINUX` in `/etc/default/grub`
-
 * Run `sudo update-grub` to refresh the boot configuration
 * Reboot the system.
+
+Once rebooted, you can check the status of AppArmor with the following commands, and should see similar output to this:
+
+```
+$ sudo aa-status
+apparmor module is loaded.
+apparmor filesystem is not mounted.
+```
+
+```
+$ systemctl status apparmor
+○ apparmor.service - Load AppArmor profiles
+     Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
+     Active: inactive (dead)
+  Condition: start condition unmet at Tue 2025-01-14 08:45:04 UTC; 1min 20s ago
+             └─ ConditionSecurity=apparmor was not met
+       Docs: man:apparmor(7)
+             https://gitlab.com/apparmor/apparmor/wikis/home/
+
+Jan 14 08:45:04 n systemd[1]: apparmor.service - Load AppArmor profiles was skipped because of an unmet condition check (ConditionSecurity=apparmor).
+```
 
 ### Re-enable AppArmor
 
 * Remove the `apparmor=0` item from `GRUB_CMDLINE_LINUX` in `/etc/default/grub`.
-
-* Re-enable the `apparmor.service` SystemD unit
-
-    ```
-    sudo systemctl enable apparmor.service
-    ```
-    
 * Run `sudo update-grub` to update your system boot configuration.
 * Reboot your system.
+
+You can check if AppArmor is then re-enabled with the following command, and you should seee output similar to this:
+
+```
+$ sudo aa-status
+apparmor module is loaded.
+119 profiles are loaded.
+24 profiles are in enforce mode.
+   /usr/bin/man
+...
+```
 
 ## Further reading
 
