@@ -214,7 +214,7 @@ Profiles are meant to provide security and so can't be too permissive. But often
 
 ## Disabling or Re-enabling AppArmor
 
-Starting with Ubuntu 24.04 and later, the AppArmor services are baked into the Ubuntu Kernel, and require special steps to fully disable or re-enable.
+Starting with Ubuntu 24.04 and later, the AppArmor services are baked into the Ubuntu Kernel.  In earlier versions of Ubuntu, you could disable AppArmor by not loading the service. However, it now requires setting a module parameter on the kernel command line to fully disable or re-enable AppArmor.
 
 ### Disable AppArmor
 
