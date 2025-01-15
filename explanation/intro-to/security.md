@@ -6,7 +6,7 @@ Ubuntu system. Although a fresh installation of Ubuntu is relatively safe for
 immediate use, it is important to have a balanced understanding of your
 system's security posture based on how it will be used after deployment. It's
 important to take a layered approach so that your system's security is not
-dependent on a single 
+dependent on a single point of defense.
 
 ## Server security guidance
 
@@ -27,7 +27,7 @@ that will help with this, and we suggest some in the
 consider for your use-case. Again, the list is not intended to be exhaustive,
 but rather a starting point.
 
-For a more thorough treatment of security in Ubuntu, we recommend checking
+For a more thorough treatment of security in Ubuntu, we also recommend checking
 out the [Ubuntu Security documentation](https://ubuntu.com/security).
 
 ## Ubuntu Pro
@@ -36,7 +36,7 @@ Canonical offers security, compliance and support services through the
 [Ubuntu Pro](https://ubuntu.com/pro) subscription. Ubuntu Pro is available
 for free on up to 5 machines (for business or personal use). Although the
 compliance and certification features of Ubuntu Pro are likely to be of more
-interest to enterprise users, the security patching features are great for
+interest to enterprise users, the enhanced security coverage is great for
 anyone using Ubuntu.
 
 All of the Ubuntu Pro features can be managed on the command line via the
@@ -46,8 +46,9 @@ utility, which also has an API for easier automation.
 ### Vulnerability management
 
 In a standard Ubuntu LTS release, security support is provided for packages in
-the Main repository for 5 years. With Ubuntu Pro, this is expanded to 10 years,
-and also includes patching for medium, high and critival severity
+the [Main repository](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#components)
+for 5 years. With Ubuntu Pro, this is expanded to 10 years, and also includes
+patching for medium, high and critival severity
 [vulnerabilities](https://ubuntu.com/security/cves/about) for the Universe
 repository.
 

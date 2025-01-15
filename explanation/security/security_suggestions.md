@@ -122,49 +122,60 @@ documentation.
    {ref}`introduction to SSSD <introduction-to-network-user-authentication-with-sssd>`
    or get started setting it up with our
    {ref}`how-to section <how-to-network-user-authentication-with-sssd>`.
-
-### Virtual Private Networks (VPNs)
-
-1. **WireGuard VPN**
-
-   * {ref}`Introduction to WireGuard VPN <introduction-to-wireguard-vpn>`
-   * {ref}`How to set up WireGuard VPN <how-to-wireguard-vpn>`
-
-1. **OpenVPN**
-   
-   * {ref}`About OpenVPN clients <openvpn-client-implementations>`
-   * {ref}`How to install OpenVPN <install-openvpn>`
+1. **Active Directory**, the directory service for Windows domain networks, can
+   be set up to allow your Ubuntu Server to integrate with a Windows network.
+   Find out more about
+   {ref}`Active Directory integration <explanation-active-directory-integration>`,
+   or {ref}`learn how to set it up <how-to-active-directory-integration>`.
+   You may also find ADSys, the Group Policy client for Ubuntu, helpful. See
+   the [ADSys documentation](https://documentation.ubuntu.com/adsys/en/latest/)
+   for more details.
+1. **AppArmor** is strongly recommended in order to limit the system access and
+   capabilities of the software running on your systems. It enforces Mandatory
+   Access Control (MAC) policies for individual applications to ensure that
+   even if an application is compromised, the amount of damage caused is
+   limited. We have a how-to guide that will show you
+   {ref}`how to set up AppArmor <apparmor>`.
 
 ### Security of communications
 
-1. **TLS/SSL** for secure communication
+VPNs are an important tool for system administrators. They provide encrypted,
+secure connections between a network and the users connecting to it. Two of the
+most popular choices in Ubuntu are **WireGuard VPN** and **OpenVPN**.
 
-<!--- We don't have specific pages on TLS or SSL individually, but we do have:
-We don't have pages on TLS or SSL individually, but we do have:
-How-to: LDAP: {ref}`LDAP and TLS <ldap-and-tls>` (this is the closest we have to a discussion of the topic, and it’s within the how-to LDAP section)
-Explanation: Cryptography: {ref}`GnuTLS <gnutls>`
-Explanation: Cryptography: {ref}`OpenSSL <openssl>`
-Explanation: Cryptography: {ref}`Troubleshooting TLS/SSL <troubleshooting-tls>`
-Explanation: security: {ref}`OpenVPN <openvpn-client-implementations>` which is a VPN in the SSL/TLS VPN stack (as opposed to an IPSec VPN)
---->
+1. **WireGuard VPN** is a modern and performant option, and it removes much of
+   the complexity from the configuration and deployment of a VPN. To get an
+   overview, see our
+   {ref}`Introduction to WireGuard VPN <introduction-to-wireguard-vpn>`. You
+   can then find out how to {ref}`set up WireGuard VPN <how-to-wireguard-vpn>`.
 
-### Mandatory Access Controls (MAC)
+1. **OpenVPN** is a well-established and widely supported option with a large
+   user base. It supports many platforms besides Linux, including Windows,
+   macOS and iOS. Find out more
+   {ref}`about the available clients <openvpn-client-implementations>`, or see
+   our guide on {ref}`how to install OpenVPN <install-openvpn>`.
 
-1. **AppArmor**
-   
-   * {ref}`How to set up AppArmor <apparmor>`
+It's also important to consider **Transport Layer Security (TLS)** and/or
+**Secure Sockets Layer (SSL)** for securely encrypting data in transit. These
+cryptographic protocols provide privacy, integrity and authenticity to the
+communications being passed between two clients, or between a client and server.
+The exact implementation you choose will depend upon your setup, and there are
+many options available.
 
-### Cryptography / cryptographic libraries
+### Cryptography
 
-1. **Crypto libraries**
+There are many **cryptographic libraries** available in Ubuntu. For an overview
+of the most common ones, including some more details about TLS and SSL, refer
+to our page {ref}`about crypto libraries <explanation-cryptography>`. For a
+more high level overview of cryptographic libraries in general, see our
+{ref}`introduction-to-crypto-libraries`
 
-   * {ref}`introduction-to-crypto-libraries`
-   * {ref}`About crypto libraries <explanation-cryptography>`
-
-1. **Certificates**
-
-   * {ref}`About certificates <certificates>`
-   * {ref}`Install root CA certificate in the trust store <install-a-root-ca-certificate-in-the-trust-store>`
+Of course, no discussion of cryptography would be complete without including
+**certificates**. For more details about what certificates are and how they are
+used, see our {ref}`About certificates <certificates>` page. Alternatively,
+if you are familiar with the concepts of certificates and Certification
+Authorities (CA), our how-to guide will show you how to
+{ref}`Install root CA certificate in the trust store <install-a-root-ca-certificate-in-the-trust-store>`
 
 ### Compliance and auditing
 
