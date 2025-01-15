@@ -76,20 +76,6 @@ sudo rm /etc/apparmor.d/disable/profile.name
 cat /etc/apparmor.d/profile.name | sudo apparmor_parser -a
 ```
 
-AppArmor can be disabled, and the kernel module unloaded, by entering the following:
-
-```bash
-sudo systemctl stop apparmor.service
-sudo systemctl disable apparmor.service
-```
-
-To re-enable AppArmor, enter:
-
-```bash
-sudo systemctl enable apparmor.service
-sudo systemctl start apparmor.service
-```
-
 > **Note**:
 > Replace `profile.name` with the name of the profile you want to manipulate. Also, replace `/path/to/bin/` with the actual executable file path. For example, for the `ping` command use `/bin/ping`.
 
@@ -224,6 +210,60 @@ Profiles are meant to provide security and so can't be too permissive. But often
 * Modify a local override:
   * To mitigate the drawbacks of above approaches, **local includes** were introduced, adding the ability to write arbitrary rules that not run into issues during upgrades that modify the packaged rule.
   * The files can be found in `/etc/apparmor.d/local/` and exist for the packages that are known to sometimes need slight tweaks for special setups.
+
+
+## Disabling or Re-enabling AppArmor
+
+Starting with Ubuntu 24.04 and later, the AppArmor services are baked into the Ubuntu Kernel.  In earlier versions of Ubuntu, you could disable AppArmor by not loading the service. However, it now requires setting a module parameter on the kernel command line to fully disable or re-enable AppArmor.
+
+### Disable AppArmor
+
+> WARNING! Disabling AppArmor reduces the security of your system! You should only disable apparmor if you understand the security implications 
+> of disabling the service!
+
+To disable AppArmor, you must do the following:
+
+* Edit `/etc/default/grub` and add `apparmor=0` to `GRUB_CMDLINE_LINUX` in `/etc/default/grub`
+* Run `sudo update-grub` to refresh the boot configuration
+* Reboot the system.
+
+Once rebooted, you can check the status of AppArmor with the following commands, and should see similar output to this:
+
+```
+$ sudo aa-status
+apparmor module is loaded.
+apparmor filesystem is not mounted.
+```
+
+```
+$ systemctl status apparmor
+○ apparmor.service - Load AppArmor profiles
+     Loaded: loaded (/usr/lib/systemd/system/apparmor.service; enabled; preset: enabled)
+     Active: inactive (dead)
+  Condition: start condition unmet at Tue 2025-01-14 08:45:04 UTC; 1min 20s ago
+             └─ ConditionSecurity=apparmor was not met
+       Docs: man:apparmor(7)
+             https://gitlab.com/apparmor/apparmor/wikis/home/
+
+Jan 14 08:45:04 n systemd[1]: apparmor.service - Load AppArmor profiles was skipped because of an unmet condition check (ConditionSecurity=apparmor).
+```
+
+### Re-enable AppArmor
+
+* Remove the `apparmor=0` item from `GRUB_CMDLINE_LINUX` in `/etc/default/grub`.
+* Run `sudo update-grub` to update your system boot configuration.
+* Reboot your system.
+
+You can check if AppArmor is then re-enabled with the following command, and you should seee output similar to this:
+
+```
+$ sudo aa-status
+apparmor module is loaded.
+119 profiles are loaded.
+24 profiles are in enforce mode.
+   /usr/bin/man
+...
+```
 
 ## Further reading
 
