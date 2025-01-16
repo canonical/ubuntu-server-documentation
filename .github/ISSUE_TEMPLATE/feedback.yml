@@ -16,7 +16,7 @@ body:
     attributes:
       label: Page URL
       description: Please enter the URL of the page you are referring to.
-      type: url
+      placeholder: https://documentation.ubuntu.com/server/
     validations:
       required: true
   - type: checkboxes
@@ -26,17 +26,11 @@ body:
       description: Please let us know what issue you encountered with the documentation.
       options:
         - label: I found what I was looking for
-          required: false
         - label: I couldn't find what I was looking for
-          required: false
         - label: I found the information, but it was incorrect
-          required: false
         - label: I found the information, but it was incomplete
-          required: false
         - label: I found the information, but it was confusing
-          required: false
         - label: I encountered a technical issue (e.g., broken link, image not loading)
-          required: false
   - type: textarea
     id: description
     attributes:
@@ -48,4 +42,3 @@ body:
         - Any error messages or screenshots you can provide would be very helpful.
     validations:
       required: true
-      
