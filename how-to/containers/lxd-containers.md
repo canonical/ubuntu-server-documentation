@@ -1,18 +1,17 @@
 (lxd-containers)=
 # LXD containers
 
+[LXD](https://ubuntu.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
-[LXD](https://ubuntu.com/lxd) (pronounced lex-dee) is the lightervisor, or lightweight container hypervisor. LXC (lex-see) is a program which creates and administers "containers" on a local system. It also provides an API to allow higher level managers, such as LXD, to administer containers. In a sense, one could compare LXC to QEMU, while comparing LXD to libvirt.
+It provides a unified experience for running and managing full Linux systems inside containers or virtual machines. You can access it via the command line, its [built-in graphical user interface](https://documentation.ubuntu.com/lxd/en/latest/howto/access_ui/), or a set of powerful [REST APIs](https://documentation.ubuntu.com/lxd/en/latest/restapi_landing/). 
 
-The LXC API deals with a 'container'. The LXD API deals with 'remotes', which serve images and containers. This extends the LXC functionality over the network, and allows concise management of tasks like container migration and container image publishing.
+LXD scales from one instance on a single machine [to a cluster](https://documentation.ubuntu.com/lxd/en/latest/explanation/clusters/) in a full data center rack, making it suitable for both development and production workloads. You can even use LXD to set up a small, scalable private cloud, [such as a MicroCloud](https://canonical.com/microcloud). 
 
-LXD uses LXC under the covers for some container management tasks. However, it keeps its own container configuration information and has its own conventions, so that it is best not to use classic LXC commands by hand with LXD containers. This document will focus on how to configure and administer LXD on Ubuntu systems.
+This document will focus on how to configure and administer LXD on Ubuntu systems using the command line. On Ubuntu Server Cloud images, LXD comes pre-installed.
 
-## Online Resources
+## Online resources
 
-There is excellent documentation for [getting started with LXD](https://documentation.ubuntu.com/lxd/en/latest/getting_started/). Stephane Graber also has an [excellent blog series](https://www.stgraber.org/2016/03/11/lxd-2-0-blog-post-series-012/) on LXD 2.0. Finally, there is great documentation on how to [drive LXD using Juju](https://docs.jujucharms.com/devel/en/clouds-lxd).
-
-This document will offer an Ubuntu Server-specific view of LXD, focusing on administration.
+You can visit [the official LXD documentation](https://documentation.ubuntu.com/lxd/), or get in touch with the LXD team in their [Ubuntu Discourse forum](https://discourse.ubuntu.com/c/lxd/). The team also maintains a [YouTube channel](https://www.youtube.com/c/LXDvideos) with helpful videos. 
 
 ## Installation
 
@@ -26,7 +25,7 @@ This will install the self-contained LXD snap package.
 
 ## Kernel preparation
 
-In general, Ubuntu should have all the desired features enabled by default. One exception to this is that in order to enable swap accounting the boot argument `swapaccount=1` must be set. This can be done by appending it to the `GRUB_CMDLINE_LINUX_DEFAULT=`variable in /etc/default/grub, then running 'update-grub' as root and rebooting.
+In general, Ubuntu should have all the desired features enabled by default. One exception to this is that in order to enable swap accounting, the boot argument `swapaccount=1` must be set. This can be done by appending it to the `GRUB_CMDLINE_LINUX_DEFAULT=`variable in /etc/default/grub, then running 'update-grub' as root and rebooting.
 
 ## Configuration
 
@@ -56,11 +55,13 @@ This section will describe the simplest container tasks.
 
 Every new container is created based on either an image, an existing container, or a container snapshot. At install time, LXD is configured with the following image servers:
 
-  - `ubuntu`: this serves official Ubuntu server cloud image releases.
+  - `ubuntu`: this serves official Ubuntu cloud image releases.
 
-  - `ubuntu-daily`: this serves official Ubuntu server cloud images of the daily development releases.
+  - `ubuntu-daily`: this serves official Ubuntu cloud images of the daily development releases.
 
-  - `images`: this is a default-installed alias for images.linuxcontainers.org. This is serves classical lxc images built using the same images which the LXC 'download' template uses. This includes various distributions and minimal custom-made Ubuntu images. This is not the recommended server for Ubuntu images.
+  - `ubuntu-minimal`: this serves official Ubuntu Minimal cloud image releases.
+
+  - `images`: this server provides unofficial images for a variety of Linux distributions. This is not the recommended server for Ubuntu images.
 
 The command to create and start a container is
 
@@ -115,7 +116,7 @@ The try-it page mentioned above gives a full synopsis of the commands you can us
 
 Now that the `bionic` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
 
-## LXD Server Configuration
+## LXD server configuration
 
 By default, LXD is socket activated and configured to listen only on a local UNIX socket. While LXD may not be running when you first look at the process listing, any LXC command will start it up. For instance:
 
@@ -227,7 +228,7 @@ LXD supports flexible constraints on the resources which containers can consume.
 
 For a full list of limits known to LXD, see [the configuration documentation](https://documentation.ubuntu.com/lxd/en/latest/reference/instance_options/).
 
-## UID mappings and Privileged containers
+## UID mappings and privileged containers
 
 By default, LXD creates unprivileged containers. This means that root in the container is a non-root UID on the host. It is privileged against the resources owned by the container, but unprivileged with respect to the host, making root in a container roughly equivalent to an unprivileged user on the host. (The main exception is the increased attack surface exposed through the system call interface)
 
