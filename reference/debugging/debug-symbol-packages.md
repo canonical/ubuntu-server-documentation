@@ -1,4 +1,5 @@
 (debug-symbol-packages)=
+
 # Debug symbol packages
 
 If you want to debug a crash – whether in a project you are developing yourself or from a third-party package – or if you frequently need the debug symbols for specific libraries, it might be helpful to install them permanently on your system if you can’t use debuginfod.
@@ -42,8 +43,9 @@ You can also add these repositories in your software sources from the Ubuntu sof
 deb http://ddebs.ubuntu.com focal main restricted universe multiverse
 ```
 
-> **Note**:
-> Make sure you replace “focal” with the Ubuntu release name you’re using.
+:::{note}
+Make sure you replace “focal” with the Ubuntu release name you’re using.
+:::
 
 ### Update package list
 
