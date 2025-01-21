@@ -43,9 +43,9 @@ You can also add these repositories in your software sources from the Ubuntu sof
 deb http://ddebs.ubuntu.com focal main restricted universe multiverse
 ```
 
-:::{note}
+```{note}
 Make sure you replace “focal” with the Ubuntu release name you’re using.
-:::
+```
 
 ### Update package list
 

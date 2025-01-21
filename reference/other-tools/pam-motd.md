@@ -16,9 +16,9 @@ When logging into an Ubuntu server you may have noticed the informative Message 
           Graph this data and manage this system at https://landscape.canonical.com/
     ```
     
-    :::{note}
+    ```{note}
     You can run landscape-sysinfo manually at any time.
-    :::
+    ```
 
   - *update-notifier-common:* provides information on available package updates, impending filesystem checks (fsck), and required reboots (e.g.: after a kernel upgrade).
 

@@ -8,11 +8,11 @@ The {ref}`simple backup shell script <basic-backup-shell-script>` only allows fo
 
 Here, the shell script is slightly modified to implement a grandparent-parent-child rotation scheme (monthly-weekly-daily):
 
-- The rotation will do a _daily_ backup from Sunday to Friday.
+- The rotation will do a *daily* backup from Sunday to Friday.
 
-- On Saturday, a _weekly_ backup is done -- giving four weekly backups per month.
+- On Saturday, a *weekly* backup is done -- giving four weekly backups per month.
 
-- The _monthly_ backup is done on the first day of the month, rotating two monthly backups based on whether the month is odd or even.
+- The *monthly* backup is done on the first day of the month, rotating two monthly backups based on whether the month is odd or even.
 
 Here is the new script:
 
@@ -90,7 +90,7 @@ As discussed in the introduction, a copy of the backup archives and/or media can
 
 A tape drive attached to the server can be used instead of an NFS share. Using a tape drive simplifies archive rotation, and makes taking the media off-site easier as well.
 
-When using a tape drive, the filename portions of the script aren't needed because the data is sent directly to the tape device. Some commands to manipulate the tape _are_ needed, however. This is accomplished using `mt`, a magnetic tape control utility -- part of the `cpio` package.
+When using a tape drive, the filename portions of the script aren't needed because the data is sent directly to the tape device. Some commands to manipulate the tape *are* needed, however. This is accomplished using `mt`, a magnetic tape control utility -- part of the `cpio` package.
 
 Here is the shell script modified to use a tape drive:
 
@@ -128,9 +128,9 @@ echo "Backup finished"
 date
 ```
 
-:::{note}
+```{note}
 The default device name for a SCSI tape drive is `/dev/st0`. Use the appropriate device path for your system.
-:::
+```
 
 Restoring from a tape drive is basically the same as restoring from a file. Simply rewind the tape and use the device path instead of a file path. For example, to restore the `/etc/hosts` file to `/tmp/etc/hosts`:
 
