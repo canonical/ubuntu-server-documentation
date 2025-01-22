@@ -2,7 +2,7 @@
 # Set up LDAP access control
 
 
-The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or ACLs.
+The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or {term}`ACLs`.
 
 When we {ref}`installed the slapd package <install-openldap>`, various ACLs were set up automatically. We will look at a few important consequences of those defaults and, in so doing, we'll get an idea of how ACLs work and how they're configured.
 
