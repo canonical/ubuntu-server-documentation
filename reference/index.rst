@@ -59,3 +59,4 @@ Other tools
     backups.rst
     debugging.rst
     other-tools.rst
+    glossary.rst
