@@ -123,7 +123,7 @@ sudo systemctl restart bind9.service
 
 ### Reverse zone file
 
-Now that the zone is set up and resolving names to IP Addresses, a **reverse zone** needs to be added to allows DNS to resolve an address to a name.
+Now that the zone is set up and resolving names to IP Addresses, a **reverse zone** needs to be added to allow DNS to resolve an address to a name.
 
 Edit `/etc/bind/named.conf.local` and add the following:
 
