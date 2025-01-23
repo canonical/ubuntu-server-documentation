@@ -116,8 +116,9 @@ All the multipath attributes that can be set in the `defaults` section of the `m
 * `ghost_delay`
 * `enable_foreign`
 
-> **Note**:
-> Previously, the `multipath-tools` project provided a complete configuration file with all the most commonly used options for each of the most-used storage devices. Currently, you can see all those default options by running `sudo multipath -t`. This will dump a used configuration file including all the embedded default options.
+```{note}
+Previously, the `multipath-tools` project provided a complete configuration file with all the most commonly used options for each of the most-used storage devices. Currently, you can see all those default options by running `sudo multipath -t`. This will dump a used configuration file including all the embedded default options.
+```
 
 ## Configuration file blacklist and exceptions
 
@@ -172,8 +173,9 @@ blacklist_exceptions {
 }
 ```
 
-> **Note**:
-> A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+```{note}
+ A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+ ```
 
 ## Configuration file multipath section
 

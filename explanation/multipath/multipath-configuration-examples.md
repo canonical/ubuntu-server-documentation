@@ -363,9 +363,10 @@ defaults {
 
 ### Example of a multipaths section
 
-> **Note**:
-> You can obtain the WWIDs for your LUNs by running: `multipath -ll`
-> after the service `multipath-tools.service` has been restarted.
+```{note}
+You can obtain the WWIDs for your LUNs by running: `multipath -ll`
+after the service `multipath-tools.service` has been restarted.
+```
 
 ```
 multipaths {

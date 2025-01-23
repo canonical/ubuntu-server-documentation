@@ -90,10 +90,11 @@ Make sure to run `resize2fs /dev/mapper/mpathb` to resize the filesystem.
 
 This is greatly simplified by the use of UUIDs to identify devices with an intrinsic label. To do this, install `multipath-tools-boot` and reboot your system. This will rebuild the initial RAM disk and afford multipath the opportunity to build its paths before the root filesystem is mounted by UUID.
 
-> **Note**:
-> Whenever `multipath.conf` is updated, initrd should be updated as well by running:
-> `update-initramfs -u -k all`
-> The reason for this is that `multipath.conf` is copied to the RAM disk, and is integral to determining the available devices to map via its `denylist` and `devices` sections. 
+```{note}
+Whenever `multipath.conf` is updated, initrd should be updated as well by running:
+`update-initramfs -u -k all`
+The reason for this is that `multipath.conf` is copied to the RAM disk, and is integral to determining the available devices to map via its `denylist` and `devices` sections. 
+```
 
 ## The multipathd daemon
 
@@ -149,8 +150,9 @@ When displaying the multipath configuration, there are three verbosity levels yo
 - **`-v1`** : Outputs only the created or updated multipath names, which you can then feed to other tools such as `kpartx`
 - **`-v2`** : Prints all detected paths, multipaths, and device maps
 
-> **Note**:
-> The default verbosity level of multipath is 2 and can be globally modified by defining the verbosity attribute in the `defaults` section of `multipath.conf`
+```{note}
+The default verbosity level of multipath is 2 and can be globally modified by defining the verbosity attribute in the `defaults` section of `multipath.conf`
+```
 
 The following example shows the output of a `sudo multipath -l` command:
 
