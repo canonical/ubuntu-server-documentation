@@ -25,7 +25,7 @@ There are two DHCP servers available on Ubuntu. We have instructions on how to {
 
 ### Time synchronisation
 
-Synchronising time over a network is handled by the Network Time Protocol (NTP). It is a networking protocol that syncronises time between all computers on a network to within a few milliseconds of Coordinated Universal Time (UTC). This explanation guide will tell you {ref}`more about time synchronisation <about-time-synchronisation>`.
+Synchronising time over a network is handled by the Network Time Protocol (NTP). It is a networking protocol that synchronises time between all computers on a network to within a few milliseconds of Coordinated Universal Time (UTC). This explanation guide will tell you {ref}`more about time synchronisation <about-time-synchronisation>`.
 
 In Ubuntu, time synchronisation is primarily handled by `timedatectl` and `timesyncd`, which are installed by default as part of `systemd`. To find out how to configure this service, {ref}`read our how-to guide <timedatectl-and-timesyncd>`.
 
