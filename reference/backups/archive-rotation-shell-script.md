@@ -1,4 +1,5 @@
 (archive-rotation-shell-script)=
+
 # Archive rotation shell script
 
 The {ref}`simple backup shell script <basic-backup-shell-script>` only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.
@@ -23,17 +24,17 @@ Here is the new script:
 # grandparent-parent-child rotation.
 #
 ####################################
-    
-# What to backup. 
+
+# What to backup.
 backup_files="/home /var/spool/mail /etc /root /boot /opt"
-    
+
 # Where to backup to.
 dest="/mnt/backup"
-    
+
 # Setup variables for the archive filename.
 day=$(date +%A)
 hostname=$(hostname -s)
-    
+
 # Find which week of the month 1-4 it is.
 day_num=$(date +%-d)
 if (( $day_num <= 7 )); then
@@ -45,7 +46,7 @@ elif (( $day_num > 14 && $day_num <= 21 )); then
 elif (( $day_num > 21 && $day_num < 32 )); then
         week_file="$hostname-week4.tgz"
 fi
-    
+
 # Find if the Month is odd or even.
 month_num=$(date +%m)
 month=$(expr $month_num % 2)
@@ -54,29 +55,29 @@ if [ $month -eq 0 ]; then
 else
         month_file="$hostname-month1.tgz"
 fi
-    
+
 # Create archive filename.
 if [ $day_num == 1 ]; then
         archive_file=$month_file
 elif [ $day != "Saturday" ]; then
         archive_file="$hostname-$day.tgz"
-else 
+else
         archive_file=$week_file
 fi
-    
+
 # Print start status message.
 echo "Backing up $backup_files to $dest/$archive_file"
 date
 echo
-    
+
 # Backup the files using tar.
 tar czf $dest/$archive_file $backup_files
-    
+
 # Print end status message.
 echo
 echo "Backup finished"
 date
-    
+
 # Long listing of files in $dest to check file sizes.
 ls -lh $dest/
 ```
@@ -100,35 +101,36 @@ Here is the shell script modified to use a tape drive:
 # Backup to tape drive script.
 #
 ####################################
-    
-# What to backup. 
+
+# What to backup.
 backup_files="/home /var/spool/mail /etc /root /boot /opt"
-    
+
 # Where to backup to.
 dest="/dev/st0"
-    
+
 # Print start status message.
 echo "Backing up $backup_files to $dest"
 date
 echo
-    
+
 # Make sure the tape is rewound.
 mt -f $dest rewind
-    
+
 # Backup the files using tar.
 tar czf $dest $backup_files
-    
+
 # Rewind and eject the tape.
 mt -f $dest rewoffl
-    
+
 # Print end status message.
 echo
 echo "Backup finished"
 date
 ```
 
-> **Note**:
-> The default device name for a SCSI tape drive is `/dev/st0`. Use the appropriate device path for your system.
+```{note}
+The default device name for a SCSI tape drive is `/dev/st0`. Use the appropriate device path for your system.
+```
 
 Restoring from a tape drive is basically the same as restoring from a file. Simply rewind the tape and use the device path instead of a file path. For example, to restore the `/etc/hosts` file to `/tmp/etc/hosts`:
 
