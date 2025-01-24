@@ -1,6 +1,6 @@
 (install-openldap)=
 
-Lightweight Directory Access Protocol (LDAP) is a protocol used for managing hierarchical data. It offers a way to store, organise and manage an organisation's data such as employee accounts and computers. It facilitates centralised authentication and authorisation management.
+[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol used for managing hierarchical data. It offers a way to store, organise and manage an organisation's data such as employee accounts and computers. It facilitates centralised authentication and authorisation management.
 
 OpenLDAP is the open-source implementation of LDAP used in Ubuntu. It provides an LDAP server and a client to manage directory services. Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements. However, because of those characteristics, beginners sometimes find it difficult to apprehend or administer.  
 
