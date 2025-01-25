@@ -4,7 +4,7 @@
 
 OpenLDAP is the open-source implementation of LDAP used in Ubuntu. It provides an LDAP server and a client to manage directory services. OpenLDAP contains some terminology and concepts that new users may want to familiarise themselves with before attempting to set it up. Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements.
 
-See [Introduction to OpenLDAP](../../explanation/intro-to/openldap.md) for a more detailed explanation.
+See {ref}`Introduction to OpenLDAP <introduction-to-openldap>` for a more detailed explanation.
 
 # Install and configure LDAP
 
