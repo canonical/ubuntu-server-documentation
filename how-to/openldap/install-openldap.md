@@ -1,4 +1,11 @@
 (install-openldap)=
+
+[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol used for managing hierarchical data. It offers a way to store, organise and manage an organisation's data such as employee accounts and computers. It facilitates centralised authentication and authorisation management.
+
+OpenLDAP is the open-source implementation of LDAP used in Ubuntu. It offers an LDAP server that provides directory services, a client for managing them, and client libraries used by hundreds of applications. OpenLDAP contains some terminology and concepts that new users may want to familiarise themselves with before attempting to set it up. Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements.
+
+See {ref}`Introduction to OpenLDAP <introduction-to-openldap>` for a more detailed explanation.
+
 # Install and configure LDAP
 
 Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/software/man.cgi?query=slapd) creates a minimal working configuration with a top level entry, and an administrator's Distinguished Name (DN). 
