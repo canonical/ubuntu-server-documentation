@@ -7,40 +7,19 @@ Glossary
 
 .. glossary::
 
-    aarch
-        *Work in Progress*
-
     ABI
         *Work in Progress*
 
     accesslog
         *Work in Progress*
 
-    accroding
-        *Work in Progress*
-
     ACL
-        *Work in Progress*
-
-    acl
         *Work in Progress*
 
     ACLs
         *Work in Progress*
 
     adapter
-        *Work in Progress*
-
-    adapter's
-        *Work in Progress*
-
-    adapters
-        *Work in Progress*
-
-    adaptively
-        *Work in Progress*
-
-    adm
         *Work in Progress*
 
     ADSys
@@ -58,25 +37,13 @@ Glossary
     ALUA
         *Work in Progress*
 
-    amd
-        *Work in Progress*
-
     AMD
         *Work in Progress*
 
     Ansible
         *Work in Progress*
 
-    apache
-        *Work in Progress*
-
     Apache2
-        *Work in Progress*
-
-    apparmor
-        *Work in Progress*
-
-    Apparmor
         *Work in Progress*
 
     AppArmor
@@ -88,12 +55,6 @@ Glossary
     APT
         *Work in Progress*
 
-    APT's
-        *Work in Progress*
-
-    architected
-        *Work in Progress*
-
     armhf
         *Work in Progress*
 
@@ -103,25 +64,10 @@ Glossary
     ArrayBolt
         *Work in Progress*
 
-    AskUbuntu
-        *Work in Progress*
-
     async
         *Work in Progress*
 
-    AUTH
-        *Work in Progress*
-
-    auth
-        *Work in Progress*
-
-    authenticatoin
-        *Work in Progress*
-
     Authenticator
-        *Work in Progress*
-
-    authorized
         *Work in Progress*
 
     autocommit
@@ -130,16 +76,7 @@ Glossary
     autodetect
         *Work in Progress*
 
-    autodetected
-        *Work in Progress*
-
     autoinstall
-        *Work in Progress*
-
-    autoinstallation
-        *Work in Progress*
-
-    Autoinstallation
         *Work in Progress*
 
     autorid
@@ -148,16 +85,10 @@ Glossary
     AWS
         *Work in Progress*
 
-    awslogs
-        *Work in Progress*
-
     AX
         *Work in Progress*
 
     backend
-        *Work in Progress*
-
-    backends
         *Work in Progress*
 
     Backports
@@ -169,9 +100,6 @@ Glossary
     BackupServer
         *Work in Progress*
 
-    bacula
-        *Work in Progress*
-
     Bacula
         *Work in Progress*
 
@@ -181,19 +109,10 @@ Glossary
     bdev
         *Work in Progress*
 
-    behavior
-        *Work in Progress*
-
-    Berkley
-        *Work in Progress*
-
     BindDN
         *Work in Progress*
 
     BMC
-        *Work in Progress*
-
-    BMC's
         *Work in Progress*
 
     bootable
@@ -201,10 +120,6 @@ Glossary
 
     bootloader
         *Work in Progress*
-
-    bootloaders
-        *Work in Progress*
-
     bootp
         *Work in Progress*
 
@@ -217,13 +132,7 @@ Glossary
     btrfs
         *Work in Progress*
 
-    Btrfs
-        *Work in Progress*
-
     bugfix
-        *Work in Progress*
-
-    byobu
         *Work in Progress*
 
     Byobu
@@ -232,43 +141,19 @@ Glossary
     CA
         *Work in Progress*
 
-    CA's
-        *Work in Progress*
-
     CAC
         *Work in Progress*
 
     CARP
         *Work in Progress*
 
-    CAs
-        *Work in Progress*
-
-    Catalog
-        *Work in Progress*
-
     CCID
-        *Work in Progress*
-
-    ccw
         *Work in Progress*
 
     CDBs
         *Work in Progress*
 
-    CDROM
-        *Work in Progress*
-
-    center
-        *Work in Progress*
-
-    Center
-        *Work in Progress*
-
     CentOS
-        *Work in Progress*
-
-    centric
         *Work in Progress*
 
     certmap
@@ -289,16 +174,7 @@ Glossary
     cgroup
         *Work in Progress*
 
-    cgroups
-        *Work in Progress*
-
     CHACHA
-        *Work in Progress*
-
-    chage
-        *Work in Progress*
-
-    checksumming
         *Work in Progress*
 
     checksums
@@ -319,9 +195,6 @@ Glossary
     CIFS
         *Work in Progress*
 
-    cifs
-        *Work in Progress*
-
     cipherlist
         *Work in Progress*
 
@@ -329,9 +202,6 @@ Glossary
         *Work in Progress*
 
     ciphersuites
-        *Work in Progress*
-
-    CipherSuites
         *Work in Progress*
 
     CIS
@@ -343,22 +213,13 @@ Glossary
     cleartext
         *Work in Progress*
 
-    Cloudwatch
-        *Work in Progress*
-
     CloudWatch
         *Work in Progress*
 
     ClusterLabs
         *Work in Progress*
 
-    clvm
-        *Work in Progress*
-
     CLVM
-        *Work in Progress*
-
-    clvmd
         *Work in Progress*
 
     cLVMd
@@ -370,12 +231,6 @@ Glossary
     CMS
         *Work in Progress*
 
-    CMSs
-        *Work in Progress*
-
-    cn
-        *Work in Progress*
-
     CN
         *Work in Progress*
 
@@ -383,21 +238,6 @@ Glossary
         *Work in Progress*
 
     colocation
-        *Work in Progress*
-
-    color
-        *Work in Progress*
-
-    Colors
-        *Work in Progress*
-
-    colors
-        *Work in Progress*
-
-    comand
-        *Work in Progress*
-
-    conf
         *Work in Progress*
 
     conffile
@@ -412,9 +252,6 @@ Glossary
     containerization
         *Work in Progress*
 
-    containerize
-        *Work in Progress*
-
     corei
         *Work in Progress*
 
@@ -427,16 +264,10 @@ Glossary
     Corosync
         *Work in Progress*
 
-    cpu
-        *Work in Progress*
-
-    CPUs
+    CPU
         *Work in Progress*
 
     CRL
-        *Work in Progress*
-
-    CRLs
         *Work in Progress*
 
     crmsh
@@ -454,43 +285,13 @@ Glossary
     cryptographic
         *Work in Progress*
 
-    cryptographically
-        *Work in Progress*
-
     CSR
         *Work in Progress*
 
     csync
         *Work in Progress*
 
-    ctrl
-        *Work in Progress*
-
-    Ctrl
-        *Work in Progress*
-
     CTX
-        *Work in Progress*
-
-    customisations
-        *Work in Progress*
-
-    Customization
-        *Work in Progress*
-
-    customization
-        *Work in Progress*
-
-    customizations
-        *Work in Progress*
-
-    customize
-        *Work in Progress*
-
-    customized
-        *Work in Progress*
-
-    customizing
         *Work in Progress*
 
     CustomLog
@@ -506,9 +307,6 @@ Glossary
         *Work in Progress*
 
     daemonize
-        *Work in Progress*
-
-    Danika
         *Work in Progress*
 
     DARPA
@@ -547,7 +345,7 @@ Glossary
     debconf
         *Work in Progress*
 
-    debian
+    Debian
         *Work in Progress*
 
     debuginfo
@@ -559,22 +357,10 @@ Glossary
     decrypt
         *Work in Progress*
 
-    decrypted
-        *Work in Progress*
-
     deduplication
         *Work in Progress*
 
-    dee
-        *Work in Progress*
-
-    Defense
-        *Work in Progress*
-
     denylist
-        *Work in Progress*
-
-    denylists
         *Work in Progress*
 
     DER
@@ -592,31 +378,16 @@ Glossary
     DGC
         *Work in Progress*
 
-    dhcp
-        *Work in Progress*
-
     DHCP
         *Work in Progress*
 
     dhcpd
         *Work in Progress*
 
-    dialogs
-        *Work in Progress*
-
-    Diffie
-        *Work in Progress*
-
     dir
         *Work in Progress*
 
     DirectoryIndex
-        *Work in Progress*
-
-    disambiguating
-        *Work in Progress*
-
-    discoverable
         *Work in Progress*
 
     DIT
@@ -626,9 +397,6 @@ Glossary
         *Work in Progress*
 
     DLM
-        *Work in Progress*
-
-    dm
         *Work in Progress*
 
     DM
@@ -646,16 +414,10 @@ Glossary
     dmsetup
         *Work in Progress*
 
-    dn
-        *Work in Progress*
-
     DN
         *Work in Progress*
 
     DNS
-        *Work in Progress*
-
-    DNs
         *Work in Progress*
 
     dnsleaktest
@@ -670,43 +432,16 @@ Glossary
     Docker
         *Work in Progress*
 
-    Docker's
-        *Work in Progress*
-
     DocumentRoot
-        *Work in Progress*
-
-    dom
         *Work in Progress*
 
     DPDK
         *Work in Progress*
 
-    dpdk
-        *Work in Progress*
-
-    DPDK's
-        *Work in Progress*
-
     dpkg
         *Work in Progress*
 
-    DPKG
-        *Work in Progress*
-
     DRBD
-        *Work in Progress*
-
-    drbd
-        *Work in Progress*
-
-    drbdadm
-        *Work in Progress*
-
-    dsg
-        *Work in Progress*
-
-    dsi
         *Work in Progress*
 
     DTLS
@@ -727,13 +462,7 @@ Glossary
     EF
         *Work in Progress*
 
-    efi
-        *Work in Progress*
-
     EFI
-        *Work in Progress*
-
-    el
         *Work in Progress*
 
     ELinks
@@ -745,15 +474,6 @@ Glossary
     Engenio
         *Work in Progress*
 
-    eno
-        *Work in Progress*
-
-    enp
-        *Work in Progress*
-
-    enroll
-        *Work in Progress*
-
     ensite
         *Work in Progress*
 
@@ -761,9 +481,6 @@ Glossary
         *Work in Progress*
 
     ERD
-        *Work in Progress*
-
-    ERDs
         *Work in Progress*
 
     ErrorDocument
@@ -781,9 +498,6 @@ Glossary
     etckeeper
         *Work in Progress*
 
-    eth
-        *Work in Progress*
-
     ETW
         *Work in Progress*
 
@@ -799,16 +513,10 @@ Glossary
     eXecution
         *Work in Progress*
 
-    exim
-        *Work in Progress*
-
-    Exim
+    Exim4
         *Work in Progress*
 
     exportfs
-        *Work in Progress*
-
-    extensibility
         *Work in Progress*
 
     failover
@@ -820,25 +528,10 @@ Glossary
     FastCGI
         *Work in Progress*
 
-    favor
-        *Work in Progress*
-
-    favorite
-        *Work in Progress*
-
-    fb
-        *Work in Progress*
-
     FC
         *Work in Progress*
 
-    feistyduck
-        *Work in Progress*
-
     FHS
-        *Work in Progress*
-
-    Fi
         *Work in Progress*
 
     filebug
@@ -850,31 +543,16 @@ Glossary
     filesystem
         *Work in Progress*
 
-    filesystems
-        *Work in Progress*
-
-    filesytem
-        *Work in Progress*
-
     FIPS
         *Work in Progress*
 
-    firefox
-        *Work in Progress*
-
     firsttest
-        *Work in Progress*
-
-    fluentd
         *Work in Progress*
 
     Fluentd
         *Work in Progress*
 
     FQDN
-        *Work in Progress*
-
-    FQDN's
         *Work in Progress*
 
     Freedesktop
@@ -887,9 +565,6 @@ Glossary
         *Work in Progress*
 
     frontend
-        *Work in Progress*
-
-    frontends
         *Work in Progress*
 
     fsck
@@ -905,9 +580,6 @@ Glossary
         *Work in Progress*
 
     FW
-        *Work in Progress*
-
-    gauranteed
         *Work in Progress*
 
     GCE
@@ -928,22 +600,10 @@ Glossary
     GDB
         *Work in Progress*
 
-    GDB's
-        *Work in Progress*
-
     gelf
         *Work in Progress*
 
     Gentoo
-        *Work in Progress*
-
-    george
-        *Work in Progress*
-
-    getty
-        *Work in Progress*
-
-    gfs
         *Work in Progress*
 
     GFS
@@ -955,19 +615,10 @@ Glossary
     GiB
         *Work in Progress*
 
-    gid
-        *Work in Progress*
-
-    gids
-        *Work in Progress*
-
-    GIDs
+    GID
         *Work in Progress*
 
     gitolite
-        *Work in Progress*
-
-    Gitolite's
         *Work in Progress*
 
     GKE
@@ -991,9 +642,6 @@ Glossary
     GPS
         *Work in Progress*
 
-    gps
-        *Work in Progress*
-
     GPSD
         *Work in Progress*
 
@@ -1001,9 +649,6 @@ Glossary
         *Work in Progress*
 
     GPUs
-        *Work in Progress*
-
-    Graber
         *Work in Progress*
 
     Graylog
@@ -1039,9 +684,6 @@ Glossary
     HBAs
         *Work in Progress*
 
-    Helman
-        *Work in Progress*
-
     HMAC
         *Work in Progress*
 
@@ -1054,28 +696,13 @@ Glossary
     hostname
         *Work in Progress*
 
-    hostnames
-        *Work in Progress*
-
     HOTP
         *Work in Progress*
 
     hotplug
         *Work in Progress*
 
-    hotplugging
-        *Work in Progress*
-
-    HOWTO
-        *Work in Progress*
-
-    HowTo
-        *Work in Progress*
-
     hpb
-        *Work in Progress*
-
-    hpc
         *Work in Progress*
 
     HPC
@@ -1099,25 +726,13 @@ Glossary
     http
         *Work in Progress*
 
-    HTTP
-        *Work in Progress*
-
     httpd
         *Work in Progress*
 
     https
         *Work in Progress*
 
-    HTTPS
-        *Work in Progress*
-
     hugepage
-        *Work in Progress*
-
-    hugepages
-        *Work in Progress*
-
-    hugepagesz
         *Work in Progress*
 
     HWE
@@ -1144,9 +759,6 @@ Glossary
     IMAP
         *Work in Progress*
 
-    IMAPS
-        *Work in Progress*
-
     IncludesNOEXEC
         *Work in Progress*
 
@@ -1157,15 +769,6 @@ Glossary
         *Work in Progress*
 
     init
-        *Work in Progress*
-
-    initialiasation
-        *Work in Progress*
-
-    initialization
-        *Work in Progress*
-
-    initialize
         *Work in Progress*
 
     initiatorname
@@ -1193,9 +796,6 @@ Glossary
         *Work in Progress*
 
     IoT
-        *Work in Progress*
-
-    ip
         *Work in Progress*
 
     IP
@@ -1231,9 +831,6 @@ Glossary
     iptables
         *Work in Progress*
 
-    IPTables
-        *Work in Progress*
-
     IPv
         *Work in Progress*
 
@@ -1254,10 +851,6 @@ Glossary
 
     ISC's
         *Work in Progress*
-
-    iscsi
-        *Work in Progress*
-
     iSCSI
         *Work in Progress*
 
@@ -1270,73 +863,28 @@ Glossary
     iSCSITarget
         *Work in Progress*
 
-    ised
-        *Work in Progress*
-
-    iso
-        *Work in Progress*
-
     ISO
         *Work in Progress*
 
-    ISOs
-        *Work in Progress*
-
-    ISP's
-        *Work in Progress*
-
-    ISPs
-        *Work in Progress*
-
-    Jammy's
+    ISP
         *Work in Progress*
 
     jitter
         *Work in Progress*
 
-    joe
-        *Work in Progress*
-
     journald
-        *Work in Progress*
-
-    journaled
-        *Work in Progress*
-
-    journaling
         *Work in Progress*
 
     JSON
         *Work in Progress*
 
-    json
-        *Work in Progress*
-
     KDC
-        *Work in Progress*
-
-    KDC's
-        *Work in Progress*
-
-    KDCs
         *Work in Progress*
 
     kea
         *Work in Progress*
 
     keepalive
-        *Work in Progress*
-
-    Keepalived
-        *Work in Progress*
-
-    Kerber
-        *Work in Progress*
-
-    Kerberized
-        *Work in Progress*
-
-    kerberos
         *Work in Progress*
 
     Kerberos
@@ -1351,9 +899,6 @@ Glossary
     keypair
         *Work in Progress*
 
-    keypairs
-        *Work in Progress*
-
     keyring
         *Work in Progress*
 
@@ -1366,46 +911,25 @@ Glossary
     keytab
         *Work in Progress*
 
-    Keytab
-        *Work in Progress*
-
     Keytool
         *Work in Progress*
 
     kraxel
         *Work in Progress*
 
-    Kudu
-        *Work in Progress*
-
     KVM
-        *Work in Progress*
-
-    kvm
         *Work in Progress*
 
     LAN
         *Work in Progress*
 
-    LANs
-        *Work in Progress*
-
     largemem
-        *Work in Progress*
-
-    ldap
         *Work in Progress*
 
     LDAP
         *Work in Progress*
 
-    LDAPS
-        *Work in Progress*
-
     ldapscripts
-        *Work in Progress*
-
-    LDAPv
         *Work in Progress*
 
     LDAPv3
@@ -1420,43 +944,16 @@ Glossary
     lftp
         *Work in Progress*
 
-    libera
-        *Work in Progress*
-
     libvirt
         *Work in Progress*
 
-    Libvirt
-        *Work in Progress*
-
-    libvirt's
-        *Work in Progress*
-
     lifecycle
-        *Work in Progress*
-
-    Lifecycle
         *Work in Progress*
 
     lightervisor
         *Work in Progress*
 
     Lighttpd
-        *Work in Progress*
-
-    linux
-        *Work in Progress*
-
-    Linux-vserver
-        *Work in Progress*
-
-    linuxcontainers
-        *Work in Progress*
-
-    LinuxONE
-        *Work in Progress*
-
-    Linuxplatform
         *Work in Progress*
 
     Livepatch
@@ -1468,15 +965,6 @@ Glossary
     LMA
         *Work in Progress*
 
-    loadbalanced
-        *Work in Progress*
-
-    Loadbalanced
-        *Work in Progress*
-
-    loadbalancing
-        *Work in Progress*
-
     Loadbalancing
         *Work in Progress*
 
@@ -1486,22 +974,13 @@ Glossary
     localhost
         *Work in Progress*
 
-    localhost's
-        *Work in Progress*
-
     LockFile
-        *Work in Progress*
-
-    lockfile
-        *Work in Progress*
-
-    logentries
         *Work in Progress*
 
     Logentries
         *Work in Progress*
 
-    logfiles
+    Logfiles
         *Work in Progress*
 
     LogFormat
@@ -1516,16 +995,10 @@ Glossary
     Logwatch
         *Work in Progress*
 
-    Logwatch's
-        *Work in Progress*
-
     lookaside
         *Work in Progress*
 
     lookup
-        *Work in Progress*
-
-    lookups
         *Work in Progress*
 
     loopback
@@ -1549,16 +1022,10 @@ Glossary
     LUN
         *Work in Progress*
 
-    LUNs
-        *Work in Progress*
-
     LUs
         *Work in Progress*
 
     LV
-        *Work in Progress*
-
-    lvm
         *Work in Progress*
 
     LVM
@@ -1570,16 +1037,7 @@ Glossary
     lvmlockd
         *Work in Progress*
 
-    lxc
-        *Work in Progress*
-
     LXC
-        *Work in Progress*
-
-    lxcpath
-        *Work in Progress*
-
-    lxd
         *Work in Progress*
 
     LXD
@@ -1588,31 +1046,13 @@ Glossary
     MAAS
         *Work in Progress*
 
-    macOS
-        *Work in Progress*
-
-    MacOS
-        *Work in Progress*
-
     macvlan
-        *Work in Progress*
-
-    Macvlan
         *Work in Progress*
 
     Maildir
         *Work in Progress*
 
-    maintainer's
-        *Work in Progress*
-
     manpage
-        *Work in Progress*
-
-    manpages
-        *Work in Progress*
-
-    Mantic
         *Work in Progress*
 
     maskable
@@ -1631,9 +1071,6 @@ Glossary
         *Work in Progress*
 
     mdev
-        *Work in Progress*
-
-    mdns
         *Work in Progress*
 
     metapackage
@@ -1657,31 +1094,10 @@ Glossary
     microVMs
         *Work in Progress*
 
-    mitigations
-        *Work in Progress*
-
-    motd
-        *Work in Progress*
-
     MOTD
         *Work in Progress*
 
     mountpoints
-        *Work in Progress*
-
-    mpath
-        *Work in Progress*
-
-    mpatha
-        *Work in Progress*
-
-    mpathb
-        *Work in Progress*
-
-    mpathc
-        *Work in Progress*
-
-    mpathd
         *Work in Progress*
 
     MSA
@@ -1705,88 +1121,28 @@ Glossary
     multicast
         *Work in Progress*
 
-    multipass
-        *Work in Progress*
-
     Multipass
-        *Work in Progress*
-
-    multipath
         *Work in Progress*
 
     Multipath
         *Work in Progress*
 
-    multipathd
-        *Work in Progress*
-
-    multipathed
-        *Work in Progress*
-
-    multipathing
-        *Work in Progress*
-
-    multipaths
-        *Work in Progress*
-
     Multiview
-        *Work in Progress*
-
-    Multiviews
-        *Work in Progress*
-
-    multiviews
-        *Work in Progress*
-
-    munin
         *Work in Progress*
 
     Munin
         *Work in Progress*
 
-    MYDOMAIN
-        *Work in Progress*
-
-    mydomain
-        *Work in Progress*
-
-    MyISAM
-        *Work in Progress*
-
-    mynewsite
-        *Work in Progress*
-
-    mySQL
-        *Work in Progress*
-
-    mysql
-        *Work in Progress*
-
     MySQL
-        *Work in Progress*
-
-    nagios
         *Work in Progress*
 
     Nagios
         *Work in Progress*
 
-    nagiosadmin
-        *Work in Progress*
-
     nameserver
         *Work in Progress*
 
-    nameserver's
-        *Work in Progress*
-
-    nameservers
-        *Work in Progress*
-
     namespace
-        *Work in Progress*
-
-    namespaced
         *Work in Progress*
 
     NAS
@@ -1795,13 +1151,7 @@ Glossary
     NAT
         *Work in Progress*
 
-    nat
-        *Work in Progress*
-
     NATed
-        *Work in Progress*
-
-    natively
         *Work in Progress*
 
     Navisys
@@ -1813,13 +1163,7 @@ Glossary
     netbios
         *Work in Progress*
 
-    netboot
-        *Work in Progress*
-
     Netboot
-        *Work in Progress*
-
-    netbooting
         *Work in Progress*
 
     Netfilter
@@ -1831,9 +1175,6 @@ Glossary
     netmask
         *Work in Progress*
 
-    netplan
-        *Work in Progress*
-
     Netplan
         *Work in Progress*
 
@@ -1841,9 +1182,6 @@ Glossary
         *Work in Progress*
 
     newsfeeds
-        *Work in Progress*
-
-    nfs
         *Work in Progress*
 
     NFS
@@ -1858,19 +1196,7 @@ Glossary
     nginx
         *Work in Progress*
 
-    Nginx
-        *Work in Progress*
-
-    nginx's
-        *Work in Progress*
-
     NIC
-        *Work in Progress*
-
-    NICs
-        *Work in Progress*
-
-    Nield
         *Work in Progress*
 
     NIS
@@ -1900,9 +1226,6 @@ Glossary
     NSS
         *Work in Progress*
 
-    ntp
-        *Work in Progress*
-
     NTP
         *Work in Progress*
 
@@ -1915,13 +1238,7 @@ Glossary
     Numa
         *Work in Progress*
 
-    Numbat
-        *Work in Progress*
-
     Nvidia
-        *Work in Progress*
-
-    Nvidia's
         *Work in Progress*
 
     NVMe
@@ -1930,25 +1247,10 @@ Glossary
     NVRAM
         *Work in Progress*
 
-    NVswitch
-        *Work in Progress*
-
     NVSwitch
         *Work in Progress*
 
-    O'Reilly
-        *Work in Progress*
-
-    O'Reilly's
-        *Work in Progress*
-
-    ocf
-        *Work in Progress*
-
     OCF
-        *Work in Progress*
-
-    ocfs
         *Work in Progress*
 
     OCFS
@@ -1963,18 +1265,6 @@ Glossary
     OCSP
         *Work in Progress*
 
-    offical
-        *Work in Progress*
-
-    ok
-        *Work in Progress*
-
-    Ok
-        *Work in Progress*
-
-    onwards
-        *Work in Progress*
-
     OpenLDAP
         *Work in Progress*
 
@@ -1984,55 +1274,25 @@ Glossary
     OpenSSH
         *Work in Progress*
 
-    openssl
-        *Work in Progress*
-
     OpenSSL
-        *Work in Progress*
-
-    OpenSSL's
         *Work in Progress*
 
     OpenStack
         *Work in Progress*
 
-    openstack
-        *Work in Progress*
-
     OpenSUSE
-        *Work in Progress*
-
-    openvpn
         *Work in Progress*
 
     OpenVPN
         *Work in Progress*
 
-    OpenVPN's
-        *Work in Progress*
-
-    OpenVswitch
-        *Work in Progress*
-
-    openvswitch
+    Open vSwitch
         *Work in Progress*
 
     OpenVZ
         *Work in Progress*
 
     OpenWRT
-        *Work in Progress*
-
-    ordinated
-        *Work in Progress*
-
-    organization
-        *Work in Progress*
-
-    organizations
-        *Work in Progress*
-
-    organize
         *Work in Progress*
 
     OSA
@@ -2047,19 +1307,10 @@ Glossary
     OTP
         *Work in Progress*
 
-    overlayfs
-        *Work in Progress*
-
     OverlayFS
         *Work in Progress*
 
     OVS
-        *Work in Progress*
-
-    OvS
-        *Work in Progress*
-
-    Packt's
         *Work in Progress*
 
     pam
@@ -2095,19 +1346,10 @@ Glossary
     PDC
         *Work in Progress*
 
-    pdc
-        *Work in Progress*
-
-    PDFs
-        *Work in Progress*
-
     PEM
         *Work in Progress*
 
     Petitboot
-        *Work in Progress*
-
-    petitboot
         *Work in Progress*
 
     PgSQL
@@ -2120,9 +1362,6 @@ Glossary
         *Work in Progress*
 
     PID
-        *Work in Progress*
-
-    pid
         *Work in Progress*
 
     PidFile
@@ -2149,16 +1388,10 @@ Glossary
     PMD
         *Work in Progress*
 
-    PMDs
-        *Work in Progress*
-
     POSIX
         *Work in Progress*
 
     Postcopy
-        *Work in Progress*
-
-    postfix
         *Work in Progress*
 
     Postfix
@@ -2173,13 +1406,7 @@ Glossary
     PowerShell
         *Work in Progress*
 
-    Powershell
-        *Work in Progress*
-
     PPA
-        *Work in Progress*
-
-    PPAs
         *Work in Progress*
 
     ppc
@@ -2189,9 +1416,6 @@ Glossary
         *Work in Progress*
 
     Preboot
-        *Work in Progress*
-
-    prepended
         *Work in Progress*
 
     preseed
@@ -2266,28 +1490,10 @@ Glossary
     RDN
         *Work in Progress*
 
-    recognize
-        *Work in Progress*
-
-    recognized
-        *Work in Progress*
-
-    recognizes
-        *Work in Progress*
-
     Redbook
         *Work in Progress*
 
-    refered
-        *Work in Progress*
-
     renderer
-        *Work in Progress*
-
-    repos
-        *Work in Progress*
-
-    resolv
         *Work in Progress*
 
     REXX
@@ -2299,19 +1505,13 @@ Glossary
     rid
         *Work in Progress*
 
-    riscv
+    RISC-V
         *Work in Progress*
 
-    ROCKs
-        *Work in Progress*
-
-    rocks
+    Rocks
         *Work in Progress*
 
     ROMs
-        *Work in Progress*
-
-    rootDN
         *Work in Progress*
 
     RootDN
@@ -2335,16 +1535,10 @@ Glossary
     rsyslog
         *Work in Progress*
 
-    rsyslog's
-        *Work in Progress*
-
     RTC
         *Work in Progress*
 
     runtime
-        *Work in Progress*
-
-    runtimes
         *Work in Progress*
 
     SAN
@@ -2362,25 +1556,13 @@ Glossary
     SANtricity
         *Work in Progress*
 
-    sasl
-        *Work in Progress*
-
     SASL
-        *Work in Progress*
-
-    sbd
         *Work in Progress*
 
     SBD
         *Work in Progress*
 
     sbin
-        *Work in Progress*
-
-    scalability
-        *Work in Progress*
-
-    scalable
         *Work in Progress*
 
     schemas
@@ -2392,31 +1574,7 @@ Glossary
     Scrollback
         *Work in Progress*
 
-    scrollback
-        *Work in Progress*
-
-    scsi
-        *Work in Progress*
-
     SCSI
-        *Work in Progress*
-
-    sdc
-        *Work in Progress*
-
-    sdd
-        *Work in Progress*
-
-    sde
-        *Work in Progress*
-
-    sdf
-        *Work in Progress*
-
-    sdh
-        *Work in Progress*
-
-    sdj
         *Work in Progress*
 
     SDN
@@ -2476,9 +1634,6 @@ Glossary
     SIDs
         *Work in Progress*
 
-    signaling
-        *Work in Progress*
-
     SIMD
         *Work in Progress*
 
@@ -2515,19 +1670,10 @@ Glossary
     Snap
         *Work in Progress*
 
-    Snap'ed
-        *Work in Progress*
-
     snapd
         *Work in Progress*
 
-    snapshotted
-        *Work in Progress*
-
-    snapshotting
-        *Work in Progress*
-
-    snapstore
+    snapshot
         *Work in Progress*
 
     Snapstore
@@ -2548,9 +1694,6 @@ Glossary
     SPC
         *Work in Progress*
 
-    splunk
-        *Work in Progress*
-
     Splunk
         *Work in Progress*
 
@@ -2564,9 +1707,6 @@ Glossary
         *Work in Progress*
 
     SSD
-        *Work in Progress*
-
-    SSD's
         *Work in Progress*
 
     SSH
@@ -2584,9 +1724,6 @@ Glossary
     SSL
         *Work in Progress*
 
-    ssl
-        *Work in Progress*
-
     SSLCertificateFile
         *Work in Progress*
 
@@ -2599,13 +1736,7 @@ Glossary
     sss
         *Work in Progress*
 
-    sssd
-        *Work in Progress*
-
     SSSD
-        *Work in Progress*
-
-    SSSD's
         *Work in Progress*
 
     StartTLS
@@ -2618,9 +1749,6 @@ Glossary
         *Work in Progress*
 
     STDOUT
-        *Work in Progress*
-
-    Stephane
         *Work in Progress*
 
     STK
@@ -2647,9 +1775,6 @@ Glossary
     subnetwork
         *Work in Progress*
 
-    Subquity
-        *Work in Progress*
-
     substring
         *Work in Progress*
 
@@ -2662,9 +1787,6 @@ Glossary
     sudo
         *Work in Progress*
 
-    summarize
-        *Work in Progress*
-
     superblock
         *Work in Progress*
 
@@ -2674,28 +1796,13 @@ Glossary
     symlink
         *Work in Progress*
 
-    symlinked
-        *Work in Progress*
-
-    symlinks
-        *Work in Progress*
-
     SymLinksIfOwnerMatch
-        *Work in Progress*
-
-    synchronize
-        *Work in Progress*
-
-    synchronized
         *Work in Progress*
 
     syncprov
         *Work in Progress*
 
     syncrepl
-        *Work in Progress*
-
-    syncronises
         *Work in Progress*
 
     sysctls
@@ -2710,13 +1817,7 @@ Glossary
     systemctl
         *Work in Progress*
 
-    systemd
-        *Work in Progress*
-
     Systemd
-        *Work in Progress*
-
-    Systemd's
         *Work in Progress*
 
     targetcli
@@ -2734,9 +1835,6 @@ Glossary
     Telegraf
         *Work in Progress*
 
-    Telegraf's
-        *Work in Progress*
-
     templated
         *Work in Progress*
 
@@ -2744,9 +1842,6 @@ Glossary
         *Work in Progress*
 
     TGS
-        *Work in Progress*
-
-    tgt
         *Work in Progress*
 
     TGT
@@ -2776,9 +1871,6 @@ Glossary
     tmpfs
         *Work in Progress*
 
-    Tmpfs
-        *Work in Progress*
-
     tmux
         *Work in Progress*
 
@@ -2794,9 +1886,6 @@ Glossary
     Traceroute
         *Work in Progress*
 
-    tradeoff
-        *Work in Progress*
-
     triagers
         *Work in Progress*
 
@@ -2806,28 +1895,13 @@ Glossary
     tunable
         *Work in Progress*
 
-    tunables
-        *Work in Progress*
-
     TuneD
-        *Work in Progress*
-
-    tunings
         *Work in Progress*
 
     Tunnelblick
         *Work in Progress*
 
-    tunneling
-        *Work in Progress*
-
     TXT
-        *Work in Progress*
-
-    ubuntu
-        *Work in Progress*
-
-    Ubuntu
         *Work in Progress*
 
     UDA
@@ -2842,49 +1916,25 @@ Glossary
     UEFI
         *Work in Progress*
 
-    UEFI's
-        *Work in Progress*
-
     ufw
-        *Work in Progress*
-
-    uid
         *Work in Progress*
 
     UID
         *Work in Progress*
 
-    uids
-        *Work in Progress*
-
     UIDs
         *Work in Progress*
 
-    UIs
+    UI
         *Work in Progress*
 
     umounts
         *Work in Progress*
 
-    un
-        *Work in Progress*
-
     unassign
         *Work in Progress*
 
-    Unassign
-        *Work in Progress*
-
-    unassigning
-        *Work in Progress*
-
     uncomment
-        *Work in Progress*
-
-    uncommented
-        *Work in Progress*
-
-    uncommenting
         *Work in Progress*
 
     unencrypted
@@ -2899,9 +1949,6 @@ Glossary
     unmount
         *Work in Progress*
 
-    unmounts
-        *Work in Progress*
-
     untrusted
         *Work in Progress*
 
@@ -2912,9 +1959,6 @@ Glossary
         *Work in Progress*
 
     URI
-        *Work in Progress*
-
-    URIs
         *Work in Progress*
 
     useradd
@@ -2941,25 +1985,13 @@ Glossary
     usr
         *Work in Progress*
 
-    util
-        *Work in Progress*
-
     utils
         *Work in Progress*
 
     UUIDs
         *Work in Progress*
 
-    UUIDS
-        *Work in Progress*
-
-    uvtool
-        *Work in Progress*
-
     UVTool
-        *Work in Progress*
-
-    UVtool
         *Work in Progress*
 
     Valgrind
@@ -2977,9 +2009,6 @@ Glossary
     VFIO
         *Work in Progress*
 
-    vfio
-        *Work in Progress*
-
     VFS
         *Work in Progress*
 
@@ -2992,16 +2021,7 @@ Glossary
     vGPU
         *Work in Progress*
 
-    vincent
-        *Work in Progress*
-
-    virgil
-        *Work in Progress*
-
     virsh
-        *Work in Progress*
-
-    virt
         *Work in Progress*
 
     VirtIO
@@ -3013,40 +2033,16 @@ Glossary
     VirtualHost
         *Work in Progress*
 
-    virtualise
-        *Work in Progress*
-
-    Virtualised
-        *Work in Progress*
-
-    virtualised
-        *Work in Progress*
-
-    virtualiser
+    virtual
         *Work in Progress*
 
     virtualization
         *Work in Progress*
 
-    virtualizations
-        *Work in Progress*
-
-    virtualize
-        *Work in Progress*
-
-    virtualizing
-        *Work in Progress*
-
     VLAN
         *Work in Progress*
 
-    VM's
-        *Work in Progress*
-
-    VMs
-        *Work in Progress*
-
-    VMWare
+    VM
         *Work in Progress*
 
     VMware
@@ -3058,13 +2054,7 @@ Glossary
     VNX
         *Work in Progress*
 
-    vpn
-        *Work in Progress*
-
     VPN
-        *Work in Progress*
-
-    VPNs
         *Work in Progress*
 
     VRRP
@@ -3076,19 +2066,10 @@ Glossary
     vsftpd
         *Work in Progress*
 
-    vSwitch
-        *Work in Progress*
-
-    Vswitch
-        *Work in Progress*
-
     WAL
         *Work in Progress*
 
     WAN
-        *Work in Progress*
-
-    WANs
         *Work in Progress*
 
     wbinfo
@@ -3103,9 +2084,6 @@ Glossary
     Webserver
         *Work in Progress*
 
-    webserver
-        *Work in Progress*
-
     wg
         *Work in Progress*
 
@@ -3113,9 +2091,6 @@ Glossary
         *Work in Progress*
 
     winbind
-        *Work in Progress*
-
-    Wireguard
         *Work in Progress*
 
     WireGuard
@@ -3136,19 +2111,10 @@ Glossary
     WWID
         *Work in Progress*
 
-    WWIDs
-        *Work in Progress*
-
-    www
-        *Work in Progress*
-
     wxWidgets
         *Work in Progress*
 
     Xen
-        *Work in Progress*
-
-    Xenial
         *Work in Progress*
 
     xhtml
@@ -3160,25 +2126,16 @@ Glossary
     xml
         *Work in Progress*
 
-    yaml
-        *Work in Progress*
-
     YAML
         *Work in Progress*
 
     Yubikey
         *Work in Progress*
 
-    yyyymmddss
-        *Work in Progress*
-
     zFCP
         *Work in Progress*
 
     ZFS
-        *Work in Progress*
-
-    zfs
         *Work in Progress*
 
     zpool
