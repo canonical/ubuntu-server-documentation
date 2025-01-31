@@ -34,7 +34,6 @@ libvirt how-to/virtualisation/libvirt/
 virtual-machine-manager how-to/virtualisation/virtual-machine-manager/
 how-to-enable-nested-virtualization how-to/virtualisation/enable-nested-virtualisation/
 how-to-set-up-ubuntu-on-hyper-v how-to/virtualisation/ubuntu-on-hyper-v/
-lxc-containers how-to/containers/lxc-containers/
 lxd-containers how-to/containers/lxd-containers/
 docker-for-system-admins how-to/containers/docker-for-system-admins/
 how-to-run-rocks-on-your-server how-to/containers/run-rocks-on-your-server/
