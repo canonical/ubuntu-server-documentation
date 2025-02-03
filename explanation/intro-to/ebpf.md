@@ -60,7 +60,7 @@ Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubunt
 different functionalities. Apart from the `bpftrace` tool itself, you can fetch
 a comprehensive list of these tools with the following command:
 
-```
+```bash
 $ dpkg -L bpftrace bpfcc-tools | grep -E '/s?bin/.*$' | xargs -n1 basename
 ```
 
@@ -83,7 +83,7 @@ output for `bpftrace` tools in
 
 For instance,
 
-```
+```bash
 # bashreadline.bt
 ```
 
@@ -111,7 +111,7 @@ For that you'd run `execsnoop-bpfcc` with the following arguments:
 * `-Uu root` - to reduce the noisy output only to things done in root context (like here the package install)
 * `-T` - to get time info along the log
 
-```
+```bash
 # In one console run:
 $ sudo execsnoop-bpfcc -Uu root -T
 
@@ -168,7 +168,7 @@ will use the following arguments:
   unfiltered output of opensnoop that it is length limited, so only the shorter
   qemu-system-x86 can be used.
 
-```
+```bash
 # This will collect a log of files opened by QEMU
 $ sudo /usr/sbin/opensnoop-bpfcc --full-path --name qemu-system-x86
 #
@@ -190,8 +190,7 @@ $ lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
 
 Of course the QEMU process opens plenty of things: shared libraries, config
 files, entries in `/{sys,dev,proc}`, and much more. But here we can see them all
-as they happen across all of the system.
-
+as they happen across the whole system.
 
 ### But I'm only interested in a particular kind of file
 
@@ -206,7 +205,7 @@ very own eBPF solutions from scratch.
 So while `opensnoop-bpfcc` as of right now has no option to filter on the file
 names, it could ...
 
-```
+```bash
 $ sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 $ sudo vim /usr/sbin/opensnoop-bpfcc.new
 ...
@@ -269,7 +268,7 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 Running the modified version now allows to probe for specific file names, like
 all the .bin files:
 
-```
+```bash
 $ sudo /usr/sbin/opensnoop-bpfcc.new --contains '.bin' --name qemu-system-x86
 PID     COMM               FD ERR PATH
 1316661 qemu-system-x86    21   0 /snap/lxd/current/share/qemu//kvmvapic.bin
@@ -283,7 +282,7 @@ And just like with all the other tools and examples, the limit is your
 imagination. Wanted to know which files in `/etc` your complex intertwined
 apache config is really loading?
 
-```
+```bash
 $ sudo /usr/sbin/opensnoop-bpfcc.new --name 'apache2' --contains '/etc'
 PID     COMM               FD ERR PATH
 1319357 apache2             3   0 /etc/apache2/apache2.conf
@@ -306,7 +305,7 @@ the event generation.  Which brings us to another topic that you might have
 seen in your recreation of these examples, being aware and understanding
 messages like:
 
-```
+```text
 Possibly lost 84 samples
 ```
 
