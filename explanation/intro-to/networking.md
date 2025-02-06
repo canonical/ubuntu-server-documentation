@@ -11,7 +11,7 @@ If you're new to networking, our explanatory {ref}`Networking key concepts <netw
 
 ## Network configuration with Netplan
 
-Ubuntu uses [Netplan](https://netplan.io/) to configure networks. Netplan is a high-level, distribution-agnostic tool which uses a [YAML configuration file](https://netplan.readthedocs.io/en/stable/netplan-yaml/) to define your network.
+Ubuntu uses [Netplan](https://netplan.io/) to configure networks. Netplan is a high-level, distribution-agnostic tool that uses a [YAML configuration file](https://netplan.readthedocs.io/en/stable/netplan-yaml/) to define your network setup.
  
 Read {ref}`more about Netplan <about-netplan>`. 
 
