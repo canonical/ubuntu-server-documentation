@@ -41,7 +41,7 @@ If you want to set up a server to *provide* NTP information, we suggest chrony. 
 
 ### The DPDK library
 
-The [Data Plane Development Kit (DPDK)](https://www.dpdk.org/) is a set of libraries that improve network performance. Learn more {ref}`about DPDK and its use in Ubuntu <about-dpdk>`
+The [Data Plane Development Kit (DPDK)](https://www.dpdk.org/) is a set of libraries that improve network performance. Learn more {ref}`about DPDK and its use in Ubuntu <about-dpdk>`.
 
 One popular piece of software that uses DPDK is Open vSwitch (OVS). OVS runs inside a virtual machine (VM) and allows access to all virtual machines with a hypervisor. Check out our guide to find out {ref}`how to use DPDK with Open vSwitch <dpdk-with-open-vswitch>`.
 
