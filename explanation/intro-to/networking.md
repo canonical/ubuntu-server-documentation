@@ -31,7 +31,7 @@ There are two DHCP servers available on Ubuntu.
 
 Learn how to {ref}`install isc-kea <install-isc-kea>` or {ref}`install and configure isc-dhcp-server <install-isc-dhcp-server>`.
 
-### Time synchronisation
+### Time synchronization
 
 Network Time Protocol (NTP) synchronizes time over a network to within a few milliseconds of Coordinated Universal Time (UTC). Learn more about {ref}`time synchronisation <about-time-synchronisation>`.
 
