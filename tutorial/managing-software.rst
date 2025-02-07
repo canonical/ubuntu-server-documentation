@@ -651,7 +651,7 @@ or later, we'll want to customise the package so that it better fits our own
 purposes.
 
 Before we try to customise the package, we should probably look at what files
-are included in it. We can check this using [``dpkg``](https://documentation.ubuntu.com/server/reference/glossary/#term-dpkg), which is the
+are included in it. We can check this using [dpkg](https://documentation.ubuntu.com/server/reference/glossary/#term-dpkg), which is the
 `Debian package manager <https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html>`_.
 Although APT is now more commonly used for basic package handling, ``dpkg``
 retains some really helpful commands for examining files and finding out
