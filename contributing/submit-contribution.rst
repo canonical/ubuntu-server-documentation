@@ -38,12 +38,15 @@ If you rename, move or delete an existing file, a corresponding redirect must
 be created to ensure users don't run into 404 errors when clicking links in the
 published documentation.
 
-To set up a redirect, add a line to the end of the `redirects.txt` file in the
-root directory, in the following format:
+Internal redirects
+------------------
 
-```
-redirect/path/from/ redirect/path/to/
-```
+To set up a redirect from one file path to another, add a line to the end of the
+redirects.txt` file in the root directory, in the following format:
+
+.. code-block:: text
+
+    redirect/path/from/ redirect/path/to/
 
 Note that since we use `dirhtml` to build, the built documentation is in the
 format `path/to/file/index.html` where `file` corresponds to the file name
@@ -51,6 +54,26 @@ you are redirecting. This means that you only need a trailing slash at the end
 of the file name, without the file extension. See the
 `Sphinx Rediraffe docs <https://sphinxext-rediraffe.readthedocs.io/en/latest/>`_
 for more guidance, or reach out to us for help.
+
+External redirects
+------------------
+
+Rediraffe doesn't currently handle redirects from a page to an external website.
+To redirect outside of the Server documentation, you will need to set up a
+redirect in the `custom_conf.py` file in the root directory. 
+
+Under the Redirects section, you can add the source page and the target page as
+follows:
+
+.. code-block:: python
+
+   redirects = {
+       "example/source": "https://exampletarget.org",
+       "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/"
+   }
+
+When you set up a redirect in this way, the path of the source file you're redirecting
+from should include everything *after* the base URL (https://documentation.ubuntu.com/server).
 
 Manual testing
 ==============
