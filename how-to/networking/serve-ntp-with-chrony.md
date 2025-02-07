@@ -140,7 +140,7 @@ sudo apt install pps-tools gpsd-clients
 
 GPS devices usually communicate via serial interfaces. The most common type these days are USB GPS devices, which have a serial converter behind USB. If you want to use one of these devices for PPS then please be aware that the majority do not signal PPS via USB. Check the [GPSD hardware](https://gpsd.gitlab.io/gpsd/hardware.html) list for details. The examples below were run with a Navisys GR701-W.
 
-When plugging in such a device (or at boot time) `dmesg` should report a serial connection of some sort, as in this example:
+When plugging in such a device (or at boot time) [`dmesg`](https://documentation.ubuntu.com/server/reference/glossary/#term-dmesg) should report a serial connection of some sort, as in this example:
 
 ```text
 [   52.442199] usb 1-1.1: new full-speed USB device number 3 using xhci_hcd

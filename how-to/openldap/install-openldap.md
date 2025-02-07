@@ -25,13 +25,13 @@ sudo apt install slapd ldap-utils
 
 ### Change the instance suffix (optional)
 
-If you want to change your Directory Information Tree (DIT) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
+If you want to change your [Directory Information Tree (DIT)](https://documentation.ubuntu.com/server/reference/glossary/#term-DIT) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
 
 ```bash
 sudo dpkg-reconfigure slapd
 ```
 
-To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the DNS domain name.
+To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) domain name.
 
 Throughout this guide we will issue many commands with the LDAP utilities. To save some typing, we can configure the OpenLDAP libraries with certain defaults in `/etc/ldap/ldap.conf` (adjust these entries for your server name and directory suffix):
 
@@ -50,7 +50,7 @@ Right after installation, you will get two databases, or suffixes: one for your 
 The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its password is the one selected during the installation of the `slapd` package.
 
 - **`cn=config`** 
-The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special DN `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
+The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special [DN](https://documentation.ubuntu.com/server/reference/glossary/#term-DN) `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
 ### Example `slapd-config` DIT
 

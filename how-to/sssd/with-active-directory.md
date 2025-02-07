@@ -14,7 +14,7 @@ ADSys serves as a Group Policy client for Ubuntu, streamlining the configuration
 This guide does not explain Active Directory, how it works, how to set one up, or how to maintain it. It assumes that a working Active Directory domain is already configured and you have access to the credentials to join a machine to that domain.
 
 - The domain controller is:
-  - Acting as an authoritative DNS server for the domain.
+  - Acting as an authoritative [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) server for the domain.
   - The primary DNS resolver (check with `systemd-resolve --status`).
 - System time is correct and in sync, maintained via a service like `chrony` or `ntp`.
 - The domain used in this example is `ad1.example.com` .

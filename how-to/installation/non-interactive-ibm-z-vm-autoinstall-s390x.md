@@ -4,7 +4,7 @@
 
 This non-interactive installation uses 'autoinstall', which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by '...', to limit the size of this document).
 
-The example z/VM guest here uses a direct-access storage device (DASD) and is connected to a regular (non-VLAN) network.
+The example z/VM guest here uses a [direct-access storage device (DASD)](https://documentation.ubuntu.com/server/reference/glossary/#term-DASD) and is connected to a regular (non-VLAN) network.
 
 For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR (s390x) installation using autoinstall](https://discourse.ubuntu.com/t/non-interactive-ibm-z-lpar-s390x-installation-using-autoinstall/16988) guide.
 
@@ -120,7 +120,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
 
-  In this particular example a single DASD ECKD disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host (host-bus-adapters) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
+  In this particular example a single [DASD](https://documentation.ubuntu.com/server/reference/glossary/#term-DASD) [ECKD](https://documentation.ubuntu.com/server/reference/glossary/#term-ECKD) disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host (host-bus-adapters) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
 
 * For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
 

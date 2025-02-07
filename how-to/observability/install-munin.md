@@ -62,7 +62,7 @@ In a browser, go to `http://server01/munin`, and you should see links to nice gr
 
 ## Additional Plugins
 
-The `munin-plugins-extra` package contains performance checks and additional services such as DNS, DHCP, and Samba, etc. To install the package, from a terminal enter:
+The `munin-plugins-extra` package contains performance checks and additional services such as [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS), [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP), and Samba, etc. To install the package, from a terminal enter:
 
 ```bash
 sudo apt install munin-plugins-extra

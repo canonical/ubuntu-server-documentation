@@ -1,7 +1,7 @@
 (dnssec-troubleshooting)=
 # Basic DNSSEC troubleshooting
 
-Some of the troubleshooting tips that will be shown here are focused on the BIND9 DNS server and its tools, but the general principle applies to DNSSEC in all implementations.
+Some of the troubleshooting tips that will be shown here are focused on the BIND9 [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) server and its tools, but the general principle applies to [DNSSEC](https://documentation.ubuntu.com/server/reference/glossary/#term-DNSSEC) in all implementations.
 
 ## Handy "bad" and "good" DNSSEC domains
 It helps to have some good known domains with broken and working DNSSEC available for testing, so we can be sure our tooling is catching those, and not just failing everywhere. There is no guarantee that these domains will be up forever, and certainly there are more out there, but this list is a good first choice:

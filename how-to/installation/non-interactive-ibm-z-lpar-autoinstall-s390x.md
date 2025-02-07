@@ -4,7 +4,7 @@
 This non-interactive installation uses ‘autoinstall’, which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by ‘…’, to limit the size of this document).
 
 The example logical partition (LPAR) here uses zFCP storage and is connected to a VLAN network.
-For a DASD and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) autoinstallation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
+For a [DASD](https://documentation.ubuntu.com/server/reference/glossary/#term-DASD) and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) autoinstallation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
 
 * Start with the preparation of the (FTP) install server (if it doesn't already exist).
 
@@ -198,7 +198,7 @@ For a DASD and a non-VLAN network example, please see the [non-interactive IBM z
 
   In this particular example, two zFCP hosts (host-bus-adapters) are enabled via their addresses *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain logical unit numbers (LUNs) assigned that are all automatically discovered and activated by `chzdev zfcp-lun -e --online`.
 
-  Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a qeth device activation looks like: `chzdev qeth -e c000`.
+  Activation of a [direct-access storage device (DASD)](https://documentation.ubuntu.com/server/reference/glossary/#term-DASD) would look like this: `chzdev dasd -e 1f00`, and a qeth device activation looks like: `chzdev qeth -e c000`.
 
 > **See also**:
 > For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) pages.

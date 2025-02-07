@@ -78,7 +78,7 @@ zone "example.com" {
 ```
 
 > **Note**:
-> If BIND will be receiving automatic updates to the file as with DDNS, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
+> If BIND will be receiving automatic updates to the file as with [DDNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DDNS), then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
 
 Now use an existing zone file as a template to create the `/etc/bind/db.example.com` file:
 

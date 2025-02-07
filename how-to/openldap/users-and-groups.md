@@ -41,7 +41,7 @@ sudo chmod 400 /etc/ldapscripts/ldapscripts.passwd
 ```
 
 >**Note**:
-> The password file must contain exactly and only the password characters, no end-of-line or anything else. The `echo` command above with the `-n` parameter achieves that by suppressing the *EOL* character `\n`. And in order to prevent the password from appearing in the shell history, the *echo* command line is prefixed by a space.
+> The password file must contain exactly and only the password characters, no end-of-line or anything else. The `echo` command above with the `-n` parameter achieves that by suppressing the [*EOL*](https://documentation.ubuntu.com/server/reference/glossary/#term-EOL) character `\n`. And in order to prevent the password from appearing in the shell history, the *echo* command line is prefixed by a space.
 
 The scripts are now ready to help manage your directory.
 

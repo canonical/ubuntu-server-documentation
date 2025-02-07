@@ -37,7 +37,7 @@ kdc01.example.com
 Remember that `kdc02` is a read-only copy of the primary KDC, so it doesn't run an admin server.
 
 > **Note**:
-> If you have added the appropriate SRV records to DNS, none of those prompts will need answering.
+> If you have added the appropriate SRV records to [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS), none of those prompts will need answering.
 
 ### Configure Kerberos
 

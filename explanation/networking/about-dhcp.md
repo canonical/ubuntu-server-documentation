@@ -9,7 +9,7 @@ The most common settings provided by a DHCP server to DHCP clients include:
 
   - IP address of the default-gateway to use
 
-  - IP addresses of the DNS servers to use
+  - IP addresses of the [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) servers to use
 
 However, a DHCP server can also supply configuration properties such as:
 

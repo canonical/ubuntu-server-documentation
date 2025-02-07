@@ -46,7 +46,7 @@ On the kernel side, there are various [options you can enable/configure](https:/
 > $ lspci | grep 3D
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
 
-You can check your boot-up kernel messages for IOMMU/DMAR messages or even filter it for a particular PCI ID.
+You can check your boot-up kernel messages for IOMMU/[DMAR](https://documentation.ubuntu.com/server/reference/glossary/#term-DMAR) messages or even filter it for a particular PCI ID.
 
 To list all:
 
@@ -159,7 +159,7 @@ drm                   491520  6 drm_kms_helper,drm_vram_helper,nvidia
 > **Note**:
 > While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
 >
-> It's also worth mentioning that the Nvidia license server went [EOL on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
+> It's also worth mentioning that the Nvidia license server went [[EOL](https://documentation.ubuntu.com/server/reference/glossary/#term-EOL) on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
 
 Here is an example of those when running fine:
 ```text

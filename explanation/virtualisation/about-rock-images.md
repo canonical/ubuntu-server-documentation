@@ -1,7 +1,7 @@
 (about-rock-images)=
 # About rock images
 
-A rock is an [Ubuntu-based container image](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#). Rocks are [OCI-compliant](https://opencontainers.org/) and thus compatible with all popular container management tools (such as Docker and Kubernetes) and container registries (such as Docker Hub and Amazon ECR). They are built to be secure and stable by design.
+A rock is an [Ubuntu-based container image](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#). Rocks are [OCI-compliant](https://opencontainers.org/) and thus compatible with all popular container management tools (such as [Docker](https://documentation.ubuntu.com/server/reference/glossary/#term-Docker) and Kubernetes) and container registries (such as Docker Hub and Amazon ECR). They are built to be secure and stable by design.
 
 Rocks are [created using Rockcraft](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rockcraft/), which in turn [uses Chisel](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/chisel/) to extract the relevant parts of Debian packages needed to form a minimal container image. By keeping rocks small and specific, their exposure to vulnerabilities is minimised.
 

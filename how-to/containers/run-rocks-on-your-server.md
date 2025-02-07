@@ -4,7 +4,7 @@
 
 ## Deploying rocks with Docker
 
-As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favourite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using Docker.
+As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favourite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using [Docker](https://documentation.ubuntu.com/server/reference/glossary/#term-Docker).
 
 First, install Docker if it's not already installed:
 

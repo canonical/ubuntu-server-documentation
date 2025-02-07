@@ -23,7 +23,7 @@ The `reload` action does exactly what we expect: it reloads the configuration of
 
 ## DNS resolving
 
-Let's say when you are inside the home network (literally -- at home), you can connect to your other systems via DNS names, because your router at `10.10.10.1` can act as an internal DNS server. It would be nice to have this capability also when connected via the WireGuard VPN.
+Let's say when you are inside the home network (literally -- at home), you can connect to your other systems via [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) names, because your router at `10.10.10.1` can act as an internal DNS server. It would be nice to have this capability also when connected via the WireGuard VPN.
 
 To do that, we can add a `PostUp` command to the WireGuard configuration to run a command for us right after the VPN is established. This command can be anything you would run in a shell (as root). We can use that to adjust the DNS resolver configuration of the laptop that is remotely connected to the home network.
 

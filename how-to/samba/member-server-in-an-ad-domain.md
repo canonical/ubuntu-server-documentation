@@ -20,7 +20,7 @@ First, let's install the necessary packages:
 sudo apt install realmd samba
 ```
 
-In order to have the joined machine registered in the AD DNS, it needs to have an FQDN set. You might have that already, if running the `hostname -f` command returns a full hostname with domain. If it doesn't, then set the hostname as follows:
+In order to have the joined machine registered in the AD [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS), it needs to have an FQDN set. You might have that already, if running the `hostname -f` command returns a full hostname with domain. If it doesn't, then set the hostname as follows:
 
 ```bash
 sudo hostnamectl hostname <yourfqdn>

@@ -304,220 +304,143 @@ Glossary
         *Work in Progress*
 
     DAC
-        *Work in Progress*
+        Discretionary access control
+        A form of access control where the owner of a resource can grant/revoke permissions to other users.
 
-    daemonize
-        *Work in Progress*
+    Daemonize
+        The process of converting a program to run in the background as a service, independent of user sessions.
 
     DARPA
-        *Work in Progress*
+        Defense Advanced Research Projects Agency
+        A research and development agency of the United States Department of Defense responsible for the development of emerging technologies for use in the military.
 
     DASD
-        *Work in Progress*
-
-    datacentre
-        *Work in Progress*
+        Direct Access Storage Device
+        The term was coined by IBM to refer to a type of storage that allow random access to storage (hard-drives, optical discs, ...). It contrast with sequential access storage such as magnetic tape or punched card.
 
     Datagram
-        *Work in Progress*
-
-    dbgsym
-        *Work in Progress*
+        In networking, a self contained, independent packet sent over a network. It can be routed from source to destination without relying on earlier or subsequent transfers.
 
     dblink
-        *Work in Progress*
-
-    DBs
-        *Work in Progress*
+        Database Link
+        Connection between two databases (mainly Oracle and PostgreSQL), allowing one database to query data from the other.
 
     ddeb
         *Work in Progress*
 
-    ddebs
-        *Work in Progress*
-
     DDNS
-        *Work in Progress*
-
-    de
-        *Work in Progress*
+        Dynamic domain name system
+        A service that automatically updates DNS records when the underlying IP address changes (aka, dynamic IP).
 
     debconf
-        *Work in Progress*
-
-    Debian
-        *Work in Progress*
-
-    debuginfo
-        *Work in Progress*
-
-    debuginfod
-        *Work in Progress*
-
-    decrypt
-        *Work in Progress*
+        A configuration management system handling the configuration of software packages during installation or upgrades by prompting users for necessary settings and storing them for subsequent installations or updates.
 
     deduplication
-        *Work in Progress*
+        Process of removing duplicate copies of data in storage spaces. The redundant data is then replace with a reference to the original.
 
     denylist
-        *Work in Progress*
+        In cyber-security, a denylist is a list of entities (IP, domains, emails, ...), that are explicitly denied access to a system or service.
 
     DER
-        *Work in Progress*
-
-    dev
-        *Work in Progress*
-
-    devel
-        *Work in Progress*
-
-    DevStack
-        *Work in Progress*
+        Distinguished Encoding Rules
+        An standardised encoding format for data (mostly cryptographic certificates and keys) for transmission and storage.
 
     DGC
-        *Work in Progress*
+        Distributed Garbage Collection
+        A process used in distributed systems to manage memory across multiple interconnected computers allowing identification and reclaiming of unused memory accross nodes.
 
     DHCP
-        *Work in Progress*
+        Dynamic Host Configuration Protocol
+        A network protocol used to automatically assign network configuration details (IP, DNS, gateway, ...) to devices allowing for easy network management and connections within the network.
 
-    dhcpd
-        *Work in Progress*
-
-    dir
-        *Work in Progress*
-
-    DirectoryIndex
-        *Work in Progress*
+    DHCPD
+        Dynamic Host Configuration Protocol Daemon
+        Server software responsible for assigning the network configuration via DHCP.
 
     DIT
-        *Work in Progress*
+        Directory Information Tree
+        In directory services (LDAP) it's a hierarchical tree-like structure used to organize and store information. 
 
     DKMS
-        *Work in Progress*
-
-    DLM
-        *Work in Progress*
-
-    DM
-        *Work in Progress*
+        Dynamic Kernel Module Support
+        A framework used in Linux systems to automatically rebuild and install kernel modules when the kernel is updated.
 
     DMA
-        *Work in Progress*
+        Direct Memory Access
+        A technology that allows peripheral devices (hard drives, network cards, ...) to access the system's memory directly, bypassing the CPU and thus improving performance.
 
     DMAR
-        *Work in Progress*
+        Direct Memory Access Remapping
+        It is a technology used to control and secure Direct Memory Access (DMA) operations and ensures that devices can only access memory regions they are authorized to, helping to prevent unauthorized access, memory corruption, or security vulnerabilities.
+        It is often used in virtualized environments to isolate devices between virtual machines (VMs) and the host system.
 
     dmesg
-        *Work in Progress*
-
-    dmsetup
-        *Work in Progress*
+        A command in Linux systems that displays system logs related to hardware, drivers, and kernel events, such as system startup, device detection, and errors. It is commonly used for troubleshooting hardware issues and system diagnostics.
 
     DN
-        *Work in Progress*
+        Distinguished Name
+        In directory services (LDAP), it's a unique identifier used to represent an entry in a directory, such as a user or a group. It's often composed of sub-components like CN (Common Name), OU (Organisational Unit), DC (Domain Component).
 
     DNS
-        *Work in Progress*
-
-    dnsleaktest
-        *Work in Progress*
+        Domain Name System
+        A system that translate human-readable domain names (canonical.com) to their IP addresses (185.125.190.20).
 
     dnsmasq
-        *Work in Progress*
+        A lightweight, open-source DNS (Domain Name System) and DHCP (Dynamic Host Configuration Protocol) server software.
 
     DNSSEC
-        *Work in Progress*
+        Domain Name System Security Extensions
+        DNSSEC is a set of security extensions to DNS which allow DNS data to be verified for authenticity and integrity.
 
     Docker
-        *Work in Progress*
+        One of the most popular containerization platforms, which allows developers to package applications - together with their dependencies - into lightweight containers. This provides a consistently reproducible environment for deploying applications.
 
     DocumentRoot
-        *Work in Progress*
-
-    DPDK
-        *Work in Progress*
+        A directive in web server configuration files that specifies the directory on the server where web files are stored (root location). 
 
     dpkg
-        *Work in Progress*
+        dpkg is a package manager for Debian-based systems. It can install, remove, and build packages, but unlike other package management systems, it cannot automatically download and install packages – or their dependencies.
 
     DRBD
-        *Work in Progress*
+        Distributed Replicated Block Device
+        A software-based storage solution for Linux that allows for the mirroring of block devices between multiple hosts. The replication is transparent to other applications on the host systems. Any block device hard disks, partitions, RAID devices, logical volumes, etc can be mirrored.
 
     DTLS
-        *Work in Progress*
+        Datagram Transport Layer Security
+        A protocol that provides security for datagram-based communication, such as UDP. It is designed to offer similar security features as TLS but adapted for the connectionless nature of datagram protocols.
 
     EAL
-        *Work in Progress*
-
-    EasyRSA
-        *Work in Progress*
+        Environment Abstraction Layer
+        A software layer that provides a standardised interface between an operating system and the underlying hardware. It abstracts hardware-specific details, allowing software to run on different hardware platforms without modification.
 
     ECKD
-        *Work in Progress*
-
-    ECR
-        *Work in Progress*
-
-    EF
-        *Work in Progress*
+        Extended Count Key Data
+        A disk storage format used by IBM mainframe systems, it provides advanced features such as better error detection and correction, as well as enhanced management of data records.
 
     EFI
-        *Work in Progress*
+        Extensible Firmware Interface
+        A type of firmware interface designed to initialize hardware and load the operating system during the boot process of a computer. Replacement for the older BIOS and ancestor of the UEFI.
 
     ELinks
-        *Work in Progress*
-
-    EMC
-        *Work in Progress*
+        A text-based web browser for Unix-like operating systems. It allows users to browse the web in a terminal making it ideal for environments without a graphical user interface.
 
     Engenio
-        *Work in Progress*
-
-    ensite
-        *Work in Progress*
+        A company that developed and manufactured storage systems including SAN and NAS. Later acquired by LSI Corporation and then by Seagate Technology.
 
     EOL
-        *Work in Progress*
+        End of life
+        When a product, service, software is no longer supported or maintained.
 
     ERD
-        *Work in Progress*
-
-    ErrorDocument
-        *Work in Progress*
-
-    ErrorLog
-        *Work in Progress*
+        Enterprise Ready Drivers
+        Drivers that are specifically designed and optimized for use in enterprise environments, where stability, performance, and reliability are critical.
 
     ESM
-        *Work in Progress*
+        Expanded Security Maintenance
+        A support offering provided by Ubuntu, to extend security updates and patches for older versions of the operating system after its standard support period has ended. 
 
     ESXi
-        *Work in Progress*
-
-    etckeeper
-        *Work in Progress*
-
-    ETW
-        *Work in Progress*
-
-    etwlogs
-        *Work in Progress*
-
-    ExecCGI
-        *Work in Progress*
-
-    executables
-        *Work in Progress*
-
-    eXecution
-        *Work in Progress*
-
-    Exim4
-        *Work in Progress*
-
-    exportfs
-        *Work in Progress*
+        A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
 
     failover
         *Work in Progress*
@@ -546,9 +469,6 @@ Glossary
     FIPS
         *Work in Progress*
 
-    firsttest
-        *Work in Progress*
-
     Fluentd
         *Work in Progress*
 
@@ -571,9 +491,6 @@ Glossary
         *Work in Progress*
 
     fsync
-        *Work in Progress*
-
-    fulfill
         *Work in Progress*
 
     FULLTEXT

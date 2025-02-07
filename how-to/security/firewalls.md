@@ -303,7 +303,7 @@ sudo iptables -A INPUT -m state --state NEW -p tcp --dport 80 \
  -j LOG --log-prefix "NEW_HTTP_CONN: "
 ```
 
-A request on port `80` from the local machine, then, would generate a log in `dmesg` that looks like this (single line split into 3 to fit this document):
+A request on port `80` from the local machine, then, would generate a log in [`dmesg`](https://documentation.ubuntu.com/server/reference/glossary/#term-dmesg) that looks like this (single line split into 3 to fit this document):
 
 ```text
 [4304885.870000] NEW_HTTP_CONN: IN=lo OUT= MAC=00:00:00:00:00:00:00:00:00:00:00:00:08:00
