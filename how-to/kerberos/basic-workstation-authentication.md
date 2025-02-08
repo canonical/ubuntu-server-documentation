@@ -87,7 +87,7 @@ $ sudo chmod 0600 /etc/sssd/sssd.conf
 $ sudo systemctl start sssd
 ```
 
-Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a fallback to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal (<kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>number</kbd>), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
+Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a {term}`fallback <fallbacks>` to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal (<kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>number</kbd>), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
 
 ```bash
 $ sudo login
