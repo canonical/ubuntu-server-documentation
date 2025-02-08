@@ -185,7 +185,7 @@ Glossary
     cfg
         *Work in Progress*
 
-    cgi
+    CGI
         *Work in Progress*
 
     CGNAT
@@ -462,19 +462,21 @@ Glossary
         A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
 
     failover
-        *Work in Progress*
+        In a Storage Area Network (SAN) environment, this occurs when data flows into an alternative I/O path because a cable, switch, or controller in the current path failed.
+        It is a common feature in high availability environments and is handled (usually automatically) by multipathing software.
 
     fallbacks
-        *Work in Progress*
+        This is a manual or automatic switch to an alternative method, when the primary option fails or is less preferred.
 
     FastCGI
-        *Work in Progress*
+        Fast Common Gateway Interface (FastCGI) is an extension of the CGI protocol that starts a persistent FastCGI 
+        application process, allowing it to handle multiple requests instead of starting a new process for each request like a traditional CGI does.
 
     FC
-        *Work in Progress*
+        Fiber Channel (FC) is a storage networking protocol used for low-latency communication between a storage device and a node in a Storage Area Network (SAN).
 
     FHS
-        *Work in Progress*
+        Filesystem Hierarchy Standard (FHS) is a standard that defines the directory structure and contents in Linux and Unix-like operating systems.
 
     filebug
         *Work in Progress*

@@ -251,4 +251,4 @@ sudo systemctl restart ssh.service
 
 ### External user database authentication
 
-Most enterprise networks require centralised authentication and access controls for all system resources. If you have configured your server to authenticate users against external databases, be sure to disable the user accounts both externally and locally. This way you ensure that local fallback authentication is not possible.
+Most enterprise networks require centralised authentication and access controls for all system resources. If you have configured your server to authenticate users against external databases, be sure to disable the user accounts both externally and locally. This way you ensure that local {term}`fallbacks` authentication is not possible.
