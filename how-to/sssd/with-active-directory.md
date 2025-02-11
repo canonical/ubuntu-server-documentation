@@ -7,7 +7,7 @@ This section describes the use of SSSD to authenticate user logins against an Ac
 
 SSSD manages user authentication and sets initial security policies.
 
-ADSys serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://canonical-adsys.readthedocs-hosted.com/en/stable/).
+{term}`ADSys` serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://canonical-adsys.readthedocs-hosted.com/en/stable/).
 
 ## Prerequisites and assumptions
 

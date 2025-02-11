@@ -9,7 +9,7 @@ Let's take a look at some of the major tools and technologies available in the U
 
 [Kernel-Based Virtual Machine (KVM)](https://www.linux-kvm.org/page/Main_Page) is a Linux kernel module that enables hardware-assisted virtualization. It is the default virtualization technology supported by Ubuntu.
 
-For Intel and AMD hardware, KVM requires virtualization extensions in order to run. KVM is also available for IBM Z and LinuxONE, IBM POWER, and ARM64.
+For Intel and {term}`AMD` hardware, KVM requires virtualization extensions in order to run. KVM is also available for IBM Z and LinuxONE, IBM POWER, and ARM64.
 
 ## QEMU
 

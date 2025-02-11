@@ -12,7 +12,7 @@ Canonical's LMA stack involves several discrete software services acting in conc
 
 [**Telegraf**](https://docs.influxdata.com/telegraf/v1/) collects metrics from the operating system, running software, and other inputs. Its plugin system permits export of data in any arbitrary format; for this system we collect the data in a central data manager called [**Prometheus**](https://prometheus.io/docs/introduction/overview/).
 
-Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualisation is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) plugin.
+Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualisation is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the Prometheus {term}`Alertmanager` plugin. See [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) for more details.
 
 ## Getting started
 

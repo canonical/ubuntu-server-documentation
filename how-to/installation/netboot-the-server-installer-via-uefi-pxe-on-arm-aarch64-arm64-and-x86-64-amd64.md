@@ -4,7 +4,7 @@
 
 This document provides the steps needed to install a system via netbooting and the live server installer (Subiquity) in UEFI mode with Ubuntu 20.04 (or later).
 
-The process described here is applicable to both arm64 and amd64 architectures. The process is inspired by [this Ubuntu Discourse post](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510) for **legacy mode**, which is UEFI's predecessor. Focal (20.04, 20.04.5) and Groovy (20.10) have been tested with the following method.
+The process described here is applicable to both arm64 and {term}`amd`64 architectures. The process is inspired by [this Ubuntu Discourse post](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510) for **legacy mode**, which is UEFI's predecessor. Focal (20.04, 20.04.5) and Groovy (20.10) have been tested with the following method.
 
 ## Configure TFTP
 

@@ -99,7 +99,7 @@ For the other stages in the `ssh` connection, like key exchange, or public key a
 
 ### Remove AES 128 from server
 
-Let's configure an OpenSSH server to only offer the AES 256 bit variant of symmetric ciphers for an `ssh` connection.
+Let's configure an OpenSSH server to only offer the {term}`AES` 256 bit variant of symmetric ciphers for an `ssh` connection.
 
 First, let's see what the default is:
 

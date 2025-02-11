@@ -136,7 +136,7 @@ On a site-to-site VPN, however, when two separate networks are connected through
 Key takeaways from this introduction:
 
 - Each peer participating in the WireGuard VPN has a private key and a public key.
-- `AllowedIPs` is used as a routing key when sending traffic, and as an ACL when receiving traffic.
+- `AllowedIPs` is used as a routing key when sending traffic, and as an {term}`ACL` when receiving traffic.
 - To establish a VPN with a remote peer, you need its public key. Likewise, the remote peer will need your public key.
 - At least one of the peers needs an `Endpoint` configured in order to be able to initiate the VPN.
 
