@@ -66,7 +66,7 @@ The installer is designed to be easy to use and have sensible defaults so for a 
  * Choose your language
  * Update the installer (if offered)
  * Select your keyboard layout
- * Do not configure networking (the installer attempts to configure wired network interfaces via [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP), but you can continue without networking if this fails)
+ * Do not configure networking (the installer attempts to configure wired network interfaces via {term}`DHCP`, but you can continue without networking if this fails)
  * Do not configure a proxy or custom mirror unless you have to in your network
  * For storage, leave "use an entire disk" checked, and choose a disk to install to, then select "Done" on the configuration screen and confirm the install
  * Enter a username, hostname and password

@@ -55,7 +55,7 @@ sssctl cache-expire -E
 
 ## DNS
 
-Kerberos is quite sensitive to [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) issues. If you suspect something related to DNS, here are two suggestions:
+Kerberos is quite sensitive to {term}`DNS` issues. If you suspect something related to DNS, here are two suggestions:
 
 ### FQDN hostname
 

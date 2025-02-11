@@ -91,7 +91,7 @@ ping: sendmsg: Required key not available
 
 Can happen when you have a route directing traffic to the WireGuard interface, but that interface does not have the target address listed in its `AllowedIPs` configuration.
 
-If you have enabled kernel debugging for WireGuard, you will also see a message like this one in the [`dmesg`](https://documentation.ubuntu.com/server/reference/glossary/#term-dmesg) output:
+If you have enabled kernel debugging for WireGuard, you will also see a message like this one in the {term}`dmesg` output:
 
 ```
 wireguard: home0: No peer has allowed IPs matching 10.10.11.1

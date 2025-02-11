@@ -7,7 +7,7 @@ To continue, this is the minimum set of packages that are needed:
 
     sudo apt install winbind libnss-winbind libpam-winbind
 
-Next, it will make everything much easier if the [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) resolver is pointed at the Active Directory DNS server. If that is already the case as provided by the [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP) server, this part can be skipped.
+Next, it will make everything much easier if the {term}`DNS` resolver is pointed at the Active Directory DNS server. If that is already the case as provided by the {term}`DHCP` server, this part can be skipped.
 
 For example, for a default netplan configuration file which looks like this:
 

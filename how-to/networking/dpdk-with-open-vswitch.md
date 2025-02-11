@@ -74,7 +74,7 @@ ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x6
 The first line selects how many Rx Queues are to be used for each DPDK interface, while the second controls how many poll mode driver (PMD) threads to run (and where to run them). The example above will use two Rx Queues, and run PMD threads on CPU 1 and 2. 
 
 > **See also**:
-> Check the links to "[EAL](https://documentation.ubuntu.com/server/reference/glossary/#term-EAL) Command-line Options" and "Open vSwitch DPDK installation" at the end of this document for more information.
+> Check the links to {term}`EAL` Command-line Options and "Open vSwitch DPDK installation" at the end of this document for more information.
 
 As usual with tunings, you need to know your system and workload really well - so please verify any tunings with workloads matching your real use case.
 

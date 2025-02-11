@@ -113,7 +113,7 @@ Has to match the LDAP suffix you chose when you configured the LDAP server.
 They are all relative to `ldap suffix` above. For example, for `ldap user suffix` you should use `ou=People`, and for computer/machines, use `ou=Computers`.
 
 - **ldap master bind dn** and **bind password**
-Use the Root [DN](https://documentation.ubuntu.com/server/reference/glossary/#term-DN) credentials.
+Use the Root {term}`DN` credentials.
 
 
 The `smbldap-populate` script will then add the LDAP objects required for Samba. It will ask you for a password for the "domain root" user, which is also the "root" user stored in LDAP:

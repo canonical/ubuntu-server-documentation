@@ -249,7 +249,7 @@ Using huge pages can help to reduce TLB pressure, page table overhead and speed 
 While huge page are admittedly harder to manage (especially later in the system's lifetime if memory is fragmented) they provide a useful boost especially for rather large guests.
 
 > **Bonus**:
-> When using device passthrough on very large guests there is an extra benefit of using huge pages as it is faster to do the initial memory clear on VFIO [DMA](https://documentation.ubuntu.com/server/reference/glossary/#term-DMA) pin.
+> When using device passthrough on very large guests there is an extra benefit of using huge pages as it is faster to do the initial memory clear on VFIO {term}`DMA` pin.
 
 ### Huge page allocation
 

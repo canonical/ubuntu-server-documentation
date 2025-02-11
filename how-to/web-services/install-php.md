@@ -74,7 +74,7 @@ To verify your installation, you can run the following PHP `phpinfo` script:
 ?>
 ```
 
-You can save the content in a file -- `phpinfo.php` for example -- and place it under the [`DocumentRoot`](https://documentation.ubuntu.com/server/reference/glossary/#term-DocumentRoot) directory of the Apache2 web server. Pointing your browser to `http://hostname/phpinfo.php` will display the values of various PHP configuration parameters.
+You can save the content in a file -- `phpinfo.php` for example -- and place it under the {term}`DocumentRoot` directory of the Apache2 web server. Pointing your browser to `http://hostname/phpinfo.php` will display the values of various PHP configuration parameters.
 
 ## Further reading
 

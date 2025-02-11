@@ -137,7 +137,7 @@ This section will assume you already have setup a Kerberos server, with a runnin
 The NFS server will have the usual `nfs-kernel-server` package and its dependencies, but we will also have to install kerberos packages. The kerberos packages are not strictly necessary, as the necessary keys can be copied over from the KDC, but it makes things much easier.
 
 For this example, we will use:
- - `.vms` [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) domain
+ - `.vms` {term}`DNS` domain
  - `VMS` Kerberos realm
  - `j-nfs-server.vms` for the NFS server
  - `j-nfs-client.vms` for the NFS client

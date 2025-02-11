@@ -16,7 +16,7 @@ that it's understood as such.
 
 - Attributes and `objectClasses` are defined in **schemas** (an `objectClass` is considered a special kind of attribute).
 
-- Each entry has a unique identifier: its [**Distinguished Name** (DN or dn)](https://documentation.ubuntu.com/server/reference/glossary/#term-DN). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
+- Each entry has a unique identifier: its **Distinguished Name** ({term}`DN` or dn). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
 
 - The entry's DN is not an attribute. It is not considered part of the entry itself.
 

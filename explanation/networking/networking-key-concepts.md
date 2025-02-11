@@ -5,19 +5,19 @@ This section provides high-level information pertaining to networking, including
 
 ## The Transmission Control Protocol and Internet Protocol (TCP/IP)
 
-The Transmission Control Protocol and Internet Protocol is a standard set of protocols developed in the late 1970s by the [Defense Advanced Research Projects Agency (DARPA)](https://documentation.ubuntu.com/server/reference/glossary/#term-DARPA) as a means of communication between different types of computers and computer networks. TCP/IP is the driving force of the Internet, and thus it is the most popular set of network protocols on Earth.
+The Transmission Control Protocol and Internet Protocol is a standard set of protocols developed in the late 1970s by the Defense Advanced Research Projects Agency ({term}`DARPA`) as a means of communication between different types of computers and computer networks. TCP/IP is the driving force of the Internet, and thus it is the most popular set of network protocols on Earth.
 
 ### TCP/IP overview
 
 The two protocol components of TCP/IP deal with different aspects of computer networking.
 
-- **Internet Protocol** -- the "IP" of TCP/IP -- is a connectionless protocol that deals only with network packet routing using the *IP Datagram* as the basic unit of networking information. The IP [Datagram](https://documentation.ubuntu.com/server/reference/glossary/#term-Datagram) consists of a header followed by a message.
+- **Internet Protocol** -- the "IP" of TCP/IP -- is a connectionless protocol that deals only with network packet routing using the *IP Datagram* as the basic unit of networking information. The IP {term}`Datagram` consists of a header followed by a message.
 
 - **Transmission Control Protocol** -- the "TCP" of TCP/IP -- enables network hosts to establish connections that may be used to exchange data streams. TCP also guarantees that data sent between connections is delivered, and that it arrives at one network host in the same order as sent from another network host.
 
 ### TCP/IP configuration
 
-The TCP/IP protocol configuration consists of several elements that must be set by editing the appropriate configuration files, or by deploying solutions such as the [Dynamic Host Configuration Protocol (DHCP)](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP) server which can, in turn, be configured to provide the proper TCP/IP configuration settings to network clients automatically. These configuration values must be set correctly in order to facilitate the proper network operation of your Ubuntu system.
+The TCP/IP protocol configuration consists of several elements that must be set by editing the appropriate configuration files, or by deploying solutions such as the Dynamic Host Configuration Protocol ({term}`DHCP`) server which can, in turn, be configured to provide the proper TCP/IP configuration settings to network clients automatically. These configuration values must be set correctly in order to facilitate the proper network operation of your Ubuntu system.
 
 The common configuration elements of TCP/IP and their purposes are as follows:
 

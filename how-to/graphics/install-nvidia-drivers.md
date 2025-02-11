@@ -9,7 +9,7 @@ We package two types of NVIDIA drivers:
 
 1. **Unified Driver Architecture (UDA)** drivers - which are recommended for the generic desktop use, and which you can also find [on the NVIDIA website](https://www.nvidia.com/en-us/drivers/unix/).
 
-1. [**Enterprise Ready Drivers (ERD)**](https://documentation.ubuntu.com/server/reference/glossary/#term-ERD) - which are recommended on servers and for computing tasks. Their packages can be recognised by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
+1. **Enterprise Ready Drivers** ({term}`ERD`) - which are recommended on servers and for computing tasks. Their packages can be recognised by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
 
 Additionally, we package the **NVIDIA Fabric Manager** and the **NVIDIA Switch Configuration and Query (NSCQ) Library**, which you will only need if you have NVswitch hardware. The Fabric Manager and NSCQ library are only available with the ERDs or `-server` driver versions.
 
@@ -142,7 +142,7 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 
 #### Building your own kernel modules using the NVIDIA DKMS package
 
-Install the relevant NVIDIA [DKMS](https://documentation.ubuntu.com/server/reference/glossary/#term-DKMS) package and `linux-headers` to build the kernel modules, and enroll your own key to sign the modules.
+Install the relevant NVIDIA {term}`DKMS` package and `linux-headers` to build the kernel modules, and enroll your own key to sign the modules.
 
 Install the `linux-headers` metapackage for your kernel flavour (e.g. `generic`, `lowlatency`, etc):
 

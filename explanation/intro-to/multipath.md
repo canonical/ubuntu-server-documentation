@@ -130,5 +130,5 @@ update-initramfs -u -k all
 ```
 
 ```{note}
-Every time either `/etc/lvm.conf` or `/etc/multipath.conf` is updated, the `initrd` should be rebuilt to reflect these changes. This is imperative when [**denylists**](https://documentation.ubuntu.com/server/reference/glossary/#term-denylist) and filters are necessary to maintain a stable storage configuration.
+Every time either `/etc/lvm.conf` or `/etc/multipath.conf` is updated, the `initrd` should be rebuilt to reflect these changes. This is imperative when {term}`denylists` and filters are necessary to maintain a stable storage configuration.
 ```

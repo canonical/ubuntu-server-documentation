@@ -256,8 +256,8 @@ The device subsection recognises the following attributes:
 1. **`product_blacklist`**: Products with the given vendor matching this string are blacklisted.
 1. **`alias_prefix`**: The `user_friendly_names` prefix to use for this device type, instead of the default `mpath`.
 1. **`hardware_handler`**: The hardware handler to use for this device type. The following hardware handlers are implemented (all of these are hardware-dependent):
-   * **`1 emc`**: Hardware handler for [DGC](https://documentation.ubuntu.com/server/reference/glossary/#term-DGC) class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
-   * **`1 rdac`**: Hardware handler for LSI / [Engenio](https://documentation.ubuntu.com/server/reference/glossary/#term-Engenio) / NetApp RDAC class as NetApp SANtricity E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
+   * **`1 emc`**: Hardware handler for {term}`DGC` class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
+   * **`1 rdac`**: Hardware handler for LSI / {term}`Engenio` / NetApp RDAC class as NetApp SANtricity E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
    * **`1 hp_sw`**: Hardware handler for HP/COMPAQ/DEC HSG80 and MSA/HSV arrays with Active/Standby mode exclusively.
    * **`1 alua`**: Hardware handler for SCSI-3 ALUA-compatible arrays.
    * **`1 ana`**: Hardware handler for NVMe ANA-compatible arrays.

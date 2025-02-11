@@ -304,32 +304,32 @@ Glossary
         *Work in Progress*
 
     DAC
-        Discretionary access control
+        **Discretionary access control**:
         A form of access control where the owner of a resource can grant/revoke permissions to other users.
 
-    Daemonize
+    daemonize
         The process of converting a program to run in the background as a service, independent of user sessions.
 
     DARPA
-        Defense Advanced Research Projects Agency
+        **Defense Advanced Research Projects Agency**:
         A research and development agency of the United States Department of Defense responsible for the development of emerging technologies for use in the military.
 
     DASD
-        Direct Access Storage Device
+        **Direct Access Storage Device**:
         The term was coined by IBM to refer to a type of storage that allow random access to storage (hard-drives, optical discs, ...). It contrast with sequential access storage such as magnetic tape or punched card.
 
     Datagram
         In networking, a self contained, independent packet sent over a network. It can be routed from source to destination without relying on earlier or subsequent transfers.
 
     dblink
-        Database Link
+        **Database Link**:
         Connection between two databases (mainly Oracle and PostgreSQL), allowing one database to query data from the other.
 
     ddeb
         *Work in Progress*
 
     DDNS
-        Dynamic domain name system
+        **Dynamic domain name system**:
         A service that automatically updates DNS records when the underlying IP address changes (aka, dynamic IP).
 
     debconf
@@ -342,54 +342,53 @@ Glossary
         In cyber-security, a denylist is a list of entities (IP, domains, emails, ...), that are explicitly denied access to a system or service.
 
     DER
-        Distinguished Encoding Rules
+        **Distinguished Encoding Rules**:
         An standardised encoding format for data (mostly cryptographic certificates and keys) for transmission and storage.
 
     DGC
-        Distributed Garbage Collection
+        **Distributed Garbage Collection**:
         A process used in distributed systems to manage memory across multiple interconnected computers allowing identification and reclaiming of unused memory accross nodes.
 
     DHCP
-        Dynamic Host Configuration Protocol
+        **Dynamic Host Configuration Protocol**:
         A network protocol used to automatically assign network configuration details (IP, DNS, gateway, ...) to devices allowing for easy network management and connections within the network.
 
     DHCPD
-        Dynamic Host Configuration Protocol Daemon
+        **Dynamic Host Configuration Protocol Daemon**:
         Server software responsible for assigning the network configuration via DHCP.
 
     DIT
-        Directory Information Tree
+        **Directory Information Tree**:
         In directory services (LDAP) it's a hierarchical tree-like structure used to organize and store information. 
 
     DKMS
-        Dynamic Kernel Module Support
+        **Dynamic Kernel Module Support**:
         A framework used in Linux systems to automatically rebuild and install kernel modules when the kernel is updated.
 
     DMA
-        Direct Memory Access
+        **Direct Memory Access**:
         A technology that allows peripheral devices (hard drives, network cards, ...) to access the system's memory directly, bypassing the CPU and thus improving performance.
 
     DMAR
-        Direct Memory Access Remapping
-        It is a technology used to control and secure Direct Memory Access (DMA) operations and ensures that devices can only access memory regions they are authorized to, helping to prevent unauthorized access, memory corruption, or security vulnerabilities.
-        It is often used in virtualized environments to isolate devices between virtual machines (VMs) and the host system.
+        **Direct Memory Access Remapping**:
+        It is a technology used to control and secure Direct Memory Access (DMA) operations and ensures that devices can only access memory regions they are authorized to, helping to prevent unauthorized access, memory corruption, or security vulnerabilities. It is often used in virtualized environments to isolate devices between virtual machines (VMs) and the host system.
 
     dmesg
         A command in Linux systems that displays system logs related to hardware, drivers, and kernel events, such as system startup, device detection, and errors. It is commonly used for troubleshooting hardware issues and system diagnostics.
 
     DN
-        Distinguished Name
+        **Distinguished Name**:
         In directory services (LDAP), it's a unique identifier used to represent an entry in a directory, such as a user or a group. It's often composed of sub-components like CN (Common Name), OU (Organisational Unit), DC (Domain Component).
 
     DNS
-        Domain Name System
+        **Domain Name System**:
         A system that translate human-readable domain names (canonical.com) to their IP addresses (185.125.190.20).
 
     dnsmasq
         A lightweight, open-source DNS (Domain Name System) and DHCP (Dynamic Host Configuration Protocol) server software.
 
     DNSSEC
-        Domain Name System Security Extensions
+        **Domain Name System Security Extensions**:
         DNSSEC is a set of security extensions to DNS which allow DNS data to be verified for authenticity and integrity.
 
     Docker
@@ -402,23 +401,23 @@ Glossary
         dpkg is a package manager for Debian-based systems. It can install, remove, and build packages, but unlike other package management systems, it cannot automatically download and install packages – or their dependencies.
 
     DRBD
-        Distributed Replicated Block Device
+        **Distributed Replicated Block Device**:
         A software-based storage solution for Linux that allows for the mirroring of block devices between multiple hosts. The replication is transparent to other applications on the host systems. Any block device hard disks, partitions, RAID devices, logical volumes, etc can be mirrored.
 
     DTLS
-        Datagram Transport Layer Security
+        **Datagram Transport Layer Security**:
         A protocol that provides security for datagram-based communication, such as UDP. It is designed to offer similar security features as TLS but adapted for the connectionless nature of datagram protocols.
 
     EAL
-        Environment Abstraction Layer
+        **Environment Abstraction Layer**:
         A software layer that provides a standardised interface between an operating system and the underlying hardware. It abstracts hardware-specific details, allowing software to run on different hardware platforms without modification.
 
     ECKD
-        Extended Count Key Data
+        **Extended Count Key Data**:
         A disk storage format used by IBM mainframe systems, it provides advanced features such as better error detection and correction, as well as enhanced management of data records.
 
     EFI
-        Extensible Firmware Interface
+        **Extensible Firmware Interface**:
         A type of firmware interface designed to initialize hardware and load the operating system during the boot process of a computer. Replacement for the older BIOS and ancestor of the UEFI.
 
     ELinks
@@ -428,15 +427,15 @@ Glossary
         A company that developed and manufactured storage systems including SAN and NAS. Later acquired by LSI Corporation and then by Seagate Technology.
 
     EOL
-        End of life
+        **End of life**:
         When a product, service, software is no longer supported or maintained.
 
     ERD
-        Enterprise Ready Drivers
+        **Enterprise Ready Drivers**:
         Drivers that are specifically designed and optimized for use in enterprise environments, where stability, performance, and reliability are critical.
 
     ESM
-        Expanded Security Maintenance
+        **Expanded Security Maintenance**:
         A support offering provided by Ubuntu, to extend security updates and patches for older versions of the operating system after its standard support period has ended. 
 
     ESXi

@@ -55,7 +55,7 @@ There are a couple of directories containing Nagios configuration and check file
 
 - `/usr/lib/nagios/plugins/`: Where the check binaries are stored. To see the options of a check use the `-h` option. For example: `/usr/lib/nagios/plugins/check_dhcp -h`
 
-There are multiple checks Nagios can be configured to execute for any given host. For this example, Nagios will be configured to check disk space, [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS), and a MySQL hostgroup. The DNS check will be on `server02`, and the MySQL hostgroup will include both `server01` and `server02`.
+There are multiple checks Nagios can be configured to execute for any given host. For this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL hostgroup. The DNS check will be on `server02`, and the MySQL hostgroup will include both `server01` and `server02`.
 
 > **Note**:
 > See these guides for details on [setting up Apache](https://discourse.ubuntu.com/t/web-servers-apache/11510), [Domain Name Service](https://discourse.ubuntu.com/t/service-domain-name-service-dns/11318), and [MySQL](https://discourse.ubuntu.com/t/databases-mysql/11515).

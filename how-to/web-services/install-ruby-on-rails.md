@@ -24,7 +24,7 @@ This will install both the Ruby base packages, and Ruby on Rails.
 
 You will need to modify the `/etc/apache2/sites-available/000-default.conf` configuration file to set up your domains.
 
-The first thing to change is the [`DocumentRoot`](https://documentation.ubuntu.com/server/reference/glossary/#term-DocumentRoot) directive:
+The first thing to change is the {term}`DocumentRoot` directive:
 
 ```text
 DocumentRoot /path/to/rails/application/public
@@ -83,7 +83,7 @@ RAILS_ENV=production rake db:create
 RAILS_ENV=production rake db:migrate
 ```
 
-That's it! Now your Server is ready for your Ruby on Rails application. You can [daemonize](https://documentation.ubuntu.com/server/reference/glossary/#term-daemonize) your application as you want.
+That's it! Now your Server is ready for your Ruby on Rails application. You can {term}`daemonize` your application as you want.
 
 ## Further reading
 

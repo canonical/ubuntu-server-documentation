@@ -3,7 +3,7 @@
 
 Now we have LDAP running just the way we want, it is time to ensure we can save all of our work and restore it as needed.
 
-What we need is a way to back up the directory database(s) -- specifically the configuration backend (`cn=config`) and the [DIT](https://documentation.ubuntu.com/server/reference/glossary/#term-DIT) (`dc=example,dc=com`). If we are going to backup those databases into, say, `/export/backup`, we could use `slapcat` as shown in the following script, called `/usr/local/bin/ldapbackup`:
+What we need is a way to back up the directory database(s) -- specifically the configuration backend (`cn=config`) and the {term}`DIT` (`dc=example,dc=com`). If we are going to backup those databases into, say, `/export/backup`, we could use `slapcat` as shown in the following script, called `/usr/local/bin/ldapbackup`:
 
 ```bash
 #!/bin/bash

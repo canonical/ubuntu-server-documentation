@@ -145,7 +145,7 @@ default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
 ```
 
-If you require [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
+If you require {term}`DNS` for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
 
 ```
 nameserver 8.8.8.8

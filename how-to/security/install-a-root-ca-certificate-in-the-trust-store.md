@@ -9,7 +9,7 @@ Enterprise environments sometimes have a local Certificate Authority (CA) that i
 There are two encoding formats for certificates:
 
 * **Privacy Enhanced Mail (PEM)**: These are human-readable and in Base64-encoded **ASCII** format.
-* [**Distinguished Encoding Rules (DER)**](https://documentation.ubuntu.com/server/reference/glossary/#term-DER): These are encoded in a more compact **binary** format, and not human readable.
+* **Distinguished Encoding Rules** ({term}`DER`): These are encoded in a more compact **binary** format, and not human readable.
 
 To install a certificate in the trust store it must be in PEM format. A PEM certificate starts with the line `----BEGIN CERTIFICATE----`. If you see this, you're ready to install. If not, it is probably a DER certificate and needs to be converted before you can install it in the trust store.
 

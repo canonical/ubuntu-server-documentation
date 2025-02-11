@@ -20,7 +20,7 @@ sudo apt install sssd-ldap sssd-krb5 ldap-utils krb5-user
 
 You may be asked about the default Kerberos realm. For this guide, we are using `EXAMPLE.COM`.
 
-At this point, you should already be able to obtain tickets from your Kerberos server, assuming [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) records point at it:
+At this point, you should already be able to obtain tickets from your Kerberos server, assuming {term}`DNS` records point at it:
 
 ```bash
 $ kinit ubuntu

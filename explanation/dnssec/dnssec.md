@@ -112,7 +112,7 @@ This stub resolver has its own configuration for which recursive DNS servers to 
            DNS Servers: 10.10.17.1
             DNS Domain: lxd
 
-This configuration is usually provided via [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP), but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
+This configuration is usually provided via {term}`DHCP`, but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
 
 Given what we have:
  * an application

@@ -150,7 +150,7 @@ You can also use the `-d` or `--debug` option to help troubleshoot problems with
 Replace *`focal`* with the appropriate virtual machine names for your case.
 
 > **Warning**: 
-> Please be aware that this is a full clone, therefore any sorts of secrets, keys and for example `/etc/machine-id` will be shared. This will cause issues with security and anything that needs to identify the machine like [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP). You most likely want to edit those afterwards and de-duplicate them as needed.
+> Please be aware that this is a full clone, therefore any sorts of secrets, keys and for example `/etc/machine-id` will be shared. This will cause issues with security and anything that needs to identify the machine like {term}`DHCP`. You most likely want to edit those afterwards and de-duplicate them as needed.
 
 ## Resources
 

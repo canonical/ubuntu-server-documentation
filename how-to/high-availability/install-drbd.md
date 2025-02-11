@@ -18,7 +18,7 @@ sudo apt install drbd-utils
 
 This section covers setting up a DRBD to replicate a separate `/srv` partition, with an `ext3` filesystem between two hosts. The partition size is not particularly relevant, but both partitions need to be the same size.
 
-The two hosts in this example will be called **`drbd01`** and **`drbd02`**. They will need to have name resolution configured either through [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) or the `/etc/hosts` file. See our {ref}`guide to DNS <install-dns>` for details.
+The two hosts in this example will be called **`drbd01`** and **`drbd02`**. They will need to have name resolution configured either through {term}`DNS` or the `/etc/hosts` file. See our {ref}`guide to DNS <install-dns>` for details.
 
 On the first host, edit `/etc/drbd.conf` as follows:
 

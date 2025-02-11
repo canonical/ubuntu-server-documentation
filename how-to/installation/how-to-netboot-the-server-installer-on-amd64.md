@@ -8,18 +8,18 @@ amd64 systems boot in either UEFI or legacy ("BIOS") mode, and many systems can 
 The process for network booting the live server installer is similar for both modes and goes like this:
 
 1. The to-be-installed machine boots, and is directed to network boot.
-2. The [DHCP](https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP)/BOOTP server tells the machine its network configuration and where to get the bootloader.
+2. The {term}`DHCP`/BOOTP server tells the machine its network configuration and where to get the bootloader.
 3. The machine's firmware downloads the bootloader over TFTP and executes it.
 4. The bootloader downloads configuration, also over TFTP, telling it where to download the kernel, RAM Disk and kernel command line to use.
 5. The RAM Disk looks at the kernel command line to learn how to configure the network and where to download the server ISO from.
 6. The RAM Disk downloads the ISO and mounts it as a loop device.
 7. From this point on the install follows the same path as if the ISO was on a local block device.
 
-The difference between UEFI and legacy modes is that in UEFI mode the bootloader is an [EFI](https://documentation.ubuntu.com/server/reference/glossary/#term-EFI) executable, signed so that is accepted by Secure Boot, and in legacy mode it is [PXELINUX](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX). Most DHCP/BOOTP servers can be configured to serve the right bootloader to a particular machine.
+The difference between UEFI and legacy modes is that in UEFI mode the bootloader is an {term}`EFI` executable, signed so that is accepted by Secure Boot, and in legacy mode it is [PXELINUX](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX). Most DHCP/BOOTP servers can be configured to serve the right bootloader to a particular machine.
 
 ## Configure DHCP/BOOTP and TFTP
 
-There are several implementations of the DHCP/BOOTP and TFTP protocols available. This document will briefly describe how to configure [`dnsmasq`](https://documentation.ubuntu.com/server/reference/glossary/#term-dnsmasq) to perform both of these roles.
+There are several implementations of the DHCP/BOOTP and TFTP protocols available. This document will briefly describe how to configure {term}`dnsmasq` to perform both of these roles.
 
 1. Install `dnsmasq` with:
 

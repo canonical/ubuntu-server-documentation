@@ -1,7 +1,7 @@
 (install-dnssec)=
 # Installing DNS Security Extensions (DNSSEC)
 
-DNSSEC is a set of security extensions to [DNS](https://documentation.ubuntu.com/server/reference/glossary/#term-DNS) which allow DNS data to be verified for authenticity and integrity.
+DNSSEC is a set of security extensions to {term}`DNS` which allow DNS data to be verified for authenticity and integrity.
 
 This guide will show you how to enable DNSSEC for an existing zone in your BIND9 DNS server deployment.
 

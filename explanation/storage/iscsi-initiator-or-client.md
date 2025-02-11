@@ -242,7 +242,7 @@ Login to [iface: iscsi01, target: iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2
 
 ## Accessing the Logical Units (or LUNs)
 
-Check [dmesg](https://documentation.ubuntu.com/server/reference/glossary/#term-dmesg) to make sure that the new disks have been detected:
+Check {term}`dmesg` to make sure that the new disks have been detected:
 
 > dmesg
 > 
