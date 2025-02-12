@@ -200,6 +200,7 @@ custom_excludes = [
     'doc-cheat-sheet*',
     'readme.rst',
     'legacy/*.md',
+    '.github/pull_request_template.md',
 ]
 
 # Allow Sphinx to use both rst and md
