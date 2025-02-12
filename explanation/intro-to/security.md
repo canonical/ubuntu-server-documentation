@@ -52,7 +52,7 @@ patching for medium, high and critival severity
 [vulnerabilities](https://ubuntu.com/security/cves/about) for the Universe
 repository.
 
-This service, known as Expanded Security Maintenance (ESM), is recommended for
+This service, known as Expanded Security Maintenance ({term}`ESM`), is recommended for
 every Ubuntu system. Learn more [about ESM](https://ubuntu.com/security/esm).
 
 ### Kernel application hardening

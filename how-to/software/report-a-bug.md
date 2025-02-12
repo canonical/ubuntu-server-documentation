@@ -67,7 +67,7 @@ Choices:
 Please choose (1/C):  1
 ```
     
-The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the [Debian alternatives system](https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html). Examples of text-based browsers to install include links, ELinks, lynx, and w3m. You can also manually point an existing browser at the given URL.
+The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the [Debian alternatives system](https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html). Examples of text-based browsers to install include links, {term}`ELinks`, lynx, and w3m. You can also manually point an existing browser at the given URL.
 
 ### V: View
 

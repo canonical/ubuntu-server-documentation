@@ -163,7 +163,7 @@ This method will work for all [AppArmor syntax](https://ubuntu.com/tutorials/beg
 
 ## Restoring configuration files
 
-Since config files are meant to be intentional changes by the user/admin, they are not overwritten by updates or even re-installs of the package. However, it's possible you might change it by accident or may just want to go back to step one of a trial-and-error phase that you are in. In those situations you can use `apt` to restore the original config files. Note that while we call `apt`, it is `dpkg` that actually handles the restoration.
+Since config files are meant to be intentional changes by the user/admin, they are not overwritten by updates or even re-installs of the package. However, it's possible you might change it by accident or may just want to go back to step one of a trial-and-error phase that you are in. In those situations you can use `apt` to restore the original config files. Note that while we call `apt`, it is {term}`dpkg` that actually handles the restoration.
 
 If you have a particular config file, like in the example `/etc/rsyslog.conf`, you first want to find out which package owns that config file:
 

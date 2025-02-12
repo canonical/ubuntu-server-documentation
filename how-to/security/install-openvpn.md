@@ -354,7 +354,7 @@ The example config files that we have been using in this guide are full of these
 
 ### Advanced bridged VPN configuration on server
 
-OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this is also referred to as OSI layer-2 versus layer-3 VPN. In a bridged VPN all layer-2 frames -- e.g. all Ethernet frames -- are sent to the VPN partners and in a routed VPN only layer-3 packets are sent to VPN partners. In bridged mode, all traffic including traffic which was traditionally LAN-local (like local network broadcasts, DHCP requests, ARP requests etc) are sent to VPN partners, whereas in routed mode this would be filtered.
+OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this is also referred to as OSI layer-2 versus layer-3 VPN. In a bridged VPN all layer-2 frames -- e.g. all Ethernet frames -- are sent to the VPN partners and in a routed VPN only layer-3 packets are sent to VPN partners. In bridged mode, all traffic including traffic which was traditionally LAN-local (like local network broadcasts, {term}`DHCP` requests, ARP requests etc) are sent to VPN partners, whereas in routed mode this would be filtered.
 
 #### Prepare interface config for bridging on server
 

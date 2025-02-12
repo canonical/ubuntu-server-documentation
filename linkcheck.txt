@@ -1,0 +1,1156 @@
+Running Sphinx v8.1.3
+loading translations [en]... done
+matplotlib is not installed, social cards will not be generated
+loading pickled environment... The configuration has changed (6 options: 'html_context', 'html_css_files', 'html_js_files', 'html_static_path', 'pygments_dark_style', ...)
+done
+myst v4.0.0: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'substitution', 'linkify', 'deflist'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=3, heading_slug_func=None, html_meta={}, footnote_sort=True, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, suppress_warnings=[], highlight_code_blocks=True)
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [linkcheck]: targets for 238 source files that are out of date
+updating environment: 0 added, 1 changed, 0 removed
+reading sources... [100%] reference/glossary
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+copying assets... 
+copying assets: done
+writing output... [  0%] contributing/build-locally
+writing output... [  1%] contributing/contrib-types
+writing output... [  1%] contributing/get-help
+writing output... [  2%] contributing/gh-issues
+writing output... [  2%] contributing/index
+writing output... [  3%] contributing/issue-labels
+writing output... [  3%] contributing/submit-contribution
+writing output... [  3%] contributing/writing-guidance
+writing output... [  4%] explanation/active-directory
+writing output... [  4%] explanation/active-directory/choosing-an-integration-method
+writing output... [  5%] explanation/active-directory/identity-mapping-idmap-backends
+writing output... [  5%] explanation/active-directory/security-identifiers-sids
+writing output... [  5%] explanation/active-directory/the-autorid-idmap-backend
+writing output... [  6%] explanation/active-directory/the-rid-idmap-backend
+writing output... [  6%] explanation/crypto/bind-9-dnssec-cryptography-selection
+writing output... [  7%] explanation/crypto/gnutls
+writing output... [  7%] explanation/crypto/java-cryptography-configuration
+writing output... [  8%] explanation/crypto/network-security-services-nss
+writing output... [  8%] explanation/crypto/openssh-crypto-configuration
+writing output... [  8%] explanation/crypto/openssl
+writing output... [  9%] explanation/crypto/troubleshooting-tls-ssl
+writing output... [  9%] explanation/cryptography
+writing output... [ 10%] explanation/dnssec/dnssec
+writing output... [ 10%] explanation/high-availability
+writing output... [ 11%] explanation/high-availability/pacemaker-fence-agents
+writing output... [ 11%] explanation/high-availability/pacemaker-resource-agents
+writing output... [ 11%] explanation/index
+writing output... [ 12%] explanation/installation
+writing output... [ 12%] explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options
+writing output... [ 13%] explanation/intro-to/AD-integration
+writing output... [ 13%] explanation/intro-to/backups
+writing output... [ 13%] explanation/intro-to/crypto-libraries
+writing output... [ 14%] explanation/intro-to/databases
+writing output... [ 14%] explanation/intro-to/ebpf
+writing output... [ 15%] explanation/intro-to/high-availability
+writing output... [ 15%] explanation/intro-to/kerberos
+writing output... [ 16%] explanation/intro-to/mail-services
+writing output... [ 16%] explanation/intro-to/multipath
+writing output... [ 16%] explanation/intro-to/networking
+writing output... [ 17%] explanation/intro-to/openldap
+writing output... [ 17%] explanation/intro-to/samba
+writing output... [ 18%] explanation/intro-to/security
+writing output... [ 18%] explanation/intro-to/sssd
+writing output... [ 18%] explanation/intro-to/virtualisation
+writing output... [ 19%] explanation/intro-to/web-servers
+writing output... [ 19%] explanation/intro-to/wireguard-vpn
+writing output... [ 20%] explanation/introduction-to
+writing output... [ 20%] explanation/multipath
+writing output... [ 21%] explanation/multipath/common-multipath-tasks-and-procedures
+writing output... [ 21%] explanation/multipath/configuring-multipath
+writing output... [ 21%] explanation/multipath/multipath-configuration-examples
+writing output... [ 22%] explanation/networking
+writing output... [ 22%] explanation/networking/about-dhcp
+writing output... [ 23%] explanation/networking/about-dpdk
+writing output... [ 23%] explanation/networking/about-netplan
+writing output... [ 24%] explanation/networking/about-time-synchronisation
+writing output... [ 24%] explanation/networking/configuring-networks
+writing output... [ 24%] explanation/networking/networking-key-concepts
+writing output... [ 25%] explanation/performance
+writing output... [ 25%] explanation/performance/perf-pgo
+writing output... [ 26%] explanation/performance/perf-tune-cpupower
+writing output... [ 26%] explanation/performance/perf-tune-hwloc
+writing output... [ 26%] explanation/performance/perf-tune-tuned
+writing output... [ 27%] explanation/security
+writing output... [ 27%] explanation/security/certificates
+writing output... [ 28%] explanation/security/openvpn-client-implementations
+writing output... [ 28%] explanation/security/security_suggestions
+writing output... [ 29%] explanation/software
+writing output... [ 29%] explanation/software/about-apt-upgrade-and-phased-updates
+writing output... [ 29%] explanation/software/advance-testing-of-updates-in-best-practice-server-deployments
+writing output... [ 30%] explanation/software/changing-package-files
+writing output... [ 30%] explanation/software/config-managers
+writing output... [ 31%] explanation/software/third-party-repository-usage
+writing output... [ 31%] explanation/storage
+writing output... [ 32%] explanation/storage/about-lvm
+writing output... [ 32%] explanation/storage/iscsi-initiator-or-client
+writing output... [ 32%] explanation/virtualisation
+writing output... [ 33%] explanation/virtualisation/about-openstack
+writing output... [ 33%] explanation/virtualisation/about-rock-images
+writing output... [ 34%] explanation/virtualisation/container-tools-in-the-ubuntu-space
+writing output... [ 34%] explanation/virtualisation/qemu-microvm
+writing output... [ 34%] explanation/virtualisation/upgrading-the-machine-type-of-your-vm
+writing output... [ 35%] explanation/virtualisation/vm-tools-in-the-ubuntu-space
+writing output... [ 35%] explanation/web-services
+writing output... [ 36%] explanation/web-services/about-squid-proxy-servers
+writing output... [ 36%] explanation/web-services/about-web-servers
+writing output... [ 37%] how-to/active-directory
+writing output... [ 37%] how-to/active-directory/join-a-domain-with-winbind-preparation
+writing output... [ 37%] how-to/active-directory/join-a-forest-with-the-autorid-backend
+writing output... [ 38%] how-to/active-directory/join-a-forest-with-the-rid-backend
+writing output... [ 38%] how-to/active-directory/join-a-simple-domain-with-the-rid-backend
+writing output... [ 39%] how-to/backups
+writing output... [ 39%] how-to/backups/back-up-using-shell-scripts
+writing output... [ 39%] how-to/backups/install-bacula
+writing output... [ 40%] how-to/backups/install-etckeeper
+writing output... [ 40%] how-to/backups/install-gitolite
+writing output... [ 41%] how-to/backups/install-rsnapshot
+writing output... [ 41%] how-to/containers
+writing output... [ 42%] how-to/containers/docker-for-system-admins
+writing output... [ 42%] how-to/containers/lxd-containers
+writing output... [ 42%] how-to/containers/run-rocks-on-your-server
+writing output... [ 43%] how-to/databases
+writing output... [ 43%] how-to/databases/install-mysql
+writing output... [ 44%] how-to/databases/install-postgresql
+writing output... [ 44%] how-to/graphics
+writing output... [ 45%] how-to/graphics/gpu-virtualization-with-qemu-kvm
+writing output... [ 45%] how-to/graphics/install-nvidia-drivers
+writing output... [ 45%] how-to/high-availability
+writing output... [ 46%] how-to/high-availability/install-drbd
+writing output... [ 46%] how-to/index
+writing output... [ 47%] how-to/installation
+writing output... [ 47%] how-to/installation/how-to-netboot-the-server-installer-on-amd64
+writing output... [ 47%] how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot
+writing output... [ 48%] how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x
+writing output... [ 48%] how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x
+writing output... [ 49%] how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot
+writing output... [ 49%] how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64
+writing output... [ 50%] how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x
+writing output... [ 50%] how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x
+writing output... [ 50%] how-to/kerberos
+writing output... [ 51%] how-to/kerberos/basic-workstation-authentication
+writing output... [ 51%] how-to/kerberos/configure-service-principals
+writing output... [ 52%] how-to/kerberos/install-a-kerberos-server
+writing output... [ 52%] how-to/kerberos/kerberos-encryption-types
+writing output... [ 53%] how-to/kerberos/kerberos-with-openldap-backend
+writing output... [ 53%] how-to/kerberos/set-up-secondary-kdc
+writing output... [ 53%] how-to/mail-services
+writing output... [ 54%] how-to/mail-services/install-dovecot
+writing output... [ 54%] how-to/mail-services/install-exim4
+writing output... [ 55%] how-to/mail-services/install-postfix
+writing output... [ 55%] how-to/networking
+writing output... [ 55%] how-to/networking/cups-print-server
+writing output... [ 56%] how-to/networking/dnssec-troubleshooting
+writing output... [ 56%] how-to/networking/dpdk-with-open-vswitch
+writing output... [ 57%] how-to/networking/ftp
+writing output... [ 57%] how-to/networking/install-dns
+writing output... [ 58%] how-to/networking/install-dnssec
+writing output... [ 58%] how-to/networking/install-isc-dhcp-server
+writing output... [ 58%] how-to/networking/install-isc-kea
+writing output... [ 59%] how-to/networking/install-nfs
+writing output... [ 59%] how-to/networking/serve-ntp-with-chrony
+writing output... [ 60%] how-to/networking/timedatectl-and-timesyncd
+writing output... [ 60%] how-to/observability
+writing output... [ 61%] how-to/observability/install-logwatch
+writing output... [ 61%] how-to/observability/install-munin
+writing output... [ 61%] how-to/observability/install-nagios
+writing output... [ 62%] how-to/observability/set-up-your-lma-stack
+writing output... [ 62%] how-to/observability/use-nagios-with-munin
+writing output... [ 63%] how-to/openldap
+writing output... [ 63%] how-to/openldap/access-control
+writing output... [ 63%] how-to/openldap/backup-and-restore
+writing output... [ 64%] how-to/openldap/install-openldap
+writing output... [ 64%] how-to/openldap/ldap-and-tls
+writing output... [ 65%] how-to/openldap/replication
+writing output... [ 65%] how-to/openldap/users-and-groups
+writing output... [ 66%] how-to/samba
+writing output... [ 66%] how-to/samba/apparmor-profile
+writing output... [ 66%] how-to/samba/file-server
+writing output... [ 67%] how-to/samba/member-server-in-an-ad-domain
+writing output... [ 67%] how-to/samba/mount-cifs-shares-permanently
+writing output... [ 68%] how-to/samba/nt4-domain-controller-legacy
+writing output... [ 68%] how-to/samba/openldap-backend-legacy
+writing output... [ 68%] how-to/samba/print-server
+writing output... [ 69%] how-to/samba/provision-samba-ad-controller
+writing output... [ 69%] how-to/samba/share-access-controls
+writing output... [ 70%] how-to/security
+writing output... [ 70%] how-to/security/apparmor
+writing output... [ 71%] how-to/security/console-security
+writing output... [ 71%] how-to/security/firewalls
+writing output... [ 71%] how-to/security/install-a-root-ca-certificate-in-the-trust-store
+writing output... [ 72%] how-to/security/install-openvpn
+writing output... [ 72%] how-to/security/openssh-server
+writing output... [ 73%] how-to/security/smart-card-authentication
+writing output... [ 73%] how-to/security/smart-card-authentication-with-ssh
+writing output... [ 74%] how-to/security/user-management
+writing output... [ 74%] how-to/software
+writing output... [ 74%] how-to/software/kernel-crash-dump
+writing output... [ 75%] how-to/software/package-management
+writing output... [ 75%] how-to/software/report-a-bug
+writing output... [ 76%] how-to/software/upgrade-your-release
+writing output... [ 76%] how-to/sssd
+writing output... [ 76%] how-to/sssd/troubleshooting
+writing output... [ 77%] how-to/sssd/with-active-directory
+writing output... [ 77%] how-to/sssd/with-ldap
+writing output... [ 78%] how-to/sssd/with-ldap-and-kerberos
+writing output... [ 78%] how-to/storage
+writing output... [ 79%] how-to/storage/manage-logical-volumes
+writing output... [ 79%] how-to/virtualisation
+writing output... [ 79%] how-to/virtualisation/arm64-vms-on-qemu
+writing output... [ 80%] how-to/virtualisation/cloud-image-vms-with-uvtool
+writing output... [ 80%] how-to/virtualisation/enable-nested-virtualisation
+writing output... [ 81%] how-to/virtualisation/libvirt
+writing output... [ 81%] how-to/virtualisation/multipass
+writing output... [ 82%] how-to/virtualisation/qemu
+writing output... [ 82%] how-to/virtualisation/qemu-vms-up-to-1024-vcpus
+writing output... [ 82%] how-to/virtualisation/ubuntu-on-hyper-v
+writing output... [ 83%] how-to/virtualisation/virtual-machine-manager
+writing output... [ 83%] how-to/web-services
+writing output... [ 84%] how-to/web-services/configure-apache2-settings
+writing output... [ 84%] how-to/web-services/configure-nginx
+writing output... [ 84%] how-to/web-services/install-a-squid-server
+writing output... [ 85%] how-to/web-services/install-apache2
+writing output... [ 85%] how-to/web-services/install-nginx
+writing output... [ 86%] how-to/web-services/install-php
+writing output... [ 86%] how-to/web-services/install-ruby-on-rails
+writing output... [ 87%] how-to/web-services/use-apache2-modules
+writing output... [ 87%] how-to/web-services/use-nginx-modules
+writing output... [ 87%] how-to/wireguard-vpn
+writing output... [ 88%] how-to/wireguard-vpn/common-tasks
+writing output... [ 88%] how-to/wireguard-vpn/on-an-internal-system
+writing output... [ 89%] how-to/wireguard-vpn/peer-to-site
+writing output... [ 89%] how-to/wireguard-vpn/peer-to-site-on-router
+writing output... [ 89%] how-to/wireguard-vpn/security-tips
+writing output... [ 90%] how-to/wireguard-vpn/site-to-site
+writing output... [ 90%] how-to/wireguard-vpn/troubleshooting
+writing output... [ 91%] how-to/wireguard-vpn/vpn-as-the-default-gateway
+writing output... [ 91%] index
+writing output... [ 92%] reference/backups
+writing output... [ 92%] reference/backups/archive-rotation-shell-script
+writing output... [ 92%] reference/backups/basic-backup-shell-script
+writing output... [ 93%] reference/clouds
+writing output... [ 93%] reference/clouds/find-cloud-images
+writing output... [ 94%] reference/debugging
+writing output... [ 94%] reference/debugging/about-debuginfod
+writing output... [ 95%] reference/debugging/debug-symbol-packages
+writing output... [ 95%] reference/glossary
+writing output... [ 95%] reference/high-availability
+writing output... [ 96%] reference/high-availability/migrate-from-crmsh-to-pcs
+writing output... [ 96%] reference/index
+writing output... [ 97%] reference/installation
+writing output... [ 97%] reference/installation/system-requirements
+writing output... [ 97%] reference/other-tools
+writing output... [ 98%] reference/other-tools/byobu
+writing output... [ 98%] reference/other-tools/pam-motd
+writing output... [ 99%] tutorial/attach-your-ubuntu-pro-subscription
+writing output... [ 99%] tutorial/basic-installation
+writing output... [100%] tutorial/index
+writing output... [100%] tutorial/managing-software
+
+
+(contributing/build-locally: line   79) broken    http://127.0.0.1:8000/ - HTTPConnectionPool(host='127.0.0.1', port=8000): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7cb2bab9e990>: Failed to establish a new connection: [Errno 111] Connection refused'))
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   55) ok        http://archive.ubuntu.com/ubuntu/dists/focal/main/uefi/grub2-amd64/current/grubnetx64.efi.signed
+(explanation/intro-to/high-availability: line   56) ok        http://clusterlabs.github.io/libqb/
+(explanation/intro-to/high-availability: line   58) ok        http://corosync.github.io/corosync/
+(reference/debugging/debug-symbol-packages: line   97) ok        http://ddebs.ubuntu.com
+(how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x: line   10) ok        http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   73) ok        http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-arm64.iso
+(explanation/networking/about-dpdk: line  219) redirect  http://dpdk.org/doc - permanently to http://core.dpdk.org/doc/
+(explanation/networking/about-dpdk: line  227) redirect  http://dpdk.org/doc/api/ - permanently to http://doc.dpdk.org/api/
+(explanation/networking/about-dpdk: line  223) redirect  http://dpdk.org/doc/guides/linux_gsg/index.html - permanently to http://doc.dpdk.org/guides/linux_gsg/index.html
+(explanation/networking/about-dpdk: line  221) redirect  http://dpdk.org/doc/guides/rel_notes/release_2_2.html - permanently to http://doc.dpdk.org/guides/rel_notes/release_2_2.html
+(explanation/networking/about-dpdk: line  225) redirect  http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html - permanently to http://doc.dpdk.org/guides/testpmd_app_ug/run_app.html
+(explanation/networking/about-dpdk: line   15) redirect  http://dpdk.org/doc/nics - permanently to http://core.dpdk.org/supported/
+(reference/other-tools/pam-motd: line   69) redirect  http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/ - permanently to https://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/
+(how-to/networking/dpdk-with-open-vswitch: line   25) redirect  http://docs.openvswitch.org/en/latest/intro/install/dpdk/#setup-ovs - with Found to https://docs.openvswitch.org/en/latest/intro/install/dpdk/
+(how-to/databases/install-mysql: line   90) redirect  http://en.wikipedia.org/wiki/ACID - permanently to https://en.wikipedia.org/wiki/ACID
+(how-to/backups/back-up-using-shell-scripts: line  150) redirect  http://en.wikipedia.org/wiki/Backup_rotation_scheme - permanently to https://en.wikipedia.org/wiki/Backup_rotation_scheme
+(explanation/security/certificates: line  168) redirect  http://en.wikipedia.org/wiki/HTTPS - permanently to https://en.wikipedia.org/wiki/HTTPS
+(how-to/backups/install-gitolite: line   93) redirect  http://git-scm.com - permanently to https://git-scm.com/
+(how-to/databases/install-mysql: line  290) redirect  http://dev.mysql.com/doc/ - permanently to https://dev.mysql.com/doc/
+(how-to/web-services/configure-apache2-settings: line   85) ok        http://index.pl
+(how-to/security/apparmor: line  272) redirect  http://en.opensuse.org/SDB:AppArmor_geeks - with Found to https://en.opensuse.org/SDB:AppArmor_geeks
+(reference/other-tools/pam-motd: line    7) redirect  http://landscape.canonical.com/ - with Found to https://landscape.canonical.com/
+(how-to/virtualisation/libvirt: line  444) redirect  http://libvirt.org/ - permanently to https://libvirt.org/
+(how-to/virtualisation/libvirt: line  127) redirect  http://libvirt.org/uri.html - permanently to https://libvirt.org/uri.html
+(how-to/containers/run-rocks-on-your-server: line  140) broken    http://localhost:3000 - HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7cb2bae7c500>: Failed to establish a new connection: [Errno 111] Connection refused'))
+(how-to/networking/dnssec-troubleshooting: line   13) redirect  http://isc.org - permanently to https://www.isc.org/
+(how-to/virtualisation/qemu: line   36) redirect  http://manpages.ubuntu.com/manpages/bionic/man1/qemu-system.1.html - permanently to https://manpages.ubuntu.com/manpages/bionic/man1/qemu-system.1.html
+(how-to/high-availability/install-drbd: line  139) broken    http://manpages.ubuntu.com/manpages/en/man5/drbd.conf.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man5/drbd.conf.5.html
+(how-to/virtualisation/qemu: line   36) redirect  http://manpages.ubuntu.com/manpages/bionic/man1/qemu-img.1.html - permanently to https://manpages.ubuntu.com/manpages/bionic/man1/qemu-img.1.html
+(how-to/networking/install-nfs: line  281) redirect  http://linux-nfs.org/wiki/ - permanently to http://linux-nfs.org/wiki/index.php/Main_Page
+(how-to/containers/lxd-containers: line  257) redirect  http://manpages.ubuntu.com/manpages/focal/en/man5/lxc.container.conf.5.html - permanently to https://manpages.ubuntu.com/manpages/focal/en/man5/lxc.container.conf.5.html
+(how-to/networking/dnssec-troubleshooting: line   10) broken    http://dnssec-failed.org - HTTPConnectionPool(host='dnssec-failed.org', port=80): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7cb2baba08c0>: Failed to resolve 'dnssec-failed.org' ([Errno -3] Temporary failure in name resolution)"))
+(how-to/high-availability/install-drbd: line  141) broken    http://manpages.ubuntu.com/manpages/en/man8/drbdadm.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/drbdadm.8.html
+(how-to/backups/install-rsnapshot: line   67) redirect  http://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html - permanently to https://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html
+(how-to/backups/back-up-using-shell-scripts: line  160) redirect  http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html - permanently to https://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html
+(reference/other-tools/pam-motd: line   67) redirect  http://manpages.ubuntu.com/manpages/jammy/en/man5/update-motd.5.html - permanently to https://manpages.ubuntu.com/manpages/jammy/en/man5/update-motd.5.html
+(explanation/networking/networking-key-concepts: line   68) redirect  http://manpages.ubuntu.com/manpages/focal/man7/ip.7.html - permanently to https://manpages.ubuntu.com/manpages/focal/man7/ip.7.html
+(how-to/kerberos/install-a-kerberos-server: line   88) redirect  http://manpages.ubuntu.com/manpages/jammy/man5/kadm5.acl.5.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man5/kadm5.acl.5.html
+(how-to/networking/install-nfs: line   75) redirect  http://manpages.ubuntu.com/manpages/jammy/man5/nfs.conf.5.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man5/nfs.conf.5.html
+(how-to/networking/install-nfs: line  126) redirect  http://manpages.ubuntu.com/manpages/jammy/man7/nfs.systemd.7.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man7/nfs.systemd.7.html
+(how-to/networking/install-nfs: line   77) redirect  http://manpages.ubuntu.com/manpages/jammy/man8/nfsconf.8.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man8/nfsconf.8.html
+(how-to/openldap/replication: line  258) broken    http://manpages.ubuntu.com/manpages/man5/slapo-accesslog.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man5/slapo-accesslog.5.html
+(how-to/networking/install-nfs: line  188) redirect  http://manpages.ubuntu.com/manpages/jammy/man5/exports.5.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man5/exports.5.html
+(how-to/openldap/replication: line  119) broken    http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html
+(how-to/networking/serve-ntp-with-chrony: line   59) redirect  http://manpages.ubuntu.com/manpages/jammy/man5/chrony.conf.5.html - permanently to https://manpages.ubuntu.com/manpages/jammy/man5/chrony.conf.5.html
+(how-to/containers/lxd-containers: line  235) redirect  http://manpages.ubuntu.com/manpages/xenial/en/man5/subuid.5.html - permanently to https://manpages.ubuntu.com/manpages/xenial/en/man5/subuid.5.html
+(explanation/networking/configuring-networks: line  358) broken    http://manpages.ubuntu.com/manpages/man8/networkd-dispatcher.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/networkd-dispatcher.8.html
+(how-to/networking/dpdk-with-open-vswitch: line   87) redirect  http://dpdk.org/ml - permanently to https://www.dpdk.org/contribute/
+(explanation/intro-to/high-availability: line  137) broken    http://manpages.ubuntu.com/manpages/man8/lvmlockd.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/lvmlockd.8.html
+(how-to/openldap/access-control: line  116) broken    http://manpages.ubuntu.com/manpages/slapd.access.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/slapd.access.html
+(explanation/security/openvpn-client-implementations: line   42) redirect  http://openvpn.net/ - permanently to https://openvpn.net/
+(how-to/networking/install-nfs: line  282) redirect  http://nfs.sourceforge.net/ - permanently to https://nfs.sourceforge.net/
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   47) ok        http://ports.ubuntu.com/ubuntu-ports/dists/focal/main/uefi/grub2-arm64/current/grubnetaa64.efi.signed
+(how-to/containers/run-rocks-on-your-server: line  148) broken    http://prometheus:9090 - HTTPConnectionPool(host='prometheus', port=9090): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPConnection object at 0x7cb2baba3140>: Failed to resolve 'prometheus' ([Errno -3] Temporary failure in name resolution)"))
+(how-to/observability/use-nagios-with-munin: line  260) redirect  http://munin-monitoring.org/ - permanently to https://munin-monitoring.org/
+(explanation/security/openvpn-client-implementations: line   44) redirect  http://openvpn.net/index.php/open-source/documentation/howto.html#security - permanently to https://openvpn.net/community-resources/how-to/
+(how-to/web-services/install-ruby-on-rails: line   90) redirect  http://rubyonrails.org/ - permanently to https://rubyonrails.org/
+(how-to/networking/dpdk-with-open-vswitch: line   88) redirect  http://openvswitch.org/mlists - permanently to http://www.openvswitch.org/mlists/
+(how-to/samba/print-server: line   47) redirect  http://samba.org/samba/docs/man/Samba-HOWTO-Collection/ - permanently to https://www.samba.org/samba/docs/old/Samba3-HOWTO/
+(explanation/intro-to/high-availability: line  133) ok        http://sg.danny.cz/sg/sg3_utils.html
+(how-to/containers/lxd-containers: line   34) redirect  http://open-zfs.org - permanently to https://openzfs.org/wiki/Main_Page
+(how-to/networking/install-dns: line  482) redirect  http://shop.oreilly.com/product/9780596100575.do - permanently to https://www.oreilly.com/library/view/dns-and-bind/0596100574/
+(how-to/networking/install-dns: line  482) redirect  http://shop.oreilly.com/product/0636920020158.do - permanently to https://www.oreilly.com/library/view/dns-and-bind/9781449308025/
+(how-to/mail-services/install-postfix: line  358) redirect  http://shop.oreilly.com/product/9780596002121.do - permanently to https://www.oreilly.com/library/view/postfix-the-definitive/0596002122/
+(how-to/databases/install-mysql: line  292) redirect  http://shop.oreilly.com/product/9780596518851.do - permanently to https://www.oreilly.com/library/view/sql-in-a/9780596155322/
+(how-to/databases/install-mysql: line  292) redirect  http://shop.oreilly.com/product/0636920044994.do - permanently to https://www.oreilly.com/library/view/getting-started-with/9781491938607/
+(how-to/software/upgrade-your-release: line    8) redirect  http://ubuntu.com/pro - permanently to https://ubuntu.com/pro
+(how-to/virtualisation/virtual-machine-manager: line  161) redirect  http://virt-manager.org/ - permanently to https://virt-manager.org/
+(how-to/networking/ftp: line  126) ok        http://vsftpd.beasts.org/vsftpd_conf.html
+(how-to/web-services/configure-apache2-settings: line  162) redirect  http://shop.oreilly.com/product/9780596529949.do - permanently to https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/
+(how-to/backups/back-up-using-shell-scripts: line  144) redirect  http://tldp.org/LDP/abs/html/ - permanently to https://tldp.org/LDP/abs/html/
+(explanation/intro-to/openldap: line    4) redirect  http://tools.ietf.org/html/rfc4510 - permanently to https://datatracker.ietf.org/doc/html/rfc4510
+(explanation/intro-to/kerberos: line   37) ok        http://techpubs.spinlocksolutions.com/dklar/kerberos.html
+(explanation/intro-to/kerberos: line   33) ok        http://web.mit.edu/Kerberos/
+(how-to/samba/file-server: line   95) redirect  http://www.amazon.com/exec/obidos/tg/detail/-/0131882228 - permanently to https://www.amazon.com/exec/obidos/tg/detail/-/0131882228
+(explanation/storage/iscsi-initiator-or-client: line  461) redirect  http://wiki.debian.org/SAN/iSCSI/open-iscsi - permanently to https://wiki.debian.org/SAN/iSCSI/open-iscsi
+(how-to/networking/cups-print-server: line  101) ok        http://www.cups.org/
+(explanation/intro-to/backups: line   19) redirect  http://www.bacula.org/ - with Found to https://www.bacula.org/
+(how-to/virtualisation/qemu: line    7) redirect  http://wiki.qemu.org/Main_Page - permanently to https://wiki.qemu.org/Main_Page
+(how-to/virtualisation/libvirt: line  165) redirect  http://wiki.qemu.org/Features/PostCopyLiveMigration - permanently to https://wiki.qemu.org/Features/PostCopyLiveMigration
+(how-to/mail-services/install-exim4: line  133) redirect  http://www.exim.org/ - permanently to https://www.exim.org/
+(how-to/high-availability/install-drbd: line  137) redirect  http://www.drbd.org/ - permanently to https://linbit.com/linbit-software-download-page-for-linstor-and-drbd-linux-driver/
+(how-to/software/kernel-crash-dump: line  357) redirect  http://www.dedoimedo.com/computers/crash-analyze.html - permanently to https://www.dedoimedo.com/computers/crash-analyze.html
+(explanation/high-availability/pacemaker-resource-agents: line  179) redirect  http://www.clusterlabs.org/ - permanently to https://clusterlabs.org/
+(how-to/mail-services/install-dovecot: line   83) redirect  http://www.dovecot.org/ - permanently to https://www.dovecot.org/
+(how-to/backups/back-up-using-shell-scripts: line  148) ok        http://www.gnu.org/software/tar/manual/index.html
+(reference/other-tools/byobu: line   49) ok        http://www.gnu.org/software/screen/
+(how-to/backups/back-up-using-shell-scripts: line  154) ok        http://www.gnu.org/software/cpio/
+(how-to/backups/back-up-using-shell-scripts: line  156) ok        http://www.gnu.org/software/coreutils/
+(how-to/mail-services/install-postfix: line  167) redirect  http://www.ietf.org/rfc/rfc2222.txt - permanently to https://www.ietf.org/rfc/rfc2222.txt
+(how-to/mail-services/install-postfix: line  167) redirect  http://www.ietf.org/rfc/rfc2554.txt - permanently to https://www.ietf.org/rfc/rfc2554.txt
+(how-to/software/kernel-crash-dump: line  355) redirect  http://www.kernel.org/doc/Documentation/kdump/kdump.txt - permanently to https://www.kernel.org/doc/Documentation/kdump/kdump.txt
+(how-to/security/firewalls: line  328) redirect  http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html - permanently to https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html
+(how-to/virtualisation/libvirt: line  450) ok        http://www.linux-kvm.org/page/How_to_assign_devices_with_VT-d_in_KVM#Assigning_the_device
+(how-to/security/firewalls: line  326) redirect  http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html - permanently to https://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html
+(how-to/virtualisation/libvirt: line  442) redirect  http://www.linux-kvm.org/ - permanently to https://linux-kvm.org/page/Main_Page
+(explanation/storage/iscsi-initiator-or-client: line  460) ok        http://www.open-iscsi.com/
+(explanation/networking/about-time-synchronisation: line   35) ok        http://www.ntp.org/
+(explanation/intro-to/high-availability: line   96) ok        http://www.linux-vs.org/
+(how-to/security/apparmor: line  270) redirect  http://www.novell.com/documentation/apparmor/apparmor201_sp10_admin/index.html?page=/documentation/apparmor/apparmor201_sp10_admin/data/book_apparmor_admin.html - permanently to http://www.novell.com/documentation/apparmor/apparmor201_sp10_admin/?page=/documentation/apparmor/apparmor201_sp10_admin/data/book_apparmor_admin.html
+(explanation/intro-to/openldap: line   71) broken    http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book - 404 Client Error: Not Found for url: https://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book
+(explanation/security/openvpn-client-implementations: line   46) broken    http://www.packtpub.com/openvpn/book - 404 Client Error: Not Found for url: https://www.packtpub.com/openvpn/book
+(how-to/security/openssh-server: line  321) redirect  http://www.openssh.org/ - permanently to https://www.openssh.com/
+(how-to/samba/file-server: line   49) redirect  http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM - permanently to https://www.pathname.com/fhs/pub/fhs-2.3.html
+(explanation/networking/about-time-synchronisation: line   36) redirect  http://www.pool.ntp.org/ - with Found to https://www.ntppool.org/en/
+(how-to/mail-services/install-postfix: line  357) ok        http://www.postfix.org/documentation.html
+(how-to/web-services/install-php: line   81) redirect  http://www.php.net/docs.php - permanently to https://www.php.net/docs.php
+(how-to/databases/install-postgresql: line   18) redirect  http://www.postgresql.org/docs/current/static/admin.html - permanently to https://www.postgresql.org/docs/current/admin.html
+(how-to/databases/install-postgresql: line  159) redirect  http://www.postgresql.org/docs/current/static/backup.html - permanently to https://www.postgresql.org/docs/current/backup.html
+(how-to/databases/install-postgresql: line   75) redirect  http://www.postgresql.org/docs/current/static/wal.html - permanently to https://www.postgresql.org/docs/current/wal.html
+(explanation/intro-to/openldap: line   70) redirect  http://www.oreilly.com/catalog/ldapsa/ - permanently to https://www.oreilly.com/library/view/ldap-system-administration/1565924916/
+(explanation/intro-to/openldap: line   67) redirect  http://www.rfc-editor.org/rfc/rfc4515.txt - permanently to https://www.rfc-editor.org/rfc/rfc4515.txt
+(how-to/openldap/replication: line    6) redirect  http://www.rfc-editor.org/rfc/rfc4533.txt - permanently to https://www.rfc-editor.org/rfc/rfc4533.txt
+(how-to/samba/file-server: line   97) redirect  http://www.oreilly.com/catalog/9780596007690/ - permanently to https://www.oreilly.com/library/view/using-samba-3rd/0596007698/
+(how-to/backups/back-up-using-shell-scripts: line  158) redirect  http://www.rsnapshot.org/ - permanently to https://rsnapshot.org/
+(explanation/networking/networking-key-concepts: line   70) redirect  http://www.redbooks.ibm.com/abstracts/gg243376.html - permanently to https://www.redbooks.ibm.com/abstracts/gg243376.html
+(explanation/software/about-apt-upgrade-and-phased-updates: line  106) ok        https://askubuntu.com/questions/1431940/what-are-phased-updates-and-why-does-ubuntu-use-them
+(explanation/intro-to/openldap: line   68) redirect  http://www.zytrax.com/books/ldap/ - permanently to https://www.zytrax.com/books/ldap/
+(how-to/virtualisation/virtual-machine-manager: line   35) ok        https://assets.ubuntu.com/v1/07edc140-virt-manager-gui-start.png
+(how-to/observability/set-up-your-lma-stack: line  344) ok        https://assets.ubuntu.com/v1/0830c195-grafana_5.png
+(explanation/intro-to/high-availability: line   25) ok        https://assets.ubuntu.com/v1/14896401-HA_intro.png
+(how-to/observability/set-up-your-lma-stack: line  352) ok        https://assets.ubuntu.com/v1/2441c52c-grafana_9.png
+(how-to/sssd/with-active-directory: line  263) ok        https://assets.ubuntu.com/v1/291d9ae9-not_listed.png
+(how-to/security/apparmor: line    4) ok        https://apparmor.net/
+(how-to/containers/run-rocks-on-your-server: line  150) ok        https://assets.ubuntu.com/v1/2a252ada-prometheus-data-source.png
+(explanation/active-directory/the-autorid-idmap-backend: line   29) ok        https://assets.ubuntu.com/v1/346983ee-domain-slots-2.png
+(how-to/virtualisation/virtual-machine-manager: line   53) ok        https://assets.ubuntu.com/v1/34e3503f-virt-manager-gui-xml.png
+(explanation/web-services/about-squid-proxy-servers: line    4) ok        http://www.squid-cache.org/
+(how-to/observability/set-up-your-lma-stack: line  348) ok        https://assets.ubuntu.com/v1/3dfc6d9d-grafana_7.png
+(how-to/containers/run-rocks-on-your-server: line  146) ok        https://assets.ubuntu.com/v1/2e14e3f3-login-to-grafana.png
+(how-to/observability/install-nagios: line  206) ok        https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/toc.html
+(how-to/observability/set-up-your-lma-stack: line  344) ok        https://assets.ubuntu.com/v1/50532a03-grafana_4.png
+(how-to/observability/set-up-your-lma-stack: line  216) ok        https://assets.ubuntu.com/v1/54610cab-promotheus_0.png
+(how-to/observability/set-up-your-lma-stack: line  340) ok        https://assets.ubuntu.com/v1/5bf5a238-grafana_1.png
+(how-to/sssd/with-active-directory: line  269) ok        https://assets.ubuntu.com/v1/6940e589-login.png
+(how-to/active-directory/join-a-forest-with-the-rid-backend: line   83) ok        https://assets.ubuntu.com/v1/42506c6d-forest-rid-ranges.png
+(how-to/observability/set-up-your-lma-stack: line  340) ok        https://assets.ubuntu.com/v1/72f14261-grafana_2.png
+(how-to/virtualisation/virtual-machine-manager: line   47) ok        https://assets.ubuntu.com/v1/7422b267-virt-manager-gui-edit.png
+(explanation/active-directory/the-rid-idmap-backend: line   31) ok        https://assets.ubuntu.com/v1/87c43d5d-simple-rid-ranges.png
+(how-to/observability/set-up-your-lma-stack: line  356) ok        https://assets.ubuntu.com/v1/55658d4d-grafana_X.png
+(           index: line   86) ok        https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf
+(tutorial/basic-installation: line   60) ok        https://assets.ubuntu.com/v1/92bda8a0-basic_installation_1.png
+(how-to/sssd/with-active-directory: line  276) ok        https://assets.ubuntu.com/v1/9c174441-local_user.png
+(how-to/virtualisation/virtual-machine-manager: line   77) ok        https://assets.ubuntu.com/v1/a38dc56a-virt-viewer-gui-show-output.png
+(how-to/containers/run-rocks-on-your-server: line   39) ok        https://assets.ubuntu.com/v1/a6b735b3-welcome-to-grafana.png
+(how-to/observability/set-up-your-lma-stack: line  331) ok        https://assets.ubuntu.com/v1/bb8a72f8-grafana_0.png
+(how-to/containers/run-rocks-on-your-server: line  156) ok        https://assets.ubuntu.com/v1/bd93d9c1-prometheus-metrics.png
+(how-to/observability/set-up-your-lma-stack: line  344) ok        https://assets.ubuntu.com/v1/bf7c1660-grafana_3.png
+(how-to/observability/set-up-your-lma-stack: line  348) ok        https://assets.ubuntu.com/v1/cfaca920-grafana_6.png
+(how-to/observability/set-up-your-lma-stack: line  220) ok        https://assets.ubuntu.com/v1/d46d3705-promotheus_2.png
+(how-to/observability/set-up-your-lma-stack: line  220) ok        https://assets.ubuntu.com/v1/d56f0ceb-promotheus_1.png
+(how-to/virtualisation/virtual-machine-manager: line   39) ok        https://assets.ubuntu.com/v1/dda60637-virt-manager-gui-show-output.png
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line  136) ok        https://assets.ubuntu.com/v1/ef037190-subiquity_welcome_page.png
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line  132) ok        https://assets.ubuntu.com/v1/fbdff13b-downloading_image.png
+(how-to/networking/install-dns: line  480) ok        https://bind9.readthedocs.io/en/latest/
+(how-to/networking/dnssec-troubleshooting: line  257) ok        https://bind9.readthedocs.io/en/latest/dnssec-guide.html#basic-dnssec-troubleshooting
+(how-to/databases/install-mysql: line  100) redirect  http://www.mysqlperformanceblog.com/2006/06/17/using-myisam-in-production/ - permanently to https://www.percona.com/blog/using-myisam-in-production/
+(explanation/dnssec/dnssec: line   32) ok        https://bind9.readthedocs.io/en/latest/dnssec-guide.html#the-12-step-dnssec-validation-process-simplified
+(how-to/networking/install-dnssec: line  190) ok        https://bind9.readthedocs.io/en/latest/dnssec-guide.html#working-with-the-parent-zone
+(how-to/networking/install-dnssec: line  188) ok        https://bind9.readthedocs.io/en/stable/chapter5.html
+(explanation/crypto/troubleshooting-tls-ssl: line   78) ok        https://badssl.com/
+(how-to/networking/install-dnssec: line  185) ok        https://bind9.readthedocs.io/en/stable/dnssec-guide.html
+(how-to/networking/install-dnssec: line  187) ok        https://bind9.readthedocs.io/en/stable/dnssec-guide.html#signing-custom-policy
+(explanation/crypto/bind-9-dnssec-cryptography-selection: line  220) ok        https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html
+(explanation/crypto/bind-9-dnssec-cryptography-selection: line  221) ok        https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html#basic-dnssec-troubleshooting
+(how-to/networking/install-dnssec: line  186) ok        https://bind9.readthedocs.io/en/stable/dnssec-guide.html#signing
+(how-to/virtualisation/libvirt: line  154) ok        https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html
+(how-to/containers/docker-for-system-admins: line  439) broken    https://aws.amazon.com/cloudwatch/details/#log-monitoring - Anchor 'log-monitoring' not found
+(how-to/security/apparmor: line  149) redirect  https://bugs.launchpad.net/ubuntu/+source/apparmor/+filebug - with See Other to https://bugs.launchpad.net/ubuntu/+source/apparmor/+filebug/+login
+(how-to/networking/serve-ntp-with-chrony: line  124) ok        https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21
+(how-to/networking/install-nfs: line   98) redirect  https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug - with See Other to https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug/+login
+(explanation/crypto/network-security-services-nss: line   10) ok        https://bugs.launchpad.net/ubuntu/+source/nss/+bug/2016303
+(how-to/networking/dpdk-with-open-vswitch: line   89) ok        https://bugs.launchpad.net/ubuntu/+source/dpdk
+(how-to/networking/install-isc-kea: line   24) ok        https://bugs.launchpad.net/ubuntu/+source/isc-kea/+bug/2007312
+(explanation/virtualisation/qemu-microvm: line  192) ok        https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2074073
+(how-to/sssd/with-active-directory: line  284) ok        https://bugs.launchpad.net/ubuntu/+source/sssd/+bug/1934997/comments/5
+(how-to/samba/member-server-in-an-ad-domain: line   92) redirect  https://bugs.launchpad.net/ubuntu/+source/realmd/+bug/1980246 - permanently to https://bugs.launchpad.net/ubuntu/+source/samba/+bug/1980246
+(how-to/virtualisation/libvirt: line  334) ok        https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189
+(contributing/get-help: line   53) redirect  https://calendar.google.com/calendar/u/0?cid=Y19mYTY4YzE5YWEwY2Y4YWE1ZWNkNzMyNjZmNmM0ZDllOTRhNTIwNTNjODc1ZjM2ZmQ3Y2MwNTQ0MzliOTIzZjMzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20 - with Found to https://workspace.google.com/intl/en-US/products/calendar/
+(how-to/sssd/with-active-directory: line  284) ok        https://bugs.launchpad.net/ubuntu/+source/sssd/+bug/1934997
+(how-to/sssd/with-active-directory: line   10) redirect  https://canonical-adsys.readthedocs-hosted.com/en/stable/ - with Found to https://documentation.ubuntu.com/adsys/en/stable/
+(reference/clouds: line   16) redirect  https://canonical-azure.readthedocs-hosted.com/en/latest/azure-how-to/instances/find-ubuntu-images/ - with Found to https://documentation.ubuntu.com/azure/en/latest/azure-how-to/instances/find-ubuntu-images/
+(reference/clouds: line   14) redirect  https://canonical-aws.readthedocs-hosted.com/en/latest/aws-how-to/instances/find-ubuntu-images/ - with Found to https://documentation.ubuntu.com/aws/en/latest/aws-how-to/instances/find-ubuntu-images/
+(reference/clouds: line   15) redirect  https://canonical-gcp.readthedocs-hosted.com/en/latest/google-how-to/gce/find-ubuntu-images/ - with Found to https://documentation.ubuntu.com/gcp/en/latest/google-how-to/gce/find-ubuntu-images/
+(explanation/virtualisation/about-rock-images: line    8) redirect  https://canonical-rockcraft.readthedocs-hosted.com/en/latest/ - with Found to https://documentation.ubuntu.com/rockcraft/en/latest/
+(    how-to/index: line   32) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-quickstart.html
+(    how-to/index: line   33) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/autoinstall-quickstart-s390x.html
+(  tutorial/index: line   26) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/configure-storage.html
+(explanation/virtualisation/about-rock-images: line    6) broken    https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/chisel/ - 404 Client Error: Not Found for url: https://documentation.ubuntu.com/rockcraft/en/latest/explanation/chisel/
+(    how-to/index: line   31) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html
+( reference/index: line   17) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
+(  tutorial/index: line   27) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/howto/report-bugs.html
+(tutorial/basic-installation: line    4) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/operate-server-installer.html
+(tutorial/basic-installation: line    4) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/tutorial/screen-by-screen.html
+(explanation/virtualisation/about-rock-images: line    6) broken    https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rockcraft/ - 404 Client Error: Not Found for url: https://documentation.ubuntu.com/rockcraft/en/latest/explanation/rockcraft/
+( reference/index: line   18) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html
+(how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot: line  355) ok        https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html
+(explanation/virtualisation/about-rock-images: line    4) broken    https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/# - 404 Client Error: Not Found for url: https://documentation.ubuntu.com/rockcraft/en/latest/explanation/rocks/
+(tutorial/managing-software: line 1326) ok        https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/
+(explanation/intro-to/security: line   48) ok        https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#components
+(explanation/intro-to/security: line   42) ok        https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/
+(explanation/performance/perf-tune-tuned: line  248) ok        https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe
+(how-to/containers/lxd-containers: line    8) ok        https://canonical.com/microcloud
+(explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options: line    9) broken    https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04.4-live-server-arm64+largemem.iso - 404 Client Error: Not Found for url: https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04.4-live-server-arm64+largemem.iso
+(explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options: line    8) broken    https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04.4-live-server-arm64.iso - 404 Client Error: Not Found for url: https://cdimage.ubuntu.com/releases/22.04/release/ubuntu-22.04.4-live-server-arm64.iso
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   46) ok        https://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-arm64.iso
+(how-to/observability/set-up-your-lma-stack: line    4) ok        https://charmhub.io/topics/canonical-observability-stack/editions/lite
+(how-to/observability/set-up-your-lma-stack: line    4) ok        https://charmhub.io/topics/canonical-observability-stack/
+(reference/clouds/find-cloud-images: line    5) ok        https://cloud-images.ubuntu.com
+(how-to/virtualisation/arm64-vms-on-qemu: line   38) ok        https://cloud-images.ubuntu.com/
+(reference/clouds/find-cloud-images: line   25) ok        https://cloud-images.ubuntu.com/docs/aws/eks/
+(explanation/networking/about-time-synchronisation: line   41) ok        https://chrony-project.org/faq.html
+(explanation/high-availability/pacemaker-fence-agents: line  198) ok        https://clusterlabs.org/
+(tutorial/attach-your-ubuntu-pro-subscription: line   75) redirect  https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/tutorials/basic_commands.html - with Found to https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/tutorials/basic_commands/
+(how-to/networking/serve-ntp-with-chrony: line  375) redirect  https://chrony.tuxfamily.org/faq.html - permanently to https://chrony-project.org/faq.html
+(how-to/containers/docker-for-system-admins: line  442) ok        https://cloud.google.com/logging/docs/
+(explanation/security/openvpn-client-implementations: line   38) broken    https://community.openvpn.net/openvpn/wiki/Easy_Windows_Guide - 403 Client Error: Forbidden for url: https://community.openvpn.net/openvpn/wiki/Easy_Windows_Guide
+(explanation/intro-to/high-availability: line  155) redirect  https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html - permanently to https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html
+(explanation/intro-to/high-availability: line  156) redirect  https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html - permanently to https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   18) ok        https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/
+(explanation/intro-to/openldap: line   49) ok        https://datatracker.ietf.org/doc/html/rfc2849
+(explanation/intro-to/high-availability: line  157) redirect  https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html - permanently to https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html
+(explanation/intro-to/high-availability: line  154) redirect  https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Clusters_from_Scratch/index.html - permanently to https://clusterlabs.org/projects/pacemaker/doc/deprecated/
+(explanation/dnssec/dnssec: line  254) ok        https://datatracker.ietf.org/doc/html/rfc4255
+(explanation/intro-to/high-availability: line   96) ok        https://datatracker.ietf.org/wg/vrrp/documents/
+(explanation/software/about-apt-upgrade-and-phased-updates: line  106) ok        https://creativecommons.org/licenses/by-sa/4.0/
+(how-to/databases/install-mysql: line  268) ok        https://dev.mysql.com/doc/
+(how-to/databases/install-mysql: line   80) ok        https://dev.mysql.com/doc/refman/8.0/en/innodb-storage-engine.html
+(how-to/databases/install-mysql: line   80) ok        https://dev.mysql.com/doc/refman/8.0/en/myisam-storage-engine.html
+(how-to/databases/install-mysql: line  172) ok        https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-utilities-dump-instance-schema.html
+(how-to/databases/install-mysql: line  163) ok        https://dev.mysql.com/doc/mysql-shell/8.0/en/mysql-shell-utilities-load-dump.html
+(how-to/containers/docker-for-system-admins: line  443) ok        https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/
+(how-to/security/openssh-server: line  324) ok        https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html
+(how-to/databases/install-mysql: line  134) ok        https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html
+(explanation/virtualisation/about-rock-images: line    8) broken    https://discourse.ubuntu.com../how-to/how-to-run-rocks-on-your-server.md - Failed to parse: 'discourse.ubuntu.com..', label empty or too long
+(contributing/gh-issues: line   27) ok        https://diataxis.fr/
+(explanation/networking/configuring-networks: line  360) redirect  https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html - permanently to https://networkmanager.dev/docs/api/latest/
+(contributing/get-help: line   40) broken    https://discourse.ubuntu.com/c/open-documentation-academy - 404 Client Error: Not Found for url: https://discourse.ubuntu.com/c/open-documentation-academy
+(how-to/databases/install-mysql: line  114) ok        https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_logical_backup
+(how-to/containers/lxd-containers: line   14) redirect  https://discourse.ubuntu.com/c/lxd/ - permanently to https://discourse.ubuntu.com/c/lxd/126
+(how-to/databases/install-mysql: line  176) ok        https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_physical_backup
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line    7) ok        https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510
+(explanation/intro-to/high-availability: line   73) ok        https://discourse.ubuntu.com/t/corosync-and-redundant-rings/11627
+(contributing/get-help: line   37) redirect  https://discourse.ubuntu.com/c/server/17 - permanently to https://discourse.ubuntu.com/c/project/server/17
+(how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x: line    9) ok        https://discourse.ubuntu.com/t/non-interactive-ibm-z-lpar-s390x-installation-using-autoinstall/16988
+(explanation/software/about-apt-upgrade-and-phased-updates: line   63) ok        https://discourse.ubuntu.com/t/phased-updates-in-apt-in-21-04/20345
+(how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x: line    6) redirect  https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995 - permanently to https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-autoinstallation/16995
+(how-to/observability/install-nagios: line   60) redirect  https://discourse.ubuntu.com/t/databases-mysql/11515 - permanently to https://discourse.ubuntu.com/t/install-and-configure-a-mysql-server/11515
+(explanation/intro-to/ebpf: line   54) ok        https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134
+(how-to/mail-services/install-dovecot: line   66) redirect  https://discourse.ubuntu.com/t/security-certificates/11885 - permanently to https://discourse.ubuntu.com/t/certificates/11885
+(how-to/samba/mount-cifs-shares-permanently: line    8) redirect  https://discourse.ubuntu.com/t/samba-introduction/11888 - permanently to https://discourse.ubuntu.com/t/introduction-to-samba/11888
+(how-to/samba/member-server-in-an-ad-domain: line    4) redirect  https://discourse.ubuntu.com/t/service-sssd/11579 - permanently to https://discourse.ubuntu.com/t/introduction-to-network-user-authentication-with-sssd/11579
+(how-to/observability/install-nagios: line   60) redirect  https://discourse.ubuntu.com/t/service-domain-name-service-dns/11318 - permanently to https://discourse.ubuntu.com/t/domain-name-service-dns/11318
+(explanation/intro-to/high-availability: line  159) ok        https://discourse.ubuntu.com/t/ubuntu-high-availability-corosync-pacemaker-shared-disk-environments/14874
+(how-to/observability/install-nagios: line   60) redirect  https://discourse.ubuntu.com/t/web-servers-apache/11510 - permanently to https://discourse.ubuntu.com/t/introduction-to-web-servers/11510
+(how-to/mail-services/install-dovecot: line   84) ok        https://doc.dovecot.org
+(how-to/wireguard-vpn/vpn-as-the-default-gateway: line  180) ok        https://dnsleaktest.com
+(explanation/dnssec/dnssec: line  252) ok        https://dnsviz.net/
+(how-to/mail-services/install-dovecot: line   24) redirect  https://doc.dovecot.org/admin_manual/mailbox_formats/ - permanently to https://doc.dovecot.org/2.3/admin_manual/mailbox_formats/
+(how-to/containers/run-rocks-on-your-server: line   15) ok        https://docs.docker.com/reference/cli/docker/container/run/
+(how-to/containers/docker-for-system-admins: line  207) redirect  https://docs.docker.com/storage/storagedriver/ - permanently to https://docs.docker.com/engine/storage/drivers/
+(how-to/networking/dnssec-troubleshooting: line  252) broken    https://dnsviz.net/: - 404 Client Error: Not Found for url: https://dnsviz.net/:
+(how-to/containers/docker-for-system-admins: line  189) redirect  https://docs.docker.com/storage/storagedriver/#images-and-layers - permanently to https://docs.docker.com/engine/storage/drivers/
+(how-to/containers/docker-for-system-admins: line  159) broken    https://docs.docker.com/storage/tmpfs/#specify-tmpfs-options - Anchor 'specify-tmpfs-options' not found
+(contributing/contrib-types: line   91) ok        https://docs.github.com/en/codespaces/the-githubdev-web-based-editor
+(contributing/gh-issues: line   40) ok        https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files
+(how-to/networking/dnssec-troubleshooting: line  253) redirect  https://dnssec-debugger.verisignlabs.com/: - with See Other to https://dnssec-debugger.verisignlabs.com/
+(how-to/observability/set-up-your-lma-stack: line   13) ok        https://docs.influxdata.com/telegraf/v1/
+(explanation/performance/perf-tune-cpupower: line  298) ok        https://docs.kernel.org/admin-guide/pm/intel_idle.html
+(explanation/performance/perf-tune-cpupower: line  144) ok        https://docs.kernel.org/admin-guide/pm/cpuidle.html
+(explanation/intro-to/ebpf: line  338) ok        https://docs.kernel.org/bpf/
+(explanation/performance/perf-tune-cpupower: line  296) ok        https://docs.kernel.org/admin-guide/pm/intel_uncore_frequency_scaling.html
+(contributing/submit-contribution: line   85) redirect  https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue - permanently to https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue
+(how-to/graphics/install-nvidia-drivers: line   12) ok        https://docs.nvidia.com/datacenter/tesla/index.html
+(how-to/graphics/install-nvidia-drivers: line  214) broken    https://docs.nvidia.com/datacenter/tesla/drivers/index.html#branches - Anchor 'branches' not found
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   34) redirect  https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html - permanently to https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  142) redirect  https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu - permanently to https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html
+(contributing/submit-contribution: line   83) ok        https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  159) redirect  https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu - permanently to https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  159) redirect  https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html - permanently to https://docs.nvidia.com/vgpu/ls/latest/grid-license-server-user-guide/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  140) redirect  https://docs.nvidia.com/grid/latest/product-support-matrix/index.html#abstract__ubuntu - permanently to https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  162) redirect  https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html - permanently to https://docs.nvidia.com/vgpu/news/vgpu-software-license-server-eol-notice/index.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  162) ok        https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html
+(explanation/virtualisation/about-openstack: line   44) ok        https://docs.openstack.org/devstack/latest/
+(explanation/virtualisation/about-openstack: line   42) ok        https://docs.openstack.org/install-guide/
+(explanation/virtualisation/about-openstack: line   40) ok        https://docs.openstack.org/project-deploy-guide/openstack-ansible/latest/
+(explanation/virtualisation/about-openstack: line   38) ok        https://docs.openstack.org/project-deploy-guide/charm-deployment-guide/latest/
+(explanation/crypto/java-cryptography-configuration: line  242) ok        https://docs.oracle.com/en/java/javase/11/tools/keytool.html
+(contributing/writing-guidance: line   32) ok        https://docs.ubuntu.com/styleguide/en
+(explanation/crypto/java-cryptography-configuration: line  172) ok        https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html
+(explanation/crypto/java-cryptography-configuration: line  241) ok        https://docs.oracle.com/en/java/javase/12/docs/specs/security/standard-names.html
+(how-to/databases/install-mysql: line  201) ok        https://docs.percona.com/percona-xtrabackup/8.0/
+(           index: line   85) ok        https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/
+(how-to/containers/lxd-containers: line    8) ok        https://documentation.ubuntu.com/lxd/en/latest/explanation/clusters/
+(how-to/containers/lxd-containers: line    6) ok        https://documentation.ubuntu.com/lxd/en/latest/howto/access_ui/
+(how-to/containers/lxd-containers: line   48) ok        https://documentation.ubuntu.com/lxd/en/latest/howto/initialize/
+(explanation/security/security_suggestions: line  125) ok        https://documentation.ubuntu.com/adsys/en/latest/
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   22) broken    https://documentation.ubuntu.com/lxd/en/latest/howto/instances_create/#launch-a-virtual-machine - Anchor 'launch-a-virtual-machine' not found
+(how-to/containers/lxd-containers: line   14) redirect  https://documentation.ubuntu.com/lxd/ - with Found to https://documentation.ubuntu.com/lxd/en/stable-5.21/
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   20) ok        https://documentation.ubuntu.com/lxd/en/latest/tutorial/
+(how-to/containers/lxd-containers: line  229) ok        https://documentation.ubuntu.com/lxd/en/latest/reference/instance_options/
+(how-to/containers/lxd-containers: line  165) ok        https://documentation.ubuntu.com/lxd/en/latest/explanation/storage/
+(how-to/containers/lxd-containers: line    6) ok        https://documentation.ubuntu.com/lxd/en/latest/restapi_landing/
+(reference/clouds: line    8) ok        https://documentation.ubuntu.com/public-cloud/en/latest/
+(how-to/security/apparmor: line    4) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DAC
+(explanation/networking/networking-key-concepts: line    8) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DARPA
+(explanation/virtualisation/qemu-microvm: line   75) broken    https://documentation.ubuntu.com/rockcraft/en/stable/tutorials/chisel/ - 404 Client Error: Not Found for url: https://documentation.ubuntu.com/rockcraft/en/stable/tutorials/chisel/
+(how-to/security/install-a-root-ca-certificate-in-the-trust-store: line   12) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DER
+(explanation/multipath/configuring-multipath: line  259) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DGC
+(how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x: line    6) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DASD
+(how-to/networking/install-dns: line   80) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DDNS
+(explanation/dnssec/dnssec: line  115) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DHCP
+(explanation/intro-to/openldap: line   11) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DIT
+(how-to/graphics/install-nvidia-drivers: line  145) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DKMS
+(how-to/virtualisation/libvirt: line  251) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DMA
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   49) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DMAR
+(explanation/crypto/bind-9-dnssec-cryptography-selection: line    4) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DNS
+(how-to/networking/dnssec-troubleshooting: line    4) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DNSSEC
+(explanation/intro-to/openldap: line   19) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DN
+(explanation/networking/networking-key-concepts: line   14) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-Datagram
+(explanation/crypto/network-security-services-nss: line   51) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DTLS
+(explanation/virtualisation/about-rock-images: line    4) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-Docker
+(explanation/networking/about-dpdk: line    5) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-EAL
+(how-to/web-services/install-php: line   77) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-DocumentRoot
+(how-to/installation/how-to-netboot-the-server-installer-on-amd64: line   18) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-EFI
+(how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x: line  123) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-ECKD
+(how-to/software/report-a-bug: line   70) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-ELinks
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  162) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-EOL
+(how-to/graphics/install-nvidia-drivers: line   12) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-ERD
+(how-to/virtualisation/ubuntu-on-hyper-v: line    4) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-ESXi
+(explanation/multipath/configuring-multipath: line  260) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-Engenio
+(explanation/intro-to/security: line   55) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-ESM
+(how-to/web-services/install-ruby-on-rails: line   86) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-daemonize
+(how-to/databases/install-postgresql: line  169) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-dblink
+(explanation/intro-to/multipath: line  133) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-denylist
+(how-to/containers/docker-for-system-admins: line  194) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-deduplication
+(how-to/networking/install-isc-dhcp-server: line    7) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-dhcpd
+(how-to/networking/install-isc-kea: line   29) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-debconf
+(explanation/storage/iscsi-initiator-or-client: line  245) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-dmesg
+(how-to/installation/how-to-netboot-the-server-installer-on-amd64: line   22) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-dnsmasq
+(explanation/software/changing-package-files: line  166) ok        https://documentation.ubuntu.com/server/reference/glossary/#term-dpkg
+(how-to/virtualisation/libvirt: line  229) ok        https://en.wikibooks.org/wiki/QEMU/Monitor
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Application_software
+(explanation/software/config-managers: line   49) ok        https://en.wikipedia.org/wiki/Comparison_of_open-source_configuration_management_software
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Computer
+(explanation/storage/iscsi-initiator-or-client: line    7) ok        https://en.wikipedia.org/wiki/Block-level_storage
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Computer_cluster
+(explanation/storage/iscsi-initiator-or-client: line    7) ok        https://en.wikipedia.org/wiki/Computer_data_storage
+(explanation/dnssec/dnssec: line  253) ok        https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities
+(explanation/networking/about-dpdk: line  231) ok        https://en.wikipedia.org/wiki/Data_Plane_Development_Kit
+(explanation/intro-to/high-availability: line   11) ok        https://en.wikipedia.org/wiki/Database_management_system
+(explanation/intro-to/high-availability: line   11) ok        https://en.wikipedia.org/wiki/Electronic_commerce
+(explanation/intro-to/high-availability: line   90) ok        https://en.wikipedia.org/wiki/Distributed_Replicated_Block_Device
+(explanation/storage/iscsi-initiator-or-client: line   13) ok        https://en.wikipedia.org/wiki/Fibre_Channel
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Failover
+(how-to/security/openssh-server: line  210) ok        https://en.wikipedia.org/wiki/HMAC-based_one-time_password
+(explanation/intro-to/high-availability: line   17) ok        https://en.wikipedia.org/wiki/Heartbeat_(computing)
+(explanation/intro-to/high-availability: line    5) ok        https://en.wikipedia.org/wiki/High-availability_cluster
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/High_availability
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/High_availability_software
+(explanation/storage/iscsi-initiator-or-client: line    5) ok        https://en.wikipedia.org/wiki/ISCSI
+(how-to/virtualisation/ubuntu-on-hyper-v: line    4) ok        https://en.wikipedia.org/wiki/Hypervisor#Classification
+(explanation/storage/iscsi-initiator-or-client: line    9) ok        https://en.wikipedia.org/wiki/Internet
+(explanation/storage/iscsi-initiator-or-client: line    9) ok        https://en.wikipedia.org/wiki/Intranet
+(explanation/storage/iscsi-initiator-or-client: line    9) ok        https://en.wikipedia.org/wiki/Local_area_network
+(explanation/storage/iscsi-initiator-or-client: line    7) ok        https://en.wikipedia.org/wiki/Internet_Protocol
+(explanation/storage/about-lvm: line    4) ok        https://en.wikipedia.org/wiki/Logical_volume_management
+(explanation/intro-to/mail-services: line   29) ok        https://en.wikipedia.org/wiki/Maildir
+(explanation/intro-to/mail-services: line   29) ok        https://en.wikipedia.org/wiki/Mbox
+(explanation/security/security_suggestions: line   69) ok        https://en.wikipedia.org/wiki/Principle_of_least_privilege
+(explanation/performance/perf-pgo: line    5) ok        https://en.wikipedia.org/wiki/Profile-guided_optimization
+(explanation/storage/iscsi-initiator-or-client: line   11) ok        https://en.wikipedia.org/wiki/Protocol_(computing)
+(explanation/intro-to/high-availability: line   21) ok        https://en.wikipedia.org/wiki/Quorum_(distributed_computing)
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Redundancy_(engineering)
+(explanation/storage/iscsi-initiator-or-client: line    7) ok        https://en.wikipedia.org/wiki/SCSI
+(explanation/intro-to/high-availability: line    9) ok        https://en.wikipedia.org/wiki/Server_(computing)
+(how-to/virtualisation/libvirt: line   18) ok        https://en.wikipedia.org/wiki/Slirp
+(explanation/intro-to/high-availability: line   17) ok        https://en.wikipedia.org/wiki/Split-brain_(computing)
+(explanation/intro-to/high-availability: line   15) ok        https://en.wikipedia.org/wiki/Storage_area_network
+(explanation/intro-to/ebpf: line  336) ok        https://ebpf.io/what-is-ebpf/
+(explanation/intro-to/ebpf: line    4) ok        https://ebpf.io/
+(explanation/storage/iscsi-initiator-or-client: line    7) ok        https://en.wikipedia.org/wiki/TCP/IP
+(explanation/intro-to/ebpf: line  340) ok        https://ebpf.io/applications/
+(how-to/security/openssh-server: line  210) ok        https://en.wikipedia.org/wiki/Time-based_one-time_password
+(explanation/storage/iscsi-initiator-or-client: line   11) ok        https://en.wikipedia.org/wiki/Storage_array
+(explanation/virtualisation/qemu-microvm: line   54) ok        https://firecracker-microvm.github.io/
+(explanation/intro-to/high-availability: line   11) ok        https://en.wikipedia.org/wiki/Websites
+(explanation/storage/iscsi-initiator-or-client: line    9) ok        https://en.wikipedia.org/wiki/Wide_area_network
+(how-to/backups/install-etckeeper: line  104) ok        https://git-scm.com/
+(explanation/networking/about-dpdk: line   13) ok        https://git.dpdk.org/dpdk/commit/?id=f27769f796a0639368117ce22fb124b6030dbf73
+(explanation/storage/iscsi-initiator-or-client: line   11) broken    https://en.wikipedia.org/wiki/SCSI_CDB - 404 Client Error: Not Found for url: https://en.wikipedia.org/wiki/SCSI_CDB
+(how-to/backups/install-etckeeper: line    4) ok        https://etckeeper.branchable.com/
+(explanation/performance/perf-pgo: line   21) ok        https://gcc.gnu.org
+(explanation/crypto/gnutls: line   76) ok        https://git.launchpad.net/ubuntu/+source/gnutls28/tree/debian/rules?h=ubuntu/jammy-devel#n38
+(explanation/crypto/network-security-services-nss: line  273) ok        https://git.launchpad.net/ubuntu/+source/nss/tree/nss/tests/ssl/sslpolicy.txt
+(explanation/crypto/network-security-services-nss: line  272) ok        https://git.launchpad.net/ubuntu/+source/nss/tree/nss/tests/policy
+(explanation/crypto/openssh-crypto-configuration: line   47) ok        https://git.launchpad.net/ubuntu/+source/openssh/tree/debian/patches/gssapi.patch?h=applied/ubuntu/jammy-devel
+(explanation/crypto/openssl: line   47) ok        https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel
+(explanation/crypto/java-cryptography-configuration: line   23) ok        https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520
+(explanation/crypto/openssl: line   50) ok        https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/rules?h=ubuntu/jammy-devel#n15
+(contributing/index: line   37) ok        https://github.com/
+(explanation/intro-to/high-availability: line   62) ok        https://github.com/ClusterLabs/crmsh
+(explanation/intro-to/high-availability: line  109) ok        https://github.com/ClusterLabs/booth
+(explanation/intro-to/high-availability: line   64) ok        https://github.com/ClusterLabs/cluster-glue
+(explanation/intro-to/crypto-libraries: line  176) ok        https://git.launchpad.net/ubuntu/+source/rclone/tree/debian/control?h=ubuntu/jammy-devel#n7
+(explanation/intro-to/high-availability: line   61) ok        https://github.com/ClusterLabs/fence-agents
+(explanation/high-availability/pacemaker-fence-agents: line  199) redirect  https://github.com/ClusterLabs/fence-agents/blob/master/doc/FenceAgentAPI.md - with Found to https://github.com/ClusterLabs/fence-agents/blob/main/doc/FenceAgentAPI.md
+(explanation/intro-to/high-availability: line  107) ok        https://github.com/ClusterLabs/fence-virt
+(explanation/intro-to/high-availability: line   63) ok        https://github.com/ClusterLabs/pcs/
+(explanation/intro-to/high-availability: line  104) ok        https://github.com/ClusterLabs/pcs
+(explanation/intro-to/high-availability: line   60) ok        https://github.com/ClusterLabs/resource-agents
+(explanation/intro-to/high-availability: line  108) ok        https://github.com/ClusterLabs/sbd
+(how-to/security/install-openvpn: line  439) ok        https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md
+(explanation/high-availability/pacemaker-resource-agents: line  180) redirect  https://github.com/ClusterLabs/resource-agents/blob/master/doc/dev-guides/ra-dev-guide.asc - with Found to https://github.com/ClusterLabs/resource-agents/blob/main/doc/dev-guides/ra-dev-guide.asc
+(explanation/intro-to/high-availability: line  105) ok        https://github.com/LINBIT/csync2
+(explanation/virtualisation/qemu-microvm: line   24) ok        https://github.com/bonzini/qboot
+(how-to/sssd/with-active-directory: line  288) ok        https://github.com/SSSD/sssd
+(contributing/index: line   20) ok        https://github.com/canonical/open-documentation-academy
+(contributing/build-locally: line    6) ok        https://github.com/canonical/open-documentation-academy/blob/main/getting-started/using_git.md
+(contributing/contrib-types: line   36) ok        https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Acoding
+(contributing/index: line   60) ok        https://github.com/canonical/ubuntu-server-documentation
+(contributing/gh-issues: line   30) ok        https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee
+(contributing/contrib-types: line    6) ok        https://github.com/canonical/ubuntu-server-documentation/issues
+(contributing/contrib-types: line   52) ok        https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Alow-code
+(contributing/contrib-types: line   24) ok        https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Atechnical
+(contributing/contrib-types: line   97) ok        https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aopen+is%3Aissue+label%3Ano-code
+(explanation/intro-to/high-availability: line  106) ok        https://github.com/corosync/corosync-qdevice
+(explanation/virtualisation/qemu-microvm: line   63) ok        https://github.com/containers/krunvm
+(contributing/index: line  110) ok        https://github.com/canonical/ubuntu-server-documentation/pull/9
+(contributing/index: line  111) ok        https://github.com/canonical/ubuntu-server-documentation/pull/10
+(explanation/intro-to/high-availability: line  134) ok        https://github.com/fujita/tgt
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   34) ok        https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   27) ok        https://github.com/dannf/ubuntu-server-netboot
+(explanation/performance/perf-pgo: line   21) ok        https://github.com/google/autofdo
+(explanation/crypto/network-security-services-nss: line  271) ok        https://git.launchpad.net/ubuntu/+source/nss/tree/nss/lib/pk11wrap/pk11pars.c#n144
+(explanation/intro-to/high-availability: line  123) ok        https://github.com/markfasheh/ocfs2-tools
+(explanation/intro-to/high-availability: line  132) ok        https://github.com/open-iscsi/open-iscsi
+(how-to/databases/install-mysql: line  260) ok        https://github.com/major/MySQLTuner-perl
+(explanation/intro-to/ebpf: line  312) ok        https://github.com/iovisor/bcc/issues/1033
+(explanation/storage/iscsi-initiator-or-client: line  458) ok        https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsi.service.template
+(explanation/storage/iscsi-initiator-or-client: line  459) ok        https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsid.service.template
+(explanation/virtualisation/qemu-microvm: line   78) ok        https://github.com/opencontainers/image-spec/blob/main/spec.md
+(explanation/intro-to/high-availability: line  131) ok        https://github.com/opensvc/multipath-tools
+(explanation/storage/iscsi-initiator-or-client: line  457) ok        https://github.com/open-iscsi/open-iscsi/blob/master/etc/iscsid.conf
+(explanation/networking/about-dpdk: line  229) ok        https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md
+(explanation/networking/about-dpdk: line  187) redirect  https://github.com/openvswitch/ovs/blob/master/acinclude.m4#L283 - with Found to https://github.com/openvswitch/ovs/blob/main/acinclude.m4
+(explanation/virtualisation/qemu-microvm: line  157) ok        https://github.com/qemu/qemu/blob/master/docs/system/i386/microvm.rst
+(explanation/virtualisation/qemu-microvm: line  164) ok        https://github.com/qemu/qemu/blob/master/docs/system/i386/microvm.rst#running-a-microvm-based-vm
+(how-to/backups/install-gitolite: line   90) ok        https://github.com/sitaramc/gitolite
+(how-to/backups/install-gitolite: line   91) ok        https://gitolite.com/gitolite/
+(explanation/virtualisation/qemu-microvm: line  147) ok        https://github.com/tianocore/edk2
+(how-to/virtualisation/libvirt: line  378) broken    https://gitlab.com/apparmor/apparmor/-/wikis/Libvirt#implementation-overview - Anchor 'implementation-overview' not found
+(explanation/crypto/gnutls: line  276) ok        https://gnutls.org/manual/html_node/Priority-Strings.html
+(explanation/crypto/gnutls: line   82) ok        https://gnutls.org/manual/html_node/Priority-Strings.html#tab_003aprio_002dkeywords
+(explanation/crypto/gnutls: line  157) ok        https://gnutls.org/manual/html_node/Selecting-cryptographic-key-sizes.html#tab_003akey_002dsizes
+(explanation/crypto/gnutls: line  282) ok        https://gnutls.org/manual/html_node/gnutls_002dcli-Invocation.html
+(how-to/observability/set-up-your-lma-stack: line   15) ok        https://grafana.com/docs/
+(how-to/virtualisation/libvirt: line  390) broken    https://gitlab.com/apparmor/apparmor/-/wikis/FAQ#what-is-default-deny-white-listing - Anchor 'what-is-default-deny-white-listing' not found
+(explanation/virtualisation/qemu-microvm: line   62) ok        https://github.com/ottomatica/slim
+(how-to/networking/serve-ntp-with-chrony: line  141) ok        https://gpsd.gitlab.io/gpsd/hardware.html
+(explanation/networking/about-time-synchronisation: line   42) ok        https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd
+(how-to/software/report-a-bug: line    4) ok        https://help.launchpad.net/YourAccount/NewAccount
+(how-to/security/apparmor: line  271) ok        https://help.ubuntu.com/community/AppArmor
+(how-to/backups/install-bacula: line  208) ok        https://help.ubuntu.com/community/Bacula
+(tutorial/basic-installation: line   55) ok        https://help.ubuntu.com/community/BootFromCD
+(how-to/backups/back-up-using-shell-scripts: line  146) ok        https://help.ubuntu.com/community/CronHowto
+(how-to/mail-services/install-exim4: line  135) ok        https://help.ubuntu.com/community/Exim4
+(how-to/web-services/install-php: line   85) ok        https://help.ubuntu.com/community/ApacheMySQLPHP
+(how-to/mail-services/install-dovecot: line   85) ok        https://help.ubuntu.com/community/Dovecot
+(how-to/software/package-management: line  339) ok        https://help.ubuntu.com/community/InstallingSoftware
+(how-to/virtualisation/libvirt: line  448) ok        https://help.ubuntu.com/community/KVM
+(how-to/security/firewalls: line  330) ok        https://help.ubuntu.com/community/IptablesHowTo
+(explanation/networking/configuring-networks: line  371) ok        https://help.ubuntu.com/community/Network
+(how-to/observability/install-nagios: line  210) ok        https://help.ubuntu.com/community/Nagios3
+(how-to/networking/install-nfs: line  285) ok        https://help.ubuntu.com/community/NFSv4Howto
+(how-to/mail-services/install-postfix: line  359) ok        https://help.ubuntu.com/community/Postfix
+(how-to/software/package-management: line  343) ok        https://help.ubuntu.com/community/Repositories/Ubuntu
+(how-to/security/openssh-server: line  320) ok        https://help.ubuntu.com/community/SSH
+(explanation/software/advance-testing-of-updates-in-best-practice-server-deployments: line   49) ok        https://help.ubuntu.com/community/ReportingBugs
+(reference/debugging/debug-symbol-packages: line   40) broken    https://help.ubuntu.com/community/Repositories/Ubuntu#Adding_Other_Repositories - Anchor 'Adding_Other_Repositories' not found
+(reference/debugging/debug-symbol-packages: line   23) ok        https://help.ubuntu.com/community/Repositories/Ubuntu#Authentication_Tab
+(how-to/samba/file-server: line   99) ok        https://help.ubuntu.com/community/Samba
+(reference/other-tools/byobu: line   51) ok        https://help.ubuntu.com/community/Screen
+(explanation/networking/about-dpdk: line   20) ok        https://help.ubuntu.com/community/Repositories/Ubuntu#The_Four_Main_Repositories
+(how-to/web-services/configure-apache2-settings: line  117) ok        https://help.ubuntu.com/community/ServerSideIncludes
+(explanation/web-services/about-squid-proxy-servers: line   24) ok        https://help.ubuntu.com/community/Squid
+(how-to/web-services/install-apache2: line    4) ok        https://httpd.apache.org/
+(how-to/web-services/configure-apache2-settings: line  160) ok        https://httpd.apache.org/docs/2.4/
+(explanation/networking/about-dhcp: line   59) ok        https://help.ubuntu.com/community/isc-dhcp-server
+(how-to/web-services/configure-apache2-settings: line  129) ok        https://httpd.apache.org/docs/2.4/mod/mod_negotiation.html#multiviews
+(how-to/containers/run-rocks-on-your-server: line   15) ok        https://hub.docker.com/r/ubuntu/grafana
+(explanation/networking/about-time-synchronisation: line   44) ok        https://help.ubuntu.com/community/UbuntuTime
+(how-to/containers/run-rocks-on-your-server: line   69) ok        https://hub.docker.com/r/ubuntu/prometheus
+(how-to/networking/install-nfs: line  284) ok        https://help.ubuntu.com/community/SettingUpNFSHowTo
+(explanation/networking/about-dhcp: line   65) broken    https://kb.isc.org/docs/kea-administrator-reference-manual - 403 Client Error: Forbidden for url: https://kb.isc.org/docs/kea-administrator-reference-manual
+(how-to/software/report-a-bug: line    4) ok        https://launchpad.net/
+(explanation/intro-to/high-availability: line   57) ok        https://kronosnet.org/
+(how-to/virtualisation/cloud-image-vms-with-uvtool: line  167) ok        https://kiwiirc.com/nextclient/irc.libera.chat/ubuntu-server
+(reference/other-tools/byobu: line   53) ok        https://launchpad.net/byobu
+(how-to/kerberos/kerberos-with-openldap-backend: line   19) broken    https://krbdev.mit.edu/rt/Ticket/Display.html?id=7754# - HTTPSConnectionPool(host='krbdev.mit.edu', port=443): Max retries exceeded with url: /rt/Ticket/Display.html?id=7754 (Caused by SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)')))
+(explanation/virtualisation/qemu-microvm: line   53) ok        https://katacontainers.io/
+(explanation/intro-to/high-availability: line  109) ok        https://launchpad.net/ubuntu/+source/booth
+(explanation/intro-to/high-availability: line  106) ok        https://launchpad.net/ubuntu/+source/corosync-qdevice
+(explanation/intro-to/high-availability: line   64) ok        https://launchpad.net/ubuntu/+source/cluster-glue
+(explanation/intro-to/high-availability: line   62) ok        https://launchpad.net/ubuntu/+source/crmsh
+(explanation/intro-to/high-availability: line   58) ok        https://launchpad.net/ubuntu/+source/corosync
+(explanation/intro-to/high-availability: line  107) ok        https://launchpad.net/ubuntu/+source/fence-virt
+(explanation/intro-to/high-availability: line   65) ok        https://launchpad.net/ubuntu/+source/drbd-utils
+(explanation/intro-to/high-availability: line   61) ok        https://launchpad.net/ubuntu/+source/fence-agents
+(explanation/intro-to/high-availability: line   66) ok        https://launchpad.net/ubuntu/+source/dlm
+(explanation/intro-to/high-availability: line  105) ok        https://launchpad.net/ubuntu/+source/csync2
+(explanation/intro-to/high-availability: line   57) ok        https://launchpad.net/ubuntu/+source/kronosnet
+(explanation/intro-to/high-availability: line   67) ok        https://launchpad.net/ubuntu/+source/gfs2-utils
+(explanation/intro-to/high-availability: line   56) ok        https://launchpad.net/ubuntu/+source/libqb
+(explanation/intro-to/high-availability: line  135) ok        https://launchpad.net/ubuntu/+source/lvm2
+(explanation/intro-to/high-availability: line   68) ok        https://launchpad.net/ubuntu/+source/keepalived
+(explanation/intro-to/high-availability: line  123) ok        https://launchpad.net/ubuntu/+source/ocfs2-tools
+(explanation/intro-to/high-availability: line  131) ok        https://launchpad.net/ubuntu/+source/multipath-tools
+(explanation/intro-to/high-availability: line   59) ok        https://launchpad.net/ubuntu/+source/pacemaker
+(explanation/intro-to/high-availability: line  132) ok        https://launchpad.net/ubuntu/+source/open-iscsi
+(explanation/intro-to/high-availability: line   63) ok        https://launchpad.net/ubuntu/+source/pcs
+(explanation/intro-to/high-availability: line  108) ok        https://launchpad.net/ubuntu/+source/sbd
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   40) ok        https://launchpad.net/uvtool
+(explanation/intro-to/high-availability: line  133) ok        https://launchpad.net/ubuntu/+source/sg3-utils
+(how-to/openldap/install-openldap: line    3) ok        https://ldap.com/
+(explanation/intro-to/high-availability: line   60) ok        https://launchpad.net/ubuntu/+source/resource-agents
+(explanation/intro-to/AD-integration: line   30) ok        https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview
+(explanation/active-directory/security-identifiers-sids: line    8) ok        https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers
+(explanation/intro-to/high-availability: line  134) ok        https://launchpad.net/ubuntu/+source/tgt
+(how-to/security/apparmor: line  274) ok        https://libera.chat
+(how-to/virtualisation/ubuntu-on-hyper-v: line   10) redirect  https://learn.microsoft.com/windows/wsl/about - with Found to https://learn.microsoft.com/en-us/windows/wsl/about
+(explanation/intro-to/kerberos: line   35) ok        https://libera.chat/
+(how-to/virtualisation/ubuntu-on-hyper-v: line   14) ok        https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/system-requirements-for-hyper-v-on-windows
+(explanation/performance/perf-pgo: line   29) ok        https://launchpad.net/~sergiodj/+archive/ubuntu/autofdo
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   30) ok        https://libvirt.org/
+(how-to/virtualisation/libvirt: line  123) ok        https://libvirt.org/formatdomain.html
+(how-to/observability/install-nagios: line  206) redirect  https://library.nagios.com/library/products/nagios-core/documentation/ - permanently to https://library.nagios.com/products/nagios-core/documentation/
+(how-to/virtualisation/libvirt: line  354) ok        https://libvirt.org/formatdomain.html#cpu-model-and-topology
+(how-to/virtualisation/libvirt: line  435) ok        https://libvirt.org/formatdomain.html#filesystems
+(how-to/virtualisation/libvirt: line  323) broken    https://libvirt.org/formatdomain.html#elementsMemoryBacking - Anchor 'elementsMemoryBacking' not found
+(how-to/virtualisation/libvirt: line  446) ok        https://libvirt.org/formatstorage.html
+(how-to/virtualisation/libvirt: line  163) ok        https://libvirt.org/migration.html
+(how-to/virtualisation/libvirt: line  437) ok        https://libvirt.org/kbase/virtiofs.html
+(explanation/intro-to/high-availability: line   65) ok        https://linbit.com/drbd/
+(explanation/storage/iscsi-initiator-or-client: line  455) broken    https://linux.die.net/man/8/iscsid - 403 Client Error: Forbidden for url: https://linux.die.net/man/8/iscsid
+(explanation/storage/iscsi-initiator-or-client: line  456) broken    https://linux.die.net/man/5/iscsi.conf - 403 Client Error: Forbidden for url: https://linux.die.net/man/5/iscsi.conf
+(how-to/virtualisation/libvirt: line  161) broken    https://libvirt.org/migration.html#offline - Anchor 'offline' not found
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  269) ok        https://libvirt.org/formatdomain.html#usb-pci-scsi-devices
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  271) ok        https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   12) ok        https://linuxcontainers.org/lxc/getting-started/
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   10) ok        https://linuxcontainers.org/
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   12) ok        https://linuxcontainers.org/lxc/introduction/
+(  lxc-containers: line   -1) ok        https://linuxcontainers.org/lxc/documentation/
+(how-to/virtualisation/cloud-image-vms-with-uvtool: line  169) ok        https://lists.ubuntu.com/mailman/listinfo/ubuntu-server
+(how-to/virtualisation/qemu: line   30) ok        https://manpages.ubuntu.com/
+(how-to/software/package-management: line  201) broken    https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html
+(how-to/software/package-management: line  341) broken    https://manpages.ubuntu.com/manpages/en/man1/systemd.1.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man1/systemd.1.html
+(tutorial/managing-software: line  293) ok        https://manpages.ubuntu.com
+(how-to/software/report-a-bug: line   70) broken    https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html
+(how-to/mail-services/install-exim4: line  137) redirect  https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#exim - with Found to https://docs.mailman3.org/projects/mailman/en/latest/src/mailman/docs/mta.html
+(how-to/mail-services/install-postfix: line  361) redirect  https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#postfix - with Found to https://docs.mailman3.org/projects/mailman/en/latest/src/mailman/docs/mta.html
+(explanation/multipath/configuring-multipath: line   53) broken    https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html#defaults%20section - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html
+(how-to/software/package-management: line  341) broken    https://manpages.ubuntu.com/manpages/en/man5/systemd.timer.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man5/systemd.timer.5.html
+(explanation/high-availability/pacemaker-resource-agents: line   79) broken    https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_iscsi.7.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_iscsi.7.html
+(how-to/networking/serve-ntp-with-chrony: line  346) broken    https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html
+(explanation/high-availability/pacemaker-resource-agents: line  159) broken    https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_LVM-activate.7.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_LVM-activate.7.html
+(how-to/security/firewalls: line  165) broken    https://manpages.ubuntu.com/manpages/en/man8/conntrack.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/conntrack.8.html
+(explanation/high-availability/pacemaker-fence-agents: line   68) broken    https://manpages.ubuntu.com/manpages/en/man8/fence_ipmilan.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/fence_ipmilan.8.html
+(how-to/containers/docker-for-system-admins: line  437) redirect  https://logentries.com/ - permanently to https://www.rapid7.com/products/insightidr/
+(explanation/high-availability/pacemaker-fence-agents: line  122) broken    https://manpages.ubuntu.com/manpages/en/man8/fence_sbd.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/fence_sbd.8.html
+(how-to/observability/install-logwatch: line  147) broken    https://manpages.ubuntu.com/manpages/en/man8/logwatch.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/logwatch.8.html
+(explanation/high-availability/pacemaker-fence-agents: line  150) broken    https://manpages.ubuntu.com/manpages/en/man8/fence_scsi.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/fence_scsi.8.html
+(explanation/high-availability/pacemaker-fence-agents: line  182) broken    https://manpages.ubuntu.com/manpages/en/man8/fence_virsh.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/fence_virsh.8.html
+(how-to/samba/mount-cifs-shares-permanently: line  162) broken    https://manpages.ubuntu.com/manpages/en/man8/mount.cifs.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/mount.cifs.8.html
+(how-to/wireguard-vpn/common-tasks: line   44) broken    https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html
+(how-to/security/firewalls: line   12) broken    https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html
+(explanation/crypto/openssl: line   66) broken    https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands - Anchor 'supported%20configuration%20file%20commands' not found
+(explanation/crypto/openssl: line   45) ok        https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CTX_set_security_level.3ssl.html
+(explanation/networking/about-dhcp: line   61) ok        https://manpages.ubuntu.com/manpages/focal/en/man5/dhcpd.conf.5.html
+(explanation/networking/networking-key-concepts: line   68) ok        https://manpages.ubuntu.com/manpages/focal/en/man7/tcp.7.html
+(explanation/crypto/openssl: line   10) ok        https://manpages.ubuntu.com/manpages/jammy/en/man5/config.5ssl.html
+(how-to/security/smart-card-authentication: line  219) broken    https://manpages.ubuntu.com/manpages/jammy/en/man5/sssd.conf.5.html#services%20sections - Anchor 'services%20sections' not found
+(how-to/security/smart-card-authentication: line  408) ok        https://manpages.ubuntu.com/manpages/jammy/en/man8/pam_sss.8.html
+(how-to/virtualisation/virtual-machine-manager: line  113) ok        https://manpages.ubuntu.com/manpages/jammy/man1/virt-install.1.html
+(explanation/software/about-apt-upgrade-and-phased-updates: line  110) ok        https://manpages.ubuntu.com/manpages/jammy/man5/apt_preferences.5.html
+(how-to/security/smart-card-authentication: line  408) ok        https://manpages.ubuntu.com/manpages/jammy/en/man5/pam.conf.5.html
+(explanation/crypto/network-security-services-nss: line  144) ok        https://manpages.ubuntu.com/manpages/jammy/en/man1/certutil.1.html
+(how-to/security/smart-card-authentication: line  279) ok        https://manpages.ubuntu.com/manpages/jammy/en/man5/sss-certmap.5.html
+(how-to/kerberos/kerberos-encryption-types: line  165) ok        https://manpages.ubuntu.com/manpages/jammy/man5/kdc.conf.5.html
+(explanation/crypto/openssh-crypto-configuration: line  163) ok        https://manpages.ubuntu.com/manpages/jammy/man5/sshd_config.5.html
+(explanation/software/changing-package-files: line  200) ok        https://manpages.ubuntu.com/manpages/jammy/en/man1/dpkg.1.html
+(how-to/samba/member-server-in-an-ad-domain: line  202) ok        https://manpages.ubuntu.com/manpages/jammy/man8/idmap_ad.8.html
+(how-to/samba/member-server-in-an-ad-domain: line  204) ok        https://manpages.ubuntu.com/manpages/jammy/man8/idmap_rid.8.html
+(explanation/intro-to/wireguard-vpn: line  171) ok        https://manpages.ubuntu.com/manpages/jammy/man8/wg-quick.8.html
+(explanation/intro-to/wireguard-vpn: line  171) ok        https://manpages.ubuntu.com/manpages/jammy/man8/wg.8.html
+(how-to/samba/member-server-in-an-ad-domain: line  113) ok        https://manpages.ubuntu.com/manpages/jammy/man5/smb.conf.5.html
+(how-to/kerberos/kerberos-encryption-types: line  166) ok        https://manpages.ubuntu.com/manpages/jammy/man5/krb5.conf.5.html
+(explanation/crypto/troubleshooting-tls-ssl: line   76) ok        https://manpages.ubuntu.com/manpages/kinetic/en/man1/openssl-s_client.1ssl.html
+(explanation/crypto/openssh-crypto-configuration: line  164) ok        https://manpages.ubuntu.com/manpages/jammy/man5/ssh_config.5.html
+(how-to/samba/member-server-in-an-ad-domain: line  203) ok        https://manpages.ubuntu.com/manpages/jammy/man8/idmap_autorid.8.html
+(explanation/crypto/troubleshooting-tls-ssl: line   71) broken    https://manpages.ubuntu.com/manpages/man1/sslscan.1.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man1/sslscan.1.html
+(explanation/crypto/troubleshooting-tls-ssl: line   75) ok        https://manpages.ubuntu.com/manpages/kinetic/en/man1/openssl-s_server.1ssl.html
+(how-to/virtualisation/cloud-image-vms-with-uvtool: line  161) ok        https://manpages.ubuntu.com/manpages/lunar/en/man1/uvt-kvm.1.html
+(explanation/high-availability/pacemaker-resource-agents: line   53) broken    https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_IPaddr2.7.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_IPaddr2.7.html
+(explanation/networking/configuring-networks: line  375) broken    https://manpages.ubuntu.com/manpages/man5/netplan.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man5/netplan.5.html
+(how-to/security/openssh-server: line   28) broken    https://manpages.ubuntu.com/manpages/man5/sshd_config.5.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man5/sshd_config.5.html
+(explanation/intro-to/wireguard-vpn: line    6) broken    https://manpages.ubuntu.com/manpages/man8/ip-route.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/ip-route.8.html
+(explanation/high-availability/pacemaker-resource-agents: line  109) broken    https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSILogicalUnit.7.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSILogicalUnit.7.html
+(explanation/high-availability/pacemaker-resource-agents: line  135) broken    https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSITarget.7.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSITarget.7.html
+(explanation/networking/configuring-networks: line  377) broken    https://manpages.ubuntu.com/manpages/man8/systemd-resolved.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/systemd-resolved.8.html
+(explanation/intro-to/wireguard-vpn: line   16) broken    https://manpages.ubuntu.com/manpages/man8/wg-quick.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/wg-quick.8.html
+(how-to/software/package-management: line  136) broken    https://manpages.ubuntu.com/manpages/man8/aptitude-curses.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/aptitude-curses.8.html
+(explanation/performance/perf-tune-hwloc: line  216) ok        https://manpages.ubuntu.com/manpages/noble/en/man1/lstopo.1.html
+(explanation/intro-to/AD-integration: line   39) ok        https://manpages.ubuntu.com/manpages/noble/en/man1/wbinfo.1.html
+(explanation/performance/perf-tune-tuned: line   90) ok        https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html
+(explanation/intro-to/wireguard-vpn: line    6) broken    https://manpages.ubuntu.com/manpages/man8/ip-address.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/ip-address.8.html
+(explanation/performance/perf-tune-hwloc: line  217) ok        https://manpages.ubuntu.com/manpages/noble/en/man7/hwloc.7.html
+(explanation/performance/perf-tune-tuned: line  254) ok        https://manpages.ubuntu.com/manpages/noble/en/man8/tuned-adm.8.html
+(explanation/performance/perf-tune-tuned: line  256) ok        https://manpages.ubuntu.com/manpages/noble/en/man8/tuned.8.html
+(explanation/security/security_suggestions: line   31) ok        https://manpages.ubuntu.com/manpages/noble/en/man8/unattended-upgrades.8.html
+(explanation/performance/perf-tune-hwloc: line  218) ok        https://manpages.ubuntu.com/manpages/noble/en/man1/hwloc-diff.1.html
+(how-to/security/user-management: line   37) broken    https://manpages.ubuntu.com/manpages/man8/sudo.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/sudo.8.html
+(how-to/networking/dnssec-troubleshooting: line  258) ok        https://manpages.ubuntu.com/manpages/noble/man1/delv.1.html
+(explanation/active-directory/identity-mapping-idmap-backends: line    7) ok        https://manpages.ubuntu.com/manpages/noble/man8/idmap_ad.8.html
+(explanation/dnssec/dnssec: line  148) ok        https://manpages.ubuntu.com/manpages/noble/man5/resolv.conf.5.html
+(explanation/active-directory/identity-mapping-idmap-backends: line    9) ok        https://manpages.ubuntu.com/manpages/noble/man8/idmap_autorid.8.html
+(explanation/active-directory/identity-mapping-idmap-backends: line    8) ok        https://manpages.ubuntu.com/manpages/noble/man8/idmap_rid.8.html
+(explanation/active-directory/identity-mapping-idmap-backends: line   13) ok        https://manpages.ubuntu.com/manpages/noble/man8/idmap_tdb.8.html
+(how-to/samba/provision-samba-ad-controller: line  260) ok        https://manpages.ubuntu.com/manpages/noble/man8/samba-tool.8.html
+(explanation/intro-to/wireguard-vpn: line   16) broken    https://manpages.ubuntu.com/manpages/man8/wg.8.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/man8/wg.8.html
+(how-to/samba/share-access-controls: line   68) ok        https://manpages.ubuntu.com/manpages/trusty/man1/setfacl.1.html
+(explanation/performance/perf-tune-hwloc: line   89) ok        https://manpages.ubuntu.com/manpages/noble/man1/hwloc-info.1.html
+(how-to/openldap/install-openldap: line  332) broken    https://manpages.ubuntu.com/manpages/slapd-config.html - 404 Client Error: Not Found for url: https://manpages.ubuntu.com/manpages/slapd-config.html
+(explanation/performance/perf-tune-tuned: line  255) ok        https://manpages.ubuntu.com/manpages/noble/en/man7/tuned-profiles.7.html
+(how-to/containers/run-rocks-on-your-server: line  160) ok        https://microk8s.io/docs
+(how-to/samba/share-access-controls: line   68) ok        https://manpages.ubuntu.com/manpages/trusty/man5/acl.5.html
+(contributing/contrib-types: line   33) ok        https://mermaid.live/
+(how-to/virtualisation/multipass: line    5) redirect  https://multipass.run - permanently to https://canonical.com/multipass
+(explanation/virtualisation/about-openstack: line   34) redirect  https://microstack.run/docs/single-node - permanently to https://canonical.com/microstack/docs/single-node
+(how-to/virtualisation/multipass: line  192) redirect  https://multipass.run/docs - permanently to https://canonical.com/multipass/docs
+(how-to/virtualisation/multipass: line  180) redirect  https://multipass.run/docs/set-up-the-driver - permanently to https://canonical.com/multipass/docs
+(contributing/get-help: line   48) broken    https://matrix.to/#/#documentation:ubuntu.com - Anchor '/%23documentation%3Aubuntu.com' not found
+(tutorial/managing-software: line   47) broken    https://multipass.run/docs/tutorial#install-multipass - Anchor 'install-multipass' not found
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   40) redirect  https://multipass.run/install - permanently to https://canonical.com/multipass
+(how-to/observability/install-munin: line    4) ok        https://munin-monitoring.org/
+(how-to/observability/install-munin: line   77) ok        https://munin.readthedocs.io/en/latest/
+(contributing/writing-guidance: line   11) ok        https://myst-parser.readthedocs.io/en/latest/intro.html
+(explanation/intro-to/networking: line   14) ok        https://netplan.io/
+(explanation/networking/configuring-networks: line  373) ok        https://netplan.io
+(explanation/networking/configuring-networks: line  363) ok        https://netplan.io/faq/
+(explanation/storage/iscsi-initiator-or-client: line   21) ok        https://netplan.readthedocs.io/en/latest/examples/
+(how-to/virtualisation/libvirt: line   22) ok        https://netplan.readthedocs.io/en/latest/
+(how-to/virtualisation/libvirt: line   22) ok        https://netplan.readthedocs.io/en/latest/netplan-yaml/#properties-for-device-type-bridges
+(explanation/intro-to/networking: line   14) ok        https://netplan.readthedocs.io/en/stable/netplan-yaml/
+(explanation/networking/about-netplan: line   12) ok        https://netplan.readthedocs.io/en/stable/howto/
+(explanation/networking/configuring-networks: line  379) ok        https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges
+(explanation/networking/configuring-networks: line  373) ok        https://netplan.readthedocs.io/en/stable/netplan-yaml/#
+(explanation/networking/configuring-networks: line    6) ok        https://netplan.readthedocs.io/en/stable/
+(how-to/web-services/install-nginx: line   91) ok        https://nginx.org/en/docs/
+(explanation/networking/about-netplan: line   10) ok        https://netplan.readthedocs.io/en/stable/structure-id/
+(how-to/web-services/configure-nginx: line  141) ok        https://nginx.org/en/docs/http/configuring_https_servers.html
+(how-to/web-services/configure-nginx: line  140) ok        https://nginx.org/en/docs/beginners_guide.html
+(explanation/virtualisation/about-rock-images: line    4) ok        https://opencontainers.org/
+(how-to/networking/cups-print-server: line    4) ok        https://openprinting.github.io/cups/doc/overview.html
+(explanation/security/openvpn-client-implementations: line   32) ok        https://openvpn.net/community-downloads/
+(explanation/intro-to/openldap: line   66) ok        https://openldap.org/doc/admin25/
+(how-to/security/install-openvpn: line  440) redirect  https://openvpn.net/quick-start-guide/ - permanently to https://openvpn.net/as-docs/getting-started.html
+(how-to/openldap/access-control: line  117) ok        https://openldap.org/doc/admin25/guide.html#Access%20Control
+(how-to/openldap/replication: line    6) ok        https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication
+(how-to/openldap/replication: line  361) ok        https://openldap.org/doc/admin24/guide.html#Configuring%20the%20different%20replication%20types
+(explanation/security/openvpn-client-implementations: line   22) broken    https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/#alternative-openvpn-open-source-tunnelblick-program - Anchor 'alternative-openvpn-open-source-tunnelblick-program' not found
+(how-to/security/smart-card-authentication: line   32) ok        https://p11-glue.github.io/p11-glue/p11-kit.html
+(how-to/security/smart-card-authentication: line   34) ok        https://p11-glue.github.io/p11-glue/p11-kit/manual/config.html
+(explanation/security/openvpn-client-implementations: line   22) redirect  https://openvpn.net/vpn-server-resources/installation-guide-for-openvpn-connect-client-on-macos/ - permanently to https://openvpn.net/as-docs/tutorials/tutorial--connect-with-macos.html
+(explanation/software/about-apt-upgrade-and-phased-updates: line   98) redirect  https://people.canonical.com/~ubuntu-archive/phased-updates.html - with Found to https://ubuntu-archive-team.ubuntu.com/phased-updates.html
+(how-to/observability/set-up-your-lma-stack: line   15) ok        https://prometheus.io/docs/alerting/latest/alertmanager/
+(how-to/observability/set-up-your-lma-stack: line   13) ok        https://prometheus.io/docs/introduction/overview/
+(explanation/intro-to/high-availability: line   66) ok        https://pagure.io/dlm
+(explanation/intro-to/high-availability: line   67) ok        https://pagure.io/gfs2-utils
+(how-to/web-services/install-ruby-on-rails: line   92) redirect  https://pragprog.com/book/rails4/agile-web-development-with-rails-4 - permanently to https://pragprog.com/search/?q=a
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   22) ok        https://qemu-project.gitlab.io/qemu/system/invocation.html
+(explanation/networking/about-dpdk: line  180) ok        https://people.freedesktop.org/~dbn/pkg-config-guide.html
+(explanation/intro-to/backups: line   19) ok        https://rsnapshot.org/
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   22) ok        https://qemu-project.gitlab.io/qemu/system/monitor.html
+(how-to/web-services/install-ruby-on-rails: line    4) ok        https://rubyonrails.org/
+(how-to/containers/run-rocks-on-your-server: line   35) ok        https://snapcraft.io/docs/channels
+(tutorial/managing-software: line 1381) ok        https://snapcraft.io/docs/managing-updates
+(how-to/security/firewalls: line  318) ok        https://shorewall.org/
+(reference/debugging/about-debuginfod: line   14) ok        https://releases.ubuntu.com/
+(how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64: line   54) redirect  https://releases.ubuntu.com/20.04.5/ubuntu-20.04.5-live-server-amd64.iso - permanently to https://old-releases.ubuntu.com/releases/20.04.5/ubuntu-20.04.5-live-server-amd64.iso
+(explanation/software/third-party-repository-usage: line   45) ok        https://snapcraft.io/store
+(how-to/security/install-openvpn: line  441) ok        https://snapcraft.io/easy-openvpn-server
+(how-to/observability/install-logwatch: line    5) broken    https://sourceforge.net/projects/logwatch/ - 403 Client Error: Forbidden for url: https://sourceforge.net/projects/logwatch/
+(explanation/intro-to/mail-services: line   13) ok        https://snapcraft.io/install/thunderbird/ubuntu
+(tutorial/managing-software: line   42) ok        https://snapcraft.io/multipass
+(explanation/intro-to/sssd: line    4) ok        https://sssd.io/
+(how-to/security/smart-card-authentication: line  279) ok        https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html
+(explanation/intro-to/high-availability: line  135) ok        https://sourceware.org/lvm2/
+(reference/debugging/about-debuginfod: line    4) ok        https://sourceware.org/elfutils/Debuginfod.html
+(contributing/submit-contribution: line   48) ok        https://sphinxext-rediraffe.readthedocs.io/en/latest/
+(how-to/virtualisation/ubuntu-on-hyper-v: line   25) ok        https://support.microsoft.com/en-us/windows/upgrade-windows-home-to-windows-pro-ef34d520-e73f-3198-c525-d1a218cc2818
+(how-to/security/smart-card-authentication: line  279) ok        https://sssd.io/design-pages/matching_and_mapping_certificates.html
+(how-to/security/smart-card-authentication: line  205) ok        https://sssd.io/docs/introduction.html
+(explanation/performance/perf-tune-tuned: line   12) ok        https://tuned-project.org/
+(explanation/software/advance-testing-of-updates-in-best-practice-server-deployments: line   14) ok        https://ubuntu-archive-team.ubuntu.com/pending-sru.html
+(how-to/sssd/with-active-directory: line  290) redirect  https://technet.microsoft.com/en-us/library/cc759550%28v=ws.10%29.aspx - permanently to https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759550(v=ws.10)?redirectedfrom=MSDN
+(how-to/software/upgrade-your-release: line    8) ok        https://ubuntu.com/about/release-cycle
+(explanation/software/changing-package-files: line   41) ok        https://systemd.io/
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) ok        https://ubuntu.com/aws/pro
+(explanation/security/openvpn-client-implementations: line   20) ok        https://tunnelblick.net
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) ok        https://ubuntu.com/azure/pro
+(reference/installation/system-requirements: line   19) ok        https://ubuntu.com/certified/servers
+(contributing/index: line   33) ok        https://ubuntu.com/community/ethos/code-of-conduct
+(           index: line   67) redirect  https://ubuntu.com/community/code-of-conduct - with Found to https://ubuntu.com/community/ethos/code-of-conduct
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) ok        https://ubuntu.com/gcp/pro
+(how-to/virtualisation/ubuntu-on-hyper-v: line   94) ok        https://ubuntu.com/download/server
+(contributing/index: line   52) ok        https://ubuntu.com/legal/contributors/agreement
+(explanation/virtualisation/container-tools-in-the-ubuntu-space: line   18) redirect  https://ubuntu.com/lxd - with Found to https://canonical.com/lxd
+(how-to/virtualisation/libvirt: line   61) ok        https://ubuntu.com/openstack
+(contributing/index: line   52) ok        https://ubuntu.com/legal/contributors
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) redirect  https://ubuntu.com/public-cloud - with Found to https://ubuntu.com/cloud/public-cloud
+(tutorial/managing-software: line 1389) redirect  https://snapcraft.io/docs/quickstart-tour - with Found to https://snapcraft.io/docs/get-started
+(explanation/intro-to/security: line   30) ok        https://ubuntu.com/security
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) redirect  https://ubuntu.com/security/certifications - with Found to https://ubuntu.com/security/compliance-automation
+(explanation/intro-to/security: line   35) ok        https://ubuntu.com/pro
+(explanation/software/third-party-repository-usage: line   39) broken    https://ubuntu.com/core/services/guide/snaps-intro - 404 Client Error:  for url: https://ubuntu.com/core/services/guide/snaps-intro
+(explanation/intro-to/security: line   68) ok        https://ubuntu.com/security/certifications/docs
+(explanation/intro-to/security: line   68) ok        https://ubuntu.com/security/certifications/docs/disa-stig
+(explanation/security/security_suggestions: line  182) ok        https://ubuntu.com/security/compliance-automation
+(explanation/intro-to/security: line   48) ok        https://ubuntu.com/security/cves/about
+(explanation/intro-to/security: line   78) ok        https://ubuntu.com/security/disclosure-policy
+(explanation/intro-to/security: line   55) ok        https://ubuntu.com/security/esm
+(tutorial/attach-your-ubuntu-pro-subscription: line    4) ok        https://ubuntu.com/security/fips
+(explanation/intro-to/security: line   60) ok        https://ubuntu.com/security/livepatch
+(           index: line   71) ok        https://ubuntu.com/server
+(           index: line   74) ok        https://ubuntu.com/server/contact-us?product=server
+(explanation/intro-to/security: line   68) ok        https://ubuntu.com/security/certifications/docs/fips
+(explanation/intro-to/security: line   68) ok        https://ubuntu.com/security/certifications/docs/usg
+(how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x: line  203) redirect  https://ubuntu.com/server/docs/install/autoinstall-reference - with Found to https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html
+(how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x: line  203) redirect  https://ubuntu.com/server/docs/install/autoinstall-schema - with Found to https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html
+(how-to/networking/dpdk-with-open-vswitch: line    5) redirect  https://ubuntu.com/server/docs/network-dpdk - with Found to https://ubuntu.com/server/docs/about-dpdk
+(how-to/networking/dpdk-with-open-vswitch: line   22) redirect  https://ubuntu.com/server/docs/network-dpdk/#heading--unassign-default-kernel-drivers - with Found to https://ubuntu.com/server/docs/about-dpdk
+(how-to/samba/print-server: line    6) redirect  https://ubuntu.com/server/docs/samba-file-server - with Found to https://ubuntu.com/server/docs/samba-as-a-file-server
+(tutorial/basic-installation: line   45) ok        https://ubuntu.com/search?q=%22create+a+bootable+USB+stick%22
+(           index: line   68) ok        https://ubuntu.com/support/community-support
+(explanation/software/changing-package-files: line  153) ok        https://ubuntu.com/tutorials/beginning-apparmor-profile-development
+(how-to/samba/print-server: line   12) redirect  https://ubuntu.com/server/docs/service-cups - with Found to https://ubuntu.com/server/docs/install-and-configure-a-cups-print-server
+(how-to/samba/print-server: line    8) redirect  https://ubuntu.com/server/docs/samba-share-access-control - with Found to https://ubuntu.com/server/docs/share-access-controls
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   20) ok        https://virgil3d.github.io/
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   50) ok        https://virt-manager.org/
+(explanation/software/changing-package-files: line  126) redirect  https://ubuntu.com/server/docs/security-apparmor - with Found to https://ubuntu.com/server/docs/apparmor
+(how-to/kerberos/kerberos-encryption-types: line   18) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html#encryption-types
+(how-to/kerberos/kerberos-encryption-types: line   18) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html#keysalt-lists
+(tutorial/basic-installation: line   45) redirect  https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu - with Found to https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu
+(how-to/kerberos/kerberos-encryption-types: line  109) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/krb5_conf.html#libdefaults
+(how-to/kerberos/kerberos-encryption-types: line   73) broken    https://web.mit.edu/kerberos/krb5-latest/doc/admin/database.html#add-principal - Anchor 'add-principal' not found
+(how-to/kerberos/kerberos-with-openldap-backend: line  336) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_ldap.html#conf-ldap
+(how-to/kerberos/kerberos-with-openldap-backend: line   15) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/dbtypes.html#ldap-module-kldap
+(how-to/kerberos/kerberos-with-openldap-backend: line    4) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/dbtypes.html
+(how-to/kerberos/kerberos-encryption-types: line  162) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html
+(how-to/kerberos/kerberos-encryption-types: line  163) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#configuration-variables
+(how-to/kerberos/kerberos-encryption-types: line  158) ok        https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#migrating-away-from-older-encryption-types
+(how-to/kerberos/kerberos-encryption-types: line  167) ok        https://web.mit.edu/kerberos/krb5-latest/doc/basic/index.html
+(how-to/security/apparmor: line  273) ok        https://wiki.debian.org/AppArmor
+(how-to/security/smart-card-authentication: line    7) ok        https://ubuntu.com/tutorials/how-to-use-smart-card-authentication-in-ubuntu-desktop#1-overview
+(how-to/samba/apparmor-profile: line   45) ok        https://wiki.debian.org/AppArmor/HowToUse
+(explanation/software/third-party-repository-usage: line   68) ok        https://wiki.debian.org/DebianRepository/UseThirdParty
+(how-to/security/install-openvpn: line  442) ok        https://wiki.debian.org/OpenVPN
+(tutorial/managing-software: line   99) ok        https://wiki.debian.org/AptCLI
+(how-to/mail-services/install-postfix: line  360) ok        https://wiki.debian.org/Postfix
+(how-to/mail-services/install-postfix: line  360) ok        https://wiki.debian.org/Postfix/Tutorials
+(how-to/samba/member-server-in-an-ad-domain: line  240) redirect  https://wiki.samba.org - permanently to https://wiki.samba.org/index.php/Main_Page
+(explanation/intro-to/AD-integration: line   33) ok        https://wiki.samba.org/index.php/Idmap_config_rid
+(explanation/intro-to/AD-integration: line   34) ok        https://wiki.samba.org/index.php/Idmap_config_autorid
+(how-to/samba/openldap-backend-legacy: line  273) ok        https://wiki.samba.org/index.php/Main_Page
+(how-to/samba/member-server-in-an-ad-domain: line    8) ok        https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member
+(how-to/virtualisation/libvirt: line  154) broken    https://wiki.libvirt.org/page/FAQ#What_is_the_difference_between_qemu:.2F.2F.2Fsystem_and_qemu:.2F.2F.2Fsession.3F_Which_one_should_I_use.3F - Anchor 'What_is_the_difference_between_qemu%3A.2F.2F.2Fsystem_and_qemu%3A.2F.2F.2Fsession.3F_Which_one_should_I_use.3F' not found
+(explanation/intro-to/AD-integration: line   32) ok        https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member#Choosing_an_idmap_backend
+(how-to/samba/provision-samba-ad-controller: line    6) ok        https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller#Using_the_Domain_Controller_as_a_File_Server_(Optional)
+(how-to/virtualisation/enable-nested-virtualisation: line   91) ok        https://wiki.openstack.org/wiki/LibvirtXMLCPUModel
+(how-to/installation/how-to-netboot-the-server-installer-on-amd64: line   18) ok        https://wiki.syslinux.org/wiki/index.php?title=PXELINUX
+(how-to/security/openssh-server: line  323) ok        https://wiki.ubuntu.com/AdvancedOpenSSH
+(explanation/software/about-apt-upgrade-and-phased-updates: line  110) ok        https://wiki.ubuntu.com/ErrorTracker/PhasedUpdates
+(reference/debugging/debug-symbol-packages: line    7) ok        https://wiki.ubuntu.com/Backtrace
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  271) ok        https://wiki.ubuntu.com/OpenStack/CloudArchive
+(how-to/software/report-a-bug: line  152) ok        https://wiki.ubuntu.com/Apport
+(how-to/virtualisation/libvirt: line  173) ok        https://wiki.ubuntu.com/QemuKVMMigration
+(explanation/virtualisation/upgrading-the-machine-type-of-your-vm: line   86) ok        https://wiki.ubuntu.com/QemuKVMMigration#Upgrade_machine_type
+(how-to/virtualisation/ubuntu-on-hyper-v: line   77) ok        https://wiki.ubuntu.com/LTS
+(explanation/software/about-apt-upgrade-and-phased-updates: line   71) ok        https://wiki.ubuntu.com/PhasedUpdates
+(tutorial/attach-your-ubuntu-pro-subscription: line    6) ok        https://wiki.ubuntu.com/Membership
+(explanation/software/advance-testing-of-updates-in-best-practice-server-deployments: line   22) ok        https://wiki.ubuntu.com/Testing/EnableProposed
+(how-to/security/firewalls: line  322) ok        https://wiki.ubuntu.com/UncomplicatedFirewall
+(explanation/software/config-managers: line   15) redirect  https://www.ansible.com/ - permanently to https://www.redhat.com/en/ansible-collaborative?intcmp=7015Y000003t7aWQAQ
+(how-to/backups/install-bacula: line  204) ok        https://www.bacula.org/documentation/documentation/
+(explanation/intro-to/mail-services: line   17) ok        https://www.authsmtp.com/sendmail/index.html
+(how-to/software/upgrade-your-release: line   18) ok        https://wiki.ubuntu.com/Releases
+(reference/debugging/debug-symbol-packages: line    7) ok        https://wiki.ubuntu.com/Valgrind
+(explanation/software/config-managers: line   26) ok        https://www.chef.io/solutions/configuration-management
+(explanation/virtualisation/qemu-microvm: line   43) ok        https://www.busybox.net/
+(tutorial/managing-software: line  711) ok        https://www.debian.org/doc/debian-policy/ap-pkg-conffiles.html#automatic-handling-of-configuration-files-by-dpkg
+(explanation/active-directory/identity-mapping-idmap-backends: line   15) ok        https://www.debian.org/doc/debian-policy/ch-opersys.html#uid-and-gid-classes
+(tutorial/managing-software: line  391) ok        https://www.debian.org/doc/debian-policy/ch-relationships.html#binary-dependencies-depends-recommends-suggests-enhances-pre-depends
+(explanation/intro-to/high-availability: line   59) redirect  https://www.clusterlabs.org/pacemaker/ - permanently to https://clusterlabs.org/projects/pacemaker/
+(explanation/software/third-party-repository-usage: line  123) ok        https://www.debian.org/doc/manuals/debian-reference/ch02.en.html#_tweaking_candidate_version
+(how-to/software/package-management: line   66) ok        https://www.debian.org/doc/user-manuals#apt-guide
+(how-to/software/package-management: line  342) broken    https://www.debian.org/doc/user-manuals#aptitude-guide - Anchor 'aptitude-guide' not found
+(explanation/intro-to/mail-services: line   29) ok        https://www.dovecot.org/
+(explanation/intro-to/networking: line   36) ok        https://www.dpdk.org/
+(explanation/intro-to/mail-services: line   22) ok        https://www.exim.org/
+(how-to/containers/docker-for-system-admins: line  438) ok        https://www.fluentd.org
+(how-to/containers/docker-for-system-admins: line  438) redirect  https://www.elastic.co/products/logstash - temporarily to https://www.elastic.co/logstash
+(explanation/crypto/openssl: line  309) ok        https://www.feistyduck.com/library/openssl-cookbook/online/openssl-command-line/understanding-security-levels.html
+(explanation/software/changing-package-files: line   92) redirect  https://www.freedesktop.org/software/systemd/man/systemd.service.html - with Found to https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html
+(explanation/networking/about-time-synchronisation: line   39) redirect  https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html# - with Found to https://www.freedesktop.org/software/systemd/man/latest/systemd-timesyncd.service.html
+(how-to/security/install-openvpn: line  153) redirect  https://www.freedesktop.org/software/systemd/man/systemd.unit.html - with Found to https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html
+(explanation/networking/about-time-synchronisation: line   38) redirect  https://www.freedesktop.org/software/systemd/man/timedatectl.html - with Found to https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html
+(explanation/crypto/gnutls: line   70) ok        https://www.gnutls.org/manual/html_node/Disabling-algorithms-and-protocols.html
+(explanation/crypto/gnutls: line  274) ok        https://www.gnutls.org/manual/html_node/System_002dwide-configuration-of-the-library.html
+(how-to/wireguard-vpn/site-to-site: line   47) ok        https://www.ietf.org/rfc/rfc3021.txt
+(how-to/containers/docker-for-system-admins: line  438) redirect  https://www.graylog.org/ - permanently to https://graylog.org/
+(explanation/crypto/bind-9-dnssec-cryptography-selection: line  148) ok        https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml
+(explanation/networking/about-dhcp: line   46) ok        https://www.isc.org/blogs/isc-dhcp-eol/
+(explanation/networking/about-dhcp: line   51) ok        https://www.isc.org/kea/
+(explanation/intro-to/high-availability: line   68) ok        https://www.keepalived.org/
+(explanation/performance/perf-tune-cpupower: line   22) ok        https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   20) ok        https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt
+(explanation/crypto/java-cryptography-configuration: line  240) ok        https://www.java.com/en/configure_crypto.html
+(how-to/virtualisation/libvirt: line  206) ok        https://www.kernel.org/doc/Documentation/vfio.txt
+(how-to/virtualisation/libvirt: line  294) ok        https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt
+(how-to/virtualisation/libvirt: line  247) ok        https://www.kernel.org/doc/Documentation/vm/transhuge.txt
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   42) ok        https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html?highlight=iommu
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   42) ok        https://www.kernel.org/doc/html/latest/arch/x86/iommu.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  205) ok        https://www.kernel.org/doc/html/latest/driver-api/vfio-mediated-device.html
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line  274) broken    https://www.kernel.org/doc/html/latest/s390/vfio-ccw.html - 404 Client Error: Not Found for url: https://www.kernel.org/doc/html/latest/s390/vfio-ccw.html
+(how-to/virtualisation/libvirt: line  272) ok        https://www.kernel.org/doc/html/v5.4/admin-guide/kernel-parameters.html
+(how-to/virtualisation/libvirt: line  292) ok        https://www.kernel.org/doc/html/v5.4/vm/numa.html
+(explanation/networking/about-dhcp: line   63) redirect  https://www.isc.org/software/dhcp - permanently to https://www.isc.org/dhcp/
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   34) ok        https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/
+(how-to/graphics/gpu-virtualization-with-qemu-kvm: line   20) ok        https://www.kraxel.org/blog/2016/09/using-virtio-gpu-with-libvirt-and-spice/
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   10) ok        https://www.linux-kvm.org/page/Main_Page
+(explanation/intro-to/databases: line    4) ok        https://www.mysql.com/
+(contributing/contrib-types: line   48) redirect  https://www.mermaidchart.com/app/dashboard - with Found to https://www.mermaidchart.com/app/login?redirect=%2Fapp%2Fdashboard
+(how-to/databases/install-mysql: line  176) ok        https://www.mysql.com/products/enterprise/backup.html
+(how-to/observability/install-nagios: line  204) ok        https://www.nagios.org/
+(how-to/observability/use-nagios-with-munin: line  262) ok        https://www.nagios.org/documentation/
+(explanation/performance/perf-pgo: line  204) ok        https://ubuntu.com/blog/profile-guided-optimization-a-case-study
+(how-to/observability/install-nagios: line  208) redirect  https://www.nagios.org/propaganda/books/ - permanently to https://www.nagios.org/about/propaganda/books-2/
+(how-to/graphics/install-nvidia-drivers: line   10) ok        https://www.nvidia.com/en-us/drivers/unix/
+(how-to/openldap/install-openldap: line   11) ok        https://www.openldap.org/software/man.cgi?query=slapd
+(explanation/crypto/openssh-crypto-configuration: line  162) ok        https://www.openssh.com/manual.html
+(how-to/networking/serve-ntp-with-chrony: line  297) redirect  https://www.networktimesecurity.org/ - permanently to https://web.archive.org/web/20241130024605/http://networktimesecurity.org/
+(how-to/security/openssh-server: line  106) ok        https://www.openssh.com/txt/release-8.2
+(explanation/crypto/openssl: line  305) ok        https://www.openssl.org
+(explanation/security/certificates: line  170) ok        https://www.openssl.org/
+(how-to/openldap/replication: line  119) redirect  https://www.openldap.org/its/index.cgi/?findid=8125 - permanently to https://bugs.openldap.org/show_bug.cgi?id=8125
+(explanation/crypto/openssl: line   52) redirect  https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html - permanently to https://docs.openssl.org/3.0/man1/openssl-ciphers/
+(explanation/crypto/openssl: line   76) broken    https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#TLS-v1.3-cipher-suites - Anchor 'TLS-v1.3-cipher-suites' not found
+(explanation/crypto/openssl: line  150) broken    https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT - Anchor 'CIPHER-LIST-FORMAT' not found
+(explanation/crypto/openssl: line  308) redirect  https://www.openssl.org/docs/man3.0/man3/SSL_CTX_set_security_level.html - permanently to https://docs.openssl.org/3.0/man3/SSL_CTX_set_security_level/
+(how-to/backups/install-gitolite: line   92) broken    https://www.packtpub.com/hardware-and-creative/gitolite-essentials - 404 Client Error: Not Found for url: https://www.packtpub.com/hardware-and-creative/gitolite-essentials
+(explanation/intro-to/mail-services: line   17) ok        https://www.postfix.org/
+(how-to/databases/install-postgresql: line   34) ok        https://www.postgresql.org/docs/
+(how-to/web-services/install-php: line    4) ok        https://www.php.net/
+(how-to/databases/install-postgresql: line  146) redirect  https://www.postgresql.org/docs/current/static/runtime-config-replication.html - permanently to https://www.postgresql.org/docs/current/runtime-config-replication.html
+(explanation/software/config-managers: line   38) ok        https://www.puppet.com/
+(how-to/databases/install-postgresql: line  146) redirect  https://www.postgresql.org/docs/current/static/high-availability.html - permanently to https://www.postgresql.org/docs/current/high-availability.html
+(explanation/intro-to/databases: line    4) ok        https://www.postgresql.org/
+(explanation/networking/networking-key-concepts: line   60) ok        https://www.rfc-editor.org/rfc/rfc792
+(explanation/intro-to/samba: line    6) ok        https://www.samba.org
+(how-to/samba/openldap-backend-legacy: line  271) ok        https://www.samba.org/samba/docs/
+(how-to/samba/file-server: line   22) ok        https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html
+(how-to/samba/file-server: line   22) ok        https://www.samba.org/samba/docs/old/Samba3-HOWTO/
+(how-to/samba/share-access-controls: line   80) ok        https://www.samba.org/samba/docs/old/Samba3-HOWTO/AccessControls.html
+(how-to/samba/nt4-domain-controller-legacy: line  200) ok        https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-bdc.html
+(how-to/samba/nt4-domain-controller-legacy: line  198) ok        https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-pdc.html
+(how-to/samba/share-access-controls: line   78) ok        https://www.samba.org/samba/docs/old/Samba3-HOWTO/securing-samba.html
+(how-to/virtualisation/qemu: line   36) ok        https://www.qemu.org/documentation/
+(explanation/virtualisation/qemu-microvm: line   23) ok        https://www.qemu.org/docs/master/system/i386/microvm.html
+(contributing/writing-guidance: line   16) ok        https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html
+(explanation/virtualisation/qemu-microvm: line  147) ok        https://www.seabios.org/SeaBIOS
+(explanation/web-services/about-web-servers: line   10) redirect  https://www.ubuntu.com - permanently to https://ubuntu.com/
+(explanation/web-services/about-web-servers: line   16) redirect  https://www.ubuntu.com/community - permanently to https://ubuntu.com/community
+(explanation/intro-to/mail-services: line   10) redirect  https://www.thunderbird.net/ - with Found to https://www.thunderbird.net/en-US/
+(reference/debugging/about-debuginfod: line   16) ok        https://www.sourceware.org/gdb/
+(explanation/virtualisation/vm-tools-in-the-ubuntu-space: line   18) ok        https://www.qemu.org/
+(explanation/web-services/about-web-servers: line   36) ok        https://www.w3.org/Protocols/rfc2616/rfc2616-sec6.html#sec6.1.1
+(reference/other-tools/pam-motd: line   33) ok        https://www.weather.gov/tg/siteloc
+(how-to/wireguard-vpn/common-tasks: line  144) ok        https://www.wireguard.com/install/
+(explanation/intro-to/wireguard-vpn: line   27) ok        https://www.wireguard.com/protocol/
+(explanation/intro-to/wireguard-vpn: line  169) ok        https://www.wireguard.com
+(explanation/intro-to/wireguard-vpn: line  170) ok        https://www.wireguard.com/quickstart/
+(how-to/containers/lxd-containers: line   14) redirect  https://www.youtube.com/c/LXDvideos - with Found to https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Fc%2FLXDvideos%3Fcbrd%3D1&gl=FR&m=0&pc=yt&cm=2&hl=fr&src=1
+(explanation/intro-to/ebpf: line  333) redirect  https://www.youtube.com/live/byPpJW5l6pg?t=30314s - with Found to https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Flive%2FbyPpJW5l6pg%3Ft%3D30314s%26cbrd%3D1&gl=FR&m=0&pc=yt&cm=2&hl=fr&src=1
+(explanation/dnssec/dnssec: line  251) timeout   https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en - HTTPSConnectionPool(host='www.icann.org', port=443): Read timed out. (read timeout=30)
+rediraffe: Redirect generation skipped for linkcheck builders.
+build finished with problems, 2 warnings.

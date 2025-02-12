@@ -106,12 +106,12 @@ AllowedIPs = 10.10.11.0/24,10.10.10.0/24
 We have given this laptop the `10.10.11.2/24` address. It could have been any valid address in the `10.10.11.0/24` network, as long as it doesn't collide with an existing one, and is allowed in the router's peer's `AllowedIPs` list.
 
 > **Note**:
-> You may have noticed by now that address allocation is manual, and not via something like DHCP. Keep tabs on it!
+> You may have noticed by now that address allocation is manual, and not via something like {term}`DHCP`. Keep tabs on it!
 
 In the `[Peer]` stanza for the laptop we have:
 
 - The usual **`PublicKey`** item, which identifies the peer. Traffic to this peer will be encrypted using this public key.
-- **`Endpoint`**: this tells WireGuard where to actually send the encrypted traffic to. Since in our scenario the laptop will be initiating connections, it has to know the public IP address of the home router. If your ISP gave you a fixed IP address, great! You have nothing else to do. If, however, you have a dynamic IP address (one that changes every time you establish a new connection), then you will have to set up some sort of dynamic DNS service. There are many such services available for free on the Internet, but setting one up is out of scope for this guide.
+- **`Endpoint`**: this tells WireGuard where to actually send the encrypted traffic to. Since in our scenario the laptop will be initiating connections, it has to know the public IP address of the home router. If your ISP gave you a fixed IP address, great! You have nothing else to do. If, however, you have a dynamic IP address (one that changes every time you establish a new connection), then you will have to set up some sort of dynamic {term}`DNS` service. There are many such services available for free on the Internet, but setting one up is out of scope for this guide.
 - In **`AllowedIPs`** we list our destinations. The VPN network `10.10.11.0/24` is listed so that we can ping `wg0` on the home router as well as other devices on the same VPN, and the actual home network, which is `10.10.10.0/24`. 
 
 If we had used `0.0.0.0/0` alone in `AllowedIPs`, then the VPN would become our default gateway, and all traffic would be sent to this peer. See {ref}`Default Gateway <using-the-vpn-as-the-default-gateway>` for details on that type of setup.

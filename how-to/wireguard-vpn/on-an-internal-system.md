@@ -3,7 +3,7 @@
 
 Sometimes it's not possible to install WireGuard {ref}`on the home router itself <wireguard-vpn-peer-to-site-on-router>`. Perhaps it's a closed system to which you do not have access, or there is no easy build for that architecture, or any of the other possible reasons.
 
-However, you do have a spare system inside your network that you could use. Here we are going to show one way to make this work. There are others, but we believe this to be the least "involved" as it only requires a couple of (very common) changes in the router itself: NAT port forwarding, and DHCP range editing.
+However, you do have a spare system inside your network that you could use. Here we are going to show one way to make this work. There are others, but we believe this to be the least "involved" as it only requires a couple of (very common) changes in the router itself: NAT port forwarding, and {term}`DHCP` range editing.
 
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 

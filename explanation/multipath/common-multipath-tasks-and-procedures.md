@@ -93,7 +93,7 @@ This is greatly simplified by the use of UUIDs to identify devices with an intri
 ```{note}
 Whenever `multipath.conf` is updated, initrd should be updated as well by running:
 `update-initramfs -u -k all`
-The reason for this is that `multipath.conf` is copied to the RAM disk, and is integral to determining the available devices to map via its `denylist` and `devices` sections. 
+The reason for this is that `multipath.conf` is copied to the RAM disk, and is integral to determining the available devices to map via its `denylist`and `devices` sections. 
 ```
 
 ## The multipathd daemon

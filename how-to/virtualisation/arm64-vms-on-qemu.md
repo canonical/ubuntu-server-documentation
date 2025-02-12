@@ -20,7 +20,7 @@ sudo apt install qemu-system-arm
 
 ## Create necessary support files
 
-Next, create a VM-specific flash volume for storing NVRAM variables, which are necessary when booting EFI firmware:
+Next, create a VM-specific flash volume for storing NVRAM variables, which are necessary when booting {term}`EFI` firmware:
 
 ```bash
 truncate -s 64m varstore.img
