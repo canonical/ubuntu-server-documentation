@@ -8,7 +8,7 @@ that it's understood as such.
 
 ## Key concepts and terms
 
-- A **directory** is a tree of data **entries** that is hierarchical in nature; it is called the [Directory Information Tree (DIT)](https://documentation.ubuntu.com/server/reference/glossary/#term-DIT).
+- A **directory** is a tree of data **entries** that is hierarchical in nature; it is called the Directory Information Tree ({term}`DIT`).
 
 - An **entry** consists of a set of **attributes**.
 
