@@ -85,7 +85,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   ```
 
 - Let's create LDAP entries for the Kerberos administrative entities that will contact the OpenLDAP server to perform operations. There are two:
-  - **`ldap_kdc_dn`**: needs to have read rights on the realm container, principal container and realm sub-trees. If **`disable_last_success`** and **`disable_lockout`** are not set, however, then **`ldap_kdc_dn`** needs write access to the Kerberos container just like the admin DN below.
+  - **`ldap_kdc_dn`**: needs to have read rights on the realm container, principal container and realm sub-trees. If **`disable_last_success`** and **`disable_lockout`** are not set, however, then **`ldap_kdc_dn`** needs write access to the Kerberos container just like the admin {term}`DN` below.
   - **`ldap_kadmind_dn`**: needs to have read and write rights on the realm container, principal container and realm sub-trees
 
   Here is the command to create these entities:

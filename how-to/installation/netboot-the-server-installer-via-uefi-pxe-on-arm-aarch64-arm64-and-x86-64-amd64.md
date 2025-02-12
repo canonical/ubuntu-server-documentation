@@ -8,7 +8,7 @@ The process described here is applicable to both arm64 and amd64 architectures. 
 
 ## Configure TFTP
 
-This article assumes that you have set up your TFTP (and/or DHCP/bootp if necessary, depending on your LAN configuration) by following [the method described here](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510). You could also build your own TFTP in this way if your DNS and DHCP are already well configured:
+This article assumes that you have set up your TFTP (and/or {term}`DHCP`/bootp if necessary, depending on your LAN configuration) by following [the method described here](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510). You could also build your own TFTP in this way if your {term}`DNS` and DHCP are already well configured:
 
 ```
 $ sudo apt install tftpd-hpa
@@ -33,7 +33,7 @@ The following files are needed for this process:
 - Ubuntu live server image:
   - For arm64 architectures, the image name has the suffix `-arm64`. For example, `ubuntu-20.04.5-live-server-arm64.iso`.
   - For amd64 architectures, the image name has the suxxif `-amd64`. For example, `ubuntu-20.04.5-live-server-amd64.iso`.
-- GRUB EFI binary (and the corresponding `grub.cfg` text file):
+- GRUB {term}`EFI` binary (and the corresponding `grub.cfg` text file):
   - For arm64 architectures, this is called `grubnetaa64.efi.signed`.
   - For amd64 architectures, this is called `grubnetx64.efi.signed`.
 - `initrd` extracted from your target Ubuntu live server image (use `hwe-initrd` instead if you want to boot with the HWE kernel).

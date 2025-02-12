@@ -4,7 +4,7 @@
 This non-interactive installation uses ‘autoinstall’, which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by ‘…’, to limit the size of this document).
 
 The example logical partition (LPAR) here uses zFCP storage and is connected to a VLAN network.
-For a DASD and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) autoinstallation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
+For a {term}`DASD` and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) autoinstallation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
 
 * Start with the preparation of the (FTP) install server (if it doesn't already exist).
 

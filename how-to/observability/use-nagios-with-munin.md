@@ -57,7 +57,7 @@ There are a few directories containing Nagios configuration and check files.
     
   For example: `/usr/lib/nagios/plugins/check_dhcp -h`
 
-There are many checks Nagios can be configured to run for any particular host. In this example, Nagios will be configured to check disk space, DNS, and a MySQL host group. The DNS check will be on `server02`, and the MySQL host group will include both `server01` and `server02`.
+There are many checks Nagios can be configured to run for any particular host. In this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL host group. The DNS check will be on `server02`, and the MySQL host group will include both `server01` and `server02`.
 
 > **Note**:
 > See these additional guides for details on setting up {ref}`Apache <install-apache2>`, {ref}`Domain Name Service (DNS) <install-dns>`, and {ref}`MySQL <install-mysql>`.
@@ -247,7 +247,7 @@ Finally, in a browser go to `http://server01/munin`, and you should see links to
 
 ### Additional plugins
 
-The `munin-plugins-extra` package contains performance checks and additional services such as DNS, DHCP, Samba, etc. To install the package, from a terminal enter:
+The `munin-plugins-extra` package contains performance checks and additional services such as DNS, {term}`DHCP`, Samba, etc. To install the package, from a terminal enter:
 
 ```bash
 sudo apt install munin-plugins-extra

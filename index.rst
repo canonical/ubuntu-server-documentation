@@ -8,7 +8,7 @@ Ubuntu Server documentation
 **Ubuntu Server** is a version of the Ubuntu operating system designed and
 engineered as a backbone for the internet.
 
-Ubuntu Server brings economic and technical scalability to your datacentre,
+Ubuntu Server brings economic and technical scalability to your datacenter,
 public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.

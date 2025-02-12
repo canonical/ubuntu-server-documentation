@@ -32,7 +32,7 @@ olcAccess: {2}to dn.base="cn=Subschema" by * read
 ```
 
 > **Note**:
-> The Root DN always has full rights to its database and does not need to be included in any ACL.
+> The Root {term}`DN` always has full rights to its database and does not need to be included in any ACL.
 
 ## Interpreting the results
 
@@ -58,7 +58,7 @@ to attrs=shadowLastChange
 
 These ACLs enforce the following:
 
-- Anonymous 'auth' access is provided to the **userPassword** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the DIT is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
+- Anonymous 'auth' access is provided to the **userPassword** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the {term}`DIT` is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
 
 - The 'by self write' ACL grants write access to the **userPassword** attribute to users who authenticated as the DN where the attribute lives. In other words, users can update the **userPassword** attribute of their own entries.
 

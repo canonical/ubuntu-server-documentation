@@ -4,7 +4,7 @@
 QEMU microvm is a special case of virtual machine (VMs), designed to be
 optimised for initialisation speed and minimal resource use.
 
-The underlying concept of a mivrovm is based on giving up some capabilities of
+The underlying concept of a microvm is based on giving up some capabilities of
 standard QEMU in order to reduce complexity and gain speed. Maybe - for your
 use-case - you do not need e.g. the hypervisor to be able to pretend to have a
 network card from the 90s, nor to emulate a CPU of a foreign architecture,

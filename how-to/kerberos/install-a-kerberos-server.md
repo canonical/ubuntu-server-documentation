@@ -11,7 +11,7 @@ For this discussion, we will create an MIT Kerberos domain with the following fe
 
 ## Prerequisites
 
-Before installing the Kerberos server, a **properly configured DNS server** is needed for your domain. Since the Kerberos realm (by convention) matches the domain name, this section uses the `EXAMPLE.COM` domain configured in the primary server section of the {ref}`DNS documentation <install-dns>`.
+Before installing the Kerberos server, a properly configured {term}`DNS` server is needed for your domain. Since the Kerberos realm (by convention) matches the domain name, this section uses the `EXAMPLE.COM` domain configured in the primary server section of the {ref}`DNS documentation <install-dns>`.
 
 Also, Kerberos is a time sensitive protocol. If the local system time between a client machine and the server differs by more than five minutes (by default), the workstation will not be able to authenticate. To correct the problem all hosts should have their time synchronized using the same Network Time Protocol (NTP) server. Check out the {ref}`NTP chapter <about-time-synchronisation>` for more details.
 
