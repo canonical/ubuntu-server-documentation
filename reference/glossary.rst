@@ -120,6 +120,7 @@ Glossary
 
     bootloader
         *Work in Progress*
+
     bootp
         *Work in Progress*
 
@@ -767,6 +768,7 @@ Glossary
 
     ISC's
         *Work in Progress*
+
     iSCSI
         *Work in Progress*
 
