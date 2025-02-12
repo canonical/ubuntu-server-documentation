@@ -34,6 +34,12 @@ After editing `/etc/samba/smb.conf`, reload Samba for the changes to take effect
 ```bash
 sudo smbcontrol smbd reload-config
 ```
+You also need to add a user to Samba with the following command (an example for *Melissa*):
+
+```bash
+sudo smbpasswd -a melissa
+```
+And then provide a password.
 
 ## Filesystem permissions
 
