@@ -32,7 +32,7 @@ userPassword: {CRYPT}x
 Then add it with `ldapadd`:
 
 ```bash
-$ ldapadd -x -ZZ -D cn=admin,dc=example,dc=com -W -f replicator.ldif
+$ ldapadd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -f replicator.ldif
 Enter LDAP Password:
 adding new entry "cn=replicator,dc=example,dc=com"
 ```
@@ -40,11 +40,14 @@ adding new entry "cn=replicator,dc=example,dc=com"
 Now set a password for it with `ldappasswd`:
 
 ```bash
-$ ldappasswd -x -ZZ -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
+$ ldappasswd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
 New password:
 Re-enter new password:
 Enter LDAP Password:
 ```
+
+> **Note**:
+> Please adjust the server URI in the `-H` parameter if needed to match your deployment.
 
 The next step is to give this replication user the correct privileges, i.e.:
 
@@ -345,13 +348,13 @@ If your connection is slow and/or your LDAP database large, it might take a whil
 If the consumer's `contextCSN` is missing or does not match the provider, you should stop and figure out the issue before continuing. Try checking the `slapd` entries in `/var/log/syslog` in the provider to see if the consumer's authentication requests were successful, or that its requests to retrieve data return no errors. In particular, verify that you can connect to the provider from the consumer as the replicator BindDN using `START_TLS`:
 
 ```bash
-ldapwhoami -x -ZZ -D cn=replicator,dc=example,dc=com -W -h ldap01.example.com
+ldapwhoami -x -ZZ -H ldap://ldap01.example.com -D cn=replicator,dc=example,dc=com -W
 ```
 
 For our example, you should now see the `john` user in the replicated tree:
 
 ```bash
-$ ldapsearch -x -LLL -b dc=example,dc=com -h ldap02.example.com '(uid=john)' uid
+$ ldapsearch -x -LLL -H ldap://ldap02.example.com -b dc=example,dc=com '(uid=john)' uid
 dn: uid=john,ou=People,dc=example,dc=com
 uid: john
 ```
