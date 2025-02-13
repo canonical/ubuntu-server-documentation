@@ -14,25 +14,19 @@ Glossary
 
         Related topic(s): :term:`API`.
 
-    accesslog
-        An accesslog is a record of access events. Any request to a resource qualifies as an access event.
-
     ACL
-        ACL stands for Access Control List. An ACL is a list of access permissions that defines entities and their access rigths to resources. ACLs can specify access with varying levels of granularity, ranging from full access to a resource to permission for a specific operation.
+        ACL stands for Access Control List. An ACL is a list of access permissions that defines entities and their access rights to resources. ACLs can specify access with varying levels of granularity, ranging from full access to a resource, to permission for a specific operation.
 
         See `ACL <https://manpages.ubuntu.com/manpages/noble/man5/acl.5.html>`_ for more details.
 
         Related topic(s): Security, :term:`OpenLDAP`, and :term:`Kerberos`.
-
-    adapter
-        *Work in Progress*
 
     ADSys
         ADSys is an Ubuntu-specific Active Directory client developed by Canonical. ADSys complements System Security Services Daemon (SSSD) by adding native Group Policy Object support, privilege management, and custom scripts execution.
 
         See `ADSys <https://documentation.ubuntu.com/adsys/en/stable/>`_ for more details.
 
-        Related topic(s): :term:`SSSD` and :term:`Group Policy Object`.
+        Related topic(s): :term:`Group Policy Object` and :term:`SSSD`.
 
     AES
         AES stands for Advanced Encryption Standard. An AES is a symmetric encryption algorithm designed to encrypt data securely into an unreadable format that can only be decrypted with the same key used for encryption.
@@ -44,7 +38,7 @@ Glossary
 
         See `Alertmanager <https://prometheus.io/docs/alerting/latest/alertmanager/>`_ for more details.
 
-        Related topic(s): :term:`Prometheus`.
+        Related topic(s): Observability and :term:`Prometheus`.
 
     ALUA
         *Work in Progress*

@@ -183,7 +183,7 @@ Now you're done! The `dc=example,dc=com` tree should now be synchronising.
 
 The remaining provider configuration for delta replication is:
 
-- Create a new database called {term}`accesslog`
+- Create a new database called `accesslog`
 - Add the `syncprov` overlay on top of the `accesslog` and `dc=example,dc=com` databases
 - Add the `accesslog` overlay on top of the `dc=example,dc=com` database
 
