@@ -124,7 +124,7 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-${LINUX_FLAVOUR}
 
 (e.g. `linux-modules-nvidia-535-generic`)
 
-Check that the modules for your specific kernel/ABI were installed by the metapackage:
+Check that the modules for your specific kernel/{term}`ABI` were installed by the metapackage:
 
 ```bash
 sudo apt-cache policy linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)

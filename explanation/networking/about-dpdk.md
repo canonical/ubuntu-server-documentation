@@ -29,7 +29,7 @@ The newer VFIO-PCI requires that you activate the following kernel parameters to
 iommu=pt intel_iommu=on          
 ```
 
-Alternatively, on AMD:
+Alternatively, on {term}`AMD`:
 
 ``` 
 amd_iommu=pt

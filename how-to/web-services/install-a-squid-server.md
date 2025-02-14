@@ -68,7 +68,7 @@ If you want to use a different directory type please take a look at their differ
 
 Using Squid's access control, you can configure use of Squid-proxied Internet services to be available only to users with certain Internet Protocol (IP) addresses. For example, we will illustrate access by users of the `192.168.42.0/24` subnetwork only:
 
-* Add the following to the **bottom** of the ACL section of your `/etc/squid/squid.conf` file:
+* Add the following to the **bottom** of the {term}`ACL` section of your `/etc/squid/squid.conf` file:
    
    ```text
    acl fortytwo_network src 192.168.42.0/24

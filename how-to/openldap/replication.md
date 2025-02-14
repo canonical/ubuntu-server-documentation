@@ -18,7 +18,7 @@ The delta replication sends less data over the network, but is more complex to s
 
 ## Provider configuration - replication user
 
-Both replication strategies will need a replication user, as well as updates to the ACLs and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
+Both replication strategies will need a replication user, as well as updates to the {term}`ACL`s and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
 
 ```text
 dn: cn=replicator,dc=example,dc=com
