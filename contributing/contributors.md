@@ -7,8 +7,9 @@ sections below (organised alphabetically), there is a huge variety of fixes,
 content updates and improvements being made across the Ubuntu Server
 documentation. The most recently submitted PRs are at the top of each table.
 
-This documentation exists because of the efforts of everyone who has taken the
-time to create, maintain and improve it. Thank you to all of you!
+This documentation is a testament to the valued efforts of our community
+members who have invested their time in its creation, maintenance and
+improvement.
 
 ## Content updates
 
