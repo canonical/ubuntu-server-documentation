@@ -34,7 +34,7 @@ Also, if a clustered service cannot be stopped, a cluster can use fencing to for
 
 - An active counter-measure taken by a functioning host to isolate a misbehaving (usually dead) host from shared data.
 
-- A mechanism that is the **most critical** part of a cluster utilising SAN or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
+- Fencing is the **most critical** part of a cluster using SAN or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
 
 - Required by OCFS2, GFS2, cLVMd (before Ubuntu 20.04), lvmlockd (from 20.04 and beyond).
 
