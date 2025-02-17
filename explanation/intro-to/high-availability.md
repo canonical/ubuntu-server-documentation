@@ -144,7 +144,7 @@ The lvmlockd benefits over clvm are:<BR><BR>
 
 ## Upstream documentation
 
-The server guide cannot document every existing option for all the HA related software described in this page. It is only designed to document recommended scenarios for Ubuntu HA Clusters. More complete documentation can be found upstream at:
+The Server documentation is not intended to document every option for all the HA related software described in this page. More complete documentation can be found upstream at:
 
 - ClusterLabs
   - [Clusters From Scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Clusters_from_Scratch/index.html)
