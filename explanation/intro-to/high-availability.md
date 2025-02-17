@@ -28,7 +28,7 @@ A definition of high availability clusters [from Wikipedia:](https://en.wikipedi
 
 Fencing protects your data from being corrupted and prevents your application from becoming unavailable due to unintended concurrent access by rogue nodes. If a node is unresponsive doesn’t mean it has stopped accessing your data. The only way to be absolutely sure that your data is safe is to employ fencing, which establishes that the unresponsive node is completely offline before the data is accessed by another node.
 
-Also, if a clustered service cannot be stopped, a cluster can use fencing to force the whole node offline and making it safe to start the service elsewhere. The most popular example of fencing is cutting a host’s power.
+In cases where a clustered service cannot be stopped, a cluster can use fencing to force the whole node offline, making it safe to start the service elsewhere. The most popular example of fencing is cutting a host’s power.
 
 ### Key benefits of fencing
 
