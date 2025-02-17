@@ -1,7 +1,9 @@
 (introduction-to-crypto-libraries)=
 # Introduction to cryptographic libraries
 
-The cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. What an application developer decides to use can be governed by many aspects, such as:
+System administrators often need to determine which cryptographic algorithms are being used on their systems because they require the answers to many crypto-related questions, including the following: How do they ensure no legacy crypto systems are being used? How do they make sure that no keys below a certain size are selected or created? And which types of X509 certificates are acceptable for connecting to remote servers?
+
+However, the cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. When an application developer chooses a crypto library, they will consider many aspects, such as:
 
   * Technical requirements
   * Language bindings
@@ -11,7 +13,7 @@ The cryptographic library landscape is vast and complex, and there are many cryp
   * General availability
   * Upstream maintenance
 
-Among the most popular and widely used libraries and frameworks, we have:
+Among the most popular and widely used libraries and frameworks are:
 
   * OpenSSL
   * GnuTLS
@@ -21,56 +23,52 @@ Among the most popular and widely used libraries and frameworks, we have:
 
 Each one of these has its own implementation details, API, behavior, configuration file, and syntax.
 
-This poses a challenge to system administrators who need to determine what cryptographic algorithms are being used on the systems they deploy. How does one ensure no legacy crypto is being used? Or that no keys below a certain size are ever selected or created? And which types of X509 certificates are acceptable for connecting to remote servers?
+## Determining which libraries are being used by an application
 
-One has to check all of the crypto implementations installed on the system and their configuration. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
+Ultimately, the only reliable way to determine how an application uses cryptography is by reading its documentation or inspecting its source code. But even then, sysadmins may discover that the code is not available and sometimes the system documentation might lack this information. 
 
-## How do we know which library an application is using?
+Then the only way to find out these answers about crypto is for the sysadmin to go through a system and find out which crypto implementations are installed on the system and which configurations are being used. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
 
-Ultimately, the only reliable way to determine how an application uses cryptography is via its documentation or inspection of source code. But the code is not always available, and sometimes the documentation lacks this information. When the documentation isn't clear or enough, there are some other practical checks that can be made.
+If you are seeking crypto-related answers to sysadmin-related questions and are having problems, there are some practical checks that can be made depending on how your application uses crypto:
 
-First, let's take a look at how an application could use crypto.
+### Follow dynamic links
 
-### Dynamic linking
-
-This is the most common way, and very easy to spot via package dependencies and helper tools. This is discussed later in this page.
+This is the most common way, and very easy to spot via package dependencies and helper tools. A detailed example of this approach to determining crypto is discussed later in this page.
  
-### Static linking
+### Check static linking
 
-This is harder, as there is no dependency information in the binary package, and this usually requires inspection of the source package to see Build Dependencies. An example is shown later in this page.
+This is harder, as there is no dependency information in the binary package, and this usually requires inspection of the source package to see build dependencies. A detailed example of this approach is shown later in this page.
 
-### Plugins
+### Look at the plugins
 
 The main binary of an application can not depend directly on a crypto library, but it could load dynamic plugins which do. Usually these would be packaged separately, and then we fall under the dynamic or static linking cases above. Note that via such a plugin mechanism, an application could depend on multiple external cryptographic libraries.
 
-### Execution of external binary
+### Examine the execution of external binaries
 
 The application could just plain call external binaries at runtime for its cryptographic operations, like calling out to `openssl` or `gnupg` to encrypt/decrypt data. This will hopefully be expressed in the dependencies of the package. If it's not, then it's a bug that should be reported.
 
-### Indirect usage
+### Indirect usage of libraries or executables
 
 The application could be using a third party library or executable which in turn could fall into any of the above categories.
 
-## Identify the crypto libraries used by an application
+## Additional information for identifying crypto libraries
 
-Here are some tips that can help identifying the crypto libraries used by an application that is installed on an Ubuntu system:
+Here are some more specific tips for identifying the crypto libraries used by an application on an Ubuntu system:
 
-### Documentation
+### Check documentation more carefully
 
-Read the application documentation. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also clarify if the application even uses external crypto libraries, or if it has its own implementation.
+Look at the application documentation again. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also provide you with assistance if the application uses external crypto libraries or if it has its own implementation of crypto.
 
-### Package dependencies
+### Use dpkg to check package dependencies (with example)
 
-The package dependencies are a good way to check what is needed at runtime by the application.
-
-To find out the package that owns a file, use `dpkg -S`. For example:
+Since package dependencies are a good way to check what is needed at runtime by the application, you can find out which package owns what file with the `dpkg -S` command. For example:
 
 ```bash
 $ dpkg -S /usr/bin/lynx
 lynx: /usr/bin/lynx
 ```
 
-Then, with the package name in hand, check its dependencies. It's best to also look for `Recommends`, as they are installed by default. Continuing with the example from before, we have:
+Now that you have the package's name in hand, check the package's dependencies and look for `Recommends`, as they are installed by default. Continuing with the current example, we can now do the following:
 
 ```bash
 $ dpkg -s lynx | grep -E "^(Depends|Recommends)"
@@ -78,13 +76,13 @@ Depends: libbsd0 (>= 0.0), libbz2-1.0, libc6 (>= 2.34), libgnutls30 (>= 3.7.0), 
 Recommends: mime-support
 ```
 
-Here we see that `lynx` links with `libgnutls30`, which answers our question: `lynx` uses the GnuTLS library for its cryptography operations.
+Now we can see that `lynx` links with `libgnutls30`, which answers our question: `lynx` uses the GnuTLS library for its cryptography operations.
 
-### Dynamic linking, plugins
+### Using ldd to list dynamic libraries (with example)
 
-The dynamic libraries that are needed by an application should always be correctly identified in the list of dependencies of the application package. When that is not the case, or if you need to identify what is needed by some plugin that is not part of the package, you can use some system tools to help identify the dependencies.
+If an dynamic library is needed by an application, it should always be correctly identified in the list of dependencies for the application package. When that is not the case, or you need to identify what is needed by some plugin that is not part of the package, you can use some system tools to help identify the dependencies.
 
-A very helpful tool that is installed in all Ubuntu systems is `ldd`. It will list all the dynamic libraries that are needed by the given binary, including dependencies of dependencies, i.e. it's recursive. Going back to the `lynx` example:
+In this situation, you can employ `ldd`, which is installed in all Ubuntu systems and will list all the dynamic libraries that are needed by the given binary, including dependencies of dependencies, i.e. the command is recursive. Going back to the `lynx` example:
 
 ```bash
 $ ldd /usr/bin/lynx
@@ -110,7 +108,7 @@ $ ldd /usr/bin/lynx
 
 We again see the GnuTLS library (via `libgnutls.so.30`) in the list, and can reach the same conclusion.
 
-Another way to check for such dependencies, but without the recursion, is via `objdump`. This may need to be installed via the `binutils` package, as it's not mandatory.
+Another way to check for such dependencies but without recursion, is via `objdump`. You may need to be install it with the `binutils` package, as it's not mandatory.
 
 The way to use it is to grep for the `NEEDED` string:
 
@@ -150,21 +148,21 @@ lynx => /usr/bin/lynx (interpreter => /lib64/ld-linux-x86-64.so.2)
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
 ```
 
-### Static linking
+### Check package headers for static linking (with example)
 
 Identifying which libraries were used in a static build is a bit more involved. There are two ways, and they are complementary most of the time:
 
 * look for the `Built-Using` header in the binary package
 * inspect the `Build-Depends` header in the source package
 
-For example, let's try to discover which crypto libraries, if any, the `rclone` tool uses. First, let's try the packaging dependencies:
+For example, let's try to discover which crypto libraries, if any, the `rclone` tool uses for an example application. First, let's try the packaging dependencies:
 
 ```bash
 $ dpkg -s rclone | grep -E "^(Depends|Recommends)"
 Depends: libc6 (>= 2.34)
 ```
 
-Uh, that's a short list. But `rclone` definitely supports encryption, so what is going on? Turns out this is a tool written in the Go language, and that uses static linking of libraries. So let's try to inspect the package data more carefully, and this time look for the `Built-Using` header:
+Yes, that's a short list. But `rclone` definitely supports encryption, so what is going on? Turns out this is a tool written in the Go language, and that uses static linking of libraries. So let's try to inspect the package data more carefully, and this time look for the `Built-Using` header:
 
 ```bash
 $ dpkg -s rclone | grep Built-Using
@@ -185,7 +183,7 @@ Source: golang-go.crypto
 
 ## What's next?
 
-Now that you have uncovered which library your application is using, the following guides will help you to understand the associated configuration files and what options you have available (including some handy examples!).
+Once you have uncovered which library your application is using, the following guides may help you to understand the associated configuration files and what options you have available (including some handy examples).
 
 * {ref}`OpenSSL guide <openssl>` 
 * {ref}`GnuTLS guide <gnutls>`
