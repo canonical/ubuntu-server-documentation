@@ -101,14 +101,7 @@ Lastly, we would like to thank you for spending your time to help make the
 Ubuntu Server documentation better. Every step in the right direction is a step
 worth taking, no matter how large or small.
 
-Our contributors
-----------------
-
-Thanks to **SecondSkoll**, who has styled our PDF and added the ability to
-build it locally:
-
-* PR: `Fix PDF build issues <https://github.com/canonical/ubuntu-server-documentation/pull/9>`_
-* PR: `Adds entrypoint for local PDF generation <https://github.com/canonical/ubuntu-server-documentation/pull/10>`_
+Check out what :ref:`our contributors <contributors>` have been working on!
 
 .. toctree::
    :maxdepth: 1
@@ -121,6 +114,7 @@ build it locally:
    writing-guidance.rst
    submit-contribution.rst
    get-help.rst
+   contributors
 
 .. LINKS
 .. _Code of Conduct: https://ubuntu.com/community/ethos/code-of-conduct
