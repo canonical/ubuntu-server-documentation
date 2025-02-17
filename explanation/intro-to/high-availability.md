@@ -42,7 +42,7 @@ In cases where a clustered service cannot be stopped, a cluster can use fencing 
 
 This section will only describe the most important upstream high availability related projects that are included in Ubuntu Linux. There are many other HA projects that are available to Ubuntu.
 
-Theses key HA packages are present in the latest Ubuntu LTS release:
+The following packages are present in the latest Ubuntu LTS release:
 
 ### Ubuntu HA core packages
 
