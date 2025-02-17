@@ -154,4 +154,4 @@ The Server documentation is not intended to document every option for all the HA
 - Other
   - [Ubuntu Bionic HA in Shared Disk Environments (Azure)](https://discourse.ubuntu.com/t/ubuntu-high-availability-corosync-pacemaker-shared-disk-environments/14874)
 
-> A very special thanks and all the credit to [ClusterLabs Project](https://clusterlabs.org/) for the detailed documentation.
+> A very special thanks and all the credit to [ClusterLabs Project](https://clusterlabs.org/) for their detailed documentation.
