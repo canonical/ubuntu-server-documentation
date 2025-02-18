@@ -10,7 +10,7 @@ Multipathing aggregates the I/O paths, creating a new device that consists of th
 Multipath can be used to provide:
 
 - **Redundancy**
-  Multipath provides failover in an active/passive configuration. In an active/passive configuration, only half the paths are used at any time for I/O. If any element of an I/O path (the cable, switch, or controller) fails, multipath switches to an alternate path.
+  Multipath provides {term}`failover` in an active/passive configuration. In an active/passive configuration, only half the paths are used at any time for I/O. If any element of an I/O path (the cable, switch, or controller) fails, multipath switches to an alternate path.
 
 - **Improved performance**
   Multipath can be configured in active/active mode, where I/O is spread over the paths in a round-robin fashion. In some configurations, multipath can detect loading on the I/O paths and dynamically re-balance the load.
@@ -115,7 +115,7 @@ You can use the resulting LVM physical device when you create an LVM volume grou
 If you try to create an LVM physical volume on a whole device on which you have configured partitions, the `pvcreate` command will fail.
 ```
 
-When you create an LVM logical volume that uses active/passive multipath arrays as the underlying physical devices, you should include filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and fallback whenever LVM scans the passive path if these devices are not filtered.
+When you create an LVM logical volume that uses active/passive multipath arrays as the underlying physical devices, you should include filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and {term}`fallbacks` whenever LVM scans the passive path if these devices are not filtered.
 
 For active/passive arrays that require a command to make the passive path active, LVM prints a warning message when this occurs. To filter all SCSI devices in the LVM configuration file (`lvm.conf`), include the following filter in the devices section of the file:
 

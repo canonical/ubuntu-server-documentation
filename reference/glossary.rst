@@ -462,10 +462,11 @@ Glossary
         A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
 
     failover
-        *Work in Progress*
+        In a storage area network (SAN) environment, this occurs when data flows into an alternative I/O path because a cable, switch, or controller in the current path failed.
+        It is a common feature in high availability environments and is handled (usually automatically) by multipathing software.
 
     fallbacks
-        *Work in Progress*
+        This is a manual or automatic switch to an alternative method, when the primary option fails or is less preferred.
 
     FastCGI
         *Work in Progress*
