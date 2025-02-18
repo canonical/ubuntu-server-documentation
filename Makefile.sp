@@ -54,7 +54,7 @@ sp-install: $(VENVDIR)
 	command -v distro-info || (sudo apt-get update; sudo apt-get install --assume-yes distro-info)
 
 sp-run: sp-install
-	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) --host 0.0.0.0
 
 # Doesn't depend on $(BUILDDIR) to rebuild properly at every run.
 sp-html: sp-install
