@@ -204,7 +204,7 @@ If you want to use a different storage driver based on your specific requirement
 }
 ```
 
-The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/storage/storagedriver/) for more information. Keep in mind that this is a JSON file and all lines should end with a comma (`,`) except the last one.
+The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/storage/storagedriver/) for more information. Keep in mind that this is a {term}`JSON` file and all lines should end with a comma (`,`) except the last one.
 
 Before changing the configuration above and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, device mapper) is mounted in `/var/lib/docker`. Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem backing `/var/lib/docker` a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
 
@@ -432,7 +432,7 @@ The following storage drivers are available (at the time of writing):
 
  * **json-file**: it is the default logging driver. It writes logs in a file in JSON format.
  * **local**: write logs to an internal storage that is optimised for performance and disk use.
- * **journald**: send logs to systemd journal.
+ * **{term}`journald`**: send logs to systemd journal.
  * **syslog**: send logs to a syslog server.
  * **logentries**: send container logs to the [Logentries](https://logentries.com/) server.
  * **gelf**: write logs in a Graylog Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).

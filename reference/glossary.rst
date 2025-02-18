@@ -810,13 +810,24 @@ Glossary
         *Work in Progress*
 
     jitter
-        *Work in Progress*
+        Jitter is the variation in delay or latency between when data packets are sent and when they are received over a network, causing irregular arrival times at the destination. This variation is often caused by network congestion, packet loss, poor hardware performance or differences in the path packets take. 
+
+        Related topic(s): :term:`Chrony`.
 
     journald
-        *Work in Progress*
+        Journald is a logging driver that sends container logs to the systemd journal. 
+
+        See `journald <https://docs.docker.com/engine/logging/drivers/journald/>`_ for more details.
+
+        Related topic(s): :term:`Docker`.
 
     JSON
-        *Work in Progress*
+        **JavaScript Object Notation**:
+        This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. JSON is a syntax for serializing objects, arrays, numbers, strings, booleans and null, and is a subset of the JavaScript syntax. Due to its simplicity, it is an ideal lightweight data interchange language. 
+
+        See `JSON <https://www.json.org/json-en.html/>`_ for more details.
+
+        Related topic(s): Ubuntu Server & :term:`Docker`.
 
     KDC
         *Work in Progress*
