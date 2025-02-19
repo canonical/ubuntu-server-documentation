@@ -812,22 +812,21 @@ Glossary
     jitter
         Jitter is the variation in delay or latency between when data packets are sent and when they are received over a network, causing irregular arrival times at the destination. This variation is often caused by network congestion, packet loss, poor hardware performance or differences in the path packets take. 
 
-        Related topic(s): :term:`Chrony`.
+        Related topic(s): Networking.
 
     journald
-        Journald is a logging driver that sends container logs to the systemd journal. 
+        Journald, also known as systemd-journald, is a logging service developed by the systemd project as part of the systemd suite. It collects and stores log messages from various sources, including systemd services, kernel messages, system logs, and application logs. Journald stores logs in a binary format offering advantages, such as storage efficiency, searchability, and most especially structured logging. In containerized systems like Docker, it functions as a logging driver for containers. 
 
-        See `journald <https://docs.docker.com/engine/logging/drivers/journald/>`_ for more details.
+        See `manpage for journald.conf <https://manpages.ubuntu.com/manpages/noble/man5/journald.conf.5.html/>`_ for more information.
+        See the `Docker journald documentation <https://docs.docker.com/engine/logging/drivers/journald/>`_ for details on using journald as a logging driver.
 
-        Related topic(s): :term:`Docker`.
+        Related topic(s): logging and :term:`Docker`.
 
     JSON
         **JavaScript Object Notation**:
-        This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. JSON is a syntax for serializing objects, arrays, numbers, strings, booleans and null, and is a subset of the JavaScript syntax. Due to its simplicity, it is an ideal lightweight data interchange language. 
+        This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. Due to its simplicity, it is an ideal lightweight data interchange language.
 
         See `JSON <https://www.json.org/json-en.html/>`_ for more details.
-
-        Related topic(s): Ubuntu Server & :term:`Docker`.
 
     KDC
         *Work in Progress*
