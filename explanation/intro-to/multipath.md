@@ -10,7 +10,7 @@ Multipathing aggregates the I/O paths, creating a new device that consists of th
 Multipath can be used to provide:
 
 - **Redundancy**
-  Multipath provides failover in an active/passive configuration. In an active/passive configuration, only half the paths are used at any time for I/O. If any element of an I/O path (the cable, switch, or controller) fails, multipath switches to an alternate path.
+  Multipath provides {term}`failover` in an active/passive configuration. In an active/passive configuration, only half the paths are used at any time for I/O. If any element of an I/O path (the cable, switch, or controller) fails, multipath switches to an alternate path.
 
 - **Improved performance**
   Multipath can be configured in active/active mode, where I/O is spread over the paths in a round-robin fashion. In some configurations, multipath can detect loading on the I/O paths and dynamically re-balance the load.
@@ -52,7 +52,7 @@ Without multipath, each path from a server node to a storage controller is treat
 
 Each multipath device has a World Wide Identifier (WWID), which is guaranteed to be globally unique and unchanging. By default, the name of a multipath device is set to its WWID. Alternatively, you can set the `user_friendly_names` option in `multipath.conf`, which causes multipath to use a **node-unique alias** of the form `mpathn` as the name.
 
-For example, a node with two host bus adapters (HBAs) attached to a storage controller, with two ports, via a single un-zoned FC switch sees four devices:  `/dev/sda`, `/dev/sdb`, `/dev/sdc`, and `/dev/sdd`. Multipath creates a single device with a unique WWID that reroutes I/O to those four underlying devices according to the multipath configuration.
+For example, a node with two host bus adapters (HBAs) attached to a storage controller, with two ports, via a single un-zoned {term}`FC` switch sees four devices:  `/dev/sda`, `/dev/sdb`, `/dev/sdc`, and `/dev/sdd`. Multipath creates a single device with a unique WWID that reroutes I/O to those four underlying devices according to the multipath configuration.
 
 When the `user_friendly_names` configuration option is set to 'yes', the name of the multipath device is set to `mpathn`. When new devices are brought under the control of multipath, the new devices may be seen in two different places under the `/dev` directory: `/dev/mapper/mpathn` and `/dev/dm-n`.
 
@@ -115,7 +115,7 @@ You can use the resulting LVM physical device when you create an LVM volume grou
 If you try to create an LVM physical volume on a whole device on which you have configured partitions, the `pvcreate` command will fail.
 ```
 
-When you create an LVM logical volume that uses active/passive multipath arrays as the underlying physical devices, you should include filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and fallback whenever LVM scans the passive path if these devices are not filtered.
+When you create an LVM logical volume that uses active/passive multipath arrays as the underlying physical devices, you should include filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and {term}`fallbacks` whenever LVM scans the passive path if these devices are not filtered.
 
 For active/passive arrays that require a command to make the passive path active, LVM prints a warning message when this occurs. To filter all SCSI devices in the LVM configuration file (`lvm.conf`), include the following filter in the devices section of the file:
 
