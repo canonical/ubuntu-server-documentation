@@ -26,23 +26,22 @@ A definition of high availability clusters [from Wikipedia:](https://en.wikipedi
 
 ## Fencing
 
-Fencing protects your data from being corrupted and prevents your application from becoming unavailable due to unintended concurrent access by rogue nodes. If a node is unresponsive doesn’t mean it has stopped accessing your data. The only way to be absolutely sure that your data is safe is to employ fencing, which establishes that the unresponsive node is completely offline before the data is accessed by another node.
+Fencing protects your data from being corrupted, and prevents your application from becoming unavailable, due to unintended concurrent access by rogue nodes. If a node is unresponsive, it doesn’t mean it has stopped accessing your data. The only way to be absolutely sure your data is safe is to use fencing, which ensures that the unresponsive node is truly offline before the data can be accessed by another node.
 
 In cases where a clustered service cannot be stopped, a cluster can use fencing to force the whole node offline, making it safe to start the service elsewhere. The most popular example of fencing is cutting a host’s power.
 
 - An active counter-measure taken by a functioning host to isolate a misbehaving (usually dead) host from shared data.
 
-- Fencing is the **most critical** part of a cluster using SAN or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
+- Fencing is the **most critical** part of a cluster using Storage Area Network (SAN) or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
 
 - Required by OCFS2, GFS2, cLVMd (before Ubuntu 20.04), lvmlockd (from 20.04 and beyond).
 
 ## Linux High Availability projects
 
-This section will only describe the most important upstream high availability related projects that are included in Ubuntu Linux. There are many other HA projects that are available to Ubuntu.
-
+There are many upstream high availability related projects that are included in Ubuntu Linux. This section will describe the most important ones.
 The following packages are present in the latest Ubuntu LTS release:
 
-### Ubuntu HA core packages
+### Main Ubuntu HA packages
 
 Packages in this list are supported just like any other package available in the  **[main] repository**:
 
@@ -87,11 +86,11 @@ Packages in this list are supported just like any other package available in the
 
 - **gfs2-utils** - Global File System 2 - filesystem tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
 
-- **Keepalived** - Provides simple and robust facilities for load balancing and high-availability to Linux system and Linux based infrastructures. The load balancing framework relies on well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module which provides Layer4 loadbalancing. It implements a set of checkers to dynamically and adaptively maintain and manage a load balanced server pool according to their health, while high-availability is achieved by the [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
+- **Keepalived** - Provides simple and robust facilities for load balancing and high-availability to Linux systems and Linux based infrastructures. The load balancing framework relies on the well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module which provides Layer4 loadbalancing. It implements a set of checkers to dynamically and adaptively maintain and manage a load balanced server pool according to their health, while high-availability is achieved by the [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
 
 ### Ubuntu HA community packages
 
-The HA packages in this list are supported just like any other package available in the **[universe] repository**  would be.
+The HA packages in this list are supported just like any other package available in the **[universe] repository**.
 
 | Package | URL |
 |-|-|
@@ -134,7 +133,7 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 
 A distributed lock manager (DLM) is used to broker concurrent LVM metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a need to lock a particular set of objects.
 <br>**[lvmlockd](http://manpages.ubuntu.com/manpages/man8/lvmlockd.8.html)** - supported after **Ubuntu 20.04**
-As of 2017, a stable LVM component that is designed to replace  `clvmd`  by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.<BR>
+As of 2017, a stable LVM component that is designed to replace  `clvmd` by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.<BR>
 The lvmlockd benefits over clvm are:<BR><BR>
   - lvmlockd supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
   - lvmlockd has better design than clvmd. clvmd is command-line level based locking system, which means the whole LVM software will get hang if any LVM command gets dead-locking issue.
