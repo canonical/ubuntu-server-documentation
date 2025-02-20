@@ -30,8 +30,6 @@ Fencing protects your data from being corrupted and prevents your application fr
 
 In cases where a clustered service cannot be stopped, a cluster can use fencing to force the whole node offline, making it safe to start the service elsewhere. The most popular example of fencing is cutting a host’s power.
 
-### Key benefits of fencing
-
 - An active counter-measure taken by a functioning host to isolate a misbehaving (usually dead) host from shared data.
 
 - Fencing is the **most critical** part of a cluster using SAN or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
@@ -130,8 +128,10 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 | tgt OR targetcli-fb* | [Ubuntu](https://launchpad.net/ubuntu/+source/tgt) \| [Upstream](https://github.com/fujita/tgt)
 | lvm2 | [Ubuntu](https://launchpad.net/ubuntu/+source/lvm2) \| [Upstream](https://sourceware.org/lvm2/)
 
-* **LVM2** in a Shared-Storage Cluster Scenario:*
-<BR>**CLVM** - supported before **Ubuntu 20.04**
+**LVM2** in a Shared-Storage Cluster Scenario
+
+**CLVM** - supported before **Ubuntu 20.04**
+
 A distributed lock manager (DLM) is used to broker concurrent LVM metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a need to lock a particular set of objects.
 <br>**[lvmlockd](http://manpages.ubuntu.com/manpages/man8/lvmlockd.8.html)** - supported after **Ubuntu 20.04**
 As of 2017, a stable LVM component that is designed to replace  `clvmd`  by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.<BR>
