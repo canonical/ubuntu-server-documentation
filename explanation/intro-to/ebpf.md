@@ -51,13 +51,12 @@ available in every Ubuntu Server installation by default as part of our efforts
 to [enhance the application developer's and sysadmin's experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).
 
-In Ubuntu, the BPF Compiler Collection (BCC) and  `bpftrace` identify
-bottlenecks, investigate performance degradation, trace specific function calls, 
-or create custom monitoring tools to collect data on specific kernel or user-space 
-processes without disrupting running services.
+In Ubuntu, the BCC identifies bottlenecks, investigates performance degradation, traces
+specific function calls, and creates custom monitoring tools to collect data on specific 
+kernel or user-space processes without disrupting running services.
 
-Both `bpftrace` and `bpfcc-tools` install sets of tools with 
-functionalities. Apart from the `bpftrace` tool itself, you can fetch
+Both `bpftrace` and `bpfcc-tools` install sets of tools to handle these
+different functionalities. Apart from the `bpftrace` tool itself, you can fetch
 a comprehensive list of these tools with the following command:
 
 ```bash
@@ -159,8 +158,8 @@ switching may be required. Furthermore, if you need to monitor a system
 to produce this answer, especially on a host running many VMs, `strace` 
 quickly reaches its limits.
 
-Instead, `opensnoop` could be used to trace `open()` syscalls. In this case,
-we could use `opensnoop-bpfcc` to have more parameters to tune it to our 
+Instead, you can use `opensnoop` could be used to trace `open()` syscalls. In this case,
+we use `opensnoop-bpfcc` to have more parameters to tune it to our 
 needs. The example will use the following arguments:
 
 * `--full-path` - Show full path for open calls using a relative path.
@@ -193,7 +192,7 @@ Of course the QEMU process opens plenty of things: shared libraries, config
 files, entries in `/{sys,dev,proc}`, and much more. But with `opensnoop-bpfcc`,
 we can see them all as they happen across the whole system.
 
-### Discovering which particular kind of file is loading
+### Focusing on a particular type of file that is loading
 
 Imagine you only wanted to verify which `.bin` files this is loading. Of course, 
 we could just use `grep` on the output, but this whole section is showing 
