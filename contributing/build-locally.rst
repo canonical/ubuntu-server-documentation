@@ -83,9 +83,9 @@ will give update the preview to show your changes (or warn you if something has
 gone horribly wrong!).
 
 If you are building locally on an Ubuntu Cloud VM or a container, you may experience issues accessing the page from a browser. To 
-resolve this, include `--host 0.0.0.0` in the `sp-run` section of the `Makefile.sp` file.
+resolve this, include ``--host 0.0.0.0`` in the ``sp-run`` section of the ``Makefile.sp`` file.
 
-.. code-block:: sp
+.. code-block::
 
    sp-run: sp-install
 	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) --host 0.0.0.0
