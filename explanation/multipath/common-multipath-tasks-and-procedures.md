@@ -84,7 +84,7 @@ size=1.0G features='0' hwhandler='1 alua' wp=rw
   `- 8:0:0:2 sdd 8:48 active ready running
 ```
 
-Make sure to run `resize2fs /dev/mapper/mpathb` to resize the filesystem.
+Make sure to run `resize2fs /dev/mapper/mpathb` to resize the {term}`filesystem`.
 
 ## Move root file system from a single path device to a multipath device
 

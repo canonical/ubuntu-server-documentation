@@ -36,7 +36,7 @@ There are a few common ways adapt a workload to match this:
 - Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
   feature set, not as generally capable but sufficient for a particular use case.
 - Even the fastest bootloader is slower than no bootloader, so often
-  the kernel is directly passed from the host filesystem.
+  the kernel is directly passed from the host {term}`filesystem`.
   A drawback of this solution is the fact that the guest system will not have
   control over the kernel anymore, thus restricting what can be done inside the
   guest system.

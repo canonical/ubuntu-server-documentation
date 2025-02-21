@@ -478,20 +478,20 @@ Glossary
     FHS
         Filesystem Hierarchy Standard (FHS) is a standard that defines the directory structure and contents in Linux and Unix-like operating systems.
 
-    filebug
-        *Work in Progress*
-
     FileSet
-        *Work in Progress*
+        A FileSet defines a group of directories that will be included when performing a backup job using {term}`Bacula`.
+
+        Related topic(s): :term:`Storage <storages>`
 
     filesystem
-        *Work in Progress*
+        A filesystem defines how data is organized, stored, and accessed on a storage device.
 
-    FIPS
-        *Work in Progress*
+        Related topic(s): :term:`Storage <storages>`
 
     Fluentd
-        *Work in Progress*
+        Fluentd is a data collection platform that gathers events from a container for later analysis on other platforms.
+
+        Related topic(s): Observability, and Containers.
 
     FQDN
         *Work in Progress*

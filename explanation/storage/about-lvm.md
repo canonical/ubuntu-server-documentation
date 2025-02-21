@@ -11,7 +11,7 @@ There are 3 concepts that LVM manages:
 
 * **Physical volumes**: correspond to disks. They represent the lowest abstraction level of LVM, and are used to create a volume group.
 * **Volume groups**: are collections of physical volumes. They are pools of disk space that logical volumes can be allocated from.
-* **Logical volumes**: correspond to partitions – they usually hold a filesystem. Unlike partitions though, they can span multiple disks (because of the way volume groups are organised) and do not have to be physically contiguous.
+* **Logical volumes**: correspond to partitions – they usually hold a {term}`filesystem`. Unlike partitions though, they can span multiple disks (because of the way volume groups are organised) and do not have to be physically contiguous.
 
 ## Resizing partitions
 

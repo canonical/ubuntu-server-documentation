@@ -117,7 +117,7 @@ This section shows how to back up specific directories on a single host to a loc
   * Change `backupserver` to the actual host name.
   * Make sure the **Password** directive matches the password string in `/etc/bacula/bacula-sd.conf`.
 
-- Create a new **FileSet** -- this will define which directories to backup -- by adding:
+- Create a new **{term}`FileSet`** -- this will define which directories to backup -- by adding:
   ```text
   # LocalhostBacup FileSet.
   FileSet {

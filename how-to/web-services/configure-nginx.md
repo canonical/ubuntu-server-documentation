@@ -30,7 +30,7 @@ server {
 }
 ```
 
-Even for a single-site configuration, while you can place your website at `/var/www/html`, you may want to place the website's files at a different location in your filesystem. For example, if you were hosting `www.my-site.org` from `/srv/my-site/html` you might edit the above file to look like this:
+Even for a single-site configuration, while you can place your website at `/var/www/html`, you may want to place the website's files at a different location in your {term}`filesystem`. For example, if you were hosting `www.my-site.org` from `/srv/my-site/html` you might edit the above file to look like this:
 
 ```text
 server {

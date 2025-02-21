@@ -91,7 +91,7 @@ Packages in this list are supported just like any other package available in  **
 
 - **DLM** - A distributed lock manager (DLM) runs in every machine in a cluster, with an identical copy of a cluster-wide lock database. In this way   DLM provides software applications which are distributed across a cluster on multiple machines with a means to synchronize their accesses to shared resources. 
 
-- **gfs2-utils** - Global File System 2 - filesystem tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
+- **gfs2-utils** - Global File System 2 - {term}`filesystem` tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
 
 - **Keepalived** - Keepalived provides simple and robust facilities for loadbalancing and high-availability to Linux system and Linux based infrastructures. Loadbalancing framework relies on well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module providing Layer4 loadbalancing. Keepalived implements a set of checkers to dynamically and adaptively maintain and manage loadbalanced server pool according their health. On the other hand high-availability is achieved by [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
 
