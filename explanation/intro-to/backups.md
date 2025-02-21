@@ -16,7 +16,7 @@ There are many ways to back up an Ubuntu installation. On Ubuntu, two primary wa
 
 ### Backup utilities
 
-The easiest way to create backups is to use dedicated tools like [Bacula](http://www.bacula.org/) or [rsnapshot](https://rsnapshot.org/). These tools have easy-to-use interface or CLI to help simplify the backup management process. They have powerful features such as automation, compression, data recovery, encryption and incremental backups.
+The easiest way to create backups is to use dedicated tools like [Bacula](http://www.bacula.org/) or [rsnapshot](https://rsnapshot.org/). These tools have easy-to-use interfaces or a CLI to help simplify the backup management process. They have powerful features such as automation, compression, data recovery, encryption and incremental backups.
 
 * **Bacula**
   Bacula's advanced features and support for additional customization make it a good choice for enterprise systems or users with complex needs. Bacula can manage backups of multiple systems over a network. Bacula uses incremental backups which only store changes made since the last backup. This can significantly decrease storage space needs and backup time. 
