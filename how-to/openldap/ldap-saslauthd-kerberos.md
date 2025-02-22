@@ -182,31 +182,12 @@ sudo systemctl start saslauthd
 ```
 ## Configure OpenLDAP
 
-The OpenLDAP service needs its own Kerberos principal.
+SASL needs to know what password check method to use and where to find saslauthd socket. This can be done using the SASL config file for slapd.
 ```bash
-sudo kadmin -p ubuntu/admin
-Authenticating as principal ubuntu/admin with password.
-Password for ubuntu/admin@EXAMPLE.COM
-kadmin: addprinc -randkey ldap/ldap-server.example.com
-No policy specified for ldap/ldap-server.example.com@EXAMPLE.COM; defaulting to no policy
-Principal "ldap/ldap-server.example.com@EXAMPLE.COM" created.
-kadmin: ktadd -k /etc/ldap/ldap.keytab ldap/ldap-server.example.com
-Entry for principal ldap/ldap-server.example.com with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab WRFILE:/etc/ldap/ldap.keytab.
-Entry for principal ldap/ldap-server.example.com with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/etc/ldap/ldap.keytab.
-kadmin: q
-```
-The permissions of the keytab file need to be secure. Change the group and permissions to allow the slapd process to read the file.
-```bash
-sudo chown root:openldap /etc/ldap/ldap.keytab
-sudo chmod 640 /etc/ldap/ldap.keytab
-```
-OpenLDAP needs to know where to look for the keytab file, what password check method to use, and where to find saslauthd socket. This can be done using the sasl config file for the slapd.
-```bash
-sudo vi usr/lib/sasl2/slapd.conf
+sudo vi /etc/ldap/sasl2/slapd.conf
 ```
 Add this to the file.
 ```text
-keytab: /etc/ldap/ldap.keytab
 pwcheck_method: saslauthd
 saslauthd_path: /var/run/saslauthd/mux
 ```
