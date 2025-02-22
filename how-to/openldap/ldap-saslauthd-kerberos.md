@@ -165,9 +165,10 @@ Make these changes.
 #
 # Example: MECHANISMS="pam"
 MECHANISMS="kerberos5"
-START=yes
 ...
 ```
+> **Note**:
+> For Ubuntu version 22.04 and earlier "START=yes" must also be added to the default config file to have sasauthd restart after rebooting.
 ## Enable and start saslauthd
 Continue by enabling the saslauthd service.
 
