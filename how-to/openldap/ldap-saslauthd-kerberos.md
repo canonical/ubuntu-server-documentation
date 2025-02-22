@@ -180,6 +180,19 @@ The final step for saslauthd is to start the saslauthd service.
 ```bash
 sudo systemctl start saslauthd
 ```
+## Test saslauthd configuration
+saslauthd can be tested with with `testsaslauthd`. For example:
+
+```bash
+testsaslauthd -u ubuntu -p ubuntusecret
+0: OK "Success."
+```
+And with the wrong kerberos password:
+```bash
+testsaslauthd -u ubuntu -p ubuntusecretwrong
+0: NO "authentication failed"
+```
+
 ## Configure OpenLDAP
 
 SASL needs to know what password check method to use and where to find saslauthd socket. This can be done using the SASL config file for slapd.
@@ -240,6 +253,9 @@ A failed bind will look like
 ```text
 ldap_bind: Invalid credentials (49)
 ```
+## Troubleshooting
+
+
 
 These LDAP users can now be used with external applications that only support "simple" username and password authentication.
 
