@@ -25,29 +25,19 @@ Next a principal who will be querying Kerberos is needed. The default for saslau
 ## Check the hostname
 Get the hostname from the server
 ```bash
-hostname
+hostname -f
 ```
 Which should give you the hostname of:
 ```text
-ldap-server
+ldap-server.example.com
 ```
-Next check what nslookup gives as the full canonical name
-```bash
-nslookup ldap-server
-```
-Which should look something like this.
-```text
-Non-authoritative answer:
-Name:   ldap-server.example.com
-Address: (your IP)
-```
-Finally, check the hostname and domain using a reverse lookup.
+Also check the hostname and domain using a reverse lookup.
 ```bash
 nslookup (your IP)
 ```
 Check the name in the reply
 ```text
-(PI ruoy).in-addr.arpa      name = ldap-server.example.com. (PI ruoy) is (your IP) in reverse
+(Your ip).in-addr.arpa      name = ldap-server.example.com. (your IP) will be in reverse here
 ```
 If the result is the same as your host's canonical name them all is well. If the domain is missing, the [Fully Qualified Domain Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN) can be entered in the `/etc/hosts` file.
 ```bash
