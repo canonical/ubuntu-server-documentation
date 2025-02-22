@@ -8,7 +8,6 @@ All the following configuration will be on `ldap-server.example.com`.
 > **Note**:
 > This process is not the same as using [Generic Security Services Application Programming Interface](https://www.openldap.org/doc/admin26/sasl.html#GSSAPI) (GSSAPI) to log into the LDAP server.
 > Rather it is using [simple authentication](https://www.openldap.org/doc/admin26/security.html#%22simple%22%20method) with the OpenLDAP server so this should be over a [Transport Layer Security](https://datatracker.ietf.org/wg/tls/documents/) (TLS) connection.
-> This process also does not require the Kerberos backend to be OpenLDAP server, the default Keberberos backend if sufficient.
 > The test user we will be using is `ubuntu@EXAMPLE.COM` which must exist in the Kerberos database
 
 
