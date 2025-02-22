@@ -36,7 +36,7 @@ nslookup (your IP)
 ```
 Check the name in the reply
 ```text
-(Your ip).in-addr.arpa      name = ldap-server.example.com. (your IP) will be in reverse here
+(Your IP).in-addr.arpa      name = ldap-server.example.com. (your IP) will be in reverse here
 ```
 If the result is the same as your host's canonical name them all is well. If the domain is missing, the [Fully Qualified Domain Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN) can be entered in the `/etc/hosts` file.
 ```bash
@@ -187,7 +187,7 @@ saslauthd can be tested with with `testsaslauthd`. For example:
 testsaslauthd -u ubuntu -p ubuntusecret
 0: OK "Success."
 ```
-And with the wrong kerberos password:
+And with the wrong Kerberos password:
 ```bash
 testsaslauthd -u ubuntu -p ubuntusecretwrong
 0: NO "authentication failed"
@@ -245,7 +245,7 @@ ldapwhoami -D uid=ubuntu,ou=People,dc=example,dc=com -W -x
 Enter LDAP Password:
 dn:uid=ubuntu,ou=People,dc=example,dc=com
 ```
-A successfull bind will look like
+A successful bind will look like
 ```text
 dn:uid=ubuntu,ou=People,dc=example,dc=com
 ```
@@ -253,11 +253,35 @@ A failed bind will look like
 ```text
 ldap_bind: Invalid credentials (49)
 ```
-## Troubleshooting
-
-
-
 These LDAP users can now be used with external applications that only support "simple" username and password authentication.
+
+## Troubleshooting
+Saslauthd can be run in debug mode for more verbose messages to aid in troubleshooting
+```bash
+sudo systemctl stop saslauthd
+sudo /usr/sbin/saslauthd -a kerberos5 -d -m /var/run/saslauthd -n 1
+```
+Also the `/var/log/auth.log` file can be checked for saslauthd log entries
+
+## Advanced options
+Saslauthd can be configured in the `/etc/saslauthd.conf` file. The settings depend on the authorization mechanism configured in `/etc/default/saslauthd`,
+which in this case is `kerberos5`.
+
+Some options are:
+`krb5_keytab` which can override the default keytab file location of `/etc/krb5.keytab` and
+`krb5_verify_principal` which changes the kerberos principle doing the verifying from `host`.
+
+Example
+```bash
+sudo vi /etc/saslauthd.conf
+```
+Change the keytab and principal
+```text
+krb5_keytab: /etc/saslauthd.keytab
+krb5_verify_principal: saslauthd
+```
+
+
 
 ## References
 
