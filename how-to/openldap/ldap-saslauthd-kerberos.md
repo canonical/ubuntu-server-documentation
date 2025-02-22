@@ -219,6 +219,11 @@ gidNumber: 10050
 memberUid: ubuntu
 LDIF
 ```
+## How the simple bind will work
+When the simple bind is requested for user ubuntu, OpenLDAP will look for the password in the userPassword field.
+In this case the field tells OpenLDAP to use SASL to verify the password. SASL then looks to see what method should be queried for the password verification and in this case will use saslauthd.
+SASL then sends the username and password to saslauthd and here saslauthd is configured to use Kerberos. The password is then checked with the Kerberos server. Saslauthd passes back the
+result to SASL which in turn passes it back to OpenLDAP which finally returns the result to the calling client.
 
 ## Test the user
 Test the ubuntu user using using ldapwhoami
@@ -227,6 +232,15 @@ ldapwhoami -D uid=ubuntu,ou=People,dc=example,dc=com -W -x
 Enter LDAP Password:
 dn:uid=ubuntu,ou=People,dc=example,dc=com
 ```
+A successfull bind will look like
+```text
+dn:uid=ubuntu,ou=People,dc=example,dc=com
+```
+A failed bind will look like
+```text
+ldap_bind: Invalid credentials (49)
+```
+
 These LDAP users can now be used with external applications that only support "simple" username and password authentication.
 
 ## References
