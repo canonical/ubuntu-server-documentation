@@ -240,23 +240,7 @@ LDIF
 ```
 
 ## Test the user
-Test the new user with ldapsearch.
-```bash
-ldapsearch -D uid=ubuntu,ou=People,dc=example,dc=com -W -x
-```
-The reply should begin like this.
-```text
-Enter LDAP Password:
-# extended LDIF
-#
-# LDAPv3
-# base <dc=example,dc=com> (default) with scope subtree
-# filter: (objectclass=*)
-# requesting: ALL
-#
-...
-```
-If you see search results then it worked, confirm using ldapwhoami
+Test the ubuntu user using using ldapwhoami
 ```bash
 ldapwhoami -D uid=ubuntu,ou=People,dc=example,dc=com -W -x
 Enter LDAP Password:
