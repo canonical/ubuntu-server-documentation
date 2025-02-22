@@ -271,7 +271,7 @@ network:
           addresses: [1.1.1.1, 8.8.8.8, 4.4.4.4]
 ```
 
-If you try to ping a host with the name `server1`, your system will automatically query DNS for its Fully Qualified Domain Name (FQDN) in the following order:
+If you try to ping a host with the name `server1`, your system will automatically query DNS for its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` in the following order:
 
 1.  `server1.example.com`
 

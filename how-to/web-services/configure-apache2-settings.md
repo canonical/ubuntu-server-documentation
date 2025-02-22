@@ -37,7 +37,7 @@ Specifies the port, and optionally the IP address, Apache2 should listen on. If 
 
 ### The **ServerName** directive (optional)
 
-Specifies what FQDN your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
+Specifies what {term}`FQDN` your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
 
   Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
 

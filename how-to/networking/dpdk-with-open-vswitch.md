@@ -87,7 +87,7 @@ You can check if your issues is known on:
   - [DPDK Mailing Lists](http://dpdk.org/ml)
   - For OpenVswitch-DPDK [OpenStack Mailing Lists](http://openvswitch.org/mlists)
   - Known issues in [DPDK Launchpad Area](https://bugs.launchpad.net/ubuntu/+source/dpdk)
-  - Join the IRC channels \#DPDK or \#openvswitch on freenode.
+  - Join the IRC channels \#DPDK or \#openvswitch on {term}`freenode`.
 
 Issues are often due to missing small details in the general setup. Later on, these missing details cause problems which can be hard to track down to their root cause. 
 

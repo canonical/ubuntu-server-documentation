@@ -497,19 +497,28 @@ Glossary
         Related topic(s): Observability, and Containers.
 
     FQDN
-        *Work in Progress*
+        A Fully Qualified Domain Name (FQDN) represents a complete name that specifies the exact location of a host within the :term:`DNS` hierarchy.
 
-    Freedesktop
-        *Work in Progress*
+        Related topic(s): Networking, Web services, Security, Active directory integration, and :term:`OpenLDAP`.
 
     FreeIPA
-        *Work in Progress*
+        Free Identity, Policy, and Audit (FreeIPA) is an open-source security solution for Linux/Unix-like systems that stores 
+        user identities in an :term:`LDAP` directory, manages a :term:`CA`, and enables authentication, policy enforcement, and 
+        auditing through integrations with :term:`SSSD` and :term:`Kerberos`.
+    
+        Related topic(s): Security, and :term:`OpenLDAP`.
 
     freenode
-        *Work in Progress*
+        Freenode is an open-source Internet Relay Chat (IRC) platform used by open-source communities for real-time discussions. 
 
     frontend
-        *Work in Progress*
+        A frontend is a user-friendly interface for managing a complex system.
+
+        - In firewall management, a frontend like `ufw` simplifies configuring `iptables`.
+        - In QEMU/KVM graphics, a frontend is the virtual graphic adapter presented to the guest OS, allowing it to process and store graphical output in memory. The guest OS treats it like a GPU, while the host determines how to display the output using the :term:`backend`.
+        - In :term:`LDAP`, the frontend is a unique database that defines global default settings, such as who the admin user is, who can access database entries, or the limit on the number of search results. These settings apply to all LDAP databases inside :term:`slapd`, unless overridden.
+
+        Related topic(s): Virtualization and containers, Security, and :term:`OpenLDAP`.
 
     fsck
         *Work in Progress*
