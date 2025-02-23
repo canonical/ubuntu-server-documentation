@@ -509,16 +509,28 @@ Glossary
         *Work in Progress*
 
     fsck
-        *Work in Progress*
+        File System Check (fsck) is a Linux/Unix-like system utility tool that checks for, and repairs, any filesystem errors.
 
-    fsync
-        *Work in Progress*
+        Related topic(s): :term:`Storage <storages>`
 
     FULLTEXT
-        *Work in Progress*
+ 
+        FULLTEXT is an index type that allows for fast indexing and searching large quantities of text. It takes a sentence, splits it into words, and links them to row IDs. When a search query for a word is made, MySQL 
+        quickly looks up the row the word appear in, and retrieves all matching row IDs, rather than scanning the entire table. It can also find similar words using natural language processing.
+
+        See `Full-Text Search Functions <https://dev.mysql.com/doc/refman/8.4/en/fulltext-search.html>`_ for more details.
+
+        Related topic(s): Databases
 
     FW
-        *Work in Progress*
+
+        A firmware (FW) is a software that runs before an operating system (OS) boots.
+
+        - When a QEMU microvm starts, the firmware initializes minimal virtual hardware like allocating RAM to the OS, etc. and then loads the Linux kernel into memory.
+
+        - In a physical device, firmware configures :term:`PCIe` devices like GPUs or network cards.
+
+        Related topic(s): Virtualisation, Networking, Virtualisation and containers, Graphics, and Server installation.
 
     GCE
         *Work in Progress*
