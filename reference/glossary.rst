@@ -60,7 +60,10 @@ Glossary
         Related topic(s): Automation.
 
     Apache2
-        *Work in Progress*
+        A robust, open-source HTTP server software designed for the deployment and delivery of web-based applications and content. Functioning as a request-response service, Apache 2 processes HTTP requests from client applications, facilitating 
+        the transmission of static and dynamic web resources. Characterized by its modular architecture, it supports a wide array of extensions, enabling customizable functionality including security protocols (e.g., SSL/TLS), server-side 
+        scripting, and content management. Widely deployed in diverse server environments, Apache 2 is a foundational component of numerous web infrastructure stacks, underpinning a substantial portion of internet-accessible services.
+        See `Ansible <https://httpd.apache.org/docs/2.4/>`_ for more details.
 
     API
         *Work in Progress*
