@@ -1,7 +1,7 @@
 (introduction-to-mail-services)=
 # Introduction to mail servers
 
-Sending email from one person to another over a network or the Internet requires many systems to work together. First, the email client (**Mail User Agent**) sends the message. Then one or more **Mail Transfer Agents** (MTA) transfers the message. The final MTA sends the message to a **Mail Delivery Agent** (MDA) for delivery to the recipient's inbox. Finally, the recipient's email client retrieves the message with a **POP3** or **IMAP** server. These systems must be configured correctly to successfully deliver a message.
+Sending email from one person to another over a network or the Internet requires many systems to work together. First, the sender's email client (**Mail User Agent**) sends the message. Then one or more **Mail Transfer Agents** (MTA) transfers the message. The final MTA sends the message to a **Mail Delivery Agent** (MDA) for delivery to the recipient's inbox. Finally, the recipient's email client retrieves the message, usually via a **POP3** or **IMAP** server. These systems must all be configured correctly to successfully deliver a message.
 
 ## Mail User Agent
 
