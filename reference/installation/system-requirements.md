@@ -9,7 +9,7 @@ Hard requirements depend on the scenario, but they're generally constrained by t
 
 Ubuntu Server supports various 64-bit architectures and 32-bit arm.
 
-- amd64 (64-bit Intel/AMD)
+- amd64 (64-bit Intel/{term}`AMD`)
 - arm64 (64-bit Arm)
 - armhf (32-bit Arm)
 - ppc64el (64-bit Power)

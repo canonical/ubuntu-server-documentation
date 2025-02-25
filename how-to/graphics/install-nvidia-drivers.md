@@ -104,9 +104,7 @@ sudo apt install nvidia-fabricmanager-535 libnvidia-nscq-535
 > **Note**:
 > While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535 package`).
 
-<h2 id="heading--manual-driver-installation-using-apt">
-Manual driver installation (using APT)
-</h2>
+## Manual driver installation (using APT)
 
 Installing the NVIDIA driver manually means installing the correct kernel modules first, then installing the metapackage for the driver series.
 
@@ -124,7 +122,7 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-${LINUX_FLAVOUR}
 
 (e.g. `linux-modules-nvidia-535-generic`)
 
-Check that the modules for your specific kernel/ABI were installed by the metapackage:
+Check that the modules for your specific kernel/{term}`ABI` were installed by the metapackage:
 
 ```bash
 sudo apt-cache policy linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)

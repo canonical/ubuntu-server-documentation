@@ -12,7 +12,7 @@ short overview of each of them, along with their suggested use cases.
 
 ## Ansible
 
-[Ansible](https://www.ansible.com/) remains one of the most popular options
+{term}`Ansible` remains one of the most popular options
 due to its simplicity. It uses SSH to orchestrate nodes rather than through an
 installed agent. It is therefore most often used in cases where an agentless
 architecture is desired, or in small to medium-sized environments where the

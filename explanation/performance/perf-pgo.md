@@ -24,7 +24,7 @@ Using `perf` to monitor a process and obtain data about its runtime workload pro
 
 * The debug information file(s) **cannot** be processed by `dwz`.  This tool's purpose is to compress the debug information generated when building a binary, and again, virtually all Ubuntu packages use it.  For this reason, it is currently not possible to profile most Ubuntu packages without first rebuilding them to disable `dwz` from running.
 
-* We must be mindful of the options we pass to `perf`, particularly when it comes to recording branch prediction events.  The options will likely vary depending on whether you are using an Intel or AMD processor, for example.
+* We must be mindful of the options we pass to `perf`, particularly when it comes to recording branch prediction events.  The options will likely vary depending on whether you are using an Intel or {term}`AMD` processor, for example.
 
 On top of that, the current `autofdo` version in Ubuntu (`0.19-3build3`, at the time of this writing) is not recent enough to process the `perfdata` files we will generate.  There is a PPA with a newer version of `autofdo` package [for Ubuntu Noble](https://launchpad.net/~sergiodj/+archive/ubuntu/autofdo).  If you are running another version of Ubuntu and want to install a newer version of `autofdo`, you will need to build the software manually (please refer to the [upstream repository](https://github.com/google/autofdo) for further instructions).
 

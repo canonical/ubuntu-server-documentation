@@ -8,42 +8,61 @@ Glossary
 .. glossary::
 
     ABI
-        *Work in Progress*
+        ABI stands for Application Binary Interface. An ABI is an interface that defines how two modules interact with each other at the machine code level. Most often, these modules are applications using external libraries. An ABI defines a low-level and hardware-dependent interface compared to an an Application Programming Interface (API), which is considered high-level and hardware-independent.
 
-    accesslog
-        *Work in Progress*
+        See `ABI <https://wiki.ubuntu.com/KernelTeam/BuildSystem/ABI>`_ for more details.
+
+        Related topic(s): :term:`API`.
 
     ACL
-        *Work in Progress*
+        ACL stands for Access Control List. An ACL is a list of access permissions that defines entities and their access rights to resources. ACLs can specify access with varying levels of granularity, ranging from full access to a resource, to permission for a specific operation.
 
-    ACLs
-        *Work in Progress*
+        See `ACL <https://manpages.ubuntu.com/manpages/noble/man5/acl.5.html>`_ for more details.
 
-    adapter
-        *Work in Progress*
+        Related topic(s): Security, :term:`OpenLDAP`, and :term:`Kerberos`.
 
     ADSys
-        *Work in Progress*
+        ADSys is an Ubuntu-specific Active Directory client developed by Canonical. ADSys complements System Security Services Daemon (SSSD) by adding native Group Policy Object support, privilege management, and custom scripts execution.
+
+        See `ADSys <https://documentation.ubuntu.com/adsys/en/stable/>`_ for more details.
+
+        Related topic(s): :term:`Group Policy Object` and :term:`SSSD`.
 
     AES
-        *Work in Progress*
+        AES stands for Advanced Encryption Standard. An AES is a symmetric encryption algorithm designed to encrypt data securely into an unreadable format that can only be decrypted with the same key used for encryption.
+
+        Related topic(s): Security.
 
     Alertmanager
-        *Work in Progress*
+        Alertmanager is an open-source monitoring system developed by the Prometheus project to monitor and handle alerts. It offers several key features, including *Grouping* to combine alerts, *Inhibition* to suppress certain alerts when others are already firing, and *Silencing* to temporarily mute specific alerts.
 
-    ALSA
-        *Work in Progress*
+        See `Alertmanager <https://prometheus.io/docs/alerting/latest/alertmanager/>`_ for more details.
+
+        Related topic(s): Observability and :term:`Prometheus`.
 
     ALUA
         *Work in Progress*
 
     AMD
-        *Work in Progress*
+        AMD stands for Advanced Micro Devices and can refer to:
+
+            * The (AMD) company: semiconductor company that designs computer components.
+            * An AMD processor: a microprocessor designed and produced by the AMD company.
+            * All Intel/AMD 64-bit processors: the term "amd64" is commonly used to refers to 64-bit processors due to the company's role in developing this architecture.
+
+        Related topic(s): Networking.
 
     Ansible
-        *Work in Progress*
+        Ansible is an open-source IT automation tool developed by Red Hat. It offers several automation features, enabling developers and organizations to automate provisioning, configuration management, and application deployment.
+
+        See `Ansible <https://docs.ansible.com/>`_ for more details.
+
+        Related topic(s): Automation.
 
     Apache2
+        *Work in Progress*
+
+    API
         *Work in Progress*
 
     AppArmor
@@ -166,7 +185,7 @@ Glossary
     cfg
         *Work in Progress*
 
-    cgi
+    CGI
         *Work in Progress*
 
     CGNAT
@@ -443,19 +462,21 @@ Glossary
         A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
 
     failover
-        *Work in Progress*
+        In a Storage Area Network (SAN) environment, this occurs when data flows into an alternative I/O path because a cable, switch, or controller in the current path failed.
+        It is a common feature in high availability environments and is handled (usually automatically) by multipathing software.
 
     fallbacks
-        *Work in Progress*
+        This is a manual or automatic switch to an alternative method, when the primary option fails or is less preferred.
 
     FastCGI
-        *Work in Progress*
+        Fast Common Gateway Interface (FastCGI) is an extension of the CGI protocol that starts a persistent FastCGI 
+        application process, allowing it to handle multiple requests instead of starting a new process for each request like a traditional CGI does.
 
     FC
-        *Work in Progress*
+        Fiber Channel (FC) is a storage networking protocol used for low-latency communication between a storage device and a node in a Storage Area Network (SAN).
 
     FHS
-        *Work in Progress*
+        Filesystem Hierarchy Standard (FHS) is a standard that defines the directory structure and contents in Linux and Unix-like operating systems.
 
     filebug
         *Work in Progress*
@@ -569,6 +590,9 @@ Glossary
         *Work in Progress*
 
     Graylog
+        *Work in Progress*
+
+    Group Policy Object
         *Work in Progress*
 
     grubnetaa
@@ -788,13 +812,23 @@ Glossary
         *Work in Progress*
 
     jitter
-        *Work in Progress*
+        Jitter is the variation in delay or latency between when data packets are sent and when they are received over a network, causing irregular arrival times at the destination. This variation is often caused by network congestion, packet loss, poor hardware performance or differences in the path packets take. 
+
+        Related topic(s): Networking.
 
     journald
-        *Work in Progress*
+        Journald, also known as systemd-journald, is a logging service developed by the systemd project as part of the systemd suite. It collects and stores log messages from various sources, including systemd services, kernel messages, system logs, and application logs. Journald stores logs in a binary format offering advantages, such as storage efficiency, searchability, and most especially structured logging. In containerized systems like Docker, it functions as a logging driver for containers. 
+
+        See `manpage for journald.conf <https://manpages.ubuntu.com/manpages/noble/man5/journald.conf.5.html/>`_ for more information.
+        See the `Docker journald documentation <https://docs.docker.com/engine/logging/drivers/journald/>`_ for details on using journald as a logging driver.
+
+        Related topic(s): logging and :term:`Docker`.
 
     JSON
-        *Work in Progress*
+        **JavaScript Object Notation**:
+        This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. Due to its simplicity, it is an ideal lightweight data interchange language.
+
+        See `JSON <https://www.json.org/json-en.html/>`_ for more details.
 
     KDC
         *Work in Progress*
@@ -1346,6 +1380,9 @@ Glossary
         *Work in Progress*
 
     procfs
+        *Work in Progress*
+
+    Prometheus
         *Work in Progress*
 
     proxied

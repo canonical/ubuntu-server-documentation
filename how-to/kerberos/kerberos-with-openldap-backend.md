@@ -130,7 +130,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   dn:uid=kdc-service,dc=example,dc=com
   ```
       
-- Finally, update the Access Control Lists (ACL). These can be tricky, as it highly depends on what you have defined already. By default, the `slapd` package configures your database with the following ACLs:
+- Finally, update the Access Control Lists ({term}`ACL`). These can be tricky, as it highly depends on what you have defined already. By default, the `slapd` package configures your database with the following ACLs:
 
   ```text
   olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none

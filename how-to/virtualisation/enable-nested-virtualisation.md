@@ -8,7 +8,7 @@ There may be use cases where you need to enable nested virtualisation so that yo
 
 ## Check if nested virtualisation is enabled
 
-Check if the required kernel module for your CPU is already loaded. Hosts with Intel CPUs require the `kvm_intel` module while AMD hosts require `kvm_amd` instead:
+Check if the required kernel module for your CPU is already loaded. Hosts with Intel CPUs require the `kvm_intel` module while {term}`AMD` hosts require `kvm_amd` instead:
   
 ```bash
 $ lsmod | grep -i kvm

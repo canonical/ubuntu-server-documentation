@@ -228,7 +228,7 @@ cat: /status: Fatal error: gnutls_handshake: A TLS fatal alert has been received
 
 ### Use only AES256 with TLSv1.3
 
-TLSv1.3 has a small list of ciphers, but it includes AES128. Let's remove it:
+TLSv1.3 has a small list of ciphers, but it includes {term}`AES`128. Let's remove it:
 
 ```INI
 [global]

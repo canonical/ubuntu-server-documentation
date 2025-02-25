@@ -82,6 +82,14 @@ It will watch the folder, and whenever you save changes to a file, this URL
 will give update the preview to show your changes (or warn you if something has
 gone horribly wrong!).
 
+If you are building locally on an Ubuntu Cloud VM or a container, you may experience issues accessing the page from a browser. To 
+resolve this, include ``--host 0.0.0.0`` in the ``sp-run`` section of the ``Makefile.sp`` file.
+
+.. code-block::
+
+   sp-run: sp-install
+	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) --host 0.0.0.0
+
 .. note::
    If you have problems getting the documentation to run on your machine,
    reach out to the team or leave a comment on your issue to get additional
