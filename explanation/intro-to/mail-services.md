@@ -6,6 +6,7 @@ Sending email from one person to another over a network or the Internet requires
 ## Mail User Agent
 
 ### Thunderbird
+
 [Thunderbird](https://www.thunderbird.net/) is the default Mail User Agent (email client) used by Ubuntu. It comes pre-installed on all Ubuntu machines from Ubuntu 16.04 LTS (Xenial) onwards.
   
   If you need to install Thunderbird manually, [this short guide](https://snapcraft.io/install/thunderbird/ubuntu) will walk you through the steps. 
