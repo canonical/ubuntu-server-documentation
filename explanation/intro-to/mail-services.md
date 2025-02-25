@@ -14,6 +14,7 @@ Sending email from one person to another over a network or the Internet requires
 ## Mail Transfer Agent
 
 ### Postfix
+
 [Postfix](https://www.postfix.org/) is the default MTA on Ubuntu. It is fast, secure and has good flexibility for administrators. It is compatible with the [sendmail](https://www.authsmtp.com/sendmail/index.html) MTA. 
   
   This guide explains {ref}`how to install and configure Postfix <install-postfix>`, including how to configure SMTP for secure communications.
