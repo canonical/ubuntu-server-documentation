@@ -1,7 +1,7 @@
 (introduction-to-virtualization)=
 # Introduction to virtualization
 
-Virtualization is a technology that allows you to create safe, isolated environments on your server. Developers can use virtualization to create self-contained sandboxes for development and testing that won't negatively affect the host machine. System administrators can use virtualization to effectively scale network resources to meet changing demand.
+Virtualization is a technology that allows you to create safe, isolated environments on your server. Developers can use virtualization to create self-contained sandboxes for development and testing that cannot negatively affect the host machine. System administrators can use virtualization to scale network resources to meet changing demand, giving greater control and flexibility in managing infrastructure.
 
 The **virtualization stack** uses layers of abstraction to help users work with virtualization more easily. Each layer of abstraction hides the complexity of layers below it, allowing the user to work with a more high-level view.
 
