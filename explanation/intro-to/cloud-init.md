@@ -5,7 +5,7 @@
 Managing and configuring cloud instances and servers can be a complex and
 time-consuming task. [Cloud-init](https://docs.cloud-init.io/en/latest/ ) is
 the industry-standard open source tool designed to automate getting systems up
-and running, already configured, in a reliable, repeatable way across instances.
+and running with preconfigured settings in a reliable and repeatable way across instances.
 
 Although it’s commonly used to automatically configure public or private cloud
 instances, it can also be used to deploy virtual machines and physical machines
@@ -22,7 +22,7 @@ configured the way you want.
 
 Your configuration can be used and re-used as often as you want - so that
 whether you want the exact same VM environment every time, or want to deploy an
-entire fleet of machines in exactly the same way, you will get reliably
+entire fleet of machines in exactly the same way, you will get reliable and
 repeatable results with a fraction of the time and effort it would take to do
 so manually.
 
