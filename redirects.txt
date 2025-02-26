@@ -387,7 +387,7 @@ configuring-networks explanation/networking/configuring-networks/
 about-netplan explanation/networking/about-netplan/ 
 netplan explanation/networking/about-netplan/
 
-network-dhcp
+network-dhcp explanation/networking/about-dhcp/
 about-dynamic-host-configuration-protocol-dhcp explanation/networking/about-dhcp/
 
 network-ntp explanation/networking/about-time-synchronisation/
