@@ -1,7 +1,7 @@
 (introduction-to-backups)=
 # Introduction to backups
 
-It's important to back up your Ubuntu installation so you can recover quickly if you experience data loss. You can create redunancy by using multiple back-up methods. Redundant data is useful if the primary back-up fails. 
+It's important to back up your Ubuntu installation so you can recover quickly if you experience data loss. You can create redundancy by using multiple back-up methods. Redundant data is useful if the primary back-up fails. 
 
 It is important to develop a backup plan that consists of:
 
@@ -22,10 +22,10 @@ The easiest way to create backups is to use a dedicated tool like [Bacula](http:
 
 Bacula's advanced features and support for additional customization make it a good choice for enterprise systems or users with complex needs. rsnapshot is ideal for individual users or small-scale organizations who want a simple and efficient solution. 
 
-| **Tool** | **Back up** | **Backup Method** | ** Install and configure ** |
+| **Tool** | **Back up** | **Backup Method** | **Install and configure** |
 |------|--------|---------------|----------------|
 |**Bacula**| Multiple systems over a network | Incremental backups | {ref}`how to install and configure Bacula <install-bacula>` |
-|**rsnapshot**| Single system | Periodic "snapshots" of files locally or remotely with ssh | `how to install and configure rsnapshot <install-rsnapshot>`. |
+|**rsnapshot**| Single system | Periodic "snapshots" of files locally or remotely with SSH | {ref}`how to install and configure rsnapshot <install-rsnapshot>` |
 
 
 ### Shell scripts
