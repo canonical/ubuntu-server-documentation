@@ -189,7 +189,7 @@ migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 basic-backup-shell-script reference/backups/basic-backup-shell-script/
 archive-rotation-shell-script reference/backups/archive-rotation-shell-script/
 about-debuginfod reference/debugging/about-debuginfod/
-server/service-debuginfod reference/debugging/about-debuginfod/
+service-debuginfod reference/debugging/about-debuginfod/
 debug-symbol-packages reference/debugging/debug-symbol-packages/
 byobu reference/other-tools/byobu/
 pam-motd reference/other-tools/pam-motd/
