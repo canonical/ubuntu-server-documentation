@@ -37,6 +37,7 @@ how-to-set-up-ubuntu-on-hyper-v how-to/virtualisation/ubuntu-on-hyper-v/
 lxd-containers how-to/containers/lxd-containers/
 docker-for-system-admins how-to/containers/docker-for-system-admins/
 how-to-run-rocks-on-your-server how-to/containers/run-rocks-on-your-server/
+service-nfs how-to/networking/install-nfs/
 network-file-system-nfs how-to/networking/install-nfs/
 set-up-an-ftp-server how-to/networking/ftp/
 domain-name-service-dns how-to/networking/install-dns/
@@ -105,6 +106,7 @@ openssh-server how-to/security/openssh-server/
 how-to-install-and-use-openvpn how-to/security/install-openvpn/
 install-a-root-ca-certificate-in-the-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/
 firewalls how-to/security/firewalls/
+security-apparmor how-to/security/apparmor/
 apparmor how-to/security/apparmor/
 smart-card-authentication how-to/security/smart-card-authentication/
 smart-card-authentication-with-ssh how-to/security/smart-card-authentication-with-ssh/
@@ -131,6 +133,7 @@ introduction-to-samba explanation/intro-to/samba/
 introduction-to-active-directory-integration explanation/intro-to/AD-integration/
 introduction-to-device-mapper-multipathing explanation/intro-to/multipath/
 introduction-to-kerberos explanation/intro-to/kerberos/
+service-sssd explanation/intro-to/sssd/
 introduction-to-network-user-authentication-with-sssd explanation/intro-to/sssd/
 introduction-to-openldap explanation/intro-to/openldap/
 introduction-to-security explanation/intro-to/security/
@@ -149,6 +152,7 @@ container-tools-in-the-ubuntu-space explanation/virtualisation/container-tools-i
 about-rock-images explanation/virtualisation/about-rock-images/
 networking-key-concepts explanation/networking/networking-key-concepts/
 configuring-networks explanation/networking/configuring-networks/
+about-netplan explanation/networking/about-netplan/ 
 netplan explanation/networking/about-netplan/
 about-dynamic-host-configuration-protocol-dhcp explanation/networking/about-dhcp/
 about-time-synchronisation explanation/networking/about-time-synchronisation/
