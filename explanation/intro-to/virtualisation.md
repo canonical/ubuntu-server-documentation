@@ -1,17 +1,17 @@
-(introduction-to-virtualisation)=
-# Introduction to virtualisation
+(introduction-to-virtualization)=
+# Introduction to virtualization
 
-Virtualisation is a technology that allows you to create safe, isolated environments on your server. For developers, this often means creating self-contained sandboxes for development and testing that cannot negatively affect the host machine. For systems administrators, it allows resources to be scaled to meet changing demand, giving greater control and flexibility in managing infrastructure.
+Virtualization is a technology that allows you to create safe, isolated environments on your server. Developers can use virtualization to create self-contained sandboxes for development and testing that cannot negatively affect the host machine. System administrators can use virtualization to scale network resources to meet changing demand, giving greater control and flexibility in managing infrastructure.
 
 The virtualisation stack is made using layers of **abstraction**. Each layer hides some of the complexity of the layer (or layers) beneath, presenting an increasingly high-level view of the technology. This makes the underlying technology progressively easier to understand and work with. 
 
 ## Virtual machines
 
-Virtual machines (VMs) are essentially computers-within-computers. Every VM includes its own operating system and simulated resources, making it completely independent of the host machine (and any other VM). Although more resource-intensive (and slower to boot) than a container, a VM provides strong isolation and reduces the need for additional hardware when running different operating system environments. To find out more, see this overview of {ref}`the different VM tools and technologies <vm-tools-in-the-ubuntu-space>` available in the Ubuntu space.
+Virtual machines (VMs) are essentially computers-within-computers. Every VM includes its own operating system and simulated resources, making it completely independent of the host machine and any other VM. Although more resource-intensive than a container, a VM provides strong isolation and reduces the need for additional hardware to run different operating system environments. To find out more, see this overview of {ref}`the different VM tools and technologies <vm-tools-in-the-ubuntu-space>` available for Ubuntu.
 
 ## Containers
 
-Containers, on the other hand, are a more lightweight virtualisation technology. They share the operating system of the host machine, so they are much quicker to provision when demand for resources is high. They are often used for packaging and running applications, since they contain everything the application needs (including any required dependencies and libraries). This ensures consistency across different environments. Containers come in two main flavours: **system** containers, and **application** containers.
+Containers, on the other hand, are a more lightweight virtualization technology. They share the operating system of the host machine, so they are much quicker to provision when demand for resources is high. They are often used for packaging and running applications. They contain everything the application needs including any required dependencies and libraries. This ensures consistency across different environments. Containers come in two main flavors: **system** containers, and **application** containers.
 
 ### System containers
 
