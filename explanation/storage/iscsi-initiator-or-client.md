@@ -419,7 +419,7 @@ Command (m for help): w
 The partition table has been altered.
 ```
 
-* Creating a filesystem:
+* Creating a {term}`filesystem`:
 
 ```
 $ sudo mkfs.ext4 /dev/mapper/mpatha-part1

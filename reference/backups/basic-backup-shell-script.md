@@ -79,6 +79,6 @@ This is a simple example of a backup shell script; however there are many option
 
   - [`dd`](http://www.gnu.org/software/coreutils/): Part of the `coreutils` package. A low level utility that can copy data from one format to another.
 
-  - [`rsnapshot`](http://www.rsnapshot.org/): A filesystem snapshot utility used to create copies of an entire file system. Also check the {ref}`Install rsnapshot guide <install-rsnapshot>` for more information.
+  - [`rsnapshot`](http://www.rsnapshot.org/): A {term}`filesystem` snapshot utility used to create copies of an entire file system. Also check the {ref}`Install rsnapshot guide <install-rsnapshot>` for more information.
 
   - [`rsync`](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html): A flexible utility used to create incremental copies of files.

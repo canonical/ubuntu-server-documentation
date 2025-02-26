@@ -175,7 +175,7 @@ base-files: /etc/host.conf
 The output shows that the `/etc/host.conf` belongs to the base-files package.
     
 > **Note**:
-> Many files are automatically generated during the package install process, and even though they are on the filesystem, `dpkg -S` may not know which package they belong to.
+> Many files are automatically generated during the package install process, and even though they are on the {term}`filesystem`, `dpkg -S` may not know which package they belong to.
 
 ### Installing a deb file
 
