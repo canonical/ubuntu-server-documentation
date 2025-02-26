@@ -14,6 +14,7 @@
 
 explanation/intro-to/ explanation/introduction-to/
 
+installation tutorial/basic-installation/
 basic-installation tutorial/basic-installation/
 attach-your-ubuntu-pro-subscription tutorial/attach-your-ubuntu-pro-subscription/
 
@@ -28,6 +29,7 @@ non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive
 virtualisation-with-qemu how-to/virtualisation/qemu/
 create-qemu-vms-with-up-to-1024-vcpus how-to/virtualisation/qemu-vms-up-to-1024-vcpus/
 boot-arm64-virtual-machines-on-qemu how-to/virtualisation/arm64-vms-on-qemu/
+virtualization-multipass how-to/virtualisation/multipass/
 how-to-create-a-vm-with-multipass how-to/virtualisation/multipass/
 create-cloud-image-vms-with-uvtool how-to/virtualisation/cloud-image-vms-with-uvtool/
 libvirt how-to/virtualisation/libvirt/
@@ -76,6 +78,7 @@ how-to-set-up-ldap-users-and-groups how-to/openldap/users-and-groups/
 ldap-and-transport-layer-security-tls how-to/openldap/ldap-and-tls/
 backup-and-restore-openldap how-to/openldap/backup-and-restore/
 install-and-configure-a-mysql-server how-to/databases/install-mysql/
+databases-postgresql how-to/databases/install-postgresql/
 install-and-configure-postgresql how-to/databases/install-postgresql/
 install-and-configure-postfix how-to/mail-services/install-postfix/
 install-and-configure-dovecot how-to/mail-services/install-dovecot/
@@ -98,13 +101,16 @@ how-to-manage-logical-volumes how-to/storage/manage-logical-volumes/
 nvidia-drivers-installation how-to/graphics/install-nvidia-drivers/
 gpu-virtualization-with-qemu-kvm how-to/graphics/gpu-virtualization-with-qemu-kvm/
 package-management how-to/software/package-management/
+upgrade-introduction how-to/software/upgrade-your-release/
 how-to-upgrade-your-release how-to/software/upgrade-your-release/
 how-to-report-a-bug-in-ubuntu-server how-to/software/report-a-bug/
 kernel-crash-dump how-to/software/kernel-crash-dump/
 how-to-install-and-use-puppet explanation/software/config-managers/
 openssh-server how-to/security/openssh-server/
 how-to-install-and-use-openvpn how-to/security/install-openvpn/
+security-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/
 install-a-root-ca-certificate-in-the-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/
+security-firewall how-to/security/firewalls/
 firewalls how-to/security/firewalls/
 security-apparmor how-to/security/apparmor/
 apparmor how-to/security/apparmor/
@@ -136,6 +142,7 @@ introduction-to-kerberos explanation/intro-to/kerberos/
 service-sssd explanation/intro-to/sssd/
 introduction-to-network-user-authentication-with-sssd explanation/intro-to/sssd/
 introduction-to-openldap explanation/intro-to/openldap/
+explanation/intro-to-security explanation/intro-to/security/
 introduction-to-security explanation/intro-to/security/
 introduction-to-crypto-libraries explanation/intro-to/crypto-libraries/
 introduction-to-wireguard-vpn explanation/intro-to/wireguard-vpn/
@@ -151,10 +158,12 @@ about-openstack explanation/virtualisation/about-openstack/
 container-tools-in-the-ubuntu-space explanation/virtualisation/container-tools-in-the-ubuntu-space/
 about-rock-images explanation/virtualisation/about-rock-images/
 networking-key-concepts explanation/networking/networking-key-concepts/
+network-configuration explanation/networking/configuring-networks/
 configuring-networks explanation/networking/configuring-networks/
 about-netplan explanation/networking/about-netplan/ 
 netplan explanation/networking/about-netplan/
 about-dynamic-host-configuration-protocol-dhcp explanation/networking/about-dhcp/
+network-ntp explanation/networking/about-time-synchronisation/
 about-time-synchronisation explanation/networking/about-time-synchronisation/
 about-dpdk explanation/networking/about-dpdk/
 choosing-an-integration-method explanation/active-directory/choosing-an-integration-method/
@@ -163,6 +172,7 @@ identity-mapping-idmap-backends explanation/active-directory/identity-mapping-id
 the-rid-idmap-backend explanation/active-directory/the-rid-idmap-backend/
 the-autorid-idmap-backend explanation/active-directory/the-autorid-idmap-backend/
 openvpn-client-implementations explanation/security/openvpn-client-implementations/
+security-certificates explanation/security/certificates/
 certificates explanation/security/certificates/
 openssl explanation/crypto/openssl/
 gnutls explanation/crypto/gnutls/
