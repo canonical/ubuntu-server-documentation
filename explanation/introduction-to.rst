@@ -7,9 +7,9 @@ If you're not sure how or where to get started with a topic, these introductory
 pages will give you a high-level overview and relevant links (with context!) to
 help you navigate to the guides and other materials of most interest to you.
 
-**Virtualisation**
+**Virtualization**
 
-* :ref:`Introduction to virtualisation <introduction-to-virtualisation>`
+* :ref:`Introduction to virtualization <introduction-to-virtualization>`
 
 **Networking**
 
@@ -52,7 +52,7 @@ help you navigate to the guides and other materials of most interest to you.
 .. toctree::
     :hidden:
 
-    Virtualisation <intro-to/virtualisation>
+    Virtualization <intro-to/virtualisation>
     Networking <intro-to/networking>
     Samba <intro-to/samba>
     Active Directory integration <intro-to/AD-integration>
