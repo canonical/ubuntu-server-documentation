@@ -17,7 +17,7 @@ Among the most popular and widely used libraries and frameworks, we have:
   * GnuTLS
   * NSS
   * GnuPG
-  * gcrypt
+  * {term}`gcrypt`
 
 Each one of these has its own implementation details, API, behavior, configuration file, and syntax.
 

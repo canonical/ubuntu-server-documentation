@@ -523,20 +523,15 @@ Glossary
     FW
         *Work in Progress*
 
-    GCE
-        *Work in Progress*
-
-    GCM
-        *Work in Progress*
-
-    GCP
-        *Work in Progress*
-
     gcplogs
-        *Work in Progress*
+        A logging driver that allows logs to be forwarded from a Docker container running in Google Cloud to the Google Cloud Logging service.
+        
+        Related topic(s): Containers, and Observability.
 
     gcrypt
-        *Work in Progress*
+        A cryptographic library that supports encryption, hashing, etc. for applications.
+
+        Related topic(s): Cryptographic libraries
 
     GDB
         *Work in Progress*

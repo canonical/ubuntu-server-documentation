@@ -13,7 +13,7 @@ For expanded documentation, please see the separate [public-cloud documentation.
 Users can find Ubuntu images for virtual machines and bare-metal offerings published directly to the following clouds:
 
 * [Amazon Elastic Compute Cloud (EC2)](https://canonical-aws.readthedocs-hosted.com/en/latest/aws-how-to/instances/find-ubuntu-images/)
-* [Google Cloud Engine (GCE)](https://canonical-gcp.readthedocs-hosted.com/en/latest/google-how-to/gce/find-ubuntu-images/)
+* [Google Compute Engine (GCE)](https://canonical-gcp.readthedocs-hosted.com/en/latest/google-how-to/gce/find-ubuntu-images/)
 * IBM Cloud
 * [Microsoft Azure](https://canonical-azure.readthedocs-hosted.com/en/latest/azure-how-to/instances/find-ubuntu-images/)
 * Oracle Cloud
