@@ -15,12 +15,13 @@ Sending email from one person to another over a network or the Internet requires
 
 ### Postfix
 
-[Postfix](https://www.postfix.org/) is the default MTA on Ubuntu. It is fast, secure and has good flexibility for administrators. It is compatible with the [sendmail](https://www.authsmtp.com/sendmail/index.html) MTA. 
+On Ubuntu, [Postfix](https://www.postfix.org/) is the default supported MTA. It aims to be fast and secure, with flexibility in administration. It is compatible with the [sendmail](https://www.authsmtp.com/sendmail/index.html) MTA.  
   
   This guide explains {ref}`how to install and configure Postfix <install-postfix>`, including how to configure SMTP for secure communications.
 
 ### Exim4
-[Exim4](https://www.exim.org/) has extensive configuration features. It can be installed instead of sendmail or Postfix. 
+
+[Exim4](https://www.exim.org/) was developed at the University of Cambridge for use on Unix systems connected to the Internet. Exim can be installed in place of sendmail, although its configuration is quite different. 
   
   This guide explains {ref}`how to install and configure Exim4 <install-exim4>` on Ubuntu.
 
