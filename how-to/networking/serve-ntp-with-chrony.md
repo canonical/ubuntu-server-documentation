@@ -351,10 +351,12 @@ For more complex scenarios there are many more advanced options for configuring 
 
 ### NTS client
 
-The client needs to specify `server` as usual (`pool` directives do not work with NTS). Afterwards, the server address options can be listed and it is there that `nts` can be added. For example:
+The client needs to specify `server` or `pool` as usual. Afterwards, the options can be listed and it is there that `nts` can be added. For example:
 
 ```text
 server <server-fqdn-or-IP> iburst nts
+# or as concrete example
+pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
 ```
 
 One can check the `authdata` of the connections established by the client using `sudo chronyc -N authdata`, which will provide the following information:
