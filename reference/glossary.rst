@@ -557,8 +557,8 @@ Glossary
     GFS2
         *Work in Progress*
 
-    GiB
-        *Work in Progress*
+    GiB 
+        A gibibyte (GiB) is a unit of storage equal to 1024^3 bytes. It is commonly used to describe the size of a disk or Random Access Memory (RAM).
 
     GID
         *Work in Progress*
