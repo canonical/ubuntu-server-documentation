@@ -39,7 +39,7 @@ Key Benefits:
 
 - **MOST CRITICAL** part of a cluster utilising SAN or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
 
-- Required by OCFS2, GFS2, cLVMd (before Ubuntu 20.04), lvmlockd (from 20.04 and beyond).
+- Required by OCFS2, {term}`GFS2`, cLVMd (before Ubuntu 20.04), lvmlockd (from 20.04 and beyond).
 
 ## Linux High Availability Projects
 

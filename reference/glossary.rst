@@ -543,19 +543,19 @@ Glossary
         Related topic(s): Cryptographic libraries
 
     GDB
-        *Work in Progress*
+        :term:`GNU` Debugger traces the current execution of a program, with the aim of identifying any issues.
+
+        Related topic(s): Debugging
 
     gelf
-        *Work in Progress*
+        :term:`Graylog` Extended Log Format (GELF) is a logging driver that allow logs to be forwarded in :term:`JSON` format, but with extra unique fields. These logs are sent from a Docker container to a data collector platform like Graylog, :term:`Logstash`, and :term:`Fluentd`.
 
-    Gentoo
-        *Work in Progress*
-
-    GFS
-        *Work in Progress*
+        Related topic(s): Containers, and Observability.
 
     GFS2
-        *Work in Progress*
+        A shared-disk :term:`filesystem` that allows multiple servers to access a single disk. It uses a locking system to ensure that no two servers modify the same data simultaneously, thus, preventing data corruption if one server fails. Additionally, fencing is used to isolate failed nodes, ensuring that their locks can be safely recovered.
+
+        Related topic(s): High availability, and Storage.
 
     GiB
         *Work in Progress*

@@ -428,14 +428,14 @@ Another important aspect of networking with containers is the {term}`DNS` servic
 
 Monitoring what is happening in the system is a crucial part of systems administration, and with Docker containers it is no different. Docker provides the logging subsystem (which is pluggable) and there are many drivers that can forward container logs to a file, an external host, a database, or another logging back-end. The logs are basically everything written to `STDOUT` and `STDERR`. When building a Docker image, the relevant data should be forwarded to those I/O stream devices.
 
-The following storage drivers are available (at the time of writing):
+The following logging drivers are available (at the time of writing):
 
  * **json-file**: it is the default logging driver. It writes logs in a file in JSON format.
  * **local**: write logs to an internal storage that is optimised for performance and disk use.
  * **{term}`journald`**: send logs to systemd journal.
  * **syslog**: send logs to a syslog server.
  * **logentries**: send container logs to the [Logentries](https://logentries.com/) server.
- * **gelf**: write logs in a Graylog Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
+ * **{term}`gelf`**: write logs in a Graylog Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
  * **awslogs**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
  * **etwlogs**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
  * **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
