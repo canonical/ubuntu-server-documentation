@@ -302,7 +302,6 @@ FW
 gauranteed
 GCE
 GCM
-GCP
 gcplogs
 gcrypt
 GDB
