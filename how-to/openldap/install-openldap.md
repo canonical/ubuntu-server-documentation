@@ -139,7 +139,7 @@ $ sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and `gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
 
 ## Populate the directory
 

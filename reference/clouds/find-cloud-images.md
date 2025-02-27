@@ -23,7 +23,7 @@ Users can find Ubuntu images for virtual machines and bare-metal offerings publi
 Ubuntu images are also produced for a number of container offerings:
 
 * [Amazon Elastic Kubernetes Service (EKS)](https://cloud-images.ubuntu.com/docs/aws/eks/)
-* Google Kubernetes Engine (GKE)
+* {term}`Google Kubernetes Engine (GKE) <GKE>`
 
 ## Private clouds
 

@@ -18,7 +18,7 @@ Ubuntu Server Edition provides a common, minimalist base for a variety of server
 
 The recommended minimal system requirements for this tutorial are:
 
- * RAM: 2 GiB or more
+ * RAM: 2 {term}`GiB` or more
  * Disk: 5 GiB or more
 
 If you are looking for more general system requirements, {ref}`refer to this page <system-requirements>`. 
