@@ -79,7 +79,7 @@ Where the entries mean the following:
 - **`cn={1}cosine,cn=schema,cn=config`**: The Cosine schema
 - **`cn={2}nis,cn=schema,cn=config`**: The Network Information Services (NIS) schema
 - **`cn={3}inetorgperson,cn=schema,cn=config`**: The InetOrgPerson schema
-- **`olcDatabase={-1}frontend,cn=config`**: Frontend database, default settings for other databases
+- **`olcDatabase={-1}frontend,cn=config`**: {term}`Frontend` database, default settings for other databases
 - **`olcDatabase={0}config,cn=config`**: `slapd` configuration database (`cn=config`)
 - **`olcDatabase={1}mdb,cn=config`**: Your database instance (`dc=example,dc=com`)
 

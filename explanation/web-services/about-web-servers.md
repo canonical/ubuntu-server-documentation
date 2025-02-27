@@ -7,7 +7,7 @@ Clients, mostly via **web browsers**, request specific resources and the server 
 
 ## URLs
 
-Users enter a Uniform Resource Locator (URL) to point to a web server by means of its Fully Qualified Domain Name (FQDN) and a path to the required resource. For example, to view the home page of the [Ubuntu Web site](https://www.ubuntu.com) a user will enter only the FQDN:
+Users enter a Uniform Resource Locator (URL) to point to a web server by means of its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` and a path to the required resource. For example, to view the home page of the [Ubuntu Web site](https://www.ubuntu.com) a user will enter only the FQDN:
 
 ```text
 www.ubuntu.com

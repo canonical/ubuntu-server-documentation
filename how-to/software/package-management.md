@@ -67,7 +67,7 @@ For details on how to upgrade to a new Ubuntu release, see our {ref}`guide on up
 
 ## Aptitude
 
-Launching Aptitude with no command-line options will give you a menu-driven, text-based frontend to the APT system. Many of the common package management functions, such as installation, removal, and upgrade, can be performed in Aptitude with single-key commands, which are typically lowercase letters.
+Launching Aptitude with no command-line options will give you a menu-driven, text-based {term}`frontend` to the APT system. Many of the common package management functions, such as installation, removal, and upgrade, can be performed in Aptitude with single-key commands, which are typically lowercase letters.
 
 Aptitude is best suited for use in a non-graphical terminal environment to ensure the command keys work properly. You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
 

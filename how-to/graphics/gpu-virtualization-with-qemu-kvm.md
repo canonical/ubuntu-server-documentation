@@ -3,7 +3,7 @@
 
 ## Graphics
 
-Graphics for QEMU/KVM always comes in two pieces: a front end and a back end.
+Graphics for QEMU/KVM always comes in two pieces: a {term}`frontend` and a backend.
 
 - `frontend`: Controlled via the `-vga` argument, which is provided to the guest. Usually one of `cirrus`, `std`, `qxl`, or `virtio`. The default these days is `qxl` which strikes a good balance between guest compatibility and performance. The guest needs a driver for whichever option is selected -- this is the most common reason to not use the default (e.g., on very old Windows versions).
 
