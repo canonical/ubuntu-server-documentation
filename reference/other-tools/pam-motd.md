@@ -20,7 +20,7 @@ When logging into an Ubuntu server you may have noticed the informative Message 
     You can run landscape-sysinfo manually at any time.
     ```
 
-  - *update-notifier-common:* provides information on available package updates, impending filesystem checks (fsck), and required reboots (e.g.: after a kernel upgrade).
+  - *update-notifier-common:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
 
 pam\_motd executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 

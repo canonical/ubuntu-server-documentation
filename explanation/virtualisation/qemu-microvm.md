@@ -21,7 +21,7 @@ now need a feature only available in the more complete solution.
 QEMU provides additional components that were added to support this special use case:
 
 1. The [`microvm` machine type](https://www.qemu.org/docs/master/system/i386/microvm.html)
-1. Alternative simple firmware (FW) that can boot Linux [called `qboot`](https://github.com/bonzini/qboot)
+1. Alternative simple {term}`firmware (FW) <FW>` that can boot Linux [called `qboot`](https://github.com/bonzini/qboot)
 1. Ubuntu has a QEMU build with reduced features matching these use cases called `qemu-system-x86-microvm`
 
 ## Why a special workload?
