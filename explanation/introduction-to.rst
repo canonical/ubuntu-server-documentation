@@ -49,6 +49,10 @@ help you navigate to the guides and other materials of most interest to you.
 
 * :ref:`Introduction to eBPF <introduction-to-ebpf>`
 
+**Cloud-init**
+
+* :ref:`Introduction to cloud-init <introduction-to-cloud-init>`
+
 .. toctree::
     :hidden:
 
@@ -69,3 +73,4 @@ help you navigate to the guides and other materials of most interest to you.
     Databases <intro-to/databases>
     High Availability <intro-to/high-availability>
     eBPF <intro-to/ebpf>
+    Cloud-init <intro-to/cloud-init>
