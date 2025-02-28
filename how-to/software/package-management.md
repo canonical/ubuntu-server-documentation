@@ -253,7 +253,9 @@ The `unattended-upgrades` package can be used to automatically update installed 
 sudo apt install unattended-upgrades
 ```
 
-To configure `unattended-upgrades`, edit `/etc/apt/apt.conf.d/50unattended-upgrades` and adjust the following to fit your needs:
+To configure `unattended-upgrades`, edit `/etc/apt/apt.conf.d/50unattended-upgrades`.
+
+The `Allowed-Origins` section specifies which release pockets will be used to gather updates from. See the [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#pockets) for additional information about each pocket. Adjust the section to fit your needs:
 
 ```text
 Unattended-Upgrade::Allowed-Origins {
