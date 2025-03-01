@@ -50,24 +50,7 @@ sudo apt install kdump-tools
 Starting with 16.04, the kernel crash dump mechanism is enabled by default.
 ```
 
-During the installation, you will be prompted with the following dialogs.
-
-```text
- |------------------------| Configuring kexec-tools |------------------------|
- |                                                                           |
- |                                                                           |
- | If you choose this option, a system reboot will trigger a restart into a  |
- | kernel loaded by kexec instead of going through the full system boot      |
- | loader process.                                                           |
- |                                                                           |
- | Should kexec-tools handle reboots (sysvinit only)?                        |
- |                                                                           |
- |                    <Yes>                       <No>                       |
- |                                                                           |
- |---------------------------------------------------------------------------|
-```
-
-Select 'Yes' to select `kexec-tools` for all reboots.
+During the installation, you will be prompted with the following dialog:
 
 ```text 
  |------------------------| Configuring kdump-tools |------------------------|
@@ -84,20 +67,15 @@ Select 'Yes' to select `kexec-tools` for all reboots.
  |---------------------------------------------------------------------------|
 ```
 
-'Yes' should be selected here as well, to enable `kdump-tools`.
+'Yes' should be selected to enable `kdump-tools`.  If you want to revisit your choice, you can use the `dpkg-reconfigure kdump-tools` command and answer 'Yes' or 'No'.
 
-If you ever need to manually enable the functionality, you can use the  `dpkg-reconfigure kexec-tools` and `dpkg-reconfigure kdump-tools` commands and answer 'Yes' to the questions. You can also edit `/etc/default/kexec` and set parameters directly:
-
-```text
-# Load a kexec kernel (true/false)
-LOAD_KEXEC=true
-```
-
-As well, edit `/etc/default/kdump-tools` to enable `kdump` by including the following line:
+As well, you will also need to edit `/etc/default/kdump-tools` to enable `kdump` by including the following line:
 
 ```text
 USE_KDUMP=1
 ```
+
+If you're disabling `kdump-tools`, either set USE_KDUMP=0 or remove the line from the file.
 
 If a reboot has not been done since installation of the `linux-crashdump` package, a reboot will be required in order to activate the `crashkernel= boot` parameter. Upon reboot, `kdump-tools` will be enabled and active.
 
