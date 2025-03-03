@@ -116,7 +116,7 @@ If you try to create an LVM physical volume on a whole device on which you have 
 
 Once you create an LVM logical volume that has active/passive multipath arrays as the underlying physical devices, you must add filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and {term}`fallbacks` whenever LVM scans the passive path if these devices are not filtered.
 
-If an active/passive arrays requires a command to make the passive path active, LVM will print a warning message when this occurs. To filter all SCSI devices in the LVM configuration file (`lvm.conf`), include the following filter in the devices section of the file:
+If an active/passive array requires a command to activate the passive path, LVM will print a warning message. To filter all SCSI devices in the LVM configuration file (`lvm.conf`), include the following filter in the devices section of the file:
 
 ```text
 filter = [ "r/block/", "r/disk/", "r/sd.*/", "a/.*/" ]
