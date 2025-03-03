@@ -22,7 +22,7 @@ To recap, our home network has the `10.10.10.0/24` address, and we want to conne
                                                   │   │     │   │     │   │
                                                   └───┘     └───┘     └───┘
 Reserved for VPN users:
-10.10.10.2-9
+10.10.10.10-49
 ```
 
 ## Router changes
