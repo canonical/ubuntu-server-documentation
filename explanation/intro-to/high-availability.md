@@ -127,7 +127,7 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 | tgt OR targetcli-fb* | [Ubuntu](https://launchpad.net/ubuntu/+source/tgt) \| [Upstream](https://github.com/fujita/tgt)
 | lvm2 | [Ubuntu](https://launchpad.net/ubuntu/+source/lvm2) \| [Upstream](https://sourceware.org/lvm2/)
 
-**LVM2** in a Shared-Storage Cluster Scenario
++ **LVM2** in a Shared-Storage Cluster Scenario
 
 **CLVM** - supported before **Ubuntu 20.04**
 
