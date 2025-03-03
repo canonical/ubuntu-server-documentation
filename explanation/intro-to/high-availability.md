@@ -86,7 +86,7 @@ Packages in this list are supported just like any other package available in the
 
 - **gfs2-utils** - Global File System 2 - filesystem tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
 
-- **Keepalived** - Provides simple and robust facilities for load balancing and high-availability to Linux systems and Linux based infrastructures. The load balancing framework relies on the well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module which provides Layer4 loadbalancing. It implements a set of checkers to dynamically and adaptively maintain and manage a load balanced server pool according to their health, while high-availability is achieved by the [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
+- **Keepalived** - Provides simple and robust facilities for load balancing and high availability to Linux systems and Linux-based infrastructures. The load balancing framework relies on the well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module which provides Layer4 load balancing. It implements a set of checkers to dynamically and adaptively maintain and manage a load-balanced server pool according to their health, while high availability is achieved by the [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
 
 ### Ubuntu HA community packages
 
