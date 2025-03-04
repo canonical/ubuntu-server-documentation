@@ -128,6 +128,7 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 | lvm2 | [Ubuntu](https://launchpad.net/ubuntu/+source/lvm2) \| [Upstream](https://sourceware.org/lvm2/)
 
 * **LVM2** in a Shared-Storage Cluster Scenario
+
   **CLVM** - supported before **Ubuntu 20.04**
 
   A distributed lock manager (DLM) is used to broker concurrent LVM metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a need to lock a particular set of objects.
