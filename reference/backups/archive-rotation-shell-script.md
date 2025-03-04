@@ -82,7 +82,7 @@ date
 ls -lh $dest/
 ```
 
-The script can be executed using the same methods as in our guide on {ref}`how to back up using shell scripts <back-up-using-shell-scripts>`.
+The script can be executed using the same methods as in this basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_.
 
 As discussed in the introduction, a copy of the backup archives and/or media can then be transferred off-site.
 
