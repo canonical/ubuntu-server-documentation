@@ -5,11 +5,10 @@ Backups and version control
 
 Example shell scripts for backing up your system.
 
-* :ref:`Basic backup shell script <basic-backup-shell-script>`
+* [DEPRECATED] `Basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_
 * :ref:`Archive rotation shell script <archive-rotation-shell-script>`
 
 .. toctree::
     :hidden:
 
-    Basic backup shell script <backups/basic-backup-shell-script>
     Archive rotation shell script <backups/archive-rotation-shell-script>
