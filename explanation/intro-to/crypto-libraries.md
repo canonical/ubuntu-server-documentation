@@ -24,11 +24,11 @@ Each one of these has its own implementation details, API, behavior, configurati
 
 ## Determining which libraries are being used by an application
 
-Ultimately, the only reliable way to determine how an application uses cryptography is by reading its documentation or inspecting its source code. But even then, you may discover that the code is not available and sometimes the documentation might lack this information. 
+Ultimately, the only reliable way to determine how an application uses cryptography is by reading its documentation or inspecting its source code. But even then, you may discover that the code is not available and sometimes the documentation might lack this information. If you are having problems finding answers to your crypto-related questions, there are some practical checks that can be made.
 
-Then the only way to find out these answers about crypto is for the sysadmin to go through a system and find out which crypto implementations are installed on the system and which configurations are being used. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
+Generally, the only way to find out these answers about crypto is for the sysadmin to go through a system and find out which crypto implementations are installed on the system and which configurations are being used. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
 
-If you are having problems finding answers to your crypto-related questions, there are some practical checks that can be made:
+The most common options are:
 
 ### Follow dynamic links
 
@@ -46,19 +46,17 @@ The main binary of an application can not depend directly on a crypto library, b
 
 The application could just plain call external binaries at runtime for its cryptographic operations, like calling out to `openssl` or `gnupg` to encrypt/decrypt data. This will hopefully be expressed in the dependencies of the package. If it's not, then it's a bug that should be reported.
 
-### Indirect usage of libraries or executables
+### Indirect use of libraries or executables
 
 The application could be using a third party library or executable which in turn could fall into any of the above categories.
 
-## Additional information for identifying crypto libraries
-
-Here are some more specific tips for identifying the crypto libraries used by an application on an Ubuntu system:
-
 ### Check documentation more carefully
 
-Look at the application documentation again. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also provide you with assistance if the application uses external crypto libraries or if it has its own implementation of crypto.
+Look at the application documentation again. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also provide you with assistance if the application uses external crypto libraries or whether it has its own implementation of crypto.
 
-### Use dpkg to check package dependencies (with example)
+## Detailed examples of how to locate crypto libraries
+
+### Use dpkg to check package dependencies
 
 Since package dependencies are a good way to check what is needed at runtime by the application, you can find out which package owns what file with the `dpkg -S` command. For example:
 
@@ -67,7 +65,7 @@ $ dpkg -S /usr/bin/lynx
 lynx: /usr/bin/lynx
 ```
 
-Now that you have the package's name in hand, check the package's dependencies and look for `Recommends`, as they are installed by default. Continuing with the current example, we can now do the following:
+Now that you have the package name, check the package's dependencies and look for `Recommends`, as they are installed by default. Using the current example, we can now do the following:
 
 ```bash
 $ dpkg -s lynx | grep -E "^(Depends|Recommends)"
@@ -77,9 +75,9 @@ Recommends: mime-support
 
 Now we can see that `lynx` links with `libgnutls30`, which answers our question: `lynx` uses the GnuTLS library for its cryptography operations.
 
-### Using ldd to list dynamic libraries (with example)
+### Using ldd to list dynamic libraries
 
-If an dynamic library is needed by an application, it should always be correctly identified in the list of dependencies for the application package. When that is not the case, or you need to identify what is needed by some plugin that is not part of the package, you can use some system tools to help identify the dependencies.
+If a dynamic library is needed by an application, it should always be correctly identified in the list of application package dependencies. When that is not the case, or you need to identify what is needed by some plugin that is not part of the package, you can use some system tools to help identify the dependencies.
 
 In this situation, you can use the `ldd` tool, which is installed in all Ubuntu systems. It lists all the dynamic libraries needed by the given binary, including dependencies of dependencies, i.e. the command is recursive. Going back to the `lynx` example:
 
