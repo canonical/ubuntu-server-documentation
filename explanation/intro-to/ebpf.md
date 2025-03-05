@@ -144,8 +144,8 @@ another use-case with eBPF then evolve this case into a more complex tool by mod
 
 ### Example - Find out which files QEMU is loading
 
-Let’s say you want to verify which binary files are loaded with a particular 
-command line command using QEMU. That is a truly complex program and sometimes 
+Let’s say you want to verify which binary files are loaded when running a particular 
+QEMU command. QEMU is a truly complex program and sometimes 
 it can be hard to make the connection from a command line to the files used from 
 /usr/share/qemu. This is hard to determine when you define the QEMU
 command line, but becomes problematic when more useful layers of abstraction are
