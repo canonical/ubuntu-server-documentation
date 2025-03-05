@@ -1,5 +1,5 @@
 (introduction-to-crypto-libraries)=
-# Introduction to cryptographic libraries
+# Introduction to cryptographic libraries 
 
 When choosing a crypto library, the following aspects should be considered to maintain security and compliance. Typically, they will want to answer questions such as: how can we ensure legacy crypto systems with known vulnerabilities are not being used? How can we enforce minimum key size requirements? And what criteria should we use to accept X.509 certificates when connecting to remote servers?
 However, the cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. When an application developer chooses a crypto library, they will consider many aspects, such as:
