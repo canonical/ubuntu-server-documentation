@@ -300,7 +300,7 @@ PID     COMM               FD ERR PATH
 
 When you read the example code change above, it is worth noticing - just like
 the existing `--name` option - this is filtering on the reporting side, not on
-event generation. So you shold be be aware and understand why you might receive
+event generation. So you should be aware and understand why you might receive
 eBPF messages like:
 
 ```text
