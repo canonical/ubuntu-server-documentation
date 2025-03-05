@@ -86,7 +86,7 @@ For instance,
 ```
 
 will print bash commands for all running bash shells in your system. Since 
-the information you can get via eBPF can be confidential, so you will have
+the information you can get via eBPF may be confidential, you will need to
 run any of it as root.  You may notice that there is also a
 `bashreadline-bpfcc` tool available from `bpfcc-tools`. Both of them provide
 similar features. The former is implemented in python with BCC while the latter
