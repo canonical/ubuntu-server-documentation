@@ -194,7 +194,7 @@ we can see them all as they happen across the whole system.
 ### Focusing on a particular type of file that is loading
 
 Imagine you only wanted to verify which `.bin` files this is loading. Of course, 
-we could just use `grep` on the output, but this whole section is showing 
+we could just use `grep` on the output, but this whole section is about showing
 eBPF examples that can get you started. So here we make the simplest change --
 modifying the python wrapper around the tracing eBPF code.
 Once you understand how to do this, you can go further in adapting them to your
