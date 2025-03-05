@@ -3,7 +3,7 @@
 
 [eBPF](https://ebpf.io/) is a powerful tool for server and system
 administrators, often described as a lightweight, sandboxed virtual
-machine within the kernel. Often it can handle performance monitoring,
+machine within the kernel. It is commonly used for performance monitoring,
 security, and network traffic processing without the need to modify or rebuild
 the kernel.
 
@@ -13,16 +13,15 @@ has access to the kernel data structures, providing more capabilities than
 tools limited to the interfaces exposed to user-space.
 
 BPF, which stands for "Berkeley Packet Filter", was originally designed to
-perform network packet filtering. Over time, its capabilities were extended far
-beyond that scope -- this is reflected in its current name, *extended Berkeley
-Packet Filter* (eBPF). Newer versions of the tool use more registers, supports
-64-bit registers, data stores (Maps), and more. As a result, eBPF has been decoupled
-from the kernel networking subsystem and it has been transformed into a tool with
-broader scope that not only manages the networking experience, but
-also provides tracing, profiling, observability, security, etc.  The terms eBPF and BPF
-are now used interchangeably, but refer to eBPF -- which has become a
-standalone term that no longer refers to *extended Berkeley Packet Filter* due
-to its aforementioned broader scope.
+perform network packet filtering. Over time, it has evolved into *extended Berkeley
+Packet Filter* (eBPF), a tool which contains many additional capabilities, including 
+the use of more registers, support for 64-bit registers, data stores (Maps), and 
+more.
+
+As a result, eBPF has been extended beyond the kernel networking subsystem and 
+it not only enhances the networking experience, but also provides tracing, 
+profiling, observability, security, etc.  The terms eBPF and BPF are  
+used interchangeably but both refer to eBPF now.
 
 ## How eBPF works
 
@@ -46,7 +45,7 @@ machine-code to optimize the program's execution.
 
 ## eBPF in Ubuntu Server
 
-Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection) are
+Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection or BCC) are
 available in every Ubuntu Server installation by default as part of our efforts 
 to [enhance the application developer's and sysadmin's experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).
@@ -152,13 +151,13 @@ it can be hard to make the connection from a command line to the files used from
 command line, but becomes problematic when more useful layers of abstraction are
 used like libvirt or LXD or even things on top like OpenStack.
 
-While `strace` could be used, but it would add additional overhead to the 
+While `strace` could be used, it would add additional overhead to the 
 investigation process since `strace` uses `ptrace`, and context
 switching may be required. Furthermore, if you need to monitor a system 
 to produce this answer, especially on a host running many VMs, `strace` 
 quickly reaches its limits.
 
-Instead, you can use `opensnoop` could be used to trace `open()` syscalls. In this case,
+Instead, `opensnoop` could be used to trace `open()` syscalls. In this case,
 we use `opensnoop-bpfcc` to have more parameters to tune it to our 
 needs. The example will use the following arguments:
 
