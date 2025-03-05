@@ -70,7 +70,7 @@ specific tasks). The ones ending in `-bpfcc` are BCC tools (from `bpfcc`)
 written in Python (you can also inspect those as you would inspect the `.bt`
 files).
 
-These `bpftrace` scripts are often demonstrate how a complex task can
+These `bpftrace` scripts often demonstrate how a complex task can
 be achieved in simple ways. The `-bpfcc` variants are often a bit more
 advanced, often providing more options and customizations.
 
