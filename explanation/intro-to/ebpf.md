@@ -98,7 +98,7 @@ perhaps the scripts) to choose which suits you best.
 
 One tool that is trivial but powerful is `execsnoop-bpfcc`, which allows
 you to answer common questions that should not be common - like "what
-other programs this action eventually calling?". It can be used to 
+other programs is this action eventually calling?". It can be used to 
 determine if a program calls another tool too often or calls something
 that you'd not expect. 
 
