@@ -102,7 +102,7 @@ other programs is this action eventually calling?". It can be used to
 determine if a program calls another tool too often or calls something
 that you'd not expect. 
 
-It has become a common way to ensure you understand what happens
+It has become a common way to help you understand what happens
 when a maintainer script is executed in a .deb package in Ubuntu.
 
 For this task, you'd run `execsnoop-bpfcc` with the following arguments:
