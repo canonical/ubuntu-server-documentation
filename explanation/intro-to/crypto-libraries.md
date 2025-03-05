@@ -107,8 +107,7 @@ $ ldd /usr/bin/lynx
 
 We again see the GnuTLS library (via `libgnutls.so.30`) in the list, and can reach the same conclusion.
 
-Another way to check for such dependencies but without recursion, is via `objdump`. You may need to be install it with the `binutils` package, as it's not mandatory.
-
+Another way to check for such dependencies (without recursion) is via `objdump`. You may need to install it with the `binutils` package, as it's not mandatory.
 The way to use it is to grep for the `NEEDED` string:
 
 ```bash
