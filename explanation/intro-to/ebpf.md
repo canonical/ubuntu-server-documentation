@@ -142,7 +142,7 @@ TIME     UID   PCOMM            PID     PPID    RET ARGS
 Let us look at another practical application of eBPF. This example is meant to show
 another use-case with eBPF then evolve this case into a more complex tool by modifying it.
 
-### Example - Find out which files is my QEMU loading
+### Example - Find out which files QEMU is loading
 
 Let’s say you want to verify which binary files are loaded with a particular 
 command line command using QEMU. That is a truly complex program and sometimes 
