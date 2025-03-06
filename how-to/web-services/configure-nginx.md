@@ -116,7 +116,7 @@ server {
 
 Thanks to the `return 301` line in the above configuration, anyone visiting the site on port 80 via an HTTP URL will get automatically redirected to the equivalent secure HTTPS URL.
 
-Refer to the {ref}`security - certificates <certificates>` page in this manual for details on how to create and manage certificates, and the {ref}`OpenSSL <openssl>` page for additional details on configuring and using that service. The {ref}`GnuTLS <openssl>` section explains how to configure different SSL protocol versions and their associated ciphers.
+Refer to the {ref}`security - certificates <certificates>` page in this manual for details on how to create and manage certificates, and the {ref}`OpenSSL <openssl>` page for additional details on configuring and using that service. The {ref}`GnuTLS <gnutls>` section explains how to configure different SSL protocol versions and their associated ciphers.
 
 For example, to generate a self-signed certificate, you might run a set of commands similar to these:
 
