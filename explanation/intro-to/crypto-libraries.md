@@ -2,6 +2,7 @@
 # Introduction to cryptographic libraries 
 
 When choosing a crypto library, the following aspects should be considered to maintain security and compliance. Typically, you will want to answer questions such as: How can we ensure legacy crypto systems with known vulnerabilities are not being used? How can we enforce minimum key size requirements? And what criteria should we use to accept X.509 certificates when connecting to remote servers?
+
 However, the cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. When an application developer chooses a crypto library, they will consider many aspects, such as:
 
   * Technical requirements
@@ -26,9 +27,10 @@ Each one of these has its own implementation details, API, behavior, configurati
 
 Ultimately, the only reliable way to determine how an application uses cryptography is by reading its documentation or inspecting its source code. But even then, you may discover that the code is not available and sometimes the documentation might lack this information. If you are having problems finding answers to your crypto-related questions, there are some practical checks that can be made.
 
-Generally, the only way to find out these answers about crypto is for the sysadmin to go through a system and find out which crypto implementations are installed on the system and which configurations are being used. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
+To find out what libraries are being used, one generally needs to check all of the installed crypto implementations and their respective configurations. To make things even more complicated, sometimes an application implements its own crypto, without using anything external.
 
-The most common options are:
+If you are having problems finding answers to your crypto-related questions, there are some practical checks that can be made.
+
 
 ### Follow dynamic links
 
@@ -52,7 +54,7 @@ The application could be using a third party library or executable which in turn
 
 ### Check documentation more carefully
 
-Look at the application documentation again. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also provide you with assistance if the application uses external crypto libraries or whether it has its own implementation of crypto.
+Read the application documentation again. It might have crypto options directly in its own configuration files, or point at specific crypto configuration files installed on the system. This may also clarify whether the application uses external crypto libraries or it has its own implementation of crypto.
 
 ## Detailed examples of how to locate crypto libraries
 
@@ -65,7 +67,7 @@ $ dpkg -S /usr/bin/lynx
 lynx: /usr/bin/lynx
 ```
 
-Now that you have the package name, check the package's dependencies and look for `Recommends`, as they are installed by default. Using the current example, we can now do the following:
+Now that you have the package name, check the package's dependencies. You should also look for `Recommends`, as they are installed by default. Using the current example, we can now do the following:
 
 ```bash
 $ dpkg -s lynx | grep -E "^(Depends|Recommends)"
@@ -144,7 +146,7 @@ lynx => /usr/bin/lynx (interpreter => /lib64/ld-linux-x86-64.so.2)
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6
 ```
 
-### Check package headers for static linking (with example)
+### Check package headers for static linking
 
 Identifying which libraries were used in a static build is a bit more involved. There are two ways, and they are complementary most of the time:
 
