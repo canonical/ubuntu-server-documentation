@@ -615,19 +615,24 @@ Glossary
         Related topic(s): Networking
 
     GPSD
-        *Work in Progress*
+        GPSD (GPS daemon) reads data from a GPS receiver and makes it available as a shared resource to multiple applications (e.g., :term:`Chrony`) to use for precise time synchronization.
 
-    gpsd
-        *Work in Progress*
+        Related topic(s): Networking
 
     GPUs
-        *Work in Progress*
+        A Graphics Processing Unit (GPU) enhances graphics rendering for a computer and virtual machines running inside of it.
+
+        Related topic(s): Graphics, and Virtualisation and containers.
 
     Graylog
-        *Work in Progress*
+        A data collector platform for storing, analysing, and interpreting logs. These logs are received from a :term:`gelf` logging driver in Docker.
+
+        Related topic(s): Containers
 
     Group Policy Object
-        *Work in Progress*
+        A set of configuration rules used to manage and enforce security and system behaviours across users or computers within an Active Directory (AD) object.
+
+        Related topic(s): Active Directory integration
 
     grubnetaa
         *Work in Progress*

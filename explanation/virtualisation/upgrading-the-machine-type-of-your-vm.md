@@ -8,7 +8,7 @@ Upgrading the machine type of a virtual machine (VM) can be thought of in the sa
 There are several reasons why you might want to update the machine type of an existing VM. For example, to:
 
 - Improve performance with additional computing power
-- Add a virtual GPU
+- Add a virtual {term}`GPU <GPUs>`
 - Scale up the allocated resources to cope with increased workloads
 - Obtain the latest security fixes and features
 - Continue using a guest created on a now-unsupported release
