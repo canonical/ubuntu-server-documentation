@@ -20,8 +20,7 @@ more.
 
 As a result, eBPF has been extended beyond the kernel networking subsystem and 
 it not only enhances the networking experience, but also provides tracing, 
-profiling, observability, security, etc.  The terms eBPF and BPF are  
-used interchangeably but both refer to eBPF now.
+profiling, observability, security, etc. The terms eBPF and BPF are used interchangeably but both refer to eBPF now.
 
 ## How eBPF works
 
@@ -50,8 +49,8 @@ available in every Ubuntu Server installation by default as part of our efforts
 to [enhance the application developer's and sysadmin's experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).
 
-In Ubuntu, the BCC identifies bottlenecks, investigates performance degradation, traces
-specific function calls, and creates custom monitoring tools to collect data on specific 
+In Ubuntu, you can use tools like the BCC to identify bottlenecks, investigate performance degradation, trace
+specific function calls, and create custom monitoring tools to collect data on specific 
 kernel or user-space processes without disrupting running services.
 
 Both `bpftrace` and `bpfcc-tools` install sets of tools to handle these
@@ -140,7 +139,7 @@ TIME     UID   PCOMM            PID     PPID    RET ARGS
 ## eBPF can be modified to your needs
 
 Let us look at another practical application of eBPF. This example is meant to show
-another use-case with eBPF then evolve this case into a more complex tool by modifying it.
+another use-case with eBPF then evolve this case into a more complex one by modifying it.
 
 ### Example - Find out which files QEMU is loading
 
@@ -191,11 +190,11 @@ Of course the QEMU process opens plenty of things: shared libraries, config
 files, entries in `/{sys,dev,proc}`, and much more. But with `opensnoop-bpfcc`,
 we can see them all as they happen across the whole system.
 
-### Focusing on a particular type of file that is loading
+### Focusing on a specific file type
 
 Imagine you only wanted to verify which `.bin` files this is loading. Of course, 
 we could just use `grep` on the output, but this whole section is about showing
-eBPF examples that can get you started. So here we make the simplest change --
+eBPF examples to get you started. So here we make the simplest change --
 modifying the python wrapper around the tracing eBPF code.
 Once you understand how to do this, you can go further in adapting them to your
 own needs by delving into the eBPF code itself, and from there to create your
@@ -265,7 +264,7 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 ```
 
 Running the modified version now allows you to probe for specific file 
-names, like all the .bin files:
+names, like all the `.bin` files:
 
 ```bash
 $ sudo /usr/sbin/opensnoop-bpfcc.new --contains '.bin' --name qemu-system-x86
