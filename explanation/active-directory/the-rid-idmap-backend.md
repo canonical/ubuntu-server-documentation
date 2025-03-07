@@ -1,7 +1,7 @@
 (the-rid-idmap-backend)=
 # The rid idmap backend
 
-The [rid](https://manpages.ubuntu.com/manpages/noble/man8/idmap_rid.8.html) idmap backend provides an algorithmic mapping between Linux uids/gids and Active Directory SIDs. That means that a given SID will always map to the same uid/gid, and vice-versa, within the same domain.
+The [rid](https://manpages.ubuntu.com/manpages/noble/man8/idmap_rid.8.html) idmap backend provides an algorithmic mapping between Linux uids/{term}`gids <GID>` and Active Directory SIDs. That means that a given SID will always map to the same uid/gid, and vice-versa, within the same domain.
 
 To use this backend, we have to choose two or more ID ranges:
 - a range for the domain we are joining

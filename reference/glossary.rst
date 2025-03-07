@@ -569,23 +569,32 @@ Glossary
 
         Related topic(s): High availability, and Storage.
 
-    GiB
-        *Work in Progress*
+    GiB 
+        A gigabyte (GiB) is a unit of storage equal to 1024^3 bytes. It is commonly used to describe the size of a disk or Random Access Memory (RAM).
+
+        Related topic(s): Storage
 
     GID
-        *Work in Progress*
+        A Group ID (GID) is an identifier for a collection of users. It helps administrators enforce system or file 
+        access permissions on multiple users at once.
+
+        Related topic(s): Active Directory integration, Containers, Kerberos, Multipath, OpenLDAP, Samba, Security, SSSD.
 
     gitolite
-        *Work in Progress*
+        Gitolite is a tool installed on a central server for managing git repositories and controlling access to them, all via the command line. The central server becomes a git server.
+
+        Related topic(s): Backups and version control
 
     GKE
-        *Work in Progress*
+        Google Kubernetes Engine (GKE) is a managed Kubernetes service provided by Google cloud.
 
     GL
-        *Work in Progress*
+        GL (Graphics Library) is an :term:`API` for interacting with a graphics card, enabling it to perform better rendering.
+
+        Related topic(s): Graphics
 
     GNU
-        *Work in Progress*
+       *Work in Progress*
 
     GnuTLS
         *Work in Progress*

@@ -106,7 +106,7 @@ If there are no errors, you should test how it works after a reboot. Your remote
 
 ## Changing the share ownership
 
-If you need to change the owner of a share, you'll need to add a **UID** (short for 'User ID') or **GID** (short for 'Group ID') parameter to the share's mount options:
+If you need to change the owner of a share, you'll need to add a **UID** (short for 'User ID') or **{term}`GID`** (short for 'Group ID') parameter to the share's mount options:
 
 ```text
 //servername/sharename /media/windowsshare cifs uid=ubuntuusername,credentials=/home/ubuntuusername/.smbcredentials 0 0

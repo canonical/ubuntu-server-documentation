@@ -26,7 +26,7 @@ Prerequisites
 
 * **Hardware:**
 
-  The default Multipass VM will need **5 GiB of disk space**, and
+  The default Multipass VM will need **5** :term:`GiB` **of disk space**, and
   **1 GiB of memory**.
 
 * **Software: -- Multipass**

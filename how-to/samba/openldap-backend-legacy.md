@@ -122,7 +122,7 @@ The `smbldap-populate` script will then add the LDAP objects required for Samba.
 sudo smbldap-populate -g 10000 -u 10000 -r 10000
 ```
 
-The `-g`, `-u` and `-r` parameters tell `smbldap-tools` where to start the numeric `uid` and `gid` allocation for the LDAP users. You should pick a range start that does not overlap with your local `/etc/passwd` users.
+The `-g`, `-u` and `-r` parameters tell `smbldap-tools` where to start the numeric `uid` and {term}`gid` allocation for the LDAP users. You should pick a range start that does not overlap with your local `/etc/passwd` users.
 
 You can create a LDIF file containing the new Samba objects by executing `sudo smbldap-populate -e samba.ldif`. This allows you to look over the changes making sure everything is correct. If it is, rerun the script without the `'-e'` switch. Alternatively, you can take the LDIF file and import its data as per usual.
 
