@@ -16,7 +16,7 @@ However, the cryptographic library landscape is vast and complex, and there are 
 Among the most popular and widely used libraries and frameworks are:
 
   * OpenSSL
-  * GnuTLS
+  * {term}`GnuTLS`
   * NSS
   * GnuPG
   * {term}`gcrypt`

@@ -594,19 +594,25 @@ Glossary
         Related topic(s): Graphics
 
     GNU
-       *Work in Progress*
+        GNU's Not Unix (GNU) is an operating system containing several free software packages. It can be used in combination with the Linux kernel.
+
+        Related topic(s): Active Directory integration, Cryptography, Debugging, High availability, Networking, Performance, Samba, Security, and Server installation.
 
     GnuTLS
-        *Work in Progress*
+        GNU's Not Unix Transport Layer Security (GnuTLS) is a GNU software package that secures data-in-transit by implementing the :term:`SSL`, :term:`TLS` and :term:`DTLS` protocol.
+
+        Related topic(s): Cryptography, Web services, and OpenLDAP.
 
     GPG
-        *Work in Progress*
+        GNU Privacy Guard (GPG) is a GNU software package that secures data-at-rest before sending it to a recepient.
 
-    GPL
-        *Work in Progress*
+        Related topic(s): Managing software
 
     GPS
-        *Work in Progress*
+        Global Positioning System (GPS) is a collection of satellites that provides accurate time using radio signals from their atomic clocks. A GPS receiver 
+        plugged into a computer can sync with these satellites and generate :term:`PPS` signal, which delivers ultra-accurate time that applications can use as a time source.
+
+        Related topic(s): Networking
 
     GPSD
         *Work in Progress*

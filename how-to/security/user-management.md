@@ -40,7 +40,7 @@ By default, the initial user created by the Ubuntu installer is a member of the 
 
 ## Adding and deleting users
 
-Managing local users and groups differs very little from most other GNU/Linux operating systems. Ubuntu and other Debian-based distributions encourage the use of the `adduser` package for account management.
+Managing local users and groups differs very little from most other {term}`GNU`/Linux operating systems. Ubuntu and other Debian-based distributions encourage the use of the `adduser` package for account management.
 
 ### Add a user
 

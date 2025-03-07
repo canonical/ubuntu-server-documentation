@@ -74,7 +74,7 @@ Packages in this list are supported just like any other package available in the
 
 - **Fence Agents** - Scripts that execute node fencing actions, given a target and fence device parameters.
 
-- **crmsh** - Advanced command-line interface for High-Availability cluster management in GNU/Linux.
+- **crmsh** - Advanced command-line interface for High-Availability cluster management in {term}`GNU`/Linux.
 
 - **pcs** - Pacemaker command line interface and GUI. It permits users to easily view, modify and create pacemaker based clusters. `pcs` also provides `pcsd`, which operates as a GUI and remote server for `pcs`. Together `pcs` and `pcsd` form the recommended configuration tool for use with pacemaker. *NOTE: It was added to the [main] repository in Ubuntu Lunar Lobster (23.10)*.
 
