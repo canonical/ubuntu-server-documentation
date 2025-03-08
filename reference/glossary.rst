@@ -644,9 +644,6 @@ Glossary
     GUI
         *Work in Progress*
 
-    GUIs
-        *Work in Progress*
-
     GV
         *Work in Progress*
 
