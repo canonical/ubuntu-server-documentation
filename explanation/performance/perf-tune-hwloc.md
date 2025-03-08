@@ -11,7 +11,7 @@ topology of the chip internal structures as well as any associated devices
 like PCI cards, NVME devices and memory.
 
 By default the tools provide command line interfaces, but it can also render
-those complex relations in a GUI environment. Depending on which one you want
+those complex relations in a {term}`GUI` environment. Depending on which one you want
 to use you can install them with `apt install hwloc-nox` or `apt install hwloc`
 respectively.
 

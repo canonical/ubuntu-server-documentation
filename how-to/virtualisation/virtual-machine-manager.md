@@ -11,7 +11,7 @@ To install `virt-manager`, enter:
 sudo apt install virt-manager
 ```
 
-Since `virt-manager` requires a Graphical User Interface (GUI) environment we recommend installing it on a workstation or test machine instead of a production server. To connect to the local libvirt service, enter:
+Since `virt-manager` requires a {term}`Graphical User Interface (GUI) <GUI>` environment we recommend installing it on a workstation or test machine instead of a production server. To connect to the local libvirt service, enter:
 
 ```bash
 virt-manager
