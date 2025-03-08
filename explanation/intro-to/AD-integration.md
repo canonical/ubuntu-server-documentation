@@ -12,7 +12,7 @@ Joining an Ubuntu system to an Active Directory domain (or a forest) means that 
 
 Depending on how the join was performed, and the software stack available on the Ubuntu system, the following is also possible:
 - authenticate and recognize users from different domains that make up the forest
-- apply certain group policy objects (not covered here)
+- apply certain {term}`group policy objects <Group Policy Object>` (not covered here)
 - provide file and print services to users from the domain
 
 To set up your Active Directory integrations, we suggest first familiarising yourself with the following key topics:
