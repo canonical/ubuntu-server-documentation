@@ -629,20 +629,23 @@ Glossary
     Group Policy Object
         *Work in Progress*
 
-    grubnetaa
-        *Work in Progress*
-
-    grubnetx
-        *Work in Progress*
-
     GSSAPI
-        *Work in Progress*
+        Generic Security Services Application Program Interface (GSSAPI) is a vendor agnostic API that uses an existing 
+        communication protocol to establish a secure communication between applications. It does this securely by verifying user 
+        credentials, ensuring that data being transmitted remains unchanged, preventing unauthorized access, and securely negotiating encryption keys.
+
+        Related topic(s): Cryptography
 
     GTK
-        *Work in Progress*
+        GIMP Toolkit (GTK) is a library used to create :term:`graphical user interfaces (GUIs) <GUI>`. It provides a visual 
+        interface for interacting with the Bacula Director when managing backup-related operations.
+
+        Related topic(s): Graphics, and Backups and version control
 
     GUI
-        *Work in Progress*
+        Graphical User Interface (GUI) is a visual representation of operations within a computer. It is usually represented as icons rather than text only.
+
+        Related topic(s): Backups and version control, Cryptography, Performance, Security, Software, and Virtualisation.
 
     GUIs
         *Work in Progress*
