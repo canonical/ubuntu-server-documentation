@@ -205,7 +205,7 @@ root@server:/etc/openvpn# ip addr show dev tun0
 
 ## Simple client configuration
 
-There are various different OpenVPN client implementations -- both with and without GUIs. You can read more about clients in {ref}`our page on OpenVPN Clients <openvpn-client-implementations>`. For now, we use the command-line/service-based OpenVPN client for Ubuntu, which is part of the same package as the server. So you must install the `openvpn` package again on the client machine:
+There are various different OpenVPN client implementations -- both with and without {term}`GUIs <GUI>`. You can read more about clients in {ref}`our page on OpenVPN Clients <openvpn-client-implementations>`. For now, we use the command-line/service-based OpenVPN client for Ubuntu, which is part of the same package as the server. So you must install the `openvpn` package again on the client machine:
 
 ```bash
 sudo apt install openvpn
