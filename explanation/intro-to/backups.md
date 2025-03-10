@@ -32,6 +32,6 @@ Bacula's advanced features and support for additional customization make it a go
 
 You can fully tailor the backup process to your specific requirements with shell scripts. The advantage of shell scripts over using backup utilities is they offer full flexibility and customization. 
 
-Refer to this guide for instructions on {ref}`how to use shell scripts for backups <back-up-using-shell-scripts>` -- or you can take a look at our reference examples:
-  * {ref}`A basic backup shell script <basic-backup-shell-script>`
+Refer to this guide for instructions on {ref}`how to use shell scripts for backups <back-up-using-shell-scripts>` -- or you can take a look at these examples:
+  * Basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_
   * {ref}`An example of archive rotation with shell scripts <archive-rotation-shell-script>`
