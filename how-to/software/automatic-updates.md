@@ -129,11 +129,16 @@ Unattended-Upgrade::Package-Blacklist {
 Just be careful to not overuse the power of regular expressions: readability is key.
 
 ## Notifications
+Besides logging, `unattended-upgrades` can also send out reports via email. There are two options that control this behavior in `/etc/apt/apt.conf.d/50unattended-upgrades`:
 
-Configuring `Unattended-Upgrade::Mail` in `/etc/apt/apt.conf.d/50unattended-upgrades` will enable `unattended-upgrades` to email an administrator detailing any packages that need upgrading or have problems.
+ - `Unattended-Upgrade::Mail "user@example.com";`: If set to an email address, this option wil have the package send out an email to this address containing a report of which packages were upgraded, and/or if problems were encountered. The default value is empty, meaning no email is sent.
+ - `Unattended-Upgrade::MailReport "on-change";`: This option can take the following values:
+   - `always`: Always send a report, regardless if upgrades were applied or not.
+   - `only-on-error`: Only send a report if there was an error.
+   - `on-change`: Only send a report if upgrades were applied. This is the default value.
 
 > **Note**:
-> Sending out emails from unattended services and jobs like these requires separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable to send messages to a mail server.
+> Sending out emails like this requires the separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable of sending messages to a mail server.
 
 ## Reboots
 TBD
