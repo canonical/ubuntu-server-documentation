@@ -4,7 +4,7 @@ Graphics
 *********
 
 
-**On-system GPU**
+**On-system** :term:`GPU <GPUs>`
 
 * :ref:`Install NVIDIA drivers <nvidia-drivers-installation>`
 
