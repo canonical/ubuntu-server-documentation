@@ -1,4 +1,4 @@
-<h2 id='heading--automatic-updates'>Automatic updates</h2>
+# Automatic updates
 
 The `unattended-upgrades` package can be used to automatically update installed packages and can be configured to update all packages or to only install security updates. First, install the package by entering the following in a terminal:
 
