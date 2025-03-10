@@ -482,7 +482,7 @@ Glossary
         Filesystem Hierarchy Standard (FHS) is a standard that defines the directory structure and contents in Linux and Unix-like operating systems.
 
     FileSet
-        A FileSet defines a group of directories that will be included when performing a backup job using {term}`Bacula`.
+        A FileSet defines a group of directories that will be included when performing a backup job using :term:`Bacula`.
 
         Related topic(s): :term:`Storage <storages>`
 
@@ -610,7 +610,7 @@ Glossary
 
     GPS
         Global Positioning System (GPS) is a collection of satellites that provides accurate time using radio signals from their atomic clocks. A GPS receiver 
-        plugged into a computer can sync with these satellites and generate :term:`PPS` signal, which delivers ultra-accurate time that applications can use as a time source.
+        plugged into a computer can sync with these satellites and generate PPS signal, which delivers ultra-accurate time that applications can use as a time source.
 
         Related topic(s): Networking
 
@@ -649,14 +649,14 @@ Glossary
     GUI
         *Work in Progress*
 
-    GUIs
-        *Work in Progress*
-
-    GV
-        *Work in Progress*
-
     GZIP
-        *Work in Progress*
+        GNU Zip is a :term:`GNU` software package used to reduce a files size of a backup.
+        
+        - When applied directly to files, it replaces the original file type with a ".gz" type.
+        - When used in Bacula's :term:`FileSet`, it reduces the storage size of backed-up directories within Bacula's storage volumes.
+        - When used to reduce the size of a folder, it works in combination with a tar tool which first combines multiple files into a single archive, before applying GZIP's size-reduction technique.
+
+        Related topic(s): Backups and version control, and Security.
 
     HA
         *Work in Progress*
