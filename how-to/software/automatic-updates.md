@@ -34,9 +34,9 @@ These two steps are controlled via the `Update-Package-Lists` and `Unattended-Up
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Unattended-Upgrade "1";
 ```
-The value for each option is a time-based value. When used just as a number, it means number of days. If set to zero, that action is disabled. If set to `1` (the default), then it means once per day.
+The value for each option is a time-based value. When used just as a number, it means number of days. If set to zero, that action is disabled. If set to `1` (the default), then it means every day. A value of `2` means every two days, and so on.
 
-Therefore, to disable unattended upgrades, we can set these options to zero, like so:
+Therefore, to disable unattended upgrades, set these options to zero:
 ```text
 APT::Periodic::Update-Package-Lists "0";
 APT::Periodic::Unattended-Upgrade "0";
@@ -44,15 +44,16 @@ APT::Periodic::Unattended-Upgrade "0";
 
 These actions are triggered by systemd timer units at a set time but with a random delay: `apt-daily.timer` and `apt-daily-upgrade.timer`. These timers activate the corresponding services that run the `/usr/lib/apt/apt.systemd.daily` script.
 
-However, it may happen that if the server is off at the time the timer unit elapses, the timer will be triggered immediately at the next startup. As a result, they will often run on system startup and thereby cause immediate activity and hold the apt-lock.
+However, it may happen that if the server is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the *RandomizedDelaySec* value). As a result, they may often run on system startup and thereby cause immediate activity and hold the apt-lock.
 
-In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To adapt this behaviour, we can change/override the configuration of both APT's timer units [`apt-daily-upgrade.timer, apt-daily.timer`]. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute, for example with `Persistent=delay`:
+In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To adapt this behaviour, we can change/override the configuration of both APT's timer units `apt-daily-upgrade.timer` and `apt-daily.timer`. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute setting it to *false*:
 
-```
+```ini
 [Timer]
-Persistent=delay
+Persistent=false
 ```
 
+See the explanation for the *Persistent* option in [systemd.timer manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/systemd.timer.5.html) for more details.
 
 ## Where to pick updates from
 
