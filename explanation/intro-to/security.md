@@ -62,7 +62,7 @@ repository.
 
 We also recommend that you use Canonical's Livepatch service for 
 every Ubuntu system, which applies kernel patches for high and 
-critical severity vulnerabilities while the system is running without 
+critical severity vulnerabilities while the system is running, without 
 the need for an immediate reboot -- which reduces downtime. Learn more
 [about Livepatch here](https://ubuntu.com/security/livepatch).
 
