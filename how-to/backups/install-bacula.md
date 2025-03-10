@@ -13,7 +13,7 @@ Bacula is made up of several components and services that are used to manage bac
   
   - Text-based command line.
     
-  - Gnome-based GTK+ Graphical User Interface (GUI) interface.
+  - Gnome-based {term}`GTK+ <GTK>` {term}`Graphical User Interface (GUI) <GUI>`.
     
   - wxWidgets GUI interface.
 

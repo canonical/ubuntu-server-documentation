@@ -149,4 +149,4 @@ Sending in a crash report like this will not immediately result in the creation 
 ## Further reading
 
 - See the [Reporting Bugs](https://help.ubuntu.com/community/ReportingBugs) Ubuntu wiki page.
-- Also, [the Apport page](https://wiki.ubuntu.com/Apport) has some useful information. Though some of it pertains to using a GUI.
+- Also, [the Apport page](https://wiki.ubuntu.com/Apport) has some useful information. Though some of it pertains to using a {term}`GUI`.
