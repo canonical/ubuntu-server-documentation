@@ -110,4 +110,4 @@ Once you have made your changes and are happy with them, you can
 :ref:`find out how to submit them <submit-work>`.
 
 .. _Diátaxis: https://diataxis.fr/
-.. _working with git: https://github.com/canonical/open-documentation-academy/blob/main/getting-started/using_git.md
+.. _working with git: https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/
