@@ -146,6 +146,9 @@ Once the package is installed, edit `/etc/apticron/apticron.conf`, to set the em
 EMAIL="root@example.com"
 ```
 
+> **Note**:
+> Sending out emails from unattended services and jobs like these requires separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable to send messages to a mail server.
+
 ## Reboots
 TBD
 
