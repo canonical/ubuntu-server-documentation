@@ -132,20 +132,6 @@ Just be careful to not overuse the power of regular expressions: readability is 
 
 Configuring `Unattended-Upgrade::Mail` in `/etc/apt/apt.conf.d/50unattended-upgrades` will enable `unattended-upgrades` to email an administrator detailing any packages that need upgrading or have problems.
 
-Another useful package is `apticron`. `apticron` will configure a cron job to email an administrator information about any packages on the system that have updates available, as well as a summary of changes in each package.
-
-To install the `apticron` package, enter the following command in a terminal:
-
-```bash
-sudo apt install apticron
-```
-
-Once the package is installed, edit `/etc/apticron/apticron.conf`, to set the email address and other options:
-
-```text
-EMAIL="root@example.com"
-```
-
 > **Note**:
 > Sending out emails from unattended services and jobs like these requires separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable to send messages to a mail server.
 
