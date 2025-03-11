@@ -141,6 +141,6 @@ Once the discussion has concluded, and you have made any agreed changes, the PR
 will be approved and then merged. Congratulations (and thank you)! You are now
 an open source contributor!
 
-.. _getting started with git: https://github.com/canonical/open-documentation-academy/blob/main/getting-started/using_git.md
+.. _getting started with git: https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/
 .. _Create a Pull Request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 .. _Link your pull request to your issue: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue
