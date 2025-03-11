@@ -132,7 +132,7 @@ This section shows how to back up specific directories on a single host to a loc
     }
   }
   ```
-  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using GZIP.
+  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using {term}`GZIP`.
 
 - Next, create a new **Schedule** for the backup job:
   ```text
