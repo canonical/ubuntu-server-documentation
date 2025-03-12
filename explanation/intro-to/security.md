@@ -27,9 +27,6 @@ is not  intended to be exhaustive, but rather a starting point.
 To read the most thorough treatment of security in Ubuntu, go to the
 [Ubuntu Security documentation](https://ubuntu.com/security).
 
-When you are considering security for your Ubuntu system, you should
-think about using Canonical's services--Ubuntu Pro, Expanded Security 
-Maintenance, and Livepatch.
 
 ## Ubuntu Pro
 
