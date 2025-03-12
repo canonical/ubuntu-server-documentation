@@ -22,7 +22,7 @@ need to do more research into your security outlook. There are specific
 packages available for Ubuntu Servers that can provide additional security, and
 we suggest some packages in the {ref}`advanced security <advanced-security>` 
 section that you might want to investigate. Again, the list in this section
-is not  intended to be exhaustive, but rather a starting point.
+is not intended to be exhaustive, but rather a starting point.
 
 For the most thorough treatment of security in Ubuntu, we also recommend reading the [Ubuntu Security documentation](https://ubuntu.com/security).
 
