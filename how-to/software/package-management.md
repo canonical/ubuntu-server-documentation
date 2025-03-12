@@ -211,7 +211,7 @@ You can edit the file to enable and disable repositories. For example, to disabl
 # deb cdrom:[DISTRO-APT-CD-NAME - Release i386 (20111013.1)]/ DISTRO-SHORT-CODENAME main restricted
 ```
 
-<h2 id='heading--automatic-updates'>Automatic updates</h2>
+## Automatic updates
 It's possible to setup an Ubuntu system with Automatic Updates, such that certain types of upgrades are applied automatically. In fact, the default for Ubuntu Server is to automatically apply security updates. Please see the {ref}`Automatic updates <automatic-updates>` section for details.
 
 ### Extra repositories
