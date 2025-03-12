@@ -52,7 +52,7 @@ For detailed setup instructions for multipath configuration see {ref}`DM-Multipa
 
 ## Example of a multipath device in use
 
-For example, a node with two host bus adapters (HBAs) attached to a storage controller, with two ports, via a single un-zoned {term}`FC` switch sees four devices:  `/dev/sda`, `/dev/sdb`, `/dev/sdc`, and `/dev/sdd`. Multipath creates a single device with a unique WWID that reroutes I/O to those four underlying devices according to the multipath configuration.
+For example, a node with two host bus adapters ({term}`HBAs`) attached to a storage controller, with two ports, via a single un-zoned {term}`FC` switch, sees four devices:  `/dev/sda`, `/dev/sdb`, `/dev/sdc`, and `/dev/sdd`. Multipath creates a single device with a unique WWID that reroutes I/O to those four underlying devices according to the multipath configuration.
 
 When the `user_friendly_names` configuration option is set to 'yes', the name of the multipath device is set to `mpathn`. When new devices are brought under the control of multipath, the new devices may be seen in two different places under the `/dev` directory: `/dev/mapper/mpathn` and `/dev/dm-n`.
 

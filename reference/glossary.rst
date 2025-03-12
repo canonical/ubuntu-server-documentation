@@ -718,19 +718,32 @@ H
 .. glossary::
 
     HA
-        *Work in Progress*
+        High Availability (HA) is the process of ensuring that a system is always up. To achieve this, a redundant system is setup that either
+        takes over when the main system is down or runs alongside the main system to load balance the workload.
+
+        Related topic(s): High availability, and OpenLDAP.
 
     HBAs
-        *Work in Progress*
+        Host Bus Adapters (HBAs) are interface cards that connect a server to a storage device.
+
+        Related topic(S): Device mapper multipathing and Server installation
 
     HMAC
-        *Work in Progress*
+        A Hash-based Message Authentication Code (HMAC) is a type of :term:`Message Authentication Code (MAC) <MAC>`.
+        While a general MAC may use various techniques during combination, HMAC follows a structured way. When a message and its 
+        HMAC are sent, the receiver verifies the integrity by computing the HMAC again - if the message is altered, the value will differ.
+
+        Related topic(S): High availability, Kerberos, Cryptography, and Security.
 
     HMC
-        *Work in Progress*
+        Hardware Management Console (HMC) is used to manage IBM servers. It can handle tasks like configuring network settings, loading Ubuntu installation files and installing the OS.
+
+        Related topic(S): Server installation
 
     hostgroup
-        *Work in Progress*
+        A group of backend web or database servers with similar configurations.
+
+        Related topic(S): Observability
 
     hostname
         *Work in Progress*
@@ -1130,6 +1143,9 @@ M
 
     MAAS
         *Work in Progress*
+    
+    MAC
+        A MAC verifies that a message hasn't been modified during transmission by combining a shared secret key between the sender and reciever, and a hash function.
 
     macvlan
         *Work in Progress*

@@ -205,7 +205,7 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
 
 * Now make sure a HTTP server is running with `/srv/www` as web-server root (in this particular example).
 
-* Next steps need to be done at the hardware management console (HMC). First, connect to the HMC and proceed with the 'Load From Removable Media and Server' task.
+* Next steps need to be done at the {term}`hardware management console (HMC) <HMC>`. First, connect to the HMC and proceed with the 'Load From Removable Media and Server' task.
 
 * Then, start the 'Load from Removable Media or Server' task under 'Recovery' --> 'Load from Removable Media or Server' on your specific LPAR that you are going to install, and fill out the following fields (the contents will be of course different on your system):
 
