@@ -24,8 +24,7 @@ we suggest some packages in the {ref}`advanced security <advanced-security>`
 section that you might want to investigate. Again, the list in this section
 is not  intended to be exhaustive, but rather a starting point.
 
-To read the most thorough treatment of security in Ubuntu, go to the
-[Ubuntu Security documentation](https://ubuntu.com/security).
+For the most thorough treatment of security in Ubuntu, we also recommend reading the [Ubuntu Security documentation](https://ubuntu.com/security).
 
 
 ## Ubuntu Pro
