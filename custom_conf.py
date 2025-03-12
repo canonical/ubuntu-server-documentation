@@ -170,6 +170,7 @@ custom_extensions = [
     'sphinxcontrib.jquery',
     'sphinxcontrib.mermaid',
     'sphinxext.rediraffe',
+    'hoverxref.extension',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -187,7 +188,14 @@ custom_extensions = [
 custom_required_modules = [
     'sphinxcontrib-mermaid',
     'sphinxext-rediraffe',
+    'sphinx-hoverxref',
 ]
+
+# Configure hoverxref options
+hoverxref_role_types = {
+    'term': 'tooltip',
+}
+hoverxref_roles = ['term',]
 
 # Add redirects, so they can be updated here to land with docs being moved
 rediraffe_branch = "main"
