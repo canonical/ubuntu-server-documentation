@@ -11,6 +11,9 @@ Glossary
 
 .. _terms_A:
 
+A
+-
+
 .. glossary::
 
     ABI
@@ -118,6 +121,9 @@ Glossary
 
 .. _terms_B:
 
+B
+-
+
 .. glossary::
 
     backend
@@ -172,6 +178,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_C:
+
+C
+-
 
 .. glossary::
 
@@ -342,6 +351,9 @@ Glossary
 
 .. _terms_D:
 
+D
+-
+
 .. glossary::
 
     DAC
@@ -451,6 +463,9 @@ Glossary
 
 .. _terms_E:
 
+E
+-
+
 .. glossary::
 
     EAL
@@ -485,6 +500,13 @@ Glossary
 
     ESXi
         A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
+
+.. _terms_F:
+
+F
+-
+
+.. glossary::
 
     failover
         In a Storage Area Network (SAN) environment, this occurs when data flows into an alternative I/O path because a cable, switch, or controller in the current path failed.
@@ -567,6 +589,9 @@ Glossary
         Related topic(s): Virtualisation, Networking, Virtualisation and containers, Graphics, and Server installation.
 
 .. _terms_G:
+
+G
+-
 
 .. glossary::
 
@@ -687,6 +712,9 @@ Glossary
 
 .. _terms_H:
 
+H
+-
+
 .. glossary::
 
     HA
@@ -750,6 +778,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_I:
+
+I
+-
 
 .. glossary::
 
@@ -887,6 +918,9 @@ Glossary
 
 .. _terms_J:
 
+J
+-
+
 .. glossary::
 
     jitter
@@ -909,6 +943,9 @@ Glossary
         See `JSON <https://www.json.org/json-en.html/>`_ for more details.
 
 .. _terms_K:
+
+K
+-
 
 .. glossary::
 
@@ -955,6 +992,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_L:
+
+L
+-
 
 .. glossary::
 
@@ -1083,6 +1123,9 @@ Glossary
 
 .. _terms_M:
 
+M
+-
+
 .. glossary::
 
     MAAS
@@ -1179,6 +1222,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_N:
+
+N
+-
 
 .. glossary::
 
@@ -1298,6 +1344,9 @@ Glossary
 
 .. _terms_O:
 
+O
+-
+
 .. glossary::
 
     OCF
@@ -1364,6 +1413,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_P:
+
+P
+-
 
 .. glossary::
 
@@ -1513,6 +1565,9 @@ Glossary
 
 .. _terms_Q:
 
+Q
+-
+
 .. glossary::
 
     qa
@@ -1534,6 +1589,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_R:
+
+R
+-
 
 .. glossary::
 
@@ -1607,6 +1665,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_S:
+
+S
+-
 
 .. glossary::
 
@@ -1891,6 +1952,9 @@ Glossary
 
 .. _terms_T:
 
+T
+-
+
 .. glossary::
 
     targetcli
@@ -1978,6 +2042,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_U:
+
+U
+-
 
 .. glossary::
 
@@ -2073,6 +2140,9 @@ Glossary
 
 .. _terms_V:
 
+V
+-
+
 .. glossary::
 
     Valgrind
@@ -2149,6 +2219,9 @@ Glossary
 
 .. _terms_W:
 
+W
+-
+
 .. glossary::
 
     WAL
@@ -2201,6 +2274,9 @@ Glossary
 
 .. _terms_X:
 
+X
+-
+
 .. glossary::
 
     Xen
@@ -2217,6 +2293,9 @@ Glossary
 
 .. _terms_Y:
 
+Y
+-
+
 .. glossary::
 
     YAML
@@ -2226,6 +2305,9 @@ Glossary
         *Work in Progress*
 
 .. _terms_Z:
+
+Z
+-
 
 .. glossary::
 
