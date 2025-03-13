@@ -215,7 +215,7 @@ You can edit the file to enable and disable repositories. For example, to disabl
 
 It's possible to setup an Ubuntu system with Automatic Updates, such that certain types of upgrades are applied automatically. In fact, the default for Ubuntu Server is to automatically apply security updates. Please see the {ref}`Automatic updates <automatic-updates>` section for details.
 
-### Extra repositories
+## Extra repositories
 
 In addition to the officially-supported package repositories available for Ubuntu, there are also community-maintained repositories which add thousands more packages for potential installation. Two of the most popular are the *Universe* and *Multiverse* repositories. These repositories are not officially supported by Ubuntu, but because they are maintained by the community they generally provide packages which are safe for use with your Ubuntu computer.
 
