@@ -132,6 +132,31 @@ Now when the tool runs, that PPA will be considered for upgrades and is listed i
 2025-03-13 22:44:34,855 INFO The list of kept packages can't be calculated in dry-run mode.
 ```
 
+The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release`) file, which can be found at the URL of the repository, or locally on the system after an *apt-get update* command was run. Locally they are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
+
+```text
+/var/lib/apt/lists/ppa.launchpadcontent.net_canonical-server_server-backports_ubuntu_dists_noble_InRelease
+```
+
+Which has contents:
+```text
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: LP-PPA-canonical-server-server-backports
+Label: Server Team Backports
+Suite: noble
+Version: 24.04
+Codename: noble
+Date: Tue, 03 Dec 2024  6:00:43 UTC
+Architectures: amd64 arm64 armhf i386 ppc64el riscv64 s390x
+Components: main
+Description: Ubuntu Noble 24.04
+(...)
+```
+And there we can see the distribution *Codename*, and the *Origin*.
+
+
 ## How to block certain packages
 Specific packages can also be excluded from an update. This is controlled via the `Unattended-Upgrade::Package-Blacklist` configuration option in `/etc/apt/apt.conf.d/50unattended-upgrades`, which contains a list of [Python Regular Expressions](https://docs.python.org/3/howto/regex.html). Each line of this list is checked against the available package updates, and if there is a match, that package is not upgraded.
 
