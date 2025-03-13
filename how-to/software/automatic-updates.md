@@ -95,6 +95,42 @@ Unattended-Upgrade::Allowed-Origins {
 //  "${distro_id}:${distro_codename}-backports";
 };
 ```
+The `Origin` field is a standard field used in package repositories. By default, *unattended-upgrades* will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
+
+A very popular package repository type is a Launchpad PPAs[REF NEEDED]. PPAs are normally referred to using the format *ppa:\<user\>/\<name\>*. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
+
+To use a PPA in the *Allowed-Origins* configuration, we need its *Origin* field. For PPAs, it is in the format *LP-PPA-\<user\>-\<name\>*. Adding it to the `Allowed-Origins` configuration would result in the following (continuing from the example above):
+```text
+Unattended-Upgrade::Allowed-Origins {
+    "${distro_id}:${distro_codename}";
+    "${distro_id}:${distro_codename}-security";
+    // Extended Security Maintenance; doesn't necessarily exist for
+    // every release and this system may not have it installed, but if
+    // available, the policy for updates is such that unattended-upgrades
+    // should also install from here by default.
+    "${distro_id}ESMApps:${distro_codename}-apps-security";
+    "${distro_id}ESM:${distro_codename}-infra-security";
+    "${distro_id}:${distro_codename}-updates";
+//  "${distro_id}:${distro_codename}-proposed";
+//  "${distro_id}:${distro_codename}-backports";
+    "LP-PPA-canonical-server-server-backports:${distro_codename}";
+};
+```
+
+Note that due to the hyphens that are both a separator, and also part of the name in this case, once the origin is written out like above, it becomes difficult to see at a glance which part is the username, and which part is the PPA name. But that's ok, because it's the whole text that is used in the comparison.
+
+Now when the tool runs, that PPA will be considered for upgrades and is listed in *Allowed origins*:
+```text
+2025-03-13 22:44:29,802 INFO Starting unattended upgrades script
+2025-03-13 22:44:29,803 INFO Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security, o=LP-PPA-canonical-server-server-backports,a=noble
+2025-03-13 22:44:29,803 INFO Initial blacklist:
+2025-03-13 22:44:29,803 INFO Initial whitelist (not strict):
+2025-03-13 22:44:33,029 INFO Option --dry-run given, *not* performing real actions
+2025-03-13 22:44:33,029 INFO Packages that will be upgraded: ibverbs-providers libibverbs1 rdma-core
+2025-03-13 22:44:33,029 INFO Writing dpkg log to /var/log/unattended-upgrades/unattended-upgrades-dpkg.log
+2025-03-13 22:44:34,421 INFO All upgrades installed
+2025-03-13 22:44:34,855 INFO The list of kept packages can't be calculated in dry-run mode.
+```
 
 ## How to block certain packages
 Specific packages can also be excluded from an update. This is controlled via the `Unattended-Upgrade::Package-Blacklist` configuration option in `/etc/apt/apt.conf.d/50unattended-upgrades`, which contains a list of [Python Regular Expressions](https://docs.python.org/3/howto/regex.html). Each line of this list is checked against the available package updates, and if there is a match, that package is not upgraded.
@@ -231,9 +267,6 @@ Below are the logs of an *unattended-upgrades* run that started at 20:43. The to
 2025-03-13 20:43:40,201 WARNING Found /var/run/reboot-required, rebooting
 2025-03-13 20:43:40,207 WARNING Shutdown msg: b"Reboot scheduled for Thu 2025-03-13 20:45:00 UTC, use 'shutdown -c' to cancel."
 ```
-
-## Including other origins
-TBD
 
 ## Fleet considerations
 TBD
