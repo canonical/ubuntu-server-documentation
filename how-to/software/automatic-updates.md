@@ -211,7 +211,26 @@ All upgrades installed
 ```
 
 ## Reboots
-TBD
+Sometimes a system needs to be rebooted to fully apply an update. Such updates can use a mechanism in Ubuntu to let the system know that a reboot is recommended. `unattended-upgrades` can benefit from this mechanism and optionally reboot the system automatically when needed.
+
+Reboots can be very disruptive, specially if the system fails to come back. There are some configuration options where this behavior can be adjusted:
+
+ * `Unattended-Upgrade::Automatic-Reboot "false";`: If this option is set to `true`, the system will be rebooted ***without confirmation*** at the end of an upgrade run if a reboot was requested. The default value is `false`.
+ * `Unattended-Upgrade::Automatic-Reboot-WithUsers "true";`: Automatically reboot even if there are users currently logged in when `Unattended-Upgrade::Automatic-Reboot` (the option above) is set to `true`. The default value is `true`.
+ * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the [shutdown](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html) command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
+
+Below are the logs of an *unattended-upgrades* run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
+```text
+2025-03-13 20:43:25,923 INFO Starting unattended upgrades script
+2025-03-13 20:43:25,924 INFO Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security
+2025-03-13 20:43:25,924 INFO Initial blacklist:
+2025-03-13 20:43:25,924 INFO Initial whitelist (not strict):
+2025-03-13 20:43:29,082 INFO Packages that will be upgraded: libc6 python3-jinja2
+2025-03-13 20:43:29,082 INFO Writing dpkg log to /var/log/unattended-upgrades/unattended-upgrades-dpkg.log
+2025-03-13 20:43:39,532 INFO All upgrades installed
+2025-03-13 20:43:40,201 WARNING Found /var/run/reboot-required, rebooting
+2025-03-13 20:43:40,207 WARNING Shutdown msg: b"Reboot scheduled for Thu 2025-03-13 20:45:00 UTC, use 'shutdown -c' to cancel."
+```
 
 ## Including other origins
 TBD
