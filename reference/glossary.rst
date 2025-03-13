@@ -2,8 +2,14 @@
 
     We are currently compiling and defining terms for this glossary. If you would like to help, please visit our :doc:`contributions page <../contributing/index>` for details on how to get involved.
 
+Jump to:
+
+:ref:`A <terms_A>` | :ref:`B <terms_B>` | :ref:`C <terms_C>` | :ref:`D <terms_D>` | ref:`E <terms_E>` | :ref:`F <terms_F>` | :ref:`G <terms_G>` | :ref:`H <terms_H>` | :ref:`I <terms_I>` | :ref:`J <terms_J>` | :ref:`K <terms_K>` | :ref:`L <terms_L>` | :ref:`M <terms_M>` | :ref:`N <terms_N>` | :ref:`O <terms_O>` | :ref:`P <terms_P>` | :ref:`Q <terms_Q>` | :ref:`R <terms_R>` | :ref:`S <terms_S>` | :ref:`T <terms_T>` | :ref:`U <terms_U>` | :ref:`V <terms_V>` | :ref:`W <terms_W>` | :ref:`X <terms_X>` | :ref:`Y <terms_Y>` | :ref:`Z <terms_Z>`
+
 Glossary
 ========
+
+.. _terms_A:
 
 .. glossary::
 
@@ -110,6 +116,10 @@ Glossary
     AX
         *Work in Progress*
 
+.. _terms_B:
+
+.. glossary::
+
     backend
         *Work in Progress*
 
@@ -160,6 +170,10 @@ Glossary
 
     Byobu
         *Work in Progress*
+
+.. _terms_C:
+
+.. glossary::
 
     CA
         *Work in Progress*
@@ -326,6 +340,10 @@ Glossary
     CX
         *Work in Progress*
 
+.. _terms_D:
+
+.. glossary::
+
     DAC
         **Discretionary access control**:
         A form of access control where the owner of a resource can grant/revoke permissions to other users.
@@ -430,6 +448,10 @@ Glossary
     DTLS
         **Datagram Transport Layer Security**:
         A protocol that provides security for datagram-based communication, such as UDP. It is designed to offer similar security features as TLS but adapted for the connectionless nature of datagram protocols.
+
+.. _terms_E:
+
+.. glossary::
 
     EAL
         **Environment Abstraction Layer**:
@@ -543,6 +565,10 @@ Glossary
         - In a physical device, firmware configures :term:`PCIe` devices like GPUs or network cards.
 
         Related topic(s): Virtualisation, Networking, Virtualisation and containers, Graphics, and Server installation.
+
+.. _terms_G:
+
+.. glossary::
 
     gcplogs
         A logging driver that allows logs to be forwarded from a Docker container running in Google Cloud to the Google Cloud Logging service.
@@ -659,6 +685,10 @@ Glossary
 
         Related topic(s): Backups and version control, and Security.
 
+.. _terms_H:
+
+.. glossary::
+
     HA
         *Work in Progress*
 
@@ -718,6 +748,10 @@ Glossary
 
     HWE
         *Work in Progress*
+
+.. _terms_I:
+
+.. glossary::
 
     ICAO
         *Work in Progress*
@@ -851,6 +885,10 @@ Glossary
     ISP
         *Work in Progress*
 
+.. _terms_J:
+
+.. glossary::
+
     jitter
         Jitter is the variation in delay or latency between when data packets are sent and when they are received over a network, causing irregular arrival times at the destination. This variation is often caused by network congestion, packet loss, poor hardware performance or differences in the path packets take. 
 
@@ -869,6 +907,10 @@ Glossary
         This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. Due to its simplicity, it is an ideal lightweight data interchange language.
 
         See `JSON <https://www.json.org/json-en.html/>`_ for more details.
+
+.. _terms_K:
+
+.. glossary::
 
     KDC
         *Work in Progress*
@@ -911,6 +953,10 @@ Glossary
 
     KVM
         *Work in Progress*
+
+.. _terms_L:
+
+.. glossary::
 
     LAN
         *Work in Progress*
@@ -1035,6 +1081,10 @@ Glossary
     LXD
         *Work in Progress*
 
+.. _terms_M:
+
+.. glossary::
+
     MAAS
         *Work in Progress*
 
@@ -1127,6 +1177,10 @@ Glossary
 
     MySQL
         *Work in Progress*
+
+.. _terms_N:
+
+.. glossary::
 
     Nagios
         *Work in Progress*
@@ -1242,6 +1296,10 @@ Glossary
     NVSwitch
         *Work in Progress*
 
+.. _terms_O:
+
+.. glossary::
+
     OCF
         *Work in Progress*
 
@@ -1305,7 +1363,11 @@ Glossary
     OVS
         *Work in Progress*
 
-    pam
+.. _terms_P:
+
+.. glossary::
+
+    PAM
         *Work in Progress*
 
     parm
@@ -1449,6 +1511,10 @@ Glossary
     PXELINUX
         *Work in Progress*
 
+.. _terms_Q:
+
+.. glossary::
+
     qa
         *Work in Progress*
 
@@ -1466,6 +1532,10 @@ Glossary
 
     quickstart
         *Work in Progress*
+
+.. _terms_R:
+
+.. glossary::
 
     rangesize
         *Work in Progress*
@@ -1535,6 +1605,10 @@ Glossary
 
     runtime
         *Work in Progress*
+
+.. _terms_S:
+
+.. glossary::
 
     SAN
         *Work in Progress*
@@ -1815,6 +1889,10 @@ Glossary
     Systemd
         *Work in Progress*
 
+.. _terms_T:
+
+.. glossary::
+
     targetcli
         *Work in Progress*
 
@@ -1898,6 +1976,10 @@ Glossary
 
     TXT
         *Work in Progress*
+
+.. _terms_U:
+
+.. glossary::
 
     UDA
         *Work in Progress*
@@ -1989,6 +2071,10 @@ Glossary
     UVTool
         *Work in Progress*
 
+.. _terms_V:
+
+.. glossary::
+
     Valgrind
         *Work in Progress*
 
@@ -2061,6 +2147,10 @@ Glossary
     vsftpd
         *Work in Progress*
 
+.. _terms_W:
+
+.. glossary::
+
     WAL
         *Work in Progress*
 
@@ -2109,6 +2199,10 @@ Glossary
     wxWidgets
         *Work in Progress*
 
+.. _terms_X:
+
+.. glossary::
+
     Xen
         *Work in Progress*
 
@@ -2121,11 +2215,19 @@ Glossary
     xml
         *Work in Progress*
 
+.. _terms_Y:
+
+.. glossary::
+
     YAML
         *Work in Progress*
 
     Yubikey
         *Work in Progress*
+
+.. _terms_Z:
+
+.. glossary::
 
     zFCP
         *Work in Progress*
