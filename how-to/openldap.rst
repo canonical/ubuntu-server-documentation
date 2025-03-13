@@ -9,6 +9,7 @@ OpenLDAP
 * :ref:`Simple LDAP user and group management <ldap-users-and-groups>`
 * :ref:`OpenLDAP and Transport Layer Security (TLS) <ldap-and-tls>`
 * :ref:`Backup and restore OpenLDAP <ldap-backup-and-restore>`
+* :ref:`Introduction to pass-through authentication with saslauthd <ldap-saslauthd-authentication-intro>`
 * :ref:`Set up OpenLDAP with plain auth using saslauthd and Kerberos <ldap-saslauthd-kerberos>`
 
 .. toctree::
@@ -20,5 +21,6 @@ OpenLDAP
     LDAP users and groups <openldap/users-and-groups>
     LDAP and TLS <openldap/ldap-and-tls>
     Backup and restore <openldap/backup-and-restore>
-    LDAP plain auth with Kerberos <openldap/ldap-saslauthd-kerberos>
+    Introduction to pass-through auth <openldap/ldap-saslauthd-authentication-intro>
+    Pass-through auth with Kerberos <openldap/ldap-saslauthd-kerberos>
 
