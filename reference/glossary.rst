@@ -4,7 +4,7 @@
 
 Jump to:
 
-:ref:`A <terms_A>` | :ref:`B <terms_B>` | :ref:`C <terms_C>` | :ref:`D <terms_D>` | ref:`E <terms_E>` | :ref:`F <terms_F>` | :ref:`G <terms_G>` | :ref:`H <terms_H>` | :ref:`I <terms_I>` | :ref:`J <terms_J>` | :ref:`K <terms_K>` | :ref:`L <terms_L>` | :ref:`M <terms_M>` | :ref:`N <terms_N>` | :ref:`O <terms_O>` | :ref:`P <terms_P>` | :ref:`Q <terms_Q>` | :ref:`R <terms_R>` | :ref:`S <terms_S>` | :ref:`T <terms_T>` | :ref:`U <terms_U>` | :ref:`V <terms_V>` | :ref:`W <terms_W>` | :ref:`X <terms_X>` | :ref:`Y <terms_Y>` | :ref:`Z <terms_Z>`
+:ref:`A <terms_A>` | :ref:`B <terms_B>` | :ref:`C <terms_C>` | :ref:`D <terms_D>` | :ref:`E <terms_E>` | :ref:`F <terms_F>` | :ref:`G <terms_G>` | :ref:`H <terms_H>` | :ref:`I <terms_I>` | :ref:`J <terms_J>` | :ref:`K <terms_K>` | :ref:`L <terms_L>` | :ref:`M <terms_M>` | :ref:`N <terms_N>` | :ref:`O <terms_O>` | :ref:`P <terms_P>` | :ref:`Q <terms_Q>` | :ref:`R <terms_R>` | :ref:`S <terms_S>` | :ref:`T <terms_T>` | :ref:`U <terms_U>` | :ref:`V <terms_V>` | :ref:`W <terms_W>` | :ref:`X <terms_X>` | :ref:`Y <terms_Y>` | :ref:`Z <terms_Z>`
 
 Glossary
 ========
