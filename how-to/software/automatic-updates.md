@@ -131,14 +131,84 @@ Just be careful to not overuse the power of regular expressions: readability is 
 ## Notifications
 Besides logging, `unattended-upgrades` can also send out reports via email. There are two options that control this behavior in `/etc/apt/apt.conf.d/50unattended-upgrades`:
 
- - `Unattended-Upgrade::Mail "user@example.com";`: If set to an email address, this option wil have the package send out an email to this address containing a report of which packages were upgraded, and/or if problems were encountered. The default value is empty, meaning no email is sent.
- - `Unattended-Upgrade::MailReport "on-change";`: This option can take the following values:
+ - `Unattended-Upgrade::Mail "user@example.com";`: If set to an email address, this option wil have the package send out an email to this address containing an activity report. When this value is empty, or not set, (which is the default), no report is sent.
+ - `Unattended-Upgrade::MailReport "on-change";`: This option controls when a report is sent:
    - `always`: Always send a report, regardless if upgrades were applied or not.
    - `only-on-error`: Only send a report if there was an error.
    - `on-change`: Only send a report if upgrades were applied. This is the default value.
 
 > **Note**:
 > Sending out emails like this requires the separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable of sending messages to a mail server.
+
+### Notification examples
+Here are some email examples (lines wrapped for better legibility).
+
+No changes applied, no errors. This would only be sent if `Unattended-Upgrade::MailReport` is set to `always`:
+```email
+Subject: unattended-upgrades result for <hostname>: SUCCESS
+
+Unattended upgrade result: No packages found that can be upgraded
+ unattended and no pending auto-removals
+
+Unattended-upgrades log:
+Starting unattended upgrades script
+Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security,
+ o=UbuntuESMApps,a=noble-apps-security,
+ o=UbuntuESM,a=noble-infra-security, o=Ubuntu,a=noble,
+ o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security,
+ o=UbuntuESM,a=noble-infra-security
+Initial blacklist:
+Initial whitelist (not strict):
+No packages found that can be upgraded unattended and no pending auto-removals
+```
+
+Upgrades applied, no errors. This is the default email report, when `Unattended-Upgrade::MailReport` is set to `on-change `:
+```email
+Subject: unattended-upgrades result for nuc1: SUCCESS
+
+Unattended upgrade result: All upgrades installed
+
+Packages that were upgraded:
+ linux-firmware
+
+Package installation log:
+Log started: 2025-03-13  06:19:10
+Preparing to unpack
+ .../linux-firmware_20240318.git3b128b60-0ubuntu2.10_amd64.deb ...
+Unpacking linux-firmware (20240318.git3b128b60-0ubuntu2.10) over
+ (20240318.git3b128b60-0ubuntu2.9) ...
+Setting up linux-firmware (20240318.git3b128b60-0ubuntu2.10) ...
+Processing triggers for initramfs-tools (0.142ubuntu25.5) ...
+update-initramfs: Generating /boot/initrd.img-6.8.0-55-generic
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+Log ended: 2025-03-13  06:19:26
+
+
+
+Unattended-upgrades log:
+Starting unattended upgrades script
+Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security,
+ o=UbuntuESMApps,a=noble-apps-security,
+ o=UbuntuESM,a=noble-infra-security, o=Ubuntu,a=noble,
+ o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security,
+ o=UbuntuESM,a=noble-infra-security
+Initial blacklist:
+Initial whitelist (not strict):
+Packages that will be upgraded: linux-firmware
+Writing dpkg log to /var/log/unattended-upgrades/unattended-upgrades-dpkg.log
+All upgrades installed
+```
 
 ## Reboots
 TBD
