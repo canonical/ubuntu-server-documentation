@@ -315,8 +315,10 @@ Just keep in mind that the security exposure is still there: it's just the updat
 ### Manual steps required
 While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe *unattended-upgrades* should be disabled on such systems. But do make an effort to consider blocklisting such packages instead, if they are known to trigger such manual steps. In that case, the system can still benefit from all the other upgrades that might become available.
 
-### To much of a risk
-- where the risk of an automatic update breaking things is too high, or higher than staying without a security update for example
+### Too much of a risk
+Even with all the care in the world, applying updates to a running system comes with risk. Ubuntu believes that risk to be less than the risk of NOT applying a security update, which is why *unattended-upgrades* will apply security updates by default. But for some specific systems, the risk vs benefit equation might favor staying put and not applying an update unless specifically requested.
+
+Always keep in mind, however, that specific packages can be blocked from receiving updates. For example, if a particular system runs a critical application that could break if certain libraries on the system are updated, then perhaps an acceptable compromise is to block these library packages from receiving upgrades, instead of disabling the whole feature.
 
 ### Fleet management
 - if another update mechanism is at play (Landscape, for example)
