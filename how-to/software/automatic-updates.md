@@ -326,7 +326,7 @@ The *unattended-upgrades* feature is helpful, does its job, and even sends out r
  * maintenance windows: Different systems might require different maintenance windows. Some can be updated anytime, others only on weekends, etc.
  * canary rollouts: The ability to rollout updates to an initial group of systems, and over time increase the number of systems which will receive the update.
 
-An example of such a Fleet Management software for Ubuntu systems is [Landsacpe](https://ubuntu.com/landscape).
+An example of such a Fleet Management software for Ubuntu systems is [Landscape](https://ubuntu.com/landscape).
 
 
 ## Testing and troubleshooting
