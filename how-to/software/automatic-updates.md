@@ -302,16 +302,13 @@ Below are the logs of an *unattended-upgrades* run that started at 20:43. The to
 2025-03-13 20:43:40,207 WARNING Shutdown msg: b"Reboot scheduled for Thu 2025-03-13 20:45:00 UTC, use 'shutdown -c' to cancel."
 ```
 
-## Fleet considerations
-TBD
-
 ## When should it be disabled
 While automatic security updates are enabled in Ubuntu by default, in some situations it might make sense to disable this feature, or carefully limit its reach.
 
 Here are some considerations.
 
 ### Systems which just get redeployed
-Some systems are not meant to apply updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually very lean and very focused on the applications they run, and might not even have tools to self-update installed.
+Some systems are not meant to receive updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually very lean and very focused on the applications they run, and might not even have tools to self-update installed.
 
 Just keep in mind that the security exposure is still there: it's just the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
 
@@ -321,7 +318,7 @@ While Ubuntu updates rarely require manual steps to complete an upgrade (at most
 ### To much of a risk
 - where the risk of an automatic update breaking things is too high, or higher than staying without a security update for example
 
-### Another update mechanism is in use
+### Fleet management
 - if another update mechanism is at play (Landscape, for example)
 
 ## Testing and troubleshooting
