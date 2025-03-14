@@ -9,7 +9,7 @@ In this guide, we will walk through how to use a shell script for backing up fil
  
 ## The shell script
 
-The following shell script, which is now deprecated uses `tar` to create an archive file on a remotely mounted NFS file system. The archive filename is determined using additional command line utilities. For more details about the script, check out the basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_.
+The following shell script uses `tar` to create an archive file on a remotely mounted NFS file system. The archive filename is determined using additional command line utilities. For more details about the script, check out the `basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_.
 
 ```sh
 #!/bin/bash

@@ -471,7 +471,7 @@ cloud-images/introduction reference/clouds/find-cloud-images/
 ubuntu-ha-migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 
-# basic-backup-shell-script reference/backups/basic-backup-shell-script/
+basic-backup-shell-script reference/backups/basic-backup-shell-script/
 
 backups-archive-rotation reference/backups/archive-rotation-shell-script/
 archive-rotation-shell-script reference/backups/archive-rotation-shell-script/
