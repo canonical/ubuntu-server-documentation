@@ -11,7 +11,7 @@ But as the name suggests, it can apply other types of updates, and with interest
 
 And more. Let's explore some of these options.
 
-## Overview
+## Configuration overview
 If for some reason the package is not present, it can be installed with the following command:
 
 ```bash
