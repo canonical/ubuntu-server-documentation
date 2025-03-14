@@ -81,7 +81,7 @@ Unattended-Upgrade::Allowed-Origins {
 };
 ```
 
-> ***Note***:
+> **Note**:
 >
 > The double “//” indicates a comment, so whatever follows "//" will not be evaluated.
 
