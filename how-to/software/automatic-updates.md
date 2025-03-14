@@ -11,6 +11,10 @@ But as the name suggests, it can apply other types of updates, and with interest
 
 And more. Let's explore some of these options.
 
+> **IMPORTANT**:
+>
+> Just adding another package repository to an Ubuntu system WILL NOT make *unattended-upgrades* consider it for updates! This is explained "Where to pick updates from " **XXX HELP WITH LINKING XXX** later in this document.
+
 ## Configuration overview
 If for some reason the package is not present, it can be installed with the following command:
 
@@ -26,8 +30,9 @@ Important files and directories:
 
 Right after installation, automatic installation of security updates will be enabled, including [Expanded Security Maintenance (ESM)](https://ubuntu.com/security/esm) if that is available on the system. By default, `unattended-upgrades` runs once per day.
 
+
 ## Enabling and disabling unattended upgrades
-Unattended upgrades performs the equivalent of `apt-get update` and `apt-get upgrade` (see {ref}`Package management <package-management>` for details on these commands XXX HELP WITH LINKING XXX). First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
+Unattended upgrades performs the equivalent of `apt-get update` and `apt-get upgrade` (see {ref}`Package management <package-management>` for details on these commands **XXX HELP WITH LINKING XXX**). First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
 
 These two steps are controlled via the `Update-Package-Lists` and `Unattended-Upgrade` options in `/etc/apt/apt.conf.d/20auto-upgrades`:
 ```text
@@ -76,7 +81,8 @@ Unattended-Upgrade::Allowed-Origins {
 };
 ```
 
-> **Note**:
+> ***Note***:
+>
 > The double “//” indicates a comment, so whatever follows "//" will not be evaluated.
 
 If you want to also allow non-security updates to be applied automatically, then uncomment the line about `-updates`, like so:
@@ -161,6 +167,7 @@ And there we can see the distribution *Codename*, and the *Origin*.
 Specific packages can also be excluded from an update. This is controlled via the `Unattended-Upgrade::Package-Blacklist` configuration option in `/etc/apt/apt.conf.d/50unattended-upgrades`, which contains a list of [Python Regular Expressions](https://docs.python.org/3/howto/regex.html). Each line of this list is checked against the available package updates, and if there is a match, that package is not upgraded.
 
 > **Note**:
+>
 > Keep in mind that blocking a package might prevent other updates from being installed if they depend on the blocked package!
 
 For example, this will block all packages that start with `linux-` from being automatically upgraded:
@@ -179,6 +186,7 @@ Unattended-Upgrade::Package-Blacklist {
 ```
 Here, the use of the `$` character marks the end of the package name (in regular expression terms, it's the end of the line, i.e., the end of the match).
 > **Note**:
+>
 > The regular expressions used here behave as if the "`^`" character is present at the start, i.e., the `libc6$` expression will match `libc6`, but will NOT match `glibc6` for example.
 
 Of course, this being a regular expression means we could also write the above like this:
@@ -199,6 +207,7 @@ Besides logging, `unattended-upgrades` can also send out reports via email. Ther
    - `on-change`: Only send a report if upgrades were applied. This is the default value.
 
 > **Note**:
+>
 > Sending out emails like this requires the separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable of sending messages to a mail server.
 
 ### Notification examples
