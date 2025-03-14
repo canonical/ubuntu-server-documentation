@@ -718,7 +718,10 @@ H
 .. glossary::
 
     HA
-        *Work in Progress*
+        High Availability (HA) is the process of ensuring that a system is always up. To achieve this, a redundant system is setup that either
+        takes over when the main system is down or run alongside the main system to load balancing the workload.
+
+        Related topic(s): High availability, and OpenLDAP.
 
     HBAs
         *Work in Progress*
