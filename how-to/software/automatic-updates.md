@@ -316,7 +316,7 @@ Some systems are not meant to apply updates, and just get redeployed instead fro
 Just keep in mind that the security exposure is still there: it's just the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
 
 ### Manual steps required
-- cases when manual steps are required after or before an update (but that update could be blocklisted)
+While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe *unattended-upgrades* should be disabled on such systems. But do make an effort to consider blocklisting such packages instead, if they are known to trigger such manual steps. In that case, the system can still benefit from all the other upgrades that might become available.
 
 ### To much of a risk
 - where the risk of an automatic update breaking things is too high, or higher than staying without a security update for example
