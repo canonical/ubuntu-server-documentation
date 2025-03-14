@@ -208,7 +208,7 @@ Besides logging, `unattended-upgrades` can also send out reports via email. Ther
 
 > **Note**:
 >
-> Sending out emails like this requires the separate configuration of a package like `ssmtp` or another minimalistic mail client that is capable of sending messages to a mail server.
+> Sending out emails like this requires the separate configuration of a package like [ssmtp](https://manpages.ubuntu.com/manpages/noble/man8/ssmtp.8.html) or another minimalistic mail client that is capable of sending messages to a mail server.
 
 ### Notification examples
 Here are some email examples (lines wrapped for better legibility).
