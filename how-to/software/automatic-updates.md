@@ -296,9 +296,6 @@ Below are the logs of an *unattended-upgrades* run that started at 20:43. The to
 ## Fleet considerations
 TBD
 
-## Integration with Pro
-TBD
-
 ## When should it be disabled
 TBD
 
