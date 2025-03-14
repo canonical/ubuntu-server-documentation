@@ -299,5 +299,49 @@ TBD
 ## When should it be disabled
 TBD
 
-## Testing/troubleshooting
-TBD
+## Testing and troubleshooting
+It's possible to test some configuration changes to *unattended-upgrade* without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) which explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
+
+ * `-v`: Show a more verbose output.
+ * `--dry-run`:  Just simulate what would happen, without actually making any changes.
+
+For example, let's say we want to check if the PPA origin was included correctly in the *Allowed-Origins* configuration, and if an update that we know is available would be considered. After we add `"LP-PPA-canonical-server-server-backports:${distro_codename}";` to `Allowed-Origins` in `/etc/apt/apt.conf.d/50unattended-upgrades`, we can run the tool in verbose and dry-run modes to check what would happen:
+
+```bash
+sudo unattended-upgrade -v --dry-run
+```
+
+Which produces this output, in this example scenario:
+```text
+Starting unattended upgrades script
+Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security, o=LP-PPA-canonical-server-server-backports,a=noble
+Initial blacklist:
+Initial whitelist (not strict):
+Option --dry-run given, *not* performing real actions
+Packages that will be upgraded: rdma-core
+Writing dpkg log to /var/log/unattended-upgrades/unattended-upgrades-dpkg.log
+/usr/bin/unattended-upgrade:567: DeprecationWarning: This process (pid=1213) is multi-threaded, use of fork() may lead to deadlocks in the child.
+  pid = os.fork()
+/usr/bin/dpkg --status-fd 10 --no-triggers --unpack --auto-deconfigure /var/cache/apt/archives/rdma-core_52.0-2ubuntu1~backport24.04.202410192216~ubuntu24.04.1_amd64.deb
+/usr/bin/dpkg --status-fd 10 --configure --pending
+All upgrades installed
+The list of kept packages can't be calculated in dry-run mode.
+```
+
+Of note, we see:
+ * `Allowed origins` include `o=LP-PPA-canonical-server-server-backports,a=noble`, which is the PPA we included.
+ * The `rdma-core` package would be updated.
+
+Let's check this `rdma-core` package with the command `apt-cache policy rdma-core`:
+```text
+rdma-core:
+  Installed: 50.0-2build2
+  Candidate: 52.0-2ubuntu1~backport24.04.202410192216~ubuntu24.04.1
+  Version table:
+     52.0-2ubuntu1~backport24.04.202410192216~ubuntu24.04.1 500
+        500 https://ppa.launchpadcontent.net/canonical-server/server-backports/ubuntu noble/main amd64 Packages
+ *** 50.0-2build2 500
+        500 http://br.archive.ubuntu.com/ubuntu noble/main amd64 Packages
+        100 /var/lib/dpkg/status
+```
+And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed, the update would be installed.
