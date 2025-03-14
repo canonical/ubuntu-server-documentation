@@ -321,7 +321,13 @@ Even with all the care in the world, applying updates to a running system comes 
 Always keep in mind, however, that specific packages can be blocked from receiving updates. For example, if a particular system runs a critical application that could break if certain libraries on the system are updated, then perhaps an acceptable compromise is to block these library packages from receiving upgrades, instead of disabling the whole feature.
 
 ### Fleet management
-- if another update mechanism is at play (Landscape, for example)
+The *unattended-upgrades* feature is helpful, does its job, and even sends out reports. But it's not meant to be a replacement for fleet management software. If a large number of Ubuntu systems needs to be kept updated, other solutions are better suited for the job. Such large deployments usually come with much stricter and wider requirements, like:
+ * compliance reports: How many systems are up-do-date, how many are still behind, for how long has a system been exposed to a known vulnerability, etc.
+ * maintenance windows: Different systems might require different maintenance windows. Some can be updated anytime, others only on weekends, etc.
+ * canary rollouts: The ability to rollout updates to an initial group of systems, and over time increase the number of systems which will receive the update.
+
+An example of such a Fleet Management software for Ubuntu systems is [Landsacpe](https://ubuntu.com/landscape).
+
 
 ## Testing and troubleshooting
 It's possible to test some configuration changes to *unattended-upgrade* without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) which explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
@@ -368,4 +374,4 @@ rdma-core:
         500 http://br.archive.ubuntu.com/ubuntu noble/main amd64 Packages
         100 /var/lib/dpkg/status
 ```
-And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed, the update would be installed.
+And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed, the update will be installed.
