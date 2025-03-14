@@ -297,7 +297,23 @@ Below are the logs of an *unattended-upgrades* run that started at 20:43. The to
 TBD
 
 ## When should it be disabled
-TBD
+While automatic security updates are enabled in Ubuntu by default, in some situations it might make sense to disable this feature, or carefully limit its reach.
+
+Here are some considerations.
+
+### Systems which just get redeployed
+Some systems are not meant to apply updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually very lean and very focused on the applications they run, and might not even have tools to self-update installed.
+
+Just keep in mind that the security exposure is still there: it's just the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
+
+### Manual steps required
+- cases when manual steps are required after or before an update (but that update could be blocklisted)
+
+### To much of a risk
+- where the risk of an automatic update breaking things is too high, or higher than staying without a security update for example
+
+### Another update mechanism is in use
+- if another update mechanism is at play (Landscape, for example)
 
 ## Testing and troubleshooting
 It's possible to test some configuration changes to *unattended-upgrade* without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) which explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
