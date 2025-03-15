@@ -1,11 +1,12 @@
 (openssh-server)=
+
 # OpenSSH server
 
 OpenSSH is a powerful collection of tools for remotely controlling networked computers and transferring data between them. Here we'll describe some of the configuration settings possible with the OpenSSH server application and how to change them on your Ubuntu system.
 
 OpenSSH is a freely available version of the Secure Shell (SSH) protocol family of tools. Traditional tools, such as `telnet` or `rcp`, are insecure and transmit the user's password in cleartext when used. OpenSSH provides a server daemon and client tools to facilitate secure, encrypted, remote control and file transfer operations, effectively replacing the legacy tools.
 
-The OpenSSH server component, `sshd`, listens continuously for client connections from any of the client tools. When a connection request occurs, `sshd` sets up the correct connection depending on the type of client tool connecting. For example, if the remote computer is connecting with the SSH client application, the OpenSSH server sets up a remote control session after authentication. If a remote user connects to an OpenSSH server with `scp`, the OpenSSH server daemon initiates a secure copy of files between the server and client after authentication. 
+The OpenSSH server component, `sshd`, listens continuously for client connections from any of the client tools. When a connection request occurs, `sshd` sets up the correct connection depending on the type of client tool connecting. For example, if the remote computer is connecting with the SSH client application, the OpenSSH server sets up a remote control session after authentication. If a remote user connects to an OpenSSH server with `scp`, the OpenSSH server daemon initiates a secure copy of files between the server and client after authentication.
 
 OpenSSH can use many authentication methods, including plain password, public key, and Kerberos tickets.
 
@@ -31,6 +32,7 @@ There are many directives in the `sshd` configuration file, which control things
 
 > **Tip**:
 > Before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
+>
 > ```bash
 > sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 > sudo chmod a-w /etc/ssh/sshd_config.original
@@ -69,7 +71,7 @@ To generate the keys, run the following command:
 ssh-keygen -t rsa
 ```
 
-This will generate the keys using the **RSA Algorithm**.  At the time of this writing, the generated keys will have 3072 bits.  You can modify the number of bits by using the `-b` option.  For example, to generate keys with 4096 bits, you can use:
+This will generate the keys using the **RSA Algorithm**. At the time of this writing, the generated keys will have 3072 bits. You can modify the number of bits by using the `-b` option. For example, to generate keys with 4096 bits, you can use:
 
 ```bash
 ssh-keygen -t rsa -b 4096
@@ -101,10 +103,12 @@ ssh-import-id <username-on-remote-service>
 
 The prefix `lp:` is implied and means fetching from Launchpad. The alternative `gh:` will make the tool fetch from GitHub instead.
 
+## Two factor authentication
+
+You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication [using U2F/FIDO hardware authentication devices](two-factor-authentication-with-u2f-or-fido.md). Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it [using HMAC/Time based One Time Passwords (HOTP/TOTP)](two-factor-authentication-with-TOTP-or-HOTP.md).
 
 ## Further reading
 
 - [Ubuntu Wiki SSH](https://help.ubuntu.com/community/SSH) page.
 - [OpenSSH Website](http://www.openssh.org/)
-- [OpenSSH 8.2 release notes](https://www.openssh.com/txt/release-8.2)
 - [Advanced OpenSSH Wiki Page](https://wiki.ubuntu.com/AdvancedOpenSSH)

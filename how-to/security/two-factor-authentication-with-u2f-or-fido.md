@@ -1,3 +1,4 @@
+(two-factor-authentication-with-u2f-or-fido)=
 ## Two factor authentication with U2F/FIDO
 
 OpenSSH 8.2 has added [support for U2F/FIDO hardware authentication devices](https://www.openssh.com/txt/release-8.2). These devices are used to provide an extra layer of security on top of the existing key-based authentication, as the hardware token needs to be present to finish the authentication.
@@ -96,16 +97,7 @@ In this case, no file is written and the public key can be printed by running `s
 > **Note**:
 > If you used the `-O verify-required` option when generating the keys, or if that option is set on the SSH server via the `/etc/ssh/sshd_config` setting `PubkeyAuthOptions verify-required`, then using the agent won't work (in Ubuntu 22.04 LTS).
 
-### Special cases
-
-On Ubuntu, the following settings are default in `/etc/ssh/sshd_config`, but if you have overridden them, note that they are required for this configuration to work correctly and must be restored as follows:
-
-```
-UsePAM yes
-PubkeyAuthentication yes
-```
-
-Remember to run `sudo systemctl try-reload-or-restart ssh` for any changes made to `sshd` configuration to take effect.
 
 ## Further reading
+- [OpenSSH 8.2 release notes](https://www.openssh.com/txt/release-8.2)
 - [Yubikey documentation for OpenSSH FIDO/FIDO2 usage](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)

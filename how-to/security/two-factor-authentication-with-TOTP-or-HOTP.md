@@ -1,12 +1,13 @@
+(two-factor-authentication-with-TOTP-or-HOTP)=
 ## Two factor authentication with TOTP/HOTP
 
-For the best two factor authentication (2FA) security, we recommend using hardware authentication devices that support U2F/FIDO. See the previous section for details. However, if this is not possible or is impractical to implement in your case, TOTP/HOTP based 2FA is an improvement over no two factor at all. Smartphone apps to support this type of 2FA are common, such as Google Authenticator.
+For the best two factor authentication (2FA) security, we recommend using hardware authentication devices that support U2F/FIDO. See the guide on [two factor authentication with U2F/FIDO](two-factor-authentication-with-u2f-or-fido.md) for details. However, if this is not possible or is impractical to implement in your case, TOTP/HOTP based 2FA is an improvement over no two factor at all. Smartphone apps to support this type of 2FA are common, such as Google Authenticator.
 
 ### Background
 
 The configuration presented here makes public key authentication the first factor, the TOTP/HOTP code the second factor, and makes password authentication unavailable. Apart from the usual setup steps required for public key authentication, all configuration and setup takes place on the server. No changes are required at the client end; the 2FA prompt appears in place of the password prompt.
 
-The two supported methods are [HMAC-based One Time Password (HOTP)](https://en.wikipedia.org/wiki/HMAC-based_one-time_password)  and [Time-based One Time Password (TOTP)](https://en.wikipedia.org/wiki/Time-based_one-time_password). Generally, TOTP is preferable if the 2FA device supports it. 
+The two supported methods are [HMAC-based One Time Password (HOTP)](https://en.wikipedia.org/wiki/HMAC-based_one-time_password) and [Time-based One Time Password (TOTP)](https://en.wikipedia.org/wiki/Time-based_one-time_password). Generally, TOTP is preferable if the 2FA device supports it. 
 
 HOTP is based on a sequence predictable only to those who share a secret. The user must take an action to cause the client to generate the next code in the sequence, and this response is sent to the server. The server also generates the next code, and if it matches the one supplied by the user, then the user has proven to the server that they share the secret. A downside of this approach is that if the user generates codes without the server following along, such as in the case of a typo, then the sequence generators can fall "out of sync". Servers compensate by allowing a gap in the sequence and considering a few subsequent codes to also be valid; if this mechanism is used, then the server "skips ahead" to sync back up. But to remain secure, this can only go so far before the server must refuse. When HOTP falls out of sync like this, it must be reset using some out-of-band method, such as authenticating using a second backup key in order to reset the secret for the first one.
 
@@ -102,6 +103,16 @@ Welcome to Ubuntu Jammy Jellyfish...
 (...)
 ubuntu@jammy.server:~$
 ```
+### Special cases
+
+On Ubuntu, the following settings are default in `/etc/ssh/sshd_config`, but if you have overridden them, note that they are required for this configuration to work correctly and must be restored as follows:
+
+```
+UsePAM yes
+PubkeyAuthentication yes
+```
+
+Remember to run `sudo systemctl try-reload-or-restart ssh` for any changes made to `sshd` configuration to take effect.
 
 ## Further reading
 - [Wikipedia on TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password)
