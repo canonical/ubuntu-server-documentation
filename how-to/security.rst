@@ -4,6 +4,8 @@ Security
 *********
 
 * :ref:`OpenSSH <openssh-server>`
+* :ref:`Two factor authentication with U2F/FIDO <two-factor-authentication-with-u2f-or-fido>`
+* :ref:`Two factor authentication with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp>`
 * :ref:`OpenVPN <install-openvpn>`
 * :ref:`CA trust store <install-a-root-ca-certificate-in-the-trust-store>`
 * :ref:`Firewall <firewalls>`
@@ -17,6 +19,8 @@ Security
     :hidden:
 
     OpenSSH <security/openssh-server>
+    Two factor authentication with U2F/FIDO <security/two-factor-authentication-with-u2f-or-fido>
+    Two factor authentication with TOTP/HOTP <security/two-factor-authentication-with-totp-or-hotp>
     OpenVPN <security/install-openvpn>
     CA trust store <security/install-a-root-ca-certificate-in-the-trust-store>
     Firewall <security/firewalls>
