@@ -160,7 +160,7 @@ Components: main
 Description: Ubuntu Noble 24.04
 (...)
 ```
-And there we can see the distribution *Codename*, and the *Origin*.
+And there we can see the *Origin*.
 
 
 ## How to block certain packages
