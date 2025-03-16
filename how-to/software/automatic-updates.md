@@ -289,6 +289,10 @@ Reboots can be very disruptive, specially if the system fails to come back. Ther
  * `Unattended-Upgrade::Automatic-Reboot-WithUsers "true";`: Automatically reboot even if there are users currently logged in when `Unattended-Upgrade::Automatic-Reboot` (the option above) is set to `true`. The default value is `true`.
  * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the [shutdown](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html) command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
 
+> **Note**
+>
+> For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html)
+
 Below are the logs of an *unattended-upgrades* run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
 ```text
 2025-03-13 20:43:25,923 INFO Starting unattended upgrades script
