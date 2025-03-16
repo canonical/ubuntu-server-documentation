@@ -62,7 +62,7 @@ With this change, the timer will trigger the service only on the next scheduled 
 
 ## Where to pick updates from
 
-In `/etc/apt/apt.conf.d/50unattended-upgrades`, the `Allowed-Origins` section specifies which release pockets will be used to gather updates from. See the [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#pockets) for additional information about each pocket.
+In `/etc/apt/apt.conf.d/50unattended-upgrades`, the `Allowed-Origins` section specifies which repositories will be used to gather updates from. See the [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#pockets) for additional information about each official repository that Ubuntu uses.
 
 This is the default:
 ```text
