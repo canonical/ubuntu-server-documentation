@@ -51,14 +51,14 @@ These actions are triggered by systemd timer units at a set time but with a rand
 
 However, it may happen that if the server is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the *RandomizedDelaySec* value). As a result, they may often run on system startup and thereby cause immediate activity and hold the apt-lock.
 
-In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To adapt this behaviour, we can change/override the configuration of both APT's timer units `apt-daily-upgrade.timer` and `apt-daily.timer`. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute setting it to *false*:
+In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To change this behaviour, we can change/override the configuration of both APT's timer units `apt-daily-upgrade.timer` and `apt-daily.timer`. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute setting it to *false*:
 
 ```ini
 [Timer]
 Persistent=false
 ```
 
-See the explanation for the *Persistent* option in [systemd.timer manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/systemd.timer.5.html) for more details.
+With this change, the timer will trigger the service only on the next scheduled time. In other words, it won't catch up to the run it missed while the system was off. See the explanation for the *Persistent* option in [systemd.timer manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/systemd.timer.5.html) for more details.
 
 ## Where to pick updates from
 
