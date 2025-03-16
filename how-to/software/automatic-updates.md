@@ -138,7 +138,7 @@ Now when the tool runs, that PPA will be considered for upgrades and is listed i
 2025-03-13 22:44:34,855 INFO The list of kept packages can't be calculated in dry-run mode.
 ```
 
-The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release`) file, which can be found at the URL of the repository, or locally on the system after an *apt-get update* command was run. Locally they are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
+The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release` file), which can be found at the URL of the repository, or locally on the system after an *apt-get update* command was run. Locally they are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
 
 ```text
 /var/lib/apt/lists/ppa.launchpadcontent.net_canonical-server_server-backports_ubuntu_dists_noble_InRelease
