@@ -339,13 +339,15 @@ It's possible to test some configuration changes to *unattended-upgrade* without
  * `-v`: Show a more verbose output.
  * `--dry-run`:  Just simulate what would happen, without actually making any changes.
 
-For example, let's say we want to check if the PPA origin was included correctly in the *Allowed-Origins* configuration, and if an update that we know is available would be considered. After we add `"LP-PPA-canonical-server-server-backports:${distro_codename}";` to `Allowed-Origins` in `/etc/apt/apt.conf.d/50unattended-upgrades`, we can run the tool in verbose and dry-run modes to check what would happen:
+For example, let's say we want to check if the PPA origin was included correctly in the *Allowed-Origins* configuration, and if an update that we know is available would be considered.
+
+After we add `"LP-PPA-canonical-server-server-backports:${distro_codename}";` to `Allowed-Origins` in `/etc/apt/apt.conf.d/50unattended-upgrades`, we can run the tool in *verbose* and *dry-run* modes to check what would happen:
 
 ```bash
 sudo unattended-upgrade -v --dry-run
 ```
 
-Which produces this output, in this example scenario:
+Which produces the following output, in this example scenario:
 ```text
 Starting unattended upgrades script
 Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security, o=LP-PPA-canonical-server-server-backports,a=noble
@@ -378,4 +380,4 @@ rdma-core:
         500 http://br.archive.ubuntu.com/ubuntu noble/main amd64 Packages
         100 /var/lib/dpkg/status
 ```
-And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed, the update will be installed.
+And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed from the command-lien we just ran, the update will be installed.
