@@ -306,7 +306,7 @@ Below are the logs of an *unattended-upgrades* run that started at 20:43. The to
 2025-03-13 20:43:40,207 WARNING Shutdown msg: b"Reboot scheduled for Thu 2025-03-13 20:45:00 UTC, use 'shutdown -c' to cancel."
 ```
 
-## When should it be disabled
+## When to consider disabling automatic updates
 While automatic security updates are enabled in Ubuntu by default, in some situations it might make sense to disable this feature, or carefully limit its reach.
 
 Here are some considerations.
