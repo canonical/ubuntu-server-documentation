@@ -21,7 +21,7 @@ QEMU primarily functions as the user-space backend for KVM. When used in collabo
 
 It also has a [command line interface](https://qemu-project.gitlab.io/qemu/system/invocation.html) and [a monitor](https://qemu-project.gitlab.io/qemu/system/monitor.html) for interacting with running guests. However, these are typically only used for development purposes.
 
-To find out how to get started with QEMU quickly, check out this guide on {ref}`how to set up QEMU <virtualisation-with-qemu>`.
+To find out how to get started with QEMU quickly, check out this guide on {ref}`how to set up QEMU <qemu>`.
 
 ## libvirt
 
