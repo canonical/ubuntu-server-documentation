@@ -15,7 +15,7 @@ And more. Let's explore some of these options.
 >
 > Just adding another package repository to an Ubuntu system WILL NOT make *unattended-upgrades* consider it for updates! This is explained "Where to pick updates from " **XXX HELP WITH LINKING XXX** later in this document.
 
-## Configuration overview
+## Configuration layout
 If for some reason the package is not present, it can be installed with the following command:
 
 ```bash
