@@ -1,38 +1,50 @@
 (qemu)=
+
 # QEMU
 
 ```{include} notices/qemu-user-group-notice.txt
+
 ```
 
 ## Virtualisation with QEMU
 
 [QEMU](http://wiki.qemu.org/Main_Page) is a machine emulator that can run operating systems and programs for one machine on a different machine. However, it is more often used as a virtualiser in collaboration with [KVM](https://www.linux-kvm.org/page/Main_Page) kernel components. In that case it uses the hardware virtualisation technology to virtualise guests.
 
-Although QEMU has a [command line interface](https://qemu-project.gitlab.io/qemu/system/invocation.html ) and a [monitor](https://qemu-project.gitlab.io/qemu/system/monitor.html) to interact with running guests, they are typically only used for development purposes. On the other hand, [libvirt]( libvirt.md) provides an abstraction from specific versions and hypervisors and encapsulates some workarounds and best practices.
+Although QEMU has a [command line interface](https://qemu-project.gitlab.io/qemu/system/invocation.html) and a [monitor](https://qemu-project.gitlab.io/qemu/system/monitor.html) to interact with running guests, they are typically only used for development purposes. On the other hand, [libvirt](libvirt.md) provides an abstraction from specific versions and hypervisors and encapsulates some workarounds and best practices.
 
-### Running QEMU/KVM
+### Install QEMU/KVM
 
-The first step to using QEMU on Ubuntu is to install it.
+The first step to using QEMU/KVM on Ubuntu is to check if your system supports KVM.
+
+```bash
+kvm-ok
+```
+
+You should get an output saying `KVM acceleration can be used`.
+
+Then next step is to install QEMU.
 
 ```bash
 sudo apt-get install qemu-system
 ```
 
-While there *are* more user-friendly and comfortable ways, the quickest way to get started with QEMU is by booting a VM directly from a netboot ISO. You can achieve this by running the following command:
+### Boot a VM
 
-> **Warning**: 
-> This example is just for illustration purposes - it is not generally recommended without verifying the checksums; {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
+While there _are_ more user-friendly and comfortable ways like downloading the ISO provides for faster access at runtime, the quickest way to get started with QEMU is by booting a VM directly from a netboot ISO. You can achieve this by running the following command:
+
+```{caution}
+This example is just for illustration purposes - it is not generally recommended without verifying the checksums; {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
+```
 
 ```bash
 qemu-system-x86_64 -enable-kvm -cdrom http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso
 ```
 
-> **Note**:
-> If you are testing this example on a headless system, specify an alternative display method such as {term}`VNC`.
+If you are testing this example on a headless system, specify an alternative display method such as {term}`VNC`.
 
-Though, downloading the ISO provides for faster access at runtime.
+### Create a virtual disk
 
-The command above boots the system entirely in RAM without persistent storage. To maintain the OS state across reboots, you should allocate space for the VM:
+The command in the previous sub-section boots the system entirely in RAM without persistent storage. To maintain the OS state across reboots, you should allocate space for the VM:
 
 ```bash
 qemu-img create -f qcow2 disk.qcow 5G
@@ -48,65 +60,147 @@ qemu-system-x86_64 options image[s]
 
 So take a look at the [QEMU manpage](http://manpages.ubuntu.com/manpages/bionic/man1/qemu-system.1.html), [`qemu-img`](http://manpages.ubuntu.com/manpages/bionic/man1/qemu-img.1.html) and the [QEMU documentation](https://www.qemu.org/documentation/) and see which options best suit your needs.
 
-Also, QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore {ref}`virtualizing graphics using QEMU/KVM <gpu-virtualization-with-qemu-kvm>`, {ref}`using QEMU to create MicroVMs <qemu-microvm>`, or creating QEMU VMs with up to 1024 vCPUs.
+While a standard QEMU configuration works for most use cases, some scenarios demand high-vCPU VMs. In the next section, we’ll cover how to create QEMU virtual machines with up to 1024 vCPUs.
 
 ## Create QEMU VMs with up to 1024 vCPUs
 
 For a long time, QEMU only supported launching virtual machines with 288 vCPUs or fewer. While this was acceptable a decade ago, nowadays it is more common to see processors with 300+ physical cores available. For this reason, QEMU has been modified to support virtual machines with up to 1024 vCPUs. The caveat is that the user has to provide a few specific (and not trivial to guess) command line options to enable such a feature, and that is the gap that this document aims to fill.
 
-### Supported QEMU versions
-
-Currently, support for VMs with more than 288 vCPUs is present in the following QEMU versions:
-
-* QEMU 6.2 (Ubuntu 22.04 Jammy)**\***
-* QEMU 8.0.4 (Ubuntu 23.10 Mantic)**\***
-* QEMU 8.2.1+ (Ubuntu 24.04 Noble)
-
-**\*** *A special QEMU machine type needs to be used in this case. See below.*
-
-From Ubuntu 24.04 Noble onwards, there is native support for more than 288 vCPUs and using the regular `ubuntu` machine type should work out of the box.
-
-#### Special QEMU machine types
+### Requirement
 
 To support more than 288 vCPUs, some QEMU versions are only compatible with special machine types.
 
-- **Ubuntu 22.04 Jammy**
+| QEMU version | Ubuntu release        | Supported machine types                                                                 |
+| ------------ | --------------------- | --------------------------------------------------------------------------------------- |
+| QEMU 6.2     | Ubuntu 22.04 (Jammy)  | `pc-q35-jammy-maxcpus`, `pc-i440fx-jammy-maxcpus`                                       |
+| QEMU 8.0.4   | Ubuntu 23.10 (Mantic) | `pc-q35-mantic-maxcpus`, `pc-i440fx-mantic-maxcpus` (Also supports Jammy machine types) |
+| QEMU 8.2.1+  | Ubuntu 24.04 (Noble)  | `ubuntu` (Native support, also supports Jammy and Mantic machine types)                 |
 
-    If you are using QEMU on Jammy and want to create VMs with more than 288 vCPUs, you will need to use either of the special `pc-q35-jammy-maxcpus` or `pc-i440fx-jammy-maxcpus` machine types in combination with QEMU 6.2.
+### Configuration by Ubuntu release
 
-    The command line needs to start with:
+#### Ubuntu 22.04 Jammy
 
-    ```
-    qemu-system-x86_64 -M pc-q35-jammy-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
-    ```
+If you are using QEMU on Jammy and want to create VMs with more than 288 vCPUs, you will need to use either of the special `pc-q35-jammy-maxcpus` or `pc-i440fx-jammy-maxcpus` machine types.
 
-    In the example above, the virtual machine will be launched using 300 vCPUs and a `pc-q35-jammy-maxcpus` machine type. You can adjust the option according to your use case.
+The command line needs to start with:
 
-    The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
+```
+qemu-system-x86_64 -M pc-q35-jammy-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
+```
 
-    Note that both machine types for Jammy are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems.
+In the example above, the virtual machine will be launched using 300 vCPUs and a `pc-q35-jammy-maxcpus` machine type. You can adjust the option according to your use case.
 
-- **Ubuntu 23.10 Mantic**
+The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
-    If you are using QEMU on Mantic, the special machine types are named in a similar fashion to Jammy's: `pc-q35-mantic-maxcpus` or `pc-i440fx-mantic-maxcpus`, and you must use it in combination with QEMU 8.0.4.
-    Therefore, you command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
+Note that both machine types for Jammy are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems.
 
-    ```
-    qemu-system-x86_64 -M pc-q35-mantic-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
-    ```
+#### Ubuntu 23.10 Mantic
 
-    In the example above, the virtual machine will be launched using 300 vCPUs and a `pc-q35-mantic-maxcpus` machine type. You can adjust the option according to your use case.
+If you are using QEMU on Mantic, the special machine types are named in a similar fashion to Jammy's: `pc-q35-mantic-maxcpus` or `pc-i440fx-mantic-maxcpus`.
+Therefore, you command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
 
-    The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
+```
+qemu-system-x86_64 -M pc-q35-mantic-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
+```
 
-    Note that both machine types for Mantic are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems. As noted in the previous section, it is also possible to create virtual machines using the special Jammy machine types on Mantic.
+In the example above, the virtual machine will be launched using 300 vCPUs and a `pc-q35-mantic-maxcpus` machine type. You can adjust the option according to your use case.
 
-- **Ubuntu 24.04 Noble**
+The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
-    From Noble onwards, the regular `ubuntu` machine type supports up to 1024 vCPUs out of the box for QEMU 8.2.1 and newer, this simplifies the command used to create such virtual machines:
+Note that both machine types for Mantic are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems. As noted in the previous section, it is also possible to create virtual machines using the special Jammy machine types on Mantic.
 
-    ```
-    qemu-system-x86_64 -M ubuntu,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
-    ```
+#### Ubuntu 24.04 Noble
 
-    Although the regular machine type can now be used to launch the virtual machine, it is still necessary to provide some special command line options to make sure that the VM is created with a virtual IOMMU with interrupt mapping.
+From Noble onwards, the regular `ubuntu` machine type supports up to 1024 vCPUs out of the box, which simplifies the command used to create such virtual machines:
+
+```
+qemu-system-x86_64 -M ubuntu,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
+```
+
+Although the regular machine type can now be used to launch the virtual machine, it is still necessary to provide some special command line options to make sure that the VM is created with a virtual IOMMU with interrupt mapping.
+
+Now that we've covered high-vCPU configurations for x86_64 VMs, let's look at how to boot ARM64 virtual machines on QEMU.
+
+## Boot ARM64 virtual machines on QEMU
+
+Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (e.g. on an x86 host) or accelerated with KVM if you have an ARM64 host. This page describes how to do both.
+
+```{note}
+This requires Ubuntu 20.04 or greater
+```
+
+### Install QEMU
+
+The first step is to install the `qemu-system-arm` package, which needs to be done regardless of where the ARM64 virtual machine will run:
+
+```bash
+sudo apt install qemu-system-arm
+```
+
+### Create necessary support files
+
+Next, create a VM-specific flash volume for storing NVRAM variables, which are necessary when booting {term}`EFI` firmware:
+
+```bash
+truncate -s 64m varstore.img
+```
+
+We also need to copy the ARM UEFI firmware into a bigger file:
+
+```bash
+truncate -s 64m efi.img
+dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=efi.img conv=notrunc
+```
+
+### Fetch the Ubuntu cloud image
+
+You need to fetch the ARM64 variant of the Ubuntu cloud image you would like to use in the virtual machine. You can go to the official [Ubuntu cloud image](https://cloud-images.ubuntu.com/) website, select the Ubuntu release, and then download the variant whose filename ends in `-arm64.img`. For example, if you want to use the latest Jammy cloud image, you should download the file named `jammy-server-cloudimg-arm64.img`.
+
+### Run QEMU natively on an ARM64 host
+
+If you have access to an ARM64 host, you should be able to create and launch an ARM64 virtual machine there. Note that the command below assumes that you have already set up a network bridge to be used by the virtual machine.
+
+```bash
+qemu-system-aarch64 \
+ -enable-kvm \
+ -m 1024 \
+ -cpu host \
+ -M virt \
+ -nographic \
+ -drive if=pflash,format=raw,file=efi.img,readonly=on \
+ -drive if=pflash,format=raw,file=varstore.img \
+ -drive if=none,file=jammy-server-cloudimg-arm64.img,id=hd0 \
+ -device virtio-blk-device,drive=hd0 -netdev type=tap,id=net0 \
+ -device virtio-net-device,netdev=net0
+```
+
+### Run an emulated ARM64 VM on x86
+
+You can also emulate an ARM64 virtual machine on an x86 host. To do that:
+
+```bash
+qemu-system-aarch64 \
+ -m 2048\
+ -cpu max \
+ -M virt \
+ -nographic \
+ -drive if=pflash,format=raw,file=efi.img,readonly=on \
+ -drive if=pflash,format=raw,file=varstore.img \
+ -drive if=none,file=jammy-server-cloudimg-arm64.img,id=hd0 \
+ -device virtio-blk-device,drive=hd0 \
+ -netdev type=tap,id=net0 \
+ -device virtio-net-device,netdev=net0
+```
+
+### Troubleshooting
+
+#### No output and no response
+
+If you get no output from the QEMU command above, aligning your host and guest release versions may help. For example, if you generated `efi.img` on Focal but want to emulate Jammy (with the Jammy cloud image), the firmware may not be fully compatible. Generating `efi.img` on Jammy when emulating Jammy with the Jammy cloud image may help.
+
+## Resources
+
+QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore these.
+
+- {ref}`Virtualizing graphics using QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
+- {ref}`Using QEMU to create MicroVMs <qemu-microvm>`.
