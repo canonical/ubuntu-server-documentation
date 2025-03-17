@@ -32,7 +32,7 @@ Right after installation, automatic installation of security updates will be ena
 
 
 ## Enabling and disabling unattended upgrades
-Unattended upgrades performs the equivalent of `apt-get update` and `apt-get upgrade` (see {ref}`Package management <package-management>` for details on these commands **XXX HELP WITH LINKING XXX**). First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
+Unattended upgrades performs the equivalent of `apt-get update` and `apt-get upgrade` (see [Upgrading packages](package-management.md#upgrading-packages) for details on these commands. First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
 
 These two steps are controlled via the `Update-Package-Lists` and `Unattended-Upgrade` options in `/etc/apt/apt.conf.d/20auto-upgrades`:
 ```text
