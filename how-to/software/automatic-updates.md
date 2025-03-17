@@ -103,6 +103,7 @@ Unattended-Upgrade::Allowed-Origins {
 ```
 The `Origin` field is a standard field used in package repositories. By default, *unattended-upgrades* will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
 
+### Automatic upgrades from a PPA
 A very popular package repository type is a [Launchpad PPA](https://help.launchpad.net/Packaging/PPA). PPAs are normally referred to using the format *ppa:\<user\>/\<name\>*. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
 
 To use a PPA in the *Allowed-Origins* configuration, we need its *Origin* field. For PPAs, it is in the format *LP-PPA-\<user\>-\<name\>*. Adding it to the `Allowed-Origins` configuration would result in the following (continuing from the example above):
