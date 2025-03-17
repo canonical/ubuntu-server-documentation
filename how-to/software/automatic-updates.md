@@ -201,7 +201,7 @@ Just be careful to not overuse the power of regular expressions: readability is 
 ## Notifications
 Besides logging, `unattended-upgrades` can also send out reports via email. There are two options that control this behavior in `/etc/apt/apt.conf.d/50unattended-upgrades`:
 
- - `Unattended-Upgrade::Mail "user@example.com";`: If set to an email address, this option wil trigger an email to this address containing an activity report. When this value is empty, or not set, (which is the default), no report is sent.
+ - `Unattended-Upgrade::Mail "user@example.com";`: If set to an email address, this option will trigger an email to this address containing an activity report. When this value is empty, or not set, (which is the default), no report is sent.
  - `Unattended-Upgrade::MailReport "on-change";`: This option controls when a report is sent:
    - `always`: Always send a report, regardless if upgrades were applied or not.
    - `only-on-error`: Only send a report if there was an error.
