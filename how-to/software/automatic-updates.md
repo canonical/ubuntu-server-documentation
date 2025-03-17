@@ -296,9 +296,9 @@ Reboots can be very disruptive, specially if the system fails to come back. Ther
 
 > **Note**
 >
-> For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html)
+> For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html).
 
-Below are the logs of an *unattended-upgrades* run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
+Below are the logs of an `unattended-upgrades` run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
 ```text
 2025-03-13 20:43:25,923 INFO Starting unattended upgrades script
 2025-03-13 20:43:25,924 INFO Allowed origins are: o=Ubuntu,a=noble, o=Ubuntu,a=noble-security, o=UbuntuESMApps,a=noble-apps-security, o=UbuntuESM,a=noble-infra-security
@@ -317,29 +317,31 @@ While automatic security updates are enabled in Ubuntu by default, in some situa
 Here are some considerations.
 
 ### Systems which just get redeployed
-Some systems are not meant to receive updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually very lean and very focused on the applications they run, and might not even have tools to self-update installed.
+Some systems are not meant to receive updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually lean and solely focused on the applications they run, and might not even have self-update tools installed.
 
-Just keep in mind that the security exposure is still there: it's just the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
+Kep in mind that the security exposure is still there: it's only the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
 
 ### Manual steps required
-While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe *unattended-upgrades* should be disabled on such systems. But do make an effort to consider blocklisting such packages instead, if they are known to trigger such manual steps. In that case, the system can still benefit from all the other upgrades that might become available.
+While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe *unattended-upgrades* should be disabled on such systems.
+
+Do consider block-listing such packages instead, if they are known to trigger such manual steps. In that case, the system can still benefit from all the other upgrades that might become available.
 
 ### Too much of a risk
-Even with all the care in the world, applying updates to a running system comes with risk. Ubuntu believes that risk to be less than the risk of NOT applying a security update, which is why *unattended-upgrades* will apply security updates by default. But for some specific systems, the risk vs benefit equation might favor staying put and not applying an update unless specifically requested.
+Even with all the care in the world, applying updates to a running system comes with risk. Ubuntu believes that risk to be less than the risk of NOT applying a security update, which is why `unattended-upgrades` will apply security updates by default. But for some specific systems, the risk vs benefit equation might favor staying put and not applying an update unless specifically requested.
 
 Always keep in mind, however, that specific packages can be blocked from receiving updates. For example, if a particular system runs a critical application that could break if certain libraries on the system are updated, then perhaps an acceptable compromise is to block these library packages from receiving upgrades, instead of disabling the whole feature.
 
 ### Fleet management
-The *unattended-upgrades* feature is helpful, does its job, and even sends out reports. But it's not meant to be a replacement for fleet management software. If a large number of Ubuntu systems needs to be kept updated, other solutions are better suited for the job. Such large deployments usually come with much stricter and wider requirements, like:
- * compliance reports: How many systems are up-do-date, how many are still behind, for how long has a system been exposed to a known vulnerability, etc.
- * maintenance windows: Different systems might require different maintenance windows. Some can be updated anytime, others only on weekends, etc.
- * canary rollouts: The ability to rollout updates to an initial group of systems, and over time increase the number of systems which will receive the update.
+The `unattended-upgrades` feature is helpful, does its job, and even sends out reports. But it's not intended to be a replacement for fleet management software. If a large number of Ubuntu systems needs to be kept updated, other solutions are better suited for the job. Such large deployments usually come with much stricter and wider requirements, like:
+ * Compliance reports: How many systems are up-do-date, how many are still behind, for how long has a system been exposed to a known vulnerability, etc.
+ * Maintenance windows: Different systems might require different maintenance windows. Some can be updated anytime, others only on weekends, etc.
+ * Canary rollouts: The ability to rollout updates to an initial group of systems, and over time increase the number of systems that will receive the update.
 
 An example of such a Fleet Management software for Ubuntu systems is [Landscape](https://ubuntu.com/landscape).
 
 
 ## Testing and troubleshooting
-It's possible to test some configuration changes to *unattended-upgrade* without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) which explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
+It's possible to test some configuration changes to `unattended-upgrade` without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) that explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
 
  * `-v`: Show a more verbose output.
  * `--dry-run`:  Just simulate what would happen, without actually making any changes.
@@ -385,4 +387,4 @@ rdma-core:
         500 http://br.archive.ubuntu.com/ubuntu noble/main amd64 Packages
         100 /var/lib/dpkg/status
 ```
-And indeed, there is an update available from that PPA, and the next time *unattended-upgrade* runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed from the command-lien we just ran, the update will be installed.
+And indeed, there is an update available from that PPA, and the next time `unattended-upgrade` runs on its own, it will apply that update. In fact, if the `--dry-run` option is removed from the command-line we just ran, the update will be installed.
