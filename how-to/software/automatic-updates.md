@@ -13,7 +13,7 @@ And more. Let's explore some of these options.
 
 > **IMPORTANT**:
 >
-> Just adding another package repository to an Ubuntu system WILL NOT make `unattended-upgrades` consider it for updates! This is explained [Where to pick updates from](#where-to-pick-updates-from) later in this document.
+> Just adding another package repository to an Ubuntu system WILL NOT make `unattended-upgrades` consider it for updates! This is explained in [where to pick updates from](#where-to-pick-updates-from) later in this document.
 
 ## Configuration layout
 If for some reason the package is not present, it can be installed with the following command:
@@ -49,7 +49,7 @@ APT::Periodic::Unattended-Upgrade "0";
 
 These actions are triggered by systemd timer units at a set time but with a random delay: `apt-daily.timer` and `apt-daily-upgrade.timer`. These timers activate the corresponding services that run the `/usr/lib/apt/apt.systemd.daily` script.
 
-However, it may happen that if the server is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the *RandomizedDelaySec* value). As a result, they may often run on system startup and thereby cause immediate activity and prevent other package operations from taking place at that time. For example, if another package has to be installed, it would have to wait until the upgrades are completed.
+However, it may happen that if the server is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the `RandomizedDelaySec` value). As a result, they may often run on system startup and thereby cause immediate activity and prevent other package operations from taking place at that time. For example, if another package has to be installed, it would have to wait until the upgrades are completed.
 
 In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To change this behaviour, we can change/override the configuration of both APT's timer units `apt-daily-upgrade.timer` and `apt-daily.timer`. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute setting it to *false*:
 
@@ -104,7 +104,7 @@ Unattended-Upgrade::Allowed-Origins {
 The `Origin` field is a standard field used in package repositories. By default, `unattended-upgrades` will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
 
 ### Automatic upgrades from a PPA
-A very popular package repository type is a [Launchpad PPA](https://help.launchpad.net/Packaging/PPA). PPAs are normally referred to using the format *ppa:\<user\>/\<name\>*. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
+A very popular package repository type is a [Launchpad PPA](https://help.launchpad.net/Packaging/PPA). PPAs are normally referred to using the format `ppa:\<user\>/\<name\>`. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
 
 To use a PPA in the *Allowed-Origins* configuration, we need its *Origin* field. For PPAs, it is in the format *LP-PPA-\<user\>-\<name\>*. Adding it to the `Allowed-Origins` configuration would result in the following (continuing from the example above):
 ```text
@@ -139,7 +139,7 @@ Now when the tool runs, that PPA will be considered for upgrades and is listed i
 2025-03-13 22:44:34,855 INFO The list of kept packages can't be calculated in dry-run mode.
 ```
 
-The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release` file), which can be found at the URL of the repository, or locally on the system after an *apt update* command was run. Locally these files are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
+The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release` file), which can be found at the URL of the repository, or locally on the system after an `apt update` command was run. Locally these files are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
 
 ```text
 /var/lib/apt/lists/ppa.launchpadcontent.net_canonical-server_server-backports_ubuntu_dists_noble_InRelease
