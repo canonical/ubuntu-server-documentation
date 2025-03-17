@@ -13,7 +13,7 @@ And more. Let's explore some of these options.
 
 > **IMPORTANT**:
 >
-> Just adding another package repository to an Ubuntu system WILL NOT make *unattended-upgrades* consider it for updates! This is explained [Where to pick updates from](#where-to-pick-updates-from) later in this document.
+> Just adding another package repository to an Ubuntu system WILL NOT make `unattended-upgrades` consider it for updates! This is explained [Where to pick updates from](#where-to-pick-updates-from) later in this document.
 
 ## Configuration layout
 If for some reason the package is not present, it can be installed with the following command:
@@ -101,7 +101,7 @@ Unattended-Upgrade::Allowed-Origins {
 //  "${distro_id}:${distro_codename}-backports";
 };
 ```
-The `Origin` field is a standard field used in package repositories. By default, *unattended-upgrades* will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
+The `Origin` field is a standard field used in package repositories. By default, `unattended-upgrades` will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
 
 ### Automatic upgrades from a PPA
 A very popular package repository type is a [Launchpad PPA](https://help.launchpad.net/Packaging/PPA). PPAs are normally referred to using the format *ppa:\<user\>/\<name\>*. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
@@ -288,7 +288,7 @@ All upgrades installed
 ## Reboots
 Sometimes a system needs to be rebooted to fully apply an update. Such updates can use a mechanism in Ubuntu to let the system know that a reboot is recommended. `unattended-upgrades` can benefit from this mechanism and optionally reboot the system automatically when needed.
 
-Reboots can be very disruptive, specially if the system fails to come back. There are some configuration options where this behavior can be adjusted:
+Reboots can be very disruptive, especially if the system fails to come back. There are some configuration options where this behavior can be adjusted:
 
  * `Unattended-Upgrade::Automatic-Reboot "false";`: If this option is set to `true`, the system will be rebooted ***without confirmation*** at the end of an upgrade run if a reboot was requested. The default value is `false`.
  * `Unattended-Upgrade::Automatic-Reboot-WithUsers "true";`: Automatically reboot even if there are users currently logged in when `Unattended-Upgrade::Automatic-Reboot` (the option above) is set to `true`. The default value is `true`.
@@ -317,12 +317,12 @@ While automatic security updates are enabled in Ubuntu by default, in some situa
 Here are some considerations.
 
 ### Systems which just get redeployed
-Some systems are not meant to receive updates, and just get redeployed instead from a new base image. This is very common in cloud and container based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually lean and solely focused on the applications they run, and might not even have self-update tools installed.
+Some systems are not meant to receive updates, and just get redeployed instead from a new base image. This is very common in cloud and container-based applications, where out-of-date instances are destroyed and replaced with newer ones. Such systems are usually lean and solely focused on the applications they run, and might not even have self-update tools installed.
 
-Kep in mind that the security exposure is still there: it's only the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
+Keep in mind that the security exposure is still there: it's only the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
 
 ### Manual steps required
-While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe *unattended-upgrades* should be disabled on such systems.
+While Ubuntu updates rarely require manual steps to complete an upgrade (at most a reboot can be required), it could be plausible that other applications require some manual steps after or before an update is applied. If that is the case, and if such steps cannot be safely automated, then maybe `unattended-upgrades` should be disabled on such systems.
 
 Do consider block-listing such packages instead, if they are known to trigger such manual steps. In that case, the system can still benefit from all the other upgrades that might become available.
 
