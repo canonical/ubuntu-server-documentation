@@ -39,7 +39,7 @@ These two steps are controlled via the `Update-Package-Lists` and `Unattended-Up
 APT::Periodic::Update-Package-Lists "1";
 APT::Periodic::Unattended-Upgrade "1";
 ```
-The value for each option is a time-based value. When used just as a number, it means number of days. If set to zero, that action is disabled. If set to `1` (the default), then it means every day. A value of `2` means every two days, and so on.
+Each option accepts a time-based value, representing the number of days. A value of `0` disables the action. The default value, `1`, executes the action daily. A value of `2` executes it every two days, and so forth.
 
 Therefore, to disable unattended upgrades, set these options to zero:
 ```text
