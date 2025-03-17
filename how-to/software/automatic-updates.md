@@ -32,7 +32,7 @@ Right after installation, automatic installation of security updates will be ena
 
 
 ## Enabling and disabling unattended upgrades
-Unattended upgrades performs the equivalent of `apt-get update` and `apt-get upgrade` (see [Upgrading packages](package-management.md#upgrading-packages) for details on these commands. First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
+Unattended upgrades performs the equivalent of `apt update` and `apt upgrade` (see [Upgrading packages](package-management.md#upgrading-packages) for details on these commands. First, it refreshes the package lists, to become aware of the new state of the package repositories. Then it checks which upgrades are available and applies them.
 
 These two steps are controlled via the `Update-Package-Lists` and `Unattended-Upgrade` options in `/etc/apt/apt.conf.d/20auto-upgrades`:
 ```text
@@ -139,7 +139,7 @@ Now when the tool runs, that PPA will be considered for upgrades and is listed i
 2025-03-13 22:44:34,855 INFO The list of kept packages can't be calculated in dry-run mode.
 ```
 
-The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release` file), which can be found at the URL of the repository, or locally on the system after an *apt-get update* command was run. Locally these files are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
+The correct *Origin* value to use is available in the repository's `InRelease` (or, for older formats, the `Release` file), which can be found at the URL of the repository, or locally on the system after an *apt update* command was run. Locally these files are in the `/var/lib/apt/lists/` directory. For example, for the PPA case, we have:
 
 ```text
 /var/lib/apt/lists/ppa.launchpadcontent.net_canonical-server_server-backports_ubuntu_dists_noble_InRelease
