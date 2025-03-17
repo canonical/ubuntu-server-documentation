@@ -124,7 +124,7 @@ Unattended-Upgrade::Allowed-Origins {
 };
 ```
 
-Note that due to the hyphens that are both a separator, and also part of the name in this case, once everything is written out like above, it becomes difficult to see at a glance which part is the username, and which part is the PPA name. But that's ok, because it's the whole text that matters.
+Due to the hyphens acting as both separators and part of the name, the complete configuration can become visually confusing, making it difficult to immediately distinguish between the username and PPA name. But that's ok, because it's the whole text that matters.
 
 Now when the tool runs, that PPA will be considered for upgrades and is listed in *Allowed origins*:
 ```text
