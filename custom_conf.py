@@ -128,7 +128,8 @@ slug = "server"
 # NOTE: If this variable is not defined, set to None, or the dictionary is empty,
 # the sphinx_reredirects extension will be disabled.
 redirects = {
-    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/"
+    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/",
+    "reference/backups/basic-backup-shell-script": "https://discourse.ubuntu.com/t/basic-backup-shell-script/36419"
 }
 
 ############################################################
