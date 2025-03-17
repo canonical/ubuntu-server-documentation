@@ -214,7 +214,9 @@ Besides logging, `unattended-upgrades` can also send out reports via email. Ther
 ### Notification examples
 Here are some email examples (lines wrapped for better legibility).
 
-No changes applied, no errors. This would only be sent if `Unattended-Upgrade::MailReport` is set to `always`:
+#### No changes applied, no errors
+
+This would only be sent if `Unattended-Upgrade::MailReport` is set to `always`:
 ```email
 Subject: unattended-upgrades result for <hostname>: SUCCESS
 
@@ -233,7 +235,9 @@ Initial whitelist (not strict):
 No packages found that can be upgraded unattended and no pending auto-removals
 ```
 
-Upgrades applied, no errors. This is the default email report, when `Unattended-Upgrade::MailReport` is set to `on-change `:
+#### Upgrades applied, no errors
+
+This is the default email report, when `Unattended-Upgrade::MailReport` is set to `on-change `:
 ```email
 Subject: unattended-upgrades result for nuc1: SUCCESS
 
