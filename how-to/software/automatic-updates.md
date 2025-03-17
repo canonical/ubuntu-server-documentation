@@ -316,7 +316,7 @@ While automatic security updates are enabled in Ubuntu by default, in some situa
 
 Here are some considerations.
 
-### Systems which just get redeployed
+### Systems which just get recreated
 Some systems are designed to be redeployed from a new base image rather than receive updates. This is common in cloud and container-based applications, where outdated instances are destroyed and replaced with newer ones. These systems are typically very lean, focused solely on running specific applications, and so may lack self-update tools.
 
 Keep in mind that the security exposure is still there: it's only the update mechanism that is different, and comes in the form of a new deployment. The update still has to happen somewhere, it's just not at runtime. Until that new deployment is done, outdated software might still be running.
