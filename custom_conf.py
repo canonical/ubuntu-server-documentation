@@ -222,7 +222,9 @@ source_suffix = {
 custom_html_css_files = []
 
 # Add JavaScript files (located in .sphinx/_static/)
-custom_html_js_files = []
+custom_html_js_files = [
+    'js/bundle.js',
+]
 
 ## The following settings override the default configuration.
 
