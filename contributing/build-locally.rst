@@ -89,7 +89,7 @@ browser. To resolve this, add the export variable to your shell by running the f
 
    export SPHINX_HOST=0.0.0.0
 
-Running the `make run` command should then work as expected.
+Running the ``make run`` command should then work as expected.
 
 .. note::
    If you have problems getting the documentation to run on your machine,
