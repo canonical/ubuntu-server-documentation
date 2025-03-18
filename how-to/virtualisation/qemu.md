@@ -30,14 +30,14 @@ sudo apt-get install qemu-system
 
 ### Boot a VM
 
-While there _are_ more user-friendly and comfortable ways like downloading the ISO provides for faster access at runtime, the quickest way to get started with QEMU is by booting a VM directly from a netboot ISO. You can achieve this by running the following command:
-
-```{caution}
-This example is just for illustration purposes - it is not generally recommended without verifying the checksums; {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
-```
+The quickest way to get started with QEMU is by booting a VM directly from a netboot ISO. You can achieve this by running the following command:
 
 ```bash
 qemu-system-x86_64 -enable-kvm -cdrom http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso
+```
+
+```{caution}
+This example is just for illustration purposes - it is not generally recommended without verifying the checksums; {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
 ```
 
 If you are testing this example on a headless system, specify an alternative display method such as {term}`VNC`.
