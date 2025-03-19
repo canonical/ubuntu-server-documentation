@@ -2,7 +2,7 @@
 
 # Archive rotation shell script
 
-The {ref}`simple backup shell script <basic-backup-shell-script>` only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.
+The {ref}`simple backup shell script <back-up-using-shell-scripts>` only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.
 
 ## Rotating NFS archives
 
