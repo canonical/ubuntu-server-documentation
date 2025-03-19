@@ -1145,7 +1145,7 @@ M
         *Work in Progress*
     
     MAC
-        A MAC verifies that a message hasn't been modified during transmission by combining a shared secret key between the sender and reciever, and a hash function.
+        A Message Authentication Code (MAC) verifies that a message hasn't been modified during transmission by combining a shared secret key between the sender and receiver, and a hash function.
 
     macvlan
         *Work in Progress*
