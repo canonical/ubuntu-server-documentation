@@ -163,7 +163,7 @@ _standard_ QEMU in the package `qemu-system-x86`.
 
 Microvm aims for maximum compatibility by default; this means that you will
 probably want to switch off some more legacy devices that are not shown in
-this example. But for what is shown here we want to keep it rather comparable
+this example. But for what is shown here, we want to keep it rather comparable
 to the non-microvm invocation.
 For more details on what else could be disabled see
 [microvm](https://github.com/qemu/qemu/blob/master/docs/system/i386/microvm.rst#running-a-microvm-based-vm).
@@ -199,15 +199,15 @@ Breaking down the changes to the command-line elements and their purpose:
 > it mostly is about the initialisation time (and kernel init by having less
 > virtual hardware). And that we can check despite this issue.
 
-On average across a few runs (albeit not in a very performance-controlled
+On average, across a few runs (albeit not in a very performance-controlled
 environment) we can see the kernel start time to be 282ms faster
 comparing _normal QEMU_ to `microvm` and another 526ms faster comparing `microvm`
 to `microvm`+`qboot`.
 
-As mentioned one could go further from here by disabling more legacy devices,
+As mentioned, one could go further from here by disabling more legacy devices,
 using `hvcconsole`, customising the guest CPU, switching off more subsystems
-like ACPI or customising the kernel that is used. But this was meant to be an
-example on how `microvm` can be used in general so we won't make it more
+like ACPI, or customising the kernel that is used. But this was meant to be an
+example on how `microvm` can be used in general, so we won't make it more
 complex for now.
 
 ## Alternative - using virtiofs
@@ -246,5 +246,5 @@ To the QEMU command-line one would then add the following options:
 ```
 
 Which allows the user to mount it from inside the guest via
-`$ mount -t virtiofs myfs /mnt` or if you want to use it as root you can pass
+`$ mount -t virtiofs myfs /mnt` or if you want to use it as root, you can pass
 it via kernel parameter `rootfstype=virtiofs root=myfs rw`.
