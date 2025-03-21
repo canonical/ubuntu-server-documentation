@@ -1,13 +1,13 @@
 /* Cookie policy styling WILL BE REMOVED when implementation of new theme with vanilla is implemented */
 .cookie-policy {
     overflow: auto;
-    position:absolute;
+    position: absolute;
     top: 40%;
     z-index: 50;
 }
 
-dialog.cookie-policy{
-    background-color: #FFFFFF;
+dialog.cookie-policy {
+    background-color: #fff;
     height: auto;
     max-height: 80vh;
     max-width: 40rem;
@@ -15,7 +15,7 @@ dialog.cookie-policy{
     width: auto;
 }
 
-.p-modal{
+.p-modal {
     color: #000000;
 }
 
