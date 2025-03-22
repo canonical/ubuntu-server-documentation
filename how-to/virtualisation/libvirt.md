@@ -54,7 +54,7 @@ In the case of virtual machines, a {term}`Graphical User Interface (GUI) <GUI>` 
 
 ## Virtual machine management
 
-The following section covers the command-line tools around `virsh` that are part of libvirt itself. But there are various options at different levels of complexities and feature-sets, like:
+The following section covers `virsh`, a virtual machine management tool that is a part of libvirt. But there are other tools available at different levels of complexities and feature-sets, like:
 
 * {ref}`Multipass <create-vms-with-multipass>
 * {ref}`UVTool <cloud-image-vms-with-uvtool>`
@@ -242,7 +242,8 @@ virsh qemu-monitor-command --hmp focal-test-log 'drive_add 0 if=none,file=/var/l
 But since the monitor is so powerful, you can do a lot -- especially for debugging purposes, like showing the guest registers:
 
 ```bash
-virsh qemu-monitor-command --hmp y-ipns 'info registers'
+$ virsh qemu-monitor-command --hmp y-ipns 'info registers'
+
 RAX=00ffffc000000000 RBX=ffff8f0f5d5c7e48 RCX=0000000000000000 RDX=ffffea00007571c0
 RSI=0000000000000000 RDI=ffff8f0fdd5c7e48 RBP=ffff8f0f5d5c7e18 RSP=ffff8f0f5d5c7df8
 [...]
@@ -270,7 +271,7 @@ echo 256 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 Be sure to re-check if it worked:
 
 ```bash
-cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+$ cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 
 256
 ```
@@ -280,7 +281,7 @@ There one of these sizes is the "default huge page size", which will be used in 
 You can check the current default size:
 
 ```bash
-grep Hugepagesize /proc/meminfo
+$ grep Hugepagesize /proc/meminfo
 
 Hugepagesize:       2048 kB
 ```
@@ -301,10 +302,11 @@ One can allocate huge pages at [boot or runtime](https://www.kernel.org/doc/Docu
 
 Huge pages need to be allocated by the kernel as mentioned above, but to be consumable, they also have to be mounted. By default, `systemd` will make `/dev/hugepages` available for the default huge page size.
 
-Feel free to add more mount points if you need different sized ones. An overview can be queried with:
+Feel free to add more mount points if you need different sized ones. An overview can be queried with [hugeadm](https://linux.die.net/man/8/hugeadm):
 
 ```bash
-hugeadm --list-all-mounts
+$ apt install libhugetlbfs-bin
+$ hugeadm --list-all-mounts
 
 Mount Point          Options
 /dev/hugepages       rw,relatime,pagesize=2M
