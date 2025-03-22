@@ -20,7 +20,7 @@ The following are typical [system requirements for Hyper-V](https://learn.micros
 
 ## Install Hyper-V
 
-Our first step in enabling Ubuntu is to install Hyper-V, which can be used on the Windows 11 Pro, Enterprise, Education and Server operating systems.
+Our first step in enabling Ubuntu is to install Hyper-V, which can be used on the Windows 11 Pro, Enterprise, Education, and Server operating systems.
 
 Hyper-V is not included in Windows 11 Home, which [would need to be upgraded](https://support.microsoft.com/en-us/windows/upgrade-windows-home-to-windows-pro-ef34d520-e73f-3198-c525-d1a218cc2818) to Windows 11 Pro.
 
