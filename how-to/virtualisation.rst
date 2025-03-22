@@ -5,9 +5,7 @@ Virtualisation
 
 **Virtual machines (VMs)**
 
-* :ref:`QEMU <virtualisation-with-qemu>`
-* :ref:`Create QEMU VMs with up to 1024 vCPUs <create-qemu-vms-with-up-to-1024-vcpus>`
-* :ref:`Boot ARM64 VMs on QEMU <boot-arm64-virtual-machines-on-qemu>`
+* :ref:`QEMU <qemu>`
 * :ref:`Create VMs with Multipass <create-vms-with-multipass>`
 * :ref:`Create cloud image VMs with UVtool <cloud-image-vms-with-uvtool>`
 
@@ -27,8 +25,6 @@ Virtualisation
     :hidden:
 
     QEMU <virtualisation/qemu>
-    QEMU VMs with up to 1024 vCPUs <virtualisation/qemu-vms-up-to-1024-vcpus>
-    ARM64 VMs on QEMU <virtualisation/arm64-vms-on-qemu>
     Multipass <virtualisation/multipass>
     UVtool <virtualisation/cloud-image-vms-with-uvtool>
     Libvirt and virsh <virtualisation/libvirt>
