@@ -17,6 +17,7 @@ Virtualisation and containers
 
 * :ref:`Overview of container tools in Ubuntu <container-tools-in-the-ubuntu-space>`
 * :ref:`About rock images <about-rock-images>`
+* :ref:`Docker storage, networking, and logging <docker-storage-networking-and-logging>`
 
 **Other virtualisation tools**
 
@@ -32,3 +33,4 @@ Virtualisation and containers
     About OpenStack <virtualisation/about-openstack>
     Container tools overview <virtualisation/container-tools-in-the-ubuntu-space>
     About rock images <virtualisation/about-rock-images>
+    Docker storage, networking, and logging <virtualisation/docker-storage-networking-and-logging>
