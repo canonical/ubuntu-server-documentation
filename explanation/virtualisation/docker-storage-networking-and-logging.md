@@ -120,3 +120,9 @@ The following logging drivers are available (at the time of writing):
 - **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
 - **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://cloud.google.com/logging/docs/) Logging.
 - **splunk**: sends container logs to [HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/) in Splunk Enterprise and Splunk Cloud.
+
+## Resources
+
+To get a hands-on tutorial on using Docker for storage, networking, and logging, see:
+
+- {ref}`Docker for system admins <docker-for-system-admins>`
