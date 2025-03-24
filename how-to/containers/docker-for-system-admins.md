@@ -19,6 +19,7 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 
   ```bash
   $ docker volume create my-vol
+
   my-vol
   ```
 
@@ -51,12 +52,12 @@ $ sudo apt-get install -y docker.io docker-compose-v2
   ]
   ```
 
-- Running a container and mounting a volume:
+- Run a container and mount a volume
 
   ```bash
-  $ docker run –name web-server -d \
-  	--mount source=my-vol,target=/app \
-  	ubuntu/apache2
+  $ docker run --name web-server -d \
+  --mount source=my-vol,target=/app \
+  ubuntu/apache2
 
   0709c1b632801fddd767deddda0d273289ba423e9228cc1d77b2194989e0a882
   ```
@@ -64,7 +65,7 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 - Inspect your container to make sure the volume is mounted correctly:
 
   ```bash
-  $ docker inspect web-server --format '{{ json .Mounts }}' | jq .
+  docker inspect web-server --format '{{ json .Mounts }}' | jq .
   ```
 
   ```json
@@ -84,24 +85,23 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 
   By default, all your volumes will be stored in `/var/lib/docker/volumes`.
 
-- Stop the container and remove its volume
+- Stop and remove the container, then remove its volume.
 
   ```bash
-  $ docker stop web-server
-  $ docker volume rm my-vol
-
-  my-vol
+  docker stop web-server
+  docker rm web-server
+  docker volume rm my-vol
   ```
 
 ### How to configure bind mounts
 
-- Create a Docker container and bind mount a host directory:
+- Create a Docker container and bind mount your host directory:
 
   ```bash
   $ docker run -d \
-  	--name web-server \
-  	--mount type=bind,source="$(pwd)",target=/app \
-  	ubuntu/apache2
+  --name web-server \
+  --mount type=bind,source="$(pwd)",target=/app \
+  ubuntu/apache2
 
   6f5378e34d6c6811702e16d047a5a80f18adbd9d8a14b11050ae3c3353bf8d2a
   ```
@@ -109,7 +109,7 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 - Inspect your container to check for the bind mount:
 
   ```bash
-  $ docker inspect web-server --format '{{ json .Mounts }}' | jq .
+  docker inspect web-server --format '{{ json .Mounts }}' | jq .
   ```
 
   ```json
@@ -125,14 +125,21 @@ $ sudo apt-get install -y docker.io docker-compose-v2
   ]
   ```
 
+- Stop and remove the container
+
+  ```bash
+  docker stop web-server
+  docker rm web-server
+  ```
+
 ### How to configure Tmpfs
 
-- How you can create a Docker container and mount a tmpfs:
+- Create a Docker container and mount a tmpfs:
 
   ```bash
   $ docker run --name web-server -d \
-  	--mount type=tmpfs,target=/app \
-  	ubuntu/apache2
+  --mount type=tmpfs,target=/app \
+  ubuntu/apache2
 
   03483cc28166fc5c56317e4ee71904941ec5942071e7c936524f74d732b6a24c
   ```
@@ -140,7 +147,7 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 - Inspect your container to check for the tmpfs mount:
 
   ```bash
-  $ docker inspect web-server --format '{{ json .Mounts }}' | jq .
+  docker inspect web-server --format '{{ json .Mounts }}' | jq .
   ```
 
   ```json
@@ -158,12 +165,29 @@ $ sudo apt-get install -y docker.io docker-compose-v2
 
 ### Choosing the right storage drivers
 
+Before changing the configuration and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, or device mapper) is mounted at `/var/lib/docker`.
+Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem mounted at `/var/lib/docker`, a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
+
 - Check the current storage driver
 
   ```bash
   $ docker info | grep "Storage Driver"
 
   Storage Driver: overlay2
+  ```
+
+- Ensure the required Filesystem is available. We will be using the ZFS Filesystem.
+
+  ```bash
+  $ apt install zfsutils-linux -y # Install ZFS
+  $ fallocate -l 5G /zfs-pool.img  # Create a 5GB file
+  $ zpool create mypool /zfs-pool.img  # Create a ZFS pool
+  $ zfs create -o mountpoint=/var/lib/docker mypool/docker # Create a ZFS dataset and mount it to dockers directory, "/var/lib/docker".
+  $ zfs list # Verify that it mounted successfully
+
+  NAME            USED  AVAIL  REFER  MOUNTPOINT
+  mypool          162K  4.36G    24K  /mypool
+  mypool/docker    39K  4.36G    39K  /var/lib/docker
   ```
 
 - Change the storage driver
@@ -174,27 +198,37 @@ $ sudo apt-get install -y docker.io docker-compose-v2
       systemctl stop docker
       ```
 
-  1.  Edit `/etc/docker/daemon.json`
+  1.  Edit `/etc/docker/daemon.json` using your favorite editor, then update the storage driver value to `zfs`.
+
+      ```bash
+      vim /etc/docker/daemon.json
+      ```
 
       ```json
       {
-        "storage-driver": "ZFS"
+        "storage-driver": "zfs"
       }
       ```
 
   1.  Restart the docker daemon
 
       ```bash
-      systemctl start docker
+      systemctl restart docker
       ```
 
-Before changing the configuration above and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, device mapper) is mounted in `/var/lib/docker`. Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem backing `/var/lib/docker` a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
+- Verify the change
+
+  ```bash
+  $ docker info | grep "Storage Driver"
+
+  Storage Driver: zfs
+  ```
 
 ## Configuring networking
 
 This is how you can create a user-defined network using the Docker CLI:
 
-- Create network
+- Create a network
 
   ```bash
   $ docker network create --driver bridge my-net
@@ -217,7 +251,7 @@ This is how you can create a user-defined network using the Docker CLI:
 - Inspect the network we created
 
   ```bash
-  $ docker network inspect my-net
+  docker network inspect my-net
   ```
 
   ```json
@@ -253,18 +287,20 @@ This is how you can create a user-defined network using the Docker CLI:
   ]
   ```
 
-- Containers can connect to a defined network when they are created (via `docker run`) or can be connected to it at any time of its lifecycle.
+Containers can connect to a defined network when they are created (via `docker run`) or at any time of its lifecycle.
 
-  ```bash
-  $ docker run -d --name c1 --network my-net ubuntu/apache2
+### Connecting a new container to an existing network
 
-  C7aa78f45ce3474a276ca3e64023177d5984b3df921aadf97e221da8a29a891e
-  ```
+```bash
+$ docker run -d --name c1 --network my-net ubuntu/apache2
+
+C7aa78f45ce3474a276ca3e64023177d5984b3df921aadf97e221da8a29a891e
+```
 
 - View the network connected to the container
 
   ```bash
-  $ docker inspect c1 --format '{{ json .NetworkSettings }}' | jq .
+  docker inspect c1 --format '{{ json .NetworkSettings }}' | jq .
   ```
 
   ```json
@@ -308,6 +344,8 @@ This is how you can create a user-defined network using the Docker CLI:
   }
   ```
 
+### Connecting a running container to an existing network
+
 - Make a running container connect to the existing network
 
   1.  Create the container
@@ -321,8 +359,8 @@ This is how you can create a user-defined network using the Docker CLI:
   1.  Connect the running container to the network and verify that it's connected.
 
       ```bash
-      $ docker network connect my-net c2
-      $ docker inspect c2 --format '{{ json .NetworkSettings }}' | jq .
+      docker network connect my-net c2
+      docker inspect c2 --format '{{ json .NetworkSettings }}' | jq .
       ```
 
       ```json
@@ -381,7 +419,17 @@ This is how you can create a user-defined network using the Docker CLI:
       }
       ```
 
-The default network created by the Docker daemon is called `bridge` using the bridge network driver. A system administrator can modify this default network by editing `/etc/docker/daemon.json`:
+The container c2 is connected to two networks `bridge` and `my-net`.
+
+The default network created by the Docker daemon is called `bridge` using the **bridge network driver**.
+
+### Modifying the default network "bridge"
+
+- A system administrator can modify this default networks IP address by editing `/etc/docker/daemon.json` and including the below into the JSON object
+
+```bash
+vim /etc/docker/daemon.json
+```
 
 ```json
 {
@@ -395,6 +443,20 @@ The default network created by the Docker daemon is called `bridge` using the br
 }
 ```
 
+- Restart the Docker daemon
+
+```bash
+systemctl restart docker
+```
+
+- Verify your changes
+
+```bash
+docker network inspect bridge
+```
+
+### Exposing a container port to the host
+
 After deciding how you are going to manage the network and selecting the most appropriate driver, there are some specific deployment details that a system administrator has to bear in mind when running containers.
 
 Exposing ports of any system is always a concern, since it increases the surface for malicious attacks. For containers, we also need to be careful, analysing whether we really need to publish ports to the host. For instance, if the goal is to allow containers to access a specific port from another container, there is no need to publish any port to the host. This can be solved by connecting all the containers to the same network. You should publish ports of a container to the host only if you want to make it available to non-Docker workloads. When a container is created no port is published to the host, the option `--publish` (or `-p`) should be passed to `docker run` or `docker create` listing which port will be exposed and how.
@@ -407,12 +469,18 @@ The `--publish` option of Docker CLI accepts the following options:
 
 An example of how to publish port `80` of a container to port `8080` of the host:
 
+-   Create a container and expose it's port to the host
+
 ```bash
 $ docker run -d --name web-server --publish 8080:80 ubuntu/nginx
 
 f451aa1990db7d2c9b065c6158e2315997a56a764b36a846a19b1b96ce1f3910
+```
 
-$ docker inspect web-server --format '{{ json .NetworkSettings.Ports }}' | jq .
+- View the containers network settings
+
+```bash
+docker inspect web-server --format '{{ json .NetworkSettings.Ports }}' | jq .
 ```
 
 ```json
@@ -438,7 +506,15 @@ Another important aspect of networking with containers is the {term}`DNS` servic
 
 ## Managing logs
 
-The default logging driver is specified in a json file, and the system administrator can change it by editing the `/etc/docker/daemon.json` file.
+The default logging driver is called `json file`, and the system administrator can change it to suite their needs.
+
+### Modifying the logging driver via the docker daemon file
+
+- Edit the docker daemon file and update the logging driver 
+
+```bash
+vim /etc/docker/daemon.json
+```
 
 ```json
 {
@@ -446,14 +522,22 @@ The default logging driver is specified in a json file, and the system administr
 }
 ```
 
+### Modifying the logging driver when creating a container
+
 Another option is specifying the logging driver during container creation time:
+
+- Specify a log driver when executing a `docker run`
 
 ```bash
 $ docker run -d --name web-server --log-driver=journald ubuntu/nginx
 
 1c08b667f32d8b834f0d9d6320721e07de5f22168cfc8a024d6e388daf486dfa
+```
 
-$ docker inspect web-server --format '{{ json .HostConfig.LogConfig }}' | jq .
+- Verify your configuration
+
+```bash
+docker inspect web-server --format '{{ json .HostConfig.LogConfig }}' | jq .
 ```
 
 ```json
@@ -462,6 +546,8 @@ $ docker inspect web-server --format '{{ json .HostConfig.LogConfig }}' | jq .
   "Config": {}
 }
 ```
+
+- View logs
 
 ```bash
 $ docker logs web-server
@@ -472,7 +558,7 @@ $ docker logs web-server
 /docker-entrypoint.sh: Configuration complete; ready for start up
 ```
 
-Depending on the driver you might also want to pass some options. You can do that via the CLI, passing `--log-opt` or in the daemon config file adding the key `log-opts`. For more information check the logging driver documentation.
+Depending on the driver you might also want to pass some options. You can do that via the CLI, passing `--log-opt` or in the daemon config file adding the key `log-opts`. For more information check the [logging driver documentation](https://docs.docker.com/engine/logging/configure/).
 
 Docker CLI also provides the `docker logs` and `docker service logs` commands which allows one to check for the logs produced by a given container or service (set of containers) in the host. However, those two commands are functional only if the logging driver for the containers is `json-file`, `local` or `journald`. They are useful for debugging in general, but there is the downside of increasing the storage needed in the host.
 
@@ -495,3 +581,9 @@ $ docker logs web-server
 
 Error response from daemon: configured logging driver does not support reading
 ```
+
+## Resources
+
+To read an explanatory guide to Docker storage, networking, and logging see:
+
+- {ref}`Docker storage, networking, and logging <docker-storage-networking-and-logging>`
