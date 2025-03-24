@@ -20,6 +20,26 @@ improvement.
   - Contributed by
   - Contribution made
 
+* - [PR #202](https://github.com/canonical/ubuntu-server-documentation/pull/202)
+  - `network-charles`
+  - Updated instructions for building docs locally
+
+* - [PR #200](https://github.com/canonical/ubuntu-server-documentation/pull/200)
+  - `Zetway-Technologies`
+  - Clarified instructions in `install-isc-dhcp-server.md`
+
+* - [PR #192](https://github.com/canonical/ubuntu-server-documentation/pull/192)
+  - `minaelee`
+  - Updated CODA links in our contributing guide
+
+* - [PR #190](https://github.com/canonical/ubuntu-server-documentation/pull/190)
+  - `kenyon`
+  - Removed no-longer-needed reference to a recently closed bug
+
+* - [PR #181](https://github.com/canonical/ubuntu-server-documentation/pull/181)
+  - `davidekete`
+  - Deprecated the `backup-with-shell-scripts.md` page
+
 * - [PR #130](https://github.com/canonical/ubuntu-server-documentation/pull/130)
   - `Sophie-Pages`
   - Deprecated the `lxc-containers.md` page
@@ -49,6 +69,40 @@ improvement.
 * - PR number
   - Contributed by
   - Contribution made
+
+* - [PR #184](https://github.com/canonical/ubuntu-server-documentation/pull/184)
+  - `thornshadow99`
+  - Improved the `sssd.md` page
+
+* - [PR #183](https://github.com/canonical/ubuntu-server-documentation/pull/183)
+  - `thornshadow99`
+  - Improved the `security.md` page
+
+* - [PR #167](https://github.com/canonical/ubuntu-server-documentation/pull/167)
+  - `POSToakDEV`
+  - Improved the `libvirt.md` page
+
+* - [PR #155](https://github.com/canonical/ubuntu-server-documentation/pull/155)
+  - `thornshadow99`
+  - Improved the `multipath.md` page
+
+* - [PR #149](https://github.com/canonical/ubuntu-server-documentation/pull/149)
+  - `thornshadow99`
+  - Improved the `high-availability.md` page
+
+* - [PR #148](https://github.com/canonical/ubuntu-server-documentation/pull/148)
+  - `thornshadow99`
+  - Improved the `ebpf.md` page
+
+* - [PR #147](https://github.com/canonical/ubuntu-server-documentation/pull/147)
+  - `birdstare`
+  - Improved the `introduction-to-backups.md`,
+    `introduction-to-mail-services.md` and `introduction-to-virtualisation.md`
+    pages
+  
+* - [PR #146](https://github.com/canonical/ubuntu-server-documentation/pull/146)
+  - `thornshadow99`
+  - Improved the `crypto-libraries.md` page
 
 * - [PR #141](https://github.com/canonical/ubuntu-server-documentation/pull/141)
   - `gregbell`
@@ -113,7 +167,7 @@ improvement.
   - Corrected an error in `install-postfix.md`
 ```
 
-## GitHub repository
+## Functionality and enhancements
 
 ```{list-table}
 :header-rows: 1
@@ -121,6 +175,10 @@ improvement.
 * - PR number
   - Contributed by
   - Contribution made
+
+* - [PR #193](https://github.com/canonical/ubuntu-server-documentation/pull/193)
+  - `network-charles`
+  - Added hover-over referencing functionality
 
 * - [PR #116](https://github.com/canonical/ubuntu-server-documentation/pull/116)
   - `activus-d`
@@ -139,6 +197,58 @@ improvement.
 * - PR number
   - Contributed by
   - Contribution made
+
+* - [PR #194](https://github.com/canonical/ubuntu-server-documentation/pull/194)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #187](https://github.com/canonical/ubuntu-server-documentation/pull/187)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #186](https://github.com/canonical/ubuntu-server-documentation/pull/186)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #185](https://github.com/canonical/ubuntu-server-documentation/pull/185)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #182](https://github.com/canonical/ubuntu-server-documentation/pull/182)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #174](https://github.com/canonical/ubuntu-server-documentation/pull/174)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #162](https://github.com/canonical/ubuntu-server-documentation/pull/162)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #161](https://github.com/canonical/ubuntu-server-documentation/pull/161)
+  - `kaushikjayant`
+  - Contributed terms to the glossary
+
+* - [PR #160](https://github.com/canonical/ubuntu-server-documentation/pull/160)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #159](https://github.com/canonical/ubuntu-server-documentation/pull/159)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #158](https://github.com/canonical/ubuntu-server-documentation/pull/158)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #156](https://github.com/canonical/ubuntu-server-documentation/pull/156)
+  - `network-charles`
+  - Contributed terms to the glossary
+
+* - [PR #152](https://github.com/canonical/ubuntu-server-documentation/pull/152)
+  - `Ibom99`
+  - Contributed "J" terms to the glossary
 
 * - [PR #134](https://github.com/canonical/ubuntu-server-documentation/pull/134)
   - `RomainDusi`
