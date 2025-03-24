@@ -11,6 +11,8 @@ BUILDDIR      = _build
 VENVDIR       = $(SPHINXDIR)/venv
 PA11Y         = $(SPHINXDIR)/node_modules/pa11y/bin/pa11y.js --config $(SPHINXDIR)/pa11y.json
 VENV          = $(VENVDIR)/bin/activate
+SPHINX_HOST     ?= 127.0.0.1
+SPHINX_PORT     ?= 8000
 
 .PHONY: sp-full-help sp-woke-install sp-pa11y-install sp-install sp-run sp-html \
         sp-epub sp-serve sp-clean sp-clean-doc sp-spelling sp-linkcheck sp-woke \
@@ -54,7 +56,7 @@ sp-install: $(VENVDIR)
 	command -v distro-info || (sudo apt-get update; sudo apt-get install --assume-yes distro-info)
 
 sp-run: sp-install
-	. $(VENV); sphinx-autobuild -b dirhtml "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
+	. $(VENV); sphinx-autobuild -b dirhtml --host $(SPHINX_HOST) --port $(SPHINX_PORT) "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS)
 
 # Doesn't depend on $(BUILDDIR) to rebuild properly at every run.
 sp-html: sp-install

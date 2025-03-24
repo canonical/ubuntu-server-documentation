@@ -200,7 +200,7 @@ To enable that process we have to configure the PAM module, add the relevant cer
 
 ## Setup guide
 
-This configuration uses SSSD as authenticatoin mechanism, and the example shown here is showing a possible usage for local users, but more complex setups using external remote identity managers such as FreeIPA, LDAP, Kerberos or others can be used.
+This configuration uses SSSD as authentication mechanism, and the example shown here is showing a possible usage for local users, but more complex setups using external remote identity managers such as {term}`FreeIPA`, LDAP, Kerberos or others can be used.
 
 Refer to [SSSD documentation](https://sssd.io/docs/introduction.html) to learn more about this.
 

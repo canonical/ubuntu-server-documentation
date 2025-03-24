@@ -128,7 +128,8 @@ slug = "server"
 # NOTE: If this variable is not defined, set to None, or the dictionary is empty,
 # the sphinx_reredirects extension will be disabled.
 redirects = {
-    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/"
+    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/",
+    "reference/backups/basic-backup-shell-script": "https://discourse.ubuntu.com/t/basic-backup-shell-script/36419"
 }
 
 ############################################################
@@ -170,6 +171,7 @@ custom_extensions = [
     'sphinxcontrib.jquery',
     'sphinxcontrib.mermaid',
     'sphinxext.rediraffe',
+    'hoverxref.extension',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -187,7 +189,14 @@ custom_extensions = [
 custom_required_modules = [
     'sphinxcontrib-mermaid',
     'sphinxext-rediraffe',
+    'sphinx-hoverxref',
 ]
+
+# Configure hoverxref options
+hoverxref_role_types = {
+    'term': 'tooltip',
+}
+hoverxref_roles = ['term',]
 
 # Add redirects, so they can be updated here to land with docs being moved
 rediraffe_branch = "main"
@@ -210,10 +219,14 @@ source_suffix = {
 }
 
 # Add CSS files (located in .sphinx/_static/)
-custom_html_css_files = []
+custom_html_css_files = [
+    'cookie-banner.css'
+]
 
 # Add JavaScript files (located in .sphinx/_static/)
-custom_html_js_files = []
+custom_html_js_files = [
+    'js/bundle.js',
+]
 
 ## The following settings override the default configuration.
 

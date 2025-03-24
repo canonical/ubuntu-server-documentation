@@ -160,7 +160,7 @@ The password can then be provided when the client registers `r1` as a known remo
 
 ### Backing store
 
-LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed zpool will be created automatically. With ZFS, launching a new container is fast because the filesystem starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
+LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed zpool will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
 
 The other supported backing stores are described in detail in the [Storage configuration](https://documentation.ubuntu.com/lxd/en/latest/explanation/storage/) section of the LXD documentation.
 
@@ -232,7 +232,7 @@ For a full list of limits known to LXD, see [the configuration documentation](ht
 
 By default, LXD creates unprivileged containers. This means that root in the container is a non-root UID on the host. It is privileged against the resources owned by the container, but unprivileged with respect to the host, making root in a container roughly equivalent to an unprivileged user on the host. (The main exception is the increased attack surface exposed through the system call interface)
 
-Briefly, in an unprivileged container, 65536 UIDs are 'shifted' into the container. For instance, UID 0 in the container may be 100000 on the host, UID 1 in the container is 100001, etc, up to 165535. The starting value for UIDs and GIDs, respectively, is determined by the 'root' entry the `/etc/subuid` and `/etc/subgid` files. (See the [subuid(5)](http://manpages.ubuntu.com/manpages/xenial/en/man5/subuid.5.html) man page.)
+Briefly, in an unprivileged container, 65536 UIDs are 'shifted' into the container. For instance, UID 0 in the container may be 100000 on the host, UID 1 in the container is 100001, etc, up to 165535. The starting value for UIDs and {term}`GIDs <GID>`, respectively, is determined by the 'root' entry the `/etc/subuid` and `/etc/subgid` files. (See the [subuid(5)](http://manpages.ubuntu.com/manpages/xenial/en/man5/subuid.5.html) man page.)
 
 It is possible to request a container to run without a UID mapping by setting the `security.privileged` flag to true:
 

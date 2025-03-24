@@ -1,7 +1,7 @@
 (how-to-netboot-the-server-installer-on-amd64)=
 # How to netboot the server installer on amd64
 
-amd64 systems boot in either UEFI or legacy ("BIOS") mode, and many systems can be configured to boot in either mode. The precise details depend on the system firmware, but both modes usually support the "Preboot eXecution Environment" (PXE) specification, which allows the provisioning of a bootloader over the network.
+{term}`amd`64 systems boot in either UEFI or legacy ("BIOS") mode, and many systems can be configured to boot in either mode. The precise details depend on the system {term}`firmware <FW>`, but both modes usually support the "Preboot eXecution Environment" (PXE) specification, which allows the provisioning of a bootloader over the network.
 
 ## Steps needed
 

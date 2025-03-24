@@ -79,7 +79,7 @@ Where the entries mean the following:
 - **`cn={1}cosine,cn=schema,cn=config`**: The Cosine schema
 - **`cn={2}nis,cn=schema,cn=config`**: The Network Information Services (NIS) schema
 - **`cn={3}inetorgperson,cn=schema,cn=config`**: The InetOrgPerson schema
-- **`olcDatabase={-1}frontend,cn=config`**: Frontend database, default settings for other databases
+- **`olcDatabase={-1}frontend,cn=config`**: {term}`Frontend` database, default settings for other databases
 - **`olcDatabase={0}config,cn=config`**: `slapd` configuration database (`cn=config`)
 - **`olcDatabase={1}mdb,cn=config`**: Your database instance (`dc=example,dc=com`)
 
@@ -107,7 +107,7 @@ This is called a "simple bind", and is essentially a plain text authentication. 
 - **`-Y EXTERNAL`**
 This is using a SASL bind (no `-x` was provided), and further specifying the `EXTERNAL` type. Together with `-H ldapi:///`, this uses a local UNIX socket connection.
 
-In both cases we only got the results that the server access-control lists (ACLs) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
+In both cases we only got the results that the server Access Control Lists ({term}`ACL`s) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
 ```bash
 $ ldapwhoami -x
@@ -139,7 +139,7 @@ $ sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and `gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
 
 ## Populate the directory
 

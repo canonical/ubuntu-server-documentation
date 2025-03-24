@@ -2,7 +2,7 @@
 # Domain Name Service (DNS)
 
 
-Domain Name Service (DNS) is an Internet service that maps IP addresses and fully qualified domain names (FQDN) to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
+Domain Name Service (DNS) is an Internet service that maps IP addresses and {term}`fully qualified domain names (FQDN) <FQDN>` to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
 
 ## Install DNS
 

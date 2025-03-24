@@ -10,7 +10,7 @@
 >
 > The [protocol](https://en.wikipedia.org/wiki/Protocol_(computing)) allows clients (called  *initiators*) to send SCSI commands ([*CDBs*](https://en.wikipedia.org/wiki/SCSI_CDB)) to storage devices (*targets*) on remote servers.  It is a [storage area network](https://en.wikipedia.org/wiki/Storage_area_network) (SAN) protocol, allowing organizations to consolidate storage into [storage arrays](https://en.wikipedia.org/wiki/Storage_array) while providing clients (such as database and web servers) with the illusion of locally attached SCSI disks.
 >
-> It mainly competes with [Fibre Channel](https://en.wikipedia.org/wiki/Fibre_Channel), but unlike traditional Fibre Channel, which usually requires dedicated cabling, iSCSI can be run over long distances using existing network infrastructure.
+> It mainly competes with [Fibre Channel](https://en.wikipedia.org/wiki/Fibre_Channel), but unlike traditional {term}`Fibre Channel <FC>`, which usually requires dedicated cabling, iSCSI can be run over long distances using existing network infrastructure.
 
 Ubuntu Server can be configured as both: **iSCSI initiator** and **iSCSI target**. This guide provides commands and configuration options to setup an **iSCSI initiator** (or Client).
 
@@ -419,7 +419,7 @@ Command (m for help): w
 The partition table has been altered.
 ```
 
-* Creating a filesystem:
+* Creating a {term}`filesystem`:
 
 ```
 $ sudo mkfs.ext4 /dev/mapper/mpatha-part1

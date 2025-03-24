@@ -82,6 +82,15 @@ It will watch the folder, and whenever you save changes to a file, this URL
 will give update the preview to show your changes (or warn you if something has
 gone horribly wrong!).
 
+If you are building locally on an Ubuntu Cloud VM or a container, you may experience issues accessing the page from your host's 
+browser. To resolve this, add the export variable to your shell by running the following command:
+
+.. code-block::
+
+   export SPHINX_HOST=0.0.0.0
+
+Running the ``make run`` command should then work as expected.
+
 .. note::
    If you have problems getting the documentation to run on your machine,
    reach out to the team or leave a comment on your issue to get additional
@@ -102,4 +111,4 @@ Once you have made your changes and are happy with them, you can
 :ref:`find out how to submit them <submit-work>`.
 
 .. _Diátaxis: https://diataxis.fr/
-.. _working with git: https://github.com/canonical/open-documentation-academy/blob/main/getting-started/using_git.md
+.. _working with git: https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/

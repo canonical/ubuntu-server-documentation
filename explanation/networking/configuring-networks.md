@@ -103,7 +103,7 @@ The following section describes the process of configuring your system's IP addr
 
 ### Temporary IP address assignment
 
-For temporary network configurations, you can use the `ip` command which is also found on most other GNU/Linux operating systems. The `ip` command allows you to configure settings which take effect immediately -- however they are not persistent and will be lost after a reboot.
+For temporary network configurations, you can use the `ip` command which is also found on most other {term}`GNU`/Linux operating systems. The `ip` command allows you to configure settings which take effect immediately -- however they are not persistent and will be lost after a reboot.
 
 To temporarily configure an IP address, you can use the `ip` command in the following manner. Modify the IP address and subnet mask to match your network requirements.
 
@@ -271,7 +271,7 @@ network:
           addresses: [1.1.1.1, 8.8.8.8, 4.4.4.4]
 ```
 
-If you try to ping a host with the name `server1`, your system will automatically query DNS for its Fully Qualified Domain Name (FQDN) in the following order:
+If you try to ping a host with the name `server1`, your system will automatically query DNS for its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` in the following order:
 
 1.  `server1.example.com`
 

@@ -4,7 +4,7 @@
 
 ## Linux Network-Manager GUI for OpenVPN
 
-Many Linux distributions (including Ubuntu Desktop variants) come with Network Manager; a GUI to configure your network settings. It also can manage your VPN connections. It is the default, but if in doubt make sure you have the `network-manager-openvpn` package installed.
+Many Linux distributions (including Ubuntu Desktop variants) come with Network Manager; a {term}`GUI` to configure your network settings. It also can manage your VPN connections. It is the default, but if in doubt make sure you have the `network-manager-openvpn` package installed.
 
 - Open the Network Manager GUI, select the VPN tab and then the 'Add' button
 - Select OpenVPN as the VPN type in the opening requester and press 'Create'

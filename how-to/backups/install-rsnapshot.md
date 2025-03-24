@@ -1,7 +1,7 @@
 (install-rsnapshot)=
 # How to install and configure rsnapshot
 
-[rsnapshot](https://rsnapshot.org/) is an rsync-based filesystem snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of rsync to create scheduled, incremental backups.
+[rsnapshot](https://rsnapshot.org/) is an rsync-based {term}`filesystem` snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of rsync to create scheduled, incremental backups.
 
 ## Install rsnapshot
 

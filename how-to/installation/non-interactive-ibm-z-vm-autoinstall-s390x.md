@@ -120,7 +120,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
 
-  In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host (host-bus-adapters) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
+  In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBAs>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
 
 * For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
 
@@ -426,7 +426,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   * It's always best to use the latest installer and autoinstall components: either make sure the installer gets updated to the latest level, or just use a current daily live-server image.
 
-  * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the hardware management console (HMC).
+  * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the {term}`hardware management console (HMC) <HMC>`.
 
   * In addition to activating disk storage resources in `early-commands`, other devices like OSA/qeth can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters that are used for the installation (that one is automatically handled).
 

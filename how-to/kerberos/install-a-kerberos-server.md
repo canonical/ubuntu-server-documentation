@@ -60,7 +60,7 @@ Principal "ubuntu@EXAMPLE.COM" created.
 kadmin.local: quit
 ```
 
-To be able to use `kadmin` remotely, we should create an **admin principal**. Convention suggests it should be an **admin instance**, as that also makes creating a generic Access Control List (ACL) easier. Let's create an admin instance for the `ubuntu` principal:
+To be able to use `kadmin` remotely, we should create an **admin principal**. Convention suggests it should be an **admin instance**, as that also makes creating a generic Access Control List ({term}`ACL`) easier. Let's create an admin instance for the `ubuntu` principal:
 
 ```bash
 $ sudo kadmin.local

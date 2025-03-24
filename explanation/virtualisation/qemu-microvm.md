@@ -21,7 +21,7 @@ now need a feature only available in the more complete solution.
 QEMU provides additional components that were added to support this special use case:
 
 1. The [`microvm` machine type](https://www.qemu.org/docs/master/system/i386/microvm.html)
-1. Alternative simple firmware (FW) that can boot Linux [called `qboot`](https://github.com/bonzini/qboot)
+1. Alternative simple {term}`firmware (FW) <FW>` that can boot Linux [called `qboot`](https://github.com/bonzini/qboot)
 1. Ubuntu has a QEMU build with reduced features matching these use cases called `qemu-system-x86-microvm`
 
 ## Why a special workload?
@@ -36,7 +36,7 @@ There are a few common ways adapt a workload to match this:
 - Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
   feature set, not as generally capable but sufficient for a particular use case.
 - Even the fastest bootloader is slower than no bootloader, so often
-  the kernel is directly passed from the host filesystem.
+  the kernel is directly passed from the host {term}`filesystem`.
   A drawback of this solution is the fact that the guest system will not have
   control over the kernel anymore, thus restricting what can be done inside the
   guest system.

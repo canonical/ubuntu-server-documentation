@@ -1,7 +1,7 @@
 (ldap-replication)=
 # OpenLDAP replication
 
-The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy (high availability) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.
+The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy ({term}`high availability <HA>`) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.
 
 Replication is achieved via the Sync replication engine, **syncrepl**. This allows changes to be synchronised using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](http://www.rfc-editor.org/rfc/rfc4533.txt).
 
@@ -18,7 +18,7 @@ The delta replication sends less data over the network, but is more complex to s
 
 ## Provider configuration - replication user
 
-Both replication strategies will need a replication user, as well as updates to the ACLs and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
+Both replication strategies will need a replication user, as well as updates to the {term}`ACL`s and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
 
 ```text
 dn: cn=replicator,dc=example,dc=com

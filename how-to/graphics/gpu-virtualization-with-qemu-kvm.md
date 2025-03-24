@@ -3,7 +3,7 @@
 
 ## Graphics
 
-Graphics for QEMU/KVM always comes in two pieces: a front end and a back end.
+Graphics for QEMU/KVM always comes in two pieces: a {term}`frontend` and a backend.
 
 - `frontend`: Controlled via the `-vga` argument, which is provided to the guest. Usually one of `cirrus`, `std`, `qxl`, or `virtio`. The default these days is `qxl` which strikes a good balance between guest compatibility and performance. The guest needs a driver for whichever option is selected -- this is the most common reason to not use the default (e.g., on very old Windows versions).
 
@@ -17,9 +17,9 @@ If you run with `spice` or `vnc` you can use native `vnc` tools or virtualizatio
 
 All these options  are considered basic usage of graphics, but there are also advanced options for more specific use-cases. Those cases usually differ in their [ease-of-use and capability](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/), such as:
 
-- *Need 3D acceleration*: Use `-vga virtio` with a local display having a GL context `-display gtk,gl=on`. This will use [virgil3d](https://virgil3d.github.io/) on the host, and guest drivers are needed (which are common in Linux since [Kernels >= 4.4](https://www.kraxel.org/blog/2016/09/using-virtio-gpu-with-libvirt-and-spice/) but can be hard to come by for other cases). While not as fast as the next two options, the major benefit is that it can be used without additional hardware and without a proper input-output memory management unit (IOMMU) [set up for device passthrough](https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt).
+- *Need 3D acceleration*: Use `-vga virtio` with a local display having a {term}`GL` context `-display gtk,gl=on`. This will use [virgil3d](https://virgil3d.github.io/) on the host, and guest drivers are needed (which are common in Linux since [Kernels >= 4.4](https://www.kraxel.org/blog/2016/09/using-virtio-gpu-with-libvirt-and-spice/) but can be hard to come by for other cases). While not as fast as the next two options, the major benefit is that it can be used without additional hardware and without a proper input-output memory management unit (IOMMU) [set up for device passthrough](https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt).
 
-- *Need native performance*: Use PCI passthrough of additional GPUs in the system. You'll need an IOMMU set up, and you'll need to unbind the cards from the host before you can pass it through, like so:
+- *Need native performance*: Use PCI passthrough of additional {term}`GPUs` in the system. You'll need an IOMMU set up, and you'll need to unbind the cards from the host before you can pass it through, like so:
 
   ```bash
   -device vfio-pci,host=05:00.0,bus=1,addr=00.0,multifunction=on,x-vga=on -device vfio-pci,host=05:00.1,bus=1,addr=00.1
@@ -31,7 +31,7 @@ All these options  are considered basic usage of graphics, but there are also ad
   -display gtk,gl=on -device vfio-pci,sysfsdev=/sys/bus/pci/devices/0000:00:02.0/4dd511f6-ec08-11e8-b839-2f163ddee3b3,display=on,rombar=0
   ```
 
-  You can read more [about vGPU at kraxel](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU mdev evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html), or AMD.
+  You can read more [about vGPU at kraxel](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU mdev evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
 
 The advanced cases in particular can get pretty complex -- it is recommended to use QEMU through {ref}`libvirt section <libvirt>` for those cases. libvirt will take care of all but the host kernel/BIOS tasks of such configurations. Below are the common basic actions needed for faster options (i.e., passthrough and mediated devices passthrough).
 
@@ -202,7 +202,7 @@ $ nvidia-smi -a | grep -A 2 "Licensed Product"
         License Status                    : Licensed
 ```
 
-A [mediated device](https://www.kernel.org/doc/html/latest/driver-api/vfio-mediated-device.html) is essentially partitioning of a hardware device using firmware and host driver features. This brings a lot of flexibility and options; in our example we can split our 16G GPU into 2x8G, 4x4G, 8x2G or 16x1G just as we need it. The following gives an example of how to split it into two 8G cards for a compute profile and pass those to guests.
+A [mediated device](https://www.kernel.org/doc/html/latest/driver-api/vfio-mediated-device.html) is essentially the partitioning of a hardware device using {term}`firmware <FW>` and host driver features. This brings a lot of flexibility and options; in our example we can split our 16G GPU into 2x8G, 4x4G, 8x2G or 16x1G just as we need it. The following gives an example of how to split it into two 8G cards for a compute profile and pass those to guests.
 
 Please refer to the [NVIDIA documentation](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu) for advanced tunings and different card profiles.
 

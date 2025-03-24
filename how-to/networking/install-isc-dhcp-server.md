@@ -40,6 +40,8 @@ This will result in the DHCP server giving clients an IP address from the range 
 
 You also may need to edit `/etc/default/isc-dhcp-server` to specify the interfaces `dhcpd` should listen to.
 
+In the example below, `eth4` is used, but you should replace this with the appropriate interface for your system. The name of the network interface can vary depending on your setup. For instance, it could be `eth0`, `ens33`, or any other name depending on the device you're using.
+
 ```
 INTERFACESv4="eth4"
 ```

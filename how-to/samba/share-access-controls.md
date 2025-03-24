@@ -37,9 +37,9 @@ sudo smbcontrol smbd reload-config
 
 ## Filesystem permissions
 
-Now that Samba has been configured to limit which groups have access to the shared directory, the filesystem permissions need to be checked.
+Now that Samba has been configured to limit which groups have access to the shared directory, the {term}`filesystem` permissions need to be checked.
 
-Traditional Linux file permissions do not map well to Windows NT Access Control Lists (ACLs). Fortunately POSIX ACLs are available on Ubuntu servers, which provides more fine-grained control. For example, to enable ACLs on `/srv` in an EXT3 filesystem, edit `/etc/fstab` and add the *acl* option:
+Traditional Linux file permissions do not map well to Windows NT Access Control Lists ({term}`ACL`s). Fortunately POSIX ACLs are available on Ubuntu servers, which provides more fine-grained control. For example, to enable ACLs on `/srv` in an EXT3 filesystem, edit `/etc/fstab` and add the *acl* option:
 
 ```text
 UUID=66bcdd2e-8861-4fb0-b7e4-e61c569fe17d /srv  ext3    noatime,relatime,acl 0       1

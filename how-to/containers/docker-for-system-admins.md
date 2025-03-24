@@ -186,7 +186,7 @@ $ docker inspect web-server --format '{{ json .Mounts }}' | jq .
 
 ### Storage drivers
 
-Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimise the use of space, but write speed might be lower than native filesystem performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/storage/storagedriver/#images-and-layers).
+Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimise the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/storage/storagedriver/#images-and-layers).
 
 The default storage driver is the `overlay2` which is backed by `OverlayFS`. This driver is recommended by upstream for use in production systems. The following storage drivers are available and are supported in Ubuntu (as at the time of writing):
 
@@ -204,7 +204,7 @@ If you want to use a different storage driver based on your specific requirement
 }
 ```
 
-The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/storage/storagedriver/) for more information. Keep in mind that this is a JSON file and all lines should end with a comma (`,`) except the last one.
+The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/storage/storagedriver/) for more information. Keep in mind that this is a {term}`JSON` file and all lines should end with a comma (`,`) except the last one.
 
 Before changing the configuration above and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, device mapper) is mounted in `/var/lib/docker`. Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem backing `/var/lib/docker` a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
 
@@ -428,18 +428,18 @@ Another important aspect of networking with containers is the {term}`DNS` servic
 
 Monitoring what is happening in the system is a crucial part of systems administration, and with Docker containers it is no different. Docker provides the logging subsystem (which is pluggable) and there are many drivers that can forward container logs to a file, an external host, a database, or another logging back-end. The logs are basically everything written to `STDOUT` and `STDERR`. When building a Docker image, the relevant data should be forwarded to those I/O stream devices.
 
-The following storage drivers are available (at the time of writing):
+The following logging drivers are available (at the time of writing):
 
  * **json-file**: it is the default logging driver. It writes logs in a file in JSON format.
  * **local**: write logs to an internal storage that is optimised for performance and disk use.
- * **journald**: send logs to systemd journal.
+ * **{term}`journald`**: send logs to systemd journal.
  * **syslog**: send logs to a syslog server.
  * **logentries**: send container logs to the [Logentries](https://logentries.com/) server.
- * **gelf**: write logs in a Graylog Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
+ * **{term}`gelf`**: write logs in a {term}`Graylog` Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
  * **awslogs**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
  * **etwlogs**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
- * **fluentd**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
- * **gcplogs**: send container logs to [Google Cloud Logging](https://cloud.google.com/logging/docs/) Logging.
+ * **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
+ * **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://cloud.google.com/logging/docs/) Logging.
  * **splunk**: sends container logs to [HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/) in Splunk Enterprise and Splunk Cloud.
 
 The default logging driver is `json-file`, and the system administrator can change it by editing the `/etc/docker/daemon.json`:

@@ -119,7 +119,7 @@ Certain `chronyc` commands are privileged and cannot be run via the network with
 
 ## Pulse-Per-Second (PPS) support
 
-`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via GPSD. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, jitter, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
+`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via {term}`GPSD`. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, {term}`jitter`, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
 
 > **Note**:
 > As of the release of 20.04, there was a bug which - until fixed - you might want to [add this content](https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21)  to your `/etc/apparmor.d/local/usr.sbin.gpsd`.
@@ -351,10 +351,12 @@ For more complex scenarios there are many more advanced options for configuring 
 
 ### NTS client
 
-The client needs to specify `server` as usual (`pool` directives do not work with NTS). Afterwards, the server address options can be listed and it is there that `nts` can be added. For example:
+The client needs to specify `server` or `pool` as usual. Afterwards, the options can be listed and it is there that `nts` can be added. For example:
 
 ```text
 server <server-fqdn-or-IP> iburst nts
+# or as concrete example
+pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
 ```
 
 One can check the `authdata` of the connections established by the client using `sudo chronyc -N authdata`, which will provide the following information:

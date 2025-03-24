@@ -29,13 +29,13 @@ The newer VFIO-PCI requires that you activate the following kernel parameters to
 iommu=pt intel_iommu=on          
 ```
 
-Alternatively, on AMD:
+Alternatively, on {term}`AMD`:
 
 ``` 
 amd_iommu=pt
 ```
 
-On top of VFIO-PCI, you must also configure and assign the IOMMU groups accordingly. This is mostly done in firmware and by hardware layout -- you can check the group assignment the kernel probed in `/sys/kernel/iommu_groups/`.
+On top of VFIO-PCI, you must also configure and assign the IOMMU groups accordingly. This is mostly done in {term}`firmware <FW>` and by hardware layout -- you can check the group assignment the kernel probed in `/sys/kernel/iommu_groups/`.
 
 > **Note**: 
 > VirtIO is special. DPDK can directly work on these devices without `vfio_pci`/`uio_pci_generic`. However, to avoid issues that might arise from the kernel and DPDK managing the device, you still need to unassign the kernel driver.
@@ -184,7 +184,7 @@ sudo apt-get install dpdk-dev libdpdk-dev
 gcc testdpdkprog.c $(pkg-config --libs --cflags libdpdk) -o testdpdkprog
 ```
 
-An example of a complex (auto-configure) user of pkg-config of DPDK including fallbacks to older non pkg-config style can be seen in the [Open vSwitch build system](https://github.com/openvswitch/ovs/blob/master/acinclude.m4#L283).
+An example of a complex (auto-configure) user of pkg-config of DPDK including {term}`fallbacks` to older non pkg-config style can be seen in the [Open vSwitch build system](https://github.com/openvswitch/ovs/blob/master/acinclude.m4#L283).
 
 Depending on what you are building, it may be a good idea to install all DPDK build dependencies before the make. On Ubuntu, this can be done automatically with the following command:
 

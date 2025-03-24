@@ -233,7 +233,7 @@ New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
 
 ### Use only AES256 with TLSv1.3
 
-In the previous example, the connection ended up using TLSv1.3 as expected, but AES128. To enforce AES256, we can disallow the 128-bit version:
+In the previous example, the connection ended up using TLSv1.3 as expected, but {term}`AES`128. To enforce AES256, we can disallow the 128-bit version:
 
 ```text
 library=

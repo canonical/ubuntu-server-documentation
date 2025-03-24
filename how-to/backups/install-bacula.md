@@ -13,7 +13,7 @@ Bacula is made up of several components and services that are used to manage bac
   
   - Text-based command line.
     
-  - Gnome-based GTK+ Graphical User Interface (GUI) interface.
+  - Gnome-based {term}`GTK+ <GTK>` {term}`Graphical User Interface (GUI) <GUI>`.
     
   - wxWidgets GUI interface.
 
@@ -117,7 +117,7 @@ This section shows how to back up specific directories on a single host to a loc
   * Change `backupserver` to the actual host name.
   * Make sure the **Password** directive matches the password string in `/etc/bacula/bacula-sd.conf`.
 
-- Create a new **FileSet** -- this will define which directories to backup -- by adding:
+- Create a new **{term}`FileSet`** -- this will define which directories to backup -- by adding:
   ```text
   # LocalhostBacup FileSet.
   FileSet {
@@ -132,7 +132,7 @@ This section shows how to back up specific directories on a single host to a loc
     }
   }
   ```
-  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using GZIP.
+  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using {term}`GZIP`.
 
 - Next, create a new **Schedule** for the backup job:
   ```text

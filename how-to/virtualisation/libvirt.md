@@ -49,7 +49,7 @@ You will need **one** of the following:
 - A keyboard and monitor attached to the physical machine.
 - To use cloud images which are meant to self-initialise (see {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>`).
 
-In the case of virtual machines, a Graphical User Interface (GUI) is analogous to using a physical keyboard and mouse on a real computer. Instead of installing a GUI the `virt-viewer` or `virt-manager` application can be used to connect to a virtual machine's console using VNC. See {ref}`Virtual Machine Manager / Viewer <virtual-machine-manager>` for more information.
+In the case of virtual machines, a {term}`Graphical User Interface (GUI) <GUI>` is analogous to using a physical keyboard and mouse on a real computer. Instead of installing a GUI the `virt-viewer` or `virt-manager` application can be used to connect to a virtual machine's console using VNC. See {ref}`Virtual Machine Manager / Viewer <virtual-machine-manager>` for more information.
 
 ## Virtual machine management
 
@@ -414,7 +414,7 @@ is recommended to use huge pages which then would look like:
 </memoryBacking>
 ```
 
-In the guest definition one then can add `filesytem` sections to specify host paths to share with the guest. The *target dir* is a bit special as it isn't really a directory -- instead it is a *tag* that in the guest can be used to access this particular `virtiofs` instance.
+In the guest definition one then can add `filesystem` sections to specify host paths to share with the guest. The *target dir* is a bit special as it isn't really a directory -- instead it is a *tag* that in the guest can be used to access this particular `virtiofs` instance.
 
 ```xml
 <filesystem type='mount' accessmode='passthrough'>
@@ -432,7 +432,7 @@ sudo mount -t virtiofs myfs /mnt/
 
 Compared to other Host/Guest file sharing options -- commonly Samba, NFS or 9P -- `virtiofs` is usually much faster and also more compatible with usual file system semantics.
 
-See the [libvirt domain/filesytem](https://libvirt.org/formatdomain.html#filesystems) documentation for further details on these.
+See the [libvirt domain/filesystem](https://libvirt.org/formatdomain.html#filesystems) documentation for further details on these.
 
 > **Note**:
 > While `virtiofs` works with >=20.10 (Groovy), with >=21.04 (Hirsute) it became more comfortable, especially in small environments (no hard requirement to specify guest Numa topology, no hard requirement to use huge pages). If needed to set up on 20.10 or just interested in those details - the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) holds more details about these.

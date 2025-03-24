@@ -6,7 +6,7 @@ In this section we'll look at configuring a Linux system as a Kerberos client. T
 
 Note that Kerberos alone is not enough for a user to exist in a Linux system. We cannot just point the system at a Kerberos server and expect all the Kerberos principals to be able to *log in* on the Linux system, simply because these users do not *exist* locally.
 
-Kerberos only provides authentication: it doesn't know about user groups, Linux UIDs and GIDs, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
+Kerberos only provides authentication: it doesn't know about user groups, Linux UIDs and {term}`GIDs <GID>`, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
 
 ## Set up a Linux system as a Kerberos client
 
@@ -87,7 +87,7 @@ $ sudo chmod 0600 /etc/sssd/sssd.conf
 $ sudo systemctl start sssd
 ```
 
-Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a fallback to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal (<kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>number</kbd>), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
+Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a {term}`fallback <fallbacks>` to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal (<kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>number</kbd>), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
 
 ```bash
 $ sudo login

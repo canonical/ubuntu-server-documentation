@@ -56,7 +56,7 @@ sudo ldapaddgroup george
 sudo ldapadduser george george
 ```
     
-This will create a group and user with name "george" and set the user's primary group (*gid*) to "george" as well.
+This will create a group and user with name "george" and set the user's primary group (*{term}`gid`*) to "george" as well.
 
 ### Change a user's password
 

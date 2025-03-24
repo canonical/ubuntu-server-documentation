@@ -127,7 +127,7 @@ AES256-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(256)        
 AES128-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(128)               Mac=SHA1
 ```
 
-Let's filter this a bit, and just as an example, remove all AES128 ciphers and SHA1 hashes:
+Let's filter this a bit, and just as an example, remove all {term}`AES`128 ciphers and SHA1 hashes:
 
 ```bash
 $ openssl ciphers -s -v 'DEFAULTS:-AES128:-SHA1'

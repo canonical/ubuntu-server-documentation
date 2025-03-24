@@ -47,7 +47,7 @@ A short description of the share. Adjust to fit your needs.
 The path to the directory you want to share.
     
   > **Note**:
-  > This example uses `/srv/samba/sharename` because, according to the *Filesystem Hierarchy Standard (FHS)*, [`/srv`](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the filesystem as long as the permissions are correct, but adhering to standards is recommended.
+  > This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
 
 - **`browsable`**
 Enables Windows clients to browse the shared directory using Windows Explorer.

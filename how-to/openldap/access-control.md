@@ -2,11 +2,11 @@
 # Set up LDAP access control
 
 
-The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or {term}`ACLs`.
+The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or {term}`ACL`s.
 
 When we {ref}`installed the slapd package <install-openldap>`, various ACLs were set up automatically. We will look at a few important consequences of those defaults and, in so doing, we'll get an idea of how ACLs work and how they're configured.
 
-To get the effective ACL for an LDAP query we need to look at the ACL entries of both the database being queried, and those of the special frontend database instance. Note that the ACLs belonging to the frontend database are always appended to the database-specific ACLs, and the first match 'wins'.
+To get the effective ACL for an LDAP query we need to look at the ACL entries of both the database being queried, and those of the special {term}`frontend` database instance. Note that the ACLs belonging to the frontend database are always appended to the database-specific ACLs, and the first match 'wins'.
 
 ## Getting the ACLs
 

@@ -9,7 +9,7 @@ To recap, our home network has the `10.10.10.0/24` address, and we want to conne
 
 ```
                        public internet
-10.10.10.3/24
+10.10.10.11/24
         home0│            xxxxxx       ppp0 ┌────────┐
            ┌─┴──┐         xx   xxxxx  ──────┤ router │
            │    ├─ppp0  xxx       xx        └───┬────┘    home network, .home domain
@@ -22,7 +22,7 @@ To recap, our home network has the `10.10.10.0/24` address, and we want to conne
                                                   │   │     │   │     │   │
                                                   └───┘     └───┘     └───┘
 Reserved for VPN users:
-10.10.10.2-9
+10.10.10.10-49
 ```
 
 ## Router changes
@@ -110,7 +110,7 @@ $ sudo wg-quick up wg0
 
 The peer configuration will be very similar to what was done before. What changes will be the address, since now it won't be on an exclusive network for the VPN, but will have an address carved out of the home network block.
 
-Let's call this new configuration file `/etc/wireguard/home_internal.conf`:
+Let's call this new configuration file `/etc/wireguard/home0.conf`:
 
 ```
 [Interface]
@@ -127,7 +127,7 @@ AllowedIPs = 10.10.10.0/24
 And bring up this WireGuard interface:
 
 ```bash
-$ sudo wg-quick up home_internal
+$ sudo wg-quick up home0
 ```
 
 > **Note**:

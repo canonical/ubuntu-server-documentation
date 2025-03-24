@@ -89,7 +89,7 @@ When configured as a domain controller, a *\[netlogon\]* share needs to be confi
 ```
 
 > **Note**:
-> The original `netlogon` share path is `/home/samba/netlogon`, but according to the Filesystem Hierarchy Standard (FHS), [/srv is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
+> The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [/srv is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
 
 Now create the `netlogon` directory, and an empty (for now) `logon.cmd` script file:
 

@@ -9,7 +9,7 @@ Let's take a look at some of the major tools and technologies available in the U
 
 [Kernel-Based Virtual Machine (KVM)](https://www.linux-kvm.org/page/Main_Page) is a Linux kernel module that enables hardware-assisted virtualization. It is the default virtualization technology supported by Ubuntu.
 
-For Intel and AMD hardware, KVM requires virtualization extensions in order to run. KVM is also available for IBM Z and LinuxONE, IBM POWER, and ARM64.
+For Intel and {term}`AMD` hardware, KVM requires virtualization extensions in order to run. KVM is also available for IBM Z and LinuxONE, IBM POWER, and ARM64.
 
 ## QEMU
 
@@ -47,7 +47,7 @@ If you want to get started with either of these tools, you can see our guides on
 
 **Abstraction layer**: GUI-based VM management
 
-[Virt-manager](https://virt-manager.org/), the Virtual Machine Manager, provides another high-level way to manage VMs. Like UVtool, virt-manager uses libvirt on the backend. However, unlike UVtool, its abstraction is presented in the form of a graphical user interface (GUI).
+[Virt-manager](https://virt-manager.org/), the Virtual Machine Manager, provides another high-level way to manage VMs. Like UVtool, virt-manager uses libvirt on the backend. However, unlike UVtool, its abstraction is presented in the form of a {term}`graphical user interface (GUI) <GUI>`.
 
 Although in many ways this makes virt-manager easier to use than Multipass and UVtool, it also introduces more complex tooling that supports more advanced users. 
 
