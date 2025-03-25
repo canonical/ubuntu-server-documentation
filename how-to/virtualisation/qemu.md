@@ -22,7 +22,7 @@ kvm-ok
 
 You should get an output saying `KVM acceleration can be used`.
 
-Then next step is to install QEMU.
+The next step is to install QEMU.
 
 ```bash
 sudo apt-get install qemu-system
