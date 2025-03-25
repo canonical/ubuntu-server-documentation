@@ -94,7 +94,7 @@ Once you have a certificate, configure Postfix to provide TLS encryption for bot
 sudo postconf -e 'smtp_tls_security_level = may'
 sudo postconf -e 'smtpd_tls_security_level = may'
 sudo postconf -e 'smtp_tls_note_starttls_offer = yes'
-sudo postconf -e 'smtpd_tls_chain_files = /etc/ssl/certs/server.crt,/etc/ssl/private/server.key'
+sudo postconf -e 'smtpd_tls_chain_files = /etc/ssl/private/server.key,/etc/ssl/certs/server.crt'
 sudo postconf -e 'smtpd_tls_loglevel = 1'
 sudo postconf -e 'smtpd_tls_received_header = yes'
 sudo postconf -e 'myhostname = mail.example.com'
