@@ -1,7 +1,6 @@
 (install-a-root-ca-certificate-in-the-trust-store)=
 # Install a root CA certificate in the trust store
 
-
 Enterprise environments sometimes have a local Certificate Authority (CA) that issues certificates for use within the organisation. For an Ubuntu server to be functional, and to trust the hosts in this environment, this CA must be installed in Ubuntu's trust store.
 
 ## Certificate formats
@@ -17,20 +16,95 @@ To install a certificate in the trust store it must be in PEM format. A PEM cert
 
 Assuming your PEM-formatted root CA certificate is in `local-ca.crt`, run the following commands to install it:
 
+```{note}
+If you don't have a certificate file, you can generate one using {term}`openssl`.
+```
+
+- Install the CA certificate package
+
 ```bash
 sudo apt-get install -y ca-certificates
+```
+
+- Copy your certificate to the local CA certificates directory
+
+```bash
 sudo cp local-ca.crt /usr/local/share/ca-certificates
+```
+
+- Add the certificate to your trust store
+
+```bash
 sudo update-ca-certificates
 ```
 
-> **Note:**
-> It is important that the certificate file has the `.crt` extension, otherwise it will not be processed.
+- Verify that your certificate is in pem format
 
-After this point you can use tools like `curl` and `wget` to connect to local sites.
+```bash
+$ sudo ls /etc/ssl/certs/ | grep local-ca
+
+local-ca.pem
+```
+
+- You can also verify that your certificate is available in the trust store by selecting a few texts from your certificate and comparing them with the certificate at the end of the trust store file to see if it matches yours.
+
+```bash
+$ sudo cat local-ca.crt
+
+...
+L4zOd3b41xJtYldofPve
+-----END CERTIFICATE-----
+
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+
+L4zOd3b41xJtYldofPve
+```
+
+```{note}
+It is important that the certificate file has the `.crt` extension, otherwise it will not be processed.
+```
+
+After this point, you can use tools like `curl` and `wget` to connect to local sites.
+
+## Uninstall a PEM-format certificate
+
+- Verify that the certificate you'd like to uninstall exists.
+
+```bash
+$ sudo ls /usr/local/share/ca-certificates/local-ca.crt
+
+/usr/local/share/ca-certificates/local-ca.crt
+```
+
+- Delete the certificate
+
+```bash
+sudo rm /usr/local/share/ca-certificates/local-ca.crt
+```
+
+- The certificate still exists in the trust store.
+
+```bash
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+
+L4zOd3b41xJtYldofPve
+```
+
+- Update the trust store
+
+```bash
+$ sudo update-ca-certificates --fresh
+```
+
+- Verify that the certificate has been uninstalled
+
+```bash
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+```
 
 ## Convert from DER to PEM format
 
-You can convert a DER-formatted certificate called `local-ca.der` to PEM form like this: 
+You can convert a DER-formatted certificate called `local-ca.der` to PEM form like this:
 
 ```bash
 sudo openssl x509 -inform der -outform pem -in local-ca.der -out local-ca.crt`
