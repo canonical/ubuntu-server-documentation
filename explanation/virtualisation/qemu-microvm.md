@@ -9,7 +9,7 @@ standard QEMU in order to reduce complexity and gain speed. Maybe - for your
 use-case - you do not need e.g. the hypervisor to be able to pretend to have a
 network card from the 90s, nor to emulate a CPU of a foreign architecture,
 nor live migrate with external I/O going on. In such cases, a lot of what QEMU
-provides are not needed and a less complex approach like microvm might be
+provides is not needed and a less complex approach like a microvm might be
 interesting to you.
 
 All of that is a balance that needs to be decided by the needs of your
