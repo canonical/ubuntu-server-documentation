@@ -8,8 +8,8 @@ The underlying concept of a microvm is based on giving up some capabilities of
 standard QEMU in order to reduce complexity and gain speed. Maybe - for your
 use-case - you do not need e.g. the hypervisor to be able to pretend to have a
 network card from the 90s, nor to emulate a CPU of a foreign architecture,
-nor live migrate with external I/O going on. In such cases a lot of what QEMU
-provides is not needed and a less complex approach like microvm might be
+nor live migrate with external I/O going on. In such cases, a lot of what QEMU
+provides is not needed and a less complex approach like a microvm might be
 interesting to you.
 
 All of that is a balance that needs to be decided by the needs of your
@@ -32,7 +32,7 @@ it if the workload you run is not taking much longer anyway. For example, by
 booting a fully generic operating system, followed by more time to completely
 initialise your workload.
 
-There are a few common ways adapt a workload to match this:
+There are a few common ways to adapt a workload to match this:
 - Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
   feature set, not as generally capable but sufficient for a particular use case.
 - Even the fastest bootloader is slower than no bootloader, so often
@@ -42,7 +42,7 @@ There are a few common ways adapt a workload to match this:
   guest system.
 - Sometimes a simpler user space like [busybox](https://www.busybox.net/) or a container-like environment
   is used.
-- In a similar fashion, a customised kernel build with a reduced feature set
+- In a similar fashion, you could use a customised kernel build with a reduced feature set
   with only what is needed for a given use case.
 
 A common compromise of the above options is aligning virtualization with
@@ -50,11 +50,11 @@ container paradigms. While behaving mostly like a container, those tools will
 use virtualization instead of namespaces for the isolation.
 Examples of that are:
 
-- container-like as in [kata containers](https://katacontainers.io/),
+- container-like, as in [kata containers](https://katacontainers.io/),
 - function-based services as in [Firecracker](https://firecracker-microvm.github.io/),
 - system containers as in {ref}`LXD <lxd-containers>`.
 
-In particular {ref}`LXD <lxd-containers>` added VM mode to allow the very same UX
+In particular, {ref}`LXD <lxd-containers>` added VM mode to allow the very same UX
 with namespaces and virtualizaton.
 
 Other related tools are more about creating VMs from containers like:
@@ -63,16 +63,16 @@ Other related tools are more about creating VMs from containers like:
 - [krunvm from OCI images](https://github.com/containers/krunvm).
 
 There are more of these out there, but the point is that one can mix and match
-to suit their needs. At the end of the day many of the above use the same
+to suit their needs. At the end of the day, many of the above use the same
 underlying technology of namespaces or QEMU/KVM.
 
 This page tries to stick to the basics and not pick either higher level
-system mentioned above. Instead it sticks to just QEMU to show how it's
+system mentioned above. Instead, it sticks to just QEMU to show how it's
 ideas of reduced firmware and microvms play into all of this.
 
 ## Create the example workload artifact
 
-To create an example of such a small workload we will follow the tutorial on
+To create an example of such a small workload, we will follow the tutorial on
 how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/en/stable/tutorials/chisel/).
 
 Out of these tutorials one gets an [OCI-compatible](https://github.com/opencontainers/image-spec/blob/main/spec.md)
@@ -158,12 +158,12 @@ add `-bios /usr/share/qemu/qboot.rom` to the QEMU command line.
 is a machine type inspired by [Firecracker](https://firecracker-microvm.github.io/)
 and constructed after its machine model.
 
-In Ubuntu we provide this on x86 as `qemu-system-x86_64-microvm` alongside the
+In Ubuntu, we provide this on x86 as `qemu-system-x86_64-microvm` alongside the
 _standard_ QEMU in the package `qemu-system-x86`.
 
 Microvm aims for maximum compatibility by default; this means that you will
 probably want to switch off some more legacy devices that are not shown in
-this example. But for what is shown here we want to keep it rather comparable
+this example. But for what is shown here, we want to keep it rather comparable
 to the non-microvm invocation.
 For more details on what else could be disabled see
 [microvm](https://github.com/qemu/qemu/blob/master/docs/system/i386/microvm.rst#running-a-microvm-based-vm).
@@ -199,15 +199,15 @@ Breaking down the changes to the command-line elements and their purpose:
 > it mostly is about the initialisation time (and kernel init by having less
 > virtual hardware). And that we can check despite this issue.
 
-On average across a few runs (albeit not in a very performance-controlled
+On average, across a few runs (albeit not in a very performance-controlled
 environment) we can see the kernel start time to be 282ms faster
 comparing _normal QEMU_ to `microvm` and another 526ms faster comparing `microvm`
 to `microvm`+`qboot`.
 
-As mentioned one could go further from here by disabling more legacy devices,
+As mentioned, one could go further from here by disabling more legacy devices,
 using `hvcconsole`, customising the guest CPU, switching off more subsystems
-like ACPI or customising the kernel that is used. But this was meant to be an
-example on how `microvm` can be used in general so we won't make it more
+like ACPI, or customising the kernel that is used. But this was meant to be an
+example on how `microvm` can be used in general, so we won't make it more
 complex for now.
 
 ## Alternative - using virtiofs
@@ -246,5 +246,5 @@ To the QEMU command-line one would then add the following options:
 ```
 
 Which allows the user to mount it from inside the guest via
-`$ mount -t virtiofs myfs /mnt` or if you want to use it as root you can pass
+`$ mount -t virtiofs myfs /mnt` or if you want to use it as root, you can pass
 it via kernel parameter `rootfstype=virtiofs root=myfs rw`.

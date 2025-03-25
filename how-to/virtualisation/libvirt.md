@@ -55,7 +55,7 @@ In the case of virtual machines, a {term}`Graphical User Interface (GUI) <GUI>` 
 
 The following section covers the command-line tools around `virsh` that are part of libvirt itself. But there are various options at different levels of complexities and feature-sets, like:
 
-* {ref}`Multipass <create-vms-with-multipass>
+* {ref}`Multipass <create-vms-with-multipass>`
 * {ref}`UVTool <cloud-image-vms-with-uvtool>`
 * {ref}`virt-* tools <virtual-machine-manager>`
 * [OpenStack](https://ubuntu.com/openstack)

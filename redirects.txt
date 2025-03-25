@@ -48,8 +48,10 @@ virtualization-qemu how-to/virtualisation/qemu/
 virtualisation-with-qemu how-to/virtualisation/qemu/
 
 create-qemu-vms-with-up-to-1024-vcpus how-to/virtualisation/qemu-vms-up-to-1024-vcpus/
+how-to/virtualisation/qemu-vms-up-to-1024-vcpus/ how-to/virtualisation/qemu
 
 boot-arm64-virtual-machines-on-qemu how-to/virtualisation/arm64-vms-on-qemu/
+how-to/virtualisation/arm64-vms-on-qemu/ how-to/virtualisation/qemu
 
 virtualization-multipass how-to/virtualisation/multipass/
 how-to-create-a-vm-with-multipass how-to/virtualisation/multipass/
