@@ -200,7 +200,7 @@ If you get no output from the QEMU command above, aligning your host and guest r
 
 ## Resources
 
-QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore these.
+QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore these additional resources:
 
 - {ref}`Virtualizing graphics using QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
 - {ref}`Using QEMU to create MicroVMs <qemu-microvm>`.
