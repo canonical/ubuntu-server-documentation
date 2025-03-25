@@ -62,6 +62,7 @@ So take a look at the [QEMU manpage](http://manpages.ubuntu.com/manpages/bionic/
 
 While a standard QEMU configuration works for most use cases, some scenarios demand high-vCPU VMs. In the next section, we’ll cover how to create QEMU virtual machines with up to 1024 vCPUs.
 
+(create-qemu-vms-with-up-to-1024-vcpus)=
 ## Create QEMU VMs with up to 1024 vCPUs
 
 For a long time, QEMU only supported launching virtual machines with 288 vCPUs or fewer. While this was acceptable a decade ago, nowadays it is more common to see processors with 300+ physical cores available. For this reason, QEMU has been modified to support virtual machines with up to 1024 vCPUs. The caveat is that the user has to provide a few specific (and not trivial to guess) command line options to enable such a feature, and that is the gap that this document aims to fill.
@@ -121,6 +122,7 @@ Although the regular machine type can now be used to launch the virtual machine,
 
 Now that we've covered high-vCPU configurations for x86_64 VMs, let's look at how to boot ARM64 virtual machines on QEMU.
 
+(boot-arm64-virtual-machines-on-qemu)=
 ## Boot ARM64 virtual machines on QEMU
 
 Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (e.g. on an x86 host) or accelerated with KVM if you have an ARM64 host. This page describes how to do both.
@@ -129,7 +131,7 @@ Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (
 This requires Ubuntu 20.04 or greater
 ```
 
-### Install QEMU
+### Install QEMU to run ARM64 virtual machines
 
 The first step is to install the `qemu-system-arm` package, which needs to be done regardless of where the ARM64 virtual machine will run:
 
@@ -203,4 +205,4 @@ If you get no output from the QEMU command above, aligning your host and guest r
 QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore these additional resources:
 
 - {ref}`Virtualizing graphics using QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
-- {ref}`Using QEMU to create MicroVMs <qemu-microvm>`.
+- {ref}`Using QEMU to create a microvm <qemu-microvm>`.

@@ -42,7 +42,7 @@ There are a few common ways to adapt a workload to match this:
   guest system.
 - Sometimes a simpler user space like [busybox](https://www.busybox.net/) or a container-like environment
   is used.
-- In a similar fashion, a customised kernel builds with a reduced feature set
+- In a similar fashion, you could use a customised kernel build with a reduced feature set
   with only what is needed for a given use case.
 
 A common compromise of the above options is aligning virtualization with
