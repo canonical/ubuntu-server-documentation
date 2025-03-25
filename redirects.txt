@@ -45,7 +45,7 @@ install/lpar-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-lpar
 non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
 
 virtualization-qemu how-to/virtualisation/qemu/
-qemu how-to/virtualisation/qemu/
+virtualisation-with-qemu how-to/virtualisation/qemu/
 
 create-qemu-vms-with-up-to-1024-vcpus how-to/virtualisation/qemu-vms-up-to-1024-vcpus/
 how-to/virtualisation/qemu-vms-up-to-1024-vcpus/ how-to/virtualisation/qemu
