@@ -1,8 +1,9 @@
 (install-postfix)=
 # Install and configure Postfix
 
-> **Note**:
-> This guide does not cover setting up Postfix *Virtual Domains*. For information on Virtual Domains and other advanced configurations see the references list at the end of this page.
+```{note}
+This guide does not cover setting up Postfix *Virtual Domains*. For information on Virtual Domains and other advanced configurations see the references list at the end of this page.
+```
 
 ## Install Postfix
 
@@ -75,8 +76,9 @@ sudo postconf -e 'smtpd_recipient_restrictions = \
 permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
 ```
 
-> **Note**:
-> The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
+```{note}
+The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
+```
 
 There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "noanonymous" prevents the use of mechanisms that permit anonymous authentication.
 
@@ -92,8 +94,7 @@ Once you have a certificate, configure Postfix to provide TLS encryption for bot
 sudo postconf -e 'smtp_tls_security_level = may'
 sudo postconf -e 'smtpd_tls_security_level = may'
 sudo postconf -e 'smtp_tls_note_starttls_offer = yes'
-sudo postconf -e 'smtpd_tls_key_file = /etc/ssl/private/server.key'
-sudo postconf -e 'smtpd_tls_cert_file = /etc/ssl/certs/server.crt'
+sudo postconf -e 'smtpd_tls_chain_files = /etc/ssl/private/server.key,/etc/ssl/certs/server.crt'
 sudo postconf -e 'smtpd_tls_loglevel = 1'
 sudo postconf -e 'smtpd_tls_received_header = yes'
 sudo postconf -e 'myhostname = mail.example.com'
@@ -347,8 +348,9 @@ As with Postfix, if you change a Dovecot configuration the process will need to 
 sudo systemctl reload dovecot.service
 ```
 
-> **Note**:
-> Some of the options above can drastically increase the amount of information sent to the log files. Remember to return the log level back to normal after you have corrected the problem -- then reload the appropriate daemon for the new configuration to take effect.
+```{note}
+Some of the options above can drastically increase the amount of information sent to the log files. Remember to return the log level back to normal after you have corrected the problem -- then reload the appropriate daemon for the new configuration to take effect.
+```
 
 ## References
 
