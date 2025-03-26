@@ -239,7 +239,7 @@ Libvirt covers most use cases needed, but if you ever want/need to work around l
 virsh qemu-monitor-command --hmp focal-test-log 'drive_add 0 if=none,file=/var/lib/libvirt/images/test.img,format=raw,id=disk1'
 ```
 
-But since the monitor is so powerful, you can do a lot -- especially for debugging purposes, like showing the guest registers:
+The monitor is a power tool, especially for debugging purposes. For example, one can use the monitor to show the guest registers:
 
 ```bash
 $ virsh qemu-monitor-command --hmp y-ipns 'info registers'
