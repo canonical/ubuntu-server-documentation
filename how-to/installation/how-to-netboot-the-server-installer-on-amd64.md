@@ -27,7 +27,7 @@ There are several implementations of the DHCP/BOOTP and TFTP protocols available
    sudo apt install dnsmasq
    ```
 
-2. Put something like this in `/etc/dnsmasq.conf.d/pxe.conf`:
+2. Put something like this in `/etc/dnsmasq.d/pxe.conf`:
 
    ```
    interface=<your interface>,lo
