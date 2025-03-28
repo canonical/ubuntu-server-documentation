@@ -1,5 +1,5 @@
 (two-factor-authentication-with-u2f-or-fido)=
-## Two factor authentication with U2F/FIDO
+# Two factor authentication with U2F/FIDO
 
 OpenSSH 8.2 has added [support for U2F/FIDO hardware authentication devices](https://www.openssh.com/txt/release-8.2). These devices are used to provide an extra layer of security on top of the existing key-based authentication, as the hardware token needs to be present to finish the authentication.
 

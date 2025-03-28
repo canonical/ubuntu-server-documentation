@@ -1,7 +1,7 @@
 (two-factor-authentication-with-TOTP-or-HOTP)=
-## Two factor authentication with TOTP/HOTP
+# Two factor authentication with TOTP/HOTP
 
-For the best two factor authentication (2FA) security, we recommend using hardware authentication devices that support U2F/FIDO. See the guide on [two factor authentication with U2F/FIDO](two-factor-authentication-with-u2f-or-fido.md) for details. However, if this is not possible or is impractical to implement in your case, TOTP/HOTP based 2FA is an improvement over no two factor at all. Smartphone apps to support this type of 2FA are common, such as Google Authenticator.
+For the best two factor authentication (2FA) security, we recommend using hardware authentication devices that support U2F/FIDO. See the guide on {ref}`two factor authentication with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>` for details. However, if this is not possible or is impractical to implement in your case, TOTP/HOTP based 2FA is an improvement over no two factor at all. Smartphone apps to support this type of 2FA are common, such as Google Authenticator.
 
 ### Background
 

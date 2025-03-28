@@ -105,7 +105,7 @@ The prefix `lp:` is implied and means fetching from Launchpad. The alternative `
 
 ## Two factor authentication
 
-You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication [using U2F/FIDO hardware authentication devices](two-factor-authentication-with-u2f-or-fido.md). Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it [using HMAC/Time based One Time Passwords (HOTP/TOTP)](two-factor-authentication-with-TOTP-or-HOTP.md).
+You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication {ref}`using U2F/FIDO hardware authentication devices <two-factor-authentication-with-u2f-or-fido.md>`. Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it {ref}`using HMAC/Time based One Time Passwords (HOTP/TOTP) <two-factor-authentication-with-TOTP-or-HOTP.md>`.
 
 ## Further reading
 
