@@ -137,7 +137,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
         
     menuentry 'Ubuntu 24.04' {
             gfxmode $linux_gfx_mode
-            linux /vmlinux $vt_handoff quiet splash
+            linux /vmlinuz $vt_handoff quiet splash
             initrd /initrd
     }
    ```
