@@ -169,7 +169,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
    ```
 
 ```{note}
-Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-init from downloading the iso twice.
+Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-init from downloading the ISO twice.
 ```
 
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
