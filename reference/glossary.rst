@@ -746,7 +746,9 @@ H
         Related topic(S): Observability
 
     hostname
-        *Work in Progress*
+        A hostname identifies a server using a word rather than an IP address. This makes it easier to remember.
+
+        Related topic(S): Networking, Web services
 
     HOTP
         *Work in Progress*
