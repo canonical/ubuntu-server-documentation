@@ -27,7 +27,7 @@ There are several implementations of the DHCP/BOOTP and TFTP protocols available
    sudo apt install dnsmasq
    ```
 
-2. Put something like this in `/etc/dnsmasq.conf.d/pxe.conf`:
+2. Put something like this in `/etc/dnsmasq.d/pxe.conf`:
 
    ```
    interface=<your interface>,lo
@@ -137,7 +137,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
         
     menuentry 'Ubuntu 24.04' {
             gfxmode $linux_gfx_mode
-            linux /vmlinux $vt_handoff quiet splash
+            linux /vmlinuz $vt_handoff quiet splash
             initrd /initrd
     }
    ```
@@ -165,8 +165,13 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
     LABEL install
       KERNEL vmlinuz
       INITRD initrd
-      APPEND root=/dev/ram0 ramdisk_size=1500000 ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
+      APPEND root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
    ```
+
+```{note}
+Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-init from downloading the ISO twice.
+```
+
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
 
 This configuration is very simple. PXELINUX has many, many options, and you can [consult its documentation](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX) for more.
