@@ -59,8 +59,9 @@ sudo certtool --generate-privkey \
 --outfile /etc/ldap/ldap01_slapd_key.pem
 ```
 
-> **Note**:
-> Replace `ldap01` in the filename with your server's hostname. Naming the certificate and key for the host and service that will be using them will help keep things clear.
+```{note}
+Replace `ldap01` in the filename with your server's {term}`hostname`. Naming the certificate and key for the host and service that will be using them will help keep things clear.
+```
 
 Create the `/etc/ssl/ldap01.info` info file containing:
 

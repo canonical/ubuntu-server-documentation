@@ -175,7 +175,7 @@ Next, sync the user accounts, using SCP to copy the `/var/lib/samba` directory f
 sudo scp -r username@pdc:/var/lib/samba /var/lib
 ```
 
-You can replace *username* with a valid username and *pdc* with the hostname or IP address of your actual PDC.
+You can replace *username* with a valid username and *pdc* with the {term}`hostname` or IP address of your actual PDC.
 
 Finally, restart samba:
 

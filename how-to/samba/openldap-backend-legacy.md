@@ -88,7 +88,7 @@ ldapi:/// -b cn=config olcDatabase={1}mdb olcDbIndex
 Next, configure the `smbldap-tools` package to match your environment. The package comes with a configuration helper script called `smbldap-config`. Before running it, though, you should decide on two important configuration settings in `/etc/samba/smb.conf`:
 
   - **netbios name** 
-How this server will be known. The default value is derived from the server's hostname, but truncated at 15 characters.
+How this server will be known. The default value is derived from the server's {term}`hostname`, but truncated at 15 characters.
 
   - **workgroup** 
 The workgroup name for this server, or, if you later decide to make it a domain controller, this will be the domain.

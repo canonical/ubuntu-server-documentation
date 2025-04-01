@@ -150,7 +150,7 @@ To verify the ticket was obtained, use `klist`, which should have output similar
 ### DNS tests
 Using the Kerberos ticket from the step above, we can check the DNS server that Samba is running.
 
-If everything is correct, the `hostname` command should be able to return both the short hostname, and the fully qualified hostname.
+If everything is correct, the `hostname` command should be able to return both the short {term}`hostname`, and the fully qualified hostname.
 
 For the short hostname, use the command:
 

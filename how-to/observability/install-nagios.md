@@ -6,7 +6,7 @@
 
 The monitoring of essential servers and services is an important part of system administration. This guide walks through how to install and configure Nagios Core 3 for availability monitoring.
 
-The example in this guide uses two servers with hostnames: **`server01`** and **`server02`**. 
+The example in this guide uses two servers with {term}`hostnames <hostname>`: **`server01`** and **`server02`**. 
 
 `Server01` will be configured with Nagios to monitor services on itself and on `server02`, while `server02` will be configured to send data to `server01`.
 

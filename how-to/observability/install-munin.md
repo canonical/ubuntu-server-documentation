@@ -3,7 +3,7 @@
 
 The monitoring of essential servers and services is an important part of system administration. This guide will show you how to set up [Munin](https://munin-monitoring.org/) for performance monitoring.
 
-In this example, we will use two servers with hostnames: **`server01`** and **`server02`**. 
+In this example, we will use two servers with {term}`hostnames <hostname>`: **`server01`** and **`server02`**. 
 
 `Server01` will be set up with the `munin` package to gather information from the network. Using the `munin-node` package, `server02` will be configured to send information to `server01`.
 

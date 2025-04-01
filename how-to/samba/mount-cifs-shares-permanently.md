@@ -42,7 +42,7 @@ Then edit your `/etc/fstab` file (with root privileges) to add this line:
 
 Where:
 
-* `servername` is the server hostname or IP address,
+* `servername` is the server {term}`hostname` or IP address,
 * `guest` indicates you don't need a password to access the share,
 * `uid=1000` makes the Linux user (specified by the ID) the owner of the mounted share, allowing them to rename files, and
 * If there is any space in the server path, you need to replace it by `\040`, for example:

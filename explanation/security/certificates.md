@@ -152,7 +152,7 @@ sudo openssl ca -in server.csr -config /etc/ssl/openssl.cnf
 
 After entering the password for the CA key, you will be prompted to sign the certificate, and again to commit the new certificate. You should then see a somewhat large amount of output related to the certificate creation.
 
-There should now be a new file, `/etc/ssl/newcerts/01.pem`, containing the same output. Copy and paste everything beginning with the `-----BEGIN CERTIFICATE-----` line and continuing through to the `----END CERTIFICATE-----` lines to a file named after the hostname of the server where the certificate will be installed. For example `mail.example.com.crt`, is a nice descriptive name.
+There should now be a new file, `/etc/ssl/newcerts/01.pem`, containing the same output. Copy and paste everything beginning with the `-----BEGIN CERTIFICATE-----` line and continuing through to the `----END CERTIFICATE-----` lines to a file named after the {term}`hostname` of the server where the certificate will be installed. For example `mail.example.com.crt`, is a nice descriptive name.
 
 Subsequent certificates will be named `02.pem`, `03.pem`, etc.
 
