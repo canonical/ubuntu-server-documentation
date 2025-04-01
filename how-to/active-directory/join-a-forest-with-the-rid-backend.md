@@ -29,7 +29,7 @@ The `testparm` utility is happy with this configuration, and there is no overlap
 
     Server role: ROLE_DOMAIN_MEMBER
 
-We next adjust the hostname and perform the join:
+We next adjust the {term}`hostname` and perform the join:
 
     $ sudo hostnamectl hostname n3.example.internal
 

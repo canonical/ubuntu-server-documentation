@@ -748,7 +748,7 @@ H
     hostname
         A hostname identifies a server using a word rather than an IP address. This makes it easier to remember.
 
-        Related topic(S): Networking, Web services
+        Related topic(S): Networking, Web services, Security, WireGuard VPN, DNSSEC, Containers, Kerberos, Backups and version control, Observability, Samba, Databases, Cloud-init, Active Directory integration, Managing software, OpenLDAP, High availability, and Cryptography.
 
     HOTP
         *Work in Progress*

@@ -76,7 +76,7 @@ Now we can access the VM by running:
     multipass shell tutorial
 
 We will get a "Welcome to Ubuntu" message. Notice that when we run
-this command, the terminal username changes to ``ubuntu`` and the hostname
+this command, the terminal username changes to ``ubuntu`` and the :term:`hostname`
 changes to ``tutorial``:
 
 .. code-block:: bash
