@@ -124,7 +124,7 @@ pg_basebackup -h <IP address of the main server> -D /var/lib/postgresql/14/main 
 
 After this, a full single pass will have been completed, copying the content of the main database onto the local system being the standby. In the `pg_basebackup` command the flags represent the following:
 
-* `-h`: The hostname or IP address of the main server
+* `-h`: The {term}`hostname` or IP address of the main server
 * `-D`: The data directory
 * `-U`: The user to be used in the operation
 * `-P`: Turns on progress reporting

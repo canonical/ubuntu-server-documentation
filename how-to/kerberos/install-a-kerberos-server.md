@@ -23,7 +23,7 @@ The first step in creating a Kerberos realm is to install the `krb5-kdc` and `kr
 sudo apt install krb5-kdc krb5-admin-server
 ```
 
-You will be asked at the end of the install to supply the hostname for the Kerberos and Admin servers for the realm, which may or may not be the same server. Since we are going to create the realm, and thus these servers, type in the full hostname of this server.
+You will be asked at the end of the install to supply the {term}`hostname` for the Kerberos and Admin servers for the realm, which may or may not be the same server. Since we are going to create the realm, and thus these servers, type in the full hostname of this server.
 
 > **Note**:
 > By default the realm name will be domain name of the Key Distribution Center (KDC) server.

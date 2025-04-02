@@ -62,7 +62,7 @@ Job {
 ```
 
 > **Note**:
-> The example above changes the job name to "BackupServer", matching the machine's host name. Replace “BackupServer” with your own hostname, or other descriptive name.
+> The example above changes the job name to "BackupServer", matching the machine's host name. Replace “BackupServer” with your own {term}`hostname`, or other descriptive name.
 
 The Console can be used to query the Director about jobs, but to use the Console with a *non-root* user, the user needs to be in the **Bacula group**. To add a user to the Bacula group, run the following command from a terminal:
 

@@ -164,7 +164,7 @@ olcUpdateRef: ldap://ldap01.example.com
 
 Ensure the following attributes have the correct values:
 
-- **`provider`**: Provider server's hostname -- `ldap01.example.com` in this example -- or IP address. It must match what is presented in the provider's SSL certificate.
+- **`provider`**: Provider server's {term}`hostname` -- `ldap01.example.com` in this example -- or IP address. It must match what is presented in the provider's SSL certificate.
 - **`binddn`**: The bind {term}`DN` for the replicator user.
 - **`credentials`**: The password you selected for the replicator user.
 - **`searchbase`**: The database suffix you're using, i.e., content that is to be replicated.

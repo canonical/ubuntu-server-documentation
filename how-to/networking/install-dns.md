@@ -444,7 +444,7 @@ You should see the file `/var/log/named/query.log` fill with query information. 
 This section covers some of the most common DNS record types.
 
 - **`A` record**
-  This record maps an IP address to a hostname.
+  This record maps an IP address to a {term}`hostname`.
 
     ```
     www      IN    A      192.168.1.12

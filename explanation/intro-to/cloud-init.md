@@ -25,7 +25,7 @@ entire fleet of machines in exactly the same way. You get consistent results wit
 so manually.
 
 It can handle a range of tasks that normally happen when a new instance is
-created, such as setting the hostname, configuring network interfaces, creating
+created, such as setting the {term}`hostname`, configuring network interfaces, creating
 user accounts, and even running custom scripts.
 
 ## Related products

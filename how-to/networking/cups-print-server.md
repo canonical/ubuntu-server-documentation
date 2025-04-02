@@ -40,7 +40,7 @@ ServerAdmin bjoy@somebigco.com
 
 By default on Ubuntu, CUPS listens only on the loopback interface at IP address `127.0.0.1`.
 
-To instruct CUPS to listen on an actual network adapter's IP address, you must specify either a hostname, the IP address, or (optionally) an IP address/port pairing via the addition of a **Listen** directive.
+To instruct CUPS to listen on an actual network adapter's IP address, you must specify either a {term}`hostname`, the IP address, or (optionally) an IP address/port pairing via the addition of a **Listen** directive.
 
 For example, if your CUPS server resides on a local network at the IP address `192.168.10.250` and you'd like to make it accessible to the other systems on this subnetwork, you would edit the `/etc/cups/cupsd.conf` and add a Listen directive, as follows:
 
