@@ -26,6 +26,58 @@ section.
    For example, if a page appears in the How-to section about Virtualisation,
    the landing page you need will be ``subsections/how-to-virtualisation.rst``.
 
+Versioning policy
+=================
+
+Ubuntu Server is relatively stable from one LTS to the next, which means the
+documentation is not substantially re-written between releases. Due to this,
+we opt not to have separate branches for each Ubuntu release. Instead, we call
+out any changes or behaviour particular to a specific release.
+
+Versioning by admonition
+------------------------
+
+Small, specific changes can be expressed in a "note" admonition block:
+
+.. code-block:: 
+
+   :::{note}
+   For Ubuntu 24.04 LTS (Noble) onwards, the recommended method for ...
+   :::
+
+or 
+
+.. code-block::
+
+   ```{note}
+   For Ubuntu 24.04 LTS (Noble) onwards, the recommended method for ...
+   ```
+
+Any content not called out as belong to a specific release (or set of releases)
+is assumed to be valid for all supported releases.
+
+Versioning by tabs
+------------------
+
+For large changes, where whole sets of commands may be different between
+releases, we can split the instructions using tabs. 
+
+The MyST documentation has a
+`helpful demonstration <https://mystmd.org/guide/dropdowns-cards-and-tabs#tabs>`_
+of the syntax and how tabs work.
+
+It's good to include a "sync" keyword, so that if users are on a particular
+release, they only need to choose their release one time. Default to the release
+number, e.g. `24.04` or `21.10`.
+
+In all cases, order the tabs and content from "most recent" to "oldest" release
+-- this ensures that the most recent release is always shown in the left-most
+tab and provides a more consistent experience.
+
+If you would like to see an example of this in the live documentation,
+:ref:`the QEMU page <qemu>` uses three tabs in the section about using 1024
+vCPUs.
+
 Style guide
 ===========
 
