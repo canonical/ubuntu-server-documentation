@@ -156,7 +156,7 @@ custom_linkcheck_anchors_ignore_for_url = []
 ## The following settings are appended to the default configuration.
 ## Use them to extend the default functionality.
 # NOTE: Remove this variable to disable the MyST parser extensions.
-custom_myst_extensions = []
+custom_myst_extensions = ["colon_fence"]
 
 myst_heading_anchors = 3
 
