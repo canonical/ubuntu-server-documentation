@@ -79,7 +79,10 @@ To support more than 288 vCPUs, some QEMU versions are only compatible with spec
 
 ### Configuration by Ubuntu release
 
-#### Ubuntu 22.04 Jammy
+::::{tab-set}
+
+:::{tab-item} 22.04 Jammy
+:sync: 22.04
 
 If you are using QEMU on Jammy and want to create VMs with more than 288 vCPUs, you will need to use either of the special `pc-q35-jammy-maxcpus` or `pc-i440fx-jammy-maxcpus` machine types.
 
@@ -94,8 +97,10 @@ In the example above, the virtual machine will be launched using 300 vCPUs and a
 The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
 Note that both machine types for Jammy are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems.
+:::
 
-#### Ubuntu 23.10 Mantic
+:::{tab-item} 23.10 Mantic
+:sync: 23.10
 
 If you are using QEMU on Mantic, the special machine types are named in a similar fashion to Jammy's: `pc-q35-mantic-maxcpus` or `pc-i440fx-mantic-maxcpus`.
 Therefore, you command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
@@ -109,8 +114,10 @@ In the example above, the virtual machine will be launched using 300 vCPUs and a
 The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
 Note that both machine types for Mantic are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems. As noted in the previous section, it is also possible to create virtual machines using the special Jammy machine types on Mantic.
+:::
 
-#### Ubuntu 24.04 Noble
+:::{tab-item} 24.04 Noble
+:sync: 24.04
 
 From Noble onwards, the regular `ubuntu` machine type supports up to 1024 vCPUs out of the box, which simplifies the command used to create such virtual machines:
 
@@ -121,6 +128,9 @@ qemu-system-x86_64 -M ubuntu,accel=kvm,kernel-irqchip=split -device intel-iommu,
 Although the regular machine type can now be used to launch the virtual machine, it is still necessary to provide some special command line options to make sure that the VM is created with a virtual IOMMU with interrupt mapping.
 
 Now that we've covered high-vCPU configurations for x86_64 VMs, let's look at how to boot ARM64 virtual machines on QEMU.
+:::
+
+::::
 
 (boot-arm64-virtual-machines-on-qemu)=
 ## Boot ARM64 virtual machines on QEMU
