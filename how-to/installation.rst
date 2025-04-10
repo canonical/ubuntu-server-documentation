@@ -58,7 +58,7 @@ Reference: :ref:`System requirements <system-requirements>`
 
     amd64 netboot install <installation/how-to-netboot-the-server-installer-on-amd64>
     arm64 netboot install <installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64>
-    Choosing between the arm64 and arm64+largemem installer options <installation/choosing-between-the-arm64-and-arm64-largemem-installer-options>
+    Choose between the arm64 and arm64+largemem installer options <installation/choosing-between-the-arm64-and-arm64-largemem-installer-options>
     ppc64el netboot install <installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot>
     Virtual CD-ROM and Petitboot install on ppc64el <installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot>
     s390x install via z/VM <installation/interactive-live-server-installation-on-ibm-z-vm-s390x>
