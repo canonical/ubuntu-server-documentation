@@ -3,7 +3,7 @@
 
 For the best two factor authentication (2FA) security, we recommend using hardware authentication devices that support U2F/FIDO. See the guide on {ref}`two factor authentication with U2F/FIDO <two-factor-authentication-with-u2f-or-fido>` for details. However, if this is not possible or is impractical to implement in your case, TOTP/HOTP based 2FA is an improvement over no two factor at all. Smartphone apps to support this type of 2FA are common, such as Google Authenticator.
 
-### Background
+## Background
 
 The configuration presented here makes public key authentication the first factor, the TOTP/HOTP code the second factor, and makes password authentication unavailable. Apart from the usual setup steps required for public key authentication, all configuration and setup takes place on the server. No changes are required at the client end; the 2FA prompt appears in place of the password prompt.
 
@@ -16,7 +16,7 @@ TOTP avoids this downside of HOTP by using the current timezone-independent date
 > **Note**:
 > It is not recommended to configure U2F/FIDO at the same time as TOTP/HOTP. This combination has not been tested, and using the configuration presented here, TOTP/HOTP would become mandatory for everyone, whether or not they are also using U2F/FIDO.
 
-### Install required software
+## Install required software
 
 From a terminal prompt, install the `google-authenticator` PAM module:
 
@@ -28,15 +28,15 @@ sudo apt install libpam-google-authenticator
 > **Note**:
 > The `libpam-google-authenticator` package is in Ubuntu's universe archive component, which receives best-effort community support only.
 
-### Configure users
+## Configure users
 
 Since public key authentication with TOTP/HOTP 2FA is about to be configured to be mandatory for all users, each user who wishes to continue using SSH must first set up public key authentication and then configure their 2FA keys by running the user setup tool. If this isn't done first, users will not be able to do it later over SSH, since at that point they won't have public key authentication and/or 2FA configured to authenticate with.
 
-#### Configure users' key-based authentication
+### Configure users' key-based authentication
 
 To set up key-based authentication, see "SSH Keys" above. Once this is done, it can be tested independently of subsequent 2FA configuration. At this stage, user authentication should work with keys only, requiring the supply of the private key passphrase only if it was configured. If configured correctly, the user should not be prompted for their password.
 
-#### Configure users' TOTP/HOTP 2FA secrets
+### Configure users' TOTP/HOTP 2FA secrets
 
 Each user needs to run the setup tool to configure 2FA. This will ask some questions, generate a key, and display a QR code for the user to import the secret into their smartphone app, such as the Google Authenticator app on Android. The tool creates the file `~/.google-authenticator`, which contains a shared secret, emergency passcodes and per-user configuration.
 
@@ -58,7 +58,7 @@ It's important to plan for the eventuality that the 2FA device gets lost or dama
 
 Of course, any of these backup steps also negate any benefit of 2FA should someone else get access to the backup, so the steps taken to protect any backup should be considered carefully.
 
-### Configure the SSH server
+## Configure the SSH server
 
 Once all users are configured, configure `sshd` itself by editing `/etc/ssh/sshd_config`. Depending on your installation, some of these settings may be configured already, but not necessarily with the values required for this configuration. Check for and adjust existing occurrences of these configuration directives, or add new ones, as required:
 
@@ -91,7 +91,7 @@ auth required pam_google_authenticator.so
 
 Changes to PAM configuration have immediate effect, and no separate reloading command is required.
 
-### Log in using 2FA
+## Log in using 2FA
 
 Now when you log in using SSH, in addition to the normal public key authentication, you will be prompted for your TOTP or HOTP code:
 
@@ -103,7 +103,7 @@ Welcome to Ubuntu Jammy Jellyfish...
 (...)
 ubuntu@jammy.server:~$
 ```
-### Special cases
+## Special cases
 
 On Ubuntu, the following settings are default in `/etc/ssh/sshd_config`, but if you have overridden them, note that they are required for this configuration to work correctly and must be restored as follows:
 
