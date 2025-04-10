@@ -26,6 +26,9 @@ how-to-netboot-the-server-installer-on-amd64 how-to/installation/how-to-netboot-
 install/netboot-arm64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/
 netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/
 
+choosing-between-the-arm64-and-arm64-largemem-installer-options how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/
+explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/ how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/
+
 install/netboot-ppc64el how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/
 netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/
 
@@ -43,6 +46,8 @@ interactive-live-server-installation-on-ibm-z-lpar-s390x how-to/installation/int
 
 install/lpar-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
 non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
+
+system-requirements reference/installation/system-requirements/
 
 virtualization-qemu how-to/virtualisation/qemu/
 virtualisation-with-qemu how-to/virtualisation/qemu/
@@ -429,8 +434,6 @@ openssh-crypto-configuration explanation/crypto/openssh-crypto-configuration/
 
 troubleshooting-tls-ssl explanation/crypto/troubleshooting-tls-ssl/
 
-choosing-between-the-arm64-and-arm64-largemem-installer-options explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/
-
 about-logical-volume-management-lvm explanation/storage/about-lvm/
 
 service-iscsi explanation/storage/iscsi-initiator-or-client/
@@ -464,8 +467,6 @@ multipath-configuration-examples explanation/multipath/multipath-configuration-e
 
 device-mapper-multipathing-usage-debug explanation/multipath/common-multipath-tasks-and-procedures/
 common-multipath-tasks-and-procedures explanation/multipath/common-multipath-tasks-and-procedures/
-
-system-requirements reference/installation/system-requirements/
 
 cloud-images reference/clouds/find-cloud-images/
 cloud-images/introduction reference/clouds/find-cloud-images/

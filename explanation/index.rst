@@ -50,13 +50,6 @@ Cryptography
     :start-line: 4
     :end-before: .. toctree::
 
-Server installation
-===================
-
-.. include:: installation.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
 Storage
 =======
 
@@ -110,7 +103,6 @@ Multipath
     active-directory.rst
     security.rst
     cryptography.rst
-    installation.rst
     storage.rst
     software.rst
     web-services.rst
