@@ -47,6 +47,8 @@ interactive-live-server-installation-on-ibm-z-lpar-s390x how-to/installation/int
 install/lpar-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
 non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
 
+explanation/installation/ how-to/installation/
+
 system-requirements reference/installation/system-requirements/
 
 virtualization-qemu how-to/virtualisation/qemu/
