@@ -3,7 +3,22 @@
 Server installation
 ********************
 
-This list of installation guides contains installation instructions for
+If you are new to Ubuntu, we recommend our
+:ref:`basic installation <basic-installation>` tutorial to get you started.
+
+**Automatic install**
+
+The Ubuntu Installer has its own documentation for automatic (or "hands off")
+installations. These guides from the Ubuntu Installer documentation are
+available for automatic installations.
+
+* `Introduction to Automated Server installer`_
+* `Autoinstall quickstart`_
+* `Autoinstall quickstart on s390x`_
+
+**Advanced install**
+
+This list of guides contains installation instructions for
 architecture-specific and more advanced setups. Select your preferred
 architecture to see which guides are available.
 
@@ -29,20 +44,6 @@ architecture to see which guides are available.
       * :ref:`Non-interactive IBM z/VM autoinstall <non-interactive-ibm-z-vm-autoinstall-s390x>`
       * :ref:`Install via LPAR <interactive-live-server-installation-on-ibm-z-lpar-s390x>`
       * :ref:`Non-interactive IBM Z LPAR autoinstall <non-interactive-ibm-z-lpar-autoinstall-s390x>`
-
-If you are new to Ubuntu, we recommend our
-:ref:`basic installation <basic-installation>` tutorial to get you started
-instead.
-
-**Automatic install**
-
-The Ubuntu Installer has its own documentation for automatic (or "hands off")
-installations. These guides from the Ubuntu Installer documentation are
-available for automatic installations.
-
-* `Introduction to Automated Server installer`_
-* `Autoinstall quickstart`_
-* `Autoinstall quickstart on s390x`_
 
 **See also**
 
