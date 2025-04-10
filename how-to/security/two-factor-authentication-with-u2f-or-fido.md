@@ -7,7 +7,7 @@ It's very simple to use and setup. The only extra step is to generate a new keyp
 
 Once the keypair is generated, it can be used as you would normally use any other type of key in OpenSSH. The only requirement is that in order to use the private key, the U2F device has to be present on the host.
 
-### Example with U2F
+## Example with U2F
 
 For example, plug the U2F device in and generate a keypair to use with it:
 
@@ -34,7 +34,7 @@ Welcome to Ubuntu Focal Fossa (GNU/Linux 5.4.0-21-generic x86_64)
 ubuntu@focal.server:~$
 ```
 
-### FIDO2 resident keys
+## FIDO2 resident keys
 
 FIDO2 private keys consist of two parts: a **key handle** part, stored in the private key file on disk, and a **per-device key**, which is unique to each FIDO2 token and cannot be exported from the token hardware. These are combined by the hardware at authentication time to derive the real key, which is used to sign authentication challenges.
 
