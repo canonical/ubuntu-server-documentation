@@ -785,7 +785,7 @@ H
         *Work in Progress*
 
     hugepage
-        *Work in Progress*
+        A huge page increases the page size on a host, and as a result, when virtual memory is allocated to an application, there are fewer page table entries required to map the virtual memory to physical memory. The page table entries are stored in Random Access Memory (RAM) and cached in the :term:`Translation Lookaside Buffer (TLB) <TLB>`.
 
     HWE
         *Work in Progress*
@@ -2013,7 +2013,7 @@ T
         *Work in Progress*
 
     TLB
-        *Work in Progress*
+        Translation Lookaside Buffer (TLB) is a CPU cache that stores recent page table entries. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it's missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
 
     TLS
         *Work in Progress*
