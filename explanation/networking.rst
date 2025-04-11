@@ -10,6 +10,10 @@ Networking
 * :ref:`Time synchronisation <about-time-synchronisation>`
 * :ref:`The DPDK library <about-dpdk>`
 
+**Active Directory integration**
+
+:ref:`explanation-active-directory-integration`
+
 .. toctree::
     :hidden:
 
@@ -19,3 +23,4 @@ Networking
     About DHCP <networking/about-dhcp>
     Time synchronisation <networking/about-time-synchronisation>
     The DPDK library <networking/about-dpdk>
+    active-directory

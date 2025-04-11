@@ -15,45 +15,23 @@ Introduction to...
     :start-line: 4
     :end-before: .. toctree::
 
-Virtualisation and containers
-=============================
+Security
+========
 
-.. include:: virtualisation.rst
-    :start-line: 4
-    :end-before: .. toctree::
+:ref:`Our security section <explanation-security>` includes additional
+discussion of concepts and features around authentication, cryptography, and
+Virtual Private Networks (VPNs).
 
+For more general introductions to these topics, see:
+
+* :ref:`introduction-to-security`
+* :ref:`introduction-to-crypto-libraries`
+* :ref:`introduction-to-wireguard-vpn`
+ 
 Networking
 ==========
 
 .. include:: networking.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Active Directory integration
-============================
-
-.. include:: active-directory.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Security
-========
-
-.. include:: security.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Cryptography
-============
-
-.. include:: cryptography.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Storage
-=======
-
-.. include:: storage.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -64,10 +42,24 @@ Managing software
     :start-line: 4
     :end-before: .. toctree::
 
+Storage
+=======
+
+.. include:: storage.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
 Web services
 ============
 
 .. include:: web-services.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+Virtualisation and containers
+=============================
+
+.. include:: virtualisation.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -85,27 +77,17 @@ High Availability
     :start-line: 4
     :end-before: .. toctree::
 
-Multipath
-=========
-
-.. include:: multipath.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-
 .. toctree::
     :hidden:
     :titlesonly:
 
     introduction-to.rst
-    virtualisation.rst
-    networking.rst
-    active-directory.rst
     security.rst
-    cryptography.rst
-    storage.rst
+    networking.rst
     software.rst
+    storage.rst
+    virtualisation.rst
     web-services.rst
     performance.rst
     high-availability.rst
-    multipath.rst
+
