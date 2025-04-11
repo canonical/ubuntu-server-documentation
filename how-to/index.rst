@@ -30,55 +30,10 @@ Security
     :start-line: 4
     :end-before: .. toctree::
 
-WireGuard VPN
-=============
-
-.. include:: wireguard-vpn.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
 Networking
 ==========
 
 .. include:: networking.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Managing software
-=================
-
-.. include:: software.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Samba
-=====
-
-.. include:: samba.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Authentication and access
-=========================
-
-Kerberos
---------
-
-.. include:: kerberos.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Network user authentication with SSSD
--------------------------------------
-
-.. include:: sssd.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-OpenLDAP
---------
-
-.. include:: openldap.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -89,24 +44,34 @@ Active Directory integration
     :start-line: 4
     :end-before: .. toctree::
     
+Samba
+=====
+
+.. include:: samba.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+Managing software
+=================
+
+.. include:: software.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+
+
+OpenLDAP
+--------
+
+.. include:: openldap.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+  
 Databases
 =========
 
 .. include:: databases.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Mail services
-=============
-
-.. include:: mail-services.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Web services
-============
-
-.. include:: web-services.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -121,6 +86,20 @@ Backups and version control
 ===========================
 
 .. include:: backups.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+Mail services
+=============
+
+.. include:: mail-services.rst
+    :start-line: 4
+    :end-before: .. toctree::
+
+Web services
+============
+
+.. include:: web-services.rst
     :start-line: 4
     :end-before: .. toctree::
 
@@ -164,14 +143,21 @@ Observability
     :titlesonly:
 
     installation.rst
+    
+.. toctree::
+    :hidden:
+    :titlesonly:
+
     security.rst
-    wireguard-vpn.rst
+
+.. toctree::
+    :hidden:
+    :titlesonly:
+
     networking.rst
     software.rst
     samba.rst
     active-directory.rst
-    kerberos.rst
-    sssd.rst
     openldap.rst
     databases.rst
     mail-services.rst

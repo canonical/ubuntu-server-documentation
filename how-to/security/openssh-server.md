@@ -112,3 +112,9 @@ You can add an extra layer of security to the default key-based authentication u
 - [Ubuntu Wiki SSH](https://help.ubuntu.com/community/SSH) page.
 - [OpenSSH Website](http://www.openssh.org/)
 - [Advanced OpenSSH Wiki Page](https://wiki.ubuntu.com/AdvancedOpenSSH)
+
+```{toctree}
+self
+2FA with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp.md>
+2FA with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>
+```
