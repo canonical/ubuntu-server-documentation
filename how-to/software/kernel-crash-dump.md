@@ -146,7 +146,7 @@ To enable remote dumps using the SSH protocol, the `/etc/default/kdump-tools` mu
 SSH="ubuntu@kdump-netcrash"
 ```
 
-The only mandatory variable to define is SSH. It must contain the username and hostname of the remote server using the format `{username}@{remote server}`.
+The only mandatory variable to define is SSH. It must contain the username and {term}`hostname` of the remote server using the format `{username}@{remote server}`.
 
 `SSH_KEY` may be used to provide an existing private key to be used. Otherwise, the `kdump-config propagate` command will create a new keypair. The `HOSTTAG` variable may be used to use the hostname of the system as a prefix to the remote directory to be created instead of the IP address.
 

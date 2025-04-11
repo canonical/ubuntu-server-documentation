@@ -13,7 +13,7 @@ The most common settings provided by a DHCP server to DHCP clients include:
 
 However, a DHCP server can also supply configuration properties such as:
 
-  - Hostname
+  - {term}`Hostname`
 
   - Domain name
 

@@ -37,7 +37,7 @@ Apply the new config via:
 
     sudo exportfs -a
 
-You can replace \* with one of the hostname formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount.  Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
+You can replace \* with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount.  Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
 
 The *sync*/*async* options control whether changes are gauranteed to be committed to stable storage before replying to requests.  *async* thus gives a performance benefit but risks data loss or corruption.  Even though *sync* is the default, it's worth setting since exportfs will issue a warning if it's left unspecified.
 

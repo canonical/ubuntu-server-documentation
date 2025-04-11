@@ -746,10 +746,12 @@ H
         Related topic(S): Observability
 
     hostname
-        *Work in Progress*
+        A hostname identifies a server using a word rather than an IP address. This makes it easier to remember.
+
+        Related topic(S): Networking, Web services, Security, WireGuard VPN, DNSSEC, Containers, Kerberos, Backups and version control, Observability, Samba, Databases, Cloud-init, Active Directory integration, Managing software, OpenLDAP, High availability, and Cryptography.
 
     HOTP
-        *Work in Progress*
+        HMAC-based One-Time Password (HOTP) generates a one-time password by using the :term:`HMAC` algorithm in combination with a counter. When a client presents the OTP, the server compares it with OTPs generated within a specific counter window to find a match.
 
     hotplug
         *Work in Progress*

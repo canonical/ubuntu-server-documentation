@@ -63,7 +63,7 @@ $ pcs stonith create $RESOURCE_NAME fence_ipmilan \
             action=$ACTION
 ```
 
-Where `$IP` is the IP address or hostname of fencing device, `$PORT` is the TCP/UDP port to use for connection, `$USER` is the login name and `$PASSWD` its password, and `$ACTION` is the fencing actions which by default is `reboot`.
+Where `$IP` is the IP address or {term}`hostname` of fencing device, `$PORT` is the TCP/UDP port to use for connection, `$USER` is the login name and `$PASSWD` its password, and `$ACTION` is the fencing actions which by default is `reboot`.
 
 This is one way to set up `fence_ipmilan`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man8/fence_ipmilan.8.html).
 
