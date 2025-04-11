@@ -445,6 +445,11 @@ sudo less /var/log/sssd/sssd_pam.log
 sudo less /var/log/sssd/p11_child.log
 ```
 
+```{toctree}
+self
+smart-card-authentication-with-ssh
+```
+
 ## SSH authentication
 
 See [this page on SSH authentication with smart cards](smart-card-authentication-with-ssh.md).
