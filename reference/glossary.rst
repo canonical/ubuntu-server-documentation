@@ -754,7 +754,7 @@ H
         HMAC-based One-Time Password (HOTP) generates a one-time password by using the :term:`HMAC` algorithm in combination with a counter. When a client presents the OTP, the server compares it with OTPs generated within a specific counter window to find a match.
 
     hotplug
-        *Work in Progress*
+        The process of adding or removing a device (USB, disks, etc.) while a virtual machine is running.
 
     hpb
         *Work in Progress*

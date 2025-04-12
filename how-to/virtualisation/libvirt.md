@@ -178,7 +178,7 @@ Some useful documentation on the constraints and considerations of live migratio
 
 If you want to always pass through a device rather than using the hotplugging method described here, add the XML content of the device to your static guest XML representation via `virsh edit <guestname>`. In that case, you won't need to use *attach/detach*. There are different kinds of passthrough, and the types available to you depend on your hardware and software setup.
 
-- USB hotplug/passthrough
+- USB {term}`hotplug`/passthrough
 
 - VF hotplug/Passthrough
 
@@ -339,7 +339,7 @@ However, it can be very important when driving more advanced use cases. If one n
 
 ### -hpb machine types
 
-Since Ubuntu 18.04, the QEMU in Ubuntu has [provided special machine-types](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189). These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The “hpb” abbreviation stands for “host-physical-bits”, which is the QEMU option that this represents.
+Since Ubuntu 18.04, the QEMU in Ubuntu has [provided special machine-types](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189). These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The “{term}`hpb`” abbreviation stands for “host-physical-bits”, which is the QEMU option that this represents.
 
 For example, by using `pc-q35-jammy-hpb`, the guest would use the number of physical bits that the Host CPU has available.
 
