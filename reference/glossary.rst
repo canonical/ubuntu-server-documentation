@@ -760,7 +760,7 @@ H
         Host Physical Bits (HPB) are appended to the name of an Ubuntu machine type. It signifies that a virtual machine will use the same number of bits the host CPU uses to point to physical memory.
 
     HPC
-        *Work in Progress*
+        High Performance Computing (HPC) is the use of multiple servers to improve the performance of a task.
 
     HSG
         *Work in Progress*
