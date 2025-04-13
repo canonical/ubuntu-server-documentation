@@ -757,7 +757,7 @@ H
         The process of adding or removing a device (USB, disks, etc.) while a virtual machine is running.
 
     hpb
-        *Work in Progress*
+        Host Physical Bits (HPB) are appended to the name of an Ubuntu machine type. It signifies that a virtual machine will use the same number of bits the host CPU uses to point to physical memory.
 
     HPC
         *Work in Progress*
