@@ -123,13 +123,17 @@ Reviews
 =======
 
 After you have submitted your PR, one of the Ubuntu Server team maintainers
-will be in touch to review it. Depending on time zones, there may be a small
-delay in your PR being reviewed. Please be patient!
+will be in touch to review it. Depending on time zones, there may be a delay
+in your PR being reviewed. Please be patient!
 
 One or more of the Ubuntu Server team maintainers will review the changes you
 have proposed, and they will either "Approve" the changes, or leave some
 feedback and suggested changes (with reasons). If you agree with the feedback,
 you can make the suggested changes, and the reviewer will approve the PR.
+
+.. note::
+   The team has adopted the `Conventional Comments <https://conventionalcomments.org/>`_
+   approach with the intention of making feedback easier to parse.
 
 If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen
