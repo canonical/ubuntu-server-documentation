@@ -255,7 +255,7 @@ Let's start with a summary of the allocation and structuring of memory in an OS,
 
 When you launch an application, the OS allocates virtual memory to it as a range of virtual addresses. The virtual memory is fake; it only allows the application to think it has more memory than what's physically available.
 
-However, the CPU architecture will determine the amount of virtual memory allocated to the application; [64-bit CPUs](https://en.wikipedia.org/wiki/64-bit_computing) support 16 GB, whereas [32-bit CPUs](https://en.wikipedia.org/wiki/32-bit_computing) support 4 GB.
+However, the CPU architecture will determine the amount of virtual memory allocated to the application; [64-bit CPUs](https://en.wikipedia.org/wiki/64-bit_computing) support 16 EB, whereas [32-bit CPUs](https://en.wikipedia.org/wiki/32-bit_computing) support 4 GB.
 [x86_64](https://en.wikipedia.org/wiki/X86-64), however, typically supports only 256 TB of virtual memory.
 
 The OS splits the virtual memory into pages (4 KB each). A page contains several virtual addresses ([1 byte each]((https://en.wikipedia.org/wiki/Memory_address))). These pages contain different parts of the application, like the code, data, stack, and heap. The OS maps these pages to real memory (RAM) because the virtual memory is a fake.
