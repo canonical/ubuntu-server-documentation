@@ -748,15 +748,13 @@ H
     hostname
         A hostname identifies a server using a word rather than an IP address. This makes it easier to remember.
 
-        Related topic(S): Networking, Web services, Security, WireGuard VPN, DNSSEC, Containers, Kerberos, Backups and version control, Observability, Samba, Databases, Cloud-init, Active Directory integration, Managing software, OpenLDAP, High availability, and Cryptography.
-
     HOTP
         HMAC-based One-Time Password (HOTP) generates a one-time password by using the :term:`HMAC` algorithm in combination with a counter. When a client presents the OTP, the server compares it with OTPs generated within a specific counter window to find a match.
 
     hotplug
         The process of adding or removing a device (USB, disks, etc.) while a virtual machine is running.
 
-    hpb
+    HPB
         Host Physical Bits (HPB) are appended to the name of an Ubuntu machine type. It signifies that a virtual machine will use the same number of bits the host CPU uses to point to physical memory.
 
     HPC
