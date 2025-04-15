@@ -34,8 +34,8 @@ http_port 8888
 
 ### Set the hostname
 
-Change the **`visible_hostname`** directive to give the Squid server a specific hostname. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
-    
+Change the **`visible_hostname`** directive to give the Squid server a specific {term}`hostname`. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
+
 ```text
 visible_hostname weezie
 ```

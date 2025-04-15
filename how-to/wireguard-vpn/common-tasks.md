@@ -59,7 +59,7 @@ $ sudo wg-quick up home0
 [#] resolvectl dns home0 10.10.10.1; resolvectl domain home0 \~home
 ```
 
-You can verify that it worked by pinging some hostname in your home network, or checking the DNS resolution status for the `home0` interface:
+You can verify that it worked by pinging some {term}`hostname` in your home network, or checking the DNS resolution status for the `home0` interface:
 
 ```bash
 $ resolvectl status home0

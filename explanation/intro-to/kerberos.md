@@ -12,7 +12,7 @@ If you are new to Kerberos there are a few terms that are good to understand bef
 
   - *Principal:* any users, computers, and services provided by servers need to be defined as Kerberos Principals.
 
-  - *Instances:* are a variation for service principals. For example, the principal for an NFS service will have an instance for the hostname of the server, like `nfs/server.example.com@REALM`. Similarly admin privileges on a principal use an instance of `/admin`, like `john/admin@REALM`, differentiating it from `john@REALM`. These variations fit nicely with {term}`ACL`s.
+  - *Instances:* are a variation for service principals. For example, the principal for an NFS service will have an instance for the {term}`hostname` of the server, like `nfs/server.example.com@REALM`. Similarly admin privileges on a principal use an instance of `/admin`, like `john/admin@REALM`, differentiating it from `john@REALM`. These variations fit nicely with {term}`ACL`s.
 
   - *Realms:* the unique realm of control provided by the Kerberos installation. Think of it as the domain or group your hosts and users belong to. Convention dictates the realm should be in uppercase. By default, Ubuntu will use the {term}`DNS` domain converted to uppercase (`EXAMPLE.COM`) as the realm.
 
