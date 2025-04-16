@@ -46,4 +46,7 @@ These options are now deprecated, but still available.
     NT4 domain controller <samba/nt4-domain-controller-legacy>
     OpenLDAP backend <samba/openldap-backend-legacy>
 
+See also
+========
 
+* Explanation: :ref:`introduction-to-samba`

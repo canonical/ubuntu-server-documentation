@@ -90,9 +90,13 @@ our sections on Samba and Active Directory.
 
 .. toctree::
    :titlesonly:
+   :hidden:
 
    Shares: Samba <samba>
-   Shares: Active Directory Integration <active-directory>
+   Shares: Active Directory integration <active-directory>
+
+* :ref:`Shares: Samba <how-to-samba>`
+* :ref:`Shares: Active Directory integration <how-to-active-directory-integration>`
 
 Printing
 ========

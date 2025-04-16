@@ -16,3 +16,8 @@ first.
     Join a simple domain with the rid backend <active-directory/join-a-simple-domain-with-the-rid-backend>
     Join a forest with the rid backend <active-directory/join-a-forest-with-the-rid-backend>
     Join a forest with the autorid backend <active-directory/join-a-forest-with-the-autorid-backend>
+    
+See also
+========
+
+* Explanation: :ref:`introduction-to-active-directory-integration`
