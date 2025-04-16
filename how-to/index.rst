@@ -69,33 +69,11 @@ Managing software
 Data and storage
 ================
 
-OpenLDAP
---------
+.. toctree::
+    :hidden:
+    :titlesonly:
 
-.. include:: openldap.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Databases
----------
-
-.. include:: databases.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Storage
--------
-
-.. include:: storage.rst
-    :start-line: 4
-    :end-before: .. toctree::
-
-Backups and version control
----------------------------
-
-.. include:: backups.rst
-    :start-line: 4
-    :end-before: .. toctree::
+    data-and-storage.rst
 
 Mail services
 =============
@@ -157,12 +135,8 @@ Observability
     :titlesonly:
 
     software.rst
-    openldap.rst
-    databases.rst
     mail-services.rst
-    backups.rst
     web-services.rst
-    storage.rst
     graphics.rst
     observability.rst
     virtualisation.rst
