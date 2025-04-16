@@ -99,6 +99,12 @@ To auto-mount a password-protected share:
 
 8. If there are no errors, test how it works after a reboot. Your remote share should mount automatically. However, if the remote server goes offline, the boot process could present errors because it won't be possible to mount the share.
 
+## Mount network folders with authd
+
+If you use Samba and authd at the same time, you must specify user and group mapping. Otherwise, you'd encounter permission issues due to mismatched user and group identifiers.
+
+Follow [Steps for the client](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-client) in the *Using authd with Samba* guide.
+
 ## Changing the share ownership
 
 If you need to change the owner of a share, add a **UID** (short for *User ID*) or **{term}`GID`** (short for *Group ID*) parameter to the share's mount options:

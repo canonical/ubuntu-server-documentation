@@ -5,6 +5,12 @@ One of the most common ways to network Ubuntu and Windows computers is to config
 
 The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see [Share Access Control](share-access-controls.md).
 
+```{warning}
+If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you'd encounter permission issues due to mismatched user and group identifiers.
+
+Instead of this guide, follow [Steps for the server](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-server) in the *Using authd with Samba* guide.
+```
+
 ## Install Samba
 
 From a terminal prompt, enter:
@@ -57,23 +63,28 @@ The main Samba configuration file is located in `/etc/samba/smb.conf`. The defau
     : Allows clients to connect to the share without supplying a password.
 
     `read only`
-    : determines if the share is read only or if write privileges are granted. Write privileges are allowed only when the value is *no*, as is seen in this example. If the value is *yes*, then access to the share is read only.
+    : Determines if the share is read only or if write privileges are granted. Write privileges are allowed only when the value is *no*, as is seen in this example. If the value is *yes*, then access to the share is read only.
 
     `create mask`
     : Determines the permissions that new files will have when created.
 
 ### Create the directory
 
-Now that Samba is configured, the directory needs to be created and the permissions changed.
+From a terminal, run the following commands.
 
-From a terminal, run the following commands:
+1. Create the directory:
 
-```bash
-sudo mkdir -p /srv/samba/share
-sudo chown nobody:nogroup /srv/samba/share/
-```
+    ```bash
+    sudo mkdir -p /srv/samba/share
+    ```
 
-The `-p` switch tells `mkdir` to create the entire directory tree if it doesn't already exist.
+    The `-p` switch tells `mkdir` to create the entire directory tree if it doesn't already exist.
+
+2. Change the permissions:
+
+    ```bash
+    sudo chown nobody:nogroup /srv/samba/share/
+    ```
 
 ### Enable the new configuration
 
