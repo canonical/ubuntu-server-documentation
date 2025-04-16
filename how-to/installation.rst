@@ -6,7 +6,8 @@ Server installation
 If you are new to Ubuntu, we recommend our
 :ref:`basic installation <basic-installation>` tutorial to get you started.
 
-**Automatic install**
+Automatic install
+=================
 
 The Ubuntu Installer has its own documentation for automatic (or "hands off")
 installations. These guides from the Ubuntu Installer documentation are
@@ -16,7 +17,8 @@ available for automatic installations.
 * `Autoinstall quickstart`_
 * `Autoinstall quickstart on s390x`_
 
-**Advanced install**
+Advanced install
+================
 
 This list of guides contains installation instructions for
 architecture-specific and more advanced setups. Select your preferred
@@ -45,9 +47,10 @@ architecture to see which guides are available.
       * :ref:`Install via LPAR <interactive-live-server-installation-on-ibm-z-lpar-s390x>`
       * :ref:`Non-interactive IBM Z LPAR autoinstall <non-interactive-ibm-z-lpar-autoinstall-s390x>`
 
-**See also**
+See also
+========
 
-Reference: :ref:`System requirements <system-requirements>`
+* Reference: :ref:`System requirements <system-requirements>`
 
 .. LINKS
 .. _Introduction to Automated Server installer: https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html

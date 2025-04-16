@@ -12,44 +12,52 @@ requirements.
 Server installation
 ===================
 
+.. toctree::
+    :hidden:
+    :titlesonly:
+
+    installation.rst
+
 Our list of :ref:`installation guides <how-to-server-installation>` contains
 installation instructions for a variety of architecture-specific and advanced
 setups. For a general installation, or if you're just getting started with
 Ubuntu, you may prefer to use our :ref:`basic installation <basic-installation>`
 tutorial.
 
-The Ubuntu installer has its own documentation for automatic (or "hands-off")
-installations. For more guidance on auto-installing Ubuntu with the installer,
-refer to the
-`Ubuntu installer documentation <https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html>`_.
-
 Security
 ========
 
-.. include:: security.rst
-    :start-line: 4
-    :end-before: .. toctree::
+.. toctree::
+    :hidden:
+    :titlesonly:
+
+    security.rst
+
+:ref:`System security <how-to-security>` is a crucial topic for any Ubuntu user.
+In addition to general security topics such as setting up a firewall, AppArmor
+profiles and user/group management, you will also find how-to guides on:
+
+* **Authentication** with Kerberos, network user authentication with SSSD and
+  physical authentication with smart cards
+* **Cryptography** with OpenSSH
+* **Virtual Private Networks** OpenVPN and WireGuard VPN
 
 Networking
 ==========
 
-.. include:: networking.rst
-    :start-line: 4
-    :end-before: .. toctree::
+.. toctree::
+    :hidden:
+    :titlesonly:
 
-Active Directory integration
-----------------------------
+    networking.rst
 
-.. include:: active-directory.rst
-    :start-line: 4
-    :end-before: .. toctree::
-    
-Samba
-=====
+:ref:`Our networking section <how-to-networking>` is where you will find how-to
+guides on a broad range of networking topics, such as:
 
-.. include:: samba.rst
-    :start-line: 4
-    :end-before: .. toctree::
+* **Network tooling and configuration** including time synchronisation, DHCP
+  for IP address assignment, Domain Name Service (DNS) (and more!)
+* **Network shares** for sharing resources (files, services, directories)
+  across networks, including integration with Windows
 
 Managing software
 =================
@@ -58,7 +66,8 @@ Managing software
     :start-line: 4
     :end-before: .. toctree::
 
-
+Data and storage
+================
 
 OpenLDAP
 --------
@@ -67,23 +76,22 @@ OpenLDAP
     :start-line: 4
     :end-before: .. toctree::
 
-  
 Databases
-=========
+---------
 
 .. include:: databases.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Storage
-=======
+-------
 
 .. include:: storage.rst
     :start-line: 4
     :end-before: .. toctree::
 
 Backups and version control
-===========================
+---------------------------
 
 .. include:: backups.rst
     :start-line: 4
@@ -138,26 +146,17 @@ Observability
     :start-line: 4
     :end-before: .. toctree::
 
-.. toctree::
-    :hidden:
-    :titlesonly:
 
-    installation.rst
     
-.. toctree::
-    :hidden:
-    :titlesonly:
 
-    security.rst
+
+
 
 .. toctree::
     :hidden:
     :titlesonly:
 
-    networking.rst
     software.rst
-    samba.rst
-    active-directory.rst
     openldap.rst
     databases.rst
     mail-services.rst

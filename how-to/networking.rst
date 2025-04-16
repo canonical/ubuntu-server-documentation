@@ -1,47 +1,116 @@
 .. _how-to-networking:
 
 Networking
-***********
+**********
 
-If you would like a broader overview into these topics before getting started,
-you can refer to our :ref:`introduction to networking <introduction-to-networking>`,
-and our :ref:`introduction to Samba <introduction-to-samba>`.
-
-**Network tools and configuration**
-
-* :ref:`Network File System (NFS) <install-nfs>`
-* :ref:`File Transfer Protocol (FTP) <ftp>`
-* :ref:`Domain Name Service (DNS) <install-dns>`
-* :ref:`DNS Security Extensions (DNSSEC) <install-dnssec>`
-* :ref:`DNSSEC Troubleshooting <dnssec-troubleshooting>`
-* :ref:`Use Open vSwitch with DPDK <dpdk-with-open-vswitch>`
-
-**DHCP**
-
-* :ref:`DHCP: Install isc-kea <install-isc-kea>`
-* :ref:`DHCP: Install isc-dhcp-server <install-isc-dhcp-server>`
-
-**Time synchronisation**
-
-* :ref:`Synchronise time using timedatectl and timesyncd <timedatectl-and-timesyncd>`
-* :ref:`Serve the Network Time Protocol (NTP) <serve-ntp-with-chrony>`
-
-**Printing**
-
-* :ref:`Set up a CUPS print server <cups-print-server>`
+This section contains how-to guides on most aspects of networking in Ubuntu.
+If you would like a broader overview of these topics before getting started,
+refer to our :ref:`introduction to networking <introduction-to-networking>`.
 
 .. toctree::
     :hidden:
 
-    Network File System (NFS) <networking/install-nfs>
-    File Transfer Protocol (FTP) <networking/ftp>
-    Domain Name Service (DNS) <networking/install-dns>
-    DNS Security Extensions (DNSSEC) <networking/install-dnssec>
+    self
+
+Configuration
+=============
+
+Network configuration in Ubuntu is handled through Netplan. See our general
+walkthrough on :ref:`configuring-networks`, or refer to
+`the Netplan documentation <https://netplan.readthedocs.io/en/stable/>`_ for
+more specific instructions.
+
+Network tools
+=============
+
+The File Transfer Protocol (FTP) can be set up to provide files for download.
+
+.. toctree::
+    :titlesonly:
+
+    File transfers with FTP <networking/ftp>
+
+The Domain Name Service (DNS) maps IP addresses to fully qualified domain names
+(FQDN). The DNS Security Extensions (DNSSEC) allow DNS data to be verified.
+
+.. toctree::
+    :titlesonly:
+
+    DNS: Set up a name server <networking/install-dns>
+    DNS: Set up DNS Security Extensions (DNSSEC) <networking/install-dnssec>
     DNSSEC Troubleshooting <networking/dnssec-troubleshooting>
+
+Open vSwitch (OVS) with the Data Plane Development Kit (DPDK) provides virtual
+switching for network automation in virtualized environments. 
+
+.. toctree::
+    :titlesonly:
+
     Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
-    Install isc-kea <networking/install-isc-kea>
-    Install isc-dhcp-server <networking/install-isc-dhcp-server>
-    Synchronise time <networking/timedatectl-and-timesyncd>
-    Serve the NTP <networking/serve-ntp-with-chrony>
+
+DHCP
+====
+
+Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address
+assignment for devices on your network. There are two DHCP servers available in
+Ubuntu: ``isc-kea`` is the most modern, and is available from 23.04 onwards.
+
+.. toctree::
+   :titlesonly:
+
+   DHCP: Install isc-kea <networking/install-isc-kea>
+   DHCP: Install isc-dhcp-server <networking/install-isc-dhcp-server>
+
+Time synchronisation
+====================
+
+The Network Time Protocol (NTP) synchronizes time over a network. Ubuntu uses
+``timedatectl`` and ``timesyncd`` by default to handle this. However, users can
+install and use ``chrony`` instead if preferred.
+
+.. toctree::
+   :titlesonly:
+
+   Time sync: configure timedatectl and timesyncd <networking/timedatectl-and-timesyncd>
+   Time sync: Serve NTP with chrony <networking/serve-ntp-with-chrony>
+
+Network shares
+==============
+
+Sharing files and resources across a network is a common requirement - this is
+where the Network File System (NFS) comes in.
+
+.. toctree::
+   :titlesonly:
+
+   Shares: Network File System (NFS) <networking/install-nfs>
+
+If you need to share network resources between Linux and Windows systems, see
+our sections on Samba and Active Directory.
+
+.. toctree::
+   :titlesonly:
+   :hidden:
+
+   Shares: Samba <samba>
+   Shares: Active Directory integration <active-directory>
+
+* :ref:`Shares: Samba <how-to-samba>`
+* :ref:`Shares: Active Directory integration <how-to-active-directory-integration>`
+
+Printing
+========
+
+The Common UNIX Printing System (CUPS) is the most common way to manage print
+services in Ubuntu. 
+
+.. toctree::
+   :titlesonly:
+
     Set up a CUPS print server <networking/cups-print-server>
+
+See also
+========
+
+* Explanation: :ref:`Networking section <explanation-networking>`
 
