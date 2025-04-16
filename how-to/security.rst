@@ -1,11 +1,14 @@
 .. _how-to-security:
 
 Security
-*********
+********
 
 While a fresh Ubuntu installation is usually safe for immediate use, there are
 some additional steps you can take to introduce a layered approach to your
 system's security.
+
+General configuration
+=====================
 
 * :ref:`Users and groups management <user-management>` for setting up user
   accounts, permissions and password policies
@@ -15,7 +18,8 @@ system's security.
 * :ref:`Console security <console-security>` for an additional physical
   security barrier
 
-**Authentication**
+Authentication
+==============
 
 These tools are particularly useful for more advanced or complex setups.
 
@@ -26,7 +30,8 @@ These tools are particularly useful for more advanced or complex setups.
 * :ref:`Smart card authentication <smart-card-authentication>` provides a
   physical authentication method
 
-**Cryptography**
+Cryptography
+============
 
 The Secure Shell (SSH) cryptographic protocol that provides secure channels on
 an unsecured network. In Ubuntu, OpenSSH is the most commonly used
@@ -36,7 +41,8 @@ transfers and can also be used for remote login and authentication.
 * :ref:`OpenSSH <openssh-server>`
 * :ref:`CA trust store <install-a-root-ca-certificate-in-the-trust-store>`
 
-**Virtual Private Network (VPN)**
+Virtual Private Network (VPN)
+=============================
 
 VPNs are commonly used to provide encrypted, secure access to a network. Two
 of the most popular choices in Ubuntu are OpenVPN and WireGuard VPN.
@@ -46,10 +52,11 @@ of the most popular choices in Ubuntu are OpenVPN and WireGuard VPN.
 * :ref:`how-to-wireguard-vpn` is a modern and performant option that removes a
   lot of the complexity from configuring a VPN
 
-.. admonition:: Our other security content
+See also
+========
 
-   * Explanation: :ref:`Introduction to security <introduction-to-security>`
-   * Explanation: :ref:`Security topics <explanation-security>`
+* Explanation: :ref:`Introduction to security <introduction-to-security>`
+* Explanation: :ref:`Security topics <explanation-security>`
 
 .. toctree::
     :hidden:
