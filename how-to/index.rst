@@ -75,6 +75,13 @@ Data and storage
 
     data-and-storage.rst
 
+:ref:`The data and storage section <how-to-data-and-storage>` covers the
+following:
+
+* **Managing data** in the OpenLDAP and databases topics
+* **Storage and backups**, including partitioning (with LVM), backup utilities,
+  and version control
+
 Mail services
 =============
 
