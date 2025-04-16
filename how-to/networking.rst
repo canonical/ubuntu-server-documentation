@@ -7,11 +7,6 @@ This section contains how-to guides on most aspects of networking in Ubuntu.
 If you would like a broader overview of these topics before getting started,
 refer to our :ref:`introduction to networking <introduction-to-networking>`.
 
-.. toctree::
-    :hidden:
-
-    self
-
 Configuration
 =============
 

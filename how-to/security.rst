@@ -5,7 +5,9 @@ Security
 
 While a fresh Ubuntu installation is usually safe for immediate use, there are
 some additional steps you can take to introduce a layered approach to your
-system's security.
+system's security. If you are new to Ubuntu, you may want to refer to our
+:ref:`Introduction to security <introduction-to-security>` first for a general
+overview.
 
 General configuration
 =====================
@@ -73,7 +75,7 @@ See also
 
     kerberos.rst
     sssd.rst
-    Smart card authentication <security/smart-card-authentication>
+    Smart cards <security/smart-card-authentication>
 
 .. toctree::
     :hidden:
