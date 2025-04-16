@@ -20,6 +20,14 @@ General configuration
 * :ref:`Console security <console-security>` for an additional physical
   security barrier
 
+.. toctree::
+   :hidden:
+
+   User management <security/user-management>
+   Firewalls <security/firewalls>
+   AppArmor <security/apparmor>
+   Console security <security/console-security>
+
 Authentication
 ==============
 
@@ -32,6 +40,13 @@ These tools are particularly useful for more advanced or complex setups.
 * :ref:`Smart card authentication <smart-card-authentication>` provides a
   physical authentication method
 
+.. toctree::
+   :hidden:
+
+   kerberos.rst
+   sssd.rst
+   Smart cards <security/smart-card-authentication>
+
 Cryptography
 ============
 
@@ -40,8 +55,11 @@ an unsecured network. In Ubuntu, OpenSSH is the most commonly used
 implementation of SSH. It provides a suite of utilities for encrypting data
 transfers and can also be used for remote login and authentication.
 
-* :ref:`OpenSSH <openssh-server>`
-* :ref:`CA trust store <install-a-root-ca-certificate-in-the-trust-store>`
+.. toctree::
+   :titlesonly:
+
+   OpenSSH <security/openssh-server>
+   Install a root CA certificate <security/install-a-root-ca-certificate-in-the-trust-store>
 
 Virtual Private Network (VPN)
 =============================
@@ -54,41 +72,15 @@ of the most popular choices in Ubuntu are OpenVPN and WireGuard VPN.
 * :ref:`how-to-wireguard-vpn` is a modern and performant option that removes a
   lot of the complexity from configuring a VPN
 
+.. toctree::
+    :hidden:
+
+    OpenVPN <security/install-openvpn>
+    wireguard-vpn
+
 See also
 ========
 
 * Explanation: :ref:`Introduction to security <introduction-to-security>`
 * Explanation: :ref:`Security topics <explanation-security>`
-
-.. toctree::
-    :hidden:
-    :caption: General security
-
-    User management <security/user-management>
-    Firewalls <security/firewalls>
-    AppArmor <security/apparmor>
-    Console security <security/console-security>
-
-.. toctree::
-    :hidden:
-    :caption: Authentication and access
-
-    kerberos.rst
-    sssd.rst
-    Smart cards <security/smart-card-authentication>
-
-.. toctree::
-    :hidden:
-    :caption: Cryptography
-
-    OpenSSH <security/openssh-server>
-    Install a root CA certificate in the trust store <security/install-a-root-ca-certificate-in-the-trust-store>
-
-.. toctree::
-    :hidden:
-    :caption: Virtual Private Network (VPN}
-
-    OpenVPN <security/install-openvpn>
-    wireguard-vpn
-
 
