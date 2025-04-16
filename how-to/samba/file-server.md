@@ -7,62 +7,66 @@ The server will be configured to share files with any client on the network with
 
 ## Install Samba
 
-The first step is to install the `samba` package. From a terminal prompt enter:
+From a terminal prompt, enter:
 
 ```bash
 sudo apt install samba
 ```
 
-That's all there is to it; you are now ready to configure Samba to share files.
+You are now ready to configure Samba to share files.
 
 ## Configure Samba as a file server
 
 The main Samba configuration file is located in `/etc/samba/smb.conf`. The default configuration file contains a significant number of comments, which document various configuration directives.
 
-> **Note**:
-> Not all available options are included in the default configuration file. See the [`smb.conf` man page](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html) or the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/) for more details.
+1. Edit the `workgroup` parameter in the `[global]` section of `/etc/samba/smb.conf`. Change it to better match your environment:
 
-First, edit the `workgroup` parameter in the *\[global\]* section of `/etc/samba/smb.conf` and change it to better match your environment:
+    ```ini
+    workgroup = EXAMPLE
+    ```
 
-```text
-workgroup = EXAMPLE
-```
+2. Create a new section at the bottom of the file, or uncomment one of the examples, for the directory you want to share:
 
-Create a new section at the bottom of the file, or uncomment one of the examples, for the directory you want to share:
+    ```ini
+    [share]
+        comment = Ubuntu File Server Share
+        path = /srv/samba/share
+        browsable = yes
+        guest ok = yes
+        read only = no
+        create mask = 0755
+    ```
 
-```text
-[share]
-    comment = Ubuntu File Server Share
-    path = /srv/samba/share
-    browsable = yes
-    guest ok = yes
-    read only = no
-    create mask = 0755
-```
+    `[share]`
+    : A name for the file share configuration. It is a good idea to name a share after a directory on the file system. Another example would be a share name of `[qa]` with a path of `/srv/samba/qa`.
 
-- **`comment`**
-A short description of the share. Adjust to fit your needs.
+    `comment`
+    : A short description of the share. Adjust to fit your needs.
 
-- **`path`**
-The path to the directory you want to share.
-    
-  > **Note**:
-  > This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
+    `path`
+    : The path to the directory you want to share.
 
-- **`browsable`**
-Enables Windows clients to browse the shared directory using Windows Explorer.
+        ```{note}
+        This example uses `/srv/samba/share` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
+        ```
 
-- **`guest ok`**
-Allows clients to connect to the share without supplying a password.
+    `browsable`
+    : Enables Windows clients to browse the shared directory using Windows Explorer.
 
-- **`read only`** determines if the share is read only or if write privileges are granted. Write privileges are allowed only when the value is *no*, as is seen in this example. If the value is *yes*, then access to the share is read only.
+    `guest ok`
+    : Allows clients to connect to the share without supplying a password.
 
-- **`create mask`**
-Determines the permissions that new files will have when created.
+    `read only`
+    : determines if the share is read only or if write privileges are granted. Write privileges are allowed only when the value is *no*, as is seen in this example. If the value is *yes*, then access to the share is read only.
+
+    `create mask`
+    : Determines the permissions that new files will have when created.
 
 ### Create the directory
 
-Now that Samba is configured, the directory needs to be created and the permissions changed. From a terminal, run the following commands:
+Now that Samba is configured, the directory needs to be created and the permissions changed.
+
+From a terminal, run the following commands:
 
 ```bash
 sudo mkdir -p /srv/samba/share
@@ -73,27 +77,28 @@ The `-p` switch tells `mkdir` to create the entire directory tree if it doesn't 
 
 ### Enable the new configuration
 
-Finally, restart the Samba services to enable the new configuration by running the following command:
+1. Restart the Samba services to enable the new configuration by running the following command:
 
-```bash
-sudo systemctl restart smbd.service nmbd.service
-```
+    ```bash
+    sudo systemctl restart smbd.service nmbd.service
+    ```
 
-> **Warning**:
-> Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see [Share Access Control](share-access-controls.md).
+    ```{warning}
+    Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see [Share Access Control](share-access-controls.md).
+    ```
 
-From a Windows client you should now be able to browse to the Ubuntu file server and see the shared directory. If your client doesn't show your share automatically, try to access your server by its IP address, e.g. `\\192.168.1.1`, in a Windows Explorer window. To check that everything is working try creating a directory from Windows.
+2. From a Windows client you should now be able to browse to the Ubuntu file server and see the shared directory.
 
-To create additional shares simply create new `[sharename]` sections in `/etc/samba/smb.conf`, and restart Samba. Just make sure that the directory you want to share actually exists and the permissions are correct.
+    If your client doesn't show your share automatically, try to access your server by its IP address, e.g. `\\192.168.1.1`, in a Windows Explorer window. To check that everything is working try creating a directory from Windows.
 
-The file share named `[share]` and the path `/srv/samba/share` used in this example can be adjusted to fit your environment. It is a good idea to name a share after a directory on the file system. Another example would be a share name of `[qa]` with a path of `/srv/samba/qa`.
+3. To create additional shares, create new `[sharename]` sections in `/etc/samba/smb.conf`, and restart Samba. Just make sure that the directory that you want to share actually exists and the permissions are correct.
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
+  - For in-depth Samba configurations, see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/) or the [`smb.conf` man page](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html).
 
   - The guide is also available [in printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is another good reference.
+  - O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/).
 
   - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
