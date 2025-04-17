@@ -48,8 +48,8 @@ introduction to networking and details on some of the key topics, such as:
 Managing software
 =================
 
-:ref:`Managing software <explanation-software>` is an integral part of system
-maintenance.
+:ref:`Managing software <explanation-managing-software>` is an integral part of
+system maintenance.
 
 .. toctree::
     :hidden:
@@ -100,9 +100,9 @@ and more!
 System tuning
 =============
 
-:ref:`Our system tuning` section provides details on system performance and
-optimization, covering concepts like Profile-Guided Optimization (PGO) and some
-common tooling.
+:ref:`Our system tuning <explanation-system-tuning>` section provides details
+on system performance and optimization, covering concepts like Profile-Guided
+Optimization (PGO) and some common tooling.
 
 .. toctree::
     :hidden:
