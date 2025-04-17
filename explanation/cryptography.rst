@@ -3,16 +3,19 @@
 Cryptography
 *************
 
-* :ref:`OpenSSL <openssl>`
-* :ref:`GnuTLS <gnutls>`
-* :ref:`Network Security Services (NSS) <network-security-services-nss>`
-* :ref:`Java cryptography configuration <java-cryptography-configuration>`
-* :ref:`BIND 9 DNSSEC cryptography selection <bind-9-dnssec-cryptography-selection>`
-* :ref:`OpenSSH crypto configuration <openssh-crypto-configuration>`
-* :ref:`Troubleshooting TLS/SSL <troubleshooting-tls-ssl>`
+.. toctree::
+   :titlesonly:
+
+   intro-to/crypto-libraries
+
+Common crypto libraries
+=======================
+
+These pages discuss various popular cryptographic libraries that are commonly
+found in Ubuntu.
 
 .. toctree::
-    :hidden:
+   :titlesonly:
 
     OpenSSL <crypto/openssl>
     GnuTLS <crypto/gnutls>
@@ -21,3 +24,4 @@ Cryptography
     BIND 9 DNSSEC cryptography selection <crypto/bind-9-dnssec-cryptography-selection>
     OpenSSH crypto configuration <crypto/openssh-crypto-configuration>
     Troubleshooting TLS/SSL <crypto/troubleshooting-tls-ssl>
+

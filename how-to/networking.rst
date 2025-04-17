@@ -21,27 +21,27 @@ Network tools
 The File Transfer Protocol (FTP) can be set up to provide files for download.
 
 .. toctree::
-    :titlesonly:
+   :titlesonly:
 
-    File transfers with FTP <networking/ftp>
+   File transfers with FTP <networking/ftp>
 
 The Domain Name Service (DNS) maps IP addresses to fully qualified domain names
 (FQDN). The DNS Security Extensions (DNSSEC) allow DNS data to be verified.
 
 .. toctree::
-    :titlesonly:
+   :titlesonly:
 
-    DNS: Set up a name server <networking/install-dns>
-    DNS: Set up DNS Security Extensions (DNSSEC) <networking/install-dnssec>
-    DNSSEC Troubleshooting <networking/dnssec-troubleshooting>
+   Set up a name server (DNS) <networking/install-dns>
+   Set up DNS Security Extensions (DNSSEC) <networking/install-dnssec>
+   DNSSEC Troubleshooting <networking/dnssec-troubleshooting>
 
 Open vSwitch (OVS) with the Data Plane Development Kit (DPDK) provides virtual
 switching for network automation in virtualized environments. 
 
 .. toctree::
-    :titlesonly:
+   :titlesonly:
 
-    Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
+   Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
 
 DHCP
 ====
@@ -53,8 +53,8 @@ Ubuntu: ``isc-kea`` is the most modern, and is available from 23.04 onwards.
 .. toctree::
    :titlesonly:
 
-   DHCP: Install isc-kea <networking/install-isc-kea>
-   DHCP: Install isc-dhcp-server <networking/install-isc-dhcp-server>
+   Install DHCP isc-kea <networking/install-isc-kea>
+   Install DHCP isc-dhcp-server <networking/install-isc-dhcp-server>
 
 Time synchronisation
 ====================
@@ -66,8 +66,8 @@ install and use ``chrony`` instead if preferred.
 .. toctree::
    :titlesonly:
 
-   Time sync: configure timedatectl and timesyncd <networking/timedatectl-and-timesyncd>
-   Time sync: Serve NTP with chrony <networking/serve-ntp-with-chrony>
+   Time sync with timedatectl and timesyncd <networking/timedatectl-and-timesyncd>
+   Time sync with chrony <networking/serve-ntp-with-chrony>
 
 Network shares
 ==============
@@ -78,7 +78,7 @@ where the Network File System (NFS) comes in.
 .. toctree::
    :titlesonly:
 
-   Shares: Network File System (NFS) <networking/install-nfs>
+   Network File System (NFS) sharing <networking/install-nfs>
 
 If you need to share network resources between Linux and Windows systems, see
 our sections on Samba and Active Directory.
@@ -87,11 +87,11 @@ our sections on Samba and Active Directory.
    :titlesonly:
    :hidden:
 
-   Shares: Samba <samba>
-   Shares: Active Directory integration <active-directory>
+   Samba <samba>
+   Active Directory integration <active-directory>
 
-* :ref:`Shares: Samba <how-to-samba>`
-* :ref:`Shares: Active Directory integration <how-to-active-directory-integration>`
+* :ref:`Samba <how-to-samba>`
+* :ref:`Active Directory integration <how-to-active-directory-integration>`
 
 Printing
 ========
@@ -102,7 +102,7 @@ services in Ubuntu.
 .. toctree::
    :titlesonly:
 
-    Set up a CUPS print server <networking/cups-print-server>
+   Set up a CUPS print server <networking/cups-print-server>
 
 See also
 ========

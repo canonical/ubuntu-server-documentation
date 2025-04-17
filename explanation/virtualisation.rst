@@ -3,6 +3,7 @@
 Virtualisation and containers
 *****************************
 
+* :ref:`Introduction to virtualization <introduction-to-virtualization>`
 
 **About virtual machines**
 
@@ -34,3 +35,9 @@ Virtualisation and containers
     Container tools overview <virtualisation/container-tools-in-the-ubuntu-space>
     About rock images <virtualisation/about-rock-images>
     Docker storage, networking, and logging <virtualisation/docker-storage-networking-and-logging>
+
+See also
+========
+
+* How-to: :ref:`dpdk-with-open-vswitch`
+* Explanation: :ref:`introduction-to-cloud-init`
