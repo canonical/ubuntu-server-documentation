@@ -3,16 +3,17 @@
 Storage
 ********
 
-* :ref:`Manage logical volumes <manage-logical-volumes>`
-
-Related links
-=============
-
-Explanation:
-
-* :ref:`About logical volume management <about-lvm>`
+The Ubuntu Server installer can set up and install to Logical Volume Management
+(LVM) partitions.
 
 .. toctree::
-    :hidden:
+   :titlesonly:
 
-    Manage logical volumes <storage/manage-logical-volumes>
+   Manage logical volumes <storage/manage-logical-volumes>
+
+See also
+========
+
+* Explanation: :ref:`about-lvm`
+
+
