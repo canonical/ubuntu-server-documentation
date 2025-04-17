@@ -33,8 +33,8 @@ concepts in the following topics:
 Networking
 ==========
 
-:ref:`Our networking section <explanation-networking>` will give you an introduction to networking and
-details on some of the key topics, such as:
+:ref:`Our networking section <explanation-networking>` will give you an
+introduction to networking and details on some of the key topics, such as:
 
 * **Network tooling and configuration**
 * **Network shares**
@@ -47,6 +47,9 @@ details on some of the key topics, such as:
 
 Managing software
 =================
+
+:ref:`Managing software <explanation-software>` is an integral part of system
+maintenance.
 
 .. toctree::
     :hidden:
@@ -63,35 +66,43 @@ Storage
 * **Storage and backups**
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    data-and-storage.rst
+   data-and-storage.rst
 
 Web services
 ============
 
-.. toctree::
-    :hidden:
-    :titlesonly:
+Our :ref:`explanation-web-services` section includes details about web servers
+and how they work, as well as related topics like Squid proxy servers.
 
-    web-services.rst
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   web-services.rst
 
 Virtualisation and containers
 =============================
 
-.. toctree::
-    :hidden:
-    :titlesonly:
+Our :ref:`Virtualisation and containers <explanation-virtualisation>` section
+includes overviews of the available virtualisation and container tooling in
+the Ubuntu space, as well as more detail about topics like rock images, Docker
+and more!
 
-    virtualisation.rst
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   virtualisation.rst
 
 System tuning
 =============
 
-.. include:: performance.rst
-    :start-after: _end-system-tuning-intro:
-    :end-before: .. toctree::
+:ref:`Our system tuning` section provides details on system performance and
+optimization, covering concepts like Profile-Guided Optimization (PGO) and some
+common tooling.
 
 .. toctree::
     :hidden:
