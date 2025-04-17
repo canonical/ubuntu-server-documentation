@@ -37,8 +37,8 @@ scale-out performance available.
    .. grid-item-card:: :ref:`Explanation <explanation>`
 
        Concepts -
-       :ref:`Overviews of key topics <explanation-introduction-to>`, as well as 
-       more in-depth discussion and clarification 
+       Overviews of key topics, as well as more in-depth discussion and
+       clarification 
 
    .. grid-item-card:: :ref:`Reference <reference>`
 

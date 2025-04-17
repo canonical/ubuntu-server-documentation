@@ -3,11 +3,13 @@
 Data and storage
 ****************
 
+The following sections provide details on various topics related to storing,
+managing and accessing data.
+
 Data management
 ===============
 
-* :ref:`how-to-openldap` is a popular implementation of the Lightweight
-  Directory Access Protocol (LDAP), used for managing hierarchical data
+* :ref:`how-to-openldap` shows how to set up and configure OpenLDAP
 * :ref:`how-to-databases` provides details on two of the most common databases
   found in Ubuntu: MySQL and PostgreSQL
 
@@ -30,5 +32,8 @@ Storage and backups
    storage
    backups
 
+See also
+========
 
+* Explanation: :ref:`explanation-data-and-storage`
 

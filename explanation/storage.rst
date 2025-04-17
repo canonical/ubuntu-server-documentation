@@ -3,16 +3,17 @@
 Storage
 ********
 
-* :ref:`About LVM <about-lvm>`
+* :ref:`About LVM <about-lvm>` provides more detail about Logical Volume
+  Management
 * :ref:`iSCSI <iscsi-initiator-or-client>`
-
-**Device Mapper Multipathing**
-
-* :ref:`explanation-multipath`
 
 .. toctree::
     :hidden:
 
     About LVM <storage/about-lvm>
     iSCSI <storage/iscsi-initiator-or-client>
-    multipath
+
+See also
+========
+
+* How-to: :ref:`how-to-storage`
