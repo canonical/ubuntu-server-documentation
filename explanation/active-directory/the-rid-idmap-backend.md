@@ -21,8 +21,9 @@ Let's analyse an example configuration:
         idmap config EXAMPLE : backend = rid
         idmap config EXAMPLE : range   = 1000000 - 1999999
 
-> **Note**:
-> This is not yet a complete configuration file, and is just illustrating the idmap configuration. More is needed to join an Active Directory domain.
+```{note}
+This is not yet a complete configuration file, and is just illustrating the idmap configuration. More is needed to join an Active Directory domain.
+```
 
 This configuration is using two idmap backends, and carving out two ranges:
 - `*` domain, or "default domain": any SID that is not mapped via another more specific idmap configuration will use this backend. Since this mapping is not deterministic, a database is needed to keep a record, hence the `tdb` backend is used.
@@ -32,8 +33,9 @@ This configuration is using two idmap backends, and carving out two ranges:
 
 
 
-> **Important**:
-> Planning a range of IDs to be used for the mapping critically important. Such a range can never be reduced, just expanded (carefully!), and it must **NEVER** overlap with another allocated range.
+```{important}
+Planning a range of IDs to be used for the mapping critically important. Such a range can never be reduced, just expanded (carefully!), and it must **NEVER** overlap with another allocated range.
+```
 
 Once this system is joined to the `EXAMPLE.INTERNAL` domain, users from that domain will be allocated corresponding Linux uids and gids from the specified range in a deterministic way, following a formula. As long as the above configuration is used in all Ubuntu systems joined to the domain, the same Active Directory user will always get the same Linux IDs in all those systems.
 

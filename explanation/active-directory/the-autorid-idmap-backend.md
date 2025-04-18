@@ -33,9 +33,9 @@ Which domain will get which slot? That is **not deterministic**. It will basical
 
 This also means that a persistent database is required to record which domain goes into which slot. This is managed automatically by the autorid backend in the `autorid.tdb` file.
 
-> **NOTE**
->
-> The `autorid.tdb` domain mapping database file is kept in `/var/lib/samba/` and should be backed up regularly.
+```{note}
+The `autorid.tdb` domain mapping database file is kept in `/var/lib/samba/` and should be backed up regularly.
+```
 
 ## Pros and Cons of the autorid backend
 
