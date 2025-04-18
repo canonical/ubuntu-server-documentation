@@ -11,8 +11,9 @@ A **certificate** is a way to distribute a public key and other information abou
 
 To set up a secure server using public-key cryptography, in most cases, you send your certificate request (including your public key), proof of your company's identity, and payment to a CA. The CA verifies the certificate request and your identity, and then sends back a certificate for your secure server. Alternatively, you can create your own **self-signed** certificate.
 
-> **Note**:
-> Self-signed certificates should not be used in most production environments.
+```{note}
+Self-signed certificates should not be used in most production environments.
+```
 
 Continuing the HTTPS example, a CA-signed certificate provides two important capabilities that a self-signed certificate does not:
 
@@ -40,8 +41,9 @@ If the certificate will be used by service daemons, such as Apache, Postfix, Dov
 
 This section will cover generating a key both with or without a passphrase. The non-passphrase key will then be used to generate a certificate that can be used with various service daemons.
 
-> **Warning**:
-> Running your secure service without a passphrase is convenient because you will not need to enter the passphrase every time you start your secure service. But it is insecure -- a compromise of the key means a compromise of the server as well.
+```{warning}
+Running your secure service without a passphrase is convenient because you will not need to enter the passphrase every time you start your secure service. But it is insecure -- a compromise of the key means a compromise of the server as well.
+```
 
 To generate the keys for the Certificate Signing Request (CSR) run the following command from a terminal prompt:
 
@@ -89,8 +91,9 @@ openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 
 The above command will prompt you to enter the passphrase. Once you enter the correct passphrase, your certificate will be created and it will be stored in the `server.crt` file.
 
-> **Warning**:
-> If your secure server is to be used in a production environment, you probably need a CA-signed certificate. It is not recommended to use self-signed certificates in production environments.
+```{warning}
+If your secure server is to be used in a production environment, you probably need a CA-signed certificate. It is not recommended to use self-signed certificates in production environments.
+```
 
 ## Install the certificate
 
@@ -156,8 +159,9 @@ There should now be a new file, `/etc/ssl/newcerts/01.pem`, containing the same 
 
 Subsequent certificates will be named `02.pem`, `03.pem`, etc.
 
-> **Note**:
-> Replace `mail.example.com.crt` with your own descriptive name.
+```{note}
+Replace `mail.example.com.crt` with your own descriptive name.
+```
 
 Finally, copy the new certificate to the host that needs it, and configure the appropriate applications to use it. The default location to install certificates is `/etc/ssl/certs`. This enables multiple services to use the same certificate without overly complicated file permissions.
 

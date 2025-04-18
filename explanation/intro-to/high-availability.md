@@ -105,7 +105,9 @@ The HA packages in this list are supported just like any other package available
 
 - **SBD** - It is a fencing block device that can be particularly useful in environments where traditional fencing mechanisms are not possible. SBD integrates with Pacemaker, which serves as a watchdog device and shared storage, to arrange for nodes to reliably self-terminate when fencing is required.
 
-> Note: **pcs** was added to the [main] repository in Ubuntu Lunar Lobster (23.04).
+```{note}
+**pcs** was added to the [main] repository in Ubuntu Lunar Lobster (23.04).
+```
 
 ### Ubuntu HA deprecated packages
 
@@ -140,7 +142,9 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
   * lvmlockd has better design than clvmd. clvmd is command-line level based locking system, which means the whole LVM software will get hang if any LVM command gets dead-locking issue.
   * lvmlockd can work with lvmetad.
 
-> Note: `targetcli-fb (Linux LIO)` will likely replace `tgt` in future Ubuntu versions.
+```{note}
+`targetcli-fb (Linux LIO)` will likely replace `tgt` in future Ubuntu versions.
+```
 
 ## Upstream documentation
 
