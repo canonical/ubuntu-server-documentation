@@ -211,8 +211,9 @@ Note this is different from rejecting the response: it just means that this resp
 
 In general, as always with cryptography, be careful with which algorithms you decide to disable and remove from DNSSEC validation, as such errors can be hard to diagnose. To help with troubleshooting, the Internet Systems Consortium (ISC) has published a very extensive DNSSEC guide, which contains a detailed troubleshooting section (see below).
 
-> **Note**:
-> Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.conf.options` and restart BIND 9. This change was just a quick test!
+```{note}
+Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.conf.options` and restart BIND 9. This change was just a quick test!
+```
 
 ## References
 

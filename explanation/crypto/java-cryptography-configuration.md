@@ -85,8 +85,9 @@ These are the parameters:
 
 The rest is just to ignore all non-error output, and show us the exit status (`0` for success, anything else for an error).
 
-> **Note**:
-> `keytool` is not really intended as a tool to test SSL/TLS connections, but being part of the Java packaging makes it convenient and it's enough for our purposes.
+```{note}
+`keytool` is not really intended as a tool to test SSL/TLS connections, but being part of the Java packaging makes it convenient and it's enough for our purposes.
+```
 
 Let's see some examples now.
 
