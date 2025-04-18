@@ -32,8 +32,9 @@ In other words, it directly benefits our users by increasing the safety, stabili
 
 The phasing system makes it so that different sets of users are chosen to be the first to get the updates, so that there isn't one group of unlucky people who always get potentially broken updates soon after release.
 
-> **Note**:
-> It should be mentioned here that security updates are *never* phased.
+```{note}
+It should be mentioned here that security updates are *never* phased.
+```
 
 ## Can I turn off phased updates?
 
