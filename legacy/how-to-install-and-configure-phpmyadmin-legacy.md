@@ -1,8 +1,9 @@
 (how-to-install-and-configure-phpmyadmin-legacy)=
 # How to install and configure phpMyAdmin (legacy)
 
-> **Note**:
-> This section is flagged as *legacy* because today there are numerous MySQL administrative tools and Ubuntu Server no longer promotes one tool over others.
+```{note}
+This section is flagged as *legacy* because today there are numerous MySQL administrative tools and Ubuntu Server no longer promotes one tool over others.
+```
 
 [phpMyAdmin](https://www.phpmyadmin.net/) is a LAMP application specifically written for administering MySQL servers. Written in PHP, and accessed through a web browser, phpMyAdmin provides a graphical interface for database administration tasks.
 
@@ -38,8 +39,9 @@ To use phpMyAdmin to administer a MySQL database hosted on another server, adjus
 $cfg['Servers'][$i]['host'] = 'db_server';
 ```
 
-> **Note**:
-> Replace `db_server` with the actual remote database server name or IP address. Also, be sure that the phpMyAdmin host has permissions to access the remote database.
+```{note}
+Replace `db_server` with the actual remote database server name or IP address. Also, be sure that the phpMyAdmin host has permissions to access the remote database.
+```
 
 Once configured, log out of phpMyAdmin then back in again, and you should be accessing the new server.
 

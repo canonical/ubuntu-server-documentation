@@ -26,8 +26,9 @@ On each Puppet client, add an entry for the server:
 192.168.1.16 puppetmaster.example.com puppetmaster puppet
 ```
 
-> **Note**:
-> Replace the example IP addresses and domain names above with your actual server and client addresses and domain names.
+```{note}
+Replace the example IP addresses and domain names above with your actual server and client addresses and domain names.
+```
 
 ## Install Puppet
 
@@ -75,8 +76,9 @@ node 'puppetclient.example.com' {
 }
 ```
 
-> **Note**:
-> Replace `puppetclient.example.com` with your Puppet client's host name.
+```{note}
+Replace `puppetclient.example.com` with your Puppet client's host name.
+```
 
 The final step for this simple Puppet server is to restart the daemon:
 
