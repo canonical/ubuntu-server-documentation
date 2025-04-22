@@ -11,6 +11,12 @@ Some of the most notable benefits that NFS can provide are:
 
   - Storage devices such as floppy disks, CDROM drives, and USB Thumb drives can be used by other machines on the network. This may reduce the number of removable media drives throughout the network.
 
+```{warning}
+If you use **NFS and authd** at the same time, you must add a Kerberos configuration on both the client and the server. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
+
+For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/en/stable/howto/use-with-nfs/).
+```
+
 ## Installation
 
 At a terminal prompt enter the following command to install the NFS Server:
