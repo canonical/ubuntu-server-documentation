@@ -23,8 +23,9 @@ All other agents are in `resource-agents-extra` and while most of them are suppo
 
 For the resource agents provided by `resource-agents-base`, we will briefly describe how to use them.
 
-> **Note**:
-> There are two well known tools used to manage fence agents, they are `crmsh` and `pcs`. Here we will present examples with both, since `crmsh` is the recommended and supported tool until Ubuntu 22.10 Kinetic Kudu, and `pcs` is the recommended and supported tool from Ubuntu 23.04 Lunar Lobster onwards. For more information on how to migrate from `crmsh` to `pcs` {ref}`refer to this migration guide <migrate-from-crmsh-to-pcs>`.
+```{note}
+There are two well known tools used to manage fence agents, they are `crmsh` and `pcs`. Here we will present examples with both, since `crmsh` is the recommended and supported tool until Ubuntu 22.10 Kinetic Kudu, and `pcs` is the recommended and supported tool from Ubuntu 23.04 Lunar Lobster onwards. For more information on how to migrate from `crmsh` to `pcs` {ref}`refer to this migration guide <migrate-from-crmsh-to-pcs>`.
+```
 
 ## IPaddr2
 
