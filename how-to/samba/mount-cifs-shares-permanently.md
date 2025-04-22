@@ -5,7 +5,7 @@ Common Internet File System (CIFS) shares are a file-sharing protocol used (main
 
 Permanently mounting CIFS shares involves configuring your system to automatically connect to these shared resources when the system boots, which is useful when network users need consistent and regular access to them.
 
-In this guide, we will show you how to permanently mount and access CIFS shares. The shares can be hosted on a Windows computer/server, or on a Linux/UNIX server running Samba. If you want to know how to host shares, see see {ref}`introduction-to-samba`.
+In this guide, we will show you how to permanently mount and access CIFS shares. The shares can be hosted on a Windows computer/server, or on a Linux/UNIX server running Samba. If you want to know how to host shares, see {ref}`introduction-to-samba`.
 
 ## Prerequisites
 
@@ -114,9 +114,9 @@ If you need to change the owner of a share, you'll need to add a **UID** (short 
 
 ## Mount network folders with authd
 
-If you use Samba and authd at the same time, you must specify user and group mapping. Otherwise, you'd encounter permission issues due to mismatched user and group identifiers.
+If you use Samba and authd at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-Follow [Steps for the client](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-client) in the *Using authd with Samba* guide.
+If you *are* using Samba with authd, follow the instructions in the [steps for the client](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-client) guide in the authd documentation.
 
 ## Mount password-protected shares using `libpam-mount`
 

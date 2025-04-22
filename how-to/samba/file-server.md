@@ -6,9 +6,9 @@ One of the most common ways to network Ubuntu and Windows computers is to config
 The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see [Share Access Control](share-access-controls.md).
 
 ```{warning}
-If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you'd encounter permission issues due to mismatched user and group identifiers.
+If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-Instead of this guide, follow [Steps for the server](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-server) in the *Using authd with Samba* guide.
+If you *are* using Samba with authd, you should follow the instructions in the [steps for the server](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-server) guide in the authd documentation instead.
 ```
 
 ## Install Samba
