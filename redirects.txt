@@ -438,8 +438,9 @@ troubleshooting-tls-ssl explanation/crypto/troubleshooting-tls-ssl/
 
 about-logical-volume-management-lvm explanation/storage/about-lvm/
 
-service-iscsi explanation/storage/iscsi-initiator-or-client/
-iscsi-initiator-or-client explanation/storage/iscsi-initiator-or-client/
+service-iscsi how-to/storage/iscsi-initiator-or-client/
+iscsi-initiator-or-client how-to/storage/iscsi-initiator-or-client/
+explanation/storage/iscsi-initiator-or-client/ how-to/storage/iscsi-initiator-or-client/
 
 about-apt-upgrade-and-phased-updates explanation/software/about-apt-upgrade-and-phased-updates/
 

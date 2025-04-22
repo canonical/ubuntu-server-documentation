@@ -22,7 +22,7 @@ It is assumed that **you already have an iSCSI target on your local network** an
 
 Before start configuring iSCSI, make sure to have the network interfaces correctly set and configured in order to have open-iscsi package to behave appropriately, specially during boot time. In Ubuntu 20.04 LTS, the default network configuration tool is [netplan.io](https://netplan.readthedocs.io/en/latest/examples/).
 
-For all the iSCSI examples bellow please consider the following netplan configuration for my iSCSI initiator:
+For all the iSCSI examples below please consider the following netplan configuration for my iSCSI initiator:
 
 > */etc/cloud/cloud.cfg.d/99-disable-network-config.cfg*
 > ```
