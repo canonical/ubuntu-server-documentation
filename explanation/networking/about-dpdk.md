@@ -37,8 +37,9 @@ amd_iommu=pt
 
 On top of VFIO-PCI, you must also configure and assign the IOMMU groups accordingly. This is mostly done in {term}`firmware <FW>` and by hardware layout -- you can check the group assignment the kernel probed in `/sys/kernel/iommu_groups/`.
 
-> **Note**: 
-> VirtIO is special. DPDK can directly work on these devices without `vfio_pci`/`uio_pci_generic`. However, to avoid issues that might arise from the kernel and DPDK managing the device, you still need to unassign the kernel driver.
+```{note}
+VirtIO is special. DPDK can directly work on these devices without `vfio_pci`/`uio_pci_generic`. However, to avoid issues that might arise from the kernel and DPDK managing the device, you still need to unassign the kernel driver.
+```
 
 Manual configuration and status checks can be done via `sysfs`, or with the tool `dpdk_nic_bind`:
 

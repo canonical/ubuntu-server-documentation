@@ -20,8 +20,9 @@ user            = mysql
 port            = 3307
 ```
 
-> **Note**:
-> Some packages do not automatically create files for you to edit in their `.d` directories. In these cases it is often acceptable to just create an additional config file by any name there. When in doubt, check the package's documentation to confirm.
+```{note}
+Some packages do not automatically create files for you to edit in their `.d` directories. In these cases it is often acceptable to just create an additional config file by any name there. When in doubt, check the package's documentation to confirm.
+```
 
 After saving the file, restart the service.
 
@@ -89,8 +90,9 @@ Restart=on-failure
 ...
 ```
 
-> **Note**:
-> Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/systemd.service.html) for more information.
+```{note}
+Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/systemd.service.html) for more information.
+```
 
 Once the changes are saved, the override file will be created in `/etc/systemd/system/apache2.service.d/override.conf`. To apply changes, run
 
@@ -152,8 +154,9 @@ For example, if you would like `swtpm` to access a custom directory called `/var
 
 This method will work for all [AppArmor syntax](https://ubuntu.com/tutorials/beginning-apparmor-profile-development).
 
-> **Note**:
-> Although most local profiles have the same name as the maintainer's, you can often check what file is included based on the main profile's contents. In `swtpm`'s case, `/etc/apparmor.d/usr.bin.swtpm` contains the lines:
+```{note}
+Although most local profiles have the same name as the maintainer's, you can often check what file is included based on the main profile's contents. In `swtpm`'s case, `/etc/apparmor.d/usr.bin.swtpm` contains the lines:
+```
 
 > ```
 > # Site-specific additions and overrides. See local/README for details.

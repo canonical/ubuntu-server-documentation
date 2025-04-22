@@ -158,8 +158,9 @@ If you no longer need this configuration and wish to purge all IP configuration 
 ip addr flush eth0
 ```
 
-> **Note**
-> Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+```{note}
+Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+```
 
 ### Dynamic IP address assignment (DHCP client)
 
@@ -206,8 +207,9 @@ The configuration can then be applied using the `netplan` command.
 sudo netplan apply
 ```
 
-> **NOTE**
-> `netplan` in  Ubuntu Bionic 18.04 LTS doesn't understand the "`to: default`" syntax to specify a default route, and should use the older `gateway4: 10.10.10.1` key instead of the whole `routes:` block.
+```{note}
+`netplan` in  Ubuntu Bionic 18.04 LTS doesn't understand the "`to: default`" syntax to specify a default route, and should use the older `gateway4: 10.10.10.1` key instead of the whole `routes:` block.
+```
 
 The loopback interface is identified by the system as `lo` and has a default IP address of 127.0.0.1. It can be viewed using the `ip` command.
 
@@ -296,8 +298,9 @@ The following is an example of a `hosts` file where a number of local servers ha
 10.0.0.14   server4 server4.example.com file
 ```
 
-> **Note**
-> In this example, notice that each of the servers were given aliases in addition to their proper names and FQDN's. *Server1* has been mapped to the name *vpn*, *server2* is referred to as *mail*, *server3* as *www*, and *server4* as *file*.
+```{note}
+In this example, notice that each of the servers were given aliases in addition to their proper names and FQDN's. *Server1* has been mapped to the name *vpn*, *server2* is referred to as *mail*, *server3* as *www*, and *server4* as *file*.
+```
 
 ### Name Service Switch (NSS) configuration
 
@@ -357,8 +360,9 @@ Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., p
 
 Instead, to achieve this functionality with the `networkd` renderer, users can use [networkd-dispatcher](http://manpages.ubuntu.com/manpages/man8/networkd-dispatcher.8.html). The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
-> **Note**: 
-> If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+```{note}
+If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+```
 
 The [Netplan FAQ has a great table](https://netplan.io/faq/) that compares event timings between `ifupdown`/`systemd-networkd`/`network-manager`.
 
