@@ -73,8 +73,9 @@ Current DNS Server: 10.10.10.1
 
 If you are using `systemctl` to control the WireGuard interface, this is the type of change (adding or changing `PostUp`) where the `reload` action won't be enough, and you actually need to issue a `restart`.
 
-> **Note**:
-> The [`wg-quick(8)` manpage](https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html) documents the DNS setting of the WireGuard interface which has the same purpose, but only works if you have `resolveconf` installed. Ubuntu systems by default don't, and rely on `systemd-resolved` instead.
+```{note}
+The [`wg-quick(8)` manpage](https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html) documents the DNS setting of the WireGuard interface which has the same purpose, but only works if you have `resolveconf` installed. Ubuntu systems by default don't, and rely on `systemd-resolved` instead.
+```
 
 ## Adding another peer
 
@@ -136,8 +137,9 @@ To update the interface with the new peer without disrupting existing connection
 $ systemctl reload wg-quick@wg0
 ```
 
-> **Note**:
-> For this case of a "server" or "VPN gateway", where we are just adding another peer to an existing config, the `systemctl reload` action will work well enough to insert the new peer into the WireGuard configuration. However, it won't create new routes, or do any of the other steps that `wg-quick` does. Depending on your setup, you might need a full restart so that `wg-quick` can fully do its job.
+```{note}
+For this case of a "server" or "VPN gateway", where we are just adding another peer to an existing config, the `systemctl reload` action will work well enough to insert the new peer into the WireGuard configuration. However, it won't create new routes, or do any of the other steps that `wg-quick` does. Depending on your setup, you might need a full restart so that `wg-quick` can fully do its job.
+```
 
 ## Adding a smartphone peer
 
@@ -161,5 +163,6 @@ That will generate a QR code in the terminal, ready for scanning with the smartp
 
 Note that you need to put the private key contents directly into that configuration file, and not use `PostUp` to load it from a separate file.
 
-> **Important**
-> Treat this QR code as a secret, as it contains the private key for the WireGuard interface!
+```{important}
+Treat this QR code as a secret, as it contains the private key for the WireGuard interface!
+```

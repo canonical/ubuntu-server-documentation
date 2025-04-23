@@ -64,13 +64,14 @@ There is no `Endpoint` configured for the laptop peer, because we don't know wha
 
 Not having an endpoint here also means that the home network side will never be able to *initiate*  the VPN connection. It will sit and wait, and can only *respond* to VPN handshake requests, at which time it will learn the endpoint from the peer and use that until it changes (i.e. when the peer reconnects from a different site) or it times out.
 
-> **Important**:
-> This configuration file contains a secret: **PrivateKey**.
-> Make sure to adjust its permissions accordingly, as follows:
-> ```
-> sudo chmod 0600 /etc/wireguard/wg0.conf
-> sudo chown root: /etc/wireguard/wg0.conf
-> ```
+````{important}
+This configuration file contains a secret: **PrivateKey**.
+Make sure to adjust its permissions accordingly, as follows:
+```
+sudo chmod 0600 /etc/wireguard/wg0.conf
+sudo chown root: /etc/wireguard/wg0.conf
+```
+````
 
 When activated, this will bring up a `wg0` interface with the address `10.10.11.1/24`, listening on port `51000/udp`, and add a route for the `10.10.11.0/24` network using that interface.
 
@@ -95,18 +96,20 @@ Endpoint = <home-ppp0-IP-or-hostname>:51000
 AllowedIPs = 10.10.11.0/24,10.10.10.0/24
 ```
 
-> **Important**:
-> As before, this configuration file contains a secret: **PrivateKey**.
-> You need to adjust its permissions accordingly, as follows:
-> ```
-> sudo chmod 0600 /etc/wireguard/home0.conf
-> sudo chown root: /etc/wireguard/home0.conf
-> ```
+````{important}
+As before, this configuration file contains a secret: **PrivateKey**.
+You need to adjust its permissions accordingly, as follows:
+```
+sudo chmod 0600 /etc/wireguard/home0.conf
+sudo chown root: /etc/wireguard/home0.conf
+```
+````
 
 We have given this laptop the `10.10.11.2/24` address. It could have been any valid address in the `10.10.11.0/24` network, as long as it doesn't collide with an existing one, and is allowed in the router's peer's `AllowedIPs` list.
 
-> **Note**:
-> You may have noticed by now that address allocation is manual, and not via something like {term}`DHCP`. Keep tabs on it!
+```{note}
+You may have noticed by now that address allocation is manual, and not via something like {term}`DHCP`. Keep tabs on it!
+```
 
 In the `[Peer]` stanza for the laptop we have:
 
