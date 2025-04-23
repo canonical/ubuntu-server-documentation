@@ -64,7 +64,7 @@ You can edit the files in `/etc/mysql/` to configure the basic settings -- log f
 bind-address            = 192.168.0.5
 ```
 
-```(note)
+```{note}
 Replace `192.168.0.5` with the appropriate address, which can be determined via the `ip address show` command.
 ```
 
