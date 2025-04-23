@@ -119,8 +119,9 @@ Which can be broken down as follows:
 
 - `/bin/ping mixr,`: allows the application read and execute access to the file.
 
-> **Note**:
-> After editing a profile file the profile must be reloaded.
+```{note}
+After editing a profile file the profile must be reloaded.
+```
 
 ### Create a Profile
 

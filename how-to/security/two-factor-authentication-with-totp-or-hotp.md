@@ -13,8 +13,9 @@ HOTP is based on a sequence predictable only to those who share a secret. The us
 
 TOTP avoids this downside of HOTP by using the current timezone-independent date and time to determine the appropriate position in the sequence. However, this results in additional requirements and a different failure mode. Both devices must have the ability to tell the time, which is not practical for a USB 2FA token with no battery, for example. And both the server and client must agree on the correct time. If their clocks are skewed, then they will disagree on their current position in the sequence. Servers compensate for clock skew by allowing a few codes either side to also be valid. But like HOTP, they can only go so far before the server must refuse. One advantage of TOTP over HOTP is that correcting for this condition involves ensuring the clocks are correct at both ends; an out-of-band authentication to reset unfortunate users' secrets is not required. When using a modern smartphone app, for example, the requirement to keep the clock correct isn't usually a problem since this is typically done automatically at both ends by default.
 
-> **Note**:
-> It is not recommended to configure U2F/FIDO at the same time as TOTP/HOTP. This combination has not been tested, and using the configuration presented here, TOTP/HOTP would become mandatory for everyone, whether or not they are also using U2F/FIDO.
+```{note}
+It is not recommended to configure U2F/FIDO at the same time as TOTP/HOTP. This combination has not been tested, and using the configuration presented here, TOTP/HOTP would become mandatory for everyone, whether or not they are also using U2F/FIDO.
+```
 
 ## Install required software
 
@@ -25,8 +26,9 @@ sudo apt update
 sudo apt install libpam-google-authenticator
 ```
 
-> **Note**:
-> The `libpam-google-authenticator` package is in Ubuntu's universe archive component, which receives best-effort community support only.
+```{note}
+The `libpam-google-authenticator` package is in Ubuntu's universe archive component, which receives best-effort community support only.
+```
 
 ## Configure users
 
@@ -68,8 +70,9 @@ PasswordAuthentication no
 AuthenticationMethods publickey,keyboard-interactive
 ```
 
-> **Note**:
-> On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAUthentication yes`.
+```{note}
+On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAUthentication yes`.
+```
 
 Restart the `ssh` service to pick up configuration changes:
 

@@ -79,8 +79,9 @@ PublicKey = <contents of laptop-public.key>
 AllowedIPs = 10.10.10.11/32 # any available IP in the VPN range
 ```
 
-> **Note**:
-> Just like in the {ref}`peer-to-site <wireguard-vpn-peer-to-site-on-router>` scenario with WireGuard on the router, there is no `Endpoint` configuration here for the laptop peer, because we don't know where it will be connecting from beforehand.
+```{note}
+Just like in the {ref}`peer-to-site <wireguard-vpn-peer-to-site-on-router>` scenario with WireGuard on the router, there is no `Endpoint` configuration here for the laptop peer, because we don't know where it will be connecting from beforehand.
+```
 
 The final step is to configure this internal system as a router for the VPN users. For that, we need to enable a couple of settings:
 
@@ -130,8 +131,9 @@ And bring up this WireGuard interface:
 $ sudo wg-quick up home0
 ```
 
-> **Note**:
-> There is no need to add an index number to the end of the interface name. That is a convention, but not strictly a requirement.
+```{note}
+There is no need to add an index number to the end of the interface name. That is a convention, but not strictly a requirement.
+```
 
 ## Testing
 
