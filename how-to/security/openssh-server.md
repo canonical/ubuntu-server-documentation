@@ -30,13 +30,14 @@ To configure the default behavior of the OpenSSH server application, `sshd`, edi
 
 There are many directives in the `sshd` configuration file, which control things like communication settings and authentication modes. The following are examples of configuration directives that can be changed by editing the `/etc/ssh/sshd_config` file.
 
-> **Tip**:
-> Before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
->
-> ```bash
-> sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
-> sudo chmod a-w /etc/ssh/sshd_config.original
-> ```
+````{tip}
+Before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
+
+```bash
+sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+sudo chmod a-w /etc/ssh/sshd_config.original
+```
+````
 
 Since losing an SSH server might mean losing your way to reach a server, check the configuration after changing it and before restarting the server:
 
@@ -58,8 +59,9 @@ After making changes to the `/etc/ssh/sshd_config` file, save the file. Then, re
 sudo systemctl restart ssh.service
 ```
 
-> **Warning**:
-> Many other configuration directives for `sshd` are available to change the server application's behavior to fit your needs. Be advised, however, if your only method of access to a server is SSH, and you make a mistake when configuring `sshd` via the `/etc/ssh/sshd_config` file, you may find you are locked out of the server upon restarting it. Additionally, if an incorrect configuration directive is supplied, the `sshd` server may refuse to start, so be particularly careful when editing this file on a remote server.
+```{warning}
+Many other configuration directives for `sshd` are available to change the server application's behavior to fit your needs. Be advised, however, if your only method of access to a server is SSH, and you make a mistake when configuring `sshd` via the `/etc/ssh/sshd_config` file, you may find you are locked out of the server upon restarting it. Additionally, if an incorrect configuration directive is supplied, the `sshd` server may refuse to start, so be particularly careful when editing this file on a remote server.
+```
 
 ## SSH keys
 

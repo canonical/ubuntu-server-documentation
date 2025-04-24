@@ -125,8 +125,9 @@ You can remove the world readable-permissions using the following command:
 sudo chmod 0750 /home/username
 ```
 
-> **Note**:
-> Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
+```{note}
+Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
+```
 
 A more efficient approach would be to modify the `adduser` global default permissions when creating user home folders. To do this, edit the `/etc/adduser.conf` file and modify the `DIR_MODE` variable to something appropriate, so that all new home directories will receive the correct permissions.
 
@@ -166,8 +167,9 @@ To adjust the minimum length to 8 characters, change the appropriate variable to
 password        [success=1 default=ignore]      pam_unix.so obscure sha512 minlen=8
 ```
 
-> **Note**:
-> Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
+```{note}
+Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
+```
 
 ### Password expiration
 

@@ -94,9 +94,9 @@ $ ssh-add -K
 
 In this case, no file is written and the public key can be printed by running `ssh-add -L`.
 
-> **Note**:
-> If you used the `-O verify-required` option when generating the keys, or if that option is set on the SSH server via the `/etc/ssh/sshd_config` setting `PubkeyAuthOptions verify-required`, then using the agent won't work (in Ubuntu 22.04 LTS).
-
+```{note}
+If you used the `-O verify-required` option when generating the keys, or if that option is set on the SSH server via the `/etc/ssh/sshd_config` setting `PubkeyAuthOptions verify-required`, then using the agent won't work (in Ubuntu 22.04 LTS).
+```
 
 ## Further reading
 - [OpenSSH 8.2 release notes](https://www.openssh.com/txt/release-8.2)
