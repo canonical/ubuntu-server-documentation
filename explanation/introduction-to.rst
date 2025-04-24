@@ -19,15 +19,10 @@ help you navigate to the guides and other materials of most interest to you.
 
 * :ref:`Introduction to eBPF <introduction-to-ebpf>`
 
-**Cloud-init**
-
-* :ref:`Introduction to cloud-init <introduction-to-cloud-init>`
-
 .. toctree::
     :hidden:
 
     Virtualization <intro-to/virtualisation>
     Mail servers <intro-to/mail-services>
     eBPF <intro-to/ebpf>
-    Cloud-init <intro-to/cloud-init>
 

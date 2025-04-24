@@ -97,6 +97,19 @@ and more!
 
    virtualisation.rst
 
+Clouds
+======
+
+Our :ref:`clouds section <explanation-cloud-images>` provides details on
+finding cloud images for various public clouds, and about the popular cloud
+initialization tool, cloud-init.
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   clouds.rst
+
 System tuning
 =============
 
@@ -105,10 +118,10 @@ on system performance and optimization, covering concepts like Profile-Guided
 Optimization (PGO) and some common tooling.
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    performance.rst
+   performance.rst
 
 High Availability
 =================
@@ -120,14 +133,25 @@ In this section we provide an introduction to High Availability and explain
 some of the key concepts.
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    high-availability.rst
+   high-availability.rst
+
+Debugging
+=========
+
+:ref:`These debugging pages <explanation-debugging>` are for readers interested
+in packaging and Ubuntu development.
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    introduction-to.rst
+   debugging.rst
 
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   introduction-to.rst

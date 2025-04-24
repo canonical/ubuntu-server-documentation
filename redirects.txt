@@ -49,6 +49,7 @@ non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive
 
 explanation/installation/ how-to/installation/
 
+reference/installation reference/
 system-requirements reference/installation/system-requirements/
 
 virtualization-qemu how-to/virtualisation/qemu/
@@ -471,8 +472,11 @@ multipath-configuration-examples explanation/multipath/multipath-configuration-e
 device-mapper-multipathing-usage-debug explanation/multipath/common-multipath-tasks-and-procedures/
 common-multipath-tasks-and-procedures explanation/multipath/common-multipath-tasks-and-procedures/
 
-cloud-images reference/clouds/find-cloud-images/
-cloud-images/introduction reference/clouds/find-cloud-images/
+reference/clouds explanation/clouds/
+
+cloud-images explanation/clouds/find-cloud-images/
+cloud-images/introduction explanation/clouds/find-cloud-images/
+reference/clouds/find-cloud-images explanation/clouds/find-cloud-images/
 
 ubuntu-ha-migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
@@ -482,10 +486,14 @@ basic-backup-shell-script reference/backups/basic-backup-shell-script/
 backups-archive-rotation reference/backups/archive-rotation-shell-script/
 archive-rotation-shell-script reference/backups/archive-rotation-shell-script/
 
-about-debuginfod reference/debugging/about-debuginfod/
-service-debuginfod reference/debugging/about-debuginfod/
+reference/debugging/ explanation/debugging/
 
-debug-symbol-packages reference/debugging/debug-symbol-packages/
+about-debuginfod explanation/debugging/about-debuginfod/
+service-debuginfod explanation/debugging/about-debuginfod/
+reference/debugging/about-debuginfod/ explanation/debugging/about-debuginfod/
+
+debug-symbol-packages explanation/debugging/debug-symbol-packages/
+reference/debugging/debug-symbol-packages/ explanation/debugging/debug-symbol-packages/
 
 tools-byobu reference/other-tools/byobu/
 byobu reference/other-tools/byobu/
