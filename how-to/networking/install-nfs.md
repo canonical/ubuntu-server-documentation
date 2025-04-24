@@ -62,9 +62,9 @@ Use the mount command to mount a shared NFS directory from another machine, by t
     sudo mkdir /opt/example
     sudo mount example.hostname.com:/srv /opt/example
 
-> **Warning**
-> 
-> The mount point directory `/opt/example` must exist. There should be no files or subdirectories in the `/opt/example` directory, else they will become inaccessible until the nfs filesystem is unmounted.
+```{warning}
+The mount point directory `/opt/example` must exist. There should be no files or subdirectories in the `/opt/example` directory, else they will become inaccessible until the nfs filesystem is unmounted.
+```
 
 An alternate way to mount an NFS share from another machine is to add a line to the `/etc/fstab` file. The line must state the hostname of the NFS server, the directory on the server being exported, and the directory on the local machine where the NFS share is to be mounted.
 
@@ -88,10 +88,10 @@ Earlier Ubuntu releases use the traditional configuration mechanism for the NFS 
 
 Each file has a small explanation about the available settings.
 
-> **Warning**
->
-> The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
-> In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```{warning}
+The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
+In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```
 
 ## Upgrading to Ubuntu 22.04 LTS ("jammy")
 
