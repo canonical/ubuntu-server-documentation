@@ -151,8 +151,9 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
   00005 * * * End of File * * * 
   ```
 
-> **Note**: 
-> In case of any issues hitting the 80-character-per-line limit of the file, you can write parameters across two lines as long as there are no unwanted white spaces. To view all 80 characters in one line, disable the prefix area on the left. "prefix off | on" will be  your friend -- use it in the command area. 
+```{note}
+In case of any issues hitting the 80-character-per-line limit of the file, you can write parameters across two lines as long as there are no unwanted white spaces. To view all 80 characters in one line, disable the prefix area on the left. "prefix off | on" will be  your friend -- use it in the command area. 
+```
 
 * You can now start the z/VM installation by executing the `UBUNTU REXX` script with `UBUNTU`.
 
