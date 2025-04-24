@@ -5,8 +5,9 @@ Ubuntu uses `timedatectl` and `timesyncd` for synchronising time, and they are i
 
 In this guide, we will show you how to configure these services.
 
-> **Note**:
-> If `chrony` is installed, `timedatectl` steps back to let `chrony` handle timekeeping. This ensures that no two time-syncing services will be in conflict. 
+```{note}
+If `chrony` is installed, `timedatectl` steps back to let `chrony` handle timekeeping. This ensures that no two time-syncing services will be in conflict. 
+```
 
 ## Check status of `timedatectl`
 
