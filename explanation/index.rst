@@ -97,6 +97,15 @@ and more!
 
    virtualisation.rst
 
+Clouds
+======
+
+.. toctree::
+    :hidden:
+    :titlesonly:
+
+    clouds.rst
+
 System tuning
 =============
 
@@ -125,9 +134,18 @@ some of the key concepts.
 
     high-availability.rst
 
+Debugging
+=========
+
+These pages are for those interested in packaging and Ubuntu development.
+
+.. toctree::
+   :titlesonly:
+
+   debugging.rst
+
 .. toctree::
     :hidden:
     :titlesonly:
 
     introduction-to.rst
-

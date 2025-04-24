@@ -1,7 +1,13 @@
 .. _reference-backups-and-version-control:
 
+Data and storage
+****************
+
+This section provides details on various topics related to storing, managing
+and accessing data.
+
 Backups and version control
-****************************
+===========================
 
 Example shell scripts for backing up your system.
 
@@ -11,3 +17,9 @@ Example shell scripts for backing up your system.
     :hidden:
 
     Archive rotation shell script <backups/archive-rotation-shell-script>
+    
+See also
+========
+
+* How-to: :ref:`how-to-backups-and-version-control`
+* Explanation: :ref:`introduction-to-backups`

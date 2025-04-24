@@ -13,3 +13,8 @@ These pages are for those interested in packaging and Ubuntu development.
 
     About debuginfod <debugging/about-debuginfod>
     Debug symbol packages <debugging/debug-symbol-packages>
+
+See also
+========
+
+External: `The Ubuntu Packaging Guide <https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/>`_
