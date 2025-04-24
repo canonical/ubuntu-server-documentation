@@ -46,10 +46,10 @@ Networking
 ==========
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    networking.rst
+   networking.rst
 
 :ref:`Our networking section <how-to-networking>` is where you will find how-to
 guides on a broad range of networking topics, such as:
@@ -62,18 +62,27 @@ guides on a broad range of networking topics, such as:
 Managing software
 =================
 
-.. include:: software.rst
-    :start-line: 4
-    :end-before: .. toctree::
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   software.rst
+
+:ref:`Managing software <how-to-managing-software>` provides guides on topics
+including:
+
+* **Software updates** and configuration
+* **Upgrading your Ubuntu release**
+* **Bug reporting**
 
 Data and storage
 ================
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    data-and-storage.rst
+   data-and-storage.rst
 
 :ref:`The data and storage section <how-to-data-and-storage>` covers the
 following:
@@ -85,68 +94,100 @@ following:
 Mail services
 =============
 
-.. include:: mail-services.rst
-    :start-line: 4
-    :end-before: .. toctree::
+Our :ref:`how-to-mail-services` section shows you how to set up:
+
+* **Mail User Agents** (Thunderbird)
+* **Mail Transfer Agents** (Postfix and Exim4)
+* **Mail Delivery Agents** (Dovecot)
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   mail-services.rst
 
 Web services
 ============
 
-.. include:: web-services.rst
-    :start-line: 4
-    :end-before: .. toctree::
+Our :ref:`Web services section <how-to-web-services>` shows how to set up the
+different components of web servers, including:
+
+* **Apache2** and **nginx**
+* **Squid proxy servers**
+* **Web programming** (PHP and Ruby)
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   web-services.rst
 
 Graphics
 ========
 
-.. include:: graphics.rst
-    :start-line: 4
-    :end-before: .. toctree::
+The :ref:`how-to-graphics` section contains guides on how to set up both
+on-system and virtual GPU.
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   graphics.rst
 
 Virtualisation
 ==============
 
-.. include:: virtualisation.rst
-    :start-line: 4
-    :end-before: .. toctree::
+Our :ref:`Virtualisation <how-to-virtualisation>` section contains installation
+and usage guides for common virtualization tools available in Ubuntu, across
+various layers of abstraction, from Multipass to QEMU.
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   virtualisation.rst
 
 Containers
 ==========
 
-.. include:: containers.rst
-    :start-line: 4
-    :end-before: .. toctree::
+Our :ref:`Containers <how-to-containers>` section includes installation and
+usage guides for the most popular container tooling available in Ubuntu:
+
+* **LXD**, which can also now be used to create virtual machines
+* **Docker** and **rocks**
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   containers.rst
 
 High Availability
 =================
 
-.. include:: high-availability.rst
-    :start-line: 4
-    :end-before: .. toctree::
+:ref:`High Availability <how-to-high-availability>` is a method for clustering
+resources to ensure minimal downtime if a particular component fails. This
+section shows how to set up various components of a High Availability setup.
+
+.. toctree::
+   :hidden:
+   :titlesonly:
+
+   high-availability.rst
 
 Observability
 =============
 
-.. include:: observability.rst
-    :start-line: 4
-    :end-before: .. toctree::
+:ref:`Observability <how-to-observability>` is a name given to the collection
+of tools used to monitor your infrastructure. In Ubuntu, you can use the classic
+Logging, Monitoring, and Alerting (LMA) stack, or the newer
+`Canonical Observability Stack <https://charmhub.io/topics/canonical-observability-stack>`_.
 
-
-    
-
-
-
+This section focuses on the classic LMA stack.
 
 .. toctree::
-    :hidden:
-    :titlesonly:
+   :hidden:
+   :titlesonly:
 
-    software.rst
-    mail-services.rst
-    web-services.rst
-    graphics.rst
-    observability.rst
-    virtualisation.rst
-    containers.rst
-    high-availability.rst
+   observability.rst
 

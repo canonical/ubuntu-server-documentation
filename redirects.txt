@@ -12,7 +12,8 @@
 # Example:
 # redirect/from/file/ redirect/to/file/
 
-explanation/intro-to/ explanation/introduction-to/
+explanation/intro-to/ explanation/
+explanation/introduction-to/ explanation/
 
 installation tutorial/basic-installation/
 basic-installation tutorial/basic-installation/
@@ -360,8 +361,9 @@ introduction-to-crypto-libraries explanation/intro-to/crypto-libraries/
 wireguard-vpn-introduction explanation/intro-to/wireguard-vpn/
 introduction-to-wireguard-vpn explanation/intro-to/wireguard-vpn/
 
-mail-introduction explanation/intro-to/mail-services/
-introduction-to-mail-services explanation/intro-to/mail-services/
+mail-introduction how-to/mail-services/
+introduction-to-mail-services how-to/mail-services/
+explanation/intro-to/mail-services/ how-to/mail-services/
 
 web-servers-introduction explanation/intro-to/web-servers/
 introduction-to-web-servers explanation/intro-to/web-servers/
