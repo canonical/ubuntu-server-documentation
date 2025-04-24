@@ -1,4 +1,4 @@
-.. _reference-debugging:
+.. _explanation-debugging:
 
 Debugging
 **********
