@@ -200,8 +200,9 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
 
   Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a qeth device activation looks like: `chzdev qeth -e c000`.
 
-> **See also**:
-> For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) pages.
+```{seealso}
+For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) pages.
+```
 
 * Now make sure a HTTP server is running with `/srv/www` as web-server root (in this particular example).
 
