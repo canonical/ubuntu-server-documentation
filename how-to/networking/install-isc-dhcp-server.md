@@ -1,8 +1,9 @@
 (install-isc-dhcp-server)=
 # How to install and configure isc-dhcp-server
 
-> **Note**:
-> Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/). It has been replaced by [Kea](https://www.isc.org/kea/).
+```{note}
+Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/). It has been replaced by [Kea](https://www.isc.org/kea/).
+```
 
 In this guide we show how to install and configure `isc-dhcp-server`, which installs the dynamic host configuration protocol daemon, {term}`DHCPD`. For `isc-kea` instructions, {ref}`refer to this guide instead <install-isc-kea>`.
 
@@ -14,8 +15,9 @@ At a terminal prompt, enter the following command to install `isc-dhcp-server`:
 sudo apt install isc-dhcp-server
 ```
 
-> **Note**:
-> You can find diagnostic messages from `dhcpd` in `syslog`.
+```{note}
+You can find diagnostic messages from `dhcpd` in `syslog`.
+```
 
 ## Configure isc-dhcp-server
 
