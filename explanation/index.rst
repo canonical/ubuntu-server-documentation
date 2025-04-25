@@ -49,7 +49,12 @@ Managing software
 =================
 
 :ref:`Managing software <explanation-managing-software>` is an integral part of
-system maintenance.
+system maintenance. In this section we discuss the following topics in detail:
+
+* **Software updates**, why updates are sometimes phased, and testing updates
+  before they're released in your production environment
+* **Third party repositories**
+* **Changing package files**
 
 .. toctree::
     :hidden:
@@ -88,8 +93,8 @@ Virtualisation and containers
 
 Our :ref:`Virtualisation and containers <explanation-virtualisation>` section
 includes overviews of the available virtualisation and container tooling in
-the Ubuntu space, as well as more detail about topics like rock images, Docker
-and more!
+the Ubuntu space, as well as more detail about topics like rock images, Docker,
+eBPF and more!
 
 .. toctree::
    :hidden:
@@ -150,8 +155,3 @@ in packaging and Ubuntu development.
 
    debugging.rst
 
-.. toctree::
-   :hidden:
-   :titlesonly:
-
-   introduction-to.rst
