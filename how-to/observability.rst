@@ -3,17 +3,25 @@
 Observability
 **************
 
-* :ref:`Logging, monitoring, and Alerting (LMA) <set-up-your-lma-stack>`
-* :ref:`Install Logwatch <install-logwatch>`
-* :ref:`Install Munin <install-munin>`
-* :ref:`Install Nagios Core 3 <install-nagios>`
-* :ref:`Use Nagios with Munin <use-nagios-with-munin>`
+In Ubuntu, it is recommended to use the
+`Canonical Observability Stack <https://charmhub.io/topics/canonical-observability-stack>`_
+to monitor your infrastructure.
+
+However, you can also use the classic Logging, Monitoring and Alerting (LMA)
+stack.
 
 .. toctree::
-    :hidden:
+   :titlesonly:
 
-    Set up your LMA stack <observability/set-up-your-lma-stack>
-    Install Logwatch <observability/install-logwatch>
-    Install Munin <observability/install-munin>
-    Install Nagios Core 3 <observability/install-nagios>
-    Use Nagios with Munin <observability/use-nagios-with-munin>
+   Set up your LMA stack <observability/set-up-your-lma-stack>
+
+If you do not need a full LMA stack, there are some other supported tools that
+can provide similar capabilities.
+
+.. toctree::
+   :titlesonly:
+
+   Install Logwatch <observability/install-logwatch>
+   Install Munin <observability/install-munin>
+   Install Nagios Core 3 <observability/install-nagios>
+   Use Nagios with Munin <observability/use-nagios-with-munin>

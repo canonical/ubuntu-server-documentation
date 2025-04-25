@@ -17,4 +17,4 @@ These pages are for those interested in packaging and Ubuntu development.
 See also
 ========
 
-External: `The Ubuntu Packaging Guide <https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/>`_
+* External: `The Ubuntu Packaging Guide <https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/>`_

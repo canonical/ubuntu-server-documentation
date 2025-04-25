@@ -3,6 +3,10 @@
 Multipath
 **********
 
+Device Mapper Multipathing (which we call "Multipath") allows you to create a
+single virtual device to aggregate different input/output (I/O) paths between
+server nodes and storage arrays.
+
 Introduction
 ============
 

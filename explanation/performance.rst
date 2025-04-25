@@ -29,11 +29,11 @@ it for a given workload.
    * Identifying where your needs are different from the generic assumptions to change related tunables
    * Identifying architectural mismatches between the solution and your needs to allow adapting
 
+.. _end-system-tuning-intro:
+
 To identify those aspects and to then apply static or dynamic tuning Ubuntu
 carries various tools, a few of them are outlined in more detail in the
 following sections.
-
-.. _end-system-tuning-intro:
 
 * Profile-Guided Optimization :ref:`PGO <perf-pgo>`
 * Obtain the hierarchical map of key computing elements using :ref:`hwloc and lstopo <perf-tune-hwloc>`

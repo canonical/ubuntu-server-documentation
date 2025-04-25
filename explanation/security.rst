@@ -73,7 +73,5 @@ VPNs are commonly used to provide encrypted, secure access to a network.
 See also
 ========
 
-How-to: :ref:`how-to-security`
-
-
+* How-to: :ref:`how-to-security`
 
