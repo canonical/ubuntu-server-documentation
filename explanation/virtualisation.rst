@@ -4,6 +4,7 @@ Virtualisation and containers
 *****************************
 
 * :ref:`Introduction to virtualization <introduction-to-virtualization>`
+  discusses and disambiguates between virtualization and containers
 
 .. toctree::
     :hidden:
@@ -13,30 +14,28 @@ Virtualisation and containers
 Virtualization
 ==============
 
-**About virtual machines**
+* :ref:`VM tools overview <vm-tools-in-the-ubuntu-space>` gives more details
+  about the virtual machines available in Ubuntu
 
-* :ref:`Overview of VM tools in Ubuntu <vm-tools-in-the-ubuntu-space>`
-
-**Using virtual machines**
+We also give further details on some specific usage scenarios here:
 
 * :ref:`QEMU microvm <qemu-microvm>`
 * :ref:`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
 
 .. toctree::
-    :hidden:
+   :hidden:
 
-    VM tools overview <virtualisation/vm-tools-in-the-ubuntu-space>
-    QEMU microvm <virtualisation/qemu-microvm>
-    Upgrade VM machine type <virtualisation/upgrading-the-machine-type-of-your-vm>
+   VM tools overview <virtualisation/vm-tools-in-the-ubuntu-space>
+   QEMU microvm <virtualisation/qemu-microvm>
+   Upgrade VM machine type <virtualisation/upgrading-the-machine-type-of-your-vm>
 
 Containers
 ==========
 
-**About containers**
+* :ref:`Container tools overview <container-tools-in-the-ubuntu-space>` gives
+  more details about the popular container technologies available in Ubuntu
 
-* :ref:`Overview of container tools in Ubuntu <container-tools-in-the-ubuntu-space>`
-
-**Using containers**
+There are more detailed discussions on specific technologies here:
 
 * :ref:`About rock images <about-rock-images>`
 * :ref:`Docker storage, networking, and logging <docker-storage-networking-and-logging>`
@@ -51,8 +50,9 @@ Containers
 Other virtualisation tools
 ==========================
 
-* :ref:`About OpenStack <about-openstack>`
-* :ref:`Introduction to eBPF <introduction-to-ebpf>`
+* :ref:`About OpenStack <about-openstack>` provides an introduction to OpenStack
+* :ref:`Introduction to eBPF <introduction-to-ebpf>` discusses eBPF, which is a
+  lightweight VM that runs in the kernel space
 
 .. toctree::
     :hidden:
