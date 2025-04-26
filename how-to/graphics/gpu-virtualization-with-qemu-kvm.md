@@ -41,10 +41,14 @@ The initial step for both options is the same; you want to ensure your system ha
 
 On the kernel side, there are various [options you can enable/configure](https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html?highlight=iommu) for the [IOMMU feature](https://www.kernel.org/doc/html/latest/arch/x86/iommu.html). In recent Ubuntu kernels (>=5.4 => Focal or Bionic-HWE kernels) everything usually works by default, unless your hardware setup makes you need any of those tuning options.
 
-> **Note**:
-> The card used in all examples below e.g. when filtering for or assigning PCI IDs, is an NVIDIA V100 on PCI ID 41.00.0
-> $ lspci | grep 3D
+````{note}
+The card used in all examples below e.g. when filtering for or assigning PCI IDs, is an NVIDIA V100 on PCI ID 41.00.0
+
+```bash
+$ lspci | grep 3D
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
+```
+````
 
 You can check your boot-up kernel messages for IOMMU/{term}`DMAR` messages or even filter it for a particular PCI ID.
 
@@ -99,8 +103,9 @@ lrwxrwxrwx 1 root root 0 Jan  3 06:57 0000:41:00.0 -> ../../../../devices/pci000
 
 Another useful tool for this stage (although the details are beyond the scope of this article) can be `virsh node*`, especially `virsh nodedev-list --tree` and `virsh nodedev-dumpxml <pcidev>`.
 
-> **Note**:
-> Some older or non-server boards tend to group devices in one IOMMU group, which isn't very useful as it means you'll need to pass "all or none of them" to the same guest.
+```{note}
+Some older or non-server boards tend to group devices in one IOMMU group, which isn't very useful as it means you'll need to pass "all or none of them" to the same guest.
+```
 
 ## Preparations for PCI and mediated devices pass-through -- block host drivers
 
@@ -156,10 +161,11 @@ mdev                   24576  2 vfio_mdev,nvidia_vgpu_vfio
 drm                   491520  6 drm_kms_helper,drm_vram_helper,nvidia
 ```
 
-> **Note**:
-> While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
->
-> It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
+```{note}
+While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
+
+It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
+```
 
 Here is an example of those when running fine:
 ```text
@@ -268,7 +274,8 @@ And for mediated devices it is quite similar, but using the UUID.
 
 Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add remove if the hardware device and its drivers support it `virsh attach-device`.
 
-> **Note**:
-> This works great on Focal, but `type='none'` as well as `display='off'` weren't available on Bionic. If this level of control is required one would need to consider using the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive) or [Server-Backports](https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports) for a newer stack of the virtualisation components.
+```{note}
+This works great on Focal, but `type='none'` as well as `display='off'` weren't available on Bionic. If this level of control is required one would need to consider using the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive) or [Server-Backports](https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports) for a newer stack of the virtualisation components.
+```
 
 And finally, it might be worth noting that while mediated devices are becoming more common and known for vGPU handling, they are a general infrastructure also used (for example) for [s390x vfio-ccw](https://www.kernel.org/doc/html/latest/s390/vfio-ccw.html).
