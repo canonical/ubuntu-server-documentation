@@ -1,8 +1,9 @@
 (openldap-backend-legacy)=
 # OpenLDAP backend (legacy)
 
-> **Note**:
-> This section is flagged as *legacy* because nowadays, Samba 4 is best integrated with its own LDAP server in Active Directory mode. Integrating Samba with LDAP as described here covers the NT4 mode, which has been deprecated for many years.
+```{note}
+This section is flagged as *legacy* because nowadays, Samba 4 is best integrated with its own LDAP server in Active Directory mode. Integrating Samba with LDAP as described here covers the NT4 mode, which has been deprecated for many years.
+```
 
 This section covers the integration of Samba with LDAP. The Samba server's role will be that of a "standalone" server and the LDAP directory will provide the authentication layer in addition to containing the user, group, and machine account information that Samba requires in order to function (in any of its 3 possible roles). The pre-requisite is an OpenLDAP server configured with a directory that can accept authentication requests. See {ref}`Install LDAP <install-openldap>` and {ref}`LDAP with Transport Layer Security <ldap-and-tls>` for details on fulfilling this requirement. Once those steps are completed, you will need to decide what specifically you want Samba to do for you and then configure it accordingly.
 
@@ -150,8 +151,9 @@ ldap passwd sync = yes
 
 Change the values to match your environment.
 
-> **Note**:
-> The `smb.conf` as shipped by the package is quite long and has many configuration examples. An easy way to visualise it without any comments is to run `testparm -s`.
+```{note}
+The `smb.conf` as shipped by the package is quite long and has many configuration examples. An easy way to visualise it without any comments is to run `testparm -s`.
+```
 
 Now inform Samba about the Root DN user's password (the one set during the installation of the `slapd` package):
 
@@ -203,8 +205,9 @@ $ getent group Replicators
 Replicators:*:552:
 ```
 
-> **Note**:
-> The names are case sensitive!
+```{note}
+The names are case sensitive!
+```
 
 If you have existing LDAP users that you want to include in your new LDAP-backed Samba they will, of course, also need to be given some of the extra Samba specific attributes. The `smbpasswd` utility can do this for you:
 

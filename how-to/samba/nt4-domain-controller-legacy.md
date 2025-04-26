@@ -1,8 +1,9 @@
 (nt4-domain-controller-legacy)=
 # NT4 domain controller (legacy)
 
-> **Note**:
-> This section is flagged as *legacy* because nowadays, Samba can be deployed in full Active Directory domain controller mode, and the old-style NT4 Primary Domain Controller is deprecated.
+```{note}
+This section is flagged as *legacy* because nowadays, Samba can be deployed in full Active Directory domain controller mode, and the old-style NT4 Primary Domain Controller is deprecated.
+```
 
 A Samba server can be configured to appear as a Windows NT4-style domain controller. A major advantage of this configuration is the ability to centralise user and machine credentials. Samba can also use multiple backends to store the user information.
 
@@ -40,8 +41,9 @@ add machine script = sudo /usr/sbin/useradd -N -g machines -c Machine -d
       /var/lib/samba -s /bin/false %u
 ```
 
-> **Note**:
-> If you wish to not use *Roaming Profiles* leave the `logon home` and `logon path` options commented out.
+```{note}
+If you wish to not use *Roaming Profiles* leave the `logon home` and `logon path` options commented out.
+```
 
 - `domain logons`
 Provides the `netlogon` service, causing Samba to act as a domain controller.
@@ -88,8 +90,9 @@ When configured as a domain controller, a *\[netlogon\]* share needs to be confi
    share modes = no
 ```
 
-> **Note**:
-> The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [/srv is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
+```{note}
+The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [/srv is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
+```
 
 Now create the `netlogon` directory, and an empty (for now) `logon.cmd` script file:
 
