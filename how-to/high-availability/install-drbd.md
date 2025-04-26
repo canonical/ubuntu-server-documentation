@@ -11,8 +11,9 @@ To get started using DRBD, first install the necessary packages. In a terminal w
 sudo apt install drbd-utils
 ```
 
-> **Note**:
-> If you are using the **virtual kernel** as part of a virtual machine you will need to manually compile the `drbd` module. It may be easier to install the `linux-modules-extra-$(uname -r)` package inside the virtual machine.
+```{note}
+If you are using the **virtual kernel** as part of a virtual machine you will need to manually compile the `drbd` module. It may be easier to install the `linux-modules-extra-$(uname -r)` package inside the virtual machine.
+```
 
 ## Configure DRBD
 
@@ -50,8 +51,9 @@ resource r0 {
 } 
 ```
 
-> **Note**:
-> There are many other options in `/etc/drbd.conf`, but for this example the default values are enough.
+```{note}
+There are many other options in `/etc/drbd.conf`, but for this example the default values are enough.
+```
 
 Now copy `/etc/drbd.conf` to the second host:
 

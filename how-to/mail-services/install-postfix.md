@@ -15,8 +15,9 @@ sudo apt install postfix
 
 It is OK to accept defaults initially by pressing return for each question. Some of the configuration options will be investigated in greater detail in the configuration stage.
 
-> **Deprecation warning:**
-> The `mail-stack-delivery` metapackage has been deprecated in Focal. The package still exists for compatibility reasons, but won't setup a working email system.
+```{warning}
+The `mail-stack-delivery` metapackage has been deprecated in Focal. The package still exists for compatibility reasons, but won't setup a working email system.
+```
 
 ## Configure Postfix
 
