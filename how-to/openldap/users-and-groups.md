@@ -29,9 +29,10 @@ USUFFIX='ou=People'
 MSUFFIX='ou=Computers'
 ```
 
-> **Note**:
-> Adjust **SERVER** and related **SUFFIX** options to suit your directory structure.
-> Here, we are forcing use of **START_TLS** (`-ZZ` parameter). Refer to {ref}`LDAP with TLS <ldap-and-tls>` to learn how to set up the server with TLS support.
+```{note}
+Adjust **SERVER** and related **SUFFIX** options to suit your directory structure.
+Here, we are forcing use of **START_TLS** (`-ZZ` parameter). Refer to {ref}`LDAP with TLS <ldap-and-tls>` to learn how to set up the server with TLS support.
+```
 
 Store the `cn=admin` password in the `/etc/ldapscripts/ldapscripts.passwd` file and make sure it's only readable by the *root* local user:
 

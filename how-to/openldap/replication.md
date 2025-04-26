@@ -13,8 +13,9 @@ There are two ways to use this replication:
 
 The delta replication sends less data over the network, but is more complex to set up. We will show both in this guide.
 
-> **Important**:
-> You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the [LDAP with TLS guide](ldap-and-tls.md) for details of how to set this up.
+```{important}
+You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the [LDAP with TLS guide](ldap-and-tls.md) for details of how to set this up.
+```
 
 ## Provider configuration - replication user
 
@@ -46,8 +47,9 @@ Re-enter new password:
 Enter LDAP Password:
 ```
 
-> **Note**:
-> Please adjust the server URI in the `-H` parameter if needed to match your deployment.
+```{note}
+Please adjust the server URI in the `-H` parameter if needed to match your deployment.
+```
 
 The next step is to give this replication user the correct privileges, i.e.:
 
@@ -119,9 +121,10 @@ olcSpCheckpoint: 100 10
 olcSpSessionLog: 100
 ```
 
-> **Customisation warning**:
-> The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
-> Please see the [slapo-syncprov(5) man page](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+```{warning}
+The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
+Please see the [slapo-syncprov(5) man page](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+```
 
 Add the new content:
 
@@ -171,8 +174,9 @@ Ensure the following attributes have the correct values:
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **`rid`**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-> **Note**:
-> A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+```{note}
+A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+```
 
 Add the new configuration:
 
@@ -258,10 +262,11 @@ olcAccessLogSuccess: TRUE
 olcAccessLogPurge: 07+00:00 01+00:00
 ```
 
-> **Customisation warning**:
-> The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-> Please see the [slapo-syncprov(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
-> For `olcAccessLogPurge`, please check the [slapo-accesslog(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-accesslog.5.html).
+```{warning}
+The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
+Please see the [slapo-syncprov(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+For `olcAccessLogPurge`, please check the [slapo-accesslog(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-accesslog.5.html).
+```
 
 Create a directory:
 
@@ -320,8 +325,9 @@ Ensure the following attributes have the correct values:
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **rid**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-> **Note**:
-> Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+```{note}
+Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+```
 
 Add the new configuration:
 
