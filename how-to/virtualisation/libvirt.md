@@ -153,8 +153,9 @@ On the other hand it can't access system resources very well, which includes net
 
 Applications will usually decide on their primary use-case. Desktop-centric applications often choose `qemu:///session` while most solutions that involve an administrator anyway continue to default to `qemu:///system`.
 
-> **Further reading**:
-> There is more information about this topic in the [libvirt FAQ](https://wiki.libvirt.org/page/FAQ#What_is_the_difference_between_qemu:.2F.2F.2Fsystem_and_qemu:.2F.2F.2Fsession.3F_Which_one_should_I_use.3F) and this [blog post](https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html) about the topic.
+```{seealso}
+There is more information about this topic in the [libvirt FAQ](https://wiki.libvirt.org/page/FAQ#What_is_the_difference_between_qemu:.2F.2F.2Fsystem_and_qemu:.2F.2F.2Fsession.3F_Which_one_should_I_use.3F) and this [blog post](https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html) about the topic.
+```
 
 ## Migration
 
@@ -277,8 +278,9 @@ The dynamic page resizing can also be an issue when using libvirt since huge pag
 
 While huge pages are admittedly harder to manage (especially later in the system's lifetime if memory is fragmented), they provide a useful boost, especially for rather large guests.
 
-> **Bonus**:
-> When using device passthrough on very large guests, there is an extra benefit of using huge pages, as it is faster to do the initial memory clear on the VFIO {term}`DMA` pin.
+```{tip}
+When using device passthrough on very large guests, there is an extra benefit of using huge pages, as it is faster to do the initial memory clear on the VFIO {term}`DMA` pin.
+```
 
 ### Huge page allocation
 
@@ -463,8 +465,9 @@ Compared to other Host/Guest file sharing options -- commonly Samba, NFS, or 9P 
 
 See the [libvirt domain/filesystem](https://libvirt.org/formatdomain.html#filesystems) documentation for further details on these.
 
-> **Note**:
-> While `virtiofs` works with >=20.10 (Groovy), with >=21.04 (Hirsute) it became more comfortable, especially in small environments (no hard requirement to specify guest Numa topology, no hard requirement to use huge pages). If needed to set up on 20.10 or just interested in those details - the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) holds more details about these.
+```{note}
+While `virtiofs` works with >=20.10 (Groovy), with >=21.04 (Hirsute) it became more comfortable, especially in small environments (no hard requirement to specify guest Numa topology, no hard requirement to use huge pages). If needed to set up on 20.10 or just interested in those details - the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) holds more details about these.
+```
 
 ## Resources
 
