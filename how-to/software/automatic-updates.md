@@ -11,9 +11,9 @@ But as the name suggests, it can apply other types of updates, and with interest
 
 And more. Let's explore some of these options.
 
-> **IMPORTANT**:
->
-> Just adding another package repository to an Ubuntu system WILL NOT make `unattended-upgrades` consider it for updates! This is explained in [where to pick updates from](#where-to-pick-updates-from) later in this document.
+```{important}
+Just adding another package repository to an Ubuntu system WILL NOT make `unattended-upgrades` consider it for updates! This is explained in [where to pick updates from](#where-to-pick-updates-from) later in this document.
+```
 
 ## Configuration layout
 If for some reason the package is not present, it can be installed with the following command:
@@ -81,9 +81,9 @@ Unattended-Upgrade::Allowed-Origins {
 };
 ```
 
-> **Note**:
->
-> The double “//” indicates a comment, so whatever follows "//" will not be evaluated.
+```{note}
+The double “//” indicates a comment, so whatever follows "//" will not be evaluated.
+```
 
 If you want to also allow non-security updates to be applied automatically, then uncomment the line about `-updates`, like so:
 ```text
@@ -167,9 +167,9 @@ And there we can see the *Origin*.
 ## How to block certain packages
 Specific packages can also be excluded from an update. This is controlled via the `Unattended-Upgrade::Package-Blacklist` configuration option in `/etc/apt/apt.conf.d/50unattended-upgrades`, which contains a list of [Python Regular Expressions](https://docs.python.org/3/howto/regex.html). Each line of this list is checked against the available package updates, and if there is a match, that package is not upgraded.
 
-> **Note**:
->
-> Keep in mind that blocking a package might prevent other updates from being installed if they depend on the blocked package!
+```{note}
+Keep in mind that blocking a package might prevent other updates from being installed if they depend on the blocked package!
+```
 
 For example, this will block all packages that start with `linux-` from being automatically upgraded:
 ```text
@@ -186,9 +186,10 @@ Unattended-Upgrade::Package-Blacklist {
 }
 ```
 Here, the use of the `$` character marks the end of the package name (in regular expression terms, it's the end of the line, i.e., the end of the match).
-> **Note**:
->
-> The regular expressions used here behave as if the "`^`" character is present at the start, i.e., the `libc6$` expression will match `libc6`, but will NOT match `glibc6` for example.
+
+```{note}
+The regular expressions used here behave as if the "`^`" character is present at the start, i.e., the `libc6$` expression will match `libc6`, but will NOT match `glibc6` for example.
+```
 
 Of course, this being a regular expression means we could also write the above like this:
 ```text
@@ -207,9 +208,9 @@ Besides logging, `unattended-upgrades` can also send out reports via email. Ther
    - `only-on-error`: Only send a report if there was an error.
    - `on-change`: Only send a report if upgrades were applied. This is the default value.
 
-> **Note**:
->
-> Sending out emails like this requires the separate configuration of a package like [ssmtp](https://manpages.ubuntu.com/manpages/noble/man8/ssmtp.8.html) or another minimalistic mail client that is capable of sending messages to a mail server.
+```{note}
+Sending out emails like this requires the separate configuration of a package like [ssmtp](https://manpages.ubuntu.com/manpages/noble/man8/ssmtp.8.html) or another minimalistic mail client that is capable of sending messages to a mail server.
+```
 
 ### Notification examples
 Here are some email examples (lines wrapped for better legibility).
@@ -294,9 +295,9 @@ Reboots can be very disruptive, especially if the system fails to come back. The
  * `Unattended-Upgrade::Automatic-Reboot-WithUsers "true";`: Automatically reboot even if there are users currently logged in when `Unattended-Upgrade::Automatic-Reboot` (the option above) is set to `true`. The default value is `true`.
  * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the [shutdown](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html) command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
 
-> **Note**
->
-> For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html).
+```{note}
+For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html).
+```
 
 Below are the logs of an `unattended-upgrades` run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
 ```text
