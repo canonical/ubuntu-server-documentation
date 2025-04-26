@@ -46,8 +46,9 @@ The kernel crash dump utility is installed with the following command:
 sudo apt install kdump-tools
 ```
 
-> **Note**:
-> Starting with 16.04, the kernel crash dump mechanism is enabled by default.
+```{note}
+Starting with 16.04, the kernel crash dump mechanism is enabled by default.
+```
 
 During the installation, you will be prompted with the following dialogs.
 
@@ -295,8 +296,9 @@ kexec command:
 
 ## Testing the crash dump mechanism
 
-> **Warning**:
-> Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
+```{warning}
+Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
+```
 
 Verify that the *SysRQ* mechanism is enabled by looking at the value of the `/proc/sys/kernel/sysrq` kernel parameter:
 
