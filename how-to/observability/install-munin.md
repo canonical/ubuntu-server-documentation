@@ -35,8 +35,9 @@ On `server01` edit the `/etc/munin/munin.conf` file, adding the IP address for `
        address 172.18.100.101
 ```
 
-> **Note**:
-> Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
+```{note}
+Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
+```
 
 ## Configure `munin-node`
 
@@ -46,8 +47,9 @@ Next, configure `munin-node` on `server02`. Edit `/etc/munin/munin-node.conf` to
 allow ^172\.18\.100\.100$
 ```
 
-> **Note**:
-> Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
+```{note}
+Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
+```
 
 Now restart `munin-node` on `server02` for the changes to take effect:
 

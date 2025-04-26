@@ -1,8 +1,9 @@
 (install-nagios)=
 # How to install and configure Nagios Core 3
 
-> **Note**:
-> Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.
+```{note}
+Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.
+```
 
 The monitoring of essential servers and services is an important part of system administration. This guide walks through how to install and configure Nagios Core 3 for availability monitoring.
 
@@ -40,8 +41,9 @@ Next, on `server02` install the `nagios-nrpe-server` package. From a terminal on
 sudo apt install nagios-nrpe-server
 ```
 
-> **Note**:
-> NRPE allows you to execute local checks on remote hosts. There are other ways of accomplishing this through other Nagios plugins, as well as other checks.
+```{note}
+NRPE allows you to execute local checks on remote hosts. There are other ways of accomplishing this through other Nagios plugins, as well as other checks.
+```
 
 ## Configuration overview
 
@@ -57,8 +59,9 @@ There are a couple of directories containing Nagios configuration and check file
 
 There are multiple checks Nagios can be configured to execute for any given host. For this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL {term}`hostgroup`. The DNS check will be on `server02`, and the MySQL hostgroup will include both `server01` and `server02`.
 
-> **Note**:
-> See these guides for details on [setting up Apache](https://discourse.ubuntu.com/t/web-servers-apache/11510), [Domain Name Service](https://discourse.ubuntu.com/t/service-domain-name-service-dns/11318), and [MySQL](https://discourse.ubuntu.com/t/databases-mysql/11515).
+```{note}
+See these guides for details on [setting up Apache](https://discourse.ubuntu.com/t/web-servers-apache/11510), [Domain Name Service](https://discourse.ubuntu.com/t/service-domain-name-service-dns/11318), and [MySQL](https://discourse.ubuntu.com/t/databases-mysql/11515).
+```
 
 Additionally, there are some terms that once explained will hopefully make understanding Nagios configuration easier:
 
@@ -85,9 +88,11 @@ First, create a **host** configuration file for `server02`. Unless otherwise spe
 ```bash
 sudo cp /etc/nagios3/conf.d/localhost_nagios2.cfg \
 /etc/nagios3/conf.d/server02.cfg
-    
-> **Note**:
-> In all command examples, replace "`server01`", "`server02`", `172.18.100.100`, and `172.18.100.101` with the host names and IP addresses of your servers.
+```
+
+```{note}
+In all command examples, replace "`server01`", "`server02`", `172.18.100.100`, and `172.18.100.101` with the host names and IP addresses of your servers.
+```
 
 ### Edit the host config file    
 
@@ -148,9 +153,10 @@ The Nagios check needs to authenticate to MySQL. To add a `nagios` user to MySQL
 mysql -u root -p -e "create user nagios identified by 'secret';"
 ```
 
-> **Note**:
-> The `nagios` user will need to be added to all hosts in the **mysql-servers** hostgroup.
-    
+```{note}
+The `nagios` user will need to be added to all hosts in the **mysql-servers** hostgroup.
+```
+
 Restart nagios to start checking the MySQL servers.
     
 sudo systemctl restart nagios3.service
