@@ -90,5 +90,6 @@ And finally, attempt a console login:
 
 The output above also shows the automatic on-demand home directory creation, according to the template defined in `/etc/samba/smb.conf`.
 
-> **Note**:
-> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when referred to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```{note}
+The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when referred to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```

@@ -39,9 +39,9 @@ If there are no complaints, the changes can be applied:
 
     sudo netplan apply
 
-> **NOTE**
->
-> Be careful whenever changing network parameters over an ssh connection. If there are any mistakes, you might lose remote access!
+```{note}
+Be careful whenever changing network parameters over an ssh connection. If there are any mistakes, you might lose remote access!
+```
 
 To check if the resolver was updated, run `resolvectl status`:
 

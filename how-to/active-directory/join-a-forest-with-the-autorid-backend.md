@@ -125,6 +125,6 @@ A console login also works:
 
 Notice how the domain name being part of the home directory path is useful: it separates the users from different domains, avoiding collisions for the same username.
 
-> **NOTE**
->
-> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when refered to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```{note}
+The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when refered to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```
