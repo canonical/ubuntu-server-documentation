@@ -36,8 +36,9 @@ sudo certtool --generate-self-signed \
 --outfile /usr/local/share/ca-certificates/mycacert.crt
 ```
 
-> **Note**:
-> Yes, the `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` will pick up trusted local CAs from. To pick up CAs from `/usr/share/ca-certificates`, a call to `dpkg-reconfigure ca-certificates` is necessary.
+```{note}
+Yes, the `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` will pick up trusted local CAs from. To pick up CAs from `/usr/share/ca-certificates`, a call to `dpkg-reconfigure ca-certificates` is necessary.
+```
 
 Run `update-ca-certificates` to add the new CA certificate to the list of trusted CAs. Note the one added CA:
 
@@ -178,8 +179,9 @@ Create the Consumer's certificate:
     --outfile ldap02_slapd_cert.pem
 ```
 
-> **Note**:
-> We had to use `sudo` to get access to the CA's private key. This means the generated certificate file is owned by root. You should change that ownership back to your regular user before copying these files over to the Consumer.
+```{note}
+We had to use `sudo` to get access to the CA's private key. This means the generated certificate file is owned by root. You should change that ownership back to your regular user before copying these files over to the Consumer.
+```
 
 Get a copy of the CA certificate:
 

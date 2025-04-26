@@ -12,8 +12,9 @@ Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/softwa
 
 In particular, it creates a database instance that you can use to store your data. However, the **suffix** (or **base DN**) of this instance will be determined from the domain name of the host. If you want something different, you can change it right after the installation (before it contains any useful data).
 
-> **Note**:
-> This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```{note}
+This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```
 
 ## Install slapd
 
@@ -122,8 +123,9 @@ dn:cn=admin,dc=example,dc=com
 
 When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authentication DN, the server will look for a `userPassword` attribute in the entry, and use that to verify the credentials. In this particular case above, we used the database **Root DN** entry, i.e., the actual administrator, and that is a special case whose password is set in the configuration when the package is installed.
 
-> **Note**:
-> A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```{note}
+A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```
 
 ### Example SASL EXTERNAL
 
@@ -184,8 +186,9 @@ loginShell: /bin/bash
 homeDirectory: /home/john
 ```
 
-> **Note**:
-> It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```{note}
+It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```
 
 Add the content:
 
@@ -230,8 +233,9 @@ Re-enter new password:
 Enter LDAP Password:
 ```
 
-> **Note**:
-> Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```{note}
+Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```
 
 <h2 id="heading--modifying-slapd-config">Change the configuration</h2>
 
@@ -312,8 +316,9 @@ Enter LDAP Password:  <-- current password, about to be changed
 
 Schemas can only be added to `cn=config` if they are in LDIF format. If not, they will first have to be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
-> **Note**:
-> It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```{note}
+It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 

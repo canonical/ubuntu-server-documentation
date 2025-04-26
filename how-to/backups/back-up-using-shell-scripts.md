@@ -97,8 +97,9 @@ To run the `backup.sh` script listed above using `cron`, enter the following fro
 sudo crontab -e
 ```
 
-> **Note**:
-> Using `sudo` with the `crontab -e` command edits the *root* user's `crontab`. This is necessary if you are backing up directories only the root user has access to.
+```{note}
+Using `sudo` with the `crontab -e` command edits the *root* user's `crontab`. This is necessary if you are backing up directories only the root user has access to.
+```
 
 As an example, if we add the following entry to the `crontab` file:
 
@@ -109,8 +110,9 @@ As an example, if we add the following entry to the `crontab` file:
 
 The `backup.sh` script would be run every day at 12:00 pm.
 
-> **Note**:
-> The `backup.sh` script will need to be copied to the `/usr/local/bin/` directory in order for this entry to run properly. The script can reside anywhere on the file system, simply change the script path appropriately.
+```{note}
+The `backup.sh` script will need to be copied to the `/usr/local/bin/` directory in order for this entry to run properly. The script can reside anywhere on the file system, simply change the script path appropriately.
+```
 
 ## Restoring from the archive
 
@@ -136,8 +138,9 @@ Once an archive has been created, it is important to test the archive. The archi
   sudo tar -xzvf /mnt/backup/host-Monday.tgz
   ```
 
-  > **Note**:
-  > This will overwrite the files currently on the file system.
+  ```{note}
+  This will overwrite the files currently on the file system.
+  ```
 
 ## Further reading
 

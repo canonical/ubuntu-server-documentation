@@ -31,8 +31,9 @@ olcAccess: {1}to dn.exact="" by * read
 olcAccess: {2}to dn.base="cn=Subschema" by * read
 ```
 
-> **Note**:
-> The Root {term}`DN` always has full rights to its database and does not need to be included in any ACL.
+```{note}
+The Root {term}`DN` always has full rights to its database and does not need to be included in any ACL.
+```
 
 ## Interpreting the results
 
