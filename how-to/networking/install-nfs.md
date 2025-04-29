@@ -45,7 +45,7 @@ Apply the new config via:
 
 You can replace \* with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount.  Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
 
-The *sync*/*async* options control whether changes are gauranteed to be committed to stable storage before replying to requests.  *async* thus gives a performance benefit but risks data loss or corruption.  Even though *sync* is the default, it's worth setting since exportfs will issue a warning if it's left unspecified.
+The *sync*/*async* options control whether changes are guaranteed to be committed to stable storage before replying to requests.  *async* thus gives a performance benefit but risks data loss or corruption.  Even though *sync* is the default, it's worth setting since exportfs will issue a warning if it's left unspecified.
 
 *subtree_check* and *no_subtree_check* enables or disables a security verification that subdirectories a client attempts to mount for an exported {term}`filesystem` are ones they're permitted to do so.  This verification step has some performance implications for some use cases, such as home directories with frequent file renames.  Read-only filesystems are more suitable to enable *subtree_check* on.  Like with sync, exportfs will warn if it's left unspecified.
 
