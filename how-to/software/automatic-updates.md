@@ -1,7 +1,7 @@
 (automatic-updates)=
 # Automatic updates
 
-Ubuntu Server will apply security updates automatically, without user interaction. This is done via the `unattended-upgrades` package, which is installed by default.
+Ubuntu will apply security updates automatically, without user interaction. This is done via the `unattended-upgrades` package, which is installed by default.
 
 But as the name suggests, it can apply other types of updates, and with interesting options alongside. For example:
 
@@ -49,7 +49,7 @@ APT::Periodic::Unattended-Upgrade "0";
 
 Systemd timer units, `apt-daily.timer` and `apt-daily-upgrade.timer`, trigger these actions at a scheduled time with a random delay. These timers activate services that execute the `/usr/lib/apt/apt.systemd.daily` script.
 
-However, it may happen that if the server is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the `RandomizedDelaySec` value). As a result, they may often run on system startup and thereby cause immediate activity and prevent other package operations from taking place at that time. For example, if another package has to be installed, it would have to wait until the upgrades are completed.
+However, it may happen that if the machine is off at the time the timer unit elapses, the timer may be triggered immediately at the next startup (still subject to the `RandomizedDelaySec` value). As a result, `unattended-upgrades` may often run on system startup and thereby cause immediate activity and prevent other package operations from taking place at that time. For example, if another package has to be installed, it would have to wait until the upgrades are completed.
 
 In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To change this behaviour, we can change/override the configuration of both APT's timer units `apt-daily-upgrade.timer` and `apt-daily.timer`. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute setting it to *false*:
 
@@ -332,6 +332,8 @@ Even with all the care in the world, applying updates to a running system comes 
 
 Always keep in mind, however, that specific packages can be blocked from receiving updates. For example, if a particular system runs a critical application that could break if certain libraries on the system are updated, then perhaps an acceptable compromise is to block these library packages from receiving upgrades, instead of disabling the whole feature.
 
+As a middle-ground solution, you can configure `unattended-upgrades` to postpone impending updates to a later time. Read how to configure this feature in the {ref}`Postponable updates <unattended_upgrades_postpone>` section.
+
 ### Fleet management
 The `unattended-upgrades` feature is helpful, does its job, and even sends out reports. But it's not intended to be a replacement for fleet management software. If a large number of Ubuntu systems needs to be kept updated, other solutions are better suited for the job. Such large deployments usually come with much stricter and wider requirements, like:
  * Compliance reports: How many systems are up-do-date, how many are still behind, for how long has a system been exposed to a known vulnerability, etc.
@@ -339,6 +341,36 @@ The `unattended-upgrades` feature is helpful, does its job, and even sends out r
  * Canary rollouts: The ability to rollout updates to an initial group of systems, and over time increase the number of systems that will receive the update.
 
 An example of such a Fleet Management software for Ubuntu systems is [Landscape](https://ubuntu.com/landscape).
+
+
+(unattended_upgrades_postpone)=
+## Postponable updates
+By default, system updates are applied automatically in the background without any user interaction.
+
+Starting with Ubuntu 25.04, a system administrator can allow users to postpone these automatic updates for a limited number of days by setting the `Unattended-Update::Postpone-For-Days` option.
+
+When this option is set, `unattended-upgrade` will run according to the cadence set by the administrator and check for updates. If there are updates available it will notify active users and prompt them to choose if they want to upgrade immediately, or postpone them. For example, if `Unattended-Upgrade::Postpone-For-Days "3"` is set, then the user can postpone upgrades for up to three days. After that, the next time `unattended-updates` runs the user will not be prompted and the upgrades will be applied to the system.
+
+To enable the feature, edit the `/etc/apt/apt.conf.d/50unattended-upgrades` file and set the number of days that a user is allowed to postpone the automatic updates for. To postpone for up to **3** days:
+```text
+Unattended-Upgrade::Postpone-For-Days "3";
+```
+
+To disable the feature, set the number of days to **0**.
+
+### Prompt duration
+
+The `Unattended-Upgrade::Postpone-Wait-Time` configuration option controls the amount of time (in seconds) that a user has available to send a postpone request after being prompted. If no postpone request is received within the specified time, the updates will start being applied as normal.
+
+### Who can postpone
+
+The system administrator can restrict access to the postpone request by defining Polkit rules for the `com.ubuntu.UnattendedUpgrade.Pending.Postpone` action. By default, access is granted to users of an active session. See the [polkit documentation](https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html) for how to set up authorization rules.
+
+### Notifications in different environments
+
+The prompting functionality is implemented graphically on Ubuntu Desktop by the `update-notifier` program. The user is shown a notification with the option to postpone the updates. Then, while updates are being applied an icon is visible in the system tray area informing the user so they know when it is safe to resume critical activities that may be affected by the updates.
+
+On other environments, such as Ubuntu Server, you can implement your own prompting client by listening for the `AboutToStart` signal on the system bus and send a call to the `Postpone()` method. Read the `/usr/share/dbus-1/interfaces/com.ubuntu.UnattendedUpgrade.Pending.xml` interface specification for more details.
 
 
 ## Testing and troubleshooting
