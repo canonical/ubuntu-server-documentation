@@ -161,7 +161,7 @@ By default, Ubuntu requires a minimum password length of 6 characters, as well a
 password        [success=1 default=ignore]      pam_unix.so obscure sha512
 ```
 
-To adjust the minimum length to 8 characters, change the appropriate variable to `min=8`. The modification is outlined below:
+To adjust the minimum length to 8 characters, change the appropriate variable to `minlen=8`. The modification is outlined below:
 
 ```text
 password        [success=1 default=ignore]      pam_unix.so obscure sha512 minlen=8
