@@ -1,8 +1,9 @@
 (use-nagios-with-munin)=
 # How to use Nagios with Munin
 
-> **Note**:
-> Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.
+```{note}
+Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.
+```
 
 The monitoring of essential servers and services is an important part of system administration. Most network services are monitored for performance, availability, or both. This section will cover installation and configuration of Nagios 3 for availability monitoring alongside Munin for performance monitoring.
 
@@ -40,8 +41,9 @@ Next, on `server02` install the `nagios-nrpe-server` package. From a terminal on
 sudo apt install nagios-nrpe-server
 ```
 
-> **Note**:
-> NRPE allows you to run local checks on remote hosts. There are other ways of accomplishing this, including through other Nagios plugins.
+```{note}
+NRPE allows you to run local checks on remote hosts. There are other ways of accomplishing this, including through other Nagios plugins.
+```
 
 ### Configuration overview
 
@@ -57,10 +59,11 @@ There are a few directories containing Nagios configuration and check files.
     
   For example: `/usr/lib/nagios/plugins/check_dhcp -h`
 
-There are many checks Nagios can be configured to run for any particular host. In this example, Nagios will be configured to check disk space, DNS, and a MySQL host group. The DNS check will be on `server02`, and the MySQL host group will include both `server01` and `server02`.
+There are many checks Nagios can be configured to run for any particular host. In this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL {term}`host group <hostgroup>`. The DNS check will be on `server02`, and the MySQL host group will include both `server01` and `server02`.
 
-> **Note**:
-> See these additional guides for details on setting up {ref}`Apache <install-apache2>`, {ref}`Domain Name Service (DNS) <install-dns>`, and {ref}`MySQL <install-mysql>`.
+```{note}
+See these additional guides for details on setting up {ref}`Apache <install-apache2>`, {ref}`Domain Name Service (DNS) <install-dns>`, and {ref}`MySQL <install-mysql>`.
+```
 
 Additionally, there are some terms that once explained will hopefully make understanding Nagios configuration easier:
 
@@ -87,8 +90,9 @@ sudo cp /etc/nagios3/conf.d/localhost_nagios2.cfg \
 /etc/nagios3/conf.d/server02.cfg
 ```
     
-> **Note**:
-> In the above and following command examples, replace "`server01`", "`server02`", `172.18.100.100`, and `172.18.100.101` with the host names and IP addresses of your servers.
+```{note}
+In the above and following command examples, replace "`server01`", "`server02`", `172.18.100.100`, and `172.18.100.101` with the host names and IP addresses of your servers.
+```
 
 Next, edit `/etc/nagios3/conf.d/server02.cfg`:
 
@@ -143,9 +147,10 @@ The Nagios check needs to authenticate to MySQL. To add a `nagios` user to MySQL
 ```bash
 mysql -u root -p -e "create user nagios identified by 'secret';"
     
-> **Note**:
-> The `nagios` user will need to be added all hosts in the `mysql-servers` host group.
-    
+```{note}
+The `nagios` user will need to be added all hosts in the `mysql-servers` host group.
+```
+
 Restart Nagios to start checking the MySQL servers.
 
 ```bash
@@ -220,8 +225,9 @@ On `server01` edit the `/etc/munin/munin.conf` to add the IP address for `server
        address 172.18.100.101
 ```
 
-> **Note**:
-> Replace `server02` and `172.18.100.101` with the actual hostname and IP address of your server.
+```{note}
+Replace `server02` and `172.18.100.101` with the actual hostname and IP address of your server.
+```
 
 ### Configure munin-node on server02
 
@@ -231,8 +237,9 @@ To configure `munin-node` on `server02`, edit `/etc/munin/munin-node.conf` to al
 allow ^172\.18\.100\.100$
 ```
 
-> **Note**:
-> Replace `^172\.18\.100\.100$` with IP address for your Munin server.
+```{note}
+Replace `^172\.18\.100\.100$` with IP address for your Munin server.
+```
 
 Now restart `munin-node` on `server02` for the changes to take effect:
 
@@ -242,12 +249,13 @@ sudo systemctl restart munin-node.service
 
 Finally, in a browser go to `http://server01/munin`, and you should see links to some graphs displaying information from the standard `munin-plugins` for disk, network, processes, and system.
 
-> **Note**:
-> Since this is a new install it may take some time for the graphs to display anything useful.
+```{note}
+Since this is a new install it may take some time for the graphs to display anything useful.
+```
 
 ### Additional plugins
 
-The `munin-plugins-extra` package contains performance checks and additional services such as DNS, DHCP, Samba, etc. To install the package, from a terminal enter:
+The `munin-plugins-extra` package contains performance checks and additional services such as DNS, {term}`DHCP`, Samba, etc. To install the package, from a terminal enter:
 
 ```bash
 sudo apt install munin-plugins-extra

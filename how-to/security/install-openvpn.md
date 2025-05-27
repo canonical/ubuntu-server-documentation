@@ -35,8 +35,9 @@ To set up your own CA, and generate certificates and keys for an OpenVPN server 
 sudo make-cadir /etc/openvpn/easy-rsa
 ```
 
-> **Note**:
-> You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it to your needs.
+```{note}
+You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it to your needs.
+```
 
 As a `root` user, change to the newly created directory `/etc/openvpn/easy-rsa` and run:
 
@@ -146,9 +147,10 @@ This is the minimum you need to configure to get a working OpenVPN server. You c
 $ sudo systemctl start openvpn@myserver
 ```
 
-> **Note**: 
-> Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` you just defined.
-> OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
+```{note}
+Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` you just defined.
+OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
+```
 
 You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
 
@@ -205,7 +207,7 @@ root@server:/etc/openvpn# ip addr show dev tun0
 
 ## Simple client configuration
 
-There are various different OpenVPN client implementations -- both with and without GUIs. You can read more about clients in {ref}`our page on OpenVPN Clients <openvpn-client-implementations>`. For now, we use the command-line/service-based OpenVPN client for Ubuntu, which is part of the same package as the server. So you must install the `openvpn` package again on the client machine:
+There are various different OpenVPN client implementations -- both with and without {term}`GUIs <GUI>`. You can read more about clients in {ref}`our page on OpenVPN Clients <openvpn-client-implementations>`. For now, we use the command-line/service-based OpenVPN client for Ubuntu, which is part of the same package as the server. So you must install the `openvpn` package again on the client machine:
 
 ```bash
 sudo apt install openvpn
@@ -316,8 +318,9 @@ PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_req=1 ttl=64 time=0.920 ms
 ```
 
-> **Note**:
-> The OpenVPN server always uses the first usable IP address in the client network and only that IP is pingable. E.g., if you configured a `/24` for the client network mask, the `.1` address will be used. The P-t-P address you see in the `ip addr` output above does not usually answer ping requests.
+```{note}
+The OpenVPN server always uses the first usable IP address in the client network and only that IP is pingable. E.g., if you configured a `/24` for the client network mask, the `.1` address will be used. The P-t-P address you see in the `ip addr` output above does not usually answer ping requests.
+```
 
 Check out your routes:
 
@@ -349,12 +352,13 @@ The above is a very simple working VPN. The client can access services on the VP
 
 The example config files that we have been using in this guide are full of these advanced options in the form of a comment and a disabled configuration line as an example.
 
-> **Note**:
-> Read the OpenVPN [hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security) for further security advice.
+```{note}
+Read the OpenVPN [hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security) for further security advice.
+```
 
 ### Advanced bridged VPN configuration on server
 
-OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this is also referred to as OSI layer-2 versus layer-3 VPN. In a bridged VPN all layer-2 frames -- e.g. all Ethernet frames -- are sent to the VPN partners and in a routed VPN only layer-3 packets are sent to VPN partners. In bridged mode, all traffic including traffic which was traditionally LAN-local (like local network broadcasts, DHCP requests, ARP requests etc) are sent to VPN partners, whereas in routed mode this would be filtered.
+OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this is also referred to as OSI layer-2 versus layer-3 VPN. In a bridged VPN all layer-2 frames -- e.g. all Ethernet frames -- are sent to the VPN partners and in a routed VPN only layer-3 packets are sent to VPN partners. In bridged mode, all traffic including traffic which was traditionally LAN-local (like local network broadcasts, {term}`DHCP` requests, ARP requests etc) are sent to VPN partners, whereas in routed mode this would be filtered.
 
 #### Prepare interface config for bridging on server
 

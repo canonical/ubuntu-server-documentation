@@ -9,7 +9,7 @@ Hard requirements depend on the scenario, but they're generally constrained by t
 
 Ubuntu Server supports various 64-bit architectures and 32-bit arm.
 
-- amd64 (64-bit Intel/AMD)
+- amd64 (64-bit Intel/{term}`AMD`)
 - arm64 (64-bit Arm)
 - armhf (32-bit Arm)
 - ppc64el (64-bit Power)
@@ -35,6 +35,6 @@ Upper limits depend on the system hardware and setup.
 **Minimum storage**: 5 GB (ISO installs)
 **Minimum storage**: 4 GB (cloud images)
 
-It's quite likely that your system might need more memory than that. Your setup plans could be more complex or you need more software to be installed, that could lead to increased storage needs. To cover better for any of those scenarios:
+In theory you could go even lower, like 2.5 GB for cloud image installs, but in practise it's quite likely that your system will need more disk storage than that to be really useful. Your setup plans could be more complex or you need more software to be installed, that could lead to increased storage needs. To cover better for any of those scenarios:
 
 **Suggested minimum storage**: 25 GB or more

@@ -40,7 +40,7 @@ By default, the initial user created by the Ubuntu installer is a member of the 
 
 ## Adding and deleting users
 
-Managing local users and groups differs very little from most other GNU/Linux operating systems. Ubuntu and other Debian-based distributions encourage the use of the `adduser` package for account management.
+Managing local users and groups differs very little from most other {term}`GNU`/Linux operating systems. Ubuntu and other Debian-based distributions encourage the use of the `adduser` package for account management.
 
 ### Add a user
 
@@ -125,8 +125,9 @@ You can remove the world readable-permissions using the following command:
 sudo chmod 0750 /home/username
 ```
 
-> **Note**:
-> Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
+```{note}
+Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
+```
 
 A more efficient approach would be to modify the `adduser` global default permissions when creating user home folders. To do this, edit the `/etc/adduser.conf` file and modify the `DIR_MODE` variable to something appropriate, so that all new home directories will receive the correct permissions.
 
@@ -160,14 +161,15 @@ By default, Ubuntu requires a minimum password length of 6 characters, as well a
 password        [success=1 default=ignore]      pam_unix.so obscure sha512
 ```
 
-To adjust the minimum length to 8 characters, change the appropriate variable to `min=8`. The modification is outlined below:
+To adjust the minimum length to 8 characters, change the appropriate variable to `minlen=8`. The modification is outlined below:
 
 ```text
 password        [success=1 default=ignore]      pam_unix.so obscure sha512 minlen=8
 ```
 
-> **Note**:
-> Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
+```{note}
+Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
+```
 
 ### Password expiration
 
@@ -251,4 +253,4 @@ sudo systemctl restart ssh.service
 
 ### External user database authentication
 
-Most enterprise networks require centralised authentication and access controls for all system resources. If you have configured your server to authenticate users against external databases, be sure to disable the user accounts both externally and locally. This way you ensure that local fallback authentication is not possible.
+Most enterprise networks require centralised authentication and access controls for all system resources. If you have configured your server to authenticate users against external databases, be sure to disable the user accounts both externally and locally. This way you ensure that local {term}`fallbacks` authentication is not possible.

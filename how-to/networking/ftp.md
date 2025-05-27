@@ -55,9 +55,9 @@ Similarly, by default, anonymous users are not allowed to upload files to FTP se
 
     anon_upload_enable=YES
 
-> **Warning**
-> 
-> Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on servers accessed directly from the Internet.
+```{warning}
+Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on servers accessed directly from the Internet.
+```
 
 The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, `man 5 vsftpd.conf` for details of each parameter.
 

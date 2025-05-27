@@ -12,8 +12,9 @@ Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/softwa
 
 In particular, it creates a database instance that you can use to store your data. However, the **suffix** (or **base DN**) of this instance will be determined from the domain name of the host. If you want something different, you can change it right after the installation (before it contains any useful data).
 
-> **Note**:
-> This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```{note}
+This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```
 
 ## Install slapd
 
@@ -25,13 +26,13 @@ sudo apt install slapd ldap-utils
 
 ### Change the instance suffix (optional)
 
-If you want to change your Directory Information Tree (DIT) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
+If you want to change your Directory Information Tree ({term}`DIT`) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
 
 ```bash
 sudo dpkg-reconfigure slapd
 ```
 
-To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the DNS domain name.
+To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the {term}`DNS` domain name.
 
 Throughout this guide we will issue many commands with the LDAP utilities. To save some typing, we can configure the OpenLDAP libraries with certain defaults in `/etc/ldap/ldap.conf` (adjust these entries for your server name and directory suffix):
 
@@ -50,7 +51,7 @@ Right after installation, you will get two databases, or suffixes: one for your 
 The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its password is the one selected during the installation of the `slapd` package.
 
 - **`cn=config`** 
-The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special DN `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
+The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
 ### Example `slapd-config` DIT
 
@@ -79,7 +80,7 @@ Where the entries mean the following:
 - **`cn={1}cosine,cn=schema,cn=config`**: The Cosine schema
 - **`cn={2}nis,cn=schema,cn=config`**: The Network Information Services (NIS) schema
 - **`cn={3}inetorgperson,cn=schema,cn=config`**: The InetOrgPerson schema
-- **`olcDatabase={-1}frontend,cn=config`**: Frontend database, default settings for other databases
+- **`olcDatabase={-1}frontend,cn=config`**: {term}`Frontend` database, default settings for other databases
 - **`olcDatabase={0}config,cn=config`**: `slapd` configuration database (`cn=config`)
 - **`olcDatabase={1}mdb,cn=config`**: Your database instance (`dc=example,dc=com`)
 
@@ -107,7 +108,7 @@ This is called a "simple bind", and is essentially a plain text authentication. 
 - **`-Y EXTERNAL`**
 This is using a SASL bind (no `-x` was provided), and further specifying the `EXTERNAL` type. Together with `-H ldapi:///`, this uses a local UNIX socket connection.
 
-In both cases we only got the results that the server access-control lists (ACLs) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
+In both cases we only got the results that the server Access Control Lists ({term}`ACL`s) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
 ```bash
 $ ldapwhoami -x
@@ -122,8 +123,9 @@ dn:cn=admin,dc=example,dc=com
 
 When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authentication DN, the server will look for a `userPassword` attribute in the entry, and use that to verify the credentials. In this particular case above, we used the database **Root DN** entry, i.e., the actual administrator, and that is a special case whose password is set in the configuration when the package is installed.
 
-> **Note**:
-> A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```{note}
+A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```
 
 ### Example SASL EXTERNAL
 
@@ -139,7 +141,7 @@ $ sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and `gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
 
 ## Populate the directory
 
@@ -184,8 +186,9 @@ loginShell: /bin/bash
 homeDirectory: /home/john
 ```
 
-> **Note**:
-> It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```{note}
+It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```
 
 Add the content:
 
@@ -230,8 +233,9 @@ Re-enter new password:
 Enter LDAP Password:
 ```
 
-> **Note**:
-> Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```{note}
+Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```
 
 <h2 id="heading--modifying-slapd-config">Change the configuration</h2>
 
@@ -312,8 +316,9 @@ Enter LDAP Password:  <-- current password, about to be changed
 
 Schemas can only be added to `cn=config` if they are in LDIF format. If not, they will first have to be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
-> **Note**:
-> It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```{note}
+It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 

@@ -1,5 +1,5 @@
 (choosing-between-the-arm64-and-arm64-largemem-installer-options)=
-# Choosing between the arm64 and arm64+largemem installer options
+# Choose between the arm64 and arm64+largemem installer options
 
 From 22.04.4 onwards, Ubuntu will provide both 4k and 64k page size kernel ISOs for ARM servers.
 
@@ -22,11 +22,12 @@ Our new **arm64+largemem** ISO includes a kernel with 64k page size. A larger pa
 
 * Machine learning
 * Databases with many large entries
-* High performance computing
+* {term}`High performance computing <HPC>`
 * etc.
 
-> **Note:**
-> It is possible to switch between these kernel options after installation by installing the other kernel alternative, rebooting, and selecting the new kernel from the GRUB menu.
+```{note}
+It is possible to switch between these kernel options after installation by installing the other kernel alternative, rebooting, and selecting the new kernel from the GRUB menu.
+```
 
 ## Switching kernels post-installation
 

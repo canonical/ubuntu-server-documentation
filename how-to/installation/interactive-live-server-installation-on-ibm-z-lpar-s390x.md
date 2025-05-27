@@ -3,7 +3,7 @@
 
 Doing an interactive (manual) live installation as described here - meaning without specifying a parmfile - has been supported in Ubuntu Server since LTS 20.04.5 ('Focal').
 
-The following guide assumes that an FTP server to host the installation files is in place, which can be used by the 'Load from Removable Media and Server' task of the Hardware Management Console (HMC).
+The following guide assumes that an FTP server to host the installation files is in place, which can be used by the 'Load from Removable Media and Server' task of the {term}`Hardware Management Console (HMC) <HMC>`.
 
 ## Download and mount the ISO
 
@@ -421,8 +421,9 @@ ubuntu-server login:
 * Since the user experience is nicer in a remote SSH session, we recommend using that.
 However, with certain network environments it's just not possible to use a remote shell, and the 'Integrated ASCII Console' will be the only option.
 
-> **Note**:
-> At the end of the installer boot-up process, **all** necessary information is provided to proceed with a remote shell.
+```{note}
+At the end of the installer boot-up process, **all** necessary information is provided to proceed with a remote shell.
+```
 
 * The command to execute locally is:
 

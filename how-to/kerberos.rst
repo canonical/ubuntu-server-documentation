@@ -3,15 +3,17 @@
 Kerberos
 *********
 
-* :ref:`Install a Kerberos server <install-a-kerberos-server>`
-* :ref:`Configure service principals <configure-service-principals>`
-* :ref:`Kerberos encryption types <kerberos-encryption-types>`
-* :ref:`Set up secondary KDC <set-up-secondary-kdc>`
-* :ref:`Basic workstation authentication <basic-workstation-authentication>`
-* :ref:`Kerberos with OpenLDAP backend <kerberos-with-openldap-backend>`
+This section assumes you have some familiarity with the terms and concepts used
+in Kerberos.
+
+You will need a properly configured DNS server set up before you begin. See the
+:ref:`install-dns` page for instructions on how to set this up.
+
+We recommend following this set of how-to guides in the order presented for
+best results.
 
 .. toctree::
-    :hidden:
+    :titlesonly:
 
     Install a Kerberos server <kerberos/install-a-kerberos-server>
     Configure service principals <kerberos/configure-service-principals>
@@ -19,3 +21,8 @@ Kerberos
     Set up secondary KDC <kerberos/set-up-secondary-kdc>
     Basic workstation authentication <kerberos/basic-workstation-authentication>
     Kerberos with OpenLDAP backend <kerberos/kerberos-with-openldap-backend>
+    
+See also
+========
+
+* Explanation: :ref:`introduction-to-kerberos`

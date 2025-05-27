@@ -55,11 +55,11 @@ sssctl cache-expire -E
 
 ## DNS
 
-Kerberos is quite sensitive to DNS issues. If you suspect something related to DNS, here are two suggestions:
+Kerberos is quite sensitive to {term}`DNS` issues. If you suspect something related to DNS, here are two suggestions:
 
 ### FQDN hostname
 
-Make sure `hostname -f` returns a fully qualified domain name (FQDN). Set it in `/etc/hostname` if necessary, and use `sudo hostnamectl set-hostname <fqdn>` to set it at runtime.
+Make sure `hostname -f` returns a {term}`fully qualified domain name (FQDN) <FQDN>`. Set it in `/etc/hostname` if necessary, and use `sudo hostnamectl set-hostname <fqdn>` to set it at runtime.
 
 ### Reverse name lookup
 

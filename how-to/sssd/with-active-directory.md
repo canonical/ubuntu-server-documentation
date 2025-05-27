@@ -7,14 +7,14 @@ This section describes the use of SSSD to authenticate user logins against an Ac
 
 SSSD manages user authentication and sets initial security policies.
 
-ADSys serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://canonical-adsys.readthedocs-hosted.com/en/stable/).
+{term}`ADSys` serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://canonical-adsys.readthedocs-hosted.com/en/stable/).
 
 ## Prerequisites and assumptions
 
 This guide does not explain Active Directory, how it works, how to set one up, or how to maintain it. It assumes that a working Active Directory domain is already configured and you have access to the credentials to join a machine to that domain.
 
 - The domain controller is:
-  - Acting as an authoritative DNS server for the domain.
+  - Acting as an authoritative {term}`DNS` server for the domain.
   - The primary DNS resolver (check with `systemd-resolve --status`).
 - System time is correct and in sync, maintained via a service like `chrony` or `ntp`.
 - The domain used in this example is `ad1.example.com` .
@@ -143,8 +143,9 @@ ldap_id_mapping = True
 access_provider = ad
  ```
 
-> **Note**:
-> Something very important to remember is that this file must have permissions `0600` and ownership `root:root`, or else SSSD won't start!
+```{note}
+Something very important to remember is that this file must have permissions `0600` and ownership `root:root`, or else SSSD won't start!
+```
 
 Let's highlight a few things from this config file:
 
@@ -176,8 +177,9 @@ $ groups john@ad1.example.com
 john@ad1.example.com : domain users@ad1.example.com engineering@ad1.example.com
 ```
 
-> **Note**:
-> If you just changed the group membership of a user, it may be a while before SSSD notices due to caching.
+```{note}
+If you just changed the group membership of a user, it may be a while before SSSD notices due to caching.
+```
 
 Finally, how about we try a login:
 
@@ -203,8 +205,9 @@ Last login: Thu Apr 16 21:22:55 2020
 john@ad1.example.com@ad-client:~$ 
 ```
 
-> **Note**:
-> In the SSH example, public key authentication was used, so no password was required. Remember that SSH password authentication is disabled by default in `/etc/ssh/sshd_config`.
+```{note}
+In the SSH example, public key authentication was used, so no password was required. Remember that SSH password authentication is disabled by default in `/etc/ssh/sshd_config`.
+```
 
 ## Kerberos tickets
 
@@ -220,8 +223,9 @@ Valid starting     Expires            Service principal
 	renew until 04/17/20 21:32:12
 ```
 
-> **Note**:
-> `realm` also configured `/etc/krb5.conf` for you, so there should be no further configuration prompts when installing `krb5-user`.
+```{note}
+`realm` also configured `/etc/krb5.conf` for you, so there should be no further configuration prompts when installing `krb5-user`.
+```
 
 Let's test with `smbclient` using Kerberos authentication to list the shares of the domain controller:
 

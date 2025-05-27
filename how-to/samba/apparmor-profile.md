@@ -13,8 +13,9 @@ To install the package, enter the following command from a terminal prompt:
 sudo apt install apparmor-profiles apparmor-utils
 ```
 
-> **Note**:
-> This package contains profiles for several other binaries.
+```{note}
+This package contains profiles for several other binaries.
+```
 
 ## AppArmor profile modes
 

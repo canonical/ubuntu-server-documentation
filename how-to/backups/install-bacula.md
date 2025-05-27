@@ -13,7 +13,7 @@ Bacula is made up of several components and services that are used to manage bac
   
   - Text-based command line.
     
-  - Gnome-based GTK+ Graphical User Interface (GUI) interface.
+  - Gnome-based {term}`GTK+ <GTK>` {term}`Graphical User Interface (GUI) <GUI>`.
     
   - wxWidgets GUI interface.
 
@@ -29,8 +29,9 @@ These services and applications can be run on multiple servers and clients, or t
 
 ## Install Bacula
 
-> **Note**:
-> If using MySQL or PostgreSQL as your database, you should already have the services available. Bacula will not install them for you. For more information, take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>`.
+```{note}
+If using MySQL or PostgreSQL as your database, you should already have the services available. Bacula will not install them for you. For more information, take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>`.
+```
 
 There are multiple packages containing the different Bacula components. To install `bacula`, from a terminal prompt enter:
 
@@ -61,8 +62,9 @@ Job {
 }
 ```
 
-> **Note**:
-> The example above changes the job name to "BackupServer", matching the machine's host name. Replace “BackupServer” with your own hostname, or other descriptive name.
+```{note}
+The example above changes the job name to "BackupServer", matching the machine's host name. Replace “BackupServer” with your own {term}`hostname`, or other descriptive name.
+```
 
 The Console can be used to query the Director about jobs, but to use the Console with a *non-root* user, the user needs to be in the **Bacula group**. To add a user to the Bacula group, run the following command from a terminal:
 
@@ -70,8 +72,9 @@ The Console can be used to query the Director about jobs, but to use the Console
 sudo adduser $username bacula
 ```
 
-> **Note**:
-> Replace `$username` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
+```{note}
+Replace `$username` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
+```
 
 ## Localhost backup
 
@@ -117,7 +120,7 @@ This section shows how to back up specific directories on a single host to a loc
   * Change `backupserver` to the actual host name.
   * Make sure the **Password** directive matches the password string in `/etc/bacula/bacula-sd.conf`.
 
-- Create a new **FileSet** -- this will define which directories to backup -- by adding:
+- Create a new **{term}`FileSet`** -- this will define which directories to backup -- by adding:
   ```text
   # LocalhostBacup FileSet.
   FileSet {
@@ -132,7 +135,7 @@ This section shows how to back up specific directories on a single host to a loc
     }
   }
   ```
-  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using GZIP.
+  This FileSet will backup the `/etc` and `/home` directories. The **Options** resource directives configure the FileSet to create an MD5 signature for each file backed up, and to compress the files using {term}`GZIP`.
 
 - Next, create a new **Schedule** for the backup job:
   ```text

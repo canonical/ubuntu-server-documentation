@@ -3,16 +3,18 @@
 Storage
 ********
 
-* :ref:`Manage logical volumes <manage-logical-volumes>`
-
-Related links
-=============
-
-Explanation:
-
-* :ref:`About logical volume management <about-lvm>`
+* The Ubuntu Server installer can set up and install to :ref:`Logical Volume Management (LVM) <manage-logical-volumes>` partitions.
+* Ubuntu Server can be configured as both an :ref:`iSCSI initiator and an iSCSI target. <iscsi-initiator-or-client>`
 
 .. toctree::
-    :hidden:
+   :hidden:
 
-    Manage logical volumes <storage/manage-logical-volumes>
+   Manage logical volumes <storage/manage-logical-volumes>
+   iSCSI <storage/iscsi-initiator-or-client>
+
+See also
+========
+
+* Explanation: :ref:`about-lvm`
+
+

@@ -44,8 +44,9 @@ CipherString = DEFAULT:@SECLEVEL=2
 
 This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the [SSL_CTX_set_security_level(3) manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CTX_set_security_level.3ssl.html).
 
-> **Note**:
-> In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
+```{note}
+In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
+```
 
 That default is also set at package building time, and in the case of Ubuntu, it's [set to `SECLEVEL=2`](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/rules?h=ubuntu/jammy-devel#n15).
 
@@ -60,8 +61,9 @@ ECDHE-ECDSA-AES256-GCM-SHA384  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256)     
 (...)
 ```
 
-> **Note**:
-> The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
+```{note}
+The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
+```
 
 All the options that can be set in the `system_default_sect` section are detailed in the [SSL_CONF_cmd manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands).
 
@@ -127,7 +129,7 @@ AES256-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(256)        
 AES128-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(128)               Mac=SHA1
 ```
 
-Let's filter this a bit, and just as an example, remove all AES128 ciphers and SHA1 hashes:
+Let's filter this a bit, and just as an example, remove all {term}`AES`128 ciphers and SHA1 hashes:
 
 ```bash
 $ openssl ciphers -s -v 'DEFAULTS:-AES128:-SHA1'
@@ -217,8 +219,9 @@ The OpenSSL `s_server` command is very handy to test this (see [the Troubleshoot
 $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www
 ```
 
-> **Note**:
-> Be sure to use another system for this server, or else it will be subject to the same `/etc/ssl/openssl.cnf` constraints you are testing on the client, and this can lead to very confusing results.
+```{note}
+Be sure to use another system for this server, or else it will be subject to the same `/etc/ssl/openssl.cnf` constraints you are testing on the client, and this can lead to very confusing results.
+```
 
 As expected, a client will end up selecting TLSv1.3 and the `TLS_AES_256_GCM_SHA384` cipher suite:
 

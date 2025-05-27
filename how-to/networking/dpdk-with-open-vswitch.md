@@ -19,8 +19,9 @@ ovs-vsctl set Open_vSwitch . "other_config:dpdk-extra=--pci-whitelist=0000:04:00
 sudo service openvswitch-switch restart
 ```
 
-> **Remember**:
-> You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on [unassigning the default kernel drivers](https://ubuntu.com/server/docs/network-dpdk/#heading--unassign-default-kernel-drivers).
+```{note}
+You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on [unassigning the default kernel drivers](https://ubuntu.com/server/docs/network-dpdk/#heading--unassign-default-kernel-drivers).
+```
 
 Please note that the section `_dpdk-alloc-mem=2048_` in the above example is the most basic non-uniform memory access (NUMA) setup for a single socket system. If you have multiple sockets you may want to define how the memory should be split among them. More details about these options are outlined in [Open vSwitch setup](http://docs.openvswitch.org/en/latest/intro/install/dpdk/#setup-ovs).
 
@@ -73,8 +74,9 @@ ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x6
 
 The first line selects how many Rx Queues are to be used for each DPDK interface, while the second controls how many poll mode driver (PMD) threads to run (and where to run them). The example above will use two Rx Queues, and run PMD threads on CPU 1 and 2. 
 
-> **See also**:
-> Check the links to "EAL Command-line Options" and "Open vSwitch DPDK installation" at the end of this document for more information.
+```{seealso}
+Check the links to {term}`EAL` Command-line Options and "Open vSwitch DPDK installation" at the end of this document for more information.
+```
 
 As usual with tunings, you need to know your system and workload really well - so please verify any tunings with workloads matching your real use case.
 
@@ -87,7 +89,7 @@ You can check if your issues is known on:
   - [DPDK Mailing Lists](http://dpdk.org/ml)
   - For OpenVswitch-DPDK [OpenStack Mailing Lists](http://openvswitch.org/mlists)
   - Known issues in [DPDK Launchpad Area](https://bugs.launchpad.net/ubuntu/+source/dpdk)
-  - Join the IRC channels \#DPDK or \#openvswitch on freenode.
+  - Join the IRC channels \#DPDK or \#openvswitch on {term}`freenode`.
 
 Issues are often due to missing small details in the general setup. Later on, these missing details cause problems which can be hard to track down to their root cause. 
 

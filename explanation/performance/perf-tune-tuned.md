@@ -241,7 +241,7 @@ The `[main]` section contains some metadata about this profile, a summary and de
 
 The sections that follow `[main]` represent the configuration of tuning plugins.
 
-* The first one is the `vm` plugin, which is used to always make use of huge pages (useful in this HPC scenario).
+* The first one is the `vm` plugin, which is used to always make use of huge pages (useful in this {term}`HPC` scenario).
 * The second plugin used is `disk`, which is used to set the `readahead` value to at least `4096`.
 * Finally, the `sysctl` plugin is configured to set several variables in `sysfs` (the comments in the example explain the rationale behind each change).
 

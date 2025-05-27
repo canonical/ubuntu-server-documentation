@@ -11,6 +11,12 @@ Some of the most notable benefits that NFS can provide are:
 
   - Storage devices such as floppy disks, CDROM drives, and USB Thumb drives can be used by other machines on the network. This may reduce the number of removable media drives throughout the network.
 
+```{warning}
+If you use **NFS and authd** at the same time, you must add a Kerberos configuration on both the client and the server. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
+
+For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/en/stable/howto/use-with-nfs/).
+```
+
 ## Installation
 
 At a terminal prompt enter the following command to install the NFS Server:
@@ -37,11 +43,11 @@ Apply the new config via:
 
     sudo exportfs -a
 
-You can replace \* with one of the hostname formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount.  Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
+You can replace \* with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount.  Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
 
-The *sync*/*async* options control whether changes are gauranteed to be committed to stable storage before replying to requests.  *async* thus gives a performance benefit but risks data loss or corruption.  Even though *sync* is the default, it's worth setting since exportfs will issue a warning if it's left unspecified.
+The *sync*/*async* options control whether changes are guaranteed to be committed to stable storage before replying to requests.  *async* thus gives a performance benefit but risks data loss or corruption.  Even though *sync* is the default, it's worth setting since exportfs will issue a warning if it's left unspecified.
 
-*subtree_check* and *no_subtree_check* enables or disables a security verification that subdirectories a client attempts to mount for an exported filesystem are ones they're permitted to do so.  This verification step has some performance implications for some use cases, such as home directories with frequent file renames.  Read-only filesystems are more suitable to enable *subtree_check* on.  Like with sync, exportfs will warn if it's left unspecified.
+*subtree_check* and *no_subtree_check* enables or disables a security verification that subdirectories a client attempts to mount for an exported {term}`filesystem` are ones they're permitted to do so.  This verification step has some performance implications for some use cases, such as home directories with frequent file renames.  Read-only filesystems are more suitable to enable *subtree_check* on.  Like with sync, exportfs will warn if it's left unspecified.
 
 There are a number of optional settings for NFS mounts for tuning performance, tightening security, or providing conveniences.  These settings each have their own trade-offs so it is important to use them with care, only as needed for the particular use case.  *no_root_squash*, for example, adds a convenience to allow root-owned files to be modified by any client system's root user; in a multi-user environment where executables are allowed on a shared mount point, this could lead to security problems.
 
@@ -56,9 +62,9 @@ Use the mount command to mount a shared NFS directory from another machine, by t
     sudo mkdir /opt/example
     sudo mount example.hostname.com:/srv /opt/example
 
-> **Warning**
-> 
-> The mount point directory `/opt/example` must exist. There should be no files or subdirectories in the `/opt/example` directory, else they will become inaccessible until the nfs filesystem is unmounted.
+```{warning}
+The mount point directory `/opt/example` must exist. There should be no files or subdirectories in the `/opt/example` directory, else they will become inaccessible until the nfs filesystem is unmounted.
+```
 
 An alternate way to mount an NFS share from another machine is to add a line to the `/etc/fstab` file. The line must state the hostname of the NFS server, the directory on the server being exported, and the directory on the local machine where the NFS share is to be mounted.
 
@@ -82,10 +88,10 @@ Earlier Ubuntu releases use the traditional configuration mechanism for the NFS 
 
 Each file has a small explanation about the available settings.
 
-> **Warning**
->
-> The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
-> In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```{warning}
+The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
+In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```
 
 ## Upgrading to Ubuntu 22.04 LTS ("jammy")
 
@@ -137,7 +143,7 @@ This section will assume you already have setup a Kerberos server, with a runnin
 The NFS server will have the usual `nfs-kernel-server` package and its dependencies, but we will also have to install kerberos packages. The kerberos packages are not strictly necessary, as the necessary keys can be copied over from the KDC, but it makes things much easier.
 
 For this example, we will use:
- - `.vms` DNS domain
+ - `.vms` {term}`DNS` domain
  - `VMS` Kerberos realm
  - `j-nfs-server.vms` for the NFS server
  - `j-nfs-client.vms` for the NFS client

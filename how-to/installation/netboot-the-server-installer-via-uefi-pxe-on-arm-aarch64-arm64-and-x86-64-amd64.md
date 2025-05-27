@@ -4,11 +4,11 @@
 
 This document provides the steps needed to install a system via netbooting and the live server installer (Subiquity) in UEFI mode with Ubuntu 20.04 (or later).
 
-The process described here is applicable to both arm64 and amd64 architectures. The process is inspired by [this Ubuntu Discourse post](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510) for **legacy mode**, which is UEFI's predecessor. Focal (20.04, 20.04.5) and Groovy (20.10) have been tested with the following method.
+The process described here is applicable to both arm64 and {term}`amd`64 architectures. The process is inspired by [this Ubuntu Discourse post](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510) for **legacy mode**, which is UEFI's predecessor. Focal (20.04, 20.04.5) and Groovy (20.10) have been tested with the following method.
 
 ## Configure TFTP
 
-This article assumes that you have set up your TFTP (and/or DHCP/bootp if necessary, depending on your LAN configuration) by following [the method described here](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510). You could also build your own TFTP in this way if your DNS and DHCP are already well configured:
+This article assumes that you have set up your TFTP (and/or {term}`DHCP`/bootp if necessary, depending on your LAN configuration) by following [the method described here](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510). You could also build your own TFTP in this way if your {term}`DNS` and DHCP are already well configured:
 
 ```
 $ sudo apt install tftpd-hpa
@@ -33,7 +33,7 @@ The following files are needed for this process:
 - Ubuntu live server image:
   - For arm64 architectures, the image name has the suffix `-arm64`. For example, `ubuntu-20.04.5-live-server-arm64.iso`.
   - For amd64 architectures, the image name has the suxxif `-amd64`. For example, `ubuntu-20.04.5-live-server-amd64.iso`.
-- GRUB EFI binary (and the corresponding `grub.cfg` text file):
+- GRUB {term}`EFI` binary (and the corresponding `grub.cfg` text file):
   - For arm64 architectures, this is called `grubnetaa64.efi.signed`.
   - For amd64 architectures, this is called `grubnetx64.efi.signed`.
 - `initrd` extracted from your target Ubuntu live server image (use `hwe-initrd` instead if you want to boot with the HWE kernel).
@@ -65,8 +65,9 @@ The GRUB binary helps us redirect the download path to the target files via `gru
 $ sudo wget http://ports.ubuntu.com/ubuntu-ports/dists/focal/main/uefi/grub2-arm64/current/grubnetaa64.efi.signed -O /var/lib/tftpboot/grubnetaa64.efi.signed
 ```
 
-> **Note**:
-> You may need to change **the archive distribution's name** from `Focal` to your target distribution name.
+```{note}
+You may need to change **the archive distribution's name** from `Focal` to your target distribution name.
+```
 
 ### Download and serve more files
 

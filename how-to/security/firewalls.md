@@ -3,7 +3,7 @@
 
 The Linux kernel includes the **Netfilter** subsystem, which is used to manipulate or decide the fate of network traffic headed into or through your server. All modern Linux firewall solutions use this system for packet filtering.
 
-The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the Netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many frontends are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
+The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the Netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many {term}`frontends <frontend>` are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
 
 ## ufw - Uncomplicated Firewall
 
@@ -114,8 +114,9 @@ And for more verbose status information use:
 sudo ufw status verbose
 ```
 
-> **Note**:
-> If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
+```{note}
+If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
+```
 
 This is a quick introduction to using `ufw`. Please refer to the [`ufw` man page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html) for more information.
 
@@ -143,8 +144,9 @@ ufw allow from 192.168.0.0/24 to any app Samba
 
 Replace `Samba` and `192.168.0.0/24` with the application profile you are using and the IP range for your network.
 
-> **Note**:
-> There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
+```{note}
+There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
+```
 
 To view details about which ports and protocols, and so on, are defined for an application, enter:
 
@@ -215,8 +217,9 @@ COMMIT
 
 For each **Table**, a corresponding `COMMIT` statement is required. In these examples only the `nat` and `filter` tables are shown, but you can also add rules for the `raw` and `mangle` tables.
 
-> **Note**:
-> In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
+```{note}
+In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
+```
 
 #### Restart ufw
 
@@ -303,7 +306,7 @@ sudo iptables -A INPUT -m state --state NEW -p tcp --dport 80 \
  -j LOG --log-prefix "NEW_HTTP_CONN: "
 ```
 
-A request on port `80` from the local machine, then, would generate a log in `dmesg` that looks like this (single line split into 3 to fit this document):
+A request on port `80` from the local machine, then, would generate a log in {term}`dmesg` that looks like this (single line split into 3 to fit this document):
 
 ```text
 [4304885.870000] NEW_HTTP_CONN: IN=lo OUT= MAC=00:00:00:00:00:00:00:00:00:00:00:00:08:00

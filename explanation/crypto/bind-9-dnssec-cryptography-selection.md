@@ -1,7 +1,6 @@
 (bind-9-dnssec-cryptography-selection)=
 # BIND 9 DNSSEC cryptography selection
-
-Domain Name System Security Extensions (DNSSEC), which provides a set of security features to DNS, is a broad topic. In this article, we will briefly show DNSSEC validation happening on a `bind9` DNS server, and then introduce the topic of how we can disable certain cryptographic algorithms from being used in this validation.
+Domain Name System Security Extensions (DNSSEC), which provides a set of security features to {term}`DNS`, is a broad topic. In this article, we will briefly show DNSSEC validation happening on a `bind9` DNS server, and then introduce the topic of how we can disable certain cryptographic algorithms from being used in this validation.
 
 ## DNSSEC validation
 
@@ -212,8 +211,9 @@ Note this is different from rejecting the response: it just means that this resp
 
 In general, as always with cryptography, be careful with which algorithms you decide to disable and remove from DNSSEC validation, as such errors can be hard to diagnose. To help with troubleshooting, the Internet Systems Consortium (ISC) has published a very extensive DNSSEC guide, which contains a detailed troubleshooting section (see below).
 
-> **Note**:
-> Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.conf.options` and restart BIND 9. This change was just a quick test!
+```{note}
+Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.conf.options` and restart BIND 9. This change was just a quick test!
+```
 
 ## References
 

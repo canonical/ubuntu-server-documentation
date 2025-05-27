@@ -11,14 +11,14 @@ This section explains various aspects to consider before starting the installati
 
 Ubuntu Server Edition provides a common, minimalist base for a variety of server applications, such as file/print services, web hosting, email hosting, etc. This version supports four 64-bit architectures:
 
- * amd64 (Intel/AMD 64-bit)
+ * amd64 (Intel/{term}`AMD` 64-bit)
  * arm64 (64-bit ARM)
  * ppc64el (POWER8 and POWER9)
  * s390x (IBM Z and LinuxONE)
 
 The recommended minimal system requirements for this tutorial are:
 
- * RAM: 2 GiB or more
+ * RAM: 2 {term}`GiB` or more
  * Disk: 5 GiB or more
 
 If you are looking for more general system requirements, {ref}`refer to this page <system-requirements>`. 
@@ -66,7 +66,7 @@ The installer is designed to be easy to use and have sensible defaults so for a 
  * Choose your language
  * Update the installer (if offered)
  * Select your keyboard layout
- * Do not configure networking (the installer attempts to configure wired network interfaces via DHCP, but you can continue without networking if this fails)
+ * Do not configure networking (the installer attempts to configure wired network interfaces via {term}`DHCP`, but you can continue without networking if this fails)
  * Do not configure a proxy or custom mirror unless you have to in your network
  * For storage, leave "use an entire disk" checked, and choose a disk to install to, then select "Done" on the configuration screen and confirm the install
  * Enter a username, hostname and password

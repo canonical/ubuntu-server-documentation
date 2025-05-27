@@ -119,10 +119,11 @@ Certain `chronyc` commands are privileged and cannot be run via the network with
 
 ## Pulse-Per-Second (PPS) support
 
-`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via GPSD. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, jitter, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
+`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via {term}`GPSD`. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, {term}`jitter`, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
 
-> **Note**:
-> As of the release of 20.04, there was a bug which - until fixed - you might want to [add this content](https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21)  to your `/etc/apparmor.d/local/usr.sbin.gpsd`.
+```{note}
+As of the release of 20.04, there was a bug which - until fixed - you might want to [add this content](https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21)  to your `/etc/apparmor.d/local/usr.sbin.gpsd`.
+```
 
 ### Example configuration for GPSD to feed `chrony`
 
@@ -140,7 +141,7 @@ sudo apt install pps-tools gpsd-clients
 
 GPS devices usually communicate via serial interfaces. The most common type these days are USB GPS devices, which have a serial converter behind USB. If you want to use one of these devices for PPS then please be aware that the majority do not signal PPS via USB. Check the [GPSD hardware](https://gpsd.gitlab.io/gpsd/hardware.html) list for details. The examples below were run with a Navisys GR701-W.
 
-When plugging in such a device (or at boot time) `dmesg` should report a serial connection of some sort, as in this example:
+When plugging in such a device (or at boot time) {term}`dmesg` should report a serial connection of some sort, as in this example:
 
 ```text
 [   52.442199] usb 1-1.1: new full-speed USB device number 3 using xhci_hcd
@@ -345,16 +346,20 @@ This provides output in the following form:
 
 For more complex scenarios there are many more advanced options for configuring NTS. These are documented in [the `chrony` man page](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html).
 
-> **Note**: *About certificate placement*
-> Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
->  Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
+```{note} *About certificate placement*
+
+Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
+Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
+```
 
 ### NTS client
 
-The client needs to specify `server` as usual (`pool` directives do not work with NTS). Afterwards, the server address options can be listed and it is there that `nts` can be added. For example:
+The client needs to specify `server` or `pool` as usual. Afterwards, the options can be listed and it is there that `nts` can be added. For example:
 
 ```text
 server <server-fqdn-or-IP> iburst nts
+# or as concrete example
+pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
 ```
 
 One can check the `authdata` of the connections established by the client using `sudo chronyc -N authdata`, which will provide the following information:

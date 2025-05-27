@@ -4,7 +4,7 @@
 
 This non-interactive installation uses 'autoinstall', which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by '...', to limit the size of this document).
 
-The example z/VM guest here uses a direct-access storage device (DASD) and is connected to a regular (non-VLAN) network.
+The example z/VM guest here uses a direct-access storage device ({term}`DASD`) and is connected to a regular (non-VLAN) network.
 
 For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR (s390x) installation using autoinstall](https://discourse.ubuntu.com/t/non-interactive-ibm-z-lpar-s390x-installation-using-autoinstall/16988) guide.
 
@@ -120,7 +120,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
 
-  In this particular example a single DASD ECKD disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host (host-bus-adapters) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
+  In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBAs>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
 
 * For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
 
@@ -151,8 +151,9 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
   00005 * * * End of File * * * 
   ```
 
-> **Note**: 
-> In case of any issues hitting the 80-character-per-line limit of the file, you can write parameters across two lines as long as there are no unwanted white spaces. To view all 80 characters in one line, disable the prefix area on the left. "prefix off | on" will be  your friend -- use it in the command area. 
+```{note}
+In case of any issues hitting the 80-character-per-line limit of the file, you can write parameters across two lines as long as there are no unwanted white spaces. To view all 80 characters in one line, disable the prefix area on the left. "prefix off | on" will be  your friend -- use it in the command area. 
+```
 
 * You can now start the z/VM installation by executing the `UBUNTU REXX` script with `UBUNTU`.
 
@@ -426,7 +427,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   * It's always best to use the latest installer and autoinstall components: either make sure the installer gets updated to the latest level, or just use a current daily live-server image.
 
-  * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the hardware management console (HMC).
+  * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the {term}`hardware management console (HMC) <HMC>`.
 
   * In addition to activating disk storage resources in `early-commands`, other devices like OSA/qeth can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters that are used for the installation (that one is automatically handled).
 

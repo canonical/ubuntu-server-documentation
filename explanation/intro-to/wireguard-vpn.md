@@ -24,8 +24,9 @@ Important attributes of a WireGuard interface are:
   - **Endpoint**: where to send the encrypted traffic to. This is optional, but at least one of the corresponding peers must have it to bootstrap the connection.
   - **Allowed IPs**: list of inner tunnel destination networks or addresses for this peer when sending traffic, or, when receiving traffic, which source networks or addresses are allowed to send traffic to us.
 
-> **Note**:
-> Cryptography is not simple. When we say that, for example, a private key is used to decrypt or sign traffic, and a public key is used to encrypt or verify the authenticity of traffic, this is a simplification and is hiding a lot of important details. WireGuard has a detailed explanation of its protocols and cryptography handling [on its website](https://www.wireguard.com/protocol/).
+```{note}
+Cryptography is not simple. When we say that, for example, a private key is used to decrypt or sign traffic, and a public key is used to encrypt or verify the authenticity of traffic, this is a simplification and is hiding a lot of important details. WireGuard has a detailed explanation of its protocols and cryptography handling [on its website](https://www.wireguard.com/protocol/).
+```
 
 These parameters can be set with the low-level [`wg`](https://manpages.ubuntu.com/manpages/man8/wg.8.html) tool, directly via the command line or with a configuration file. This tool, however, doesn't handle the non-WireGuard settings of the interface. It won't assign an IP address to it, for example, nor set up routing. For this reason, it's more common to use [`wg-quick`](https://manpages.ubuntu.com/manpages/man8/wg-quick.8.html).
 
@@ -136,7 +137,7 @@ On a site-to-site VPN, however, when two separate networks are connected through
 Key takeaways from this introduction:
 
 - Each peer participating in the WireGuard VPN has a private key and a public key.
-- `AllowedIPs` is used as a routing key when sending traffic, and as an ACL when receiving traffic.
+- `AllowedIPs` is used as a routing key when sending traffic, and as an {term}`ACL` when receiving traffic.
 - To establish a VPN with a remote peer, you need its public key. Likewise, the remote peer will need your public key.
 - At least one of the peers needs an `Endpoint` configured in order to be able to initiate the VPN.
 
@@ -161,8 +162,9 @@ To help better understand these (and other) concepts, we will create some WireGu
 * {ref}`Security tips <security-tips-for-wireguard-vpn>`
 * {ref}`Troubleshooting <troubleshooting-wireguard-vpn>`
 
-> **Note**:
-> Throughout this guide, we will sometimes mention a VPN "connection". This is technically false, as WireGuard uses UDP and there is no persistent connection. The term is used just to facilitate understanding, and means that the peers in the examples know each other and have completed a handshake already.
+```{note}
+Throughout this guide, we will sometimes mention a VPN "connection". This is technically false, as WireGuard uses UDP and there is no persistent connection. The term is used just to facilitate understanding, and means that the peers in the examples know each other and have completed a handshake already.
+```
 
 ## Further reading
 

@@ -41,8 +41,9 @@ Make sure to start the `sssd` service:
 sudo systemctl start sssd.service
 ```
 
-> **Note**:
-> `sssd` will use `START_TLS` by default for authentication requests against the LDAP server (the **`auth_provider`**), but not for the **`id_provider`**. If you want to also enable `START_TLS` for the `id_provider`, specify `ldap_id_use_start_tls = true`.
+```{note}
+`sssd` will use `START_TLS` by default for authentication requests against the LDAP server (the **`auth_provider`**), but not for the **`id_provider`**. If you want to also enable `START_TLS` for the `id_provider`, specify `ldap_id_use_start_tls = true`.
+```
 
 ## Automatic home directory creation
 
@@ -65,8 +66,9 @@ If using a custom CA, an easy way to have a host trust it is to place it in `/us
 
 Alternatively, you can edit `/etc/ldap/ldap.conf` and point `TLS_CACERT` to the CA public key file.
 
-> **Note**:
-> You may have to restart `sssd` after these changes: `sudo systemctl restart sssd`
+```{note}
+You may have to restart `sssd` after these changes: `sudo systemctl restart sssd`
+```
 
 Once that is all done, check that you can connect to the LDAP server using verified SSL connections:
 

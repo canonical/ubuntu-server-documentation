@@ -2,7 +2,7 @@
 
 # Archive rotation shell script
 
-The {ref}`simple backup shell script <basic-backup-shell-script>` only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.
+The {ref}`simple backup shell script <back-up-using-shell-scripts>` only allows for seven different archives. For a server whose data doesn't change often, this may be enough. If the server has a large amount of data, a more complex rotation scheme should be used.
 
 ## Rotating NFS archives
 
@@ -82,7 +82,7 @@ date
 ls -lh $dest/
 ```
 
-The script can be executed using the same methods as in our guide on {ref}`how to back up using shell scripts <back-up-using-shell-scripts>`.
+The script can be executed using the same methods as in this `basic backup shell script <https://discourse.ubuntu.com/t/basic-backup-shell-script/36419>`_.
 
 As discussed in the introduction, a copy of the backup archives and/or media can then be transferred off-site.
 

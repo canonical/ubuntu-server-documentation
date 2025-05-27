@@ -67,7 +67,7 @@ For details on how to upgrade to a new Ubuntu release, see our {ref}`guide on up
 
 ## Aptitude
 
-Launching Aptitude with no command-line options will give you a menu-driven, text-based frontend to the APT system. Many of the common package management functions, such as installation, removal, and upgrade, can be performed in Aptitude with single-key commands, which are typically lowercase letters.
+Launching Aptitude with no command-line options will give you a menu-driven, text-based {term}`frontend` to the APT system. Many of the common package management functions, such as installation, removal, and upgrade, can be performed in Aptitude with single-key commands, which are typically lowercase letters.
 
 Aptitude is best suited for use in a non-graphical terminal environment to ensure the command keys work properly. You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
 
@@ -174,8 +174,9 @@ base-files: /etc/host.conf
 
 The output shows that the `/etc/host.conf` belongs to the base-files package.
     
-> **Note**:
-> Many files are automatically generated during the package install process, and even though they are on the filesystem, `dpkg -S` may not know which package they belong to.
+```{note}
+Many files are automatically generated during the package install process, and even though they are on the {term}`filesystem`, `dpkg -S` may not know which package they belong to.
+```
 
 ### Installing a deb file
 
@@ -195,8 +196,9 @@ You can uninstall a package by running:
 sudo dpkg -r zip
 ```
     
-> **Caution**:
-> Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
+```{caution}
+Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
+```
 
 For more `dpkg` options see the [`dpkg` manpage](https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html): `man dpkg`.
 
@@ -211,14 +213,19 @@ You can edit the file to enable and disable repositories. For example, to disabl
 # deb cdrom:[DISTRO-APT-CD-NAME - Release i386 (20111013.1)]/ DISTRO-SHORT-CODENAME main restricted
 ```
 
-### Extra repositories
+## Automatic updates
+
+It's possible to setup an Ubuntu system with Automatic Updates, such that certain types of upgrades are applied automatically. In fact, the default for Ubuntu Server is to automatically apply security updates. Please see the {ref}`Automatic updates <automatic-updates>` section for details.
+
+## Extra repositories
 
 In addition to the officially-supported package repositories available for Ubuntu, there are also community-maintained repositories which add thousands more packages for potential installation. Two of the most popular are the *Universe* and *Multiverse* repositories. These repositories are not officially supported by Ubuntu, but because they are maintained by the community they generally provide packages which are safe for use with your Ubuntu computer.
 
 For more information, see our guide on {ref}`using third-party repositories <third-party-repository-usage>`.
 
-> **Warning**:
-> Be advised that packages in Universe and Multiverse are not officially supported and do not receive security patches, except through Ubuntu Pro's [Expanded Security Maintenance](https://ubuntu.com/security/esm). A subscription to [Ubuntu Pro](https://ubuntu.com/pro) is free for personal use on up to five machines.
+```{warning}
+Be advised that packages in Universe and Multiverse are not officially supported and do not receive security patches, except through Ubuntu Pro's [Expanded Security Maintenance](https://ubuntu.com/security/esm). A subscription to [Ubuntu Pro](https://ubuntu.com/pro) is free for personal use on up to five machines.
+```
 
 > Packages in the *multiverse* repository often have licensing issues that prevent them from being distributed with a free operating system, and they may be illegal in your locality.
 
@@ -245,86 +252,6 @@ deb-src http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security univers
 deb http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security multiverse
 deb-src http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security multiverse
 ```
-<h2 id='heading--automatic-updates'>Automatic updates</h2>
-
-The `unattended-upgrades` package can be used to automatically update installed packages and can be configured to update all packages or to only install security updates. First, install the package by entering the following in a terminal:
-
-```bash
-sudo apt install unattended-upgrades
-```
-
-To configure `unattended-upgrades`, edit `/etc/apt/apt.conf.d/50unattended-upgrades` and adjust the following to fit your needs:
-
-```text
-Unattended-Upgrade::Allowed-Origins {
-        "${distro_id}:${distro_codename}";
-        "${distro_id}:${distro_codename}-security";
-//      "${distro_id}:${distro_codename}-updates";
-//      "${distro_id}:${distro_codename}-proposed";
-//      "${distro_id}:${distro_codename}-backports";
-};
-```
-
-Certain packages can also be excluded and therefore will not be automatically updated. To block a package, add it to the list:
-
-```text
-Unattended-Upgrade::Package-Blacklist {
-//      "vim";
-//      "libc6";
-//      "libc6-dev";
-//      "libc6-i686";
-};
-```
-
-> **Note**:
-> The double “//” serve as comments, so whatever follows "//" will not be evaluated.
-
-To enable automatic updates, edit `/etc/apt/apt.conf.d/20auto-upgrades` and set the appropriate APT configuration options:
-
-```text
-APT::Periodic::Update-Package-Lists "1";
-APT::Periodic::Download-Upgradeable-Packages "1";
-APT::Periodic::AutocleanInterval "7";
-APT::Periodic::Unattended-Upgrade "1";
-```
-
-The above configuration updates the package list, then downloads and installs available upgrades every day. These actions are triggered by timer units at a set time but with a random delay:  `apt-daily.timer` and `apt-daily-upgrade.timer`. These timers activate the corresponding services that run the `/usr/lib/apt/apt.systemd.daily` script.
-
-However, it may happen that if the server is off at the time the timer unit elapses, the timer will be triggered immediately at the next startup. As a result, they will often run on system startup 
-and thereby cause immediate activity and hold the apt-lock.
-
-In many cases this is beneficial, but in some cases it might be counter-productive; examples are administrators with many shut-down machines or VM images that are only started for some quick action, which is delayed or even blocked by the unattended upgrades. To adapt this behaviour, we can change/override the configuration of both APT's timer units [`apt-daily-upgrade.timer, apt-daily.timer`]. To do so, use `systemctl edit <timer_unit>` and override the *Persistent* attribute, for example with `Persistent=delay`:
-
-```
-[Timer]
-Persistent=delay
-```
-
-The local download archive is cleaned every week. On servers upgraded to newer versions of Ubuntu, depending on your responses, the file listed above may not be there. In this case, creating a new file of the same name should also work.
-
-> **Note**:
-> You can read more about `apt` *Periodic* configuration options in the `apt.conf(5)` manpage and in the `/usr/lib/apt/apt.systemd.daily` script header.
-
-The results of `unattended-upgrades` will be logged to `/var/log/unattended-upgrades`.
-
-### Notifications
-
-Configuring `Unattended-Upgrade::Mail` in `/etc/apt/apt.conf.d/50unattended-upgrades` will enable `unattended-upgrades` to email an administrator detailing any packages that need upgrading or have problems.
-
-Another useful package is `apticron`. `apticron` will configure a cron job to email an administrator information about any packages on the system that have updates available, as well as a summary of changes in each package.
-
-To install the `apticron` package, enter the following command in a terminal:
-
-```bash
-sudo apt install apticron
-```
-
-Once the package is installed, edit `/etc/apticron/apticron.conf`, to set the email address and other options:
-
-```text
-EMAIL="root@example.com"
-```
-
 ## logging
 
 Actions of the `apt` command, such as installation and removal of packages,

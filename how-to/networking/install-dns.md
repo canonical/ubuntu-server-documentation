@@ -2,7 +2,7 @@
 # Domain Name Service (DNS)
 
 
-Domain Name Service (DNS) is an Internet service that maps IP addresses and fully qualified domain names (FQDN) to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
+Domain Name Service (DNS) is an Internet service that maps IP addresses and {term}`fully qualified domain names (FQDN) <FQDN>` to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
 
 ## Install DNS
 
@@ -51,8 +51,9 @@ forwarders {
 };
 ```
 
-> **Note**:
-> Replace `1.2.3.4` and `5.6.7.8` with the IP addresses of actual nameservers.
+```{note}
+Replace `1.2.3.4` and `5.6.7.8` with the IP addresses of actual nameservers.
+```
 
 To enable the new configuration, restart the DNS server. From a terminal prompt, run:
 
@@ -77,8 +78,9 @@ zone "example.com" {
 };
 ```
 
-> **Note**:
-> If BIND will be receiving automatic updates to the file as with DDNS, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
+```{note}
+If BIND will be receiving automatic updates to the file as with {term}`DDNS`, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
+```
 
 Now use an existing zone file as a template to create the `/etc/bind/db.example.com` file:
 
@@ -112,8 +114,9 @@ You must increment the `Serial Number` every time you make changes to the zone f
 
 Now, you can add DNS records to the bottom of the zone file. See {ref}`Common Record Types <install-dns>` for details.
 
-> **Note**:
-> Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
+```{note}
+Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
+```
 
 Once you have made changes to the zone file, BIND9 needs to be restarted for the changes to take effect:
 
@@ -134,8 +137,9 @@ zone "1.168.192.in-addr.arpa" {
 };
 ```
 
-> **Note**:
-> Replace `1.168.192` with the first three octets of whatever network you are using. Also, name the zone file `/etc/bind/db.192` appropriately. It should match the first octet of your network.
+```{note}
+Replace `1.168.192` with the first three octets of whatever network you are using. Also, name the zone file `/etc/bind/db.192` appropriately. It should match the first octet of your network.
+```
 
 Now create the `/etc/bind/db.192` file:
 
@@ -188,8 +192,9 @@ zone "1.168.192.in-addr.arpa" {
 };
 ```
 
-> **Note**:
-> Replace `192.168.1.11` with the IP address of your secondary nameserver.
+```{note}
+Replace `192.168.1.11` with the IP address of your secondary nameserver.
+```
 
 Restart BIND9 on the primary server:
 
@@ -240,8 +245,9 @@ transfer of 'example.com/IN' from 192.168.1.10#53: Transfer completed: 1 message
 8 records, 225 bytes, 0.002 secs (112500 bytes/sec)
 ```
 
-> **Note**:
-> A zone is only transferred if the `Serial Number` on the primary is larger than the one on the secondary. If you want to have your primary DNS notify other secondary DNS servers of zone changes, you can add `also-notify { ipaddress; };` to `/etc/bind/named.conf.local` as shown in the example below:
+```{note}
+A zone is only transferred if the `Serial Number` on the primary is larger than the one on the secondary. If you want to have your primary DNS notify other secondary DNS servers of zone changes, you can add `also-notify { ipaddress; };` to `/etc/bind/named.conf.local` as shown in the example below:
+```
 
 ```
 zone "example.com" {
@@ -260,8 +266,9 @@ zone "1.168.192.in-addr.arpa" {
     
 ```
 
-> **Note**:
-> The default directory for non-authoritative zone files is `/var/cache/bind/`. This directory is also configured in AppArmor to allow the named daemon to write to it. See this page for {ref}`more information on AppArmor <apparmor>`.
+```{note}
+The default directory for non-authoritative zone files is `/var/cache/bind/`. This directory is also configured in AppArmor to allow the named daemon to write to it. See this page for {ref}`more information on AppArmor <apparmor>`.
+```
 
 ## Testing your setup
 
@@ -280,8 +287,9 @@ To check which DNS server your local resolver is using, run:
 resolvectl status
 ```
 
-> **Note**:
-> You should also add the IP address of the secondary nameserver to your client configuration in case the primary becomes unavailable.
+```{note}
+You should also add the IP address of the secondary nameserver to your client configuration in case the primary becomes unavailable.
+```
 
 ### dig
 
@@ -364,8 +372,9 @@ zone 1.168.192.in-addr.arpa/IN: loaded serial 3
 OK
 ```
 
-> **Note**:
-> The Serial Number of your zone file will probably be different.
+```{note}
+The Serial Number of your zone file will probably be different.
+```
 
 ### Quick temporary query logging
 
@@ -391,8 +400,9 @@ Jan 20 19:40:50 new-n1 named[816]: query logging is now on
 Jan 20 19:40:57 new-n1 named[816]: client @0x7f48ec101480 192.168.1.10#36139 (ubuntu.com): query: ubuntu.com IN A +E(0)K (192.168.1.10)
 ```
 
-> **Note**:
-> The amount of logs generated by enabling `querylog` could be huge!
+```{note}
+The amount of logs generated by enabling `querylog` could be huge!
+```
 
 ## Logging
 
@@ -421,8 +431,9 @@ logging {
 };
 ```
 
-> **Note**:
-> The `debug` option can be set from 1 to 3. If a level isn't specified, level 1 is the default.
+```{note}
+The `debug` option can be set from 1 to 3. If a level isn't specified, level 1 is the default.
+```
 
 Since the **named daemon** runs as the `bind` user, the `/var/log/named` directory must be created and the ownership changed:
 
@@ -444,7 +455,7 @@ You should see the file `/var/log/named/query.log` fill with query information. 
 This section covers some of the most common DNS record types.
 
 - **`A` record**
-  This record maps an IP address to a hostname.
+  This record maps an IP address to a {term}`hostname`.
 
     ```
     www      IN    A      192.168.1.12

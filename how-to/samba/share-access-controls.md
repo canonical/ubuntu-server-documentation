@@ -37,9 +37,9 @@ sudo smbcontrol smbd reload-config
 
 ## Filesystem permissions
 
-Now that Samba has been configured to limit which groups have access to the shared directory, the filesystem permissions need to be checked.
+Now that Samba has been configured to limit which groups have access to the shared directory, the {term}`filesystem` permissions need to be checked.
 
-Traditional Linux file permissions do not map well to Windows NT Access Control Lists (ACLs). Fortunately POSIX ACLs are available on Ubuntu servers, which provides more fine-grained control. For example, to enable ACLs on `/srv` in an EXT3 filesystem, edit `/etc/fstab` and add the *acl* option:
+Traditional Linux file permissions do not map well to Windows NT Access Control Lists ({term}`ACL`s). Fortunately POSIX ACLs are available on Ubuntu servers, which provides more fine-grained control. For example, to enable ACLs on `/srv` in an EXT3 filesystem, edit `/etc/fstab` and add the *acl* option:
 
 ```text
 UUID=66bcdd2e-8861-4fb0-b7e4-e61c569fe17d /srv  ext3    noatime,relatime,acl 0       1
@@ -51,8 +51,9 @@ Then remount the partition:
 sudo mount -v -o remount /srv
 ```
 
-> **Note**:
-> This example assumes `/srv` is on a separate partition. If `/srv`, or wherever you have configured your share path, is part of the `/` partition then a reboot may be required.
+```{note}
+This example assumes `/srv` is on a separate partition. If `/srv`, or wherever you have configured your share path, is part of the `/` partition then a reboot may be required.
+```
 
 To match the Samba configuration above, the "sysadmin" group will be given read, write, and execute permissions to `/srv/samba/share`, the "qa" group will be given read and execute permissions, and the files will be owned by the username "Melissa". Enter the following in a terminal:
 
@@ -62,8 +63,9 @@ sudo chgrp -R sysadmin /srv/samba/share/
 sudo setfacl -R -m g:qa:rx /srv/samba/share/
 ```
 
-> **Note**:
-> The `setfacl` command above gives *execute* permissions to all files in the `/srv/samba/share` directory, which you may or may not want.
+```{note}
+The `setfacl` command above gives *execute* permissions to all files in the `/srv/samba/share` directory, which you may or may not want.
+```
 
 Now from a Windows client you should notice the new file permissions are implemented. See [the `acl`](https://manpages.ubuntu.com/manpages/trusty/man5/acl.5.html) and [`setfacl`](https://manpages.ubuntu.com/manpages/trusty/man1/setfacl.1.html) man pages for more information on POSIX ACLs.
 

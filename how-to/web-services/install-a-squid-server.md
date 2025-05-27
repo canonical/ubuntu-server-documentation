@@ -34,8 +34,8 @@ http_port 8888
 
 ### Set the hostname
 
-Change the **`visible_hostname`** directive to give the Squid server a specific hostname. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
-    
+Change the **`visible_hostname`** directive to give the Squid server a specific {term}`hostname`. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
+
 ```text
 visible_hostname weezie
 ```
@@ -68,7 +68,7 @@ If you want to use a different directory type please take a look at their differ
 
 Using Squid's access control, you can configure use of Squid-proxied Internet services to be available only to users with certain Internet Protocol (IP) addresses. For example, we will illustrate access by users of the `192.168.42.0/24` subnetwork only:
 
-* Add the following to the **bottom** of the ACL section of your `/etc/squid/squid.conf` file:
+* Add the following to the **bottom** of the {term}`ACL` section of your `/etc/squid/squid.conf` file:
    
    ```text
    acl fortytwo_network src 192.168.42.0/24
@@ -103,9 +103,10 @@ After making any changes to the `/etc/squid/squid.conf` file, you will need to s
 sudo systemctl restart squid.service
 ```
 
-> **Note**:
-> If a formerly customised squid3 was used to set up the spool at `/var/log/squid3` to be a mount point, but otherwise kept the default configuration, the upgrade will fail. The upgrade tries to rename/move files as needed, but it can't do so for an active mount point. In that case you will need to adapt either the mount point or the config in `/etc/squid/squid.conf` so that they match.
-> The same applies if the **include** config statement was used to pull in more files from the old path at `/etc/squid3/`. In those cases you should move and adapt your configuration accordingly.
+```{note}
+If a formerly customised squid3 was used to set up the spool at `/var/log/squid3` to be a mount point, but otherwise kept the default configuration, the upgrade will fail. The upgrade tries to rename/move files as needed, but it can't do so for an active mount point. In that case you will need to adapt either the mount point or the config in `/etc/squid/squid.conf` so that they match.
+The same applies if the **include** config statement was used to pull in more files from the old path at `/etc/squid3/`. In those cases you should move and adapt your configuration accordingly.
+```
 
 ## Further reading
 

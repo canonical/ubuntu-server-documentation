@@ -9,8 +9,9 @@ Apache2 ships with a "virtual-host-friendly" default configuration -- it is conf
 
 If left alone, the default virtual host will serve as your default site, or the site users will see if the URL they enter does not match the **ServerName** directive of any of your custom sites. To modify the default virtual host, edit the file `/etc/apache2/sites-available/000-default.conf`.
 
-> **Note**:
-> The directives set for a virtual host only apply to that particular virtual host. If a directive is set server-wide and not defined in the virtual host settings, the default setting is used. For example, you can define a Webmaster email address and not define individual email addresses for each virtual host.
+```{note}
+The directives set for a virtual host only apply to that particular virtual host. If a directive is set server-wide and not defined in the virtual host settings, the default setting is used. For example, you can define a Webmaster email address and not define individual email addresses for each virtual host.
+```
 
 If you want to configure a new virtual host or site, copy the `000-default.conf` file into the same directory with a name you choose. For example:
 
@@ -37,7 +38,7 @@ Specifies the port, and optionally the IP address, Apache2 should listen on. If 
 
 ### The **ServerName** directive (optional)
 
-Specifies what FQDN your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
+Specifies what {term}`FQDN` your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
 
   Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
 
@@ -62,8 +63,9 @@ sudo a2ensite mynewsite
 sudo systemctl restart apache2.service
 ```
 
-> **Note**:
-> Be sure to replace `mynewsite` with a more descriptive name for the VirtualHost. One method is to name the file after the **ServerName** directive of the VirtualHost.
+```{note}
+Be sure to replace `mynewsite` with a more descriptive name for the VirtualHost. One method is to name the file after the **ServerName** directive of the VirtualHost.
+```
 
 Similarly, use the `a2dissite` utility to disable sites. This is can be useful when troubleshooting configuration problems with multiple virtual hosts:
 
@@ -111,9 +113,10 @@ The Options directive within a Directory stanza accepts one or more of the follo
 - **ExecCGI**
   Allow CGI scripts to be run. CGI scripts are not run if this option is not chosen.
         
-  > **Caution**
-  > Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
-    
+  ```{caution}
+  Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
+  ```
+
 - **Includes**
   Allow **server-side includes**. Server-side includes allow an HTML file to *include* other files. See [Apache SSI documentation (Ubuntu community)](https://help.ubuntu.com/community/ServerSideIncludes) for more information.
     
@@ -123,8 +126,9 @@ The Options directive within a Directory stanza accepts one or more of the follo
 - **Indexes**
   Display a formatted list of the directory's contents, if no DirectoryIndex (such as `index.html`) exists in the requested directory.
 
-  > **Caution**
-  > For security reasons, this should usually not be set, and certainly should not be set on your DocumentRoot directory. Enable this option carefully on a per-directory basis **only** if you are certain you want users to see the entire contents of the directory.
+  ```{caution}
+  For security reasons, this should usually not be set, and certainly should not be set on your DocumentRoot directory. Enable this option carefully on a per-directory basis **only** if you are certain you want users to see the entire contents of the directory.
+  ```
 
 - **Multiview**
   Support content-negotiated multiviews; this option is disabled by default for security reasons. See the [Apache2 documentation on this option](https://httpd.apache.org/docs/2.4/mod/mod_negotiation.html#multiviews).
@@ -145,9 +149,10 @@ This section briefly explains some basic Apache2 daemon configuration settings.
 - **User**
   The **User** directive sets the userid used by the server to answer requests. This setting determines the server's access. Any files inaccessible to this user will also be inaccessible to your website's visitors. The default value for User is "www-data".
 
-  > **Warning**
-  > Unless you know exactly what you are doing, do not set the User directive to root. Using root as the User will create large security holes for your Web server.
-
+  ```{warning}
+  Unless you know exactly what you are doing, do not set the User directive to root. Using root as the User will create large security holes for your Web server.
+  ```
+  
 - **Group**
   The **Group** directive is similar to the User directive. Group sets the group under which the server will answer requests. The default group is also "www-data".
 

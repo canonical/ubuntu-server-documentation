@@ -5,8 +5,9 @@ Establishing an SSH connection to a remote service involves multiple stages. Eac
 
 The default selection of algorithms for each stage should be good enough for the majority of deployment scenarios. Sometimes, however, a compliance rule, or a set of legacy servers, or something else, requires a change in this selection. Perhaps a legacy system or piece of hardware that is still in production is not compatible with the current encryption schemes and requires legacy algorithms to be enabled again. Or a compliance rule that isn't up-to-date with the current crypto standards doesn't allow a more advanced cipher.
 
-> **WARNING**:
-> Be careful when restricting cryptographic algorithms in SSH, specially on the server side. You can inadvertently lock yourself out of a remote system!
+```{warning}
+Be careful when restricting cryptographic algorithms in SSH, specially on the server side. You can inadvertently lock yourself out of a remote system!
+```
 
 ## Algorithm configuration general rules
 
@@ -29,8 +30,9 @@ Most of the configuration options that take a list of cryptographic algorithms f
 
 With rare exceptions, the list of algorithms can be queried by running `ssh -Q <config>`, where `<config>` is the configuration setting name. For example, `ssh -Q ciphers` will show the available list of ciphers.
 
-> **Note**:
-> The output of the `ssh -Q <name>` command will not take into consideration the configuration changes that may have been made. It cannot therefore be used to test the crypto configuration changes.
+```{note}
+The output of the `ssh -Q <name>` command will not take into consideration the configuration changes that may have been made. It cannot therefore be used to test the crypto configuration changes.
+```
 
 ## Configuration settings
 
@@ -45,7 +47,7 @@ Here are the configuration settings that control the cryptographic algorithms se
     List of Message Authentication Code algorithms, used for data integrity protection. The `-etm` versions calculate the MAC after encryption and are considered safer. Examples include `hmac-sha2-256` and `hmac-sha2-512-etm@openssh.com`.
 
 * `GSSAPIKexAlgorithms`
-    This option is not available in OpenSSH upstream, and is [provided via a patch](https://git.launchpad.net/ubuntu/+source/openssh/tree/debian/patches/gssapi.patch?h=applied/ubuntu/jammy-devel) that Ubuntu and many other Linux Distributions carry. It lists the key exchange (kex) algorithms that are offered for Generic Security Services Application Program Interface (GSSAPI) key exchange, and only applies to connections using GSSAPI. Examples include `gss-gex-sha1-` and `gss-group14-sha256-`.
+    This option is not available in OpenSSH upstream, and is [provided via a patch](https://git.launchpad.net/ubuntu/+source/openssh/tree/debian/patches/gssapi.patch?h=applied/ubuntu/jammy-devel) that Ubuntu and many other Linux Distributions carry. It lists the key exchange (kex) algorithms that are offered for {term}`Generic Security Services Application Program Interface (GSSAPI) <GSSAPI>` key exchange, and only applies to connections using GSSAPI. Examples include `gss-gex-sha1-` and `gss-group14-sha256-`.
 
 * `KexAlgorithms`
     List of available key exchange (kex) algorithms. Examples include `curve25519-sha256` and `sntrup761x25519-sha512@openssh.com`.
@@ -99,7 +101,7 @@ For the other stages in the `ssh` connection, like key exchange, or public key a
 
 ### Remove AES 128 from server
 
-Let's configure an OpenSSH server to only offer the AES 256 bit variant of symmetric ciphers for an `ssh` connection.
+Let's configure an OpenSSH server to only offer the {term}`AES` 256-bit variant of symmetric ciphers for an `ssh` connection.
 
 First, let's see what the default is:
 

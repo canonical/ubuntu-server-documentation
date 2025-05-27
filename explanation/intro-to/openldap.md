@@ -8,7 +8,7 @@ that it's understood as such.
 
 ## Key concepts and terms
 
-- A **directory** is a tree of data **entries** that is hierarchical in nature; it is called the Directory Information Tree (DIT).
+- A **directory** is a tree of data **entries** that is hierarchical in nature; it is called the Directory Information Tree ({term}`DIT`).
 
 - An **entry** consists of a set of **attributes**.
 
@@ -16,12 +16,13 @@ that it's understood as such.
 
 - Attributes and `objectClasses` are defined in **schemas** (an `objectClass` is considered a special kind of attribute).
 
-- Each entry has a unique identifier: its **Distinguished Name** (DN or dn). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
+- Each entry has a unique identifier: its **Distinguished Name** ({term}`DN` or dn). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
 
 - The entry's DN is not an attribute. It is not considered part of the entry itself.
 
-> **Note**:
-> The terms **object**, **container**, and **node** have certain connotations but they all essentially mean the same thing as **entry** (the technically correct term).
+```{note}
+The terms **object**, **container**, and **node** have certain connotations but they all essentially mean the same thing as **entry** (the technically correct term).
+```
 
 For example, below we have a single entry consisting of 11 attributes where the following is true:
 

@@ -3,7 +3,7 @@
 
 The monitoring of essential servers and services is an important part of system administration. This guide will show you how to set up [Munin](https://munin-monitoring.org/) for performance monitoring.
 
-In this example, we will use two servers with hostnames: **`server01`** and **`server02`**. 
+In this example, we will use two servers with {term}`hostnames <hostname>`: **`server01`** and **`server02`**. 
 
 `Server01` will be set up with the `munin` package to gather information from the network. Using the `munin-node` package, `server02` will be configured to send information to `server01`.
 
@@ -35,8 +35,9 @@ On `server01` edit the `/etc/munin/munin.conf` file, adding the IP address for `
        address 172.18.100.101
 ```
 
-> **Note**:
-> Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
+```{note}
+Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
+```
 
 ## Configure `munin-node`
 
@@ -46,8 +47,9 @@ Next, configure `munin-node` on `server02`. Edit `/etc/munin/munin-node.conf` to
 allow ^172\.18\.100\.100$
 ```
 
-> **Note**:
-> Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
+```{note}
+Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
+```
 
 Now restart `munin-node` on `server02` for the changes to take effect:
 
@@ -62,7 +64,7 @@ In a browser, go to `http://server01/munin`, and you should see links to nice gr
 
 ## Additional Plugins
 
-The `munin-plugins-extra` package contains performance checks and additional services such as DNS, DHCP, and Samba, etc. To install the package, from a terminal enter:
+The `munin-plugins-extra` package contains performance checks and additional services such as {term}`DNS`, {term}`DHCP`, and Samba, etc. To install the package, from a terminal enter:
 
 ```bash
 sudo apt install munin-plugins-extra

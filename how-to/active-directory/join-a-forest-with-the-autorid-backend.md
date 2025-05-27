@@ -48,7 +48,7 @@ Running the recommended `testparm` command gives us confidence that the configur
 
     Press enter to see a dump of your service definitions
 
-Like with the *rid* idmap backend, if this system is not yet in the AD DNS server, it's best to change its hostname (including the short hostname) do be the fully qualified domain name (FQDN), as that will allow the joining procedure to also update the DNS records, if so allowed by the AD server (normally it is).
+Like with the *rid* idmap backend, if this system is not yet in the AD {term}`DNS` server, it's best to change its {term}`hostname` (including the short hostname) to be the fully qualified domain name (FQDN), as that will allow the joining procedure to also update the DNS records, if so allowed by the AD server (normally it is).
 
 For this example, the system's hostname is `n2` in the `example.internal` domain, so the FQDN is `n2.example.internal`:
 
@@ -125,6 +125,6 @@ A console login also works:
 
 Notice how the domain name being part of the home directory path is useful: it separates the users from different domains, avoiding collisions for the same username.
 
-> **NOTE**
->
-> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when refered to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```{note}
+The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when refered to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```

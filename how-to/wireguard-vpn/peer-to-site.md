@@ -32,3 +32,10 @@ This diagram represents a typical simple home network setup. You have a router/m
 There are basically two approaches that can be taken here: install WireGuard {ref}`on the router <wireguard-vpn-peer-to-site-on-router>`, or on {ref}`another system in the home network <wireguard-on-an-internal-system>`.
 
 Note that in this scenario the "fixed" side, the home network, normally won't have a WireGuard `Endpoint` configured, as the peer is typically "on the road" and will have a dynamic IP address.
+
+```{toctree}
+:titlesonly:
+
+Peer-to-site (on router) <peer-to-site-on-router>
+Peer-to-site (inside device) <on-an-internal-system>
+```

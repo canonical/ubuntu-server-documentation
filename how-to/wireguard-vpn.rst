@@ -3,23 +3,35 @@
 WireGuard VPN
 **************
 
-* :ref:`Peer-to-site <wireguard-vpn-peer-to-site>`
-* :ref:`Peer-to-site (on router) <wireguard-vpn-peer-to-site-on-router>`
-* :ref:`Peer-to-site (inside device) <wireguard-on-an-internal-system>`
-* :ref:`Site-to-site <wireguard-vpn-site-to-site>`
-* :ref:`Default gateway <using-the-vpn-as-the-default-gateway>`
-* :ref:`Common tasks <common-tasks-in-wireguard-vpn>`
-* :ref:`Security tips <security-tips-for-wireguard-vpn>`
-* :ref:`Troubleshooting <troubleshooting-wireguard-vpn>`
+WireGuard is a straightforward, modern, cross-platform VPN implementation. It
+is usually used to either connect a single system to a remote site
+("peer-to-site") or to connect two distinct networks over the internet
+("site-to-site").
 
 .. toctree::
-    :hidden:
+    :titlesonly:
 
     Peer-to-site <wireguard-vpn/peer-to-site>
-    Peer-to-site (on router) <wireguard-vpn/peer-to-site-on-router>
-    Peer-to-site (inside device) <wireguard-vpn/on-an-internal-system>
     Site-to-site <wireguard-vpn/site-to-site>
+
+WireGuard can also be set up to route all traffic through the VPN. 
+
+.. toctree::
+    :titlesonly:
+
     Default gateway <wireguard-vpn/vpn-as-the-default-gateway>
+
+There are also some common tasks and tips that will help you adjust your
+configuration to your needs.
+
+.. toctree::
+    :titlesonly:
+
     Common tasks <wireguard-vpn/common-tasks>
     Security tips <wireguard-vpn/security-tips>
     Troubleshooting <wireguard-vpn/troubleshooting>
+
+See also
+========
+
+* Explanation: :ref:`introduction-to-wireguard-vpn`

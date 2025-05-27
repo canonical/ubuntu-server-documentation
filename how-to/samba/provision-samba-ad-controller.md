@@ -72,7 +72,7 @@ If you didn't use the `--adminpass` option, the administrator password will be p
 ## Post-installation steps
 The AD/DC services are not running yet. Some post-installation steps are necessary before the services can be started.
 
-First, adjust `dns forwarder` in `/etc/samba/smb.conf` to point at your DNS server. It will be used for all queries that are not local to the Active Directory domain we just deployed (`EXAMPLE.INTERNAL`). The provisioning script simply copied the server IP from `/etc/resolv.conf` to this parameter, but if we leave it like that, it will point back to itself:
+First, adjust `dns forwarder` in `/etc/samba/smb.conf` to point at your {term}`DNS` server. It will be used for all queries that are not local to the Active Directory domain we just deployed (`EXAMPLE.INTERNAL`). The provisioning script simply copied the server IP from `/etc/resolv.conf` to this parameter, but if we leave it like that, it will point back to itself:
 
     [global]
         dns forwarder = 127.0.0.53
@@ -150,7 +150,7 @@ To verify the ticket was obtained, use `klist`, which should have output similar
 ### DNS tests
 Using the Kerberos ticket from the step above, we can check the DNS server that Samba is running.
 
-If everything is correct, the `hostname` command should be able to return both the short hostname, and the fully qualified hostname.
+If everything is correct, the `hostname` command should be able to return both the short {term}`hostname`, and the fully qualified hostname.
 
 For the short hostname, use the command:
 

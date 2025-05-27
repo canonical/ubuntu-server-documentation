@@ -1,7 +1,7 @@
 (apparmor)=
 # AppArmor
 
-[AppArmor](https://apparmor.net/) is an easy-to-use Linux Security Module implementation that restricts applications' capabilities and permissions with **profiles** that are set per-program. It provides mandatory access control (MAC) to supplement the more traditional UNIX model of discretionary access control (DAC).
+[AppArmor](https://apparmor.net/) is an easy-to-use Linux Security Module implementation that restricts applications' capabilities and permissions with **profiles** that are set per-program. It provides mandatory access control (MAC) to supplement the more traditional UNIX model of discretionary access control ({term}`DAC`).
 
 In Ubuntu, AppArmor is installed and loaded by default -- you can check this by running `aa-status`.
 
@@ -119,8 +119,9 @@ Which can be broken down as follows:
 
 - `/bin/ping mixr,`: allows the application read and execute access to the file.
 
-> **Note**:
-> After editing a profile file the profile must be reloaded.
+```{note}
+After editing a profile file the profile must be reloaded.
+```
 
 ### Create a Profile
 
@@ -169,7 +170,7 @@ Some even more experimental profiles carried by the package are placed in` /usr/
 
 ## Checking and debugging denies
 
-You will see in `dmesg` (and any log that collects kernel messages) if you have hit a **deny**.
+You will see in {term}`dmesg` (and any log that collects kernel messages) if you have hit a **deny**.
 It is worth knowing that this will cover any access that was denied `because it was not allowed`, but `explicit denies` will put no message in your logs at all.
 
 Examples might look like:

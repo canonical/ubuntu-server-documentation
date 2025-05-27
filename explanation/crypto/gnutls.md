@@ -1,7 +1,7 @@
 (gnutls)=
 # GnuTLS
 
-When initialised, the GnuTLS library tries to read its system-wide configuration file
+When initialised, the {term}`GnuTLS` library tries to read its system-wide configuration file
 `/etc/gnutls/config`. If the file doesn't exist, built-in defaults are used. To make configuration changes, the `/etc/gnutls` directory and the `config` file in it must be created manually, since they are not shipped in the Ubuntu packaging.
 
 This config file can be used to disable (or mark as insecure) algorithms and
@@ -228,7 +228,7 @@ cat: /status: Fatal error: gnutls_handshake: A TLS fatal alert has been received
 
 ### Use only AES256 with TLSv1.3
 
-TLSv1.3 has a small list of ciphers, but it includes AES128. Let's remove it:
+TLSv1.3 has a small list of ciphers, but it includes {term}`AES`128. Let's remove it:
 
 ```INI
 [global]

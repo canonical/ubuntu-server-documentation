@@ -3,13 +3,13 @@
 
 Sometimes it's not possible to install WireGuard {ref}`on the home router itself <wireguard-vpn-peer-to-site-on-router>`. Perhaps it's a closed system to which you do not have access, or there is no easy build for that architecture, or any of the other possible reasons.
 
-However, you do have a spare system inside your network that you could use. Here we are going to show one way to make this work. There are others, but we believe this to be the least "involved" as it only requires a couple of (very common) changes in the router itself: NAT port forwarding, and DHCP range editing.
+However, you do have a spare system inside your network that you could use. Here we are going to show one way to make this work. There are others, but we believe this to be the least "involved" as it only requires a couple of (very common) changes in the router itself: NAT port forwarding, and {term}`DHCP` range editing.
 
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 
 ```
                        public internet
-10.10.10.3/24
+10.10.10.11/24
         home0│            xxxxxx       ppp0 ┌────────┐
            ┌─┴──┐         xx   xxxxx  ──────┤ router │
            │    ├─ppp0  xxx       xx        └───┬────┘    home network, .home domain
@@ -22,7 +22,7 @@ To recap, our home network has the `10.10.10.0/24` address, and we want to conne
                                                   │   │     │   │     │   │
                                                   └───┘     └───┘     └───┘
 Reserved for VPN users:
-10.10.10.2-9
+10.10.10.10-49
 ```
 
 ## Router changes
@@ -79,8 +79,9 @@ PublicKey = <contents of laptop-public.key>
 AllowedIPs = 10.10.10.11/32 # any available IP in the VPN range
 ```
 
-> **Note**:
-> Just like in the {ref}`peer-to-site <wireguard-vpn-peer-to-site-on-router>` scenario with WireGuard on the router, there is no `Endpoint` configuration here for the laptop peer, because we don't know where it will be connecting from beforehand.
+```{note}
+Just like in the {ref}`peer-to-site <wireguard-vpn-peer-to-site-on-router>` scenario with WireGuard on the router, there is no `Endpoint` configuration here for the laptop peer, because we don't know where it will be connecting from beforehand.
+```
 
 The final step is to configure this internal system as a router for the VPN users. For that, we need to enable a couple of settings:
 
@@ -110,7 +111,7 @@ $ sudo wg-quick up wg0
 
 The peer configuration will be very similar to what was done before. What changes will be the address, since now it won't be on an exclusive network for the VPN, but will have an address carved out of the home network block.
 
-Let's call this new configuration file `/etc/wireguard/home_internal.conf`:
+Let's call this new configuration file `/etc/wireguard/home0.conf`:
 
 ```
 [Interface]
@@ -127,11 +128,12 @@ AllowedIPs = 10.10.10.0/24
 And bring up this WireGuard interface:
 
 ```bash
-$ sudo wg-quick up home_internal
+$ sudo wg-quick up home0
 ```
 
-> **Note**:
-> There is no need to add an index number to the end of the interface name. That is a convention, but not strictly a requirement.
+```{note}
+There is no need to add an index number to the end of the interface name. That is a convention, but not strictly a requirement.
+```
 
 ## Testing
 

@@ -32,8 +32,9 @@ In other words, it directly benefits our users by increasing the safety, stabili
 
 The phasing system makes it so that different sets of users are chosen to be the first to get the updates, so that there isn't one group of unlucky people who always get potentially broken updates soon after release.
 
-> **Note**:
-> It should be mentioned here that security updates are *never* phased.
+```{note}
+It should be mentioned here that security updates are *never* phased.
+```
 
 ## Can I turn off phased updates?
 
@@ -96,10 +97,6 @@ libglapi-mesa:
 In this output you can see that this package is 20% phased.
 
 You can see the status of all packages currently being phased in Ubuntu at https://people.canonical.com/~ubuntu-archive/phased-updates.html
-
-
-> **Note**:
-> There is a bug report currently active about the fact that the "kept back" message is not as informative as it could be, and the issue is on our radar. If this issue also affects you, you have an Ubuntu Single Sign-On (SSO) account and can log into Launchpad, you can click on the link near the top of the page that says "This bug affects 85 people. Does this bug affect you?". If you then click on "Yes, it affects me", it will increase the bug heat rating, making it more significant.
 
 ## Further reading
 

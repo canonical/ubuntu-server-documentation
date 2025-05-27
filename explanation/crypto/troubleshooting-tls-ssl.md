@@ -21,7 +21,7 @@ To bring up an OpenSSL server, a certificate with a private key is needed. There
 $ openssl req -new -x509 -nodes -days 30 -out myserver.pem -keyout myserver.key
 ```
 
-Answer the questions as you prefer, but the one that needs special attention is the `commonName` (`CN`) one, which should match the hostname of this server. Then bring up the OpenSSL server with this command:
+Answer the questions as you prefer, but the one that needs special attention is the `commonName` (`CN`) one, which should match the {term}`hostname` of this server. Then bring up the OpenSSL server with this command:
 
 ```bash
 $ openssl s_server -cert myserver.pem -key myserver.key

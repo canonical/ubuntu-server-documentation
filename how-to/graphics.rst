@@ -3,18 +3,28 @@
 Graphics
 *********
 
-
-**On-system GPU**
-
-* :ref:`Install NVIDIA drivers <nvidia-drivers-installation>`
-
-
-**Virtual GPU**
-
-* :ref:`Virtualised GPU (vGPU) with QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
+On-system GPU
+=============
 
 .. toctree::
-    :hidden:
+   :titlesonly:
 
-    Install NVIDIA drivers <graphics/install-nvidia-drivers>
-    vGPU with QEMU/KVM <graphics/gpu-virtualization-with-qemu-kvm>
+   Install NVIDIA drivers <graphics/install-nvidia-drivers>
+
+Virtual GPU
+===========
+
+A virtual GPU (vGPU) partitions a physical GPU to enable GPU-accelerated
+workloads in virtualized environments.
+
+.. toctree::
+   :hidden:
+
+   vGPU with QEMU/KVM <graphics/gpu-virtualization-with-qemu-kvm>
+
+* :ref:`Virtual GPU (vGPU) with QEMU/KVM <gpu-virtualization-with-qemu-kvm>`
+
+
+
+
+

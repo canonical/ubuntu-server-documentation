@@ -26,7 +26,7 @@ Prerequisites
 
 * **Hardware:**
 
-  The default Multipass VM will need **5 GiB of disk space**, and
+  The default Multipass VM will need **5** :term:`GiB` **of disk space**, and
   **1 GiB of memory**.
 
 * **Software: -- Multipass**
@@ -76,7 +76,7 @@ Now we can access the VM by running:
     multipass shell tutorial
 
 We will get a "Welcome to Ubuntu" message. Notice that when we run
-this command, the terminal username changes to ``ubuntu`` and the hostname
+this command, the terminal username changes to ``ubuntu`` and the :term:`hostname`
 changes to ``tutorial``:
 
 .. code-block:: bash

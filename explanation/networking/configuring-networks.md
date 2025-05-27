@@ -103,7 +103,7 @@ The following section describes the process of configuring your system's IP addr
 
 ### Temporary IP address assignment
 
-For temporary network configurations, you can use the `ip` command which is also found on most other GNU/Linux operating systems. The `ip` command allows you to configure settings which take effect immediately -- however they are not persistent and will be lost after a reboot.
+For temporary network configurations, you can use the `ip` command which is also found on most other {term}`GNU`/Linux operating systems. The `ip` command allows you to configure settings which take effect immediately -- however they are not persistent and will be lost after a reboot.
 
 To temporarily configure an IP address, you can use the `ip` command in the following manner. Modify the IP address and subnet mask to match your network requirements.
 
@@ -145,7 +145,7 @@ default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
 ```
 
-If you require DNS for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
+If you require {term}`DNS` for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
 
 ```
 nameserver 8.8.8.8
@@ -158,8 +158,9 @@ If you no longer need this configuration and wish to purge all IP configuration 
 ip addr flush eth0
 ```
 
-> **Note**
-> Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+```{note}
+Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+```
 
 ### Dynamic IP address assignment (DHCP client)
 
@@ -206,8 +207,9 @@ The configuration can then be applied using the `netplan` command.
 sudo netplan apply
 ```
 
-> **NOTE**
-> `netplan` in  Ubuntu Bionic 18.04 LTS doesn't understand the "`to: default`" syntax to specify a default route, and should use the older `gateway4: 10.10.10.1` key instead of the whole `routes:` block.
+```{note}
+`netplan` in  Ubuntu Bionic 18.04 LTS doesn't understand the "`to: default`" syntax to specify a default route, and should use the older `gateway4: 10.10.10.1` key instead of the whole `routes:` block.
+```
 
 The loopback interface is identified by the system as `lo` and has a default IP address of 127.0.0.1. It can be viewed using the `ip` command.
 
@@ -223,7 +225,7 @@ ip address show lo
 
 ## Name resolution
 
-Name resolution (as it relates to IP networking) is the process of mapping hostnames to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
+Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
 
 <h3 id="heading--dns-client-configuration">DNS client configuration</h3>
 
@@ -271,7 +273,7 @@ network:
           addresses: [1.1.1.1, 8.8.8.8, 4.4.4.4]
 ```
 
-If you try to ping a host with the name `server1`, your system will automatically query DNS for its Fully Qualified Domain Name (FQDN) in the following order:
+If you try to ping a host with the name `server1`, your system will automatically query DNS for its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` in the following order:
 
 1.  `server1.example.com`
 
@@ -296,8 +298,9 @@ The following is an example of a `hosts` file where a number of local servers ha
 10.0.0.14   server4 server4.example.com file
 ```
 
-> **Note**
-> In this example, notice that each of the servers were given aliases in addition to their proper names and FQDN's. *Server1* has been mapped to the name *vpn*, *server2* is referred to as *mail*, *server3* as *www*, and *server4* as *file*.
+```{note}
+In this example, notice that each of the servers were given aliases in addition to their proper names and FQDN's. *Server1* has been mapped to the name *vpn*, *server2* is referred to as *mail*, *server3* as *www*, and *server4* as *file*.
+```
 
 ### Name Service Switch (NSS) configuration
 
@@ -357,8 +360,9 @@ Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., p
 
 Instead, to achieve this functionality with the `networkd` renderer, users can use [networkd-dispatcher](http://manpages.ubuntu.com/manpages/man8/networkd-dispatcher.8.html). The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
-> **Note**: 
-> If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+```{note}
+If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+```
 
 The [Netplan FAQ has a great table](https://netplan.io/faq/) that compares event timings between `ifupdown`/`systemd-networkd`/`network-manager`.
 

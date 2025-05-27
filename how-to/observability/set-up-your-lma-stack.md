@@ -1,8 +1,11 @@
 (set-up-your-lma-stack)=
 # Set up your LMA stack
 
-> **LMA to COS**
-> The LMA stack is being succeeded by the Canonical Observability Stack (COS). While the current LMA still works, most users are recommended to consider COS instead. For more information, refer to [this COS topic](https://charmhub.io/topics/canonical-observability-stack/). In environments with more limited resources, there is also [COS lite](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
+```{note}
+**LMA to COS**
+
+The LMA stack is being succeeded by the Canonical Observability Stack (COS). While the current LMA still works, most users are recommended to consider COS instead. For more information, refer to [this COS topic](https://charmhub.io/topics/canonical-observability-stack/). In environments with more limited resources, there is also [COS lite](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
+```
 
 Logging, Monitoring, and Alerting (LMA) is a collection of tools that guarantee the availability of your running infrastructure. Your LMA stack will help point out issues in load, networking, and other resources before they become a failure point.
 
@@ -12,14 +15,15 @@ Canonical's LMA stack involves several discrete software services acting in conc
 
 [**Telegraf**](https://docs.influxdata.com/telegraf/v1/) collects metrics from the operating system, running software, and other inputs. Its plugin system permits export of data in any arbitrary format; for this system we collect the data in a central data manager called [**Prometheus**](https://prometheus.io/docs/introduction/overview/).
 
-Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualisation is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) plugin.
+Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualisation is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the Prometheus {term}`Alertmanager` plugin. See [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) for more details.
 
 ## Getting started
 
 Let's set up a basic demonstration with two **nodes**, the first acting as a placeholder load with Telegraf installed - the "Workload", and the second acting as our data visualisation system - the "Monitor". This will help us familiarise ourselves with the various components and how they inter-operate.
 
-> **Note**:
-> For clarity, we'll refer to these two hosts as named: `workload` and `monitor`. If you use other hostnames, substitute your preferred names as we go through this guide.
+```{note}
+For clarity, we'll refer to these two hosts as named: `workload` and `monitor`. If you use other {term}`hostnames <hostname>`, substitute your preferred names as we go through this guide.
+```
 
 The Workload node will be running Telegraf to collect metrics from whatever load we're monitoring. For demonstration purposes we'll just read the CPU/memory data from the node. In a real environment, we'd have multiple hosts (each with their own Telegraf instance) collecting hardware, network, and software statuses particular to that node.
 

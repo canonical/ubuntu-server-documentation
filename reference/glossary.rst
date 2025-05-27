@@ -1,49 +1,84 @@
-.. caution::
-
-    We are currently compiling and defining terms for this glossary. If you would like to help, please visit our :doc:`contributions page <../contributing/index>` for details on how to get involved.
+.. _reference-glossary:
 
 Glossary
 ========
 
+We are currently compiling and defining terms for this glossary. If you would
+like to help, please visit our :doc:`contributions page <../contributing/index>`
+for details on how to get involved.
+
+
+**Jump to:**
+
+:ref:`A <terms_A>` | :ref:`B <terms_B>` | :ref:`C <terms_C>` | :ref:`D <terms_D>` | :ref:`E <terms_E>` | :ref:`F <terms_F>` | :ref:`G <terms_G>` | :ref:`H <terms_H>` | :ref:`I <terms_I>` | :ref:`J <terms_J>` | :ref:`K <terms_K>` | :ref:`L <terms_L>` | :ref:`M <terms_M>` | :ref:`N <terms_N>` | :ref:`O <terms_O>` | :ref:`P <terms_P>` | :ref:`Q <terms_Q>` | :ref:`R <terms_R>` | :ref:`S <terms_S>` | :ref:`T <terms_T>` | :ref:`U <terms_U>` | :ref:`V <terms_V>` | :ref:`W <terms_W>` | :ref:`X <terms_X>` | :ref:`Y <terms_Y>` | :ref:`Z <terms_Z>`
+
+
+.. _terms_A:
+
+A
+-
+
 .. glossary::
 
     ABI
-        *Work in Progress*
+        ABI stands for Application Binary Interface. An ABI is an interface that defines how two modules interact with each other at the machine code level. Most often, these modules are applications using external libraries. An ABI defines a low-level and hardware-dependent interface compared to an an Application Programming Interface (API), which is considered high-level and hardware-independent.
 
-    accesslog
-        *Work in Progress*
+        See `ABI <https://wiki.ubuntu.com/KernelTeam/BuildSystem/ABI>`_ for more details.
+
+        Related topic(s): :term:`API`.
 
     ACL
-        *Work in Progress*
+        ACL stands for Access Control List. An ACL is a list of access permissions that defines entities and their access rights to resources. ACLs can specify access with varying levels of granularity, ranging from full access to a resource, to permission for a specific operation.
 
-    ACLs
-        *Work in Progress*
+        See `ACL <https://manpages.ubuntu.com/manpages/noble/man5/acl.5.html>`_ for more details.
 
-    adapter
-        *Work in Progress*
+        Related topic(s): Security, :term:`OpenLDAP`, and :term:`Kerberos`.
 
     ADSys
-        *Work in Progress*
+        ADSys is an Ubuntu-specific Active Directory client developed by Canonical. ADSys complements System Security Services Daemon (SSSD) by adding native Group Policy Object support, privilege management, and custom scripts execution.
+
+        See `ADSys <https://documentation.ubuntu.com/adsys/en/stable/>`_ for more details.
+
+        Related topic(s): :term:`Group Policy Object` and :term:`SSSD`.
 
     AES
-        *Work in Progress*
+        AES stands for Advanced Encryption Standard. An AES is a symmetric encryption algorithm designed to encrypt data securely into an unreadable format that can only be decrypted with the same key used for encryption.
+
+        Related topic(s): Security.
 
     Alertmanager
-        *Work in Progress*
+        Alertmanager is an open-source monitoring system developed by the Prometheus project to monitor and handle alerts. It offers several key features, including *Grouping* to combine alerts, *Inhibition* to suppress certain alerts when others are already firing, and *Silencing* to temporarily mute specific alerts.
 
-    ALSA
-        *Work in Progress*
+        See `Alertmanager <https://prometheus.io/docs/alerting/latest/alertmanager/>`_ for more details.
+
+        Related topic(s): Observability and :term:`Prometheus`.
 
     ALUA
         *Work in Progress*
 
     AMD
-        *Work in Progress*
+        AMD stands for Advanced Micro Devices and can refer to:
+
+            * The (AMD) company: semiconductor company that designs computer components.
+            * An AMD processor: a microprocessor designed and produced by the AMD company.
+            * All Intel/AMD 64-bit processors: the term "amd64" is commonly used to refers to 64-bit processors due to the company's role in developing this architecture.
+
+        Related topic(s): Networking.
 
     Ansible
-        *Work in Progress*
+        Ansible is an open-source IT automation tool developed by Red Hat. It offers several automation features, enabling developers and organizations to automate provisioning, configuration management, and application deployment.
+
+        See `Ansible <https://docs.ansible.com/>`_ for more details.
+
+        Related topic(s): Automation.
 
     Apache2
+        A robust, open-source HTTP server software designed for the deployment and delivery of web-based applications and content. Functioning as a request-response service, Apache 2 processes HTTP requests from client applications, facilitating 
+        the transmission of static and dynamic web resources. Characterized by its modular architecture, it supports a wide array of extensions, enabling customizable functionality including security protocols (e.g., SSL/TLS), server-side 
+        scripting, and content management. Widely deployed in diverse server environments, Apache 2 is a foundational component of numerous web infrastructure stacks, underpinning a substantial portion of internet-accessible services.
+        See `the Apache project documentation <https://httpd.apache.org/docs/2.4/>`_ for more details.
+
+    API
         *Work in Progress*
 
     AppArmor
@@ -88,6 +123,13 @@ Glossary
     AX
         *Work in Progress*
 
+.. _terms_B:
+
+B
+-
+
+.. glossary::
+
     backend
         *Work in Progress*
 
@@ -120,6 +162,7 @@ Glossary
 
     bootloader
         *Work in Progress*
+
     bootp
         *Work in Progress*
 
@@ -137,6 +180,13 @@ Glossary
 
     Byobu
         *Work in Progress*
+
+.. _terms_C:
+
+C
+-
+
+.. glossary::
 
     CA
         *Work in Progress*
@@ -165,7 +215,7 @@ Glossary
     cfg
         *Work in Progress*
 
-    cgi
+    CGI
         *Work in Progress*
 
     CGNAT
@@ -303,410 +353,416 @@ Glossary
     CX
         *Work in Progress*
 
+.. _terms_D:
+
+D
+-
+
+.. glossary::
+
     DAC
-        *Work in Progress*
+        **Discretionary access control**:
+        A form of access control where the owner of a resource can grant/revoke permissions to other users.
 
     daemonize
-        *Work in Progress*
+        The process of converting a program to run in the background as a service, independent of user sessions.
 
     DARPA
-        *Work in Progress*
+        **Defense Advanced Research Projects Agency**:
+        A research and development agency of the United States Department of Defense responsible for the development of emerging technologies for use in the military.
 
     DASD
-        *Work in Progress*
-
-    datacentre
-        *Work in Progress*
+        **Direct Access Storage Device**:
+        The term was coined by IBM to refer to a type of storage that allow random access to storage (hard-drives, optical discs, ...). It contrast with sequential access storage such as magnetic tape or punched card.
 
     Datagram
-        *Work in Progress*
-
-    dbgsym
-        *Work in Progress*
+        In networking, a self contained, independent packet sent over a network. It can be routed from source to destination without relying on earlier or subsequent transfers.
 
     dblink
-        *Work in Progress*
-
-    DBs
-        *Work in Progress*
+        **Database Link**:
+        Connection between two databases (mainly Oracle and PostgreSQL), allowing one database to query data from the other.
 
     ddeb
         *Work in Progress*
 
-    ddebs
-        *Work in Progress*
-
     DDNS
-        *Work in Progress*
-
-    de
-        *Work in Progress*
+        **Dynamic domain name system**:
+        A service that automatically updates DNS records when the underlying IP address changes (aka, dynamic IP).
 
     debconf
-        *Work in Progress*
-
-    Debian
-        *Work in Progress*
-
-    debuginfo
-        *Work in Progress*
-
-    debuginfod
-        *Work in Progress*
-
-    decrypt
-        *Work in Progress*
+        A configuration management system handling the configuration of software packages during installation or upgrades by prompting users for necessary settings and storing them for subsequent installations or updates.
 
     deduplication
-        *Work in Progress*
+        Process of removing duplicate copies of data in storage spaces. The redundant data is then replace with a reference to the original.
 
     denylist
-        *Work in Progress*
+        In cyber-security, a denylist is a list of entities (IP, domains, emails, ...), that are explicitly denied access to a system or service.
 
     DER
-        *Work in Progress*
-
-    dev
-        *Work in Progress*
-
-    devel
-        *Work in Progress*
-
-    DevStack
-        *Work in Progress*
+        **Distinguished Encoding Rules**:
+        An standardised encoding format for data (mostly cryptographic certificates and keys) for transmission and storage.
 
     DGC
-        *Work in Progress*
+        **Distributed Garbage Collection**:
+        A process used in distributed systems to manage memory across multiple interconnected computers allowing identification and reclaiming of unused memory accross nodes.
 
     DHCP
-        *Work in Progress*
+        **Dynamic Host Configuration Protocol**:
+        A network protocol used to automatically assign network configuration details (IP, DNS, gateway, ...) to devices allowing for easy network management and connections within the network.
 
-    dhcpd
-        *Work in Progress*
-
-    dir
-        *Work in Progress*
-
-    DirectoryIndex
-        *Work in Progress*
+    DHCPD
+        **Dynamic Host Configuration Protocol Daemon**:
+        Server software responsible for assigning the network configuration via DHCP.
 
     DIT
-        *Work in Progress*
+        **Directory Information Tree**:
+        In directory services (LDAP) it's a hierarchical tree-like structure used to organize and store information. 
 
     DKMS
-        *Work in Progress*
-
-    DLM
-        *Work in Progress*
-
-    DM
-        *Work in Progress*
+        **Dynamic Kernel Module Support**:
+        A framework used in Linux systems to automatically rebuild and install kernel modules when the kernel is updated.
 
     DMA
-        *Work in Progress*
+        **Direct Memory Access**:
+        A technology that allows peripheral devices (hard drives, network cards, ...) to access the system's memory directly, bypassing the CPU and thus improving performance.
 
     DMAR
-        *Work in Progress*
+        **Direct Memory Access Remapping**:
+        It is a technology used to control and secure Direct Memory Access (DMA) operations and ensures that devices can only access memory regions they are authorized to, helping to prevent unauthorized access, memory corruption, or security vulnerabilities. It is often used in virtualized environments to isolate devices between virtual machines (VMs) and the host system.
 
     dmesg
-        *Work in Progress*
-
-    dmsetup
-        *Work in Progress*
+        A command in Linux systems that displays system logs related to hardware, drivers, and kernel events, such as system startup, device detection, and errors. It is commonly used for troubleshooting hardware issues and system diagnostics.
 
     DN
-        *Work in Progress*
+        **Distinguished Name**:
+        In directory services (LDAP), it's a unique identifier used to represent an entry in a directory, such as a user or a group. It's often composed of sub-components like CN (Common Name), OU (Organisational Unit), DC (Domain Component).
 
     DNS
-        *Work in Progress*
-
-    dnsleaktest
-        *Work in Progress*
+        **Domain Name System**:
+        A system that translate human-readable domain names (canonical.com) to their IP addresses (185.125.190.20).
 
     dnsmasq
-        *Work in Progress*
+        A lightweight, open-source DNS (Domain Name System) and DHCP (Dynamic Host Configuration Protocol) server software.
 
     DNSSEC
-        *Work in Progress*
+        **Domain Name System Security Extensions**:
+        DNSSEC is a set of security extensions to DNS which allow DNS data to be verified for authenticity and integrity.
 
     Docker
-        *Work in Progress*
+        One of the most popular containerization platforms, which allows developers to package applications - together with their dependencies - into lightweight containers. This provides a consistently reproducible environment for deploying applications.
 
     DocumentRoot
-        *Work in Progress*
-
-    DPDK
-        *Work in Progress*
+        A directive in web server configuration files that specifies the directory on the server where web files are stored (root location). 
 
     dpkg
-        *Work in Progress*
+        dpkg is a package manager for Debian-based systems. It can install, remove, and build packages, but unlike other package management systems, it cannot automatically download and install packages – or their dependencies.
 
     DRBD
-        *Work in Progress*
+        **Distributed Replicated Block Device**:
+        A software-based storage solution for Linux that allows for the mirroring of block devices between multiple hosts. The replication is transparent to other applications on the host systems. Any block device hard disks, partitions, RAID devices, logical volumes, etc can be mirrored.
 
     DTLS
-        *Work in Progress*
+        **Datagram Transport Layer Security**:
+        A protocol that provides security for datagram-based communication, such as UDP. It is designed to offer similar security features as TLS but adapted for the connectionless nature of datagram protocols.
+
+.. _terms_E:
+
+E
+-
+
+.. glossary::
 
     EAL
-        *Work in Progress*
-
-    EasyRSA
-        *Work in Progress*
+        **Environment Abstraction Layer**:
+        A software layer that provides a standardised interface between an operating system and the underlying hardware. It abstracts hardware-specific details, allowing software to run on different hardware platforms without modification.
 
     ECKD
-        *Work in Progress*
-
-    ECR
-        *Work in Progress*
-
-    EF
-        *Work in Progress*
+        **Extended Count Key Data**:
+        A disk storage format used by IBM mainframe systems, it provides advanced features such as better error detection and correction, as well as enhanced management of data records.
 
     EFI
-        *Work in Progress*
+        **Extensible Firmware Interface**:
+        A type of firmware interface designed to initialize hardware and load the operating system during the boot process of a computer. Replacement for the older BIOS and ancestor of the UEFI.
 
     ELinks
-        *Work in Progress*
-
-    EMC
-        *Work in Progress*
+        A text-based web browser for Unix-like operating systems. It allows users to browse the web in a terminal making it ideal for environments without a graphical user interface.
 
     Engenio
-        *Work in Progress*
-
-    ensite
-        *Work in Progress*
+        A company that developed and manufactured storage systems including SAN and NAS. Later acquired by LSI Corporation and then by Seagate Technology.
 
     EOL
-        *Work in Progress*
+        **End of life**:
+        When a product, service, software is no longer supported or maintained.
 
     ERD
-        *Work in Progress*
-
-    ErrorDocument
-        *Work in Progress*
-
-    ErrorLog
-        *Work in Progress*
+        **Enterprise Ready Drivers**:
+        Drivers that are specifically designed and optimized for use in enterprise environments, where stability, performance, and reliability are critical.
 
     ESM
-        *Work in Progress*
+        **Expanded Security Maintenance**:
+        A support offering provided by Ubuntu, to extend security updates and patches for older versions of the operating system after its standard support period has ended. 
 
     ESXi
-        *Work in Progress*
+        A bare-metal virtualization platform created by VMWare that enables multiple virtual machines to operate on a single physical server.
 
-    etckeeper
-        *Work in Progress*
+.. _terms_F:
 
-    ETW
-        *Work in Progress*
+F
+-
 
-    etwlogs
-        *Work in Progress*
-
-    ExecCGI
-        *Work in Progress*
-
-    executables
-        *Work in Progress*
-
-    eXecution
-        *Work in Progress*
-
-    Exim4
-        *Work in Progress*
-
-    exportfs
-        *Work in Progress*
+.. glossary::
 
     failover
-        *Work in Progress*
+        In a Storage Area Network (SAN) environment, this occurs when data flows into an alternative I/O path because a cable, switch, or controller in the current path failed.
+        It is a common feature in high availability environments and is handled (usually automatically) by multipathing software.
 
     fallbacks
-        *Work in Progress*
+        This is a manual or automatic switch to an alternative method, when the primary option fails or is less preferred.
 
     FastCGI
-        *Work in Progress*
+        Fast Common Gateway Interface (FastCGI) is an extension of the CGI protocol that starts a persistent FastCGI 
+        application process, allowing it to handle multiple requests instead of starting a new process for each request like a traditional CGI does.
 
     FC
-        *Work in Progress*
+        Fiber Channel (FC) is a storage networking protocol used for low-latency communication between a storage device and a node in a Storage Area Network (SAN).
 
     FHS
-        *Work in Progress*
-
-    filebug
-        *Work in Progress*
+        Filesystem Hierarchy Standard (FHS) is a standard that defines the directory structure and contents in Linux and Unix-like operating systems.
 
     FileSet
-        *Work in Progress*
+        A FileSet defines a group of directories that will be included when performing a backup job using :term:`Bacula`.
+
+        Related topic(s): :term:`Storage <storages>`
 
     filesystem
-        *Work in Progress*
+        A filesystem defines how data is organized, stored, and accessed on a storage device.
 
-    FIPS
-        *Work in Progress*
-
-    firsttest
-        *Work in Progress*
+        Related topic(s): :term:`Storage <storages>`
 
     Fluentd
-        *Work in Progress*
+        Fluentd is a data collection platform that gathers events from a container for later analysis on other platforms.
+
+        Related topic(s): Observability, and Containers.
 
     FQDN
-        *Work in Progress*
+        A Fully Qualified Domain Name (FQDN) represents a complete name that specifies the exact location of a host within the :term:`DNS` hierarchy.
 
-    Freedesktop
-        *Work in Progress*
+        Related topic(s): Networking, Web services, Security, Active directory integration, and :term:`OpenLDAP`.
 
     FreeIPA
-        *Work in Progress*
+        Free Identity, Policy, and Audit (FreeIPA) is an open-source security solution for Linux/Unix-like systems that stores 
+        user identities in an :term:`LDAP` directory, manages a :term:`CA`, and enables authentication, policy enforcement, and 
+        auditing through integrations with :term:`SSSD` and :term:`Kerberos`.
+    
+        Related topic(s): Security, and :term:`OpenLDAP`.
 
     freenode
-        *Work in Progress*
+        Freenode is an open-source Internet Relay Chat (IRC) platform used by open-source communities for real-time discussions. 
 
     frontend
-        *Work in Progress*
+        A frontend is a user-friendly interface for managing a complex system.
+
+        - In firewall management, a frontend like `ufw` simplifies configuring `iptables`.
+        - In QEMU/KVM graphics, a frontend is the virtual graphic adapter presented to the guest OS, allowing it to process and store graphical output in memory. The guest OS treats it like a GPU, while the host determines how to display the output using the :term:`backend`.
+        - In :term:`LDAP`, the frontend is a unique database that defines global default settings, such as who the admin user is, who can access database entries, or the limit on the number of search results. These settings apply to all LDAP databases inside :term:`slapd`, unless overridden.
+
+        Related topic(s): Virtualization and containers, Security, and :term:`OpenLDAP`.
 
     fsck
-        *Work in Progress*
+        File System Check (fsck) is a Linux/Unix-like system utility tool that checks for, and repairs, any filesystem errors.
 
-    fsync
-        *Work in Progress*
-
-    fulfill
-        *Work in Progress*
+        Related topic(s): :term:`Storage <storages>`
 
     FULLTEXT
-        *Work in Progress*
+ 
+        FULLTEXT is an index type that allows for fast indexing and searching large quantities of text. It takes a sentence, splits it into words, and links them to row IDs. When a search query for a word is made, MySQL 
+        quickly looks up the row the word appear in, and retrieves all matching row IDs, rather than scanning the entire table. It can also find similar words using natural language processing.
+
+        See `Full-Text Search Functions <https://dev.mysql.com/doc/refman/8.4/en/fulltext-search.html>`_ for more details.
+
+        Related topic(s): Databases
 
     FW
-        *Work in Progress*
 
-    GCE
-        *Work in Progress*
+        A firmware (FW) is a software that runs before an operating system (OS) boots.
 
-    GCM
-        *Work in Progress*
+        - When a QEMU microvm starts, the firmware initializes minimal virtual hardware like allocating RAM to the OS, etc. and then loads the Linux kernel into memory.
 
-    GCP
-        *Work in Progress*
+        - In a physical device, firmware configures :term:`PCIe` devices like GPUs or network cards.
+
+        Related topic(s): Virtualisation, Networking, Virtualisation and containers, Graphics, and Server installation.
+
+.. _terms_G:
+
+G
+-
+
+.. glossary::
 
     gcplogs
-        *Work in Progress*
+        A logging driver that allows logs to be forwarded from a Docker container running in Google Cloud to the Google Cloud Logging service.
+        
+        Related topic(s): Containers, and Observability.
 
     gcrypt
-        *Work in Progress*
+        A cryptographic library that supports encryption, hashing, etc. for applications.
+
+        Related topic(s): Cryptographic libraries
 
     GDB
-        *Work in Progress*
+        :term:`GNU` Debugger traces the current execution of a program, with the aim of identifying any issues.
+
+        Related topic(s): Debugging
 
     gelf
-        *Work in Progress*
+        :term:`Graylog` Extended Log Format (GELF) is a logging driver that allow logs to be forwarded in :term:`JSON` format, but with extra unique fields. These logs are sent from a Docker container to a data collector platform like Graylog, :term:`Logstash`, and :term:`Fluentd`.
 
-    Gentoo
-        *Work in Progress*
-
-    GFS
-        *Work in Progress*
+        Related topic(s): Containers, and Observability.
 
     GFS2
-        *Work in Progress*
+        A shared-disk :term:`filesystem` that allows multiple servers to access a single disk. It uses a locking system to ensure that no two servers modify the same data simultaneously, thus, preventing data corruption if one server fails. Additionally, fencing is used to isolate failed nodes, ensuring that their locks can be safely recovered.
 
-    GiB
-        *Work in Progress*
+        Related topic(s): High availability, and Storage.
+
+    GiB 
+        A gigabyte (GiB) is a unit of storage equal to 1024^3 bytes. It is commonly used to describe the size of a disk or Random Access Memory (RAM).
+
+        Related topic(s): Storage
 
     GID
-        *Work in Progress*
+        A Group ID (GID) is an identifier for a collection of users. It helps administrators enforce system or file 
+        access permissions on multiple users at once.
+
+        Related topic(s): Active Directory integration, Containers, Kerberos, Multipath, OpenLDAP, Samba, Security, SSSD.
 
     gitolite
-        *Work in Progress*
+        Gitolite is a tool installed on a central server for managing git repositories and controlling access to them, all via the command line. The central server becomes a git server.
+
+        Related topic(s): Backups and version control
 
     GKE
-        *Work in Progress*
+        Google Kubernetes Engine (GKE) is a managed Kubernetes service provided by Google cloud.
 
     GL
-        *Work in Progress*
+        GL (Graphics Library) is an :term:`API` for interacting with a graphics card, enabling it to perform better rendering.
+
+        Related topic(s): Graphics
 
     GNU
-        *Work in Progress*
+        GNU's Not Unix (GNU) is an operating system containing several free software packages. It can be used in combination with the Linux kernel.
+
+        Related topic(s): Active Directory integration, Cryptography, Debugging, High availability, Networking, Performance, Samba, Security, and Server installation.
 
     GnuTLS
-        *Work in Progress*
+        GNU's Not Unix Transport Layer Security (GnuTLS) is a GNU software package that secures data-in-transit by implementing the :term:`SSL`, :term:`TLS` and :term:`DTLS` protocol.
+
+        Related topic(s): Cryptography, Web services, and OpenLDAP.
 
     GPG
-        *Work in Progress*
+        GNU Privacy Guard (GPG) is a GNU software package that secures data-at-rest before sending it to a recepient.
 
-    GPL
-        *Work in Progress*
+        Related topic(s): Managing software
 
     GPS
-        *Work in Progress*
+        Global Positioning System (GPS) is a collection of satellites that provides accurate time using radio signals from their atomic clocks. A GPS receiver 
+        plugged into a computer can sync with these satellites and generate PPS signal, which delivers ultra-accurate time that applications can use as a time source.
+
+        Related topic(s): Networking
 
     GPSD
-        *Work in Progress*
+        GPSD (GPS daemon) reads data from a GPS receiver and makes it available as a shared resource to multiple applications (e.g., :term:`Chrony`) to use for precise time synchronization.
 
-    gpsd
-        *Work in Progress*
+        Related topic(s): Networking
 
     GPUs
-        *Work in Progress*
+        A Graphics Processing Unit (GPU) enhances graphics rendering for a computer and virtual machines running inside of it.
+
+        Related topic(s): Graphics, and Virtualisation and containers.
 
     Graylog
-        *Work in Progress*
+        A data collector platform for storing, analysing, and interpreting logs. These logs are received from a :term:`gelf` logging driver in Docker.
 
-    grubnetaa
-        *Work in Progress*
+        Related topic(s): Containers
 
-    grubnetx
-        *Work in Progress*
+    Group Policy Object
+        A set of configuration rules used to manage and enforce security and system behaviours across users or computers within an Active Directory (AD) object.
+
+        Related topic(s): Active Directory integration
 
     GSSAPI
-        *Work in Progress*
+        Generic Security Services Application Program Interface (GSSAPI) is a vendor agnostic API that uses an existing 
+        communication protocol to establish a secure communication between applications. It does this securely by verifying user 
+        credentials, ensuring that data being transmitted remains unchanged, preventing unauthorized access, and securely negotiating encryption keys.
+
+        Related topic(s): Cryptography
 
     GTK
-        *Work in Progress*
+        GIMP Toolkit (GTK) is a library used to create :term:`graphical user interfaces (GUIs) <GUI>`. It provides a visual 
+        interface for interacting with the Bacula Director when managing backup-related operations.
+
+        Related topic(s): Graphics, and Backups and version control
 
     GUI
-        *Work in Progress*
-
-    GUIs
-        *Work in Progress*
-
-    GV
-        *Work in Progress*
+        Graphical User Interface (GUI) is a visual representation of operations within a computer. It is usually represented as icons rather than text only.
 
     GZIP
-        *Work in Progress*
+        GNU Zip is a :term:`GNU` software package used to reduce a files size of a backup.
+        
+        - When applied directly to files, it replaces the original file type with a ".gz" type.
+        - When used in Bacula's :term:`FileSet`, it reduces the storage size of backed-up directories within Bacula's storage volumes.
+        - When used to reduce the size of a folder, it works in combination with a tar tool which first combines multiple files into a single archive, before applying GZIP's size-reduction technique.
+
+        Related topic(s): Backups and version control, and Security.
+
+.. _terms_H:
+
+H
+-
+
+.. glossary::
 
     HA
-        *Work in Progress*
+        High Availability (HA) is the process of ensuring that a system is always up. To achieve this, a redundant system is setup that either
+        takes over when the main system is down or runs alongside the main system to load balance the workload.
+
+        Related topic(s): High availability, and OpenLDAP.
 
     HBAs
-        *Work in Progress*
+        Host Bus Adapters (HBAs) are interface cards that connect a server to a storage device.
+
+        Related topic(S): Device mapper multipathing and Server installation
 
     HMAC
-        *Work in Progress*
+        A Hash-based Message Authentication Code (HMAC) is a type of :term:`Message Authentication Code (MAC) <MAC>`.
+        While a general MAC may use various techniques during combination, HMAC follows a structured way. When a message and its 
+        HMAC are sent, the receiver verifies the integrity by computing the HMAC again - if the message is altered, the value will differ.
+
+        Related topic(S): High availability, Kerberos, Cryptography, and Security.
 
     HMC
-        *Work in Progress*
+        Hardware Management Console (HMC) is used to manage IBM servers. It can handle tasks like configuring network settings, loading Ubuntu installation files and installing the OS.
+
+        Related topic(S): Server installation
 
     hostgroup
-        *Work in Progress*
+        A group of backend web or database servers with similar configurations.
+
+        Related topic(S): Observability
 
     hostname
-        *Work in Progress*
+        A hostname identifies a server using a word rather than an IP address. This makes it easier to remember.
 
     HOTP
-        *Work in Progress*
+        HMAC-based One-Time Password (HOTP) generates a one-time password by using the :term:`HMAC` algorithm in combination with a counter. When a client presents the OTP, the server compares it with OTPs generated within a specific counter window to find a match.
 
     hotplug
-        *Work in Progress*
+        The process of adding or removing a device (USB, disks, etc.) while a virtual machine is running.
 
-    hpb
-        *Work in Progress*
+    HPB
+        Host Physical Bits (HPB) are appended to the name of an Ubuntu machine type. It signifies that a virtual machine will use the same number of bits the host CPU uses to point to physical memory.
 
     HPC
-        *Work in Progress*
+        High Performance Computing (HPC) is the use of multiple servers to improve the performance of a task.
 
     HSG
         *Work in Progress*
@@ -733,10 +789,17 @@ Glossary
         *Work in Progress*
 
     hugepage
-        *Work in Progress*
+        A huge page increases the page size on a host, and as a result, when virtual memory is allocated to an application, there are fewer page table entries required to map the virtual memory to physical memory. The page table entries are stored in Random Access Memory (RAM) and cached in the :term:`Translation Lookaside Buffer (TLB) <TLB>`.
 
     HWE
         *Work in Progress*
+
+.. _terms_I:
+
+I
+-
+
+.. glossary::
 
     ICAO
         *Work in Progress*
@@ -851,6 +914,7 @@ Glossary
 
     ISC's
         *Work in Progress*
+
     iSCSI
         *Work in Progress*
 
@@ -869,14 +933,38 @@ Glossary
     ISP
         *Work in Progress*
 
+.. _terms_J:
+
+J
+-
+
+.. glossary::
+
     jitter
-        *Work in Progress*
+        Jitter is the variation in delay or latency between when data packets are sent and when they are received over a network, causing irregular arrival times at the destination. This variation is often caused by network congestion, packet loss, poor hardware performance or differences in the path packets take. 
+
+        Related topic(s): Networking.
 
     journald
-        *Work in Progress*
+        Journald, also known as systemd-journald, is a logging service developed by the systemd project as part of the systemd suite. It collects and stores log messages from various sources, including systemd services, kernel messages, system logs, and application logs. Journald stores logs in a binary format offering advantages, such as storage efficiency, searchability, and most especially structured logging. In containerized systems like Docker, it functions as a logging driver for containers. 
+
+        See `manpage for journald.conf <https://manpages.ubuntu.com/manpages/noble/man5/journald.conf.5.html/>`_ for more information.
+        See the `Docker journald documentation <https://docs.docker.com/engine/logging/drivers/journald/>`_ for details on using journald as a logging driver.
+
+        Related topic(s): logging and :term:`Docker`.
 
     JSON
-        *Work in Progress*
+        **JavaScript Object Notation**:
+        This is a text format that is completely language independent but uses conventions that are familiar with programmers of the C-family of languages, including C, C++, C#, Java, JavaScript, Perl, Python, and many others. Due to its simplicity, it is an ideal lightweight data interchange language.
+
+        See `JSON <https://www.json.org/json-en.html/>`_ for more details.
+
+.. _terms_K:
+
+K
+-
+
+.. glossary::
 
     KDC
         *Work in Progress*
@@ -919,6 +1007,13 @@ Glossary
 
     KVM
         *Work in Progress*
+
+.. _terms_L:
+
+L
+-
+
+.. glossary::
 
     LAN
         *Work in Progress*
@@ -1043,8 +1138,18 @@ Glossary
     LXD
         *Work in Progress*
 
+.. _terms_M:
+
+M
+-
+
+.. glossary::
+
     MAAS
         *Work in Progress*
+    
+    MAC
+        A Message Authentication Code (MAC) verifies that a message hasn't been modified during transmission by combining a shared secret key between the sender and receiver, and a hash function.
 
     macvlan
         *Work in Progress*
@@ -1135,6 +1240,13 @@ Glossary
 
     MySQL
         *Work in Progress*
+
+.. _terms_N:
+
+N
+-
+
+.. glossary::
 
     Nagios
         *Work in Progress*
@@ -1250,6 +1362,13 @@ Glossary
     NVSwitch
         *Work in Progress*
 
+.. _terms_O:
+
+O
+-
+
+.. glossary::
+
     OCF
         *Work in Progress*
 
@@ -1313,7 +1432,14 @@ Glossary
     OVS
         *Work in Progress*
 
-    pam
+.. _terms_P:
+
+P
+-
+
+.. glossary::
+
+    PAM
         *Work in Progress*
 
     parm
@@ -1430,6 +1556,9 @@ Glossary
     procfs
         *Work in Progress*
 
+    Prometheus
+        *Work in Progress*
+
     proxied
         *Work in Progress*
 
@@ -1454,6 +1583,13 @@ Glossary
     PXELINUX
         *Work in Progress*
 
+.. _terms_Q:
+
+Q
+-
+
+.. glossary::
+
     qa
         *Work in Progress*
 
@@ -1471,6 +1607,13 @@ Glossary
 
     quickstart
         *Work in Progress*
+
+.. _terms_R:
+
+R
+-
+
+.. glossary::
 
     rangesize
         *Work in Progress*
@@ -1540,6 +1683,13 @@ Glossary
 
     runtime
         *Work in Progress*
+
+.. _terms_S:
+
+S
+-
+
+.. glossary::
 
     SAN
         *Work in Progress*
@@ -1820,6 +1970,13 @@ Glossary
     Systemd
         *Work in Progress*
 
+.. _terms_T:
+
+T
+-
+
+.. glossary::
+
     targetcli
         *Work in Progress*
 
@@ -1860,7 +2017,7 @@ Glossary
         *Work in Progress*
 
     TLB
-        *Work in Progress*
+        Translation Lookaside Buffer (TLB) is a CPU cache that stores recent page table entries. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it's missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
 
     TLS
         *Work in Progress*
@@ -1903,6 +2060,13 @@ Glossary
 
     TXT
         *Work in Progress*
+
+.. _terms_U:
+
+U
+-
+
+.. glossary::
 
     UDA
         *Work in Progress*
@@ -1994,6 +2158,13 @@ Glossary
     UVTool
         *Work in Progress*
 
+.. _terms_V:
+
+V
+-
+
+.. glossary::
+
     Valgrind
         *Work in Progress*
 
@@ -2066,6 +2237,13 @@ Glossary
     vsftpd
         *Work in Progress*
 
+.. _terms_W:
+
+W
+-
+
+.. glossary::
+
     WAL
         *Work in Progress*
 
@@ -2114,6 +2292,13 @@ Glossary
     wxWidgets
         *Work in Progress*
 
+.. _terms_X:
+
+X
+-
+
+.. glossary::
+
     Xen
         *Work in Progress*
 
@@ -2126,11 +2311,25 @@ Glossary
     xml
         *Work in Progress*
 
+.. _terms_Y:
+
+Y
+-
+
+.. glossary::
+
     YAML
         *Work in Progress*
 
     Yubikey
         *Work in Progress*
+
+.. _terms_Z:
+
+Z
+-
+
+.. glossary::
 
     zFCP
         *Work in Progress*

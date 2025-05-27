@@ -30,7 +30,7 @@ server {
 }
 ```
 
-Even for a single-site configuration, while you can place your website at `/var/www/html`, you may want to place the website's files at a different location in your filesystem. For example, if you were hosting `www.my-site.org` from `/srv/my-site/html` you might edit the above file to look like this:
+Even for a single-site configuration, while you can place your website at `/var/www/html`, you may want to place the website's files at a different location in your {term}`filesystem`. For example, if you were hosting `www.my-site.org` from `/srv/my-site/html` you might edit the above file to look like this:
 
 ```text
 server {
@@ -116,7 +116,7 @@ server {
 
 Thanks to the `return 301` line in the above configuration, anyone visiting the site on port 80 via an HTTP URL will get automatically redirected to the equivalent secure HTTPS URL.
 
-Refer to the {ref}`security - certificates <certificates>` page in this manual for details on how to create and manage certificates, and the {ref}`OpenSSL <openssl>` page for additional details on configuring and using that service. The {ref}`GnuTLS <openssl>` section explains how to configure different SSL protocol versions and their associated ciphers.
+Refer to the {ref}`security - certificates <certificates>` page in this manual for details on how to create and manage certificates, and the {ref}`OpenSSL <openssl>` page for additional details on configuring and using that service. The {ref}`GnuTLS <gnutls>` section explains how to configure different SSL protocol versions and their associated ciphers.
 
 For example, to generate a self-signed certificate, you might run a set of commands similar to these:
 
@@ -137,6 +137,6 @@ Beyond the settings outlined above, nginx can be further customised through the 
 
 ## Further reading
 
-* [nginx's beginner's guide](https://nginx.org/en/docs/beginners_guide.html) covers use cases such as  proxy servers, FastCGI for use with PHP and other frameworks, and optimising the handling of static content.
+* [nginx's beginner's guide](https://nginx.org/en/docs/beginners_guide.html) covers use cases such as proxy servers, {term}`FastCGI` for use with PHP and other frameworks, and optimising the handling of static content.
 * The [nginx documentation](https://nginx.org/en/docs/http/configuring_https_servers.html) describes HTTPS server configuration in greater detail, including certificate chains, disambiguating various multi-site certificate situations, performance optimisations and compatibility issues.
 * For Ubuntu-specific nginx questions, ask in the `#ubuntu-server` IRC channel on <a>libera.chat</a>.

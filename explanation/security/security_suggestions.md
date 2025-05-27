@@ -127,7 +127,7 @@ documentation.
    Find out more about
    {ref}`Active Directory integration <explanation-active-directory-integration>`,
    or {ref}`learn how to set it up <how-to-active-directory-integration>`.
-   You may also find ADSys, the Group Policy client for Ubuntu, helpful. See
+   You may also find {term}`ADSys`, the Group Policy client for Ubuntu, helpful. See
    the [ADSys documentation](https://documentation.ubuntu.com/adsys/en/latest/)
    for more details.
 1. **AppArmor** is strongly recommended in order to limit the system access and

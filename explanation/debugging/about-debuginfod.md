@@ -19,7 +19,7 @@ From Kinetic onwards, when you install [GNU Debugger (GDB)](https://www.sourcewa
 export DEBUGINFOD_URLS="https://debuginfod.ubuntu.com"
 ```
 
-When you run GDB, and if you have the `DEBUGINFOD_URLS` variable in your environment, you will be asked whether you would like to use the service.  If you want to make sure that GDB always uses `debuginfod`, you can put the following snippet inside your `~/.gdbinit` file:
+When you run {term}`GDB`, and if you have the `DEBUGINFOD_URLS` variable in your environment, you will be asked whether you would like to use the service.  If you want to make sure that GDB always uses `debuginfod`, you can put the following snippet inside your `~/.gdbinit` file:
 
 ```text
 set debuginfod enabled on
@@ -55,7 +55,7 @@ Reading symbols from /home/ubuntu/.cache/debuginfod_client/c0fbda15a807f880e9d0b
 
 ## Opting out of the service
 
-If, for some reason, you prefer not to use the service, you can opt-out of it by un-setting the `DEBUGINFOD_URLS` environment variable.  This can be done by putting the following snippet inside your shell's configuration file:
+If, for some reason, you prefer not to use the service, you can opt-out of it by unsetting the `DEBUGINFOD_URLS` environment variable. This can be done by putting the following snippet inside your shell's configuration file:
 
 ```
 unset DEBUGINFOD_URLS

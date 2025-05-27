@@ -137,8 +137,9 @@ Once you are finished with your VM, you can destroy it with:
 uvt-kvm destroy secondtest
 ```
 
-> **Note**:
-   Unlike libvirt's `destroy` or `undefine` actions, this will (by default) also remove the associated virtual storage files.
+```{note}
+Unlike libvirt's `destroy` or `undefine` actions, this will (by default) also remove the associated virtual storage files.
+```
 
 ## More `uvt-kvm` options
 

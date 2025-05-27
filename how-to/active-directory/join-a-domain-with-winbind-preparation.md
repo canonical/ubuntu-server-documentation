@@ -7,7 +7,7 @@ To continue, this is the minimum set of packages that are needed:
 
     sudo apt install winbind libnss-winbind libpam-winbind
 
-Next, it will make everything much easier if the DNS resolver is pointed at the Active Directory DNS server. If that is already the case as provided by the DHCP server, this part can be skipped.
+Next, it will make everything much easier if the {term}`DNS` resolver is pointed at the Active Directory DNS server. If that is already the case as provided by the {term}`DHCP` server, this part can be skipped.
 
 For example, for a default netplan configuration file which looks like this:
 
@@ -39,9 +39,9 @@ If there are no complaints, the changes can be applied:
 
     sudo netplan apply
 
-> **NOTE**
->
-> Be careful whenever changing network parameters over an ssh connection. If there are any mistakes, you might lose remote access!
+```{note}
+Be careful whenever changing network parameters over an ssh connection. If there are any mistakes, you might lose remote access!
+```
 
 To check if the resolver was updated, run `resolvectl status`:
 
