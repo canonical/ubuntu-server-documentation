@@ -231,6 +231,10 @@ memberUid: ubuntu
 LDIF
 ```
 ## How the simple bind will work
+Here is a diagram showing everything that is going on:
+
+![openldap saslauthd detailed diagram](../images/openldap-saslauthd-diagram-detailed.png)
+
 When the simple bind is requested for user ubuntu, OpenLDAP will look for the password in the userPassword field.
 In this case the field tells OpenLDAP to use SASL to verify the password. SASL then looks to see what method should be queried for the password verification and in this case will use saslauthd.
 SASL then sends the username and password to saslauthd and here saslauthd is configured to use Kerberos. The password is then checked with the Kerberos server. Saslauthd passes back the
