@@ -1,5 +1,5 @@
 (ldap-saslauthd-kerberos)=
-# How to configure OpenLDAP with pass-through SASL authentication using Kerberos
+# How to configure OpenLDAP with passthrough SASL authentication using Kerberos
 
 ## Before you begin
 It is assumed you are starting with a working OpenLDAP server, with a hostname of `ldap-server.example.com`. If not, follow this guide {ref}`Install and configure OpenLDAP<install-openldap>` to set it up. It is also assumed that the `EXAMPLE.COM` realm is set up, and the Kerberos client tools (krb5-user) are installed on the ldap server. You will need to create an ubuntu principal. See {ref}`How to install a Kerberos server <install-a-kerberos-server>`. You should also know how to create service principals. See {ref}`How to configure Kerberos service principals <configure-service-principals>`.
@@ -283,7 +283,7 @@ krb5_verify_principal: saslauthd
 
 ## References
 
-  - [OpenLDAP Pass-through Authentication](https://www.openldap.org/doc/admin26/security.html#Pass-Through%20authentication)
+  - [OpenLDAP Passthrough Authentication](https://www.openldap.org/doc/admin26/security.html#Pass-Through%20authentication)
   - [Cyrus SASL Password Verification](https://www.cyrusimap.org/sasl/sasl/components.html#password-verification-services)
   - [Cyrus SASL Slapd Configuration File](https://www.cyrusimap.org/sasl/sasl/faqs/openldap-sasl-gssapi.html)
   - [Kerberos Client Hostname Requirements](https://web.mit.edu/kerberos/krb5-1.12/doc/admin/princ_dns.html)
