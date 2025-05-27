@@ -16,6 +16,7 @@ pass back the authentication status to OpenLDAP which in turn passes it back to 
 
 A graphic showing this process is as follows:
 
+![openldap with saslauthd](../images/openldap-saslauthd-diagram.png)
 
 
 ## Saslauthd authentication providers
