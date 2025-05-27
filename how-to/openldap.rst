@@ -19,6 +19,8 @@ presented below is suggested.
    User and group management <openldap/users-and-groups>
    OpenLDAP and TLS <openldap/ldap-and-tls>
    Backup and restore <openldap/backup-and-restore>
+   Introduction to passthrough authentication <openldap/ldap-saslauthd-authentication-intro>
+   Passthrough authentication with Kerberos <openldap/ldap-saslauthd-kerberos>
 
 See also
 ========
