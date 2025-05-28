@@ -171,7 +171,7 @@ For more details on what else could be disabled see
 Run the guest in `qemu-system-x86_64-microvm`:
 
 ```bash
-$ sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm \
+$ sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm,rtc=on \
     -bios /usr/share/qemu/qboot.rom \
     -kernel /boot/vmlinuz-$(uname -r) \
     -append 'console=ttyS0 root=/dev/vda fsck.mode=skip init=/usr/bin/hello' \
