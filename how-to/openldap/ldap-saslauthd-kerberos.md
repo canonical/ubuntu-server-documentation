@@ -57,7 +57,7 @@ The simplest way to create this principal, and extract the key safely, is to run
 ```text
 sudo kadmin -p ubuntu/admin
 ```
-The result will be similar to this. Note the two commands we are issuing at the `kadmin:` prompt: `addprinc` and `ktadd`:
+An interactive session will look like below. Note the two commands we are issuing at the `kadmin:` prompt: `addprinc` and `ktadd`:
 ```text
 Authenticating as principal ubuntu/admin with password.
 Password for ubuntu/admin@EXAMPLE.COM
@@ -68,6 +68,20 @@ kadmin: ktadd host/ldap-server.example.com
 Entry for principal host/ldap-server.example.com with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
 Entry for principal host/ldap-server.example.com with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
 ```
+
+Alternatively, we can issue the commands directly:
+```text
+kadmin -p ubuntu/admin -q "addprinc -randkey host/ldap-server.example.com"
+```
+> *NOTE*
+>
+> `sudo` is not needed to remotely create a new principal.
+
+And:
+```text
+sudo kadmin -p ubuntu/admin -q "ktadd host/ldap-server.example.com"
+```
+
 To check that the service principal was added to `/etc/krb5.keytab`, run this command:
 ```text
 sudo klist -k
@@ -107,8 +121,9 @@ Make the following change:
 MECHANISMS="kerberos5"
 ...
 ```
-> **Note**:
-> For Ubuntu version 22.04 and earlier "START=yes" must also be added to the default config file to have sasauthd restart after rebooting.
+> **IMPORTANT**:
+>
+> For Ubuntu version 22.04 and earlier "`START=yes`" must also be added to the default config file for `saslauthd` to start.
 
 Save and exit the editor.
 
@@ -131,15 +146,28 @@ testsaslauthd -u ubuntu -p ubuntusecretwrong
 0: NO "authentication failed"
 ```
 
+> **NOTE**:
+>
+> In Ubuntu 22.04 LTS and earlier, the `/run/saslauthd` directory is restricted to members of the `sasl` group, so the `testsaslauthd` commands above need to be run as root (via `sudo`) or as a user who is in the `sasl` group.
+
 ## Configure OpenLDAP
 In order for OpenLDAP to perform passthrough authentication using `saslauthd`, we need to create the configuration file `/etc/ldap/sasl2/slapd.conf` with the following content:
 ```text
 pwcheck_method: saslauthd
 ```
-This will direct OpenLDAP to use `saslauthd` as the password checking mechanism when performing passthrough authentication on behalf of a user. After making this change, restart the OpenLDAP service:
+
+This will direct OpenLDAP to use `saslauthd` as the password checking mechanism when performing passthrough authentication on behalf of a user.
+
+In Ubuntu 22.04 LTS and earlier, the `openldap` system user needs to be added to the `sasl` group, or else it will not have permission to contact the `saslauthd` unix socket in `/run/saslauthd/`. To make this change, run:
+```
+sudo gpasswd -a openldap sasl
+```
+
+Finally, restart the OpenLDAP service:
 ```
 sudo systemctl restart slapd.service
 ```
+
 ## Change the `userPassword` attribute
 What triggers OpenLDAP to perform a passthrough authentication when processing a simple bind authentication request, is the special content of the `userPassword` attribute. Normally, that attribute contains some form of password hash, which is used to authenticate the request. If, however, what it contains is in the format of `{SASL}username@realm`, then OpenLDAP will delegate the authentication to the SASL library, whose configuration is in that file we just created above.
 
