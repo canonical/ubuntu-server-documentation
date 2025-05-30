@@ -54,7 +54,10 @@ A
         Related topic(s): Observability and :term:`Prometheus`.
 
     ALUA
-        *Work in Progress*
+        ALUA stands for Asymmetric Logical Unit Access. It is a storage concept used in Small Computer System Interface (SCSI) environments, particularly in Multi-Path Input/Output (MPIO) setups for shared storage
+        systems like Storage Area Networks (SANs). ALUA informs a system about which paths to a storage device are optimal and which are non-optimal, enabling it to make smarter decisions about accessing shared disks.
+
+        Related topic(s): :term:`SCSI`, :term:`SAN`
 
     AMD
         AMD stands for Advanced Micro Devices and can refer to:
@@ -79,16 +82,34 @@ A
         See `the Apache project documentation <https://httpd.apache.org/docs/2.4/>`_ for more details.
 
     API
-        *Work in Progress*
+        API stands for Application Programming Interface. It is a type of software interface that acts as a connection between different software programs, allowing them to communicate and exchange data. APIs exist on multiple layers of abstraction,
+        from low-level APIs closest to system hardware to high-level web APIs that enable clients and remote servers to communicate.
+
+        Related topic(s): REST and :term:`JSON`.
 
     AppArmor
-        *Work in Progress*
+        AppArmor stands for Application Armor. It is a Linux security module that provides mandatory access control (MAC) for programs. AppArmor restricts what applications can do, even when they are compromised. It enforces a set of security policies
+        (called profiles) that define what files, capabilities, and system resources a given program is allowed to access.
+
+        See `AppArmor <https://apparmor.net/>`_ for more details.
+
+        Related topic(s): LSM and SELinux.
 
     Apport
-        *Work in Progress*
+        Apport is a debugging tool and crash reporting system used in Ubuntu and Debian-based Linux distributions. It can automatically detect crashes in programs and system services, collect detailed diagnostic data, generate crash reports,
+        and prompt the user to send the report to developers via systems like Launchpad. Typically, it is disabled by default on production systems because it can expose sensitive information in logs, but is used during development or testing.
+
+        See the `Apport Wiki Page <https://wiki.ubuntu.com/Apport>`_ for more details.
+
+        Related topic(s): Launchpad.
 
     APT
-        *Work in Progress*
+        APT stands for Advanced Package Tool. It is a package management system used by Debian and Debian-based Linux distributions like Ubuntu. APT helps install, update, upgrade, and remove
+        software packages from the command line.
+        
+        See the `package management guide <https://documentation.ubuntu.com/server/how-to/software/package-management/>`_ for more details.
+
+        Related topic(s): :term:`Snap` and :term:`dpkg`.
 
     armhf
         *Work in Progress*
