@@ -91,7 +91,7 @@ A
         AppArmor stands for Application Armor. It is a Linux security module that provides mandatory access control (MAC) for programs. AppArmor restricts what applications can do, even when they are compromised. It enforces a set of security policies
         (called profiles) that define what files, capabilities, and system resources a given program is allowed to access.
 
-        See `AppArmor <https://wiki.ubuntu.com/AppArmor>`_ for more details.
+        See `AppArmor <https://apparmor.net/>`_ for more details.
 
         Related topic(s): LSM and SELinux.
 
@@ -101,13 +101,13 @@ A
 
         See the `Apport Wiki Page <https://wiki.ubuntu.com/Apport>`_ for more details.
 
-        Related topic(s): :term:`Systemd` and Launchpad.
+        Related topic(s): Launchpad.
 
     APT
         APT stands for Advanced Package Tool. It is a package management system used by Debian and Debian-based Linux distributions like Ubuntu. APT helps install, update, upgrade, and remove
         software packages from the command line.
         
-        See the `APT user guide <https://help.ubuntu.com/lts/serverguide/apt.html>`_ for more details.
+        See the `package management guide <https://documentation.ubuntu.com/server/how-to/software/package-management/>`_ for more details.
 
         Related topic(s): :term:`Snap` and :term:`dpkg`.
 
