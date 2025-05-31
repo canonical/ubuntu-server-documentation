@@ -52,7 +52,7 @@ Add the FQDN before the short hostname. Using the same IP as in the previous exa
 
 The `saslauthd` daemon needs a Kerberos service principal in order to authenticate itself to the Kerberos server. Such principals are created with a random password, and the resulting key is stored in `/etc/krb5.keytab`. For more information about Kerberos service principals, please consult {ref}`How to configure Kerberos service principals <configure-service-principals>`.
 
-The simplest way to create this principal, and extract the key safely, is to run the `kadmin` tool remotely, instead of on the kerberos server. Since the key needs to be written to `/etc/krb5.keytab`, the tool needs to be run with root privileges. Additionally, since creating a new service principal, as well as extracting its key, are privileged operations, we need an `/admin` instance of a principal in order to be allowed these actions. In this example, we will use `ubuntu/admin`:
+The simplest way to create this principal, and extract the key safely, is to run the `kadmin` tool remotely, instead of on the Kerberos server. Since the key needs to be written to `/etc/krb5.keytab`, the tool needs to be run with root privileges. Additionally, since creating a new service principal, as well as extracting its key, are privileged operations, we need an `/admin` instance of a principal in order to be allowed these actions. In this example, we will use `ubuntu/admin`:
 
 ```text
 sudo kadmin -p ubuntu/admin
@@ -207,7 +207,7 @@ LDIF
 > Note how we don't need to add the posix attributes like user id, home directory, group, etc. All we really need is a directory entry that contains a `userPassword` attribute.
 
 ## Test the authentication
-To test that the simple bind is working, and using the kerberos password for the `ubuntu` user, let's use `ldapwhoami`:
+To test that the simple bind is working, and using the Kerberos password for the `ubuntu` user, let's use `ldapwhoami`:
 ```text
 ldapwhoami -D uid=ubuntu,dc=example,dc=com -W -x
 Enter LDAP Password:
@@ -235,14 +235,14 @@ Saslauthd can be configured in the `/etc/saslauthd.conf` file. The settings depe
 
 Some options are:
 - `krb5_keytab`: Override the default keytab file location of `/etc/krb5.keytab`.
-- `krb5_verify_principal`: Change the name of the kerberos service principal used by `saslauthd`.
+- `krb5_verify_principal`: Change the name of the Kerberos service principal used by `saslauthd`.
 
 For example, with this content in `/etc/saslauthd.conf`:
 ```text
 krb5_keytab: /etc/saslauthd.keytab
 krb5_verify_principal: saslauthd
 ```
-We have changed the keytab file to `/etc/saslauthd.keytab`, and the service principal that `saslauthd` will use to authenticate itself with the kerberos server becomes `saslauthd/ldap-server.example.com@EXAMPLE.COM` (following this how-to). Note how the domain and realm names remain the same in this service principal, and only the actual principal name is affected (changed from the default value of `host` to `saslauthd`).
+We have changed the keytab file to `/etc/saslauthd.keytab`, and the service principal that `saslauthd` will use to authenticate itself with the Kerberos server becomes `saslauthd/ldap-server.example.com@EXAMPLE.COM` (following this how-to). Note how the domain and realm names remain the same in this service principal, and only the actual principal name is affected (changed from the default value of `host` to `saslauthd`).
 
 
 
