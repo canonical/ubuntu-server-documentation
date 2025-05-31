@@ -1,5 +1,5 @@
 (ldap-saslauthd-kerberos)=
-# How to configure OpenLDAP with pass-through SASL authentication using Kerberos
+# How to configure OpenLDAP with passthrough SASL authentication using Kerberos
 
 ## Before you begin
 It is assumed you are starting with a working OpenLDAP server, with a hostname of `ldap-server.example.com`. If not, follow this guide {ref}`Install and configure OpenLDAP<install-openldap>` to set it up. It is also assumed that the `EXAMPLE.COM` realm is set up, and the Kerberos client tools (krb5-user) are installed on the ldap server. You will need to create an ubuntu principal. See {ref}`How to install a Kerberos server <install-a-kerberos-server>`. You should also know how to create service principals. See {ref}`How to configure Kerberos service principals <configure-service-principals>`.
@@ -9,47 +9,56 @@ All the following configuration will be on `ldap-server.example.com`.
 > Rather it is using [simple authentication](https://www.openldap.org/doc/admin26/security.html#%22simple%22%20method) with the OpenLDAP server so this should be over a [Transport Layer Security](https://datatracker.ietf.org/wg/tls/documents/) (TLS) connection.
 > The test user we will be using is `ubuntu@EXAMPLE.COM` which must exist in the Kerberos database
 
-## Package installation
-Install saslauthd
+## How the passthrough authentication will work
+Here is a diagram showing how all the different pieces work together:
 
-```bash
+![openldap saslauthd detailed diagram](../images/openldap-saslauthd-diagram-detailed.png)
+
+We will go over all these details next.
+
+## Package installation
+Install `saslauthd` on the OpenLDAP server (`ldap-server.example.com` in this document):
+
+```text
 sudo apt install sasl2-bin
 ```
-## Saslauthd service principal
-It is assumed you have an admin principal set up in the realm. We will use `ubuntu/admin@EXAMPLE.COM`.
-Next a principal who will be querying Kerberos is needed. The default for saslauthd is "host"/"hostname.domain"@"REALM". For the basic case, it is important that the hostname and domain be what nslookup on your IP number says it is.
 
 ## Check the hostname
 Get the hostname from the server
-```bash
+```text
 hostname -f
 ```
 Which should give you the hostname of:
 ```text
 ldap-server.example.com
 ```
-Also check the hostname and domain using a reverse lookup.
-```bash
-nslookup (your IP)
-```
-Check the name in the reply
+Also check the hostname and domain using a reverse lookup with your IP. For example, if the IP address is `10.10.17.91`:
 ```text
-(Your IP).in-addr.arpa      name = ldap-server.example.com. (your IP) will be in reverse here
+nslookup 10.10.17.91
+```
+The reply should look like this:
+```text
+91.17.10.10.in-addr.arpa        name = ldap-server.example.com.
 ```
 If the result is the same as your host's canonical name them all is well. If the domain is missing, the [Fully Qualified Domain Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN) can be entered in the `/etc/hosts` file.
-```bash
+```text
 sudo vi /etc/hosts
 ```
-Add the FQDN before the short hostname.
+Add the FQDN before the short hostname. Using the same IP as in the previous example, we would have:
 ```text
-(your IP) ldap-server.example.com ldap-server
+10.10.17.91 ldap-server.example.com ldap-server
 ```
 ## Create the saslauthd principal
 
-The hostname portion of the principal must be in lowercase. You won't be creating a password for this principal so you will need to ask the kadmin tool to store the key in an external file on the LDAP server. The default location is `/etc/krb5.keytab` so you need to run the kadmin command as sudo.
+The `saslauthd` daemon needs a Kerberos service principal in order to authenticate itself to the Kerberos server. Such principals are created with a random password, and the resulting key is stored in `/etc/krb5.keytab`. For more information about Kerberos service principals, please consult {ref}`How to configure Kerberos service principals <configure-service-principals>`.
 
-```bash
+The simplest way to create this principal, and extract the key safely, is to run the `kadmin` tool remotely, instead of on the Kerberos server. Since the key needs to be written to `/etc/krb5.keytab`, the tool needs to be run with root privileges. Additionally, since creating a new service principal, as well as extracting its key, are privileged operations, we need an `/admin` instance of a principal in order to be allowed these actions. In this example, we will use `ubuntu/admin`:
+
+```text
 sudo kadmin -p ubuntu/admin
+```
+An interactive session will look like below. Note the two commands we are issuing at the `kadmin:` prompt: `addprinc` and `ktadd`:
+```text
 Authenticating as principal ubuntu/admin with password.
 Password for ubuntu/admin@EXAMPLE.COM
 kadmin: addprinc -randkey host/ldap-server.example.com
@@ -58,13 +67,26 @@ Principal "host/ldap-server.example.com@EXAMPLE.COM" created.
 kadmin: ktadd host/ldap-server.example.com
 Entry for principal host/ldap-server.example.com with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
 Entry for principal host/ldap-server.example.com with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
-kadmin: q
 ```
-To check our principals enter:
-```bash
+
+Alternatively, we can issue the commands directly:
+```text
+kadmin -p ubuntu/admin -q "addprinc -randkey host/ldap-server.example.com"
+```
+> *NOTE*
+>
+> `sudo` is not needed to remotely create a new principal.
+
+And:
+```text
+sudo kadmin -p ubuntu/admin -q "ktadd host/ldap-server.example.com"
+```
+
+To check that the service principal was added to `/etc/krb5.keytab`, run this command:
+```text
 sudo klist -k
 ```
-You should see the following.
+You should see the following:
 ```text
 Keytab name: FILE:/etc/krb5.keytab
 KVNO Principal
@@ -73,78 +95,12 @@ KVNO Principal
    2 host/ldap-server.example.com@EXAMPLE.COM
 ```
 ## Configure saslauthd
-Next look at the default saslauthd file located in `/etc/default/saslauthd`
-```bash
-sudo cat /etc/default/saslauthd
-```
-Here is the default config.
+We now need to configure `saslauthd` such that it uses Kerberos authentication. This is an option that is selected at startup time, via command-line options. The configuration file for such options is `/etc/default/saslauthd`. Only one change is needed in this file: update `MECHANISMS` to `kerberos5`:
+
 ```text
-#
-# Settings for saslauthd daemon
-# Please read /usr/share/doc/sasl2-bin/README.Debian for details.
-#
-
-# Description of this saslauthd instance. Recommended.
-# (suggestion: SASL Authentication Daemon)
-DESC="SASL Authentication Daemon"
-
-# Short name of this saslauthd instance. Strongly recommended.
-# (suggestion: saslauthd)
-NAME="saslauthd"
-
-# Which authentication mechanisms should saslauthd use? (default: pam)
-#
-# Available options in this Debian package:
-# getpwent  -- use the getpwent() library function
-# kerberos5 -- use Kerberos 5
-# pam       -- use PAM
-# rimap     -- use a remote IMAP server
-# shadow    -- use the local shadow password file
-# sasldb    -- use the local sasldb database file
-# ldap      -- use LDAP (configuration is in /etc/saslauthd.conf)
-#
-# Only one option may be used at a time. See the saslauthd man page
-# for more information.
-#
-# Example: MECHANISMS="pam"
-MECHANISMS="pam"
-
-# Additional options for this mechanism. (default: none)
-# See the saslauthd man page for information about mech-specific options.
-MECH_OPTIONS=""
-
-# How many saslauthd processes should we run? (default: 5)
-# A value of 0 will fork a new process for each connection.
-THREADS=5
-
-# Other options (default: -c -m /var/run/saslauthd)
-# Note: You MUST specify the -m option or saslauthd won't run!
-#
-# WARNING: DO NOT SPECIFY THE -d OPTION.
-# The -d option will cause saslauthd to run in the foreground instead of as
-# a daemon. This will PREVENT YOUR SYSTEM FROM BOOTING PROPERLY. If you wish
-# to run saslauthd in debug mode, please run it by hand to be safe.
-#
-# See /usr/share/doc/sasl2-bin/README.Debian for Debian-specific information.
-# See the saslauthd man page and the output of 'saslauthd -h' for general
-# information about these options.
-#
-# Example for chroot Postfix users: "-c -m /var/spool/postfix/var/run/saslauthd"
-# Example for non-chroot Postfix users: "-c -m /var/run/saslauthd"
-#
-# To know if your Postfix is running chroot, check /etc/postfix/master.cf.
-# If it has the line "smtp inet n - y - - smtpd" or "smtp inet n - - - - smtpd"
-# then your Postfix is running in a chroot.
-# If it has the line "smtp inet n - n - - smtpd" then your Postfix is NOT
-# running in a chroot.
-OPTIONS="-c -m /var/run/saslauthd"
-```
-Two changes are needed to use Kerberos, update MECHANISMS to kerberos5 and add START=yes
-
-```bash
 sudo vi /etc/default/saslauthd
 ```
-Make these changes.
+Make the following change:
 ```text
 ...
 # Which authentication mechanisms should saslauthd use? (default: pam)
@@ -165,125 +121,134 @@ Make these changes.
 MECHANISMS="kerberos5"
 ...
 ```
-> **Note**:
-> For Ubuntu version 22.04 and earlier "START=yes" must also be added to the default config file to have sasauthd restart after rebooting.
+> **IMPORTANT**:
+>
+> For Ubuntu version 22.04 and earlier "`START=yes`" must also be added to the default config file for `saslauthd` to start.
+
+Save and exit the editor.
+
 ## Enable and start saslauthd
-Continue by enabling the saslauthd service.
+Continue by enabling and starting the saslauthd service.
 
-```bash
-sudo systemctl enable saslauthd
-```
-The final step for saslauthd is to start the saslauthd service.
-
-```bash
-sudo systemctl start saslauthd
+```text
+sudo systemctl enable --now saslauthd
 ```
 ## Test saslauthd configuration
-saslauthd can be tested with with `testsaslauthd`. For example:
+The `saslauthd` service can be tested with with the `testsaslauthd` command. For example, with the correct Kerberos password for the `ubuntu` principal:
 
-```bash
+```text
 testsaslauthd -u ubuntu -p ubuntusecret
 0: OK "Success."
 ```
 And with the wrong Kerberos password:
-```bash
+```text
 testsaslauthd -u ubuntu -p ubuntusecretwrong
 0: NO "authentication failed"
 ```
 
-## Configure OpenLDAP
+> **NOTE**:
+>
+> In Ubuntu 22.04 LTS and earlier, the `/run/saslauthd` directory is restricted to members of the `sasl` group, so the `testsaslauthd` commands above need to be run as root (via `sudo`) or as a user who is in the `sasl` group.
 
-SASL needs to know what password check method to use and where to find saslauthd socket. This can be done using the SASL config file for slapd.
-```bash
-sudo vi /etc/ldap/sasl2/slapd.conf
-```
-Add this to the file.
+## Configure OpenLDAP
+In order for OpenLDAP to perform passthrough authentication using `saslauthd`, we need to create the configuration file `/etc/ldap/sasl2/slapd.conf` with the following content:
 ```text
 pwcheck_method: saslauthd
-saslauthd_path: /var/run/saslauthd/mux
 ```
-Restart slapd.
-```bash
-sudo systemctl restart slapd
-```
-## Change the user password
-The user we will be testing with is called ubuntu. You can add the user to the OpenLDAP directory by using the ldapadd command. Remember that the ubuntu principal exists in the Kerberos database.
 
-```bash
-ldapadd -x -D cn=admin,dc=example,dc=com -W <<LDIF
-dn: uid=ubuntu,ou=People,dc=example,dc=com
-objectClass: posixAccount
-objectClass: inetOrgPerson
+This will direct OpenLDAP to use `saslauthd` as the password checking mechanism when performing passthrough authentication on behalf of a user.
+
+In Ubuntu 22.04 LTS and earlier, the `openldap` system user needs to be added to the `sasl` group, or else it will not have permission to contact the `saslauthd` unix socket in `/run/saslauthd/`. To make this change, run:
+```
+sudo gpasswd -a openldap sasl
+```
+
+Finally, restart the OpenLDAP service:
+```
+sudo systemctl restart slapd.service
+```
+
+## Change the `userPassword` attribute
+What triggers OpenLDAP to perform a passthrough authentication when processing a simple bind authentication request, is the special content of the `userPassword` attribute. Normally, that attribute contains some form of password hash, which is used to authenticate the request. If, however, what it contains is in the format of `{SASL}username@realm`, then OpenLDAP will delegate the authentication to the SASL library, whose configuration is in that file we just created above.
+
+For example, let's examine the directory entry below:
+```text
+dn: uid=ubuntu,dc=example,dc=com
 uid: ubuntu
-cn: ubuntu
-sn: ubuntu
-userPassword: {SASL}ubuntu@EXAMPLE.COM
-uidNumber: 10050
-gidNumber: 10050
-loginShell: /bin/bash
-homeDirectory: /home/ubuntu
+objectClass: account
+objectClass: simpleSecurityObject
+userPassword: {SSHA}S+WlmGneLDFeCwErKnY4mJngnVJMZAM5
+```
+If a simple bind is performed using a binddn of `uid=ubuntu,dc=example,dc=com`, the password will be checked against the hashed `userPassword` value as normal. That is, no passthrough authentication will be done at all.
 
-dn: cn=ubuntu,ou=Groups,dc=example,dc=com
-objectClass: posixGroup
-cn: ubuntu
-gidNumber: 10050
-memberUid: ubuntu
+However, if the `userPassword` attribute is in this format:
+```text
+userPassword: {SASL}ubuntu@EXAMPLE.COM
+```
+That will trigger the passthrough authentication, because the `userPassword` attribute starts with the special prefix `{SASL}`. This will direct OpenLDAP to use `saslauthd` for the authentication, and use the name provided in the `userPassword` attribute.
+
+> **IMPORTANT**
+>
+> Note how the username present in the `userPassword` attribute is independent of the binddn used in the simple bind! If the `userPassword` attribute contained, say, `{SASL}anotheruser@EXAMPLE.COM`, OpenLDAP would ask `saslauthd` to authenticate `anotheruser@EXAMPLE.COM`, and not the user from the binddn! Therefore, it's important to use OpenLDAP ACLs to prevent users from changing the `userPassword` attribute when using passthrough authentication!
+
+To continue with this how-to, let's create the `uid=ubuntu` entry in the directory, which will use passthrough authentication:
+```text
+ldapadd -x -D cn=admin,dc=example,dc=com -W <<LDIF
+dn: uid=ubuntu,dc=example,dc=com
+uid: ubuntu
+objectClass: account
+objectClass: simpleSecurityObject
+userPassword: {SASL}ubuntu@EXAMPLE.COM
 LDIF
 ```
-## How the simple bind will work
-When the simple bind is requested for user ubuntu, OpenLDAP will look for the password in the userPassword field.
-In this case the field tells OpenLDAP to use SASL to verify the password. SASL then looks to see what method should be queried for the password verification and in this case will use saslauthd.
-SASL then sends the username and password to saslauthd and here saslauthd is configured to use Kerberos. The password is then checked with the Kerberos server. Saslauthd passes back the
-result to SASL which in turn passes it back to OpenLDAP which finally returns the result to the calling client.
 
-## Test the user
-Test the ubuntu user using using ldapwhoami
-```bash
-ldapwhoami -D uid=ubuntu,ou=People,dc=example,dc=com -W -x
+> **NOTE**
+>
+> Note how we don't need to add the posix attributes like user id, home directory, group, etc. All we really need is a directory entry that contains a `userPassword` attribute.
+
+## Test the authentication
+To test that the simple bind is working, and using the Kerberos password for the `ubuntu` user, let's use `ldapwhoami`:
+```text
+ldapwhoami -D uid=ubuntu,dc=example,dc=com -W -x
 Enter LDAP Password:
-dn:uid=ubuntu,ou=People,dc=example,dc=com
 ```
 A successful bind will look like
 ```text
-dn:uid=ubuntu,ou=People,dc=example,dc=com
+dn:uid=ubuntu,dc=example,dc=com
 ```
 A failed bind will look like
 ```text
 ldap_bind: Invalid credentials (49)
 ```
-These LDAP users can now be used with external applications that only support "simple" username and password authentication.
+These LDAP bind DNs can now be used with external applications that only support "simple" username and password authentication, and they will be authenticated against Kerberos behind the scenes.
 
 ## Troubleshooting
 Saslauthd can be run in debug mode for more verbose messages to aid in troubleshooting
-```bash
+```text
 sudo systemctl stop saslauthd
 sudo /usr/sbin/saslauthd -a kerberos5 -d -m /var/run/saslauthd -n 1
 ```
 Also the `/var/log/auth.log` file can be checked for saslauthd log entries
 
 ## Advanced options
-Saslauthd can be configured in the `/etc/saslauthd.conf` file. The settings depend on the authorization mechanism configured in `/etc/default/saslauthd`,
-which in this case is `kerberos5`.
+Saslauthd can be configured in the `/etc/saslauthd.conf` file. The settings depend on the authorization mechanism configured in `/etc/default/saslauthd`, which in this case is `kerberos5`.
 
 Some options are:
-`krb5_keytab` which can override the default keytab file location of `/etc/krb5.keytab` and
-`krb5_verify_principal` which changes the kerberos principle doing the verifying from `host`.
+- `krb5_keytab`: Override the default keytab file location of `/etc/krb5.keytab`.
+- `krb5_verify_principal`: Change the name of the Kerberos service principal used by `saslauthd`.
 
-Example
-```bash
-sudo vi /etc/saslauthd.conf
-```
-Change the keytab and principal
+For example, with this content in `/etc/saslauthd.conf`:
 ```text
 krb5_keytab: /etc/saslauthd.keytab
 krb5_verify_principal: saslauthd
 ```
+We have changed the keytab file to `/etc/saslauthd.keytab`, and the service principal that `saslauthd` will use to authenticate itself with the Kerberos server becomes `saslauthd/ldap-server.example.com@EXAMPLE.COM` (following this how-to). Note how the domain and realm names remain the same in this service principal, and only the actual principal name is affected (changed from the default value of `host` to `saslauthd`).
 
 
 
 ## References
 
-  - [OpenLDAP Pass-through Authentication](https://www.openldap.org/doc/admin26/security.html#Pass-Through%20authentication)
+  - [OpenLDAP Passthrough Authentication](https://www.openldap.org/doc/admin26/security.html#Pass-Through%20authentication)
   - [Cyrus SASL Password Verification](https://www.cyrusimap.org/sasl/sasl/components.html#password-verification-services)
   - [Cyrus SASL Slapd Configuration File](https://www.cyrusimap.org/sasl/sasl/faqs/openldap-sasl-gssapi.html)
   - [Kerberos Client Hostname Requirements](https://web.mit.edu/kerberos/krb5-1.12/doc/admin/princ_dns.html)
