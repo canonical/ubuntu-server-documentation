@@ -50,7 +50,7 @@ Add the FQDN before the short hostname. Using the same IP as in the previous exa
 ```
 ## Create the saslauthd principal
 
-The `saslauthd` daemon  needs a kerberos service principal in order to authenticate itself to the kerberos server. Such principals are created with a random password, and the resulting key is stored in `/etc/krb5.keytab`. For more information about kerberos service principals, please consult [How to configure Kerberos service principals](/how-to/kerberos/configure-service-principals/).
+The `saslauthd` daemon needs a Kerberos service principal in order to authenticate itself to the Kerberos server. Such principals are created with a random password, and the resulting key is stored in `/etc/krb5.keytab`. For more information about Kerberos service principals, please consult {ref}`How to configure Kerberos service principals <configure-service-principals>`.
 
 The simplest way to create this principal, and extract the key safely, is to run the `kadmin` tool remotely, instead of on the kerberos server. Since the key needs to be written to `/etc/krb5.keytab`, the tool needs to be run with root privileges. Additionally, since creating a new service principal, as well as extracting its key, are privileged operations, we need an `/admin` instance of a principal in order to be allowed these actions. In this example, we will use `ubuntu/admin`:
 
