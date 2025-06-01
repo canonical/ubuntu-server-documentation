@@ -112,22 +112,37 @@ A
         Related topic(s): :term:`Snap` and :term:`dpkg`.
 
     armhf
-        *Work in Progress*
+        armhf stands for ARM hard-float. It is a designation used in Linux distributions to describe a 32-bit variant of the ARM architecture that has hardware-based floating-point support. armhf is typically used for lightweight systems
+        or backward compatibility, especially in embedded environments.
+
+        Related topic(s): arm32 and arm64.
+
 
     ARP
-        *Work in Progress*
+        ARP stands for Address Resolution Protocol. It is a network protocol used to map an IP address to a physical machine (MAC address) on a local area network (LAN).
+
+        Related topic(s): :term:`IP` and :term:`LAN`.
 
     ArrayBolt
         *Work in Progress*
 
     async
-        *Work in Progress*
+        async stands for asynchronous. It is commonly used in programming to describe operations that take place without blocking the main execution thread. Instead of waiting for a particular operation to finish (such as reading a file or making a network request), 
+        "async" programs can keep running other operations in the meantime.
+
+        Related topic(s): Concurrency, parallelism and threading.
 
     Authenticator
-        *Work in Progress*
+        An authenticator refers to a tool used to verify a user's identity, typically as part of a multi-factor authentication (MFA) process. They are widely used to enhance security by generating one-time codes that serve as
+        a second layer of verification beyond traditional passwords.
+
+        Related topic(s): 2FA and MFA.
 
     autocommit
-        *Work in Progress*
+        autocommit is a database feature that automatically commits every individual SQL statement as soon as it is executed. When autocommit is enabled, every SQL statement is treated as its own transaction and is applied immediately and permanently.
+        This means it is impossible to undo or roll back a statement executed with autocommit enabled.
+
+        Related topic(s): :term:`MySQL` and :term:`Postgres`.
 
     autodetect
         *Work in Progress*
