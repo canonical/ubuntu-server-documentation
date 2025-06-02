@@ -1,7 +1,7 @@
 (system-requirements)=
 # System requirements
 
-Ubuntu Server provides a flexible base for your solution that can run on a wide range of hardware, from small virtual machines to enterprise-scale computing. 
+Ubuntu Server provides a flexible base for your solution that can run on a wide range of hardware, from small virtual machines to enterprise-scale computing.
 
 Hard requirements depend on the scenario, but they're generally constrained by the following recommended values.
 
