@@ -1,7 +1,7 @@
 (system-requirements)=
 # System requirements
 
-Ubuntu Server provides a flexible base for your solution that can run on a wide range of hardware, from small virtual machines to enterprise-scale computing. 
+Ubuntu Server provides a flexible base for your solution that can run on a wide range of hardware, from small virtual machines to enterprise-scale computing.
 
 Hard requirements depend on the scenario, but they're generally constrained by the following recommended values.
 
@@ -18,11 +18,12 @@ Ubuntu Server supports various 64-bit architectures and 32-bit arm.
 
 For specific platforms, see our list of [Ubuntu certified servers](https://ubuntu.com/certified/servers).
 
-The numbers below are true for Ubuntu 24.04 Noble amd64 ISO installs. Other releases, architectures and deployment methods might differ slightly.
+The numbers below are true for Ubuntu 24.04 Noble amd64. Other releases and architectures might differ slightly.
 
 ## Memory
 
-**Minimum RAM**: 1024 MB
+**Minimum RAM**: 1.5 GB (ISO installs)
+**Minimum RAM**: 1 GB (cloud images)
 
 It's likely that your system might need more memory than that if you, for instance, have more hardware to initialise, have more complex setup plans, or are using other architectures. To cover better for any of those scenarios:
 
