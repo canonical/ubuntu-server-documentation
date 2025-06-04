@@ -201,7 +201,13 @@ Remove any NVIDIA packages from your system:
 sudo apt --purge remove '*nvidia*${DRIVER_BRANCH}*'
 ```
 
-If you are unsure which `${DRIVER_BRANCH}` to pick for removal you might look at installed nvidia packages and see the different `${DRIVER_BRANCH}` on your system as numbers shared by several packges when you run `apt list --installed | grep nvidia`.
+If you are unsure which `${DRIVER_BRANCH}` to pick for removal you might look at the installed nvidia packages and see the different `${DRIVER_BRANCH}` numbers that are present on your system.
+Since `autoremove` will take care of all indirect dependencies it is sufficient to list those that have been directly installed by using `apt-mark`.
+
+```bash
+apt-mark showmanual | grep nvidia`.
+```
+
 Remove any additional packages that may have been installed as a dependency (e.g. the `i386` libraries on amd64 systems) and which were not caught by the previous command:
 
 ```bash
