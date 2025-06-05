@@ -128,19 +128,21 @@ A
 
     async
         async stands for asynchronous. It is commonly used in programming to describe operations that take place without blocking the main execution thread. Instead of waiting for a particular operation to finish (such as reading a file or making a network request), 
-        "async" programs can keep running other operations in the meantime.
+        "async" programs can keep running other operations in the meantime. These operations are often dispatched to the background, allowing them to run in parallel. If needed, however, the program can still wait for the result of an asynchronous operation.
 
         Related topic(s): Concurrency, parallelism and threading.
 
     Authenticator
-        An authenticator refers to a tool used to verify a user's identity, typically as part of a multi-factor authentication (MFA) process. They are widely used to enhance security by generating one-time codes that serve as
-        a second layer of verification beyond traditional passwords.
 
-        Related topic(s): 2FA and MFA.
+        An authenticator is any system, method, or mechanism used to verify a user's identity during the authentication process. It can range from something as simple as a password field (e.g., LDAP bind) to more advanced
+        tools like biometric scanners or one-time code generators. Authenticators are essential components of authentication protocols and can be used in both single-factor and multi-factor authentication setups.
+
+        Related topic(s): :term:`LDAP`, 2FA, and MFA.
 
     autocommit
         autocommit is a database feature that automatically commits every individual SQL statement as soon as it is executed. When autocommit is enabled, every SQL statement is treated as its own transaction and is applied immediately and permanently.
         This means it is impossible to undo or roll back a statement executed with autocommit enabled.
+        While autocommit is a common default in many systems, behavior can vary depending on the database or language bindings. For example, in Python's sqlite3 module, Python 3.12 introduces changes to transaction control, allowing explicit control over autocommit mode.
 
         Related topic(s): :term:`MySQL` and :term:`Postgres`.
 
