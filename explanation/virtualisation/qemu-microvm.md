@@ -73,7 +73,7 @@ ideas of reduced firmware and microvms play into all of this.
 ## Create the example workload artifact
 
 To create an example of such a small workload, we will follow the tutorial on
-how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/en/stable/tutorials/chisel/).
+how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/en/stable/tutorial/hello-world/).
 
 Out of these tutorials one gets an [OCI-compatible](https://github.com/opencontainers/image-spec/blob/main/spec.md)
 artifact. It will be called `chiselled-hello_latest_amd64.rock`.
@@ -171,7 +171,7 @@ For more details on what else could be disabled see
 Run the guest in `qemu-system-x86_64-microvm`:
 
 ```bash
-$ sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm \
+$ sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm,rtc=on \
     -bios /usr/share/qemu/qboot.rom \
     -kernel /boot/vmlinuz-$(uname -r) \
     -append 'console=ttyS0 root=/dev/vda fsck.mode=skip init=/usr/bin/hello' \
