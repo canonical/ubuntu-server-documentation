@@ -144,6 +144,8 @@ A
         This means it is impossible to undo or roll back a statement executed with autocommit enabled.
         While autocommit is a common default in many systems, behavior can vary depending on the database or language bindings. For example, in Python's sqlite3 module, Python 3.12 introduces changes to transaction control, allowing explicit control over autocommit mode.
 
+        See `autocommit behavior in Python's sqlite3 module <https://docs.python.org/3/library/sqlite3.html#transaction-control>`_ for more details.
+
         Related topic(s): :term:`MySQL` and :term:`Postgres`.
 
     autodetect
