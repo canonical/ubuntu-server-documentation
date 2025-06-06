@@ -112,22 +112,41 @@ A
         Related topic(s): :term:`Snap` and :term:`dpkg`.
 
     armhf
-        *Work in Progress*
+        armhf stands for ARM hard-float. It is a designation used in Linux distributions to describe a 32-bit variant of the ARM architecture that has hardware-based floating-point support. armhf is typically used for lightweight systems
+        or backward compatibility, especially in embedded environments.
+
+        Related topic(s): arm32 and arm64.
+
 
     ARP
-        *Work in Progress*
+        ARP stands for Address Resolution Protocol. It is a network protocol used to map an IP address to a physical machine (MAC address) on a local area network (LAN).
+
+        Related topic(s): :term:`IP` and :term:`LAN`.
 
     ArrayBolt
         *Work in Progress*
 
     async
-        *Work in Progress*
+        async stands for asynchronous. It is commonly used in programming to describe operations that take place without blocking the main execution thread. Instead of waiting for a particular operation to finish (such as reading a file or making a network request), 
+        "async" programs can keep running other operations in the meantime. These operations are often dispatched to the background, allowing them to run in parallel. If needed, however, the program can still wait for the result of an asynchronous operation.
+
+        Related topic(s): Concurrency, parallelism and threading.
 
     Authenticator
-        *Work in Progress*
+
+        An authenticator is any system, method, or mechanism used to verify a user's identity during the authentication process. It can range from something as simple as a password field (e.g., LDAP bind) to more advanced
+        tools like biometric scanners or one-time code generators. Authenticators are essential components of authentication protocols and can be used in both single-factor and multi-factor authentication setups.
+
+        Related topic(s): :term:`LDAP`, 2FA, and MFA.
 
     autocommit
-        *Work in Progress*
+        autocommit is a database feature that automatically commits every individual SQL statement as soon as it is executed. When autocommit is enabled, every SQL statement is treated as its own transaction and is applied immediately and permanently.
+        This means it is impossible to undo or roll back a statement executed with autocommit enabled.
+        While autocommit is a common default in many systems, behavior can vary depending on the database or language bindings. For example, in Python's sqlite3 module, Python 3.12 introduces changes to transaction control, allowing explicit control over autocommit mode.
+
+        See `autocommit behavior in Python's sqlite3 module <https://docs.python.org/3/library/sqlite3.html#transaction-control>`_ for more details.
+
+        Related topic(s): :term:`MySQL` and :term:`Postgres`.
 
     autodetect
         *Work in Progress*
