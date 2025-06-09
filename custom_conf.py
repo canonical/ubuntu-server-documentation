@@ -262,7 +262,8 @@ suppress_warnings = ['orphan']
 ## Sitemap configuration
 
 html_baseurl = 'https://documentation.ubuntu.com/server/'
-html_extra_path = ['_build/sitemap.xml']
+sitemap_url_scheme = "{link}"
+
 ############################################################
 ### PDF configuration
 ############################################################
