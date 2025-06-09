@@ -172,6 +172,7 @@ custom_extensions = [
     'sphinxcontrib.mermaid',
     'sphinxext.rediraffe',
     'hoverxref.extension',
+    'sphinx_sitemap',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -190,6 +191,7 @@ custom_required_modules = [
     'sphinxcontrib-mermaid',
     'sphinxext-rediraffe',
     'sphinx-hoverxref',
+    'sphinx-sitemap',
 ]
 
 # Configure hoverxref options
@@ -256,6 +258,11 @@ custom_tags = []
 #'''
 
 suppress_warnings = ['orphan']
+
+## Sitemap configuration
+
+html_baseurl = 'https://documentation.ubuntu.com/server/'
+sitemap_url_scheme = "{link}"
 
 ############################################################
 ### PDF configuration
