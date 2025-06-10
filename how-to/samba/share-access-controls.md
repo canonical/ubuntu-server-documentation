@@ -1,8 +1,35 @@
 (share-access-controls)=
 # Share access controls
 
-
 There are several options available to control access for each individual shared directory. Using the *\[share\]* example, this section will cover some common options.
+
+Since most of these options will deal with user authentication, we first need to briefly address how that is done in Samba.
+
+## Authenticating Samba users
+
+Samba cannot authenticate existing Linux users using the its native protocols. This is just not compatible with the way Linux passwords are stored in the system (in `/etc/shadow`, for example). All local Linux users that the system may have are not automatically available as Samba users. To have a local Linux user available as a Samba user, they need to be created in the Samba credentials database. That means we will have two user databases: the Linux one, and the Samba one.
+
+```{seealso}
+How to create and manage Linux users is covered in {ref}`Users and groups management <user-management>`.
+```
+
+To add an existing Linux user to the Samba user database, the command `smbpasswd` is used. For example, here we are adding an existing Linux user called `melissa` to the Samba user database:
+```text
+sudo smbpasswd -a melissa
+```
+The command will prompt for a password twice, for confirmation, and create the Samba user.
+```{note}
+As this is a separate user database, the password selected for the Samba user does not need to be the same as the Linux password for that user. In fact, most Samba servers setup this way will have the Linux users setup without a valid password: these users only exist so that the corresponding Samba users can be created.
+```
+
+If this user does not exist in Linux, the `smbpasswd` command will fail. Samba users must first exist as Linux users.
+
+To later change the password of an existing Samba user, the same command is used. For example:
+```text
+sudo smbpasswd melissa
+```
+
+Samba also has the concept of Samba groups, but since there is no authentication going on, there is no need to create a separate group database just for Samba groups. We can use the normal Linux group, as long as the group members (the users) exist both in the Linux and Samba user database.
 
 ## Groups
 
@@ -29,6 +56,9 @@ For example, if you wanted to give the user *Melissa* administrative permissions
 admin users = melissa
 ```
 
+```{note}
+Remember that the users listed in `smb.conf` for these access controls need to exist both as Linux users, and Samba users.
+```
 After editing `/etc/samba/smb.conf`, reload Samba for the changes to take effect by running the following command:
 
 ```bash
