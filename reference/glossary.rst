@@ -123,9 +123,6 @@ A
 
         Related topic(s): :term:`IP` and :term:`LAN`.
 
-    ArrayBolt
-        *Work in Progress*
-
     async
         async stands for asynchronous. It is commonly used in programming to describe operations that take place without blocking the main execution thread. Instead of waiting for a particular operation to finish (such as reading a file or making a network request), 
         "async" programs can keep running other operations in the meantime. These operations are often dispatched to the background, allowing them to run in parallel. If needed, however, the program can still wait for the result of an asynchronous operation.
@@ -177,9 +174,6 @@ A
         See the `AWS documentation <https://docs.aws.amazon.com/>`_ for more details.
 
         Related topic(s): :term:`OpenStack`, Microsoft Azure, Google Cloud Platform (GCP), and IBM Cloud.
-
-    AX
-        *Work in Progress*
 
 .. _terms_B:
 
