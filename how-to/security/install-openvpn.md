@@ -438,6 +438,46 @@ sudo systemctl restart openvpn@client
 
 You should now be able to connect to the fully remote LAN through the VPN.
 
+### Using OpenSSL providers
+
+OpenVPN uses the OpenSSL 3 Default Provider on Ubuntu. However, you can include additional providers dynamically depending on your use case.
+
+#### Legacy provider
+
+In Ubuntu 24.04 LTS and later, you can still use legacy algorithms by explicitly adding them through the `legacy` provider alongside `default`. To do this, add the following line to your configuration.
+
+```
+providers legacy default
+```
+
+You can also run openvpn with the `--providers` argument.
+
+```bash
+openvpn --providers legacy default ...
+```
+
+```{note}
+On Ubuntu 22.04 LTS, legacy algorithms are included in OpenVPN by default.
+```
+
+#### TPM 2.0
+
+OpenVPN also works with Trusted Platform Module (TPM) 2.0 encryption using the `tpm2` provider. Set it up by installing the `tpm2-openssl` package and including both `legacy` and `tpm2` in your provider configuration.
+
+```
+providers legacy default tpm2
+```
+
+Alternatively, run with:
+
+```bash
+openvpn --providers legacy default tpm2 ...
+```
+
+```{note}
+The provider order matters here as tpm2 currently requires the legacy provider to load first.
+```
+
 ## Further reading
 
 - [EasyRSA](https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md)
