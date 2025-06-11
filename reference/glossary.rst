@@ -149,16 +149,34 @@ A
         Related topic(s): :term:`MySQL` and :term:`Postgres`.
 
     autodetect
-        *Work in Progress*
+        autodetect is the ability of a system to automatically detect and configure hardware or settings without user input. In Ubuntu Server and other Linux systems, this is used during boot or installation to identify devices like disks, network interfaces,
+        or keyboard layouts. The kernel, installers, and configuration tools rely on autodetection to simplify setup by loading the right drivers and defaults based on the system's hardware and environment.
+
+        Related topic(s): Kernel modules and :term:`udev`.
 
     autoinstall
-        *Work in Progress*
+        autoinstall is a feature in Ubuntu Desktop and Ubuntu Server that provides fully automated installations using a predefined configuration file. This file describes how the system should be installed, including disk partitioning,
+        user accounts, package selection, and network settings.
+
+        See `the autoinstall documentation <https://canonical-subiquity.readthedocs-hosted.com/en/latest/intro-to-autoinstall.html>`_ for more details.
+
+        Related topic(s): cloud-init. 
 
     autorid
-        *Work in Progress*
+        autorid is a Samba ID mapping backend that automatically assigns UID and GID values to security identifiers (SIDs) when integrating with Active Directory (AD). It ensures consistent and persistent Unix ID mapping
+        without requiring manual configuration for each domain or user/group.
+
+        See `the autorid Samba Wiki <https://wiki.samba.org/index.php/Idmap_config_autorid>`_ for more details.
+
+        Related topic(s): :term:`GID`, :term:`SIDs`, and Samba.
 
     AWS
-        *Work in Progress*
+        AWS stands for Amazon Web Services. AWS is a cloud computing platform that offers a wide range of on-demand services such as compute, storage, networking, machine learning, analytics and much more.
+        It allows individuals and companies to run applications without owning physical hardware, scale resources up or down as needed, and pay only for what they use.
+
+        See the `AWS documentation <https://docs.aws.amazon.com/>`_ for more details.
+
+        Related topic(s): :term:`OpenStack`, Microsoft Azure, Google Cloud Platform (GCP), and IBM Cloud.
 
     AX
         *Work in Progress*
