@@ -1,8 +1,7 @@
 (gnutls)=
 # GnuTLS
 
-When initialised, the {term}`GnuTLS` library tries to read its system-wide configuration file
-`/etc/gnutls/config`. If the file doesn't exist, built-in defaults are used. To make configuration changes, the `/etc/gnutls` directory and the `config` file in it must be created manually, since they are not shipped in the Ubuntu packaging.
+When initialised, the {term}`GnuTLS` library tries to read its system-wide configuration file `/etc/gnutls/config`. This file is present in Ubuntu Noble 24.04 LTS and later, but previous releases did not ship it. In that case, if you want to make configuration changes, it has to be created manually.
 
 This config file can be used to disable (or mark as insecure) algorithms and
 protocols in a system-wide manner, overriding the library defaults. Note that,
