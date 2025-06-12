@@ -56,18 +56,19 @@ Ubuntu: ``isc-kea`` is the most modern, and is available from 23.04 onwards.
    Install DHCP isc-kea <networking/install-isc-kea>
    Install DHCP isc-dhcp-server <networking/install-isc-dhcp-server>
 
-Time synchronisation
+Time synchronization
 ====================
 
 The Network Time Protocol (NTP) synchronizes time over a network. Ubuntu uses
-``timedatectl`` and ``timesyncd`` by default to handle this. However, users can
-install and use ``chrony`` instead if preferred.
+``chrony`` by default to handle this. However, users can install and use
+``timedatectl``/``timesyncd`` instead if preferred.
 
 .. toctree::
    :titlesonly:
 
+   Time sync with chrony <networking/chrony-client>
    Time sync with timedatectl and timesyncd <networking/timedatectl-and-timesyncd>
-   Time sync with chrony <networking/serve-ntp-with-chrony>
+   Serving time with chrony <networking/serve-ntp-with-chrony>
 
 Network shares
 ==============
