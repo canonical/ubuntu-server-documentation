@@ -1,7 +1,7 @@
 (serve-ntp-with-chrony)=
 # How to serve the Network Time Protocol with Chrony
 
-`timesyncd` and `timedatectl` will generally do the right thing in keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server. 
+As of Ubuntu 25.10 `chrony` is installed by default, functioning as a client and keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server.
 
 Between `chrony`, the now-deprecated `ntpd`, and `open-ntp`, there are plenty of options. The solution we recommend is `chrony`.
 
@@ -20,28 +20,6 @@ This will provide two binaries:
 - `chronyd` - the actual daemon to sync and serve via the Network Time Protocol
 
 - `chronyc` - command-line interface for the `chrony` daemon
-
-## Configure `chronyd`
-
-Firstly, edit `/etc/chrony/chrony.conf` to add/remove server lines. By default these servers are configured:
-
-```text
-# Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board
-# on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for
-# more information.
-pool 0.ubuntu.pool.ntp.org iburst
-pool 1.ubuntu.pool.ntp.org iburst
-pool 2.ubuntu.pool.ntp.org iburst
-pool 3.ubuntu.pool.ntp.org iburst
-```
-
-See `man chrony.conf` for more details on the configuration options available. After changing any part of the config file you need to restart `chrony`, as follows:
-
-```bash
-sudo systemctl restart chrony.service
-```
-
-Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if needed. If you need to force IPv6, there is also `ipv6.ntp.ubuntu.com` which is not configured by default.
 
 ## Enable serving the Network Time Protocol
 
@@ -351,29 +329,6 @@ For more complex scenarios there are many more advanced options for configuring 
 Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
 Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
 ```
-
-### NTS client
-
-The client needs to specify `server` or `pool` as usual. Afterwards, the options can be listed and it is there that `nts` can be added. For example:
-
-```text
-server <server-fqdn-or-IP> iburst nts
-# or as concrete example
-pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
-```
-
-One can check the `authdata` of the connections established by the client using `sudo chronyc -N authdata`, which will provide the following information:
-
-```text
-Name/IP address             Mode KeyID Type KLen Last Atmp  NAK Cook CLen
-=========================================================================
-<server-fqdn-or-ip>          NTS     1   15  256  48h    0    0    8  100
-```
-
-Again, there are more advanced options documented in [the man page](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html). Common use cases are specifying an explicit trusted certificate.
-
-> **Bad Clocks and secure time syncing - "A Chicken and Egg" problem**
-> There is one problem with systems that have very bad clocks. NTS is based on TLS, and TLS needs a reasonably correct clock. Due to that, an NTS-based sync might fail. On hardware affected by this problem, one can consider using the `nocerttimecheck` option which allows the user to set the number of times that the time can be synced without checking validation and expiration.
 
 ## References
 

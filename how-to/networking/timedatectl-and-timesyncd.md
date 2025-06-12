@@ -1,7 +1,11 @@
 (timedatectl-and-timesyncd)=
 # Synchronise time using timedatectl and timesyncd
 
-Ubuntu uses `timedatectl` and `timesyncd` for synchronising time, and they are installed by default as part of `systemd`. You can optionally use `chrony` to {ref}`serve the Network Time Protocol <serve-ntp-with-chrony>`.
+Ubuntu can use `timedatectl` and `timesyncd` for synchronising time, which can be installed as follows, replacing the default `chrony` installation. You can optionally use `chrony` as a {ref}`Network Time Security (NTS) client <chrony-client>` or to {ref}`serve the Network Time Protocol <serve-ntp-with-chrony>`.
+
+```bash
+sudo apt-mark auto chrony && apt install systemd-timesyncd
+```
 
 In this guide, we will show you how to configure these services.
 
