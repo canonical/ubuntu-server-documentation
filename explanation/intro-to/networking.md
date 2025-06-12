@@ -31,7 +31,7 @@ Learn how to {ref}`install isc-kea <install-isc-kea>` or {ref}`install and confi
 
 Network Time Protocol (NTP) synchronizes time between all devices on a network to within a few milliseconds of Coordinated Universal Time (UTC). Learn more about {ref}`time synchronization <about-time-synchronisation>`.
 
-Time is primarily synchronized in Ubuntu by `timedatectl` and `timesyncd`. Both utilities are available by default as part of `systemd`. To find out how to configure this service, {ref}`read our how-to guide <timedatectl-and-timesyncd>`.
+Time is primarily synchronized in Ubuntu by `chrony`. To find out how to configure this service, including Network Time Security (NTS) {ref}`read our how-to guide <chrony-client>`.
 
 If you want to set up a server to *provide* NTP information, we suggest `chrony`. Learn {ref}`how to serve NTP using chrony <serve-ntp-with-chrony>` with this guide.
 
