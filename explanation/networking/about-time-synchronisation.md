@@ -7,12 +7,13 @@ Behind this simple description, there is a lot of complexity. There are three ti
 
 The client software is also a lot more complex than you might expect. It must factor in communication delays and adjust the time in a way that does not upset all the other processes that run on the server. Luckily, all that complexity is hidden from you\!
 
-By default, Ubuntu uses `timedatectl`/`timesyncd` to synchronise time, and they are available by default. See our guide If you would like to know {ref}`how to configure timedatectl and timesyncd <timedatectl-and-timesyncd>`.
+By default, Ubuntu uses `chrony` to synchronise time, which is installed by default. See our guide If you would like to know {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
 
-Users can also optionally {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
+Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
 ## How time synchronisation works
 
+Since Ubuntu 25.10, `chrony` replace most of `timedatectl`/`timesyncd`.
 Since Ubuntu 16.04, `timedatectl`/`timesyncd` (which are part of `systemd`) replace most of `ntpdate`/`ntp`.
 
 ### About `timesyncd`
