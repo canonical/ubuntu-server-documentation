@@ -107,7 +107,16 @@ total 68
 -rw-r--r-- 1 root root 4141 2011-07-04 15:09 server.conf.gz
 ```
 
-Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`:
+Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`.
+
+In Ubuntu 24.04 or newer:
+
+```bash
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
+sudo gzip -d /etc/openvpn/myserver.conf.gz
+```
+
+In Ubuntu 23.04 or older:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
@@ -121,12 +130,13 @@ ca ca.crt
 cert myservername.crt
 key myservername.key
 dh dh.pem
+tls-auth ./easy-rsa/ta.key 0
 ```
 
 Complete this set with a TLS Authentication (TA) key in `etc/openvpn` for `tls-auth` like this:
 
 ```bash
-sudo openvpn --genkey --secret ta.key
+sudo openvpn --genkey secret ta.key
 ```
 
 Edit `/etc/sysctl.conf` and uncomment the following line to enable IP forwarding:
@@ -343,6 +353,7 @@ If the above didn't work for you, check the following:
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
 - Client and server must use the same compression configuration, see `comp-lzo` config option.
 - Client and server must use same config regarding bridged vs. routed mode, see `server vs server-bridge` config option
+- Client must use the config `tls-auth` with index `0` (example client config: `tls-auth FILE 0`), but server must use `tls-auth` with index `1` (example server config: `tls-auth FILE 1`).
 
 ## Advanced configuration
 
