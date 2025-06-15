@@ -350,6 +350,7 @@ If the above didn't work for you, check the following:
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
 - Client and server must use the same compression configuration, see `comp-lzo` config option.
 - Client and server must use same config regarding bridged vs. routed mode, see `server vs server-bridge` config option
+- Client must use the config `tls-auth` with index `0` (example client config: `tls-auth FILE 0`), but server must use `tls-auth` with index `1` (example server config: `tls-auth FILE 1`).
 
 ## Advanced configuration
 
