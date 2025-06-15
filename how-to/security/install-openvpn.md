@@ -126,6 +126,7 @@ ca ca.crt
 cert myservername.crt
 key myservername.key
 dh dh.pem
+tls-auth ta.key 0
 ```
 
 Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-auth` like this:
