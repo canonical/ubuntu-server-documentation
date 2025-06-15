@@ -106,7 +106,16 @@ total 68
 -rw-r--r-- 1 root root 4141 2011-07-04 15:09 server.conf.gz
 ```
 
-Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`:
+Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`.
+
+In Ubuntu 24.04 or newer:
+
+```bash
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
+sudo gzip -d /etc/openvpn/myserver.conf.gz
+```
+
+In Ubuntu 23.04 or older:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
