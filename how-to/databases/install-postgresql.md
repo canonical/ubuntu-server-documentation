@@ -17,7 +17,7 @@ The database service is automatically configured with viable defaults, but can b
 
 PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is the default authentication method used for `local` connections, while `scram-sha-256` is the default for `host` connections (this used to be `md5` until Ubuntu 21.10). Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) if you would like to configure alternatives like Kerberos.
 
-The following discussion assumes that you wish to enable TCP/IP connections and use the MD5 method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
+The following discussion assumes that you wish to enable TCP/IP connections and use the `scram-sha-256` method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
 
 ```{tip}
 To configure *IDENT* authentication, add entries to the `/etc/postgresql/*/main/pg_ident.conf` file. There are detailed comments in the file to guide you.
@@ -30,7 +30,7 @@ listen_addresses = '*'
 ```
 
 ```{note}
-'*' will allow all available IP interfaces (IPv4 and IPv6), to only listen for IPv4 set `0.0.0.0` while '`::`' allows listening for all IPv6 addresses.
+'`*`' will allow connections from all available IP interfaces (IPv4 and IPv6). To only listen for IPv4 set `listen_addresses` to '`0.0.0.0`', while '`::`' allows listening for all IPv6 addresses.
 ```
 
 For details on other parameters, refer to the configuration file or to the [PostgreSQL documentation](https://www.postgresql.org/docs/) for information on how they can be edited.
@@ -41,16 +41,16 @@ Now that we can connect to our PostgreSQL server, the next step is to set a pass
 sudo -u postgres psql template1
 ```
 
-The above command connects to PostgreSQL database `template1` as user `postgres`. Once you connect to the PostgreSQL server, you will be at an SQL prompt. You can run the following SQL command at the `psql` prompt to configure the password for the user `postgres`.
+The above command connects to PostgreSQL database `template1` as user `postgres`. Once you connect to the PostgreSQL server, you will be at an SQL prompt. You can run the following SQL command at the `psql` prompt to configure the password for the user `postgres`:
 
 ```bash
 ALTER USER postgres with encrypted password 'your_password';
 ```
 
-After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.conf` to use `scram-sha-256` authentication with the `postgres` user, allowed for the `template1` database, from any system in the local network (which in the example is `192.168.122.1/24`) :
+After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.conf` to use `scram-sha-256` authentication with the `postgres` user, allowed for the `template1` database, from any system in the local network (which in the example is `192.168.1.1/24`) :
 
 ```text
-hostssl template1       postgres        192.168.122.1/24        scram-sha-256
+hostssl template1       postgres        192.168.1.1/24        scram-sha-256
 ```
 
 ```{note}
