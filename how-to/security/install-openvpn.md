@@ -132,7 +132,7 @@ tls-auth ta.key 0
 Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-auth` like this:
 
 ```bash
-sudo openvpn --genkey --secret ta.key
+sudo openvpn --genkey secret ta.key
 ```
 
 Edit `/etc/sysctl.conf` and uncomment the following line to enable IP forwarding:
