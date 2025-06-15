@@ -100,13 +100,18 @@ Since the client certificates and keys are only required on the client machine, 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
 
 ```bash
-root@server:/# ls -l /usr/share/doc/openvpn/examples/sample-config-files/
-total 68
--rw-r--r-- 1 root root 3427 2011-07-04 15:09 client.conf
--rw-r--r-- 1 root root 4141 2011-07-04 15:09 server.conf.gz
+root@server:/# ls /usr/share/doc/openvpn/examples/sample-config-files/*
+/usr/share/doc/openvpn/examples/sample-config-files/client.conf
+/usr/share/doc/openvpn/examples/sample-config-files/server.conf
 ```
 
-Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`:
+Start by copying the example server configuration to `/etc/openvpn/server.conf`:
+
+```bash
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
+```
+
+In Ubuntu 20.04 or older, do this instead:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
