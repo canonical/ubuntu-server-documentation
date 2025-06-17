@@ -52,6 +52,34 @@ Name/IP address             Mode KeyID Type KLen Last Atmp  NAK Cook CLen
 <server-fqdn-or-ip>          NTS     1   15  256  48h    0    0    8  100
 ```
 
+### NTS related constraints
+
+**Key Exchange port:** NTS/KE uses a separate port (4460/tcp)** to negotiate
+security parameters, which are then used via the normal NTP port (123/udp).
+This is a new deployment, running on different IP addresses than the
+traditional Ubuntu NTP pool.
+
+:::{warning}
+  If the network does not allow access to the Ubuntu NTS servers and required
+  ports, with the default configuration is in place, `chrony` will not be able
+  to adjust the system's clock. To revert to NTP, edit the configuration file
+  in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` and revert to using
+  the listed NTP servers in favor of the NTS ones.
+:::
+
+**Bad Clocks and secure time syncing:** NTS is based on TLS, and TLS needs a
+  reasonably correct clock. Due to that, an NTS-based sync might fail if the
+  clock is too far off. On hardware affected by this problem, one can consider
+  using the `nocerttimecheck` option, which allows to set the number of times
+  that the time can be synced without checking validation and expiration.
+
+:::{note}
+  A new CA is installed in `/etc/chrony/nts-bootstrap-ubuntu.crt` that is
+  used specifically for the Ubuntu NTS bootstrap server, needed for when the
+  clock is too far off. This is added to certificate set ID "1", and defined
+  via `/etc/chrony/conf.d/ubuntu-nts.conf`.
+:::
+
 ## Configure Chrony
 
 An admin can control the timezone and how the system clock should relate to the `hwclock` using the common `timedatectl [set-timezone/set-local-rtc]` commands, provided by `systemd`. For more specific actions, like adding of time-sources, the `chronyc` command can be used. See `man chronyc` for more details.
@@ -115,9 +143,6 @@ Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided
 ```bash
 sudo systemctl restart chrony.service
 ```
-
-> **Bad Clocks and secure time syncing - "A Chicken and Egg" problem**
-> There is one problem with systems that have very bad clocks. NTS is based on TLS, and TLS needs a reasonably correct clock. Due to that, an NTS-based sync might fail. On hardware affected by this problem, one can consider using the `nocerttimecheck` option which allows the user to set the number of times that the time can be synced without checking validation and expiration.
 
 ## Next steps
 
