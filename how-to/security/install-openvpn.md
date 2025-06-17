@@ -123,7 +123,7 @@ key myservername.key
 dh dh.pem
 ```
 
-Complete this set with a TLS Authentication (TA) key in `etc/openvpn` for `tls-auth` like this:
+Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-auth` like this:
 
 ```bash
 sudo openvpn --genkey --secret ta.key
