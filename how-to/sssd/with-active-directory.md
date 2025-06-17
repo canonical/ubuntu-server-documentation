@@ -148,11 +148,10 @@ Something very important to remember is that this file must have permissions `06
 ```
 
 ```{note}
-```
 [FAILED] Failed to listen on sssd-nss.socket...
 [FAILED] Failed to listen on sssd-pam.socket...
 [FAILED] Dependency failed for sssd-pam-priv.socket...
-```
+
 If you get those errors on startup, just remove the line `services = nss, pam`
 ```
 
