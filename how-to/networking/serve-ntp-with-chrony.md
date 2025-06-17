@@ -1,7 +1,7 @@
 (serve-ntp-with-chrony)=
 # How to serve the Network Time Protocol with Chrony
 
-As of Ubuntu 25.10 `chrony` is installed by default, functioning as a client and keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server.
+As of Ubuntu 25.10 `chrony` is installed by default, {ref}`functioning as a client <chrony-client>` and keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server.
 
 Between `chrony`, the now-deprecated `ntpd`, and `open-ntp`, there are plenty of options. The solution we recommend is `chrony`.
 
