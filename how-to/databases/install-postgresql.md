@@ -30,7 +30,7 @@ listen_addresses = '*'
 ```
 
 ```{note}
-'`*`' will allow connections from all available IP interfaces (IPv4 and IPv6). To only listen for IPv4 set `listen_addresses` to '`0.0.0.0`', while '`::`' allows listening for all IPv6 addresses.
+To listen on all IPv4 interfaces, set `listen_addresses` to '`0.0.0.0`', while '`::`' will listen on all IPv6 interfaces. '`*`' will cause PostgreSQL to listen on all available network interfaces, both IPv4 and IPv6.
 ```
 
 For details on other parameters, refer to the configuration file or to the [PostgreSQL documentation](https://www.postgresql.org/docs/) for information on how they can be edited.
@@ -61,7 +61,7 @@ Finally, you should restart the PostgreSQL service to initialise the new configu
 
 ```bash
 sudo systemctl restart postgresql.service
-``` 
+```
 
 ```{warning}
 The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) to configure more parameters.
@@ -165,7 +165,7 @@ PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Adm
 ## Further reading
 
 - As mentioned above, the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
- 
+
   ```bash
   sudo apt install postgresql-doc
   ```
