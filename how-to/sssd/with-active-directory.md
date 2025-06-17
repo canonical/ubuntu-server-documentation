@@ -147,6 +147,15 @@ access_provider = ad
 Something very important to remember is that this file must have permissions `0600` and ownership `root:root`, or else SSSD won't start!
 ```
 
+```{note}
+```
+[FAILED] Failed to listen on sssd-nss.socket...
+[FAILED] Failed to listen on sssd-pam.socket...
+[FAILED] Dependency failed for sssd-pam-priv.socket...
+```
+If you get those errors on startup, just remove the line `services = nss, pam`
+```
+
 Let's highlight a few things from this config file:
 
 - **`cache_credentials`**: This allows logins when the AD server is unreachable
