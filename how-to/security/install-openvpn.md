@@ -106,6 +106,16 @@ root@server:/# ls /usr/share/doc/openvpn/examples/sample-config-files/*
 /usr/share/doc/openvpn/examples/sample-config-files/server.conf
 ```
 
+If these files under `/usr/share/doc/*` are not available:
+
+> Official minimal environments like Ubuntu Docker are optimized to never install stuff like documentation files (you probably also have not `sudo` there, etc).
+> To re-install the necessary documentation, at this point you can run these commands, as the root user:
+>
+> ```bash
+> echo 'path-include=/usr/share/doc/openvpn/examples/*' > /etc/dpkg/dpkg.cfg.d/my-openvpn
+> apt install --reinstall openvpn
+> ```
+
 Start by copying the example server configuration to `/etc/openvpn/server.conf`:
 
 ```bash
