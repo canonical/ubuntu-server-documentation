@@ -69,21 +69,44 @@ sudo service exim4 start
 
 ## SMTP authentication
 
-Exim4 can be configured to use SMTP-AUTH with Transport Layer Security (TLS) and Simple Authentication and Security Layer (SASL).
+There are multiple authentication options available for Exim4. Here we will document two methods:
+
+ * Authenticate Linux users present in the local shadow file (`/etc/shadow`), via `saslauthd` and PAM.
+ * Authenticate arbitrary users against a custom Exim4 password database (`/etc/exim4/passwd`).
+
+Both of these methods use clear text passwords transmitted over the network, so they need to be protected by Transport Layer Security (TLS).
+
+```{warning}
+All configuration steps shown from now on will assume a split-configuration mode for Exim4. If you have selected the non-split mode, then all commands that edit a configuration file under `/etc/exim4/conf.d` in the sections below should be replaced with editing the single file `/etc/exim4/exim4.conf.template`.
+```
+
+### Enabling TLS
 
 First, enter the following into a terminal prompt to create a certificate for use with TLS:
 
 ```bash
 sudo /usr/share/doc/exim4-base/examples/exim-gencert
 ```
+This command will ask some questions about the certificate, like country, city, and others. The most important one, and that must be correct otherwise TLS won't work for this server, is the "Server name" one. It **MUST** match the fully qualified hostname (FQDN) of the system where Exim4 is deployed.
 
+```{warning}
+This will install a self-signed certificate. If deploying this system in production, you must get a proper certificate signed by a recognized Certificate Authority (CA), or, if using an internal, you will have to distribute the CA to all clients expected to connect to this server.
+```
 Configure Exim4 for TLS by editing the `/etc/exim4/conf.d/main/03_exim4-config_tlsoptions` file and adding the following:
 
 ```text
 MAIN_TLS_ENABLE = yes
 ```
 
-Next, configure Exim4 to use the `saslauthd` daemon for authentication by editing `/etc/exim4/conf.d/auth/30_exim4-config_examples` -- uncomment the `plain_saslauthd_server` and `login_saslauthd_server` sections:
+### Authenticating existing Linux users
+
+To authenticate existing Linux users, that is, users who already have accounts on this system, we will use the `saslauthd` service.
+
+```{note}
+To manage local Linux users, please refer to {ref}`User management <user-management>`.
+```
+
+Configure Exim4 to use the `saslauthd` daemon for authentication by editing `/etc/exim4/conf.d/auth/30_exim4-config_examples` -- uncomment the `plain_saslauthd_server` and `login_saslauthd_server` sections:
 
 ```text 
 plain_saslauthd_server:
@@ -108,24 +131,106 @@ login_saslauthd_server:
   .endif
 ```
 
-To enable outside mail clients to connect to the new server, a new user needs to be added into Exim4 by using the following commands:
+This will enable the `PLAIN` and `LOGIN` authentication mechanisms via `saslauthd`.
 
-```bash
+To make these changes effective, the main configuration file needs to be updated, and Exim4 restarted:
+```text
+sudo update-exim4.conf
+sudo systemctl restart exim4
+```
+
+This concludes the Exim4 side of the configuration. Next, the `sasl2-bin` package needs to be installed:
+
+```text
+sudo apt install sasl2-bin
+```
+
+The main configuration for `saslauthd` is in the `/etc/default/saslauthd` file. What needs to be verified is the `MECHANISMS` setting, which we want to be `PAM`:
+```
+MECHANISMS="pam"
+```
+
+```{note}
+In Ubuntu 22.04 Jammy and earlier, we also need to add `START=yes` to `/etc/default/saslauthd`.
+```
+
+Finally, enable and start the `saslauthd` service:
+
+```text
+sudo systemctl enable --now saslauthd
+```
+Exim4 is now configured with SMTP-AUTH using TLS authenticating local Linux users via PAM.
+
+### Authenticating arbitrary users
+
+Exim4 can also be configured to authenticate arbitrary users, that is, users that do note exist on the local system. These mechanisms are called `plain_server` and `login_server`. Edit `/etc/exim4/conf.d/auth/30_exim4-config_examples` and uncomment these sections:
+```text
+plain_server:
+  driver = plaintext
+  public_name = PLAIN
+  server_condition = "${if crypteq{$auth3}{${extract{1}{:}{${lookup{$auth2}lsearch{CONFDIR/passwd}{$value}{*:*}}}}}{1}{0}}"
+  server_set_id = $auth2
+  server_prompts = :
+  .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
+  server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
+  .endif
+
+login_server:
+  driver = plaintext
+  public_name = LOGIN
+  server_prompts = "Username:: : Password::"
+  server_condition = "${if crypteq{$auth2}{${extract{1}{:}{${lookup{$auth1}lsearch{CONFDIR/passwd}{$value}{*:*}}}}}{1}{0}}"
+  server_set_id = $auth1
+  .ifndef AUTH_SERVER_ALLOW_NOTLS_PASSWORDS
+  server_advertise_condition = ${if eq{$tls_in_cipher}{}{}{*}}
+  .endif
+```
+
+```{warning}
+DO NOT enable both these and the `_saslauthd_server` variants (from "Authenticating existing Linux users" above) at the same time!
+```
+
+These mechanisms will lookup usernames and passwords in the `/etc/exim4/passwd` file, which has to be created and populated. The format of this file is:
+```text
+username:crypted-password:cleartext-password
+```
+
+The Exim4 installation ships a helper script that can populate this file. It is a simple interactive script that can be run like this:
+```text
 sudo /usr/share/doc/exim4-base/examples/exim-adduser
 ```
 
-Protect the new password files with the following commands:
+It will prompt for a username and password. In this example we are creating an `ubuntu` entry with the password `ubuntusecret`:
+```text
+User: ubuntu
+Password: ubuntusecret
+```
+After that, we will have a `/etc/exim4/passwd` file, owned by `root:root` and mode `0644`, with contents similar to this:
+```text
+ubuntu:$1$ZvPA$HTddFobmJD1vURtJHBmbw/:ubuntusecret
+```
 
-```bash
+Since this file contains secrets, it should be protected, and Exim4 has to be allowed to read it:
+```text
 sudo chown root:Debian-exim /etc/exim4/passwd
-sudo chmod 640 /etc/exim4/passwd
+sudo chmod 0640 /etc/exim4/passwd
+```
+
+The same script can also be used to manage users in this `passwd` file:
+
+ * To change the password of an existing user, edit the `passwd` file, delete the line corresponding to the user, save the file, and run the script again to provide the new password.
+ * To add another user, run the script and provide the new user name, and their password.
+ * To remove a user, edit the file with a text editor and delete the line corresponding to the user that should be removed.
+
+```{warning}
+The `/usr/share/doc/exim4-base/examples/exim-adduser` serves mostly as an example and is not able to handle many scenarios. For example, it won't check if the username you are providing already exists in the `passwd` file, which can lead to multiple entries for the same user, with unpredictable results.
 ```
 
 Finally, update the Exim4 configuration and restart the service:
 
 ```bash
 sudo update-exim4.conf
-sudo systemctl restart exim4.service
+sudo systemctl restart exim4
 ```
 
 ## Configure SASL
