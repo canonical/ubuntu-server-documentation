@@ -233,33 +233,150 @@ sudo update-exim4.conf
 sudo systemctl restart exim4
 ```
 
-## Configure SASL
-
-To configure `saslauthd` to provide authentication for Exim4, first install the `sasl2-bin` package by running this command at a terminal prompt:
-
-```bash
-sudo apt install sasl2-bin
+```{note}
+There is no need to restart Exim4 after making changes to the `/etc/exim4/passwd` file.
 ```
 
-To configure `saslauthd`, edit the `/etc/default/saslauthd` configuration file and set:
+## Troubleshooting
+
+Exim4 has logs in its own directory in `/var/log/exim4/mainlog`. Whenever troubleshooting the service, always look at that log file.
+
+A quick test to verify if `saslauthd` is working can be performed with the `testsaslauthd` command. Assuming you have a local user called `ubuntu` with a password of `ubuntusecret`, this command can be used to test the authentication on the Exim4 server:
 
 ```text
-START=yes
+testsaslauthd -u ubuntu -p ubuntusecret
 ```
 
-Next, to make Exim4 use the `saslauthd` service, the *Debian-exim* user needs to be part of the *sasl* group:
-
-```bash
-sudo adduser Debian-exim sasl
+The result should be OK:
+```text
+0: OK "Success."
 ```
 
-Finally, start the `saslauthd` service:
+Note that this tests only the `saslauthd` service, not the Exim4 integration with it. For that we need to actually connect to the SMTP service and try out the authentication. A good helper tool for this is shipped in the `cyrus-clients` package. Since this is part of another email system, it's best to install it on another machine, and not on the same machine as Exim4.
 
-```bash
-sudo service saslauthd start
+```text
+sudo apt install cyrus-clients --no-install-recommends
 ```
 
-Exim4 is now configured with SMTP-AUTH using TLS and SASL authentication.
+Here we are using the extra `--no-install-recommends` option because we don't need all the other components of the Cyrus email system.
+
+The tool we are interested in is called `smtptest`, and its documentation can be inspected in its manual page at [cyrus-smtptest](https://manpages.ubuntu.com/manpages/noble/man1/cyrus-smtptest.1.html).
+
+For our purposes, we will run it like this, assuming an `ubuntu` user with the `ubuntusecret` password, and that the Exim4 server is running on the `n-exim.lxd` system:
+```text
+/usr/lib/cyrus/bin/smtptest -t "" -a ubuntu -w ubuntusecret n-exim.lxd
+```
+
+The command-line parameters are:
+
+ * `-t ""`: Enable TLS.
+ * `-a ubuntu`: Use `ubuntu` as the authenticating user.
+ * `-w ubuntusecret`: Authenticate using the `ubuntusecret` password.
+ * `n-exim.lxd`: The hostname of the Exim4 server to connect to.
+
+If all works well, the output will be similar to this, showing that the connection was switched to TLS, and the authentication worked:
+```text
+S: 220 n-exim ESMTP Exim 4.97 Ubuntu Mon, 23 Jun 2025 21:11:59 +0000
+C: EHLO smtptest
+S: 250-n-exim Hello n-exim.lxd [10.10.17.9]
+S: 250-SIZE 52428800
+S: 250-8BITMIME
+S: 250-PIPELINING
+S: 250-PIPECONNECT
+S: 250-CHUNKING
+S: 250-STARTTLS
+S: 250-PRDR
+S: 250 HELP
+C: STARTTLS
+S: 220 TLS go ahead
+verify error:num=18:self-signed certificate
+TLS connection established: TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+C: EHLO smtptest
+S: 250-n-exim Hello n-exim.lxd [10.10.17.9]
+S: 250-SIZE 52428800
+S: 250-8BITMIME
+S: 250-PIPELINING
+S: 250-PIPECONNECT
+S: 250-AUTH PLAIN LOGIN
+S: 250-CHUNKING
+S: 250-PRDR
+S: 250 HELP
+C: AUTH LOGIN
+S: 334 VXNlcm5hbWU6
+C: dWJ1bnR1
+S: 334 UGFzc3dvcmQ6
+C: dWJ1bnR1c2VjcmV0
+S: 235 Authentication succeeded
+Authenticated.
+Security strength factor: 256
+```
+It will appear to hang at this point, but it's just waiting for the SMTP commands, i.e., receive an email. You can exit by typing `QUIT` followed by pressing enter.
+
+Interesting points to note in the output above:
+
+ * No authentication was offered before the connection was switched to TLS. That's because the only mechanisms which are configured are plain-text ones. Without TLS, the password would be exposed on the network.
+ * Since this documentation used a self-signed certificate, that was highlighted right before the TLS session was established. A real email client would probably abort the connnection at this point.
+ * After TLS was established, the `LOGIN` mechanism was chosen.
+ * The username and password are sent base64 encoded. Do not mistake that for encryption: this is just an encoding mechanism!
+
+```{tip}
+Want to obtain the original username and password back from the base64 encoded values? Feed those values to the `base64 -d` tool. Example, using the value from the session above:
+```text
+$ echo -n dWJ1bnR1c2VjcmV0 | base64 -d; echo
+ubuntusecret
+```
+
+To test the `PLAIN` mechanism, add the `-m plain` command-line option:
+```text
+/usr/lib/cyrus/bin/smtptest -t "" -a ubuntu -w ubuntusecret -m plain n-exim.lxd
+```
+
+In the new output, `PLAIN` was selected:
+```text
+S: 220 n-exim ESMTP Exim 4.97 Ubuntu Mon, 23 Jun 2025 21:15:39 +0000
+C: EHLO smtptest
+S: 250-n-exim Hello n-exim.lxd [10.10.17.9]
+S: 250-SIZE 52428800
+S: 250-8BITMIME
+S: 250-PIPELINING
+S: 250-PIPECONNECT
+S: 250-CHUNKING
+S: 250-STARTTLS
+S: 250-PRDR
+S: 250 HELP
+C: STARTTLS
+S: 220 TLS go ahead
+verify error:num=18:self-signed certificate
+TLS connection established: TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+C: EHLO smtptest
+S: 250-n-exim Hello n-exim.lxd [10.10.17.9]
+S: 250-SIZE 52428800
+S: 250-8BITMIME
+S: 250-PIPELINING
+S: 250-PIPECONNECT
+S: 250-AUTH PLAIN LOGIN
+S: 250-CHUNKING
+S: 250-PRDR
+S: 250 HELP
+C: AUTH PLAIN AHVidW50dQB1YnVudHVzZWNyZXQ=
+S: 235 Authentication succeeded
+Authenticated.
+Security strength factor: 256
+```
+
+### Troubleshooting tips
+
+Here are some troubleshooting tips.
+
+#### Permissions
+   * If using `saslauthd`: Can the `Debian-exim` user read and write to the `saslauthd` socket in `/run/saslauthd/mux` socket?
+   * If using `/etc/exim4/passwd`: Can the `Debian-exim` user read this file?
+
+#### Config
+   * If changing a configuration file under `/etc/exim4/conf.d/`, make sure to be using the split-config mode! Check `/etc/exim4/update-exim4.conf.conf` file to see which mode is in use.
+   * Similarly, if changing the configuration file `/etc/exim4/exim4.conf.template`, make sure to be using the non-split mode.
+   * After any configuration file change, be it split mode or not, be sure to run `sudo update-exim4.conf` and restart the exim4 service.
+
 
 ## References
 
