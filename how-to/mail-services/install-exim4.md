@@ -133,7 +133,12 @@ login_saslauthd_server:
 
 This will enable the `PLAIN` and `LOGIN` authentication mechanisms via `saslauthd`.
 
-To make these changes effective, the main configuration file needs to be updated, and Exim4 restarted:
+For Ubuntu 22.04 and earlier, of it you plan to use authentication mechanisms that will need read access to `/etc/sasldb2` (not covered in this guide), you need to add the `Debian-exim` user to the `sasl` group:
+```text
+sudo gpasswd -a Debian-exim sasl
+```
+
+To make all these changes effective, the main configuration file needs to be updated, and Exim4 restarted:
 ```text
 sudo update-exim4.conf
 sudo systemctl restart exim4
@@ -151,13 +156,14 @@ MECHANISMS="pam"
 ```
 
 ```{note}
-In Ubuntu 22.04 Jammy and earlier, we also need to add `START=yes` to `/etc/default/saslauthd`.
+In Ubuntu 22.04 Jammy and earlier, we also need to add `START="yes"` to `/etc/default/saslauthd`.
 ```
 
 Finally, enable and start the `saslauthd` service:
 
 ```text
-sudo systemctl enable --now saslauthd
+sudo systemctl enable saslauthd
+sudo systemctl start saslauthd
 ```
 Exim4 is now configured with SMTP-AUTH using TLS authenticating local Linux users via PAM.
 
