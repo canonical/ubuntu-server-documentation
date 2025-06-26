@@ -147,6 +147,30 @@ linkcheck_ignore = [
 custom_linkcheck_anchors_ignore_for_url = []
 
 ############################################################
+### Manpages auto-linking
+############################################################
+
+# To enable manpage links, uncomment and replace {codename} with required
+# release, preferably an LTS release (e.g. noble). Do *not* substitute
+# {section} or {page}; these will be replaced by sphinx at build time
+#
+# NOTE: If set, adding '{manpage}' to an .md file adds a link to the
+# corresponding man section at the bottom of the page.
+#
+# manpages_url = 'https://manpages.ubuntu.com/manpages/{codename}/en/' + \
+#     'man{section}/{page}.{section}.html'
+
+stable_distro = "plucky"
+
+manpages_url = (
+    "https://manpages.ubuntu.com/manpages/"
+    + stable_distro
+    + "/en/man{section}/{page}.{section}.html"
+)
+
+
+
+############################################################
 ### Additions to default configuration
 ############################################################
 
@@ -192,6 +216,7 @@ custom_required_modules = [
     'sphinxext-rediraffe',
     'sphinx-hoverxref',
     'sphinx-sitemap',
+    'distro_info',
 ]
 
 # Configure hoverxref options
