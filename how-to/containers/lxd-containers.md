@@ -232,7 +232,7 @@ For a full list of limits known to LXD, see [the configuration documentation](ht
 
 By default, LXD creates unprivileged containers. This means that root in the container is a non-root UID on the host. It is privileged against the resources owned by the container, but unprivileged with respect to the host, making root in a container roughly equivalent to an unprivileged user on the host. (The main exception is the increased attack surface exposed through the system call interface)
 
-Briefly, in an unprivileged container, 65536 UIDs are 'shifted' into the container. For instance, UID 0 in the container may be 100000 on the host, UID 1 in the container is 100001, etc, up to 165535. The starting value for UIDs and {term}`GIDs <GID>`, respectively, is determined by the 'root' entry the `/etc/subuid` and `/etc/subgid` files. (See the [subuid(5)](http://manpages.ubuntu.com/manpages/xenial/en/man5/subuid.5.html) man page.)
+Briefly, in an unprivileged container, 65536 UIDs are 'shifted' into the container. For instance, UID 0 in the container may be 100000 on the host, UID 1 in the container is 100001, etc, up to 165535. The starting value for UIDs and {term}`GIDs <GID>`, respectively, is determined by the 'root' entry the `/etc/subuid` and `/etc/subgid` files. (See the {manpage}`subuid(5)`) manual page.)
 
 It is possible to request a container to run without a UID mapping by setting the `security.privileged` flag to true:
 
@@ -254,7 +254,7 @@ All containers are confined by a default seccomp policy. This policy prevents so
 
 ## Raw LXC configuration
 
-LXD configures containers for the best balance of host safety and container usability. Whenever possible it is highly recommended to use the defaults, and use the LXD configuration keys to request LXD to modify as needed. Sometimes, however, it may be necessary to talk to the underlying lxc driver itself. This can be done by specifying LXC configuration items in the 'raw.lxc' LXD configuration key. These must be valid items as documented in [the lxc.container.conf(5) manual page](http://manpages.ubuntu.com/manpages/focal/en/man5/lxc.container.conf.5.html).
+LXD configures containers for the best balance of host safety and container usability. Whenever possible it is highly recommended to use the defaults, and use the LXD configuration keys to request LXD to modify as needed. Sometimes, however, it may be necessary to talk to the underlying lxc driver itself. This can be done by specifying LXC configuration items in the 'raw.lxc' LXD configuration key. These must be valid items as documented in the {manpage}`lxc.container.conf(5)` manual page.
 
 ### Snapshots
 

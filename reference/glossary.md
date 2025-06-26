@@ -39,7 +39,7 @@ Access Control List
     specific operation.
 
     See also:
-    * [the ACL manual page](https://manpages.ubuntu.com/manpages/noble/man5/acl.5.html)
+    * {manpage}`the ACL manual page <acl(5)>`
 
     Related topic(s):
     * Security, {term}`OpenLDAP`, and {term}`Kerberos`
@@ -1241,7 +1241,7 @@ journald
     containers. 
 
     See also:
-    * [the `journald.conf` manual page](https://manpages.ubuntu.com/manpages/noble/man5/journald.conf.5.html/)
+    * The {manpage}`journald.conf(5)` manual page
     * [Docker `journald` documentation](https://docs.docker.com/engine/logging/drivers/journald/) for details on using journald as a logging driver
 
     Related topic(s):

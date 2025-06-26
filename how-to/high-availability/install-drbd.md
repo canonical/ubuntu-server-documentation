@@ -138,6 +138,6 @@ Using `ls` you should see `/srv/default` copied from the former primary host `dr
 
 - For more information on DRBD see the [DRBD web site](http://www.drbd.org/).
 
-- The [drbd.conf manpage](http://manpages.ubuntu.com/manpages/en/man5/drbd.conf.5.html) contains details on the options not covered in this guide.
+- The {manpage}`drbd.conf(5)` manual page contains details on the options not covered in this guide.
 
-- Also, see the [drbdadm manpage](http://manpages.ubuntu.com/manpages/en/man8/drbdadm.8.html).
+- Also, see the {manpage}`drbdadm(8)` manpage.

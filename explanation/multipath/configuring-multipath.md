@@ -50,7 +50,7 @@ defaults {
 
 This overwrites the default value of the `user_friendly_names` parameter.
 
-All the multipath attributes that can be set in the `defaults` section of the `multipath.conf` file can be found [in the man pages](https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html#defaults%20section) with an explanation of what they mean. The attributes are:
+All the multipath attributes that can be set in the `defaults` section of the `multipath.conf` file can be found {manpage}`in the manual pages <multipath.conf(5)>` with an explanation of what they mean. The attributes are:
 
 * `verbosity`
 * `polling_interval`
@@ -191,7 +191,7 @@ The multipath subsection recognises the following attributes:
 
 ### Optional attributes
 
-The following attributes are optional; if not set, the default values are taken from the overrides, devices, or [defaults section](https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html#defaults%20section):
+The following attributes are optional; if not set, the default values are taken from the overrides, devices, or defaults section of the {manpage}`multipath.conf(5)` manual page:
 
  * `path_grouping_policy`
  * `path_selector`

@@ -334,7 +334,7 @@ If the schema you want to add does not exist in LDIF format, a nice conversion t
 
 Activity logging for `slapd` is very useful when implementing an OpenLDAP-based solution -- and it must be manually enabled after software installation. Otherwise, only rudimentary messages will appear in the logs. Logging, like any other such configuration, is enabled via the `slapd-config` database.
 
-OpenLDAP comes with multiple logging levels, with each level containing the lower one (additive). A good level to try is **stats**. The [slapd-config man page](https://manpages.ubuntu.com/manpages/slapd-config.html) has more to say on the different subsystems.
+OpenLDAP comes with multiple logging levels, with each level containing the lower one (additive). A good level to try is **stats**. The {manpage}`slapd-config(5)` manual page has more to say on the different subsystems.
 
 ### Example logging with the stats level 
 

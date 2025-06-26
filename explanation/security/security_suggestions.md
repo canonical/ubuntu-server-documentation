@@ -29,9 +29,7 @@ relevant for your setup.
    ```
 
    By default, `unattended-upgrade` runs daily, but this can be configured. See
-   the `unattended-upgrade`
-   [manual page](https://manpages.ubuntu.com/manpages/noble/en/man8/unattended-upgrades.8.html)
-   for details.
+   the {manpage}`unattended-upgrades(8)` manual page for details.
 
 1. **Manage your software**:
 
@@ -62,7 +60,7 @@ relevant for your setup.
    Most security patches can be fetched and applied automatically through the
    `unattended-upgrade` package. For more details on using and monitoring
    Ubuntu Pro via the command line, refer to the
-   [official documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/).
+   [official documentation](https://documentation.ubuntu.com/pro-client/en/latest/).
 
 ### Access Control
 

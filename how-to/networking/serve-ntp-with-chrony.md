@@ -34,7 +34,7 @@ An example would be:
 allow 1.2.3.4
 ```
 
-See the section "NTP server" in the [man page](http://manpages.ubuntu.com/manpages/jammy/man5/chrony.conf.5.html) for more details on how you can control and restrict access to your NTP server.
+See the section "NTP server" in the {manpage}`chrony.conf(5)` manual page for more details on how you can control and restrict access to your NTP server.
 
 ## View `chrony` status
 
@@ -322,7 +322,7 @@ This provides output in the following form:
     ...
 ```
 
-For more complex scenarios there are many more advanced options for configuring NTS. These are documented in [the `chrony` man page](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html).
+For more complex scenarios there are many more advanced options for configuring NTS. These are documented in the {manpage}`chrony.conf(5)` manual page.
 
 ```{note} *About certificate placement*
 

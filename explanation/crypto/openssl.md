@@ -7,7 +7,7 @@ The OpenSSL configuration file is located at `/etc/ssl/openssl.cnf` and is used 
 
 ## Structure of the config file
 
-The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manpage](https://manpages.ubuntu.com/manpages/jammy/en/man5/config.5ssl.html) has all the details.
+The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manpage](https://manpages.ubuntu.com/manpages/plucky/en/man5/config.5ssl.html) has all the details.
 
 This is what it looks like:
 
@@ -42,7 +42,7 @@ system_default = system_default_sect
 CipherString = DEFAULT:@SECLEVEL=2
 ```
 
-This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the [SSL_CTX_set_security_level(3) manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CTX_set_security_level.3ssl.html).
+This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the {manpage}`SSL_CTX_set_security_level(3)` manpage.
 
 ```{note}
 In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
@@ -65,7 +65,7 @@ ECDHE-ECDSA-AES256-GCM-SHA384  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256)     
 The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
 ```
 
-All the options that can be set in the `system_default_sect` section are detailed in the [SSL_CONF_cmd manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands).
+All the options that can be set in the `system_default_sect` section are detailed in the {manpage}`SSL_CONF_cmd(3)` manpage.
 
 ## Cipher strings, cipher suites, cipher lists
 
@@ -311,4 +311,4 @@ New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
   * https://www.openssl.org/docs/man3.0/man3/SSL_CTX_set_security_level.html
   * https://www.feistyduck.com/library/openssl-cookbook/online/openssl-command-line/understanding-security-levels.html
 
-* [Configuration directives that can be used in the `system_default_sect` section](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands)
+* Configuration directives that can be used in the `system_default_sect` section are in the {manpage}`SSL_CONF_cmd(3)` manual page

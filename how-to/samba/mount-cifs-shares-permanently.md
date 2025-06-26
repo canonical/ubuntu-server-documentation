@@ -165,7 +165,7 @@ If you get the error "mount error(13) permission denied", then the server denied
 * Are you using a valid username and password? Does that account really have access to this folder?
 * Do you have blank space in your credentials file? It should be `password=mspassword`, not `password = mspassword`.
 * Do you need a domain? For example, if you are told that your username is `SALES\sally`, then actually your username is `sally` and your domain is `SALES`. You can add a `domain=SALES` line to the `~/.credentials` file.
-* The security and version settings are interrelated. SMB1 is insecure and no longer supported. At first, try to not specify either security or version: do not specify `sec=` or `vers=`. If you still have authentication errors then you may need to specify either `sec=` or `vers=` or both. You can try the options listed at the [mount.cifs man page](https://manpages.ubuntu.com/manpages/en/man8/mount.cifs.8.html).
+* The security and version settings are interrelated. SMB1 is insecure and no longer supported. At first, try to not specify either security or version: do not specify `sec=` or `vers=`. If you still have authentication errors then you may need to specify either `sec=` or `vers=` or both. You can try the options listed at the {manpage}`mount.cifs(8)` manual page.
 
 ### Mount after login instead of boot
 

@@ -257,7 +257,7 @@ This Samba AD/DC server can be treated as an Active Directory server for Window 
 ## References
 
 - [Active Directory Domain Services Overview](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/get-started/virtual-dc/active-directory-domain-services-overview)
-- [`samba-tool` manual page](https://manpages.ubuntu.com/manpages/noble/man8/samba-tool.8.html)
+- {manpage}`samba-tool(8)` manual page
 - Active Directory integration:
   - {ref}`Choosing an integration method <choosing-an-integration-method>`
   - {ref}`Joining a Member Server <join-a-domain-with-winbind-preparation>`

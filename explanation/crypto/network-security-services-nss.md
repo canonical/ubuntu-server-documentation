@@ -141,7 +141,7 @@ This command will ask you for the NSS database password that you supplied when b
 * `-A`: Import a certificate.
 * `-a`: The certificate is in ASCII mode (PEM).
 * `-i localhost.pem`: The file to read (the actual certificate).
-* `-t TCP`: Trust flags (see the `-t trustargs` argument in the [certutil manpage](https://manpages.ubuntu.com/manpages/jammy/en/man1/certutil.1.html) for a full list).
+* `-t TCP`: Trust flags (see the `-t trustargs` argument in the {manpage}`certutil manpage <certutil(1)>` for a full list).
   * `T`: Trusted CA for client authentication.
   * `C`: Trusted CA.
   * `P`: Trusted peer.

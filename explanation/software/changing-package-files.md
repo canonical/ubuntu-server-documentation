@@ -200,7 +200,7 @@ Configuration file '/etc/rsyslog.conf', does not exist on system.
 Installing new config file as you requested.
 ```
 
-More details on these options can be found in the [`dpkg` man page](https://manpages.ubuntu.com/manpages/jammy/en/man1/dpkg.1.html), but the most common and important ones are:
+More details on these options can be found in the {manpage}`dpkg(1)` manual page, but the most common and important ones are:
 
 * `confmiss`
    Always install the missing conffile without prompting.

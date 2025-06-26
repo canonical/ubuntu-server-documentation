@@ -123,7 +123,7 @@ olcSpSessionLog: 100
 
 ```{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
-Please see the [slapo-syncprov(5) man page](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
 ```
 
 Add the new content:
@@ -264,8 +264,8 @@ olcAccessLogPurge: 07+00:00 01+00:00
 
 ```{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-Please see the [slapo-syncprov(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-syncprov.5.html). In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
-For `olcAccessLogPurge`, please check the [slapo-accesslog(5) manpage](http://manpages.ubuntu.com/manpages/man5/slapo-accesslog.5.html).
+Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manpage.
 ```
 
 Create a directory:

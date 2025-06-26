@@ -112,7 +112,7 @@ Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/realmd/+bug/19802
 
 When domain users and groups are brought to the Linux world, a bit of translation needs to happen, and sometimes new values need to be created. For example, there is no concept of a "login shell" for AD users, but it exists in Linux.
 
-The following are some common `/etc/samba/smb.conf` options you are likely to want to tweak in your installation. The [`smb.conf(5)` man page](https://manpages.ubuntu.com/manpages/jammy/man5/smb.conf.5.html) explains the `%` variable substitutions and other details:
+The following are some common `/etc/samba/smb.conf` options you are likely to want to tweak in your installation. The {manpage}`smb.conf(5)` manual page explains the `%` variable substitutions and other details:
 
 - **home directory** 
 `template homedir = /home/%U@%D`
@@ -199,11 +199,11 @@ You can also restrict access to the share as usual. Just keep in mind the syntax
 
 User and group identifiers on the AD side are not directly usable as identifiers on the Linux site. A *mapping* needs to be performed.
 
-Winbind supports several `idmap` backends, and each one has its own man page. The three main ones are:
+Winbind supports several `idmap` backends, and each one has its own manual page. The three main ones are:
 
-- [`idmap_ad`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_ad.8.html)
-- [`idmap_autorid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_autorid.8.html)
-- [`idmap_rid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_rid.8.html)
+- {manpage}`idmap_ad(8)`
+- {manpage}`idmap_autorid(8)`
+- {manpage}`idmap_rid(8)`
 
 Choosing the correct backend for each deployment type needs careful planing. Upstream has some guidelines at [Choosing an `idmap` backend](https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member#Choosing_an_idmap_backend), and each man page has more details and recommendations.
 

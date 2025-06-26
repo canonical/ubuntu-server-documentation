@@ -64,7 +64,7 @@ backup root@example.com:/etc/  example.com/    exclude=mtab,exclude=core
 
 As you can see, you can pass extra rsync parameters (the `+` appends the parameter to the default list -- if you remove the `+` sign you override it) and also exclude directories.
 
-You can check the comments in `/etc/rsnapshot.conf` and the [rsnapshot man page](http://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html) for more options.
+You can check the comments in `/etc/rsnapshot.conf` and the {manpage}`rsnapshot(1)` manual page for more options.
 
 ## Test configuration
 
@@ -107,5 +107,5 @@ For more information on how to schedule a backup using cron please take a look a
 ### Further reading
 
 * [rsnapshot offical web page](https://rsnapshot.org/)
-* [rsnapshot man page](http://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html)
-* [rsync man page](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html)
+* {manpage}`rsnapshot(1)` manual page
+* {manpage}`rsync(1)` manual page

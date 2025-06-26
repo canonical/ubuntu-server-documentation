@@ -114,5 +114,5 @@ See how to {ref}`set up LDAP users and groups <ldap-users-and-groups>`.
 
 ## Further reading
 
-- See the man page for [slapd.access](http://manpages.ubuntu.com/manpages/slapd.access.html).
+- See the manual page for {manpage}`slapd.access(5)`
 - The [access control topic](https://openldap.org/doc/admin25/guide.html#Access%20Control) in the OpenLDAP administrator's guide.

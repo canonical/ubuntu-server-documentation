@@ -58,7 +58,7 @@ In many cases this is beneficial, but in some cases it might be counter-producti
 Persistent=false
 ```
 
-With this change, the timer will trigger the service only on the next scheduled time. In other words, it won't catch up to the run it missed while the system was off. See the explanation for the *Persistent* option in [systemd.timer manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/systemd.timer.5.html) for more details.
+With this change, the timer will trigger the service only on the next scheduled time. In other words, it won't catch up to the run it missed while the system was off. See the explanation for the *Persistent* option in {manpage}`systemd.timer(5)` manpage for more details.
 
 ## Where to pick updates from
 
@@ -209,7 +209,7 @@ Besides logging, `unattended-upgrades` can also send out reports via email. Ther
    - `on-change`: Only send a report if upgrades were applied. This is the default value.
 
 ```{note}
-Sending out emails like this requires the separate configuration of a package like [ssmtp](https://manpages.ubuntu.com/manpages/noble/man8/ssmtp.8.html) or another minimalistic mail client that is capable of sending messages to a mail server.
+Sending out emails like this requires the separate configuration of a package like {manpage}`ssmtp(8)` or another minimalistic mail client that is capable of sending messages to a mail server.
 ```
 
 ### Notification examples
@@ -293,10 +293,10 @@ Reboots can be very disruptive, especially if the system fails to come back. The
 
  * `Unattended-Upgrade::Automatic-Reboot "false";`: If this option is set to `true`, the system will be rebooted ***without confirmation*** at the end of an upgrade run if a reboot was requested. The default value is `false`.
  * `Unattended-Upgrade::Automatic-Reboot-WithUsers "true";`: Automatically reboot even if there are users currently logged in when `Unattended-Upgrade::Automatic-Reboot` (the option above) is set to `true`. The default value is `true`.
- * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the [shutdown](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html) command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
+ * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the {manpage}`shutdown(8)` command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
 
 ```{note}
-For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the [shutdown manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/shutdown.8.html).
+For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the {manpage}`shutdown(8)` manpage.
 ```
 
 Below are the logs of an `unattended-upgrades` run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
@@ -374,7 +374,7 @@ On other environments, such as Ubuntu Server, you can implement your own prompti
 
 
 ## Testing and troubleshooting
-It's possible to test some configuration changes to `unattended-upgrade` without having to wait for the next time it would run. The `unattended-upgrade` tool has a [manual page](https://manpages.ubuntu.com/manpages/noble/man8/unattended-upgrade.8.html) that explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
+It's possible to test some configuration changes to `unattended-upgrade` without having to wait for the next time it would run. The `unattended-upgrade` tool has a {manpage}`manual page <unattended-upgrade(8)>` that explains all its command-line options. Here are the most useful ones for testing and troubleshooting:
 
  * `-v`: Show a more verbose output.
  * `--dry-run`:  Just simulate what would happen, without actually making any changes.

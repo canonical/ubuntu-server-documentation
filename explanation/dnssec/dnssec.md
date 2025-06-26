@@ -145,7 +145,7 @@ This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:
     nameserver 127.0.0.53
     options edns0 trust-ad
 
-The `trust-ad` setting is documented in the [resolv.conf(5)](https://manpages.ubuntu.com/manpages/noble/man5/resolv.conf.5.html) manpage. It means that the local resolver will:
+The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manpage. It means that the local resolver will:
 
  * Set the `ad` bit (Authenticated Data) in the outgoing queries.
  * Trust the `ad` bit in the responses from the specified nameserver.

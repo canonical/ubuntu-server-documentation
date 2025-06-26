@@ -133,7 +133,7 @@ To remove the same package, you would use the command:
 sudo aptitude remove nmap
 ```
 
-Consult the [Aptitude manpages](https://manpages.ubuntu.com/manpages/man8/aptitude-curses.8.html) for full details of Aptitude's command-line options.
+Consult the {manpage}`Aptitude manpages <aptitude-curses(8)>` for full details of Aptitude's command-line options.
 
 ## dpkg
 
@@ -200,7 +200,7 @@ sudo dpkg -r zip
 Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
 ```
 
-For more `dpkg` options see the [`dpkg` manpage](https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html): `man dpkg`.
+For more `dpkg` options see the {manpage}`dpkg(1)` manpage: `man dpkg`.
 
 ## APT configuration
 
@@ -265,6 +265,6 @@ Most of the material covered in this chapter is available in the respective man 
 
 - The [Installing Software](https://help.ubuntu.com/community/InstallingSoftware) Ubuntu wiki page has more information.
 - The [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide) contains useful information regarding APT usage.
-- For more information about systemd timer units (and systemd in general), visit the [systemd man page](https://manpages.ubuntu.com/manpages/en/man1/systemd.1.html) and [systemd.timer man page](https://manpages.ubuntu.com/manpages/en/man5/systemd.timer.5.html).
+- For more information about systemd timer units (and systemd in general), visit the {manpage}`systemd(1)` manual page and {manpage}`systemd.timer(5)` manual page
 - See the [Aptitude user's manual](https://www.debian.org/doc/user-manuals#aptitude-guide) for more Aptitude options.
 - The [Adding Repositories HOWTO (Ubuntu Wiki)](https://help.ubuntu.com/community/Repositories/Ubuntu) page contains more details on adding repositories.

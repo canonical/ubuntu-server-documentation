@@ -66,7 +66,7 @@ $ pcs stonith create $RESOURCE_NAME fence_ipmilan \
 
 Where `$IP` is the IP address or {term}`hostname` of fencing device, `$PORT` is the TCP/UDP port to use for connection, `$USER` is the login name and `$PASSWD` its password, and `$ACTION` is the fencing actions which by default is `reboot`.
 
-This is one way to set up `fence_ipmilan`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man8/fence_ipmilan.8.html).
+This is one way to set up `fence_ipmilan`, for more information refer {manpage}`to its manpage <fence_ipmilan(8)>`.
 
 ## fence_mpath
 
@@ -120,7 +120,7 @@ One can do the same using `pcs` via the following command:
 $ pcs stonith create $RESOURCE_NAME fence_sbd devices=$DEVICE
 ```
 
-This is one way to set up `fence_sbd`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man8/fence_sbd.8.html).
+This is one way to set up `fence_sbd`, for more information refer {manpage}`to its manpage <fence_sbd(8)>`.
 
 ## fence_scsi
 
@@ -148,7 +148,7 @@ $ pcs stonith create $RESOURCE_NAME fence_scsi \
 
 The `pcmk_host_list` parameter contains a list of cluster nodes that can access the managed SCSI device.
 
-This is one way to set up `fence_scsi`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man8/fence_scsi.8.html).
+This is one way to set up `fence_scsi`, for more information refer {manpage}`to its manpage <fence_scsi(8)>`.
 
 ## fence_virsh
 
@@ -180,7 +180,7 @@ $ pcs stonith create $RESOURCE_NAME fence_virsh \
             use_sudo=true
 ```
 
-This is one way to set up `fence_virsh`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man8/fence_virsh.8.html).
+This is one way to set up `fence_virsh`, for more information refer {manpage}`to its manpage <fence_virsh(8)>`.
 
 In order to avoid running the resource in the same node that should be fenced, we need to add a location restriction:
 

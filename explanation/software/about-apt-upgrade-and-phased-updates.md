@@ -104,4 +104,4 @@ You can see the status of all packages currently being phased in Ubuntu at https
 
 - You can check on the progress of the current [phasing Ubuntu Stable Release Updates](https://people.canonical.com/~ubuntu-archive/phased-updates.html).
 
-- There is also more detail on how phased updates work in the [Ubuntu wiki](https://wiki.ubuntu.com/PhasedUpdates), the [Error Tracker](https://wiki.ubuntu.com/ErrorTracker/PhasedUpdates), and the [`apt` preferences manpage](https://manpages.ubuntu.com/manpages/jammy/man5/apt_preferences.5.html).
+- There is also more detail on how phased updates work in the [Ubuntu wiki](https://wiki.ubuntu.com/PhasedUpdates), the [Error Tracker](https://wiki.ubuntu.com/ErrorTracker/PhasedUpdates), and the {manpage}`apt preferences <apt_preferences(5)>` manpage.

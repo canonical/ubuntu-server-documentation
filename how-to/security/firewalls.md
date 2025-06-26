@@ -9,7 +9,7 @@ The kernel's packet filtering system would be of little use to administrators wi
 
 The default firewall configuration tool for Ubuntu is `ufw`. Developed to ease `iptables` firewall configuration, `ufw` provides a user-friendly way to create an IPv4 or IPv6 host-based firewall.
 
-`ufw` by default is initially disabled. From the [`ufw` man page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html):
+`ufw` by default is initially disabled. From the {manpage}`ufw(8)` manual page:
 
 > ufw is not intended to provide complete firewall functionality via its command interface, but instead provides an easy way to add or remove simple rules. It is currently mainly used for host-based firewalls.
 
@@ -118,7 +118,7 @@ sudo ufw status verbose
 If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
 ```
 
-This is a quick introduction to using `ufw`. Please refer to the [`ufw` man page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html) for more information.
+This is a quick introduction to using `ufw`. Please refer to the {manpage}`ufw(8)` manual page for more information.
 
 ### ufw application integration
 
@@ -164,7 +164,7 @@ ubuntu-bug nameofpackage
 
 The purpose of IP masquerading is to allow machines with private, non-routable IP addresses on your network to access the Internet through the machine doing the masquerading. Traffic from your private network destined for the Internet must be manipulated for replies to be routable back to the machine that made the request.
 
-To do this, the kernel must modify the **source** IP address of each packet so that replies will be routed back to it, rather than to the private IP address that made the request, which is impossible over the Internet. Linux uses **Connection Tracking** ([`conntrack`](https://manpages.ubuntu.com/manpages/en/man8/conntrack.8.html)) to keep track of which connections belong to which machines and reroute each return packet accordingly. Traffic leaving your private network is thus "masqueraded" as having originated from your Ubuntu gateway machine. This process is referred to in Microsoft documentation as "Internet Connection Sharing".
+To do this, the kernel must modify the **source** IP address of each packet so that replies will be routed back to it, rather than to the private IP address that made the request, which is impossible over the Internet. Linux uses **Connection Tracking** ({manpage}`conntrack(8)`) to keep track of which connections belong to which machines and reroute each return packet accordingly. Traffic leaving your private network is thus "masqueraded" as having originated from your Ubuntu gateway machine. This process is referred to in Microsoft documentation as "Internet Connection Sharing".
 
 ### IP masquerading with ufw
 
@@ -324,7 +324,7 @@ There are many tools available to help you construct a complete firewall without
 
 - The [Ubuntu Firewall](https://wiki.ubuntu.com/UncomplicatedFirewall) wiki page contains information on the development of ufw
 
-- Also, the [`ufw` manual page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html) contains some very useful information: `man ufw`
+- Also, the {manpage}`ufw(8)` manual page contains some very useful information: `man ufw`
 
 - See the [packet-filtering-HOWTO](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
 

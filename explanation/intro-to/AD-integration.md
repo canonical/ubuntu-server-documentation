@@ -33,7 +33,7 @@ To set up your Active Directory integrations, we suggest first familiarising you
   - [rid identity mapping backend](https://wiki.samba.org/index.php/Idmap_config_rid)
   - [autorid identity mapping backend](https://wiki.samba.org/index.php/Idmap_config_autorid)
 - Manual pages:
-  - [idmap_tdb(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_tdb.8.html)
-  - [idmap_rid(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_rid.8.html)
-  - [idmap_autorid(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_autorid.8.html)
-  - [wbinfo(1)](https://manpages.ubuntu.com/manpages/noble/en/man1/wbinfo.1.html)
+  - {manpage}`idmap_tdb(8)`
+  - {manpage}`idmap_rid(8)`
+  - {manpage}`idmap_autorid(8)`
+  - {manpage}`wbinfo(1)`
