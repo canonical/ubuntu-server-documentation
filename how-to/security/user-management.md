@@ -34,7 +34,7 @@ To disable the root account password, use the following `passwd` syntax:
 sudo passwd -l root
 ```
 
-You can learn more about `sudo` by reading the [`sudo` man page](https://manpages.ubuntu.com/manpages/man8/sudo.8.html): `man sudo`
+You can learn more about `sudo` by reading the {manpage}`sudo(8)` manual page: `man sudo`
 
 By default, the initial user created by the Ubuntu installer is a member of the group `sudo` which is added to the file `/etc/sudoers` as an authorised `sudo` user. To give any other account full root access through `sudo`, add them to the `sudo` group.
 

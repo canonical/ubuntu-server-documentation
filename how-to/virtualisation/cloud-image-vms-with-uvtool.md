@@ -159,7 +159,7 @@ Some other parameters will have an impact on the cloud-init configuration:
 
 - `--packages <package_list>` : Install the comma-separated packages specified in `package_list` on first boot.
 
-A complete description of all available modifiers is available in the [`uvt-kvm` manpages](https://manpages.ubuntu.com/manpages/lunar/en/man1/uvt-kvm.1.html).
+A complete description of all available modifiers is available in the {manpage}`uvt-kvm(1)` manpages.
 
 ## Resources
 

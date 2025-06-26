@@ -78,9 +78,9 @@ NFS is comprised of several services, both on the server and the client. Each on
 
 ### Ubuntu Server 22.04 LTS ("jammy")
 
-All NFS related services read a single configuration file: `/etc/nfs.conf`. This is a INI-style config file, see the [`nfs.conf(5)`](http://manpages.ubuntu.com/manpages/jammy/man5/nfs.conf.5.html) manpage for details. Furthermore, there is a `/etc/nfs.conf.d` directory which can hold `*.conf` snippets that can override settings from previous snippets or from the `nfs.conf` main config file itself.
+All NFS related services read a single configuration file: `/etc/nfs.conf`. This is a INI-style config file, see the {manpage}`nfs.conf(5)` manual page for details. Furthermore, there is a `/etc/nfs.conf.d` directory which can hold `*.conf` snippets that can override settings from previous snippets or from the `nfs.conf` main config file itself.
 
-There is a new command-line tool called [`nfsconf(8)`](http://manpages.ubuntu.com/manpages/jammy/man8/nfsconf.8.html) which can be used to query or even set configuration parameters in `nfs.conf`. In particular, it has a `--dump` parameter which will show the effective configuration including all changes done by `/etc/nfs.conf.d/*.conf` snippets.
+There is a new command-line tool called {manpage}`nfsconf(8)` which can be used to query or even set configuration parameters in `nfs.conf`. In particular, it has a `--dump` parameter which will show the effective configuration including all changes done by `/etc/nfs.conf.d/*.conf` snippets.
 
 ### For Ubuntu Server 20.04 LTS ("focal") and earlier
 
@@ -129,7 +129,7 @@ For example, `systemctl restart nfs-server.service` will restart `nfs-mountd`, `
 
 Of course, each service can still be individually restarted with the usual `systemctl restart <service>`.
 
-The [`nfs.systemd(7)`](http://manpages.ubuntu.com/manpages/jammy/man7/nfs.systemd.7.html) manpage has more details on the several systemd units available with the NFS packages.
+The {manpage}`nfs.systemd(7)` manpage has more details on the several systemd units available with the NFS packages.
 
 
 ## NFS with Kerberos
@@ -191,7 +191,7 @@ Refresh the exports:
     $ sudo exportfs -rav
     exporting *:/storage
 
-The security options are explained in the [`exports(5)`](http://manpages.ubuntu.com/manpages/jammy/man5/exports.5.html) manpage, but generally they are:
+The security options are explained in the {manpage}`exports(5)` manpage, but generally they are:
   - `krb5`: use kerberos for authentication only (non-auth traffic is in clear text)
   - `krb5i`: use kerberos for authentication and integrity checks (non-auth traffic is in clear text)
   - `krb5p`: use kerberos for authentication, integrity and privacy protection (non-auth traffic is encrypted)

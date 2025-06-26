@@ -267,7 +267,7 @@ sudo apt install cyrus-clients --no-install-recommends
 
 Here we are using the extra `--no-install-recommends` option because we don't need all the other components of the Cyrus email system.
 
-The tool we are interested in is called `smtptest`, and its documentation can be inspected in its manual page at [cyrus-smtptest](https://manpages.ubuntu.com/manpages/noble/man1/cyrus-smtptest.1.html).
+The tool we are interested in is called `smtptest`, and its documentation can be inspected in its manual page at {manpage}`cyrus-smtptest(1)`.
 
 For our purposes, we will run it like this, assuming an `ubuntu` user with the `ubuntusecret` password, and that the Exim4 server is running on the `n-exim.lxd` system:
 ```text

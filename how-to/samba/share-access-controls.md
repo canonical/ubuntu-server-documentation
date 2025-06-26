@@ -97,7 +97,7 @@ sudo setfacl -R -m g:qa:rx /srv/samba/share/
 The `setfacl` command above gives *execute* permissions to all files in the `/srv/samba/share` directory, which you may or may not want.
 ```
 
-Now from a Windows client you should notice the new file permissions are implemented. See [the `acl`](https://manpages.ubuntu.com/manpages/trusty/man5/acl.5.html) and [`setfacl`](https://manpages.ubuntu.com/manpages/trusty/man1/setfacl.1.html) man pages for more information on POSIX ACLs.
+Now from a Windows client you should notice the new file permissions are implemented. See the {manpage}`acl(5)` and {manpage}`setfacl(1)` manual pages for more information on POSIX ACLs.
 
 ## Further reading
 

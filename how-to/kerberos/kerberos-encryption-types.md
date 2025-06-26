@@ -165,6 +165,6 @@ MIT Kerberos has a [guide on updating encryption types](https://web.mit.edu/kerb
 * [Encryption types in MIT Kerberos](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html)
 * [`krb5.conf` encryption related configurations options](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#configuration-variables)
 * [Migrating away from older encryption types](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#migrating-away-from-older-encryption-types)
-* [`kdc.conf` manpage](https://manpages.ubuntu.com/manpages/jammy/man5/kdc.conf.5.html)
-* [`krb5.conf` manpage](https://manpages.ubuntu.com/manpages/jammy/man5/krb5.conf.5.html)
+* {manpage}`kdc.conf(5)` manpage
+* {manpage}`krb5.conf(5)` manpage
 * [Kerberos V5 concepts](https://web.mit.edu/kerberos/krb5-latest/doc/basic/index.html)

@@ -87,7 +87,7 @@ Here is a brief explanation of these configuration parameters:
 * `devices`: A comma separated list of device names (without the `/dev/` prefix) which represents the devices this plugin should act on. If not specified, all compatible devices found, now or in the future, will be used. This parameter also accepts simple globbing and negation rules, so that you can specify `nvme*` for all `/dev/nvme*` devices, or `!sda` to not include `/dev/sda`.
 * plugin-specific options: These can be seen in the output of the `tuned-adm list plugins -v` command, for each listed plugin.
 
-See the [tuned.conf manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html) for details on the syntax of this configuration file.
+See the {manpage}`tuned.conf(5)` manpage for details on the syntax of this configuration file.
 
 The plugin instance concept can be useful if you want to apply different tuning parameters to diferent devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
 ```ini
@@ -246,12 +246,12 @@ The sections that follow `[main]` represent the configuration of tuning plugins.
 * Finally, the `sysctl` plugin is configured to set several variables in `sysfs` (the comments in the example explain the rationale behind each change).
 
 > \*1: This is a universe package
-> Ubuntu ships this software as part of its [universe repository](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
+> Ubuntu ships this software as part of its [universe repository](https://documentation.ubuntu.com/pro-client/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
 
 ## Further reading
 
 * [TuneD website](https://tuned-project.org/)
-* [tuned-adm manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/tuned-adm.8.html)
-* [TuneD profiles manpage](https://manpages.ubuntu.com/manpages/noble/en/man7/tuned-profiles.7.html)
-* [TuneD daemon manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/tuned.8.html)
-* [TuneD configuration manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html)
+* {manpage}`tuned-adm(8)` manpage
+* {manpage}`TuneD profiles <tuned-profiles(7)>` manpage
+* {manpage}`TuneD daemon <tuned(8)>` manpage
+* {manpage}`TuneD configuration <tuned.conf(5)>` manpage

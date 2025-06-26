@@ -87,7 +87,7 @@ You can also use a more generic form for this ACL:
 */admin@EXAMPLE.COM        *
 ```
 
-The above will grant all privileges to any admin instance of a principal. See the [`kadm5.acl` manpage](http://manpages.ubuntu.com/manpages/jammy/man5/kadm5.acl.5.html) for details.
+The above will grant all privileges to any admin instance of a principal. See the {manpage}`kadm5.acl(5)` manpage for details.
 
 Now restart the `krb5-admin-server` for the new ACL to take effect:
 

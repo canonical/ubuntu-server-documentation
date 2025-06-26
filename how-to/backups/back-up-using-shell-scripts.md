@@ -160,4 +160,4 @@ Once an archive has been created, it is important to test the archive. The archi
    
   - [`rsnapshot`](http://www.rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the {ref}`Tools - rsnapshot <install-rsnapshot>` for some information.
     
-  - [`rsync`](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html): a flexible utility used to create incremental copies of files.
+  - {manpage}`rsync(1)`: a flexible utility used to create incremental copies of files.

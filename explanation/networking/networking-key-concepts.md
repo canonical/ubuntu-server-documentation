@@ -67,7 +67,7 @@ Daemons are special system applications which typically execute continuously in 
 
 ### Resources
 
-  - There are man pages for [TCP](https://manpages.ubuntu.com/manpages/focal/en/man7/tcp.7.html) and [IP](http://manpages.ubuntu.com/manpages/focal/man7/ip.7.html) that contain more useful information.
+  - There are manual pages for {manpage}`TCP <tcp(7)>` and {manpage}`IP <ip(7)>` that contain more useful information.
 
   - Also, see the [TCP/IP Tutorial and Technical Overview](http://www.redbooks.ibm.com/abstracts/gg243376.html) IBM Redbook.
 

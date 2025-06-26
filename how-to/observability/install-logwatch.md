@@ -144,4 +144,4 @@ Filesystem      Size  Used Avail Use% Mounted on
 ```
 
 ## Further reading
-- The [Ubuntu manpage for Logwatch](https://manpages.ubuntu.com/manpages/en/man8/logwatch.8.html) contains many more detailed options.
+- The Ubuntu {manpage}`logwatch(8)` manpage contains many more detailed options.

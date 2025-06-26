@@ -64,6 +64,6 @@ You should now be greeted with some useful information, and some information abo
 
 ## Resources
 
-  - See the [update-motd man page](http://manpages.ubuntu.com/manpages/jammy/en/man5/update-motd.5.html) for more options available to update-motd.
+  - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
 
   - The Debian Package of the Day [weather](http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weatherutility.

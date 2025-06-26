@@ -358,7 +358,7 @@ The new bridge interface should now be up and running. The `brctl` provides usef
 
 Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., pre-up, post-up) in their interfaces file. [Netplan configuration](https://netplan.readthedocs.io/en/stable/netplan-yaml/) does not currently support hook scripts in its configuration definition.
 
-Instead, to achieve this functionality with the `networkd` renderer, users can use [networkd-dispatcher](http://manpages.ubuntu.com/manpages/man8/networkd-dispatcher.8.html). The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
+Instead, to achieve this functionality with the `networkd` renderer, users can use {manpage}`networkd-dispatcher(8)`. The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
 ```{note}
 If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
@@ -376,8 +376,8 @@ The [Netplan FAQ also has an example](https://netplan.io/faq/) on converting an 
 
   - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/netplan-yaml/#) and documentation.
 
-  - The [Netplan man page](https://manpages.ubuntu.com/manpages/man5/netplan.5.html) has more information on Netplan.
+  - The Netplan {manpage}`manual page <netplan(5)>` has more information on Netplan.
 
-  - The [systemd-resolved man page](https://manpages.ubuntu.com/manpages/man8/systemd-resolved.8.html) has more information on systemd-resolved service.
+  - The {manpage}`systemd-resolved(8)` manual page has more information on `systemd-resolved` service.
 
   - For more information on *bridging* see the [netplan.io examples page](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)

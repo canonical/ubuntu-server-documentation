@@ -58,7 +58,7 @@ These tools can do much more, as you'll discover in their respective (long) [man
 qemu-system-x86_64 options image[s]
 ```
 
-So take a look at the [QEMU manpage](http://manpages.ubuntu.com/manpages/bionic/man1/qemu-system.1.html), [`qemu-img`](http://manpages.ubuntu.com/manpages/bionic/man1/qemu-img.1.html) and the [QEMU documentation](https://www.qemu.org/documentation/) and see which options best suit your needs.
+So take a look at the {manpage}`QEMU manpage <qemu-system(1)>`, {manpage}`qemu-img(1)` and the [QEMU documentation](https://www.qemu.org/documentation/) and see which options best suit your needs.
 
 While a standard QEMU configuration works for most use cases, some scenarios demand high-vCPU VMs. In the next section, we’ll cover how to create QEMU virtual machines with up to 1024 vCPUs.
 

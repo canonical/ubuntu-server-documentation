@@ -217,7 +217,7 @@ services = pam
 pam_cert_auth = True
 ```
 
-Further `[pam]` configuration options can be changed accroding to [`man sssd.conf`](https://manpages.ubuntu.com/manpages/jammy/en/man5/sssd.conf.5.html#services%20sections).
+Further `[pam]` configuration options can be changed according to the {manpage}`sssd.conf(5)` manual page.
 
 ### Configure SSSD Certificate Authorities database
 
@@ -277,7 +277,7 @@ The sss PAM module allows certificates to be used for login, though our Linux sy
 
 For the purposes of this guide, we will use a simple local user mapping as reference.
 
-Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the [sss-certmap](https://manpages.ubuntu.com/manpages/jammy/en/man5/sss-certmap.5.html) manpage.
+Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the {manpage}`sss-certmap(5)` manpage.
 
 #### Local users mapping
 

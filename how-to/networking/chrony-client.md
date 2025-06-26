@@ -138,7 +138,7 @@ The output produced will look something like this:
     Jun 02 11:27:09 questing systemd[1]: Started chrony.service - chrony, an NTP client/server.
 ```
 
-Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided in `/etc/chrony/chrony.conf` and additional config files can be stored in `/etc/chrony/conf.d/`. The NTS servers from which to fetch time for `chrony` are in defined in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. There are more advanced options documented in [man chrony.conf(5)](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html). Common use cases are specifying an explicit trusted certificate. After changing any part of the config file you need to restart `chrony`, as follows:
+Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided in `/etc/chrony/chrony.conf` and additional config files can be stored in `/etc/chrony/conf.d/`. The NTS servers from which to fetch time for `chrony` are in defined in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. There are more advanced options documented in the {manpage}`chrony.conf(5)` manpage. Common use cases are specifying an explicit trusted certificate. After changing any part of the config file you need to restart `chrony`, as follows:
 
 ```bash
 sudo systemctl restart chrony.service
@@ -150,8 +150,8 @@ If you would now like to also serve the Network Time Protocol via `chrony`, this
 
 ## References
 
-- [Manpage about chronyc](https://manpages.ubuntu.com/manpages/man1/chronyc.1.html)
+- {manpage}`chronyc(1)` manual page
 
-- [Manpage about chronyd](https://manpages.ubuntu.com/manpages/man8/chronyd.8.html)
+- {manpage}`chronyd(8)` manual page
 
-- [Manpage about chrony.conf](https://manpages.ubuntu.com/manpages/man5/chrony.conf.5.html)
+- {manpage}`chrony.conf(5)` manual page
