@@ -885,7 +885,7 @@ Group ID
     * Active Directory integration, Samba, Security, SSSD
 
 gitolite
-    Gitolite is a tool installed on a central server for managing git
+    [Gitolite](../how-to/backups/install-gitolite.md) is a tool installed on a central server for managing git
     repositories and controlling access to them, all via the command line. The
     central server becomes a git server.
 
