@@ -88,8 +88,8 @@ experience. In the Server Guide, we use the
 Language
 --------
 
-We use British (GB) English. It's a good idea to set your spellchecker to
-``en-GB``. We use an automated spelling checker that sometimes throws errors
+We use US English. It's a good idea to set your spellchecker to
+``en-US``. We use an automated spelling checker that sometimes throws errors
 about terms we would like it to ignore:
 
 - If it complains about a file name or a command, enclose the word in backticks
@@ -110,7 +110,10 @@ Acronyms should always be capitalised.
 They should always be expanded the first time they appear on a page, and then
 can be used as acronyms after that. E.g. YAML should be shown as Yet Another
 Markup Language (YAML), and then can be referred to as YAML for the rest of the
-page. 
+page.
+
+All acronyms should also be in our glossary -- you can add the term to the
+glossary if it is not present.
 
 Links
 -----
@@ -157,6 +160,30 @@ Avoid skipping header levels in your document structure, i.e., a level 2 header
 Always include some text between headers if you can. You can see this
 demonstrated between this section's heading and the one above it (Markdown
 elements). It looks quite odd without text to break the headers apart!
+
+Semantic markup
+---------------
+
+We encourage (but do not mandate) the use of semantic mark-up where possible.
+See `Roles <https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html>`_
+in the Sphinx documentation for an overview of inline semantic roles available
+by default. The most helpful ones for this project are:
+
+.. code-block::
+
+   Keyboard keys: {kbd}`Ctrl`, {kbd}`C`
+
+Rendered as :kbd:`Ctrl`, :kbd:`C`
+
+.. code-block::
+
+   Manpages: {manpage}`package-name(section)` (e.g. {manpage}`dpkg(1)`)
+
+Rendered as :manpage:`dpkg(1)`
+
+It is not necessary to provide the hardcoded URL to a manpage - they are
+generated when Sphinx rebuilds the documentation so that they are always up
+to date.
 
 Lists
 -----
