@@ -23,13 +23,13 @@ The recommended minimal system requirements for this tutorial are:
 
 If you are looking for more general system requirements, {ref}`refer to this page <system-requirements>`. 
 
-## Perform a system back up
+## Perform a system backup
 
 Before installing Ubuntu Server Edition you should make sure all data on the system is backed up.
 
 If this is not the first time an operating system has been installed on your computer, it is likely you will need to re-partition your disk to make room for Ubuntu.
 
-Any time you partition your disk, you should be prepared to lose everything on the disk should you make a mistake or something goes wrong during partitioning. The programs used in installation are quite reliable, most have seen years of use, but they also perform destructive actions.
+Any time you partition your disk, you should be prepared to lose all data on the disk should you make a mistake or something goes wrong during partitioning. The programs used in installation are quite reliable, most have seen years of use, but they also perform destructive actions.
 
 ## Download the server ISO
 
@@ -48,7 +48,7 @@ There are many ways to boot the installer but the simplest and most common way i
 
 Plug the USB stick into the system to be installed and start it.
 
-Most computers will automatically boot from USB or DVD, though in some cases this is disabled to improve boot times. If you don't see the boot message and the "Welcome" screen which should appear after it, you will need to set your computer to boot from the install media.
+Most computers will automatically boot from USB or DVD, though in some cases manufacturers disable this feature to improve boot times. If you don't see the boot message and the "Welcome" screen which should appear after it, you will need to set your computer to boot from the install media.
 
 There should be an on-screen message when the computer starts telling you what key to press for settings or a boot menu. Depending on the manufacturer, this could be <kbd>Escape</kbd>, <kbd>F2</kbd>, <kbd>F10</kbd> or <kbd>F12</kbd>. Simply restart your computer and hold down this key until the boot menu appears, then select the drive with the Ubuntu install media.
 
