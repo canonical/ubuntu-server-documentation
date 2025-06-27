@@ -8,7 +8,7 @@ OpenSSH is a freely available version of the Secure Shell (SSH) protocol family 
 
 The OpenSSH server component, `sshd`, listens continuously for client connections from any of the client tools. When a connection request occurs, `sshd` sets up the correct connection depending on the type of client tool connecting. For example, if the remote computer is connecting with the SSH client application, the OpenSSH server sets up a remote control session after authentication. If a remote user connects to an OpenSSH server with `scp`, the OpenSSH server daemon initiates a secure copy of files between the server and client after authentication.
 
-OpenSSH can use many authentication methods, including plain password, public key, and Kerberos tickets.
+OpenSSH can use many authentication methods, including plain password, public key cryptography, and Kerberos tickets.
 
 ## Install OpenSSH
 
@@ -31,7 +31,9 @@ To configure the default behavior of the OpenSSH server application, `sshd`, edi
 There are many directives in the `sshd` configuration file, which control things like communication settings and authentication modes. The following are examples of configuration directives that can be changed by editing the `/etc/ssh/sshd_config` file.
 
 ````{tip}
-Before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
+You can use {ref}`etckeeper <install-etckeeper>` to track changes in your `/etc/` with `git`.
+
+Alternatively, before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
 
 ```bash
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
@@ -65,35 +67,61 @@ Many other configuration directives for `sshd` are available to change the serve
 
 ## SSH keys
 
-SSH allows authentication between two hosts without the need of a password. SSH key authentication uses a **private key** and a **public key**.
+SSH allows authentication between two hosts without the need of a password, using cryptographic keys instead.
+{term}`SSH-key` authentication uses a **private key** and a **public key**.
 
-To generate the keys, run the following command:
+We recommend the [**ed25519 Elliptic Curve algorithm**](https://ed25519.cr.yp.to/) (`-t ed25519`) due to shorter keysize and lower computational requirements.
+Alternatively, you can create a key using the **RSA Algorithm** (`-t rsa -b 4096`, for 4096 bit keysize) instead.
 
-```bash
-ssh-keygen -t rsa
-```
-
-This will generate the keys using the **RSA Algorithm**. At the time of this writing, the generated keys will have 3072 bits. You can modify the number of bits by using the `-b` option. For example, to generate keys with 4096 bits, you can use:
+To generate a key pair, run the following command:
 
 ```bash
-ssh-keygen -t rsa -b 4096
+ssh-keygen -t ed25519
 ```
 
-During the process you will be prompted for a password. Simply hit <kbd>Enter</kbd> when prompted to create the key.
+During creation, you will be prompted for a key passphrase, which you would enter to use that key (every time, or instead using an {manpage}`ssh-agent(1)`.
 
-By default, the public key is saved in the file `~/.ssh/id_rsa.pub`, while `~/.ssh/id_rsa` is the private key. Now copy the `id_rsa.pub` file to the remote host and append it to `~/.ssh/authorized_keys` by running:
+By default, the public key is saved in the file `~/.ssh/id_<algorithm>.pub`, while `~/.ssh/id_<algorithm>` is the private key.
+To allow login for a user via key, append the content of `id_ed25519.pub` (`id_rsa.pub` for RSA) to `target_machine:~/.ssh/authorized_keys` by running:
 
 ```bash
-ssh-copy-id username@remotehost
+ssh-copy-id username@target_machine
 ```
 
-Finally, double check the permissions on the `authorized_keys` file -- only the authenticated user should have read and write permissions. If the permissions are not correct then change them by:
+Finally, double check the permissions on the `authorized_keys` file -- only the authenticated user must have write permissions.
+If the permissions are not correct then change them by:
 
 ```bash
-chmod 600 .ssh/authorized_keys
+chmod go-w .ssh/authorized_keys
 ```
 
-You should now be able to SSH to the host without being prompted for a password.
+You should now be able to SSH to the `target_machine` without being prompted for a password.
+
+To troubleshoot this, have a look at the `target_machine`'s live logs of `ssh.service`:
+
+```bash
+sudo journalctl -fu ssh.service
+```
+
+Since you can have multiple {term}`SSH-key`s, you can configure which to use for which target machine in `~/.ssh/config` (see {manpage}`ssh_config(5)`).
+
+
+
+## Connection multiplexing
+
+To reduce connection setup times, multiple SSH sessions to the same `target_machine` can reuse the same {term}`TCP` connection.
+
+Configuration to activate multiplexing in `~/.ssh/config`:
+```text
+ControlMaster auto
+ControlPath %d/.ssh/ssh_mux_%u@%l_%r@%h:%p
+```
+
+Optionally, if you want the session to still be re-usable `1` second after disconnecting, set:
+```text
+ControlPersist 1
+```
+
 
 ## Import keys from public keyservers
 
