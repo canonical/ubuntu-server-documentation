@@ -885,7 +885,7 @@ Group ID
     * Active Directory integration, Samba, Security, SSSD
 
 gitolite
-    Gitolite is a tool installed on a central server for managing git
+    {ref}`Gitolite <install-gitolite>` is a tool installed on a central server for managing git
     repositories and controlling access to them, all via the command line. The
     central server becomes a git server.
 
@@ -2052,6 +2052,14 @@ Solid State Drive
 SSH
 Secure Shell
     *Work in Progress*
+
+SSH-key
+Secure Shell Key
+    A cryptographic encryption key pair for {term}`SSH`, usually used and created with {term}`OpenSSH`.
+    It's split in two parts: a _public_ and a _private_ key files.
+    The private key is secret and belogs to the owning user, and it's used to prove posession of that secret.
+    The public key is not secret and is used to securely identify only the private key holder.
+    That way, entering a public key on a server for {term}`SSH` access, only the private key holder can log in.
 
 SSI
 Server-Side Includes
