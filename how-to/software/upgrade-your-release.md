@@ -7,9 +7,23 @@ We recommend running a Long Term Support (LTS) release as it provides 5 years of
 
 After the initial standard support period ends for an LTS release, an extended maintenance period is available via an [Ubuntu Pro subscription](http://ubuntu.com/pro), which provides coverage for an additional five years and is available for free on up to five machines. Find out more about the [release lifecycle and support period](https://ubuntu.com/about/release-cycle) for your release.
 
+## Update vs Upgrade vs Release-Upgrade
+
+```{note}
+In this guide, we use the term "upgrade" in two differente contexts:
+ * In the **pre-upgrade checklist**, **upgrade** refers to updating and upgrading the currently installed packages within your existing Ubuntu release.
+ * In the **upgrade the system** section, **upgrade** refers to performing a distribution upgrade to a new Ubuntu release using `do-release-upgrade`.
+```
+| Command | Purpose |
+| :--- | :---: |
+| apt update | Updates packages index (metadata) | 
+| apt upgrade | Upgrades only installed packages within the current distribution |
+| do-release-upgrade | Upgrades the entire OS to next release |
+
 ## Upgrade paths
 
 Ubuntu supports the ability to upgrade from one LTS to the next in sequential order. For example, a user on Ubuntu 16.04 LTS can upgrade to Ubuntu 18.04 LTS, but cannot jump directly to Ubuntu 20.04 LTS. To do this, the user would need to upgrade twice: once to Ubuntu 18.04 LTS, and then upgrade again to Ubuntu 20.04 LTS.
+
 
 ## Pre-upgrade checklist
 
@@ -22,6 +36,7 @@ To ensure a successful upgrade, review the following items:
   ```bash
   sudo apt update
   sudo apt upgrade
+  sudo reboot
   ```
 
 * Check that there is enough free disk space for the upgrade. Upgrading a system will include downloading new packages, which is likely to be on the order of hundreds of new packages. Systems with additional software installed may therefore require a few gigabytes of free disk space.
