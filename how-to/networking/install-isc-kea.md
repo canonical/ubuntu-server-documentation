@@ -48,46 +48,41 @@ pre-configured IP address pool. This can be done with settings as follows:
 
 ```json
 {
-  "Dhcp4": {
-	"interfaces-config": {
-  	"interfaces": [ "eth4" ]
-	},
-	"control-socket": {
-    	"socket-type": "unix",
-    	"socket-name": "/run/kea/kea4-ctrl-socket"
-	},
-	"lease-database": {
-    	"type": "memfile",
-    	"lfc-interval": 3600
-	},
-	"valid-lifetime": 600,
-	"max-valid-lifetime": 7200,
-	"subnet4": [
-  	{
-    	"id": 1,
-    	"subnet": "192.168.1.0/24",
-    	"pools": [
-      	{
-        	"pool": "192.168.1.150 - 192.168.1.200"
-      	}
-    	],
-    	"option-data": [
-      	{
-        	"name": "routers",
-        	"data": "192.168.1.254"
-      	},
-      	{
-        	"name": "domain-name-servers",
-        	"data": "192.168.1.1, 192.168.1.2"
-      	},
-      	{
-        	"name": "domain-name",
-        	"data": "mydomain.example"
-      	}
-    	]
-  	}
-	]
-  }
+    "Dhcp4": {
+        "interfaces-config": {
+            "interfaces": ["eth4"]
+        },
+        "control-socket": {
+            "socket-type": "unix",
+            "socket-name": "/run/kea/kea4-ctrl-socket"
+        },
+        "lease-database": {
+            "type": "memfile",
+            "lfc-interval": 3600
+        },
+        "valid-lifetime": 600,
+        "max-valid-lifetime": 7200,
+        "subnet4": [{
+            "id": 1,
+            "subnet": "192.168.1.0/24",
+            "pools": [{
+                "pool": "192.168.1.150 - 192.168.1.200"
+            }],
+            "option-data": [{
+                    "name": "routers",
+                    "data": "192.168.1.254"
+                },
+                {
+                    "name": "domain-name-servers",
+                    "data": "192.168.1.1, 192.168.1.2"
+                },
+                {
+                    "name": "domain-name",
+                    "data": "mydomain.example"
+                }
+            ]
+        }]
+    }
 }
 ```
 
