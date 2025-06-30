@@ -109,6 +109,14 @@ After adding or removing sources, they can be reloaded using `sudo chrony reload
 
 Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if needed. If you need to force IPv6, there is also `ipv6.ntp.ubuntu.com` which is not configured by default.
 
+### Time sources provided by DHCP (option 42)
+
+Chrony consumes time sources provided by DHCP (option 42). Those could be traditional, non-authenticated NTP sources. Should one want to avoid this behavior, overruling the choices made by a local DHCP administrator, it can be disabled in `/etc/chrony/chrony.conf`. To do that one would comment out the corresponding setting:
+```
+# Use time sources from DHCP.
+# sourcedir /run/chrony-dhcp
+```
+
 ### Chrony time-daemon
 
 `chronyd` itself is a normal service, so you can check its status in more detail using:
