@@ -47,9 +47,14 @@ pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
 For **validation of NTS enablement**, one can list the time sources in use by executing the `chronyc -N sources` command, to find the timeserver in use, as indicated by the `^*` symbol in the first column. Then check the `authdata` of that connection using `sudo chronyc -N authdata`. If the client was able to successfully establish a NTS connection, it will show the `Mode: NTS` field and non-zero values for `KeyID`, `Type` and `KLen`:
 
 ```text
+$ sudo chronyc -N authdata
 Name/IP address             Mode KeyID Type KLen Last Atmp  NAK Cook CLen
 =========================================================================
-<server-fqdn-or-ip>          NTS     1   15  256  48h    0    0    8  100
+1.ntp.ubuntu.com             NTS     6   30  128  14d    0    0    8   64
+2.ntp.ubuntu.com             NTS     6   30  128  14d    0    0    8   64
+3.ntp.ubuntu.com             NTS     1   30  128  27d    0    0    8   64
+4.ntp.ubuntu.com             NTS     2   30  128  20d    0    0    5   64
+ntp-bootstrap.ubuntu.com     NTS     3   30  128   7d    0    0    8   64
 ```
 
 ### NTS related constraints
