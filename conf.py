@@ -112,8 +112,8 @@ if 'custom_rst_epilog' in locals():
 if 'custom_manpages_url' in locals():
     manpages_url = custom_manpages_url
 else:
-    manpages_distribution = subprocess.check_output("distro-info --stable", 
-                                                text=True, shell=True).strip()
+    manpages_distribution = subprocess.check_output(["distro-info", "--lts"],
+                                                text=True, shell=False).strip()
     manpages_url = ("https://manpages.ubuntu.com/manpages/"
                     f"{manpages_distribution}/en/"
                     "man{section}/{page}.{section}.html")
