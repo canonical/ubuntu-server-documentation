@@ -15,7 +15,7 @@ This guide does not explain Active Directory, how it works, how to set one up, o
 
 - The domain controller is:
   - Acting as an authoritative {term}`DNS` server for the domain.
-  - The primary DNS resolver (check with `systemd-resolve --status`).
+  - The primary DNS resolver (check with `resolvectl status`).
 - System time is correct and in sync, maintained via a service like `chrony` or `ntp`.
 - The domain used in this example is `ad1.example.com` .
 
