@@ -18,13 +18,13 @@ Before starting a mjor release upgrade, it's important to prepare our system to 
 
 * **Review Releases notes:** Always check the **release notes** for the new Ubuntu version we are moving to. This can be found on the [Ubuntu Wiki Releases Page](https://wiki.ubuntu.com/Releases).
 
-* **Fully update the current system:** The release upgrade process works best when the current system has all the latest updates installed. This is a standard **package upgrade** so, `apt update` will refresh package lists (sync our package index with the upstream sources), and `apt upgrade` will install the latest versions of installed packages.
+* **Fully update the current system:** The release upgrade process works best when the current system has all the latest updates installed. This is a standard **package upgrade**, **apt update** will refresh package lists (sync our package index with the upstream sources), and **apt upgrade** will install the latest versions of installed packages.
+
   1. Run these commands to ensure everything is up to date:
 
       ```bash
       sudo apt update
       sudo apt upgrade
-      sudo reboot
       ```
   2. Confirm both commands complete successfully and no further updates are available.
 
@@ -98,7 +98,7 @@ Configuration file '/etc/ssh/ssh_config'
 
 You should look at the differences between the files and decide what to do. The default response is to keep the current version of the file. There are situations where accepting the new version, like with `/boot/grub/menu.lst`, is required for the system to boot correctly with the new kernel.
 
-### Package removal
+### Removing Obsolete Packages
 
 After all packages are updated, you can choose to remove any obsolete packages that are  no longer needed packages:
 
