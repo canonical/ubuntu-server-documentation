@@ -14,11 +14,11 @@ However, you cannot skip releases (e.g. jump from 16.04 LTS to 20.04 LTS).If you
 
 ## Pre-upgrade checklist
 
-Before starting a mjor release upgrade, it's important to prepare our system to ensure a smooth transition. This steps are essential, so we need to review the following items:
+Before starting a major release upgrade, it's important to prepare your system to ensure a smooth transition. This step is essential, so we need to review the following items:
 
 * **Review Releases notes:** Always check the **release notes** for the new Ubuntu version we are moving to. This can be found on the [Ubuntu Wiki Releases Page](https://wiki.ubuntu.com/Releases).
 
-* **Fully update the current system:** The release upgrade process works best when the current system has all the latest updates installed. This is a standard **package upgrade**, **apt update** will refresh package lists (sync our package index with the upstream sources), and **apt upgrade** will install the latest versions of installed packages.
+* **Fully update the current system:** The release upgrade process requires that the current system has all the latest updates installed. This is a standard **package upgrade**, **apt update** will refresh package index database, and **apt upgrade** will download and install the latest versions of installed packages.
 
   1. Run these commands to ensure everything is up to date:
 
@@ -28,20 +28,19 @@ Before starting a mjor release upgrade, it's important to prepare our system to 
       ```
   2. Confirm both commands complete successfully and no further updates are available.
 
-  3. After applying all updates, **reboot your system** to ensure the latest kernel is running.
+  3. After applying all updates, it may be necessary to **reboot your system.** The release upgrade process will let you know if that's needed, but you can also check manually before: if the file `/run/reboot-required` exists, then you will need to reboot.
 
 * **Check that there is enough free space:** A release upgrade involves downloading hundreds of new packages, which can be several gigabytes. Make sure you have enough free disk space.
 
-* **Dedicate time for the upgrade:** This process takes time. So we should dedicated period during which we can monitor the upgrade and respond to any prompts.
+* **Dedicate time for the upgrade:** This is an interactive process. The release upgrade will sometimes stop and ask questions, so you should monitor the upgrade and be available to respond.
 
-* **Understand Third-party repositories:**  Third-party software repositories and Personal Package Archives (PPAs) are disabled during upgrade. While software installed from these sources will not be removed, it's the most common cause of upgrade issues. Be prepared to re-enable them or find updated versions after the upgrade.
+* **Understand Third-party repositories:**  Third-party software repositories and Personal Package Archives (PPAs) are disabled during the release upgrade. While software installed from these sources will not be removed, it's the most common cause of upgrade issues. Be prepared to re-enable them or find updated versions after the upgrade.
 
-* **Backup all your data:**  Although upgrade are normally safe, there is always a chance that something could go wrong. It is extremely important that the data is safely copied to a backup location to allow restoration if any problems occur.
+* **Backup all your data:**  Although upgrades are normally safe, there is always a chance that something could go wrong. It is extremely important that the data is safely copied to a backup location to allow restoration if any problems occur.
 
 ## Upgrade the system
 
-
-We recommend upgrading the system using the `do-release-upgrade` command on Server edition and cloud images. This command can handle system configuration changes that are sometimes needed between releases. To begin the process, run the following command:
+We recommend upgrading the system using the `do-release-upgrade` command on Server edition and cloud images. This command can handle system configuration changes that are sometimes needed between releases.
 
 To start the process, run this command:
 
@@ -100,7 +99,7 @@ You should look at the differences between the files and decide what to do. The 
 
 ### Removing Obsolete Packages
 
-After all packages are updated, you can choose to remove any obsolete packages that are  no longer needed packages:
+After all packages are updated, you can choose to remove any obsolete packages that are  no longer needed:
 
 ```text
 Remove obsolete packages?  
