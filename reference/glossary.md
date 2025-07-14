@@ -1365,7 +1365,10 @@ Logical Volume
 
 LVM
 Logical Volume Manager
-    *Work in Progress*
+    A storage management framework in Linux that provides a layer of abstraction
+    over physical storage devices. It allows disks or partitions to be pooled
+    into a single storage space, enabling the creation of flexible logical
+    volumes that can be easily resized or moved.
 
 LXC
 Linux Containers
