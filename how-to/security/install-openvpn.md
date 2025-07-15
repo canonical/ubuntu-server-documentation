@@ -101,13 +101,28 @@ Since the client certificates and keys are only required on the client machine, 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
 
 ```bash
-root@server:/# ls -l /usr/share/doc/openvpn/examples/sample-config-files/
-total 68
--rw-r--r-- 1 root root 3427 2011-07-04 15:09 client.conf
--rw-r--r-- 1 root root 4141 2011-07-04 15:09 server.conf.gz
+root@server:/# ls /usr/share/doc/openvpn/examples/sample-config-files/*
+/usr/share/doc/openvpn/examples/sample-config-files/client.conf
+/usr/share/doc/openvpn/examples/sample-config-files/server.conf
 ```
 
-Start by copying and unpacking `server.conf.gz` to `/etc/openvpn/server.conf`:
+If these files under `/usr/share/doc/*` are not available:
+
+> Official minimal environments like Ubuntu Docker are optimized to never install stuff like documentation files (you probably also have not `sudo` there, etc).
+> To re-install the necessary documentation, at this point you can run these commands, as the root user:
+>
+> ```bash
+> echo 'path-include=/usr/share/doc/openvpn/examples/*' > /etc/dpkg/dpkg.cfg.d/my-openvpn
+> apt install --reinstall openvpn
+> ```
+
+Start by copying the example server configuration to `/etc/openvpn/server.conf`:
+
+```bash
+sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
+```
+
+In Ubuntu 20.04 or older, do this instead:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
@@ -121,12 +136,13 @@ ca ca.crt
 cert myservername.crt
 key myservername.key
 dh dh.pem
+tls-auth ta.key 0
 ```
 
-Complete this set with a TLS Authentication (TA) key in `etc/openvpn` for `tls-auth` like this:
+Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-auth` like this:
 
 ```bash
-sudo openvpn --genkey --secret ta.key
+sudo openvpn --genkey secret ta.key
 ```
 
 Edit `/etc/sysctl.conf` and uncomment the following line to enable IP forwarding:
@@ -343,6 +359,7 @@ If the above didn't work for you, check the following:
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
 - Client and server must use the same compression configuration, see `comp-lzo` config option.
 - Client and server must use same config regarding bridged vs. routed mode, see `server vs server-bridge` config option
+- Client must use the config `tls-auth` with index `1` (example client config: `tls-auth ta.key 1`), but server must use `tls-auth` with index `0` (example server config: `tls-auth ta.key 0`).
 
 ## Advanced configuration
 
