@@ -41,7 +41,7 @@ Right after saving `/etc/samba/smb.conf`, it's always good practice to run the `
     (...)
 
 
-During the domain join process, the tooling will attempt to update the DNS server with the hostname of this system. Since its IP is likely not yet registered in DNS, that's kind of a chicken and egg problem. It helps to, beforehand, set the hostname manually to the FQDN. For this example, we will use a host named `n1` in the `example.internal` domain:
+During the domain join process, the tooling will attempt to update the {term}`DNS` server with the {term}`hostname` of this system. Since its IP is likely not yet registered in DNS, that's kind of a chicken and egg problem. It helps to, beforehand, set the hostname manually to the {term}`FQDN`. For this example, we will use a host named `n1` in the `example.internal` domain:
 
     sudo hostnamectl hostname n1.example.internal
 
@@ -90,5 +90,6 @@ And finally, attempt a console login:
 
 The output above also shows the automatic on-demand home directory creation, according to the template defined in `/etc/samba/smb.conf`.
 
-> **Note**:
-> The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when referred to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```{note}
+The actual login name used can have multiple formats: `DOMAIN\user` at the terminal login prompt, `DOMAIN\\user` when referred to in shell scripts (note the escaping of the '`\`' character), and `user@domain` is also accepted.
+```

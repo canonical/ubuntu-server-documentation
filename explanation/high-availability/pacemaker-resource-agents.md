@@ -23,8 +23,9 @@ All other agents are in `resource-agents-extra` and while most of them are suppo
 
 For the resource agents provided by `resource-agents-base`, we will briefly describe how to use them.
 
-> **Note**:
-> There are two well known tools used to manage fence agents, they are `crmsh` and `pcs`. Here we will present examples with both, since `crmsh` is the recommended and supported tool until Ubuntu 22.10 Kinetic Kudu, and `pcs` is the recommended and supported tool from Ubuntu 23.04 Lunar Lobster onwards. For more information on how to migrate from `crmsh` to `pcs` {ref}`refer to this migration guide <migrate-from-crmsh-to-pcs>`.
+```{note}
+There are two well known tools used to manage fence agents, they are `crmsh` and `pcs`. Here we will present examples with both, since `crmsh` is the recommended and supported tool until Ubuntu 22.10 Kinetic Kudu, and `pcs` is the recommended and supported tool from Ubuntu 23.04 Lunar Lobster onwards. For more information on how to migrate from `crmsh` to `pcs` {ref}`refer to this migration guide <migrate-from-crmsh-to-pcs>`.
+```
 
 ## IPaddr2
 
@@ -50,7 +51,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
             op monitor interval=30s
 ```
 
-This is one way to set up `IPaddr2`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_IPaddr2.7.html).
+This is one way to set up `IPaddr2`, for more information refer {manpage}`to its manpage <ocf_heartbeat_IPaddr2(7)>`.
 
 ## iscsi
 
@@ -76,7 +77,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iscsi \
 
 Where `$TARGET` is the iSCSI Qualified Name (IQN) of the iSCSI target and `$PORTAL` its address, which can be, for instance, formed by the IP address and port number used by the target daemon.
 
-This is one way to set up `iscsi`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_iscsi.7.html).
+This is one way to set up `iscsi`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iscsi(7)>`.
 
 ## iSCSILogicalUnit
 
@@ -106,7 +107,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
 
 Where implementation is set to `lio-t` as mentioned before, `$IQN_TARGET` is the iSCSI Qualified Name (IQN) that this Logical Unit belongs to, `$DEVICE` is the path to the exposed block device, and `$LUN` is the number representing the Logical Unit which will be exposed to initiators.
 
-This is one way to set up `iSCSILogicalUnit`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSILogicalUnit.7.html).
+This is one way to set up `iSCSILogicalUnit`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iSCSILogicalUnit(7)>`.
 
 ## iSCSITarget
 
@@ -132,7 +133,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
 
 Where implementation is set to `lio-t` as mentioned before and `$IQN_TARGET` is the IQN of the target.
 
-This is one way to set up `iSCSITarget`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/man7/ocf_heartbeat_iSCSITarget.7.html).
+This is one way to set up `iSCSITarget`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iSCSITarget(7)>`.
 
 ## LVM-activate
 
@@ -156,7 +157,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:LVM-activate \
              vg_access_mode=system_id
 ```
 
-This is one way to set up `LVM-activate`, for more information [refer to its manpage](https://manpages.ubuntu.com/manpages/en/man7/ocf_heartbeat_LVM-activate.7.html).
+This is one way to set up `LVM-activate`, for more information refer {manpage}`to its manpage <ocf_heartbeat_LVM-activate(7)>`.
 
 ## Systemd
 

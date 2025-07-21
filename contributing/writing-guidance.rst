@@ -26,6 +26,58 @@ section.
    For example, if a page appears in the How-to section about Virtualisation,
    the landing page you need will be ``subsections/how-to-virtualisation.rst``.
 
+Versioning policy
+=================
+
+Ubuntu Server is relatively stable from one LTS to the next, which means the
+documentation is not substantially re-written between releases. Due to this,
+we opt not to have separate branches for each Ubuntu release. Instead, we call
+out any changes or behaviour particular to a specific release.
+
+Versioning by admonition
+------------------------
+
+Small, specific changes can be expressed in a "note" admonition block:
+
+.. code-block:: 
+
+   :::{note}
+   For Ubuntu 24.04 LTS (Noble) onwards, the recommended method for ...
+   :::
+
+or 
+
+.. code-block::
+
+   ```{note}
+   For Ubuntu 24.04 LTS (Noble) onwards, the recommended method for ...
+   ```
+
+Any content not called out as belong to a specific release (or set of releases)
+is assumed to be valid for all supported releases.
+
+Versioning by tabs
+------------------
+
+For large changes, where whole sets of commands may be different between
+releases, we can split the instructions using tabs. 
+
+The MyST documentation has a
+`helpful demonstration <https://mystmd.org/guide/dropdowns-cards-and-tabs#tabs>`_
+of the syntax and how tabs work.
+
+It's good to include a "sync" keyword, so that if users are on a particular
+release, they only need to choose their release one time. Default to the release
+number, e.g. `24.04` or `21.10`.
+
+In all cases, order the tabs and content from "most recent" to "oldest" release
+-- this ensures that the most recent release is always shown in the left-most
+tab and provides a more consistent experience.
+
+If you would like to see an example of this in the live documentation,
+:ref:`the QEMU page <qemu>` uses three tabs in the section about using 1024
+vCPUs.
+
 Style guide
 ===========
 
@@ -36,8 +88,8 @@ experience. In the Server Guide, we use the
 Language
 --------
 
-We use British (GB) English. It's a good idea to set your spellchecker to
-``en-GB``. We use an automated spelling checker that sometimes throws errors
+We use US English. It's a good idea to set your spellchecker to
+``en-US``. We use an automated spelling checker that sometimes throws errors
 about terms we would like it to ignore:
 
 - If it complains about a file name or a command, enclose the word in backticks
@@ -58,7 +110,10 @@ Acronyms should always be capitalised.
 They should always be expanded the first time they appear on a page, and then
 can be used as acronyms after that. E.g. YAML should be shown as Yet Another
 Markup Language (YAML), and then can be referred to as YAML for the rest of the
-page. 
+page.
+
+All acronyms should also be in our glossary -- you can add the term to the
+glossary if it is not present.
 
 Links
 -----
@@ -105,6 +160,30 @@ Avoid skipping header levels in your document structure, i.e., a level 2 header
 Always include some text between headers if you can. You can see this
 demonstrated between this section's heading and the one above it (Markdown
 elements). It looks quite odd without text to break the headers apart!
+
+Semantic markup
+---------------
+
+We encourage (but do not mandate) the use of semantic mark-up where possible.
+See `Roles <https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html>`_
+in the Sphinx documentation for an overview of inline semantic roles available
+by default. The most helpful ones for this project are:
+
+.. code-block::
+
+   Keyboard keys: {kbd}`Ctrl`, {kbd}`C`
+
+Rendered as :kbd:`Ctrl`, :kbd:`C`
+
+.. code-block::
+
+   Manpages: {manpage}`package-name(section)` (e.g. {manpage}`dpkg(1)`)
+
+Rendered as :manpage:`dpkg(1)`
+
+It is not necessary to provide the hardcoded URL to a manpage - they are
+generated when Sphinx rebuilds the documentation so that they are always up
+to date.
 
 Lists
 -----

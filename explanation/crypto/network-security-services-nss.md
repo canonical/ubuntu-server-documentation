@@ -48,7 +48,7 @@ It's via the `config=` line that we can list which cryptographic algorithms we w
 
 - **Version specifiers**: A minimum or maximum version for a protocol. These are the available ones:
   - `tls-version-min`, `tls-version-max`: Minimum and maximum version for the TLS protocol. For example, `tls-version-min=tls1.2`.
-  - `dtls-version-min`, `dtls-version-max`: As above, but for DTLS (TLS over UDP)
+  - `dtls-version-min`, `dtls-version-max`: As above, but for {term}`DTLS` (TLS over UDP)
 
 - **Key sizes**: Minimum size for a key:
   - `DH-MIN`: Diffie-Helman minimum key size. For example, `DH-MIN=2048` specifies a minimum of 2048 bits.
@@ -141,7 +141,7 @@ This command will ask you for the NSS database password that you supplied when b
 * `-A`: Import a certificate.
 * `-a`: The certificate is in ASCII mode (PEM).
 * `-i localhost.pem`: The file to read (the actual certificate).
-* `-t TCP`: Trust flags (see the `-t trustargs` argument in the [certutil manpage](https://manpages.ubuntu.com/manpages/jammy/en/man1/certutil.1.html) for a full list).
+* `-t TCP`: Trust flags (see the `-t trustargs` argument in the {manpage}`certutil manpage <certutil(1)>` for a full list).
   * `T`: Trusted CA for client authentication.
   * `C`: Trusted CA.
   * `P`: Trusted peer.
@@ -233,7 +233,7 @@ New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
 
 ### Use only AES256 with TLSv1.3
 
-In the previous example, the connection ended up using TLSv1.3 as expected, but AES128. To enforce AES256, we can disallow the 128-bit version:
+In the previous example, the connection ended up using TLSv1.3 as expected, but {term}`AES`128. To enforce AES256, we can disallow the 128-bit version:
 
 ```text
 library=

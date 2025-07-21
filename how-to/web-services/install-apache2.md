@@ -20,7 +20,9 @@ Apache2 is configured by placing **directives** in plain text configuration file
 - `apache2.conf`
   The main Apache2 configuration file. Contains settings that are **global** to Apache2.
 
-  > **Note**: Historically, the main Apache2 configuration file was `httpd.conf`, named after the "httpd" daemon. In other distributions (or older versions of Ubuntu), the file might be present. In modern releases of Ubuntu, all configuration options have been moved to `apache2.conf` and the below referenced directories and `httpd.conf` no longer exists.
+  ```{note}
+  Historically, the main Apache2 configuration file was `httpd.conf`, named after the "httpd" daemon. In other distributions (or older versions of Ubuntu), the file might be present. In modern releases of Ubuntu, all configuration options have been moved to `apache2.conf` and the below referenced directories and `httpd.conf` no longer exists.
+  ```
 
 - `envvars`
   File where Apache2 **environment** variables are set.

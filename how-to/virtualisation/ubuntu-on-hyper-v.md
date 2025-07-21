@@ -1,7 +1,7 @@
 (ubuntu-on-hyper-v)=
 # How to set up Ubuntu on Hyper-V
 
-Hyper-V is a native [type 1 hypervisor](https://en.wikipedia.org/wiki/Hypervisor#Classification) developed by Microsoft for the Windows family of operating systems, similar to Xen or VMWare ESXi. It was first released for Windows Server in 2008, and has been available without additional charge since Windows Server 2012 and Windows 8.
+Hyper-V is a native [type 1 hypervisor](https://en.wikipedia.org/wiki/Hypervisor#Classification) developed by Microsoft for the Windows family of operating systems, similar to Xen or VMWare {term}`ESXi`. It was first released for Windows Server in 2008, and has been available without additional charge since Windows Server 2012 and Windows 8.
 
 Hyper-V allows Ubuntu to be run in parallel or in isolation on Windows operating systems. There are several use-cases for running Ubuntu on Hyper-V:
 
@@ -20,7 +20,7 @@ The following are typical [system requirements for Hyper-V](https://learn.micros
 
 ## Install Hyper-V
 
-Our first step in enabling Ubuntu is to install Hyper-V, which can be used on the Windows 11 Pro, Enterprise, Education and Server operating systems.
+Our first step in enabling Ubuntu is to install Hyper-V, which can be used on the Windows 11 Pro, Enterprise, Education, and Server operating systems.
 
 Hyper-V is not included in Windows 11 Home, which [would need to be upgraded](https://support.microsoft.com/en-us/windows/upgrade-windows-home-to-windows-pro-ef34d520-e73f-3198-c525-d1a218cc2818) to Windows 11 Pro.
 

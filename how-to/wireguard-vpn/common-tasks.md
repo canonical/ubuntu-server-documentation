@@ -23,7 +23,7 @@ The `reload` action does exactly what we expect: it reloads the configuration of
 
 ## DNS resolving
 
-Let's say when you are inside the home network (literally -- at home), you can connect to your other systems via DNS names, because your router at `10.10.10.1` can act as an internal DNS server. It would be nice to have this capability also when connected via the WireGuard VPN.
+Let's say when you are inside the home network (literally -- at home), you can connect to your other systems via {term}`DNS` names, because your router at `10.10.10.1` can act as an internal DNS server. It would be nice to have this capability also when connected via the WireGuard VPN.
 
 To do that, we can add a `PostUp` command to the WireGuard configuration to run a command for us right after the VPN is established. This command can be anything you would run in a shell (as root). We can use that to adjust the DNS resolver configuration of the laptop that is remotely connected to the home network.
 
@@ -41,7 +41,7 @@ We can add this `PostUp` command to the `home0.conf` configuration file to have 
 PostUp = resolvectl dns %i 10.10.10.1; resolvectl domain %i \~home
 ```
 
-For `PostUp` (and `PostDown` -- see the [`wg-quick(8)` manpage](https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html) for details), the `%i` text is replaced with the WireGuard interface name. In this case, that would be `home0`.
+For `PostUp` (and `PostDown` -- see the {manpage}`wg-quick(8)` manpage for details), the `%i` text is replaced with the WireGuard interface name. In this case, that would be `home0`.
 
 These two `resolvectl` commands tell the local *systemd-resolved* resolver to:
 * associate the DNS server at `10.10.10.1` to the `home0` interface, and
@@ -59,7 +59,7 @@ $ sudo wg-quick up home0
 [#] resolvectl dns home0 10.10.10.1; resolvectl domain home0 \~home
 ```
 
-You can verify that it worked by pinging some hostname in your home network, or checking the DNS resolution status for the `home0` interface:
+You can verify that it worked by pinging some {term}`hostname` in your home network, or checking the DNS resolution status for the `home0` interface:
 
 ```bash
 $ resolvectl status home0
@@ -73,8 +73,9 @@ Current DNS Server: 10.10.10.1
 
 If you are using `systemctl` to control the WireGuard interface, this is the type of change (adding or changing `PostUp`) where the `reload` action won't be enough, and you actually need to issue a `restart`.
 
-> **Note**:
-> The [`wg-quick(8)` manpage](https://manpages.ubuntu.com/manpages/en/man8/wg-quick.8.html) documents the DNS setting of the WireGuard interface which has the same purpose, but only works if you have `resolveconf` installed. Ubuntu systems by default don't, and rely on `systemd-resolved` instead.
+```{note}
+The {manpage}`wg-quick(8)` manpage documents the DNS setting of the WireGuard interface which has the same purpose, but only works if you have `resolveconf` installed. Ubuntu systems by default don't, and rely on `systemd-resolved` instead.
+```
 
 ## Adding another peer
 
@@ -136,8 +137,9 @@ To update the interface with the new peer without disrupting existing connection
 $ systemctl reload wg-quick@wg0
 ```
 
-> **Note**:
-> For this case of a "server" or "VPN gateway", where we are just adding another peer to an existing config, the `systemctl reload` action will work well enough to insert the new peer into the WireGuard configuration. However, it won't create new routes, or do any of the other steps that `wg-quick` does. Depending on your setup, you might need a full restart so that `wg-quick` can fully do its job.
+```{note}
+For this case of a "server" or "VPN gateway", where we are just adding another peer to an existing config, the `systemctl reload` action will work well enough to insert the new peer into the WireGuard configuration. However, it won't create new routes, or do any of the other steps that `wg-quick` does. Depending on your setup, you might need a full restart so that `wg-quick` can fully do its job.
+```
 
 ## Adding a smartphone peer
 
@@ -161,5 +163,6 @@ That will generate a QR code in the terminal, ready for scanning with the smartp
 
 Note that you need to put the private key contents directly into that configuration file, and not use `PostUp` to load it from a separate file.
 
-> **Important**
-> Treat this QR code as a secret, as it contains the private key for the WireGuard interface!
+```{important}
+Treat this QR code as a secret, as it contains the private key for the WireGuard interface!
+```

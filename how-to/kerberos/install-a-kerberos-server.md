@@ -11,7 +11,7 @@ For this discussion, we will create an MIT Kerberos domain with the following fe
 
 ## Prerequisites
 
-Before installing the Kerberos server, a **properly configured DNS server** is needed for your domain. Since the Kerberos realm (by convention) matches the domain name, this section uses the `EXAMPLE.COM` domain configured in the primary server section of the {ref}`DNS documentation <install-dns>`.
+Before installing the Kerberos server, a properly configured {term}`DNS` server is needed for your domain. Since the Kerberos realm (by convention) matches the domain name, this section uses the `EXAMPLE.COM` domain configured in the primary server section of the {ref}`DNS documentation <install-dns>`.
 
 Also, Kerberos is a time sensitive protocol. If the local system time between a client machine and the server differs by more than five minutes (by default), the workstation will not be able to authenticate. To correct the problem all hosts should have their time synchronized using the same Network Time Protocol (NTP) server. Check out the {ref}`NTP chapter <about-time-synchronisation>` for more details.
 
@@ -23,10 +23,11 @@ The first step in creating a Kerberos realm is to install the `krb5-kdc` and `kr
 sudo apt install krb5-kdc krb5-admin-server
 ```
 
-You will be asked at the end of the install to supply the hostname for the Kerberos and Admin servers for the realm, which may or may not be the same server. Since we are going to create the realm, and thus these servers, type in the full hostname of this server.
+You will be asked at the end of the install to supply the {term}`hostname` for the Kerberos and Admin servers for the realm, which may or may not be the same server. Since we are going to create the realm, and thus these servers, type in the full hostname of this server.
 
-> **Note**:
-> By default the realm name will be domain name of the Key Distribution Center (KDC) server.
+```{note}
+By default the realm name will be domain name of the Key Distribution Center (KDC) server.
+```
 
 Next, create the new realm with the `kdb5_newrealm` utility:
 
@@ -44,8 +45,9 @@ The questions asked during installation are used to configure the `/etc/krb5.con
 sudo dpkg-reconfigure krb5-kdc
 ```
 
-> **Note**:
-> The manpage for `krb5.conf` is in the `krb5-doc` package.
+```{note}
+The manpage for `krb5.conf` is in the `krb5-doc` package.
+```
 
 Let's create our first principal. Since there is no principal create yet, we need to use `kadmin.local`, which uses a local UNIX socket to talk to the KDC, and requires root privileges:
 
@@ -60,7 +62,7 @@ Principal "ubuntu@EXAMPLE.COM" created.
 kadmin.local: quit
 ```
 
-To be able to use `kadmin` remotely, we should create an **admin principal**. Convention suggests it should be an **admin instance**, as that also makes creating a generic Access Control List (ACL) easier. Let's create an admin instance for the `ubuntu` principal:
+To be able to use `kadmin` remotely, we should create an **admin principal**. Convention suggests it should be an **admin instance**, as that also makes creating a generic Access Control List ({term}`ACL`) easier. Let's create an admin instance for the `ubuntu` principal:
 
 ```bash
 $ sudo kadmin.local
@@ -85,7 +87,7 @@ You can also use a more generic form for this ACL:
 */admin@EXAMPLE.COM        *
 ```
 
-The above will grant all privileges to any admin instance of a principal. See the [`kadm5.acl` manpage](http://manpages.ubuntu.com/manpages/jammy/man5/kadm5.acl.5.html) for details.
+The above will grant all privileges to any admin instance of a principal. See the {manpage}`kadm5.acl(5)` manpage for details.
 
 Now restart the `krb5-admin-server` for the new ACL to take effect:
 

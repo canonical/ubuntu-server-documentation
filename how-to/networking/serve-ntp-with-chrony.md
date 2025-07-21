@@ -1,7 +1,7 @@
 (serve-ntp-with-chrony)=
-# How to server the Network Time Protocol with Chrony
+# How to serve the Network Time Protocol with Chrony
 
-`timesyncd` and `timedatectl` will generally do the right thing in keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server. 
+As of Ubuntu 25.10 `chrony` is installed by default, {ref}`functioning as a client <chrony-client>` and keeping your time in sync. However, if you also want to serve NTP information then you need an NTP server.
 
 Between `chrony`, the now-deprecated `ntpd`, and `open-ntp`, there are plenty of options. The solution we recommend is `chrony`.
 
@@ -21,28 +21,6 @@ This will provide two binaries:
 
 - `chronyc` - command-line interface for the `chrony` daemon
 
-## Configure `chronyd`
-
-Firstly, edit `/etc/chrony/chrony.conf` to add/remove server lines. By default these servers are configured:
-
-```text
-# Use servers from the NTP Pool Project. Approved by Ubuntu Technical Board
-# on 2011-02-08 (LP: #104525). See http://www.pool.ntp.org/join.html for
-# more information.
-pool 0.ubuntu.pool.ntp.org iburst
-pool 1.ubuntu.pool.ntp.org iburst
-pool 2.ubuntu.pool.ntp.org iburst
-pool 3.ubuntu.pool.ntp.org iburst
-```
-
-See `man chrony.conf` for more details on the configuration options available. After changing any part of the config file you need to restart `chrony`, as follows:
-
-```bash
-sudo systemctl restart chrony.service
-```
-
-Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if needed. If you need to force IPv6, there is also `ipv6.ntp.ubuntu.com` which is not configured by default.
-
 ## Enable serving the Network Time Protocol
 
 You can install `chrony` (above) and configure special Hardware (below) for a local synchronisation
@@ -56,7 +34,7 @@ An example would be:
 allow 1.2.3.4
 ```
 
-See the section "NTP server" in the [man page](http://manpages.ubuntu.com/manpages/jammy/man5/chrony.conf.5.html) for more details on how you can control and restrict access to your NTP server.
+See the section "NTP server" in the {manpage}`chrony.conf(5)` manual page for more details on how you can control and restrict access to your NTP server.
 
 ## View `chrony` status
 
@@ -119,10 +97,11 @@ Certain `chronyc` commands are privileged and cannot be run via the network with
 
 ## Pulse-Per-Second (PPS) support
 
-`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via GPSD. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, jitter, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
+`Chrony` supports various PPS types natively. It can use kernel PPS API as well as Precision Time Protocol (PTP) hardware clocks. Most general GPS receivers can be leveraged via {term}`GPSD`. The latter (and potentially more) can be accessed via **SHM** or via a **socket** (recommended). All of the above can be used to augment `chrony` with additional high quality time sources for better accuracy, {term}`jitter`, drift, and longer- or shorter-term accuracy. Usually, each kind of clock type is good at one of those, but non-perfect at the others. For more details on configuration see some of the external PPS/GPSD resources listed below.
 
-> **Note**:
-> As of the release of 20.04, there was a bug which - until fixed - you might want to [add this content](https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21)  to your `/etc/apparmor.d/local/usr.sbin.gpsd`.
+```{note}
+As of the release of 20.04, there was a bug which - until fixed - you might want to [add this content](https://bugs.launchpad.net/ubuntu/+source/gpsd/+bug/1872175/comments/21)  to your `/etc/apparmor.d/local/usr.sbin.gpsd`.
+```
 
 ### Example configuration for GPSD to feed `chrony`
 
@@ -140,7 +119,7 @@ sudo apt install pps-tools gpsd-clients
 
 GPS devices usually communicate via serial interfaces. The most common type these days are USB GPS devices, which have a serial converter behind USB. If you want to use one of these devices for PPS then please be aware that the majority do not signal PPS via USB. Check the [GPSD hardware](https://gpsd.gitlab.io/gpsd/hardware.html) list for details. The examples below were run with a Navisys GR701-W.
 
-When plugging in such a device (or at boot time) `dmesg` should report a serial connection of some sort, as in this example:
+When plugging in such a device (or at boot time) {term}`dmesg` should report a serial connection of some sort, as in this example:
 
 ```text
 [   52.442199] usb 1-1.1: new full-speed USB device number 3 using xhci_hcd
@@ -343,32 +322,13 @@ This provides output in the following form:
     ...
 ```
 
-For more complex scenarios there are many more advanced options for configuring NTS. These are documented in [the `chrony` man page](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html).
+For more complex scenarios there are many more advanced options for configuring NTS. These are documented in the {manpage}`chrony.conf(5)` manual page.
 
-> **Note**: *About certificate placement*
-> Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
->  Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
+```{note} *About certificate placement*
 
-### NTS client
-
-The client needs to specify `server` as usual (`pool` directives do not work with NTS). Afterwards, the server address options can be listed and it is there that `nts` can be added. For example:
-
-```text
-server <server-fqdn-or-IP> iburst nts
+Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
+Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
 ```
-
-One can check the `authdata` of the connections established by the client using `sudo chronyc -N authdata`, which will provide the following information:
-
-```text
-Name/IP address             Mode KeyID Type KLen Last Atmp  NAK Cook CLen
-=========================================================================
-<server-fqdn-or-ip>          NTS     1   15  256  48h    0    0    8  100
-```
-
-Again, there are more advanced options documented in [the man page](https://manpages.ubuntu.com/manpages/en/man5/chrony.conf.5.html). Common use cases are specifying an explicit trusted certificate.
-
-> **Bad Clocks and secure time syncing - "A Chicken and Egg" problem**
-> There is one problem with systems that have very bad clocks. NTS is based on TLS, and TLS needs a reasonably correct clock. Due to that, an NTS-based sync might fail. On hardware affected by this problem, one can consider using the `nocerttimecheck` option which allows the user to set the number of times that the time can be synced without checking validation and expiration.
 
 ## References
 

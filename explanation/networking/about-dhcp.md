@@ -9,11 +9,11 @@ The most common settings provided by a DHCP server to DHCP clients include:
 
   - IP address of the default-gateway to use
 
-  - IP addresses of the DNS servers to use
+  - IP addresses of the {term}`DNS` servers to use
 
 However, a DHCP server can also supply configuration properties such as:
 
-  - Hostname
+  - {term}`Hostname`
 
   - Domain name
 
@@ -58,7 +58,7 @@ Ubuntu makes two DHCP servers available:
 
 - The [isc-dhcp-server Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
 
-- For more `/etc/dhcp/dhcpd.conf` options see the [dhcpd.conf man page](https://manpages.ubuntu.com/manpages/focal/en/man5/dhcpd.conf.5.html).
+- For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
 - [ISC dhcp-server](https://www.isc.org/software/dhcp)
 

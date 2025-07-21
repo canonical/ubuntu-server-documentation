@@ -127,7 +127,10 @@ slug = "server"
 # (see https://docs.readthedocs.io/en/stable/guides/redirects.html).
 # NOTE: If this variable is not defined, set to None, or the dictionary is empty,
 # the sphinx_reredirects extension will be disabled.
-redirects = {}
+redirects = {
+    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/",
+    "reference/backups/basic-backup-shell-script": "https://discourse.ubuntu.com/t/basic-backup-shell-script/36419"
+}
 
 ############################################################
 ### Link checker exceptions
@@ -144,6 +147,30 @@ linkcheck_ignore = [
 custom_linkcheck_anchors_ignore_for_url = []
 
 ############################################################
+### Manpages auto-linking
+############################################################
+
+# To enable manpage links, uncomment and replace {codename} with required
+# release, preferably an LTS release (e.g. noble). Do *not* substitute
+# {section} or {page}; these will be replaced by sphinx at build time
+#
+# NOTE: If set, adding '{manpage}' to an .md file adds a link to the
+# corresponding man section at the bottom of the page.
+#
+# manpages_url = 'https://manpages.ubuntu.com/manpages/{codename}/en/' + \
+#     'man{section}/{page}.{section}.html'
+
+stable_distro = "plucky"
+
+manpages_url = (
+    "https://manpages.ubuntu.com/manpages/"
+    + stable_distro
+    + "/en/man{section}/{page}.{section}.html"
+)
+
+
+
+############################################################
 ### Additions to default configuration
 ############################################################
 
@@ -153,7 +180,7 @@ custom_linkcheck_anchors_ignore_for_url = []
 ## The following settings are appended to the default configuration.
 ## Use them to extend the default functionality.
 # NOTE: Remove this variable to disable the MyST parser extensions.
-custom_myst_extensions = []
+custom_myst_extensions = ["colon_fence"]
 
 myst_heading_anchors = 3
 
@@ -167,6 +194,9 @@ custom_extensions = [
     'myst_parser',
     'sphinxcontrib.jquery',
     'sphinxcontrib.mermaid',
+    'sphinxext.rediraffe',
+    'hoverxref.extension',
+    'sphinx_sitemap',
 #    'canonical.youtube-links',
 #    'canonical.related-links',
 #    'canonical.custom-rst-roles',
@@ -183,7 +213,21 @@ custom_extensions = [
 # sphinxext-opengraph
 custom_required_modules = [
     'sphinxcontrib-mermaid',
+    'sphinxext-rediraffe',
+    'sphinx-hoverxref',
+    'sphinx-sitemap',
+    'distro_info',
 ]
+
+# Configure hoverxref options
+hoverxref_role_types = {
+    'term': 'tooltip',
+}
+hoverxref_roles = ['term',]
+
+# Add redirects, so they can be updated here to land with docs being moved
+rediraffe_branch = "main"
+rediraffe_redirects = "redirects.txt"
 
 # Add files or directories that should be excluded from processing.
 custom_excludes = [
@@ -192,6 +236,7 @@ custom_excludes = [
     'doc-cheat-sheet*',
     'readme.rst',
     'legacy/*.md',
+    '.github/pull_request_template.md',
 ]
 
 # Allow Sphinx to use both rst and md
@@ -201,10 +246,14 @@ source_suffix = {
 }
 
 # Add CSS files (located in .sphinx/_static/)
-custom_html_css_files = []
+custom_html_css_files = [
+    'cookie-banner.css'
+]
 
 # Add JavaScript files (located in .sphinx/_static/)
-custom_html_js_files = []
+custom_html_js_files = [
+    'js/bundle.js',
+]
 
 ## The following settings override the default configuration.
 
@@ -234,6 +283,11 @@ custom_tags = []
 #'''
 
 suppress_warnings = ['orphan']
+
+## Sitemap configuration
+
+html_baseurl = 'https://documentation.ubuntu.com/server/'
+sitemap_url_scheme = "{link}"
 
 ############################################################
 ### PDF configuration

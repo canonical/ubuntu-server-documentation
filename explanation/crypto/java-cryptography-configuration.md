@@ -3,7 +3,7 @@
 
 The Java cryptographic settings are large and complex, with many layers and policies. Here we will focus on one aspect of it, which is how to apply some basic filters to the set of cryptographic algorithms available to applications. The references section at the end contains links to more information.
 
-There are many versions of Java available in Ubuntu. It's best to install the "default" one, which is represented by the `default-jre` (for the Runtime Environment) or `default-jdk` (for the Development Kit). And their non-GUI counterparts `default-jre-headless` and `default-jdk-headless`, respectively.
+There are many versions of Java available in Ubuntu. It's best to install the "default" one, which is represented by the `default-jre` (for the Runtime Environment) or `default-jdk` (for the Development Kit). And their non-{term}`GUI` counterparts `default-jre-headless` and `default-jdk-headless`, respectively.
 
 To install the default Java Runtime on Ubuntu Server, run the following command:
 
@@ -85,8 +85,9 @@ These are the parameters:
 
 The rest is just to ignore all non-error output, and show us the exit status (`0` for success, anything else for an error).
 
-> **Note**:
-> `keytool` is not really intended as a tool to test SSL/TLS connections, but being part of the Java packaging makes it convenient and it's enough for our purposes.
+```{note}
+`keytool` is not really intended as a tool to test SSL/TLS connections, but being part of the Java packaging makes it convenient and it's enough for our purposes.
+```
 
 Let's see some examples now.
 

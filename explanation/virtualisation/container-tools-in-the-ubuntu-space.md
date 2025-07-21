@@ -9,7 +9,7 @@ Let's take a look at some of the most commonly used tools and technologies avail
 
 [Linux Containers, or LXC](https://linuxcontainers.org/) (pronounced "lex-see"), is a program that creates and administers containers on your local system. It is the foundation of several other system container technologies and provides both an API (to allow higher-level managers like LXD to administer containers), and an interface through which the user can interact with kernel containment features (often called the "userspace interface"). LXC interacts directly with the kernel to isolate processes, resources, etc, and provides the necessary tools - and a container runtime - for creating and managing system containers.
 
-To get started with LXC containers, check out our {ref}`how-to guide <lxc-containers>`.
+To get started with LXC containers, check out the [LXC Introduction](https://linuxcontainers.org/lxc/introduction/) and [LXC Getting started](https://linuxcontainers.org/lxc/getting-started/) pages.
 
 ## LXD
 

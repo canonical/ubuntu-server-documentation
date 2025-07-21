@@ -29,9 +29,10 @@ USUFFIX='ou=People'
 MSUFFIX='ou=Computers'
 ```
 
-> **Note**:
-> Adjust **SERVER** and related **SUFFIX** options to suit your directory structure.
-> Here, we are forcing use of **START_TLS** (`-ZZ` parameter). Refer to {ref}`LDAP with TLS <ldap-and-tls>` to learn how to set up the server with TLS support.
+```{note}
+Adjust **SERVER** and related **SUFFIX** options to suit your directory structure.
+Here, we are forcing use of **START_TLS** (`-ZZ` parameter). Refer to {ref}`LDAP with TLS <ldap-and-tls>` to learn how to set up the server with TLS support.
+```
 
 Store the `cn=admin` password in the `/etc/ldapscripts/ldapscripts.passwd` file and make sure it's only readable by the *root* local user:
 
@@ -41,7 +42,7 @@ sudo chmod 400 /etc/ldapscripts/ldapscripts.passwd
 ```
 
 >**Note**:
-> The password file must contain exactly and only the password characters, no end-of-line or anything else. The `echo` command above with the `-n` parameter achieves that by suppressing the *EOL* character `\n`. And in order to prevent the password from appearing in the shell history, the *echo* command line is prefixed by a space.
+> The password file must contain exactly and only the password characters, no end-of-line or anything else. The `echo` command above with the `-n` parameter achieves that by suppressing the {term}`EOL` character `\n`. And in order to prevent the password from appearing in the shell history, the *echo* command line is prefixed by a space.
 
 The scripts are now ready to help manage your directory.
 
@@ -56,7 +57,7 @@ sudo ldapaddgroup george
 sudo ldapadduser george george
 ```
     
-This will create a group and user with name "george" and set the user's primary group (*gid*) to "george" as well.
+This will create a group and user with name "george" and set the user's primary group (*{term}`gid`*) to "george" as well.
 
 ### Change a user's password
 

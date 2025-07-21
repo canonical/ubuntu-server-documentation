@@ -26,7 +26,7 @@ Prerequisites
 
 * **Hardware:**
 
-  The default Multipass VM will need **5 GiB of disk space**, and
+  The default Multipass VM will need **5** :term:`GB` **of disk space**, and
   **1 GiB of memory**.
 
 * **Software: -- Multipass**
@@ -76,7 +76,7 @@ Now we can access the VM by running:
     multipass shell tutorial
 
 We will get a "Welcome to Ubuntu" message. Notice that when we run
-this command, the terminal username changes to ``ubuntu`` and the hostname
+this command, the terminal username changes to ``ubuntu`` and the :term:`hostname`
 changes to ``tutorial``:
 
 .. code-block:: bash
@@ -651,8 +651,8 @@ or later, we'll want to customise the package so that it better fits our own
 purposes.
 
 Before we try to customise the package, we should probably look at what files
-are included in it. We can check this using ``dpkg``, which is the
-`Debian package manager <https://manpages.ubuntu.com/manpages/en/man1/dpkg.1.html>`_.
+are included in it. We can check this using :manpage:`dpkg(1)`, which is the
+Debian package manager.
 Although APT is now more commonly used for basic package handling, ``dpkg``
 retains some really helpful commands for examining files and finding out
 package information. It's installed by default on Ubuntu systems so we can use

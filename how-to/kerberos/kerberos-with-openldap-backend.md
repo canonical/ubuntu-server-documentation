@@ -37,8 +37,9 @@ If you want to use an existing OpenLDAP server, that's also possible, but keep i
 
 First, the necessary **schema** needs to be loaded on an OpenLDAP server that has network connectivity to both the **primary** and **secondary** KDCs. The rest of this section assumes that you also have LDAP replication configured between at least two servers. For information on setting up OpenLDAP see {ref}`OpenLDAP Server <install-openldap>`.
 
-> **Note**:
-> `cn=admin,dc=example,dc=com` is a default admin user that is created during the installation of the `slapd` package (the OpenLDAP server). The domain component will change for your server, so adjust accordingly.
+```{note}
+`cn=admin,dc=example,dc=com` is a default admin user that is created during the installation of the `slapd` package (the OpenLDAP server). The domain component will change for your server, so adjust accordingly.
+```
 
 - Install the necessary packages (it's assumed that OpenLDAP is already installed):
    
@@ -85,7 +86,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   ```
 
 - Let's create LDAP entries for the Kerberos administrative entities that will contact the OpenLDAP server to perform operations. There are two:
-  - **`ldap_kdc_dn`**: needs to have read rights on the realm container, principal container and realm sub-trees. If **`disable_last_success`** and **`disable_lockout`** are not set, however, then **`ldap_kdc_dn`** needs write access to the Kerberos container just like the admin DN below.
+  - **`ldap_kdc_dn`**: needs to have read rights on the realm container, principal container and realm sub-trees. If **`disable_last_success`** and **`disable_lockout`** are not set, however, then **`ldap_kdc_dn`** needs write access to the Kerberos container just like the admin {term}`DN` below.
   - **`ldap_kadmind_dn`**: needs to have read and write rights on the realm container, principal container and realm sub-trees
 
   Here is the command to create these entities:
@@ -130,7 +131,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   dn:uid=kdc-service,dc=example,dc=com
   ```
       
-- Finally, update the Access Control Lists (ACL). These can be tricky, as it highly depends on what you have defined already. By default, the `slapd` package configures your database with the following ACLs:
+- Finally, update the Access Control Lists ({term}`ACL`). These can be tricky, as it highly depends on what you have defined already. By default, the `slapd` package configures your database with the following ACLs:
 
   ```text
   olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
@@ -254,8 +255,9 @@ With OpenLDAP configured it is time to configure the KDC. In this example we are
   sudo kdb5_ldap_util -D cn=admin,dc=example,dc=com stashsrvpw -f /etc/krb5kdc/service.keyfile uid=kadmin-service,dc=example,dc=com
   ```
 
-  > **Note**:
-  > The `/etc/krb5kdc/service.keyfile` file now contains clear text versions of the passwords used by the KDC to contact the LDAP server!
+  ```{note}
+  The `/etc/krb5kdc/service.keyfile` file now contains clear text versions of the passwords used by the KDC to contact the LDAP server!
+  ```
 
 - Create a `/etc/krb5kdc/kadm5.acl` file for the admin server, if you haven't already:
 
@@ -311,8 +313,9 @@ Principal "testuser1@EXAMPLE.COM" created.
 
 Since the specified DN already exists, `kadmin.local` will just add the required Kerberos attributes to this existing entry. If it didn't exist, it would be created from scratch, with only the Kerberos attributes, just like what happened with the `ubuntu` example above, but in the specified location.
 
-> **Note**:
-> The `ldap_kadmin_dn` DN (`uid=kadmin-service` in our example) does not have write access to the location specified by the `-x` parameter, you will get an `Insufficient access` error.
+```{note}
+The `ldap_kadmin_dn` DN (`uid=kadmin-service` in our example) does not have write access to the location specified by the `-x` parameter, you will get an `Insufficient access` error.
+```
 
 Both places are visible for `kinit`, since, when the realm was created with `kdb5_ldap_util`, the default value for the search scope and base were taken: `subtree`, and `dc=example,dc=com`.
 

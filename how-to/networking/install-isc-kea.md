@@ -2,7 +2,7 @@
 # How to install and configure isc-kea
 
 In this guide we show how to install and configure `isc-kea` in Ubuntu 23.04
-or greater. [Kea](https://www.isc.org/kea/) is the DHCP server developed by ISC to replace `isc-dhcp`. It is newer and designed for more modern network environments.
+or greater. [Kea](https://www.isc.org/kea/) is the {term}`DHCP` server developed by ISC to replace `isc-dhcp`. It is newer and designed for more modern network environments.
 
 For `isc-dhcp-server` instructions, {ref}`refer to this guide instead <install-isc-dhcp-server>`.
 
@@ -19,15 +19,14 @@ This will also install a few binary packages, including
 * `kea-dhcp4-server`: The IPv4 DHCP server (the one we will configure in this guide).
 * `kea-dhcp6-server`: The IPv6 DHCP server.
 * `kea-ctrl-agent`: A REST API service for Kea.
-* `kea-dhcp-ddns-server`: A Dynamic DNS service to update DNS based on DHCP lease events.
+* `kea-dhcp-ddns-server`: A Dynamic {term}`DNS` service to update DNS based on DHCP lease events.
 
 Since the `kea-ctrl-agent` service has some administrative rights to the Kea
 services, we need to ensure regular users are not allowed to use the API
 without permissions. Ubuntu does it by requiring user authentication to access
 the `kea-ctrl-agent` API service ([LP: #2007312 has more details on this](https://bugs.launchpad.net/ubuntu/+source/isc-kea/+bug/2007312)).
 
-Therefore, the installation process described above will get a debconf "high"
-priority prompt with 3 options:
+Therefore, the installation process described above will get a {term}`debconf` "high" priority prompt with 3 options:
 
 * no action (default);
 * configure with a random password; or
@@ -49,46 +48,41 @@ pre-configured IP address pool. This can be done with settings as follows:
 
 ```json
 {
-  "Dhcp4": {
-	"interfaces-config": {
-  	"interfaces": [ "eth4" ]
-	},
-	"control-socket": {
-    	"socket-type": "unix",
-    	"socket-name": "/run/kea/kea4-ctrl-socket"
-	},
-	"lease-database": {
-    	"type": "memfile",
-    	"lfc-interval": 3600
-	},
-	"valid-lifetime": 600,
-	"max-valid-lifetime": 7200,
-	"subnet4": [
-  	{
-    	"id": 1,
-    	"subnet": "192.168.1.0/24",
-    	"pools": [
-      	{
-        	"pool": "192.168.1.150 - 192.168.1.200"
-      	}
-    	],
-    	"option-data": [
-      	{
-        	"name": "routers",
-        	"data": "192.168.1.254"
-      	},
-      	{
-        	"name": "domain-name-servers",
-        	"data": "192.168.1.1, 192.168.1.2"
-      	},
-      	{
-        	"name": "domain-name",
-        	"data": "mydomain.example"
-      	}
-    	]
-  	}
-	]
-  }
+    "Dhcp4": {
+        "interfaces-config": {
+            "interfaces": ["eth4"]
+        },
+        "control-socket": {
+            "socket-type": "unix",
+            "socket-name": "/run/kea/kea4-ctrl-socket"
+        },
+        "lease-database": {
+            "type": "memfile",
+            "lfc-interval": 3600
+        },
+        "valid-lifetime": 600,
+        "max-valid-lifetime": 7200,
+        "subnet4": [{
+            "id": 1,
+            "subnet": "192.168.1.0/24",
+            "pools": [{
+                "pool": "192.168.1.150 - 192.168.1.200"
+            }],
+            "option-data": [{
+                    "name": "routers",
+                    "data": "192.168.1.254"
+                },
+                {
+                    "name": "domain-name-servers",
+                    "data": "192.168.1.1, 192.168.1.2"
+                },
+                {
+                    "name": "domain-name",
+                    "data": "mydomain.example"
+                }
+            ]
+        }]
+    }
 }
 ```
 

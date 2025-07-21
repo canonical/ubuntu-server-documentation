@@ -1,7 +1,7 @@
 (the-autorid-idmap-backend)=
 # The autorid idmap backend
 
-The [autorid](https://manpages.ubuntu.com/manpages/noble/man8/idmap_autorid.8.html) identity mapping backend, like the *rid* one, also provides an algorithmic mapping between SIDs and Linux IDs, with the advantage that it can also automatically cope with Active Directory deployed across multiple domains. There is no need to pre-allocate ranges for each specific existing or future domain. Some planning is required, though:
+The {manpage}`idmap_autorid(8)` identity mapping backend, like the `rid` one, also provides an algorithmic mapping between SIDs and Linux IDs, with the advantage that it can also automatically cope with Active Directory deployed across multiple domains. There is no need to pre-allocate ranges for each specific existing or future domain. Some planning is required, though:
 
 - range: the first and last ID that will be allocated on the Linux side by this backend. This includes all possible domains.
 - rangesize: how many IDs to allocate to each domain.
@@ -33,13 +33,13 @@ Which domain will get which slot? That is **not deterministic**. It will basical
 
 This also means that a persistent database is required to record which domain goes into which slot. This is managed automatically by the autorid backend in the `autorid.tdb` file.
 
-> **NOTE**
->
-> The `autorid.tdb` domain mapping database file is kept in `/var/lib/samba/` and should be backed up regularly.
+```{note}
+The `autorid.tdb` domain mapping database file is kept in `/var/lib/samba/` and should be backed up regularly.
+```
 
 ## Pros and Cons of the autorid backend
 
-Let's examine the Pros and Cons of the *idmap_autorid* backend, and which scenarios are a better fit for it.
+Let's examine the Pros and Cons of the `idmap_autorid` backend, and which scenarios are a better fit for it.
 
 Pros:
 - automatic handling of trusted domains
@@ -49,7 +49,7 @@ Cons:
 - non-deterministic SID to ID mapping with multiple domains, even if the same idmap config settings are used for all domain-joined systems
 - extra concern to backup the domain mapping database file
 
-So when to use the *idmap_autorid* backend?
+So when to use the `idmap_autorid` backend?
 - Multiple domains are involved via trust relationships, and the stability of IDs is not required on the joined systems.
 - Single domain systems can also benefit from the easier and simpler up-front configuration.
 - If you need to share files owned by domain users via NFS or another mechanism which relies on stability of IDs, then this backend must not be used.

@@ -20,8 +20,9 @@ user            = mysql
 port            = 3307
 ```
 
-> **Note**:
-> Some packages do not automatically create files for you to edit in their `.d` directories. In these cases it is often acceptable to just create an additional config file by any name there. When in doubt, check the package's documentation to confirm.
+```{note}
+Some packages do not automatically create files for you to edit in their `.d` directories. In these cases it is often acceptable to just create an additional config file by any name there. When in doubt, check the package's documentation to confirm.
+```
 
 After saving the file, restart the service.
 
@@ -89,8 +90,9 @@ Restart=on-failure
 ...
 ```
 
-> **Note**:
-> Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/systemd.service.html) for more information.
+```{note}
+Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/systemd.service.html) for more information.
+```
 
 Once the changes are saved, the override file will be created in `/etc/systemd/system/apache2.service.d/override.conf`. To apply changes, run
 
@@ -152,8 +154,9 @@ For example, if you would like `swtpm` to access a custom directory called `/var
 
 This method will work for all [AppArmor syntax](https://ubuntu.com/tutorials/beginning-apparmor-profile-development).
 
-> **Note**:
-> Although most local profiles have the same name as the maintainer's, you can often check what file is included based on the main profile's contents. In `swtpm`'s case, `/etc/apparmor.d/usr.bin.swtpm` contains the lines:
+```{note}
+Although most local profiles have the same name as the maintainer's, you can often check what file is included based on the main profile's contents. In `swtpm`'s case, `/etc/apparmor.d/usr.bin.swtpm` contains the lines:
+```
 
 > ```
 > # Site-specific additions and overrides. See local/README for details.
@@ -163,7 +166,7 @@ This method will work for all [AppArmor syntax](https://ubuntu.com/tutorials/beg
 
 ## Restoring configuration files
 
-Since config files are meant to be intentional changes by the user/admin, they are not overwritten by updates or even re-installs of the package. However, it's possible you might change it by accident or may just want to go back to step one of a trial-and-error phase that you are in. In those situations you can use `apt` to restore the original config files. Note that while we call `apt`, it is `dpkg` that actually handles the restoration.
+Since config files are meant to be intentional changes by the user/admin, they are not overwritten by updates or even re-installs of the package. However, it's possible you might change it by accident or may just want to go back to step one of a trial-and-error phase that you are in. In those situations you can use `apt` to restore the original config files. Note that while we call `apt`, it is {term}`dpkg` that actually handles the restoration.
 
 If you have a particular config file, like in the example `/etc/rsyslog.conf`, you first want to find out which package owns that config file:
 
@@ -197,7 +200,7 @@ Configuration file '/etc/rsyslog.conf', does not exist on system.
 Installing new config file as you requested.
 ```
 
-More details on these options can be found in the [`dpkg` man page](https://manpages.ubuntu.com/manpages/jammy/en/man1/dpkg.1.html), but the most common and important ones are:
+More details on these options can be found in the {manpage}`dpkg(1)` manual page, but the most common and important ones are:
 
 * `confmiss`
    Always install the missing conffile without prompting.

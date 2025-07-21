@@ -3,13 +3,13 @@
 
 The Linux kernel includes the **Netfilter** subsystem, which is used to manipulate or decide the fate of network traffic headed into or through your server. All modern Linux firewall solutions use this system for packet filtering.
 
-The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the Netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many frontends are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
+The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the Netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many {term}`frontends <frontend>` are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
 
 ## ufw - Uncomplicated Firewall
 
 The default firewall configuration tool for Ubuntu is `ufw`. Developed to ease `iptables` firewall configuration, `ufw` provides a user-friendly way to create an IPv4 or IPv6 host-based firewall.
 
-`ufw` by default is initially disabled. From the [`ufw` man page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html):
+`ufw` by default is initially disabled. From the {manpage}`ufw(8)` manual page:
 
 > ufw is not intended to provide complete firewall functionality via its command interface, but instead provides an easy way to add or remove simple rules. It is currently mainly used for host-based firewalls.
 
@@ -114,10 +114,11 @@ And for more verbose status information use:
 sudo ufw status verbose
 ```
 
-> **Note**:
-> If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
+```{note}
+If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
+```
 
-This is a quick introduction to using `ufw`. Please refer to the [`ufw` man page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html) for more information.
+This is a quick introduction to using `ufw`. Please refer to the {manpage}`ufw(8)` manual page for more information.
 
 ### ufw application integration
 
@@ -143,8 +144,9 @@ ufw allow from 192.168.0.0/24 to any app Samba
 
 Replace `Samba` and `192.168.0.0/24` with the application profile you are using and the IP range for your network.
 
-> **Note**:
-> There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
+```{note}
+There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
+```
 
 To view details about which ports and protocols, and so on, are defined for an application, enter:
 
@@ -162,7 +164,7 @@ ubuntu-bug nameofpackage
 
 The purpose of IP masquerading is to allow machines with private, non-routable IP addresses on your network to access the Internet through the machine doing the masquerading. Traffic from your private network destined for the Internet must be manipulated for replies to be routable back to the machine that made the request.
 
-To do this, the kernel must modify the **source** IP address of each packet so that replies will be routed back to it, rather than to the private IP address that made the request, which is impossible over the Internet. Linux uses **Connection Tracking** ([`conntrack`](https://manpages.ubuntu.com/manpages/en/man8/conntrack.8.html)) to keep track of which connections belong to which machines and reroute each return packet accordingly. Traffic leaving your private network is thus "masqueraded" as having originated from your Ubuntu gateway machine. This process is referred to in Microsoft documentation as "Internet Connection Sharing".
+To do this, the kernel must modify the **source** IP address of each packet so that replies will be routed back to it, rather than to the private IP address that made the request, which is impossible over the Internet. Linux uses **Connection Tracking** ({manpage}`conntrack(8)`) to keep track of which connections belong to which machines and reroute each return packet accordingly. Traffic leaving your private network is thus "masqueraded" as having originated from your Ubuntu gateway machine. This process is referred to in Microsoft documentation as "Internet Connection Sharing".
 
 ### IP masquerading with ufw
 
@@ -215,8 +217,9 @@ COMMIT
 
 For each **Table**, a corresponding `COMMIT` statement is required. In these examples only the `nat` and `filter` tables are shown, but you can also add rules for the `raw` and `mangle` tables.
 
-> **Note**:
-> In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
+```{note}
+In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
+```
 
 #### Restart ufw
 
@@ -303,7 +306,7 @@ sudo iptables -A INPUT -m state --state NEW -p tcp --dport 80 \
  -j LOG --log-prefix "NEW_HTTP_CONN: "
 ```
 
-A request on port `80` from the local machine, then, would generate a log in `dmesg` that looks like this (single line split into 3 to fit this document):
+A request on port `80` from the local machine, then, would generate a log in {term}`dmesg` that looks like this (single line split into 3 to fit this document):
 
 ```text
 [4304885.870000] NEW_HTTP_CONN: IN=lo OUT= MAC=00:00:00:00:00:00:00:00:00:00:00:00:08:00
@@ -321,7 +324,7 @@ There are many tools available to help you construct a complete firewall without
 
 - The [Ubuntu Firewall](https://wiki.ubuntu.com/UncomplicatedFirewall) wiki page contains information on the development of ufw
 
-- Also, the [`ufw` manual page](https://manpages.ubuntu.com/manpages/en/man8/ufw.8.html) contains some very useful information: `man ufw`
+- Also, the {manpage}`ufw(8)` manual page contains some very useful information: `man ufw`
 
 - See the [packet-filtering-HOWTO](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
 

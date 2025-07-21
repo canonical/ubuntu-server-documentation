@@ -1,12 +1,20 @@
 (install-openldap)=
+
+[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol used for managing hierarchical data. It offers a way to store, organise and manage an organisation's data such as employee accounts and computers. It facilitates centralised authentication and authorisation management.
+
+OpenLDAP is the open-source implementation of LDAP used in Ubuntu. It offers an LDAP server that provides directory services, a client for managing them, and client libraries used by hundreds of applications. OpenLDAP contains some terminology and concepts that new users may want to familiarise themselves with before attempting to set it up. Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements.
+
+See {ref}`Introduction to OpenLDAP <introduction-to-openldap>` for a more detailed explanation.
+
 # Install and configure LDAP
 
 Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/software/man.cgi?query=slapd) creates a minimal working configuration with a top level entry, and an administrator's Distinguished Name (DN). 
 
 In particular, it creates a database instance that you can use to store your data. However, the **suffix** (or **base DN**) of this instance will be determined from the domain name of the host. If you want something different, you can change it right after the installation (before it contains any useful data).
 
-> **Note**:
-> This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```{note}
+This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+```
 
 ## Install slapd
 
@@ -18,13 +26,13 @@ sudo apt install slapd ldap-utils
 
 ### Change the instance suffix (optional)
 
-If you want to change your Directory Information Tree (DIT) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
+If you want to change your Directory Information Tree ({term}`DIT`) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
 
 ```bash
 sudo dpkg-reconfigure slapd
 ```
 
-To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the DNS domain name.
+To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the {term}`DNS` domain name.
 
 Throughout this guide we will issue many commands with the LDAP utilities. To save some typing, we can configure the OpenLDAP libraries with certain defaults in `/etc/ldap/ldap.conf` (adjust these entries for your server name and directory suffix):
 
@@ -43,7 +51,7 @@ Right after installation, you will get two databases, or suffixes: one for your 
 The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its password is the one selected during the installation of the `slapd` package.
 
 - **`cn=config`** 
-The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special DN `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
+The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
 ### Example `slapd-config` DIT
 
@@ -84,7 +92,7 @@ Where the entries mean the following:
 - **`cn={1}cosine,cn=schema,cn=config`**: The Cosine schema
 - **`cn={2}nis,cn=schema,cn=config`**: The Network Information Services (NIS) schema
 - **`cn={3}inetorgperson,cn=schema,cn=config`**: The InetOrgPerson schema
-- **`olcDatabase={-1}frontend,cn=config`**: Frontend database, default settings for other databases
+- **`olcDatabase={-1}frontend,cn=config`**: {term}`Frontend` database, default settings for other databases
 - **`olcDatabase={0}config,cn=config`**: `slapd` configuration database (`cn=config`)
 - **`olcDatabase={1}mdb,cn=config`**: Your database instance (`dc=example,dc=com`)
 
@@ -112,7 +120,7 @@ This is called a "simple bind", and is essentially a plain text authentication. 
 - **`-Y EXTERNAL`**
 This is using a SASL bind (no `-x` was provided), and further specifying the `EXTERNAL` type. Together with `-H ldapi:///`, this uses a local UNIX socket connection.
 
-In both cases we only got the results that the server access-control lists (ACLs) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
+In both cases we only got the results that the server Access Control Lists ({term}`ACL`s) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
 ```bash
 ldapwhoami -x
@@ -133,8 +141,9 @@ dn:cn=admin,dc=example,dc=com
 
 When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authentication DN, the server will look for a `userPassword` attribute in the entry, and use that to verify the credentials. In this particular case above, we used the database **Root DN** entry, i.e., the actual administrator, and that is a special case whose password is set in the configuration when the package is installed.
 
-> **Note**:
-> A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```{note}
+A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
+```
 
 ### Example SASL EXTERNAL
 
@@ -156,7 +165,7 @@ should produce
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and `gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the `uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
 
 ## Populate the directory
 
@@ -182,6 +191,7 @@ dn: cn=miners,ou=Groups,dc=example,dc=com
 objectClass: posixGroup
 cn: miners
 gidNumber: 5000
+memberUid: john
 
 dn: uid=john,ou=People,dc=example,dc=com
 objectClass: inetOrgPerson
@@ -200,8 +210,9 @@ loginShell: /bin/bash
 homeDirectory: /home/john
 ```
 
-> **Note**:
-> It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```{note}
+It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+```
 
 Add the content:
 
@@ -212,7 +223,9 @@ enter your admin password and you should see
 ```text
 adding new entry "ou=People,dc=example,dc=com"
 adding new entry "ou=Groups,dc=example,dc=com"
+
 adding new entry "cn=miners,ou=Groups,dc=example,dc=com"
+
 adding new entry "uid=john,ou=People,dc=example,dc=com"
 ```
 
@@ -257,8 +270,9 @@ ldapsearch -x -LLL -D uid=john,ou=People,dc=example,dc=com -W \
 ```
 and you should see all of the info in the database that John has access to.
 
-> **Note**:
-> Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```{note}
+Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
+```
 
 <h2 id="heading--modifying-slapd-config">Change the configuration</h2>
 
@@ -345,8 +359,9 @@ Enter LDAP Password:  <-- current password, about to be changed
 
 Schemas can only be added to `cn=config` if they are in LDIF format. If not, they will first have to be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
-> **Note**:
-> It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```{note}
+It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
+```
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 
@@ -364,7 +379,7 @@ If the schema you want to add does not exist in LDIF format, a nice conversion t
 
 Activity logging for `slapd` is very useful when implementing an OpenLDAP-based solution -- and it must be manually enabled after software installation. Otherwise, only rudimentary messages will appear in the logs. Logging, like any other such configuration, is enabled via the `slapd-config` database.
 
-OpenLDAP comes with multiple logging levels, with each level containing the lower one (additive). A good level to try is **stats**. The [slapd-config man page](https://manpages.ubuntu.com/manpages/slapd-config.html) has more to say on the different subsystems.
+OpenLDAP comes with multiple logging levels, with each level containing the lower one (additive). A good level to try is **stats**. The {manpage}`slapd-config(5)` manual page has more to say on the different subsystems.
 
 ### Example logging with the stats level 
 

@@ -17,10 +17,11 @@ The database service is automatically configured with viable defaults, but can b
 
 PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is the default authentication method used for `local` connections, while `scram-sha-256` is the default for `host` connections (this used to be `md5` until Ubuntu 21.10). Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) if you would like to configure alternatives like Kerberos.
 
-The following discussion assumes that you wish to enable TCP/IP connections and use the MD5 method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
+The following discussion assumes that you wish to enable TCP/IP connections and use the `scram-sha-256` method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
 
-> **Tip**:
-> To configure *IDENT* authentication, add entries to the `/etc/postgresql/*/main/pg_ident.conf` file. There are detailed comments in the file to guide you.
+```{tip}
+To configure *IDENT* authentication, add entries to the `/etc/postgresql/*/main/pg_ident.conf` file. There are detailed comments in the file to guide you.
+```
 
 By default, only connections from the local system are allowed. To enable all other computers to connect to your PostgreSQL server, edit the file `/etc/postgresql/*/main/postgresql.conf`. Locate the line: *\#listen\_addresses = 'localhost'* and change it to `*`:
 
@@ -28,8 +29,9 @@ By default, only connections from the local system are allowed. To enable all ot
 listen_addresses = '*'
 ```
 
-> **Note**:
-> '*' will allow all available IP interfaces (IPv4 and IPv6), to only listen for IPv4 set `0.0.0.0` while '`::`' allows listening for all IPv6 addresses.
+```{note}
+To listen on all IPv4 interfaces, set `listen_addresses` to '`0.0.0.0`', while '`::`' will listen on all IPv6 interfaces. '`*`' will cause PostgreSQL to listen on all available network interfaces, both IPv4 and IPv6.
+```
 
 For details on other parameters, refer to the configuration file or to the [PostgreSQL documentation](https://www.postgresql.org/docs/) for information on how they can be edited.
 
@@ -39,29 +41,31 @@ Now that we can connect to our PostgreSQL server, the next step is to set a pass
 sudo -u postgres psql template1
 ```
 
-The above command connects to PostgreSQL database `template1` as user `postgres`. Once you connect to the PostgreSQL server, you will be at an SQL prompt. You can run the following SQL command at the `psql` prompt to configure the password for the user `postgres`.
+The above command connects to PostgreSQL database `template1` as user `postgres`. Once you connect to the PostgreSQL server, you will be at an SQL prompt. You can run the following SQL command at the `psql` prompt to configure the password for the user `postgres`:
 
 ```bash
 ALTER USER postgres with encrypted password 'your_password';
 ```
 
-After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.conf` to use `scram-sha-256` authentication with the `postgres` user, allowed for the `template1` database, from any system in the local network (which in the example is `192.168.122.1/24`) :
+After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.conf` to use `scram-sha-256` authentication with the `postgres` user, allowed for the `template1` database, from any system in the local network (which in the example is `192.168.1.1/24`) :
 
 ```text
-hostssl template1       postgres        192.168.122.1/24        scram-sha-256
+hostssl template1       postgres        192.168.1.1/24        scram-sha-256
 ```
 
-> **Note**:
-> The config statement `hostssl` used here will reject TCP connections that would not use SSL. PostgreSQL in Ubuntu has the SSL feature built in and configured by default, so it works right away. On your PostgreSQL server this uses the certificate created by `ssl-cert` package which is great, but for production use you should consider updating that with a proper certificate from a recognised Certificate Authority (CA).
+```{note}
+The config statement `hostssl` used here will reject TCP connections that would not use SSL. PostgreSQL in Ubuntu has the SSL feature built in and configured by default, so it works right away. On your PostgreSQL server this uses the certificate created by `ssl-cert` package which is great, but for production use you should consider updating that with a proper certificate from a recognised Certificate Authority (CA).
+```
 
 Finally, you should restart the PostgreSQL service to initialise the new configuration. From a terminal prompt enter the following to restart PostgreSQL:
 
 ```bash
 sudo systemctl restart postgresql.service
-``` 
+```
 
-> **Warning**:
-> The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) to configure more parameters.
+```{warning}
+The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) to configure more parameters.
+```
 
 You can test server connections from other machines by using the PostgreSQL client as follows, replacing the domain name with your actual server domain name or IP address:
 
@@ -124,7 +128,7 @@ pg_basebackup -h <IP address of the main server> -D /var/lib/postgresql/14/main 
 
 After this, a full single pass will have been completed, copying the content of the main database onto the local system being the standby. In the `pg_basebackup` command the flags represent the following:
 
-* `-h`: The hostname or IP address of the main server
+* `-h`: The {term}`hostname` or IP address of the main server
 * `-D`: The data directory
 * `-U`: The user to be used in the operation
 * `-P`: Turns on progress reporting
@@ -161,11 +165,11 @@ PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Adm
 ## Further reading
 
 - As mentioned above, the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
- 
+
   ```bash
   sudo apt install postgresql-doc
   ```
 
-  This package provides further manpages on PostgreSQL  "dblink" and "server programming interface" as well as the upstream HTML guide. To view the guide enter `xdg-open /usr/share/doc/postgresql-doc-*/html/index.html` or point your browser at it.
+  This package provides further manpages on PostgreSQL {term}`dblink` and "server programming interface" as well as the upstream HTML guide. To view the guide enter `xdg-open /usr/share/doc/postgresql-doc-*/html/index.html` or point your browser at it.
 
 - For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by Thomas Nield as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.

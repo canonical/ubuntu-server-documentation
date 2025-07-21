@@ -13,18 +13,16 @@ has access to the kernel data structures, providing more capabilities than
 tools limited to the interfaces exposed to user-space.
 
 BPF, which stands for "Berkeley Packet Filter", was originally designed to
-perform network packet filtering. Over time, its capabilities were extended far
-beyond that scope -- this is reflected in the current name, *extended Berkeley
-Packet Filter* (eBPF). It now uses more registers, supports 64-bit registers,
-data stores (Maps), and more.  Such enhancements allowed eBPF to be decoupled
-from the kernel networking subsystem and transformed it into a tool with
-broader scope, capable of enhancing not only the networking experience, but
-also tracing, profiling, observability, security, etc.  The terms eBPF and BPF
-are now used interchangeably, but refer to eBPF -- which has become a
-standalone term that no longer refers to *extended Berkeley Packet Filter* due
-to its aforementioned broader scope.
+perform network packet filtering. Over time, it has evolved into *extended Berkeley
+Packet Filter* (eBPF), a tool which contains many additional capabilities, including 
+the use of more registers, support for 64-bit registers, data stores (Maps), and 
+more.
 
-## How it works
+As a result, eBPF has been extended beyond the kernel networking subsystem and 
+it not only enhances the networking experience, but also provides tracing, 
+profiling, observability, security, etc. The terms eBPF and BPF are used interchangeably but both refer to eBPF now.
+
+## How eBPF works
 
 User-space applications can load eBPF programs into the kernel as eBPF
 bytecode. Although you could write eBPF programs in bytecode, there are several
@@ -32,7 +30,7 @@ tools which provide abstraction layers on top of eBPF so you do not need to
 write bytecode manually. These tools will then generate the bytecode which will
 in turn be loaded into the kernel.
 
-Once the eBPF program is loaded, it is then verified by the kernel before it
+Once an eBPF program is loaded into the kernel, it is then verified by the kernel before it
 can run. These checks include:
 
 * verifying if the eBPF program halts and will never get stuck in a loop,
@@ -46,21 +44,20 @@ machine-code to optimize the program's execution.
 
 ## eBPF in Ubuntu Server
 
-In Ubuntu, you can leverage tools like the BPF Compiler Collection (BCC) or
-`bpftrace` to identify bottlenecks, investigate performance degradation, trace
-specific function calls, or create custom monitoring tools to collect data on
-specific kernel or user-space processes without disrupting running services.
-
-Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (BCC) are available in every
-Ubuntu Server installation by default as part of our efforts to [enhance the
-application developer's and sysadmin's experience in
+Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection or BCC) are
+available in every Ubuntu Server installation by default as part of our efforts 
+to [enhance the application developer's and sysadmin's experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).
 
-`bpftrace` and `bpfcc-tools` install a range of tools with a variety of
+In Ubuntu, you can use tools like the BCC to identify bottlenecks, investigate performance degradation, trace
+specific function calls, and create custom monitoring tools to collect data on specific 
+kernel or user-space processes without disrupting running services.
+
+Both `bpftrace` and `bpfcc-tools` install sets of tools to handle these
 different functionalities. Apart from the `bpftrace` tool itself, you can fetch
 a comprehensive list of these tools with the following command:
 
-```
+```bash
 $ dpkg -L bpftrace bpfcc-tools | grep -E '/s?bin/.*$' | xargs -n1 basename
 ```
 
@@ -72,7 +69,7 @@ specific tasks). The ones ending in `-bpfcc` are BCC tools (from `bpfcc`)
 written in Python (you can also inspect those as you would inspect the `.bt`
 files).
 
-These `bpftrace` scripts are often a great start on how something complex can
+These `bpftrace` scripts often demonstrate how a complex task can
 be achieved in simple ways. The `-bpfcc` variants are often a bit more
 advanced, often providing more options and customizations.
 
@@ -83,35 +80,36 @@ output for `bpftrace` tools in
 
 For instance,
 
-```
+```bash
 # bashreadline.bt
 ```
 
-will print bash commands for all running bash shells in your system. Note that
-the information you can get via eBPF is always potentially confidential, so you
-need to run any of it as root.  You may notice that there is also a
+will print bash commands for all running bash shells in your system. Since 
+the information you can get via eBPF may be confidential, you will need to
+run any of it as root.  You may notice that there is also a
 `bashreadline-bpfcc` tool available from `bpfcc-tools`. Both of them provide
 similar features. The former is implemented in python with BCC while the latter
 is a `bpftrace` script, as described above. You will see that many of these
 tools have both a `-bpfcc` and a `.bt` version. Do read their manpages (and
 perhaps the scripts) to choose which suits you best.
 
-## Example - What commands are executed?
+## Example - Determine what commands are executed
 
-A trivial, yet powerful command of these tools is `execsnoop-bpfcc` which
-allows one to answer common questions that should not be common - like "what
-other programs this action eventually calling?". It makes it rather easy to
-identify if for example a program calls another tool too often or something
-that you'd not expect. It has become a common helper to ensure one understands
-well what happens on execution of a maintainer script in a .deb package in
-Ubuntu.
+One tool that is trivial but powerful is `execsnoop-bpfcc`, which allows
+you to answer common questions that should not be common - like "what
+other programs is this action eventually calling?". It can be used to 
+determine if a program calls another tool too often or calls something
+that you'd not expect. 
 
-For that you'd run `execsnoop-bpfcc` with the following arguments:
+It has become a common way to help you understand what happens
+when a maintainer script is executed in a .deb package in Ubuntu.
+
+For this task, you'd run `execsnoop-bpfcc` with the following arguments:
 
 * `-Uu root` - to reduce the noisy output only to things done in root context (like here the package install)
 * `-T` - to get time info along the log
 
-```
+```bash
 # In one console run:
 $ sudo execsnoop-bpfcc -Uu root -T
 
@@ -138,29 +136,29 @@ TIME     UID   PCOMM            PID     PPID    RET ARGS
 10:58:17 1000  vte-urlencode-c  1323227 1322857   0 /usr/libexec/vte-urlencode-cwd
 ```
 
-## You can modify it to your needs
+## eBPF can be modified to your needs
 
-Let us look at another practical application of eBPF. This time meant to show
-another use-case, but also evolve it into more by modifying it.
+Let us look at another practical application of eBPF. This example is meant to show
+another use-case with eBPF then evolve this case into a more complex one by modifying it.
 
-### Which files is my QEMU loading?
+### Example - Find out which files QEMU is loading
 
-Let’s say you want to verify which binary files are
-loaded with a particular command line of QEMU. That is a truly complex program
-and sometimes it can be hard to make the connection from a command line to the
-files used from /usr/share/qemu. This is already hard to answer when you define
-the QEMU command line, but even more when more useful layers of abstraction are
+Let’s say you want to verify which binary files are loaded when running a particular 
+QEMU command. QEMU is a truly complex program and sometimes 
+it can be hard to make the connection from a command line to the files used from 
+/usr/share/qemu. This is hard to determine when you define the QEMU
+command line, but becomes problematic when more useful layers of abstraction are
 used like libvirt or LXD or even things on top like OpenStack.
 
-You could definitely use `strace` to do so, but that would add quite some
-overhead to the investigation process (since `strace` uses `ptrace`, and context
-switching may be required).
-Furthermore, if you would want to generally monitor a system for this,
-especially on a host running many VMs, `strace` quickly reaches its limits.
+While `strace` could be used, it would add additional overhead to the 
+investigation process since `strace` uses `ptrace`, and context
+switching may be required. Furthermore, if you need to monitor a system 
+to produce this answer, especially on a host running many VMs, `strace` 
+quickly reaches its limits.
 
-Instead, you can use `opensnoop` to trace `open()` syscalls. We use
-`opensnoop-bpfcc` to have more parameters to tune it to our needs. The example
-will use the following arguments:
+Instead, `opensnoop` could be used to trace `open()` syscalls. In this case,
+we use `opensnoop-bpfcc` to have more parameters to tune it to our 
+needs. The example will use the following arguments:
 
 * `--full-path` - Show full path for open calls using a relative path.
 * `--name qemu-system-x86` - only care about files opened by QEMU; The mindful
@@ -168,7 +166,7 @@ will use the following arguments:
   unfiltered output of opensnoop that it is length limited, so only the shorter
   qemu-system-x86 can be used.
 
-```
+```bash
 # This will collect a log of files opened by QEMU
 $ sudo /usr/sbin/opensnoop-bpfcc --full-path --name qemu-system-x86
 #
@@ -189,11 +187,10 @@ $ lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
 ```
 
 Of course the QEMU process opens plenty of things: shared libraries, config
-files, entries in `/{sys,dev,proc}`, and much more. But here we can see them all
-as they happen across all of the system.
+files, entries in `/{sys,dev,proc}`, and much more. But with `opensnoop-bpfcc`,
+we can see them all as they happen across the whole system.
 
-
-### But I'm only interested in a particular kind of file
+### Focusing on a specific file type
 
 Imagine you only wanted to verify which `.bin` files this is loading. Of course, 
 we could just use `grep` on the output, but this whole section is about showing
@@ -206,7 +203,7 @@ very own eBPF solutions from scratch.
 So while `opensnoop-bpfcc` as of right now has no option to filter on the file
 names, it could ...
 
-```
+```bash
 $ sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 $ sudo vim /usr/sbin/opensnoop-bpfcc.new
 ...
@@ -266,10 +263,10 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
              try:
 ```
 
-Running the modified version now allows to probe for specific file names, like
-all the .bin files:
+Running the modified version now allows you to probe for specific file 
+names, like all the `.bin` files:
 
-```
+```bash
 $ sudo /usr/sbin/opensnoop-bpfcc.new --contains '.bin' --name qemu-system-x86
 PID     COMM               FD ERR PATH
 1316661 qemu-system-x86    21   0 /snap/lxd/current/share/qemu//kvmvapic.bin
@@ -277,13 +274,13 @@ PID     COMM               FD ERR PATH
 1316661 qemu-system-x86    39   0 /snap/lxd/current/share/qemu//vgabios-virtio.bin
 ```
 
-### Use it elsewhere, the limit is your imagination
+### Use for other purposes, the limit is your imagination
 
 And just like with all the other tools and examples, the limit is your
 imagination. Wanted to know which files in `/etc` your complex intertwined
 apache config is really loading?
 
-```
+```bash
 $ sudo /usr/sbin/opensnoop-bpfcc.new --name 'apache2' --contains '/etc'
 PID     COMM               FD ERR PATH
 1319357 apache2             3   0 /etc/apache2/apache2.conf
@@ -298,29 +295,28 @@ PID     COMM               FD ERR PATH
 1319357 apache2             4   0 /etc/apache2/sites-enabled/000-default.conf
 ```
 
-## Limitations
+## eBPF's limitations
 
-You might have realized reading the example code change above that - just like
+When you read the example code change above, it is worth noticing - just like
 the existing `--name` option - this is filtering on the reporting side, not on
-the event generation.  Which brings us to another topic that you might have
-seen in your recreation of these examples, being aware and understanding
-messages like:
+event generation. So you should be aware and understand why you might receive
+eBPF messages like:
 
-```
+```text
 Possibly lost 84 samples
 ```
 
-eBPF programs produce events on a ring buffer, if that is exceeding the pace
-the userspace process can consume them it will lose some events (overwritten
-since it's a ring).  The "Possibly lost .. samples" message is a hint about
-this happening.  This is conceptually the same for almost all kernel tracing
-facilities, they are not allowed to slow down the kernel, you can't really say
-"wait until I've consumed".  Most of the time this is fine, but advanced users
-might need to aggregate on the eBPF side to reduce what needs to be picked up by
-userspace.  And despite having lower overhead, eBPF tools still need to find
-their balance between buffering, dropping events and consuming CPU.  See the
-[same discussion](https://github.com/iovisor/bcc/issues/1033) in the example
-tools shown above.
+Since eBPF programs produce events on a ring buffer, if the rate of events exceeds 
+the pace that the userspace process can consume the events, a program will lose some
+events (overwritten since it's a ring).  The "Possibly lost .. samples" message
+hints that this is happening.  This is conceptually the same for almost all
+kernel tracing facilities. Since they are not allowed to slow down the kernel, 
+you can't tell the tool to  "wait until I've consumed".  Most of the time this
+is fine, but advanced users might need to aggregate on the eBPF side to reduce 
+what needs to be picked up by the userspace.  And despite having lower overhead, 
+eBPF tools still need to find their balance between buffering, dropping events
+and consuming CPU.  See the [same discussion](https://github.com/iovisor/bcc/issues/1033)
+in the examples of tools shown above.
 
 ## Conclusion
 
@@ -331,7 +327,7 @@ software engineers.
 
 ## References
 
-* [Introduction to eBPF video, given at the as part of The Ubuntu summit
+* [Introduction to eBPF video, given at the Ubuntu summit
   2024](https://www.youtube.com/live/byPpJW5l6pg?t=30314s), eventually
   presenting an eBPF based framework for Kubernetes called Inspector Gadget.
 * For a deeper introduction into eBPF concepts consider reading [what is

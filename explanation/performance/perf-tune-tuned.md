@@ -21,7 +21,7 @@ You can also configure TuneD to dynamically react to changes in device usage and
 
 ## Static vs. dynamic tuning
 
-TuneD can perform two types of tuning: **static** and **dynamic**. 
+TuneD can perform two types of tuning: **static** and **dynamic**.
 
 * Static tuning mainly consists of applying predefined `sysctl` and `sysfs` settings and the one-shot activation of several configuration tools such as `ethtool`.
 
@@ -41,7 +41,21 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 | Other cases | `balanced` |
 
 ### Anatomy of a profile
-Tuned profiles are defined by directory in `/usr/lib/tuned/<profile>` or `/etc/tuned/<profile>`, and are defined in a `tuned.conf` file within that directory.  That file has an INI structure which looks like this:
+
+Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile-name>`,
+those added by the administrator should be placed in `/etc/tuned/<profile-name>`.
+
+> In TuneD version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
+> of these files changed. An upgrade will migrate any custom profiles, however
+> since most users are not yet on the new release, the rest of this page uses
+> the old paths in the examples.
+> Predefined profiles:
+>   `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
+> User defined profiles:
+>   `/etc/tuned/<profile-name>` -> `/etc/tuned/profiles/<profile-name>`
+
+In each of these `<profile-name>` directories a file `tuned.conf` defines that profile.
+That file has an INI structure which looks like this:
 
 ```ini
 [main]
@@ -73,7 +87,7 @@ Here is a brief explanation of these configuration parameters:
 * `devices`: A comma separated list of device names (without the `/dev/` prefix) which represents the devices this plugin should act on. If not specified, all compatible devices found, now or in the future, will be used. This parameter also accepts simple globbing and negation rules, so that you can specify `nvme*` for all `/dev/nvme*` devices, or `!sda` to not include `/dev/sda`.
 * plugin-specific options: These can be seen in the output of the `tuned-adm list plugins -v` command, for each listed plugin.
 
-See the [tuned.conf manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html) for details on the syntax of this configuration file.
+See the {manpage}`tuned.conf(5)` manpage for details on the syntax of this configuration file.
 
 The plugin instance concept can be useful if you want to apply different tuning parameters to diferent devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
 ```ini
@@ -128,15 +142,15 @@ cpu
 ```
 And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
 
-### Customising a profile 
+### Customising a profile
 
 For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
 
-Custom profiles live in `/etc/tuned/<profile>/tuned.conf`. There are 3 ways they can be created:
+Custom profiles live in `/etc/tuned/<profile-name>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
 
-* Copy an existing profile from `/usr/lib/tuned/<profile>` to `/etc/tuned/<profile>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
-* Create an entirely new profile in `/etc/tuned/<profile>` from scratch.
-* Create a new profile in `/etc/tuned/<new-profile>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/<profile>`.
+* Copy an existing profile from `/usr/lib/tuned/<profile-name>` to `/etc/tuned/<profile-name>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
+* Create an entirely new profile in `/etc/tuned/<new-profile-name>` from scratch.
+* Create a new profile in `/etc/tuned/<new-profile-name>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/<profile-name>`.
 
 After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
 
@@ -227,19 +241,17 @@ The `[main]` section contains some metadata about this profile, a summary and de
 
 The sections that follow `[main]` represent the configuration of tuning plugins.
 
-* The first one is the `vm` plugin, which is used to always make use of huge pages (useful in this HPC scenario).
+* The first one is the `vm` plugin, which is used to always make use of huge pages (useful in this {term}`HPC` scenario).
 * The second plugin used is `disk`, which is used to set the `readahead` value to at least `4096`.
 * Finally, the `sysctl` plugin is configured to set several variables in `sysfs` (the comments in the example explain the rationale behind each change).
 
-The content of this profile can be overwritten if needed, by creating the file `/etc/tuned/hpc-compute/tuned.conf` with the desired content. The content in `/etc/tuned` always takes precedence over `/usr/lib/tuned`. One can also extend this profile by creating a custom profile and including `hpc-compute`.
-
 > \*1: This is a universe package
-> Ubuntu ships this software as part of its [universe repository](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
+> Ubuntu ships this software as part of its [universe repository](https://documentation.ubuntu.com/pro-client/en/latest/explanations/about_esm/#what-are-main-and-universe), which is maintained by volunteers from the Ubuntu community. Canonical also offers [Ubuntu Pro](https://ubuntu.com/pro) – a free-for-personal-use subscription that provides a 10 year [security maintenance commitment](https://ubuntu.com/security/esm).
 
 ## Further reading
 
 * [TuneD website](https://tuned-project.org/)
-* [tuned-adm manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/tuned-adm.8.html)
-* [TuneD profiles manpage](https://manpages.ubuntu.com/manpages/noble/en/man7/tuned-profiles.7.html)
-* [TuneD daemon manpage](https://manpages.ubuntu.com/manpages/noble/en/man8/tuned.8.html)
-* [TuneD configuration manpage](https://manpages.ubuntu.com/manpages/noble/en/man5/tuned.conf.5.html)
+* {manpage}`tuned-adm(8)` manpage
+* {manpage}`TuneD profiles <tuned-profiles(7)>` manpage
+* {manpage}`TuneD daemon <tuned(8)>` manpage
+* {manpage}`TuneD configuration <tuned.conf(5)>` manpage

@@ -2,11 +2,11 @@
 # Set up LDAP access control
 
 
-The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or ACLs.
+The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or {term}`ACL`s.
 
 When we {ref}`installed the slapd package <install-openldap>`, various ACLs were set up automatically. We will look at a few important consequences of those defaults and, in so doing, we'll get an idea of how ACLs work and how they're configured.
 
-To get the effective ACL for an LDAP query we need to look at the ACL entries of both the database being queried, and those of the special frontend database instance. Note that the ACLs belonging to the frontend database are always appended to the database-specific ACLs, and the first match 'wins'.
+To get the effective ACL for an LDAP query we need to look at the ACL entries of both the database being queried, and those of the special {term}`frontend` database instance. Note that the ACLs belonging to the frontend database are always appended to the database-specific ACLs, and the first match 'wins'.
 
 ## Getting the ACLs
 
@@ -31,8 +31,9 @@ olcAccess: {1}to dn.exact="" by * read
 olcAccess: {2}to dn.base="cn=Subschema" by * read
 ```
 
-> **Note**:
-> The Root DN always has full rights to its database and does not need to be included in any ACL.
+```{note}
+The Root {term}`DN` always has full rights to its database and does not need to be included in any ACL.
+```
 
 ## Interpreting the results
 
@@ -58,7 +59,7 @@ to attrs=shadowLastChange
 
 These ACLs enforce the following:
 
-- Anonymous 'auth' access is provided to the **userPassword** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the DIT is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
+- Anonymous 'auth' access is provided to the **userPassword** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the {term}`DIT` is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
 
 - The 'by self write' ACL grants write access to the **userPassword** attribute to users who authenticated as the DN where the attribute lives. In other words, users can update the **userPassword** attribute of their own entries.
 
@@ -113,5 +114,5 @@ See how to {ref}`set up LDAP users and groups <ldap-users-and-groups>`.
 
 ## Further reading
 
-- See the man page for [slapd.access](http://manpages.ubuntu.com/manpages/slapd.access.html).
+- See the manual page for {manpage}`slapd.access(5)`
 - The [access control topic](https://openldap.org/doc/admin25/guide.html#Access%20Control) in the OpenLDAP administrator's guide.

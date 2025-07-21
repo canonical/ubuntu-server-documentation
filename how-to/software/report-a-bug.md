@@ -9,8 +9,9 @@ The preferred way to report a bug is with the `apport-cli` command. This command
 
 Getting this information to Launchpad can be a challenge if the system is not running a desktop environment with a browser (a common scenario with servers) or if it does not have Internet access. The steps to take in these situations are described below.
 
-> **Note**:
-> The commands `apport-cli` and `ubuntu-bug` should give the same results on a command-line interface (CLI) server. The latter is actually a symlink to `apport-bug`, which is intelligent enough to know whether a desktop environment is in use, and will choose `apport-cli` if not. Since server systems tend to be CLI-only, `apport-cli` was chosen from the outset in this guide.
+```{note}
+The commands `apport-cli` and `ubuntu-bug` should give the same results on a command-line interface (CLI) server. The latter is actually a symlink to `apport-bug`, which is intelligent enough to know whether a desktop environment is in use, and will choose `apport-cli` if not. Since server systems tend to be CLI-only, `apport-cli` was chosen from the outset in this guide.
+```
 
 Bug reports in Ubuntu need to be filed against a specific software package, so the name of the package (source package or program name/path) affected by the bug needs to be supplied to `apport-cli`:
 
@@ -67,7 +68,7 @@ Choices:
 Please choose (1/C):  1
 ```
     
-The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the [Debian alternatives system](https://manpages.ubuntu.com/manpages/en/man1/update-alternatives.1.html). Examples of text-based browsers to install include links, ELinks, lynx, and w3m. You can also manually point an existing browser at the given URL.
+The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the {manpage}`Debian alternatives system <update-alternatives(1)>`. Examples of text-based browsers to install include links, {term}`ELinks`, lynx, and w3m. You can also manually point an existing browser at the given URL.
 
 ### V: View
 
@@ -102,8 +103,9 @@ apport-cli vim --save apport.vim.test.apport
 
 Report names should end in `.apport`.
    
-> **Note**:
-> If this Internet-enabled system is non-Ubuntu/Debian, `apport-cli` is not available so the bug will need to be created manually. An `apport` report is also not to be included as an attachment to a bug either so it is completely useless in this scenario.
+```{note}
+If this Internet-enabled system is non-Ubuntu/Debian, `apport-cli` is not available so the bug will need to be created manually. An `apport` report is also not to be included as an attachment to a bug either so it is completely useless in this scenario.
+```
 
 ## Reporting application crashes
 
@@ -149,4 +151,4 @@ Sending in a crash report like this will not immediately result in the creation 
 ## Further reading
 
 - See the [Reporting Bugs](https://help.ubuntu.com/community/ReportingBugs) Ubuntu wiki page.
-- Also, [the Apport page](https://wiki.ubuntu.com/Apport) has some useful information. Though some of it pertains to using a GUI.
+- Also, [the Apport page](https://wiki.ubuntu.com/Apport) has some useful information. Though some of it pertains to using a {term}`GUI`.

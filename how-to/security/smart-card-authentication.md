@@ -4,8 +4,9 @@
 
 One of the most popular uses for smart cards is to control access to computer systems. The owner must physically *have* the smart card, and they must know the PIN to unlock it. This provides a higher degree of security than single-factor authentication (such as just using a password). In this page, we describe how to enable smart card authentication on Ubuntu.
 
-> **Note**:
-> This guide is meant for Ubuntu Server 20.04 and newer. If you want to configure a desktop installation refer to the [desktop guide](https://ubuntu.com/tutorials/how-to-use-smart-card-authentication-in-ubuntu-desktop#1-overview).
+```{note}
+This guide is meant for Ubuntu Server 20.04 and newer. If you want to configure a desktop installation refer to the [desktop guide](https://ubuntu.com/tutorials/how-to-use-smart-card-authentication-in-ubuntu-desktop#1-overview).
+```
 
 ## Software requirements
 
@@ -200,7 +201,7 @@ To enable that process we have to configure the PAM module, add the relevant cer
 
 ## Setup guide
 
-This configuration uses SSSD as authenticatoin mechanism, and the example shown here is showing a possible usage for local users, but more complex setups using external remote identity managers such as FreeIPA, LDAP, Kerberos or others can be used.
+This configuration uses SSSD as authentication mechanism, and the example shown here is showing a possible usage for local users, but more complex setups using external remote identity managers such as {term}`FreeIPA`, LDAP, Kerberos or others can be used.
 
 Refer to [SSSD documentation](https://sssd.io/docs/introduction.html) to learn more about this.
 
@@ -216,7 +217,7 @@ services = pam
 pam_cert_auth = True
 ```
 
-Further `[pam]` configuration options can be changed accroding to [`man sssd.conf`](https://manpages.ubuntu.com/manpages/jammy/en/man5/sssd.conf.5.html#services%20sections).
+Further `[pam]` configuration options can be changed according to the {manpage}`sssd.conf(5)` manual page.
 
 ### Configure SSSD Certificate Authorities database
 
@@ -276,7 +277,7 @@ The sss PAM module allows certificates to be used for login, though our Linux sy
 
 For the purposes of this guide, we will use a simple local user mapping as reference.
 
-Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the [sss-certmap](https://manpages.ubuntu.com/manpages/jammy/en/man5/sss-certmap.5.html) manpage.
+Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the {manpage}`sss-certmap(5)` manpage.
 
 #### Local users mapping
 
@@ -443,6 +444,11 @@ $ pamtester -v login "" authenticate
 sudo less /var/log/auth.log
 sudo less /var/log/sssd/sssd_pam.log
 sudo less /var/log/sssd/p11_child.log
+```
+
+```{toctree}
+self
+smart-card-authentication-with-ssh
 ```
 
 ## SSH authentication

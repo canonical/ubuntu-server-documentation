@@ -4,7 +4,7 @@ Ubuntu Server documentation
 Ubuntu Server is a version of the Ubuntu operating system designed and
 engineered as a backbone for the internet.
 
-Ubuntu Server brings economic and technical scalability to your datacentre,
+Ubuntu Server brings economic and technical scalability to your datacenter,
 public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
@@ -25,11 +25,11 @@ with any page.
 * `Get support <https://ubuntu.com/support/community-support>`_
 * `Join the Discourse forum <https://discourse.ubuntu.com/c/server/17>`_
 * `Download Ubuntu Server <https://ubuntu.com/server>`_
-* :ref:`Find out how to contribute <contribute>`
+* `Find out how to contribute <https://documentation.ubuntu.com/server/contributing/>`_
 
 Offline version
 ===============
 
-You can :ref:`build this documentation locally <build-locally>`, or you can
+You can `build this documentation locally <https://documentation.ubuntu.com/server/contributing/build-locally>`_, or you can
 access `the PDF version <https://documentation.ubuntu.com/server/>`_ of this
 documentation from Read the Docs.

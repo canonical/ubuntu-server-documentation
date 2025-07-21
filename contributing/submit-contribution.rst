@@ -29,7 +29,51 @@ You can run:
    make linkcheck
    
 To perform a full spelling and link check. You can also run ``make`` by itself
-to see a list of all the possible ``make`` targets. 
+to see a list of all the possible ``make`` targets.
+
+Check if you need redirects
+===========================
+
+If you rename, move or delete an existing file, a corresponding redirect must
+be created to ensure users don't run into 404 errors when clicking links in the
+published documentation.
+
+Internal redirects
+------------------
+
+To set up a redirect from one file path to another, add a line to the end of the
+redirects.txt` file in the root directory, in the following format:
+
+.. code-block:: text
+
+    redirect/path/from/ redirect/path/to/
+
+Note that since we use `dirhtml` to build, the built documentation is in the
+format `path/to/file/index.html` where `file` corresponds to the file name
+you are redirecting. This means that you only need a trailing slash at the end
+of the file name, without the file extension. See the
+`Sphinx Rediraffe docs <https://sphinxext-rediraffe.readthedocs.io/en/latest/>`_
+for more guidance, or reach out to us for help.
+
+External redirects
+------------------
+
+Rediraffe doesn't currently handle redirects from a page to an external website.
+To redirect outside of the Server documentation, you will need to set up a
+redirect in the `custom_conf.py` file in the root directory. 
+
+Under the Redirects section, you can add the source page and the target page as
+follows:
+
+.. code-block:: python
+
+   redirects = {
+       "example/source": "https://exampletarget.org",
+       "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/"
+   }
+
+When you set up a redirect in this way, the path of the source file you're redirecting
+from should include everything *after* the base URL (https://documentation.ubuntu.com/server).
 
 Manual testing
 ==============
@@ -79,13 +123,17 @@ Reviews
 =======
 
 After you have submitted your PR, one of the Ubuntu Server team maintainers
-will be in touch to review it. Depending on time zones, there may be a small
-delay in your PR being reviewed. Please be patient!
+will be in touch to review it. Depending on time zones, there may be a delay
+in your PR being reviewed. Please be patient!
 
 One or more of the Ubuntu Server team maintainers will review the changes you
 have proposed, and they will either "Approve" the changes, or leave some
 feedback and suggested changes (with reasons). If you agree with the feedback,
 you can make the suggested changes, and the reviewer will approve the PR.
+
+.. note::
+   The team has adopted the `Conventional Comments <https://conventionalcomments.org/>`_
+   approach with the intention of making feedback easier to parse.
 
 If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen
@@ -97,6 +145,6 @@ Once the discussion has concluded, and you have made any agreed changes, the PR
 will be approved and then merged. Congratulations (and thank you)! You are now
 an open source contributor!
 
-.. _getting started with git: https://github.com/canonical/open-documentation-academy/blob/main/getting-started/using_git.md
+.. _getting started with git: https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/
 .. _Create a Pull Request: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 .. _Link your pull request to your issue: https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue

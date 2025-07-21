@@ -11,7 +11,7 @@ topology of the chip internal structures as well as any associated devices
 like PCI cards, NVME devices and memory.
 
 By default the tools provide command line interfaces, but it can also render
-those complex relations in a GUI environment. Depending on which one you want
+those complex relations in a {term}`GUI` environment. Depending on which one you want
 to use you can install them with `apt install hwloc-nox` or `apt install hwloc`
 respectively.
 
@@ -86,8 +86,7 @@ Core L#0
  cpukind info FrequencyBaseMHz = 1800
 ```
 
-See the [`hwloc-info`](https://manpages.ubuntu.com/manpages/noble/man1/hwloc-info.1.html)
-man page for a list of all the potential objects that can be queried.
+See the {manpage}`hwloc-info(1)` manual page for a list of all the potential objects that can be queried.
 
 ## hwloc-ls - system topology in CLI
 
@@ -213,6 +212,6 @@ Output (GUI):
 
 ## Further reading
 
-* [`hwloc-ls` man page](https://manpages.ubuntu.com/manpages/noble/en/man1/lstopo.1.html)
-* [`hwloc` man page](https://manpages.ubuntu.com/manpages/noble/en/man7/hwloc.7.html)
-* [`hwloc-diff` man page](https://manpages.ubuntu.com/manpages/noble/en/man1/hwloc-diff.1.html)
+* {manpage}`lstopo(1)` manual page
+* {manpage}`hwloc(7)` manual page
+* {manpage}`hwloc-diff(1)` manual page

@@ -50,7 +50,7 @@ defaults {
 
 This overwrites the default value of the `user_friendly_names` parameter.
 
-All the multipath attributes that can be set in the `defaults` section of the `multipath.conf` file can be found [in the man pages](https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html#defaults%20section) with an explanation of what they mean. The attributes are:
+All the multipath attributes that can be set in the `defaults` section of the `multipath.conf` file can be found {manpage}`in the manual pages <multipath.conf(5)>` with an explanation of what they mean. The attributes are:
 
 * `verbosity`
 * `polling_interval`
@@ -116,8 +116,9 @@ All the multipath attributes that can be set in the `defaults` section of the `m
 * `ghost_delay`
 * `enable_foreign`
 
-> **Note**:
-> Previously, the `multipath-tools` project provided a complete configuration file with all the most commonly used options for each of the most-used storage devices. Currently, you can see all those default options by running `sudo multipath -t`. This will dump a used configuration file including all the embedded default options.
+```{note}
+Previously, the `multipath-tools` project provided a complete configuration file with all the most commonly used options for each of the most-used storage devices. Currently, you can see all those default options by running `sudo multipath -t`. This will dump a used configuration file including all the embedded default options.
+```
 
 ## Configuration file blacklist and exceptions
 
@@ -172,8 +173,9 @@ blacklist_exceptions {
 }
 ```
 
-> **Note**:
-> A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+```{note}
+ A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+ ```
 
 ## Configuration file multipath section
 
@@ -189,7 +191,7 @@ The multipath subsection recognises the following attributes:
 
 ### Optional attributes
 
-The following attributes are optional; if not set, the default values are taken from the overrides, devices, or [defaults section](https://manpages.ubuntu.com/manpages/en/man5/multipath.conf.5.html#defaults%20section):
+The following attributes are optional; if not set, the default values are taken from the overrides, devices, or defaults section of the {manpage}`multipath.conf(5)` manual page:
 
  * `path_grouping_policy`
  * `path_selector`
@@ -254,8 +256,8 @@ The device subsection recognises the following attributes:
 1. **`product_blacklist`**: Products with the given vendor matching this string are blacklisted.
 1. **`alias_prefix`**: The `user_friendly_names` prefix to use for this device type, instead of the default `mpath`.
 1. **`hardware_handler`**: The hardware handler to use for this device type. The following hardware handlers are implemented (all of these are hardware-dependent):
-   * **`1 emc`**: Hardware handler for DGC class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
-   * **`1 rdac`**: Hardware handler for LSI / Engenio / NetApp RDAC class as NetApp SANtricity E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
+   * **`1 emc`**: Hardware handler for {term}`DGC` class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
+   * **`1 rdac`**: Hardware handler for LSI / {term}`Engenio` / NetApp RDAC class as NetApp SANtricity E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
    * **`1 hp_sw`**: Hardware handler for HP/COMPAQ/DEC HSG80 and MSA/HSV arrays with Active/Standby mode exclusively.
    * **`1 alua`**: Hardware handler for SCSI-3 ALUA-compatible arrays.
    * **`1 ana`**: Hardware handler for NVMe ANA-compatible arrays.

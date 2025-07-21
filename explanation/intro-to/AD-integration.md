@@ -12,7 +12,7 @@ Joining an Ubuntu system to an Active Directory domain (or a forest) means that 
 
 Depending on how the join was performed, and the software stack available on the Ubuntu system, the following is also possible:
 - authenticate and recognize users from different domains that make up the forest
-- apply certain group policy objects (not covered here)
+- apply certain {term}`group policy objects <Group Policy Object>` (not covered here)
 - provide file and print services to users from the domain
 
 To set up your Active Directory integrations, we suggest first familiarising yourself with the following key topics:
@@ -33,7 +33,7 @@ To set up your Active Directory integrations, we suggest first familiarising you
   - [rid identity mapping backend](https://wiki.samba.org/index.php/Idmap_config_rid)
   - [autorid identity mapping backend](https://wiki.samba.org/index.php/Idmap_config_autorid)
 - Manual pages:
-  - [idmap_tdb(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_tdb.8.html)
-  - [idmap_rid(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_rid.8.html)
-  - [idmap_autorid(8)](https://manpages.ubuntu.com/manpages/noble/man8/idmap_autorid.8.html)
-  - [wbinfo(1)](https://manpages.ubuntu.com/manpages/noble/en/man1/wbinfo.1.html)
+  - {manpage}`idmap_tdb(8)`
+  - {manpage}`idmap_rid(8)`
+  - {manpage}`idmap_autorid(8)`
+  - {manpage}`wbinfo(1)`

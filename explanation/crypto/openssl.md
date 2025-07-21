@@ -7,7 +7,7 @@ The OpenSSL configuration file is located at `/etc/ssl/openssl.cnf` and is used 
 
 ## Structure of the config file
 
-The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manpage](https://manpages.ubuntu.com/manpages/jammy/en/man5/config.5ssl.html) has all the details.
+The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manpage](https://manpages.ubuntu.com/manpages/plucky/en/man5/config.5ssl.html) has all the details.
 
 This is what it looks like:
 
@@ -42,16 +42,17 @@ system_default = system_default_sect
 CipherString = DEFAULT:@SECLEVEL=2
 ```
 
-This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the [SSL_CTX_set_security_level(3) manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CTX_set_security_level.3ssl.html).
+This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the {manpage}`SSL_CTX_set_security_level(3)` manpage.
 
-> **Note**:
-> In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
+```{note}
+In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
+```
 
 That default is also set at package building time, and in the case of Ubuntu, it's [set to `SECLEVEL=2`](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/rules?h=ubuntu/jammy-devel#n15).
 
 The list of allowed ciphers in a security level can be obtained with the [`openssl ciphers`](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html) command (output truncated for brevity):
 
-```console
+```bash
 $ openssl ciphers -s -v DEFAULT:@SECLEVEL=2
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
@@ -60,10 +61,11 @@ ECDHE-ECDSA-AES256-GCM-SHA384  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256)     
 (...)
 ```
 
-> **Note**:
-> The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
+```{note}
+The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
+```
 
-All the options that can be set in the `system_default_sect` section are detailed in the [SSL_CONF_cmd manpage](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands).
+All the options that can be set in the `system_default_sect` section are detailed in the {manpage}`SSL_CONF_cmd(3)` manpage.
 
 ## Cipher strings, cipher suites, cipher lists
 
@@ -93,7 +95,7 @@ In the end, without other constraints, the library will merge both lists into on
 
 This will list all supported/enabled ciphers, with defaults taken from the library and `/etc/ssl/openssl.cnf`. Since no other options were given, this will include TLSv1.3 ciphersuites and TLSv1.2 and older cipher strings:
 
-```console
+```bash
 $ openssl ciphers -s -v
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
@@ -127,9 +129,9 @@ AES256-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(256)        
 AES128-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(128)               Mac=SHA1
 ```
 
-Let's filter this a bit, and just as an example, remove all AES128 ciphers and SHA1 hashes:
+Let's filter this a bit, and just as an example, remove all {term}`AES`128 ciphers and SHA1 hashes:
 
-```console
+```bash
 $ openssl ciphers -s -v 'DEFAULTS:-AES128:-SHA1'
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
@@ -151,7 +153,7 @@ Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filt
 
 To filter out TLSv1.3 algorithms, there is no such mechanism, and we must list explicitly what we want by using `-ciphersuites`:
 
-```console
+```bash
 $ openssl ciphers -s -v -ciphersuites TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 'DEFAULTS:-AES128:-SHA1'
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
@@ -186,7 +188,7 @@ MinProtocol = TLSv1.3
 
 If you then try to connect securely to a server that only offers, say TLSv1.2, the connection will fail:
 
-```console
+```bash
 $ curl https://j-server.lxd/stats
 curl: (35) error:0A00042E:SSL routines::tlsv1 alert protocol version
 
@@ -217,12 +219,13 @@ The OpenSSL `s_server` command is very handy to test this (see [the Troubleshoot
 $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www
 ```
 
-> **Note**:
-> Be sure to use another system for this server, or else it will be subject to the same `/etc/ssl/openssl.cnf` constraints you are testing on the client, and this can lead to very confusing results.
+```{note}
+Be sure to use another system for this server, or else it will be subject to the same `/etc/ssl/openssl.cnf` constraints you are testing on the client, and this can lead to very confusing results.
+```
 
 As expected, a client will end up selecting TLSv1.3 and the `TLS_AES_256_GCM_SHA384` cipher suite:
 
-```console
+```bash
 $ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
 New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
     Cipher    : TLS_AES_256_GCM_SHA384
@@ -236,7 +239,7 @@ $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -cip
 
 And now the client will fail:
 
-```console
+```bash
 $ wget https://j-server.lxd/stats -O /dev/stdout
 --2023-01-06 14:20:55--  https://j-server.lxd/stats
 Resolving j-server.lxd (j-server.lxd)... 10.0.100.87
@@ -264,7 +267,7 @@ $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls
 
 And our client picks AES256:
 
-```console
+```bash
 $ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
 New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
     Cipher    : ECDHE-RSA-AES256-GCM-SHA384
@@ -278,7 +281,7 @@ $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls
 
 Surely `wget` should fail now. Well, turns out it does select AES128:
 
-```console
+```bash
 $ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
 New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
     Cipher    : ECDHE-RSA-AES128-GCM-SHA256
@@ -286,7 +289,7 @@ New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
 
 It's unclear why. Maybe it's a safeguard, or maybe AES128 is always allowed in TLSv1.2 and we produced an invalid configuration. This case shows how crypto is complex, and also applications can override any such configuration setting that comes from the library. As a counter example, OpenSSL's `s_client` tool follows the library config, and fails in this case:
 
-```console
+```bash
 $ echo | openssl s_client -connect j-server.lxd:443  | grep -w -i cipher
 4007F4F9D47F0000:error:0A000410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure:../ssl/record/rec_layer_s3.c:1584:SSL alert number 40
 New, (NONE), Cipher is (NONE)
@@ -294,7 +297,7 @@ New, (NONE), Cipher is (NONE)
 
 But we can override that as well with a command-line option and force `s_client` to allow AES128:
 
-```console
+```bash
 $ echo | openssl s_client -connect j-server.lxd:443 --cipher DEFAULT:AES128 2>&1| grep -w -i cipher
 New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
     Cipher    : ECDHE-RSA-AES128-GCM-SHA256
@@ -308,4 +311,4 @@ New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
   * https://www.openssl.org/docs/man3.0/man3/SSL_CTX_set_security_level.html
   * https://www.feistyduck.com/library/openssl-cookbook/online/openssl-command-line/understanding-security-levels.html
 
-* [Configuration directives that can be used in the `system_default_sect` section](https://manpages.ubuntu.com/manpages/jammy/en/man3/SSL_CONF_cmd.3ssl.html#supported%20configuration%20file%20commands)
+* Configuration directives that can be used in the `system_default_sect` section are in the {manpage}`SSL_CONF_cmd(3)` manual page

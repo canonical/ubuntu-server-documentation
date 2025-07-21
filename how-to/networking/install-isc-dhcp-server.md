@@ -1,10 +1,11 @@
 (install-isc-dhcp-server)=
 # How to install and configure isc-dhcp-server
 
-> **Note**:
-> Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/). It has been replaced by [Kea](https://www.isc.org/kea/).
+```{note}
+Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/). It has been replaced by [Kea](https://www.isc.org/kea/).
+```
 
-In this guide we show how to install and configure `isc-dhcp-server`, which installs the dynamic host configuration protocol daemon, `dhcpd`. For `isc-kea` instructions, {ref}`refer to this guide instead <install-isc-kea>`.
+In this guide we show how to install and configure `isc-dhcp-server`, which installs the dynamic host configuration protocol daemon, {term}`DHCPD`. For `isc-kea` instructions, {ref}`refer to this guide instead <install-isc-kea>`.
 
 ## Install isc-dhcp-server
 
@@ -14,8 +15,9 @@ At a terminal prompt, enter the following command to install `isc-dhcp-server`:
 sudo apt install isc-dhcp-server
 ```
 
-> **Note**:
-> You can find diagnostic messages from `dhcpd` in `syslog`.
+```{note}
+You can find diagnostic messages from `dhcpd` in `syslog`.
+```
 
 ## Configure isc-dhcp-server
 
@@ -36,9 +38,11 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 }
 ```
 
-This will result in the DHCP server giving clients an IP address from the range `192.168.1.150 - 192.168.1.200`. It will lease an IP address for 600 seconds if the client doesn't ask for a specific time frame. Otherwise the maximum (allowed) lease will be 7200 seconds. The server will also "advise" the client to use `192.168.1.254` as the default-gateway and `192.168.1.1` and `192.168.1.2` as its DNS servers.
+This will result in the DHCP server giving clients an IP address from the range `192.168.1.150 - 192.168.1.200`. It will lease an IP address for 600 seconds if the client doesn't ask for a specific time frame. Otherwise the maximum (allowed) lease will be 7200 seconds. The server will also "advise" the client to use `192.168.1.254` as the default-gateway and `192.168.1.1` and `192.168.1.2` as its {term}`DNS` servers.
 
 You also may need to edit `/etc/default/isc-dhcp-server` to specify the interfaces `dhcpd` should listen to.
+
+In the example below, `eth4` is used, but you should replace this with the appropriate interface for your system. The name of the network interface can vary depending on your setup. For instance, it could be `eth0`, `ens33`, or any other name depending on the device you're using.
 
 ```
 INTERFACESv4="eth4"
@@ -54,6 +58,6 @@ sudo systemctl restart isc-dhcp-server.service
 
 - The [isc-dhcp-server Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
 
-- For more `/etc/dhcp/dhcpd.conf` options see the [dhcpd.conf man page](https://manpages.ubuntu.com/manpages/focal/en/man5/dhcpd.conf.5.html).
+- For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
 - [ISC dhcp-server](https://www.isc.org/software/dhcp)

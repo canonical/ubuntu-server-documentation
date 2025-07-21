@@ -1,7 +1,7 @@
 (install-dnssec)=
 # Installing DNS Security Extensions (DNSSEC)
 
-DNSSEC is a set of security extensions to DNS which allow DNS data to be verified for authenticity and integrity.
+DNSSEC is a set of security extensions to {term}`DNS` which allow DNS data to be verified for authenticity and integrity.
 
 This guide will show you how to enable DNSSEC for an existing zone in your BIND9 DNS server deployment.
 
@@ -186,5 +186,5 @@ Taking that line, the actual record to send to the parent zone just needs a litt
  * [Easy-Start Guide for Signing Authoritative Zones](https://bind9.readthedocs.io/en/stable/dnssec-guide.html#signing)
  * [Creating a Custom DNSSEC Policy](https://bind9.readthedocs.io/en/stable/dnssec-guide.html#signing-custom-policy)
  * [Detailed DNSSEC chapter from the bind9 documentation](https://bind9.readthedocs.io/en/stable/chapter5.html)
- * [`delv` manual page](https://manpages.ubuntu.com/manpages/noble/man1/delv.1.html)
+ * {manpage}`delv(1)` manual page
  * [Working with the parent zone](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#working-with-the-parent-zone)

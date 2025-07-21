@@ -5,7 +5,7 @@ Common Internet File System (CIFS) shares are a file-sharing protocol used (main
 
 Permanently mounting CIFS shares involves configuring your system to automatically connect to these shared resources when the system boots, which is useful when network users need consistent and regular access to them.
 
-In this guide, we will show you how to permanently mount and access CIFS shares. The shares can be hosted on a Windows computer/server, or on a Linux/UNIX server running [Samba](https://discourse.ubuntu.com/t/samba-introduction/11888). If you want to know how to host shares, you will need to use [Samba](https://discourse.ubuntu.com/t/samba-introduction/11888).
+In this guide, we will show you how to permanently mount and access CIFS shares. The shares can be hosted on a Windows computer/server, or on a Linux/UNIX server running Samba. If you want to know how to host shares, see {ref}`introduction-to-samba`.
 
 ## Prerequisites
 
@@ -42,7 +42,7 @@ Then edit your `/etc/fstab` file (with root privileges) to add this line:
 
 Where:
 
-* `servername` is the server hostname or IP address,
+* `servername` is the server {term}`hostname` or IP address,
 * `guest` indicates you don't need a password to access the share,
 * `uid=1000` makes the Linux user (specified by the ID) the owner of the mounted share, allowing them to rename files, and
 * If there is any space in the server path, you need to replace it by `\040`, for example:
@@ -106,11 +106,17 @@ If there are no errors, you should test how it works after a reboot. Your remote
 
 ## Changing the share ownership
 
-If you need to change the owner of a share, you'll need to add a **UID** (short for 'User ID') or **GID** (short for 'Group ID') parameter to the share's mount options:
+If you need to change the owner of a share, you'll need to add a **UID** (short for 'User ID') or **{term}`GID`** (short for 'Group ID') parameter to the share's mount options:
 
 ```text
 //servername/sharename /media/windowsshare cifs uid=ubuntuusername,credentials=/home/ubuntuusername/.smbcredentials 0 0
 ```
+
+## Mount network folders with authd
+
+If you use Samba and authd at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
+
+If you *are* using Samba with authd, follow the instructions in the [steps for the client](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-client) guide in the authd documentation.
 
 ## Mount password-protected shares using `libpam-mount`
 
@@ -159,7 +165,7 @@ If you get the error "mount error(13) permission denied", then the server denied
 * Are you using a valid username and password? Does that account really have access to this folder?
 * Do you have blank space in your credentials file? It should be `password=mspassword`, not `password = mspassword`.
 * Do you need a domain? For example, if you are told that your username is `SALES\sally`, then actually your username is `sally` and your domain is `SALES`. You can add a `domain=SALES` line to the `~/.credentials` file.
-* The security and version settings are interrelated. SMB1 is insecure and no longer supported. At first, try to not specify either security or version: do not specify `sec=` or `vers=`. If you still have authentication errors then you may need to specify either `sec=` or `vers=` or both. You can try the options listed at the [mount.cifs man page](https://manpages.ubuntu.com/manpages/en/man8/mount.cifs.8.html).
+* The security and version settings are interrelated. SMB1 is insecure and no longer supported. At first, try to not specify either security or version: do not specify `sec=` or `vers=`. If you still have authentication errors then you may need to specify either `sec=` or `vers=` or both. You can try the options listed at the {manpage}`mount.cifs(8)` manual page.
 
 ### Mount after login instead of boot
 

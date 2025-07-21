@@ -9,7 +9,7 @@ We package two types of NVIDIA drivers:
 
 1. **Unified Driver Architecture (UDA)** drivers - which are recommended for the generic desktop use, and which you can also find [on the NVIDIA website](https://www.nvidia.com/en-us/drivers/unix/).
 
-1. **Enterprise Ready Drivers (ERD)** - which are recommended on servers and for computing tasks. Their packages can be recognised by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
+1. **Enterprise Ready Drivers** ({term}`ERD`) - which are recommended on servers and for computing tasks. Their packages can be recognised by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
 
 Additionally, we package the **NVIDIA Fabric Manager** and the **NVIDIA Switch Configuration and Query (NSCQ) Library**, which you will only need if you have NVswitch hardware. The Fabric Manager and NSCQ library are only available with the ERDs or `-server` driver versions.
 
@@ -101,12 +101,11 @@ If your system comes with NVswitch hardware, then you will want to install Fabri
 sudo apt install nvidia-fabricmanager-535 libnvidia-nscq-535
 ```
 
-> **Note**:
-> While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535 package`).
+```{note}
+While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535 package`).
+```
 
-<h2 id="heading--manual-driver-installation-using-apt">
-Manual driver installation (using APT)
-</h2>
+## Manual driver installation (using APT)
 
 Installing the NVIDIA driver manually means installing the correct kernel modules first, then installing the metapackage for the driver series.
 
@@ -124,7 +123,7 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-${LINUX_FLAVOUR}
 
 (e.g. `linux-modules-nvidia-535-generic`)
 
-Check that the modules for your specific kernel/ABI were installed by the metapackage:
+Check that the modules for your specific kernel/{term}`ABI` were installed by the metapackage:
 
 ```bash
 sudo apt-cache policy linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
@@ -142,7 +141,7 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 
 #### Building your own kernel modules using the NVIDIA DKMS package
 
-Install the relevant NVIDIA DKMS package and `linux-headers` to build the kernel modules, and enroll your own key to sign the modules.
+Install the relevant NVIDIA {term}`DKMS` package and `linux-headers` to build the kernel modules, and enroll your own key to sign the modules.
 
 Install the `linux-headers` metapackage for your kernel flavour (e.g. `generic`, `lowlatency`, etc):
 
@@ -184,8 +183,9 @@ If your system comes with NVswitch hardware, then you will want to install Fabri
 sudo apt install nvidia-fabricmanager-${DRIVER_BRANCH} libnvidia-nscq-${DRIVER_BRANCH}
 ```
 
-> **Note**:
-> While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535` package).
+```{note}
+While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535` package).
+```
 
 ## Switching between pre-compiled and DKMS modules
 
@@ -199,6 +199,13 @@ Remove any NVIDIA packages from your system:
 
 ```bash
 sudo apt --purge remove '*nvidia*${DRIVER_BRANCH}*'
+```
+
+If you are unsure which `${DRIVER_BRANCH}` to pick for removal you might look at the installed nvidia packages and see the different `${DRIVER_BRANCH}` numbers that are present on your system.
+Since `autoremove` will take care of all indirect dependencies it is sufficient to list those that have been directly installed by using `apt-mark`.
+
+```bash
+apt-mark showmanual | grep nvidia`.
 ```
 
 Remove any additional packages that may have been installed as a dependency (e.g. the `i386` libraries on amd64 systems) and which were not caught by the previous command:

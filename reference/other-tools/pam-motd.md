@@ -16,11 +16,11 @@ When logging into an Ubuntu server you may have noticed the informative Message 
           Graph this data and manage this system at https://landscape.canonical.com/
     ```
     
-    > **Note**
-    > 
-    > You can run landscape-sysinfo manually at any time.
+    ```{note}
+    You can run landscape-sysinfo manually at any time.
+    ```
 
-  - *update-notifier-common:* provides information on available package updates, impending filesystem checks (fsck), and required reboots (e.g.: after a kernel upgrade).
+  - *update-notifier-common:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
 
 pam\_motd executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 
@@ -64,6 +64,6 @@ You should now be greeted with some useful information, and some information abo
 
 ## Resources
 
-  - See the [update-motd man page](http://manpages.ubuntu.com/manpages/jammy/en/man5/update-motd.5.html) for more options available to update-motd.
+  - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
 
   - The Debian Package of the Day [weather](http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weatherutility.

@@ -3,7 +3,7 @@
 
 WireGuard is a simple, fast and modern VPN implementation. It is widely deployed and can be used cross-platform.
 
-VPNs have traditionally been hard to understand, configure and deploy. WireGuard removed most of that complexity by focusing on its single task, and leaving out things like key distribution and pushed configurations. You get a network interface which encrypts and verifies the traffic, and the remaining tasks like setting up addresses, routing, etc, are left to the usual system tools like [ip-route(8)](https://manpages.ubuntu.com/manpages/man8/ip-route.8.html) and [ip-address(8)](https://manpages.ubuntu.com/manpages/man8/ip-address.8.html).
+VPNs have traditionally been hard to understand, configure and deploy. WireGuard removed most of that complexity by focusing on its single task, and leaving out things like key distribution and pushed configurations. You get a network interface which encrypts and verifies the traffic, and the remaining tasks like setting up addresses, routing, etc, are left to the usual system tools like {manpage}`ip-route(8)` and {manpage}`ip-address(8)`.
 
 Setting up the cryptographic keys is very much similar to configuring SSH for key based authentication: each side of the connection has its own private and public key, and the peers' public key, and this is enough to start encrypting and verifying the exchanged traffic.
 
@@ -13,7 +13,7 @@ For more details on how WireGuard works, and information on its availability on 
 
 It helps to think of WireGuard primarily as a network interface, like any other. It will have the usual attributes, like IP address, CIDR, and there will be some routing associated with it. But it also has WireGuard-specific attributes, which handle the VPN part of things.
 
-All of this can be configured via different tools. WireGuard itself ships its own tools in the user-space package `wireguard-tools`: [`wg`](https://manpages.ubuntu.com/manpages/man8/wg.8.html) and [`wg-quick`](https://manpages.ubuntu.com/manpages/man8/wg-quick.8.html). But these are not strictly needed: any user space with the right privileges and kernel calls can configure a WireGuard interface. For example, `systemd-networkd` and `network-manager` can do it on their own, without the WireGuard user-space utilities.
+All of this can be configured via different tools. WireGuard itself ships its own tools in the user-space package `wireguard-tools`: {manpage}`wg(8)` and {manpage}`wg-quick(8)`. But these are not strictly needed: any user space with the right privileges and kernel calls can configure a WireGuard interface. For example, `systemd-networkd` and `network-manager` can do it on their own, without the WireGuard user-space utilities.
 
 Important attributes of a WireGuard interface are:
 
@@ -24,10 +24,11 @@ Important attributes of a WireGuard interface are:
   - **Endpoint**: where to send the encrypted traffic to. This is optional, but at least one of the corresponding peers must have it to bootstrap the connection.
   - **Allowed IPs**: list of inner tunnel destination networks or addresses for this peer when sending traffic, or, when receiving traffic, which source networks or addresses are allowed to send traffic to us.
 
-> **Note**:
-> Cryptography is not simple. When we say that, for example, a private key is used to decrypt or sign traffic, and a public key is used to encrypt or verify the authenticity of traffic, this is a simplification and is hiding a lot of important details. WireGuard has a detailed explanation of its protocols and cryptography handling [on its website](https://www.wireguard.com/protocol/).
+```{note}
+Cryptography is not simple. When we say that, for example, a private key is used to decrypt or sign traffic, and a public key is used to encrypt or verify the authenticity of traffic, this is a simplification and is hiding a lot of important details. WireGuard has a detailed explanation of its protocols and cryptography handling [on its website](https://www.wireguard.com/protocol/).
+```
 
-These parameters can be set with the low-level [`wg`](https://manpages.ubuntu.com/manpages/man8/wg.8.html) tool, directly via the command line or with a configuration file. This tool, however, doesn't handle the non-WireGuard settings of the interface. It won't assign an IP address to it, for example, nor set up routing. For this reason, it's more common to use [`wg-quick`](https://manpages.ubuntu.com/manpages/man8/wg-quick.8.html).
+These parameters can be set with the low-level {manpage}`wg(8)` tool, directly via the command line or with a configuration file. This tool, however, doesn't handle the non-WireGuard settings of the interface. It won't assign an IP address to it, for example, nor set up routing. For this reason, it's more common to use {manpage}`wg-quick(8)`.
 
 `wg-quick` will handle the lifecycle of the WireGuard interface. It can bring it up or down, set up routing, execute arbitrary commands before or after the interface is up, and more. It augments the configuration file that `wg` can use, with its own extra settings, which is important to keep in mind when feeding that file to `wg`, as it will contain settings `wg` knows nothing about.
 
@@ -136,7 +137,7 @@ On a site-to-site VPN, however, when two separate networks are connected through
 Key takeaways from this introduction:
 
 - Each peer participating in the WireGuard VPN has a private key and a public key.
-- `AllowedIPs` is used as a routing key when sending traffic, and as an ACL when receiving traffic.
+- `AllowedIPs` is used as a routing key when sending traffic, and as an {term}`ACL` when receiving traffic.
 - To establish a VPN with a remote peer, you need its public key. Likewise, the remote peer will need your public key.
 - At least one of the peers needs an `Endpoint` configured in order to be able to initiate the VPN.
 
@@ -161,12 +162,14 @@ To help better understand these (and other) concepts, we will create some WireGu
 * {ref}`Security tips <security-tips-for-wireguard-vpn>`
 * {ref}`Troubleshooting <troubleshooting-wireguard-vpn>`
 
-> **Note**:
-> Throughout this guide, we will sometimes mention a VPN "connection". This is technically false, as WireGuard uses UDP and there is no persistent connection. The term is used just to facilitate understanding, and means that the peers in the examples know each other and have completed a handshake already.
+```{note}
+Throughout this guide, we will sometimes mention a VPN "connection". This is technically false, as WireGuard uses UDP and there is no persistent connection. The term is used just to facilitate understanding, and means that the peers in the examples know each other and have completed a handshake already.
+```
 
 ## Further reading
 
 - See the [WireGuard website](https://www.wireguard.com) for more detailed information.
 - The [WireGuard Quickstart](https://www.wireguard.com/quickstart/) has a good introduction and demo.
-- [wg(8)](https://manpages.ubuntu.com/manpages/jammy/man8/wg.8.html) and [wg-quick(8)](https://manpages.ubuntu.com/manpages/jammy/man8/wg-quick.8.html) manual pages.
+- {manpage}`wg(8)` manual page
+- {manpage}`wg-quick(8)` manual page
 - [Detailed explanation](https://www.wireguard.com/protocol/) of the algorithms used by WireGuard.

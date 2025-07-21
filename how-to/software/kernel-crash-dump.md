@@ -46,8 +46,9 @@ The kernel crash dump utility is installed with the following command:
 sudo apt install kdump-tools
 ```
 
-> **Note**:
-> Starting with 16.04, the kernel crash dump mechanism is enabled by default.
+```{note}
+Starting with 16.04, the kernel crash dump mechanism is enabled by default.
+```
 
 During the installation, you will be prompted with the following dialogs.
 
@@ -146,7 +147,7 @@ To enable remote dumps using the SSH protocol, the `/etc/default/kdump-tools` mu
 SSH="ubuntu@kdump-netcrash"
 ```
 
-The only mandatory variable to define is SSH. It must contain the username and hostname of the remote server using the format `{username}@{remote server}`.
+The only mandatory variable to define is SSH. It must contain the username and {term}`hostname` of the remote server using the format `{username}@{remote server}`.
 
 `SSH_KEY` may be used to provide an existing private key to be used. Otherwise, the `kdump-config propagate` command will create a new keypair. The `HOSTTAG` variable may be used to use the hostname of the system as a prefix to the remote directory to be created instead of the IP address.
 
@@ -295,8 +296,9 @@ kexec command:
 
 ## Testing the crash dump mechanism
 
-> **Warning**:
-> Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
+```{warning}
+Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
+```
 
 Verify that the *SysRQ* mechanism is enabled by looking at the value of the `/proc/sys/kernel/sysrq` kernel parameter:
 

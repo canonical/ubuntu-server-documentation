@@ -63,8 +63,9 @@ ssl_key = </etc/dovecot/private/dovecot.key
 
 You can get the SSL certificate from a Certificate Issuing Authority or you can create self-signed one. Once you create the certificate, you will have a key file and a certificate file that you want to make known in the config shown above.
 
-> **Further reading**:
-> For more details on creating custom certificates, see our guide on [security certificates](https://discourse.ubuntu.com/t/security-certificates/11885).
+```{seealso}
+For more details on creating custom certificates, see our guide on [security certificates](https://discourse.ubuntu.com/t/security-certificates/11885).
+```
 
 ## Configure a firewall for an email server
 

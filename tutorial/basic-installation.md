@@ -11,25 +11,25 @@ This section explains various aspects to consider before starting the installati
 
 Ubuntu Server Edition provides a common, minimalist base for a variety of server applications, such as file/print services, web hosting, email hosting, etc. This version supports four 64-bit architectures:
 
- * amd64 (Intel/AMD 64-bit)
+ * amd64 (Intel/{term}`AMD` 64-bit)
  * arm64 (64-bit ARM)
  * ppc64el (POWER8 and POWER9)
  * s390x (IBM Z and LinuxONE)
 
 The recommended minimal system requirements for this tutorial are:
 
- * RAM: 2 GiB or more
- * Disk: 5 GiB or more
+ * RAM: 2 {term}`GB` or more
+ * Disk: 5 GB or more
 
 If you are looking for more general system requirements, {ref}`refer to this page <system-requirements>`. 
 
-## Perform a system back up
+## Perform a system backup
 
 Before installing Ubuntu Server Edition you should make sure all data on the system is backed up.
 
 If this is not the first time an operating system has been installed on your computer, it is likely you will need to re-partition your disk to make room for Ubuntu.
 
-Any time you partition your disk, you should be prepared to lose everything on the disk should you make a mistake or something goes wrong during partitioning. The programs used in installation are quite reliable, most have seen years of use, but they also perform destructive actions.
+Any time you partition your disk, you should be prepared to lose all data on the disk should you make a mistake or something goes wrong during partitioning. The programs used in installation are quite reliable, most have seen years of use, but they also perform destructive actions.
 
 ## Download the server ISO
 
@@ -48,7 +48,7 @@ There are many ways to boot the installer but the simplest and most common way i
 
 Plug the USB stick into the system to be installed and start it.
 
-Most computers will automatically boot from USB or DVD, though in some cases this is disabled to improve boot times. If you don't see the boot message and the "Welcome" screen which should appear after it, you will need to set your computer to boot from the install media.
+Most computers will automatically boot from USB or DVD, though in some cases manufacturers disable this feature to improve boot times. If you don't see the boot message and the "Welcome" screen which should appear after it, you will need to set your computer to boot from the install media.
 
 There should be an on-screen message when the computer starts telling you what key to press for settings or a boot menu. Depending on the manufacturer, this could be <kbd>Escape</kbd>, <kbd>F2</kbd>, <kbd>F10</kbd> or <kbd>F12</kbd>. Simply restart your computer and hold down this key until the boot menu appears, then select the drive with the Ubuntu install media.
 
@@ -66,7 +66,7 @@ The installer is designed to be easy to use and have sensible defaults so for a 
  * Choose your language
  * Update the installer (if offered)
  * Select your keyboard layout
- * Do not configure networking (the installer attempts to configure wired network interfaces via DHCP, but you can continue without networking if this fails)
+ * Do not configure networking (the installer attempts to configure wired network interfaces via {term}`DHCP`, but you can continue without networking if this fails)
  * Do not configure a proxy or custom mirror unless you have to in your network
  * For storage, leave "use an entire disk" checked, and choose a disk to install to, then select "Done" on the configuration screen and confirm the install
  * Enter a username, hostname and password

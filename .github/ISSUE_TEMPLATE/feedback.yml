@@ -1,0 +1,44 @@
+name: Feedback
+description: Provide feedback on the Ubuntu Server documentation.
+title: "[Feedback]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Thanks for taking the time to fill out this feedback!**
+        We really appreciate your input, and it will help us improve the documentation.
+        
+        Please provide an appropriate title at the top of this page.
+        
+        ---
+  - type: input
+    id: page_url
+    attributes:
+      label: Page URL
+      description: Please enter the URL of the page you are referring to.
+      placeholder: https://documentation.ubuntu.com/server/
+    validations:
+      required: true
+  - type: checkboxes
+    id: content
+    attributes:
+      label: Select an option
+      description: Please let us know what issue you encountered with the documentation.
+      options:
+        - label: I found what I was looking for
+        - label: I couldn't find what I was looking for
+        - label: I found the information, but it was incorrect
+        - label: I found the information, but it was incomplete
+        - label: I found the information, but it was confusing
+        - label: I encountered a technical issue (e.g., broken link, image not loading)
+  - type: textarea
+    id: description
+    attributes:
+      label: Issue Description
+      description: |
+        Please provide a detailed description of the issue:
+        - What part of the documentation were you trying to use?
+        - What did you expect to happen, and what actually happened?
+        - Any error messages or screenshots you can provide would be very helpful.
+    validations:
+      required: true

@@ -10,7 +10,7 @@ DNSSEC is a security extension for the Domain Name System (DNS). DNS is a mappin
  * what information about other services, such as kerberos realms, LDAP servers, etc (usually on internal domains only) are there
  * and more
 
-When DNS was first conceived, security wasn't a top priority. At its origins, DNS is susceptible to multiple vulnerabilities, and has many weaknesses. Most of them are a consequence of spoofing: there is no guarantee that the reply you received to a DNS query a) was not tampered with; b) came from the true source.
+When DNS was first conceived, security wasn't a top priority. At its origins, DNS is susceptible to multiple vulnerabilities, and has many weaknesses. Most of them are a consequence of spoofing: there is no guarantee that the reply you received to a DNS query was not tampered with or that it came from the true source.
 
 This is not news, and other mechanisms on top of DNS and around it are in place to counteract that weakness. For example, the famous *HTTPS* padlock that can be seen when accessing most websites nowadays, which uses the TLS protocol to both authenticate the website, and encrypt the connection. It doesn't prevent DNS spoofing, and your web browser might still be tricked into attempting a connection with a fraudulent website, but the moment the TLS certificate is inspected, a warning will be issued to the user. Depending on local policies, the connection might be even immediately blocked. Still, DNS spoofing is a real problem, and TLS itself is subject to other types of attacks.
 
@@ -92,7 +92,7 @@ Let's zoom in a little bit on that Ubuntu system:
 
 ![Stub Resolver](../images/ubuntu-stub-resolver.png)
 
-To translate a hostname into an IP address, applications typically rely on standard glibc functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
+To translate a {term}`hostname` into an IP address, applications typically rely on standard glibc functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
 
 In Ubuntu, the default stub resolver is `systemd-resolved`. That's a daemon, running locally, and listening on port 53/udp on IP 127.0.0.53. The system is configured to use that as its nameserver via `/etc/resolv.conf`:
 
@@ -112,7 +112,7 @@ This stub resolver has its own configuration for which recursive DNS servers to 
            DNS Servers: 10.10.17.1
             DNS Domain: lxd
 
-This configuration is usually provided via DHCP, but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
+This configuration is usually provided via {term}`DHCP`, but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
 
 Given what we have:
  * an application
@@ -145,7 +145,7 @@ This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:
     nameserver 127.0.0.53
     options edns0 trust-ad
 
-The `trust-ad` setting is documented in the [resolv.conf(5)](https://manpages.ubuntu.com/manpages/noble/man5/resolv.conf.5.html) manpage. It means that the local resolver will:
+The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manpage. It means that the local resolver will:
 
  * Set the `ad` bit (Authenticated Data) in the outgoing queries.
  * Trust the `ad` bit in the responses from the specified nameserver.

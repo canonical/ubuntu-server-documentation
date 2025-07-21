@@ -1,7 +1,7 @@
 (install-rsnapshot)=
 # How to install and configure rsnapshot
 
-[rsnapshot](https://rsnapshot.org/) is an rsync-based filesystem snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of rsync to create scheduled, incremental backups.
+[rsnapshot](https://rsnapshot.org/) is an rsync-based {term}`filesystem` snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of rsync to create scheduled, incremental backups.
 
 ## Install rsnapshot
 
@@ -19,7 +19,7 @@ The `rsnapshot` configuration resides in `/etc/rsnapshot.conf`. Below you can fi
 
 The root directory where all snapshots will be stored is found at:
 
-```console
+```bash
 snapshot_root       /var/cache/rsnapshot/
 ```
 
@@ -27,7 +27,7 @@ snapshot_root       /var/cache/rsnapshot/
 
 Since `rsnapshot` uses incremental backups, we can afford to keep older backups for a while before removing them. You set these up under the `BACKUP LEVELS / INTERVALS` section. You can tell `rsnapshot` to retain a specific number of backups of each kind of interval. 
 
-```console
+```bash
 retain  daily   6
 retain  weekly    7
 retain  monthly   4
@@ -39,7 +39,7 @@ In this example we will keep 6 snapshots of our daily strategy, 7 snapshots of o
 
 If you are accessing a remote machine over SSH and the port to bind is not the default (port `22`), you need to set the following variable with the port number:
 
-```console
+```bash
 ssh_args       -p 22222
 ```
 
@@ -49,7 +49,7 @@ Now the most important part; you need to decide what you would like to backup.
 
 If you are backing up locally to the same machine, this is as easy as specifying the directories that you want to save and following it with `localhost/` which will be a sub-directory in the `snapshot_root` that you set up earlier.
 
-```console
+```bash
 backup  /home/          localhost/
 backup  /etc/           localhost/
 backup  /usr/local/     localhost/
@@ -57,14 +57,14 @@ backup  /usr/local/     localhost/
 
 If you are backing up a remote machine you just need to tell `rsnapshot` where the server is and which directories you would like to back up.
 
-```console
+```bash
 backup root@example.com:/home/ example.com/    +rsync_long_args=--bwlimit=16,exclude=core
 backup root@example.com:/etc/  example.com/    exclude=mtab,exclude=core
 ```
 
 As you can see, you can pass extra rsync parameters (the `+` appends the parameter to the default list -- if you remove the `+` sign you override it) and also exclude directories.
 
-You can check the comments in `/etc/rsnapshot.conf` and the [rsnapshot man page](http://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html) for more options.
+You can check the comments in `/etc/rsnapshot.conf` and the {manpage}`rsnapshot(1)` manual page for more options.
 
 ## Test configuration
 
@@ -107,5 +107,5 @@ For more information on how to schedule a backup using cron please take a look a
 ### Further reading
 
 * [rsnapshot offical web page](https://rsnapshot.org/)
-* [rsnapshot man page](http://manpages.ubuntu.com/manpages/focal/man1/rsnapshot.1.html)
-* [rsync man page](http://manpages.ubuntu.com/manpages/focal/man1/rsync.1.html)
+* {manpage}`rsnapshot(1)` manual page
+* {manpage}`rsync(1)` manual page

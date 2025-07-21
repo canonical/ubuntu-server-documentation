@@ -5,8 +5,9 @@ A Samba server needs to join the Active Directory (AD) domain before it can serv
 
 For Samba to authenticate these users via Server Message Block (SMB) authentication protocols, we need both for the remote users to be "seen", and for Samba itself to be aware of the domain. In this scenario, Samba is called a Member Server or Domain Member.
 
-> **See also**:
-> Samba itself has the necessary tooling to join an Active Directory domain. It requires a sequence of manual steps and configuration file editing, which is [thoroughly documented on the Samba wiki](https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member). It's useful to read that documentation to get an idea of the steps necessary, and the decisions you will need to make.
+```{seealso}
+Samba itself has the necessary tooling to join an Active Directory domain. It requires a sequence of manual steps and configuration file editing, which is [thoroughly documented on the Samba wiki](https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member). It's useful to read that documentation to get an idea of the steps necessary, and the decisions you will need to make.
+```
 
 ## Use `realmd` to join the Active Directory domain
 
@@ -20,7 +21,7 @@ First, let's install the necessary packages:
 sudo apt install realmd samba
 ```
 
-In order to have the joined machine registered in the AD DNS, it needs to have an FQDN set. You might have that already, if running the `hostname -f` command returns a full hostname with domain. If it doesn't, then set the hostname as follows:
+In order to have the joined machine registered in the AD {term}`DNS`, it needs to have an {term}`FQDN` set. You might have that already, if running the `hostname -f` command returns a full {term}`hostname` with domain. If it doesn't, then set the hostname as follows:
 
 ```bash
 sudo hostnamectl hostname <yourfqdn>
@@ -85,9 +86,10 @@ Password for [INTEXAMPLE\Administrator]:
  * Successfully enrolled machine in realm
 ```
 
-> **Note**:
-> This command also installed the `libpam-winbind` package, **which allows AD users to authenticate to other services on this system via PAM, like SSH or console logins**. For example, if your SSH server allows password authentication (`PasswordAuthentication yes` in `/etc/ssh/sshd_config`), then the domain users will be allowed to login remotely on this system via SSH.
-> If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
+```{note}
+This command also installed the `libpam-winbind` package, **which allows AD users to authenticate to other services on this system via PAM, like SSH or console logins**. For example, if your SSH server allows password authentication (`PasswordAuthentication yes` in `/etc/ssh/sshd_config`), then the domain users will be allowed to login remotely on this system via SSH.
+If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
+```
 
 Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/realmd/+bug/1980246) is fixed, one extra step is needed:
 - Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
@@ -110,7 +112,7 @@ Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/realmd/+bug/19802
 
 When domain users and groups are brought to the Linux world, a bit of translation needs to happen, and sometimes new values need to be created. For example, there is no concept of a "login shell" for AD users, but it exists in Linux.
 
-The following are some common `/etc/samba/smb.conf` options you are likely to want to tweak in your installation. The [`smb.conf(5)` man page](https://manpages.ubuntu.com/manpages/jammy/man5/smb.conf.5.html) explains the `%` variable substitutions and other details:
+The following are some common `/etc/samba/smb.conf` options you are likely to want to tweak in your installation. The {manpage}`smb.conf(5)` manual page explains the `%` variable substitutions and other details:
 
 - **home directory** 
 `template homedir = /home/%U@%D`
@@ -197,11 +199,11 @@ You can also restrict access to the share as usual. Just keep in mind the syntax
 
 User and group identifiers on the AD side are not directly usable as identifiers on the Linux site. A *mapping* needs to be performed.
 
-Winbind supports several `idmap` backends, and each one has its own man page. The three main ones are:
+Winbind supports several `idmap` backends, and each one has its own manual page. The three main ones are:
 
-- [`idmap_ad`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_ad.8.html)
-- [`idmap_autorid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_autorid.8.html)
-- [`idmap_rid`](https://manpages.ubuntu.com/manpages/jammy/man8/idmap_rid.8.html)
+- {manpage}`idmap_ad(8)`
+- {manpage}`idmap_autorid(8)`
+- {manpage}`idmap_rid(8)`
 
 Choosing the correct backend for each deployment type needs careful planing. Upstream has some guidelines at [Choosing an `idmap` backend](https://wiki.samba.org/index.php/Setting_up_Samba_as_a_Domain_Member#Choosing_an_idmap_backend), and each man page has more details and recommendations.
 

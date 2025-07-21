@@ -41,7 +41,7 @@ You can extend a logical volume with:
 sudo lvextend --resizefs --size +5g foo/bar
 ```
 
-This will add 5 GB to the `bar` logical volume in the `foo` volume group, and will automatically resize the underlying filesystem (if supported). The space is allocated from free space anywhere in the `bar` volume group. You can specify an absolute size instead of a relative size if you want by omitting the leading `+`.
+This will add 5 GB to the `bar` logical volume in the `foo` volume group, and will automatically resize the underlying {term}`filesystem` (if supported). The space is allocated from free space anywhere in the `bar` volume group. You can specify an absolute size instead of a relative size if you want by omitting the leading `+`.
 
 If you have multiple physical volumes you can add the names of one (or more) of them to the end of the command to limit which ones are used to fulfil the request.
 

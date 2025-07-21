@@ -11,14 +11,15 @@ To get started using DRBD, first install the necessary packages. In a terminal w
 sudo apt install drbd-utils
 ```
 
-> **Note**:
-> If you are using the **virtual kernel** as part of a virtual machine you will need to manually compile the `drbd` module. It may be easier to install the `linux-modules-extra-$(uname -r)` package inside the virtual machine.
+```{note}
+If you are using the **virtual kernel** as part of a virtual machine you will need to manually compile the `drbd` module. It may be easier to install the `linux-modules-extra-$(uname -r)` package inside the virtual machine.
+```
 
 ## Configure DRBD
 
-This section covers setting up a DRBD to replicate a separate `/srv` partition, with an `ext3` filesystem between two hosts. The partition size is not particularly relevant, but both partitions need to be the same size.
+This section covers setting up a DRBD to replicate a separate `/srv` partition, with an `ext3` {term}`filesystem` between two hosts. The partition size is not particularly relevant, but both partitions need to be the same size.
 
-The two hosts in this example will be called **`drbd01`** and **`drbd02`**. They will need to have name resolution configured either through DNS or the `/etc/hosts` file. See our {ref}`guide to DNS <install-dns>` for details.
+The two hosts in this example will be called **`drbd01`** and **`drbd02`**. They will need to have name resolution configured either through {term}`DNS` or the `/etc/hosts` file. See our {ref}`guide to DNS <install-dns>` for details.
 
 On the first host, edit `/etc/drbd.conf` as follows:
 
@@ -50,8 +51,9 @@ resource r0 {
 } 
 ```
 
-> **Note**:
-> There are many other options in `/etc/drbd.conf`, but for this example the default values are enough.
+```{note}
+There are many other options in `/etc/drbd.conf`, but for this example the default values are enough.
+```
 
 Now copy `/etc/drbd.conf` to the second host:
 
@@ -136,6 +138,6 @@ Using `ls` you should see `/srv/default` copied from the former primary host `dr
 
 - For more information on DRBD see the [DRBD web site](http://www.drbd.org/).
 
-- The [drbd.conf manpage](http://manpages.ubuntu.com/manpages/en/man5/drbd.conf.5.html) contains details on the options not covered in this guide.
+- The {manpage}`drbd.conf(5)` manual page contains details on the options not covered in this guide.
 
-- Also, see the [drbdadm manpage](http://manpages.ubuntu.com/manpages/en/man8/drbdadm.8.html).
+- Also, see the {manpage}`drbdadm(8)` manpage.

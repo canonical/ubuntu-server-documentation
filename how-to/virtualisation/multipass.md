@@ -1,7 +1,6 @@
 (create-vms-with-multipass)=
 # How to create a VM with Multipass
 
-
 [Multipass](https://multipass.run) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.
 
 On Linux it's available as a snap:
@@ -48,7 +47,7 @@ minikube                                      latest           minikube is local
 
 ## Launch a fresh instance of the Ubuntu Jammy (22.04) LTS
 
-You can launch a fresh instance by specifying either the image name from the list (in this example, 22.04) or using an alias, if the image has one. 
+You can launch a fresh instance by specifying either the image name from the list (in this example, 22.04) or using an alias, if the image has one.
 
 ```bash
 $ multipass launch 22.04
@@ -59,10 +58,10 @@ This command is equivalent to: `multipass launch jammy` or `multipass launch lts
 
 ## Check out the running instances
 
-You can check out the currently running instance(s) by using the "multipass list` command:
+You can check out the currently running instance(s) by using the `multipass list` command:
 
 ```bash
-$ multipass list                                                  
+$ multipass list
 Name                    State             IPv4             Image
 cleansing-guanaco       Running           10.140.26.17     Ubuntu 22.04 LTS
 ```
@@ -72,7 +71,7 @@ cleansing-guanaco       Running           10.140.26.17     Ubuntu 22.04 LTS
 You can use the `multipass info` command to find out more details about the VM instance parameters:
 
 ```bash
-$ multipass info cleansing-guanaco 
+$ multipass info cleansing-guanaco
 Name:           cleansing-guanaco
 State:          Running
 IPv4:           10.140.26.17
@@ -89,10 +88,10 @@ Mounts:         --
 To enter the VM you created, use the `shell` command:
 
 ```bash
-$ multipass shell cleansing-guanaco 
+$ multipass shell cleansing-guanaco
 Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-53-generic x86_64)
 (...)
-ubuntu@cleansing-guanaco:~$ 
+ubuntu@cleansing-guanaco:~$
 ```
 
 ### Disconnect from the instance
@@ -153,23 +152,29 @@ $ multipass list
 No instances found.
 ```
 
-## Integrate with the rest of your virtualization
+## Integrate with the rest of your virtualisation
 
-You might have other virtualization already based on libvirt, either through using the similar older {ref}`uvtool <cloud-image-vms-with-uvtool>` or through the more common [virt-manager](https://virt-manager.org/).
+If you already have a hypervisor interacting with {ref}`libvirt`, such as {term}`QEMU`, {term}`KVM`, or {term}`ESXi`, you might
+be managing virtual machines through tools like [virt-manager](https://virt-manager.org/) or the older {ref}`uvtool <cloud-image-vms-with-uvtool>`.
 
-You might, for example, want those guests to be on the same bridge to communicate with each other, or if you need access to the graphical output for some reason.
+In that case, integrating Multipass with your existing setup would allow VMs to share the same network bridge for communication
+and be managed using virsh. However, Multipass runs as a headless system, so you don't have direct GUI access through virt-viewer. Follow this [guide](https://canonical.com/multipass/docs/set-up-a-graphical-interface) to set up a GUI. 
 
-Fortunately it is possible to integrate this by using the {ref}`libvirt <libvirt>` backend of Multipass:
+To begin, integrate Multipass into your existing setup by selecting libvirt as your local driver:
 
 ```bash
 $ sudo multipass set local.driver=libvirt
 ```
 
-Now when you start a guest you can also access it via tools like [virt-manager](https://virt-manager.org/) or `virsh`:
+```{note}
+If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvert service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
+```
+
+Start a guest, and access it via tools like [virt-manager](https://virt-manager.org/) or `virsh`:
 
 ```bash
 $ multipass launch lts
-Launched: engaged-amberjack 
+Launched: engaged-amberjack
 
 $ virsh list
  Id    Name                           State
