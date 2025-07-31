@@ -31,6 +31,47 @@ The public key cryptography underpinning SSL/TLS operates in a similar manner, b
 
 For a more detailed explanation of how the DNSSEC validation is performed, please refer to the [Simplified 12-step DNSSEC validation process](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#the-12-step-dnssec-validation-process-simplified) guide from ISC.
 
+## DNS daemons
+Ubuntu supports multiple DNS resolvers, covering a variety of use cases. Most of them support DNSSEC validation, but it might not be activated and set up with valid trust-anchors automatically.
+
+<!-- Using non-breaking hyphen & non-breaking space for improved table spacing. -->
+| Daemon | Type | DNSSEC support |
+| --- | --- | --- |
+| systemd&#8209;resolved | Stub&nbsp;Resolver&nbsp;(local) | Yes. Enabled by default via `DNSSEC=allow-downgrade` setting. |
+| dnsmasq | Stub Resolver | Yes. Disabled by default. Controlled via `dnssec` and `conf-file=../trust-anchors.conf` settings. |
+| bind9 | Recursive Resolver | Yes. Enabled by default via `dnssec-validation auto;` setting. |
+<!-- TODO: What about "unbound"? -->
+
+The **systemd-resolved** stub resolver is pre-installed by default and comes with DNSSEC enabled in fallback mode (as of Ubuntu 25.10). This mode configures the `DNSSEC=allow-downgrade` setting in `/usr/lib/systemd/resolved.conf.d/00-enable-dnssec.conf` (installed by the `systemd-resolved-dnssec` package) and tries to validate the DNSSEC records whenever possible, but at the same time accepts unsigned responses for backwards compatibility with unsigned zones.
+
+The functionality of DNSSEC in **systemd-resolved** can be confirmed, using the `dig` command on the local stub resolver at `127.0.0.53:53`, by checking for the existence of the **ad** (Authenticated Data) flag:
+```
+$ dig @127.0.0.53 isc.org +dnssec
+[...]
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+```
+
+Should authenticity of DNS records be a concern to you, it's advised to override the default DNSSEC validation settings through an additional drop-in configuration in `/etc/systemd/resolved.conf.d/10-dnssec.conf`, which would reject any unsigned records, after reloading the configuration:
+```
+$ cat /etc/systemd/resolved.conf.d/10-dnssec.conf
+[Resolve]
+DNSSEC=yes
+
+$ sudo systemctl reload systemd-resolved.service
+```
+```{warning}
+Be aware that enforcing DNSSEC can lead to errors, especially for local, unsigned domains and you would only be able to reach such services by accessing them through their IP address directly. For example this could manifest itself by errors like `DNS_PROBE_FINISHED_NXDOMAIN` in your browser, when trying to access services in the local network.
+<!-- TODO: What about DNS64? (https://blog.apnic.net/2016/06/09/lets-talk-ipv6-dns64-dnssec/) -->
+```
+
+Once DNSSEC validation is enforced, you should also be able to confirm it through higher level checks in your browser, e.g. using those 3rd party services:
+ * https://internet.nl/test-connection/
+ * https://wander.science/projects/dns/dnssec-resolver-test/
+
+```{note}
+In case of issues with Domain Name resolution, make sure to remove any drop-in configs in `resolved.conf.d`, execute `systemctl reload systemd-resolved.service` and `apt remove systemd-resolved-dnssec`. This will reset any DNSSEC configuration to `DNSSEC=no` and can be confirmed by executing `resolvectl dnssec`.
+```
+
 ## New Resource Records (RRs)
 DNSSEC introduces a set of new Resource Records. Here are the most important ones:
 
@@ -112,6 +153,10 @@ This stub resolver has its own configuration for which recursive DNS servers to 
            DNS Servers: 10.10.17.1
             DNS Domain: lxd
 
+```{note}
+Starting with Ubuntu 25.10 the `systemd-resolved-dnssec` package is pre-installed enabling the fallback mode as `DNSSEC=allow-downgrade/supported`
+```
+
 This configuration is usually provided via {term}`DHCP`, but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
 
 Given what we have:
@@ -159,7 +204,7 @@ Specifying `trust-ad` in `/etc/resolv.conf` implies in these assumptions:
 
 When using `systemd-resolved` as a stub resolver, as configured above, the network path to the local DNS resolver is inherently trusted, as it is a localhost interface. However, the actual nameserver used is not 127.0.0.53; it depends on `systemd-resolved`'s configuration. Unless local DNSSEC validation is enabled, `systemd-resolved` will strip the ad bit from queries sent to the Validating Resolver and from the received responses.
 
-This is the default case in Ubuntu systems.
+This is the default case in Ubuntu systems until Ubuntu 25.04.
 
 Another valid configuration is to not use `systemd-resolved`, but rather point at the Validating Resolver of the network directly, like in this example:
 
