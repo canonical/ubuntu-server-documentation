@@ -202,6 +202,10 @@ Address Resolution Protocol
     Related topic(s):
     * Networking
 
+ASCII
+American Standard Code for Information Interchange
+   A character encoding standard.
+
 async
 asynchronous
     A term commonly used in programming to describe operations that take place
@@ -330,6 +334,10 @@ Baseboard Management Controller
 
 bootloader
     *Work in Progress*
+
+BOOTP
+Bootstrap Protocol
+    A network protocol that assigns IP addresses and boot information to a diskless system.
 
 bootstrap
     *Work in Progress*
@@ -744,6 +752,13 @@ filesystem
     Related topic(s):
     * Storage
 
+FIPS
+Federal Information Processing Standard
+    A set of publicly-announced US government standards for codes, data security and encryption.
+
+    See also:
+    * [NIST](https://en.wikipedia.org/wiki/National_Institute_of_Standards_and_Technology)
+
 Fluentd
     Fluentd is a data collection platform that gathers events from a container
     for later analysis on other platforms.
@@ -965,6 +980,10 @@ Group Policy Object
     behaviours across users or computers within an Active Directory (AD) object.
 
     Related topic(s): Active Directory integration
+
+GRUB
+GRand Unified Bootloader
+    *Work in progress*
 
 GSSAPI
 Generic Security Services Application Program Interface
@@ -1320,6 +1339,9 @@ LDAP Data Interchange Format
 lightervisor
     *Work in Progress*
 
+LinuxONE
+    IBM Linux-only enterprise server platform.
+
 Load-balancing
     *Work in Progress*
 
@@ -1406,6 +1428,10 @@ manual page
 MCE
 Machine Check Exception
     *Work in Progress*
+
+MD5
+Message Digest Algorithm 5
+    A cryptographic hash function producing a 128-bit checksum.
 
 MDA
 Mail Delivery Agent
@@ -1718,6 +1744,12 @@ PMD
 Poll Mode Driver
     *Work in Progress*
 
+pockets
+    Sub-repositories within the Ubuntu Package Archive.
+
+    See also:
+    * [Ubuntu Project: pockets](https://canonical-ubuntu-project.readthedocs-hosted.com/how-ubuntu-is-made/concepts/package-archive/#pockets)
+
 POSIX
 Portable Operating System Interface (for UNIX)
     *Work in Progress*
@@ -1734,6 +1766,10 @@ PostgreSQL
 
 PostScript
     *Work in Progress*
+
+Power 8
+Power 9
+    IMB POWER processor architectures used in enterprise servers.
 
 PowerShell
     *Work in Progress*
@@ -1908,6 +1944,12 @@ runtime
 
 :::{glossary}
 
+Samba
+    Open source software that implements the SMB/CIFS protocol for file and printer sharing with Windows systems.
+
+    See also:
+    * {ref}`introduction-to-samba`
+
 SAN
 Storage Area Network
     *Work in Progress*
@@ -1994,6 +2036,10 @@ Single Instruction, Multiple Data
 slapd
 Standalone LDAP Daemon
     *Work in Progress*
+
+SLAT
+Second Level Address Translation
+    *Work in progress*
 
 smartcard
     *Work in Progress*
@@ -2201,6 +2247,10 @@ TOTP
 Time-based One-Time Password
     *Work in Progress*
 
+TPM
+Trusted Platform Module
+    *Work in progress*
+
 traceback
     *Work in Progress*
 
@@ -2261,6 +2311,10 @@ uptime
 URI
 Uniform Resource Identifier
     *Work in Progress*
+
+URL
+Uniform Resource Locator
+    The web address of a resource on the internet.
 
 userspace
     *Work in Progress*
@@ -2404,6 +2458,9 @@ World Wide Identifier
 
 :::{glossary}
 
+X.509
+    Standard format for public key certificates used in TLS/SSL for secure communications.
+
 xhtml
 Extensible HyperText Markup Language
     *Work in Progress*
@@ -2437,15 +2494,17 @@ Yubikey
 
 zFCP
 zSeries Fibre Channel Protocol
-    *Work in Progress*
+    *Work in progress*
 
 ZFS
 Zettabyte File System
-    *Work in Progress*
+    *Work in progress*
 
 zpool
 ZFS Pool
-    *Work in Progress*
+    *Work in progress*
 
+z/VM
+    *Work in progress*
 :::
 
