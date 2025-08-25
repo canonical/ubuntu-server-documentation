@@ -225,14 +225,17 @@ As these assumptions have a higher chance of not being true, this is not the def
 In any case, having a Validating Resolver in the network is a valid and very useful scenario, and good enough for most cases. And it has the extra benefit that the DNSSEC validation is done only once, at the resolver, for all clients on the network.
 
 ### Local DNSSEC validation
-Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can significantly increase latency, and with multiple clients on the same network request the same record, that's duplicated work.
+Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can increase latency, and with multiple clients on the same network requesting the same records, that's duplicated work.
 
-In general, local DNSSEC validation is only required in more specific secure environments.
+In general, local DNSSEC validation is still the more secure approach, validating and authenticating the DNS resource records end-to-end, without the need to trust any DNS server along the way. Besides this, DNS-over-TLS (DoT) or DNS-over-HTTPS (DoH) could be used to increase privacy, by encrypting the DNS connection between your local client and the remote Recursive Resolver.
 
 As an example, let's perform the same query using `systemd-resolved` with and without local DNSSEC validation enabled.
 
 Without local DNSSEC validation. First, let's show it's disabled indeed:
 
+    $ sudo resolvectl dnssec eth0 false
+    $ sudo resolvectl flush-caches
+    $ sudo resolvectl reset-server-features
     $ resolvectl dnssec
     Global: no
     Link 44 (eth0): no
@@ -243,7 +246,7 @@ Now we perform the query:
     isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
     isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
 
-    -- Information acquired via protocol DNS in 229.5ms.
+    -- Information acquired via protocol DNS in 37.2ms.
     -- Data is authenticated: no; Data was acquired via local or encrypted transport: no
     -- Data from: network
 
@@ -301,3 +304,4 @@ But even when the validation is local, simpler clients might not get the full pi
  * [Tool to visualize the DNSSEC chain of trust of a domain](https://dnsviz.net/)
  * [DANE](https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities)
  * [RFC 4255](https://datatracker.ietf.org/doc/html/rfc4255) - Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints
+ * {ref}`dnssec-troubleshooting`
