@@ -3,7 +3,7 @@
 
 DNSSEC is a set of security extensions to {term}`DNS` which allow DNS data to be verified for authenticity and integrity.
 
-This guide will show you how to enable DNSSEC for an existing zone in your BIND9 DNS server deployment.
+This guide will show you how to enable DNSSEC for an existing zone in your BIND9 DNS server deployment, by serving additional records like `DS`, `DNSKEY` or `RRSIG` for signed zones.
 
 ## Starting point
 The starting point for this how-to is an existing BIND9 DNS server deployed with an authoritative zone. For details on how to deploy BIND9 in this fashion, please see the {ref}`DNS How-To <install-dns>`. One key difference from that guide, however, is that we need the zone file to be in a directory where the server can write to, like `/var/lib/bind`, instead of `/etc/bind`.
