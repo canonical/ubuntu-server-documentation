@@ -183,6 +183,10 @@ This is the case if you install the BIND9 DNS server: the default configuration 
         ...
     };
 
+```{note}
+Starting with version `1:9.18.34-1` in Ubuntu 24.10 and above, the `dnssec-validation auto` setting became the implicit default and does not need to be set explicitly in `named.conf.options` anymore.
+```
+
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.
 
 This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:

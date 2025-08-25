@@ -4,17 +4,9 @@ Domain Name System Security Extensions (DNSSEC), which provides a set of securit
 
 ## DNSSEC validation
 
-Out of the box, the BIND 9 DNS server is configured to try to use DNSSEC whenever it's available, doing all the validation checks automatically. This is done via the `dnssec-validation` setting in `/etc/bind/named.conf.options`:
+Out of the box, the BIND 9 DNS server is configured to try to use DNSSEC whenever it's available, doing all the validation checks automatically. This is done via the `dnssec-validation auto` setting in `/etc/bind/named.conf.options`, which became the implicit default as of version `1:9:18.34-1` in Ubuntu 24.10 and above.
 
-```text
-options {
-    (...)
-    dnssec-validation auto;
-    (...)
-};
-```
-
-This can be quickly checked with the help of `dig`. Right after you installed `bind9`, you can run `dig` and ask it about the `isc.org` domain:
+DNSSEC can be quickly checked with the help of `dig`. Right after you installed `bind9`, you can run `dig` and ask it about the `isc.org` domain:
 
 ```text
 $ dig @127.0.0.1 isc.org +dnssec +multiline
