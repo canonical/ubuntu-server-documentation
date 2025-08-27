@@ -219,7 +219,7 @@ asynchronous
     Related topic(s):
     * Concurrency, parallelism, and threading
 
-Attestation
+attestation
     In Confidential or Trusted Computing contexts, attestation refers both to
     the process of generating verifiable evidence about the trustworthiness of
     a system, and to the artifact produced by that process (commonly called an
@@ -2221,6 +2221,12 @@ TB
 TCP
 Transmission Control Protocol
     *Work in Progress*
+
+TEE
+Trusted Execution Environment
+    A secure processor enclave that isolates code and data to ensure
+    confidentiality, integrity, and verifiable trust, forming the foundation of
+    Confidential Computing.
 
 TFTP
 Trivial File Transfer Protocol
