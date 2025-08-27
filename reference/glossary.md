@@ -2274,7 +2274,9 @@ Time-based One-Time Password
 
 TPM
 Trusted Platform Module
-    *Work in progress*
+    A hardware security chip that securely stores cryptographic keys, measures
+    system integrity during boot, and enables features such as secure storage,
+    encryption, and attestation.
 
 traceback
     *Work in Progress*
