@@ -219,6 +219,25 @@ asynchronous
     Related topic(s):
     * Concurrency, parallelism, and threading
 
+Attestation
+    In Confidential or Trusted Computing contexts, attestation refers both to
+    the process of generating verifiable evidence about the trustworthiness of
+    a system, and to the artifact produced by that process (commonly called an
+    attestation report or quote).
+
+    - As a process: A TEE or TPM measures critical system components (firmware,
+      boot chain, enclave/VM code) and cryptographically signs these
+      measurements with keys rooted in hardware trust. The evidence is then
+      checked by a verifier against reference values or policies.
+
+    - As a document: The signed report (attestation) is the concrete proof
+      presented to a verifier. It contains the measurements and cryptographic
+      signatures used to establish trust.
+
+    Attestation may be local (between components on the same host) or remote
+    (to an external verifier). It underpins measured boot, secure provisioning,
+    and Confidential Computing workloads.
+
 Authenticator
     An authenticator is any system, method, or mechanism used to verify a
     user's identity during the authentication process. It can range from
