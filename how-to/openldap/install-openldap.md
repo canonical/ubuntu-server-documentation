@@ -184,7 +184,7 @@ homeDirectory: /home/john
 ```
 
 ```{note}
-It's important that `uid` and `gid` values in your directory do not collide with local values. You can use high number ranges, such as starting at 5000 or even higher.
+It's important that `uid` and `gid` values in your directory do not collide with local linux users' values. You can use high number ranges, such as starting at 5000 or even higher.
 ```
 
 Add the content:
