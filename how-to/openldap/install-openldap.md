@@ -20,7 +20,7 @@ This guide will use a database suffix of **`dc=example,dc=com`**. You can change
 
 You can install the server and the main command line utilities with the following command:
 
-```bash
+```console
 sudo apt install slapd ldap-utils
 ```
 
@@ -28,7 +28,7 @@ sudo apt install slapd ldap-utils
 
 If you want to change your Directory Information Tree ({term}`DIT`) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
 
-```bash
+```console
 sudo dpkg-reconfigure slapd
 ```
 
@@ -56,10 +56,14 @@ The configuration of `slapd` itself is stored under this suffix. Changes to it c
 ### Example `slapd-config` DIT
 
 This is what the `slapd-config` DIT looks like via the LDAP protocol (listing only the DNs):
+To see what the `slapd-config` DIT looks like via the LDAP protocol, listing only the DNs, run this command:
 
-```bash 
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
+```console
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
+```
 
+The output fill be the following:
+```ldif
 dn: cn=config
 dn: cn=module{0},cn=config
 dn: cn=schema,cn=config
@@ -107,13 +111,21 @@ This is using a SASL bind (no `-x` was provided), and further specifying the `EX
 
 In both cases we only got the results that the server Access Control Lists ({term}`ACL`s) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
-```bash
-$ ldapwhoami -x
+```console
+ldapwhoami -x
+```
 
+The output will say who we connected as:
+```text
 anonymous
+```
 
-$ ldapwhoami -x -D cn=admin,dc=example,dc=com -W
-
+Now let's perform an authenticated call, via simple authentication:
+```console
+ldapwhoami -x -D cn=admin,dc=example,dc=com -W
+```
+This time we will be shown our authentication DN, after the password prompt:
+```text
 Enter LDAP Password:
 dn:cn=admin,dc=example,dc=com
 ```
@@ -126,15 +138,22 @@ A simple bind without some sort of transport security mechanism is **clear text*
 
 ### Example SASL EXTERNAL
 
-Here are the SASL EXTERNAL examples:
+Let's try some SASL EXTERNAL authentication commands:
+```console
+ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
+```
 
-```bash
-$ ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
-
+The authentication DN is quite different from the simple bind one from before:
+```text
 dn:gidNumber=1000+uidNumber=1000,cn=peercred,cn=external,cn=auth
+```
 
-$ sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
-
+Let's try as root:
+```console
+sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
+```
+Notice how the `uidNumber` and `gidNumber` changed:
+```text
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
@@ -151,7 +170,7 @@ Let's introduce some content to our directory. We will add the following:
 
 Create the following LDIF file and call it `add_content.ldif`:
 
-```text
+```ldif
 dn: ou=People,dc=example,dc=com
 objectClass: organizationalUnit
 ou: People
@@ -189,9 +208,12 @@ It's important that `uid` and `gid` values in your directory do not collide with
 
 Add the content:
 
-```bash
-$ ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
+```console
+ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
+```
 
+The output shows the entries that are being added:
+```text
 Enter LDAP Password: ********
 adding new entry "ou=People,dc=example,dc=com"
 
@@ -204,9 +226,12 @@ adding new entry "uid=john,ou=People,dc=example,dc=com"
 
 We can check that the information has been correctly added with the `ldapsearch` utility. For example, let's search for the "john" entry, and request the `cn` and `gidnumber` attributes:
 
-```bash
-$ ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
+```console
+ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
+```
 
+The output shows the DNs that matched the search criteria, and the requested attributes:
+```ldif
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
 gidNumber: 5000
@@ -222,9 +247,12 @@ That is a logical "AND" between two attributes. Filters are very important in LD
 
 Notice we set the `userPassword` field for the "john" entry to the cryptic value `{CRYPT}x`. This essentially is an invalid password, because no hashing will produce just `x`. It's a common pattern when adding a user entry without a default password. To change the password to something valid, you can now use `ldappasswd`:
 
-```bash
-$ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,dc=com
+```console
+ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,dc=com
+```
 
+We will be prompted for the new password twice, and at the end for the bind password corresponding to the bind DN specified via `-D`:
+```text
 New password:
 Re-enter new password:
 Enter LDAP Password:
@@ -242,7 +270,7 @@ The `slapd-config` DIT can also be queried and modified. Here are some common op
 
 Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). Create a file called `uid_index.ldif`, and add the following contents:
 
-```text
+```ldif
 dn: olcDatabase={1}mdb,cn=config
 add: olcDbIndex
 olcDbIndex: mail eq,sub
@@ -250,18 +278,23 @@ olcDbIndex: mail eq,sub
 
 Then issue the command:
 
-```bash
-$ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
+```console
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
+```
 
+The output will show the modifications being done:
+```text
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
-You can confirm the change in this way:
+You can confirm the change with a search:
 
-```bash    
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcDatabase={1}mdb)' olcDbIndex
+```console
+ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
+```
 
+And the result will include all instances of the `olcDbIndex` attribute:
+```ldif
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
 olcDbIndex: cn,uid eq
@@ -272,19 +305,17 @@ olcDbIndex: mail eq,sub
 
 ### Change the RootDN password:
 
-First, run `slappasswd` to get the hash for the new password you want:
+First, run `slappasswd` and type the password you want, with a confirmation. The output will be the hash for that password, which we will need for the next step:
 
-```bash
-$ slappasswd
-
+```text
 New password:
 Re-enter new password:
 {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
 ```
 
-Now prepare a `changerootpw.ldif` file with this content:
+Now prepare a `changerootpw.ldif` file with this content, which includes the hashed password from the output above:
 
-```text
+```ldif
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
 replace: olcRootPW
@@ -293,12 +324,13 @@ olcRootPW: {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
 
 Finally, run the `ldapmodify` command:
 
-```bash
-$ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
-
-modifying entry "olcDatabase={1}mdb,cn=config"
+```console
+ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
 ```
 
+If successful, the output will show the entry that is being modified:
+```
+modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
 ### Add a schema
@@ -311,9 +343,12 @@ It is not trivial to remove a schema from the slapd-config database. Practice ad
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 
-```bash
-$ sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif
+```console
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif
+```
 
+The output will confirm the new schema being added:
+```
 adding new entry "cn=corba,cn=schema,cn=config"
 ```
 
@@ -329,16 +364,16 @@ OpenLDAP comes with multiple logging levels, with each level containing the lowe
 
 Create the file `logging.ldif` with the following contents:
 
-```text
+```ldif
 dn: cn=config
 changetype: modify
 replace: olcLogLevel
 olcLogLevel: stats
 ```
 
-Implement the change:
+Run `ldapmodify` to implement the change:
 
-```bash
+```console
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f logging.ldif
 ```
 
@@ -348,7 +383,7 @@ This will produce a significant amount of logging and you will want to revert ba
 rsyslogd-2177: imuxsock lost 228 messages from pid 2547 due to rate-limiting
 ```
 
-You may consider a change to rsyslog's configuration. In `/etc/rsyslog.conf`, put:
+You may consider a change to rsyslog's configuration. In `/etc/rsyslog.conf`, add:
 
 ```text
 # Disable rate limiting
@@ -358,7 +393,7 @@ $SystemLogRateLimitInterval 0
 
 And then restart the rsyslog daemon:
 
-```bash
+```console
 sudo systemctl restart syslog.service
 ```
 
