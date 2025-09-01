@@ -86,19 +86,16 @@ Where the entries mean the following:
 
 ### Example `dc=example,dc=com` DIT
 
-This is what the `dc=example,dc=com` DIT looks like:
+After installing the `slapd` package, a default DIT is configured, based on the detected domain name of the system. Assuming a domain of `example.com`, this command can be run to show what it looks like:
 
-```bash    
-$ ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
-
-dn: dc=example,dc=com
-dn: cn=admin,dc=example,dc=com
+```console    
+ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 ```
 
-Where the entries mean the following:
-
-- **`dc=example,dc=com`**: Base of the DIT
-- **`cn=admin,dc=example,dc=com`**: Administrator (rootDN) for this DIT (set up during package install)
+And the output will be just the top-level entry which represents the base of the DIT.
+```ldif
+dn: dc=example,dc=com
+```
 
 Notice how we used two different authentication mechanisms:
 
@@ -302,14 +299,6 @@ $ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
-We still have the actual **`cn=admin,dc=example,dc=com`** DN in the **`dc=example,dc=com`** database, so let's change that too. Since this is a regular entry in this database suffix, we can use `ldappasswd`:
-
-```bash
-$ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S
-
-New password:
-Re-enter new password:
-Enter LDAP Password:  <-- current password, about to be changed
 ```
 
 ### Add a schema
