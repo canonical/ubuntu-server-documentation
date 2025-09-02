@@ -51,7 +51,7 @@ Right after installation, you will get two databases, or suffixes: one for your 
 The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its password is the one selected during the installation of the `slapd` package.
 
 - **`cn=config`** 
-The configuration of `slapd` itself is stored under this suffix. Changes to it can be made by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
+The configuration of `slapd` itself is stored under this suffix. Reading and writing to it can be made by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
 ### Example `slapd-config` DIT
 
@@ -320,9 +320,41 @@ olcDbIndex: member,memberUid eq
 olcDbIndex: mail eq,sub
 ```
 
-### Change the RootDN password:
+### Which "admin" DN to use?
 
-First, run `slappasswd` and type the password you want, with a confirmation. The output will be the hash for that password, which we will need for the next step:
+Throughout this guide so far, we have used two different authentication mechanisms to make changes to the directory. Which one is needed for what kind of change?
+
+Each directory tree suffix has its own specific administrative DN. This is the DN that can make changes to the tree, and is stored in the `olcRootDN` configuration. This is not a normal entry in the directory tree, but a configuration setting instead. The password corresponding to this admin DN is in the `olcRootPW` attribute.
+
+Besides this specific administrator entry, {term}`ACL`s (Access Control Lists) can also grant such privileges to any other DN in the directory. All of this is setup by the `slapd` package when it is installed. This results in the following DNs that can be used to make changes to each directory suffix:
+
+
+| Suffix            | DN for making changes      | Authentication mechanism          |
+|-------------------|----------------------------|-----------------------------------|
+| cn=config         | cn=admin,cn=config         | absent                            |
+| cn=config         | gidNumber=0+uidNumber=0,<br>cn=peercred,cn=external,cn=auth    | SASL EXTERNAL as root via ldapi:// |
+| dc=example,dc=com | cn=admin,dc=example,dc=com | Simple bind with password<br>set during install or reconfigure         |
+
+
+```{note}
+OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
+```
+
+### Change the "admin" password
+There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time:
+```ldif
+dn: olcDatabase={1}mdb,cn=config
+...
+olcSuffix: dc=example,dc=com
+olcRootDN: cn=admin,dc=example,dc=com
+olcRootPW:: e1NTSE....
+```
+
+Since this attribute is located under the `cn=config` suffix, we will have to use the SASL EXTERNAL authentication.
+
+To change the password associated with the `olcRootDN` administrative DN, we need to replace the value of the `olcRootPW` attribute. That value is not the literal password, but the hash of the password, using a specific hash algorithm.
+
+To obtain the hash of a password, suitable to be used as the value of `olcRootPW`, run the `slappasswd` command and type the password you want, with a confirmation. The output will be the hash for that password, which we will need for the next step:
 
 ```text
 New password:
@@ -339,7 +371,7 @@ replace: olcRootPW
 olcRootPW: {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
 ```
 
-Finally, run the `ldapmodify` command:
+Finally, run the `ldapmodify` command on this file:
 
 ```console
 ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
