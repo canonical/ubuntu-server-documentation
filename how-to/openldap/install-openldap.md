@@ -264,6 +264,17 @@ Re-enter new password:
 Enter LDAP Password:
 ```
 
+To verify the change, we can use `ldapwhoami` with simple bind authentication using john's DN as the bind DN:
+```console
+ldapwhoami -x -D uid=john,ou=people,dc=example,dc=com -W
+```
+
+If the new password worked, the output will show that we authenticated as the `uid=john,ou=People,dc=example,dc=com` DN:
+```text
+Enter LDAP Password:
+dn:uid=john,ou=People,dc=example,dc=com
+```
+
 ```{note}
 Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
 ```
