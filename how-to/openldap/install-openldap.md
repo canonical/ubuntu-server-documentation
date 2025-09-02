@@ -101,7 +101,7 @@ And the output will be just the top-level entry which represents the base of the
 dn: dc=example,dc=com
 ```
 
-Notice how we used two different authentication mechanisms:
+Notice how we used two different authentication mechanisms in these recent examples:
 
 - **`-x`**
 This is called a "simple bind", and is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this became an *anonymous* bind. Without `-x`, the default is to use a Simple Authentication Security Layer (SASL) bind.
