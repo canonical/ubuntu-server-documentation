@@ -287,43 +287,6 @@ Remember that simple binds are insecure and you should {ref}`add TLS support <ld
 
 The `slapd-config` DIT can also be queried and modified. Here are some common operations.
 
-### Add an index
-
-Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). Create a file called `uid_index.ldif`, and add the following contents:
-
-```ldif
-dn: olcDatabase={1}mdb,cn=config
-add: olcDbIndex
-olcDbIndex: mail eq,sub
-```
-
-Then issue the command:
-
-```console
-sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
-```
-
-The output will show the modifications being done:
-```text
-modifying entry "olcDatabase={1}mdb,cn=config"
-```
-
-You can confirm the change with a search:
-
-```console
-ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
-```
-
-And the result will include all instances of the `olcDbIndex` attribute:
-```ldif
-dn: olcDatabase={1}mdb,cn=config
-olcDbIndex: objectClass eq
-olcDbIndex: cn,uid eq
-olcDbIndex: uidNumber,gidNumber eq
-olcDbIndex: member,memberUid eq
-olcDbIndex: mail eq,sub
-```
-
 ### Which "admin" DN to use?
 
 Throughout this guide so far, we have used two different authentication mechanisms to make changes to the directory. Which one is needed for what kind of change?
@@ -377,7 +340,7 @@ modifyTimestamp: 20250901200928Z
 Since the `olcRootPW` password attribute we want to change is located under the `cn=config` suffix, we will have to use the SASL EXTERNAL authentication, according to the table shown earlier.
 
 ```{note}
-Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` tree!
+Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` suffix!
 ```
 
 To change the password associated with the `olcRootDN` administrative DN, we need to replace the value of the `olcRootPW` attribute. That value is not the literal password, but the hash of the password, using a specific hash algorithm.
@@ -408,6 +371,43 @@ ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
 If successful, the output will show the entry that is being modified:
 ```
 modifying entry "olcDatabase={1}mdb,cn=config"
+```
+
+### Add an index
+
+Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). Create a file called `uid_index.ldif`, and add the following contents:
+
+```ldif
+dn: olcDatabase={1}mdb,cn=config
+add: olcDbIndex
+olcDbIndex: mail eq,sub
+```
+
+Then issue the command:
+
+```console
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
+```
+
+The output will show the modifications being done:
+```text
+modifying entry "olcDatabase={1}mdb,cn=config"
+```
+
+You can confirm the change with a search:
+
+```console
+ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
+```
+
+And the result will include all instances of the `olcDbIndex` attribute:
+```ldif
+dn: olcDatabase={1}mdb,cn=config
+olcDbIndex: objectClass eq
+olcDbIndex: cn,uid eq
+olcDbIndex: uidNumber,gidNumber eq
+olcDbIndex: member,memberUid eq
+olcDbIndex: mail eq,sub
 ```
 
 ### Add a schema
