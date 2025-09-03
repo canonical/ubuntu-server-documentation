@@ -120,6 +120,10 @@ The output will say who we connected as:
 anonymous
 ```
 
+```{note}
+OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
+```
+
 Now let's perform an authenticated call, via simple authentication:
 ```console
 ldapwhoami -x -D cn=admin,dc=example,dc=com -W
@@ -326,7 +330,7 @@ Throughout this guide so far, we have used two different authentication mechanis
 
 Each directory tree suffix has its own specific administrative DN. This is the DN that can make changes to the tree, and is stored in the `olcRootDN` attribute under the `cn=config` configuration tree. The password corresponding to this admin DN is in the `olcRootPW` attribute.
 
-Besides this specific administrator entry, {term}`ACL`s (Access Control Lists) can also grant such privileges to any other DN in the directory. All of this is setup by the `slapd` package when it is installed. This results in the following DNs that can be used to make changes to each directory suffix:
+Besides this specific administrator entry, ACLs can also grant such privileges to any other DN in the directory. All of this is setup by the `slapd` package when it is installed. This results in the following DNs that can be used to make changes to each directory suffix:
 
 
 | Suffix            | DN for making changes      | Authentication mechanism          |
@@ -335,10 +339,6 @@ Besides this specific administrator entry, {term}`ACL`s (Access Control Lists) c
 | cn=config         | gidNumber=0+uidNumber=0,<br>cn=peercred,cn=external,cn=auth    | SASL EXTERNAL as root via ldapi:// |
 | dc=example,dc=com | cn=admin,dc=example,dc=com | Simple bind with password<br>set during install or reconfigure         |
 
-
-```{note}
-OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
-```
 
 ### Change the "admin" password
 There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time:
