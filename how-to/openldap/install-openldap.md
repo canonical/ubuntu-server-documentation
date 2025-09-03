@@ -341,16 +341,40 @@ Besides this specific administrator entry, ACLs can also grant such privileges t
 
 
 ### Change the "admin" password
-There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time:
+There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time. To locate it in the `cn=config` suffix, run this command:
+```console
+sudo slapcat -b cn=config -a '(olcSuffix=dc=example,dc=com)'
+```
+The output will be the configuration entry for the `dc=example,dc=com` suffix:
 ```ldif
 dn: olcDatabase={1}mdb,cn=config
-...
+objectClass: olcDatabaseConfig
+objectClass: olcMdbConfig
+olcDatabase: {1}mdb
+olcDbDirectory: /var/lib/ldap
 olcSuffix: dc=example,dc=com
+olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
+olcAccess: {1}to attrs=shadowLastChange by self write by * read
+olcAccess: {2}to * by * read
+olcLastMod: TRUE
 olcRootDN: cn=admin,dc=example,dc=com
-olcRootPW:: e1NTSE....
+olcRootPW:: e1NTSEF9WTBVakJVVW1mMDhUQzI1ZVBWYzZ3YUkvbWZ2UE5rdGs=
+olcDbCheckpoint: 512 30
+olcDbIndex: objectClass eq
+olcDbIndex: cn,uid eq
+olcDbIndex: uidNumber,gidNumber eq
+olcDbIndex: member,memberUid eq
+olcDbMaxSize: 1073741824
+structuralObjectClass: olcMdbConfig
+entryUUID: 4f176dd8-1bbb-1040-9b5f-ada4d8382f7f
+creatorsName: cn=admin,cn=config
+createTimestamp: 20250901200928Z
+entryCSN: 20250901200928.425177Z#000000#000#000000
+modifiersName: cn=admin,cn=config
+modifyTimestamp: 20250901200928Z
 ```
 
-Since this attribute is located under the `cn=config` suffix, we will have to use the SASL EXTERNAL authentication.
+Since the `olcRootPW` password attribute we want to change is located under the `cn=config` suffix, we will have to use the SASL EXTERNAL authentication, according to the table shown earlier.
 
 ```{note}
 Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` tree!
