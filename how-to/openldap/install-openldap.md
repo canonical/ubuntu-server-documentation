@@ -328,7 +328,7 @@ olcDbIndex: mail eq,sub
 
 Throughout this guide so far, we have used two different authentication mechanisms to make changes to the directory. Which one is needed for what kind of change?
 
-Each directory tree suffix has its own specific administrative DN. This is the DN that can make changes to the tree, and is stored in the `olcRootDN` attribute under the `cn=config` configuration tree. The password corresponding to this admin DN is in the `olcRootPW` attribute.
+Each directory tree suffix has its own specific administrative DN. This is the DN that can make changes to the tree and is not subject to ACLs. It is stored in the `olcRootDN` attribute under the `cn=config` configuration tree, and the corresponding password is in the `olcRootPW` attribute.
 
 Besides this specific administrator entry, ACLs can also grant such privileges to any other DN in the directory. All of this is setup by the `slapd` package when it is installed. This results in the following DNs that can be used to make changes to each directory suffix:
 
