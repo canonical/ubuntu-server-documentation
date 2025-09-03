@@ -352,6 +352,10 @@ olcRootPW:: e1NTSE....
 
 Since this attribute is located under the `cn=config` suffix, we will have to use the SASL EXTERNAL authentication.
 
+```{note}
+Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` tree!
+```
+
 To change the password associated with the `olcRootDN` administrative DN, we need to replace the value of the `olcRootPW` attribute. That value is not the literal password, but the hash of the password, using a specific hash algorithm.
 
 To obtain the hash of a password, suitable to be used as the value of `olcRootPW`, run the `slappasswd` command and type the password you want, with a confirmation. The output will be the hash for that password, which we will need for the next step:
