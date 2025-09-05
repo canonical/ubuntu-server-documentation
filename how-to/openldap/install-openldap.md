@@ -186,9 +186,9 @@ When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a co
 Let's introduce some content to our directory. We will add the following:
 
 - A node called **People**, to store users
-  - A user called **john**
+  - An entry for an user called **john**
 - A node called **Groups**, to store groups
-  - A group called **miners**
+  - An entry for a group called **miners**
 
 Create the following LDIF file and call it `add_content.ldif`:
 
@@ -234,7 +234,7 @@ Add the content:
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
 ```
 
-The output shows the entries that are being added:
+The command will ask for the admin password, and then show the entries as they are being added:
 ```text
 Enter LDAP Password: ********
 adding new entry "ou=People,dc=example,dc=com"
