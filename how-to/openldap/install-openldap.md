@@ -456,7 +456,9 @@ Run `ldapmodify` to implement the change:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f logging.ldif
 ```
 
-This will produce a significant amount of logging and you will want to revert back to a less verbose level once your system is in production. While in this verbose mode your host's syslog engine (rsyslog) may have a hard time keeping up and may drop messages like this:
+Depending on how active your OpenLDAP server is, this will produce a significant amount of logging. It is recommended to revert back to a less verbose level once the need for this detailed logging isn't there anymore.
+
+While in this verbose mode your host's syslog engine (rsyslog) may have a hard time keeping up. If you see log message like this, it means some messages were dropped:
 
 ```text
 rsyslogd-2177: imuxsock lost 228 messages from pid 2547 due to rate-limiting
