@@ -371,7 +371,9 @@ modifying entry "olcDatabase={1}mdb,cn=config"
 
 ### Add an index
 
-Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). Create a file called `uid_index.ldif`, and add the following contents:
+Like in other database types, having an index for attributes commonly used in searches can speed up such searches dramatically, specially on large trees. The default installation of OpenLDAP already creates several common indexes, but depending on your data and queries, other indexes might be helpful.
+
+Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). In this example, we will add an "equality" and a "substring" index to the `mail` attribute. Create a file called `add_index.ldif`, and add the following contents:
 
 ```ldif
 dn: olcDatabase={1}mdb,cn=config
@@ -382,7 +384,7 @@ olcDbIndex: mail eq,sub
 Then issue the command:
 
 ```console
-sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f uid_index.ldif
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f add_index.ldif
 ```
 
 The output will show the modifications being done:
@@ -404,6 +406,10 @@ olcDbIndex: cn,uid eq
 olcDbIndex: uidNumber,gidNumber eq
 olcDbIndex: member,memberUid eq
 olcDbIndex: mail eq,sub
+```
+
+```{seealso}
+To learn more about OpenLDAP indexes, check the upstream documentation at https://www.openldap.org/doc/admin26/tuning.html#Indexes
 ```
 
 ### Add a schema
