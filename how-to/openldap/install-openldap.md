@@ -88,6 +88,24 @@ Where the entries mean the following:
 - **`olcDatabase={0}config,cn=config`**: `slapd` configuration database (`cn=config`)
 - **`olcDatabase={1}mdb,cn=config`**: Your database instance (`dc=example,dc=com`)
 
+Since the configuration is located under the `cn=config` suffix, we can use LDAP commands to inspect or modify it.
+
+To see all the configuration, run this command:
+
+```console
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config
+```
+
+The output is too large to show here, but it will start like this:
+```ldif
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcArgsFile: /var/run/slapd/slapd.args
+olcLogLevel: none
+...
+```
+
 ### Example `dc=example,dc=com` DIT
 
 After installing the `slapd` package, a default DIT is configured, based on the detected domain name of the system. Assuming a domain of `example.com`, this command can be run to show what it looks like:
