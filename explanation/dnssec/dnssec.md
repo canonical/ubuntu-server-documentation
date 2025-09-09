@@ -233,7 +233,7 @@ In any case, having a Validating Resolver in the network is a valid and very use
 ### Local DNSSEC validation
 Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can increase latency, and with multiple clients on the same network requesting the same records, that's duplicated work.
 
-In general, local DNSSEC validation is still the more secure approach, validating and authenticating the DNS resource records end-to-end, without the need to trust any DNS server along the way. Besides this, DNS-over-TLS (DoT) or DNS-over-HTTPS (DoH) could be used to increase privacy, by encrypting the DNS connection between your local client and the remote Recursive Resolver.
+In general, local DNSSEC validation is still the more secure approach, validating and authenticating the DNS resource records end-to-end, without the need to trust any DNS server along the way. Besides this, {term}`DNS-over-TLS (DoT) <DoT>` or {term}`DNS-over-HTTPS (DoH) <DoH>` could be used to increase privacy, by encrypting the DNS connection between your local client and the remote Recursive Resolver.
 
 As an example, let's perform the same query using `systemd-resolved` with and without local DNSSEC validation enabled.
 
