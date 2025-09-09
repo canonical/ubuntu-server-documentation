@@ -239,9 +239,6 @@ As an example, let's perform the same query using `systemd-resolved` with and wi
 
 Without local DNSSEC validation. First, let's show it's disabled indeed:
 
-    $ sudo resolvectl dnssec eth0 false
-    $ sudo resolvectl flush-caches
-    $ sudo resolvectl reset-server-features
     $ resolvectl dnssec
     Global: no
     Link 44 (eth0): no

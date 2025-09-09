@@ -216,6 +216,29 @@ For a good DNSSEC domain, `delv` will return a validated answer:
 
 Given that above we used the `+cd` flag, this means that the validation was done by `delv` itself. We will get the same result without that flag if the resolver also succeeds in the DNSSEC validation, and provides an answer.
 
+## Client-side tooling: resolvectl
+
+The local stub resolver *systemd-resolved* can perform DNSSEC validation locally using its high-level `resolvectl` tool. The local cache and state about DNS servers should be reset in systemd-resolved, to get reliable results.
+
+Flush systemd-resolved caches & state and confirm DNSSEC is enabled:
+
+    $ sudo resolvectl flush-caches
+    $ sudo resolvectl reset-server-features
+    $ sudo resolvectl dnssec eth0 yes
+    $ resolvectl dnssec
+    Global: no
+    Link 44 (eth0): yes
+
+Query a DNSSEC enabled domain and confirm the data was fetched from the network and authenticated, as displayed by the `Data is authenticated` and `Data from` fields:
+
+    $ resolvectl query --type=MX isc.org
+    isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
+    isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+
+    -- Information acquired via protocol DNS in 3.0ms.
+    -- Data is authenticated: yes; Data was acquired via local or encrypted transport: no
+    -- Data from: network
+
 ## Incorrect time
 
 As with everything related to cryptography, having an accurate measurement of time is of crucial importance. In a nutshell, digital signatures and keys have expiration dates.
