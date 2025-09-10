@@ -31,6 +31,57 @@ The public key cryptography underpinning SSL/TLS operates in a similar manner, b
 
 For a more detailed explanation of how the DNSSEC validation is performed, please refer to the [Simplified 12-step DNSSEC validation process](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#the-12-step-dnssec-validation-process-simplified) guide from ISC.
 
+## DNS daemons
+Ubuntu supports multiple DNS resolvers, covering a variety of use cases. Most of them support DNSSEC validation, but it might not be activated and set up with valid trust-anchors automatically.
+
+<!-- Using non-breaking hyphen & non-breaking space for improved table spacing. -->
+| Daemon | Type | DNSSEC support |
+| --- | --- | --- |
+| systemd&#8209;resolved | Stub&nbsp;Resolver&nbsp;(local) | Yes. Disabled by default. Controlled via `DNSSEC=...` setting in `/etc/systemd/resolved.conf.d`. |
+| dnsmasq | Stub Resolver | Yes. Disabled by default. Controlled via `dnssec` and `conf-file=../trust-anchors.conf` settings. |
+| bind9 | Recursive Resolver | Yes. Enabled by default via `dnssec-validation auto;` setting. |
+<!-- TODO: What about "unbound"? -->
+
+The **systemd-resolved** stub resolver is pre-installed in Ubuntu but ships with DNSSEC validation disabled by default. It supports two optional DNSSEC modes: fallback or strict validation. Either mode can be configured using the `DNSSEC=` setting, e.g. in a new `/etc/systemd/resolved.conf.d/10-dnssec.conf` drop-in configuration (see example below).
+
+* You can enable the **fallback mode**, using the `DNSSEC=allow-downgrade` setting, which tries to validate the DNSSEC records whenever possible, but at the same time accepts unsigned responses for backwards compatibility with unsigned zones.
+
+* Should authenticity of DNS records be a concern to you, it's advised to opt-in to the **strict mode** by using the `DNSSEC=yes` setting and reloading the configuration.
+
+For example, here is how the strict mode can be enabled. To use the fallback mode instead, replace `DNSSEC=yes` with `DNSSEC=allow-downgrade`:
+
+```
+$ sudo mkdir -p /etc/systemd/resolved.conf.d
+$ sudo tee /etc/systemd/resolved.conf.d/10-dnssec.conf >/dev/null <<EOF
+[Resolve]
+DNSSEC=yes
+EOF
+
+$ sudo systemctl reload systemd-resolved.service
+```
+
+Once reloaded, the functionality of DNSSEC in **systemd-resolved** can be confirmed, using the `dig` command on the local stub resolver at `127.0.0.53`, by checking for the existence of the **ad** (Authenticated Data) flag:
+```
+$ dig @127.0.0.53 isc.org +dnssec
+[...]
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+```
+
+DNSSEC validation will reject DNS resource records, originating from a DNS resolver that indicates DNSSEC support through the `EDNS0` "DNSSEC OK" (`DO`) flag (c.f. [RFC 3225](https://datatracker.ietf.org/doc/html/rfc3225)), but at the same time does not properly respond to DNSSEC queries (e.g. the missing "authenticated data" = `AD` flag or missing `RRSIG` or `NSEC` records). In the past this has led to issues, especially in virtualization environments or when edge routers are involved, e.g. those provided by ISPs for home connectivity ([ref1](https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/2119652), [ref2](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/AFHNUEHKC5KJVGBGSJBH2BMESUAGDF4H/), [ref3](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/P63RI3VBQ7NGL3AKMTR7PCVHVSCPYCLF/), [ref4](https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/2121483)). Therefore, DNSSEC should only be enabled in controlled environments, where the upstream DNS server is correctly configured to handle DNSSEC queries.
+
+```{warning}
+Be aware that enforcing DNSSEC in strict mode can lead to errors, especially for local, unsigned domains and you would only be able to reach such services by accessing them through their IP address directly. For example this could manifest itself by errors like `DNS_PROBE_FINISHED_NXDOMAIN` in your browser, when trying to access services in the local network.
+<!-- TODO: What about DNS64? (https://blog.apnic.net/2016/06/09/lets-talk-ipv6-dns64-dnssec/) -->
+```
+
+Once strict DNSSEC validation is enabled, you should also be able to confirm it through higher level checks in your browser, e.g. using those 3rd party services:
+ * https://internet.nl/test-connection/
+ * https://wander.science/projects/dns/dnssec-resolver-test/
+
+```{note}
+In case of issues with Domain Name resolution, make sure to remove relevant drop-in configs in `/etc/resolved.conf.d` and execute `systemctl reload systemd-resolved.service`. This will reset any DNSSEC configuration to the default `DNSSEC=no` and can be confirmed by executing `resolvectl dnssec`.
+```
+
 ## New Resource Records (RRs)
 DNSSEC introduces a set of new Resource Records. Here are the most important ones:
 
@@ -138,6 +189,10 @@ This is the case if you install the BIND9 DNS server: the default configuration 
         ...
     };
 
+```{note}
+Starting with version `1:9.18.34-1` in Ubuntu 24.10 and above, the `dnssec-validation auto` setting became the implicit default and does not need to be set explicitly in `named.conf.options` anymore.
+```
+
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.
 
 This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:
@@ -176,9 +231,9 @@ As these assumptions have a higher chance of not being true, this is not the def
 In any case, having a Validating Resolver in the network is a valid and very useful scenario, and good enough for most cases. And it has the extra benefit that the DNSSEC validation is done only once, at the resolver, for all clients on the network.
 
 ### Local DNSSEC validation
-Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can significantly increase latency, and with multiple clients on the same network request the same record, that's duplicated work.
+Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can increase latency, and with multiple clients on the same network requesting the same records, that's duplicated work.
 
-In general, local DNSSEC validation is only required in more specific secure environments.
+In general, local DNSSEC validation is still the more secure approach, validating and authenticating the DNS resource records end-to-end, without the need to trust any DNS server along the way. Besides this, {term}`DNS-over-TLS (DoT) <DoT>` or {term}`DNS-over-HTTPS (DoH) <DoH>` could be used to increase privacy, by encrypting the DNS connection between your local client and the remote Recursive Resolver.
 
 As an example, let's perform the same query using `systemd-resolved` with and without local DNSSEC validation enabled.
 
@@ -194,7 +249,7 @@ Now we perform the query:
     isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
     isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
 
-    -- Information acquired via protocol DNS in 229.5ms.
+    -- Information acquired via protocol DNS in 37.2ms.
     -- Data is authenticated: no; Data was acquired via local or encrypted transport: no
     -- Data from: network
 
@@ -252,3 +307,4 @@ But even when the validation is local, simpler clients might not get the full pi
  * [Tool to visualize the DNSSEC chain of trust of a domain](https://dnsviz.net/)
  * [DANE](https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities)
  * [RFC 4255](https://datatracker.ietf.org/doc/html/rfc4255) - Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints
+ * {ref}`dnssec-troubleshooting`

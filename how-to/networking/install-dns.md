@@ -488,6 +488,8 @@ This section covers some of the most common DNS record types.
 
 ## Further reading
 
+- {ref}`install-dnssec`
+
 - [Upstream BIND9 Documentation](https://bind9.readthedocs.io/en/latest/)
 
 - [DNS and BIND](http://shop.oreilly.com/product/9780596100575.do) is a popular book now in its fifth edition. There is now also a [DNS and BIND on IPv6](http://shop.oreilly.com/product/0636920020158.do) book.

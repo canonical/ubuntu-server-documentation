@@ -644,6 +644,28 @@ DocumentRoot
     A directive in web server configuration files that specifies the directory
     on the server where web files are stored (root location). 
 
+DoT
+DNS over TLS
+    DNS over TLS utilizes {term}`Transport Layer Security (TLS) <TLS>` to encrypt the entire DNS connection, rather than just the payload. DoT servers listen on TCP port 853.
+
+    See also:
+    * [RFC 7858](https://datatracker.ietf.org/doc/html/rfc7858)
+
+    Related topic(s):
+    * Networking
+    * Security
+
+DoH
+DNS over HTTPS
+    DNS over HTTPS is tunneling DNS query data over encrypted {term}`HTTPS <HTTPS>` connections. It uses TCP port 443, and thus looks similar to web traffic.
+
+    See also:
+    * [RFC 8484](https://datatracker.ietf.org/doc/html/rfc8484)
+
+    Related topic(s):
+    * Networking
+    * Security
+
 dpkg
     dpkg is a package manager for Debian-based systems. It can install, remove,
     and build packages, but unlike other package management systems, it cannot
