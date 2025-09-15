@@ -74,6 +74,54 @@ After making a configuration change, the MySQL daemon will need to be restarted 
 sudo systemctl restart mysql.service
 ```
 
+## User setup
+
+By default, `mysql-server` initially provides a `'root'@'localhost'` user for managing the server locally. You can enter the MySQL command-line as this user by running:
+
+```none
+sudo mysql -u root
+```
+
+No password is required by MySQL as it authenticates with [auth_socket](https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-configure-authentication.html).
+
+### Create a new user
+
+From the command-line, you can create additional MySQL users with different privileges using the `CREATE USER` command. For authentication, the two main options are to use a password or use a socket like the root user.
+
+To create a user authenticated with a password, you can use MySQL's provided `caching_sha2_password` plugin. It can be invoked in the following way, providing the password in plaintext:
+
+```none
+CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
+```
+
+A random password can also be generated here with:
+
+```none
+CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY RANDOM PASSWORD;
+```
+
+[MySQL's upstream documentation](https://dev.mysql.com/doc/mysql-secure-deployment-guide/8.0/en/secure-deployment-user-accounts.html) provides an overview of additional options when creating accounts with passwords.
+
+Socket-based authentication is used to allow a local system user to access an account without entering a password. Invoke this with:
+
+```none
+CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket;
+```
+
+By default, only the system user with the matching username can access this account. If you want the MySQL account username to differ from the system user username, then use the `AS` option:
+
+```none
+CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket AS 'system-user-username';
+```
+
+### Adding user permissions
+
+A newly created user will require privilege updates to interact with databases in any way. These are provided by the `GRANT` command alongside specified roles or operations. For example, to give your user the ability to view table entries using the `SELECT` operation on all databases, run the following:
+
+```none
+GRANT SELECT on *.* TO 'username'@'localhost';
+```
+
 ## Database engines
 
 Whilst the default configuration of MySQL provided by the Ubuntu packages is perfectly functional and performs well there are things you may wish to consider before you proceed.
