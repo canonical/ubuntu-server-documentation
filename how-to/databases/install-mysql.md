@@ -78,7 +78,7 @@ sudo systemctl restart mysql.service
 
 By default, `mysql-server` initially provides a `'root'@'localhost'` user for managing the server locally. You can enter the MySQL command-line as this user by running:
 
-```bash
+```none
 sudo mysql -u root
 ```
 
@@ -90,13 +90,13 @@ From the command-line, you can create additional MySQL users with different priv
 
 To create a user authenticated with a password, you can use MySQL's provided `caching_sha2_password` plugin. It can be invoked in the following way, providing the password in plaintext:
 
-```sql
+```none
 CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
 ```
 
 A random password can also be generated here with:
 
-```sql
+```none
 CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY RANDOM PASSWORD;
 ```
 
@@ -104,13 +104,13 @@ CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY RAND
 
 Socket-based authentication is used to allow a local system user to access an account without entering a password. Invoke this with:
 
-```sql
+```none
 CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket;
 ```
 
 By default, only the system user with the matching username can access this account. If you want the MySQL account username to differ from the system user username, then use the `AS` option:
 
-```sql
+```none
 CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket AS 'system-user-username';
 ```
 
@@ -118,7 +118,7 @@ CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket AS 'system-user-u
 
 A newly created user will require privilege updates to interact with databases in any way. These are provided by the `GRANT` command alongside specified roles or operations. For example, to give your user the ability to view table entries using the `SELECT` operation on all databases, run the following:
 
-```sql
+```none
 GRANT SELECT on *.* TO 'username'@'localhost';
 ```
 
