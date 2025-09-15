@@ -74,9 +74,9 @@ After making a configuration change, the MySQL daemon will need to be restarted 
 sudo systemctl restart mysql.service
 ```
 
-## User Setup
+## User setup
 
-By default, mysql-server initially provides a `'root'@'localhost'` user for managing the server locally. You can enter the MySQL command-line as this user by running:
+By default, `mysql-server` initially provides a `'root'@'localhost'` user for managing the server locally. You can enter the MySQL command-line as this user by running:
 
 ```bash
 sudo mysql -u root
