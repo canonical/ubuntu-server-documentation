@@ -41,7 +41,7 @@ BASE dc=example,dc=com
 URI ldap://ldap01.example.com
 ```
 
-## Configuration options
+## Default tree contents
 
 `slapd` is designed to be configured within the service itself by dedicating a separate DIT for that purpose. This allows for dynamic configuration of `slapd` without needing to restart the service or edit config files. This configuration database consists of a collection of text-based LDIF files located under `/etc/ldap/slapd.d`, but these should never be edited directly. This way of working is known by several names: the "slapd-config" method, the "Real Time Configuration (RTC)" method, or the "cn=config" method. You can still use the traditional flat-file method (`slapd.conf`) but that will not be covered in this guide.
 
@@ -53,7 +53,7 @@ The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its 
 - **`cn=config`** 
 The configuration of `slapd` itself is stored under this suffix. Reading and writing to it can be made by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
-### Example `slapd-config` DIT
+### Default configuration tree
 
 This is what the `slapd-config` DIT looks like via the LDAP protocol (listing only the DNs):
 To see what the `slapd-config` DIT looks like via the LDAP protocol, listing only the DNs, run this command:
@@ -62,7 +62,16 @@ To see what the `slapd-config` DIT looks like via the LDAP protocol, listing onl
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
 ```
 
-The output fill be the following:
+The command-line options mean the following:
+
+ * `-Q`: Quiet mode for the SASL authentication setup.
+ * `-LLL`: Less verbose LDIF output. One "`L`" restricts output to LDIFv1; another disables comments; and the third one removes the LDIF version from the output.
+ * `-Y EXTERNAL`: Select the `EXTERNAL` SASL mechanism for authentication.
+ * `-H ldapi:///`: The URL to use to contact the server. In this case, it will use a local unix socket.
+ * `-b cn=config`: Start the search at the `cn=config` base.
+ * `dn`: Only retrieve the `dn` attribute.
+
+The output will be the similar to the following:
 ```ldif
 dn: cn=config
 dn: cn=module{0},cn=config
@@ -106,28 +115,27 @@ olcLogLevel: none
 ...
 ```
 
-### Example `dc=example,dc=com` DIT
+### Default "data" tree
 
-After installing the `slapd` package, a default DIT is configured, based on the detected domain name of the system. Assuming a domain of `example.com`, this command can be run to show what it looks like:
+After installing the `slapd` package, a default data tree is configured, based on the detected domain name of the system. Assuming a domain of `example.com`, this command can be run to show what it looks like:
 
 ```console    
 ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 ```
 
-And the output will be just the top-level entry which represents the base of the DIT.
+Here the only new command-line option is `-x`, and we have a new parameter for `-H`:
+
+ * `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a Simple Authentication Security Layer (SASL) bind.
+ * `-H ldap:///`: Use the LDAP protocol over the network (and not over a unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
+
+The output will be just the top-level entry which represents the base of the DIT.
 ```ldif
 dn: dc=example,dc=com
 ```
 
-Notice how we used two different authentication mechanisms in these recent examples:
+## Who am I?
 
-- **`-x`**
-This is called a "simple bind", and is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this became an *anonymous* bind. Without `-x`, the default is to use a Simple Authentication Security Layer (SASL) bind.
-
-- **`-Y EXTERNAL`**
-This is using a SASL bind (no `-x` was provided), and further specifying the `EXTERNAL` type. Together with `-H ldapi:///`, this uses a local UNIX socket connection.
-
-In both cases we only got the results that the server Access Control Lists ({term}`ACL`s) allowed us to see, based on who we are. A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
+A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
 ```console
 ldapwhoami -x
@@ -138,9 +146,6 @@ The output will say who we connected as:
 anonymous
 ```
 
-```{note}
-OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
-```
 
 Now let's perform an authenticated call, via simple authentication:
 ```console
@@ -157,8 +162,6 @@ When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authenti
 ```{note}
 A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
 ```
-
-### Example SASL EXTERNAL
 
 Let's try some SASL EXTERNAL authentication commands:
 ```console
@@ -180,6 +183,10 @@ dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
 When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the {term}`uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+
+```{note}
+OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
+```
 
 ## Populate the directory
 
