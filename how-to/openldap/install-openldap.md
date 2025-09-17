@@ -193,7 +193,7 @@ OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>
 Let's introduce some content to our directory. We will add the following:
 
 - A node called **People**, to store users
-  - An entry for an user called **john**
+  - An entry for a user called **john**
 - A node called **Groups**, to store groups
   - An entry for a group called **miners**
 
