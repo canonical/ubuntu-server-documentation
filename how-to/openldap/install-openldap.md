@@ -72,7 +72,7 @@ The command-line options mean the following:
  * `dn`: Only retrieve the `dn` attribute.
 
 The output will be the similar to the following:
-```ldif
+```text
 dn: cn=config
 dn: cn=module{0},cn=config
 dn: cn=schema,cn=config
@@ -106,7 +106,7 @@ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config
 ```
 
 The output is too large to show here, but it will start like this:
-```ldif
+```text
 dn: cn=config
 objectClass: olcGlobal
 cn: config
@@ -129,7 +129,7 @@ Here the only new command-line option is `-x`, and we have a new parameter for `
  * `-H ldap:///`: Use the LDAP protocol over the network (and not over a unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
 The output will be the top-level entry which represents the base of the DIT.
-```ldif
+```text
 dn: dc=example,dc=com
 ```
 
@@ -199,7 +199,7 @@ Let's introduce some content to our directory. We will add the following:
 
 Create the following LDIF file and call it `add_content.ldif`:
 
-```ldif
+```text
 dn: ou=People,dc=example,dc=com
 objectClass: organizationalUnit
 ou: People
@@ -260,7 +260,7 @@ ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
 ```
 
 The output shows the DNs that matched the search criteria, and the requested attributes:
-```ldif
+```text
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
 gidNumber: 5000
@@ -272,7 +272,7 @@ Here we used an LDAP "filter": `(uid=john)`. LDAP filters are very flexible and 
 ldapsearch -x -LLL -b dc=example,dc=com '(&(objectClass=posixGroup)(memberUid=john))' cn gidNumber
 ```
 And the result tells us that "john" is a member of the "miners" group:
-```ldif
+```text
 dn: cn=miners,ou=Groups,dc=example,dc=com
 cn: miners
 gidNumber: 5000
@@ -334,7 +334,7 @@ There is really only one administrative DN that has an associated password, and 
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcSuffix=dc=example,dc=com)' olcSuffix olcRootDN olcRootPW
 ```
 The output will be the configuration entry for the `dc=example,dc=com` suffix, and show only the selected attributes in the response:
-```ldif
+```text
 dn: olcDatabase={1}mdb,cn=config
 olcSuffix: dc=example,dc=com
 olcRootDN: cn=admin,dc=example,dc=com
@@ -358,7 +358,7 @@ Re-enter new password:
 
 Now prepare a `changerootpw.ldif` file with this content, which includes the hashed password from the output above:
 
-```ldif
+```text
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
 replace: olcRootPW
@@ -382,7 +382,7 @@ Like in other database types, having an index for attributes commonly used in se
 
 Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). In this example, we will add an "equality" and a "substring" index to the `mail` attribute. Create a file called `add_index.ldif`, and add the following contents:
 
-```ldif
+```text
 dn: olcDatabase={1}mdb,cn=config
 add: olcDbIndex
 olcDbIndex: mail eq,sub
@@ -406,7 +406,7 @@ ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' 
 ```
 
 And the result will include all instances of the `olcDbIndex` attribute:
-```ldif
+```text
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
 olcDbIndex: cn,uid eq
@@ -450,7 +450,7 @@ OpenLDAP comes with multiple logging levels, with each level containing the lowe
 
 Create the file `logging.ldif` with the following contents:
 
-```ldif
+```text
 dn: cn=config
 changetype: modify
 replace: olcLogLevel
