@@ -175,6 +175,56 @@ There are various options to those methods, but the entry point for all of them 
 
 Some useful documentation on the constraints and considerations of live migration can be found at the [Ubuntu Wiki](https://wiki.ubuntu.com/QemuKVMMigration).
 
+## CPU model and topology
+
+libvirt abstracts CPU configuration and provides several options to specify the VM CPU model in the domain definition:
+
+ - custom
+ - host-model
+ - host-passthrough
+ - maximum
+
+While most of thee modes are straightforward, the behavior of `host-model` is more subtle. There is no direct
+translation of `host-model` into a single QEMU `-cpu` argument. Instead, libvirt selects a baseline CPU model and appends
+a list of features:
+
+```bash
+-cpu Haswell-noTSX-IBRS,vmx=on,pdcm=off,...,vmx-entry-load-efer=on,vmx-eptp-switching=on
+```
+
+Because libvirt may not include every known CPU model, it chooses the model that shares the largest set of features with
+the host’s physical CPU and then lists the remaining features explicitly. In many cases, libvirt does not detect the
+exact host CPU model. At first this may seem like a flaw, but in practice, it is not necessary to know the exact model.
+
+For example, running `virsh capabilities` on a host with an Intel **Broadwell CPU** may produce the following output,
+where libvirt uses **Haswell-noTSX-IBRS** as the baseline:
+
+```xml
+<capabilities>
+  <host>
+    <uuid>30303837-3831-584d-5135-323430354a38</uuid>
+    <cpu>
+      <arch>x86_64</arch>
+      <model>Haswell-noTSX-IBRS</model>
+      <vendor>Intel</vendor>
+      <microcode version='73'/>
+      <signature family='6' model='63' stepping='2'/>
+      <counter name='tsc' frequency='2397195000' scaling='no'/>
+      <topology sockets='1' dies='1' cores='6' threads='2'/>
+      <maxphysaddr mode='emulate' bits='46'/>
+      <feature name='vme'/>
+      <feature name='ds'/>
+      <feature name='acpi'/>
+      <feature name='ss'/>
+```
+
+This mismatch between the baseline model reported by libvirt and the actual physical CPU model is not a bug and can safely be ignored.
+
+For more details, refer to the [upstream documentation](https://libvirt.org/formatcaps.html#host-cpu-model-and-features).
+
+### Host CPU capabilities
+
+
 ## Device passthrough/hotplug
 
 If you want to always pass through a device rather than using the hotplugging method described here, add the XML content of the device to your static guest XML representation via `virsh edit <guestname>`. In that case, you won't need to use *attach/detach*. There are different kinds of passthrough, and the types available to you depend on your hardware and software setup.
