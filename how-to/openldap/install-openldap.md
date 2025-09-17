@@ -128,7 +128,7 @@ Here the only new command-line option is `-x`, and we have a new parameter for `
  * `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
  * `-H ldap:///`: Use the LDAP protocol over the network (and not over a unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
-The output will be just the top-level entry which represents the base of the DIT.
+The output will be the top-level entry which represents the base of the DIT.
 ```ldif
 dn: dc=example,dc=com
 ```
