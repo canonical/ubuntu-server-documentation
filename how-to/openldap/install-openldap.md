@@ -51,7 +51,7 @@ Right after installation, you will get two databases, or suffixes: one for your 
 The administrative user for this suffix is `cn=admin,dc=example,dc=com` and its password is the one selected during the installation of the `slapd` package.
 
 - **`cn=config`** 
-The configuration of `slapd` itself is stored under this suffix. Reading and writing to it can be done by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using SASL EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
+The configuration of `slapd` itself is stored under this suffix. Reading and writing to it can be done by the special {term}`DN` `gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth`. This is how the local system's root user (`uid=0/gid=0`) is seen by the directory when using {term}`SASL` EXTERNAL authentication through the `ldapi:///` transport via the `/run/slapd/ldapi` Unix socket. Essentially what this means is that only the local root user can update the `cn=config` database. More details later.
 
 ### Default configuration tree
 
@@ -125,7 +125,7 @@ ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 
 Here the only new command-line option is `-x`, and we have a new parameter for `-H`:
 
- * `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a Simple Authentication Security Layer (SASL) bind.
+ * `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
  * `-H ldap:///`: Use the LDAP protocol over the network (and not over a unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
 The output will be just the top-level entry which represents the base of the DIT.
