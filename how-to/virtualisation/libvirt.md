@@ -184,7 +184,7 @@ libvirt abstracts CPU configuration and provides several options to specify the 
  - host-passthrough
  - maximum
 
-While most of thee modes are straightforward, the behavior of `host-model` is more subtle. There is no direct
+While most of thee modes are straightforward, the behavior of `host-model` is more subtle and the source of many common misunderstandings. There is no direct
 translation of `host-model` into a single QEMU `-cpu` argument. Instead, libvirt selects a baseline CPU model and appends
 a list of features:
 
