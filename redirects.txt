@@ -448,6 +448,7 @@ explanation/storage/iscsi-initiator-or-client/ how-to/storage/iscsi-initiator-or
 about-apt-upgrade-and-phased-updates explanation/software/about-apt-upgrade-and-phased-updates/
 
 third-party-repository-usage explanation/software/third-party-repository-usage/
+third-party-apt-repositories explanation/software/third-party-repository-usage/
 
 changing-package-files explanation/software/changing-package-files/
 
