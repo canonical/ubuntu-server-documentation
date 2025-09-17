@@ -193,8 +193,8 @@ a list of features:
 ... -cpu Haswell-noTSX-IBRS,vmx=on,pdcm=off,...,vmx-entry-load-efer=on,vmx-eptp-switching=on ...
 ```
 
-Because libvirt may not include every known CPU model, it chooses the model that shares the largest set of features with
-the host’s physical CPU and then lists the remaining features explicitly. In many cases, libvirt does not detect the
+Because libvirt can not include every known CPU model and variant, it chooses the model that shares the largest set of features with
+the host’s physical CPU and then lists the remaining features explicitly. In many cases, libvirt therefore can not detect the
 exact host CPU model. At first this may seem like a flaw, but in practice, it is not necessary to know the exact model.
 
 For example, running `virsh capabilities` on a host with an Intel **Broadwell CPU** may produce the following output,
