@@ -74,13 +74,13 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 2. Mount it:
 
    ```
-   mount noble-live-server-amd64.iso /mnt
+   sudo mount noble-live-server-amd64.iso /mnt
    ```
 
 3. Copy the kernel and `initrd` from it to where the `dnsmasq` serves TFTP from:
 
    ```
-   cp /mnt/casper/{vmlinuz,initrd} /srv/tftp/
+   sudo cp /mnt/casper/{vmlinuz,initrd} /srv/tftp/
    ```
 
 ### Set up the files for UEFI booting
@@ -89,60 +89,64 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
    ```
    apt download shim-signed
-   dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O > /srv/tftp/bootx64.efi
+   dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O | sudo tee /srv/tftp/bootx64.efi >/dev/null
    ```
 
 2. Copy the signed GRUB binary into place:
 
    ```
    apt download grub-efi-amd64-signed
-   dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O > /srv/tftp/grubx64.efi
+   dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O | sudo tee /srv/tftp/grubx64.efi >/dev/null
    ```
 
 3. GRUB also needs a font to be available over TFTP:
 
    ```
    apt download grub-common
-   dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O > /srv/tftp/unicode.pf2
+   dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O | sudo tee /srv/tftp/unicode.pf2 >/dev/null
    ```
 
 4. Create `/srv/tftp/grub/grub.cfg` that contains:
 
    ```
-    set default="0"
-    set timeout=-1
-        
-    if loadfont unicode ; then
+   sudo mkdir -p /srv/tftp/grub/
+
+   sudo tee /srv/tftp/grub/grub.cfg >/dev/null <<EOF
+   set default="0"
+   set timeout=-1
+
+   if loadfont unicode ; then
       set gfxmode=auto
       set locale_dir=$prefix/locale
       set lang=en_US
-    fi
-    terminal_output gfxterm
-        
-    set menu_color_normal=white/black
-    set menu_color_highlight=black/light-gray
-    if background_color 44,0,30; then
+   fi
+   terminal_output gfxterm
+
+   set menu_color_normal=white/black
+   set menu_color_highlight=black/light-gray
+   if background_color 44,0,30; then
       clear
-    fi
-        
-    function gfxmode {
-            set gfxpayload="${1}"
-            if [ "${1}" = "keep" ]; then
-                    set vt_handoff=vt.handoff=7
-            else
-                    set vt_handoff=
-            fi
-    }
-        
-    set linux_gfx_mode=keep
-        
-    export linux_gfx_mode
-        
-    menuentry 'Ubuntu 24.04' {
-            gfxmode $linux_gfx_mode
-            linux /vmlinuz $vt_handoff quiet splash
-            initrd /initrd
-    }
+   fi
+
+   function gfxmode {
+      set gfxpayload="${1}"
+      if [ "${1}" = "keep" ]; then
+         set vt_handoff=vt.handoff=7
+      else
+         set vt_handoff=
+      fi
+   }
+
+   set linux_gfx_mode=keep
+
+   export linux_gfx_mode
+
+   menuentry 'Ubuntu 24.04' {
+      gfxmode $linux_gfx_mode
+      linux /vmlinuz $vt_handoff quiet splash
+      initrd /initrd
+   }
+   EOF
    ```
 
 ### Set up the files for legacy boot
