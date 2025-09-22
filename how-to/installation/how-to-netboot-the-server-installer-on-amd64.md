@@ -143,7 +143,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
    menuentry 'Ubuntu 24.04' {
       gfxmode $linux_gfx_mode
-      linux /vmlinuz $vt_handoff quiet splash
+      linux /vmlinuz $vt_handoff quiet splash root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
       initrd /initrd
    }
    EOF
