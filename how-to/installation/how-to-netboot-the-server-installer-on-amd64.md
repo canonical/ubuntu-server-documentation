@@ -50,6 +50,7 @@ This assumes several things about your network; read `man dnsmasq` or the defaul
    sudo systemctl restart dnsmasq.service
    ```
 
+<!-- XXX: This is an internal note & should not be presented in public, until fixed.
 ## Serve the bootloaders and configuration.
 
 **We need to make this section possible to write sanely**
@@ -60,6 +61,7 @@ Ideally this would be something like:
 apt install cd-boot-images-amd64
 ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 ```
+-->
 
 ### Mode-independent set up
 
