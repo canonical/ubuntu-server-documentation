@@ -1,0 +1,30 @@
+This page serves as a reference for the key differences between `sudo.ws` and `sudo-rs`.
+
+Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences. This is a list of major differences as of the Ubuntu 25.10 release.
+
+For the most accurate and current information, always refer to:
+`sudo-rs --help` for a list of supported options in your installed version.
+`man sudoers-rs` for /etc/sudoers configuration options supported by sudo-rs.
+
+### Differences
+
+1. Start with the official documentation from the sudo-rs project.
+
+[differences-from-original-sudo](https://github.com/trifectatechfoundation/sudo-rs#differences-from-original-sudo)
+[aim-of-the-project](https://github.com/trifectatechfoundation/sudo-rs?tab=readme-ov-file#aim-of-the-project)
+
+2. sudo-rs prompt. 
+
+This is the most common error users encounter when using Expect based automation. The error often is a TIMEOUT because expect is pattern matching on the sudo.ws prompt.
+
+sudo.ws prompt for password says `[sudo] password for <USERNAME>`, whereas sudo-rs prompt says `[sudo: authenticate] <METHOD>:`. sudo-rs transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
+
+You can use `--prompt ""` in Expect based scripts to skip the regex based matching of the prompt.
+
+More information: https://github.com/trifectatechfoundation/sudo-rs/issues/1242
+
+3. I/O logging and sudoreplay is not supported. The programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
+
+4. There is no sudoers.ldap. You need to use [LDAP authentication via PAM](https://github.com/trifectatechfoundation/sudo-rs/issues/445).
+
+5. sudo-rs team maintains the list of [CLI flags parity](https://github.com/trifectatechfoundation/sudo-rs/issues/129) with sudo.ws
