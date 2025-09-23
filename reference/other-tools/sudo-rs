@@ -16,7 +16,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
    * [differences-from-original-sudo](https://github.com/trifectatechfoundation/sudo-rs#differences-from-original-sudo)
    * [aim-of-the-project](https://github.com/trifectatechfoundation/sudo-rs?tab=readme-ov-file#aim-of-the-project)
 
-2. sudo-rs prompt. 
+2. `sudo-rs` prompt. 
 
 This is the most common error users encounter when using Expect based automation. The error often is a TIMEOUT because expect is pattern matching on the sudo.ws prompt.
 
