@@ -14,7 +14,7 @@ Instead, the `sudo` utility ("superuser do") is used to carry out system adminis
 Since Ubuntu 25.10 (Questing Quokka), `sudo` is provided by the `sudo-rs` package (a rust implementation). While `sudo-rs` is not 100% compatible with 
 `sudo.ws`, the majority of common use cases are supported and the change should be invisible to most users.
 
-A list of key differences is maintained as a [reference](https://documentation.ubuntu.com/server/reference/other-tools/sudo-rs/)
+A list of key differences is {ref}`maintained as a reference <sudo-rs>`
 
 The original `sudo` utility (maintained by Todd C. Miller), `sudo.ws` remains supported in the 25.10 and the subsequent 26.04 LTS. You will find these utilities installed with `.ws` suffix (for example `sudo.ws`, `visudo.ws`, etc.).
 Switching the default back to `sudo.ws` is not recommended, but if you need to do so, follow these steps:
