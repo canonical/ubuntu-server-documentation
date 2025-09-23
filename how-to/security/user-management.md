@@ -24,7 +24,7 @@ Interactive:
 # update-alternatives --config sudo
 ```
 
-Non-interactive
+Non-interactive:
 ```
 # update-alternatives --set sudo /usr/bin/sudo.ws
 ```
