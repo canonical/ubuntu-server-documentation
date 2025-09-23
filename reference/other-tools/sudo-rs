@@ -9,7 +9,7 @@ For the most accurate and current information, refer to
 `sudo-rs --help` for a list of supported options in your installed version.
 Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported by `sudo-rs`.
 
-### Differences
+## Differences
 
 1. Start with the official documentation from the `sudo-rs` project.
 
