@@ -29,7 +29,7 @@ Non-interactive:
 # update-alternatives --set sudo /usr/bin/sudo.ws
 ```
 
-You can always switch back to sudo-rs using
+You can always switch back to `sudo-rs` using:
 ```
 # update-alternatives --set sudo /usr/lib/cargo/bin/sudo
 ```
