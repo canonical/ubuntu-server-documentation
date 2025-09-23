@@ -16,7 +16,7 @@ Since Ubuntu 25.10 (Questing Quokka), `sudo` is provided by the `sudo-rs` packag
 
 A list of key differences is maintained as a [reference](https://documentation.ubuntu.com/server/reference/other-tools/sudo-rs/)
 
-The orginal `sudo` utility (Maintained by Todd C. Miller), `sudo.ws` remains supported in the 25.10 and the subsequent 26.04 LTS. You will find these utilities installed with `.ws` suffix (for example sudo.ws, visudo.ws, etc.).
+The original `sudo` utility (maintained by Todd C. Miller), `sudo.ws` remains supported in the 25.10 and the subsequent 26.04 LTS. You will find these utilities installed with `.ws` suffix (for example `sudo.ws`, `visudo.ws`, etc.).
 Switching default back to `sudo.ws` is not recommended, but if you need to do so, follow these steps:
 
 Interactive
