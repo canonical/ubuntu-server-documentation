@@ -11,7 +11,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
 
 ### Differences
 
-1. Start with the official documentation from the sudo-rs project.
+1. Start with the official documentation from the `sudo-rs` project.
 
 [differences-from-original-sudo](https://github.com/trifectatechfoundation/sudo-rs#differences-from-original-sudo)
 [aim-of-the-project](https://github.com/trifectatechfoundation/sudo-rs?tab=readme-ov-file#aim-of-the-project)
