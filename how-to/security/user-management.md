@@ -36,7 +36,7 @@ You can always switch back to `sudo-rs` using:
 
 You can learn more about the motivation for this change in the blog post [Adopting sudo-rs By Default in Ubuntu 25.10](https://discourse.ubuntu.com/t/adopting-sudo-rs-by-default-in-ubuntu-25-10/60583)
 
-The rest of the article should work the same with both sudo.ws and sudo-rs.
+The rest of the article should work the same with both `sudo.ws` and `sudo-rs`.
 
 ### Enabling the root account
 
