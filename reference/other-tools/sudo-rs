@@ -7,7 +7,7 @@ Note: Both projects are under active development, so it is not possible to maint
 
 For the most accurate and current information, refer to
 `sudo-rs --help` for a list of supported options in your installed version.
-`man sudoers-rs` for /etc/sudoers configuration options supported by sudo-rs.
+Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported by `sudo-rs`.
 
 ### Differences
 
