@@ -24,7 +24,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
 
   You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
 
-More information: https://github.com/trifectatechfoundation/sudo-rs/issues/1242
+  [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
 
 3. I/O logging and sudoreplay is not supported. The programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
 
