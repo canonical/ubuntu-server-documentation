@@ -20,7 +20,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
 
   This is the most common error users encounter when using Expect-based automation. The error often is a TIMEOUT because Expect is pattern matching on the `sudo.ws` prompt.
 
-sudo.ws prompt for password says `[sudo] password for <USERNAME>`, whereas sudo-rs prompt says `[sudo: authenticate] <METHOD>:`. sudo-rs transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
+  `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
 
 You can use `--prompt ""` in Expect based scripts to skip the regex based matching of the prompt.
 
