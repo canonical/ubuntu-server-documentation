@@ -22,7 +22,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
 
   `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
 
-You can use `--prompt ""` in Expect based scripts to skip the regex based matching of the prompt.
+  You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
 
 More information: https://github.com/trifectatechfoundation/sudo-rs/issues/1242
 
