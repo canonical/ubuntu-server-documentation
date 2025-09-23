@@ -12,7 +12,7 @@ Instead, the `sudo` utility ("superuser do") is used to carry out system adminis
 ### sudo-rs
 
 Since Ubuntu 25.10 (Questing Quokka), `sudo` is provided by the `sudo-rs` package (a rust implementation). While `sudo-rs` is not 100% compatible with 
-sudo.ws, the majority of common use cases are supported and the change should be invisible to most users.
+`sudo.ws`, the majority of common use cases are supported and the change should be invisible to most users.
 
 A list of key differences is maintained as a [reference](https://documentation.ubuntu.com/server/reference/other-tools/sudo-rs/)
 
