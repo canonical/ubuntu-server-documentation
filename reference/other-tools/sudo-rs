@@ -5,7 +5,7 @@ This page serves as a reference for the key differences between `sudo.ws` and `s
 
 Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences. This is a list of major differences as of the Ubuntu 25.10 release.
 
-For the most accurate and current information, always refer to:
+For the most accurate and current information, refer to
 `sudo-rs --help` for a list of supported options in your installed version.
 `man sudoers-rs` for /etc/sudoers configuration options supported by sudo-rs.
 
