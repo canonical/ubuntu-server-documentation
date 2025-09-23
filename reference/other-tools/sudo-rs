@@ -1,3 +1,6 @@
+(sudo-rs)=
+# sudo-rs
+
 This page serves as a reference for the key differences between `sudo.ws` and `sudo-rs`.
 
 Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences. This is a list of major differences as of the Ubuntu 25.10 release.
