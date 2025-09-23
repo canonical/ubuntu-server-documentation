@@ -26,7 +26,7 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
 
   [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
 
-3. I/O logging and sudoreplay is not supported. The programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
+3. I/O logging and `sudoreplay` is not supported. The programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
 
 4. There is no sudoers.ldap. You need to use [LDAP authentication via PAM](https://github.com/trifectatechfoundation/sudo-rs/issues/445).
 
