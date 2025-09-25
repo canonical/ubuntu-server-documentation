@@ -42,7 +42,7 @@ For more specificity, a raw numeric value from **0-255** can also be provided he
 
 ## Setting EPP Values
 
-EPP values are managed through each core's `energy_performance_preference` file, so they can be updated manually by overriding the contents of it. For example, to set cpu0 to the `performance` profile, run the following:
+EPP values are managed through each core's `energy_performance_preference` file, so the EPP values can be updated manually by overriding the contents of that file. For example, to set cpu0 to the `performance` profile, run the following:
 
 ```bash
 echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference
