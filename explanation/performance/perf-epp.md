@@ -40,7 +40,7 @@ cat /sys/devices/system/cpu/cpu2/cpufreq/energy_performance_available_preference
 
 For more specificity, a raw numeric value from **0-255** can also be provided here. In general, a value closer to `0` will prioritize performance and a value closer to `255` will prioritize efficiency.
 
-## Setting EPP Values
+## Setting EPP values
 
 EPP values are managed through each core's `energy_performance_preference` file, so the EPP values can be updated manually by overriding the contents of that file. For example, to set cpu0 to the `performance` profile, run the following:
 
