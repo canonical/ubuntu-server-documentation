@@ -38,7 +38,13 @@ The full list of options is provided in `/sys/devices/system/cpu/cpu#/cpufreq/en
 cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_available_preferences
 ```
 
-For more specificity, a raw numeric value from **0-255** can also be provided here. In general, a value closer to `0` will prioritize performance and a value closer to `255` will prioritize efficiency.
+which will display something like:
+
+```text
+default performance balance_performance balance_power power
+```
+
+For more specificity, a raw numeric value from **0-255** can also be provided in the `energy_performance_preference` file. In general, a value closer to `0` will prioritize performance and a value closer to `255` will prioritize efficiency.
 
 ## Setting EPP values
 
