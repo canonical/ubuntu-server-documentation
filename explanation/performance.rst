@@ -49,3 +49,4 @@ following sections.
     hwloc <performance/perf-tune-hwloc>
     cpupower <performance/perf-tune-cpupower>
     TuneD <performance/perf-tune-tuned>
+    Energy Performance Preference <performance/perf-epp>
