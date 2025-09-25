@@ -35,7 +35,7 @@ This file will normally contain one of the following named profiles:
 The full list of options is provided in `/sys/devices/system/cpu/cpu#/cpufreq/energy_performance_available_preferences`. To see them, run:
 
 ```bash
-cat /sys/devices/system/cpu/cpu2/cpufreq/energy_performance_available_preferences
+cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_available_preferences
 ```
 
 For more specificity, a raw numeric value from **0-255** can also be provided here. In general, a value closer to `0` will prioritize performance and a value closer to `255` will prioritize efficiency.
