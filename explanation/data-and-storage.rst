@@ -10,7 +10,9 @@ Data management
 ===============
 
 OpenLDAP is a popular implementation of the Lightweight Directory Access
-Protocol (LDAP), used for managing hierarchical data.
+Protocol (LDAP), used for managing hierarchical data. It offers a way to store,
+organise and manage an organisation's data such as employee accounts and computers.
+It facilitates centralised authentication and authorisation management.
 
 .. toctree::
    :titlesonly:
