@@ -1,7 +1,15 @@
 (introduction-to-openldap)=
 # Introduction to OpenLDAP
 
-The Lightweight Directory Access Protocol, or LDAP, is a protocol for querying and modifying an X.500-based directory service running over TCP/IP. The current LDAP version is LDAPv3, as defined in [RFC 4510](http://tools.ietf.org/html/rfc4510), and the implementation used in Ubuntu is OpenLDAP.
+[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol used for managing hierarchical data.
+OpenLDAP is the open-source implementation of LDAP used in Ubuntu.
+
+It offers an LDAP server that provides directory services, a client for managing them, and client libraries used by hundreds of applications.
+OpenLDAP contains some terminology and concepts that new users may want to familiarise themselves with before attempting to set it up.
+Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements.
+
+LDAP is a protocol for querying and modifying an X.500-based directory service running over TCP/IP.
+The current LDAP version is LDAPv3, as defined in [RFC 4510](http://tools.ietf.org/html/rfc4510).
 
 The LDAP protocol *accesses* directories. It's common to refer to a directory as an *LDAP directory* or *LDAP database* as a shorthand -- although technically incorrect, this shorthand is so widely used
 that it's understood as such. 
