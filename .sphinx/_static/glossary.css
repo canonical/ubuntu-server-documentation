@@ -1,0 +1,63 @@
+/* Glossary popup styling */
+.glossary-popup {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-sidebar-background-border);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    padding: 1rem;
+    max-width: 400px;
+}
+
+/* Light mode link styles */
+.glossary-popup a {
+    color: var(--color-link);
+    text-decoration: none;
+}
+
+.glossary-popup a:hover {
+    text-decoration: underline;
+}
+
+/* Dark mode specific styles */
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .glossary-popup {
+        background: var(--color-background-primary);
+        border-color: var(--color-sidebar-background-border);
+    }
+
+    body:not([data-theme="light"]) .glossary-popup a {
+        color: #8ab4f8; /* Light blue color for better visibility */
+        text-decoration: none;
+    }
+
+    body:not([data-theme="light"]) .glossary-popup a:hover {
+        color: #bbe1fa;
+        text-decoration: underline;
+    }
+}
+
+/* Explicit dark theme override */
+body[data-theme="dark"] .glossary-popup {
+    background: var(--color-background-primary);
+    border-color: var(--color-sidebar-background-border);
+}
+
+body[data-theme="dark"] .glossary-popup a {
+    color: #8ab4f8;
+    text-decoration: none;
+}
+
+body[data-theme="dark"] .glossary-popup a:hover {
+    color: #bbe1fa;
+    text-decoration: underline;
+}
+
+/* Ensure text is visible in both modes */
+.glossary-popup {
+    color: var(--color-foreground-primary);
+}
+
+/* Ensure popup is above other content */
+.glossary-popup {
+    z-index: 100;
+    position: relative;
+}
