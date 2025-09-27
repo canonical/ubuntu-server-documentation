@@ -247,7 +247,9 @@ source_suffix = {
 
 # Add CSS files (located in .sphinx/_static/)
 custom_html_css_files = [
-    'cookie-banner.css'
+    'cookie-banner.css',
+    'glossary.css',
+    'dark-mode.css'
 ]
 
 # Add JavaScript files (located in .sphinx/_static/)
