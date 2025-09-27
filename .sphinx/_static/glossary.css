@@ -30,7 +30,7 @@
     }
 
     body:not([data-theme="light"]) .glossary-popup a:hover {
-        color: #bbe1fa;
+        color: #ffffff; /* White for maximum contrast on hover */
         text-decoration: underline;
     }
 }
@@ -47,7 +47,7 @@ body[data-theme="dark"] .glossary-popup a {
 }
 
 body[data-theme="dark"] .glossary-popup a:hover {
-    color: #bbe1fa;
+    color: #ffffff; /* White for maximum contrast */
     text-decoration: underline;
 }
 
