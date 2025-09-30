@@ -9,6 +9,35 @@ Ubuntu developers decided to disable the administrative root account by default 
 
 Instead, the `sudo` utility ("superuser do") is used to carry out system administrative duties. `sudo` allows an authorised user to temporarily elevate their privileges using their own password instead of having to know the password belonging to the root account. This provides accountability for all user actions, and gives the administrator control over which actions a user can perform with said privileges.
 
+### sudo-rs
+
+From Ubuntu 25.10 (Questing Quokka) onward, `sudo` is provided by the `sudo-rs` package (a rust implementation). While `sudo-rs` is not 100% compatible with
+`sudo.ws`, the majority of common use cases are supported and the change should be invisible to most users.
+
+A list of key differences is {ref}`maintained as a reference <sudo-rs>`
+
+The original `sudo` utility (maintained by Todd C. Miller), `sudo.ws` remains supported in the 25.10 and the subsequent 26.04 LTS. You will find these utilities installed with `.ws` suffix (for example `sudo.ws`, `visudo.ws`, etc.).
+Switching the default back to `sudo.ws` is not recommended, but if you need to do so, follow these steps:
+
+Interactive:
+```
+# update-alternatives --config sudo
+```
+
+Non-interactive:
+```
+# update-alternatives --set sudo /usr/bin/sudo.ws
+```
+
+You can always switch back to `sudo-rs` using:
+```
+# update-alternatives --set sudo /usr/lib/cargo/bin/sudo
+```
+
+You can learn more about the motivation for this change in the blog post [Adopting sudo-rs By Default in Ubuntu 25.10](https://discourse.ubuntu.com/t/adopting-sudo-rs-by-default-in-ubuntu-25-10/60583)
+
+The rest of the article should work the same with both `sudo.ws` and `sudo-rs`.
+
 ### Enabling the root account
 
 If for some reason you wish to enable the root account, you will need to give it a password:
@@ -20,9 +49,9 @@ sudo passwd
 `sudo` will prompt you for your password, and then ask you to supply a new password for `root` as shown below:
 
 ```bash
-[sudo] password for username: (enter your own password)
-Enter new UNIX password: (enter a new password for root)
-Retype new UNIX password: (repeat new password for root)
+[sudo: authenticate] Password: (enter your own password)
+New password: (enter a new password for root)
+Retype new password: (repeat new password for root)
 passwd: password updated successfully
 ```
 
