@@ -22,5 +22,5 @@ sudo-rs is a safety oriented and memory safe implementation of sudo written in R
 
     Byobu <other-tools/byobu>
     pam_motd <other-tools/pam-motd>
-    sudo-rs <other-tools/sudo>
+    sudo-rs <other-tools/sudo-rs>
 
