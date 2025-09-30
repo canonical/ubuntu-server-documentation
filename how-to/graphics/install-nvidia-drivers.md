@@ -175,6 +175,12 @@ After installing the correct kernel modules (see the relevant section of this do
 sudo apt install nvidia-driver-${DRIVER_BRANCH}${SERVER}
 ```
 
+If you encounter an error such as when running the [nvidia-smi](https://developer.nvidia.com/system-management-interface) command:
+
+    Failed to initialize NVML: Driver/library version mismatch
+
+this typically indicates that the userspace driver packages were upgraded while the kernel module is still on the older version(for example, the client reports one driver version while the kernel module reports another). This situation often occurs after a system upgrade. Rebooting the system will load the updated kernel module and bring the versions back in sync.
+
 #### (Optional) Installing Fabric Manager and the NSCQ library
 
 If your system comes with NVswitch hardware, then you will want to install Fabric Manager and the NVSwitch Configuration and Query library. You can do so by running the following:
