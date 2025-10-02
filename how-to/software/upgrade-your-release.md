@@ -127,4 +127,4 @@ Continue [yN]
 
 ## Further reading
 
-- For a complete list of releases and current support status see the [Ubuntu Wiki Releases](https://wiki.ubuntu.com/Releases) page.
+- For a complete list of releases and current support status, see the [List of releases](https://documentation.ubuntu.com/project/release-team/list-of-releases/) page.
