@@ -13,6 +13,14 @@ public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
 
+This documentation always targets the latest LTS version of Ubuntu. When
+there are differences towards older LTS releases, they are noted in the
+guide.
+
+If these notes are missing, or if a particular topic has too many of them,
+making reading more difficult, please file an issue using the link at the
+bottom.
+
 .. only:: html
 
    In this documentation
