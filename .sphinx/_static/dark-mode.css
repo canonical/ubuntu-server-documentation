@@ -1,0 +1,21 @@
+/* Dark mode link styles */
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) a {
+        color: #8ab4f8;
+    }
+
+    body:not([data-theme="light"]) a:hover {
+        color: #ffffff;
+        text-decoration: underline;
+    }
+}
+
+/* Explicit dark theme override */
+body[data-theme="dark"] a {
+    color: #8ab4f8;
+}
+
+body[data-theme="dark"] a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
