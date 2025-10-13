@@ -219,3 +219,43 @@ sudo apt autoremove
 When NVIDIA stops support on a driver branch, then Canonical will transition you to the next supported driver branch automatically if you try to install that driver branch.
 
 See NVIDIA's [current support matrix](https://docs.nvidia.com/datacenter/tesla/drivers/index.html#branches) in their documentation.
+
+## Troubleshooting
+
+### Driver/library version mismatch error
+
+If you encounter the following error when running the [nvidia-smi](https://developer.nvidia.com/system-management-interface) command:
+
+    Failed to initialize NVML: Driver/library version mismatch
+
+This typically indicates that the userspace driver packages were upgraded while the kernel module is still on the older version (for example, the client reports one driver version while the kernel module reports another). This situation often occurs after a system upgrade. To verify this, check the kernel logs:
+
+    sudo dmesg
+
+Look for error messages similar to:
+
+    NVRM: API mismatch: the client has the version 570.172.08, but
+    NVRM: this kernel module has the version 570.158.01.  Please
+    NVRM: make sure that this kernel module and all NVIDIA driver
+    NVRM: components have the same version.
+
+**Solution**: Rebooting the system will load the updated kernel module and bring the versions back in sync.
+
+### No devices were found error
+
+If you encounter the following error when running the [nvidia-smi](https://developer.nvidia.com/system-management-interface) command:
+
+    No devices were found
+
+This may occur if the open-source NVIDIA kernel driver [nouveau](https://nouveau.freedesktop.org/) is pre-installed and loaded, which conflicts with the proprietary NVIDIA driver. To check whether nouveau is loaded:
+
+    lsmod | grep nouveau
+
+**Solution**: If nouveau kernel module is loaded, blacklist it and rebuild the initramfs:
+
+    echo "blacklist nouveau" | sudo tee /etc/modprobe.d/disable-nouveau.conf
+    echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/disable-nouveau.conf
+    sudo rmmod nouveau || true
+    sudo update-initramfs -u
+
+Then reboot the system for the changes to take effect.
