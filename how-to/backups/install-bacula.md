@@ -56,6 +56,16 @@ During the install process you will be asked to supply a password for the *datab
 
 ## Configure Bacula
 
+Several components were installed on this system by the `bacula` package. Each one has its own configuration file:
+
+ * Director: `/etc/bacula/bacula-dir.conf`
+ * Storage: `/etc/bacula/bacula-sd.conf`
+ * File: `/etc/bacula/bacula-fd.conf`
+ * Console: `/etc/bacula/bconsole.conf`
+
+All these components need to eventually talk to each other, and the authentication is performed via passwords that were automatically generated at install time. These passwords are stored in the `/etc/bacula/common_default_passwords` file. If a new component is installed on this system, it can benefit from this file to automatically be ready to authenticate itself, but in general, after everything is installed and configured, this file isn't needed anymore.
+
+
 Bacula configuration files are formatted based on **resources** composed of **directives** surrounded by curly “{}” braces. Each Bacula component has an individual file in the `/etc/bacula` directory.
 
 The various Bacula components must authorise themselves to each other. This is accomplished using the **password** directive. For example, the Storage resource password in the `/etc/bacula/bacula-dir.conf` file must match the Director resource password in `/etc/bacula/bacula-sd.conf`.
