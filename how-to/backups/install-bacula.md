@@ -27,17 +27,32 @@ These services and applications can be run on multiple servers and clients, or t
 
 ## Install Bacula
 
-The Bacula application needs a database to store the Catalog. The choices are sqlite, MySQL, or PostgreSQL. It is recommended to use either MySQL or PostgreSQL, and leave sqlite for small development or test deployments. When using MySQL or PostgreSQL as your database, you should already have it deployed. Bacula will not install them for you. For more information, take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>`.
+The Bacula components can be installed on multiple systems, or they can be grouped together where it makes sense. A fully distributed installation might be appealing and is more scalable, but is also harder to configure. Here we will pick something in between:
 
-There are multiple packages containing the different Bacula components. To install `bacula`, from a terminal prompt enter:
+ * A Bacula "server", where we will install the following Bacula components: Director, Catalog with an SQL database, Storage, File, Console. The server itself should also be backed up, hence why components typically installed on clients are also installed here.
+ * A Bacula "client", which is just a system to be backed up. It will have only the File component installed. Any system that needs to be backed up will have to have the File component installed.
+
+To begin with, we have to start with installing the database that will be used by the Catalog. The choices are:
+
+ * sqlite: Should only be used for test or development deployments of Bacula.
+ * PostgreSQL
+ * MySQL
+
+Either SQL database is suitable. For this document, we will use PostgreSQL:
+
+```bash
+sudo apt install postgresql
+```
+```{note}
+The default choices for PostgreSQL are fine for most cases, but please take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>` for more details on these powerful databases.
+```
+
+Next we can install Bacula. The `bacula` package has the necessary dependencies and will pull in what is needed for our deployment scenario:
 
 ```bash
 sudo apt install bacula
 ```
-
-By default, installing the `bacula` package will use a PostgreSQL database for the Catalog. If you want to use SQLite or MySQL for the Catalog instead, install `bacula-director-sqlite3` or `bacula-director-mysql` respectively.
-
-During the install process you will be asked to supply a password for the *database owner* of the *bacula database*. 
+During the install process you will be asked to supply a password for the *database owner* of the *bacula database*. If left blank, a random password will be used.
 
 ## Configure Bacula
 
