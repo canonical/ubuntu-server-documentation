@@ -13,25 +13,21 @@ Bacula is made up of several components and services that are used to manage bac
   
   - Text-based command line.
     
-  - Gnome-based {term}`GTK+ <GTK>` {term}`Graphical User Interface (GUI) <GUI>`.
-    
-  - wxWidgets GUI interface.
+  - Qt GUI interface.
 
-- **Bacula File**: Also known as the Bacula Client program. This application is installed on machines to be backed up, and is responsible for handling data requested by the Director.
+- **Bacula File**: This application is installed on machines to be backed up, and is responsible for handling data requested by the Director.
 
 - **Bacula Storage**: The program that performs the storage of data onto, and recovery of data from, the physical media.
 
 - **Bacula Catalog**: Responsible for maintaining the file indices and volume databases for all backed-up files. This enables rapid location and restoration of archived files. The Catalog supports three different databases: MySQL, PostgreSQL, and SQLite.
 
-- **Bacula Monitor**: Monitors the Director, File daemons, and Storage daemons. Currently the Monitor is only available as a GTK+ GUI application.
+- **Bacula Monitor**: This is a graphical tray monitor for the Bacula backup system.
 
 These services and applications can be run on multiple servers and clients, or they can be installed on one machine if backing up a single disk or volume.
 
 ## Install Bacula
 
-```{note}
-If using MySQL or PostgreSQL as your database, you should already have the services available. Bacula will not install them for you. For more information, take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>`.
-```
+The Bacula application needs a database to store the Catalog. The choices are sqlite, MySQL, or PostgreSQL. It is recommended to use either MySQL or PostgreSQL, and leave sqlite for small development or test deployments. When using MySQL or PostgreSQL as your database, you should already have it deployed. Bacula will not install them for you. For more information, take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>`.
 
 There are multiple packages containing the different Bacula components. To install `bacula`, from a terminal prompt enter:
 
