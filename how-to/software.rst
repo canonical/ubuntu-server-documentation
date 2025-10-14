@@ -20,11 +20,14 @@ Updates
 
     Automatic updates <software/automatic-updates>
     Upgrade your release <software/upgrade-your-release>
+    Snapshot service <software/snapshot-service>
 
 * :ref:`Automatic updates <automatic-updates>` shows you how to configure (or
   turn off) automatic updates
 * :ref:`Upgrade your release <upgrade-your-release>` shows you how to upgrade
   from one Ubuntu release to the next one
+* :ref:`Snapshot service <snapshot-service>` shows you how to use the Ubuntu
+  Snapshot Service to update packages to time-specific archive states.
 
 Troubleshooting
 ===============

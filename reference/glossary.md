@@ -531,6 +531,13 @@ Dynamic Domain Name System
     Related topic(s):
     * Networking
 
+deb822
+    A structured configuration format based on RFC822.
+
+    See also:
+    * [RFC 822](https://datatracker.ietf.org/doc/html/rfc822)
+    * The {manpage}`deb822(5)` manual page
+
 debconf
     A {term}`configuration management system <CMS>` handling the configuration
     of software packages during installation or upgrades by prompting users for
