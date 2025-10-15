@@ -255,6 +255,20 @@ custom_html_js_files = [
     'js/bundle.js',
 ]
 
+# Configure copybutton extension
+# This option excludes line numbers and prompts from being selected when
+# users copy commands using the copybutton
+# https://sphinx-copybutton.readthedocs.io/en/latest/use.html#automatic-exclusion-of-prompts-from-the-copies
+
+# This regex was implemented by rkratky for the Ubuntu Project docs. It uses
+# '|' because of a bug in copybutton extension:
+#     https://github.com/executablebooks/sphinx-copybutton/issues/96
+# Replace with   r"(\S+@\S+)?[\$\#] "  when the bug is fixed.
+copybutton_prompt_text = r"\S+@\S+[\$\#] |[\$\#] "
+copybutton_prompt_is_regexp = True
+copybutton_line_continuation_character = "\\"
+
+
 ## The following settings override the default configuration.
 
 # Specify a reST string that is included at the end of each file.
