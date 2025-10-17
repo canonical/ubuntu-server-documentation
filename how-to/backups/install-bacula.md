@@ -91,7 +91,7 @@ sudo cp -af /etc/bacula/bacula-dir.conf /etc/bacula/bacula-dir.conf.bak
 ```
 Now edit `/etc/bacula/bacula-dir.conf` and make the following changes/additions:
 
-a) `Director` block
+a) The `Director` resource
 
 This block defines the attributes of the Director service:
 ```
@@ -114,10 +114,9 @@ What you should inspect and change:
 
 ```{tip}
 For more details about all the options of the `Director` resource, please check the upstream [Director Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000) documentation.
-
 ```
 
-b) `FileSet` block
+b) The `FileSet` resource
 
 Let's define what we want to backup. There will likely be multiple file sets defined in a production server, but as an example, here we will define a set for backing up the home directory:
 ```
@@ -146,11 +145,35 @@ This example illustrates some interesting points, and shows the type of flexibil
 
 ```{tip}
 For more details about all the options of the `FileSet` resource, please check the upstream [FileSet Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000) documentation.
-
 ```
 
-
+c) The `Client` resource
+The default installation will have defined a `Client` resource. It should be similar to the following:
+```
+# Client (File Services) to backup
+Client {
+  Name = bacula-server-fd
+  Address = bacula-server.lxd  # use the real hostname instead of "localhost"
+  FDPort = 9102
+  Catalog = MyCatalog
+  Password = "R_MqfSOpsIWYx0PAwMSHEFzCHF9OkcmFI"
+  File Retention = 60 days
+  Job Retention = 6 months
+  AutoPrune = yes
+}
+```
+Of note in this definition we have:
+ * `Name`: As with other similar resources, the default name uses the format `$hostname-fd` (where `fd` stands for *File Daemon*).
+ * `Address`: The default will be `localhost`, but we should be in the habit of using a real hostname, because in a more distributed installation, these hostnames will be sent to other services in other machines, and "localhost" will then be incorrect.
+ * `Password`: The password was automatically generated, and should be kept as is unless you want to use another one.
+ * `File Retention`, `Job Retention`: these should be adjusted according to your particular needs for each client.
 By default, the backup job named `BackupClient1` is configured to archive the Bacula Catalog. If you plan on using the server to back up more than one client you should change the name of this job to something more descriptive. To change the name, edit `/etc/bacula/bacula-dir.conf`:
+ * `AutoPrune`: This setting makes Bacula automatically apply the retention parameters at the end of a backup job. It is enabled by default.
+
+```{tip}
+For more details about all the options of the `Client` resource, please check the upstream [Client Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231300000000000000000) documentation.
+```
+
 
 ```text
 #
