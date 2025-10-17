@@ -112,7 +112,10 @@ What you should inspect and change:
  * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, thouch, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
  * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
 
-For all the options of the `Director` resource, check https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000
+```{tip}
+For more details about all the options of the `Director` resource, please check the upstream [Director Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000) documentation.
+
+```
 
 b) `FileSet` block
 
@@ -138,10 +141,13 @@ FileSet {
 This example illustrates some interesting points, and shows the type of flexibility he have in defining File Sets:
  * `Name`: This defines the name of this file set, and will be referenced by other configuration blocks.
  * *Include Options*: the `Options` block can be used several times inside the `Include` block. Here we define that we want to include POSIX ACLs support, and extended attributes, and use the SHA256 hash algorithm, but perhaps more interesting is how we select which files to exclude from the set:
-   * `wilddir`, `wildfile`: these parameters specify globbing expressions of directories and files to exclude from the set (because we also set `exclude = yes`).
+   * `wilddir`, `wildfile`: these parameters specify globbing expressions of directories and files to exclude from the set (because we also set `exclude = yes`). In this example, we are excluding potentially large files. Unfortunately there is no direct way to exclude files from a set based on their size, so we have to make some educated guesses using standard file extensions and directory locations.
  * `File`: This parameter can be specified multiple times, and it's additive. In this example we have it only used once, to select the `/home` directory and its subdirectories, subject to the exclusions defined in the `Options` block.
 
-For all the options of the `FileSet` resource, check https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000
+```{tip}
+For more details about all the options of the `FileSet` resource, please check the upstream [FileSet Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000) documentation.
+
+```
 
 
 By default, the backup job named `BackupClient1` is configured to archive the Bacula Catalog. If you plan on using the server to back up more than one client you should change the name of this job to something more descriptive. To change the name, edit `/etc/bacula/bacula-dir.conf`:
