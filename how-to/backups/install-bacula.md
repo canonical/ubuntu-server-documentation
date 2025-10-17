@@ -25,7 +25,14 @@ Bacula is made up of several components and services that are used to manage bac
 
 These services and applications can be run on multiple servers and clients, or they can be installed on one machine if backing up a single disk or volume.
 
-## Install Bacula
+In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacule File service on a workstation, to remotely backup its data.
+
+
+TBD
+
+IMAGE
+
+## Installing the Server Components
 
 The Bacula components can be installed on multiple systems, or they can be grouped together where it makes sense. A fully distributed installation might be appealing and is more scalable, but is also harder to configure. Here we will pick something in between:
 
@@ -54,7 +61,7 @@ sudo apt install bacula
 ```
 During the install process you will be asked to supply a password for the *database owner* of the *bacula database*. If left blank, a random password will be used.
 
-## Configure Bacula
+## Configuring the Server
 
 Several components were installed on this system by the `bacula` package. Each one has its own configuration file:
 
@@ -65,18 +72,77 @@ Several components were installed on this system by the `bacula` package. Each o
 
 All these components need to eventually talk to each other, and the authentication is performed via passwords that were automatically generated at install time. These passwords are stored in the `/etc/bacula/common_default_passwords` file. If a new component is installed on this system, it can benefit from this file to automatically be ready to authenticate itself, but in general, after everything is installed and configured, this file isn't needed anymore.
 
-The default installation of all these components already configured several aspects of bacula, but some fine tuning will be needed.
-
-### Storage
-
-Bacula has support for many different storage devices, notable tape drives, and the default configuration has many examples. Here we will configure a path for the Storage component to use for backups and restores, and it is assumed that this path is a mount point for some external storage device.
-
 ### Director
 
+The Bacula Director is the central component of the system. This is where we:
+
+ * Register the clients;
+ * Define the schedules;
+ * Define the file sets to be backed up;
+ * Define storage pools;
+ * Define the backup jobs;
 
 Bacula configuration files are formatted based on **resources** composed of **directives** surrounded by curly “{}” braces. Each Bacula component has an individual file in the `/etc/bacula` directory.
 
-The various Bacula components must authorise themselves to each other. This is accomplished using the **password** directive. For example, the Storage resource password in the `/etc/bacula/bacula-dir.conf` file must match the Director resource password in `/etc/bacula/bacula-sd.conf`.
+The default installation of the Director create a configuration file in `/etc/bacula/bacula-dir.conf` with some choices and examples. That is a good reference, but it does not apply to all cases. Since we are going to modify that file a lot, it's best to make a backup copy first:
+
+```
+sudo cp -af /etc/bacula/bacula-dir.conf /etc/bacula/bacula-dir.conf.bak
+```
+Now edit `/etc/bacula/bacula-dir.conf` and make the following changes/additions:
+
+a) `Director` block
+
+This block defines the attributes of the Director service:
+```
+Director {
+  Name = bacula-server-dir
+  DIRport = 9101
+  QueryFile = "/etc/bacula/scripts/query.sql"
+  WorkingDirectory = "/var/lib/bacula"
+  PidDirectory = "/run/bacula"
+  Maximum Concurrent Jobs = 20
+  Password = "P68sjhhjPTf4FmZsUNOUpQPj8MwV86OA7"
+  Messages = Daemon
+  #DirAddress = 127.0.0.1
+}
+```
+What you should inspect and change:
+ * `Name`: it's common to use the format `$hostname-dir` for the director. For example, if the hostname is "`bacula-server`", the name here would be `bacula-server-dir`.
+ * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, thouch, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
+ * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
+
+For all the options of the `Director` resource, check https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000
+
+b) `FileSet` block
+
+Let's define what we want to backup. There will likely be multiple file sets defined in a production server, but as an example, here we will define a set for backing up the home directory:
+```
+FileSet {
+  Name = "Home"
+  Include {
+    Options {
+      signature = SHA256
+      aclsupport = yes
+      xattrsupport = yes
+    }
+    Options {
+        wilddir = "/home/*/Downloads"
+        wildfile = "*.iso"
+        exclude = yes
+    }
+    File = /home
+  }
+} 
+```
+This example illustrates some interesting points, and shows the type of flexibility he have in defining File Sets:
+ * `Name`: This defines the name of this file set, and will be referenced by other configuration blocks.
+ * *Include Options*: the `Options` block can be used several times inside the `Include` block. Here we define that we want to include POSIX ACLs support, and extended attributes, and use the SHA256 hash algorithm, but perhaps more interesting is how we select which files to exclude from the set:
+   * `wilddir`, `wildfile`: these parameters specify globbing expressions of directories and files to exclude from the set (because we also set `exclude = yes`).
+ * `File`: This parameter can be specified multiple times, and it's additive. In this example we have it only used once, to select the `/home` directory and its subdirectories, subject to the exclusions defined in the `Options` block.
+
+For all the options of the `FileSet` resource, check https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000
+
 
 By default, the backup job named `BackupClient1` is configured to archive the Bacula Catalog. If you plan on using the server to back up more than one client you should change the name of this job to something more descriptive. To change the name, edit `/etc/bacula/bacula-dir.conf`:
 
@@ -231,6 +297,63 @@ This section shows how to back up specific directories on a single host to a loc
 
 Congratulations, you have now configured Bacula to backup the `localhost` to an attached tape drive.
 
+### File
+
+### Storage
+
+Bacula has support for many different storage devices, notable tape drives, and the default configuration has many examples. Here we will configure a path for the Storage component to use for backups and restores, and it is assumed that this path is a mount point for some external storage device.
+
+
+## Adding a client
+
+On the client
+
+sudo apt install bacula-fd
+
+Director {
+  Name = bacula-dir ## same as Director's Name on the Director server
+  Password = "ue2FpvuVaztKON1nibj-tfYUTXUFzp5gT" # same as the Client resource for this system on the Director server
+  Address = bacula-dir.lxd # IP/hostname of the Director server. Only needed if ConnectToDirector is used
+}
+
+FileDaemon {
+  Name = workstation-fd
+  FDport = 9102                  # where we listen for the director
+  WorkingDirectory = /var/lib/bacula
+  Pid Directory = /run/bacula
+  Maximum Concurrent Jobs = 20
+  Plugin Directory = /usr/lib/bacula
+  #FDAddress = 127.0.0.1 # don't set: default is to listen on all addresses
+}
+
+
+On the director:
+
+Add client instance to director:
+Client {
+    Name = workstation-fd
+    Address = workstation.lxd
+    FDPort = 9102
+    Catalog = MyCatalog
+    Password = "ue2FpvuVaztKON1nibj-tfYUTXUFzp5gT" # password from bacula-fd.conf on the new client
+    File Retention = 60 days
+    Job Retention = 6 months
+    AutoPrune = yes
+}
+
+New job on the director:
+
+Job {
+    Name = "BackupWorkstation"
+    JobDefs = "DefaultJob"
+    Client = workstation-fd
+}
+
+
+console commands
+list clients
+
+
 ## Further reading
 
 * For more Bacula configuration options, refer to the [Bacula documentation](https://www.bacula.org/documentation/documentation/).
@@ -238,3 +361,26 @@ Congratulations, you have now configured Bacula to backup the `localhost` to an 
 * The [Bacula home page](http://www.bacula.org/) contains the latest Bacula news and developments.
 
 * Also, see the [Bacula Ubuntu Wiki](https://help.ubuntu.com/community/Bacula) page.
+
+
+
+Useful commands:
+- list jobloj jobid=<N>
+- list jobs
+- list volumes
+- run job=<name> yes
+
+
+Restoring
+restore
+5 (Select the most recent backup for a client)
+defined client: : workstation-fd
+navigate to path
+type "mark <file>"
+done
+Use "mod" to change restore: you can restore in another client, another path, etc
+
+job status codes: https://www.bacula.org/15.0.x-manuals/en/main/Job_status_Error_codes.html#blb:director:job:status
+
+
+Be mindful of 127.0.0.1!!! Better to avoid it!!!
