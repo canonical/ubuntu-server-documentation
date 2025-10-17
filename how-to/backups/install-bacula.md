@@ -174,6 +174,34 @@ By default, the backup job named `BackupClient1` is configured to archive the Ba
 For more details about all the options of the `Client` resource, please check the upstream [Client Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231300000000000000000) documentation.
 ```
 
+d) The `Pool` resource
+A *Pool* in Bacula represents a collection of volumes. A *Volume* is a single physical tape, or a file on disk, and is where Bacula will write the backup data.
+
+The default configuration file will have defined several *Pools* already. For this documentation, we are interested in the `File` pool:
+```
+Pool {
+  Name = File
+  Pool Type = Backup
+  Recycle = yes                  # Bacula can automatically recycle Volumes
+  AutoPrune = yes                # Prune expired volumes
+  Volume Retention = 365 days    # one year
+  Maximum Volume Bytes = 50G     # Limit Volume size
+  Maximum Volumes = 100          # Limit number of Volumes in Pool
+  Label Format = "Vol-"          # Auto label
+}
+```
+We will use this pool to backup to a directory on the server (which will usually be the mount point for a big storage device). The pool resource has some definitions that affect how large the backups can become, so these have to be checked:
+ * `Name`: The name of the pool, which will be referenced in other resources.
+ * `Volume Retention`: For how long volumes are kept.
+ * `Maximum Volume Bytes`: What is the maximum size of each volume file.
+ * `Maximum Volumes`: How many volume files are we going to keep at most.
+ * `Label Format`: The prefix that each volume file will get. In this example, the files will be automatically named `Vol-0001`, `Vol-0002`, and so on.
+
+With the values in the example above, we will be storing at most 50G * 100 = 5000GB in this pool.
+
+```{tip}
+For more details about all the options of the `Pool` resource, please check the upstream [Pool Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231600000000000000000) documentation.
+```
 
 ```text
 #
