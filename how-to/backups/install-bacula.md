@@ -203,6 +203,67 @@ With the values in the example above, we will be storing at most 50G * 100 = 500
 For more details about all the options of the `Pool` resource, please check the upstream [Pool Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231600000000000000000) documentation.
 ```
 
+e) The `Storage` resource
+The *Storage* resource in the bacula Director configuration file points at the system where the Storage component is running.
+
+In our current setup, that's the same system where the Director is running, but we **MUST NOT** use `localhost` in the definition, because this configuration is also sent to the File component on other systems. In another system, `localhost` will mean itself, but the Storage daemon is not running over there.
+
+This time we will have to change two configuration files: the Director one, and the Storage one. Let's begin by defining a `Storage` resource on `/etc/bacula/bacula-dir.conf`, the Director configuration file:
+```
+Storage {
+  Name = FileBackup
+  Address = bacula-dir.lxd
+  SDPort = 9103
+  Password = "nuzA3-p89t_HXHYcCeoUtX7FdFQbJv8wB"
+  Device = FileBackup
+  Media Type = File
+}
+```
+Here is what we have defined with the block above:
+ * `Name`: The name of this Storage resource, which will be referenced in other places.
+ * `Address`: The name of the system where the Storage daemon is running. Again, never use `localhost` here, even if it's the same system where the Director is running.
+ * `Password`: The password that should be used when connecting to the Storage daemon. The installation of the packages will have generated a random password. It can be found either in the existing `Autochanger` definitions in `/etc/bacula/bacula-dir.conf`, or in `/etc/bacula/common_default_passwords` in the line for `SDPASSWD`, or in the Storage daemon configuration file `/etc/bacula/bacula-sd.conf`.
+ * `Device`: This must match an existing `Device` definition in the Storage daemon's configuration file (which will be covered next).
+ * `Media Type`: Likewise, this must also match the same `Media Type` defined in the Storage daemon's configuration file.
+
+And now the corresponding Storage daemon configuration in `/etc/bacula/bacula-sd.conf`.
+
+First, remove or comment out the `SDAddress` configuration, so that the daemon will listen on all network interfaces it finds:
+```
+Storage {
+  Name = bacula-server-sd
+  SDPort = 9103
+  WorkingDirectory = "/var/lib/bacula"
+  Pid Directory = "/run/bacula"
+  Plugin Directory = "/usr/lib/bacula"
+  Maximum Concurrent Jobs = 20
+  Encryption Command = "/etc/bacula/scripts/key-manager.py getkey"
+  #SDAddress = 127.0.0.1
+}
+```
+Important points for the config above:
+ * `Name`: It's standard for Bacula systems to suffix the name of the system where a component is running with the abbreviation of that component. In this case, the name of the system is `bacule-server`, and the component we are defining is the Storage Daemon, hence the `-sd` suffix.
+ * `SDAddress`: We need this daemon to listen on all interfaces so it's reachable from other systems, so we comment this line out and rely on the default which it to listen on all interfaces.
+
+Next, let's define a `Device`, also in `/etc/bacula/bacula-sd.conf`:
+```
+Device {
+    Name = FileBackup
+    Media Type = File
+    Archive Device = /storage/backup
+    Random Access = yes
+    Automatic Mount = yes
+    Removable Media = no
+    Always Open = no
+    Label Media = yes
+}
+```
+What we need to pay close attention to here is:
+ * `Name`: This has to match the name this device will be referred to in other services. In our case, it matches the name we are using in the `Device` entry of the `Storage` definition we added to the Director configuration file `/etc/bacula/bacula-dir.conf` earlier.
+ * `Media Type`: Likewise, this has to match the entry we used in the `Storage` definition in the Director.
+ * `Archive Device`: Since we are going to store backups as files, and not as tapes, the `Archive Device` configuration points to a directory. Here we are using `/storage/backup`, which can be the mount point of an external storage for example. This is the target directory of all backup jobs what will refer to this device of this storage server.
+ * `Label Media`: Since we are using files and not real tapes, we want the Storage daemon to actually name the files for us. This configuration option allows it to do so.
+
 ```text
 #
 # Define the main nightly save backup job
