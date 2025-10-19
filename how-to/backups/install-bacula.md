@@ -275,6 +275,33 @@ These two options need to match the following:
  * `Name`: This names which Director is allowed to use this Storage component, and therefore needs to match the `Name` defined in the `Director` resource in `/etc/bacula/bacula-dir.conf` on the Director system.
  * `Password`: The password that the Director needs to use to authenticate against this Storage component. This needs to match the `Password` set in the `Storage` resource in `/etc/bacula/bacula-dir.conf` on the Directory system.
 
+f) The `Job` resource
+The `Job` resource is the basic unit in Bacula, and ties everything together:
+ * Who is being backed up (`Client`).
+ * What should be backed up (`FileSet`).
+ * Where should the data be stored (`Storage`, `Pool`), and where to record the job (`Catalog`)
+ * When thouls the job run (`Schedule`)
+
+The default Director configuration file includes a default Job resource, and more Jobs can inherit from that.
+
+Let's go over the default Job resource first:
+```
+JobDefs {
+  Name = "DefaultJob"
+  Type = Backup
+  Level = Incremental
+  Client = bacula-server-fd
+  FileSet = "Home"
+  Schedule = "WeeklyCycle"
+  Storage = FileBackup
+  Messages = Standard
+  Pool = File
+  SpoolAttributes = yes
+  Priority = 10
+  Write Bootstrap = "/var/lib/bacula/%c.bsr"
+}
+```
+
 
 ```text
 #
