@@ -469,7 +469,57 @@ Let's unpack this:
  * Summary: at the end, we are given a summary of the job. Here we can still change values via the `mod` reply, but for now let's just accept those values and reply `yes`.
  * JobId: the job is accepted, and we are given an ID. In this case, it was "`7`".
 
+To check the result of a job, there are several methods:
+ * Messages: right after scheduling the job, it's likely something will be logged. You can run the `messages` command, and it will show the latest unread messages (and also mark them as read, so you can only benefit from this once).
+ * The `list jobs` command, to list all jobs, or, more specifically, `list jobid=7` to list a particular job.
+ * Inspect the full log of that particular job, via the `list joblog jobid=<N>` command.
+ * Server log: you can inspect the server log at `/var/log/bacula/bacula.log`.
 
+For example, if we run `list jobid=7`, this is the output:
+```
++-------+------------+---------------------+------+-------+----------+----------+-----------+
+| jobid | name       | starttime           | type | level | jobfiles | jobbytes | jobstatus |
++-------+------------+---------------------+------+-------+----------+----------+-----------+
+|     7 | HomeBackup | 2025-10-20 20:21:11 | B    | I     |        0 |        0 | T         |
++-------+------------+---------------------+------+-------+----------+----------+-----------+
+```
+That tells us some details about this job, in particular that it finished correctly (the `T` code).
+
+```{tip}
+For a list of status and error codes, check the upstream [Job status and Error codes tables](https://www.bacula.org/15.0.x-manuals/en/main/Job_status_Error_codes.html#blb:director:job:status).
+```
+
+To see the full log of this specific job, we can use the `list joblog jobid=7` command. This is quite detailed, and the output below is truncated for brevity:
+```
++----------------------------------------------------------------------------------------------------+
+| logtext                                                                                              |
++----------------------------------------------------------------------------------------------------+
+| bacula-server-dir JobId 7: Start Backup JobId 7, Job=HomeBackup.2025-10-20_20.21.08_03               |
+| bacula-server-dir JobId 7: Connected to Storage "FileBackup" at bacula-server.lxd:9103 with TLS      |
+| bacula-server-dir JobId 7: Using Device "FileBackup" to write.                                       |
+...
+  Build OS:               x86_64-pc-linux-gnu ubuntu 25.10
+  JobId:                  7
+  Job:                    HomeBackup.2025-10-20_20.21.08_03
+  Backup Level:           Incremental, since=2025-10-20 18:11:00
+  Client:                 "bacula-server-fd" 15.0.3 (25Mar25) x86_64-pc-linux-gnu,ubuntu,25.10
+  FileSet:                "Home Set" 2025-10-20 16:27:31
+  Pool:                   "File" (From Job resource)
+  Catalog:                "MyCatalog" (From Client resource)
+  Storage:                "FileBackup" (From Job resource)
+...
+  Non-fatal FD errors:    0
+  SD Errors:              0
+  FD termination status:  OK
+  SD termination status:  OK
+  Termination:            Backup OK                                                                    |
+...
+```
+
+If we inspect the backup target location on the Storage server (which in this deployment is the same as the Director), we can see that a volume file was created:
+```
+-rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
+```
 
 ### File
 
@@ -542,7 +592,7 @@ list clients
 
 
 Useful commands:
-- list jobloj jobid=<N>
+- list joblog jobid=<N>
 - list jobs
 - list volumes
 - run job=<name> yes
