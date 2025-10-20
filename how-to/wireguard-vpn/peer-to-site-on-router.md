@@ -5,19 +5,27 @@
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
 ```
-                       public internet              ┌─── wg0 10.10.11.1/24
-10.10.11.2/24                                       │        VPN network
-        home0│            xxxxxx       ppp0 ┌───────┴┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─wlan0  xx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │.1       10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-Laptop in                                         ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-Coffee shop                                       │   │     │   │     │   │
-                                                  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
+---
+config:
+  layout: elk
+---
+flowchart LR
+ subgraph home["Home network (.home) — 10.10.10.0/24"]
+        pi4["Raspberry Pi 4"]
+        nas["NAS"]
+        dots["..."]
+  end
+    laptop["Laptop<br>Coffee shop"] -- |wlan0| --> internet((("Public Internet")))
+    internet -- |ppp0| --> router[["Router<br>.home = 10.10.10.1"]]
+    laptop -. "wg0 10.10.11.2/24" .-> vpn[("WireGuard VPN<br>10.10.11.0/24")]
+    router -. "wg0 10.10.11.1/24" .-> vpn
+    router --- pi4 & nas & dots
+    style laptop fill:#C8E6C9
+    style internet fill:#BBDEFB
+    style router fill:#FFF9C4
+    style vpn fill:#D50000
+    style home fill:#FFD600
+
 ```
 
 Of course, this setup is only possible if you can install software on the router. Most of the time, when it's provided by your ISP, you can't. But some ISPs allow their device to be put into a bridge mode, in which case you can use your own device (a computer, a Raspberry PI, or something else) as the routing device.
