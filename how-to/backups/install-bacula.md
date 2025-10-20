@@ -412,6 +412,64 @@ Be mindful of who is added to the `bacula` group: members of this group are able
 ## Our first backup
 We now have everything in place to run our first backup job.
 
+On the Bacula Director system, run the `bconsole` command as root to enter the Bacula Console:
+
+```
+sudo bconsole
+```
+The command will connect to the the local Director, and open up an interactive prompt:
+```
+Connecting to Director localhost:9101
+1000 OK: 10002 bacula-server-dir Version: 15.0.3 (25 March 2025)
+Enter a period to cancel a command.
+*
+```
+You can type `help` for a full list of all the available commands, and `help <command>` for more detailed information about the specific `<command>`.
+
+For example, to obtain help text about the `run` command, type `help run` to obtain the following output:
+```
+  Command       Description
+  =======       ===========
+  run           Run a job
+
+Arguments:
+        job=<job-name> client=<client-name>
+        fileset=<FileSet-name> level=<level-keyword>
+        storage=<storage-name> where=<directory-prefix>
+        when=<universal-time-specification> pool=<pool-name>
+         nextpool=<next-pool-name> comment=<text> accurate=<bool> spooldata=<bool> yes
+
+When at a prompt, entering a period cancels the command.
+```
+Let's interactively run a backup job. The output below will show the `run` command and all the replies that were typed in response to the console prompts:
+```
+*run
+Using Catalog "MyCatalog"
+A job name must be specified.
+The defined Job resources are:
+     1: HomeBackup
+     2: BackupCatalog
+     3: RestoreFiles
+Select Job resource (1-3): 1
+Run Backup job
+JobName:  HomeBackup
+Level:    Incremental
+Client:   bacula-server-fd
+FileSet:  Home Set
+Pool:     File (From Job resource)
+Storage:  FileBackup (From Job resource)
+When:     2025-10-20 20:21:03
+Priority: 10
+OK to run? (Yes/mod/no): yes
+Job queued. JobId=7
+```
+Let's unpack this:
+ * `run`: This is the command. Since no parameters were given, Bacula will ask for what's missing.
+ * Which job should be run: `HomeBackup` is the job we defined in this how-to, and we select it by its index number.
+ * Summary: at the end, we are given a summary of the job. Here we can still change values via the `mod` reply, but for now let's just accept those values and reply `yes`.
+ * JobId: the job is accepted, and we are given an ID. In this case, it was "`7`".
+
+
 
 ### File
 
