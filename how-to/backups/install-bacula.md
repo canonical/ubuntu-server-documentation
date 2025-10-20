@@ -51,7 +51,7 @@ Either SQL database is suitable. For this document, we will use PostgreSQL:
 sudo apt install postgresql
 ```
 ```{note}
-The default choices for PostgreSQL are fine for most cases, but please take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>` for more details on these powerful databases.
+Please take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>` for more details on these powerful databases.
 ```
 
 Next we can install Bacula. The `bacula` package has the necessary dependencies and will pull in what is needed for our deployment scenario:
