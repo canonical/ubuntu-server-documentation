@@ -288,7 +288,7 @@ The `Job` resource is the basic unit in Bacula, and ties everything together:
 
 The default Director configuration file includes a default Job resource, and more Jobs can inherit from that.
 
-Let's go over the default Job resource first:
+Let's go over the Default Job resource first in `/etc/bacula/bacula-dir.conf`:
 ```
 JobDefs {
   Name = "DefaultJob"
@@ -305,7 +305,21 @@ JobDefs {
   Write Bootstrap = "/var/lib/bacula/%c.bsr"
 }
 ```
+This configuration is selecting some defaults:
+  * `Name`: The name of this Job.
+  * `Client`: To which client it applies. This must match an existing `Client {}` resource definition.
+  * `FileSet`: The name of the `FileSet` resource that defines the data to be backed up.
+  * `Schedule`: The name of the `Schedule` resource that defines when this job should run.
+  * `Storage`: Which `Storage` resource this job should use.
+  * `Pool`: Which `Pool` resource this job should use.
 
+We can now take advantage of this set of defaults, and define a new Job resource with minimal config:
+```
+Job {
+    Name = "HomeBackup"
+    JobDefs = "DefaultJob"
+}
+```
 
 ```text
 #
