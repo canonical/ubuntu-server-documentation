@@ -409,7 +409,7 @@ Replace `<username>` with the actual username. Also, if you are adding the curre
 Be mindful of who is added to the `bacula` group: members of this group are able to read all the data that is being backed up!
 ```
 
-## Our first backup
+## Our first backup and restore
 We now have everything in place to run our first backup job.
 
 On the Bacula Director system, run the `bconsole` command as root to enter the Bacula Console:
@@ -520,6 +520,150 @@ If we inspect the backup target location on the Storage server (which in this de
 ```
 -rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
 ```
+
+So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` job. Below is the output of an interactive `restore` session where we selected the option "Select the most recent bakcup for a client":
+```
+First you select one or more JobIds that contain files
+to be restored. You will be presented several methods
+of specifying the JobIds. Then you will be allowed to
+select which files from those JobIds are to be restored.
+
+To select the JobIds, you have the following choices:
+     1: List last 20 Jobs run
+...
+     5: Select the most recent backup for a client
+...
+Select item:  (1-14): 5
+Automatically selected Client: bacula-server-fd
+Automatically selected FileSet: Home Set
++-------+-------+----------+----------+---------------------+------------+
+| jobid | level | jobfiles | jobbytes | starttime           | volumename |
++-------+-------+----------+----------+---------------------+------------+
+|     4 | F     |      266 |  312,756 | 2025-10-20 17:34:43 | Vol-0001   |
+|     5 | I     |        3 |       32 | 2025-10-20 18:11:00 | Vol-0001   |
++-------+-------+----------+----------+---------------------+------------+
+You have selected the following JobIds: 4,5
+...
+You are now entering file selection mode where you add (mark) and
+remove (unmark) files to be restored. No files are initially added, unless
+you used the "all" keyword on the command line.
+Enter "done" to leave this mode.
+
+cwd is: /
+$
+```
+Here we can navigate the filesystem and inspect which files are part of the backup:
+```
+$ dir
+drwxr-xr-x   1 root     root              12  2025-10-20 14:03:44  /home/
+$ cd home/ubuntu
+cwd is: /home/ubuntu/
+$ dir
+drwxr-xr-x   1 ubuntu   ubuntu           424  2025-10-20 14:03:50  /home/ubuntu/.bash-git-prompt/
+-rw-rw-r--   1 ubuntu   ubuntu           258  2025-10-20 14:03:49  /home/ubuntu/.bash_aliases
+-rw-------   1 ubuntu   ubuntu            32  2025-10-20 18:10:51  /home/ubuntu/.bash_history
+-rw-r--r--   1 ubuntu   ubuntu          2678  2025-10-20 14:03:50  /home/ubuntu/.bash_local.rc
+-rw-r--r--   1 ubuntu   ubuntu           220  2025-10-20 14:03:50  /home/ubuntu/.bash_logout
+-rw-r--r--   1 ubuntu   ubuntu          3830  2025-10-20 14:03:50  /home/ubuntu/.bashrc
+drwx------   1 ubuntu   ubuntu            40  2025-10-20 14:03:49  /home/ubuntu/.cache/
+-rw-r--r--   1 ubuntu   ubuntu            57  2025-10-20 14:03:49  /home/ubuntu/.devscripts
+-rw-r--r--   1 ubuntu   ubuntu           236  2025-10-20 14:03:49  /home/ubuntu/.dput.cf
+drwxrwxr-x   1 ubuntu   ubuntu            40  2025-10-20 14:03:49  /home/ubuntu/.dput.d/
+-rw-rw-r--   1 ubuntu   ubuntu          1306  2025-10-20 14:03:49  /home/ubuntu/.gitconfig
+-rw-------   1 ubuntu   ubuntu            20  2025-10-20 17:21:30  /home/ubuntu/.lesshst
+-rw-r--r--   1 ubuntu   ubuntu           807  2025-10-20 14:03:44  /home/ubuntu/.profile
+-rw-rw-r--   1 ubuntu   ubuntu            29  2025-10-20 17:27:58  /home/ubuntu/.python_history
+-rw-r--r--   1 ubuntu   ubuntu           595  2025-10-20 14:03:49  /home/ubuntu/.quiltrc
+-rw-r--r--   1 ubuntu   ubuntu           566  2025-10-20 14:03:49  /home/ubuntu/.quiltrc-dpkg
+drwx------   1 ubuntu   ubuntu            30  2025-10-20 14:03:45  /home/ubuntu/.ssh/
+-rw-r--r--   1 ubuntu   ubuntu          2434  2025-10-20 14:03:49  /home/ubuntu/.tmux.conf
+drwxr-xr-x   1 ubuntu   ubuntu            30  2025-10-20 14:03:49  /home/ubuntu/.vim/
+drwxrwxr-x   1 ubuntu   ubuntu            14  2025-10-20 14:03:50  /home/ubuntu/bin/
+-rw-rw-r--   1 ubuntu   ubuntu             0  2025-10-20 18:10:50  /home/ubuntu/this-is-on-the-server.txt
+```
+
+To restore a file, we use the `mark` command on it. For example, let's restore `/home/ubuntu/.tmux.conf`:
+```
+$ mark .tmux.conf
+1 file marked.
+$ done
+Bootstrap records written to /var/lib/bacula/bacula-server-dir.restore.1.bsr
+
+The Job will require the following (*=>InChanger):
+   Volume(s)                 Storage(s)                SD Device(s)
+===========================================================================
+
+    Vol-0001                  FileBackup                FileBackup
+
+Volumes marked with "*" are in the Autochanger.
+
+
+1 file selected to be restored.
+
+Run Restore job
+JobName:         RestoreFiles
+Bootstrap:       /var/lib/bacula/bacula-server-dir.restore.1.bsr
+Where:           /storage/restore
+Replace:         Always
+FileSet:         Home Set
+Backup Client:   bacula-server-fd
+Restore Client:  bacula-server-fd
+Storage:         FileBackup
+When:            2025-10-20 21:02:37
+Catalog:         MyCatalog
+Priority:        10
+Plugin Options:  *None*
+OK to run? (Yes/mod/no):
+```
+Now we have some choices. Notice how the `RestoreFiles` job was automatically selected. That's the only job of the type `Restore` that we defined in the Director configuration earlier. It has certain default values, and we can either accept those (by replying `yes`), or modify them (by replying `mod`).
+
+If we accept these default, the marked files will be restored to the `/storage/restore` path on the `bacula-server-fd` system:
+```
+OK to run? (Yes/mod/no): yes
+Job queued. JobId=8
+*
+```
+And indeed, if we inspect that location, we see the file that we marked for restoration:
+```
+-rw-r--r-- 1 ubuntu ubuntu 2.4K Oct 20 14:03 /storage/restore/home/ubuntu/.tmux.conf
+```
+
+If we wanted to restore it to its original place, for example, if the user mistakenly deleted it and wanted it back, we would select the `mod` option to change where the file should be placed:
+```
+OK to run? (Yes/mod/no): mod
+Parameters to modify:
+     1: Level
+     2: Storage
+     3: Job
+     4: FileSet
+     5: Restore Client
+     6: When
+     7: Priority
+     8: Bootstrap
+     9: Where
+    10: File Relocation
+    11: Replace
+    12: JobId
+    13: Plugin Options
+Select parameter to modify (1-13): 9
+Please enter the full path prefix for restore (/ for none): /
+Run Restore job
+JobName:         RestoreFiles
+Bootstrap:       /var/lib/bacula/bacula-server-dir.restore.2.bsr
+Where:
+Replace:         Always
+FileSet:         Home Set
+Backup Client:   bacula-server-fd
+Restore Client:  bacula-server-fd
+Storage:         FileBackup
+When:            2025-10-20 21:11:55
+Catalog:         MyCatalog
+Priority:        10
+Plugin Options:  *None*
+OK to run? (Yes/mod/no): yes
+Job queued. JobId=9
+```
+By giving a restoration prefix of `/`, we are essentially asking to restore the file at its original full path.
 
 ### File
 
