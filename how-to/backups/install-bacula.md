@@ -292,7 +292,7 @@ The `Job` resource is the basic unit in Bacula, and ties everything together:
 
 The default Director configuration file includes a default Job resource, and more Jobs can inherit from that.
 
-Let's go over the Default Job resource first in `/etc/bacula/bacula-dir.conf`:
+Let's go over the Default Job resource first in `/etc/bacula/bacula-dir.conf` and change it a little bit:
 ```
 JobDefs {
   Name = "DefaultJob"
@@ -320,9 +320,15 @@ This configuration is selecting some defaults:
 We can now take advantage of this set of defaults, and define a new Job resource with minimal config:
 ```
 Job {
-    Name = "HomeBackup"
+    Name = "DirectorHomeBackup"
     JobDefs = "DefaultJob"
 }
+```
+
+```{tip}
+A job has many attributes that can only be specified once. This means that jobs are pretty much specific to what is being backed up, and from where, among other things. It therefore helps to come up with a naming convention.
+
+The upstream documentation has a section about [Naming Resources](https://docs.baculasystems.com/BEPlanningAndPreparation/BackupPolicy/NamingResources/index.html) with some suggestions.
 ```
 
 We also need a Job definition for the restore task. The default configuration file will have a definition for this already, but it needs to be changed:
