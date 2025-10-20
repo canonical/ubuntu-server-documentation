@@ -108,7 +108,7 @@ Director {
 }
 ```
 What you should inspect and change:
- * `Name`: it's common to use the format `$hostname-dir` for the director. For example, if the hostname is "`bacula-server`", the name here would be `bacula-server-dir`.
+ * `Name`: it's common to use the format `$hostname-dir` for the director. For example, if the hostname is "`bacula-server`", the name here would be `bacula-server-dir`. By sticking to this pattern, less changes will have to be made to the config, as this is what the default installation already assumes.
  * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, thouch, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
  * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
 
@@ -419,13 +419,14 @@ Bacula has support for many different storage devices, notable tape drives, and 
 On the client
 
 sudo apt install bacula-fd
-
+```
 Director {
   Name = bacula-dir ## same as Director's Name on the Director server
   Password = "ue2FpvuVaztKON1nibj-tfYUTXUFzp5gT" # same as the Client resource for this system on the Director server
   Address = bacula-dir.lxd # IP/hostname of the Director server. Only needed if ConnectToDirector is used
 }
-
+```
+```
 FileDaemon {
   Name = workstation-fd
   FDport = 9102                  # where we listen for the director
@@ -435,11 +436,12 @@ FileDaemon {
   Plugin Directory = /usr/lib/bacula
   #FDAddress = 127.0.0.1 # don't set: default is to listen on all addresses
 }
-
+```
 
 On the director:
 
 Add client instance to director:
+```
 Client {
     Name = workstation-fd
     Address = workstation.lxd
@@ -450,15 +452,16 @@ Client {
     Job Retention = 6 months
     AutoPrune = yes
 }
-
+```
 New job on the director:
 
+```
 Job {
     Name = "BackupWorkstation"
     JobDefs = "DefaultJob"
     Client = workstation-fd
 }
-
+```
 
 console commands
 list clients
