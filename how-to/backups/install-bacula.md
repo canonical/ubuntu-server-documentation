@@ -91,7 +91,7 @@ for f in /etc/bacula/bacula-{dir,sd,fd}.conf; do sudo cp -af $f $f.bak; done
 ```
 Now edit `/etc/bacula/bacula-dir.conf` and make the following changes/additions:
 
-a) The `Director` resource
+#### The `Director` resource
 
 This block defines the attributes of the Director service:
 ```
@@ -116,7 +116,7 @@ What you should inspect and change:
 For more details about all the options of the `Director` resource, please check the upstream [Director Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000) documentation.
 ```
 
-b) The `FileSet` resource
+#### The `FileSet` resource
 
 Let's define what we want to backup. There will likely be multiple file sets defined in a production server, but as an example, here we will define a set for backing up the home directory:
 ```
@@ -147,7 +147,7 @@ This example illustrates some interesting points, and shows the type of flexibil
 For more details about all the options of the `FileSet` resource, please check the upstream [FileSet Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000) documentation.
 ```
 
-c) The `Client` resource
+#### The `Client` resource
 
 The default installation will have defined a `Client` resource. It should be similar to the following:
 ```
@@ -175,7 +175,7 @@ By default, the backup job named `BackupClient1` is configured to archive the Ba
 For more details about all the options of the `Client` resource, please check the upstream [Client Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231300000000000000000) documentation.
 ```
 
-d) The `Pool` resource
+#### The `Pool` resource
 
 A *Pool* in Bacula represents a collection of volumes. A *Volume* is a single physical tape, or a file on disk, and is where Bacula will write the backup data.
 
@@ -205,7 +205,7 @@ With the values in the example above, we will be storing at most 50G * 100 = 500
 For more details about all the options of the `Pool` resource, please check the upstream [Pool Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231600000000000000000) documentation.
 ```
 
-e) The `Storage` resource
+#### The `Storage` resource
 
 The *Storage* resource in the bacula Director configuration file points at the system where the Storage component is running.
 
@@ -278,7 +278,7 @@ These two options need to match the following:
  * `Name`: This names which Director is allowed to use this Storage component, and therefore needs to match the `Name` defined in the `Director` resource in `/etc/bacula/bacula-dir.conf` on the Director system.
  * `Password`: The password that the Director needs to use to authenticate against this Storage component. This needs to match the `Password` set in the `Storage` resource in `/etc/bacula/bacula-dir.conf` on the Directory system.
 
-f) The `Job` resource
+#### The `Job` resource
 
 The `Job` resource is the basic unit in Bacula, and ties everything together:
  * Who is being backed up (`Client`).
