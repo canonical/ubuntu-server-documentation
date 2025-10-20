@@ -84,10 +84,10 @@ The Bacula Director is the central component of the system. This is where we:
 
 Bacula configuration files are formatted based on **resources** composed of **directives** surrounded by curly “{}” braces. Each Bacula component has an individual file in the `/etc/bacula` directory.
 
-The default installation of the Director create a configuration file in `/etc/bacula/bacula-dir.conf` with some choices and examples. That is a good reference, but it does not apply to all cases. Since we are going to modify that file a lot, it's best to make a backup copy first:
+The default installation of the several bacula components will create configuration files in `/etc/bacula/` with some choices and examples. That is a good reference, but it does not apply to all cases. Since we are going to modify these files a lot, it's best to make a backup copy first:
 
 ```
-sudo cp -af /etc/bacula/bacula-dir.conf /etc/bacula/bacula-dir.conf.bak
+for f in /etc/bacula/bacula-{dir,sd,fd}.conf; do sudo cp -af $f $f.bak; done
 ```
 Now edit `/etc/bacula/bacula-dir.conf` and make the following changes/additions:
 
