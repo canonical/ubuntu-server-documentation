@@ -148,6 +148,7 @@ For more details about all the options of the `FileSet` resource, please check t
 ```
 
 c) The `Client` resource
+
 The default installation will have defined a `Client` resource. It should be similar to the following:
 ```
 # Client (File Services) to backup
@@ -175,6 +176,7 @@ For more details about all the options of the `Client` resource, please check th
 ```
 
 d) The `Pool` resource
+
 A *Pool* in Bacula represents a collection of volumes. A *Volume* is a single physical tape, or a file on disk, and is where Bacula will write the backup data.
 
 The default configuration file will have defined several *Pools* already. For this documentation, we are interested in the `File` pool:
@@ -204,6 +206,7 @@ For more details about all the options of the `Pool` resource, please check the 
 ```
 
 e) The `Storage` resource
+
 The *Storage* resource in the bacula Director configuration file points at the system where the Storage component is running.
 
 In our current setup, that's the same system where the Director is running, but we **MUST NOT** use `localhost` in the definition, because this configuration is also sent to the File component on other systems. In another system, `localhost` will mean itself, but the Storage daemon is not running over there.
@@ -276,6 +279,7 @@ These two options need to match the following:
  * `Password`: The password that the Director needs to use to authenticate against this Storage component. This needs to match the `Password` set in the `Storage` resource in `/etc/bacula/bacula-dir.conf` on the Directory system.
 
 f) The `Job` resource
+
 The `Job` resource is the basic unit in Bacula, and ties everything together:
  * Who is being backed up (`Client`).
  * What should be backed up (`FileSet`).
