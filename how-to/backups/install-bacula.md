@@ -215,7 +215,7 @@ This time we will have to change two configuration files: the Director one, and 
 ```
 Storage {
   Name = FileBackup
-  Address = bacula-dir.lxd
+  Address = bacula-server.lxd
   SDPort = 9103
   Password = "nuzA3-p89t_HXHYcCeoUtX7FdFQbJv8wB"
   Device = FileBackup
@@ -403,7 +403,7 @@ Replace `<username>` with the actual username. Also, if you are adding the curre
 Be mindful of who is added to the `bacula` group: members of this group are able to read all the data that is being backed up!
 ```
 
-## Localhost backup
+## Our first backup
 
 This section shows how to back up specific directories on a single host to a local tape drive.
 
