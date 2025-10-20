@@ -11,19 +11,24 @@ Where to place the remote WireGuard endpoint in the network will vary a lot depe
 Here we will cover a simpler case more resembling what a home network could be like:
 
 ```
-               public internet
-     
-                xxxxxx      ppp0 ┌────────┐
- ┌────┐         xx   xxxx      ──┤ router │
- │    ├─ppp0  xxx      xx        └───┬────┘
- │    │       xx        x            │         home 10.10.10.0/24
- │    │        xxx    xxx            └───┬─────────┬─────────┐
- └────┘          xxxxx                   │         │         │
-                                       ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-                                       │   │     │   │     │   │
-                                       │pi4│     │NAS│     │...│
-                                       │   │     │   │     │   │
-                                       └───┘     └───┘     └───┘
+---
+config:
+  layout: dagre
+---
+flowchart LR
+ subgraph home["Home LAN 10.10.10.0/24"]
+        pi4["Raspberry Pi 4"]
+        nas["NAS"]
+        dots["..."]
+  end
+    host["Host"] -- ppp0 --> internet((("Public Internet")))
+    internet -- ppp0 --> router[["Router"]]
+    router --- pi4 & nas & dots
+    style host fill:#FFE0B2
+    style internet fill:#BBDEFB
+    style router fill:#FFF9C4
+    style home fill:#FFD600
+
 ```
 
 
