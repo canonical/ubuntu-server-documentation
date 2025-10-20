@@ -385,35 +385,22 @@ sudo systemctl restart bacula-fd.service
 ```
 
 ```{tip}
-For more detauls about the File daemon configuration, please check the upstream [File Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Client_File_daemon_Configur.html) documentation.
+For more details about the File daemon configuration, please check the upstream [File Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Client_File_daemon_Configur.html) documentation.
 ```
 
 
 ### Console
-
-```text
-#
-# Define the main nightly save backup job
-#   By default, this job will back up to disk in 
-Job {
-  Name = "BackupServer"
-  JobDefs = "DefaultJob"
-  Write Bootstrap = "/var/lib/bacula/Client1.bsr"
-}
-```
-
-```{note}
-The example above changes the job name to "BackupServer", matching the machine's host name. Replace “BackupServer” with your own {term}`hostname`, or other descriptive name.
-```
+There is no further configuration to be done for the Console at this time. The defaults selected and adjusted by the package install are sufficient. The configuration file is `/etc/bacula/bconsole.conf`, and more details are available in the upstream [Console Configuration](https://www.bacula.org/15.0.x-manuals/en/main/Console_Configuration.html) documentation.
 
 The Console can be used to query the Director about jobs, but to use the Console with a *non-root* user, the user needs to be in the **Bacula group**. To add a user to the Bacula group, run the following command from a terminal:
 
 ```bash
-sudo adduser $username bacula
+sudo adduser <username> bacula
 ```
+Replace `<username>` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
 
-```{note}
-Replace `$username` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
+```{warning}
+Be mindful of who is added to the `bacula` group: members of this group are able to read all the data that is being backed up!
 ```
 
 ## Localhost backup
