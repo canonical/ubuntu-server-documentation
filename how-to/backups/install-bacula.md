@@ -121,7 +121,7 @@ For more details about all the options of the `Director` resource, please check 
 Let's define what we want to backup. There will likely be multiple file sets defined in a production server, but as an example, here we will define a set for backing up the home directory:
 ```
 FileSet {
-  Name = "Home"
+  Name = "Home Set"
   Include {
     Options {
       signature = SHA256
@@ -229,7 +229,11 @@ Here is what we have defined with the block above:
  * `Device`: This must match an existing `Device` definition in the Storage daemon's configuration file (which will be covered next).
  * `Media Type`: Likewise, this must also match the same `Media Type` defined in the Storage daemon's configuration file.
 
-And now the corresponding Storage daemon configuration in `/etc/bacula/bacula-sd.conf`.
+```{tip}
+For more details about all the options of the `Pool` resource, please check the upstream [Storage Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#blb:StorageResource) documentation.
+```
+
+Next we need to edit the corresponding Storage daemon configuration in `/etc/bacula/bacula-sd.conf`.
 
 First, remove or comment out the `SDAddress` configuration, so that the daemon will listen on all network interfaces it finds:
 ```
@@ -295,7 +299,7 @@ JobDefs {
   Type = Backup
   Level = Incremental
   Client = bacula-server-fd
-  FileSet = "Home"
+  FileSet = "Home Set"
   Schedule = "WeeklyCycle"
   Storage = FileBackup
   Messages = Standard
@@ -320,6 +324,68 @@ Job {
     JobDefs = "DefaultJob"
 }
 ```
+
+We also need a Job definition for the restore task. The default configuration file will have a definition for this already, but it needs to be changed:
+```
+Job {
+    Name = "RestoreFiles"
+    Type = Restore
+    Client = bacula-server-fd
+    Storage = FileBackup
+    # The FileSet and Pool directives are not used by Restore Jobs
+    # but must not be removed
+    FileSet = "Home Set"
+    Pool = File
+    Messages = Standard
+    Where = /storage/restore
+}
+```
+Important parameters defined above:
+ * `Name`: The name of this job.
+ * `Type`: This is a job that restores backups (`Restore`).
+ * `Client`: Where the files should be restored to. This can be overridden when the job is invoked.
+ * `Storage`: The storage from where the backup should be restored.
+ * `FileSet` and `Pool`: These are not used, but must be present and point to valid resources.
+ * `Where`: The path where the restored files should be placed. This can also be overridden when the job is invoked.
+
+```{tip}
+For more details about all the options of the `Job` resource, please check the upstream [Job Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#blb:JobResource) documentation.
+```
+
+### Storage daemon
+There isn't much more to configure for the Storage daemon after the Director configuration steps done earlier, but we still need to create the directories for the backup and restore jobs:
+```
+sudo mkdir -m 0700 /storage /storage/backups /storage/restore
+sudo chown bacula: -R /storage
+```
+This will allow bacula, and only bacula, to read and write to the storage path. You can, of course, adjust the permissions and ownership to something that suits your deployment. Just be mindful that the bacula user needs to be able to create and remove files from the `/storage/backups` and `/storage/restore` paths, and that regular users should not be allowed to read those.
+
+```{tip}
+For more details about the Storage daemon configuration options, please check the upstream [Storage Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Storage_Daemon_Configuratio.html) documentation.
+```
+
+### File daemon
+The File daemon configuration is located in the `/etc/bacula/bacula-fd.conf` file, and the only remaining task is to make sure it listens on the network. To be fair, in this particular deployment layout, this is not strictly needed, as both the Director and Storage daemons are located on the same system, but making this change allows for those components to be split off to different systems should that need arise.
+
+To make this change, we are going to remove or comment out the `FDAddress` option in the `FileDaemon` resource in `/etc/bacula/bacula-fd.conf` file:
+```
+FileDaemon {
+  Name = bacula-server-fd
+  FDport = 9102
+  WorkingDirectory = /var/lib/bacula
+  Pid Directory = /run/bacula
+  Maximum Concurrent Jobs = 20
+  Plugin Directory = /usr/lib/bacula
+  #FDAddress = 127.0.0.1
+}
+```
+After making the change and saving the file, restart the File daemon service:
+```
+sudo systemctl restart bacula-fd.service
+```
+
+
+### Console
 
 ```text
 #
