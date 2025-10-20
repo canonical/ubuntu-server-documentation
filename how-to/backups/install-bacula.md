@@ -267,7 +267,7 @@ What we need to pay close attention to here is:
  * `Archive Device`: Since we are going to store backups as files, and not as tapes, the `Archive Device` configuration points to a directory. Here we are using `/storage/backup`, which can be the mount point of an external storage for example. This is the target directory of all backup jobs what will refer to this device of this storage server.
  * `Label Media`: Since we are using files and not real tapes, we want the Storage daemon to actually name the files for us. This configuration option allows it to do so.
 
-Lastly, the Storage component needs to be told about the Director. This is done with a `Director` resource in `/etc/bacula/bacula-sd.conf`:
+Lastly, the Storage component needs to be told about the Director. This is done with a `Director` resource in `/etc/bacula/bacula-sd.conf`. No changes should be needed here, but it's best to check:
 ```
 Director {
     Name = bacula-server-dir
