@@ -384,6 +384,10 @@ After making the change and saving the file, restart the File daemon service:
 sudo systemctl restart bacula-fd.service
 ```
 
+```{tip}
+For more detauls about the File daemon configuration, please check the upstream [File Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Client_File_daemon_Configur.html) documentation.
+```
+
 
 ### Console
 
