@@ -790,5 +790,3 @@ $ dir this*
 * For more Bacula configuration options, refer to the [Bacula documentation](https://www.bacula.org/documentation/documentation/).
 
 * The [Bacula home page](http://www.bacula.org/) contains the latest Bacula news and developments.
-
-* Also, see the [Bacula Ubuntu Wiki](https://help.ubuntu.com/community/Bacula) page.
