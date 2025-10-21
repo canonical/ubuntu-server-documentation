@@ -38,7 +38,7 @@ To begin with, we have to start with installing the database that will be used b
 
 Either SQL database is suitable. For this document, we will use PostgreSQL:
 
-```bash
+```console
 sudo apt install postgresql
 ```
 ```{note}
@@ -47,7 +47,7 @@ Please take a look at {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQ
 
 Next we can install Bacula. The `bacula` package has the necessary dependencies and will pull in what is needed for our deployment scenario:
 
-```bash
+```console
 sudo apt install bacula
 ```
 During the install process you will be asked to supply a password for the *database owner* of the *bacula database*. If left blank, a random password will be used.
@@ -75,12 +75,9 @@ The Bacula Director is the central component of the system. This is where we:
 
 Bacula configuration files are formatted based on **resources** composed of **directives** surrounded by curly “{}” braces. Each Bacula component has an individual file in the `/etc/bacula` directory.
 
-The default installation of the several bacula components will create configuration files in `/etc/bacula/` with some choices and examples. That is a good reference, but it does not apply to all cases. Since we are going to modify these files a lot, it's best to make a backup copy first:
+The default installation of the several bacula components will create configuration files in `/etc/bacula/` with some choices and examples. That is a good reference, but it does not apply to all cases.
 
-```
-for f in /etc/bacula/bacula-{dir,sd,fd}.conf; do sudo cp -af $f $f.bak; done
-```
-Now edit `/etc/bacula/bacula-dir.conf` and make the following changes/additions:
+All the following sections involve the `/etc/bacula/bacula-dir.conf` Director configuration file, unless stated otherwise.
 
 #### The `Director` resource
 
@@ -351,7 +348,7 @@ For more details about all the options of the `Job` resource, please check the u
 
 ### Storage daemon
 There isn't much more to configure for the Storage daemon after the Director configuration steps done earlier, but we still need to create the directories for the backup and restore jobs:
-```
+```console
 sudo mkdir -m 0700 /storage /storage/backups /storage/restore
 sudo chown bacula: -R /storage
 ```
@@ -377,7 +374,7 @@ FileDaemon {
 }
 ```
 After making the change and saving the file, restart the File daemon service:
-```
+```console
 sudo systemctl restart bacula-fd.service
 ```
 
@@ -391,7 +388,7 @@ There is no further configuration to be done for the Console at this time. The d
 
 The Console can be used to query the Director about jobs, but to use the Console with a *non-root* user, the user needs to be in the **Bacula group**. To add a user to the Bacula group, run the following command from a terminal:
 
-```bash
+```console
 sudo adduser <username> bacula
 ```
 Replace `<username>` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
@@ -416,11 +413,11 @@ We now have everything in place to run our first backup job.
 
 On the Bacula Director system, run the `bconsole` command as root to enter the Bacula Console:
 
-```
+```console
 sudo bconsole
 ```
 The command will connect to the the local Director, and open up an interactive prompt:
-```
+```text
 Connecting to Director localhost:9101
 1000 OK: 10002 bacula-server-dir Version: 15.0.3 (25 March 2025)
 Enter a period to cancel a command.
@@ -429,22 +426,22 @@ Enter a period to cancel a command.
 You can type `help` for a full list of all the available commands, and `help <command>` for more detailed information about the specific `<command>`.
 
 For example, to obtain help text about the `run` command, type `help run` to obtain the following output:
-```
+```text
   Command       Description
   =======       ===========
   run           Run a job
 
 Arguments:
-        job=<job-name> client=<client-name>
-        fileset=<FileSet-name> level=<level-keyword>
-        storage=<storage-name> where=<directory-prefix>
-        when=<universal-time-specification> pool=<pool-name>
-         nextpool=<next-pool-name> comment=<text> accurate=<bool> spooldata=<bool> yes
+  job=<job-name> client=<client-name>
+  fileset=<FileSet-name> level=<level-keyword>
+  storage=<storage-name> where=<directory-prefix>
+  when=<universal-time-specification> pool=<pool-name>
+  nextpool=<next-pool-name> comment=<text> accurate=<bool> spooldata=<bool> yes
 
 When at a prompt, entering a period cancels the command.
 ```
 Let's interactively run a backup job. The output below will show the `run` command and all the replies that were typed in response to the console prompts:
-```
+```text
 *run
 Using Catalog "MyCatalog"
 A job name must be specified.
@@ -478,7 +475,7 @@ To check the result of a job, there are several methods:
  * Server log: you can inspect the server log at `/var/log/bacula/bacula.log`.
 
 For example, if we run `list jobid=7`, this is the output:
-```
+```text
 +-------+------------+---------------------+------+-------+----------+----------+-----------+
 | jobid | name       | starttime           | type | level | jobfiles | jobbytes | jobstatus |
 +-------+------------+---------------------+------+-------+----------+----------+-----------+
@@ -492,7 +489,7 @@ For a list of status and error codes, check the upstream [Job status and Error c
 ```
 
 To see the full log of this specific job, we can use the `list joblog jobid=7` command. This is quite detailed, and the output below is truncated for brevity:
-```
+```text
 +----------------------------------------------------------------------------------------------------+
 | logtext                                                                                              |
 +----------------------------------------------------------------------------------------------------+
@@ -523,8 +520,8 @@ If we inspect the backup target location on the Storage server (which in this de
 -rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
 ```
 
-So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` job. Below is the output of an interactive `restore` session where we selected the option "Select the most recent bakcup for a client":
-```
+So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` job. Below is the output of an interactive `restore` session where we selected the option "Select the most recent backup for a client":
+```text
 First you select one or more JobIds that contain files
 to be restored. You will be presented several methods
 of specifying the JobIds. Then you will be allowed to
@@ -570,7 +567,7 @@ drwx------   1 ubuntu   ubuntu            30  2025-10-20 14:03:45  /home/ubuntu/
 ```
 
 To restore a file, we use the `mark` command on it. For example, let's restore `/home/ubuntu/.tmux.conf`:
-```
+```text
 $ mark .tmux.conf
 1 file marked.
 $ done
@@ -605,18 +602,18 @@ OK to run? (Yes/mod/no):
 Now we have some choices. Notice how the `RestoreFiles` job was automatically selected. That's the only job of the type `Restore` that we defined in the Director configuration earlier. It has certain default values, and we can either accept those (by replying `yes`), or modify them (by replying `mod`).
 
 If we accept these default, the marked files will be restored to the `/storage/restore` path on the `bacula-server-fd` system:
-```
+```text
 OK to run? (Yes/mod/no): yes
 Job queued. JobId=8
 *
 ```
 And indeed, if we inspect that location, we see the file that we marked for restoration:
-```
+```text
 -rw-r--r-- 1 ubuntu ubuntu 2.4K Oct 20 14:03 /storage/restore/home/ubuntu/.tmux.conf
 ```
 
 If we wanted to restore it to its original place, for example, if the user mistakenly deleted it and wanted it back, we would select the `mod` option to change where the file should be placed:
-```
+```text
 OK to run? (Yes/mod/no): mod
 Parameters to modify:
      1: Level
@@ -658,7 +655,7 @@ If we want to start backing up a new system, we need to install the File Daemon 
 
 First, on the system that we want to add, let's install the client portion of Bacula, which is the File Daemon component:
 
-```
+```console
 sudo apt install bacula-fd
 ```
 Next, update the Director resource in `/etc/bacula/bacula-fd.conf` to point at the existing Director we have already deployed:
@@ -692,7 +689,7 @@ Messages {
 }
 ```
 With these changes done, restart the File Daemon:
-```
+```console
 sudo systemctl restart bacula-fd.service
 ```
 
@@ -729,12 +726,12 @@ Job {
 This job inherits all parameters from the `DefaultJob`, and just overrides the client.
 
 With this done, we can restart the Director:
-```
+```console
 sudo systemctl restart bacula-dir.service
 ```
 
-If we now enter the console, we should be able to list the new client, and run its new backup job:
-```
+If we now enter the Bacula console, we should be able to list the new client, and run its new backup job:
+```text
 *list clients
 Automatically selected Catalog: MyCatalog
 Using Catalog "MyCatalog"
@@ -746,7 +743,7 @@ Using Catalog "MyCatalog"
 +----------+------------------+---------------+--------------+
 ```
 Let's run the new `BackupWorkstation` job:
-```
+```text
 *run
 Using Catalog "MyCatalog"
 A job name must be specified.
@@ -771,7 +768,7 @@ You have messages.
 ```
 
 And for a quick check of the contents (for testing, there was a file called `this-is-workstation1.txt` in `/home/ubuntu` on that system):
-```
+```text
 *restore
 ...
      5: Select the most recent backup for a client
