@@ -400,6 +400,17 @@ Replace `<username>` with the actual username. Also, if you are adding the curre
 Be mindful of who is added to the `bacula` group: members of this group are able to read all the data that is being backed up!
 ```
 
+### Cleaning up
+We have added new resources to some Bacula components, and changed some existing ones. There are also resources we didn't touch, but they will show up in the console or logs. Optionally, we can remove them to cleanup our config files.
+
+In `/etc/bacula/bacula-dir.conf`:
+ * all the `Autochanger` resources can be removed, since they are not referred to by any other resource.
+
+In `/etc/bacula/bacula-sd.conf`:
+ * The `Autochanger` resources can be removed, as it's not being used.
+ * The `FileChgr1-Dev1`, `FileChgr1-Dev2`, `FileChgr2-Dev1`, and `FileChgr2-Dev2` Devices, referred to by the Autochangers above, should then also be removed.
+
+
 ## Our first backup and restore
 We now have everything in place to run our first backup job.
 
