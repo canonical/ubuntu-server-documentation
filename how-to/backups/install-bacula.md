@@ -793,26 +793,3 @@ $ dir this*
 * The [Bacula home page](http://www.bacula.org/) contains the latest Bacula news and developments.
 
 * Also, see the [Bacula Ubuntu Wiki](https://help.ubuntu.com/community/Bacula) page.
-
-
-
-Useful commands:
-- list joblog jobid=<N>
-- list jobs
-- list volumes
-- run job=<name> yes
-
-
-Restoring
-restore
-5 (Select the most recent backup for a client)
-defined client: : workstation-fd
-navigate to path
-type "mark <file>"
-done
-Use "mod" to change restore: you can restore in another client, another path, etc
-
-job status codes: https://www.bacula.org/15.0.x-manuals/en/main/Job_status_Error_codes.html#blb:director:job:status
-
-
-Be mindful of 127.0.0.1!!! Better to avoid it!!!
