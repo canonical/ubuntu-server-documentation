@@ -559,26 +559,11 @@ drwxr-xr-x   1 root     root              12  2025-10-20 14:03:44  /home/
 $ cd home/ubuntu
 cwd is: /home/ubuntu/
 $ dir
-drwxr-xr-x   1 ubuntu   ubuntu           424  2025-10-20 14:03:50  /home/ubuntu/.bash-git-prompt/
--rw-rw-r--   1 ubuntu   ubuntu           258  2025-10-20 14:03:49  /home/ubuntu/.bash_aliases
 -rw-------   1 ubuntu   ubuntu            32  2025-10-20 18:10:51  /home/ubuntu/.bash_history
--rw-r--r--   1 ubuntu   ubuntu          2678  2025-10-20 14:03:50  /home/ubuntu/.bash_local.rc
 -rw-r--r--   1 ubuntu   ubuntu           220  2025-10-20 14:03:50  /home/ubuntu/.bash_logout
 -rw-r--r--   1 ubuntu   ubuntu          3830  2025-10-20 14:03:50  /home/ubuntu/.bashrc
-drwx------   1 ubuntu   ubuntu            40  2025-10-20 14:03:49  /home/ubuntu/.cache/
--rw-r--r--   1 ubuntu   ubuntu            57  2025-10-20 14:03:49  /home/ubuntu/.devscripts
--rw-r--r--   1 ubuntu   ubuntu           236  2025-10-20 14:03:49  /home/ubuntu/.dput.cf
-drwxrwxr-x   1 ubuntu   ubuntu            40  2025-10-20 14:03:49  /home/ubuntu/.dput.d/
--rw-rw-r--   1 ubuntu   ubuntu          1306  2025-10-20 14:03:49  /home/ubuntu/.gitconfig
--rw-------   1 ubuntu   ubuntu            20  2025-10-20 17:21:30  /home/ubuntu/.lesshst
 -rw-r--r--   1 ubuntu   ubuntu           807  2025-10-20 14:03:44  /home/ubuntu/.profile
--rw-rw-r--   1 ubuntu   ubuntu            29  2025-10-20 17:27:58  /home/ubuntu/.python_history
--rw-r--r--   1 ubuntu   ubuntu           595  2025-10-20 14:03:49  /home/ubuntu/.quiltrc
--rw-r--r--   1 ubuntu   ubuntu           566  2025-10-20 14:03:49  /home/ubuntu/.quiltrc-dpkg
 drwx------   1 ubuntu   ubuntu            30  2025-10-20 14:03:45  /home/ubuntu/.ssh/
--rw-r--r--   1 ubuntu   ubuntu          2434  2025-10-20 14:03:49  /home/ubuntu/.tmux.conf
-drwxr-xr-x   1 ubuntu   ubuntu            30  2025-10-20 14:03:49  /home/ubuntu/.vim/
-drwxrwxr-x   1 ubuntu   ubuntu            14  2025-10-20 14:03:50  /home/ubuntu/bin/
 -rw-rw-r--   1 ubuntu   ubuntu             0  2025-10-20 18:10:50  /home/ubuntu/this-is-on-the-server.txt
 ```
 
