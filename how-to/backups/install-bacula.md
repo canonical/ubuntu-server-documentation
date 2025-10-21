@@ -665,65 +665,141 @@ Job queued. JobId=9
 ```
 By giving a restoration prefix of `/`, we are essentially asking to restore the file at its original full path.
 
-### File
-
-### Storage
-
-Bacula has support for many different storage devices, notable tape drives, and the default configuration has many examples. Here we will configure a path for the Storage component to use for backups and restores, and it is assumed that this path is a mount point for some external storage device.
-
 
 ## Adding a client
+If we want to start backing up a new system, we need to install the File Daemon on that system and include it in the Bacula Director. In this example, the new system we are adding is called `workstation1`.
 
-On the client
+First, on the system that we want to add, let's install the client portion of Bacula, which is the File Daemon component:
 
+```
 sudo apt install bacula-fd
 ```
+Next, update the Director resource in `/etc/bacula/bacula-fd.conf` to point at the existing Director we have already deployed:
+```
 Director {
-  Name = bacula-dir ## same as Director's Name on the Director server
-  Password = "ue2FpvuVaztKON1nibj-tfYUTXUFzp5gT" # same as the Client resource for this system on the Director server
-  Address = bacula-dir.lxd # IP/hostname of the Director server. Only needed if ConnectToDirector is used
+  Name = bacula-server-dir # same as Director's Name on the Director server
+  Password = "JdRJy-5vaCuj7FywN2rXK0xDYsbtui6Mj" # to be added to the Director
 }
 ```
+Notes:
+ * `Name`: This has to be the same name set on the Director's `/etc/bacula/bacula-dir.conf` file, in the `Director` resource over there. It's not the hostname.
+ * `Password`: The password was randomly generated when the `bacula-fd` package was installed. This password has to match the password in the new `Client` resource that we will add to the Director next.
+
+Also in `/etc/bacula/bacula-fd.conf`, we have to remove or comment out the `FDAddress` parameter in the `FileDaemon` resource, so that this service will listen on all available network interfaces, and not just localhost:
 ```
 FileDaemon {
-  Name = workstation-fd
-  FDport = 9102                  # where we listen for the director
+  Name = workstation1-fd
+  FDport = 9102           # where we listen for the director
   WorkingDirectory = /var/lib/bacula
   Pid Directory = /run/bacula
   Maximum Concurrent Jobs = 20
   Plugin Directory = /usr/lib/bacula
-  #FDAddress = 127.0.0.1 # don't set: default is to listen on all addresses
+  #FDAddress = 127.0.0.1  # default is to listen on all interfaces
 }
 ```
+And finally, in the same file, update the `Messages` resource and update the Director name in there as well:
+```
+Messages {
+    Name = Standard
+    director = bacula-server-dir = all, !skipped, !restored, !verified, !saved
+}
+```
+With these changes done, restart the File Daemon:
+```
+sudo systemctl restart bacula-fd.service
+```
 
-On the director:
+Now we switch to the Director system, where we have to let it know about this new Client that we just provisioned.
 
-Add client instance to director:
+In `/etc/bacula/bacula-dir.conf`, add a new `Client` resource:
 ```
 Client {
-    Name = workstation-fd
-    Address = workstation.lxd
+    Name = workstation1-fd
+    Address = workstation1.lxd
     FDPort = 9102
     Catalog = MyCatalog
-    Password = "ue2FpvuVaztKON1nibj-tfYUTXUFzp5gT" # password from bacula-fd.conf on the new client
+    Password = "JdRJy-5vaCuj7FywN2rXK0xDYsbtui6Mj" # password from bacula-fd.conf on workstation1-fd
     File Retention = 60 days
     Job Retention = 6 months
     AutoPrune = yes
 }
 ```
-New job on the director:
+Notes:
+ * `Name`: The name has to match the name defined in the `FileDaemon` resource from `/etc/bacula/bacula-fd.conf` of the system we just added.
+ * `Password`: The password has to be the same as the one defined in the `Director` resource from `/etc/bacula/bacula-fd.conf` of that system.
+ * `Address`: The hostname or IP of the system we added.
 
+This makes the Director know how to reach the new client.
+
+Now we have to define a new job to backup files from this new client. Again on `/etc/bacula/bacula-dir.conf` on the Director, let's add a new `Job` resource:
 ```
 Job {
     Name = "BackupWorkstation"
     JobDefs = "DefaultJob"
-    Client = workstation-fd
+    Client = workstation1-fd
 }
 ```
+This job inherits all parameters from the `DefaultJob`, and just overrides the client.
 
-console commands
-list clients
+With this done, we can restart the Director:
+```
+sudo systemctl restart bacula-dir.service
+```
 
+If we now enter the console, we should be able to list the new client, and run its new backup job:
+```
+*list clients
+Automatically selected Catalog: MyCatalog
+Using Catalog "MyCatalog"
++----------+------------------+---------------+--------------+
+| clientid | name             | fileretention | jobretention |
++----------+------------------+---------------+--------------+
+|        1 | bacula-server-fd |     5,184,000 |   15,552,000 |
+|        2 | workstation1-fd  |     5,184,000 |   15,552,000 |
++----------+------------------+---------------+--------------+
+```
+Let's run the new `BackupWorkstation` job:
+```
+*run
+Using Catalog "MyCatalog"
+A job name must be specified.
+The defined Job resources are:
+     1: HomeBackup
+     2: BackupWorkstation
+     3: BackupCatalog
+     4: RestoreFiles
+Select Job resource (1-4): 2
+Run Backup job
+JobName:  BackupWorkstation
+Level:    Incremental
+Client:   workstation1-fd
+FileSet:  Home Set
+Pool:     File (From Job resource)
+Storage:  FileBackup (From Job resource)
+When:     2025-10-21 21:02:48
+Priority: 10
+OK to run? (Yes/mod/no): yes
+Job queued. JobId=14
+You have messages.
+```
+
+And for a quick check of the contents (for testing, there was a file called `this-is-workstation1.txt` in `/home/ubuntu` on that system):
+```
+*restore
+...
+     5: Select the most recent backup for a client
+...
+Select item:  (1-14): 5
+Defined Clients:
+     1: bacula-server-fd
+     2: workstation1-fd
+Select the Client (1-2): 2
+...
+$ cd home/ubuntu
+cwd is: /home/ubuntu/
+$ dir this*
+-rw-rw-r--   1 ubuntu   ubuntu             0  2025-10-21 21:02:08  /home/ubuntu/this-is-workstation1.txt
+```
 
 ## Further reading
 
