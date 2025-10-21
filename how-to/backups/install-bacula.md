@@ -23,11 +23,6 @@ These services and applications can be run on multiple servers and clients, or t
 
 In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacule File service on a workstation, to remotely backup its data.
 
-
-TBD
-
-IMAGE
-
 ## Installing the Server Components
 
 The Bacula components can be installed on multiple systems, or they can be grouped together where it makes sense. A fully distributed installation might be appealing and is more scalable, but is also harder to configure. Here we will pick something in between:
