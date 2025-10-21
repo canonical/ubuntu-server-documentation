@@ -9,11 +9,7 @@ Bacula is made up of several components and services that are used to manage bac
 
 - **Bacula Director**: A service that controls all backup, restore, verify, and archive operations.
 
-- **Bacula Console**: An application that allows communication with the Director. There are three versions of the Console:
-  
-  - Text-based command line.
-    
-  - Qt GUI interface.
+- **Bacula Console**: An application that allows communication with the Director.
 
 - **Bacula File**: This application is installed on machines to be backed up, and is responsible for handling data requested by the Director.
 
