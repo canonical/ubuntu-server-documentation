@@ -719,7 +719,7 @@ Client {
 ```
 Notes:
  * `Name`: The name has to match the name defined in the `FileDaemon` resource from `/etc/bacula/bacula-fd.conf` of the system we just added.
- * `Password`: The password has to be the same as the one defined in the `Director` resource from `/etc/bacula/bacula-fd.conf` of that system. Since this is referring to a new client, installed on a different system, the randomly generated password that is in this field is NOT correct, and needs to be replaced with the password from the `/etc/bacula/bacula-fd.conf` file on the new client.
+ * `Password`: The password has to be the same as the one defined in the `Director` resource from `/etc/bacula/bacula-fd.conf` of that system.
  * `Address`: The hostname or IP of the system we added.
 
 This makes the Director know how to reach the new client.
