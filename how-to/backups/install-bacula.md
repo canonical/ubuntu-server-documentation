@@ -205,7 +205,8 @@ Storage {
   Name = FileBackup
   Address = bacula-server.lxd
   SDPort = 9103
-  Password = "<randomly generated>"
+  # For this password: sudo grep ^SDPASSWD /etc/bacula/common_default_passwords
+  Password = "<SDPASSWD>"
   Device = FileBackup
   Media Type = File
 }
