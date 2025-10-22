@@ -531,7 +531,7 @@ If we inspect the backup target location on the Storage server (which in this de
 -rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
 ```
 
-So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` job. Below is the output of an interactive `restore` session where we selected the option "Select the most recent backup for a client":
+So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` command (the `RestoreFiles` job should never be executed directly). Below is the output of an interactive `restore` session where we selected the option "Select the most recent backup for a client":
 ```text
 First you select one or more JobIds that contain files
 to be restored. You will be presented several methods
