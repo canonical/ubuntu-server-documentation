@@ -678,7 +678,7 @@ Director {
 ```
 Notes:
  * `Name`: This has to be the same name set on the Director's `/etc/bacula/bacula-dir.conf` file, in the `Director` resource over there. It's not the hostname.
- * `Password`: The password was randomly generated when the `bacula-fd` package was installed. This password has to match the password in the new `Client` resource that we will add to the Director next.
+ * `Password`: The password was randomly generated when the `bacula-fd` package was installed. This password has to match the password in the new `Client` resource that we will add to the Director next, so keep note of it.
 
 Also in `/etc/bacula/bacula-fd.conf`, we have to remove or comment out the `FDAddress` parameter in the `FileDaemon` resource, so that this service will listen on all available network interfaces, and not just localhost:
 ```
