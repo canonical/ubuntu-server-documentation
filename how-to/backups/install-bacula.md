@@ -270,6 +270,11 @@ These two options need to match the following:
  * `Name`: This names which Director is allowed to use this Storage component, and therefore needs to match the `Name` defined in the `Director` resource in `/etc/bacula/bacula-dir.conf` on the Director system.
  * `Password`: The password that the Director needs to use to authenticate against this Storage component. This needs to match the `Password` set in the `Storage` resource in `/etc/bacula/bacula-dir.conf` on the Directory system.
 
+After making all changes to the `bacula-sd.conf` configuration file, restart the Storage Daemon:
+```console
+sudo systemctl restart bacula-sd.service
+```
+
 #### The `Job` resource
 
 The `Job` resource is the basic unit in Bacula, and ties everything together:
