@@ -90,7 +90,7 @@ Director {
   WorkingDirectory = "/var/lib/bacula"
   PidDirectory = "/run/bacula"
   Maximum Concurrent Jobs = 20
-  Password = "P68sjhhjPTf4FmZsUNOUpQPj8MwV86OA7"
+  Password = "<randomly generated>"
   Messages = Daemon
   #DirAddress = 127.0.0.1
 }
@@ -145,7 +145,7 @@ Client {
   Address = bacula-server.lxd  # use the real hostname instead of "localhost"
   FDPort = 9102
   Catalog = MyCatalog
-  Password = "R_MqfSOpsIWYx0PAwMSHEFzCHF9OkcmFI"
+  Password = "<randomly generated>"
   File Retention = 60 days
   Job Retention = 6 months
   AutoPrune = yes
@@ -205,7 +205,7 @@ Storage {
   Name = FileBackup
   Address = bacula-server.lxd
   SDPort = 9103
-  Password = "nuzA3-p89t_HXHYcCeoUtX7FdFQbJv8wB"
+  Password = "<randomly generated>"
   Device = FileBackup
   Media Type = File
 }
@@ -245,7 +245,7 @@ Next, let's define a `Device`, also in `/etc/bacula/bacula-sd.conf`:
 Device {
     Name = FileBackup
     Media Type = File
-    Archive Device = /storage/backup
+    Archive Device = /storage/backups
     Random Access = yes
     Automatic Mount = yes
     Removable Media = no
@@ -256,14 +256,14 @@ Device {
 What we need to pay close attention to here is:
  * `Name`: This has to match the name this device will be referred to in other services. In our case, it matches the name we are using in the `Device` entry of the `Storage` definition we added to the Director configuration file `/etc/bacula/bacula-dir.conf` earlier.
  * `Media Type`: Likewise, this has to match the entry we used in the `Storage` definition in the Director.
- * `Archive Device`: Since we are going to store backups as files, and not as tapes, the `Archive Device` configuration points to a directory. Here we are using `/storage/backup`, which can be the mount point of an external storage for example. This is the target directory of all backup jobs what will refer to this device of this storage server.
+ * `Archive Device`: Since we are going to store backups as files, and not as tapes, the `Archive Device` configuration points to a directory. Here we are using `/storage/backups`, which can be the mount point of an external storage for example. This is the target directory of all backup jobs what will refer to this device of this storage server.
  * `Label Media`: Since we are using files and not real tapes, we want the Storage daemon to actually name the files for us. This configuration option allows it to do so.
 
 Lastly, the Storage component needs to be told about the Director. This is done with a `Director` resource in `/etc/bacula/bacula-sd.conf`. No changes should be needed here, but it's best to check:
 ```
 Director {
     Name = bacula-server-dir
-    Password = NWib9m5fym8_bMDXtLdncPNB6qWDWCtCC
+    Password = "<randomly generated>"
 }
 ```
 These two options need to match the following:
@@ -305,9 +305,9 @@ JobDefs {
 This configuration is selecting some defaults:
   * `Name`: The name of this Job.
   * `Client`: To which client it applies. This must match an existing `Client {}` resource definition.
-  * `FileSet`: The name of the `FileSet` resource that defines the data to be backed up.
+  * `FileSet`: The name of the `FileSet` resource that defines the data to be backed up. We changed it to `Home Set` in this example.
   * `Schedule`: The name of the `Schedule` resource that defines when this job should run.
-  * `Storage`: Which `Storage` resource this job should use.
+  * `Storage`: Which `Storage` resource this job should use. We changed it to `FileBackup` in this example.
   * `Pool`: Which `Pool` resource this job should use.
 
 We can now take advantage of this set of defaults, and define a new Job resource with minimal config:
@@ -343,9 +343,9 @@ Important parameters defined above:
  * `Name`: The name of this job.
  * `Type`: This is a job that restores backups (`Restore`).
  * `Client`: Where the files should be restored to. This can be overridden when the job is invoked.
- * `Storage`: The storage from where the backup should be restored.
- * `FileSet` and `Pool`: These are not used, but must be present and point to valid resources.
- * `Where`: The path where the restored files should be placed. This can also be overridden when the job is invoked.
+ * `Storage`: The storage from where the backup should be restored. We changed it to `FileBackup` in this example.
+ * `FileSet` and `Pool`: These are not used, but must be present and point to valid resources. We changed `FileSet` to `Home Set` in this example.
+ * `Where`: The path where the restored files should be placed. This can also be overridden when the job is invoked. We changed it to `/storage/restore` in this example.
 
 ```{tip}
 For more details about all the options of the `Job` resource, please check the upstream [Job Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#blb:JobResource) documentation.
@@ -412,6 +412,10 @@ In `/etc/bacula/bacula-sd.conf`:
  * The `Autochanger` resources can be removed, as it's not being used.
  * The `FileChgr1-Dev1`, `FileChgr1-Dev2`, `FileChgr2-Dev1`, and `FileChgr2-Dev2` Devices, referred to by the Autochangers above, should then also be removed.
 
+We made many changes to a few configuration files, so let's restart all the related services:
+```console
+sudo systemctl restart bacula-dir.service bacula-fd.service bacula-sd.service
+```
 
 ## Our first backup and restore
 We now have everything in place to run our first backup job.
@@ -667,7 +671,7 @@ Next, update the Director resource in `/etc/bacula/bacula-fd.conf` to point at t
 ```
 Director {
   Name = bacula-server-dir # same as Director's Name on the Director server
-  Password = "JdRJy-5vaCuj7FywN2rXK0xDYsbtui6Mj" # to be added to the Director
+  Password = "<randomly generated>"
 }
 ```
 Notes:
@@ -707,7 +711,7 @@ Client {
     Address = workstation1.lxd
     FDPort = 9102
     Catalog = MyCatalog
-    Password = "JdRJy-5vaCuj7FywN2rXK0xDYsbtui6Mj" # password from bacula-fd.conf on workstation1-fd
+    Password = "<to be filled in>" # password from bacula-fd.conf on workstation1-fd
     File Retention = 60 days
     Job Retention = 6 months
     AutoPrune = yes
@@ -715,7 +719,7 @@ Client {
 ```
 Notes:
  * `Name`: The name has to match the name defined in the `FileDaemon` resource from `/etc/bacula/bacula-fd.conf` of the system we just added.
- * `Password`: The password has to be the same as the one defined in the `Director` resource from `/etc/bacula/bacula-fd.conf` of that system.
+ * `Password`: The password has to be the same as the one defined in the `Director` resource from `/etc/bacula/bacula-fd.conf` of that system. Since this is referring to a new client, installed on a different system, the randomly generated password that is in this field is NOT correct, and needs to be replaced with the password from the `/etc/bacula/bacula-fd.conf` file on the new client.
  * `Address`: The hostname or IP of the system we added.
 
 This makes the Director know how to reach the new client.
