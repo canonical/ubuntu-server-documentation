@@ -101,20 +101,13 @@ Since the client certificates and keys are only required on the client machine, 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
 
 ```bash
-root@server:/# ls /usr/share/doc/openvpn/examples/sample-config-files/*
 /usr/share/doc/openvpn/examples/sample-config-files/client.conf
 /usr/share/doc/openvpn/examples/sample-config-files/server.conf
 ```
 
-If these files under `/usr/share/doc/*` are not available:
-
-> Official minimal environments like Ubuntu Docker are optimized to never install stuff like documentation files (you probably also have not `sudo` there, etc).
-> To re-install the necessary documentation, at this point you can run these commands, as the root user:
->
-> ```bash
-> echo 'path-include=/usr/share/doc/openvpn/examples/*' > /etc/dpkg/dpkg.cfg.d/my-openvpn
-> apt install --reinstall openvpn
-> ```
+If these files under `/usr/share/doc/*` are not available (for example, the system was provisioned as a minimal install), you can fetch them directly from the Ubuntu package repositories:
+ * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf?h=applied/ubuntu/noble-devel)
+ * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf?h=applied/ubuntu/noble-devel)
 
 Start by copying the example server configuration to `/etc/openvpn/server.conf`:
 
@@ -122,7 +115,7 @@ Start by copying the example server configuration to `/etc/openvpn/server.conf`:
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
 ```
 
-In Ubuntu 20.04 or older, do this instead:
+In Ubuntu 20.04 or older, the file is compressed, so do this instead:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
