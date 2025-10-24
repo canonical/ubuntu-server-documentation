@@ -137,7 +137,9 @@ For more details about all the options of the `FileSet` resource, please check t
 
 #### The `Client` resource
 
-The default installation will have defined a `Client` resource. It should be similar to the following:
+The `Client` resource is used to define a system to be backed up. That system will have at least the File Daemon installed, and will be contacted by the Director whenever there is a backup job for it.
+
+The default installation will have defined this resource already, and it should be similar to the following:
 ```
 # Client (File Services) to backup
 Client {
