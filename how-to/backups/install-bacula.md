@@ -421,7 +421,7 @@ We made many changes to a few configuration files, so let's restart all the rela
 sudo systemctl restart bacula-dir.service bacula-fd.service bacula-sd.service
 ```
 
-## Our first backup and restore
+## Running a backup job
 We now have everything in place to run our first backup job.
 
 On the Bacula Director system, run the `bconsole` command as root to enter the Bacula Console:
@@ -532,6 +532,8 @@ If we inspect the backup target location on the Storage server (which in this de
 ```
 -rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
 ```
+
+## Restoring a backup
 
 So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` command (the `RestoreFiles` job should never be executed directly). Below is the output of an interactive `restore` session where we selected the option "Select the most recent backup for a client":
 ```text
