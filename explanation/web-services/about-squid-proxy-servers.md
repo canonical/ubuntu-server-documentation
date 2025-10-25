@@ -13,9 +13,42 @@ When selecting a computer system for use as a dedicated Squid caching proxy serv
 
 ## Caching
 
-Squid can implement caching and proxying of Secure Sockets Layer (SSL) requests and caching of Domain Name Server ({term}`DNS`) lookups, and perform transparent caching. Squid also supports a wide variety of caching protocols, such as Internet Cache Protocol (ICP), the Hyper Text Caching Protocol (HTCP), the Cache Array Routing Protocol (CARP), and the Web Cache Coordination Protocol (WCCP).
+Squid implements a sophisticated caching system that stores frequently requested web content locally, reducing bandwidth usage and improving response times. When a client requests web content, Squid follows this process:
 
-If you would like to know how to install and configure your own Squid server, refer to {ref}`our installation guide <install-a-squid-server>`.
+1. Checks if the requested content exists in its cache
+2. If found (cache hit), validates if the content is still fresh using HTTP headers
+3. If fresh, serves the content directly from cache
+4. If not found (cache miss) or stale, fetches the content from the origin server
+
+### Cache Storage
+
+Squid offers multiple storage types for its cache:
+- Memory cache (in-RAM) for fastest access
+- Disk cache for larger storage capacity
+- Hierarchical cache directories for efficient file organization
+
+### Cache Control Factors
+
+Several factors determine whether and how long content is cached:
+
+1. HTTP Headers
+   - Cache-Control directives from origin servers
+   - Expires headers
+   - Last-Modified timestamps
+   - ETag values
+
+2. Squid Configuration
+   - `cache_dir` settings for disk cache size and structure
+   - `maximum_object_size` limiting cache entry size
+   - `minimum_object_size` for efficiency
+   - `refresh_pattern` rules for cache retention policies
+
+3. Content Type
+   - Static content (images, CSS, JS) is highly cacheable
+   - Dynamic content may require special configuration
+   - HTTPS traffic needs SSL bump configuration to cache
+
+For installation and configuration instructions, refer to {ref}`our installation guide <install-a-squid-server>`.
 
 ## Further reading
 
