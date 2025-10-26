@@ -7,23 +7,29 @@ However, you do have a spare system inside your network that you could use. Here
 
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 
+
+
+```mermaid
+flowchart LR
+  %% ASCII -> Mermaid conversion of: laptop over wlan0 to public untrusted network,
+  %% WireGuard wg0 tunnel (10.90.90.1/24 <-> 10.90.90.2/24) to VPN gw and VPN network.
+
+  laptop["Laptop"]
+
+  internet(("public untrusted<br/>network/internet"))
+  vpngw["VPN gw"]
+  vpn(("VPN network"))
+
+  %% Physical/normal networking
+  laptop --|wlan0|--> internet
+  internet --|eth0|--> vpngw
+
+  %% WireGuard VPN endpoints
+  laptop -. "wg0 10.90.90.1/24" .-> vpn
+  vpngw  -. "wg0 10.90.90.2/24" .-> vpn
+
 ```
-                       public internet
-10.10.10.11/24
-        home0│            xxxxxx       ppp0 ┌────────┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─ppp0  xxx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │         10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-                                                  ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-                                            wg0 ──┤   │     │   │     │   │
-                                  10.10.10.10/32  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
-Reserved for VPN users:
-10.10.10.10-49
-```
+
 
 ## Router changes
 
