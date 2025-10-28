@@ -40,105 +40,50 @@ Change the **`visible_hostname`** directive to give the Squid server a specific 
 visible_hostname weezie
 ```
 
-### Configure Caching
+### Configure the memory cache
 
-The effectiveness of Squid's caching depends on several key configuration directives in `/etc/squid/squid.conf`. Here's a comprehensive guide to configuring caching:
+The default setting is to use on-memory cache. This example tells squid to use up to 512MB of memory, erasing the last recently used content when the cache is full to free space for new items:
 
-#### Configure on-disk cache
+```text
+cache_mem 512 MB
+maximum_memory_policy lru
+```
 
-The default setting is to use on-memory cache. By changing the **`cache_dir`** directive you can configure use of an on-disk cache. The `cache_dir` directive takes the following arguments:
+### Configure on-disk cache
+
+By changing the **`cache_dir`** directive you can configure use of an on-disk cache. The `cache_dir` directive takes the following arguments:
 
 ```text
 cache_dir <Type> <Directory-Name> <Size-in-MB> <L1-Dirs> <L2-Dirs> [options]
 ```
 
-Example configuration:
+In this example we set the cache configuration to use a `ufs` storage in `/var/spool/squid`, up to 10GB, with 16 directories on the first level of the hierarchy, each of those containing 256 directories for organization.
 
 ```text
-# Basic disk cache configuration
 cache_dir ufs /var/spool/squid 10000 16 256
-
-# Memory cache settings
-cache_mem 512 MB
-maximum_memory_policy lru
 ```
 
-Available storage types:
+The available storage types are:
+* `ufs`: This is the common Squid storage format, good for general use.
+* `aufs`: Uses the same storage format as `ufs`, using POSIX-threads to avoid blocking the main Squid process on disk-I/O. This was formerly known in Squid as `async-io`.
+* `diskd`: Uses the same storage format as `ufs`, using a separate process to avoid blocking the main Squid process on disk-I/O.
+* `rock`: This is a database-style storage. All cached entries are stored in a "database" file, using fixed-size slots. A single entry occupies one or more slots.
 
-* `ufs`: The common Squid storage format, good for general use.
-* `aufs`: Like `ufs` but uses POSIX-threads to prevent blocking on disk-I/O.
-* `diskd`: Like `ufs` but uses a separate process for disk-I/O.
-* `rock`: Database-style storage using fixed-size slots.
+### Configure cached objects size limits
 
-#### Configure Cache Size Limits
-
-Control what objects get cached based on their size:
+The following configuration directives control which objects get cached based on their size, for space optimization, both on disk and in memory:
 
 ```text
-# Object size limits
 maximum_object_size 512 MB
 minimum_object_size 0 KB
 maximum_object_size_in_memory 512 KB
-
-# Memory cache settings
-cache_mem 512 MB
 ```
 
-#### Configure Cache Retention Rules
+### Other caching configuration options
 
-Define how long different types of content stay cached:
+Different options can be used to set retention rules, which determine for how long different types of content stay in the cache, and fine-tuning the caching behavior overall, by determining how squid stores files in the hierarchy, the algorithm for the replacement policy, DNS cache settings, and more.
 
-```text
-# Cache retention rules
-refresh_pattern -i \.(gif|png|jpg|jpeg|ico)$ 1440 20% 10080
-refresh_pattern -i \.(css|js)$ 1440 20% 4320
-refresh_pattern -i \.(html|htm)$ 1440 20% 2880
-refresh_pattern -i \.zip$ 10080 20% 20160
-refresh_pattern . 0 20% 4320
-```
-
-Format: `refresh_pattern [options] regex min-fresh percent-fresh max-fresh`
-
-- `min-fresh`: Time (minutes) an object without an explicit expiry time will be considered fresh
-- `percent-fresh`: Percentage of the object's age to wait before revalidating
-- `max-fresh`: Maximum time (minutes) an object will be considered fresh
-
-#### Configure Cache Optimization
-
-Fine-tune caching behavior:
-
-```text
-# Optimization settings
-cache_replacement_policy heap LFUDA
-memory_replacement_policy heap GDSF
-cache_dir_select_policy round-robin
-
-# Quick abort settings
-quick_abort_min 0 KB
-quick_abort_max 0 KB
-quick_abort_pct 95
-
-# DNS cache settings
-positive_dns_ttl 6 hours
-negative_dns_ttl 1 minute
-```
-
-After making changes to the cache configuration:
-
-1. Verify the configuration:
-   ```bash
-   sudo squid -k parse
-   ```
-
-2. Initialize the cache directory:
-   ```bash
-   sudo squid -z
-   ```
-
-3. Restart Squid:
-   ```bash
-   sudo systemctl restart squid
-   ```
+For a full list of configuration entries, please refer to the [Squid configuration guide](https://www.squid-cache.org/Doc/config/).
 
 ### Access control
 
@@ -173,7 +118,15 @@ Using Squid's access control features, you can configure Squid-proxied Internet 
 
 ## Restart the Squid server
 
-After making any changes to the `/etc/squid/squid.conf` file, you will need to save the file and restart the squid server application. You can restart the server using the following command:
+After making any changes to the `/etc/squid/squid.conf` file, you will need to save the file and restart the squid server application. 
+
+First, you can verify the syntax of your configuration file by running:
+
+```bash
+sudo squid -k parse
+```
+
+You can restart the server using the following command:
 
 ```bash
 sudo systemctl restart squid.service
@@ -404,23 +357,3 @@ Success Criteria:
 - [The Squid Website](http://www.squid-cache.org/)
 
 - [Ubuntu Wiki page on Squid](https://help.ubuntu.com/community/Squid).
-This PR enhances the Squid server documentation with comprehensive guidance on caching configuration and troubleshooting.
-
-Changes made:
-- Added detailed explanation of Squid caching mechanisms
-- Enhanced caching configuration examples with best practices
-- Added comprehensive troubleshooting guide for common caching issues
-- Included step-by-step verification procedures
-- Updated configuration examples with modern cache optimization settings
-
-The documentation now provides clear guidance on:
-- Understanding how Squid caching works
-- Configuring caching effectively
-- Troubleshooting caching issues
-- Verifying cache performance
-- Optimizing cache settings
-
-Testing:
-- All configuration examples have been validated
-- Commands and procedures have been verified
-- Documentation formatting has been checked
