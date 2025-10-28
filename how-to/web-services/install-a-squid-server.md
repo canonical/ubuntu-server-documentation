@@ -79,9 +79,32 @@ minimum_object_size 0 KB
 maximum_object_size_in_memory 512 KB
 ```
 
+### Configure cached objects lifetime
+
+Using the `refresh_pattern` configuration directive controls how long cached objects stay fresh before they need to be revalidated with the origin server. It is configured as:
+
+```text
+refresh_pattern regex min percent max [options]
+```
+
+where `regex` needs to match against the filename, `min` and `max` set the time limits in minutes for freshness, and a `percent` of the object's age to calculate the refresh threshold.
+
+In the following example, static web assets (such as images, css and scripts) are configured to be kept for 7 to 30 days + 90% of their age, based on the `Last-Modified` header, while everything else is kept up to 3 days + 20% of their age.
+
+```text
+refresh_pattern -i \.(gif|jpg|png|css|js)$  10080  90%  43200
+refresh_pattern .                           0      20%  4320
+```
+
+### Caching HTTPS content
+
+By default, Squid can't cache HTTPS because the traffic is encrypted. There are different strategies for enabling HTTPS caching, such as TLS interception via `CONNECT` requests, origin server caching based on `Cache-Control` and `ETag` headers, or access-control only solutions.
+
+Please refer to the [Squid HTTPS documentation](https://wiki.squid-cache.org/Features/HTTPS) to learn more.
+
 ### Other caching configuration options
 
-Different options can be used to set retention rules, which determine for how long different types of content stay in the cache, and fine-tuning the caching behavior overall, by determining how squid stores files in the hierarchy, the algorithm for the replacement policy, DNS cache settings, and more.
+Different options can be used to fine-tune the caching behavior overall, by determining how squid stores files in the hierarchy, the algorithm for the replacement policy, DNS cache settings, compatibility with different scenarios, and more.
 
 For a full list of configuration entries, please refer to the [Squid configuration guide](https://www.squid-cache.org/Doc/config/).
 
