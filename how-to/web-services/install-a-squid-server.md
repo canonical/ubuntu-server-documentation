@@ -162,218 +162,36 @@ The same applies if the **include** config statement was used to pull in more fi
 
 ## Troubleshooting
 
-### Diagnosing Caching Issues
+To monitor Squid behavior and check for potential errors and problems, there are useful commands to be executed and files to be checked.
 
-Before making any changes, gather information about your Squid server's current state:
+Squid version and status can be checked with:
 
-1. Check Squid Status and Version
-   ```bash
-   # Verify Squid version
-   sudo squid -v
-   
-   # Check service status
-   sudo systemctl status squid
-   ```
-
-2. Monitor Logs in Real-time
-   ```bash
-   # Watch access log for cache hits/misses
-   sudo tail -f /var/log/squid/access.log
-   
-   # Check cache log for errors
-   sudo tail -f /var/log/squid/cache.log
-   ```
-
-3. Review Cache Statistics
-   ```bash
-   # Get cache manager statistics
-   squidclient mgr:info
-   ```
-
-### Common Cache Issues and Solutions
-
-#### 1. Cache Directory Problems
-```text
-# Proper cache directory configuration
-cache_dir ufs /var/spool/squid 5000 16 256
-
-# Check directory permissions
-sudo chown proxy:proxy /var/spool/squid
-sudo chmod 750 /var/spool/squid
-```
-- Ensure cache_dir is uncommented
-- Set appropriate cache size (5000 MB in example)
-- Verify permissions for Squid user (usually 'proxy')
-
-#### 2. Object Size Configuration
-```text
-# Adjust object size limits
-maximum_object_size 100 MB
-minimum_object_size 0 KB
-maximum_object_size_in_memory 512 KB
-```
-- Increase limits if large files aren't being cached
-- Monitor cache.log for size-related rejections
-- Balance memory cache size with server resources
-
-#### 3. Access Control Configuration
-```text
-# Example ACL configuration
-acl ALLOWED_CLIENTS src 192.168.1.0/24
-http_access allow ALLOWED_CLIENTS
-
-# For HTTPS traffic
-ssl_bump server-first all
-sslcrtd_program /usr/lib/squid/security_file_certgen -s /var/lib/squid/ssl_db -M 4MB
-```
-- Verify client IPs match ACLs
-- Configure SSL bump for HTTPS caching
-- Check for TCP_DENIED in access.log
-
-#### 4. Cache Retention Rules
-```text
-# Optimized refresh patterns
-refresh_pattern -i \.(gif|png|jpg|jpeg|ico)$ 1440 20% 10080
-refresh_pattern -i \.(css|js)$ 1440 20% 4320
-refresh_pattern -i \.(html|htm)$ 1440 20% 2880
-refresh_pattern . 0 20% 4320
-```
-- Adjust patterns based on content types
-- Monitor effectiveness with access.log
-- Balance freshness vs cache hits
-
-### Verifying and Monitoring Cache Performance
-
-1. Check Cache Hit Rates
-   ```bash
-   # Monitor cache hits
-   squidclient mgr:info | grep "Hit Rate"
-   
-   # Watch for cache hits in real-time
-   sudo tail -f /var/log/squid/access.log | grep 'TCP_HIT\|TCP_MEM_HIT'
-   ```
-
-2. Analyze Access Log Entries
-   - TCP_HIT: Served from cache
-   - TCP_MISS: Not in cache
-   - TCP_REFRESH_HIT: Validated with origin
-   - TCP_TUNNEL: HTTPS traffic (not cached)
-   - TCP_DENIED: Blocked by ACLs
-
-3. Advanced Debugging
-   ```text
-   # Enable detailed logging
-   debug_options ALL,1 28,3
-   
-   # Check cache directory status
-   sudo squid -k check
-   ```
-
-4. Reset Corrupt Cache
-   ```bash
-   # Clear and reinitialize cache
-   sudo systemctl stop squid
-   sudo rm -rf /var/spool/squid/*
-   sudo squid -z
-   sudo systemctl start squid
-   ```
-
-### Applying Configuration Changes
-
-After making changes to squid.conf:
-
-1. Back up the configuration
-   ```bash
-   sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.backup
-   ```
-
-2. Validate and apply changes
-   ```bash
-   # Check configuration syntax
-   sudo squid -k parse
-   
-   # Restart Squid service
-   sudo systemctl restart squid
-   
-   # Verify service status
-   sudo systemctl status squid
-   ```
-
-### Verifying Caching Effectiveness
-
-After applying configuration changes, follow these steps to verify that Squid is caching content correctly:
-
-#### 1. Monitor Real-time Caching Activity
 ```bash
-# Watch access log in real-time
-sudo tail -f /var/log/squid/access.log
+sudo squid -v
+sudo systemctl status squid
 ```
 
-While monitoring, look for these cache status indicators:
+Checking or watching the log files may be useful to see potential errors, and to verify cache hits and misses:
+
+```bash
+sudo cat /var/log/squid/cache.log
+sudo cat /var/log/squid/access.log
+```
+
+For a status summary containing runtime statistics and congfiguration, run:
+
+```bash
+squidclient mgr:info
+```
+
+While monitoring, these cache status indicators can help identifying what is happening with requests:
 - `TCP_MISS`: Content not in cache, fetched from origin
 - `TCP_HIT`: Content served from disk cache
 - `TCP_MEM_HIT`: Content served from memory cache
 - `TCP_REFRESH_HIT`: Cached content revalidated with origin
-- `TCP_TUNNEL`: HTTPS traffic (not cached without SSL bump)
+- `TCP_TUNNEL`: HTTPS traffic (not cached by default)
 
-Test caching by:
-1. Configure a client browser to use the proxy
-2. Visit a website with static content (images, CSS, JS)
-3. Visit the same site again
-4. First visit should show `TCP_MISS`, second should show `TCP_HIT`
-
-#### 2. Analyze Cache Statistics
-```bash
-# Get detailed cache statistics
-squidclient mgr:info
-
-# Filter for hit ratios
-squidclient mgr:info | grep -i "hit ratio"
-```
-
-Look for:
-- Request Hit Ratios (should be > 0%)
-- Byte Hit Ratios (indicates bandwidth savings)
-- Memory and Disk utilization
-- Number of objects cached
-
-A healthy cache should show:
-- Increasing hit ratios over time
-- Non-zero byte hit ratios
-- Growing number of cached objects
-
-#### 3. Monitor Cache Directory Growth
-```bash
-# Check initial cache size
-sudo du -sh /var/spool/squid
-
-# List cache directories
-sudo ls -l /var/spool/squid
-
-# Monitor directory size changes
-watch -n 60 'sudo du -sh /var/spool/squid'
-```
-
-Verify:
-- Cache directory size increases with usage
-- New swap directories are created
-- Proper permissions for Squid user
-
-#### 4. Check for Error Conditions
-```bash
-# Review cache log for errors
-sudo tail -n 100 /var/log/squid/cache.log
-
-# Monitor for new errors
-sudo tail -f /var/log/squid/cache.log | grep -i "error\|warn\|fatal"
-```
-
-Success Criteria:
-1. Access log shows mix of `TCP_MISS` and `TCP_HIT`
-2. Cache hit ratios are positive and increasing
-3. Cache directory shows growth
-4. No critical errors in logs
-5. Clients report improved response times
+A healthy cache should show increasing hit ratios over time, of non-zero size, and a growing number of cached objects.
 
 ## Further reading
 
