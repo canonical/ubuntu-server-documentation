@@ -67,9 +67,68 @@ You can learn more about `sudo` by reading the {manpage}`sudo(8)` manual page: `
 
 By default, the initial user created by the Ubuntu installer is a member of the group `sudo` which is added to the file `/etc/sudoers` as an authorised `sudo` user. To give any other account full root access through `sudo`, add them to the `sudo` group.
 
-## Adding and deleting users
+## Listing, adding, and deleting local users
 
 Managing local users and groups differs very little from most other {term}`GNU`/Linux operating systems. Ubuntu and other Debian-based distributions encourage the use of the `adduser` package for account management.
+
+Local users and groups are those defined in the `/etc/passwd` and `/etc/group` files, respectively. Via the Name Service Switch ({term}`NSS`) mechanism, however, user and group accounts can also come from other sources, like remote Active Directory or Samba servers, OpenLDAP directory services, and more. Managing accounts in those services in an entirely different matter, and not covered in this document.
+
+### Listing local users
+The local users are defined one per line in the `/etc/passwd` text file. The `cat /etc/passwd` command can be used to list its contents (only a few lines shown below, for brevity):
+```text
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+...
+ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
+```
+```{tip}
+The structure of the `/etc/passwd` file is explained in the {manpage}`passwd(5)` manual page.
+```
+There are basically three types of local users:
+ * system pre-installed users: These are system users essential to a working Linux system, like `root`, `man`, `lp`, and others. Their {term}`UID`s are in the range between 0 and 99.
+ * system users: These users are created dynamically, as services are installed. The UID range here is between 100 and 999.
+ * Regular users: Finally, the remaining range is usable for "real" users, generally representing persons using the system. This UID range starts at 1000 and, by convention, ends at 59999.
+
+```{tip}
+For more details about these UID ranges, including groups and other configuration options for adding users, check the {manpage}`adduser.conf.5` manual page.
+```
+
+To list all local usernames, we can list the contents of `/etc/passwd` with some string manipulation. For example:
+```console
+cat /etc/passwd | cut -d : -f 1
+```
+This command will cut each line at the first column, using the "`:`" character as the delimiter, and result in an output showing all local users:
+```
+root
+daemon
+bin
+sys
+...
+```
+If you want to only show regular users, that is, users with an UID greater than 1000, we can use a regular expression for this filtering:
+```
+cat /etc/passwd | cut -d : -f 1,3 | grep -E ':[0-9]{4}+'
+```
+The regular expression `:[0-9]{4}+` means all digits, repeated 4 times or more. The output will be similar to this:
+```
+nobody:65534
+ubuntu:1000
+```
+```{tip}
+By convention, the `nobody` users has an UID of 65534. That originated back when the user range was limited to 16 bits (so, 0-65535), and is kept for compatibility reasons.
+```
+
+#### A note about remote users
+
+There is another command that, at first glance, looks like it lists all local users as well: `getent passwd`. What this tool is doing, however, is listing all entries from the `passwd` database, and this will include any NSS modules that might be installed and configured.
+
+On a default installation of Ubuntu, with no extra configuration, that will indeed list only the local users, but not in the general case. If you have, for example, `libnss-ldap` installed and configured, the output of `getent passwd` will list all local users, **plus all the remote users** it finds in the LDAP server that it was configured with.
+
+Performing such an exhaustive enumeration is frowned upon, because that can incur a large amount of network traffic, and place an unreasonable burden on the remote server. In fact, most NSS services block such enumeration actions by default.
+
+For more information on the Name Service Switch (NSS) mechanism, please consult the {manpage}`nss(5)` and {manpage}`nsswitch.conf(5)` manual pages.
 
 ### Add a user
 
