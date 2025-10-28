@@ -126,7 +126,7 @@ There is another command that, at first glance, looks like it lists all local us
 
 On a default installation of Ubuntu, with no extra configuration, that will indeed list only the local users, but not in the general case. If you have, for example, `libnss-ldap` installed and configured, the output of `getent passwd` will list all local users, **plus all the remote users** it finds in the LDAP server that it was configured with.
 
-Performing such an exhaustive enumeration is frowned upon, because that can incurr in a large amount of network traffic, and place an unreasonable burden on the remote server. In fact, most NSS services block such enumeration actions by default.
+Performing such an exhaustive enumeration is frowned upon, because that can incur a large amount of network traffic, and place an unreasonable burden on the remote server. In fact, most NSS services block such enumeration actions by default.
 
 For more information on the Name Service Switch (NSS) mechanism, please consult the {manpage}`nss(5)` and {manpage}`nsswitch.conf(5)` manual pages.
 
