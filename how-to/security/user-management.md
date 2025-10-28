@@ -92,7 +92,7 @@ There are basically three types of local users:
  * Regular users: Finally, the remaining range is usable for "real" users, generally representing persons using the system. This UID range starts at 1000 and, by convention, ends at 59999.
 
 ```{tip}
-For more details about these UID ranges, including groups and other configuration options for adding users, please check the {manpage}`adduser.conf.5` manual page.
+For more details about these UID ranges, including groups and other configuration options for adding users, check the {manpage}`adduser.conf.5` manual page.
 ```
 
 To list all local usernames, we can list the contents of `/etc/passwd` with some string manipulation. For example:
