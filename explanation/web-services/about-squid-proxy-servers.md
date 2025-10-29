@@ -15,6 +15,8 @@ When selecting a computer system for use as a dedicated Squid caching proxy serv
 
 Squid can implement caching and proxying of Secure Sockets Layer (SSL) requests and caching of Domain Name Server ({term}`DNS`) lookups, and perform transparent caching. Squid also supports a wide variety of caching protocols, such as Internet Cache Protocol (ICP), the Hyper Text Caching Protocol (HTCP), the Cache Array Routing Protocol (CARP), and the Web Cache Coordination Protocol (WCCP).
 
+Squid caching can be done in-RAM for fastest access, on disk for larger capacity, and may use a hierarchical directory structure for efficient file organization.
+
 If you would like to know how to install and configure your own Squid server, refer to {ref}`our installation guide <install-a-squid-server>`.
 
 ## Further reading
