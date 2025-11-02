@@ -3,24 +3,30 @@
 
 Another usual VPN configuration where one could deploy WireGuard is to connect two distinct networks over the internet. Here is a simplified diagram:
 
-```
-                      ┌─────── WireGuard tunnel ──────┐
-                      │         10.10.9.0/31          │
-                      │                               │
-         10.10.9.0 wgA│               xx              │wgB 10.10.9.1
-                    ┌─┴─┐          xxx  xxxx        ┌─┴─┐
-    alpha site      │   │ext     xx        xx    ext│   │  beta site
-                    │   ├───    x           x    ───┤   │
-    10.10.10.0/24   │   │      xx           xx      │   │  10.10.11.0/24
-                    │   │      x             x      │   │
-                    └─┬─┘      x              x     └─┬─┘
-            10.10.10.1│        xx             x       │10.10.11.1
-    ...┌─────────┬────┘          xx   xxx    xx       └───┬─────────┐...
-       │         │                  xx   xxxxx            │         │
-       │         │                                        │         │
-     ┌─┴─┐     ┌─┴─┐           public internet          ┌─┴─┐     ┌─┴─┐
-     │   │     │   │                                    │   │     │   │
-     └───┘     └───┘                                    └───┘     └───┘
+```mermaid
+
+       flowchart LR
+ subgraph alpha["alpha site — 10.10.10.0/24"]
+        alpha_gw["wgA<br>10.10.10.1<br>10.10.9.0"]
+        a_left["..."]
+        a_right["..."]
+  end
+ subgraph beta["beta site — 10.10.11.0/24"]
+        beta_gw["wgB<br>10.10.11.1<br>10.10.9.1"]
+        b_left["..."]
+        b_right["..."]
+  end
+    alpha_gw --- a_left & a_right
+    beta_gw --- b_left & b_right
+    alpha_gw -. ext .- internet(("public internet"))
+    internet -. ext .- beta_gw
+    alpha_gw -. "WireGuard tunnel<br>10.10.9.0/31" .- beta_gw
+
+    style internet fill:#BBDEFB
+    style alpha fill:#FFF9C4
+    style beta fill:#C8E6C9
+
+
 ```
 
 The goal here is to seamlessly integrate network **alpha** with network **beta**, so that systems on the alpha site can transparently access systems on the beta site, and vice-versa.
