@@ -10,7 +10,7 @@ Where to place the remote WireGuard endpoint in the network will vary a lot depe
 
 Here we will cover a simpler case more resembling what a home network could be like:
 
-```mermaid
+```{mermaid}
  flowchart LR
   %% ASCII -> Mermaid conversion
   host["host"]
