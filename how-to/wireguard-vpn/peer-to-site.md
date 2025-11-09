@@ -10,20 +10,23 @@ Where to place the remote WireGuard endpoint in the network will vary a lot depe
 
 Here we will cover a simpler case more resembling what a home network could be like:
 
-```
-               public internet
-     
-                xxxxxx      ppp0 ┌────────┐
- ┌────┐         xx   xxxx      ──┤ router │
- │    ├─ppp0  xxx      xx        └───┬────┘
- │    │       xx        x            │         home 10.10.10.0/24
- │    │        xxx    xxx            └───┬─────────┬─────────┐
- └────┘          xxxxx                   │         │         │
-                                       ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-                                       │   │     │   │     │   │
-                                       │pi4│     │NAS│     │...│
-                                       │   │     │   │     │   │
-                                       └───┘     └───┘     └───┘
+```mermaid
+
+flowchart LR
+ subgraph home["home — 10.10.10.0/24"]
+        pi4["pi4"]
+        nas["NAS"]
+        Y["Y"]
+        dots["..."]
+  end
+    router["router"] --- pi4 & nas & Y & dots
+    host["host"] -- |ppp0| --> internet(("public internet"))
+    internet -- |ppp0| --> router
+    style router fill:#FFE0B2
+    style host fill:#E1BEE7
+    style internet fill:#C8E6C9
+    style home fill:#FFF9C4
+
 ```
 
 
