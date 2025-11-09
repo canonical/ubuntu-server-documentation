@@ -80,7 +80,7 @@ $ sudo ln -s /etc/nginx/sites-available/<your-domain> /etc/nginx/sites-enabled/
 To disable a website, you can delete the symlink in `sites-enabled`. For example, once you have your new site(s) configured and no longer need the default site configuration:
 
 ```bash
-$ sudo rm /etc/nginx/sites-available/default
+$ sudo rm /etc/nginx/sites-enabled/default
 ```
 
 ## SSL and HTTPS 
