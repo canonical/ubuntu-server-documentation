@@ -4,20 +4,34 @@
 
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
-```
-                       public internet              ┌─── wg0 10.10.11.1/24
-10.10.11.2/24                                       │        VPN network
-        home0│            xxxxxx       ppp0 ┌───────┴┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─wlan0  xx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │.1       10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-Laptop in                                         ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-Coffee shop                                       │   │     │   │     │   │
-                                                  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
+```mermaid
+---
+config:
+  layout: dagre
+---
+%% Conversion Markdown ASCII diagram peer-to-site-on-router 
+flowchart TB
+%% Home network LAN
+ subgraph home["home network, .home domain — 10.10.10.0/24"]
+        pi4["pi4"]
+        nas["NAS"]
+        Y["Y"]
+        dots["..."]
+  end
+
+%% External/public and VPN elements
+    laptop["Laptop in<br>Coffee shop"] -- |wlan0| --> internet(("public internet"))
+    internet -- |ppp0| --> router["router.home =<br> 10.10.10.1"]
+    laptop -. "wg0<br>10.10.11.2/24" .-> vpn(("VPN network<br>10.10.11.0/24"))
+    router -. "wg0<br>10.10.11.1/24" .-> vpn
+    router --- pi4 & dots & nas & Y
+
+%% Styling - colours
+    style laptop fill:#E1BEE7
+    style internet fill:#C8E6C9
+    style router fill:#FFE0B2
+    style vpn fill:#BBDEFB
+    style home fill:#FFF9C4
 ```
 
 Of course, this setup is only possible if you can install software on the router. Most of the time, when it's provided by your ISP, you can't. But some ISPs allow their device to be put into a bridge mode, in which case you can use your own device (a computer, a Raspberry PI, or something else) as the routing device.
