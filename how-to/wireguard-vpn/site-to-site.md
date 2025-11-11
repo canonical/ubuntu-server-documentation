@@ -3,7 +3,7 @@
 
 Another usual VPN configuration where one could deploy WireGuard is to connect two distinct networks over the internet. Here is a simplified diagram:
 
-```mermaid
+```{mermaid}
 
        flowchart LR
  subgraph alpha["alpha site — 10.10.10.0/24"]

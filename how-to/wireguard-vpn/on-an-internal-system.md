@@ -7,12 +7,7 @@ However, you do have a spare system inside your network that you could use. Here
 
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 
-```mermaid
----
-config:
-  layout: fixed
-  look: neo
----
+```{mermaid}
 flowchart LR
  subgraph home["home network, .home domain — 10.10.10.0/24"]
         router["router"]

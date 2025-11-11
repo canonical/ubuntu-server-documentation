@@ -4,7 +4,7 @@
 
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
-```mermaid
+```{mermaid}
 
 flowchart LR
   home0["home0"]
