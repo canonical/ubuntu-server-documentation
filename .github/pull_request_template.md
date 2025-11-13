@@ -39,7 +39,6 @@ Provide the desired commit message below:
 ### Checklist
 
 - [ ] I have read and followed the [Ubuntu Server contributing guide](https://documentation.ubuntu.com/server/contributing/).
-- [ ] I have signed the [Contributor License Agreement (CLA)](https://ubuntu.com/legal/contributors).
 - [ ] My pull request is linked to an existing issue (if applicable).
 - [ ] I have tested my changes, and they work as expected.
 
