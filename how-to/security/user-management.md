@@ -109,9 +109,9 @@ sys
 ```
 If you want to only show regular users, that is, users with an UID greater than 1000, we can use a regular expression for this filtering:
 ```
-cat /etc/passwd | cut -d : -f 1,3 | grep -E ':[0-9]{4}+'
+cat /etc/passwd | cut -d : -f 1,3 | grep -E ':[0-9]{4,}'
 ```
-The regular expression `:[0-9]{4}+` means all digits, repeated 4 times or more. The output will be similar to this:
+The regular expression `:[0-9]{4,}` means all digits, repeated 4 times or more. The output will be similar to this:
 ```
 nobody:65534
 ubuntu:1000
