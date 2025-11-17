@@ -72,6 +72,10 @@ You can also limit a specific list of users to just their home directories:
     chroot_list_enable=YES
     chroot_list_file=/etc/vsftpd.chroot_list
 
+```{warning}
+If chroot_local_user is set to YES (setting all users to be limited a to just their home directories), /etc/vsftpd.chroot_list becomes a list of users which are NOT limited a to just their home directories
+```
+
 After uncommenting the above options, create a `/etc/vsftpd.chroot_list` containing a list of users one per line. Then restart vsftpd:
 
     sudo systemctl restart vsftpd.service
