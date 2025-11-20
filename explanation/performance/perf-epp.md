@@ -56,7 +56,7 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/energy_performa
 
 There are several additional tools that can manipulate EPP values on Ubuntu too.
 
-[cpupower](perf-tune-cpupower) will likely override the value to `performance` on all cores when swapping to the `performance` governer with:
+{ref}`cpupower <perf-tune-cpupower>` will likely override the value to `performance` on all cores when swapping to the `performance` governer with:
 
 ```bash
 sudo cpupower frequency-set -g performance
