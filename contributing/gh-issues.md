@@ -30,7 +30,7 @@ issue at a time. You can see which issues are unassigned by selecting
 "Assigned to nobody" from the "Assignee" drop-down menu (or [use this link](https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aissue+is%3Aopen+no%3Aassignee) as
 a shortcut).
 
-```{include} issue-labels.md
+```{include} issue-labels.txt
 
 ```
 

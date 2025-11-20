@@ -1,4 +1,4 @@
-# Issue labels
+## Issue labels
 
 The Ubuntu Server team regularly triages issues, and we use the following issue
 labels to help manage them. If you are looking for certain types of tasks, you
@@ -9,7 +9,7 @@ Note that we don't use the **help wanted** or **good first issue** labels. All
 the issues we have can be considered as available for anyone who wants to work
 on them.
 
-## Coding level  
+### Coding level  
 
 These labels correspond to the different types of contributions that we accept
 according to the details in the {ref}`contrib-types` page.
@@ -19,7 +19,7 @@ according to the details in the {ref}`contrib-types` page.
 - {guilabel}`code: non-code`
 - {guilabel}`code: technical`
 
-## Content  
+### Content  
 
 These labels are used to mark out issues related to content. They will often
 also have a [Diátaxis](https://diataxis.fr/) label to give more context.
@@ -33,7 +33,7 @@ also have a [Diátaxis](https://diataxis.fr/) label to give more context.
 
   Add new documentation for a specific tool, feature, or function.
 
-## For
+### For
 
 - {guilabel}`For: Open Documentation Academy`
 
@@ -45,7 +45,7 @@ also have a [Diátaxis](https://diataxis.fr/) label to give more context.
   This issue has been identified as something the Ubuntu Server team needs to
   work on or fix.
 
-## Review
+### Review
 
 This issue or Pull Request needs a specific type of review.
 
@@ -58,7 +58,7 @@ This issue or Pull Request needs a specific type of review.
   Review the technical accuracy, completeness, and up-to-dateness of the
   content.
 
-## State labels
+### State labels
 
 The set of {guilabel}`State:` issues labels are for the maintainers of the
 repository to flag possible problems with the listed issue or Pull Request.
