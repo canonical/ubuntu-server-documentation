@@ -79,7 +79,7 @@ To access your mail server from another computer, you must configure your firewa
 
   - POP3S - 995
 
-## References
+## Further reading
 
 - The [Dovecot website](http://www.dovecot.org/) has more general information about Dovecot.
 - The [Dovecot manual](https://doc.dovecot.org) provides full documentation for Dovecot use.

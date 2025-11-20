@@ -385,7 +385,7 @@ Here are some troubleshooting tips.
 * After any configuration file change, be it split mode or not, be sure to run `sudo update-exim4.conf` and restart the `exim4` service.
 
 
-## References
+## Further reading
 
   - See [exim.org](http://www.exim.org/) for more information.
 

@@ -353,7 +353,7 @@ sudo systemctl reload dovecot.service
 Some of the options above can drastically increase the amount of information sent to the log files. Remember to return the log level back to normal after you have corrected the problem -- then reload the appropriate daemon for the new configuration to take effect.
 ```
 
-## References
+## Further reading
 
 Administering a Postfix server can be a very complicated task. At some point you may need to turn to the Ubuntu community for more experienced help.
 

@@ -1,5 +1,4 @@
 (qemu)=
-
 # QEMU
 
 ```{include} notices/qemu-user-group-notice.txt
@@ -210,7 +209,7 @@ qemu-system-aarch64 \
 
 If you get no output from the QEMU command above, aligning your host and guest release versions may help. For example, if you generated `efi.img` on Focal but want to emulate Jammy (with the Jammy cloud image), the firmware may not be fully compatible. Generating `efi.img` on Jammy when emulating Jammy with the Jammy cloud image may help.
 
-## Resources
+## Further reading
 
 QEMU can be extended in many different ways. If you'd like to take QEMU further, you might want to explore these additional resources:
 
