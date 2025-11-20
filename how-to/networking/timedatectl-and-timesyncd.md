@@ -1,7 +1,7 @@
 (timedatectl-and-timesyncd)=
 # Synchronise time using timedatectl and timesyncd
 
-Ubuntu can use `timedatectl` and `timesyncd` for synchronising time, which can be installed as follows. `systemd-timesyncd` used to be part of the default installation, but was replaced by `chrony` since Ubuntu 25.10. You can optionally use `chrony` as a {ref}`Network Time Security (NTS) client <chrony-client>` or to {ref}`serve the Network Time Protocol <serve-ntp-with-chrony>`.
+Ubuntu can use `timedatectl` and `timesyncd` for synchronizing time, which can be installed as follows. `systemd-timesyncd` used to be part of the default installation, but was replaced by `chrony` since Ubuntu 25.10. You can optionally use `chrony` as a {ref}`Network Time Security (NTS) client <chrony-client>` or to {ref}`serve the Network Time Protocol <serve-ntp-with-chrony>`.
 
 ```bash
 sudo apt-mark auto chrony && apt install systemd-timesyncd
@@ -36,7 +36,7 @@ If `chrony` is running, it will automatically switch to:
 
 ### Configure `timedatectl`
 
-By using `timedatectl`, an admin can control the timezone, how the system clock should relate to the `hwclock` and whether permanent synchronisation should be enabled. See `man timedatectl` for more details.
+By using `timedatectl`, an admin can control the timezone, how the system clock should relate to the `hwclock` and whether permanent synchronization should be enabled. See `man timedatectl` for more details.
 
 ## Check status of `timesyncd`
 

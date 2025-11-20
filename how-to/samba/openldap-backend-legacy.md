@@ -152,7 +152,7 @@ ldap passwd sync = yes
 Change the values to match your environment.
 
 ```{note}
-The `smb.conf` as shipped by the package is quite long and has many configuration examples. An easy way to visualise it without any comments is to run `testparm -s`.
+The `smb.conf` as shipped by the package is quite long and has many configuration examples. An easy way to visualize it without any comments is to run `testparm -s`.
 ```
 
 Now inform Samba about the Root DN user's password (the one set during the installation of the `slapd` package):

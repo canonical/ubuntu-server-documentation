@@ -80,7 +80,7 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
 
 ### Storage drivers
 
-Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimise the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/storage/storagedriver/#images-and-layers).
+Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimize the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/storage/storagedriver/#images-and-layers).
 
 The default storage driver is the `overlay2` which is backed by `OverlayFS`. This driver is recommended by upstream for use in production systems. The following storage drivers are available and are supported in Ubuntu (as at the time of writing):
 
@@ -110,7 +110,7 @@ Monitoring what is happening in the system is a crucial part of systems administ
 The following logging drivers are available (at the time of writing):
 
 - **json-file**: it is the default logging driver. It writes logs in a file in JSON format.
-- **local**: write logs to an internal storage that is optimised for performance and disk use.
+- **local**: write logs to an internal storage that is optimized for performance and disk use.
 - **{term}`journald`**: send logs to systemd journal.
 - **syslog**: send logs to a syslog server.
 - **logentries**: send container logs to the [Logentries](https://logentries.com/) server.

@@ -5,7 +5,7 @@ Once you have {ref}`installed nginx <install-nginx>`, you can customise it for y
 
 ## Server blocks
 
-nginx organises sets of site-specific configuration details into **server blocks**, and by default comes pre-configured for single-site operation. This can either be used "as-is", or as a starting template
+nginx organizes sets of site-specific configuration details into **server blocks**, and by default comes pre-configured for single-site operation. This can either be used "as-is", or as a starting template
 for serving multiple sites.
 
 The single-site configuration serves files out of `/var/www/html`, as defined by the server block and as provided by `/etc/nginx/sites-enabled/default`:

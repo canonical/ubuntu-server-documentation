@@ -1,7 +1,7 @@
 (install-ruby-on-rails)=
 # How to install and configure Ruby on Rails
 
-[Ruby on Rails](https://rubyonrails.org/) is an open source web framework for developing database-backed web applications. It is optimised for sustainable productivity of the programmer since it lets the programmer to write code by favouring convention over configuration. This guide explains how to install and configure Ruby on Rails for an Ubuntu system with Apache2 and MySQL.
+[Ruby on Rails](https://rubyonrails.org/) is an open source web framework for developing database-backed web applications. It is optimized for sustainable productivity of the programmer since it lets the programmer to write code by favoring convention over configuration. This guide explains how to install and configure Ruby on Rails for an Ubuntu system with Apache2 and MySQL.
 
 ## Prerequisites
 

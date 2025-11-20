@@ -95,7 +95,7 @@ When you are debugging a program, GDB will send the program's Build-ID to the `d
 
 ## Can `ddebs` packages co-exist with `debuginfod`?
 
-Yes. GDB will try to use local debug information if available.  That means that if you have a `ddeb` package installed that provides the necessary debug symbols for the program being debugged (or if you have already downloaded that information from the `debuginfod` service earlier), then GDB will use it in favour of performing the download.
+Yes. GDB will try to use local debug information if available.  That means that if you have a `ddeb` package installed that provides the necessary debug symbols for the program being debugged (or if you have already downloaded that information from the `debuginfod` service earlier), then GDB will use it in favor of performing the download.
 
 ## Can I use `debuginfod` with my own binary that links against system libraries?
 

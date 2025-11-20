@@ -37,7 +37,7 @@ To upgrade to all of proposed, enable proposed as described above, then run (for
 
 After the appropriate packages are upgraded to their proposed versions, you can test your deployment as normal.
 
-After testing, the test environment should be considered "spent" and not be used again. Instead, re-create and re-upgrade to proposed for any subsequent test run. This prevents proposed updates that were not ultimately released from accidentally being included, and minimises occurrences of the “inconsistent pocket” problem as described above.
+After testing, the test environment should be considered "spent" and not be used again. Instead, re-create and re-upgrade to proposed for any subsequent test run. This prevents proposed updates that were not ultimately released from accidentally being included, and minimizes occurrences of the "inconsistent pocket" problem as described above.
 
 ## How to report a regression
 

@@ -52,7 +52,7 @@ Calendar
 
 Subscribe to the `Documentation event calendar`_. Not only does this include
 the Documentation office hours, it will also include any other discussion or
-training events we organise.
+training events we organize.
 
 
 .. _create a post: https://discourse.ubuntu.com/c/server/17

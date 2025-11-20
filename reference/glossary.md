@@ -1707,7 +1707,7 @@ One-Time Password
     *Work in Progress*
 
 OU
-Organisational Unit
+Organizational Unit
     *Work in Progress*
 
 OverlayFS

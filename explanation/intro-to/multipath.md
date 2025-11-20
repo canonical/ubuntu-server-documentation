@@ -5,7 +5,7 @@ Device mapper multipathing (which will be called **multipath** in this document)
 
 ## How a multipath device works in practice
 
-If you are not using multipath, your system treats every path from a server node to a storage controller as a separate device, even when the I/O path connects the same server node to the same storage controller. Multipath allows you to organise the I/O paths logically, by creating a single device on top of the underlying paths.
+If you are not using multipath, your system treats every path from a server node to a storage controller as a separate device, even when the I/O path connects the same server node to the same storage controller. Multipath allows you to organize the I/O paths logically, by creating a single device on top of the underlying paths.
 
 ## What identifier does a multipath device use?
 
