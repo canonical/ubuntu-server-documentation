@@ -2,7 +2,7 @@
 # QEMU microvm
 
 QEMU microvm is a special case of virtual machine (VMs), designed to be
-optimized for initialisation speed and minimal resource use.
+optimized for initialization speed and minimal resource use.
 
 The underlying concept of a microvm is based on giving up some capabilities of
 standard QEMU in order to reduce complexity and gain speed. Maybe - for your
