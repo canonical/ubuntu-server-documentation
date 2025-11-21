@@ -101,7 +101,7 @@ sudo mkdir -p /srv/samba/netlogon
 sudo touch /srv/samba/netlogon/logon.cmd
 ```
 
-You can enter any normal Windows logon script commands in `logon.cmd` to customise the client's environment.
+You can enter any normal Windows logon script commands in `logon.cmd` to customize the client's environment.
 
 Restart Samba to enable the new domain controller, using the following command:
 

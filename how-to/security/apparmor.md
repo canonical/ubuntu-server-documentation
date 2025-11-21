@@ -199,7 +199,7 @@ Second example:
 
 That way you know in which profile and at what action you have to start if you consider either debugging or adapting the profiles.
 
-## Profile customisation
+## Profile customization
 
 Profiles are meant to provide security and so can't be too permissive. But often, a very special setup would work with a profile if it wold *just allow this one extra access*. To handle that situation, there are three options:
 

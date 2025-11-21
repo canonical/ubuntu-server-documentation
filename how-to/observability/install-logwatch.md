@@ -26,7 +26,7 @@ Logwatch's default configuration is kept in` /usr/share/logwatch/default.conf/lo
 sudo cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf/
 ```
 
-With your favorite editor, open `/etc/logwatch/conf/logwatch.conf`.  The uncommented lines indicate the default configuration values.  First, lets customise some of the basics:
+With your favorite editor, open `/etc/logwatch/conf/logwatch.conf`.  The uncommented lines indicate the default configuration values.  First, lets customize some of the basics:
 
 ```text
 Output = mail

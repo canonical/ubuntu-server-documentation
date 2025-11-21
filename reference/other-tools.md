@@ -5,7 +5,7 @@ Byobu is a useful tool for system administrators who need to execute multiple sh
 
 * {ref}`Byobu <byobu>`
 
-pam_motd is a PAM module that allows customised "Message Of The Day" (MOTD) messages to be shown.
+pam_motd is a PAM module that allows customized "Message Of The Day" (MOTD) messages to be shown.
 
 * {ref}`pam_motd <pam-motd>`
 

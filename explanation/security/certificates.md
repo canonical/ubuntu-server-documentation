@@ -17,9 +17,9 @@ Self-signed certificates should not be used in most production environments.
 
 Continuing the HTTPS example, a CA-signed certificate provides two important capabilities that a self-signed certificate does not:
 
-- Browsers will (usually) automatically recognise the CA signature and allow a secure connection to be made without prompting the user.
+- Browsers will (usually) automatically recognize the CA signature and allow a secure connection to be made without prompting the user.
 
-- When a CA issues a signed certificate, it is guaranteeing the identity of the organisation providing the web pages to the browser.
+- When a CA issues a signed certificate, it is guaranteeing the identity of the organization providing the web pages to the browser.
 
 Most software supporting SSL/TLS has a list of CAs whose certificates they automatically accept. If a browser encounters a certificate whose authorising CA is not in the list, the browser asks the user to either accept or decline the connection. Also, other applications may generate an error message when using a self-signed certificate.
 

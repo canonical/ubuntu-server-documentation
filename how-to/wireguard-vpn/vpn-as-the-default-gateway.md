@@ -3,7 +3,7 @@
 
 WireGuard can be set up to route all traffic through the VPN, and not just specific remote networks. There could be many reasons to do this, but mostly they are related to privacy.
 
-Here we will assume a scenario where the local network is considered to be "untrusted", and we want to leak as little information as possible about our behaviour on the Internet. This could apply to the case of an airport, or a coffee shop, a conference, a hotel, or any other public network.
+Here we will assume a scenario where the local network is considered to be "untrusted", and we want to leak as little information as possible about our behavior on the Internet. This could apply to the case of an airport, or a coffee shop, a conference, a hotel, or any other public network.
 
 ```
                        public untrusted          ┌── wg0 10.90.90.2/24

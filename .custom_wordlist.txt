@@ -1,7 +1,6 @@
 aarch
 ABI
 accesslog
-accroding
 ACL
 acl
 ACLs
@@ -34,9 +33,7 @@ AskUbuntu
 async
 AUTH
 auth
-authenticatoin
 Authenticator
-authorized
 autocommit
 autodetect
 autodetected
@@ -56,7 +53,6 @@ bacula
 Bacula
 BDC
 bdev
-behavior
 Berkley
 BindDN
 BMC
@@ -82,8 +78,6 @@ CCID
 ccw
 CDBs
 CDROM
-center
-Center
 CentOS
 centric
 certmap
@@ -124,16 +118,10 @@ cn
 CN
 codename
 colocation
-color
-Colors
-colors
-comand
 conf
 conffile
 config
 connectionless
-containerization
-containerize
 corei
 coreutils
 corosync
@@ -153,13 +141,6 @@ csync
 ctrl
 Ctrl
 CTX
-customisations
-Customization
-customization
-customizations
-customize
-customized
-customizing
 CustomLog
 CVE
 CX
@@ -168,7 +149,6 @@ daemonize
 Danika
 DARPA
 DASD
-datacentre
 Datagram
 dbgsym
 dblink
@@ -208,7 +188,6 @@ DLM
 dm
 DM
 DMA
-DMAR
 DMAR
 dmesg
 dmsetup
@@ -270,8 +249,6 @@ extensibility
 failover
 fallbacks
 FastCGI
-favor
-favorite
 fb
 FC
 feistyduck
@@ -281,7 +258,6 @@ filebug
 FileSet
 filesystem
 filesystems
-filesytem
 FIPS
 firefox
 firsttest
@@ -296,16 +272,13 @@ frontend
 frontends
 fsck
 fsync
-fulfill
 FULLTEXT
 FW
-gauranteed
 GCE
 GCM
 GCP
 gcplogs
 gcrypt
-GDB
 GDB
 GDB's
 gelf
@@ -384,9 +357,6 @@ IncludesNOEXEC
 InetOrgPerson
 INI
 init
-initialiasation
-initialization
-initialize
 initiatorname
 initrd
 InnoDB
@@ -409,7 +379,6 @@ IPs
 IPSec
 iptables
 IPTables
-iptables
 IPv
 IPvlan
 IPVS
@@ -569,7 +538,6 @@ MUAs
 multicast
 multipass
 Multipass
-Multipass
 multipath
 Multipath
 multipathd
@@ -588,9 +556,7 @@ mynewsite
 mySQL
 mysql
 MySQL
-MySQL
 nagios
-Nagios
 Nagios
 nagiosadmin
 nameserver
@@ -642,7 +608,6 @@ NUMA
 Numa
 Numbat
 Nvidia
-Nvidia
 Nvidia's
 NVMe
 NVRAM
@@ -657,7 +622,6 @@ OCFS
 OCFS2
 OCI
 OCSP
-offical
 ok
 Ok
 onwards
@@ -678,9 +642,6 @@ openvswitch
 OpenVZ
 OpenWRT
 ordinated
-organization
-organizations
-organize
 OSA
 OSI
 ote
@@ -724,7 +685,6 @@ POSIX
 Postcopy
 postfix
 Postfix
-Postfix
 Postgres
 PostScript
 PowerShell
@@ -759,11 +719,7 @@ RDAC
 RDBMS
 rdn
 RDN
-recognize
-recognized
-recognizes
 Redbook
-refered
 renderer
 repos
 resolv
@@ -829,7 +785,6 @@ SHell
 SHM
 Shorewall
 SIDs
-signaling
 SIMD
 slapd
 slapo
@@ -891,18 +846,14 @@ substring
 subuid
 subvolume
 sudo
-summarize
 superblock
 suxxif
 symlink
 symlinked
 symlinks
 SymLinksIfOwnerMatch
-synchronize
-synchronized
 syncprov
 syncrepl
-syncronises
 sysctls
 sysinfo
 syslog
@@ -975,7 +926,6 @@ untrusted
 upgraders
 uptime
 URI
-URI
 URIs
 useradd
 userid
@@ -1009,14 +959,6 @@ virt
 VirtIO
 virtiofs
 VirtualHost
-virtualise
-Virtualised
-virtualised
-virtualiser
-virtualization
-virtualizations
-virtualize
-virtualizing
 VLAN
 VM's
 VMs

@@ -3,7 +3,7 @@
 
 The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy ({term}`high availability <HA>`) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.
 
-Replication is achieved via the Sync replication engine, **syncrepl**. This allows changes to be synchronised using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](http://www.rfc-editor.org/rfc/rfc4533.txt).
+Replication is achieved via the Sync replication engine, **syncrepl**. This allows changes to be synchronized using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](http://www.rfc-editor.org/rfc/rfc4533.txt).
 
 There are two ways to use this replication:
 

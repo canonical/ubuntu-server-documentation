@@ -30,7 +30,7 @@ One has to understand that minimising the QEMU initialisation time only yields a
 small gain, by shaving off parts of a task that usually do not take a long time. That is only worth
 it if the workload you run is not taking much longer anyway. For example, by
 booting a fully generic operating system, followed by more time to completely
-initialise your workload.
+initialize your workload.
 
 There are a few common ways to adapt a workload to match this:
 - Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
@@ -42,7 +42,7 @@ There are a few common ways to adapt a workload to match this:
   guest system.
 - Sometimes a simpler user space like [busybox](https://www.busybox.net/) or a container-like environment
   is used.
-- In a similar fashion, you could use a customised kernel build with a reduced feature set
+- In a similar fashion, you could use a customized kernel build with a reduced feature set
   with only what is needed for a given use case.
 
 A common compromise of the above options is aligning virtualization with
