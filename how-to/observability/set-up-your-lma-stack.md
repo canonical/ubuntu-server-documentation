@@ -15,11 +15,11 @@ Canonical's LMA stack involves several discrete software services acting in conc
 
 [**Telegraf**](https://docs.influxdata.com/telegraf/v1/) collects metrics from the operating system, running software, and other inputs. Its plugin system permits export of data in any arbitrary format; for this system we collect the data in a central data manager called [**Prometheus**](https://prometheus.io/docs/introduction/overview/).
 
-Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualisation is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the Prometheus {term}`Alertmanager` plugin. See [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) for more details.
+Prometheus works as a hub, polling data from different Telegraf nodes and sending it to various outputs, including persistent storage. For this LMA stack, visualization is handled via [**Grafana**](https://grafana.com/docs/) and email/pager alerts are generated via the Prometheus {term}`Alertmanager` plugin. See [**Prometheus Alertmanager**](https://prometheus.io/docs/alerting/latest/alertmanager/) for more details.
 
 ## Getting started
 
-Let's set up a basic demonstration with two **nodes**, the first acting as a placeholder load with Telegraf installed - the "Workload", and the second acting as our data visualisation system - the "Monitor". This will help us familiarise ourselves with the various components and how they inter-operate.
+Let's set up a basic demonstration with two **nodes**, the first acting as a placeholder load with Telegraf installed - the "Workload", and the second acting as our data visualization system - the "Monitor". This will help us familiarize ourselves with the various components and how they inter-operate.
 
 ```{note}
 For clarity, we'll refer to these two hosts as named: `workload` and `monitor`. If you use other {term}`hostnames <hostname>`, substitute your preferred names as we go through this guide.
@@ -215,7 +215,7 @@ Then restart Prometheus:
 monitor:~# snap restart prometheus
 ```
 
-While we'll be using Grafana for visualisation, Prometheus also has a web interface for viewing and interacting with the collected data. At this stage, we can load it to verify that our setup is working properly. In a web browser, navigate to the Monitor's IP address, and port `9090`. You should see Prometheus' interface, as in the following image:
+While we'll be using Grafana for visualization, Prometheus also has a web interface for viewing and interacting with the collected data. At this stage, we can load it to verify that our setup is working properly. In a web browser, navigate to the Monitor's IP address, and port `9090`. You should see Prometheus' interface, as in the following image:
 
 ![prometheus_0|690x454,80%](https://assets.ubuntu.com/v1/54610cab-promotheus_0.png)
 
@@ -347,7 +347,7 @@ Returning to the Grafana home page, next set up a "New Dashboard". A dashboard c
 
 ![grafana_3|690x638,25%](https://assets.ubuntu.com/v1/bf7c1660-grafana_3.png) ![grafana_4|690x638,25%](https://assets.ubuntu.com/v1/50532a03-grafana_4.png) ![grafana_5|690x638,25%](https://assets.ubuntu.com/v1/0830c195-grafana_5.png)
 
-On the left you can see four buttons to configure four elements of the panel: data source, visualisation, general settings, and alerts. The general settings page allows us to set a title for the panel, for instance. Make any other customisations you want, and then save the dashboard using the save icon at the top of the page.
+On the left you can see four buttons to configure four elements of the panel: data source, visualization, general settings, and alerts. The general settings page allows us to set a title for the panel, for instance. Make any other customizations you want, and then save the dashboard using the save icon at the top of the page.
 
 ![grafana_6|690x638,40%](https://assets.ubuntu.com/v1/cfaca920-grafana_6.png) ![grafana_7|690x638,40%](https://assets.ubuntu.com/v1/3dfc6d9d-grafana_7.png)
 
@@ -355,6 +355,6 @@ Using the same procedure, add additional panels for processor load and memory us
 
 ![grafana_9|690x638,40%](https://assets.ubuntu.com/v1/2441c52c-grafana_9.png)
 
-Try also adding a panel with the "Text" visualisation option for entering descriptive text about our demo. Save, and then view the final dashboard:
+Try also adding a panel with the "Text" visualization option for entering descriptive text about our demo. Save, and then view the final dashboard:
 
 ![grafana_X|690x638,80%](https://assets.ubuntu.com/v1/55658d4d-grafana_X.png)

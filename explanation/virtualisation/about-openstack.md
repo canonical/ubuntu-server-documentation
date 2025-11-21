@@ -1,9 +1,9 @@
 (about-openstack)=
 # About OpenStack
 
-OpenStack is the most popular open source cloud computing platform that enables the management of distributed compute, network and storage resources in the data centre.
+OpenStack is the most popular open source cloud computing platform that enables the management of distributed compute, network and storage resources in the data center.
 
-While the reference virtualisation stack (consisting of {ref}`QEMU/KVM <qemu>` and {ref}`libvirt <libvirt>`) enables hardware virtualisation and the management of virtual machines (VMs) on a single host, in most cases the computing, network and storage resources are distributed across multiple hosts in the data centre.
+While the reference virtualisation stack (consisting of {ref}`QEMU/KVM <qemu>` and {ref}`libvirt <libvirt>`) enables hardware virtualisation and the management of virtual machines (VMs) on a single host, in most cases the computing, network and storage resources are distributed across multiple hosts in the data center.
 
 This creates an obvious challenge with centralised management of those resources, scheduling VMs, etc. OpenStack solves this problem by aggregating distributed pools of resources, allocating them to VMs on-demand and enabling automated VM provisioning through a self-service portal.
 

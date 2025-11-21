@@ -23,7 +23,7 @@ This will provide two binaries:
 
 ## Enable serving the Network Time Protocol
 
-You can install `chrony` (above) and configure special Hardware (below) for a local synchronisation
+You can install `chrony` (above) and configure special Hardware (below) for a local synchronization
 and as-installed that is the default to stay on the secure and conservative side. But if you want to *serve* NTP you need adapt your configuration.
 
 To enable serving NTP you'll need to at least set the `allow` rule. This controls which clients/networks you want `chrony` to serve NTP to.

@@ -1,17 +1,17 @@
 (about-time-synchronisation)=
 # About time synchronisation
 
-Network Time Protocol (NTP) is a networking protocol for synchronising time over a network. Basically, a client requests the current time from a server, and uses it to set its own clock.
+Network Time Protocol (NTP) is a networking protocol for synchronizing time over a network. Basically, a client requests the current time from a server, and uses it to set its own clock.
 
 Behind this simple description, there is a lot of complexity. There are three tiers of NTP servers; tier one NTP servers are connected to atomic clocks, while tier two and tier three three servers spread the load of actually handling requests across the Internet.
 
 The client software is also a lot more complex than you might expect. It must factor in communication delays and adjust the time in a way that does not upset all the other processes that run on the server. Luckily, all that complexity is hidden from you\!
 
-By default, Ubuntu uses `chrony` to synchronise time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronise time with Chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
+By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronise time with Chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
 
 Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
-## How time synchronisation works
+## How time synchronization works
 
 Since Ubuntu 25.10, `chrony` replaces most of `systemd-timesyncd` but still uses systemd's `timedatectl`.
 

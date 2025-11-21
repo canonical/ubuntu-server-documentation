@@ -33,7 +33,7 @@ Apache2 is configured by placing **directives** in plain text configuration file
 - `ports.conf`
   Houses the directives that determine which TCP ports Apache2 is listening on.
 
-In addition, other configuration files may be added using the **Include** directive, and wildcards can be used to include many configuration files. Any directive may be placed in any of these configuration files. Changes to the main configuration files are only recognised by Apache2 when it is started or restarted.
+In addition, other configuration files may be added using the **Include** directive, and wildcards can be used to include many configuration files. Any directive may be placed in any of these configuration files. Changes to the main configuration files are only recognized by Apache2 when it is started or restarted.
 
 The server also reads a file containing MIME document types; the filename is set by the **`TypesConfig`** directive, typically via `/etc/apache2/mods-available/mime.conf`, which might also include additions and overrides, and is `/etc/mime.types` by default.
 

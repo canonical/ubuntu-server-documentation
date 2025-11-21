@@ -33,7 +33,7 @@ relevant for your setup.
 
 1. **Manage your software**:
 
-   * Remove packages you don't need, to minimise the potential attack surface
+   * Remove packages you don't need, to minimize the potential attack surface
      you are exposing. See our article on
      {ref}`Package management <package-management>` for more details.
 

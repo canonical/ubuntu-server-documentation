@@ -7,7 +7,7 @@ If you're new to web servers, see this page for more information {ref}`on the ke
 
 ## Squid proxy server
 
-Squid is a popular, open-source, proxy caching server that can help optimise network efficiency and improve response times by saving local copies of frequently accessed content. Read more {ref}`about Squid proxy servers <about-squid-proxy-servers>` and what they can do, or find out {ref}`how to install a Squid server <install-a-squid-server>`.
+Squid is a popular, open-source, proxy caching server that can help optimize network efficiency and improve response times by saving local copies of frequently accessed content. Read more {ref}`about Squid proxy servers <about-squid-proxy-servers>` and what they can do, or find out {ref}`how to install a Squid server <install-a-squid-server>`.
 
 ### Web server
 

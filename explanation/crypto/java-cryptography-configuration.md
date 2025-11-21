@@ -170,7 +170,7 @@ Caused by: javax.net.ssl.SSLHandshakeException: Received fatal alert: protocol_v
 
 ### Prevent a specific cipher
 
-The [Java Security Standard Algorithm Names](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html) page lists the names of all the cryptographic algorithms recognised by Java. If you want to prevent a specific algorithm from being used, you can list it in the `java.security` file.
+The [Java Security Standard Algorithm Names](https://docs.oracle.com/en/java/javase/11/docs/specs/security/standard-names.html) page lists the names of all the cryptographic algorithms recognized by Java. If you want to prevent a specific algorithm from being used, you can list it in the `java.security` file.
 
 In the previous example where we allowed only TLSv1.3 we saw that the negotiated algorithm was `TLS_AES_256_GCM_SHA384`. But what happens if we block it?
 

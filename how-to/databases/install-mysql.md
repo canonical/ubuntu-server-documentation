@@ -142,7 +142,7 @@ Write locking can occur on a row-level basis within a table. That means multiple
 
 ### MyISAM
 
-MyISAM is the older of the two. It can be faster than InnoDB under certain circumstances and favours a read-only workload. Some web applications have been tuned around MyISAM (though that's not to imply that they will be slower under InnoDB).
+MyISAM is the older of the two. It can be faster than InnoDB under certain circumstances and favors a read-only workload. Some web applications have been tuned around MyISAM (though that's not to imply that they will be slower under InnoDB).
 
 MyISAM also supports the {term}`FULLTEXT` index type, which allows very fast searches of large quantities of text data. However MyISAM is only capable of locking an entire table for writing. This means only one process can update a table at a time. As any application that uses the table scales this may prove to be a hindrance.
 
