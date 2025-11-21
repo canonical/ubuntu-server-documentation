@@ -106,6 +106,6 @@ For more information on how to schedule a backup using cron please take a look a
 
 ### Further reading
 
-* [rsnapshot offical web page](https://rsnapshot.org/)
+* [rsnapshot official web page](https://rsnapshot.org/)
 * {manpage}`rsnapshot(1)` manual page
 * {manpage}`rsync(1)` manual page

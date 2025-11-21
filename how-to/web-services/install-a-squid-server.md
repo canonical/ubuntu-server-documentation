@@ -178,7 +178,7 @@ sudo cat /var/log/squid/cache.log
 sudo cat /var/log/squid/access.log
 ```
 
-For a status summary containing runtime statistics and congfiguration, run:
+For a status summary containing runtime statistics and configuration, run:
 
 ```bash
 squidclient mgr:info

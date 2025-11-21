@@ -952,7 +952,7 @@ If you would like more information about the Ubuntu release process, how package
 
 ## Installing a .deb file
 
-Although APT is the preferred way to install packages on your system, due to its ability to handle depedencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
+Although APT is the preferred way to install packages on your system, due to its ability to handle dependencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
 
 We can install .deb files that aren't in the APT repository using `dpkg` -- all we need is to download the .deb file, and we can run a command like this to install it:
 

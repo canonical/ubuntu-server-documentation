@@ -1,7 +1,6 @@
 aarch
 ABI
 accesslog
-accroding
 ACL
 acl
 ACLs
@@ -34,7 +33,6 @@ AskUbuntu
 async
 AUTH
 auth
-authenticatoin
 Authenticator
 authorized
 autocommit
@@ -299,7 +297,6 @@ fsync
 fulfill
 FULLTEXT
 FW
-gauranteed
 GCE
 GCM
 GCP
@@ -384,7 +381,6 @@ IncludesNOEXEC
 InetOrgPerson
 INI
 init
-initialiasation
 initialization
 initialize
 initiatorname
@@ -657,7 +653,6 @@ OCFS
 OCFS2
 OCI
 OCSP
-offical
 ok
 Ok
 onwards
@@ -683,7 +678,6 @@ organizations
 organize
 OSA
 OSI
-ote
 OTP
 overlayfs
 OverlayFS
@@ -902,7 +896,6 @@ synchronize
 synchronized
 syncprov
 syncrepl
-syncronises
 sysctls
 sysinfo
 syslog

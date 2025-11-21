@@ -21,7 +21,7 @@ Bacula is made up of several components and services that are used to manage bac
 
 These services and applications can be run on multiple servers and clients, or they can be installed on one machine if backing up a single disk or volume.
 
-In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacule File service on a workstation, to remotely backup its data.
+In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacula File service on a workstation, to remotely backup its data.
 
 ## Installing the Server Components
 
@@ -97,7 +97,7 @@ Director {
 ```
 What you should inspect and change:
  * `Name`: it's common to use the format `$hostname-dir` for the director. For example, if the hostname is "`bacula-server`", the name here would be `bacula-server-dir`. By sticking to this pattern, less changes will have to be made to the config, as this is what the default installation already assumes.
- * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, thouch, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
+ * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, though, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
  * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
 
 ```{tip}
@@ -285,7 +285,7 @@ The `Job` resource is the basic unit in Bacula, and ties everything together:
  * Who is being backed up (`Client`).
  * What should be backed up (`FileSet`).
  * Where should the data be stored (`Storage`, `Pool`), and where to record the job (`Catalog`)
- * When thouls the job run (`Schedule`)
+ * When should the job run (`Schedule`)
 
 The default Director configuration file includes a default Job resource, and more Jobs can inherit from that.
 
