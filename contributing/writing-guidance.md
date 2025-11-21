@@ -10,18 +10,13 @@ file types) with [MyST support](https://myst-parser.readthedocs.io/en/latest/int
 All the documentation pages are in the `docs/` folder, then split into a
 subfolder for the [Diátaxis](https://diataxis.fr/) section it belongs in.
 
-The structural elements, such as landing pages, are written in
-[reStructuredText](https://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html) (`.rst` file types). It shouldn't be necessary to change
-them, unless you are making substantial restructuring changes, or
-adding/deleting pages. 
-
-If you do need to change a landing page, they are found in the `subsections/`
-folder. Each Markdown page is only called once, by the landing page for that
+The structural elements, such as landing pages, are also written in Markdown.
+Each documentation page is only called once, by the landing page (or index) for that
 section.
 
 ```{tip}
 For example, if a page appears in the How-to section about Virtualisation,
-the landing page you need will be `subsections/how-to-virtualisation.rst`.
+the landing page you need will be `how-to/virtualisation/index.md`.
 ```
 
 ## Versioning policy
@@ -144,8 +139,8 @@ elements). It looks quite odd without text to break the headers apart!
 ### Semantic markup
 
 We encourage (but do not mandate) the use of semantic mark-up where possible.
-See [Roles](https://www.sphinx-doc.org/en/master/usage/restructuredtext/roles.html)
-in the Sphinx documentation for an overview of inline semantic roles available
+See [MyST Roles](https://myst-parser.readthedocs.io/en/latest/syntax/roles-and-directives.html)
+in the MyST documentation for an overview of inline semantic roles available
 by default. The most helpful ones for this project are:
 
 ```
