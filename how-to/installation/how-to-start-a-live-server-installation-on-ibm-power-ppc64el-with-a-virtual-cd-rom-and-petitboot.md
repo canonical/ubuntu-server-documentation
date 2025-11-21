@@ -229,7 +229,7 @@ Petitboot (v1.7.5-p8f5fc86)                                   9006-12C BOS0026
   Exit to shell
 ─────────────────────────────────────────────
  Enter=accept, e=edit, n=new, x=exit, l=language, g=log, h=help
- Default boot cancelled
+ Default boot canceled
 ```
 
 Make sure that booting from CD-ROM is enabled:

@@ -1,5 +1,5 @@
 (about-time-synchronisation)=
-# About time synchronisation
+# About time synchronization
 
 Network Time Protocol (NTP) is a networking protocol for synchronizing time over a network. Basically, a client requests the current time from a server, and uses it to set its own clock.
 
@@ -7,7 +7,7 @@ Behind this simple description, there is a lot of complexity. There are three ti
 
 The client software is also a lot more complex than you might expect. It must factor in communication delays and adjust the time in a way that does not upset all the other processes that run on the server. Luckily, all that complexity is hidden from you\!
 
-By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronise time with Chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
+By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronize time with Chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
 
 Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
@@ -28,7 +28,7 @@ If `chrony` is installed, `timedatectl` can still be used to configure basic set
   - If you require a one-shot sync, use: `chronyd -q`
   - If you require a one-shot time check (without setting the time), use: `chronyd -Q`
 
-While use of `ntpd` is no longer recommended, this also still applies to `ntpd` being installed to retain any previous behaviour/config that you had through an upgrade. However, it also implies that on an upgrade from a former release, `ntp`/`ntpdate` might still be installed and therefore renders the new `systemd`-based services disabled.
+While use of `ntpd` is no longer recommended, this also still applies to `ntpd` being installed to retain any previous behavior/config that you had through an upgrade. However, it also implies that on an upgrade from a former release, `ntp`/`ntpdate` might still be installed and therefore renders the new `systemd`-based services disabled.
 
 ## Further reading
 

@@ -2,7 +2,7 @@
 # QEMU microvm
 
 QEMU microvm is a special case of virtual machine (VMs), designed to be
-optimized for initialisation speed and minimal resource use.
+optimized for initialization speed and minimal resource use.
 
 The underlying concept of a microvm is based on giving up some capabilities of
 standard QEMU in order to reduce complexity and gain speed. Maybe - for your
@@ -15,7 +15,7 @@ interesting to you.
 All of that is a balance that needs to be decided by the needs of your
 use case. There will surely be arguments and examples going both ways - so be
 careful. Giving up on unnecessary features to gain speed is great, but it is
-not so great if - some time after deploying your project - you realise that you
+not so great if - some time after deploying your project - you realize that you
 now need a feature only available in the more complete solution.
 
 QEMU provides additional components that were added to support this special use case:
@@ -26,11 +26,11 @@ QEMU provides additional components that were added to support this special use 
 
 ## Why a special workload?
 
-One has to understand that minimising the QEMU initialisation time only yields a
+One has to understand that minimizing the QEMU initialization time only yields a
 small gain, by shaving off parts of a task that usually do not take a long time. That is only worth
 it if the workload you run is not taking much longer anyway. For example, by
 booting a fully generic operating system, followed by more time to completely
-initialise your workload.
+initialize your workload.
 
 There are a few common ways to adapt a workload to match this:
 - Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
@@ -42,7 +42,7 @@ There are a few common ways to adapt a workload to match this:
   guest system.
 - Sometimes a simpler user space like [busybox](https://www.busybox.net/) or a container-like environment
   is used.
-- In a similar fashion, you could use a customised kernel build with a reduced feature set
+- In a similar fashion, you could use a customized kernel build with a reduced feature set
   with only what is needed for a given use case.
 
 A common compromise of the above options is aligning virtualization with

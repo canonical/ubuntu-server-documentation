@@ -229,7 +229,7 @@ For more details about the autoinstall config options, please have a look at the
 
 * Confirm again with 'OK'.
 
-* And another confirmation about the 'Load will cause jobs to be cancelled'.
+* And another confirmation about the 'Load will cause jobs to be canceled'.
 
 * Then, another 'Yes' -- understanding that it's a disruptive task:
 

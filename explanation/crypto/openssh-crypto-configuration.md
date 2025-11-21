@@ -139,9 +139,9 @@ $ ssh -c aes128-ctr <server>
 Unable to negotiate with 10.0.102.49 port 22: no matching cipher found. Their offer: chacha20-poly1305@openssh.com,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com
 ```
 
-### Prioritize AES 256 on the client
+### Prioritise AES 256 on the client
 
-If we just want to prioritize a particular cipher, we can use the "`^`" character to move it to the front of the list, without disabling any other cipher:
+If we just want to prioritise a particular cipher, we can use the "`^`" character to move it to the front of the list, without disabling any other cipher:
 
 ```bash
 $ ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"

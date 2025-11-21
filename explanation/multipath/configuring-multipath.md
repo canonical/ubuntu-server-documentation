@@ -24,7 +24,7 @@ The `multipath.conf` configuration file contains entries of the form:
 }
 ```
 
-The following keywords are recognized:
+The following keywords are recognised:
 
 * **`defaults`**: Defines default values for attributes used whenever no values are given in the appropriate device or multipath sections.
 
@@ -142,7 +142,7 @@ Regular expression for the World Wide Identifier of a device to be excluded/incl
 
 ### By device
 
-Subsection for the device description. This subsection recognizes the `vendor` and `product` keywords. Both are regular expressions.
+Subsection for the device description. This subsection recognises the `vendor` and `product` keywords. Both are regular expressions.
 
 ```text
 device {
@@ -157,7 +157,7 @@ Regular expression for an udev property. All devices that have matching udev pro
 
 ### Blacklist by protocol
 
-The protocol strings that multipath recognizes are `scsi:fcp`, `scsi:spi`, `scsi:ssa`, `scsi:sbp`, `scsi:srp`, `scsi:iscsi`, `scsi:sas`, `scsi:adt`, `scsi:ata`, `scsi:unspec`, `ccw`, `cciss`, `nvme`, and `undef`. The protocol that a path is using can be viewed by running: 
+The protocol strings that multipath recognises are `scsi:fcp`, `scsi:spi`, `scsi:ssa`, `scsi:sbp`, `scsi:srp`, `scsi:iscsi`, `scsi:sas`, `scsi:adt`, `scsi:ata`, `scsi:unspec`, `ccw`, `cciss`, `nvme`, and `undef`. The protocol that a path is using can be viewed by running: 
    
 ```bash
 multipathd show paths format "%d %P"
@@ -181,9 +181,9 @@ blacklist_exceptions {
 
 The `multipaths` section allows setting attributes of **multipath maps**. The attributes set via the multipaths section (see list below) take precedence over all other configuration settings, including those from the overrides section.
 
-The only recognized attribute for the multipaths section is the multipath subsection. If there is more than one multipath subsection matching a given WWID, the contents of these sections are merged, and settings from later entries take precedence.
+The only recognised attribute for the multipaths section is the multipath subsection. If there is more than one multipath subsection matching a given WWID, the contents of these sections are merged, and settings from later entries take precedence.
 
-The multipath subsection recognizes the following attributes:
+The multipath subsection recognises the following attributes:
 
  * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a substring; WWIDs must match exactly inside the multipaths section.
 
@@ -244,11 +244,11 @@ multipaths {
 
 `multipath-tools` has a built-in **device table** with reasonable defaults for more than 100 known multipath-capable storage devices. The `devices` section can be used to override these settings. If there are multiple matches for a given device, the attributes of all matching entries are applied to it. If an attribute is specified in several matching device subsections, later entries take precedence. 
 
-The only recognized attribute for the `devices` section is the `device` subsection. Devices detected in the system are matched against the device entries using the vendor, product, and revision fields.
+The only recognised attribute for the `devices` section is the `device` subsection. Devices detected in the system are matched against the device entries using the vendor, product, and revision fields.
 
 The vendor, product, and revision fields that multipath or `multipathd` detect for devices in a system depend on the device type. For SCSI devices, they correspond to the respective fields of the "SCSI INQUIRY" page. In general, the command `multipathd show paths format "%d %s"` command can be used to see the detected properties for all devices in the system.
 
-The device subsection recognizes the following attributes:
+The device subsection recognises the following attributes:
 
 1. **`vendor`**: (Mandatory) Regular expression to match the vendor name.
 1. **`product`**: (Mandatory) Regular expression to match the product name.

@@ -9,7 +9,7 @@ We package two types of NVIDIA drivers:
 
 1. **Unified Driver Architecture (UDA)** drivers - which are recommended for the generic desktop use, and which you can also find [on the NVIDIA website](https://www.nvidia.com/en-us/drivers/unix/).
 
-1. **Enterprise Ready Drivers** ({term}`ERD`) - which are recommended on servers and for computing tasks. Their packages can be recognized by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
+1. **Enterprise Ready Drivers** ({term}`ERD`) - which are recommended on servers and for computing tasks. Their packages can be recognised by the `-server` suffix. You can read more about these drivers [in the NVIDIA documentation](https://docs.nvidia.com/datacenter/tesla/index.html).
 
 Additionally, we package the **NVIDIA Fabric Manager** and the **NVIDIA Switch Configuration and Query (NSCQ) Library**, which you will only need if you have NVswitch hardware. The Fabric Manager and NSCQ library are only available with the ERDs or `-server` driver versions.
 

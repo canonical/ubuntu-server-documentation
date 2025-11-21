@@ -61,12 +61,12 @@ user@workstation:~$ ls -1 ./iso/boot/{ubuntu.exec,parmfile.*,kernel.u*,initrd.u*
   *  ubuntu-live-server-20.04.5/boot/ubuntu.ins     Ubuntu for IBM Z (default kernel)
   ```
 
-* Confirm again that jobs might be cancelled if proceeding:
+* Confirm again that jobs might be canceled if proceeding:
 
   ```text
   Load from Removable Media or Server Task Confirmation - 
   <machine>:s1lp11
-  Load will cause jobs to be cancelled.
+  Load will cause jobs to be canceled.
   Do you want to continue with this task?
   ACT33501
   ```

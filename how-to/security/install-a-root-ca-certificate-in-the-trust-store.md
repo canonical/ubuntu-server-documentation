@@ -2,7 +2,7 @@
 
 # Install a root CA certificate in the trust store
 
-Enterprise environments sometimes have a local Certificate Authority (CA) that issues certificates for use within the organization. For an Ubuntu server to be functional, and to trust the hosts in this environment, this CA must be installed in Ubuntu's trust store.
+Enterprise environments sometimes have a local Certificate Authority (CA) that issues certificates for use within the organisation. For an Ubuntu server to be functional, and to trust the hosts in this environment, this CA must be installed in Ubuntu's trust store.
 
 ## Certificate formats
 

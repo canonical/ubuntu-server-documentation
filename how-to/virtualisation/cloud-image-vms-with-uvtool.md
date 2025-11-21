@@ -5,7 +5,7 @@ With Ubuntu being one of the most popular operating systems on many cloud platfo
 
 ## Creating virtual machines using `uvtool`
 
-Starting with Ubuntu 14.04 LTS, a tool called `uvtool` has greatly facilitated the creation of virtual machines (VMs) using cloud images. `uvtool` provides a simple mechanism for synchronizing cloud images locally and using them to create new VMs in minutes.
+Starting with Ubuntu 14.04 LTS, a tool called `uvtool` has greatly facilitated the creation of virtual machines (VMs) using cloud images. `uvtool` provides a simple mechanism for synchronising cloud images locally and using them to create new VMs in minutes.
 
 ## Install `uvtool` packages
 
@@ -25,7 +25,7 @@ This will install `uvtool`'s main commands, `uvt-simplestreams-libvirt` and `uvt
 
 ## Get the Ubuntu cloud image with `uvt-simplestreams-libvirt`
 
-This is one of the major simplifications that `uvtool` provides. It knows where to find the cloud images so you only need one command to get a new cloud image. For instance, if you want to synchronize all cloud images for the amd64 architecture, the `uvtool` command would be:
+This is one of the major simplifications that `uvtool` provides. It knows where to find the cloud images so you only need one command to get a new cloud image. For instance, if you want to synchronise all cloud images for the amd64 architecture, the `uvtool` command would be:
 
 ```bash
 uvt-simplestreams-libvirt --verbose sync arch=amd64
@@ -45,7 +45,7 @@ release=focal arch=amd64 label=daily (20191029)
 ...
 ```
 
-In the case where you want to synchronize only one specific cloud image, you need to use the `release=` and `arch=` filters to identify which image needs to be synchronized.
+In the case where you want to synchronise only one specific cloud image, you need to use the `release=` and `arch=` filters to identify which image needs to be synchronised.
 
 ```bash
 uvt-simplestreams-libvirt sync release=DISTRO-SHORT-CODENAME arch=amd64

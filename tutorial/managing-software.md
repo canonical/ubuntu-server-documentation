@@ -1,7 +1,7 @@
 (managing-software)=
 # Managing your software
 
-If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customisable according to your needs. There are two types of software found in Ubuntu: **Debian packages** and **snaps** -- we will learn about both!
+If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customizable according to your needs. There are two types of software found in Ubuntu: **Debian packages** and **snaps** -- we will learn about both!
 
 To help you get the most from your Ubuntu experience, this tutorial will walk you through managing the software on your Ubuntu machine. This tutorial can be completed using either Ubuntu Server or Ubuntu Desktop.
 
@@ -284,7 +284,7 @@ Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-brow
 
 In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
-We can override this behaviour by passing the `--no-install-recommends` flag to our command, like this:
+We can override this behavior by passing the `--no-install-recommends` flag to our command, like this:
 
 ```bash
 sudo apt install apache2 --no-install-recommends
@@ -444,11 +444,11 @@ sudo apt install apache2
 
 And this time select {kbd}`Y` to confirm when it asks.
 
-## Customise configuration
+## Customize configuration
 
-In general, the default package configuration should just work well, and work "out of the box" when it's installed. But it's almost inevitable that, sooner or later, we'll want to customise the package so that it better fits our own purposes.
+In general, the default package configuration should just work well, and work "out of the box" when it's installed. But it's almost inevitable that, sooner or later, we'll want to customize the package so that it better fits our own purposes.
 
-Before we try to customise the package, we should probably look at what files are included in it. We can check this using {manpage}`dpkg(1)`, which is the Debian package manager. Although APT is now more commonly used for basic package handling, `dpkg` retains some really helpful commands for examining files and finding out package information. It's installed by default on Ubuntu systems so we can use it directly:
+Before we try to customize the package, we should probably look at what files are included in it. We can check this using {manpage}`dpkg(1)`, which is the Debian package manager. Although APT is now more commonly used for basic package handling, `dpkg` retains some really helpful commands for examining files and finding out package information. It's installed by default on Ubuntu systems so we can use it directly:
 
 ```bash
 dpkg --listfiles ssl-cert
@@ -952,7 +952,7 @@ If you would like more information about the Ubuntu release process, how package
 
 ## Installing a .deb file
 
-Although APT is the preferred way to install packages on your system, due to its ability to handle depedencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
+Although APT is the preferred way to install packages on your system, due to its ability to handle dependencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
 
 We can install .deb files that aren't in the APT repository using `dpkg` -- all we need is to download the .deb file, and we can run a command like this to install it:
 
@@ -1028,7 +1028,7 @@ Congratulations, we made it to the end! We've covered a lot of material in this 
 
 * We even learned how to downgrade to older versions of APT packages, and all about APT sources.
 
-**Customising package configuration**
+**Customizing package configuration**
 
 * How to find the conffiles in a package:
   * `dpkg-query --show -f='${Conffiles}\n' <package>`

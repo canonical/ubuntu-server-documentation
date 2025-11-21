@@ -4,7 +4,7 @@
 
 ## Deploying rocks with Docker
 
-As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favorite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
+As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favourite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
 
 First, install Docker if it's not already installed:
 
@@ -64,7 +64,7 @@ The [Grafana rock’s documentation](https://hub.docker.com/r/ubuntu/grafana) wi
 
 ## Multi-container deployment
 
-The section above explained the use of a single container for running a single software instance, but one of the benefits of using rocks is the ability to easily create and architecturally organize (or "orchestrate") them to operate together in a modular fashion.
+The section above explained the use of a single container for running a single software instance, but one of the benefits of using rocks is the ability to easily create and architecturally organise (or “orchestrate”) them to operate together in a modular fashion.
 
 This section will demonstrate use of `docker-compose` to set up two container services that inter-operate to implement a trivial observability stack with the [Prometheus](https://hub.docker.com/r/ubuntu/prometheus) and [Grafana](https://hub.docker.com/r/ubuntu/grafana) rocks.
 
@@ -151,7 +151,7 @@ By clicking on "Data Sources" you can then add Prometheus and provide the server
 
 This URL works because Docker Compose ensures both containers are on the same Docker network and that they can be discovered via their service name.
 
-Finally, click on "Explore" from the Grafana menu, and select the `prometheus` datasource. You can now query and visualize the Prometheus metrics. For example:
+Finally, click on “Explore” from the Grafana menu, and select the `prometheus` datasource. You can now query and visualise the Prometheus metrics. For example:
 
 ![Prometheus data source](https://assets.ubuntu.com/v1/bd93d9c1-prometheus-metrics.png)
 

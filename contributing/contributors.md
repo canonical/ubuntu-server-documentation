@@ -3,7 +3,7 @@
 # Our contributors
 
 Curious about what our contributors have been doing? As you can see from the
-sections below (organized alphabetically), there is a huge variety of fixes,
+sections below (organised alphabetically), there is a huge variety of fixes,
 content updates and improvements being made across the Ubuntu Server
 documentation. The most recently submitted PRs are at the top of each table.
 

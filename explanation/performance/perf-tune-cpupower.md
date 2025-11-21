@@ -14,8 +14,8 @@ optimize for different needs.
 | **Governor** | Design philosophy |
 |--------------|-------------------|
 | ondemand | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
-| conservative | Similar to ondemand, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behaviour is more suitable in a battery-powered environment. |
-| performance | This sets the CPU statically to the highest frequency. This behaviour is best to optimize for speed and latency, but might waste power if being under-used. |
+| conservative | Similar to ondemand, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behavior is more suitable in a battery-powered environment. |
+| performance | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being under-used. |
 | powersave | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
 | userspace | Allows a user-space program to control the CPU frequency. |
 
@@ -241,7 +241,7 @@ either:
 
 ## Does it match what you expect?
 
-One might have expectations about the behaviour of a system. Examples are:
+One might have expectations about the behavior of a system. Examples are:
 
 * I'm not doing much -- it should be idling most of the time
 * I have a very busy workload, I expect it to run at highest frequency

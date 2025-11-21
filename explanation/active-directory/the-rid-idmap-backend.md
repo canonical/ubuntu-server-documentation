@@ -7,7 +7,7 @@ To use this backend, we have to choose two or more ID ranges:
 - a range for the domain we are joining
 - another range to serve as a "catch all", which will store mappings for users and groups that might come from other domains, as well as the default built-in entries
 
-Let's analyze an example configuration:
+Let's analyse an example configuration:
 
     [global]
         ...
