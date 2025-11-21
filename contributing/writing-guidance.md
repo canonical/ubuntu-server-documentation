@@ -16,7 +16,7 @@ section.
 
 ```{tip}
 For example, if a page appears in the How-to section about Virtualisation,
-the landing page you need will be `how-to/virtualisation/index.md`.
+the landing page you need will be `how-to/virtualisation.md`.
 ```
 
 ## Versioning policy
