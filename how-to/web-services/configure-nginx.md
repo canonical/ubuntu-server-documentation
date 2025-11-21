@@ -1,7 +1,7 @@
 (configure-nginx)=
 # How to configure nginx
 
-Once you have {ref}`installed nginx <install-nginx>`, you can customise it for your use with the configuration options explained in this guide.
+Once you have {ref}`installed nginx <install-nginx>`, you can customize it for your use with the configuration options explained in this guide.
 
 ## Server blocks
 
@@ -130,7 +130,7 @@ $ cp our-site.org.crt our-site.org.key our-site.org.csr /etc/apache2/ssl/
 
 ## Setting up nginx
 
-Beyond the settings outlined above, nginx can be further customised through the use of modules.  Please see the next guide in this series for details of how to do that.
+Beyond the settings outlined above, nginx can be further customized through the use of modules.  Please see the next guide in this series for details of how to do that.
 
 * Part 3: {ref}`How to use nginx modules <use-nginx-modules>`
 

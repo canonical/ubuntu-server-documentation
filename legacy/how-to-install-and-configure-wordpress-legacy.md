@@ -18,7 +18,7 @@ Before installing WordPress you should install Apache2 (or a preferred web serve
 
 ## Install WordPress
 
-To install WordPress, run the following comand in the command prompt:
+To install WordPress, run the following command in the command prompt:
 
 ```bash
 sudo apt install wordpress

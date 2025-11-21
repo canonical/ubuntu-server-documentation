@@ -15,7 +15,7 @@ points for a few named workload categories that allow you to react dynamically.
 * Low latency
 * Saving power
 
-It is possible to modify the rules defined for each profile and customise how to tune a particular device. When you switch to another profile or deactivate TuneD, all changes made to the system settings by the previous profile revert back to their original state.
+It is possible to modify the rules defined for each profile and customize how to tune a particular device. When you switch to another profile or deactivate TuneD, all changes made to the system settings by the previous profile revert back to their original state.
 
 You can also configure TuneD to dynamically react to changes in device usage and adjust settings to improve the performance of active devices and reduce the power consumption of inactive devices.
 
@@ -142,9 +142,9 @@ cpu
 ```
 And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
 
-### Customising a profile
+### Customizing a profile
 
-For some specific workloads, the predefined profiles might not be enough and you may want to customise your own profile. You may customise an existing profile, just overriding a few settings, or create an entirely new one.
+For some specific workloads, the predefined profiles might not be enough and you may want to customize your own profile. You may customize an existing profile, just overriding a few settings, or create an entirely new one.
 
 Custom profiles live in `/etc/tuned/<profile-name>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
 
@@ -154,7 +154,7 @@ Custom profiles live in `/etc/tuned/<profile-name>/tuned.conf` (Remember this lo
 
 After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
 
-Here is a simple example of a customised profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/postgresql` profile. The child profile is defined in `/etc/tuned/mypostgresql/tuned.conf`:
+Here is a simple example of a customized profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/postgresql` profile. The child profile is defined in `/etc/tuned/mypostgresql/tuned.conf`:
 
 ```text
 [main]

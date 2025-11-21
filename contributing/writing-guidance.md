@@ -24,7 +24,7 @@ the landing page you need will be `how-to/virtualisation.md`.
 Ubuntu Server is relatively stable from one LTS to the next, which means the
 documentation is not substantially re-written between releases. Due to this,
 we opt not to have separate branches for each Ubuntu release. Instead, we call
-out any changes or behaviour particular to a specific release.
+out any changes or behavior particular to a specific release.
 
 ### Versioning by admonition
 

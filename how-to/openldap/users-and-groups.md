@@ -136,7 +136,7 @@ The user's `gecos` should now be “George Carlin”.
 
 ## `ldapscripts` templates
 
-A nice feature of `ldapscripts` is the template system. Templates allow you to customise the attributes of user, group, and machine objects. For example, to enable the `user` template, edit `/etc/ldapscripts/ldapscripts.conf` by changing:
+A nice feature of `ldapscripts` is the template system. Templates allow you to customize the attributes of user, group, and machine objects. For example, to enable the `user` template, edit `/etc/ldapscripts/ldapscripts.conf` by changing:
 
 ```text    
 UTEMPLATE="/etc/ldapscripts/ldapadduser.template"

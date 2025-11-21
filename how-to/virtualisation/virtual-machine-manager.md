@@ -130,7 +130,7 @@ There are many more arguments that can be found in the {manpage}`virt-install(1)
    Exports the guest's virtual console using VNC and on all host interfaces. Typically servers have no GUI, so another GUI-based computer on the Local Area Network (LAN) can connect via VNC to complete the installation.
 * `--noautoconsole`
    Will not automatically connect to the virtual machine's console.
-* `--hvm`: creates a fully virtualised guest.
+* `--hvm`: creates a fully virtualized guest.
 * `--vcpus=4`: allocate 4 virtual CPUs.
 
 After launching `virt-install`, you can connect to the virtual machine's console either locally using a GUI (if your server has a GUI), or via a remote VNC client from a GUI-based computer.

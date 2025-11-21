@@ -1,7 +1,7 @@
 (gnutls)=
 # GnuTLS
 
-When initialised, the {term}`GnuTLS` library tries to read its system-wide configuration file `/etc/gnutls/config`. This file is present in Ubuntu Noble 24.04 LTS and later, but previous releases did not ship it. In that case, if you want to make configuration changes, it has to be created manually.
+When initialized, the {term}`GnuTLS` library tries to read its system-wide configuration file `/etc/gnutls/config`. This file is present in Ubuntu Noble 24.04 LTS and later, but previous releases did not ship it. In that case, if you want to make configuration changes, it has to be created manually.
 
 This config file can be used to disable (or mark as insecure) algorithms and
 protocols in a system-wide manner, overriding the library defaults. Note that,
@@ -257,7 +257,7 @@ Connecting to '10.0.100.87:443'...
 *** Received alert [40]: Handshake failed
 ```
 
-And given GnuTLS' behaviour regarding re-enabling a cipher that was once removed, we cannot allow AES128 from the command line either:
+And given GnuTLS' behavior regarding re-enabling a cipher that was once removed, we cannot allow AES128 from the command line either:
 
 ```bash
 $ gnutls-cli --priority="NORMAL:+AES-128-GCM"  j-server.lxd

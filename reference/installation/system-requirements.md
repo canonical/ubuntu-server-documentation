@@ -25,7 +25,7 @@ The numbers below are true for Ubuntu 24.04 Noble amd64. Other releases and arch
 **Minimum RAM**: 1.5 GB (ISO installs)
 **Minimum RAM**: 1 GB (cloud images)
 
-It's likely that your system might need more memory than that if you, for instance, have more hardware to initialise, have more complex setup plans, or are using other architectures. To cover better for any of those scenarios:
+It's likely that your system might need more memory than that if you, for instance, have more hardware to initialize, have more complex setup plans, or are using other architectures. To cover better for any of those scenarios:
 
 **Suggested minimum RAM**: 3 GB or more
 

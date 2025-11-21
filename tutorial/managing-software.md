@@ -284,7 +284,7 @@ Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-brow
 
 In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
-We can override this behaviour by passing the `--no-install-recommends` flag to our command, like this:
+We can override this behavior by passing the `--no-install-recommends` flag to our command, like this:
 
 ```bash
 sudo apt install apache2 --no-install-recommends
@@ -444,11 +444,11 @@ sudo apt install apache2
 
 And this time select {kbd}`Y` to confirm when it asks.
 
-## Customise configuration
+## Customize configuration
 
-In general, the default package configuration should just work well, and work "out of the box" when it's installed. But it's almost inevitable that, sooner or later, we'll want to customise the package so that it better fits our own purposes.
+In general, the default package configuration should just work well, and work "out of the box" when it's installed. But it's almost inevitable that, sooner or later, we'll want to customize the package so that it better fits our own purposes.
 
-Before we try to customise the package, we should probably look at what files are included in it. We can check this using {manpage}`dpkg(1)`, which is the Debian package manager. Although APT is now more commonly used for basic package handling, `dpkg` retains some really helpful commands for examining files and finding out package information. It's installed by default on Ubuntu systems so we can use it directly:
+Before we try to customize the package, we should probably look at what files are included in it. We can check this using {manpage}`dpkg(1)`, which is the Debian package manager. Although APT is now more commonly used for basic package handling, `dpkg` retains some really helpful commands for examining files and finding out package information. It's installed by default on Ubuntu systems so we can use it directly:
 
 ```bash
 dpkg --listfiles ssl-cert
@@ -1028,7 +1028,7 @@ Congratulations, we made it to the end! We've covered a lot of material in this 
 
 * We even learned how to downgrade to older versions of APT packages, and all about APT sources.
 
-**Customising package configuration**
+**Customizing package configuration**
 
 * How to find the conffiles in a package:
   * `dpkg-query --show -f='${Conffiles}\n' <package>`

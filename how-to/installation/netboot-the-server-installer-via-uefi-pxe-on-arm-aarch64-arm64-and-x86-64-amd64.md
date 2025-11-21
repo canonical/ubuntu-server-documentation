@@ -96,7 +96,7 @@ $ find /var/lib/tftpboot/
 /var/lib/tftpboot/casper/vmlinuz
 ```
 
-Finally, let’s customise the GRUB menu so we can install our target image by fetching it directly over the internet.
+Finally, let's customize the GRUB menu so we can install our target image by fetching it directly over the internet.
 
 ```
 $ sudo chmod +w /var/lib/tftpboot/grub/grub.cfg

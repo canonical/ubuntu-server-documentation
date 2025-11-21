@@ -67,7 +67,7 @@ And, on `drbd02`, move the file to `/etc`:
 sudo mv drbd.conf /etc/
 ```
 
-Now using the `drbdadm` utility, initialise the meta data storage. On both servers, run:
+Now using the `drbdadm` utility, initialize the meta data storage. On both servers, run:
 
 ```bash
 sudo drbdadm create-md r0

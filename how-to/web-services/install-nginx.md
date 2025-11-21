@@ -47,7 +47,7 @@ $ sudo systemctl restart nginx
 
 ### Enable/disable nginx manually
 
-By default, Nginx will automatically start at boot time.  To disable this behaviour so that you can start it up manually, you can disable it:
+By default, Nginx will automatically start at boot time.  To disable this behavior so that you can start it up manually, you can disable it:
 
 ```bash
 $ sudo systemctl disable nginx
@@ -80,7 +80,7 @@ Thank you for using nginx.
 
 ### Setting up nginx
 
-For more information on customising nginx for your needs, see these follow-up guides:
+For more information on customizing nginx for your needs, see these follow-up guides:
 
   * Part 2: {ref}`How to configure nginx <configure-nginx>
   * Part 3: {ref}`How to use nginx modules <use-nginx-modules>

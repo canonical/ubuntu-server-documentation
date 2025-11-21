@@ -278,7 +278,7 @@ It's also a good idea to backup the original configuration:
 sudo rsync -avz /etc/mysql /root/mysql-backup
 ```
 
-Next, make any desired configuration changes. Then, delete and re-initialise the database space and make sure ownership is correct before restarting MySQL:
+Next, make any desired configuration changes. Then, delete and re-initialize the database space and make sure ownership is correct before restarting MySQL:
 
 ```bash
 sudo rm -rf /var/lib/mysql/*

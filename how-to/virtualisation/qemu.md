@@ -7,7 +7,7 @@
 
 ## Virtualisation with QEMU
 
-[QEMU](http://wiki.qemu.org/Main_Page) is a machine emulator that can run operating systems and programs for one machine on a different machine. However, it is more often used as a virtualiser in collaboration with [KVM](https://www.linux-kvm.org/page/Main_Page) kernel components. In that case it uses the hardware virtualisation technology to virtualise guests.
+[QEMU](http://wiki.qemu.org/Main_Page) is a machine emulator that can run operating systems and programs for one machine on a different machine. However, it is more often used as a virtualizer in collaboration with [KVM](https://www.linux-kvm.org/page/Main_Page) kernel components. In that case it uses the hardware virtualization technology to virtualize guests.
 
 Although QEMU has a [command line interface](https://qemu-project.gitlab.io/qemu/system/invocation.html) and a [monitor](https://qemu-project.gitlab.io/qemu/system/monitor.html) to interact with running guests, they are typically only used for development purposes. On the other hand, {ref}`libvirt <libvirt>` provides an abstraction from specific versions and hypervisors, and encapsulates some workarounds and best practices.
 

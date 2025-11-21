@@ -50,7 +50,7 @@ If you want to `apt upgrade` a package, you should first carefully examine the p
 
 ## How do I turn off phased updates?
  
-If you're sure that you want to disable phased updates, reverting to the old behaviour, you can change `apt`'s configuration by creating a file in `/etc/apt/apt.conf.d` called `99-Phased-Updates` (if `/etc/apt/apt.conf.d/99-Phased-Updates` doesn't already exist). In the file, simply add the following lines:
+If you're sure that you want to disable phased updates, reverting to the old behavior, you can change `apt`'s configuration by creating a file in `/etc/apt/apt.conf.d` called `99-Phased-Updates` (if `/etc/apt/apt.conf.d/99-Phased-Updates` doesn't already exist). In the file, simply add the following lines:
 
 ```bash
 Update-Manager::Always-Include-Phased-Updates true;

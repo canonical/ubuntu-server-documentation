@@ -7,7 +7,7 @@ The Ubuntu Server installer has the ability to set up and install to LVM partiti
 
 First, you need a physical volume. Typically you start with a hard disk, and create a regular partition whose type is “LVM” on it. You can create it with `gparted` or `fdisk`, and usually only want one LVM-type partition in the whole disk, since LVM will handle subdividing it into logical volumes. In `gparted`, you need to check the `lvm` flag when creating the partition, and with `fdisk`, tag the type with code `8e`.
 
-Once you have your LVM partition, you need to initialise it as a physical volume. Assuming this partition is `/dev/sda1`:
+Once you have your LVM partition, you need to initialize it as a physical volume. Assuming this partition is `/dev/sda1`:
 
 ```bash
 sudo pvcreate /dev/sda1
@@ -43,7 +43,7 @@ sudo lvextend --resizefs --size +5g foo/bar
 
 This will add 5 GB to the `bar` logical volume in the `foo` volume group, and will automatically resize the underlying {term}`filesystem` (if supported). The space is allocated from free space anywhere in the `bar` volume group. You can specify an absolute size instead of a relative size if you want by omitting the leading `+`.
 
-If you have multiple physical volumes you can add the names of one (or more) of them to the end of the command to limit which ones are used to fulfil the request.
+If you have multiple physical volumes you can add the names of one (or more) of them to the end of the command to limit which ones are used to fulfill the request.
 
 ## Move a partition
 

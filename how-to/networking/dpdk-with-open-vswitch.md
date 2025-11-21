@@ -93,7 +93,7 @@ You can check if your issues is known on:
 
 Issues are often due to missing small details in the general setup. Later on, these missing details cause problems which can be hard to track down to their root cause. 
 
-A common case seems to be the "could not open network device dpdk0 (No such device)" issue. This occurs rather late when setting up a port in Open vSwitch with DPDK, but the root cause (most of the time) is very early in the setup and initialisation. Here is an example of how proper initialiasation of a device looks - this can be found in the `syslog/journal` when starting Open vSwitch with DPDK enabled.
+A common case seems to be the "could not open network device dpdk0 (No such device)" issue. This occurs rather late when setting up a port in Open vSwitch with DPDK, but the root cause (most of the time) is very early in the setup and initialisation. Here is an example of how proper initialisation of a device looks - this can be found in the `syslog/journal` when starting Open vSwitch with DPDK enabled.
 
 ``` 
 ovs-ctl[3560]: EAL: PCI device 0000:04:00.1 on NUMA socket 0
