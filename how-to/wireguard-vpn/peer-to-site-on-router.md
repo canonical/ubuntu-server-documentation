@@ -4,20 +4,33 @@
 
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
+```{mermaid}
+
+flowchart LR
+  home0["home0"]
+  laptop["Laptop in Coffee shop"]
+  home0 --> laptop
+
+  internet(("public internet"))
+  vpn(("VPN network"))
+
+  subgraph home["home network, .home domain — 10.10.10.0/24"]
+    router["router (.1)"]
+    pi4["pi4"]
+    nas["NAS"]
+    extra["Y"]
+    dots["..."]
+    router --- pi4
+    router --- nas
+    router --- extra
+    router --- dots
+  end
+
+  laptop -- wlan0 --> internet
+  internet -- ppp0 --> router
+  laptop -. "wg0 10.10.11.2/24" .-> vpn
+  router -. "wg0 10.10.11.1/24" .-> vpn
 ```
-                       public internet              ┌─── wg0 10.10.11.1/24
-10.10.11.2/24                                       │        VPN network
-        home0│            xxxxxx       ppp0 ┌───────┴┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─wlan0  xx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │.1       10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-Laptop in                                         ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-Coffee shop                                       │   │     │   │     │   │
-                                                  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
 ```
 
 Of course, this setup is only possible if you can install software on the router. Most of the time, when it's provided by your ISP, you can't. But some ISPs allow their device to be put into a bridge mode, in which case you can use your own device (a computer, a Raspberry PI, or something else) as the routing device.
