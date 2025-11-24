@@ -30,7 +30,6 @@ vale
 
 # Custom dependencies
 GitPython
-distro_info
 furo
 linkify-it-py
 pyspelling
