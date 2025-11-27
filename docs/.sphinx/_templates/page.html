@@ -1,5 +1,13 @@
 {% extends "furo/page.html" %}
 
+{% block htmltitle %}
+   {{ super() }}
+   {# Make github_url available to JavaScript #}
+   {% if github_url %}
+   <meta name="github-url" content="{{ github_url }}">
+   {% endif %}
+{% endblock htmltitle %}
+
 {% block footer %}
    {% include "footer.html" %}
 {% endblock footer %}
