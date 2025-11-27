@@ -122,7 +122,8 @@ html_theme_options = {
 
 # By default, the documentation includes a feedback button at the top.
 # You can disable it by setting the following configuration to True.
-# disable_feedback_button = True
+# We disable it because we have a custom feedback button with our issue template.
+disable_feedback_button = True
 
 
 # ==============================================================================
@@ -157,24 +158,24 @@ html_static_path = [".sphinx/_static/"]
 
 templates_path = [".sphinx/_templates/"]
 
-html_extra_path = []
+#html_extra_path = []
 
 # Add custom CSS files (located under "html_static_path")
 html_css_files = [
-    "cookie-banner.css",
-    "custom.css",
-    "footer.css",
-    "furo_colors.css",
-    "github_issue_links.css",
-    "header.css",
+    "css/cookie-banner.css",
+    "css/custom.css",
+    "css/footer.css",
+    "css/furo_colors.css",
+    "css/github_issue_links.css",
+    "css/header.css",
 ]
 
 # Add custom JavaScript files (located under "html_static_path")
 html_js_files = [
-    "footer.js",
-    "header-nav.js",
-    "github_issue_links.js",
-    "bundle.js",
+    "js/footer.js",
+    "js/header-nav.js",
+    "js/github_issue_links.js",
+    "js/bundle.js",
 ]
 
 source_suffix = {
@@ -229,12 +230,9 @@ linkcheck_retries = 3
 # To enable manpage links, uncomment and replace {codename} with required
 # release, preferably an LTS release (e.g. noble). Do *not* substitute
 # {section} or {page}; these will be replaced by sphinx at build time.
-#
+
 # NOTE: If set, adding "{manpage}" to an .md file adds a link to the
 # corresponding man section at the bottom of the page.
-#
-# manpages_url = "https://manpages.ubuntu.com/manpages/{codename}/en/" + \
-#     "man{section}/{page}.{section}.html"
 
 stable_distro = "plucky"
 
@@ -254,7 +252,7 @@ manpages_url = (
 
 # Custom MyST syntax extensions; see
 # https://myst-parser.readthedocs.io/en/latest/syntax/optional.html
-#
+
 # NOTE: By default, the following MyST extensions are enabled:
 # - substitution
 # - deflist
@@ -319,6 +317,12 @@ extensions = [
 myst_heading_anchors = 3
 
 
+# Suppress specific warnings
+suppress_warnings = [
+    'myst.glossary',  # Suppress glossary-related warnings from MyST parser
+]
+
+
 # Configure hoverxref options
 hoverxref_role_types = {
     "term": "tooltip",
@@ -327,7 +331,6 @@ hoverxref_roles = ["term",]
 
 
 # Excludes files or directories from processing
-
 exclude_patterns = [
     "_build",
     "Thumbs.db",
