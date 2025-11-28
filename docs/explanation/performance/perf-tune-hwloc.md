@@ -123,7 +123,7 @@ Machine (31GB total)
       Net "enp0s31f6"
 ```
 
-Output (example on a server - shortened for readbility):
+Output (example on a server -- shortened for readability):
 
 ```bash
 Package L#0

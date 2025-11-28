@@ -89,7 +89,7 @@ Here is a brief explanation of these configuration parameters:
 
 See the {manpage}`tuned.conf(5)` manpage for details on the syntax of this configuration file.
 
-The plugin instance concept can be useful if you want to apply different tuning parameters to diferent devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
+The plugin instance concept can be useful if you want to apply different tuning parameters to different devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
 ```ini
 [fast_storage]
 type=disk
@@ -177,7 +177,7 @@ Here is an example which applies the base profile `cpu-partitioning` and then ov
 
     sudo tuned-adm profile cpu-partitioning intel-sst
 
-In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hardcoded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
+In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hard-coded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
 
 Another example of merging profiles is the combining of the `powersave` profile with another one:
 

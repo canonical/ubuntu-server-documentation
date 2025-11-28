@@ -255,7 +255,7 @@ Jan 14 08:45:04 n systemd[1]: apparmor.service - Load AppArmor profiles was skip
 * Run `sudo update-grub` to update your system boot configuration.
 * Reboot your system.
 
-You can check if AppArmor is then re-enabled with the following command, and you should seee output similar to this:
+You can check if AppArmor is then re-enabled with the following command, and you should see output similar to this:
 
 ```
 $ sudo aa-status

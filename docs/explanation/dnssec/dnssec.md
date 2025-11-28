@@ -143,7 +143,7 @@ Let's zoom in a little bit on that Ubuntu system:
 
 ![Stub Resolver](../images/ubuntu-stub-resolver.png)
 
-To translate a {term}`hostname` into an IP address, applications typically rely on standard glibc functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
+To translate a {term}`hostname` into an IP address, applications typically rely on standard `glibc` functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
 
 In Ubuntu, the default stub resolver is `systemd-resolved`. That's a daemon, running locally, and listening on port 53/udp on IP 127.0.0.53. The system is configured to use that as its nameserver via `/etc/resolv.conf`:
 

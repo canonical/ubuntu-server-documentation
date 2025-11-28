@@ -32,7 +32,7 @@ The Bacula components can be installed on multiple systems, or they can be group
 
 To begin with, we have to start with installing the database that will be used by the Catalog. The choices are:
 
- * sqlite: Should only be used for test or development deployments of Bacula.
+ * SQLite: Should only be used for test or development deployments of Bacula.
  * PostgreSQL
  * MySQL
 
@@ -97,7 +97,7 @@ Director {
 ```
 What you should inspect and change:
  * `Name`: it's common to use the format `$hostname-dir` for the director. For example, if the hostname is "`bacula-server`", the name here would be `bacula-server-dir`. By sticking to this pattern, less changes will have to be made to the config, as this is what the default installation already assumes.
- * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, thouch, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
+ * `DirAddress`: by default this is set to the localhost address. In order to be able to perform remote backups, though, the director needs to be accessible on the network. To do that, simply remove or comment this parameter: in that case, the service will listen on all network interfaces available on the system.
  * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
 
 ```{tip}
@@ -285,7 +285,7 @@ The `Job` resource is the basic unit in Bacula, and ties everything together:
  * Who is being backed up (`Client`).
  * What should be backed up (`FileSet`).
  * Where should the data be stored (`Storage`, `Pool`), and where to record the job (`Catalog`)
- * When thouls the job run (`Schedule`)
+ * When should the job run (`Schedule`)
 
 The default Director configuration file includes a default Job resource, and more Jobs can inherit from that.
 
