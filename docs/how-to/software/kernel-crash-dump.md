@@ -1,7 +1,6 @@
 (kernel-crash-dump)=
 # Kernel crash dump
 
-
 A 'kernel crash dump' refers to a portion of the contents of volatile memory (RAM) that is copied to disk whenever the execution of the kernel is disrupted. The following events can cause a kernel disruption:
 
   - Kernel panic
@@ -334,4 +333,4 @@ Kernel crash dump is a vast topic that requires good knowledge of the Linux kern
 
   - [Kdump kernel documentation](http://www.kernel.org/doc/Documentation/kdump/kdump.txt).
 
-  - [Analyzing Linux Kernel Crash](http://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walkthrough of kernel dump analysis)
+  - [Analyzing Linux Kernel Crash](http://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)
