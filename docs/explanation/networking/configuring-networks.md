@@ -148,7 +148,7 @@ You can also use the `ip` command to verify your default gateway configuration, 
 ip route show
 default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.0/24 dev eth0 proto kernel scope link src 10.102.66.200
-10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
+10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100
 ```
 
 If you require {term}`DNS` for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
@@ -330,6 +330,43 @@ To modify the order of these name resolution methods, you can simply change the 
 
 ```
 hosts:          files dns [NOTFOUND=return] mdns4_minimal mdns4
+```
+## Adding a virtual IP address
+
+Virtual IP is a method of broadcasting multiple IP addresses to the network. For example, use virtual IP to:
+
+- host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
+- host multiple server names using Samba
+
+Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`. Using the example below, enter the appropriate values for your server and network:
+
+```
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+      - 192.168.0.100/24
+        label: eno1:0
+      - 192.168.0.101/24
+        label: eno1:1
+      ...
+
+```
+
+Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
+
+Apply the configuration to enable the virtual IP:
+
+```
+sudo netplan apply
+```
+
+Verify the IP are available:
+
+```
+ping 192.168.0.100
+ping 192.168.0.101
 ```
 
 ## Bridging multiple interfaces
