@@ -338,9 +338,14 @@ Virtual IP is a method of broadcasting multiple IP addresses to the network. For
 - host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
 - host multiple server names using Samba
 
-Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`. Using the example below, enter the appropriate values for your server and network:
+Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`.
 
-```
+### Multiple static IP addresses
+
+This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
+
+
+```yaml
 network:
   version: 2
   ethernets:
@@ -350,21 +355,49 @@ network:
         label: eno1:0
       - 192.168.0.101/24
         label: eno1:1
-      ...
 
 ```
 
 Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
 
+
 Apply the configuration to enable the virtual IP:
 
+
+```bash
+sudo netplan apply
 ```
+
+### Dynamic IP addresses
+
+This example adds one or more IP addresses to an interface that also has a dynamic address assigned by DHCP.
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+      - 192.168.0.101/24
+        label: eno1:1
+      dhcp4: true
+
+```
+
+:::{note}
+A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces.
+:::
+
+Apply the configuration to enable the virtual IP:
+
+
+```bash
 sudo netplan apply
 ```
 
 Verify the IP are available:
 
-```
+```bash
 ping 192.168.0.100
 ping 192.168.0.101
 ```
