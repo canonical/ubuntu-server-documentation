@@ -133,7 +133,7 @@ To remove the same package, you would use the command:
 sudo aptitude remove nmap
 ```
 
-Consult the {manpage}`Aptitude manpages <aptitude-curses(8)>` for full details of Aptitude's command-line options.
+Consult the {manpage}`Aptitude manual pages <aptitude-curses(8)>` for full details of Aptitude's command-line options.
 
 ## dpkg
 
@@ -200,7 +200,7 @@ sudo dpkg -r zip
 Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
 ```
 
-For more `dpkg` options see the {manpage}`dpkg(1)` manpage: `man dpkg`.
+For more `dpkg` options see the {manpage}`dpkg(1)` manual page: `man dpkg`.
 
 ## APT configuration
 

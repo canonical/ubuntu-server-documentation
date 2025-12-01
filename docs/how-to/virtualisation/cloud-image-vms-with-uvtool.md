@@ -92,7 +92,7 @@ To create a new virtual machine using `uvtool`, run the following in a terminal:
 uvt-kvm create firsttest
 ```
 
-This will create a VM named 'firsttest' using the current locally-available LTS cloud image. If you want to specify a release to be used to create the VM, you need to use the `release=` filter, and the short codename of the release, e.g. "jammy":
+This will create a VM named `firsttest` using the current locally-available LTS cloud image. If you want to specify a release to be used to create the VM, you need to use the `release=` filter, and the short codename of the release, e.g. "jammy":
 
 ```bash
 uvt-kvm create secondtest release=DISTRO-SHORT-CODENAME
@@ -159,12 +159,12 @@ Some other parameters will have an impact on the cloud-init configuration:
 
 - `--packages <package_list>` : Install the comma-separated packages specified in `package_list` on first boot.
 
-A complete description of all available modifiers is available in the {manpage}`uvt-kvm(1)` manpages.
+A complete description of all available modifiers is available in the {manpage}`uvt-kvm(1)` manual pages.
 
 ## Resources
 
 If you are interested in learning more, have questions or suggestions, please contact the Ubuntu Server Team at:
 
-- IRC: [`#ubuntu-server` on Libera](https://kiwiirc.com/nextclient/irc.libera.chat/ubuntu-server)
+- [#server on Ubuntu Matrix](https://matrix.to/#/#server:ubuntu.com)
 
-- Mailing list: [ubuntu-server at lists.ubuntu.com](https://lists.ubuntu.com/mailman/listinfo/ubuntu-server)
+- Mailing list: [`ubuntu-server` at `lists.ubuntu.com`](https://lists.ubuntu.com/mailman/listinfo/ubuntu-server)

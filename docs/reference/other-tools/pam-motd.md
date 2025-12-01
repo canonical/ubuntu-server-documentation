@@ -4,7 +4,7 @@
 
 When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD). This information is obtained and displayed using a couple of packages:
 
-  - *landscape-common:* provides the core libraries of landscape-client, which is needed to manage systems with [Landscape](http://landscape.canonical.com/) (proprietary). Yet the package also includes the landscape-sysinfo utility which is responsible for displaying core system data involving cpu, memory, disk space, etc. For instance:
+  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](http://landscape.canonical.com/) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
     
     ``` 
     
@@ -17,16 +17,16 @@ When logging into an Ubuntu server you may have noticed the informative Message 
     ```
     
     ```{note}
-    You can run landscape-sysinfo manually at any time.
+    You can run `landscape-sysinfo` manually at any time.
     ```
 
-  - *update-notifier-common:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
+  - *`update-notifier-common`:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
 
-pam\_motd executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
+`pam_motd` executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 
 You can add your own dynamic information to the MOTD. For example, to add local weather information:
 
-  - First, install the weather-util package:
+  - First, install the `weather-util` package:
     
         sudo apt install weather-util
 
@@ -60,10 +60,10 @@ You can add your own dynamic information to the MOTD. For example, to add local 
 
   - Finally, exit the server and re-login to view the new MOTD.
 
-You should now be greeted with some useful information, and some information about the local weather that may not be quite so useful. Hopefully the local-weather example demonstrates the flexibility of pam\_motd.
+You should now be greeted with some useful information, and some information about the local weather that may not be quite so useful. Hopefully the local-weather example demonstrates the flexibility of `pam_motd`.
 
 ## Resources
 
   - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
 
-  - The Debian Package of the Day [weather](http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weatherutility.
+  - The Debian Package of the Day [weather](http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weather utility.

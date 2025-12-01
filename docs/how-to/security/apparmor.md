@@ -272,4 +272,4 @@ apparmor module is loaded.
 - For details using AppArmor with other Ubuntu releases see the [AppArmor Community Wiki](https://help.ubuntu.com/community/AppArmor) page.
 - The [OpenSUSE AppArmor](http://en.opensuse.org/SDB:AppArmor_geeks) page is another introduction to AppArmor.
 - (https://wiki.debian.org/AppArmor) is another introduction and basic how-to for AppArmor.
-- A great place to get involved with the Ubuntu Server community and to ask for AppArmor assistance is the `\#ubuntu-server` IRC channel on [Libera](https://libera.chat). The `\#ubuntu-security` IRC channel may also be of use.
+- A great place to get involved with the Ubuntu Server community and to ask for AppArmor assistance is the [#server channel on Matrix](https://matrix.to/#/#server:ubuntu.com). The [#security channel](https://matrix.to/#/#security:ubuntu.com) may also be of use.

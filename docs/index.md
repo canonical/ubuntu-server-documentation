@@ -7,7 +7,7 @@
 **Ubuntu Server** is a version of the Ubuntu operating system designed and
 engineered as a backbone for the internet.
 
-Ubuntu Server brings economic and technical scalability to your datacenter,
+Ubuntu Server brings economic and technical scalability to your data center,
 public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
@@ -70,14 +70,14 @@ page.
 * Read our [Code of Conduct](https://ubuntu.com/community/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/server/17)
-* Get in touch via the `#ubuntu-server` [IRC channel on Libera](https://kiwiirc.com/nextclient/irc.libera.chat/ubuntu-server)
+* [Chat to us on Matrix](https://matrix.to/#/#server:ubuntu.com)
 * [Download Ubuntu Server](https://ubuntu.com/server)
 * Find out how to {ref}`contribute to the Server Guide <contribute>`
 
 Thinking about using Ubuntu Server for your next project? [Get in touch!](https://ubuntu.com/server/contact-us?product=server)
 
 **PDF versions**
-: [Current PDF](https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/) (for Ubuntu 20.04 LTS onwards)
+: [Current PDF](https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/) (for Ubuntu 20.04 LTS onward)
 : [Ubuntu 18.04 LTS PDF](https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf)
 
 ```{toctree}

@@ -5,11 +5,11 @@ Byobu is a useful tool for system administrators who need to execute multiple sh
 
 * {ref}`Byobu <byobu>`
 
-pam_motd is a PAM module that allows customized "Message Of The Day" (MOTD) messages to be shown.
+`pam_motd` is a PAM module that allows customized "Message Of The Day" (MOTD) messages to be shown.
 
 * {ref}`pam_motd <pam-motd>`
 
-sudo-rs is a safety oriented and memory safe implementation of sudo written in Rust.
+`sudo-rs` is a safety oriented and memory safe implementation of sudo written in Rust.
 
 * {ref}`sudo-rs <sudo-rs>`
 
