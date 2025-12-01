@@ -7,7 +7,7 @@ The OpenSSL configuration file is located at `/etc/ssl/openssl.cnf` and is used 
 
 ## Structure of the config file
 
-The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manpage](https://manpages.ubuntu.com/manpages/plucky/en/man5/config.5ssl.html) has all the details.
+The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manual page](https://manpages.ubuntu.com/manpages/plucky/en/man5/config.5ssl.html) has all the details.
 
 This is what it looks like:
 
@@ -42,7 +42,7 @@ system_default = system_default_sect
 CipherString = DEFAULT:@SECLEVEL=2
 ```
 
-This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the {manpage}`SSL_CTX_set_security_level(3)` manpage.
+This gives us our first information about the default set of ciphers and algorithms used by OpenSSL in an Ubuntu installation: `DEFAULT:@SECLEVEL=2`. What that means is detailed inside the {manpage}`SSL_CTX_set_security_level(3)` manual page.
 
 ```{note}
 In Ubuntu Jammy, TLS versions below 1.2 are **disabled** in OpenSSL's `SECLEVEL=2` due to [this patch](https://git.launchpad.net/ubuntu/+source/openssl/tree/debian/patches/tls1.2-min-seclevel2.patch?h=ubuntu/jammy-devel).
@@ -65,17 +65,17 @@ ECDHE-ECDSA-AES256-GCM-SHA384  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256)     
 The `openssl ciphers` command will output even ciphers that are not allowed, unless the `-s` switch is given. That option tells the command to list only **supported** ciphers.
 ```
 
-All the options that can be set in the `system_default_sect` section are detailed in the {manpage}`SSL_CONF_cmd(3)` manpage.
+All the options that can be set in the `system_default_sect` section are detailed in the {manpage}`SSL_CONF_cmd(3)` manual page.
 
 ## Cipher strings, cipher suites, cipher lists
 
 Encrypting data (or signing it) is not a one step process. The whole transformation applied to the source data (until it is in its encrypted form) has several stages, and each stage typically uses a different cryptographic algorithm. The combination of these algorithms is called a cipher suite.
 
-Similar to GnuTLS, OpenSSL also uses the concept of cipher strings to group several algorithms and cipher suites together. The full list of cipher strings is shown in the [`openssl ciphers`](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html) manpage.
+Similar to GnuTLS, OpenSSL also uses the concept of cipher strings to group several algorithms and cipher suites together. The full list of cipher strings is shown in the [`openssl ciphers`](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html) manual page.
 
 OpenSSL distinguishes the ciphers used with TLSv1.3, and those used with TLSv1.2 and older. Specifically for the `openssl ciphers` command, we have:
 
-* `-ciphersuites`: used for the TLSv1.3 ciphersuites. So far, there are only five listed in the [upstream documentation](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#TLS-v1.3-cipher-suites), and the defaults are:
+* `-ciphersuites`: used for the TLSv1.3 cipher suites. So far, there are only five listed in the [upstream documentation](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#TLS-v1.3-cipher-suites), and the defaults are:
 
     TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256
 
@@ -89,7 +89,7 @@ CipherString = DEFAULT:@SECLEVEL=2
 CipherSuites = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256
 ```
 
-In the end, without other constraints, the library will merge both lists into one set of supported crypto algorithms. If the crypto negotiation in a connection settles on TLSv1.3, then the list of *CipherSuites* is considered. If it's TLSv1.2 or lower, then *CipherString* is used.
+In the end, without other constraints, the library will merge both lists into one set of supported crypto algorithms. If the crypto negotiation in a connection settles on TLSv1.3, then the list of *`CipherSuites`* is considered. If it's TLSv1.2 or lower, then *`CipherString`* is used.
 
 ### `openssl ciphers` examples
 
@@ -149,7 +149,7 @@ AES256-GCM-SHA384              TLSv1.2 Kx=RSA      Au=RSA   Enc=AESGCM(256)     
 AES256-SHA256                  TLSv1.2 Kx=RSA      Au=RSA   Enc=AES(256)               Mac=SHA256
 ```
 
-Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filtering, and still contains the **AES128** cipher. But TLSv1.2 and older no longer have **AES128** or **SHA1**. This type of filtering with '`+`', '`-`' and '`!`' can be done with the TLSv1.2 and older protocols and is detailed in the [`openssl ciphers` manpage](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT).
+Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filtering, and still contains the **AES128** cipher. But TLSv1.2 and older no longer have **AES128** or **SHA1**. This type of filtering with '`+`', '`-`' and '`!`' can be done with the TLSv1.2 and older protocols and is detailed in the [`openssl ciphers` manual page](https://www.openssl.org/docs/man3.0/man1/openssl-ciphers.html#CIPHER-LIST-FORMAT).
 
 To filter out TLSv1.3 algorithms, there is no such mechanism, and we must list explicitly what we want by using `-ciphersuites`:
 

@@ -240,5 +240,5 @@ CIPHER is ECDHE-RSA-CHACHA20-POLY1305
 
   * Additional information on [Java's Cryptographic Algorithms settings](https://www.java.com/en/configure_crypto.html)
   * Java Security [Standard Algorithm Names](https://docs.oracle.com/en/java/javase/12/docs/specs/security/standard-names.html)
-  * [Keytool upstream documentation](https://docs.oracle.com/en/java/javase/11/tools/keytool.html)
+  * [`keytool` upstream documentation](https://docs.oracle.com/en/java/javase/11/tools/keytool.html)
   * [`java.security` file with comments](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520) -- links to the section which explains the crypto algorithm restrictions)
