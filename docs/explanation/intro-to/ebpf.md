@@ -46,7 +46,7 @@ machine-code to optimize the program's execution.
 
 Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection or BCC) are
 available in every Ubuntu Server installation by default as part of our efforts 
-to [enhance the application developer's and sysadmin's experience in
+to [enhance the application developer and sysadmin experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).
 
 In Ubuntu, you can use tools like the BCC to identify bottlenecks, investigate performance degradation, trace
@@ -61,7 +61,7 @@ a comprehensive list of these tools with the following command:
 $ dpkg -L bpftrace bpfcc-tools | grep -E '/s?bin/.*$' | xargs -n1 basename
 ```
 
-Most of the tools listed above are quite well documented. Their manpages
+Most of the tools listed above are quite well documented. Their manual pages
 usually include good examples you can try immediately. The tools ending in
 `.bt` are installed by `bpftrace` and refer to `bpftrace` scripts (they are
 text files, hence, you could read them to understand how they are achieving
@@ -90,7 +90,7 @@ run any of it as root.  You may notice that there is also a
 `bashreadline-bpfcc` tool available from `bpfcc-tools`. Both of them provide
 similar features. The former is implemented in python with BCC while the latter
 is a `bpftrace` script, as described above. You will see that many of these
-tools have both a `-bpfcc` and a `.bt` version. Do read their manpages (and
+tools have both a `-bpfcc` and a `.bt` version. Do read their manual pages (and
 perhaps the scripts) to choose which suits you best.
 
 ## Example - Determine what commands are executed
@@ -156,14 +156,14 @@ switching may be required. Furthermore, if you need to monitor a system
 to produce this answer, especially on a host running many VMs, `strace` 
 quickly reaches its limits.
 
-Instead, `opensnoop` could be used to trace `open()` syscalls. In this case,
+Instead, `opensnoop` could be used to trace `open()` system calls. In this case,
 we use `opensnoop-bpfcc` to have more parameters to tune it to our 
 needs. The example will use the following arguments:
 
 * `--full-path` - Show full path for open calls using a relative path.
 * `--name qemu-system-x86` - only care about files opened by QEMU; The mindful
   reader will wonder why this isn't qemu-system-x86_64, but you'd see in
-  unfiltered output of opensnoop that it is length limited, so only the shorter
+  unfiltered output of `opensnoop` that it is length limited, so only the shorter
   qemu-system-x86 can be used.
 
 ```bash

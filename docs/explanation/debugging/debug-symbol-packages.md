@@ -3,7 +3,7 @@
 
 If you want to debug a crash – whether in a project you are developing yourself or from a third-party package – or if you frequently need the debug symbols for specific libraries, it might be helpful to install them permanently on your system if you can’t use debuginfod.
 
-This document describes how to set up the debugging symbol packages (`*-dbg.deb` and `*-dbgsym.ddeb`). You might need to do this when you are performing tasks like a [Backtrace](https://wiki.ubuntu.com/Backtrace) or using [Valgrind](https://wiki.ubuntu.com/Valgrind).
+This document describes how to set up the debugging symbol packages (`*-dbg.deb` and `*-dbgsym.ddeb`). You might need to do this when you are performing tasks like a [backtrace](https://wiki.ubuntu.com/Backtrace) or using [Valgrind](https://wiki.ubuntu.com/Valgrind).
 
 ## Debuginfod
 

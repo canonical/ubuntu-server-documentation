@@ -34,7 +34,7 @@ Key benefits:
 
 - Fencing is the **most critical** part of a cluster using Storage Area Network (SAN) or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
 
-- Required by OCFS2, {term}`GFS2`, cLVMd (before Ubuntu 20.04), lvmlockd (from 20.04 and beyond).
+- Required by OCFS2, {term}`GFS2`, `clvmd` (before Ubuntu 20.04), `lvmlockd` (from 20.04 and beyond).
 
 ## Linux High Availability projects
 
@@ -43,7 +43,7 @@ The following packages are present in the latest Ubuntu LTS release:
 
 ### Main Ubuntu HA packages
 
-Packages in this list are supported just like any other package available in the  **[main] repository**:
+Packages in this list are supported just like any other package available in the  **`main` repository**:
 
 | Package | URL |
 |-|-|
@@ -62,11 +62,11 @@ Packages in this list are supported just like any other package available in the
 | `keepalived` |[Ubuntu](https://launchpad.net/ubuntu/+source/keepalived) \| [Upstream](https://www.keepalived.org/)
 
 
-- **`libqb`** - Library which provides a set of high performance client-server reusable features. It offers high performance logging, tracing, IPC and poll. Its initial features were spun off the `Corosync` cluster communication suite to make them accessible for other projects.
+- **`libqb`** - Library which provides a set of high performance client-server reusable features. It offers high performance logging, tracing, IPC and poll. Its initial features were spun off the `corosync` cluster communication suite to make them accessible for other projects.
 
-- **`Kronosnet`** - `Kronosnet`, often referred to as `knet`, is a network abstraction layer designed for High Availability. `Corosync` uses `Kronosnet` to provide multiple networks for its interconnect (replacing the old [Totem Redundant Ring Protocol](https://discourse.ubuntu.com/t/corosync-and-redundant-rings/11627)) and adds support for some more features like interconnect network hot-plug.
+- **`Kronosnet`** - `Kronosnet`, often referred to as `knet`, is a network abstraction layer designed for High Availability. `corosync` uses `Kronosnet` to provide multiple networks for its interconnect (replacing the old [Totem Redundant Ring Protocol](https://discourse.ubuntu.com/t/corosync-and-redundant-rings/11627)) and adds support for some more features like interconnect network hot-plug.
 
-- **`Corosync`** - or *Cluster Membership Layer*, provides reliable messaging, membership and quorum information about the cluster. Currently, Pacemaker supports `Corosync` as this layer.
+- **`corosync`** - or *Cluster Membership Layer*, provides reliable messaging, membership and quorum information about the cluster. Currently, Pacemaker supports `corosync` as this layer.
 
 - **Pacemaker** - or *Cluster Resource Manager*, provides the brain that processes and reacts to events that occur in the cluster. Events might be: nodes joining or leaving the cluster, resource events caused by failures, maintenance, or scheduled activities. To achieve the desired availability, Pacemaker may start and stop resources and fence nodes.
 
@@ -74,39 +74,39 @@ Packages in this list are supported just like any other package available in the
 
 - **Fence Agents** - Scripts that execute node fencing actions, given a target and fence device parameters.
 
-- **crmsh** - Advanced command-line interface for High-Availability cluster management in {term}`GNU`/Linux.
+- **`crmsh`** - Advanced command-line interface for High-Availability cluster management in {term}`GNU`/Linux.
 
-- **pcs** - Pacemaker command line interface and GUI. It permits users to easily view, modify and create pacemaker based clusters. `pcs` also provides `pcsd`, which operates as a GUI and remote server for `pcs`. Together `pcs` and `pcsd` form the recommended configuration tool for use with pacemaker. *NOTE: It was added to the [main] repository in Ubuntu Lunar Lobster (23.10)*.
+- **`pcs`** - Pacemaker command line interface and GUI. It permits users to easily view, modify and create pacemaker based clusters. `pcs` also provides `pcsd`, which operates as a GUI and remote server for `pcs`. Together `pcs` and `pcsd` form the recommended configuration tool for use with pacemaker. *NOTE: It was added to the `main` repository in Ubuntu Lunar Lobster (23.10)*.
 
-- **cluster-glue** - Reusable cluster components for Linux HA. This package contains node fencing plugins, an error reporting utility, and other reusable cluster components from the Linux HA project.
+- **`cluster-glue`** - Reusable cluster components for Linux HA. This package contains node fencing plugins, an error reporting utility, and other reusable cluster components from the Linux HA project.
 
-- **DRBD** - Distributed Replicated Block Device, **DRBD**  is a [distributed replicated storage system](https://en.wikipedia.org/wiki/Distributed_Replicated_Block_Device) for the Linuxplatform. It is implemented as a kernel driver, several userspace management applications, and some shell scripts. DRBD is traditionally used in high availability (HA) clusters.
+- **DRBD** - Distributed Replicated Block Device, **DRBD** is a [distributed replicated storage system](https://en.wikipedia.org/wiki/Distributed_Replicated_Block_Device) for the Linux platform. It is implemented as a kernel driver, several userspace management applications, and some shell scripts. DRBD is traditionally used in high availability (HA) clusters.
 
-- **DLM** - A distributed lock manager (DLM) runs in every machine in a cluster, with an identical copy of a cluster-wide lock database. In this way   DLM provides software applications which are distributed across a cluster on multiple machines with a means to synchronize their accesses to shared resources. 
+- **DLM** - A distributed lock manager (DLM) runs in every machine in a cluster, with an identical copy of a cluster-wide lock database. In this way DLM provides software applications which are distributed across a cluster on multiple machines with a means to synchronize their accesses to shared resources. 
 
-- **gfs2-utils** - Global File System 2 - {term}`filesystem` tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
+- **`gfs2-utils`** - Global File System 2 - {term}`filesystem` tools. The Global File System allows a cluster of machines to concurrently access shared storage hardware like SANs or iSCSI and network block devices.
 
 - **Keepalived** - Provides simple and robust facilities for load balancing and high availability to Linux systems and Linux-based infrastructures. The load balancing framework relies on the well-known and widely used [Linux Virtual Server (IPVS)](http://www.linux-vs.org/) kernel module which provides Layer4 load balancing. It implements a set of checkers to dynamically and adaptively maintain and manage a load-balanced server pool according to their health, while high availability is achieved by the [VRRP](https://datatracker.ietf.org/wg/vrrp/documents/) protocol.
 
 ### Ubuntu HA community packages
 
-The HA packages in this list are supported just like any other package available in the **[universe] repository**.
+The HA packages in this list are supported just like any other package available in the **`universe` repository**.
 
 | Package | URL |
 |-|-|
-| pcs* | [Ubuntu](https://launchpad.net/ubuntu/+source/libqb) \| [Upstream](https://github.com/ClusterLabs/pcs)
-| csync2| [Ubuntu](https://launchpad.net/ubuntu/+source/csync2) \| [Upstream](https://github.com/LINBIT/csync2)
-| corosync-qdevice| [Ubuntu](https://launchpad.net/ubuntu/+source/corosync-qdevice) \| [Upstream](https://github.com/corosync/corosync-qdevice)
-| fence-virt| [Ubuntu](https://launchpad.net/ubuntu/+source/fence-virt) \| [Upstream](https://github.com/ClusterLabs/fence-virt)
-| sbd| [Ubuntu](https://launchpad.net/ubuntu/+source/sbd) \| [Upstream](https://github.com/ClusterLabs/sbd)
-| booth| [Ubuntu](https://launchpad.net/ubuntu/+source/booth) \| [Upstream](https://github.com/ClusterLabs/booth)
+| `pcs`* | [Ubuntu](https://launchpad.net/ubuntu/+source/libqb) \| [Upstream](https://github.com/ClusterLabs/pcs)
+| `csync2` | [Ubuntu](https://launchpad.net/ubuntu/+source/csync2) \| [Upstream](https://github.com/LINBIT/csync2)
+| `corosync-qdevice` | [Ubuntu](https://launchpad.net/ubuntu/+source/corosync-qdevice) \| [Upstream](https://github.com/corosync/corosync-qdevice)
+| `fence-virt` | [Ubuntu](https://launchpad.net/ubuntu/+source/fence-virt) \| [Upstream](https://github.com/ClusterLabs/fence-virt)
+| `sbd` | [Ubuntu](https://launchpad.net/ubuntu/+source/sbd) \| [Upstream](https://github.com/ClusterLabs/sbd)
+| `booth` | [Ubuntu](https://launchpad.net/ubuntu/+source/booth) \| [Upstream](https://github.com/ClusterLabs/booth)
 
-- **Corosync-Qdevice** - Primarily used for even-node clusters and operates at the corosync (quorum) layer. Corosync-Qdevice is an independent arbiter for solving split-brain situations. (qdevice-net supports multiple algorithms).
+- **`Corosync-Qdevice`** - Primarily used for even-node clusters and operates at the `corosync` (quorum) layer. `Corosync-Qdevice` is an independent arbiter for solving split-brain situations. (qdevice-net supports multiple algorithms).
 
 - **SBD** - It is a fencing block device that can be particularly useful in environments where traditional fencing mechanisms are not possible. SBD integrates with Pacemaker, which serves as a watchdog device and shared storage, to arrange for nodes to reliably self-terminate when fencing is required.
 
 ```{note}
-**pcs** was added to the [main] repository in Ubuntu Lunar Lobster (23.04).
+**`pcs`** was added to the `main` repository in Ubuntu Lunar Lobster (23.04).
 ```
 
 ### Ubuntu HA deprecated packages
@@ -119,15 +119,15 @@ Packages in this list are  **only supported by the upstream community** . All bu
 
 ### Ubuntu HA related packages
 
-Packages in this list aren't necessarily **HA** related packages, but they play a very important role in High Availability Clusters and are supported like any other package provided by the **[main]** repository.
+Packages in this list aren't necessarily **HA** related packages, but they play a very important role in High Availability Clusters and are supported like any other package provided by the **`main`** repository.
 
 | Package | URL |
 |-|-|
-| multipath-tools | [Ubuntu](https://launchpad.net/ubuntu/+source/multipath-tools) \| [Upstream](https://github.com/opensvc/multipath-tools)
-| open-iscsi | [Ubuntu](https://launchpad.net/ubuntu/+source/open-iscsi) \| [Upstream](https://github.com/open-iscsi/open-iscsi)
-| sg3-utils | [Ubuntu](https://launchpad.net/ubuntu/+source/sg3-utils) \| [Upstream](http://sg.danny.cz/sg/sg3_utils.html)
-| tgt OR targetcli-fb* | [Ubuntu](https://launchpad.net/ubuntu/+source/tgt) \| [Upstream](https://github.com/fujita/tgt)
-| lvm2 | [Ubuntu](https://launchpad.net/ubuntu/+source/lvm2) \| [Upstream](https://sourceware.org/lvm2/)
+| `multipath-tools` | [Ubuntu](https://launchpad.net/ubuntu/+source/multipath-tools) \| [Upstream](https://github.com/opensvc/multipath-tools)
+| `open-iscsi` | [Ubuntu](https://launchpad.net/ubuntu/+source/open-iscsi) \| [Upstream](https://github.com/open-iscsi/open-iscsi)
+| `sg3-utils` | [Ubuntu](https://launchpad.net/ubuntu/+source/sg3-utils) \| [Upstream](http://sg.danny.cz/sg/sg3_utils.html)
+| `tgt` OR `targetcli-fb`* | [Ubuntu](https://launchpad.net/ubuntu/+source/tgt) \| [Upstream](https://github.com/fujita/tgt)
+| `lvm2` | [Ubuntu](https://launchpad.net/ubuntu/+source/lvm2) \| [Upstream](https://sourceware.org/lvm2/)
 
 * **LVM2** in a Shared-Storage Cluster Scenario
 
@@ -136,14 +136,14 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
   A distributed lock manager (DLM) is used to broker concurrent {term}`LVM` metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a need to lock a particular set of objects.
   **{manpage}`lvmlockd(8)`** - supported after **Ubuntu 20.04**
   As of 2017, a stable LVM component that is designed to replace  `clvmd` by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.
-  The lvmlockd benefits over clvm are:
+  The `lvmlockd` benefits over `clvm` are:
 
-  * lvmlockd supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
-  * lvmlockd has better design than clvmd. clvmd is command-line level based locking system, which means the whole LVM software will get hang if any LVM command gets dead-locking issue.
-  * lvmlockd can work with lvmetad.
+  * `lvmlockd` supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
+  * `lvmlockd` has better design than `clvmd`. `clvmd` is a command-line level based locking system, which means the whole LVM software will hang if any LVM command gets a dead-locking issue.
+  * `lvmlockd` can work with `lvmetad`.
 
 ```{note}
-`targetcli-fb (Linux LIO)` will likely replace `tgt` in future Ubuntu versions.
+`targetcli-fb` (Linux LIO) will likely replace `tgt` in future Ubuntu versions.
 ```
 
 ## Upstream documentation

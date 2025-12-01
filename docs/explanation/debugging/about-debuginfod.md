@@ -13,7 +13,7 @@ Currently, the service only provides DWARF information. There are plans for it t
 
 `debuginfod` is indexing `ddebs` packages from all [supported Ubuntu releases](https://releases.ubuntu.com/). Once a release goes unsupported, we stop indexing `ddebs` from it and eventually stop serving debug symbols for its packages.
 
-From Kinetic onwards, when you install [GNU Debugger (GDB)](https://www.sourceware.org/gdb/) your system will be automatically configured to use Ubuntu's `debuginfod` service. For previous Ubuntu releases, you can manually enable the service by setting the `DEBUGINFOD_URLS` environment variable in your shell. If you use Bash, you can do that by adding the following snippet to your `~/.bashrc`:
+From Kinetic onward, when you install [GNU Debugger (GDB)](https://www.sourceware.org/gdb/) your system will be automatically configured to use Ubuntu's `debuginfod` service. For previous Ubuntu releases, you can manually enable the service by setting the `DEBUGINFOD_URLS` environment variable in your shell. If you use Bash, you can do that by adding the following snippet to your `~/.bashrc`:
 
 ```text
 export DEBUGINFOD_URLS="https://debuginfod.ubuntu.com"

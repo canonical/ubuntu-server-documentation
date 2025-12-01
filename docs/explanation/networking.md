@@ -16,7 +16,7 @@ Networking key concepts <networking/networking-key-concepts>
 
 ## Configuration
 
-Network configuration in Ubuntu is handled through Netplan. Find out more {ref}`About Netplan <about-netplan>` or get started with our walkthrough on {ref}`network configuration <configuring-networks>` which gives a practical demonstration.
+Network configuration in Ubuntu is handled through Netplan. Find out more {ref}`About Netplan <about-netplan>` or get started with our walk-through on {ref}`network configuration <configuring-networks>` which gives a practical demonstration.
 
 ```{toctree}
 :hidden:

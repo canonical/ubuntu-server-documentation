@@ -22,8 +22,8 @@ If you are a server administrator, check out our explanatory guide on {ref}`conf
 The Dynamic Host Configuration Protocol (DHCP) enables host computers to be automatically assigned settings from a server. To learn more about DHCP and how configuration works, we have {ref}`an explanatory guide <about-dhcp>`.
 
 There are two DHCP servers available on Ubuntu.  
- * **isc-kea** (available from 23.04 onwards)
- * **isc-dhcp-server** (no longer supported by vendor)
+ * **`isc-kea`** (available from 23.04 onward)
+ * **`isc-dhcp-server`** (no longer supported by vendor)
 
 Learn how to {ref}`install isc-kea <install-isc-kea>` or {ref}`install and configure isc-dhcp-server <install-isc-dhcp-server>`.
 

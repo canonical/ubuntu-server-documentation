@@ -5,7 +5,7 @@ The [System Security Services Daemon (SSSD)](https://sssd.io/) is a collection o
 
 ## Common deployment scenarios
 
-The SSSD supports a variety of authorisation and identity services, such as Active Directory, LDAP, and Kerberos. The following guides will help you set up SSSD for:
+The SSSD supports a variety of authorization and identity services, such as Active Directory, LDAP, and Kerberos. The following guides will help you set up SSSD for:
 
 - {ref}`Active Directory <sssd-with-active-directory>`
 - {ref}`LDAP <sssd-with-ldap>`

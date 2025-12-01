@@ -13,7 +13,7 @@ point of defense.
 Given Ubuntu has a wide range of customization options, this introduction cannot 
 provide a comprehensive security hardening guide. However, the security of nearly any 
 Ubuntu system can be enhanced by implementing certain best practices and security-related 
-packages. Our {ref}`security suggestions <security-suggestions>` page outlies those best 
+packages. Our {ref}`security suggestions <security-suggestions>` page outlines those best 
 practices and packages. While you may not choose to implement every suggestion -- and 
 this list is not exhaustive -- each one can contribute an additional layer of security.
 

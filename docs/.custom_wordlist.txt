@@ -30,6 +30,7 @@ RangeSize
 CRLs
 traceback
 ciphersuite
+ciphersuites
 cipherlist
 cipherstring
 [Dd]ebuginfod
@@ -37,7 +38,7 @@ Valgrind
 VPNs
 ISPs
 Bacula
-Open vSwitch
+vSwitch
 UUIDs
 sandboxed
 IPs
@@ -51,6 +52,57 @@ passthrough
 Petitboot
 Subiquity
 validator
+UIDs
+GIDs
+GDB's
+backtrace
+traceback
+rsnapshot
+systemd
+dnsmasq
+nameserver
+Kerberized
+[Kk]eytab
+multipathed
+configurability
+SSSD's
+[Pp]luggable
+userspace
+namespace
+keypairs
+multipaths
+netmask
+WWIDs
+DPDK's
+NICs
+PMDs
+hugepages
+lookaside
+FQDN's
+hostnames
+[Cc]onffile
+PPAs
+architected
+bootloader
+BMC's
+UEFI's
+KDCs
+KDC's
+LUNs
+autoinstall
+Munin
+Yubikey
+Quokka
+enablement
+ASIDs
+VM's
+LANs
+WANs
+CDBs
+O'Reilly
+O'Reilly's
+Byobu
+
 
 
 

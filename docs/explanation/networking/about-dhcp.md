@@ -49,17 +49,17 @@ Ubuntu makes two DHCP servers available:
   Find out {ref}`how to install and configure isc-dhcp-server <install-isc-dhcp-server>`.
 
 - `isc-kea`:
-  [Kea](https://www.isc.org/kea/) was created by ISC to replace `isc-dhcp-server` -- It is supported in Ubuntu releases from 23.04 onwards.
+  [Kea](https://www.isc.org/kea/) was created by ISC to replace `isc-dhcp-server` -- It is supported in Ubuntu releases from 23.04 onward.
 
   Find out {ref}`how to install and configure isc-kea <install-isc-kea>`.
 
 
 ## References
 
-- The [isc-dhcp-server Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
+- The [`isc-dhcp-server` Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
 
 - For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
-- [ISC dhcp-server](https://www.isc.org/software/dhcp)
+- [ISC `dhcp-server`](https://www.isc.org/software/dhcp)
 
 - [ISC Kea Documentation](https://kb.isc.org/docs/kea-administrator-reference-manual)
