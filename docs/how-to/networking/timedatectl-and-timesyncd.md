@@ -74,7 +74,7 @@ If you would now like to serve the Network Time Protocol via `chrony`, this guid
 
 ## References
 
-- [Freedesktop.org info on timedatectl](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
+- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
 
 - [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
 

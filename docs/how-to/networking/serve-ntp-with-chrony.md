@@ -117,7 +117,7 @@ However, since you will want to test/debug your setup (especially the GPS recept
 sudo apt install pps-tools gpsd-clients
 ```
 
-GPS devices usually communicate via serial interfaces. The most common type these days are USB GPS devices, which have a serial converter behind USB. If you want to use one of these devices for PPS then please be aware that the majority do not signal PPS via USB. Check the [GPSD hardware](https://gpsd.gitlab.io/gpsd/hardware.html) list for details. The examples below were run with a Navisys GR701-W.
+GPS devices usually communicate via serial interfaces. The most common type these days are USB GPS devices, which have a serial converter behind USB. If you want to use one of these devices for PPS then please be aware that the majority do not signal PPS via USB. Check the [GPSD hardware](https://gpsd.gitlab.io/gpsd/hardware.html) list for details. The examples below were run with a {spellexception}`Navisys` GR701-W.
 
 When plugging in such a device (or at boot time) {term}`dmesg` should report a serial connection of some sort, as in this example:
 
@@ -324,24 +324,25 @@ This provides output in the following form:
 
 For more complex scenarios there are many more advanced options for configuring NTS. These are documented in the {manpage}`chrony.conf(5)` manual page.
 
-```{note} *About certificate placement*
+```{admonition} *About certificate placement*
+:class: note
 
-Chrony, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
+`chrony`, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
 Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
 ```
 
 ## References
 
-  - [Chrony FAQ](https://chrony.tuxfamily.org/faq.html)
+- [`chrony` FAQ](https://chrony.tuxfamily.org/faq.html)
 
-  - [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
+- [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
 
-  - [pool.ntp.org: project of virtual cluster of timeservers](http://www.pool.ntp.org/)
+- [pool.ntp.org: project of virtual cluster of timeservers](http://www.pool.ntp.org/)
 
-  - [Freedesktop.org info on timedatectl](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
+- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
 
-  - [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
+- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
 
-  - [Feeding chrony from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
+- [Feeding `chrony` from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
 
-  - See the [Ubuntu Time](https://help.ubuntu.com/community/UbuntuTime) wiki page for more information.
+- See the [Ubuntu Time](https://help.ubuntu.com/community/UbuntuTime) wiki page for more information.

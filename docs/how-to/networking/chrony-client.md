@@ -1,5 +1,5 @@
 (chrony-client)=
-# Synchronize time using Chrony
+# Synchronize time using chrony
 
 Ubuntu uses `chrony` for synchronizing time, which is installed by default as of Ubuntu 25.10. You can optionally use `timedatectl`/`timesyncd` to {ref}`synchronize time using systemd <timedatectl-and-timesyncd>`.
 
@@ -17,7 +17,7 @@ System clock synchronized: yes
           RTC in local TZ: no
 ```
 
-For more details on time accuracy, Chrony can be queried directly, using the `chronyc -N tracking` command, producing output like this:
+For more details on time accuracy, `chrony` can be queried directly, using the `chronyc -N tracking` command, producing output like this:
 ```text
 Reference ID    : B97DBE7B (2.ntp.ubuntu.com)
 Stratum         : 3
@@ -36,7 +36,7 @@ Leap status     : Normal
 
 ### Network Time Security (NTS)
 
-Chrony supports "Network Time Security" (NTS) and enables it by default, using the Ubuntu NTS pools. This is done by specifying a `server` or `pool` as usual. Afterwards, options can be listed and it is there that `nts` can be added. For example:
+`chrony` supports "Network Time Security" (NTS) and enables it by default, using the Ubuntu NTS pools. This is done by specifying a `server` or `pool` as usual. Afterwards, options can be listed and it is there that `nts` can be added. For example:
 
 ```text
 server <server-fqdn-or-IP> iburst nts
@@ -85,7 +85,7 @@ traditional Ubuntu NTP pool.
   via `/etc/chrony/conf.d/ubuntu-nts.conf`.
 :::
 
-## Configure Chrony
+## Configure chrony
 
 An admin can control the timezone and how the system clock should relate to the `hwclock` using the common `timedatectl [set-timezone/set-local-rtc]` commands, provided by `systemd`. For more specific actions, like adding of time-sources, the `chronyc` command can be used. See `man chronyc` for more details.
 
@@ -111,7 +111,7 @@ Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if 
 
 ### Time sources provided by DHCP (option 42)
 
-Chrony consumes time sources provided by DHCP (option 42). Those could be traditional, non-authenticated NTP sources. Should one want to avoid this behavior, overruling the choices made by a local DHCP administrator, it can be disabled in `/etc/chrony/chrony.conf`. To do that one would comment out the corresponding setting:
+`chrony` consumes time sources provided by DHCP (option 42). Those could be traditional, non-authenticated NTP sources. Should one want to avoid this behavior, overruling the choices made by a local DHCP administrator, it can be disabled in `/etc/chrony/chrony.conf`. To do that one would comment out the corresponding setting:
 ```
 # Use time sources from DHCP.
 # sourcedir /run/chrony-dhcp
@@ -151,7 +151,7 @@ The output produced will look something like this:
     Jun 02 11:27:09 questing systemd[1]: Started chrony.service - chrony, an NTP client/server.
 ```
 
-Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided in `/etc/chrony/chrony.conf` and additional config files can be stored in `/etc/chrony/conf.d/`. The NTS servers from which to fetch time for `chrony` are in defined in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. There are more advanced options documented in the {manpage}`chrony.conf(5)` manpage. Common use cases are specifying an explicit trusted certificate. After changing any part of the config file you need to restart `chrony`, as follows:
+Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided in `/etc/chrony/chrony.conf` and additional config files can be stored in `/etc/chrony/conf.d/`. The NTS servers from which to fetch time for `chrony` are in defined in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. There are more advanced options documented in the {manpage}`chrony.conf(5)` manual page. Common use cases are specifying an explicit trusted certificate. After changing any part of the config file you need to restart `chrony`, as follows:
 
 ```bash
 sudo systemctl restart chrony.service
@@ -159,7 +159,7 @@ sudo systemctl restart chrony.service
 
 ## Next steps
 
-If you would now like to also serve the Network Time Protocol via `chrony`, this guide will walk you through {ref}`how to configure your Chrony setup <serve-ntp-with-chrony>`.
+If you would now like to also serve the Network Time Protocol via `chrony`, this guide will walk you through {ref}`how to configure your chrony setup <serve-ntp-with-chrony>`.
 
 ## References
 

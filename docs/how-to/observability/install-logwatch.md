@@ -2,7 +2,7 @@
 # How to install and configure Logwatch
 
 
-Logs are an invaluable source of information about problems that may arise in your server.  [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
+Logs are an invaluable source of information about problems that may arise in your server. [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
 
 ## Install Logwatch
 
@@ -18,15 +18,15 @@ You will also need to manually create a temporary directory in order for it to w
 sudo mkdir /var/cache/logwatch
 ```
 
-## Configure `logwatch`
+## Configure Logwatch
 
-Logwatch's default configuration is kept in` /usr/share/logwatch/default.conf/logwatch.conf`. However, configuration changes made directly to that file can be overwritten during updates, so instead the file should be copied into `/etc` and modified there:
+Logwatch's default configuration is kept in `/usr/share/logwatch/default.conf/logwatch.conf`. However, configuration changes made directly to that file can be overwritten during updates, so instead the file should be copied into `/etc` and modified there:
 
 ```
 sudo cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf/
 ```
 
-With your favorite editor, open `/etc/logwatch/conf/logwatch.conf`.  The uncommented lines indicate the default configuration values.  First, lets customize some of the basics:
+With your favorite editor, open `/etc/logwatch/conf/logwatch.conf`. The uncommented lines indicate the default configuration values. First, lets customize some of the basics:
 
 ```text
 Output = mail
@@ -40,7 +40,7 @@ This assumes you've already set up mail services on `host1` that will allow mail
 
 The **Detail** level defines how much information is included in the reports. Possible values are: `Low`, `Medium`, and `High`.
 
-Logwatch will then monitor logs for all services on the system, unless specified otherwise with the **Service** parameter.  If there are undesired services included in the reports, they can be disabled by removing them with additional **Service** fields. E.g.:
+Logwatch will then monitor logs for all services on the system, unless specified otherwise with the **Service** parameter. If there are undesired services included in the reports, they can be disabled by removing them with additional **Service** fields. E.g.:
 
 ```text
 Service = "-http"
@@ -144,4 +144,5 @@ Filesystem      Size  Used Avail Use% Mounted on
 ```
 
 ## Further reading
-- The Ubuntu {manpage}`logwatch(8)` manpage contains many more detailed options.
+
+- The Ubuntu {manpage}`logwatch(8)` manual page contains many more detailed options.

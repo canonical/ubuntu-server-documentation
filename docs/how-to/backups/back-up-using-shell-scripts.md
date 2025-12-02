@@ -144,19 +144,19 @@ Once an archive has been created, it is important to test the archive. The archi
 
 ## Further reading
 
-- For more information on shell scripting see the [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/)
+- For more information on shell scripting see the [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/).
 
-- The [Cron How-to Wiki Page](https://help.ubuntu.com/community/CronHowto) contains details on advanced cron options.
+- The [`cron` how-to wiki page](https://help.ubuntu.com/community/CronHowto) contains details on advanced `cron` options.
 
-- See the [GNU tar Manual](http://www.gnu.org/software/tar/manual/index.html) for more tar options.
+- See the [GNU `tar` manual](http://www.gnu.org/software/tar/manual/index.html) for more `tar` options.
 
 - The Wikipedia [Backup Rotation Scheme](http://en.wikipedia.org/wiki/Backup_rotation_scheme) article contains information on other backup rotation schemes.
 
-- The shell script uses tar to create the archive, but there many other command line utilities that can be used. For example:
+- The shell script uses `tar` to create the archive, but there many other command line utilities that can be used. For example:
     
   - [`cpio`](http://www.gnu.org/software/cpio/): used to copy files to and from archives.
     
-  - [`dd`](http://www.gnu.org/software/coreutils/): part of the coreutils package. A low level utility that can copy data from one format to another.
+  - [`dd`](http://www.gnu.org/software/coreutils/): part of the `coreutils` package. A low level utility that can copy data from one format to another.
    
   - [`rsnapshot`](http://www.rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the {ref}`Tools - rsnapshot <install-rsnapshot>` for some information.
     

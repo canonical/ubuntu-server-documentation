@@ -41,7 +41,7 @@ We can add this `PostUp` command to the `home0.conf` configuration file to have 
 PostUp = resolvectl dns %i 10.10.10.1; resolvectl domain %i \~home
 ```
 
-For `PostUp` (and `PostDown` -- see the {manpage}`wg-quick(8)` manpage for details), the `%i` text is replaced with the WireGuard interface name. In this case, that would be `home0`.
+For `PostUp` (and `PostDown` -- see the {manpage}`wg-quick(8)` manual page for details), the `%i` text is replaced with the WireGuard interface name. In this case, that would be `home0`.
 
 These two `resolvectl` commands tell the local *systemd-resolved* resolver to:
 * associate the DNS server at `10.10.10.1` to the `home0` interface, and

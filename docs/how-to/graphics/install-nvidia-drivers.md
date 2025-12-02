@@ -247,11 +247,11 @@ If you encounter the following error when running the [nvidia-smi](https://devel
 
     No devices were found
 
-This may occur if the open-source NVIDIA kernel driver [nouveau](https://nouveau.freedesktop.org/) is pre-installed and loaded, which conflicts with the proprietary NVIDIA driver. To check whether nouveau is loaded:
+This may occur if the open-source NVIDIA kernel driver [`nouveau`](https://nouveau.freedesktop.org/) is pre-installed and loaded, which conflicts with the proprietary NVIDIA driver. To check whether `nouveau` is loaded:
 
     lsmod | grep nouveau
 
-**Solution**: If nouveau kernel module is loaded, blacklist it and rebuild the initramfs:
+**Solution**: If `nouveau` kernel module is loaded, blocklist it and rebuild the `initramfs`:
 
     echo "blacklist nouveau" | sudo tee /etc/modprobe.d/disable-nouveau.conf
     echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/disable-nouveau.conf

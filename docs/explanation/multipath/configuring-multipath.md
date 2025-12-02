@@ -185,7 +185,7 @@ The only recognized attribute for the multipaths section is the multipath subsec
 
 The multipath subsection recognizes the following attributes:
 
- * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a substring; WWIDs must match exactly inside the multipaths section.
+ * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a sub-string; WWIDs must match exactly inside the multipaths section.
 
  * `alias`: Symbolic name for the multipath map. This takes precedence over an entry for the same WWID in the `bindings_file`.
 

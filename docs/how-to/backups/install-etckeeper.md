@@ -7,7 +7,7 @@ Placing `/etc` under version control is considered an industry best practice, an
 
 ## Install etckeeper
 
-Install etckeeper by entering the following in a terminal:
+Install `etckeeper` by entering the following in a terminal:
 
 ```bash
 sudo apt install etckeeper

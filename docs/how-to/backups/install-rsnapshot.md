@@ -1,7 +1,7 @@
 (install-rsnapshot)=
 # How to install and configure rsnapshot
 
-[rsnapshot](https://rsnapshot.org/) is an rsync-based {term}`filesystem` snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of rsync to create scheduled, incremental backups.
+[`rsnapshot`](https://rsnapshot.org/) is an `rsync`-based {term}`filesystem` snapshot utility. It can take incremental backups of local and remote filesystems for any number of machines. rsnapshot makes extensive use of hard links, so disk space is only used when absolutely necessary. It leverages the power of `rsync` to create scheduled, incremental backups.
 
 ## Install rsnapshot
 
@@ -62,7 +62,7 @@ backup root@example.com:/home/ example.com/    +rsync_long_args=--bwlimit=16,exc
 backup root@example.com:/etc/  example.com/    exclude=mtab,exclude=core
 ```
 
-As you can see, you can pass extra rsync parameters (the `+` appends the parameter to the default list -- if you remove the `+` sign you override it) and also exclude directories.
+As you can see, you can pass extra `rsync` parameters (the `+` appends the parameter to the default list -- if you remove the `+` sign you override it) and also exclude directories.
 
 You can check the comments in `/etc/rsnapshot.conf` and the {manpage}`rsnapshot(1)` manual page for more options.
 

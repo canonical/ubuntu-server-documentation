@@ -2,7 +2,7 @@
 # Domain Name Service (DNS)
 
 
-Domain Name Service (DNS) is an Internet service that maps IP addresses and {term}`fully qualified domain names (FQDN) <FQDN>` to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
+Domain Name Service (DNS) is an Internet service that maps IP addresses and {term}`fully qualified domain names (FQDN) <FQDN>` to one another. In this way, DNS alleviates the need to remember IP addresses. Computers that run DNS are called **name servers**. Ubuntu ships with the Berkeley Internet Naming Daemon (BIND), the most common program used for maintaining a name server on Linux.
 
 ## Install DNS
 
@@ -494,4 +494,4 @@ This section covers some of the most common DNS record types.
 
 - [DNS and BIND](http://shop.oreilly.com/product/9780596100575.do) is a popular book now in its fifth edition. There is now also a [DNS and BIND on IPv6](http://shop.oreilly.com/product/0636920020158.do) book.
 
-- A great place to ask for BIND9 assistance, and get involved with the Ubuntu Server community, is the `#ubuntu-server` IRC channel on [Libera Chat](https://libera.chat/).
+- A great place to ask for BIND9 assistance, and get involved with the Ubuntu Server community, is the [#server Matrix channel](https://matrix.to/#/#server:ubuntu.com).

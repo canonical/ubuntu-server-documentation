@@ -46,7 +46,7 @@ sudo dpkg-reconfigure krb5-kdc
 ```
 
 ```{note}
-The manpage for `krb5.conf` is in the `krb5-doc` package.
+The manual page for `krb5.conf` is in the `krb5-doc` package.
 ```
 
 Let's create our first principal. Since there is no principal create yet, we need to use `kadmin.local`, which uses a local UNIX socket to talk to the KDC, and requires root privileges:
@@ -87,7 +87,7 @@ You can also use a more generic form for this ACL:
 */admin@EXAMPLE.COM        *
 ```
 
-The above will grant all privileges to any admin instance of a principal. See the {manpage}`kadm5.acl(5)` manpage for details.
+The above will grant all privileges to any admin instance of a principal. See the {manpage}`kadm5.acl(5)` manual page for details.
 
 Now restart the `krb5-admin-server` for the new ACL to take effect:
 

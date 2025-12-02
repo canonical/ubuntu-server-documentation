@@ -37,7 +37,7 @@ In order to use LXD, some basic settings need to be configured first. This is do
 
   - A 'trust password' used by remote clients to vouch for their client certificate.
 
-You must run 'lxd init' as root. 'lxc' commands can be run as any user who is a member of group lxd. If user joe is not a member of group 'lxd', you may run:
+You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group lxd. If user `joe` is not a member of group `lxd`, you may run:
 
 ``` 
 adduser joe lxd
@@ -160,7 +160,7 @@ The password can then be provided when the client registers `r1` as a known remo
 
 ### Backing store
 
-LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed zpool will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
+LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed `zpool` will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
 
 The other supported backing stores are described in detail in the [Storage configuration](https://documentation.ubuntu.com/lxd/en/latest/explanation/storage/) section of the LXD documentation.
 
@@ -168,7 +168,7 @@ The other supported backing stores are described in detail in the [Storage confi
 
 Containers are configured according to a set of profiles, described in the next section, and a set of container-specific configuration. Profiles are applied first, so that container specific configuration can override profile configuration.
 
-Container configuration includes properties like the architecture, limits on resources such as CPU and RAM, security details including apparmor restriction overrides, and devices to apply to the container.
+Container configuration includes properties like the architecture, limits on resources such as CPU and RAM, security details including AppArmor restriction overrides, and devices to apply to the container.
 
 Devices can be of several types, including UNIX character, UNIX block, network interface, or disk. In order to insert a host mount into a container, a 'disk' device type would be used. For instance, to mount `/opt` in container `c1` at `/opt`, you could use:
 
@@ -216,7 +216,7 @@ In order to run unprivileged (the default in LXD) containers nested under an unp
 
 LXD supports flexible constraints on the resources which containers can consume. The limits come in the following categories:
 
-  - CPU: limit cpu available to the container in several ways.
+  - CPU: limit CPU available to the container in several ways
 
   - Disk: configure the priority of I/O requests under load
 
@@ -224,7 +224,7 @@ LXD supports flexible constraints on the resources which containers can consume.
 
   - Network: configure the network priority under load
 
-  - Processes: limit the number of concurrent processes in the container.
+  - Processes: limit the number of concurrent processes in the container
 
 For a full list of limits known to LXD, see [the configuration documentation](https://documentation.ubuntu.com/lxd/en/latest/reference/instance_options/).
 
@@ -242,15 +242,15 @@ lxc config set c1 security.privileged true
 
 Note however that in this case the root user in the container is the root user on the host.
 
-## Apparmor
+## AppArmor
 
-LXD confines containers by default with an apparmor profile which protects containers from each other and the host from containers. For instance this will prevent root in one container from signaling root in another container, even though they have the same uid mapping. It also prevents writing to dangerous, un-namespaced files such as many sysctls and ` /proc/sysrq-trigger`.
+LXD confines containers by default with an AppArmor profile which protects containers from each other and the host from containers. For instance this will prevent root in one container from signaling root in another container, even though they have the same UID mapping. It also prevents writing to dangerous, un-namespaced files such as many sysctls and ` /proc/sysrq-trigger`.
 
-If the apparmor policy for a container needs to be modified for a container `c1`, specific apparmor policy lines can be added in the `raw.apparmor` configuration key.
+If the AppArmor policy for a container needs to be modified for a container `c1`, specific AppArmor policy lines can be added in the `raw.apparmor` configuration key.
 
 ## Seccomp
 
-All containers are confined by a default seccomp policy. This policy prevents some dangerous actions such as forced umounts, kernel module loading and unloading, kexec, and the `open_by_handle_at` system call. The seccomp configuration cannot be modified, however a completely different seccomp policy -- or none -- can be requested using `raw.lxc` (see below).
+All containers are confined by a default seccomp policy. This policy prevents some dangerous actions such as forced unmounts, kernel module loading and unloading, kexec, and the `open_by_handle_at` system call. The seccomp configuration cannot be modified, however a completely different seccomp policy -- or none -- can be requested using `raw.lxc` (see below).
 
 ## Raw LXC configuration
 
@@ -321,10 +321,10 @@ To view debug information about LXD itself, on a systemd based host use
 journalctl -u lxd
 ```
 
-Container logfiles for container c1 may be seen using:
+Container log files for container c1 may be seen using:
 
 ``` 
 lxc info c1 --show-log
 ```
 
-The configuration file which was used may be found under ` /var/log/lxd/c1/lxc.conf` while apparmor profiles can be found in ` /var/lib/lxd/security/apparmor/profiles/c1` and seccomp profiles in ` /var/lib/lxd/security/seccomp/c1`.
+The configuration file which was used may be found under ` /var/log/lxd/c1/lxc.conf` while AppArmor profiles can be found in ` /var/lib/lxd/security/apparmor/profiles/c1` and seccomp profiles in ` /var/lib/lxd/security/seccomp/c1`.

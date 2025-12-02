@@ -32,13 +32,13 @@ For the fence agents provided by `fence-agents-base`, we will briefly describe h
 There are two well known tools used to manage fence agents, they are `crmsh` and `pcs`. Here we present examples with both, since `crmsh` is the recommended and supported tool until Ubuntu 22.10 Kinetic Kudu, and `pcs` is the recommended and supported tool from Ubuntu 23.04 Lunar Lobster onwards. For more information on how to migrate from `crmsh` to `pcs` {ref}`refer to our migration guide <migrate-from-crmsh-to-pcs>`.
 ```
 
-## fence_ipmilan
+## `fence_ipmilan`
 
 The content of this section is also applicable to the following fence agents: `fence_idrac`, `fence_ilo3`, `fence_ilo4`, `fence_ilo5`, `fence_imm`, and `fence_ipmilanplus`. All of them are symlinks to `fence_ipmilan`.
 
 From its manual page:
 
-> fence_ipmilan is an I/O Fencing agent which can be used with machines controlled by IPMI. This agent calls support software `ipmitool`. WARNING! This fence agent might report success before the node is powered off. You should use `-m/method onoff` if your fence device works correctly with that option.
+> `fence_ipmilan` is an I/O Fencing agent which can be used with machines controlled by IPMI. This agent calls support software `ipmitool`. WARNING! This fence agent might report success before the node is powered off. You should use `-m/method onoff` if your fence device works correctly with that option.
 
 In a system which supports IPMI and with `ipmitool` installed, a `fence_ipmilan` resource can be configured with the following command:
 
@@ -68,11 +68,11 @@ Where `$IP` is the IP address or {term}`hostname` of fencing device, `$PORT` is 
 
 This is one way to set up `fence_ipmilan`, for more information refer {manpage}`to its manual page <fence_ipmilan(8)>`.
 
-## fence_mpath
+## `fence_mpath`
 
 From its manual page:
 
->`fence_mpath` is an I/O fencing agent that uses SCSI-3 persistent reservations to control access multipath devices. Underlying devices must support SCSI-3 persistent reservations (SPC-3 or greater) as well as the "preempt-and-abort" subcommand. The `fence_mpath` agent works by having a unique key for each node that has to be set in `/etc/multipath.conf`. Once registered, a single node will become the reservation holder by creating a "write exclusive, registrants only" reservation on the device(s). The result is that only registered nodes may write to the device(s). When a node failure occurs, the fence_mpath agent will remove the key belonging to the failed node from the device(s). The failed node will no longer be able to write to the device(s). A manual reboot is required.
+>`fence_mpath` is an I/O fencing agent that uses SCSI-3 persistent reservations to control access multipath devices. Underlying devices must support SCSI-3 persistent reservations (SPC-3 or greater) as well as the "preempt-and-abort" subcommand. The `fence_mpath` agent works by having a unique key for each node that has to be set in `/etc/multipath.conf`. Once registered, a single node will become the reservation holder by creating a "write exclusive, registrants only" reservation on the device(s). The result is that only registered nodes may write to the device(s). When a node failure occurs, the `fence_mpath` agent will remove the key belonging to the failed node from the device(s). The failed node will no longer be able to write to the device(s). A manual reboot is required.
 
 One can configure a `fence_mpath` resource with the following command:
 
@@ -98,15 +98,15 @@ $ pcs stonith create $RESOURCE_NAME fence_mpath \
             meta provides=unfencing
 ```
 
-The `$NODE1_RES_KEY` is the reservation key used by this node 1 (same for the others node with access to the multipath device), please make sure you have `reservation_key <key>` in the `default` section inside `/etc/multipath.conf` and the multipathd service was reloaded after it.
+The `$NODE1_RES_KEY` is the reservation key used by this node 1 (same for the others node with access to the multipath device), please make sure you have `reservation_key <key>` in the `default` section inside `/etc/multipath.conf` and the multipathed service was reloaded after it.
 
 This is one way to set up `fence_mpath`, for more information please check its manual page.
 
-## fence_sbd
+## `fence_sbd`
 
 From its manual page:
 
-> fence_sbd is I/O Fencing agent which can be used in environments where SBD can be used (shared storage).
+> `fence_sbd` is I/O Fencing agent which can be used in environments where SBD can be used (shared storage).
 
 With STONITH Block Device (SBD) configured on a system, the `fence_sbd` resource can be configured with the following command:
 
@@ -122,7 +122,7 @@ $ pcs stonith create $RESOURCE_NAME fence_sbd devices=$DEVICE
 
 This is one way to set up `fence_sbd`, for more information refer {manpage}`to its manual page <fence_sbd(8)>`.
 
-## fence_scsi
+## `fence_scsi`
 
 From its manual page:
 
@@ -150,11 +150,11 @@ The `pcmk_host_list` parameter contains a list of cluster nodes that can access 
 
 This is one way to set up `fence_scsi`, for more information refer {manpage}`to its manual page <fence_scsi(8)>`.
 
-## fence_virsh
+## `fence_virsh`
 
 From its manual page:
 
->`fence_virsh` is an I/O Fencing agent which can be used with the virtual machines managed by libvirt. It logs via ssh to a dom0 and there run virsh command, which does all work. By default, virsh needs root account to do properly work. So you must allow ssh login in your sshd_config.
+>`fence_virsh` is an I/O Fencing agent which can be used with the virtual machines managed by libvirt. It logs via SSH to a dom0 and there run `virsh` command, which does all work. By default, `virsh` needs root account to do properly work. So you must allow SSH login in your `sshd_config`.
 
 A `fence_virsh` resource can be configured with the following command:
 

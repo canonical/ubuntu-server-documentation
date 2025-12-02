@@ -50,7 +50,7 @@ Listen /var/run/cups/cups.sock # existing socket Listen
 Listen 192.168.10.250:631      # Listen on the LAN interface, Port 631 (IPP)
 ```
 
-In the example above, you can comment out or remove the reference to the Loopback address (`127.0.0.1`) if you do not want the CUPS daemon (`cupsd`) to listen on that interface, but would rather have it only listen on the Ethernet interfaces of the Local Area Network (LAN). To enable listening for all network interfaces for which a certain hostname is bound, including the Loopback, you could create a Listen entry for the hostname `socrates` like this:
+In the example above, you can comment out or remove the reference to the loopback address (`127.0.0.1`) if you do not want the CUPS daemon (`cupsd`) to listen on that interface, but would rather have it only listen on the Ethernet interfaces of the Local Area Network (LAN). To enable listening for all network interfaces for which a certain hostname is bound, including the loopback, you could create a Listen entry for the hostname `socrates` like this:
 
 ```text    
 Listen socrates:631  # Listen on all interfaces for the hostname 'socrates'

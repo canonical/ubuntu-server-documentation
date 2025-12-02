@@ -14,7 +14,7 @@ The following packages have been kept back:
 0 upgraded, 0 newly installed, 0 to remove and <X> not upgraded.
 ```
 
-If you’ve ever used combinations of packages from different releases or third party repos, you may be familiar with this message already. However, it has become a much more common occurrence due to something called "phased updates".
+If you've ever used combinations of packages from different releases or third party repositories, you may be familiar with this message already. However, it has become a much more common occurrence due to something called "phased updates".
 
 ## What are phased updates?
 
@@ -24,7 +24,7 @@ The good news is, you don't need to do anything about the "packages kept back" m
 
 ## Why is Ubuntu doing this?
 
-Although updates are thoroughly tested before they get released at all, sometimes bugs can be hidden well enough to escape our attention and make it into a release -- especially in highly specific use cases that we didn’t know we needed to test. This can obviously cause problems for our users, and used to be the norm before we phased updates through `apt`.
+Although updates are thoroughly tested before they get released at all, sometimes bugs can be hidden well enough to escape our attention and make it into a release -- especially in highly specific use cases that we didn't know we needed to test. This can obviously cause problems for our users, and used to be the norm before we phased updates through `apt`.
 
 Update phasing makes it much easier for us to detect serious breakages early on -- before they have a chance to cause problems for the majority of our users. It gives us the opportunity to hold back the update until the bugs are fixed.
 
@@ -96,12 +96,12 @@ libglapi-mesa:
 
 In this output you can see that this package is 20% phased.
 
-You can see the status of all packages currently being phased in Ubuntu at https://people.canonical.com/~ubuntu-archive/phased-updates.html
+You can see the status of all packages [currently being phased](https://ubuntu-archive-team.ubuntu.com/phased-updates.html).
 
 ## Further reading
 
 - The details in this page are based on this [excellent post on AskUbuntu](https://askubuntu.com/questions/1431940/what-are-phased-updates-and-why-does-ubuntu-use-them) by AskUbuntu user *ArrayBolt3*. This page is therefore licensed under Creative Commons Attribution-ShareAlike license, distributed under the terms of [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
 
-- You can check on the progress of the current [phasing Ubuntu Stable Release Updates](https://people.canonical.com/~ubuntu-archive/phased-updates.html).
+- You can check on the progress of the current [phasing Ubuntu Stable Release Updates](https://ubuntu-archive-team.ubuntu.com/phased-updates.html).
 
-- There is also more detail on how phased updates work in the [Ubuntu wiki](https://wiki.ubuntu.com/PhasedUpdates), the [Error Tracker](https://wiki.ubuntu.com/ErrorTracker/PhasedUpdates), and the {manpage}`apt preferences <apt_preferences(5)>` manpage.
+- There is also more detail on how phased updates work in the [Ubuntu wiki](https://wiki.ubuntu.com/PhasedUpdates), the [Error Tracker](https://wiki.ubuntu.com/ErrorTracker/PhasedUpdates), and the {manpage}`apt preferences <apt_preferences(5)>` manual page.

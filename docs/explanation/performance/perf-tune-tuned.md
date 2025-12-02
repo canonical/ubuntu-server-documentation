@@ -87,7 +87,7 @@ Here is a brief explanation of these configuration parameters:
 * `devices`: A comma separated list of device names (without the `/dev/` prefix) which represents the devices this plugin should act on. If not specified, all compatible devices found, now or in the future, will be used. This parameter also accepts simple globbing and negation rules, so that you can specify `nvme*` for all `/dev/nvme*` devices, or `!sda` to not include `/dev/sda`.
 * plugin-specific options: These can be seen in the output of the `tuned-adm list plugins -v` command, for each listed plugin.
 
-See the {manpage}`tuned.conf(5)` manpage for details on the syntax of this configuration file.
+See the {manpage}`tuned.conf(5)` manual page for details on the syntax of this configuration file.
 
 The plugin instance concept can be useful if you want to apply different tuning parameters to different devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
 ```ini
@@ -251,7 +251,7 @@ The sections that follow `[main]` represent the configuration of tuning plugins.
 ## Further reading
 
 * [TuneD website](https://tuned-project.org/)
-* {manpage}`tuned-adm(8)` manpage
-* {manpage}`TuneD profiles <tuned-profiles(7)>` manpage
-* {manpage}`TuneD daemon <tuned(8)>` manpage
-* {manpage}`TuneD configuration <tuned.conf(5)>` manpage
+* {manpage}`tuned-adm(8)` manual page
+* {manpage}`TuneD profiles <tuned-profiles(7)>` manual page
+* {manpage}`TuneD daemon <tuned(8)>` manual page
+* {manpage}`TuneD configuration <tuned.conf(5)>` manual page

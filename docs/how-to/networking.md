@@ -37,7 +37,7 @@ Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
 
 ## DHCP
 
-Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address assignment for devices on your network. There are two DHCP servers available in Ubuntu: `isc-kea` is the most modern, and is available from 23.04 onwards.
+Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address assignment for devices on your network. There are two DHCP servers available in Ubuntu: `isc-kea` is the most modern, and is available from 23.04 onward.
 
 ```{toctree}
 :titlesonly:

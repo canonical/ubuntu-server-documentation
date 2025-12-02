@@ -7,7 +7,7 @@ Ubuntu is an operating system with thousands of packages and snaps available to 
 
 While having access to the software you want to use is great, it is crucial to understand the risks involved in using third party software - whether it's an individual deb package, or an APT repository. Although this page will focus on third party APT repositories, the same risks are inherent in third party packages as well.
 
-Although we don’t recommend using third party software, we know that users sometimes have no other option – so let’s take a look at some of the pitfalls, alternatives, and mitigations.
+Although we don’t recommend using third party software, we know that users sometimes have no other option – so let’s take a look at some of the pitfalls, alternatives, and mitigation options.
 
 
 ### Security risk
@@ -42,7 +42,7 @@ Due to the way they are architected, snaps already carry all of their dependenci
 
 When executed, a snap application is sandboxed and has limited access to the system resources. While still vulnerable to some security threats, snaps offer a better isolation than third party APT repositories when it comes to the damage that can be done by an application.
 
-Finally, if a snap is [published in the snapstore](https://snapcraft.io/store), you will not need to go through the hassle of modifying `sources.list` or adding a new {term}`GPG` key to the keyring. Everything will work “out of the box” when you run `snap install`.
+Finally, if a snap is [published in the snap store](https://snapcraft.io/store), you will not need to go through the hassle of modifying `sources.list` or adding a new {term}`GPG` key to the keyring. Everything will work “out of the box” when you run `snap install`.
 
 ## Mitigating the risks
 
@@ -61,7 +61,7 @@ If the software you want is not available as a snap, you may still need to use a
 
 ## Dealing with third party APT repositories in Ubuntu
 
-Now that we have discussed the risks and mitigations of using third party APT repositories, let's take a look at how we can work with them in Ubuntu. Unless otherwise noted, all commands below are to be executed as the `root` user (or using `sudo` with your regular user).
+Now that we have discussed the risks and mitigation options of using third party APT repositories, let's take a look at how we can work with them in Ubuntu. Unless otherwise noted, all commands below are to be executed as the `root` user (or using `sudo` with your regular user).
 
 ### Add the repository
 
