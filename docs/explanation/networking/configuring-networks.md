@@ -281,7 +281,7 @@ If you try to ping a host with the name `server1`, your system will automaticall
 
 3.  `server1.dev.example.com`
 
-If no matches are found, the DNS server will provide a result of *notfound* and the DNS query will fail.
+If no matches are found, the DNS server will provide a result of *`notfound`* and the DNS query will fail.
 
 ### Static hostnames
 

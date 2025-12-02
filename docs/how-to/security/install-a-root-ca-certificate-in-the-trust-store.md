@@ -43,7 +43,7 @@ sudo cp local-ca.crt /usr/local/share/ca-certificates
 sudo update-ca-certificates
 ```
 
-- Verify that your certificate is in pem format
+- Verify that your certificate is in PEM format
 
 ```bash
 $ sudo ls /etc/ssl/certs/ | grep local-ca

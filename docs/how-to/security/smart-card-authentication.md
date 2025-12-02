@@ -273,7 +273,7 @@ For checking if the smart card works, without doing any verification check (and 
 
 ### Map certificates to user names
 
-The sss PAM module allows certificates to be used for login, though our Linux system needs to know the username associated to a certificate. SSSD provides a variety of cert mappers to do this. Each cert mapper uses specific  information from the certificate to map to a user on the system. The  different cert mappers may even be stacked. In other words, if the first defined mapper fails to map to a user on the system, the next one will be tried, and so on until a user is found.
+The `sss` PAM module allows certificates to be used for login, though our Linux system needs to know the username associated to a certificate. SSSD provides a variety of cert mappers to do this. Each cert mapper uses specific  information from the certificate to map to a user on the system. The  different cert mappers may even be stacked. In other words, if the first defined mapper fails to map to a user on the system, the next one will be tried, and so on until a user is found.
 
 For the purposes of this guide, we will use a simple local user mapping as reference.
 

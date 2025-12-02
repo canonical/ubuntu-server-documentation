@@ -21,7 +21,7 @@ Bacula is made up of several components and services that are used to manage bac
 
 These services and applications can be run on multiple servers and clients, or they can be installed on one machine if backing up a single disk or volume.
 
-In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacule File service on a workstation, to remotely backup its data.
+In this documentation, we will deploy a Bacula Director, with a backup job for the Director itself, and also install the Bacula File service on a workstation, to remotely backup its data.
 
 ## Installing the Server Components
 

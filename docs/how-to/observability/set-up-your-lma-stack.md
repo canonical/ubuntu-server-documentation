@@ -351,7 +351,7 @@ On the left you can see four buttons to configure four elements of the panel: da
 
 ![grafana_6|690x638,40%](https://assets.ubuntu.com/v1/cfaca920-grafana_6.png) ![grafana_7|690x638,40%](https://assets.ubuntu.com/v1/3dfc6d9d-grafana_7.png)
 
-Using the same procedure, add additional panels for processor load and memory usage. Panels can be used to present other types of data as well, such as numerical indicators, logs, newsfeeds, or markdown-formatted documentation. For example, you can add a panel to display the system uptime, such as in the following image:
+Using the same procedure, add additional panels for processor load and memory usage. Panels can be used to present other types of data as well, such as numerical indicators, logs, news feeds, or markdown-formatted documentation. For example, you can add a panel to display the system uptime, such as in the following image:
 
 ![grafana_9|690x638,40%](https://assets.ubuntu.com/v1/2441c52c-grafana_9.png)
 

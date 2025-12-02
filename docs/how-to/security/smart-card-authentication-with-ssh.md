@@ -29,7 +29,7 @@ sudo systemctl restart sshd
 
 ### Set the public key on the server
 
-Extract the user’s public key from the smart card on the SSH client. Use sshkeygen to read the public key from the smart card and into a format consumable
+Extract the user’s public key from the smart card on the SSH client. Use `ssh-keygen` to read the public key from the smart card and into a format consumable
 for SSH.
 
 ```
@@ -49,7 +49,7 @@ and check to make sure that only the key(s) you wanted were added.
 
 ## Client configuration
 
-The SSH client needs to identify its PKCS#11 provider.  To do that set the PKCS11Provider option in the `~/.ssh/config `file of each user desiring to use SSH smart card login.
+The SSH client needs to identify its PKCS#11 provider. To do that set the PKCS11Provider option in the `~/.ssh/config `file of each user desiring to use SSH smart card login.
 
 ```
 PKCS11Provider /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so

@@ -99,7 +99,9 @@ Next, we need to be sure this system will be using the Samba DNS server for its 
 
     sudo unlink /etc/resolv.conf
 
-Note: this will make sudo issue complaints about DNS from this point on, until the Samba DNS service is up and running.
+```{note}
+This will make `sudo` issue complaints about DNS from this point on, until the Samba DNS service is up and running.
+```
 
 And now recreate the file `/etc/resolv.conf` with this content:
 
