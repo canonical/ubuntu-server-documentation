@@ -59,14 +59,15 @@ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
 
 The command-line options mean the following:
 
- * `-Q`: Quiet mode for the SASL authentication setup.
- * `-LLL`: Less verbose LDIF output. One "`L`" restricts output to LDIFv1; another disables comments; and the third one removes the LDIF version from the output.
- * `-Y EXTERNAL`: Select the `EXTERNAL` SASL mechanism for authentication.
- * `-H ldapi:///`: The URL to use to contact the server. In this case, it will use a local unix socket.
- * `-b cn=config`: Start the search at the `cn=config` base.
- * `dn`: Only retrieve the `dn` attribute.
+* `-Q`: Quiet mode for the SASL authentication setup.
+* `-LLL`: Less verbose LDIF output. One "`L`" restricts output to LDIFv1; another disables comments; and the third one removes the LDIF version from the output.
+* `-Y EXTERNAL`: Select the `EXTERNAL` SASL mechanism for authentication.
+* `-H ldapi:///`: The URL to use to contact the server. In this case, it will use a local Unix socket.
+* `-b cn=config`: Start the search at the `cn=config` base.
+* `dn`: Only retrieve the `dn` attribute.
 
 The output will be the similar to the following:
+
 ```text
 dn: cn=config
 dn: cn=module{0},cn=config
@@ -101,6 +102,7 @@ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config
 ```
 
 The output is too large to show here, but it will start like this:
+
 ```text
 dn: cn=config
 objectClass: olcGlobal
@@ -120,10 +122,11 @@ ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 
 Here the only new command-line option is `-x`, and we have a new parameter for `-H`:
 
- * `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **Bind DN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
- * `-H ldap:///`: Use the LDAP protocol over the network (and not over a unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
+* `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **bindDN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
+* `-H ldap:///`: Use the LDAP protocol over the network (and not over a Unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
 The output will be the top-level entry which represents the base of the DIT.
+
 ```text
 dn: dc=example,dc=com
 ```
@@ -137,16 +140,19 @@ ldapwhoami -x
 ```
 
 The output will say who we connected as:
+
 ```text
 anonymous
 ```
 
-
 Now let's perform an authenticated call, via simple authentication:
+
 ```console
 ldapwhoami -x -D cn=admin,dc=example,dc=com -W
 ```
+
 This time we will be shown our authentication DN, after the password prompt:
+
 ```text
 Enter LDAP Password:
 dn:cn=admin,dc=example,dc=com
@@ -159,20 +165,24 @@ A simple bind without some sort of transport security mechanism is **clear text*
 ```
 
 Let's try some SASL EXTERNAL authentication commands:
+
 ```console
 ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 ```
 
 The authentication DN is quite different from the simple bind one from before:
+
 ```text
 dn:gidNumber=1000+uidNumber=1000,cn=peercred,cn=external,cn=auth
 ```
 
 Let's try as root:
+
 ```console
 sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 ```
 Notice how the `uidNumber` and `gidNumber` changed:
+
 ```text
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
@@ -237,6 +247,7 @@ ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
 ```
 
 The command will ask for the admin password, and then show the entries as they are being added:
+
 ```text
 Enter LDAP Password: ********
 adding new entry "ou=People,dc=example,dc=com"
@@ -255,6 +266,7 @@ ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
 ```
 
 The output shows the DNs that matched the search criteria, and the requested attributes:
+
 ```text
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
@@ -266,7 +278,9 @@ Here we used an LDAP "filter": `(uid=john)`. LDAP filters are very flexible and 
 ```console
 ldapsearch -x -LLL -b dc=example,dc=com '(&(objectClass=posixGroup)(memberUid=john))' cn gidNumber
 ```
+
 And the result tells us that "john" is a member of the "miners" group:
+
 ```text
 dn: cn=miners,ou=Groups,dc=example,dc=com
 cn: miners
@@ -282,6 +296,7 @@ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,
 ```
 
 We will be prompted for the new password twice, and at the end for the bind password corresponding to the bind DN specified via `-D`:
+
 ```text
 New password:
 Re-enter new password:
@@ -294,6 +309,7 @@ ldapwhoami -x -D uid=john,ou=people,dc=example,dc=com -W
 ```
 
 If the new password worked, the output will show that we authenticated as the `uid=john,ou=People,dc=example,dc=com` DN:
+
 ```text
 Enter LDAP Password:
 dn:uid=john,ou=People,dc=example,dc=com
@@ -303,7 +319,8 @@ dn:uid=john,ou=People,dc=example,dc=com
 Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
 ```
 
-<h2 id="heading--modifying-slapd-config">Change the configuration</h2>
+(modifying-slapd-config)=
+## Change the configuration
 
 The `slapd-config` DIT can also be queried and modified. Here are some common operations.
 
@@ -316,25 +333,30 @@ Each directory tree suffix has its own specific administrative DN. This is the D
 Besides this specific administrator entry, ACLs can also grant such privileges to any other DN in the directory. All of this is setup by the `slapd` package when it is installed. This results in the following DNs that can be used to make changes to each directory suffix:
 
 
-| Suffix            | DN for making changes      | Authentication mechanism          |
-|-------------------|----------------------------|-----------------------------------|
-| cn=config         | cn=admin,cn=config         | absent                            |
-| cn=config         | gidNumber=0+uidNumber=0,<br>cn=peercred,cn=external,cn=auth    | SASL EXTERNAL as root via ldapi:// |
-| dc=example,dc=com | cn=admin,dc=example,dc=com | Simple bind with password<br>set during install or reconfigure         |
+| Suffix              | DN for making changes                                         | Authentication mechanism                                       |
+| ------------------- | ----------------------------                                  | -----------------------------------                            |
+| `cn=config`         | `cn=admin,cn=config`                                          | Absent                                                         |
+| `cn=config`         | `gidNumber=0+uidNumber=0,<br>cn=peercred,cn=external,cn=auth` | SASL EXTERNAL as root via `ldapi://`                           |
+| `dc=example,dc=com` | `cn=admin,dc=example,dc=com`                                  | Simple bind with password<br>set during install or reconfigure |
 
 
 ### Change the "admin" password
+
 There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time. To locate it in the `cn=config` suffix, run this command:
+
 ```console
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcSuffix=dc=example,dc=com)' olcSuffix olcRootDN olcRootPW
 ```
+
 The output will be the configuration entry for the `dc=example,dc=com` suffix, and show only the selected attributes in the response:
+
 ```text
 dn: olcDatabase={1}mdb,cn=config
 olcSuffix: dc=example,dc=com
 olcRootDN: cn=admin,dc=example,dc=com
 olcRootPW: {SSHA}Y0UjBUUmf08TC25ePVc6waI/mfvPNktk
 ```
+
 Since the `olcRootPW` password attribute we want to change is located under the `cn=config` suffix, we will also have to use the SASL EXTERNAL authentication to modify it, according to the table shown earlier.
 
 ```{note}
@@ -367,6 +389,7 @@ ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
 ```
 
 If successful, the output will show the entry that is being modified:
+
 ```
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
@@ -375,7 +398,7 @@ modifying entry "olcDatabase={1}mdb,cn=config"
 
 Like in other database types, having an index for attributes commonly used in searches can speed up such searches dramatically, specially on large trees. The default installation of OpenLDAP already creates several common indexes, but depending on your data and queries, other indexes might be helpful.
 
-Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). In this example, we will add an "equality" and a "substring" index to the `mail` attribute. Create a file called `add_index.ldif`, and add the following contents:
+Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). In this example, we will add an "equality" and a "sub-string" index to the `mail` attribute. Create a file called `add_index.ldif`, and add the following contents:
 
 ```text
 dn: olcDatabase={1}mdb,cn=config
@@ -390,6 +413,7 @@ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f add_index.ldif
 ```
 
 The output will show the modifications being done:
+
 ```text
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
@@ -401,6 +425,7 @@ ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' 
 ```
 
 And the result will include all instances of the `olcDbIndex` attribute:
+
 ```text
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
@@ -460,13 +485,13 @@ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f logging.ldif
 
 Depending on how active your OpenLDAP server is, this will produce a significant amount of logging. It is recommended to revert back to a less verbose level once the need for this detailed logging isn't there anymore.
 
-While in this verbose mode your host's syslog engine (rsyslog) may have a hard time keeping up. If you see log message like this, it means some messages were dropped:
+While in this verbose mode your host's syslog engine (`rsyslog`) may have a hard time keeping up. If you see log message like this, it means some messages were dropped:
 
 ```text
 rsyslogd-2177: imuxsock lost 228 messages from pid 2547 due to rate-limiting
 ```
 
-You may consider a change to rsyslog's configuration. In `/etc/rsyslog.conf`, add:
+You may consider a change to `rsyslog`'s configuration. In `/etc/rsyslog.conf`, add:
 
 ```text
 # Disable rate limiting
@@ -474,7 +499,7 @@ You may consider a change to rsyslog's configuration. In `/etc/rsyslog.conf`, ad
 $SystemLogRateLimitInterval 0
 ```
 
-And then restart the rsyslog daemon:
+And then restart the `rsyslog` daemon:
 
 ```console
 sudo systemctl restart syslog.service

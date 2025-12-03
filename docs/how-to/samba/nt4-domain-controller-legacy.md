@@ -29,7 +29,7 @@ workgroup = EXAMPLE
 security = user
 ```
 
-In the commented “Domains” section, add or uncomment the following (the last line has been split to fit the format of this document):
+In the commented "Domains" section, add or uncomment the following (the last line has been split to fit the format of this document):
 
 ```text 
 domain logons = yes
@@ -46,28 +46,28 @@ If you wish to not use *Roaming Profiles* leave the `logon home` and `logon path
 ```
 
 - `domain logons`
-Provides the `netlogon` service, causing Samba to act as a domain controller.
+  Provides the `netlogon` service, causing Samba to act as a domain controller.
 
 - `logon path`
-Places the user's Windows profile into their home directory. It is also possible to configure a *\[profiles\]* share placing all profiles under a single directory.
+  Places the user's Windows profile into their home directory. It is also possible to configure a *`[profiles]`* share placing all profiles under a single directory.
 
 - `logon drive`
-Specifies the home directory local path.
+  Specifies the home directory local path.
 
 - `logon home` 
-Specifies the home directory location.
+  Specifies the home directory location.
 
 - `logon script`
-Determines the script to be run locally once a user has logged in. The script needs to be placed in the *\[netlogon\]* share.
+  Determines the script to be run locally once a user has logged in. The script needs to be placed in the *`[netlogon]`* share.
 
 - `add machine script`
-A script that will automatically create the *Machine Trust Account* needed for a workstation to join the domain.
+  A script that will automatically create the *Machine Trust Account* needed for a workstation to join the domain.
     
 In this example the *machines* group will need to be created using the `addgroup` utility (see {ref}`Security - Users: Adding and Deleting Users <user-management>` for details).
 
 ### Mapping shares
 
-Uncomment the *\[homes\]* share to allow the `logon home` to be mapped:
+Uncomment the *`[homes]`* share to allow the `logon home` to be mapped:
 
 ```text
 [homes]
@@ -79,7 +79,7 @@ Uncomment the *\[homes\]* share to allow the `logon home` to be mapped:
    valid users = %S
 ```
 
-When configured as a domain controller, a *\[netlogon\]* share needs to be configured. To enable the share, uncomment:
+When configured as a domain controller, a *`[netlogon]`* share needs to be configured. To enable the share, uncomment:
 
 ```text
 [netlogon]
@@ -91,7 +91,7 @@ When configured as a domain controller, a *\[netlogon\]* share needs to be confi
 ```
 
 ```{note}
-The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [/srv is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
+The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv` is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
 ```
 
 Now create the `netlogon` directory, and an empty (for now) `logon.cmd` script file:
@@ -178,7 +178,7 @@ Next, sync the user accounts, using SCP to copy the `/var/lib/samba` directory f
 sudo scp -r username@pdc:/var/lib/samba /var/lib
 ```
 
-You can replace *username* with a valid username and *pdc* with the {term}`hostname` or IP address of your actual PDC.
+You can replace *`username`* with a valid username and *`pdc`* with the {term}`hostname` or IP address of your actual PDC.
 
 Finally, restart samba:
 
@@ -192,13 +192,13 @@ Another thing to keep in mind is if you have configured the `logon home` option 
 
 ## Further reading
 
-  - For in depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
+- For in depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
 
-  - The guide is also available [in printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- The guide is also available [in printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is also a good reference.
+- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is also a good reference.
 
-  - [Chapter 4](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-pdc.html) of the Samba HOWTO Collection explains setting up a Primary Domain Controller.
+- [Chapter 4](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-pdc.html) of the Samba HOWTO Collection explains setting up a Primary Domain Controller.
 
   - [Chapter 5](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-bdc.html) of the Samba HOWTO Collection explains setting up a Backup Domain Controller.
 

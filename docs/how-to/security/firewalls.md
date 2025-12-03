@@ -1,9 +1,9 @@
 (firewalls)=
 # Firewall
 
-The Linux kernel includes the **Netfilter** subsystem, which is used to manipulate or decide the fate of network traffic headed into or through your server. All modern Linux firewall solutions use this system for packet filtering.
+The Linux kernel includes the **[netfilter](https://netfilter.org/)** subsystem, which is used to manipulate or decide the fate of network traffic headed into or through your server. All modern Linux firewall solutions use this system for packet filtering.
 
-The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the Netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many {term}`frontends <frontend>` are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
+The kernel's packet filtering system would be of little use to administrators without a userspace interface to manage it. This is the purpose of the **`iptables`** utility: when a packet reaches your server, it will be handed off to the netfilter subsystem for acceptance, manipulation, or rejection based on the rules supplied to it from the userspace (via `iptables`). Thus, `iptables` is all you need to manage your firewall, if you're familiar with it, but many {term}`frontends <frontend>` are available to simplify the task. We'll take a look at the default frontend used in Ubuntu here.
 
 ## ufw - Uncomplicated Firewall
 
@@ -322,12 +322,12 @@ There are many tools available to help you construct a complete firewall without
 
 ## Further reading
 
-- The [Ubuntu Firewall](https://wiki.ubuntu.com/UncomplicatedFirewall) wiki page contains information on the development of ufw
+- The [Ubuntu Firewall](https://wiki.ubuntu.com/UncomplicatedFirewall) wiki page contains information on the development of `ufw`
 
 - Also, the {manpage}`ufw(8)` manual page contains some very useful information: `man ufw`
 
-- See the [packet-filtering-HOWTO](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
+- See the [packet-filtering how-to](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
 
-- The [nat-HOWTO](http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
+- The [nat how-to](http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
 
-- The [IPTables HowTo](https://help.ubuntu.com/community/IptablesHowTo) in the Ubuntu wiki is a great resource
+- The [`iptables` how-to](https://help.ubuntu.com/community/IptablesHowTo) in the Ubuntu wiki is a great resource

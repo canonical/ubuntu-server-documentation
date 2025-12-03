@@ -26,7 +26,7 @@ sudo apt install openssh-server
 
 ## Configure OpenSSH
 
-To configure the default behavior of the OpenSSH server application, `sshd`, edit the file `/etc/ssh/sshd_config`. For information about the configuration directives used in this file, refer to the online {manpage}`sshd_config(5)` manpage or run `man sshd_config` at a terminal prompt.
+To configure the default behavior of the OpenSSH server application, `sshd`, edit the file `/etc/ssh/sshd_config`. For information about the configuration directives used in this file, refer to the online {manpage}`sshd_config(5)` manual page or run `man sshd_config` at a terminal prompt.
 
 There are many directives in the `sshd` configuration file, which control things like communication settings and authentication modes. The following are examples of configuration directives that can be changed by editing the `/etc/ssh/sshd_config` file.
 
@@ -70,8 +70,8 @@ Many other configuration directives for `sshd` are available to change the serve
 SSH allows authentication between two hosts without the need of a password, using cryptographic keys instead.
 {term}`SSH-key` authentication uses a **private key** and a **public key**.
 
-We recommend the [**ed25519 Elliptic Curve algorithm**](https://ed25519.cr.yp.to/) (`-t ed25519`) due to shorter keysize and lower computational requirements.
-Alternatively, you can create a key using the **RSA Algorithm** (`-t rsa -b 4096`, for 4096 bit keysize) instead.
+We recommend the [**ed25519 Elliptic Curve algorithm**](https://ed25519.cr.yp.to/) (`-t ed25519`) due to shorter key size and lower computational requirements.
+Alternatively, you can create a key using the **RSA Algorithm** (`-t rsa -b 4096`, for 4096 bit key size) instead.
 
 To generate a key pair, run the following command:
 

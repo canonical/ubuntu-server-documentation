@@ -356,7 +356,7 @@ bootloader
 
 BOOTP
 Bootstrap Protocol
-    A network protocol that assigns IP addresses and boot information to a diskless system.
+    A network protocol that assigns IP addresses and boot information to a disk-less system.
 
 bootstrap
     *Work in Progress*
@@ -607,7 +607,7 @@ Direct Memory Access Remapping
     often used in virtualized environments to isolate devices between
     {term}`virtual machines (VMs) <VM>` and the host system.
 
-dmesg
+`dmesg`
     A command in Linux systems that displays system logs related to hardware,
     drivers, and kernel events, such as system startup, device detection, and
     errors. It is commonly used for troubleshooting hardware issues and system
@@ -673,8 +673,8 @@ DNS over HTTPS
     * Networking
     * Security
 
-dpkg
-    dpkg is a package manager for Debian-based systems. It can install, remove,
+`dpkg`
+    `dpkg` is a package manager for Debian-based systems. It can install, remove,
     and build packages, but unlike other package management systems, it cannot
     automatically download and install packages -– or their dependencies.
 
@@ -852,7 +852,7 @@ frontend
     Related topic(s):
     * Virtualization and containers, Security, OpenLDAP.
 
-fsck
+`fsck`
 File System Check
     `fsck` is a Linux/Unix-like system utility tool that checks for, and
     repairs, any {term}`filesystem` errors.
@@ -892,14 +892,14 @@ Firmware
 
 :::{glossary}
 
-gcplogs
+`gcplogs`
     A logging driver that allows logs to be forwarded from a Docker container
     running in Google Cloud to the Google Cloud Logging service.
     
     Related topic(s):
     * Cloud, Containers, Observability
 
-gcrypt
+`gcrypt`
     A cryptographic library that supports encryption, hashing, etc. for
     applications.
 
@@ -914,7 +914,6 @@ GNU Debugger
     Related topic(s):
     * Debugging
 
-gelf
 GELF
 Graylog Extended Log Format
     GELF is a logging driver that allow logs to be forwarded in {term}`JSON`
@@ -983,7 +982,7 @@ GNU's Not Unix Transport Layer Security
 GPG
 GNU Privacy Guard
     GPG is a GNU software package that secures data-at-rest before sending it
-    to a recepient.
+    to a recipient.
 
     Related topic(s):
     * Security, Cryptography
@@ -1298,18 +1297,18 @@ jitter
     * Networking
 
 journald
-    `journald`, also known as `systemd-journald`, is a logging service
-    developed by the {term}`systemd` project as part of the `systemd` suite. It
-    collects and stores log messages from various sources, including `systemd`
-    services, kernel messages, system logs, and application logs. `journald`
-    stores logs in a binary format offering advantages, such as storage
+    journald, also known as systemd-journald, is a logging service
+    developed by the {term}`systemd` project as part of the systemd suite. It
+    collects and stores log messages from various sources, including systemd
+    services, kernel messages, system logs, and application logs.
+    journald stores logs in a binary format offering advantages, such as storage
     efficiency, searchability, and most especially structured logging. In
     containerized systems like Docker, it functions as a logging driver for
     containers. 
 
     See also:
     * The {manpage}`journald.conf(5)` manual page
-    * [Docker `journald` documentation](https://docs.docker.com/engine/logging/drivers/journald/) for details on using journald as a logging driver
+    * [Docker journald documentation](https://docs.docker.com/engine/logging/drivers/journald/) for details on using journald as a logging driver
 
     Related topic(s):
     * Logging, Observability
@@ -1357,7 +1356,7 @@ keyservers
 keytab
     *Work in Progress*
 
-Keytool
+keytool
     *Work in Progress*
 
 KVM
@@ -1396,7 +1395,7 @@ Load-balancing
 localhost
     *Work in Progress*
 
-Logfiles
+Log files
     *Work in Progress*
     
 Logstash
@@ -1469,7 +1468,7 @@ Message Authentication Code
 MAC address
     *Work in Progress*
 
-manpage
+{spellexception}`manpage`
 manual page
     *Work in Progress*
 
@@ -1485,7 +1484,7 @@ MDA
 Mail Delivery Agent
     *Work in Progress*
 
-mdev
+`mdev`
 Minimal Device Manager
     *Work in Progress*
 
@@ -1506,7 +1505,7 @@ MOTD
 Message of the Day
     *Work in Progress*
 
-mountpoints
+mount points
     *Work in Progress*
 
 MPIO
@@ -1808,7 +1807,6 @@ Postcopy
 Postfix
     *Work in Progress*
 
-Postgres
 PostgreSQL
     *Work in Progress*
 
@@ -1878,7 +1876,7 @@ QA
 Quality Assurance
     *Work in Progress*
 
-qdevice
+QDevice
 Quorum Device
     *Work in Progress*
 
@@ -1886,7 +1884,7 @@ QEMU
 Quick Emulator
     *Work in Progress*
 
-qeth
+QETH
 QDIO Ethernet
     *Work in Progress*
 
@@ -1905,10 +1903,7 @@ RAM
 Random Access Memory
     *Work in Progress*
 
-rangesize
-    *Work in Progress*
-
-rclone
+RangeSize
     *Work in Progress*
 
 RDAC
@@ -1921,9 +1916,6 @@ Relational Database Management System
 
 RDN
 Relative Distinguished Name
-    *Work in Progress*
-
-Redbook
     *Work in Progress*
 
 renderer
@@ -1966,15 +1958,6 @@ routable
 RSA
 Rivest–Shamir–Adleman
     RSA is an asymmetric encryption algorithm
-    *Work in Progress*
-
-rsnapshot
-    *Work in Progress*
-
-rsync
-    *Work in Progress*
-
-rsyslog
     *Work in Progress*
 
 RTC
@@ -2039,10 +2022,6 @@ SDN
 Software-Defined Networking
     *Work in Progress*
 
-sdx
-SCSI Desk (x)
-    *Work in Progress*
-
 seccomp
 Secure computing mode
     *Work in Progress*
@@ -2089,7 +2068,7 @@ SLAT
 Second Level Address Translation
     *Work in progress*
 
-smartcard
+smart card
     *Work in Progress*
 
 SMB
@@ -2117,7 +2096,7 @@ snapd
 snapshot
     *Work in Progress*
 
-Snapstore
+Snap store
     *Work in Progress*
 
 SNMP
@@ -2154,7 +2133,7 @@ SSH-key
 Secure Shell Key
     A cryptographic encryption key pair for {term}`SSH`, usually used and created with {term}`OpenSSH`.
     It's split in two parts: a _public_ and a _private_ key files.
-    The private key is secret and belogs to the owning user, and it's used to prove posession of that secret.
+    The private key is secret and belongs to the owning user, and it's used to prove possession of that secret.
     The public key is not secret and is used to securely identify only the private key holder.
     That way, entering a public key on a server for {term}`SSH` access, only the private key holder can log in.
 
@@ -2190,7 +2169,7 @@ Standard Error
     *Work in Progress*
 
 STK
-Storake Tek
+StorageTek
     *Work in Progress*
 
 storage
@@ -2212,7 +2191,7 @@ substring
 subvolume
     *Work in Progress*
 
-sudo
+`sudo`
 superuser do
     *Work in Progress*
 
@@ -2267,12 +2246,6 @@ Ticket Granting Service
 
 TGT
 Ticket Granting Ticket
-    *Work in Progress*
-
-timedatectl
-    *Work in Progress*
-
-timesyncd
     *Work in Progress*
 
 TLB
@@ -2340,7 +2313,7 @@ UEFI
 Unified Extensible Firmware Interface
     *Work in Progress*
 
-ufw
+`ufw`
 Uncomplicated Firewall
     *Work in Progress*
 
@@ -2379,7 +2352,7 @@ USN
 Update Sequence Number
     *Work in Progress*
 
-usr
+`usr`
     Refers to the `/usr/` directory and stands for "Unix System Resources"
 
 UUIDs
@@ -2484,7 +2457,7 @@ WCCP
 Web Cache Communication Protocol
     *Work in Progress*
 
-Webserver
+Web server
     *Work in Progress*
 
 winbind
@@ -2554,10 +2527,6 @@ zSeries Fibre Channel Protocol
 
 ZFS
 Zettabyte File System
-    *Work in progress*
-
-zpool
-ZFS Pool
     *Work in progress*
 
 z/VM

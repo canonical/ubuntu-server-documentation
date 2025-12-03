@@ -144,10 +144,10 @@ This section briefly explains some basic Apache2 daemon configuration settings.
   The **LockFile** directive sets the path to the lockfile used when the server is compiled with either `USE_FCNTL_SERIALIZED_ACCEPT` or `USE_FLOCK_SERIALIZED_ACCEPT`. It must be stored on the local disk. It should be left to the default value unless the logs directory is located on an NFS share. If this is the case, the default value should be changed to a location on the local disk and to a directory that is readable only by root.
 
 - **PidFile**
-  The **PidFile** directive sets the file in which the server records its process ID (pid). This file should only be readable by root. In most cases, it should be left to the default value.
+  The **PidFile** directive sets the file in which the server records its process ID (`pid`). This file should only be readable by root. In most cases, it should be left to the default value.
 
 - **User**
-  The **User** directive sets the userid used by the server to answer requests. This setting determines the server's access. Any files inaccessible to this user will also be inaccessible to your website's visitors. The default value for User is "www-data".
+  The **User** directive sets the user ID used by the server to answer requests. This setting determines the server's access. Any files inaccessible to this user will also be inaccessible to your website's visitors. The default value for User is "www-data".
 
   ```{warning}
   Unless you know exactly what you are doing, do not set the User directive to root. Using root as the User will create large security holes for your Web server.

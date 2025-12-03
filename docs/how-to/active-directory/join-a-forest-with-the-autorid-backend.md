@@ -78,7 +78,8 @@ The last step is to restart the *winbind* service:
     sudo systemctl restart winbind.service
 
 ## Verifying the join
-The quickest way to test the integrity of the domain join is via the *wbinfo* command:
+
+The quickest way to test the integrity of the domain join is via the *`wbinfo`* command:
 
     $ sudo wbinfo -t
     checking the trust secret for domain EXAMPLE via RPC calls succeeded

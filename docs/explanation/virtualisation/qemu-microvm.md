@@ -40,7 +40,7 @@ There are a few common ways to adapt a workload to match this:
   A drawback of this solution is the fact that the guest system will not have
   control over the kernel anymore, thus restricting what can be done inside the
   guest system.
-- Sometimes a simpler user space like [busybox](https://www.busybox.net/) or a container-like environment
+- Sometimes a simpler user space like [BusyBox](https://www.busybox.net/) or a container-like environment
   is used.
 - In a similar fashion, you could use a customized kernel build with a reduced feature set
   with only what is needed for a given use case.
@@ -50,17 +50,17 @@ container paradigms. While behaving mostly like a container, those tools will
 use virtualization instead of namespaces for the isolation.
 Examples of that are:
 
-- container-like, as in [kata containers](https://katacontainers.io/),
-- function-based services as in [Firecracker](https://firecracker-microvm.github.io/),
-- system containers as in {ref}`LXD <lxd-containers>`.
+- Container-like, as in [kata containers](https://katacontainers.io/),
+- Function-based services as in [Firecracker](https://firecracker-microvm.github.io/),
+- System containers as in {ref}`LXD <lxd-containers>`.
 
 In particular, {ref}`LXD <lxd-containers>` added VM mode to allow the very same UX
-with namespaces and virtualizaton.
+with namespaces and virtualization.
 
 Other related tools are more about creating VMs from containers like:
 
-- [slim from dockerfiles](https://github.com/ottomatica/slim) or
-- [krunvm from OCI images](https://github.com/containers/krunvm).
+- [`slim` from dockerfiles](https://github.com/ottomatica/slim) or
+- [`krunvm` from OCI images](https://github.com/containers/krunvm).
 
 There are more of these out there, but the point is that one can mix and match
 to suit their needs. At the end of the day, many of the above use the same
@@ -130,7 +130,7 @@ Breaking down the command-line elements and their purpose in this context:
 | `-no-user-config` | Do not load any user provided config files. |
 | `-display none` | Disable video output (due to `-nodefaults` and `-display none` we do not also need `-nographic`). |
 | `-serial mon:stdio` | Map the virtual serial port and the monitor (for debugging) to stdio |
-| `-drive ... -device ...` | Provide our test image as virtio based block device. |
+| `-drive ... -device ...` | Provide our test image as `virtio`-based block device. |
 
 After running this example we notice that, by changing the workload to something
 small and streamlined, the execution time went down from about 1 minute (when
@@ -145,8 +145,8 @@ focusing on the time that the initialisation of firmware and QEMU consume.
 ## Using `qboot` and `microvm`
 
 In the same way as `qemu-system-x86-microvm` is a reduced QEMU,
-[qboot](https://github.com/bonzini/qboot) is a simpler variant to the
-extended feature set of [seabios](https://www.seabios.org/SeaBIOS) or
+[`qboot`](https://github.com/bonzini/qboot) is a simpler variant to the
+extended feature set of [SeaBIOS](https://www.seabios.org) or
 [UEFI](https://github.com/tianocore/edk2) that can do less, but therefore is
 faster at doing what it can.
 

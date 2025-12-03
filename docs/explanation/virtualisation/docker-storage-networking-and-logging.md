@@ -109,17 +109,17 @@ Monitoring what is happening in the system is a crucial part of systems administ
 
 The following logging drivers are available (at the time of writing):
 
-- **json-file**: it is the default logging driver. It writes logs in a file in JSON format.
-- **local**: write logs to an internal storage that is optimized for performance and disk use.
+- **`json-file`**: it is the default logging driver. It writes logs in a file in JSON format.
+- **`local`**: write logs to an internal storage that is optimized for performance and disk use.
 - **{term}`journald`**: send logs to systemd journal.
-- **syslog**: send logs to a syslog server.
-- **logentries**: send container logs to the [Logentries](https://logentries.com/) server.
+- **`syslog`**: send logs to a syslog server.
+- **`logentries`**: send container logs to the [Logentries](https://logentries.com/) server.
 - **{term}`gelf`**: write logs in a {term}`Graylog` Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
-- **awslogs**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
-- **etwlogs**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
+- **`awslogs`**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
+- **`etwlogs`**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
 - **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
 - **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://cloud.google.com/logging/docs/) Logging.
-- **splunk**: sends container logs to [HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/) in Splunk Enterprise and Splunk Cloud.
+- **`splunk`**: sends container logs to [HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/) in Splunk Enterprise and Splunk Cloud.
 
 ## Resources
 
