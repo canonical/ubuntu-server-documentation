@@ -1247,9 +1247,6 @@ IPSec
 Internet Protocol Security
     *Work in Progress*
 
-iptables
-    *Work in Progress*
-
 IPVS
 IP Virtual Server
     *Work in Progress*

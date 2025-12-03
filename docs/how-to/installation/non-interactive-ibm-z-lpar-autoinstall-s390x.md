@@ -85,7 +85,7 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
   -r--r--r--  1 user user       185 Jun 26 10:12 ubuntu.ins
   ```
 
-* Now create ins and parm files dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default ins and parm files that are shipped with the ISO image:
+* Now create `.ins` and parmfiles dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default `.ins` and parmfiles that are shipped with the ISO image:
 
   ```bash
   admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ chmod -R +rw ./boot

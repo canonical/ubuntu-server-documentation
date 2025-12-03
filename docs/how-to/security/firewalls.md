@@ -328,6 +328,6 @@ There are many tools available to help you construct a complete firewall without
 
 - See the [packet-filtering how-to](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
 
-- The [nat how-to](http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
+- The [`nat` how-to](http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
 
 - The [`iptables` how-to](https://help.ubuntu.com/community/IptablesHowTo) in the Ubuntu wiki is a great resource

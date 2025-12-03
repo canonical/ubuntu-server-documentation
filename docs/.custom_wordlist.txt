@@ -120,6 +120,7 @@ lightervisor
 livepatching
 localhost's
 lockfile
+Logentries
 Logstash
 Logwatch
 Logwatch's
@@ -187,6 +188,7 @@ prepended
 Preprocessor
 preseed
 proxying
+QDevice
 Quokka
 RangeSize
 Rediraffe

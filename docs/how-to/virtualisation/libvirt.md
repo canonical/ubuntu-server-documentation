@@ -15,7 +15,7 @@ On many computers with processors supporting hardware-assisted virtualisation, i
 
 ## Virtual networking
 
-There are a few different ways to allow a virtual machine access to the external network. The default virtual network configuration includes **bridging** and **iptables** rules implementing **usermode** networking, which uses the [SLiRP](https://en.wikipedia.org/wiki/Slirp) protocol. Traffic is NATed through the host interface to the outside network.
+There are a few different ways to allow a virtual machine access to the external network. The default virtual network configuration includes **bridging** and **`iptables`** rules implementing **usermode** networking, which uses the [SLiRP](https://en.wikipedia.org/wiki/Slirp) protocol. Traffic is NATed through the host interface to the outside network.
 
 To enable external hosts to directly access services on virtual machines, a different type of *bridge* than the default needs to be configured. This allows the virtual interfaces to connect to the outside network through the physical interface, making them appear as normal hosts to the rest of the network.
 
