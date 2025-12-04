@@ -43,4 +43,4 @@ There is an [updated guide by the upstream](https://community.openvpn.net/openvp
 
 - [OpenVPN hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security)
 
-- Also, Packt's [OpenVPN: Building and Integrating Virtual Private Networks](http://www.packtpub.com/openvpn/book) is a good resource.
+- Also, {spellexception}`Packt's` [OpenVPN: Building and Integrating Virtual Private Networks](http://www.packtpub.com/openvpn/book) is a good resource.

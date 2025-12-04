@@ -81,7 +81,7 @@ maximum_object_size_in_memory 512 KB
 
 ### Configure cached objects lifetime
 
-Using the `refresh_pattern` configuration directive controls how long cached objects stay fresh before they need to be revalidated with the origin server. It is configured as:
+Using the `refresh_pattern` configuration directive controls how long cached objects stay fresh before they need to be re-validated with the origin server. It is configured as:
 
 ```text
 refresh_pattern regex min percent max [options]
@@ -178,7 +178,7 @@ sudo cat /var/log/squid/cache.log
 sudo cat /var/log/squid/access.log
 ```
 
-For a status summary containing runtime statistics and congfiguration, run:
+For a status summary containing runtime statistics and configuration, run:
 
 ```bash
 squidclient mgr:info
@@ -188,7 +188,7 @@ While monitoring, these cache status indicators can help identifying what is hap
 - `TCP_MISS`: Content not in cache, fetched from origin
 - `TCP_HIT`: Content served from disk cache
 - `TCP_MEM_HIT`: Content served from memory cache
-- `TCP_REFRESH_HIT`: Cached content revalidated with origin
+- `TCP_REFRESH_HIT`: Cached content re-validated with origin
 - `TCP_TUNNEL`: HTTPS traffic (not cached by default)
 
 A healthy cache should show increasing hit ratios over time, of non-zero size, and a growing number of cached objects.

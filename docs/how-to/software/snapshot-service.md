@@ -18,7 +18,7 @@ Here we show how to set up and use the snapshot service.
 
 ## Prerequisites
 
-Snapshots are supported in Ubuntu 23.10 onwards and on updated installations of
+Snapshots are supported in Ubuntu 23.10 onward and on updated installations of
 Ubuntu 20.04 LTS (starting from `apt` 2.0.10) and Ubuntu 22.04 LTS (starting
 from `apt` 2.4.11).
 

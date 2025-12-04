@@ -20,7 +20,7 @@ The **internal attributes** database can be acquired by running the following on
 sudo multipath -t
 ```
 
-Multipath usually works out-of-the-box with most common storages. This **does not mean** the default configuration variables should be used in production: the default variables don’t treat important parameters your storage might need.
+Multipath usually works out-of-the-box with most common storage. This **does not mean** the default configuration variables should be used in production: the default variables don’t treat important parameters your storage might need.
 
 With the internal attributes (described above), and the example below, you will likely be able to create your `/etc/multipath.conf` file by squashing the code blocks below. Make sure to read the `defaults` section attribute comments and make any changes based on what your environment needs.
 

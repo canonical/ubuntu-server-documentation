@@ -1,7 +1,7 @@
 (reference-high-availability)=
 # High availability
 
-In Ubuntu 23.04 (Lunar) and onwards, `pcs` became the recommended and supported tool for managing Pacemaker clusters. The 23.04 release is the last release where `crmsh` is available.
+In Ubuntu 23.04 (Lunar) and onward, `pcs` became the recommended and supported tool for managing Pacemaker clusters. The 23.04 release is the last release where `crmsh` is available.
 
 To migrate from `crmsh` to `pcs`, refer to our reference table of {ref}`corresponding commands <migrate-from-crmsh-to-pcs>`.
 

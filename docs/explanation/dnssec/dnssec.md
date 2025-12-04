@@ -2,13 +2,13 @@
 # DNS Security Extensions (DNSSEC)
 
 DNSSEC is a security extension for the Domain Name System (DNS). DNS is a mapping between names and Internet Protocol (IP) addresses, allowing the use of friendly names instead of sequences of numbers when reaching web sites. Additionally, it stores extra information about a given domain, such as:
- * who the point of contact is
- * when it was last updated
- * what are the authoritative name servers for the domain
- * what are the mail exchangers for the domain (i.e., which systems are responsible for email for this domain)
- * how host names are mapped to IP addresses, and vice-versa
- * what information about other services, such as kerberos realms, LDAP servers, etc (usually on internal domains only) are there
- * and more
+
+* Who the point of contact is
+* When it was last updated
+* What are the authoritative name servers for the domain
+* What are the mail exchangers for the domain (i.e., which systems are responsible for email for this domain)
+* How host names are mapped to IP addresses, and vice-versa
+* What information about other services, such as kerberos realms, LDAP servers, etc (usually on internal domains only) are there
 
 When DNS was first conceived, security wasn't a top priority. At its origins, DNS is susceptible to multiple vulnerabilities, and has many weaknesses. Most of them are a consequence of spoofing: there is no guarantee that the reply you received to a DNS query was not tampered with or that it came from the true source.
 
@@ -18,8 +18,8 @@ This is not news, and other mechanisms on top of DNS and around it are in place 
 
 DNSSEC, which stands for Domain Name System Security Extensions, is an extension to DNS that introduces digital signatures. This allows each DNS response to be verified for:
 
- * integrity: The answer was not tampered with and did not change during transit.
- * authenticity: The data came from the true source, and not another entity impersonating the source.
+* **Integrity**: The answer was not tampered with and did not change during transit.
+* **Authenticity**: The data came from the true source, and not another entity impersonating the source.
 
 It's important to note that DNSSEC, however, will NOT encrypt the data: it is still sent in the clear.
 
@@ -143,7 +143,7 @@ Let's zoom in a little bit on that Ubuntu system:
 
 ![Stub Resolver](../images/ubuntu-stub-resolver.png)
 
-To translate a {term}`hostname` into an IP address, applications typically rely on standard glibc functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
+To translate a {term}`hostname` into an IP address, applications typically rely on standard `glibc` functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
 
 In Ubuntu, the default stub resolver is `systemd-resolved`. That's a daemon, running locally, and listening on port 53/udp on IP 127.0.0.53. The system is configured to use that as its nameserver via `/etc/resolv.conf`:
 
@@ -200,7 +200,7 @@ This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:
     nameserver 127.0.0.53
     options edns0 trust-ad
 
-The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manpage. It means that the local resolver will:
+The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manual page. It means that the local resolver will:
 
  * Set the `ad` bit (Authenticated Data) in the outgoing queries.
  * Trust the `ad` bit in the responses from the specified nameserver.

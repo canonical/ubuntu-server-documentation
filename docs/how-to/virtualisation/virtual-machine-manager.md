@@ -114,7 +114,7 @@ virt-install \
    --vcpus=4
 ```
 
-There are many more arguments that can be found in the {manpage}`virt-install(1)` manpage. However, here is an explanation of arguments used in the example above, one by one:
+There are many more arguments that can be found in the {manpage}`virt-install(1)` manual page. However, here is an explanation of arguments used in the example above, one by one:
 
 * `--name web_devel`:
    The name of the new virtual machine will be `web_devel`.

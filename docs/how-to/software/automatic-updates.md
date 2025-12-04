@@ -58,7 +58,7 @@ In many cases this is beneficial, but in some cases it might be counter-producti
 Persistent=false
 ```
 
-With this change, the timer will trigger the service only on the next scheduled time. In other words, it won't catch up to the run it missed while the system was off. See the explanation for the *Persistent* option in {manpage}`systemd.timer(5)` manpage for more details.
+With this change, the timer will trigger the service only on the next scheduled time. In other words, it won't catch up to the run it missed while the system was off. See the explanation for the *Persistent* option in {manpage}`systemd.timer(5)` manual page for more details.
 
 ## Where to pick updates from
 
@@ -364,7 +364,7 @@ The `Unattended-Upgrade::Postpone-Wait-Time` configuration option controls the a
 
 ### Who can postpone
 
-The system administrator can restrict access to the postpone request by defining Polkit rules for the `com.ubuntu.UnattendedUpgrade.Pending.Postpone` action. By default, access is granted to users of an active session. See the [polkit documentation](https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html) for how to set up authorization rules.
+The system administrator can restrict access to the postpone request by defining polkit rules for the `com.ubuntu.UnattendedUpgrade.Pending.Postpone` action. By default, access is granted to users of an active session. See the [polkit documentation](https://www.freedesktop.org/software/polkit/docs/latest/polkit.8.html) for how to set up authorization rules.
 
 ### Notifications in different environments
 

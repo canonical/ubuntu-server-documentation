@@ -68,7 +68,7 @@ To use the tool, point it at the server you want to scan:
 $ sslscan j-server.lxd
 ```
 
-And you will get a report of the ciphers and algorithms supported by that server. Consult the {manpage}`sslscan(1)` manpage.
+And you will get a report of the ciphers and algorithms supported by that server. Consult the {manpage}`sslscan(1)` manual page.
 
 ## References
 

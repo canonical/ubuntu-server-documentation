@@ -29,7 +29,7 @@ There are two well known tools used to manage fence agents, they are `crmsh` and
 
 ## IPaddr2
 
-From its manpage:
+From its manual page:
 
 > This Linux-specific resource manages IP alias IP addresses. It can add an IP alias, or remove one. In addition, it can implement Cluster Alias IP functionality if invoked as a clone resource.
 
@@ -51,11 +51,11 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
             op monitor interval=30s
 ```
 
-This is one way to set up `IPaddr2`, for more information refer {manpage}`to its manpage <ocf_heartbeat_IPaddr2(7)>`.
+This is one way to set up `IPaddr2`, for more information refer {manpage}`to its manual page <ocf_heartbeat_IPaddr2(7)>`.
 
 ## iscsi
 
-From its manpage:
+From its manual page:
 
 > Manages a local iSCSI initiator and its connections to iSCSI targets.
 
@@ -77,11 +77,11 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iscsi \
 
 Where `$TARGET` is the iSCSI Qualified Name (IQN) of the iSCSI target and `$PORTAL` its address, which can be, for instance, formed by the IP address and port number used by the target daemon.
 
-This is one way to set up `iscsi`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iscsi(7)>`.
+This is one way to set up `iscsi`, for more information refer {manpage}`to its manual page <ocf_heartbeat_iscsi(7)>`.
 
 ## iSCSILogicalUnit
 
-From its manpage:
+From its manual page:
 
 > Manages iSCSI Logical Unit. An iSCSI Logical unit is a subdivision of an SCSI Target, exported via a daemon that speaks the iSCSI protocol.
 
@@ -107,11 +107,11 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
 
 Where implementation is set to `lio-t` as mentioned before, `$IQN_TARGET` is the iSCSI Qualified Name (IQN) that this Logical Unit belongs to, `$DEVICE` is the path to the exposed block device, and `$LUN` is the number representing the Logical Unit which will be exposed to initiators.
 
-This is one way to set up `iSCSILogicalUnit`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iSCSILogicalUnit(7)>`.
+This is one way to set up `iSCSILogicalUnit`, for more information refer {manpage}`to its manual page <ocf_heartbeat_iSCSILogicalUnit(7)>`.
 
 ## iSCSITarget
 
-From its manpage:
+From its manual page:
 
 > Manages iSCSI targets. An iSCSI target is a collection of SCSI Logical Units (LUs) exported via a daemon that speaks the iSCSI protocol.
 
@@ -133,11 +133,11 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
 
 Where implementation is set to `lio-t` as mentioned before and `$IQN_TARGET` is the IQN of the target.
 
-This is one way to set up `iSCSITarget`, for more information refer {manpage}`to its manpage <ocf_heartbeat_iSCSITarget(7)>`.
+This is one way to set up `iSCSITarget`, for more information refer {manpage}`to its manual page <ocf_heartbeat_iSCSITarget(7)>`.
 
 ## LVM-activate
 
-From its manpage:
+From its manual page:
 
 > This agent manages LVM activation/deactivation work for a given volume group.
 
@@ -157,7 +157,7 @@ $ pcs resource create $RESOURCE_NAME ocf:heartbeat:LVM-activate \
              vg_access_mode=system_id
 ```
 
-This is one way to set up `LVM-activate`, for more information refer {manpage}`to its manpage <ocf_heartbeat_LVM-activate(7)>`.
+This is one way to set up `LVM-activate`, for more information refer {manpage}`to its manual page <ocf_heartbeat_LVM-activate(7)>`.
 
 ## Systemd
 

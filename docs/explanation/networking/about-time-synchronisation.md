@@ -7,7 +7,7 @@ Behind this simple description, there is a lot of complexity. There are three ti
 
 The client software is also a lot more complex than you might expect. It must factor in communication delays and adjust the time in a way that does not upset all the other processes that run on the server. Luckily, all that complexity is hidden from you\!
 
-By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronize time with Chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
+By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronize time with chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
 
 Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
@@ -35,10 +35,10 @@ While use of `ntpd` is no longer recommended, this also still applies to `ntpd` 
 - [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
 - [pool.ntp.org: project of virtual cluster of timeservers](http://www.pool.ntp.org/)
 
-- [Freedesktop.org info on timedatectl](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
+- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
 - [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
 
-- [Chrony FAQ](https://chrony-project.org/faq.html)
-- [Feeding chrony from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
+- [`chrony` FAQ](https://chrony-project.org/faq.html)
+- [Feeding `chrony` from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
 
 - Also see the [Ubuntu Time wiki page](https://help.ubuntu.com/community/UbuntuTime) for more information.

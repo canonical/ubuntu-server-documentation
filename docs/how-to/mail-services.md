@@ -12,7 +12,7 @@ These systems must all be configured correctly to successfully deliver a message
 
 ## Mail User Agent
 
-[Thunderbird](https://www.thunderbird.net/) is the default Mail User Agent (email client) used by Ubuntu. It comes pre-installed on all Ubuntu machines from Ubuntu 16.04 LTS (Xenial) onwards.
+[Thunderbird](https://www.thunderbird.net/) is the default Mail User Agent (email client) used by Ubuntu. It comes pre-installed on all Ubuntu machines from Ubuntu 16.04 LTS (Xenial) onward.
 
 If you need to install Thunderbird manually, [this short guide](https://snapcraft.io/install/thunderbird/ubuntu) will walk you through the steps. 
 

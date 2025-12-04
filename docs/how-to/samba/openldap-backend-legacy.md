@@ -88,11 +88,11 @@ ldapi:/// -b cn=config olcDatabase={1}mdb olcDbIndex
 
 Next, configure the `smbldap-tools` package to match your environment. The package comes with a configuration helper script called `smbldap-config`. Before running it, though, you should decide on two important configuration settings in `/etc/samba/smb.conf`:
 
-  - **netbios name** 
-How this server will be known. The default value is derived from the server's {term}`hostname`, but truncated at 15 characters.
+- **`netbios name`** 
+  How this server will be known. The default value is derived from the server's {term}`hostname`, but truncated at 15 characters.
 
-  - **workgroup** 
-The workgroup name for this server, or, if you later decide to make it a domain controller, this will be the domain.
+- **`workgroup`** 
+  The `workgroup` name for this server, or, if you later decide to make it a domain controller, this will be the domain.
 
 It's important to make these choices now because `smbldap-config` will use them to generate the config that will be later stored in the LDAP directory. If you run `smbldap-config` now and later change these values in `/etc/samba/smb.conf` there will be an inconsistency.
 
@@ -104,18 +104,17 @@ sudo smbldap-config
 
 Some of the more important ones:
 
-- **workgroup name**
-Has to match what you will configure in `/etc/samba/smb.conf` later on.
+- **`workgroup name`**
+  Has to match what you will configure in `/etc/samba/smb.conf` later on.
 
-- **ldap suffix**
-Has to match the LDAP suffix you chose when you configured the LDAP server.
+- **`ldap suffix`**
+  Has to match the LDAP suffix you chose when you configured the LDAP server.
 
-- **other ldap suffixes**
-They are all relative to `ldap suffix` above. For example, for `ldap user suffix` you should use `ou=People`, and for computer/machines, use `ou=Computers`.
+- **`other ldap suffixes`**
+  They are all relative to `ldap suffix` above. For example, for `ldap user suffix` you should use `ou=People`, and for computer/machines, use `ou=Computers`.
 
-- **ldap master bind dn** and **bind password**
-Use the Root {term}`DN` credentials.
-
+- **`ldap master bind dn`** and **`bind password`**
+  Use the Root {term}`DN` credentials.
 
 The `smbldap-populate` script will then add the LDAP objects required for Samba. It will ask you for a password for the "domain root" user, which is also the "root" user stored in LDAP:
 
@@ -245,7 +244,7 @@ To manage user, group, and machine accounts use the utilities provided by the `s
   sudo smbldap-groupadd -a groupname
   ```
 
-  As for *smbldap-useradd*, the *-a* adds the Samba attributes.
+  As for `smbldap-useradd`, the `-a` adds the Samba attributes.
 
 - To make an existing user a member of a group:
 
@@ -269,8 +268,8 @@ To manage user, group, and machine accounts use the utilities provided by the `s
   
   Replace `username` with the name of the workstation. The `-t 0` option creates the machine account without a delay, while the `-w` option specifies the user as a machine account.
 
-## Resources
+## Further reading
 
-  - [Upstream documentation collection](https://www.samba.org/samba/docs/)
+- [Upstream Samba documentation collection](https://www.samba.org/samba/docs/)
 
-  - [Upstream samba wiki](https://wiki.samba.org/index.php/Main_Page)
+- [Upstream Samba wiki](https://wiki.samba.org/index.php/Main_Page)

@@ -65,10 +65,10 @@ The Internet Control Messaging Protocol is an extension to the Internet Protocol
 
 Daemons are special system applications which typically execute continuously in the background and await requests for the functions they provide from other applications. Many daemons are network-centric; that is, a large number of daemons executing in the background on an Ubuntu system may provide network-related functionality. Such network daemons include the *Hyper Text Transport Protocol Daemon* (`httpd`), which provides web server functionality; the *Secure SHell Daemon* (`sshd`), which provides secure remote login shell and file transfer capabilities; and the *Internet Message Access Protocol Daemon* (`imapd`), which provides E-Mail services.
 
-### Resources
+### Further reading
 
-  - There are manual pages for {manpage}`TCP <tcp(7)>` and {manpage}`IP <ip(7)>` that contain more useful information.
+- There are manual pages for {manpage}`TCP <tcp(7)>` and {manpage}`IP <ip(7)>` that contain more useful information.
 
-  - Also, see the [TCP/IP Tutorial and Technical Overview](http://www.redbooks.ibm.com/abstracts/gg243376.html) IBM Redbook.
+- Also, see the [TCP/IP Tutorial and Technical Overview](http://www.redbooks.ibm.com/abstracts/gg243376.html) IBM {spellexception}`Redbook`.
 
-  - Another resource is O'Reilly's "TCP/IP Network Administration".
+- Another resource is O'Reilly's "TCP/IP Network Administration".

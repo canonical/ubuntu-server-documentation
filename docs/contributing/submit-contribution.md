@@ -2,12 +2,12 @@
 # Submitting your work
 
 You should submit your pull request (PR) to the **Ubuntu Server documentation
-repository** (repo), whether you claimed your issue via the ODA repo or the
-Ubuntu Server repo.
+repository**, whether you claimed your issue via the ODA repository or the
+Ubuntu Server repository.
 
-If you need help with any aspect of the process (forking the repo, committing,
+If you need help with any aspect of the process (forking the repository, committing,
 pushing, etc) then refer to the [getting started with git](https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/) guide on the ODA
-repo, which will guide you through those steps as you construct your changes.
+repository, which will guide you through those steps as you construct your changes.
 
 (doc-testing)=
 ## Testing your changes
@@ -81,7 +81,7 @@ what you've presented in the guide?
 
 - Make sure all your proposed changes are committed:
 
-  - `git status` will show your uncomitted changes
+  - `git status` will show your not-yet committed changes
   - Select the ones you want to add to each commit using `git add <filename>`
   - Commit your selected changes using `git commit`.
 

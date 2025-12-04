@@ -1,7 +1,7 @@
 (introduction-to-multipath)=
 # Introduction to device mapper multipathing ("multipath")
 
-Device mapper multipathing (which will be called **multipath** in this document) allows you to create a virtual device that aggregrates multiple input/output (I/O) paths between server nodes and storage arrays. These I/O paths are physical storage area network (SAN) connections that can include separate cables, switches, and controllers.
+Device mapper multipathing (which will be called **multipath** in this document) allows you to create a virtual device that aggregates multiple input/output (I/O) paths between server nodes and storage arrays. These I/O paths are physical storage area network (SAN) connections that can include separate cables, switches, and controllers.
 
 ## How a multipath device works in practice
 

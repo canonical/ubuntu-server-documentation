@@ -1,7 +1,7 @@
 (managing-software)=
 # Managing your software
 
-If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customisable according to your needs. There are two types of software found in Ubuntu: **Debian packages** and **snaps** -- we will learn about both!
+If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customizable according to your needs. There are two types of software found in Ubuntu: **Debian packages** and **snaps** -- we will learn about both!
 
 To help you get the most from your Ubuntu experience, this tutorial will walk you through managing the software on your Ubuntu machine. This tutorial can be completed using either Ubuntu Server or Ubuntu Desktop.
 
@@ -148,13 +148,13 @@ It's important to know that `apt upgrade` will only handle packages that can be 
 
 ### Searching with APT
 
-Now we're up-to-date, we can start exploring! As with any other database, we can search the list of available packages using APT in order to find software. Let's say that we want to find a webserver, for example. We can run the following command:
+Now we're up-to-date, we can start exploring! As with any other database, we can search the list of available packages using APT in order to find software. Let's say that we want to find a web server, for example. We can run the following command:
 
 ```bash
 apt search webserver
 ```
 
-This will return us a long list of all "webserver" packages it can find. But some of the descriptions don't actually contain the text "webserver" -- like in this section of the list:
+This will return us a long list of all "`webserver`" packages it can find. But some of the descriptions don't actually contain the text "`webserver`" -- like in this section of the list:
 
 ```text
 inotify-tools/noble 3.22.6.0-4 amd64
@@ -173,7 +173,7 @@ We can use `apt show` to inspect the description and summary details of any pack
 apt show ipcalc
 ```
 
-The summary has been replaced with `[...]` for brevity, but we can see that the text "webserver" is in the long description of the "Description" field.
+The summary has been replaced with `[...]` for brevity, but we can see that the text "`webserver`" is in the long description of the "Description" field.
 
 ```text
 Package: ipcalc
@@ -201,7 +201,7 @@ Run `man apt`, `man apt-get` or `man apt-cache` in the terminal to access the ma
 
 ## Installing deb packages
 
-For the examples for this section, we're going to use the popular webserver package, [Apache2](https://httpd.apache.org/).
+For the examples for this section, we're going to use the popular web server package, [Apache2](https://httpd.apache.org/).
 
 APT gives us a lot of details about what will be included in the installation, and it's always important to understand the implications of a command *before* we run it. We'll be taking a close look at the details APT gives us, so we need to be careful in this section.
 
@@ -233,7 +233,7 @@ sudo apt install apache2
 
 The output should be similar to the below. It tells us:
 
-- which packages we have but don't need (we'll talk about that in the "autoremove" section),
+- which packages we have but don't need (we'll talk about that in the "auto-remove" section),
 - additional packages that will be installed (these are our dependencies),
 - suggested packages (which we'll discuss in the next section), and
 - a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
@@ -372,7 +372,7 @@ Let's now choose {kbd}`Y` to confirm we want to remove this dependency.
 Removing dependencies can, at worst, cause a system to become unusable -- you should always be careful when doing so. If you remove a dependency that is part of a chain, the removals will cascade up the chain as each dependency and the package that depends on it are removed. You can end up removing more than you originally anticipated!
 ```
 
-#### Autoremove dependencies
+#### Auto-remove dependencies
 
 So, we have removed the `apache2` and `apache2-data` packages, but the other dependencies that were installed alongside `apache2` are still there. The output of our `remove` command gave us the hint about how to deal with these redundant packages -- the `autoremove` command:
 
@@ -391,11 +391,11 @@ After this operation, 6751 kB disk space will be freed.
 Do you want to continue? [Y/n] 
 ```
 
-You may be wondering why we don't need to specify any packages when we call the `autoremove` command -- after all, we've just been dealing with packages related to `apache2`. This is because `apt` will check all the packages on your system. It examines the dependency tree, and if the original reason for the package to be installed no longer exists (i.e., it isn't needed by anything), it will be flagged for autoremoval.
+You may be wondering why we don't need to specify any packages when we call the `autoremove` command -- after all, we've just been dealing with packages related to `apache2`. This is because `apt` will check all the packages on your system. It examines the dependency tree, and if the original reason for the package to be installed no longer exists (i.e., it isn't needed by anything), it will be flagged for auto-removal.
 
 But!
 
-We might, in the future, uninstall Apache2 without uninstalling the redundant packages at the time. We might have found another use for `ssl-cert`, perhaps in a script that makes use of SSL certificates. So how can we keep the `ssl-cert` package, even though it's flagged for autoremoval?
+We might, in the future, uninstall Apache2 without uninstalling the redundant packages at the time. We might have found another use for `ssl-cert`, perhaps in a script that makes use of SSL certificates. So how can we keep the `ssl-cert` package, even though it's flagged for auto-removal?
 
 We can solve this problem, and un-flag the `ssl-cert` package for removal, by *manually* installing it:
 
@@ -415,7 +415,7 @@ Use 'sudo apt autoremove' to remove them.
 0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
 ```
 
-If the `ssl-cert` package is manually installed on our system, by us, then `apt` knows the package is wanted, and we can see that it has been removed from the autoremove list so our next autoremove will not uninstall it. Let's test this, just to make sure!
+If the `ssl-cert` package is manually installed on our system, by us, then `apt` knows the package is wanted, and we can see that it has been removed from the auto-remove list so our next `autoremove` will not uninstall it. Let's test this, just to make sure!
 
 ```bash
 sudo apt autoremove
@@ -553,7 +553,7 @@ The checksum is like a fingerprint - it's unique for every *version* of a file, 
 
 ### Verifying checksums
 
-Let's set up a situation so we can poke a bit at this idea. We can start by making some changes to a conffile. In Apache2, the main conffile is `/etc/apache2/apache2.conf`, so let's use that. In a situation where we are setting up a new webserver, we might reasonably want to increase the `LogLevel` from "warn" to "debug" to get more debugging messages, so let's run this command and use `sed` to make that change in the conffile:
+Let's set up a situation so we can poke a bit at this idea. We can start by making some changes to a conffile. In Apache2, the main conffile is `/etc/apache2/apache2.conf`, so let's use that. In a situation where we are setting up a new web server, we might reasonably want to increase the `LogLevel` from "warn" to "debug" to get more debugging messages, so let's run this command and use `sed` to make that change in the conffile:
 
 ```bash
 sudo sed -e 's/LogLevel warn/LogLevel debug/' -i /etc/apache2/apache2.conf
@@ -952,7 +952,7 @@ If you would like more information about the Ubuntu release process, how package
 
 ## Installing a .deb file
 
-Although APT is the preferred way to install packages on your system, due to its ability to handle depedencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
+Although APT is the preferred way to install packages on your system, due to its ability to handle dependencies and keep software up-to-date, not every package is available in the APT repository -- especially if they are so old they are no longer maintained, or conversely, are the newest version still in development!
 
 We can install .deb files that aren't in the APT repository using `dpkg` -- all we need is to download the .deb file, and we can run a command like this to install it:
 

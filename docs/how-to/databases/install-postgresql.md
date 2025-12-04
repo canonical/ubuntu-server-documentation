@@ -1,7 +1,7 @@
 (install-postgresql)=
 # Install and configure PostgreSQL
 
-[PostgreSQL](https://www.postgresql.org/) (commonly referred to as "Postgres") is an object-relational database system that has all the features of traditional commercial database systems, but with enhancements to be found in next-generation database management systems (DBMS).
+[PostgreSQL](https://www.postgresql.org/) (commonly referred to as "{spellexception}`Postgres`") is an object-relational database system that has all the features of traditional commercial database systems, but with enhancements to be found in next-generation database management systems (DBMS).
 
 ## Install PostgreSQL
 
@@ -170,6 +170,6 @@ PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Adm
   sudo apt install postgresql-doc
   ```
 
-  This package provides further manpages on PostgreSQL {term}`dblink` and "server programming interface" as well as the upstream HTML guide. To view the guide enter `xdg-open /usr/share/doc/postgresql-doc-*/html/index.html` or point your browser at it.
+  This package provides further manual pages on PostgreSQL {term}`dblink` and "server programming interface" as well as the upstream HTML guide. To view the guide enter `xdg-open /usr/share/doc/postgresql-doc-*/html/index.html` or point your browser at it.
 
-- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by Thomas Nield as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.
+- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by {spellexception}`Thomas Nield` as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.

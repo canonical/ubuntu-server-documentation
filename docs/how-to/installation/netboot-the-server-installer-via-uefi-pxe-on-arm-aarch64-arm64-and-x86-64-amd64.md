@@ -32,7 +32,7 @@ The following files are needed for this process:
 
 - Ubuntu live server image:
   - For arm64 architectures, the image name has the suffix `-arm64`. For example, `ubuntu-20.04.5-live-server-arm64.iso`.
-  - For amd64 architectures, the image name has the suxxif `-amd64`. For example, `ubuntu-20.04.5-live-server-amd64.iso`.
+  - For amd64 architectures, the image name has the suffix `-amd64`. For example, `ubuntu-20.04.5-live-server-amd64.iso`.
 - GRUB {term}`EFI` binary (and the corresponding `grub.cfg` text file):
   - For arm64 architectures, this is called `grubnetaa64.efi.signed`.
   - For amd64 architectures, this is called `grubnetx64.efi.signed`.

@@ -1,10 +1,9 @@
 (debug-symbol-packages)=
-
 # Debug symbol packages
 
 If you want to debug a crash – whether in a project you are developing yourself or from a third-party package – or if you frequently need the debug symbols for specific libraries, it might be helpful to install them permanently on your system if you can’t use debuginfod.
 
-This document describes how to set up the debugging symbol packages (`*-dbg.deb` and `*-dbgsym.ddeb`). You might need to do this when you are performing tasks like a [Backtrace](https://wiki.ubuntu.com/Backtrace) or using [Valgrind](https://wiki.ubuntu.com/Valgrind).
+This document describes how to set up the debugging symbol packages (`*-dbg.deb` and `*-dbgsym.ddeb`). You might need to do this when you are performing tasks like a [backtrace](https://wiki.ubuntu.com/Backtrace) or using [Valgrind](https://wiki.ubuntu.com/Valgrind).
 
 ## Debuginfod
 
@@ -12,7 +11,7 @@ If you are on Ubuntu Jammy (22.04) or later, you don't need to worry about insta
 
 You will only need to follow the methods outlined in this section if you are on Ubuntu Focal (20.04) or earlier.
 
-## Getting -dbgsym.ddeb packages
+## Getting `-dbgsym.ddeb` packages
 
 If you are debugging without debuginfod, your first step will be to enable the `ddebs.ubuntu.com` repository as described in this section, which will provide access to the `-dbgsym` packages.
 
@@ -46,7 +45,7 @@ deb http://ddebs.ubuntu.com focal main restricted universe multiverse
 ```
 
 ```{note}
-Make sure you replace “focal” with the Ubuntu release name you’re using.
+Make sure you replace `focal` with the Ubuntu release name you're using.
 ```
 
 ### Update package list

@@ -87,9 +87,9 @@ Here is a brief explanation of these configuration parameters:
 * `devices`: A comma separated list of device names (without the `/dev/` prefix) which represents the devices this plugin should act on. If not specified, all compatible devices found, now or in the future, will be used. This parameter also accepts simple globbing and negation rules, so that you can specify `nvme*` for all `/dev/nvme*` devices, or `!sda` to not include `/dev/sda`.
 * plugin-specific options: These can be seen in the output of the `tuned-adm list plugins -v` command, for each listed plugin.
 
-See the {manpage}`tuned.conf(5)` manpage for details on the syntax of this configuration file.
+See the {manpage}`tuned.conf(5)` manual page for details on the syntax of this configuration file.
 
-The plugin instance concept can be useful if you want to apply different tuning parameters to diferent devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
+The plugin instance concept can be useful if you want to apply different tuning parameters to different devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
 ```ini
 [fast_storage]
 type=disk
@@ -177,7 +177,7 @@ Here is an example which applies the base profile `cpu-partitioning` and then ov
 
     sudo tuned-adm profile cpu-partitioning intel-sst
 
-In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hardcoded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
+In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hard-coded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
 
 Another example of merging profiles is the combining of the `powersave` profile with another one:
 
@@ -251,7 +251,7 @@ The sections that follow `[main]` represent the configuration of tuning plugins.
 ## Further reading
 
 * [TuneD website](https://tuned-project.org/)
-* {manpage}`tuned-adm(8)` manpage
-* {manpage}`TuneD profiles <tuned-profiles(7)>` manpage
-* {manpage}`TuneD daemon <tuned(8)>` manpage
-* {manpage}`TuneD configuration <tuned.conf(5)>` manpage
+* {manpage}`tuned-adm(8)` manual page
+* {manpage}`TuneD profiles <tuned-profiles(7)>` manual page
+* {manpage}`TuneD daemon <tuned(8)>` manual page
+* {manpage}`TuneD configuration <tuned.conf(5)>` manual page

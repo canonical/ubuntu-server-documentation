@@ -11,21 +11,21 @@
 The kernel provides several CPU governors which can be configured, per core, to
 optimize for different needs.
 
-| **Governor** | Design philosophy |
-|--------------|-------------------|
-| ondemand | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
-| conservative | Similar to ondemand, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behavior is more suitable in a battery-powered environment. |
-| performance | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being under-used. |
-| powersave | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
-| userspace | Allows a user-space program to control the CPU frequency. |
+| **Governor**   | Design philosophy   |
+| -------------- | ------------------- |
+| `ondemand`     | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
+| `conservative` | Similar to `ondemand`, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behavior is more suitable in a battery-powered environment. |
+| `performance` | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being under-used. |
+| `powersave`   | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
+| `userspace`   | Allows a user-space program to control the CPU frequency. |
 
-See the [Linux CPUFreq Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
+See the [Linux {spellexception}`CPUFreq` Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
 for a more extensive discussion and explanation of the available Linux CPU governors.
 
-While these governors can be checked and changed directly in sysfs at
+While these governors can be checked and changed directly in `sysfs` at
 `/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`, the command `cpupower`
 which comes with the package `linux-tools-common` makes this easier by providing
-a commandline interface and providing access to several related values.
+a command line interface and providing access to several related values.
 
 ## Monitor CPU frequency
 
@@ -34,7 +34,7 @@ Many systems have various potential monitors, and by default one sees
 all of them which can be quite confusing. Therefore start with looking at
 the available power monitors.
 
-Command (list all available cpupower monitors available on the system):
+Command (list all available `cpupower` monitors available on the system):
 
 ```bash
 sudo cpupower monitor -l
@@ -71,10 +71,10 @@ Monitor "Idle_Stats" (9 states) - Might overflow after 4294967295 s
 
 Here we can see that the machine has four available monitors shown in `"`.
 
-* Nehalem - Hardware specific C states.
-* Mperf - Average of frequencies and time in active (C0) or sleep (Cx) states.
-* RAPL - Running Average Power Limit covering different system elements.
-* Idle_Stats - Statistics of the `cpuidle` kernel subsystem (software based).
+* `Nehalem` - Hardware specific C states.
+* `Mperf` - Average of frequencies and time in active (`C0`) or sleep (`Cx`) states.
+* `RAPL` - Running Average Power Limit covering different system elements.
+* `Idle_Stats` - Statistics of the `cpuidle` kernel subsystem (software based).
 
 Those counters can represent different system units:
 
@@ -83,9 +83,9 @@ Those counters can represent different system units:
 * [P] -> Processor Package (Socket)
 * [M] -> Machine/Platform wide counter
 
-So if we want to know what frequency the CPU threads were in (Mperf) and
+So if we want to know what frequency the CPU threads were in (`Mperf`) and
 what was consumed at the different system levels of package, dram, core and
-uncore (RAPL) averages over a minute (`-i <seconds>`) we would run:
+{spellexception}`uncore` (RAPL) averages over a minute (`-i <seconds>`) we would run:
 
 Command:
 
@@ -256,7 +256,7 @@ check if the current constraints match what you think. And use
 
 An administrator can execute the `cpupower` command to set the CPU governor.
 
-Command (set the CPU governor to Performance mode on all CPUs):
+Command (set the CPU governor to `performance` mode on all CPUs):
 
 ```bash
 cpupower frequency-set -g performance
@@ -265,7 +265,7 @@ cpupower frequency-set -g performance
 Since all commands of `cpupower` can be for a sub-set of CPUs, one can use `-c` here
 as well if that matches what is needed for more complex scenarios.
 
-Command (Set conservative on the first 8 cores in a system):
+Command (Set `conservative` on the first 8 cores in a system):
 ```bash
 cpupower -c 0-7 frequency-set -g conservative
 ```

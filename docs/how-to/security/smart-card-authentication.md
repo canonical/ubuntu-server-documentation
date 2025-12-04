@@ -13,7 +13,7 @@ This guide is meant for Ubuntu Server 20.04 and newer. If you want to configure 
 The following packages must be installed to obtain a smart card configuration on Ubuntu:
  
 * **`pcscd`**: contains the drivers needed to communicate with the CCID smart card readers
-* **`opensc-pkcs11`**: (optional, depending on your smartcard hardware) contains the smart card drivers, such as Personal Identify Verification (PIV) or Common Access Card (CAC)
+* **`opensc-pkcs11`**: (optional, depending on your smart card hardware) contains the smart card drivers, such as Personal Identify Verification (PIV) or Common Access Card (CAC)
 * **`sssd`**: the authentication daemon that manages smart card access and certificate verification
 
 To install these packages, run the following command in your terminal:
@@ -30,7 +30,7 @@ Each smart card is expected to contain an X.509 certificate and the correspondin
 
 ## Smart card PKCS#11 modules
 
-While `opensc-pkcs11` supports a wide number of smart cards, some of them may require specific PKCS#11 modules, and you must refer to your vendor to install the proper one. From Ubuntu 20.04 onwards, all modules supported by [`p11-kit`](https://p11-glue.github.io/p11-glue/p11-kit.html) can be used. 
+While `opensc-pkcs11` supports a wide number of smart cards, some of them may require specific PKCS#11 modules, and you must refer to your vendor to install the proper one. From Ubuntu 20.04 onward, all modules supported by [`p11-kit`](https://p11-glue.github.io/p11-glue/p11-kit.html) can be used. 
 
 If custom PKCS#11 modules are used, you need to ensure that `p11-kit` is [properly configured](https://p11-glue.github.io/p11-glue/p11-kit/manual/config.html).
 
@@ -237,7 +237,7 @@ crl_file = /etc/sssd/pki/sssd_auth_crl.pem
 soft_crl = /etc/sssd/pki/sssd_auth_soft_crl.pem
 ```
 
-In case that a full certificate authority chain is not available, openssl won't verify the card certificate, and so sssd should be instructed about.
+In case that a full certificate authority chain is not available, openssl won't verify the card certificate, and so SSSD should be instructed about.
 
 This is not suggested, but it can be done changing `/etc/sssd/sssd.conf` so that it contains:
 
@@ -269,19 +269,19 @@ CNS1
 MIIHXDCCBUSgAwIBAgIQA1ex7....
 ```
 
-For checking if the smartcard works, without doing any verification check (and so for debugging purposes the option) `--verify=no_ocsp` can also be used, while `--verify=partial_chain` can be used to do partial CA verification.
+For checking if the smart card works, without doing any verification check (and so for debugging purposes the option) `--verify=no_ocsp` can also be used, while `--verify=partial_chain` can be used to do partial CA verification.
 
 ### Map certificates to user names
 
-The sss PAM module allows certificates to be used for login, though our Linux system needs to know the username associated to a certificate. SSSD provides a variety of cert mappers to do this. Each cert mapper uses specific  information from the certificate to map to a user on the system. The  different cert mappers may even be stacked. In other words, if the first defined mapper fails to map to a user on the system, the next one will be tried, and so on until a user is found.
+The `sss` PAM module allows certificates to be used for login, though our Linux system needs to know the username associated to a certificate. SSSD provides a variety of cert mappers to do this. Each cert mapper uses specific  information from the certificate to map to a user on the system. The  different cert mappers may even be stacked. In other words, if the first defined mapper fails to map to a user on the system, the next one will be tried, and so on until a user is found.
 
 For the purposes of this guide, we will use a simple local user mapping as reference.
 
-Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the {manpage}`sss-certmap(5)` manpage.
+Mapping for more complex configurations can be done following the official [SSSD documentation](https://sssd.io/design-pages/matching_and_mapping_certificates.html) depending on [providers](https://sssd.io/design-pages/certmaps_for_LDAP_AD_file.html). For up-to-date information on certificate mapping, please also consult the {manpage}`sss-certmap(5)` manual page.
 
 #### Local users mapping
 
-When using only local users, sssd can be easily configured to define an `implicit_domain` that maps all the local users.
+When using only local users, SSSD can be easily configured to define an `implicit_domain` that maps all the local users.
 
 Certificate mapping for local users can be easily done using the certificate Subject check, in our example:
 
@@ -365,7 +365,7 @@ Check `man sssd.conf` for details.
 Remember that this file should be owned by `root` and have permission set to `600`, otherwise won't be loaded and SSSD will not complain gracefully.
 On errors you can test running SSSD temporary with `sudo sssd -d9 -i`.
 
-Every time the configuration is changed sssd should be restarted (`systemctl restart sssd`).
+Every time the configuration is changed SSSD should be restarted (`systemctl restart sssd`).
 
 ### Add `pam_sss` to PAM
 
@@ -379,7 +379,7 @@ Edit `/etc/pam.d/common-auth` to include the `pam_sss` module as follows:
 $ sudo pam-auth-update
 ```
 
-Then you can interactively enable SSSD profiles for smart-card only or optional smart card access.
+Then you can interactively enable SSSD profiles for smart-card-only or optional smart card access.
 
 You can also set this non-interactively by using:
 
@@ -408,13 +408,13 @@ auth    [success=ok default=ignore]    pam_sss.so allow_missing_name try_cert_au
 
 See [`man pam.conf`](https://manpages.ubuntu.com/manpages/jammy/en/man5/pam.conf.5.html), [`man pam_sss`](https://manpages.ubuntu.com/manpages/jammy/en/man8/pam_sss.8.html) for further details.
 
----
-**Warning:** A global configuration such as this requires a smart card for su and sudo authentication as well!
-If you want to reduce the scope of this module, move it to the appropriate pam configuration file in `/etc/pam.d` and ensure that's referenced by `pam_p11_allowed_services` in `sssd.conf`.
+```{Warning}
+A global configuration such as this requires a smart card for `su` and `sudo` authentication as well!
 
----
+If you want to reduce the scope of this module, move it to the appropriate PAM configuration file in `/etc/pam.d` and ensure that it's referenced by `pam_p11_allowed_services` in `sssd.conf`.
+```
 
-The OS is now ready to do a smart card login for the user foo.
+The OS is now ready to do a smart card login for the user `foo`.
 
 #### Troubleshooting
 

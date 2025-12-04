@@ -1,7 +1,6 @@
 (kernel-crash-dump)=
 # Kernel crash dump
 
-
 A 'kernel crash dump' refers to a portion of the contents of volatile memory (RAM) that is copied to disk whenever the execution of the kernel is disrupted. The following events can cause a kernel disruption:
 
   - Kernel panic
@@ -14,13 +13,13 @@ A 'kernel crash dump' refers to a portion of the contents of volatile memory (RA
 
   - Manual intervention
 
-For some of these events (kernel panic, NMI) the kernel will react automatically and trigger the crash dump mechanism through *kexec*. In other situations a manual intervention is required in order to capture the memory. Whenever one of the above events occurs, it is important to find out the root cause in order to prevent it from happening again. The cause can be determined by inspecting the copied memory contents.
+For some of these events (kernel panic, NMI) the kernel will react automatically and trigger the crash dump mechanism through *`kexec`*. In other situations a manual intervention is required in order to capture the memory. Whenever one of the above events occurs, it is important to find out the root cause in order to prevent it from happening again. The cause can be determined by inspecting the copied memory contents.
 
 ## Kernel crash dump mechanism
 
-When a kernel panic occurs, the kernel relies on the *kexec* mechanism to quickly reboot a new instance of the kernel in a pre-reserved section of memory that had been allocated when the system booted (see below). This permits the existing memory area to remain untouched in order to safely copy its contents to storage.
+When a kernel panic occurs, the kernel relies on the *`kexec`* mechanism to quickly reboot a new instance of the kernel in a pre-reserved section of memory that had been allocated when the system booted (see below). This permits the existing memory area to remain untouched in order to safely copy its contents to storage.
 
-## KDump enabled by default
+## `kdump` enabled by default
 
 Starting in Oracular Oriole (24.10) the kernel crash dump facility will be enabled by default during standard Ubuntu Desktop or Ubuntu Server installations on systems that meet the following requirements:
  - the system has at least 4 CPU threads
@@ -313,8 +312,7 @@ The rest of the output is truncated, but you should see the system rebooting and
 Begin: Saving vmcore from kernel crash ...
 ```
 
-Once completed, the system will reboot to its normal operational mode. You will then find the kernel crash dump file, and related subdirectories, in the `/var/crash` directory by running, e.g. `ls /var/crash
-`, which produces the following:
+Once completed, the system will reboot to its normal operational mode. You will then find the kernel crash dump file, and related subdirectories, in the `/var/crash` directory by running, e.g. `ls /var/crash`, which produces the following:
 
 ```bash
 201809240744  kexec_cmd  linux-image-4.15.0-34-generic-201809240744.crash
@@ -332,6 +330,6 @@ You can then run `sudo update-grub`, reboot afterwards, and then test again.
 
 Kernel crash dump is a vast topic that requires good knowledge of the Linux kernel. You can find more information on the topic here:
 
-  - [Kdump kernel documentation](http://www.kernel.org/doc/Documentation/kdump/kdump.txt).
+  - [`kdump` kernel documentation](http://www.kernel.org/doc/Documentation/kdump/kdump.txt).
 
-  - [Analyzing Linux Kernel Crash](http://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walkthrough of kernel dump analysis)
+  - [Analyzing Linux Kernel Crash](http://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)

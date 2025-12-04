@@ -96,7 +96,7 @@ ubuntu@cleansing-guanaco:~$
 
 ### Disconnect from the instance
 
-Don't forget to log out (or <kbd>Ctrl</kbd> + <kbd>D</kbd>) when you are done, or you may find yourself heading all the way down the Inception levels...
+Don't forget to log out (or {kbd}`Ctrl` + {kbd}`D`) when you are done, or you may find yourself heading all the way down the Inception levels...
 
 ## Run commands inside an instance from outside
 
@@ -158,9 +158,9 @@ If you already have a hypervisor interacting with {ref}`libvirt`, such as {term}
 be managing virtual machines through tools like [virt-manager](https://virt-manager.org/) or the older {ref}`uvtool <cloud-image-vms-with-uvtool>`.
 
 In that case, integrating Multipass with your existing setup would allow VMs to share the same network bridge for communication
-and be managed using virsh. However, Multipass runs as a headless system, so you don't have direct GUI access through virt-viewer. Follow this [guide](https://canonical.com/multipass/docs/set-up-a-graphical-interface) to set up a GUI. 
+and be managed using `virsh`. However, Multipass runs as a headless system, so you don't have direct GUI access through virt-viewer. Follow this [guide](https://canonical.com/multipass/docs/set-up-a-graphical-interface) to set up a GUI. 
 
-To begin, integrate Multipass into your existing setup by selecting libvirt as your local driver:
+To begin, integrate Multipass into your existing setup by selecting `libvirt` as your local driver:
 
 ```bash
 $ sudo multipass set local.driver=libvirt

@@ -3,7 +3,7 @@
 
 It is recommended that you first read the [device mapper multipathing introduction](introduction-to-multipath) if you are unfamiliar with the concepts and terms. For consistency, we refer to device mapper multipathing as **multipath**.
 
-Multipath usually works out-of-the-box with most common storages. This doesn't mean the default configuration variables should be used in production: they don't treat important parameters your storage might need.
+Multipath usually works out-of-the-box with most common storage. This doesn't mean the default configuration variables should be used in production: they don't treat important parameters your storage might need.
 
 It's a good idea to consult your storage manufacturer's install guide for the Linux Multipath configuration options. Storage vendors often provide the most adequate options for Linux, including minimal versions required for kernel and multipath-tools.
 
@@ -153,7 +153,7 @@ device {
 
 ### By property
 
-Regular expression for an udev property. All devices that have matching udev properties will be excluded/included. The handling of the property keyword is special, because devices must have at least one whitelisted udev property; otherwise they're treated as blacklisted, and the message "blacklisted, udev property missing" is displayed in the logs.
+Regular expression for a `udev` property. All devices that have matching `udev` properties will be excluded/included. The handling of the property keyword is special, because devices must have at least one whitelisted `udev` property; otherwise they're treated as blacklisted, and the message "blacklisted, `udev` property missing" is displayed in the logs.
 
 ### Blacklist by protocol
 
@@ -174,8 +174,8 @@ blacklist_exceptions {
 ```
 
 ```{note}
- A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
- ```
+A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+```
 
 ## Configuration file multipath section
 
@@ -185,7 +185,7 @@ The only recognized attribute for the multipaths section is the multipath subsec
 
 The multipath subsection recognizes the following attributes:
 
- * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a substring; WWIDs must match exactly inside the multipaths section.
+ * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a sub-string; WWIDs must match exactly inside the multipaths section.
 
  * `alias`: Symbolic name for the multipath map. This takes precedence over an entry for the same WWID in the `bindings_file`.
 
@@ -257,7 +257,7 @@ The device subsection recognizes the following attributes:
 1. **`alias_prefix`**: The `user_friendly_names` prefix to use for this device type, instead of the default `mpath`.
 1. **`hardware_handler`**: The hardware handler to use for this device type. The following hardware handlers are implemented (all of these are hardware-dependent):
    * **`1 emc`**: Hardware handler for {term}`DGC` class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
-   * **`1 rdac`**: Hardware handler for LSI / {term}`Engenio` / NetApp RDAC class as NetApp SANtricity E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
+   * **`1 rdac`**: Hardware handler for LSI / {term}`Engenio` / NetApp RDAC class as NetApp {spellexception}`SANtricity` E/EF Series, and OEM arrays from IBM DELL SGI STK and SUN.
    * **`1 hp_sw`**: Hardware handler for HP/COMPAQ/DEC HSG80 and MSA/HSV arrays with Active/Standby mode exclusively.
    * **`1 alua`**: Hardware handler for SCSI-3 ALUA-compatible arrays.
    * **`1 ana`**: Hardware handler for NVMe ANA-compatible arrays.

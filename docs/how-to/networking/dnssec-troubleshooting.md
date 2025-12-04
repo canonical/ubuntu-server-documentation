@@ -288,5 +288,5 @@ There are some public third-party web-based tools that will check the status of 
 
  * [bind9's guide to DNSSEC troubleshooting](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#basic-dnssec-troubleshooting)
  * [How to validate DNSSEC using the command line](https://www.cyberciti.biz/faq/unix-linux-test-and-validate-dnssec-using-dig-command-line/)
- * {manpage}`delv(1)` manpage
- * {manpage}`dig(1)` manpage
+ * {manpage}`delv(1)` manual page
+ * {manpage}`dig(1)` manual page

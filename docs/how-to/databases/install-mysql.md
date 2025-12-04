@@ -88,7 +88,7 @@ No password is required by MySQL as it authenticates with [auth_socket](https://
 
 From the command-line, you can create additional MySQL users with different privileges using the `CREATE USER` command. For authentication, the two main options are to use a password or use a socket like the root user.
 
-To create a user authenticated with a password, you can use MySQL's provided `caching_sha2_password` plugin. It can be invoked in the following way, providing the password in plaintext:
+To create a user authenticated with a password, you can use MySQL's provided `caching_sha2_password` plugin. It can be invoked in the following way, providing the password in plain text:
 
 ```none
 CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
@@ -152,12 +152,13 @@ It also lacks journaling, which makes it harder for data to be recovered after a
 
 MySQL databases should be backed up regularly. Backups can be accomplished through several methods, of which we'll discuss three here.
 
-[mysqldump](#mysqldump) is included with `mysql-server`. It is useful for backing up smaller databases, allows backups to be edited prior to a restore, and can be used for exporting to CSV and XML.
+{ref}`mysqldump <mysqldump>` is included with `mysql-server`. It is useful for backing up smaller databases, allows backups to be edited prior to a restore, and can be used for exporting to CSV and XML.
 
-[MySQL Shell's Dump Utility](#mysql-shell-dump-utility) allows for backups of specific schema and tables, both to local files and remote secure servers. It is recommended for creating partial backups, and for integration with Python programs.
+{ref}`MySQL Shell's Dump Utility <mysql-shell-dump-utility>` allows for backups of specific schema and tables, both to local files and remote secure servers. It is recommended for creating partial backups, and for integration with Python programs.
 
-[Percona Xtrabackup](#percona-xtrabackup) creates full backups with far greater performance than the former options. However, it lacks the ability to customize schema and tables. It is the recommended option for backing up large databases in a production environment.
+{ref}`Percona Xtrabackup <percona-xtrabackup>` creates full backups with far greater performance than the former options. However, it lacks the ability to customize schema and tables. It is the recommended option for backing up large databases in a production environment.
 
+(mysqldump)=
 ### mysqldump
 
 `mysqldump` is a built-in tool that performs [logical backups](https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_logical_backup) for MySQL.
@@ -182,6 +183,7 @@ mysql -u root [database name] < dump.sql
 
 See the [upstream documentation](https://dev.mysql.com/doc/refman/8.4/en/mysqldump.html) for more information.
 
+(mysql-shell-dump-utility)=
 ### MySQL Shell Dump Utility
 
 MySQL Shell, supported in Ubuntu 24.04 LTS and later, contains a set of utilities for dumping, backing up, and restoring MySQL data. It provides a programmatic option for logical backups with filtering options.
@@ -221,6 +223,7 @@ To restore data from a local file, `local_infile` needs to be enabled on the MyS
 
 See the [MySQL Shell dump documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-utilities-dump-instance-schema.html) for more information.
 
+(percona-xtrabackup)=
 ### Percona Xtrabackup
 
 Also supported in Ubuntu 24.04 LTS and later, Percona Xtrabackup is a tool for creating [physical backups](https://dev.mysql.com/doc/refman/8.4/en/glossary.html#glos_physical_backup). It is similar to the commercial offering of [MySQL Enterprise Backup](https://www.mysql.com/products/enterprise/backup.html).
@@ -340,4 +343,4 @@ You may find it useful to spend some time searching for database tuning tips bas
 
 - Full documentation is available in both online and offline formats from the [MySQL Developers portal](http://dev.mysql.com/doc/)
 
-- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by Thomas Nield as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.
+- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by {spellexception}`Thomas Nield` as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.

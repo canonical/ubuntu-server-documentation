@@ -1,7 +1,7 @@
 (migrate-from-crmsh-to-pcs)=
 # Migrate from crmsh to pcs
 
-From Ubuntu 23.04 Lunar Lobster onwards, `pcs` is the recommended and supported tool for setting up and managing Corosync/Pacemaker clusters in Ubuntu. This is the final Ubuntu release where `crmsh` will be supported (but not recommended) so users will have time to migrate away from `crmsh`.
+From Ubuntu 23.04 Lunar Lobster onward, `pcs` is the recommended and supported tool for setting up and managing Corosync/Pacemaker clusters in Ubuntu. This is the final Ubuntu release where `crmsh` will be supported (but not recommended) so users will have time to migrate away from `crmsh`.
 
 The migration from `crmsh` to `pcs` is not very complex since both have a similar command-line interface (CLI). Here is a direct mapping of some useful commands from `crmsh` to `pcs`.
 
@@ -14,7 +14,7 @@ The migration from `crmsh` to `pcs` is not very complex since both have a simila
 | Remove a node from standby mode | `crm node online NODE` | `pcs node unstandby NODE` |
 | Set cluster property | `crm configure property PROPERTY=VALUE` | `pcs property set PROPERTY=VALUE` |
 | List resource agent classes | `crm ra classes` | `pcs resource standards` |
-| List available resource agents by standard | `crm ra list ocf` | `pcs resource agents ocf |
+| List available resource agents by standard | `crm ra list ocf` | `pcs resource agents ocf` |
 | List available resource agents by OCF provider | `crm ra list ocf pacemaker` | `pcs resource agents ocf:pacemaker` |
 | List available resource agent parameters | `crm ra info AGENT` | `pcs resource describe AGENT` |
 | Show available fence agent parameters | `crm ra info stonith:AGENT` | `pcs stonith describe AGENT` |

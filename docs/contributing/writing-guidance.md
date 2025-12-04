@@ -8,7 +8,7 @@ If you get stuck at all -- please don't hesitate to reach out for help!
 The documentation pages are all written in standard Markdown (`.md`
 file types) with [MyST support](https://myst-parser.readthedocs.io/en/latest/intro.html) for more advanced elements if you want them.
 All the documentation pages are in the `docs/` folder, then split into a
-subfolder for the [Diátaxis](https://diataxis.fr/) section it belongs in.
+sub-folder for the [Diátaxis](https://diataxis.fr/) section it belongs in.
 
 The structural elements, such as landing pages, are also written in Markdown.
 Each documentation page is only called once, by the landing page (or index) for that
@@ -80,7 +80,7 @@ about terms we would like it to ignore:
   `.custom_wordlist.txt` (terms should be added in alphabetical order).
 
 Both methods are valid, depending on whether you want the term to be rendered
-as normal font, or as inline code (monospaced).
+as normal font, or as inline code (monospace font).
 
 ### Acronyms
 
@@ -97,7 +97,7 @@ glossary if it is not present.
 ### Links
 
 The first time you refer to a package or other product, you should make it a
-link to either that product's website, or its documentation, or its manpage.
+link to either that product's website, or its documentation, or its manual page.
 
 Links should be from reputable sources (such as official upstream docs). Try
 not to include blog posts as references if possible.
@@ -155,7 +155,7 @@ Manpages: {manpage}`package-name(section)` (e.g. {manpage}`dpkg(1)`)
 
 Rendered as {manpage}`dpkg(1)`
 
-It is not necessary to provide the hardcoded URL to a manpage - they are
+It is not necessary to provide the hard-coded URL to a manual page - they are
 generated when Sphinx rebuilds the documentation so that they are always up
 to date.
 

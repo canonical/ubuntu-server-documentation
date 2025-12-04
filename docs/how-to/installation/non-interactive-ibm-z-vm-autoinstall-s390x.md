@@ -43,7 +43,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
   admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$
   ```
 
-* Now make sure an FTP server is running in the *installserver* with `/srv/ftp` as ftp-server root (as used in this example).
+* Now make sure an FTP server is running in the *`installserver`* with `/srv/ftp` as `ftp-server` root (as used in this example).
 
 * Next, prepare an *autoinstall* (HTTP) server. This hosts the configuration data for the non-interactive installation.
 
@@ -120,7 +120,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
 
-  In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBA>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a qeth device would look like this: `chzdev qeth -e 0600`.
+  In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBA>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a QETH device would look like this: `chzdev qeth -e 0600`.
 
 * For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
 
@@ -429,7 +429,7 @@ In case of any issues hitting the 80-character-per-line limit of the file, you c
 
   * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the {term}`hardware management console (HMC) <HMC>`.
 
-  * In addition to activating disk storage resources in `early-commands`, other devices like OSA/qeth can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters that are used for the installation (that one is automatically handled).
+  * In addition to activating disk storage resources in `early-commands`, other devices like OSA/QETH can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters that are used for the installation (that one is automatically handled).
 
   * If everything is properly set up -- FTP server for the image, HTTP server for the autoinstall config files -- the installation can be as quick as 2 to 3 minutes (depending on the complexity of the autoinstall YAML file).
 

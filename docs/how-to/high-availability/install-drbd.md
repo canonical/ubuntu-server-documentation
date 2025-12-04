@@ -140,4 +140,4 @@ Using `ls` you should see `/srv/default` copied from the former primary host `dr
 
 - The {manpage}`drbd.conf(5)` manual page contains details on the options not covered in this guide.
 
-- Also, see the {manpage}`drbdadm(8)` manpage.
+- Also, see the {manpage}`drbdadm(8)` manual page.

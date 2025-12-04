@@ -7,7 +7,7 @@
 Package management <software/package-management>
 ```
 
-* {ref}`Package management <package-management>` shows you how to manage the software on your system using APT, dpkg, and other package managers
+* {ref}`Package management <package-management>` shows you how to manage the software on your system using APT, `dpkg`, and other package managers
 
 ## Updates
 

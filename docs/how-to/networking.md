@@ -5,7 +5,7 @@ This section contains how-to guides on most aspects of networking in Ubuntu. If 
 
 ## Configuration
 
-Network configuration in Ubuntu is handled through Netplan. See our general walkthrough on {ref}`configuring-networks`, or refer to [the Netplan documentation](https://netplan.readthedocs.io/en/stable/) for more specific instructions.
+Network configuration in Ubuntu is handled through Netplan. See our general walk-through on {ref}`configuring-networks`, or refer to [the Netplan documentation](https://netplan.readthedocs.io/en/stable/) for more specific instructions.
 
 ## Network tools
 
@@ -37,7 +37,7 @@ Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
 
 ## DHCP
 
-Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address assignment for devices on your network. There are two DHCP servers available in Ubuntu: `isc-kea` is the most modern, and is available from 23.04 onwards.
+Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address assignment for devices on your network. There are two DHCP servers available in Ubuntu: `isc-kea` is the most modern, and is available from 23.04 onward.
 
 ```{toctree}
 :titlesonly:

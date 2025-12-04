@@ -9,7 +9,7 @@ This document will explain the basic configuration parameters of Kerberos that c
 
 There are two main server-side configuration parameters that control the encryption types used on the server for its database and its collection or principals. Both exist in `/etc/krb5kdc/kdc.conf` inside the `[realms]` section and are as follows:
 
- * `master_key_type`
+* `master_key_type`
     Specifies the key type of the master key. This is used to encrypt the database, and the default is `aes256-cts-hmac-sha1-96`.
 
 * `supported_enctypes`
@@ -18,6 +18,7 @@ There are two main server-side configuration parameters that control the encrypt
 Possible values for the encryption algorithms are listed in the [MIT documentation on encryption types](https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html#encryption-types), and the salt types can be seen [in the MIT keysalt lists](https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html#keysalt-lists).
 
 Here is an example showing the default values (other settings removed for brevity):
+
 ```text
 [realms]
     EXAMPLE.INTERNAL = {
@@ -165,6 +166,6 @@ MIT Kerberos has a [guide on updating encryption types](https://web.mit.edu/kerb
 * [Encryption types in MIT Kerberos](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html)
 * [`krb5.conf` encryption related configurations options](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#configuration-variables)
 * [Migrating away from older encryption types](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#migrating-away-from-older-encryption-types)
-* {manpage}`kdc.conf(5)` manpage
-* {manpage}`krb5.conf(5)` manpage
+* {manpage}`kdc.conf(5)` manual page
+* {manpage}`krb5.conf(5)` manual page
 * [Kerberos V5 concepts](https://web.mit.edu/kerberos/krb5-latest/doc/basic/index.html)

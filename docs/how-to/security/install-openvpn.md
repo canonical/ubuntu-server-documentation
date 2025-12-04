@@ -1,7 +1,7 @@
 (install-openvpn)=
 # How to install and use OpenVPN
 
-OpenVPN is a flexible, reliable and secure Virtual Private Networking (VPN) solution. It belongs to the family of SSL/TLS VPN stacks (different from IPSec VPNs). This chapter will show how to install and configure OpenVPN to create a VPN.
+OpenVPN is a flexible, reliable and secure Virtual Private Networking (VPN) solution. It belongs to the family of SSL/TLS VPN stacks (different from IPsec VPNs). This chapter will show how to install and configure OpenVPN to create a VPN.
 
 ## Install the server
 
@@ -56,7 +56,7 @@ Next, we will generate a key pair for the server:
 ./easyrsa gen-req myservername nopass
 ```
 
-Diffie Hellman parameters must be generated for the OpenVPN server. The following command will place them in `pki/dh.pem`:
+{spellexception}`Diffie Hellman` parameters must be generated for the OpenVPN server. The following command will place them in `pki/dh.pem`:
 
 ```bash
 ./easyrsa gen-dh
@@ -460,7 +460,7 @@ In Ubuntu 24.04 LTS and later, you can still use legacy algorithms by explicitly
 providers legacy default
 ```
 
-You can also run openvpn with the `--providers` argument.
+You can also run `openvpn` with the `--providers` argument.
 
 ```bash
 openvpn --providers legacy default ...
@@ -492,5 +492,5 @@ The provider order matters here as tpm2 currently requires the legacy provider t
 
 - [EasyRSA](https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md)
 - [OpenVPN quick start guide](https://openvpn.net/quick-start-guide/)
-- Snap'ed version of OpenVPN [easy-openvpn](https://snapcraft.io/easy-openvpn-server)
+- OpenVPN as a snap [easy-openvpn](https://snapcraft.io/easy-openvpn-server)
 - Debian's [OpenVPN Guide](https://wiki.debian.org/OpenVPN)

@@ -59,11 +59,11 @@ to attrs=shadowLastChange
 
 These ACLs enforce the following:
 
-- Anonymous 'auth' access is provided to the **userPassword** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the {term}`DIT` is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
+- Anonymous 'auth' access is provided to the **`userPassword`** attribute so that users can authenticate, or **bind**. Perhaps counter-intuitively, 'by anonymous auth' is needed even when anonymous access to the {term}`DIT` is unwanted, otherwise this would be a chicken-and-egg problem: before authentication, all users are anonymous.
 
-- The 'by self write' ACL grants write access to the **userPassword** attribute to users who authenticated as the DN where the attribute lives. In other words, users can update the **userPassword** attribute of their own entries.
+- The 'by self write' ACL grants write access to the **`userPassword`** attribute to users who authenticated as the DN where the attribute lives. In other words, users can update the **`userPassword`** attribute of their own entries.
 
-- The **userPassword** attribute is otherwise inaccessible by all other users, with the exception of the Root DN, who always has access and doesn't need to be mentioned explicitly.
+- The **`userPassword`** attribute is otherwise inaccessible by all other users, with the exception of the Root DN, who always has access and doesn't need to be mentioned explicitly.
 
 - In order for users to change their own password, using `passwd` or other utilities, the user's own **shadowLastChange** attribute needs to be writable. All other directory users get to read this attribute's contents.
 
@@ -99,7 +99,7 @@ Since this is a SASL identity we need to use a SASL **mechanism** when invoking 
 
 - You must use `sudo` to become the root identity in order for the ACL to match.
 
-- The EXTERNAL mechanism works via **Interprocess Communication** (IPC, UNIX domain sockets). This means you must use the `ldapi` URI format.
+- The EXTERNAL mechanism works via **Inter-process Communication** (IPC, UNIX domain sockets). This means you must use the `ldapi` URI format.
 
 A succinct way to get all the ACLs is like this:
 

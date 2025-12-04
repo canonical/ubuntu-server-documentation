@@ -1,7 +1,7 @@
 (netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot)=
 # Netboot the live server installer on IBM Power (ppc64el) with Petitboot
 
-Open a terminal window on your workstation and make sure the ‘ipmitool’ package is installed.
+Open a terminal window on your workstation and make sure the `ipmitool` package is installed.
 
 Verify if you can reach the BMC of the IBM Power system via `ipmitool` with a simple `ipmitool` call like:
 
@@ -156,7 +156,7 @@ Next we need to loop-back mount the ISO:
 / # mount -o loop focal-live-server-ppc64el.iso iso
 ```
 
-Or, in case autodetect of type iso9660 is not supported or not working, you should explicitly specify the 'iso9660' type:
+Or, in case auto-detect of type iso9660 is not supported or not working, you should explicitly specify the 'iso9660' type:
 
 ```
 / # mount -t iso9660 -o loop focal-live-server-ppc64el.iso iso
@@ -278,4 +278,4 @@ Once it has completed, you will reach the initial Subiquity installer screen:
                   [ Українська                                 ▸ ]              
 ```
 
-From this point, you can follow the normal Subiquity installation. For more details, refer to the [Subquity installer documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html).
+From this point, you can follow the normal Subiquity installation. For more details, refer to the [Subiquity installer documentation](https://canonical-subiquity.readthedocs-hosted.com/en/latest/index.html).

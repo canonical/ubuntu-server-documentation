@@ -209,6 +209,6 @@ Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.
 
 ## References
 
-* [ISC's DNSSEC Guide](https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html)
+* [ISC DNSSEC Guide](https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html)
 * [DNSSEC troubleshooting section of the ISC DNSSEC guide](https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html#basic-dnssec-troubleshooting)
 * [Standard algorithms used for DNSSEC](https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xhtml)

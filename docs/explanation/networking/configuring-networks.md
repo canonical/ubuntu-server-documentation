@@ -3,7 +3,7 @@
 
 Network configuration on Ubuntu is handled through [Netplan](https://netplan.io/), which provides a high-level, distribution-agnostic way to define how the network on your system should be set up via a [YAML configuration file](https://netplan.readthedocs.io/en/stable/netplan-yaml/).
 
-While Netplan is a configuration abstraction renderer that covers all aspects of network configuration, here we will outline the underlying system elements like IP addresses, ethernet devices, name resolution and so on. We will refer to the related Netplan settings where appropriate, but we do recommend studying [the Netplan documentation](https://netplan.readthedocs.io/en/stable/) in general.
+While Netplan is a configuration abstraction renderer that covers all aspects of network configuration, here we will outline the underlying system elements like IP addresses, Ethernet devices, name resolution and so on. We will refer to the related Netplan settings where appropriate, but we do recommend studying [the Netplan documentation](https://netplan.readthedocs.io/en/stable/) in general.
 
 ## Ethernet interfaces
 
@@ -281,7 +281,7 @@ If you try to ping a host with the name `server1`, your system will automaticall
 
 3.  `server1.dev.example.com`
 
-If no matches are found, the DNS server will provide a result of *notfound* and the DNS query will fail.
+If no matches are found, the DNS server will provide a result of *`notfound`* and the DNS query will fail.
 
 ### Static hostnames
 

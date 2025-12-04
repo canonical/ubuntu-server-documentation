@@ -19,9 +19,9 @@ First, on `server01`, install the `nagios3` package by entering the following co
 sudo apt install nagios3 nagios-nrpe-plugin
 ```
 
-You will be asked to enter a password for the **nagiosadmin** user. The user's credentials are stored in `/etc/nagios3/htpasswd.users`. To change the nagiosadmin password, or add more users to the Nagios CGI scripts, use the `htpasswd` that is part of the `apache2-utils` package.
+You will be asked to enter a password for the **`nagiosadmin`** user. The user's credentials are stored in `/etc/nagios3/htpasswd.users`. To change the `nagiosadmin` password, or add more users to the Nagios CGI scripts, use the `htpasswd` that is part of the `apache2-utils` package.
 
-For example, to change the password for the nagiosadmin user, enter:
+For example, to change the password for the `nagiosadmin` user, enter:
 
 ```bash
 sudo htpasswd /etc/nagios3/htpasswd.users nagiosadmin
@@ -158,8 +158,10 @@ The `nagios` user will need to be added to all hosts in the **mysql-servers** ho
 ```
 
 Restart nagios to start checking the MySQL servers.
-    
+
+```bash
 sudo systemctl restart nagios3.service
+```
 
 ### Configure NRPE
 
@@ -201,7 +203,7 @@ Also, on `server01` restart Nagios:
 sudo systemctl restart nagios3.service
 ```
 
-You should now be able to see the host and service checks in the Nagios CGI files. To access them, point a browser to `http://server01/nagios3`. You will then be prompted for the **nagiosadmin** username and password.
+You should now be able to see the host and service checks in the Nagios CGI files. To access them, point a browser to `http://server01/nagios3`. You will then be prompted for the **`nagiosadmin`** username and password.
 
 ## Further reading
 

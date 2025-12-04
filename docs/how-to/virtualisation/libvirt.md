@@ -15,7 +15,7 @@ On many computers with processors supporting hardware-assisted virtualisation, i
 
 ## Virtual networking
 
-There are a few different ways to allow a virtual machine access to the external network. The default virtual network configuration includes **bridging** and **iptables** rules implementing **usermode** networking, which uses the [SLiRP](https://en.wikipedia.org/wiki/Slirp) protocol. Traffic is NATed through the host interface to the outside network.
+There are a few different ways to allow a virtual machine access to the external network. The default virtual network configuration includes **bridging** and **`iptables`** rules implementing **usermode** networking, which uses the [SLiRP](https://en.wikipedia.org/wiki/Slirp) protocol. Traffic is NATed through the host interface to the outside network.
 
 To enable external hosts to directly access services on virtual machines, a different type of *bridge* than the default needs to be configured. This allows the virtual interfaces to connect to the outside network through the physical interface, making them appear as normal hosts to the rest of the network.
 
@@ -377,7 +377,7 @@ One can allocate huge pages at [boot or runtime](https://www.kernel.org/doc/Docu
 
 Huge pages need to be allocated by the kernel as mentioned above, but to be consumable, they also have to be mounted. By default, `systemd` will make `/dev/hugepages` available for the default huge page size.
 
-Feel free to add more mount points if you need different sized ones. An overview can be queried with [hugeadm](https://linux.die.net/man/8/hugeadm):
+Feel free to add more mount points if you need different sized ones. An overview can be queried with [`hugeadm`](https://linux.die.net/man/8/hugeadm):
 
 ```bash
 $ apt install libhugetlbfs-bin
@@ -403,7 +403,7 @@ With the above in place, libvirt can map guest memory to huge pages. In a guest 
 </memoryBacking>
 ```
 
-That will allocate the huge pages using the default huge page size from an autodetected mount point.
+That will allocate the huge pages using the default huge page size from an auto-detected mount point.
 For more control, e.g. how memory is spread over [Numa nodes](https://www.kernel.org/doc/html/v5.4/vm/numa.html) or which page size to use, check out the details at the [libvirt docs](https://libvirt.org/formatdomain.html#elementsMemoryBacking).
 
 ## Controlling addressing bits
@@ -412,15 +412,15 @@ This is a topic that rarely matters on a single computer with virtual machines f
 
 However, it can be very important when driving more advanced use cases. If one needs bigger guest sizes with more than a terabyte of memory then controlling the addressing bits is crucial.
 
-### -hpb machine types
+### `-hpb` machine types
 
-Since Ubuntu 18.04, the QEMU in Ubuntu has [provided special machine-types](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189). These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The “{term}`HPB`” abbreviation stands for “host-physical-bits”, which is the QEMU option that this represents.
+Since Ubuntu 18.04, the QEMU in Ubuntu has [provided special machine-types](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189). These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The "{term}`HPB`" abbreviation stands for "host-physical-bits", which is the QEMU option that this represents.
 
 For example, by using `pc-q35-jammy-hpb`, the guest would use the number of physical bits that the Host CPU has available.
 
 Providing the configuration that a guest should use more address bits as a machine type has the benefit that many higher level management stacks like for example openstack, are already able to control it through libvirt.
 
-One can check the bits available to a given CPU via the procfs:
+One can check the bits available to a given CPU via the `procfs`:
 
 ```bash
 $ cat /proc/cpuinfo | grep '^address sizes'
@@ -434,7 +434,7 @@ address sizes   : 39 bits physical, 48 bits virtual
 ### maxphysaddr guest configuration
 
 Since libvirt version 8.7.0 (>= Ubuntu 22.10 Lunar), `maxphysaddr` can be controlled via the [CPU model and topology section](https://libvirt.org/formatdomain.html#cpu-model-and-topology) of the guest configuration.
-If one needs just a large guest, like before when using the `-hpb` types, all that is needed is the following libvirt guest xml configuration:
+If one needs just a large guest, like before when using the `-hpb` types, all that is needed is the following libvirt guest `xml` configuration:
 
 ```xml
   <maxphysaddr mode='passthrough' />

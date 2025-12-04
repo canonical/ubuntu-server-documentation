@@ -81,7 +81,7 @@ permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
 The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
 ```
 
-There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "noanonymous" prevents the use of mechanisms that permit anonymous authentication.
+There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "`noanonymous`" prevents the use of mechanisms that permit anonymous authentication.
 
 ### Configure TLS
 

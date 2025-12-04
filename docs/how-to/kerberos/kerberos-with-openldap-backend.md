@@ -8,7 +8,6 @@ Kerberos supports a few different database backends. The default one (which we h
 There are several reasons why one would want to have the Kerberos principals stored in LDAP as opposed to a local on-disk database. There are also cases when it is not a good idea. Each site has to evaluate the pros and cons. Here are a few:
 
 - Pros:
-  - OpenLDAP replication is faster and more robust than the native Kerberos one, based on a cron job
   - If you already have OpenLDAP set up for other things, such as storing users and groups, adding the Kerberos attributes can be beneficial, providing an integrated story
 - Cons:
   - Setting up the LDAP backend isn't a trivial task and shouldn't be attempted by administrators without prior knowledge of OpenLDAP
@@ -118,10 +117,10 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   $ ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=kdc-service,dc=example,dc=com
   New password:   <-- password you want for uid-kdc-service 
   Re-enter new password: 
-  Enter LDAP Password:  <-- password for the dn specified with the -D option
+  Enter LDAP Password:  <-- password for the DN specified with the -D option
   ```
 
-  Repeat for the `uid=kadmin-service` dn. These passwords will be needed later.
+  Repeat for the `uid=kadmin-service` DN. These passwords will be needed later.
 
   You can test these with `ldapwhoami`:
 

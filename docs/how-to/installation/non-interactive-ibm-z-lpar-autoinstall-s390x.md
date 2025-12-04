@@ -1,10 +1,10 @@
 (non-interactive-ibm-z-lpar-autoinstall-s390x)=
 # Non-interactive IBM Z LPAR autoinstall (s390x)
 
-This non-interactive installation uses ‘autoinstall’, which can be considered the successor to the Debian installer (d-i) and preseed on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by ‘…’, to limit the size of this document).
+This non-interactive installation uses `autoinstall`, which can be considered the successor to the Debian installer (d-i) and `preseed` on Ubuntu. This is a detailed step-by-step guide, including output and logs (which are partially a bit shortened, as indicated by `…`, to limit the size of this document).
 
 The example logical partition (LPAR) here uses zFCP storage and is connected to a VLAN network.
-For a {term}`DASD` and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) autoinstallation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
+For a {term}`DASD` and a non-VLAN network example, please see the [non-interactive IBM z/VM (s390x) auto-installation](https://discourse.ubuntu.com/t/non-interactive-ibm-z-vm-s390x-installation-using-autoinstall/16995) guide.
 
 * Start with the preparation of the (FTP) install server (if it doesn't already exist).
 
@@ -85,7 +85,7 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
   -r--r--r--  1 user user       185 Jun 26 10:12 ubuntu.ins
   ```
 
-* Now create ins and parm files dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default ins and parm files that are shipped with the ISO image:
+* Now create `.ins` and parmfiles dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default `.ins` and parmfiles that are shipped with the ISO image:
 
   ```bash
   admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ chmod -R +rw ./boot
@@ -112,7 +112,7 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
    ip=10.11.12.42::10.11.12.1:255.255.255.0:zlinlpar:encc000.4711:none:10.11.12.1 vlan=encc000.4711:encc000 url=http://installserver.local:80/ubuntu-daily-live-server-20.04/focal-live-server-s390x.iso autoinstall ds=nocloud-net;s=http://installserver.local:80/autoinstall/zlinlpar/ --- quiet
    ```
 
-* Now make sure an FTP server is running in the *installserver* with `/srv/ftp` as ftp-server root (as used in this example).
+* Now make sure an FTP server is running in the `installserver` with `/srv/ftp` as ftp-server root (as used in this example).
 
 * Now prepare an *autoinstall* (HTTP) server, which hosts the configuration data for the non-interactive installation.
 
@@ -198,7 +198,7 @@ For a {term}`DASD` and a non-VLAN network example, please see the [non-interacti
 
   In this particular example, two zFCP hosts (host-bus-adapters) are enabled via their addresses *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain logical unit numbers (LUNs) assigned that are all automatically discovered and activated by `chzdev zfcp-lun -e --online`.
 
-  Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a qeth device activation looks like: `chzdev qeth -e c000`.
+  Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a QETH device activation looks like: `chzdev qeth -e c000`.
 
 ```{seealso}
 For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) pages.
@@ -490,7 +490,7 @@ For more details about the autoinstall config options, please have a look at the
 
   * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the hardware management console (HMC).
 
-  * In addition to activating disk storage resources in `early-commands`, other devices like OSA/qeth can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters used for the installation (that one is automatically handled).
+  * In addition to activating disk storage resources in `early-commands`, other devices like OSA/QETH can be added and activated there, too. This is not needed for the basic network device, as specified in the kernel parameters used for the installation (that one is automatically handled).
 
   * If everything is properly set up -- FTP server for the image, HTTP server for the autoinstall config files -- the installation can be as quick as 2 to 3 minutes. Of course this depends on the complexity of the autoinstall YAML file.
 

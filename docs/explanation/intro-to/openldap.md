@@ -24,7 +24,7 @@ that it's understood as such.
 
 - Attributes and `objectClasses` are defined in **schemas** (an `objectClass` is considered a special kind of attribute).
 
-- Each entry has a unique identifier: its **Distinguished Name** ({term}`DN` or dn). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
+- Each entry has a unique identifier: its **Distinguished Name** ({term}`DN`). This, in turn, consists of a **Relative Distinguished Name** (RDN) followed by the parent entry's DN.
 
 - The entry's DN is not an attribute. It is not considered part of the entry itself.
 
@@ -38,7 +38,7 @@ For example, below we have a single entry consisting of 11 attributes where the 
 
 - RDN is `cn=John Doe`
 
-- parent DN is `dc=example,dc=com`
+- Parent DN is `dc=example,dc=com`
 
 ```text
  dn: cn=John Doe,dc=example,dc=com
@@ -74,7 +74,7 @@ For users who want to set up OpenLDAP, we recommend following our series of guid
 
 - The [OpenLDAP administrators guide](https://openldap.org/doc/admin25/)
 - [RFC 4515: LDAP string representation of search filters](http://www.rfc-editor.org/rfc/rfc4515.txt)
-- Zytrax's [LDAP for Rocket Scientists](http://www.zytrax.com/books/ldap/); a less pedantic but comprehensive treatment of LDAP
+- {spellexception}`Zytrax's` [LDAP for Rocket Scientists](http://www.zytrax.com/books/ldap/); a less pedantic but comprehensive treatment of LDAP
 Older references that might still be useful:
-- O'Reilly's [LDAP System Administration](http://www.oreilly.com/catalog/ldapsa/) (textbook; 2003)
-- Packt's [Mastering OpenLDAP](http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book) (textbook; 2007)
+- {spellexception}`O'Reilly's` [LDAP System Administration](http://www.oreilly.com/catalog/ldapsa/) (textbook; 2003)
+- {spellexception}`Packt's` [Mastering OpenLDAP](http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book) (textbook; 2007)
