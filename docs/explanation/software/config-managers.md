@@ -36,7 +36,7 @@ alleviate some of the complexity in using the tool.
 ## Puppet
 
 [Puppet](https://www.puppet.com/) uses a client-server architecture; the
-Puppet server (the "master") is installed one one or more servers, and the
+Puppet server (the "{spellexception}`master`") is installed one one or more servers, and the
 client (Puppet Agent) is installed on every machine Puppet is to manage. It's
 most often used to manage IT infrastructure lifecycles; although it can be
 complicated to set up, it is useful in particularly complex or large-scale

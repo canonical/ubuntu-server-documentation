@@ -23,10 +23,10 @@ In this section we'll configure a primary and secondary Kerberos server to use O
 1. **Extended simple case**:
    - Multiple primary KDCs connected to one primary OpenLDAP
    - Multiple secondary KDCs connected to primary and secondary OpenLDAP
-1. **OpenLDAP with multi-master replication**:
+1. **OpenLDAP with {spellexception}`multi-master` replication**:
    - Multiple primary KDCs connected to all primary OpenLDAP servers
 
-We haven't covered OpenLDAP multi-master replication in this guide, so we will show the **simple case** only. The second scenario is an extension: just add another primary KDC to the mix, talking to the same primary OpenLDAP server.
+We haven't covered OpenLDAP {spellexception}`multi-master` replication in this guide, so we will show the **simple case** only. The second scenario is an extension: just add another primary KDC to the mix, talking to the same primary OpenLDAP server.
 
 ## Configure OpenLDAP
 

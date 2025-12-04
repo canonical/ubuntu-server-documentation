@@ -317,14 +317,15 @@ S: 235 Authentication succeeded
 Authenticated.
 Security strength factor: 256
 ```
-It will appear to hang at this point, but it's just waiting for the SMTP commands, i.e., receive an email. You can exit by typing `QUIT` followed by pressing enter.
+
+It will appear to freeze at this point, but it's just waiting for the SMTP commands, i.e., receive an email. You can exit by typing `QUIT` followed by pressing enter.
 
 Interesting points to note in the output above:
 
- * No authentication was offered before the connection was switched to TLS. That's because the only mechanisms which are configured are plain-text ones. Without TLS, the password would be exposed on the network.
- * Since this documentation used a self-signed certificate, that was highlighted right before the TLS session was established. A real email client would probably abort the connection at this point.
- * After TLS was established, the `LOGIN` mechanism was chosen.
- * The username and password are sent base64 encoded. Do not mistake that for encryption: this is just an encoding mechanism!
+* No authentication was offered before the connection was switched to TLS. That's because the only mechanisms which are configured are plain-text ones. Without TLS, the password would be exposed on the network.
+* Since this documentation used a self-signed certificate, that was highlighted right before the TLS session was established. A real email client would probably abort the connection at this point.
+* After TLS was established, the `LOGIN` mechanism was chosen.
+* The username and password are sent base64 encoded. Do not mistake that for encryption: this is just an encoding mechanism!
 
 ```{tip}
 Want to obtain the original username and password back from the base64 encoded values? Feed those values to the `base64 -d` tool. Example, using the value from the session above:
@@ -376,10 +377,12 @@ Security strength factor: 256
 Here are some troubleshooting tips.
 
 #### Permissions
+
 * If using `saslauthd`: Can the `Debian-exim` user read and write to the `saslauthd` socket in `/run/saslauthd/mux` socket?
 * If using `/etc/exim4/passwd`: Can the `Debian-exim` user read this file?
 
 #### Config
+
 * If changing a configuration file under `/etc/exim4/conf.d/`, make sure to be using the split-config mode! Check the `/etc/exim4/update-exim4.conf.conf` file to see which mode is in use.
 * Similarly, if changing the configuration file `/etc/exim4/exim4.conf.template`, make sure to be using the non-split mode.
 * After any configuration file change, be it split mode or not, be sure to run `sudo update-exim4.conf` and restart the `exim4` service.
@@ -387,8 +390,8 @@ Here are some troubleshooting tips.
 
 ## Further reading
 
-  - See [exim.org](http://www.exim.org/) for more information.
+- See [exim.org](http://www.exim.org/) for more information.
+  
+- Another resource is the [Exim4 Ubuntu Wiki](https://help.ubuntu.com/community/Exim4) page.
 
-  - Another resource is the [Exim4 Ubuntu Wiki](https://help.ubuntu.com/community/Exim4) page.
-
-  - Further resources to [set up mailman3 with Exim4](https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#exim).
+- Further resources to [set up mailman3 with Exim4](https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#exim).

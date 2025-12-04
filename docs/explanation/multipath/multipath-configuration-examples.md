@@ -12,7 +12,7 @@ For consistency with those sections, we will refer here to device mapper multipa
 
 Before setting up multipath on your system, ensure that your system has been updated and includes the `multipath-tools` package. If you want to boot from the storage area network (SAN), then the `multipath-tools-boot` package is also required.
 
-A very simple `/etc/multipath.conf` file exists, as explained in {ref}`the configuration overview <configuring-multipath>`. All attributes not declared in `multipath.conf` are taken from the `multipath-tools` internal database and its internal blacklist.
+A very simple `/etc/multipath.conf` file exists, as explained in {ref}`the configuration overview <configuring-multipath>`. All attributes not declared in `multipath.conf` are taken from the `multipath-tools` internal database and its internal blocklist.
 
 The **internal attributes** database can be acquired by running the following on the command line:
 
@@ -406,7 +406,7 @@ multipaths {
 #
 ```
 
-### Example of a blacklist section
+### Example of a blocklist section
 
 ```
 # name    : blacklist
@@ -429,7 +429,7 @@ multipaths {
 # }
 ```
 
-### Example of a blacklist exception section
+### Example of a blocklist exception section
 
 ```
 # name    : blacklist_exceptions
