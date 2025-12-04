@@ -10,7 +10,7 @@ This document will explain the basic configuration parameters of Kerberos that c
 There are two main server-side configuration parameters that control the encryption types used on the server for its database and its collection or principals. Both exist in `/etc/krb5kdc/kdc.conf` inside the `[realms]` section and are as follows:
 
 * `master_key_type`
-    Specifies the key type of the master key. This is used to encrypt the database, and the default is `aes256-cts-hmac-sha1-96`.
+    Specifies the key type of the {spellexception}`master` key. This is used to encrypt the database, and the default is `aes256-cts-hmac-sha1-96`.
 
 * `supported_enctypes`
     Specifies the default key/salt combinations of principals for this realm. The default is `aes256-cts-hmac-sha1-96:normal aes128-cts-hmac-sha1-96:normal`, and the encryption types should be listed in order of preference.
@@ -29,7 +29,7 @@ Here is an example showing the default values (other settings removed for brevit
 }
 ```
 
-The master key is created once per realm, when the realm is bootstrapped. That is usually done with the `krb5_newrealm` tool (see {ref}`how to install a Kerberos server <install-a-kerberos-server>` for details). You can check the master key type with either of these commands on the KDC server:
+The {spellexception}`master` key is created once per realm, when the realm is bootstrapped. That is usually done with the `krb5_newrealm` tool (see {ref}`how to install a Kerberos server <install-a-kerberos-server>` for details). You can check the {spellexception}`master` key type with either of these commands on the KDC server:
 
 ```bash
 $ sudo kadmin.local

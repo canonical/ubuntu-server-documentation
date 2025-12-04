@@ -35,7 +35,7 @@ Next, create the new realm with the `kdb5_newrealm` utility:
 sudo krb5_newrealm
 ```
 
-It will ask you for a database master password, which is used to encrypt the local database. Chose a secure password: its strength is not verified for you.
+It will ask you for a database {spellexception}`master` password, which is used to encrypt the local database. Chose a secure password: its strength is not verified for you.
 
 ## Configure the Kerberos server
 
