@@ -289,11 +289,11 @@ sudo netplan apply
 - Verify the IP addresses are available locally using one or more of the following:
 
 ```bash
-ip addr # shows all network interfaces
+ip addr    #shows all network interfaces
 
-ip addr show <interface_name> # shows single interface
+ip addr show <interface_name>    #shows single interface
 
-hostname -i # shows only the available IP addresses on the host
+hostname -i    #shows only the available IP addresses on the host
 ```
 
 Check the output to see that the addresses were applied to the interface that was configured.
@@ -301,7 +301,7 @@ Check the output to see that the addresses were applied to the interface that wa
 - Verify the IP addresses are available on the network. From a different computer on the network:
 
 ```bash
-ping 192.168.0.100 # configured IP addresses
+ping 192.168.0.100    #configured IP addresses
 ping 192.168.0.101
 ```
 ## Name resolution
