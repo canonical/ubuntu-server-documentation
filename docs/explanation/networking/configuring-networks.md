@@ -258,14 +258,6 @@ network:
 
 Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
 
-
-Apply the configuration to enable the virtual IP:
-
-
-```bash
-sudo netplan apply
-```
-
 #### Dynamic IP addresses
 
 This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
@@ -286,21 +278,32 @@ network:
 A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces.
 :::
 
-Apply the configuration to enable the virtual IP:
+#### Apply and verify the IP addresses
 
+- Apply the configuration to enable the virtual IP:
 
 ```bash
 sudo netplan apply
 ```
 
-Verify the IP addresses are available:
+- Verify the IP addresses are available locally using one or more of the following:
 
 ```bash
-ping 192.168.0.100
-ping 192.168.0.101
+ip addr # shows all network interfaces
+
+ip addr show <interface_name> # shows single interface
+
+hostname -i # shows only the available IP addresses on the host
 ```
 
+Check the output to see that the addresses were applied to the interface that was configured.
 
+- Verify the IP addresses are available on the network. From a different computer on the network:
+
+```bash
+ping 192.168.0.100 # configured IP addresses
+ping 192.168.0.101
+```
 ## Name resolution
 
 Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
