@@ -229,6 +229,78 @@ ip address show lo
        valid_lft forever preferred_lft forever
 ```
 
+### Adding a virtual IP address
+
+Virtual IP is a method for broadcasting multiple IP addresses to the network. For example, use virtual IP to:
+
+- host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
+- host multiple server names using Samba
+
+Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`.
+
+#### Multiple static IP addresses
+
+This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
+
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+      - 192.168.0.100/24
+        label: eno1:0
+      - 192.168.0.101/24
+        label: eno1:1
+
+```
+
+Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
+
+
+Apply the configuration to enable the virtual IP:
+
+
+```bash
+sudo netplan apply
+```
+
+#### Dynamic IP addresses
+
+This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+      - 192.168.0.101/24
+        label: eno1:1
+      dhcp4: true
+
+```
+
+:::{note}
+A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces.
+:::
+
+Apply the configuration to enable the virtual IP:
+
+
+```bash
+sudo netplan apply
+```
+
+Verify the IP addresses are available:
+
+```bash
+ping 192.168.0.100
+ping 192.168.0.101
+```
+
+
 ## Name resolution
 
 Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
@@ -331,77 +403,6 @@ To modify the order of these name resolution methods, you can simply change the 
 ```
 hosts:          files dns [NOTFOUND=return] mdns4_minimal mdns4
 ```
-## Adding a virtual IP address
-
-Virtual IP is a method for broadcasting multiple IP addresses to the network. For example, use virtual IP to:
-
-- host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
-- host multiple server names using Samba
-
-Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`.
-
-### Multiple static IP addresses
-
-This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
-
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    eno1:
-      addresses:
-      - 192.168.0.100/24
-        label: eno1:0
-      - 192.168.0.101/24
-        label: eno1:1
-
-```
-
-Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
-
-
-Apply the configuration to enable the virtual IP:
-
-
-```bash
-sudo netplan apply
-```
-
-### Dynamic IP addresses
-
-This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    eno1:
-      addresses:
-      - 192.168.0.101/24
-        label: eno1:1
-      dhcp4: true
-
-```
-
-:::{note}
-A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces.
-:::
-
-Apply the configuration to enable the virtual IP:
-
-
-```bash
-sudo netplan apply
-```
-
-Verify the IP addresses are available:
-
-```bash
-ping 192.168.0.100
-ping 192.168.0.101
-```
-
 ## Bridging multiple interfaces
 
 Bridging is a more advanced configuration, but is very useful in multiple scenarios. One scenario is setting up a bridge with multiple network interfaces, then using a firewall to filter traffic between two network segments. Another scenario is using bridge on a system with one interface to allow virtual machines direct access to the outside network. The following example covers the latter scenario:
