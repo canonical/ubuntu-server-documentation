@@ -333,7 +333,7 @@ hosts:          files dns [NOTFOUND=return] mdns4_minimal mdns4
 ```
 ## Adding a virtual IP address
 
-Virtual IP is a method of broadcasting multiple IP addresses to the network. For example, use virtual IP to:
+Virtual IP is a method for broadcasting multiple IP addresses to the network. For example, use virtual IP to:
 
 - host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
 - host multiple server names using Samba
@@ -370,7 +370,7 @@ sudo netplan apply
 
 ### Dynamic IP addresses
 
-This example adds one or more IP addresses to an interface that also has a dynamic address assigned by DHCP.
+This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
 
 ```yaml
 network:
@@ -395,7 +395,7 @@ Apply the configuration to enable the virtual IP:
 sudo netplan apply
 ```
 
-Verify the IP are available:
+Verify the IP addresses are available:
 
 ```bash
 ping 192.168.0.100
