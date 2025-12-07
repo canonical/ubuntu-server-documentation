@@ -2217,7 +2217,7 @@ Systemd
 
 tasksel
 Task selector
-    *Work in Progress*
+     Tasksel is a Debian/Ubuntu tool that simplifies the installation of collections of related packages (called "tasks") for specific purposes, like setting up a mail server, LAMP stack, or desktop environment. Instead of manually installing dozens of packages, tasksel lets you install entire pre-configured software bundles with a single command.
 
 TB
     Terabyte (unit of measurement)
@@ -2225,7 +2225,7 @@ TB
 
 TCP
 Transmission Control Protocol
-    *Work in Progress*
+     TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications rely on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
 
 TEE
 Trusted Execution Environment
@@ -2235,41 +2235,39 @@ Trusted Execution Environment
 
 TFTP
 Trivial File Transfer Protocol
-    *Work in Progress*
+   TFTP is a very simple, lightweight file transfer protocol that uses {term}`UDP` instead of {term}`TCP`, designed for basic file transfers where simplicity is more important than features or security. It is "trivial" because it has minimal functionality - no authentication, no encryption, no directory listing, just basic reading and writing of files.
 
 TGS
 Ticket Granting Service
-    *Work in Progress*
+    TGS is a term used in the Kerberos authentication protocol, a key component of he Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
 
 TGT
 Ticket Granting Ticket
-    *Work in Progress*
+    TGT is a credential issued by Kerberos authentication systems that allows users to request service tickets without re-entering their password.
+It is a central component of Kerberos, the network authentication protocol used in Active Directory ({term} `AD`) and many Unix/Linux environments.
 
 TLB
 Translation Lookaside Buffer
-    TLB is a {term}`CPU` cache that stores recent page table entries. When the
-    CPU translates a virtual address, it first checks the TLB. If the mapping is
-    found, the translation is fast. If it's missing, the CPU retrieves the
-    mapping from the page table in memory, which takes longer.
+    TLB is a specialized cache in the {term}`CPU` that stores recent virtual-to-physical address translations, dramatically speeding up memory access by avoiding repeated page table lookups. It is a critical component of virtual memory systems that makes address translation fast enough to be practical. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it is missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
 
 TLS
 Transport Layer Security
-    *Work in Progress*
+    TLS is a cryptographic protocol that provides secure communication over a network by encrypting data transmitted between clients and servers. It is the successor to SSL (Secure Sockets Layer) and is what makes {term}`HTTPS` secure (the padlock icon in your browser).
 
 tmpfs
 Temporary Filesystem
-    *Work in Progress*
+    tmfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it extremely fast but also volatile - data disappears when the system reboots or loses power.
 
 tmux
 Terminal Multiplexer
-    *Work in Progress*
+    tmux is a powerful command-line tool that allows you to manage multiple terminal sessions from a single window, with the ability to detach and reattach sessions. It is a way to have multiple terminal windows and split-screen layouts, all within a single terminal, with sessions that persist even when you disconnect.
 
 topologies
-    *Work in Progress*
+    Topologies (in a networking context) refer to the physical or logical arrangement of devices and connections in a network - essentially how computers, switches, routers, and other devices are interconnected.
 
 TOTP
 Time-based One-Time Password
-    *Work in Progress*
+    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It Is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Authy, Microsoft Authenticator, and many others.
 
 TPM
 Trusted Platform Module
@@ -2277,19 +2275,26 @@ Trusted Platform Module
     system integrity during boot, and enables features such as secure storage,
     encryption, and attestation.
 
-traceback
-    *Work in Progress*
+Traceback
+    traceback is term used in Python. Traceback is a report of the function call stack printed when an exception occurs, showing the sequence of calls leadiing to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by traciing execution backward from the failure point.
 
 Traceroute
-    *Work in Progress*
+    Traceroute is a network diagnostic tool that shows the path packets take from your computer to a destination across the internet, revealing each hop (router) along the way.
 
-ttys
+TTYS
 Teletype Terminals
-    *Work in Progress*
+    TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term tty still exists in Unix/Linux systems to represent:
+* A text-based input/output device
+* A terminal session
+* A console connection
 
 TXT
 Trusted Execution Technology
-    *Work in Progress*
+    TXT is Intel's hardware-based security technology that creates a trusted execution environment to protect systems from software-based attacks. In other words, TXT was designed to make sure that a computer boots into a trusted and verified state before loading the operating system or applications.
+It protects against:
+* Rootkits
+* Boot-level malware
+* Unauthorized changes to firmware or system software
 
 :::
 
