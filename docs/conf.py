@@ -225,6 +225,10 @@ linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*"]
 linkcheck_timeout = 15
 linkcheck_retries = 2
 
+# Number of parallel workers for linkcheck (default is 5)
+# Higher values work well for network I/O-bound tasks
+linkcheck_workers = 20
+
 
 # ==============================================================================
 # Manpages auto-linking
