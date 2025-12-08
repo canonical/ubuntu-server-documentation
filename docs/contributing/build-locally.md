@@ -4,7 +4,7 @@
 To contribute to the Ubuntu Server documentation you will first need to create
 your own fork of the repository, then clone that fork to your machine. If
 you're not sure what this means or need some help getting started, check out
-the [working with git](https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/) guide from the Open Documentation Academy which will
+the [working with git](https://documentation.academy/docs/howto/get-started/using_git/) guide from the Open Documentation Academy which will
 walk you through the process and explain this terminology. Just remember to
 change all instances of `open-documentation-academy` in the commands to
 `ubuntu-server-documentation`!
