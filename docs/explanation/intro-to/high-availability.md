@@ -139,7 +139,7 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
   The `lvmlockd` benefits over `clvm` are:
 
   * `lvmlockd` supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
-  * `lvmlockd` has better design than `clvmd`. `clvmd` is a command-line level based locking system, which means the whole LVM software will lock up if any LVM command gets a dead-locking issue.
+  * `lvmlockd` has better design than `clvmd`. `clvmd` is a command-line level based locking system, which means the whole LVM software will freeze if any LVM command gets a dead-locking issue.
   * `lvmlockd` can work with `lvmetad`.
 
 ```{note}
