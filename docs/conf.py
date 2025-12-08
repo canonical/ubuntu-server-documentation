@@ -213,14 +213,17 @@ rediraffe_redirects = "redirects.txt"
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
     "https://manpages.ubuntu.com",
+    # Rate-limited domains that cause delays
+    r"http://www\.gnu\.org/software/.*",
+    r"https://github\.com/.*/blob/.*",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
 linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*"]
 
 # Give linkcheck multiple tries on failure
-linkcheck_timeout = 30
-linkcheck_retries = 3
+linkcheck_timeout = 15
+linkcheck_retries = 2
 
 
 # ==============================================================================
