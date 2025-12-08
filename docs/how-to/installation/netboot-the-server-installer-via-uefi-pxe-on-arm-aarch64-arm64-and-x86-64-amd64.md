@@ -51,7 +51,7 @@ In the following sections, we will use an arm64 image as an example. This means 
 
 Replace the corresponding files if you want to work on an amd64 image. For example, your files may be:
 
-- Ubuntu 20.04.5 live server image [ubuntu-20.04.5-live-server-amd64.iso](https://releases.ubuntu.com/20.04.5/ubuntu-20.04.5-live-server-amd64.iso)
+- Ubuntu 20.04.5 live server image [ubuntu-20.04.5-live-server-amd64.iso](https://old-releases.ubuntu.com/releases/20.04.5/ubuntu-20.04.5-live-server-amd64.iso)
 - GRUB EFI binary [grubnetx64.efi.signed](http://archive.ubuntu.com/ubuntu/dists/focal/main/uefi/grub2-amd64/current/grubnetx64.efi.signed)
 - `initrd` extracted from `ubuntu-20.04.5-live-server-amd64.iso`
 - `vmlinuz` extracted from `ubuntu-20.04.5-live-server-amd64.iso`

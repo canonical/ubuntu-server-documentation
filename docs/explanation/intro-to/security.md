@@ -37,7 +37,7 @@ interest to enterprise users, the enhanced security coverage is great for
 anyone using Ubuntu.
 
 All of the Ubuntu Pro features can be managed on the command line via the
-[Ubuntu Pro Client](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/)
+[Ubuntu Pro Client](https://documentation.ubuntu.com/pro-client/en/latest/)
 utility, which has an API that provides easier automation to users.
 
 ### Vulnerability management

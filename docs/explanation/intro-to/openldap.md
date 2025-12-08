@@ -9,7 +9,7 @@ OpenLDAP contains some terminology and concepts that new users may want to famil
 Thanks to its high configurability and flexibility, OpenLDAP can be tailored to suit various needs and is a pertinent choice for those with specific requirements.
 
 LDAP is a protocol for querying and modifying an X.500-based directory service running over TCP/IP.
-The current LDAP version is LDAPv3, as defined in [RFC 4510](http://tools.ietf.org/html/rfc4510).
+The current LDAP version is LDAPv3, as defined in [RFC 4510](https://datatracker.ietf.org/doc/html/rfc4510).
 
 The LDAP protocol *accesses* directories. It's common to refer to a directory as an *LDAP directory* or *LDAP database* as a shorthand -- although technically incorrect, this shorthand is so widely used
 that it's understood as such. 
@@ -73,8 +73,8 @@ For users who want to set up OpenLDAP, we recommend following our series of guid
 ## References
 
 - The [OpenLDAP administrators guide](https://openldap.org/doc/admin25/)
-- [RFC 4515: LDAP string representation of search filters](http://www.rfc-editor.org/rfc/rfc4515.txt)
-- {spellexception}`Zytrax's` [LDAP for Rocket Scientists](http://www.zytrax.com/books/ldap/); a less pedantic but comprehensive treatment of LDAP
+- [RFC 4515: LDAP string representation of search filters](https://www.rfc-editor.org/rfc/rfc4515.txt)
+- {spellexception}`Zytrax's` [LDAP for Rocket Scientists](https://www.zytrax.com/books/ldap/); a less pedantic but comprehensive treatment of LDAP
 Older references that might still be useful:
-- {spellexception}`O'Reilly's` [LDAP System Administration](http://www.oreilly.com/catalog/ldapsa/) (textbook; 2003)
+- {spellexception}`O'Reilly's` [LDAP System Administration](https://www.oreilly.com/library/view/ldap-system-administration/1565924916/) (textbook; 2003)
 - {spellexception}`Packt's` [Mastering OpenLDAP](http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book) (textbook; 2007)

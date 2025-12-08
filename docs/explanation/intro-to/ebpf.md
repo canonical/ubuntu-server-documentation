@@ -328,7 +328,7 @@ software engineers.
 ## References
 
 * [Introduction to eBPF video, given at the Ubuntu summit
-  2024](https://www.youtube.com/live/byPpJW5l6pg?t=30314s), eventually
+  2024](https://consent.youtube.com/m?continue=https%3A%2F%2Fwww.youtube.com%2Flive%2FbyPpJW5l6pg%3Ft%3D30314s%26cbrd%3D1&gl=GB&m=0&pc=yt&cm=2&hl=en-GB&src=1), eventually
   presenting an eBPF based framework for Kubernetes called Inspector Gadget.
 * For a deeper introduction into eBPF concepts consider reading [what is
   eBPF](https://ebpf.io/what-is-ebpf/) by the eBPF community.

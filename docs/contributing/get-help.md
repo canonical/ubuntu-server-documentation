@@ -30,7 +30,7 @@ can also "ping" them in that comment to send them a notification by using
 ## Community forums
 
 For more general questions about Ubuntu Server, you're welcome to
-[create a post](https://discourse.ubuntu.com/c/server/17) on the Ubuntu Server forum.
+[create a post](https://discourse.ubuntu.com/c/project/server/17) on the Ubuntu Server forum.
 
 You can also use the [Canonical Open Documentation Academy (CODA) forum](https://discourse.ubuntu.com/c/open-documentation-academy),
 which is the hub for questions about documentation specifically. It includes
@@ -43,6 +43,6 @@ For more interactive chat, the documentation team [can be found on Matrix](https
 
 ## Calendar
 
-Subscribe to the [Documentation event calendar](https://calendar.google.com/calendar/u/0?cid=Y19mYTY4YzE5YWEwY2Y4YWE1ZWNkNzMyNjZmNmM0ZDllOTRhNTIwNTNjODc1ZjM2ZmQ3Y2MwNTQ0MzliOTIzZjMzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20). Not only does this include
+Subscribe to the [Documentation event calendar](https://workspace.google.com/intl/en-US/products/calendar/). Not only does this include
 the Documentation office hours, it will also include any other discussion or
 training events we organize.

@@ -12,7 +12,7 @@ These systems must all be configured correctly to successfully deliver a message
 
 ## Mail User Agent
 
-[Thunderbird](https://www.thunderbird.net/) is the default Mail User Agent (email client) used by Ubuntu. It comes pre-installed on all Ubuntu machines from Ubuntu 16.04 LTS (Xenial) onward.
+[Thunderbird](https://www.thunderbird.net:443/en-US/) is the default Mail User Agent (email client) used by Ubuntu. It comes pre-installed on all Ubuntu machines from Ubuntu 16.04 LTS (Xenial) onward.
 
 If you need to install Thunderbird manually, [this short guide](https://snapcraft.io/install/thunderbird/ubuntu) will walk you through the steps. 
 
@@ -35,7 +35,7 @@ Install Exim4 <mail-services/install-exim4>
     
 ## Mail Delivery Agent
 
-[Dovecot](https://www.dovecot.org/) is an MDA written with security primarily in mind. It supports the [mbox](https://en.wikipedia.org/wiki/Mbox) and [Maildir](https://en.wikipedia.org/wiki/Maildir) mailbox formats. 
+[Dovecot](https://dovecot.org/) is an MDA written with security primarily in mind. It supports the [mbox](https://en.wikipedia.org/wiki/Mbox) and [Maildir](https://en.wikipedia.org/wiki/Maildir) mailbox formats. 
   
 * {ref}`Install Dovecot <install-dovecot>` explains how to set up Dovecot as an IMAP or POP3 server
 

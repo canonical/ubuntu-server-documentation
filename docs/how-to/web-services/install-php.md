@@ -78,7 +78,7 @@ You can save the content in a file -- `phpinfo.php` for example -- and place it 
 
 ## Further reading
 
-- For more in depth information see [the php.net documentation](http://www.php.net/docs.php).
+- For more in depth information see [the php.net documentation](https://www.php.net/docs.php).
 
 - There are a plethora of books on PHP 7 and PHP 8. A good book from O'Reilly is "Learning PHP", which includes an exploration of PHP 7's enhancements to the language.
 

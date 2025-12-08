@@ -361,7 +361,7 @@ Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., p
 Instead, to achieve this functionality with the `networkd` renderer, users can use {manpage}`networkd-dispatcher(8)`. The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
 ```{note}
-If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://networkmanager.dev/docs/api/latest/) instead.
 ```
 
 The [Netplan FAQ has a great table](https://netplan.io/faq/) that compares event timings between `ifupdown`/`systemd-networkd`/`network-manager`.

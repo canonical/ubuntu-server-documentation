@@ -60,6 +60,6 @@ Ubuntu makes two DHCP servers available:
 
 - For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
-- [ISC `dhcp-server`](https://www.isc.org/software/dhcp)
+- [ISC `dhcp-server`](https://www.isc.org/dhcp/)
 
 - [ISC Kea Documentation](https://kb.isc.org/docs/kea-administrator-reference-manual)

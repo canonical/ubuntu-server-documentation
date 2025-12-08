@@ -1,7 +1,7 @@
 (member-server-in-an-ad-domain)=
 # Member server in an Active Directory domain
 
-A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from [Network User Authentication with SSSD](https://discourse.ubuntu.com/t/service-sssd/11579), where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
+A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from [Network User Authentication with SSSD](https://discourse.ubuntu.com/t/introduction-to-network-user-authentication-with-sssd/11579), where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
 
 For Samba to authenticate these users via Server Message Block (SMB) authentication protocols, we need both for the remote users to be "seen", and for Samba itself to be aware of the domain. In this scenario, Samba is called a Member Server or Domain Member.
 
@@ -91,7 +91,7 @@ This command also installed the `libpam-winbind` package, **which allows AD user
 If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
 ```
 
-Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/realmd/+bug/1980246) is fixed, one extra step is needed:
+Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/1980246) is fixed, one extra step is needed:
 - Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
 
   ```text 

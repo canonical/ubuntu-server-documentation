@@ -7,7 +7,7 @@ This section describes the use of SSSD to authenticate user logins against an Ac
 
 SSSD manages user authentication and sets initial security policies.
 
-{term}`ADSys` serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://canonical-adsys.readthedocs-hosted.com/en/stable/).
+{term}`ADSys` serves as a Group Policy client for Ubuntu, streamlining the configuration of Ubuntu systems within a Microsoft Active Directory environment. If you are interested in Group Policies support for Ubuntu, detailed information can be found in the [ADSys documentation](https://documentation.ubuntu.com/adsys/stable/).
 
 ## Prerequisites and assumptions
 
@@ -299,4 +299,4 @@ This is being tracked in [bug #1934997](https://bugs.launchpad.net/ubuntu/+sourc
 
 - [GitHub SSSD Project](https://github.com/SSSD/sssd)
 
-- [Active Directory DNS Zone Entries](https://technet.microsoft.com/en-us/library/cc759550%28v=ws.10%29.aspx)
+- [Active Directory DNS Zone Entries](https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2003/cc759550(v=ws.10)?redirectedfrom=MSDN)

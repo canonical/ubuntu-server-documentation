@@ -4,7 +4,7 @@
 
 When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD). This information is obtained and displayed using a couple of packages:
 
-  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](http://landscape.canonical.com/) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
+  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://landscape.canonical.com/) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
     
     ``` 
     
@@ -66,4 +66,4 @@ You should now be greeted with some useful information, and some information abo
 
   - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
 
-  - The Debian Package of the Day [weather](http://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weather utility.
+  - The Debian Package of the Day [weather](https://debaday.debian.net/2007/10/04/weather-check-weather-conditions-and-forecasts-on-the-command-line/) article has more details about using the weather utility.

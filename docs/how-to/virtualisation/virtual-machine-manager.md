@@ -163,4 +163,4 @@ Please be aware that this is a full clone, therefore any secrets, keys, and for 
 
 - For more information on libvirt see the [libvirt home page](http://libvirt.org/)
 
-- The [Virtual Machine Manager](http://virt-manager.org/) site has more information on `virt-manager` development.
+- The [Virtual Machine Manager](https://virt-manager.org/) site has more information on `virt-manager` development.

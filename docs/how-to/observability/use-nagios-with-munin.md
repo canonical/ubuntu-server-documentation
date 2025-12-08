@@ -265,7 +265,7 @@ Be sure to install the package on both the server and node machines.
 
 ## Further reading
 
-- See the [Munin](http://munin-monitoring.org/) and [Nagios](https://www.nagios.org/) websites for more details on these packages.
+- See the [Munin](https://munin-monitoring.org/) and [Nagios](https://www.nagios.org/) websites for more details on these packages.
 - The [Munin Documentation](https://munin.readthedocs.io/en/latest/) page includes information on additional plugins, writing plugins, etc.
 - The [Nagios Online Documentation](https://www.nagios.org/documentation/) site.
 - There is also a [list of books](https://www.nagios.org/propaganda/books/) related to Nagios and network monitoring.
