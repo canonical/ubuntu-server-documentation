@@ -1,0 +1,153 @@
+name: Update Redirecting Links
+
+on:
+  schedule:
+    # Run every Monday at 9:00 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch:  # Allow manual triggering
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-links:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y make python3-pip python3-venv
+          make install
+      
+      - name: Create branch for updates
+        run: |
+          DATE=$(date +%Y-%m-%d)
+          BRANCH="automated/update-redirecting-links-${DATE}"
+          echo "BRANCH_NAME=${BRANCH}" >> $GITHUB_ENV
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "${BRANCH}"
+      
+      - name: Run redirect link updater
+        id: update_links
+        run: |
+          python3 update_redirecting_links.py
+          
+          # Check if any files were changed
+          if git diff --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+            echo "No redirecting links to update"
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+            
+            # Count changes
+            CHANGED_FILES=$(git diff --name-only | wc -l)
+            echo "changed_files=${CHANGED_FILES}" >> $GITHUB_OUTPUT
+            
+            # Get summary from report
+            if [ -f redirect_update_report.txt ]; then
+              echo "Report generated successfully"
+            fi
+          fi
+      
+      - name: Commit changes
+        if: steps.update_links.outputs.has_changes == 'true'
+        run: |
+          git add docs/
+          git add redirect_update_report.txt redirect_update_report.json
+          git commit -m "chore: Update redirecting links
+
+Automated update of redirecting links found by linkcheck.
+
+- Updated ${{ steps.update_links.outputs.changed_files }} file(s)
+- See redirect_update_report.txt for detailed changes"
+      
+      - name: Push branch
+        if: steps.update_links.outputs.has_changes == 'true'
+        run: |
+          git push origin "${BRANCH_NAME}"
+      
+      - name: Create Pull Request
+        if: steps.update_links.outputs.has_changes == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ env.BRANCH_NAME }}
+          title: "chore: Update redirecting links (automated)"
+          body: |
+            ## Automated Link Update
+            
+            This PR was automatically generated to update redirecting links found by the linkcheck tool.
+            
+            ### Summary
+            
+            - **Changed files**: ${{ steps.update_links.outputs.changed_files }}
+            - **Date**: ${{ github.event.repository.updated_at }}
+            
+            ### What changed?
+            
+            The script identified links that redirect to other URLs and updated them to point directly to the final destination. This improves:
+            - Documentation accuracy
+            - Page load times (fewer redirects)
+            - Link reliability
+            
+            ### Reports
+            
+            Detailed reports are included in this PR:
+            - `redirect_update_report.txt` - Human-readable summary
+            - `redirect_update_report.json` - Machine-readable data
+            
+            ### Review checklist
+            
+            - [ ] Review the changes to ensure redirects are appropriate
+            - [ ] Check that no broken links were introduced
+            - [ ] Verify the redirect targets are correct and stable
+            - [ ] Confirm reports look reasonable
+            
+            ### Testing
+            
+            You can run `make linkcheck` locally to verify the improvements.
+            
+            ---
+            
+            🤖 This PR was created automatically by the [Update Redirecting Links workflow](${{ github.server_url }}/${{ github.repository }}/actions/workflows/update-redirecting-links.yml).
+          labels: |
+            automated
+            documentation
+            maintenance
+          draft: false
+      
+      - name: Comment on PR with report
+        if: steps.update_links.outputs.has_changes == 'true'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          issue-number: ${{ steps.create_pr.outputs.pull-request-number }}
+          body: |
+            ## Detailed Report
+            
+            <details>
+            <summary>Click to expand the redirect update report</summary>
+            
+            ```
+            $(cat redirect_update_report.txt || echo "Report not found")
+            ```
+            
+            </details>
+      
+      - name: No changes summary
+        if: steps.update_links.outputs.has_changes == 'false'
+        run: |
+          echo "✅ No redirecting links found that need updating!"
+          echo "The documentation is up to date."

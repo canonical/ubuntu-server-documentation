@@ -30,3 +30,20 @@ with any page.
 You can [build this documentation locally](https://documentation.ubuntu.com/server/contributing/build-locally), or you can
 access [the PDF version](https://documentation.ubuntu.com/server/) of this
 documentation from Read the Docs.
+
+## Automated maintenance
+
+This repository includes automated workflows to maintain documentation quality:
+
+### Update Redirecting Links
+
+A weekly GitHub Action automatically updates links that redirect to new URLs. The
+[`update_redirecting_links.py`](update_redirecting_links.py) script:
+
+- Runs every Monday at 9:00 AM UTC
+- Identifies links that redirect to other URLs
+- Updates them to point directly to the final destination
+- Creates a PR for human review before merging
+
+See [UPDATE_REDIRECTING_LINKS.md](UPDATE_REDIRECTING_LINKS.md) for details on how
+this works and how to run it manually.
