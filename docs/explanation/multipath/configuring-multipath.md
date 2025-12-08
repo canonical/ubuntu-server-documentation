@@ -30,7 +30,7 @@ The following keywords are recognized:
 
 * **`blacklist`**: Defines which devices should be excluded from the multipath topology discovery.
 
-* **`blacklist_exceptions`**: Defines which devices should be included in the multipath topology discovery, despite being listed in the blacklist section.
+* **`blacklist_exceptions`**: Defines which devices should be included in the multipath topology discovery, despite being listed in the blocklist section.
 
 * **`multipaths`**: Defines the multipath topologies. They are indexed by a World Wide Identifier (WWID). Attributes set in this section take precedence **over all others**.
 
@@ -120,13 +120,13 @@ All the multipath attributes that can be set in the `defaults` section of the `m
 Previously, the `multipath-tools` project provided a complete configuration file with all the most commonly used options for each of the most-used storage devices. Currently, you can see all those default options by running `sudo multipath -t`. This will dump a used configuration file including all the embedded default options.
 ```
 
-## Configuration file blacklist and exceptions
+## Configuration file blocklist and exceptions
 
-The blacklist section is used to exclude specific devices from the multipath topology. It is most commonly used to exclude local disks, non-multipathed devices, or non-disk devices.
+The blocklist section is used to exclude specific devices from the multipath topology. It is most commonly used to exclude local disks, non-multipathed devices, or non-disk devices.
 
 ### By `devnode`
 
-The default blacklist consists of the regular expressions `"^(ram|zram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]"` and `"^(td|hd|vd)[a-z]"`. This causes virtual devices, non-disk devices, and some other device types to be excluded from multipath handling by default.
+The default blocklist consists of the regular expressions `"^(ram|zram|raw|loop|fd|md|dm-|sr|scd|st|dcssblk)[0-9]"` and `"^(td|hd|vd)[a-z]"`. This causes virtual devices, non-disk devices, and some other device types to be excluded from multipath handling by default.
 
 ```text
 blacklist {
@@ -153,9 +153,9 @@ device {
 
 ### By property
 
-Regular expression for a `udev` property. All devices that have matching `udev` properties will be excluded/included. The handling of the property keyword is special, because devices must have at least one whitelisted `udev` property; otherwise they're treated as blacklisted, and the message "blacklisted, `udev` property missing" is displayed in the logs.
+Regular expression for a `udev` property. All devices that have matching `udev` properties will be excluded/included. The handling of the property keyword is special, because devices must have at least one allowlisted `udev` property; otherwise they're treated as blocklisted, and the message "{spellexception}`blacklisted`, `udev` property missing" is displayed in the logs.
 
-### Blacklist by protocol
+### Blocklist by protocol
 
 The protocol strings that multipath recognizes are `scsi:fcp`, `scsi:spi`, `scsi:ssa`, `scsi:sbp`, `scsi:srp`, `scsi:iscsi`, `scsi:sas`, `scsi:adt`, `scsi:ata`, `scsi:unspec`, `ccw`, `cciss`, `nvme`, and `undef`. The protocol that a path is using can be viewed by running: 
    
@@ -163,9 +163,9 @@ The protocol strings that multipath recognizes are `scsi:fcp`, `scsi:spi`, `scsi
 multipathd show paths format "%d %P"
 ```
 
-### Blacklist exceptions
+### Blocklist exceptions
 
-The `blacklist_exceptions` section is used to revert the actions of the blacklist section. This allows one to selectively include ("whitelist") devices which would normally be excluded via the blacklist section.
+The `blacklist_exceptions` section is used to revert the actions of the blocklist section. This allows one to selectively include ("{spellexception}`whitelist`") devices which would normally be excluded via the blocklist section.
 
 ```text
 blacklist_exceptions {
@@ -174,7 +174,7 @@ blacklist_exceptions {
 ```
 
 ```{note}
-A common use is to blacklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
+A common use is to blocklist "everything" using a catch-all regular expression, and create specific `blacklist_exceptions` entries for those devices that should be handled by `multipath-tools`.
 ```
 
 ## Configuration file multipath section
@@ -185,7 +185,7 @@ The only recognized attribute for the multipaths section is the multipath subsec
 
 The multipath subsection recognizes the following attributes:
 
- * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blacklist section, this is not a regular expression or a sub-string; WWIDs must match exactly inside the multipaths section.
+ * `wwid`: (Mandatory) World Wide Identifier. Detected multipath maps are matched against this attribute. Note that, unlike the `wwid` attribute in the blocklist section, this is not a regular expression or a sub-string; WWIDs must match exactly inside the multipaths section.
 
  * `alias`: Symbolic name for the multipath map. This takes precedence over an entry for the same WWID in the `bindings_file`.
 
@@ -253,7 +253,7 @@ The device subsection recognizes the following attributes:
 1. **`vendor`**: (Mandatory) Regular expression to match the vendor name.
 1. **`product`**: (Mandatory) Regular expression to match the product name.
 1. **`revision`**: Regular expression to match the product revision.
-1. **`product_blacklist`**: Products with the given vendor matching this string are blacklisted.
+1. **`product_blacklist`**: Products with the given vendor matching this string are blocklisted.
 1. **`alias_prefix`**: The `user_friendly_names` prefix to use for this device type, instead of the default `mpath`.
 1. **`hardware_handler`**: The hardware handler to use for this device type. The following hardware handlers are implemented (all of these are hardware-dependent):
    * **`1 emc`**: Hardware handler for {term}`DGC` class arrays as CLARiiON CX/AX and EMC VNX and Unity families.
