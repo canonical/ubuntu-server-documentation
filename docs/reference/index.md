@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete reference documentation for Ubuntu Server, including glossary, system requirements, and technical specifications."
+---
+
 (reference)=
 # Ubuntu Server reference
 

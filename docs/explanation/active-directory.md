@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding Active Directory integration with Ubuntu Server including domain joining, authentication methods, and identity mapping.
+---
+
 (explanation-active-directory-integration)=
 # Active Directory integration
 

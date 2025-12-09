@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand the RID IDMap backend for algorithmic UID/GID mapping based on Windows Relative Identifiers in Active Directory."
+---
+
 (the-rid-idmap-backend)=
 # The RID IDMap backend
 

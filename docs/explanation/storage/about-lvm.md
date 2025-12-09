@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Logical Volume Management (LVM) on Ubuntu Server for flexible disk storage management and dynamic volume resizing."
+---
+
 (about-lvm)=
 # About Logical Volume Management (LVM)
 

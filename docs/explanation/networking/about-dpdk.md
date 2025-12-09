@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand the Data Plane Development Kit (DPDK), a framework for fast packet processing in user space on Ubuntu Server."
+---
+
 (about-dpdk)=
 # About DPDK
 

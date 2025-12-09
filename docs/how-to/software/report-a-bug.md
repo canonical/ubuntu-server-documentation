@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Report bugs in Ubuntu Server using apport-cli to file detailed bug reports on Launchpad with system information.
+---
+
 (report-a-bug)=
 # How to report a bug in Ubuntu Server
 

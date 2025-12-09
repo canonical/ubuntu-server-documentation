@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to SSSD (System Security Services Daemon) for centralized authentication and identity management from network sources.
+---
+
 (introduction-to-network-user-authentication-with-sssd)=
 # Introduction to network user authentication with SSSD
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Bacula cross-platform backup management system for network-wide backup, restore, and verification operations.
+---
+
 (install-bacula)=
 # How to install and configure Bacula
 

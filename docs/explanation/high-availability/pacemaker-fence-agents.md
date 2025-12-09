@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Pacemaker fence agents for managing node fencing in high-availability clusters on Ubuntu Server."
+---
+
 (pacemaker-fence-agents)=
 # Pacemaker fence agents
 

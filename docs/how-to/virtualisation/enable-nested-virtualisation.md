@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Enable nested virtualisation on Ubuntu x86 systems using kvm_intel or kvm_amd kernel modules to run VMs inside VMs.
+---
+
 (enable-nested-virtualisation)=
 # How to enable nested virtualisation
 

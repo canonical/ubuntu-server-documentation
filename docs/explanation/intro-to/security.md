@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to security best practices on Ubuntu Server including firewalls, AppArmor, authentication, and system hardening fundamentals.
+---
+
 (introduction-to-security)=
 # Introduction to security
 

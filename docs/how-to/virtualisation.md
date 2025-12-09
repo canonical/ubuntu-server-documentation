@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Create and manage virtual machines on Ubuntu Server using Multipass, UVtool, QEMU, libvirt, and virt-manager with these comprehensive guides.
+---
+
 (how-to-virtualisation)=
 # Virtualisation
 

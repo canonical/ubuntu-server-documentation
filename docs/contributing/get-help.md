@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Find support and guidance for contributing to Ubuntu Server documentation, including community resources and help channels."
+---
+
 (get-help)=
 # Getting help
 

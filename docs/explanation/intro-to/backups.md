@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to backup strategies and tools for Ubuntu Server including Bacula, rsnapshot, shell scripts, and version control systems.
+---
+
 (introduction-to-backups)=
 # Introduction to backups
 

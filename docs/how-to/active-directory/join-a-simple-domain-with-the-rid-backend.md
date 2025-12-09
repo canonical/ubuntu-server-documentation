@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Complete configuration to join a single Active Directory domain using winbind with RID backend for deterministic UID/GID mapping.
+---
+
 (join-a-simple-domain-with-the-rid-backend)=
 # Join a simple domain with the rid backend
 

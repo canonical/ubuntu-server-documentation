@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage local and remote virtual machines using virt-manager GUI with tools like virt-install, virt-clone, and virt-viewer on Ubuntu.
+---
+
 (virtual-machine-manager)=
 # Virtual Machine Manager
 

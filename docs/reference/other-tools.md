@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for additional Ubuntu Server tools including sudo-rs, Byobu, and system utilities."
+---
+
 (reference-other-tools)=
 # Other tools
 

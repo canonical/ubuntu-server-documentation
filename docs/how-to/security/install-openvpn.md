@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up OpenVPN server on Ubuntu with PKI authentication to create secure SSL/TLS VPN connections for remote access.
+---
+
 (install-openvpn)=
 # How to install and use OpenVPN
 

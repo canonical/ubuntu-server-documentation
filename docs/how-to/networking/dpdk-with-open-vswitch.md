@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Open vSwitch with DPDK support on Ubuntu for high-performance networking with libvirt and qemu-kvm integration.
+---
+
 (dpdk-with-open-vswitch)=
 # How to use Open vSwitch with DPDK
 

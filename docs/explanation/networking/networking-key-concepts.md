@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand essential networking concepts including TCP/IP, routing, DNS, and other fundamental protocols for Ubuntu Server networking."
+---
+
 (networking-key-concepts)=
 # Networking key concepts
 

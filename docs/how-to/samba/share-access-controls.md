@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Samba share access controls by managing user authentication, permissions, and security options for shared directories.
+---
+
 (share-access-controls)=
 # Share access controls
 

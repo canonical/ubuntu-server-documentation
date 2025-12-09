@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage software on Ubuntu Server with guides for package management, APT, automatic updates, release upgrades, and troubleshooting.
+---
+
 (how-to-managing-software)=
 # Managing software
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand security best practices and recommendations for hardening and protecting Ubuntu Server deployments."
+---
+
 (security-suggestions)=
 # Security suggestions
 

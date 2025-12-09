@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how apt upgrade and phased updates work on Ubuntu Server, including rollout strategies and update management."
+---
+
 (about-apt-upgrade-and-phased-updates)=
 # About apt upgrade and phased updates
 

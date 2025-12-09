@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about common multipath storage tasks and procedures for managing redundant storage paths on Ubuntu Server."
+---
+
 (common-multipath-tasks-and-procedures)=
 # Common tasks and procedures
 

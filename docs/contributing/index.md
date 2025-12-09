@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to contribute to Ubuntu Server documentation, including guidelines for writing, submitting, and reviewing content."
+---
+
 (contribute)=
 # Contribute to this documentation
 

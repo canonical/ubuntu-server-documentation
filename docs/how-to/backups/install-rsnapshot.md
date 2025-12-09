@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure rsnapshot for incremental, scheduled backups of local and remote filesystems using rsync with hard links.
+---
+
 (install-rsnapshot)=
 # How to install and configure rsnapshot
 

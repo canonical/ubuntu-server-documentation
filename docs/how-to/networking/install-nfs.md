@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up NFS on Ubuntu to share directories and files over a network, enabling remote access to data and reducing local disk space needs.
+---
+
 (install-nfs)=
 # Network File System (NFS)
 

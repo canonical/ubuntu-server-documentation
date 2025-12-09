@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding package management in Ubuntu Server including APT, third-party repositories, and software update best practices.
+---
+
 (explanation-managing-software)=
 # Managing software
 

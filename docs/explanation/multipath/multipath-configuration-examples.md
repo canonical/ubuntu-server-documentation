@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore practical multipath configuration examples for different storage scenarios on Ubuntu Server."
+---
+
 (multipath-configuration-examples)=
 # Multipath configuration examples
 

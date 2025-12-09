@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Network Security Services (NSS) cryptographic library configuration and usage on Ubuntu Server."
+---
+
 (network-security-services-nss)=
 # Network Security Services (NSS)
 

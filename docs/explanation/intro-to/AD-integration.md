@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to integrating Ubuntu Server with Microsoft Active Directory domains including authentication methods and identity mapping options.
+---
+
 (introduction-to-active-directory-integration)=
 # Introduction to Active Directory integration
 

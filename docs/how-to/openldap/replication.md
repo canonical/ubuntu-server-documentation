@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up OpenLDAP replication using syncrepl for high availability with standard or delta replication in consumer-provider model.
+---
+
 (ldap-replication)=
 # OpenLDAP replication
 

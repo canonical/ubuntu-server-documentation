@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure OpenLDAP server with slapd daemon, set up database suffix, and manage hierarchical directory data on Ubuntu.
+---
+
 (install-openldap)=
 # Install and configure LDAP
 

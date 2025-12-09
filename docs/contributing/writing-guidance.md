@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Follow style guidelines and writing best practices for contributing high-quality Ubuntu Server documentation."
+---
+
 (writing-guidance)=
 # Guidance for writing
 

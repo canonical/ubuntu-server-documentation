@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Technical system requirements for installing Ubuntu Server, including hardware specifications and minimum resource needs."
+---
+
 (system-requirements)=
 # System requirements
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about TuneD for automatic system tuning and performance optimization using profiles on Ubuntu Server."
+---
+
 (perf-tune-tuned)=
 # TuneD
 

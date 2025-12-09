@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand hwloc (Hardware Locality) for discovering and managing hardware topology on Ubuntu Server for performance optimization."
+---
+
 (perf-tune-hwloc)=
 # hwloc
 

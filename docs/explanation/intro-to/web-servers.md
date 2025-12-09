@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to web servers on Ubuntu including Apache2, nginx, and proxy servers for hosting websites and web applications.
+---
+
 (introduction-to-web-servers)=
 # Introduction to web servers
 

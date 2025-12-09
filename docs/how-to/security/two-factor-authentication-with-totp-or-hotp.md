@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Implement TOTP/HOTP two-factor authentication on Ubuntu Server using time-based or HMAC-based one-time passwords with public keys.
+---
+
 (two-factor-authentication-with-totp-or-hotp)=
 # Two factor authentication with TOTP/HOTP
 

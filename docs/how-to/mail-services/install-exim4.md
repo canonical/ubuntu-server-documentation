@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Exim4 mail transfer agent using the interactive dpkg-reconfigure wizard for email server setup on Ubuntu.
+---
+
 (install-exim4)=
 # Install and configure Exim4
 

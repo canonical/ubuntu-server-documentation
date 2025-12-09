@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about QEMU microvm, a lightweight virtualization option optimized for fast boot times and minimal resource usage on Ubuntu Server."
+---
+
 (qemu-microvm)=
 # QEMU microvm
 

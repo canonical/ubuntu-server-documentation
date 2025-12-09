@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Logwatch to monitor server logs and automatically email reports about flagged items of interest on Ubuntu.
+---
+
 (install-logwatch)=
 # How to install and configure Logwatch
 

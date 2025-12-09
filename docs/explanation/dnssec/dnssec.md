@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about DNS Security Extensions (DNSSEC) for securing DNS queries and protecting against DNS spoofing on Ubuntu Server."
+---
+
 (dnssec)=
 # DNS Security Extensions (DNSSEC)
 

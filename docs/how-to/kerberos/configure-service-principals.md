@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Step-by-step guide to creating and configuring Kerberos service principals and keytabs for services running on your network.
+---
+
 (configure-service-principals)=
 # How to configure Kerberos service principals
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure vsftpd FTP server on Ubuntu with anonymous and authenticated access modes for file transfer over TCP protocol.
+---
+
 (ftp)=
 # Set up an FTP server
 

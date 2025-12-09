@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for sudo-rs, a memory-safe Rust implementation of the sudo command on Ubuntu Server."
+---
+
 (sudo-rs)=
 # sudo-rs
 

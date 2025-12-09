@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage Ubuntu Server users securely using sudo and sudo-rs for privilege escalation without requiring the root account password.
+---
+
 (user-management)=
 # User management
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage data and storage on Ubuntu Server with guides for OpenLDAP, databases, logical volumes, and backup solutions.
+---
+
 (how-to-data-and-storage)=
 # Data and storage
 

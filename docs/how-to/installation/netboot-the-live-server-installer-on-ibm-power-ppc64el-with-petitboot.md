@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Network boot Ubuntu Server installer on IBM Power (ppc64el) using Petitboot with ipmitool for remote PXE-style installation.
+---
+
 (netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot)=
 # Netboot the live server installer on IBM Power (ppc64el) with Petitboot
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to find and use Ubuntu cloud images for AWS, Azure, Google Cloud, and other cloud platforms."
+---
+
 (cloud-images)=
 # Cloud images
 

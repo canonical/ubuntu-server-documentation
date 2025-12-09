@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure GPU virtualization with QEMU/KVM including graphics frontends, backends, 3D acceleration, and advanced passthrough options.
+---
+
 (gpu-virtualization-with-qemu-kvm)=
 # GPU virtualisation with QEMU/KVM
 

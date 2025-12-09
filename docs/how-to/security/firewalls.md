@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Ubuntu Server firewalls using ufw (Uncomplicated Firewall) to manage iptables rules and control network traffic.
+---
+
 (firewalls)=
 # Firewall
 

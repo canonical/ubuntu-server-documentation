@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Energy Performance Preference (EPP) settings for optimizing power consumption and performance on Ubuntu Server."
+---
+
 (perf-epp)=
 
 # Energy Performance Preference

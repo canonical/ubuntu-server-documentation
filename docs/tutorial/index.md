@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Getting started with Ubuntu Server - learn how to install and configure your first Ubuntu Server system with step-by-step tutorials.
+---
+
 (tutorial)=
 # Ubuntu Server tutorial
 

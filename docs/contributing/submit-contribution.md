@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Step-by-step guide for submitting your Ubuntu Server documentation contributions through pull requests."
+---
+
 (submit-work)=
 # Submitting your work
 

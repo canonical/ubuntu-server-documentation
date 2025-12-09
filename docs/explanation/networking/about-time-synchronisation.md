@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand time synchronisation protocols and services, including NTP and chrony, for maintaining accurate system time on Ubuntu Server."
+---
+
 (about-time-synchronisation)=
 # About time synchronisation
 

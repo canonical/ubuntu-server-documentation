@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand debug symbol packages on Ubuntu Server for debugging applications with detailed symbol information."
+---
+
 (debug-symbol-packages)=
 # Debug symbol packages
 

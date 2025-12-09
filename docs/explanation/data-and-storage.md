@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding data management and storage in Ubuntu Server including OpenLDAP directory services, databases, and storage solutions.
+---
+
 (explanation-data-and-storage)=
 # Data and storage
 

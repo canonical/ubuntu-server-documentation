@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Postfix mail server on Ubuntu for SMTP email delivery without Virtual Domains or advanced configurations.
+---
+
 (install-postfix)=
 # Install and configure Postfix
 

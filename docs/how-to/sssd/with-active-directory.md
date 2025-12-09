@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure SSSD with Active Directory provider to authenticate AD users on Ubuntu systems with group membership and policy support.
+---
+
 (sssd-with-active-directory)=
 # How to set up SSSD with Active Directory
 

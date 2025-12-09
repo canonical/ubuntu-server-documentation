@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to Samba for file and print sharing between Ubuntu and Windows systems including SMB protocol and Active Directory integration.
+---
+
 (introduction-to-samba)=
 # Introduction to Samba
 

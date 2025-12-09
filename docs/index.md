@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Official Ubuntu Server documentation - comprehensive guides for installation, configuration, security, networking, databases, virtualization, and system administration.
+---
+
 # Ubuntu Server documentation
 
 ```{only} latex

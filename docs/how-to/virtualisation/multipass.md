@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and use Multipass to quickly create Ubuntu VMs with a single command on Linux, Windows, and macOS using snap packages.
+---
+
 (create-vms-with-multipass)=
 # How to create a VM with Multipass
 

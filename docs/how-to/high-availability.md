@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure high availability on Ubuntu Server with Distributed Replicated Block Device (DRBD) installation and setup guides.
+---
+
 (how-to-high-availability)=
 # High availability
 

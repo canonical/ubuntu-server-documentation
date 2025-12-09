@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about using third-party repositories on Ubuntu Server, including security considerations and best practices."
+---
+
 (third-party-repository-usage)=
 # Third party repository usage
 

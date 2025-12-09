@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure OpenLDAP access control lists (ACLs) to manage read, write, and authentication permissions for LDAP resources.
+---
+
 (ldap-access-control)=
 # Set up LDAP access control
 

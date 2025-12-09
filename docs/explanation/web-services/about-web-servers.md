@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand web server options for Ubuntu Server, including Apache, Nginx, and other HTTP server technologies."
+---
+
 (about-web-servers)=
 # About web servers
 

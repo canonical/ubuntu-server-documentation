@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure the Common UNIX Printing System (CUPS) on Ubuntu for managing print jobs, queues, and network printers.
+---
+
 (cups-print-server)=
 # Install and configure a CUPS print server
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to WireGuard VPN including concepts, architecture, peer-to-site, site-to-site configurations, and security features.
+---
+
 (introduction-to-wireguard-vpn)=
 # Introduction to WireGuard VPN
 

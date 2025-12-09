@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Legacy guide to configure Samba as Windows NT4-style Primary Domain Controller with centralized user and machine credentials.
+---
+
 (nt4-domain-controller-legacy)=
 # NT4 domain controller (legacy)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to Kerberos network authentication protocol including KDC, principals, realms, and ticket-based authentication concepts.
+---
+
 (introduction-to-kerberos)=
 # Introduction to Kerberos
 
