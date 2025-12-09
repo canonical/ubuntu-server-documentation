@@ -100,4 +100,4 @@ If you make this change, remember to change it back once you've solved your prob
 
 * [CUPS Website](http://www.cups.org/)
 
-* [Debian Open-iSCSI page](http://wiki.debian.org/SAN/iSCSI/open-iscsi)
+* [Debian Open-iSCSI page](https://wiki.debian.org/SAN/iSCSI/open-iscsi)

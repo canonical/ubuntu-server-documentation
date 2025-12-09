@@ -14,7 +14,7 @@ Some of the most notable benefits that NFS can provide are:
 ```{warning}
 If you use **NFS and authd** at the same time, you must add a Kerberos configuration on both the client and the server. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/en/stable/howto/use-with-nfs/).
+For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/stable-docs/howto/use-with-nfs/).
 ```
 
 ## Installation
@@ -101,7 +101,7 @@ When upgrading to Ubuntu 22.04 LTS ("jammy") from a release that still uses the 
  * a default `/etc/nfs.conf` configuration file will be installed
  * if the `/etc/default/nfs-*` files have been modified, a conversion script will be run and it will create `/etc/nfs.conf.d/local.conf` with the local modifications.
 
-If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please file a bug using this link: [https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug)
+If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please file a bug using this link: [https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug/+login](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug/+login)
 
 You can run the conversion tool manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
 
@@ -284,7 +284,7 @@ After you restart the service with `systemctl restart rpc-gssd.service`, the `ro
 
 ## References
 
-* [Linux NFS wiki](http://linux-nfs.org/wiki/)
+* [Linux NFS wiki](http://linux-nfs.org/wiki/index.php/Main_Page)
 * [Linux NFS FAQ](http://nfs.sourceforge.net/)
 
 * [Ubuntu Wiki NFS How-to](https://help.ubuntu.com/community/SettingUpNFSHowTo)

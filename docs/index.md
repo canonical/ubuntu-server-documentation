@@ -67,7 +67,7 @@ If you find any errors or have suggestions for improvements, please use the
 GitHub where you can share your comments or let us know about bugs with any
 page.
 
-* Read our [Code of Conduct](https://ubuntu.com/community/code-of-conduct)
+* Read our [Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/server/17)
 * [Chat to us on Matrix](https://matrix.to/#/#server:ubuntu.com)

@@ -492,6 +492,6 @@ This section covers some of the most common DNS record types.
 
 - [Upstream BIND9 Documentation](https://bind9.readthedocs.io/en/latest/)
 
-- [DNS and BIND](http://shop.oreilly.com/product/9780596100575.do) is a popular book now in its fifth edition. There is now also a [DNS and BIND on IPv6](http://shop.oreilly.com/product/0636920020158.do) book.
+- [DNS and BIND](https://www.oreilly.com/library/view/dns-and-bind/0596100574/) is a popular book now in its fifth edition. There is now also a [DNS and BIND on IPv6](https://www.oreilly.com/library/view/dns-and-bind/9781449308025/) book.
 
 - A great place to ask for BIND9 assistance, and get involved with the Ubuntu Server community, is the [#server Matrix channel](https://matrix.to/#/#server:ubuntu.com).

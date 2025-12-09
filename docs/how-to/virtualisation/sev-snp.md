@@ -7,7 +7,7 @@ While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 
 
 ## Host configuration
 
-AMD SEV-SNP is fully supported as of Ubuntu 25.04. To launch a VM with these features, enable memory encryption features and SNP in the firmware settings, and then assign Address-Space Identifiers (ASIDs) to SNP. For more details, refer to [AMD's documentation](https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/tuning-guides/58207-using-sev-with-amd-epyc-processors.pdf) and to the manuals for your specific mainboard or Baseboard Management Controller (BMC).
+AMD SEV-SNP is fully supported as of Ubuntu 25.04. To launch a VM with these features, enable memory encryption features and SNP in the firmware settings, and then assign Address-Space Identifiers (ASIDs) to SNP. For more details, refer to [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and to the manuals for your specific mainboard or Baseboard Management Controller (BMC).
 
 On the host OS, install `qemu-system-x86_64` and launch QEMU with the following parameters:
 

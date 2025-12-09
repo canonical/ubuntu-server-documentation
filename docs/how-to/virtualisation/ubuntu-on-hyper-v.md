@@ -7,7 +7,7 @@ Hyper-V allows Ubuntu to be run in parallel or in isolation on Windows operating
 
 * To introduce Ubuntu in a Windows-centric IT environment.
 * To have access to a complete Ubuntu desktop environment without dual-booting a PC.
-* To use Linux software on Ubuntu that is not yet supported on the[ Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
+* To use Linux software on Ubuntu that is not yet supported on the[ Windows Subsystem for Linux](https://learn.microsoft.com/en-us/windows/wsl/about).
 
 ## Hyper-V system requirements
 

@@ -12,7 +12,7 @@ Ubuntu provides some additional infrastructure to increase DPDK's usability.
 
 This package is currently compiled for the lowest possible CPU requirements allowed by upstream. Starting with [DPDK 17.08](https://git.dpdk.org/dpdk/commit/?id=f27769f796a0639368117ce22fb124b6030dbf73), that means it requires at least SSE4_2 and for anything else activated by -march=corei7 (in GCC) to be supported by the CPU.
 
-The list of upstream DPDK-supported network cards can be found at [supported NICs](http://dpdk.org/doc/nics). However, a lot of those are disabled by default in the upstream project as they are not yet in a stable state. The subset of network cards that DPDK has enabled in the package (as available in Ubuntu 16.04) is:
+The list of upstream DPDK-supported network cards can be found at [supported NICs](http://core.dpdk.org/doc//nics). However, a lot of those are disabled by default in the upstream project as they are not yet in a stable state. The subset of network cards that DPDK has enabled in the package (as available in Ubuntu 16.04) is:
 
 DPDK has "userspace" drivers for the cards called PMDs.
 The packages for these follow the pattern of `librte-pmd-<type>-<version>`. Therefore the example for an Intel e1000 in 18.11 would be `librte-pmd-e1000-18.11`.
@@ -217,15 +217,15 @@ Since DPDK itself is only a (massive) library, you most likely will continue to 
 
 ## Resources
 
-  - [DPDK documentation](http://dpdk.org/doc)
+  - [DPDK documentation](http://core.dpdk.org/doc/)
 
-  - [Release Notes matching the version packages in Ubuntu 16.04](http://dpdk.org/doc/guides/rel_notes/release_2_2.html)
+  - [Release Notes matching the version packages in Ubuntu 16.04](http://core.dpdk.org/doc//guides/rel_notes/release_2_2.html)
 
-  - [Linux DPDK user getting started](http://dpdk.org/doc/guides/linux_gsg/index.html)
+  - [Linux DPDK user getting started](http://core.dpdk.org/doc//guides/linux_gsg/index.html)
 
-  - [EAL command-line options](http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html)
+  - [EAL command-line options](http://core.dpdk.org/doc//guides/testpmd_app_ug/run_app.html)
 
-  - [DPDK API documentation](http://dpdk.org/doc/api/)
+  - [DPDK API documentation](http://core.dpdk.org/doc//api/)
 
   - [Open vSwitch DPDK installation](https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md)
 

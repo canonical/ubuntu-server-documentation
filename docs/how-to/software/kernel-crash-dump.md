@@ -330,6 +330,6 @@ You can then run `sudo update-grub`, reboot afterwards, and then test again.
 
 Kernel crash dump is a vast topic that requires good knowledge of the Linux kernel. You can find more information on the topic here:
 
-  - [`kdump` kernel documentation](http://www.kernel.org/doc/Documentation/kdump/kdump.txt).
+  - [`kdump` kernel documentation](https://www.kernel.org/doc/Documentation/kdump/kdump.txt).
 
-  - [Analyzing Linux Kernel Crash](http://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)
+  - [Analyzing Linux Kernel Crash](https://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)

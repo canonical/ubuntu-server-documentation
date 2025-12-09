@@ -73,7 +73,7 @@ ideas of reduced firmware and microvms play into all of this.
 ## Create the example workload artifact
 
 To create an example of such a small workload, we will follow the tutorial on
-how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/en/stable/tutorial/hello-world/).
+how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/stable/tutorial/hello-world/).
 
 Out of these tutorials one gets an [OCI-compatible](https://github.com/opencontainers/image-spec/blob/main/spec.md)
 artifact. It will be called `chiselled-hello_latest_amd64.rock`.

@@ -1,7 +1,7 @@
 (how-to-observability)=
 # Observability
 
-In Ubuntu, it is recommended to use the [Canonical Observability Stack](https://documentation.ubuntu.com/observability/) to monitor your infrastructure.
+In Ubuntu, it is recommended to use the [Canonical Observability Stack](https://documentation.ubuntu.com/observability/track-2/) to monitor your infrastructure.
 
 However, you can also use the classic Logging, Monitoring and Alerting (LMA) stack.
 

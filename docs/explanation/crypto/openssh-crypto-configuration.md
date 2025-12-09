@@ -161,6 +161,6 @@ debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit
 
 ## References
 
-* [OpenSSH upstream documentation index](https://www.openssh.com/manual.html)
+* [OpenSSH upstream documentation index](https://www.openssh.org/manual.html)
 * Ubuntu {manpage}`sshd_config(5)` manual page
 * Ubuntu {manpage}`ssh_config(5)` manual page

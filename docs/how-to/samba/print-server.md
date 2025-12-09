@@ -3,13 +3,13 @@
 
 Another common way to network Ubuntu and Windows computers is to configure Samba as a *print server*. This will allow it to share printers installed on an Ubuntu server, whether locally or over the network.
 
-Just as we did in [using Samba as a file server](https://ubuntu.com/server/docs/samba-file-server), this section will configure Samba to allow any client on the local network to use the installed printers without prompting for a username and password.
+Just as we did in [using Samba as a file server](https://documentation.ubuntu.com/server/samba-file-server/), this section will configure Samba to allow any client on the local network to use the installed printers without prompting for a username and password.
 
-If your environment requires stricter Access Controls see [Share Access Control](https://ubuntu.com/server/docs/samba-share-access-control).
+If your environment requires stricter Access Controls see [Share Access Control](https://documentation.ubuntu.com/server/samba-share-access-control/).
 
 ## Install and configure CUPS
 
-Before installing and configuring Samba as a print server, it is best to already have a working CUPS installation. See [our guide on CUPS](https://ubuntu.com/server/docs/service-cups) for details.
+Before installing and configuring Samba as a print server, it is best to already have a working CUPS installation. See [our guide on CUPS](https://documentation.ubuntu.com/server/service-cups/) for details.
 
 ## Install Samba
 

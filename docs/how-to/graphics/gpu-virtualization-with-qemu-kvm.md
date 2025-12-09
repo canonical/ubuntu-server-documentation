@@ -31,7 +31,7 @@ All these options  are considered basic usage of graphics, but there are also ad
   -display gtk,gl=on -device vfio-pci,sysfsdev=/sys/bus/pci/devices/0000:00:02.0/4dd511f6-ec08-11e8-b839-2f163ddee3b3,display=on,rombar=0
   ```
 
-  You can read more [about vGPU at {spellexception}`kraxel`](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU `mdev` evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
+  You can read more [about vGPU at {spellexception}`kraxel`](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU `mdev` evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
 
 The advanced cases in particular can get pretty complex -- it is recommended to use QEMU through {ref}`libvirt section <libvirt>` for those cases. libvirt will take care of all but the host kernel/BIOS tasks of such configurations. Below are the common basic actions needed for faster options (i.e., passthrough and mediated devices passthrough).
 
@@ -142,9 +142,9 @@ Kernel driver in use: nouveau
 
 ## Preparations for mediated devices pass-through - driver
 
-For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/grid/latest/product-support-matrix/index.html#abstract__ubuntu).
+For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html).
 
-There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
+There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
 
 Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that that driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
@@ -162,9 +162,9 @@ drm                   491520  6 drm_kms_helper,drm_vram_helper,nvidia
 ```
 
 ```{note}
-While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
+While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/vgpu/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
 
-It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
+It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/vgpu/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
 ```
 
 Here is an example of those when running fine:
@@ -210,7 +210,7 @@ $ nvidia-smi -a | grep -A 2 "Licensed Product"
 
 A [mediated device](https://www.kernel.org/doc/html/latest/driver-api/vfio-mediated-device.html) is essentially the partitioning of a hardware device using {term}`firmware <FW>` and host driver features. This brings a lot of flexibility and options; in our example we can split our 16G GPU into 2x8G, 4x4G, 8x2G or 16x1G just as we need it. The following gives an example of how to split it into two 8G cards for a compute profile and pass those to guests.
 
-Please refer to the [NVIDIA documentation](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu) for advanced tunings and different card profiles.
+Please refer to the [NVIDIA documentation](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu) for advanced tunings and different card profiles.
 
 The tool for listing and configuring these mediated devices is `mdevctl`: 
 

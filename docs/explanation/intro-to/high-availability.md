@@ -50,7 +50,7 @@ Packages in this list are supported just like any other package available in the
 | `libqb` | [Ubuntu](https://launchpad.net/ubuntu/+source/libqb) \| [Upstream](http://clusterlabs.github.io/libqb/)
 | `kronosnet` | [Ubuntu](https://launchpad.net/ubuntu/+source/kronosnet) \| [Upstream](https://kronosnet.org/)
 | `corosync` | [Ubuntu](https://launchpad.net/ubuntu/+source/corosync) \| [Upstream](http://corosync.github.io/corosync/)
-| `pacemaker` | [Ubuntu](https://launchpad.net/ubuntu/+source/pacemaker) \| [Upstream](https://www.clusterlabs.org/pacemaker/)
+| `pacemaker` | [Ubuntu](https://launchpad.net/ubuntu/+source/pacemaker) \| [Upstream](https://clusterlabs.org/projects/pacemaker/)
 | `resource-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/resource-agents) \| [Upstream](https://github.com/ClusterLabs/resource-agents)
 | `fence-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/fence-agents) \| [Upstream](https://github.com/ClusterLabs/fence-agents)
 | `crmsh` |[Ubuntu](https://launchpad.net/ubuntu/+source/crmsh) \| [Upstream](https://github.com/ClusterLabs/crmsh)
@@ -151,10 +151,10 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 The Server documentation is not intended to document every option for all the HA related software described in this page. More complete documentation can be found upstream at:
 
 - ClusterLabs
-  - [Clusters From Scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Clusters_from_Scratch/index.html)
-  - [Managing Pacemaker Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html)
-  - [Pacemaker Configuration Explained](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html)
-  - [Pacemaker Remote - Scaling HA Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html)
+  - [Clusters From Scratch](https://clusterlabs.org/projects/pacemaker/doc/deprecated/)
+  - [Managing Pacemaker Clusters](https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html)
+  - [Pacemaker Configuration Explained](https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html)
+  - [Pacemaker Remote - Scaling HA Clusters](https://clusterlabs.org/projects/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html)
 - Other
   - [Ubuntu Bionic HA in Shared Disk Environments (Azure)](https://discourse.ubuntu.com/t/ubuntu-high-availability-corosync-pacemaker-shared-disk-environments/14874)
 

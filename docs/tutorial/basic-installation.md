@@ -42,7 +42,7 @@ There are platform specific how-to guides for installations on:
 
 ## Create a bootable USB
 
-There are many ways to boot the installer but the simplest and most common way is to [create a bootable USB stick](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu) to boot from ([tutorials for other operating systems](https://ubuntu.com/search?q=%22create+a+bootable+USB+stick%22) are also available). 
+There are many ways to boot the installer but the simplest and most common way is to [create a bootable USB stick](https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu) to boot from ([tutorials for other operating systems](https://ubuntu.com/search?q=%22create+a+bootable+USB+stick%22) are also available). 
 
 ## Boot the installer
 
