@@ -136,7 +136,7 @@ Apache2
     * [The Apache project documentation](https://httpd.apache.org/docs/2.4/)
 
     Related topic(s):
-    * {term}`Web servers`
+    * {term}`Web servers <Web server>`
 
 API
 Application Programming Interface
