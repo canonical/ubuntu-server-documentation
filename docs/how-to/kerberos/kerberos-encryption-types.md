@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Kerberos encryption algorithms and key types for server-side database security and client-side principal authentication.
+---
+
 (kerberos-encryption-types)=
 # Kerberos encryption types
 

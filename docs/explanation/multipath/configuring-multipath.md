@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand multipath configuration options and settings for device mapper multipathing on Ubuntu Server."
+---
+
 (configuring-multipath)=
 # Multipath configuration options and overview
 

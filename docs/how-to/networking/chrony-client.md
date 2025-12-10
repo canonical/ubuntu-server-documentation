@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Learn how to synchronize time on Ubuntu using chrony, check client status with timedatectl and chronyc, and query time accuracy.
+---
+
 (chrony-client)=
 # Synchronize time using chrony
 

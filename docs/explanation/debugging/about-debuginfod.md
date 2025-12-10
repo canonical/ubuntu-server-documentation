@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about debuginfod, a service that automatically provides debug symbols and source code for debugging on Ubuntu Server."
+---
+
 (about-debuginfod)=
 # About `debuginfod`
 

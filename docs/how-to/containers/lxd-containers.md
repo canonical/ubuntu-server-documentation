@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and manage LXD system containers and virtual machines with command-line administration for development and production workloads.
+---
+
 (lxd-containers)=
 # LXD containers
 

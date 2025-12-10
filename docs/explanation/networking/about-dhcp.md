@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how Dynamic Host Configuration Protocol (DHCP) automatically assigns network settings to host computers, including IP addresses and gateway configurations."
+---
+
 (about-dhcp)=
 # About DHCP
 

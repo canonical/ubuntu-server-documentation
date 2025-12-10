@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure smart card authentication on Ubuntu Server 20.04+ using SSSD, pcscd, and PIV/CAC drivers for two-factor security.
+---
+
 (smart-card-authentication)=
 # Smart card authentication
 

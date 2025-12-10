@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Troubleshoot DNSSEC issues in BIND9 with test domains, log analysis, and validation tools to diagnose DNS security extension failures.
+---
+
 (dnssec-troubleshooting)=
 # Basic DNSSEC troubleshooting
 

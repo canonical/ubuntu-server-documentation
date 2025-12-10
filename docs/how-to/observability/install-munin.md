@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up Munin performance monitoring system with master and node configuration for network-wide server resource monitoring on Ubuntu.
+---
+
 (install-munin)=
 # How to install and configure Munin
 

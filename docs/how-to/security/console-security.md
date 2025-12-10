@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Secure your Ubuntu Server console by disabling Ctrl+Alt+Delete reboots and implementing physical access protection measures.
+---
+
 (console-security)=
 # Console security
 

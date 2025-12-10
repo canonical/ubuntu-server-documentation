@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding networking in Ubuntu Server including key concepts, DHCP, DNS, Netplan, time synchronization, and DPDK configuration.
+---
+
 (explanation-networking)=
 # Networking
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Pacemaker resource agents for managing cluster resources in high-availability environments on Ubuntu Server."
+---
+
 (pacemaker-resource-agents)=
 # Pacemaker resource agents
 

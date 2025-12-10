@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding virtualization and containers on Ubuntu Server including VMs, OpenStack, Docker, LXD, and ROCK images.
+---
+
 (explanation-virtualisation)=
 # Virtualisation and containers
 

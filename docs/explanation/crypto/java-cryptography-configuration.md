@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Java cryptography configuration on Ubuntu Server, including security policies and algorithm selection."
+---
+
 (java-cryptography-configuration)=
 # Java cryptography configuration
 

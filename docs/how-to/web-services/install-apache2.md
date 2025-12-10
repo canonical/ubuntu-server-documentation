@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install Apache2 HTTP web server on Ubuntu and learn about its configuration files and directives for LAMP stack deployment.
+---
+
 (install-apache2)=
 # How to install Apache2
 

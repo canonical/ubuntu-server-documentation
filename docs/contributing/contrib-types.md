@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore different ways to contribute to Ubuntu Server documentation, from fixing typos to writing comprehensive guides."
+---
+
 (contrib-types)=
 # Types of contributions
 

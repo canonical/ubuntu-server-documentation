@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up Gitolite for centralized git hosting with fine-grained access control, SSH key authentication, and bare repository management.
+---
+
 (install-gitolite)=
 # How to set up Gitolite
 

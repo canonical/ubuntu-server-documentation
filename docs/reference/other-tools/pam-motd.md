@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for pam_motd, the PAM module that generates message-of-the-day on Ubuntu Server login."
+---
+
 (pam-motd)=
 # pam_motd
 

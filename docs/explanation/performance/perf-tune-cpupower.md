@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about CPU governors and the cpupower tool for managing CPU frequency scaling and power management on Ubuntu Server."
+---
+
 (perf-tune-cpupower)=
 # CPU Governors and the cpupower tool
 

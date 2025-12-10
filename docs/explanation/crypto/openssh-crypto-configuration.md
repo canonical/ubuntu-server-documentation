@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand OpenSSH cryptographic configuration options on Ubuntu Server, including cipher selection and security hardening."
+---
+
 (openssh-crypto-configuration)=
 # OpenSSH crypto configuration
 

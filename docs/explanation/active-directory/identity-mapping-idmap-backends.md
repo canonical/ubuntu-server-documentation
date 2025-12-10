@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about identity mapping (idmap) backends for mapping Windows SIDs to Unix UIDs and GIDs in Active Directory integration."
+---
+
 (identity-mapping-idmap-backends)=
 # Identity Mapping (idmap) backends
 

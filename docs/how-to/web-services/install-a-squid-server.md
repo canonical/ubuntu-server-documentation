@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Squid proxy server on Ubuntu for web traffic filtering, caching, and bandwidth optimization.
+---
+
 (install-a-squid-server)=
 # How to install a Squid server
 

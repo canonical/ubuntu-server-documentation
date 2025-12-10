@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Deploy and run Canonical rocks container images using Docker with practical examples for OCI-compliant image deployment workflows.
+---
+
 (run-rocks-on-your-server)=
 # How to run rocks on your server
 

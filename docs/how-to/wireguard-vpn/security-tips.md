@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Security best practices for WireGuard VPN including bidirectional traffic considerations, firewall rules, and PreSharedKey configuration.
+---
+
 (security-tips-for-wireguard-vpn)=
 # Security tips for WireGuard VPN
 

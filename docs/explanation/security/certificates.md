@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about digital certificates, certificate authorities, and how they secure communication in Ubuntu Server environments."
+---
+
 (certificates)=
 # About certificates
 

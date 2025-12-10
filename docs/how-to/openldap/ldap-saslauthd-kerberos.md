@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure OpenLDAP with SASL passthrough authentication using Kerberos for simple bind authentication over TLS connections.
+---
+
 (ldap-saslauthd-kerberos)=
 # How to configure OpenLDAP with passthrough SASL authentication using Kerberos
 

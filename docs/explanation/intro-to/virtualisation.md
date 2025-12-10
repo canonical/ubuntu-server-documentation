@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to virtualization and containers on Ubuntu Server including KVM, QEMU, LXD, Docker, and hypervisor concepts.
+---
+
 (introduction-to-virtualization)=
 # Introduction to virtualization
 

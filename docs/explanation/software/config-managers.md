@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand configuration management tools like Ansible, Puppet, and Chef for automating Ubuntu Server configuration and deployment."
+---
+
 (config-managers)=
 # Configuration managers
 

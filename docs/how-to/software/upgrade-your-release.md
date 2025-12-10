@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Upgrade Ubuntu Server to the next major LTS release with this comprehensive guide covering pre-upgrade checklist, do-release-upgrade, and troubleshooting.
+---
+
 (upgrade-your-release)=
 # How to upgrade your Ubuntu release
 

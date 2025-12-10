@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure the legacy isc-dhcp-server DHCP daemon on Ubuntu. Note - This software is no longer vendor-supported; use Kea instead.
+---
+
 (install-isc-dhcp-server)=
 # How to install and configure isc-dhcp-server
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure PostgreSQL object-relational database system with peer and SCRAM-SHA-256 authentication on Ubuntu Server.
+---
+
 (install-postgresql)=
 # Install and configure PostgreSQL
 

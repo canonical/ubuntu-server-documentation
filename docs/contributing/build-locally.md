@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to build and preview Ubuntu Server documentation locally for testing your contributions."
+---
+
 (build-locally)=
 # Build the documentation locally
 

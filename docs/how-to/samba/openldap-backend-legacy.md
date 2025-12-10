@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Legacy guide for integrating Samba NT4 mode with OpenLDAP backend for centralized authentication and account management.
+---
+
 (openldap-backend-legacy)=
 # OpenLDAP backend (legacy)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure OpenSSH server on Ubuntu for secure remote access, encrypted file transfers, and authentication methods.
+---
+
 (openssh-server)=
 
 # OpenSSH server

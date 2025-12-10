@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server how-to guides for installation, security, networking, databases, virtualization, containers, and system administration tasks.
+---
+
 (how-to)=
 # Ubuntu Server how-to guides
 

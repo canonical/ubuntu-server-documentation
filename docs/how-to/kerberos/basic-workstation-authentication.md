@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Learn how to configure a Linux system as a Kerberos client for workstation authentication using SSSD with local user information.
+---
+
 (basic-workstation-authentication)=
 # How to set up basic workstation authentication
 

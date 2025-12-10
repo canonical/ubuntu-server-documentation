@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for data backup strategies, storage management, and version control systems on Ubuntu Server."
+---
+
 (reference-backups-and-version-control)=
 # Data and storage
 

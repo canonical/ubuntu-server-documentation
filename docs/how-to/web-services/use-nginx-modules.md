@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage nginx dynamically loaded modules for programming languages, security, and extended web server functionality on Ubuntu.
+---
+
 (use-nginx-modules)=
 # How to use nginx modules
 

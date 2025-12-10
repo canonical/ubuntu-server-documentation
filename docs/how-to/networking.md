@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server networking guides covering Netplan configuration, DNS/DNSSEC, FTP, DHCP, time synchronization, and network troubleshooting.
+---
+
 (how-to-networking)=
 # Networking
 

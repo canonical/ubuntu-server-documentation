@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand OpenStack cloud computing platform and its integration with Ubuntu Server for building private and public clouds."
+---
+
 (about-openstack)=
 # About OpenStack
 

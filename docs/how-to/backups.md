@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Backup solutions for Ubuntu Server including Bacula, rsnapshot, shell scripts, and etckeeper for version control.
+---
+
 (how-to-backups-and-version-control)=
 # Backups and version control
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Combine Nagios 3 availability monitoring with Munin performance monitoring for comprehensive server and service monitoring on Ubuntu.
+---
+
 (use-nagios-with-munin)=
 # How to use Nagios with Munin
 

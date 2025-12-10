@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about modifying package files on Ubuntu Server, including handling configuration files and package management best practices."
+---
+
 (changing-package-files)=
 # Changing package files
 

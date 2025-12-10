@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to High Availability concepts including redundancy, failover mechanisms, and distributed systems for minimal downtime.
+---
+
 (introduction-to-high-availability)=
 # Introduction to High Availability
 

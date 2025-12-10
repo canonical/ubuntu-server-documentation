@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to troubleshoot TLS/SSL issues on Ubuntu Server, including certificate problems and connection errors."
+---
+
 (troubleshooting-tls-ssl)=
 # Troubleshooting TLS/SSL
 

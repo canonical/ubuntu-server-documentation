@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for Byobu terminal multiplexer, including keyboard shortcuts and configuration options."
+---
+
 (byobu)=
 # Byobu
 

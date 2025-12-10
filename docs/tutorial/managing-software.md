@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Complete tutorial on managing software in Ubuntu Server - learn about Debian packages, snaps, APT commands, repositories, and package management using Multipass.
+---
+
 (managing-software)=
 # Managing your software
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up QEMU/KVM virtualisation on Ubuntu Server to run virtual machines using hardware virtualization with libvirt management.
+---
+
 (qemu)=
 # QEMU
 

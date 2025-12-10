@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Security Identifiers (SIDs) in Windows Active Directory and their role in Ubuntu Server integration."
+---
+
 (security-identifiers-sids)=
 # Security identifiers (SIDs)
 

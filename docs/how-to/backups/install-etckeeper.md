@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Track /etc configuration changes with etckeeper version control system integrated with APT for automatic commit on package changes.
+---
+
 (install-etckeeper)=
 # etckeeper
 

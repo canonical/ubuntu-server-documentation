@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding cloud computing and cloud-init provisioning for Ubuntu Server deployment across cloud providers and infrastructures.
+---
+
 (explanation-cloud-images)=
 # Clouds
 

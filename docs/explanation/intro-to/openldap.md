@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to OpenLDAP directory services including LDAP concepts, schemas, entries, and hierarchical data organization.
+---
+
 (introduction-to-openldap)=
 # Introduction to OpenLDAP
 

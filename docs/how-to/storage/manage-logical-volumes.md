@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Create and manage LVM logical volumes, physical volumes, and volume groups for flexible disk partition management on Ubuntu.
+---
+
 (manage-logical-volumes)=
 # How to manage logical volumes
 

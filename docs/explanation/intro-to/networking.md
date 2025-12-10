@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to networking fundamentals on Ubuntu Server including TCP/IP, DNS, DHCP, routing, and network configuration basics.
+---
+
 (introduction-to-networking)=
 # Introduction to networking
 

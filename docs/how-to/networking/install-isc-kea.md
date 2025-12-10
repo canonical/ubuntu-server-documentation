@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure ISC Kea DHCP server on Ubuntu 23.04+, the modern replacement for isc-dhcp designed for contemporary networks.
+---
+
 (install-isc-kea)=
 # How to install and configure isc-kea
 

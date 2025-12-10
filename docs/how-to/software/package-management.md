@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and manage Debian packages on Ubuntu Server using APT command-line tools for installing, upgrading, and removing software.
+---
+
 (package-management)=
 # Install and manage packages
 

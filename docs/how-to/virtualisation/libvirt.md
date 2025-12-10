@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure libvirt for KVM virtualisation on Ubuntu including virtual networking, bridging, and usermode networking with iptables.
+---
+
 (libvirt)=
 # Libvirt
 

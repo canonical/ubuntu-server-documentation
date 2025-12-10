@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure mail services on Ubuntu Server with installation and configuration guides for Postfix, Exim4, and Dovecot.
+---
+
 (how-to-mail-services)=
 # Mail services
 

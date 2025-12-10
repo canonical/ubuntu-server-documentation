@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server explanation guides covering security, networking, virtualization, storage, performance, cryptography, and system concepts.
+---
+
 (explanation)=
 # Ubuntu Server explanation guides
 

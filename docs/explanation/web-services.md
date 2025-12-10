@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Overview of web server concepts and services on Ubuntu Server including Apache2, nginx, and Squid proxy server fundamentals.
+---
+
 (explanation-web-services)=
 # Web services
 

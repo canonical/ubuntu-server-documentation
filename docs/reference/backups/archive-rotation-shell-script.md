@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference shell script example for implementing archive rotation and backup management on Ubuntu Server."
+---
+
 (archive-rotation-shell-script)=
 
 # Archive rotation shell script

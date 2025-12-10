@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install nginx HTTP server on Ubuntu as a powerful alternative to Apache for high-performance web services and applications.
+---
+
 (install-nginx)=
 # How to install nginx
 

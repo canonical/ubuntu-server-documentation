@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure automatic security updates on Ubuntu Server with unattended-upgrades including reboot options, update sources, and blocking specific packages.
+---
+
 (automatic-updates)=
 # Automatic updates
 

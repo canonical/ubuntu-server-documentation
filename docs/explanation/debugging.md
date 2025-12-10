@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding debugging tools on Ubuntu Server including debuginfod and debug symbol packages for package development and troubleshooting.
+---
+
 (explanation-debugging)=
 # Debugging
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure BIND9 DNS server on Ubuntu to map IP addresses and FQDNs, with tools for testing and troubleshooting DNS issues.
+---
+
 (install-dns)=
 # Domain Name Service (DNS)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Run Ubuntu virtual machines on Windows Hyper-V hypervisor for development, testing, and Linux software access without dual-booting.
+---
+
 (ubuntu-on-hyper-v)=
 # How to set up Ubuntu on Hyper-V
 

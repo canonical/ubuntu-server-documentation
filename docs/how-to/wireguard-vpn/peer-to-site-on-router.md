@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure peer-to-site WireGuard VPN directly on your home router to provide secure remote access to your home network.
+---
+
 (wireguard-vpn-peer-to-site-on-router)=
 # WireGuard VPN peer-to-site (on router)
 

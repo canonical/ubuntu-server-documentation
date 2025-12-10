@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Docker storage drivers, networking modes, and logging configuration options on Ubuntu Server."
+---
+
 (docker-storage-networking-and-logging)=
 # Docker storage, networking, and logging
 

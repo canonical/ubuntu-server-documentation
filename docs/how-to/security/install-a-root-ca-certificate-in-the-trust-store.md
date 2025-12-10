@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install enterprise root CA certificates in Ubuntu's trust store to enable secure communication with internal infrastructure.
+---
+
 (install-a-root-ca-certificate-in-the-trust-store)=
 
 # Install a root CA certificate in the trust store

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Create automated backups using shell scripts with tar utility to archive files locally or to remote NFS-mounted filesystems.
+---
+
 (back-up-using-shell-scripts)=
 # How to back up using shell scripts
 
