@@ -1,0 +1,233 @@
+file_path,category,title_tag,content_depth,heading_structure,internal_links,meta_description,url_quality,freshness,direct_answer,structure,semantic_clarity,code_examples,prerequisites,step_format,version_info,seo_score,aeo_score,overall_score,notes
+explanation/active-directory/choosing-an-integration-method.md,explanation,5,2,5,3,5,5,2,5,3,3,1,3,3,2,3.86,2.86,3.36,Short content (252 words); No version info
+explanation/active-directory/identity-mapping-idmap-backends.md,explanation,5,3,5,2,5,5,2,4,3,4,1,3,3,2,3.86,2.86,3.36,No version info
+explanation/active-directory/security-identifiers-sids.md,explanation,5,3,5,3,5,5,2,5,3,4,2,3,3,2,4.0,3.14,3.57,No version info
+explanation/active-directory/the-autorid-idmap-backend.md,explanation,5,3,5,1,5,5,2,5,4,3,2,3,3,2,3.71,3.14,3.43,No internal links; No version info
+explanation/active-directory/the-rid-idmap-backend.md,explanation,5,4,5,2,5,5,2,5,4,3,3,3,3,2,4.0,3.29,3.64,No version info
+explanation/active-directory.md,explanation,5,1,4,2,5,5,2,4,3,3,3,3,3,2,3.43,3.0,3.21,Short content (51 words); No version info
+explanation/clouds/find-cloud-images.md,explanation,5,2,4,2,5,5,2,4,3,4,1,3,3,2,3.57,2.86,3.21,Short content (214 words); No version info
+explanation/clouds.md,explanation,5,2,4,2,5,3,2,4,3,4,3,3,3,2,3.29,3.14,3.21,Short content (151 words); No version info
+explanation/crypto/bind-9-dnssec-cryptography-selection.md,explanation,5,4,4,2,5,5,4,5,5,4,5,3,3,3,4.14,4.0,4.07,Excellent code examples
+explanation/crypto/gnutls.md,explanation,5,5,3,2,5,3,4,5,5,3,5,3,3,4,3.86,4.0,3.93,Multiple H1s (2); Excellent code examples
+explanation/crypto/java-cryptography-configuration.md,explanation,5,5,4,2,5,5,3,5,5,3,5,3,3,3,4.14,3.86,4.0,Excellent code examples
+explanation/crypto/network-security-services-nss.md,explanation,5,5,4,2,5,5,2,5,5,4,5,3,3,2,4.0,3.86,3.93,No version info; Excellent code examples; Comprehensive content
+explanation/crypto/openssh-crypto-configuration.md,explanation,5,5,4,2,5,5,2,5,5,4,5,3,3,2,4.0,3.86,3.93,No version info; Excellent code examples
+explanation/crypto/openssl.md,explanation,5,5,5,2,5,3,3,5,5,4,5,3,3,3,4.0,4.0,4.0,Excellent code examples; Comprehensive content
+explanation/crypto/troubleshooting-tls-ssl.md,explanation,5,3,4,2,5,5,2,4,5,4,5,3,3,2,3.71,3.71,3.71,No version info; Excellent code examples
+explanation/cryptography.md,explanation,5,1,4,1,5,3,2,4,3,4,3,3,3,2,3.0,3.14,3.07,Short content (19 words); No internal links; No version info
+explanation/data-and-storage.md,explanation,5,1,4,3,5,5,2,4,4,4,4,3,3,2,3.57,3.43,3.5,Short content (120 words); No version info
+explanation/debugging/about-debuginfod.md,explanation,5,4,5,2,5,5,2,5,5,3,5,3,3,2,4.0,3.71,3.86,No version info; Excellent code examples
+explanation/debugging/debug-symbol-packages.md,explanation,5,4,5,2,5,5,3,4,5,3,5,3,3,3,4.14,3.71,3.93,Excellent code examples
+explanation/debugging.md,explanation,5,1,4,2,5,3,2,4,3,3,2,3,3,2,3.14,2.86,3.0,Short content (23 words); No version info
+explanation/dnssec/dnssec.md,explanation,5,5,4,3,5,3,4,5,5,3,5,3,3,3,4.14,3.86,4.0,Excellent code examples; Comprehensive content
+explanation/high-availability/pacemaker-fence-agents.md,explanation,5,5,4,2,5,5,2,4,5,4,5,3,3,2,4.0,3.71,3.86,No version info; Excellent code examples
+explanation/high-availability/pacemaker-resource-agents.md,explanation,5,4,4,2,5,5,2,4,5,4,5,3,3,2,3.86,3.71,3.79,No version info; Excellent code examples
+explanation/high-availability.md,explanation,5,1,4,3,5,5,2,5,3,4,2,3,3,2,3.57,3.14,3.36,Short content (44 words); No version info
+explanation/intro-to/AD-integration.md,explanation,5,2,4,4,5,5,2,4,4,4,1,3,3,2,3.86,3.0,3.43,Short content (278 words); No version info
+explanation/intro-to/backups.md,explanation,5,3,4,3,5,3,2,4,3,3,1,3,3,2,3.57,2.71,3.14,No version info
+explanation/intro-to/cloud-init.md,explanation,5,3,4,2,5,5,2,3,2,4,1,3,3,2,3.71,2.57,3.14,No version info
+explanation/intro-to/crypto-libraries.md,explanation,5,5,5,3,5,5,3,4,5,3,5,3,3,3,4.43,3.71,4.07,Excellent code examples; Comprehensive content
+explanation/intro-to/databases.md,explanation,5,1,5,3,5,3,2,5,2,3,1,3,3,2,3.43,2.71,3.07,Short content (120 words); No version info
+explanation/intro-to/ebpf.md,explanation,5,5,3,1,5,3,4,5,5,3,5,3,3,3,3.71,3.86,3.79,Multiple H1s (10); No internal links; Excellent code examples; Comprehensive content
+explanation/intro-to/high-availability.md,explanation,5,5,5,4,5,5,3,4,5,4,3,3,3,3,4.57,3.57,4.07,Comprehensive content
+explanation/intro-to/kerberos.md,explanation,5,3,4,3,5,3,2,5,3,5,1,3,3,2,3.57,3.14,3.36,No version info
+explanation/intro-to/multipath.md,explanation,5,5,5,5,5,3,2,5,5,4,5,3,4,2,4.29,4.0,4.14,No version info; Excellent code examples; Comprehensive content
+explanation/intro-to/networking.md,explanation,5,3,4,5,5,3,2,5,2,4,1,3,3,2,3.86,2.86,3.36,No version info
+explanation/intro-to/openldap.md,explanation,5,3,5,4,5,3,2,5,4,4,3,3,3,2,3.86,3.43,3.64,No version info
+explanation/intro-to/samba.md,explanation,5,3,4,4,5,3,2,5,3,4,1,3,3,2,3.71,3.0,3.36,No version info
+explanation/intro-to/security.md,explanation,5,3,4,3,5,3,2,5,2,3,1,3,3,2,3.57,2.71,3.14,No version info
+explanation/intro-to/sssd.md,explanation,5,2,5,3,5,3,2,5,2,4,1,3,3,2,3.57,2.86,3.21,Short content (186 words); No version info
+explanation/intro-to/virtualisation.md,explanation,5,3,4,2,5,3,2,5,2,3,1,3,3,2,3.43,2.71,3.07,No version info
+explanation/intro-to/web-servers.md,explanation,5,2,4,5,5,5,2,4,3,3,1,3,3,2,4.0,2.71,3.36,Short content (284 words); No version info
+explanation/intro-to/wireguard-vpn.md,explanation,5,5,3,5,5,5,2,5,5,4,5,3,3,2,4.29,3.86,4.07,Multiple H1s (2); No version info; Excellent code examples; Comprehensive content
+explanation/multipath/common-multipath-tasks-and-procedures.md,explanation,5,4,5,3,5,5,2,5,5,3,5,3,4,2,4.14,3.86,4.0,No version info; Excellent code examples
+explanation/multipath/configuring-multipath.md,explanation,5,5,4,2,5,5,2,5,5,4,5,3,4,2,4.0,4.0,4.0,No version info; Excellent code examples
+explanation/multipath/multipath-configuration-examples.md,explanation,5,2,2,3,5,5,2,5,5,3,5,3,3,2,3.43,3.71,3.57,Multiple H1s (38); Short content (223 words); No version info; Excellent code examples
+explanation/multipath.md,explanation,5,1,4,3,5,3,2,5,3,3,2,3,3,2,3.29,3.0,3.14,Short content (38 words); No version info
+explanation/networking/about-dhcp.md,explanation,4,4,4,3,4,5,2,5,3,4,1,3,3,2,3.71,3.0,3.36,No version info
+explanation/networking/about-dpdk.md,explanation,5,5,4,3,5,5,2,5,5,4,5,5,3,2,4.14,4.14,4.14,Multiple H1s (9); No version info; Excellent code examples; Comprehensive content
+explanation/networking/about-netplan.md,explanation,5,2,4,2,5,5,2,5,2,3,1,3,3,2,3.57,2.71,3.14,Short content (190 words); No version info
+explanation/networking/about-time-synchronisation.md,explanation,5,3,4,3,5,5,2,5,3,3,1,3,3,2,3.86,2.86,3.36,No version info
+explanation/networking/configuring-networks.md,explanation,5,5,4,3,5,5,2,5,5,4,5,3,4,2,4.14,4.0,4.07,No version info; Excellent code examples; Comprehensive content
+explanation/networking/networking-key-concepts.md,explanation,5,5,4,3,5,5,2,5,4,4,3,3,3,2,4.14,3.43,3.79,No version info; Comprehensive content
+explanation/networking.md,explanation,5,2,4,4,5,3,2,5,5,4,5,3,3,2,3.57,3.86,3.71,Short content (208 words); No version info; Excellent code examples
+explanation/performance/perf-epp.md,explanation,5,3,5,2,5,5,2,3,4,3,5,3,3,2,3.86,3.29,3.57,No version info; Excellent code examples
+explanation/performance/perf-pgo.md,explanation,5,5,3,2,5,5,4,3,5,3,5,3,3,3,4.14,3.57,3.86,Multiple H1s (2); Excellent code examples; Comprehensive content
+explanation/performance/perf-tune-cpupower.md,explanation,5,5,5,2,5,5,2,4,5,3,5,3,3,2,4.14,3.57,3.86,No version info; Excellent code examples
+explanation/performance/perf-tune-hwloc.md,explanation,5,3,4,2,5,5,2,4,5,5,5,3,3,2,3.71,3.86,3.79,No version info; Excellent code examples
+explanation/performance/perf-tune-tuned.md,explanation,5,5,4,2,5,5,2,5,5,3,5,3,3,2,4.0,3.71,3.86,Multiple H1s (18); No version info; Excellent code examples; Comprehensive content
+explanation/performance.md,explanation,5,2,4,3,5,3,2,5,3,3,2,3,3,2,3.43,3.0,3.21,Short content (281 words); No version info
+explanation/security/certificates.md,explanation,5,5,4,2,5,3,2,5,5,4,5,3,4,2,3.71,4.0,3.86,No version info; Excellent code examples; Comprehensive content
+explanation/security/openvpn-client-implementations.md,explanation,5,3,5,2,5,5,2,5,3,4,1,3,3,2,3.86,3.0,3.43,No version info
+explanation/security/security_suggestions.md,explanation,5,5,4,5,5,3,2,5,4,4,3,3,4,2,4.14,3.57,3.86,No version info; Comprehensive content
+explanation/security.md,explanation,5,2,4,5,5,3,2,5,4,4,4,3,3,2,3.71,3.57,3.64,Short content (162 words); No version info
+explanation/software/about-apt-upgrade-and-phased-updates.md,explanation,5,5,5,1,5,5,3,5,4,3,5,3,3,3,4.14,3.71,3.93,No internal links; Excellent code examples; Comprehensive content
+explanation/software/advance-testing-of-updates-in-best-practice-server-deployments.md,explanation,5,4,5,1,5,4,4,4,2,3,1,3,3,3,4.0,2.71,3.36,No internal links
+explanation/software/changing-package-files.md,explanation,5,5,3,2,5,5,2,4,5,3,5,3,3,2,3.86,3.57,3.71,Multiple H1s (17); No version info; Excellent code examples
+explanation/software/config-managers.md,explanation,5,3,4,2,5,5,2,4,2,4,1,3,3,2,3.71,2.71,3.21,No version info
+explanation/software/third-party-repository-usage.md,explanation,5,5,5,2,5,5,2,5,5,3,5,3,3,2,4.14,3.71,3.93,No version info; Excellent code examples; Comprehensive content
+explanation/software.md,explanation,5,1,4,4,5,3,2,5,4,3,4,3,3,2,3.43,3.43,3.43,Short content (83 words); No version info
+explanation/storage/about-lvm.md,explanation,5,3,4,2,5,5,2,5,2,4,1,3,3,2,3.71,2.86,3.29,No version info
+explanation/storage.md,explanation,5,1,4,2,5,3,2,5,3,4,2,3,3,2,3.14,3.14,3.14,Short content (16 words); No version info
+explanation/virtualisation/about-openstack.md,explanation,5,2,4,2,5,5,2,5,3,3,1,3,3,2,3.57,2.86,3.21,Short content (294 words); No version info
+explanation/virtualisation/about-rock-images.md,explanation,5,1,5,2,5,5,2,5,2,4,1,3,3,2,3.57,2.86,3.21,Short content (147 words); No version info
+explanation/virtualisation/container-tools-in-the-ubuntu-space.md,explanation,5,3,4,2,5,5,2,4,2,3,1,3,3,2,3.71,2.57,3.14,No version info
+explanation/virtualisation/docker-storage-networking-and-logging.md,explanation,5,5,4,5,5,5,2,4,5,3,1,3,3,2,4.43,3.0,3.71,No version info; Comprehensive content
+explanation/virtualisation/qemu-microvm.md,explanation,5,5,4,3,5,5,2,5,5,3,5,3,4,2,4.14,3.86,4.0,Multiple H1s (7); No version info; Excellent code examples; Comprehensive content
+explanation/virtualisation/upgrading-the-machine-type-of-your-vm.md,explanation,5,4,4,2,5,5,2,4,4,3,5,3,3,2,3.86,3.43,3.64,Multiple H1s (3); No version info; Excellent code examples
+explanation/virtualisation/vm-tools-in-the-ubuntu-space.md,explanation,5,4,4,4,5,5,2,4,2,4,1,3,3,2,4.14,2.71,3.43,No version info
+explanation/virtualisation.md,explanation,5,1,4,5,5,3,2,5,4,3,4,3,3,2,3.57,3.43,3.5,Short content (93 words); No version info
+explanation/web-services/about-squid-proxy-servers.md,explanation,5,2,4,2,5,5,2,5,2,5,1,3,3,2,3.57,3.0,3.29,Short content (292 words); No version info
+explanation/web-services/about-web-servers.md,explanation,5,3,4,2,5,5,2,5,4,4,3,3,3,2,3.71,3.43,3.57,No version info
+explanation/web-services.md,explanation,5,1,4,2,5,5,2,4,3,3,3,3,3,2,3.43,3.0,3.21,Short content (26 words); No version info
+how-to/active-directory/join-a-domain-with-winbind-preparation.md,how-to,5,3,5,2,5,5,4,5,4,4,4,2,2,3,4.14,3.43,3.79,Missing prerequisites
+how-to/active-directory/join-a-forest-with-the-autorid-backend.md,how-to,5,5,5,2,5,5,4,5,3,3,2,2,2,3,4.43,2.86,3.64,Missing prerequisites
+how-to/active-directory/join-a-forest-with-the-rid-backend.md,how-to,5,5,5,2,5,5,2,5,2,3,1,2,2,2,4.14,2.43,3.29,Missing prerequisites; No version info; No code examples
+how-to/active-directory/join-a-simple-domain-with-the-rid-backend.md,how-to,5,4,5,3,5,5,4,4,3,4,2,2,2,3,4.43,2.86,3.64,Missing prerequisites
+how-to/active-directory.md,how-to,5,1,4,2,5,5,2,4,3,3,2,2,2,2,3.43,2.57,3.0,Short content (57 words); Missing prerequisites; No version info
+how-to/backups/back-up-using-shell-scripts.md,how-to,5,4,4,2,5,5,2,4,5,3,5,2,2,2,3.86,3.29,3.57,Multiple H1s (11); Missing prerequisites; No version info; Excellent code examples
+how-to/backups/install-bacula.md,how-to,5,5,3,2,5,5,2,5,5,3,5,2,2,2,3.86,3.43,3.64,Multiple H1s (2); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/backups/install-etckeeper.md,how-to,5,2,4,1,5,5,2,5,5,4,5,2,2,2,3.43,3.57,3.5,Short content (288 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/backups/install-gitolite.md,how-to,5,4,4,3,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Multiple H1s (11); Missing prerequisites; No version info; Excellent code examples
+how-to/backups/install-rsnapshot.md,how-to,5,4,4,3,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/backups.md,how-to,5,1,4,3,5,3,2,4,4,4,4,2,2,2,3.29,3.14,3.21,Short content (124 words); Missing prerequisites; No version info
+how-to/containers/docker-for-system-admins.md,how-to,5,5,4,3,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/containers/lxd-containers.md,how-to,5,5,4,2,5,5,2,5,5,3,5,2,2,2,4.0,3.43,3.71,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/containers/run-rocks-on-your-server.md,how-to,5,4,4,2,5,5,3,4,5,3,5,2,2,3,4.0,3.43,3.71,Missing prerequisites; Excellent code examples
+how-to/containers.md,how-to,5,1,4,3,5,3,2,5,3,3,2,2,2,2,3.29,2.71,3.0,Short content (35 words); Missing prerequisites; No version info
+how-to/data-and-storage.md,how-to,5,1,4,3,5,5,2,4,4,3,3,2,2,2,3.57,2.86,3.21,Short content (79 words); Missing prerequisites; No version info
+how-to/databases/install-mysql.md,how-to,5,5,4,3,5,5,4,5,5,3,5,2,2,3,4.43,3.57,4.0,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/databases/install-postgresql.md,how-to,5,5,3,2,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples
+how-to/databases.md,how-to,5,1,4,2,5,3,2,5,3,3,2,2,2,2,3.14,2.71,2.93,Short content (42 words); Missing prerequisites; No version info
+how-to/graphics/gpu-virtualization-with-qemu-kvm.md,how-to,5,4,4,5,5,5,3,4,5,4,5,2,2,3,4.43,3.57,4.0,Multiple H1s (5); Missing prerequisites; Excellent code examples
+how-to/graphics/install-nvidia-drivers.md,how-to,5,5,5,3,5,5,2,5,5,3,5,2,3,2,4.29,3.57,3.93,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/graphics.md,how-to,5,1,4,2,5,3,2,3,3,3,3,2,2,2,3.14,2.57,2.86,Short content (26 words); Missing prerequisites; No version info
+how-to/high-availability/install-drbd.md,how-to,5,3,4,3,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Missing prerequisites; No version info; Excellent code examples
+how-to/high-availability.md,how-to,5,1,4,3,5,5,2,5,3,5,2,2,2,2,3.57,3.0,3.29,Short content (34 words); Missing prerequisites; No version info
+how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options.md,how-to,5,3,5,2,5,4,3,5,5,3,5,2,2,3,3.86,3.57,3.71,Missing prerequisites; Excellent code examples
+how-to/installation/how-to-netboot-the-server-installer-on-amd64.md,how-to,5,3,5,3,5,5,4,5,5,4,5,2,5,3,4.29,4.14,4.21,Missing prerequisites; Excellent code examples
+how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot.md,how-to,5,3,5,2,5,3,3,4,5,3,5,2,2,3,3.71,3.43,3.57,Missing prerequisites; Excellent code examples
+how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x.md,how-to,5,4,5,2,5,5,3,4,5,4,5,2,2,3,4.14,3.57,3.86,Missing prerequisites; Excellent code examples
+how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x.md,how-to,5,3,4,1,5,5,3,4,5,4,5,2,2,3,3.71,3.57,3.64,Multiple H1s (2); No internal links; Missing prerequisites; Excellent code examples
+how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md,how-to,5,2,4,1,5,4,2,5,5,3,5,2,2,2,3.29,3.43,3.36,Short content (253 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64.md,how-to,5,4,4,3,5,4,3,5,5,4,5,2,2,3,4.0,3.71,3.86,Missing prerequisites; Excellent code examples
+how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x.md,how-to,5,4,5,2,5,5,3,5,5,4,5,2,2,3,4.14,3.71,3.93,Missing prerequisites; Excellent code examples
+how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x.md,how-to,5,4,5,3,5,5,3,5,5,4,5,2,2,3,4.29,3.71,4.0,Missing prerequisites; Excellent code examples
+how-to/installation.md,how-to,5,1,4,5,5,3,2,4,5,3,5,2,2,2,3.57,3.29,3.43,Short content (148 words); Missing prerequisites; No version info; Excellent code examples
+how-to/kerberos/basic-workstation-authentication.md,how-to,5,4,4,3,5,5,3,5,5,4,5,2,2,3,4.14,3.71,3.93,Missing prerequisites; Excellent code examples
+how-to/kerberos/configure-service-principals.md,how-to,5,2,5,1,5,5,2,4,5,3,5,2,2,2,3.57,3.29,3.43,Short content (283 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/kerberos/install-a-kerberos-server.md,how-to,5,4,5,4,5,5,2,5,5,4,5,5,2,2,4.29,4.0,4.14,No version info; Excellent code examples
+how-to/kerberos/kerberos-encryption-types.md,how-to,5,4,4,2,5,5,2,5,5,3,5,2,2,2,3.86,3.43,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/kerberos/kerberos-with-openldap-backend.md,how-to,5,5,5,3,5,5,2,5,5,3,5,2,3,2,4.29,3.57,3.93,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/kerberos/set-up-secondary-kdc.md,how-to,5,3,4,1,5,5,2,5,5,4,5,2,2,2,3.57,3.57,3.57,Multiple H1s (2); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/kerberos.md,how-to,5,1,4,2,5,3,2,5,3,3,2,2,2,2,3.14,2.71,2.93,Short content (64 words); Missing prerequisites; No version info
+how-to/mail-services/install-dovecot.md,how-to,5,3,4,1,5,5,2,4,5,3,5,2,2,2,3.57,3.29,3.43,No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/mail-services/install-exim4.md,how-to,5,5,4,2,5,5,3,4,5,3,5,2,2,3,4.14,3.43,3.79,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/mail-services/install-postfix.md,how-to,5,5,3,2,5,5,3,5,5,3,5,2,2,3,4.0,3.57,3.79,Multiple H1s (5); Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/mail-services.md,how-to,5,2,5,3,5,5,2,4,4,4,3,2,3,2,3.86,3.14,3.5,Short content (231 words); Missing prerequisites; No version info
+how-to/networking/chrony-client.md,how-to,5,4,2,2,5,5,2,5,5,4,5,2,2,2,3.57,3.57,3.57,Multiple H1s (10); Missing prerequisites; No version info; Excellent code examples
+how-to/networking/cups-print-server.md,how-to,5,4,4,2,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Missing prerequisites; No version info; Excellent code examples
+how-to/networking/dnssec-troubleshooting.md,how-to,5,5,4,2,5,5,4,4,4,4,1,2,2,3,4.29,2.86,3.57,Missing prerequisites; No code examples; Comprehensive content
+how-to/networking/dpdk-with-open-vswitch.md,how-to,5,4,4,2,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Multiple H1s (4); Missing prerequisites; No version info; Excellent code examples
+how-to/networking/ftp.md,how-to,5,5,4,2,5,3,2,5,3,3,3,2,2,2,3.71,2.86,3.29,Missing prerequisites; No version info
+how-to/networking/install-dns.md,how-to,5,5,4,4,5,5,2,5,5,4,5,2,2,2,4.29,3.57,3.93,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/networking/install-dnssec.md,how-to,5,5,4,2,5,5,2,5,4,3,1,2,2,2,4.0,2.71,3.36,Missing prerequisites; No version info; No code examples; Comprehensive content
+how-to/networking/install-isc-dhcp-server.md,how-to,5,2,3,3,5,5,2,5,4,4,5,2,2,2,3.57,3.43,3.5,Multiple H1s (2); Short content (247 words); Missing prerequisites; No version info; Excellent code examples
+how-to/networking/install-isc-kea.md,how-to,5,3,4,3,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Missing prerequisites; No version info; Excellent code examples
+how-to/networking/install-nfs.md,how-to,5,5,4,3,5,5,3,5,5,3,4,2,2,3,4.29,3.43,3.86,Missing prerequisites; Comprehensive content
+how-to/networking/serve-ntp-with-chrony.md,how-to,5,5,3,3,5,5,3,5,5,4,5,2,2,3,4.14,3.71,3.93,Multiple H1s (2); Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/networking/timedatectl-and-timesyncd.md,how-to,5,2,4,3,5,5,2,4,4,3,5,2,2,2,3.71,3.14,3.43,Short content (222 words); Missing prerequisites; No version info; Excellent code examples
+how-to/networking.md,how-to,5,2,4,3,5,3,2,5,5,5,5,2,2,2,3.43,3.71,3.57,Short content (252 words); Missing prerequisites; No version info; Excellent code examples
+how-to/observability/install-logwatch.md,how-to,5,2,4,1,5,5,2,5,5,3,5,2,2,2,3.43,3.43,3.43,Short content (232 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/observability/install-munin.md,how-to,5,2,4,3,5,5,2,5,5,4,5,4,2,2,3.71,3.86,3.79,Short content (243 words); No version info; Excellent code examples
+how-to/observability/install-nagios.md,how-to,5,4,2,3,5,5,2,5,5,3,5,2,2,2,3.71,3.43,3.57,Multiple H1s (5); Missing prerequisites; No version info; Excellent code examples
+how-to/observability/set-up-your-lma-stack.md,how-to,5,5,3,2,5,5,2,3,5,3,5,2,2,2,3.86,3.14,3.5,Multiple H1s (5); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/observability/use-nagios-with-munin.md,how-to,5,4,3,4,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Multiple H1s (5); Missing prerequisites; No version info; Excellent code examples
+how-to/observability.md,how-to,5,1,4,1,5,3,2,5,3,4,3,2,2,2,3.0,3.0,3.0,Short content (52 words); No internal links; Missing prerequisites; No version info
+how-to/openldap/access-control.md,how-to,5,4,4,4,5,5,2,5,5,4,5,2,2,2,4.14,3.57,3.86,Missing prerequisites; No version info; Excellent code examples
+how-to/openldap/backup-and-restore.md,how-to,5,2,5,2,5,5,2,5,4,4,4,2,2,2,3.71,3.29,3.5,Short content (182 words); Missing prerequisites; No version info
+how-to/openldap/install-openldap.md,how-to,5,5,4,5,5,5,2,5,5,4,5,2,2,2,4.43,3.57,4.0,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/openldap/ldap-and-tls.md,how-to,5,3,5,2,5,5,2,5,5,4,5,2,2,2,3.86,3.57,3.71,Missing prerequisites; No version info; Excellent code examples
+how-to/openldap/ldap-saslauthd-authentication-intro.md,how-to,5,3,4,2,5,5,2,5,3,4,1,2,2,2,3.71,2.71,3.21,Missing prerequisites; No version info; No code examples
+how-to/openldap/ldap-saslauthd-kerberos.md,how-to,5,5,4,3,5,5,3,5,5,3,5,2,2,3,4.29,3.57,3.93,Multiple H1s (13); Missing prerequisites; Excellent code examples
+how-to/openldap/replication.md,how-to,5,5,4,5,5,3,2,5,5,4,5,2,2,2,4.14,3.57,3.86,Multiple H1s (9); Missing prerequisites; No version info; Excellent code examples
+how-to/openldap/users-and-groups.md,how-to,5,3,4,4,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples
+how-to/openldap.md,how-to,5,1,4,2,5,3,2,5,3,3,2,2,2,2,3.14,2.71,2.93,Short content (54 words); Missing prerequisites; No version info
+how-to/samba/apparmor-profile.md,how-to,5,2,4,1,5,5,2,5,4,3,4,2,2,2,3.43,3.14,3.29,Short content (240 words); No internal links; Missing prerequisites; No version info
+how-to/samba/file-server.md,how-to,5,4,4,3,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/samba/member-server-in-an-ad-domain.md,how-to,5,5,4,3,5,5,2,5,5,4,5,2,2,2,4.14,3.57,3.86,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/samba/mount-cifs-shares-permanently.md,how-to,5,5,4,3,5,5,2,4,5,4,5,5,2,2,4.14,3.86,4.0,No version info; Excellent code examples
+how-to/samba/nt4-domain-controller-legacy.md,how-to,5,5,4,3,5,5,2,5,5,4,5,2,2,2,4.14,3.57,3.86,Missing prerequisites; No version info; Excellent code examples
+how-to/samba/openldap-backend-legacy.md,how-to,5,5,3,4,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/samba/print-server.md,how-to,5,2,4,1,5,5,2,5,4,3,4,2,2,2,3.43,3.14,3.29,Short content (236 words); No internal links; Missing prerequisites; No version info
+how-to/samba/provision-samba-ad-controller.md,how-to,5,5,4,4,5,5,2,5,5,3,5,2,2,2,4.29,3.43,3.86,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/samba/share-access-controls.md,how-to,5,5,4,3,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/samba.md,how-to,5,1,4,2,5,3,2,4,4,3,4,2,2,2,3.14,3.0,3.07,Short content (68 words); Missing prerequisites; No version info
+how-to/security/apparmor.md,how-to,5,5,4,2,5,3,4,5,5,3,5,2,2,3,4.0,3.57,3.79,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/security/console-security.md,how-to,5,2,4,1,5,5,2,5,3,3,2,2,2,2,3.43,2.71,3.07,Short content (190 words); No internal links; Missing prerequisites; No version info
+how-to/security/firewalls.md,how-to,5,5,3,2,5,3,2,5,5,3,5,2,2,2,3.57,3.43,3.5,Multiple H1s (5); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/security/install-a-root-ca-certificate-in-the-trust-store.md,how-to,5,3,5,2,5,5,2,4,5,4,5,2,2,2,3.86,3.43,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/security/install-openvpn.md,how-to,5,5,5,3,5,5,4,5,5,4,5,2,2,4,4.57,3.86,4.21,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/security/openssh-server.md,how-to,5,3,4,4,5,5,2,3,5,4,5,2,2,2,4.0,3.29,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/security/smart-card-authentication-with-ssh.md,how-to,5,2,4,1,5,5,2,5,4,3,5,2,2,2,3.43,3.29,3.36,Short content (290 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/security/smart-card-authentication.md,how-to,5,5,2,2,5,5,3,5,5,3,5,2,2,3,3.86,3.57,3.71,Multiple H1s (28); Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/security/two-factor-authentication-with-totp-or-hotp.md,how-to,5,5,4,2,5,5,3,4,5,3,5,2,2,3,4.14,3.43,3.79,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/security/two-factor-authentication-with-u2f-or-fido.md,how-to,5,4,5,1,5,5,3,4,5,3,5,2,2,3,4.0,3.43,3.71,No internal links; Missing prerequisites; Excellent code examples
+how-to/security/user-management.md,how-to,5,5,3,3,5,5,2,5,5,4,5,2,2,2,4.0,3.57,3.79,Multiple H1s (4); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/security.md,how-to,5,2,4,5,5,3,2,5,4,4,4,2,2,2,3.71,3.29,3.5,Short content (242 words); Missing prerequisites; No version info
+how-to/software/automatic-updates.md,how-to,5,5,4,2,5,5,4,5,5,3,5,2,2,3,4.29,3.57,3.93,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/software/kernel-crash-dump.md,how-to,5,5,3,2,5,5,4,5,5,3,5,2,2,3,4.14,3.57,3.86,Multiple H1s (15); Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/software/package-management.md,how-to,5,5,3,3,5,5,2,5,5,3,5,2,2,2,4.0,3.43,3.71,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/software/report-a-bug.md,how-to,5,4,4,2,5,5,2,4,5,4,5,2,2,2,3.86,3.43,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/software/snapshot-service.md,how-to,5,5,4,1,5,5,4,5,5,3,5,5,2,4,4.14,4.14,4.14,No internal links; Excellent code examples
+how-to/software/upgrade-your-release.md,how-to,5,5,4,1,5,5,3,5,5,3,5,2,2,3,4.0,3.57,3.79,No internal links; Missing prerequisites; Excellent code examples
+how-to/software.md,how-to,5,1,4,4,5,3,2,3,4,3,4,2,2,2,3.43,2.86,3.14,Short content (94 words); Missing prerequisites; No version info
+how-to/sssd/troubleshooting.md,how-to,5,2,3,2,5,3,2,4,4,4,5,2,2,2,3.14,3.29,3.21,Multiple H1s (2); Short content (186 words); Missing prerequisites; No version info; Excellent code examples
+how-to/sssd/with-active-directory.md,how-to,5,4,4,2,5,5,3,5,5,3,5,5,2,3,4.0,4.0,4.0,Excellent code examples
+how-to/sssd/with-ldap-and-kerberos.md,how-to,5,4,5,3,5,5,3,5,5,3,5,5,2,3,4.29,4.0,4.14,Excellent code examples
+how-to/sssd/with-ldap.md,how-to,5,3,5,1,5,5,3,5,5,3,5,4,2,3,3.86,3.86,3.86,No internal links; Excellent code examples
+how-to/sssd.md,how-to,5,1,4,2,5,3,2,4,3,3,3,2,2,2,3.14,2.71,2.93,Short content (41 words); Missing prerequisites; No version info
+how-to/storage/iscsi-initiator-or-client.md,how-to,5,5,3,3,5,5,3,5,5,4,5,2,4,3,4.14,4.0,4.07,Multiple H1s (7); Missing prerequisites; Excellent code examples
+how-to/storage/manage-logical-volumes.md,how-to,5,5,5,2,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/storage.md,how-to,5,1,4,3,5,3,2,4,3,5,2,2,2,2,3.29,2.86,3.07,Short content (29 words); Missing prerequisites; No version info
+how-to/virtualisation/cloud-image-vms-with-uvtool.md,how-to,5,4,5,1,5,5,2,4,5,3,5,2,2,2,3.86,3.29,3.57,No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/virtualisation/enable-nested-virtualisation.md,how-to,5,3,5,2,5,5,2,5,5,3,5,2,2,2,3.86,3.43,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/virtualisation/libvirt.md,how-to,5,5,2,5,5,3,2,5,5,3,5,2,2,2,3.86,3.43,3.64,Multiple H1s (7); Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/virtualisation/multipass.md,how-to,5,3,5,4,5,3,3,5,5,4,5,2,2,3,4.0,3.71,3.86,Missing prerequisites; Excellent code examples
+how-to/virtualisation/qemu.md,how-to,5,5,5,4,5,3,4,4,5,3,5,2,2,4,4.43,3.57,4.0,Missing prerequisites; Excellent code examples; Comprehensive content
+how-to/virtualisation/sev-snp.md,how-to,5,3,4,1,5,5,4,4,4,3,3,2,2,3,3.86,3.0,3.43,No internal links; Missing prerequisites
+how-to/virtualisation/ubuntu-on-hyper-v.md,how-to,5,5,5,2,5,5,2,5,5,3,2,2,5,2,4.14,3.43,3.79,Missing prerequisites; No version info
+how-to/virtualisation/virtual-machine-manager.md,how-to,5,5,4,3,5,5,2,5,5,4,5,2,2,2,4.14,3.57,3.86,Missing prerequisites; No version info; Excellent code examples
+how-to/virtualisation.md,how-to,5,1,4,5,5,3,2,5,4,3,4,2,2,2,3.57,3.14,3.36,Short content (59 words); Missing prerequisites; No version info
+how-to/web-services/configure-apache2-settings.md,how-to,5,5,4,3,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/web-services/configure-nginx.md,how-to,5,4,4,4,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/web-services/install-a-squid-server.md,how-to,5,5,4,3,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples
+how-to/web-services/install-apache2.md,how-to,5,3,4,2,5,5,2,5,4,3,3,2,2,2,3.71,3.0,3.36,Missing prerequisites; No version info
+how-to/web-services/install-nginx.md,how-to,5,2,4,2,5,5,2,5,5,3,5,2,2,2,3.57,3.43,3.5,Short content (231 words); Missing prerequisites; No version info; Excellent code examples
+how-to/web-services/install-php.md,how-to,5,3,4,3,5,5,2,5,5,3,5,4,2,2,3.86,3.71,3.79,No version info; Excellent code examples
+how-to/web-services/install-ruby-on-rails.md,how-to,5,3,3,3,5,5,2,5,5,4,5,4,2,2,3.71,3.86,3.79,Multiple H1s (2); No version info; Excellent code examples
+how-to/web-services/use-apache2-modules.md,how-to,5,3,5,2,5,5,2,5,5,3,5,2,2,2,3.86,3.43,3.64,Missing prerequisites; No version info; Excellent code examples
+how-to/web-services/use-nginx-modules.md,how-to,5,2,4,1,5,5,2,5,4,3,5,2,2,2,3.43,3.29,3.36,Short content (273 words); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/web-services.md,how-to,5,1,4,4,5,5,2,4,4,3,4,2,2,2,3.71,3.0,3.36,Short content (130 words); Missing prerequisites; No version info
+how-to/wireguard-vpn/common-tasks.md,how-to,5,4,3,2,5,5,2,4,5,4,5,2,3,2,3.71,3.57,3.64,Multiple H1s (3); Missing prerequisites; No version info; Excellent code examples
+how-to/wireguard-vpn/on-an-internal-system.md,how-to,5,4,3,3,5,5,2,4,5,3,5,2,2,2,3.86,3.29,3.57,Multiple H1s (2); Missing prerequisites; No version info; Excellent code examples
+how-to/wireguard-vpn/peer-to-site-on-router.md,how-to,5,5,4,3,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/wireguard-vpn/peer-to-site.md,how-to,5,2,5,2,5,5,2,4,3,3,3,2,2,2,3.71,2.71,3.21,Short content (202 words); Missing prerequisites; No version info
+how-to/wireguard-vpn/security-tips.md,how-to,5,2,5,1,5,5,2,4,4,3,4,2,2,2,3.57,3.0,3.29,Short content (281 words); No internal links; Missing prerequisites; No version info
+how-to/wireguard-vpn/site-to-site.md,how-to,5,4,3,1,5,5,2,5,5,3,5,2,2,2,3.57,3.43,3.5,Multiple H1s (3); No internal links; Missing prerequisites; No version info; Excellent code examples
+how-to/wireguard-vpn/troubleshooting.md,how-to,5,4,5,2,5,3,2,5,5,3,5,2,2,2,3.71,3.43,3.57,Missing prerequisites; No version info; Excellent code examples
+how-to/wireguard-vpn/vpn-as-the-default-gateway.md,how-to,5,5,5,2,5,5,2,5,5,3,5,2,2,2,4.14,3.43,3.79,Missing prerequisites; No version info; Excellent code examples; Comprehensive content
+how-to/wireguard-vpn.md,how-to,5,1,4,2,5,5,2,5,4,3,4,2,2,2,3.43,3.14,3.29,Short content (79 words); Missing prerequisites; No version info
+reference/backups/archive-rotation-shell-script.md,reference,5,2,4,2,5,5,2,3,4,3,4,2,3,2,3.57,3.0,3.29,Multiple H1s (21); Short content (283 words); No version info
+reference/backups.md,reference,5,1,4,3,5,3,2,5,3,3,2,2,3,2,3.29,2.86,3.07,Short content (42 words); No version info
+reference/glossary.md,reference,5,5,4,5,5,3,2,5,5,4,1,2,3,2,4.14,3.14,3.64,No version info; Comprehensive content
+reference/high-availability/migrate-from-crmsh-to-pcs.md,reference,5,2,5,1,5,5,2,5,2,3,1,2,3,2,3.57,2.57,3.07,Short content (231 words); No internal links; No version info
+reference/high-availability.md,reference,5,1,4,3,5,5,2,5,3,4,2,2,3,2,3.57,3.0,3.29,Short content (51 words); No version info
+reference/installation/system-requirements.md,reference,5,2,4,2,5,5,4,5,3,3,1,2,3,3,3.86,2.86,3.36,Short content (267 words)
+reference/other-tools/byobu.md,reference,5,3,4,1,5,3,2,5,4,3,1,2,3,2,3.29,2.86,3.07,No internal links; No version info
+reference/other-tools/pam-motd.md,reference,5,3,4,2,5,5,2,5,4,4,3,2,3,2,3.71,3.29,3.5,No version info
+reference/other-tools/sudo-rs.md,reference,5,2,4,1,5,5,2,4,3,3,1,2,4,2,3.43,2.71,3.07,Short content (195 words); No internal links; No version info
+reference/other-tools.md,reference,5,1,4,3,5,5,2,5,3,4,2,2,3,2,3.57,3.0,3.29,Short content (53 words); No version info
+tutorial/attach-your-ubuntu-pro-subscription.md,tutorial,5,3,5,1,5,5,2,5,4,3,5,2,3,2,3.71,3.43,3.57,No internal links; No version info; Excellent code examples
+tutorial/basic-installation.md,tutorial,5,4,5,4,5,5,2,5,4,3,1,2,3,2,4.29,2.86,3.57,No version info
+tutorial/managing-software.md,tutorial,4,5,4,3,4,5,4,5,5,3,5,5,3,4,4.14,4.29,4.21,Excellent code examples; Comprehensive content
