@@ -1,6 +1,7 @@
 # Leave a blank line at the end of this file to support concatenation
 agentless
 Alertmanager
+allowlisted
 Apport
 APT's
 architected
@@ -15,6 +16,7 @@ autoinstall
 autorid
 backtrace
 Bacula
+blocklisted
 BMC's
 bootable
 bootloader
