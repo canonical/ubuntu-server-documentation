@@ -47,7 +47,7 @@ documentation directly to fix:
 - Unclear explanations or imprecise language.
 - Testing tutorials and how-to guide steps.
 - Fixing or creating graphics from code using Mermaid. If you are not familiar
-  with the syntax, they have a live [online generator](https://www.mermaidchart.com/app/dashboard) tool that will create
+  with the syntax, they have a live [online generator](https://www.mermaidchart.com/app/login?redirect=%2Fapp%2Fdashboard) tool that will create
   the code for a diagram you design.
 
 [Find low-code issues to work on](https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aissue+is%3Aopen+label%3A%22code%3A+low-code%22+no%3Aassignee).
