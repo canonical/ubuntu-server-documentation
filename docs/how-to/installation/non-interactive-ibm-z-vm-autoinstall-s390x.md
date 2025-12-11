@@ -12,7 +12,7 @@ This non-interactive installation uses 'autoinstall', which can be considered th
 
 The example z/VM guest here uses a direct-access storage device ({term}`DASD`) and is connected to a regular (non-VLAN) network.
 
-For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR (s390x) installation using autoinstall](https://discourse.ubuntu.com/t/non-interactive-ibm-z-lpar-s390x-installation-using-autoinstall/16988) guide.
+For a zFCP and a VLAN network example, please see the {ref}`non-interactive IBM LPAR (s390x) installation using autoinstall <non-interactive-ibm-z-lpar-autoinstall-s390x>` guide.
 
 * Start with the preparation of the (FTP) install server (if it doesn't already exist).
 

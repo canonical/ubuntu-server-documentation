@@ -25,7 +25,8 @@ The packages for these follow the pattern of `librte-pmd-<type>-<version>`. Ther
 
 The more commonly used, tested and fully supported drivers are installed as dependencies of `dpdk`. But there are [many more "in-universe"](https://help.ubuntu.com/community/Repositories/Ubuntu#The_Four_Main_Repositories) that follow the same naming pattern.
 
-## <h2 id="heading--unassign-default-kernel-drivers">Unassign the default kernel drivers </a>
+(unassign-default-kernel-drivers)=
+## Unassign the default kernel drivers
 
 Cards must be unassigned from their kernel driver and instead be assigned to `uio_pci_generic` of `vfio-pci`. `uio_pci_generic` is older and it's (usually) easier to get it to work. However, it also has fewer features and less isolation.
 
