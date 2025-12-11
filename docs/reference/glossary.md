@@ -61,7 +61,7 @@ ADSys
     execution.
 
     See also:
-    * [the ADSys documentation](https://documentation.ubuntu.com/adsys/en/stable/)
+    * [the ADSys documentation](https://documentation.ubuntu.com/adsys/stable/)
 
     Related topic(s):
     * {term}`Group Policy Object` and {term}`SSSD`
@@ -1798,7 +1798,7 @@ pockets
     Sub-repositories within the Ubuntu Package Archive.
 
     See also:
-    * [Ubuntu Project: pockets](https://canonical-ubuntu-project.readthedocs-hosted.com/how-ubuntu-is-made/concepts/package-archive/#pockets)
+    * [Ubuntu Project: pockets](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#pockets)
 
 POSIX
 Portable Operating System Interface (for UNIX)

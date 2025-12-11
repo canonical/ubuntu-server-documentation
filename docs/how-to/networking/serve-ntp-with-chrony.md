@@ -279,7 +279,7 @@ sample NTP1          0.000485216  1588265807.000485216  1588265807.000000000 0 -
 
 ## NTS Support
 
-In Chrony 4.0 (which first appeared in Ubuntu 21.04 Hirsute) support for [Network Time Security "NTS"](https://www.networktimesecurity.org/) was added.
+In Chrony 4.0 (which first appeared in Ubuntu 21.04 Hirsute) support for [Network Time Security "NTS"](https://web.archive.org/web/20241130024605/http://networktimesecurity.org/) was added.
 
 ### NTS server
 
@@ -339,7 +339,7 @@ Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom
 
 ## References
 
-- [`chrony` FAQ](https://chrony.tuxfamily.org/faq.html)
+- [`chrony` FAQ](https://chrony-project.org/faq.html)
 
 - [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
 

@@ -128,7 +128,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBA>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a QETH device would look like this: `chzdev qeth -e 0600`.
 
-* For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
+* For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) page.
 
 * Now make sure a HTTP server is running with `/srv/www` as web-server root (in this particular example).
 

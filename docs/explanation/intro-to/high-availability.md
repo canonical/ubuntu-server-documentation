@@ -56,7 +56,7 @@ Packages in this list are supported just like any other package available in the
 | `libqb` | [Ubuntu](https://launchpad.net/ubuntu/+source/libqb) \| [Upstream](http://clusterlabs.github.io/libqb/)
 | `kronosnet` | [Ubuntu](https://launchpad.net/ubuntu/+source/kronosnet) \| [Upstream](https://kronosnet.org/)
 | `corosync` | [Ubuntu](https://launchpad.net/ubuntu/+source/corosync) \| [Upstream](http://corosync.github.io/corosync/)
-| `pacemaker` | [Ubuntu](https://launchpad.net/ubuntu/+source/pacemaker) \| [Upstream](https://www.clusterlabs.org/pacemaker/)
+| `pacemaker` | [Ubuntu](https://launchpad.net/ubuntu/+source/pacemaker) \| [Upstream](https://clusterlabs.org/projects/pacemaker/)
 | `resource-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/resource-agents) \| [Upstream](https://github.com/ClusterLabs/resource-agents)
 | `fence-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/fence-agents) \| [Upstream](https://github.com/ClusterLabs/fence-agents)
 | `crmsh` |[Ubuntu](https://launchpad.net/ubuntu/+source/crmsh) \| [Upstream](https://github.com/ClusterLabs/crmsh)

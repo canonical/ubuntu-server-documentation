@@ -37,7 +37,7 @@ There are also many other OpenStack components and supporting services available
 
 ## OpenStack installation
 
-The most straightforward way to get started with OpenStack on Ubuntu is to use [MicroStack](https://microstack.run/docs/single-node) since the entire installation process requires only 2 commands and takes around 20 minutes.
+The most straightforward way to get started with OpenStack on Ubuntu is to use [MicroStack](https://canonical-openstack.readthedocs-hosted.com/en/latest/tutorial/get-started-with-openstack/) since the entire installation process requires only 2 commands and takes around 20 minutes.
 
 Apart from MicroStack, multiple different installation methods for OpenStack on Ubuntu are available. These include:
 

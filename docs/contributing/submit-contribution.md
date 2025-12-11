@@ -103,7 +103,7 @@ what you've presented in the guide?
 
 - [Create a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) against the Ubuntu Server documentation repository.
 
-- [Link your pull request to your issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue), typically by adding
+- [Link your pull request to your issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue), typically by adding
   `fixes #<issue-number>` to your description.
 
 - Give your pull request a description and click on submit!

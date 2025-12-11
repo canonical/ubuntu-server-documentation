@@ -150,7 +150,7 @@ Once an archive has been created, it is important to test the archive. The archi
 
 ## Further reading
 
-- For more information on shell scripting see the [Advanced Bash-Scripting Guide](http://tldp.org/LDP/abs/html/).
+- For more information on shell scripting see the [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/).
 
 - The [`cron` how-to wiki page](https://help.ubuntu.com/community/CronHowto) contains details on advanced `cron` options.
 
@@ -164,6 +164,6 @@ Once an archive has been created, it is important to test the archive. The archi
     
   - [`dd`](http://www.gnu.org/software/coreutils/): part of the `coreutils` package. A low level utility that can copy data from one format to another.
    
-  - [`rsnapshot`](http://www.rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the {ref}`Tools - rsnapshot <install-rsnapshot>` for some information.
+  - [`rsnapshot`](https://rsnapshot.org/): a file system snapshot utility used to create copies of an entire file system. Also check the {ref}`Tools - rsnapshot <install-rsnapshot>` for some information.
     
   - {manpage}`rsync(1)`: a flexible utility used to create incremental copies of files.

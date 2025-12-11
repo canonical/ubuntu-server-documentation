@@ -132,7 +132,7 @@ This will allow you to edit the [XML representation that defines the guest](http
 Editing the XML directly certainly is the most powerful way, but also the most complex one. Tools like {ref}`Virtual Machine Manager / Viewer <virtual-machine-manager>` can help inexperienced users to do most of the common tasks.
 
 ```{note}
-If `virsh` (or other `vir*` tools) connect to something other than the default `qemu-kvm`/system hypervisor, one can find alternatives for the `--connect` option using `man virsh` or the [libvirt docs](http://libvirt.org/uri.html).
+If `virsh` (or other `vir*` tools) connect to something other than the default `qemu-kvm`/system hypervisor, one can find alternatives for the `--connect` option using `man virsh` or the [libvirt docs](https://libvirt.org/uri.html).
 ```
 
 ### `system` and `session` scope
@@ -171,7 +171,7 @@ There are different types of migration available depending on the versions of li
 
 - [Live migration](https://libvirt.org/migration.html)
 
-- [Postcopy migration](http://wiki.qemu.org/Features/PostCopyLiveMigration)
+- [Postcopy migration](https://wiki.qemu.org/Features/PostCopyLiveMigration)
 
 There are various options to those methods, but the entry point for all of them is `virsh migrate`. Read the integrated help for more detail.
 
@@ -528,14 +528,14 @@ While `virtiofs` works with >=20.10 (Groovy), with >=21.04 (Hirsute) it became m
 
 ## Resources
 
-- See the [KVM home page](http://www.linux-kvm.org/) for more details.
+- See the [KVM home page](https://linux-kvm.org/page/Main_Page) for more details.
 
-- For more information on libvirt see the [libvirt home page](http://libvirt.org/).
+- For more information on libvirt see the [libvirt home page](https://libvirt.org/).
 
   - XML configuration of [domains](https://libvirt.org/formatdomain.html) and [storage](https://libvirt.org/formatstorage.html) are the most often used libvirt reference.
 
 - Another good resource is the [Ubuntu Wiki KVM](https://help.ubuntu.com/community/KVM) page.
 
-- For basics on how to assign VT-d devices to QEMU/KVM, please see the [linux-kvm](http://www.linux-kvm.org/page/How_to_assign_devices_with_VT-d_in_KVM#Assigning_the_device) page.
+- For basics on how to assign VT-d devices to QEMU/KVM, please see the [linux-kvm](https://www.linux-kvm.org/page/How_to_assign_devices_with_VT-d_in_KVM#Assigning_the_device) page.
 
 - [Introduction to Memory Management in Linux](https://www.youtube.com/watch?v=7aONIVSXiJ8)

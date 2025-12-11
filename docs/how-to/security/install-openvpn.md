@@ -167,7 +167,7 @@ Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` yo
 OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
 ```
 
-You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
+You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
 
 ```bash
 sudo journalctl -u openvpn@myserver -xe
@@ -497,6 +497,6 @@ The provider order matters here as tpm2 currently requires the legacy provider t
 ## Further reading
 
 - [EasyRSA](https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md)
-- [OpenVPN quick start guide](https://openvpn.net/quick-start-guide/)
+- [OpenVPN quick start guide](https://openvpn.net/as-docs/getting-started.html)
 - OpenVPN as a snap [easy-openvpn](https://snapcraft.io/easy-openvpn-server)
 - Debian's [OpenVPN Guide](https://wiki.debian.org/OpenVPN)

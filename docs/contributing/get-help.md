@@ -36,16 +36,16 @@ can also "ping" them in that comment to send them a notification by using
 ## Community forums
 
 For more general questions about Ubuntu Server, you're welcome to
-[create a post](https://discourse.ubuntu.com/c/server/17) on the Ubuntu Server forum.
+[create a post](https://discourse.ubuntu.com/c/project/server/17) on the Ubuntu Server forum.
 
-You can also use the [Canonical Open Documentation Academy (CODA) forum](https://discourse.ubuntu.com/c/open-documentation-academy),
+You can also use the [Canonical Open Documentation Academy (CODA) forum](https://discourse.ubuntu.com/c/community/open-documentation-academy/166),
 which is the hub for questions about documentation specifically. It includes
 our Getting started guide and links to our weekly Documentation office hours,
 alongside meeting notes, updates, external links and discussions.
 
 ## Synchronous chat
 
-For more interactive chat, the documentation team [can be found on Matrix](https://matrix.to/#/#documentation:ubuntu.com).
+For more interactive chat, the documentation team {matrix}`can be found on Matrix <documentation>`.
 
 ## Calendar
 

@@ -7,7 +7,7 @@ myst:
 (create-vms-with-multipass)=
 # How to create a VM with Multipass
 
-[Multipass](https://multipass.run) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.
+[Multipass](https://canonical.com/multipass) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.
 
 On Linux it's available as a snap:
 
@@ -164,7 +164,7 @@ If you already have a hypervisor interacting with {ref}`libvirt`, such as {term}
 be managing virtual machines through tools like [virt-manager](https://virt-manager.org/) or the older {ref}`uvtool <cloud-image-vms-with-uvtool>`.
 
 In that case, integrating Multipass with your existing setup would allow VMs to share the same network bridge for communication
-and be managed using `virsh`. However, Multipass runs as a headless system, so you don't have direct GUI access through virt-viewer. Follow this [guide](https://canonical.com/multipass/docs/set-up-a-graphical-interface) to set up a GUI. 
+and be managed using `virsh`. However, Multipass runs as a headless system, so you don't have direct GUI access through virt-viewer. Follow this [guide](https://documentation.ubuntu.com/multipass/latest/how-to-guides/customise-multipass/set-up-a-graphical-interface/) to set up a GUI. 
 
 To begin, integrate Multipass into your existing setup by selecting `libvirt` as your local driver:
 
@@ -188,7 +188,7 @@ $ virsh list
  15    engaged-amberjack              running
 ```
 
-For more detailed and comprehensive instructions on changing your drivers, refer to the [Multipass drivers documentation](https://multipass.run/docs/set-up-the-driver).
+For more detailed and comprehensive instructions on changing your drivers, refer to the [Multipass drivers documentation](https://documentation.ubuntu.com/multipass/latest/how-to-guides/customise-multipass/set-up-the-driver/).
 
 ## Get help
 
@@ -200,4 +200,4 @@ multipass help <command>
 multipass help --all
 ```
 
-Or, check out the [Multipass documentation](https://multipass.run/docs) for more details on how to use it.
+Or, check out the [Multipass documentation](https://documentation.ubuntu.com/multipass/latest/) for more details on how to use it.

@@ -33,7 +33,7 @@ started.
 There are some prerequisites to contributing to Ubuntu Server documentation.
 
 - **Code of Conduct**
-  You will need to read and agree to the Ubuntu [Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct). By
+  You will need to read and agree to the Ubuntu [Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct). By
   participating, you implicitly agree to abide by the Code of Conduct. 
 
 - **GitHub account**
@@ -53,8 +53,8 @@ There are some prerequisites to contributing to Ubuntu Server documentation.
   
   This license protects your copyright over your contributions, including the
   right to use them elsewhere, but grants us (Canonical) permission to use
-  them in our project. You can read [more about the CLA](https://ubuntu.com/legal/contributors) before you
-  [sign the CLA](https://ubuntu.com/legal/contributors/agreement).
+  them in our project. You can read [more about the CLA](https://canonical.com/legal/contributors) before you
+  [sign the CLA](https://canonical.com/legal/contributors/agreement).
 
 ## The Ubuntu Server docs overview
 
