@@ -55,6 +55,8 @@ ogp_site_name = project
 # Preview image URL
 ogp_image = "https://assets.ubuntu.com/v1/cc828679-docs_illustration.svg"
 
+# Tell the Open Graph extension to use the standard HTML meta description
+ogp_enable_meta_description = True
 
 # Product favicon; shown in bookmarks, browser tabs, etc.
 html_favicon = ".sphinx/_static/favicon.png"
