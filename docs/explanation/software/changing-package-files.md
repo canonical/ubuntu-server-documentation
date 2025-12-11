@@ -131,7 +131,7 @@ systemctl status apache2
 
 ## AppArmor
 
-Packages that use [AppArmor](https://documentation.ubuntu.com/server/security-apparmor/) will install AppArmor profiles in the `/etc/apparmor.d/` directory. These files are often named after the process being protected, such as `usr.bin.firefox` and `usr.sbin.libvirtd`.
+Packages that use {ref}`AppArmor <apparmor>` will install AppArmor profiles in the `/etc/apparmor.d/` directory. These files are often named after the process being protected, such as `usr.bin.firefox` and `usr.sbin.libvirtd`.
 
 When these files are modified manually, it can lead to a conflict during updates. This will show up in `apt` with something like:
 

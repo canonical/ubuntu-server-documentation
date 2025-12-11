@@ -7,7 +7,7 @@ myst:
 (member-server-in-an-ad-domain)=
 # Member server in an Active Directory domain
 
-A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from [Network User Authentication with SSSD](https://discourse.ubuntu.com/t/introduction-to-network-user-authentication-with-sssd/11579), where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
+A Samba server needs to join the Active Directory (AD) domain before it can serve files and printers to Active Directory users. This is different from {ref}`Network User Authentication with SSSD <introduction-to-network-user-authentication-with-sssd>`, where we integrate the AD users and groups into the local Ubuntu system as if they were local. 
 
 For Samba to authenticate these users via Server Message Block (SMB) authentication protocols, we need both for the remote users to be "seen", and for Samba itself to be aware of the domain. In this scenario, Samba is called a Member Server or Domain Member.
 

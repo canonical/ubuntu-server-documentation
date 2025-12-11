@@ -8,7 +8,7 @@ myst:
 # How to use Open vSwitch with DPDK
 
 
-Since [DPDK is *just* a library](https://documentation.ubuntu.com/server/network-dpdk/), it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
+Since {ref}`DPDK is just a library <about-dpdk>`, it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
 
 Here is a brief example of how to install and configure a basic Open vSwitch using DPDK for later use via `libvirt`/`qemu-kvm`.
 
@@ -26,7 +26,7 @@ sudo service openvswitch-switch restart
 ```
 
 ```{note}
-You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on [unassigning the default kernel drivers](https://documentation.ubuntu.com/server/explanation/networking/about-dpdk/index.html#unassign-the-default-kernel-drivers).
+You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on {ref}`unassigning the default kernel drivers <unassign-default-kernel-drivers>`.
 ```
 
 Please note that the section `_dpdk-alloc-mem=2048_` in the above example is the most basic non-uniform memory access (NUMA) setup for a single socket system. If you have multiple sockets you may want to define how the memory should be split among them. More details about these options are outlined in [Open vSwitch setup](https://docs.openvswitch.org/en/latest/intro/install/dpdk/#setup-ovs).
