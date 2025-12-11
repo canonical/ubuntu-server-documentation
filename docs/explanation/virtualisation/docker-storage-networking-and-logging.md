@@ -86,7 +86,7 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
 
 ### Storage drivers
 
-Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimize the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/storage/storagedriver/#images-and-layers).
+Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimize the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/engine/storage/drivers/#images-and-layers).
 
 The default storage driver is the `overlay2` which is backed by `OverlayFS`. This driver is recommended by upstream for use in production systems. The following storage drivers are available and are supported in Ubuntu (as at the time of writing):
 
@@ -96,7 +96,7 @@ The default storage driver is the `overlay2` which is backed by `OverlayFS`. Thi
 - **Device Mapper**: it is a kernel-based framework that underpins many advanced volume management technologies on Linux. The Docker storage driver is called `devicemapper`.
 - **VFS**: it is not a union filesystem, instead, each layer is a directory on disk, and there is no copy-on-write support. To create a new layer, a "deep copy" is done of the previous layer. This driver does not perform well compared to the others, however, it is robust, stable and works in any environment. The Docker storage driver is called `vfs`.
 
-The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/storage/storagedriver/) for more information. Keep in mind that this is a {term}`JSON` file and all lines should end with a comma (`,`) except the last one.
+The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/engine/storage/drivers/) for more information. Keep in mind that this is a {term}`JSON` file and all lines should end with a comma (`,`) except the last one.
 
 ## Networking
 
@@ -119,12 +119,12 @@ The following logging drivers are available (at the time of writing):
 - **`local`**: write logs to an internal storage that is optimized for performance and disk use.
 - **{term}`journald`**: send logs to systemd journal.
 - **`syslog`**: send logs to a syslog server.
-- **`logentries`**: send container logs to the [Logentries](https://logentries.com/) server.
-- **{term}`gelf`**: write logs in a {term}`Graylog` Extended Format which is understood by many tools, such as [Graylog](https://www.graylog.org/), [Logstash](https://www.elastic.co/products/logstash), and [Fluentd](https://www.fluentd.org).
+- **`logentries`**: send container logs to the [Logentries](https://www.rapid7.com/products/siem/) server.
+- **{term}`gelf`**: write logs in a {term}`Graylog` Extended Format which is understood by many tools, such as [Graylog](https://graylog.org/), [Logstash](https://www.elastic.co/logstash), and [Fluentd](https://www.fluentd.org).
 - **`awslogs`**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
 - **`etwlogs`**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
 - **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
-- **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://cloud.google.com/logging/docs/) Logging.
+- **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://docs.cloud.google.com/logging/docs) Logging.
 - **`splunk`**: sends container logs to [HTTP Event Collector](https://dev.splunk.com/enterprise/docs/devtools/httpeventcollector/) in Splunk Enterprise and Splunk Cloud.
 
 ## Resources

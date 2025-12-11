@@ -175,7 +175,7 @@ For applications that can be configured to use a CA certificate, you should also
 
 ## Further reading
 
-- The Wikipedia [HTTPS page](http://en.wikipedia.org/wiki/HTTPS) has more information regarding HTTPS.
+- The Wikipedia [HTTPS page](https://en.wikipedia.org/wiki/HTTPS) has more information regarding HTTPS.
 
 - For more information on OpenSSL see the [OpenSSL Home Page](https://www.openssl.org/).
 

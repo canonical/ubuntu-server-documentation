@@ -132,7 +132,7 @@ documentation.
    {ref}`Active Directory integration <explanation-active-directory-integration>`,
    or {ref}`learn how to set it up <how-to-active-directory-integration>`.
    You may also find {term}`ADSys`, the Group Policy client for Ubuntu, helpful. See
-   the [ADSys documentation](https://documentation.ubuntu.com/adsys/en/latest/)
+   the [ADSys documentation](https://documentation.ubuntu.com/adsys/latest/)
    for more details.
 1. **AppArmor** is strongly recommended in order to limit the system access and
    capabilities of the software running on your systems. It enforces Mandatory
@@ -185,7 +185,7 @@ Authorities (CA), our how-to guide will show you how to
 
 If you need to adhere to specific industry standards, or are otherwise operating
 in a high security environment, refer to the
-[Ubuntu Security documentation](https://ubuntu.com/security/compliance-automation).
+[Ubuntu Security documentation](https://ubuntu.com/security/security-standards).
 
 
 

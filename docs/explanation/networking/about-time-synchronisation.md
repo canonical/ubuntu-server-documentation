@@ -39,10 +39,10 @@ While use of `ntpd` is no longer recommended, this also still applies to `ntpd` 
 ## Further reading
 
 - [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
-- [pool.ntp.org: project of virtual cluster of timeservers](http://www.pool.ntp.org/)
+- [pool.ntp.org: project of virtual cluster of timeservers](https://www.ntppool.org/en/)
 
-- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
-- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
+- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
+- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/latest/systemd-timesyncd.service.html)
 
 - [`chrony` FAQ](https://chrony-project.org/faq.html)
 - [Feeding `chrony` from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
