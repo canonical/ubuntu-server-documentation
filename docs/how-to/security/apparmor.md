@@ -274,8 +274,8 @@ apparmor module is loaded.
 
 ## Further reading
 
-- See the [AppArmor Administration Guide](http://www.novell.com/documentation/apparmor/apparmor201_sp10_admin/index.html?page=/documentation/apparmor/apparmor201_sp10_admin/data/book_apparmor_admin.html) for advanced configuration options.
+- See the [AppArmor Administration Guide](http://www.novell.com/documentation/apparmor/apparmor201_sp10_admin/?page=/documentation/apparmor/apparmor201_sp10_admin/data/book_apparmor_admin.html) for advanced configuration options.
 - For details using AppArmor with other Ubuntu releases see the [AppArmor Community Wiki](https://help.ubuntu.com/community/AppArmor) page.
-- The [OpenSUSE AppArmor](http://en.opensuse.org/SDB:AppArmor_geeks) page is another introduction to AppArmor.
+- The [OpenSUSE AppArmor](https://en.opensuse.org/SDB:AppArmor_geeks) page is another introduction to AppArmor.
 - (https://wiki.debian.org/AppArmor) is another introduction and basic how-to for AppArmor.
 - A great place to get involved with the Ubuntu Server community and to ask for AppArmor assistance is the [#server channel on Matrix](https://matrix.to/#/#server:ubuntu.com). The [#security channel](https://matrix.to/#/#security:ubuntu.com) may also be of use.
