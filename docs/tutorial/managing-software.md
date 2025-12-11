@@ -985,7 +985,7 @@ Instead of **versions** as we have them in debs, snaps use the concept of [chann
 
 By default, snaps are kept automatically up-to-date, so we don't need to remember to update and upgrade them. There are times on a live system, such as a server in a production environment, where we might not want to have updates automatically applied. In those cases, we can [turn off automatic updates](https://snapcraft.io/docs/managing-updates) and refresh the system snaps when it's convenient (for example, during a maintenance window).
 
-If you would like to try out snaps, we recommend the excellent [quickstart tour](https://snapcraft.io/docs/quickstart-tour) tutorial in the snap documentation. Feel free to continue using the VM we've been using in this tutorial while exploring!
+If you would like to try out snaps, we recommend the excellent [quickstart tour](https://snapcraft.io/docs/get-started) tutorial in the snap documentation. Feel free to continue using the VM we've been using in this tutorial while exploring!
 
 ## Completion!
 
