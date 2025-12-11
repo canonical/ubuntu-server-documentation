@@ -21,7 +21,7 @@ The database service is automatically configured with viable defaults, but can b
 
 ## Configure PostgreSQL
 
-PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is the default authentication method used for `local` connections, while `scram-sha-256` is the default for `host` connections (this used to be `md5` until Ubuntu 21.10). Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) if you would like to configure alternatives like Kerberos.
+PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is the default authentication method used for `local` connections, while `scram-sha-256` is the default for `host` connections (this used to be `md5` until Ubuntu 21.10). Please refer to the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) if you would like to configure alternatives like Kerberos.
 
 The following discussion assumes that you wish to enable TCP/IP connections and use the `scram-sha-256` method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
 
@@ -70,7 +70,7 @@ sudo systemctl restart postgresql.service
 ```
 
 ```{warning}
-The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) to configure more parameters.
+The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) to configure more parameters.
 ```
 
 You can test server connections from other machines by using the PostgreSQL client as follows, replacing the domain name with your actual server domain name or IP address:
@@ -82,7 +82,7 @@ psql --host your-servers-dns-or-ip --username postgres --password --dbname templ
 
 ## Streaming replication
 
-PostgreSQL has a nice feature called **streaming replication** which provides the ability to continuously ship and apply the Write-Ahead Log [(WAL) XLOG](http://www.postgresql.org/docs/current/static/wal.html) records to some number of standby servers to keep them current. Here is a simple way to replicate a PostgreSQL server (main) to a standby server.
+PostgreSQL has a nice feature called **streaming replication** which provides the ability to continuously ship and apply the Write-Ahead Log [(WAL) XLOG](https://www.postgresql.org/docs/current/wal.html) records to some number of standby servers to keep them current. Here is a simple way to replicate a PostgreSQL server (main) to a standby server.
 
 First, create a replication user in the main server, to be used from the standby server:
 
@@ -153,7 +153,7 @@ To make sure it is working, go to the main server and run the following command:
 sudo -u postgres psql -c "select * from pg_stat_replication;"
 ```
 
-As mentioned, this is a very simple introduction, there are way more great details in the upstream documentation about the configuration of [replication](https://www.postgresql.org/docs/current/static/runtime-config-replication.html) as well as further [High Availability, Load Balancing, and Replication](https://www.postgresql.org/docs/current/static/high-availability.html).
+As mentioned, this is a very simple introduction, there are way more great details in the upstream documentation about the configuration of [replication](https://www.postgresql.org/docs/current/runtime-config-replication.html) as well as further [High Availability, Load Balancing, and Replication](https://www.postgresql.org/docs/current/high-availability.html).
 
 To test the replication you can now create a test database in the main server and check if it is replicated in the standby server:
 
@@ -166,11 +166,11 @@ You need to be able to see the `test` database, that was created on the main ser
 
 ## Backups
 
-PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/backup.html) for different approaches.
+PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/backup.html) for different approaches.
 
 ## Further reading
 
-- As mentioned above, the [PostgreSQL Administrator's Guide](http://www.postgresql.org/docs/current/static/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
+- As mentioned above, the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
 
   ```bash
   sudo apt install postgresql-doc
