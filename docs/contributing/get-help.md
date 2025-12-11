@@ -49,6 +49,6 @@ For more interactive chat, the documentation team {matrix}`can be found on Matri
 
 ## Calendar
 
-Subscribe to the [Documentation event calendar](https://workspace.google.com/intl/en-US/products/calendar/). Not only does this include
+Subscribe to the [Documentation event calendar](https://calendar.google.com/calendar/u/0?cid=Y19mYTY4YzE5YWEwY2Y4YWE1ZWNkNzMyNjZmNmM0ZDllOTRhNTIwNTNjODc1ZjM2ZmQ3Y2MwNTQ0MzliOTIzZjMzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20). Not only does this include
 the Documentation office hours, it will also include any other discussion or
 training events we organize.
