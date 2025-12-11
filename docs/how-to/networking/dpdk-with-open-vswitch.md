@@ -8,7 +8,7 @@ myst:
 # How to use Open vSwitch with DPDK
 
 
-Since {ref}`DPDK is *just* a library <about-dpdk>`, it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
+Since {ref}`DPDK is just a library <about-dpdk>`, it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
 
 Here is a brief example of how to install and configure a basic Open vSwitch using DPDK for later use via `libvirt`/`qemu-kvm`.
 
