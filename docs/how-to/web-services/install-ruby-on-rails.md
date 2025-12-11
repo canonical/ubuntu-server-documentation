@@ -93,6 +93,6 @@ That's it! Now your Server is ready for your Ruby on Rails application. You can 
 
 ## Further reading
 
-- See the [Ruby on Rails](http://rubyonrails.org/) website for more information.
+- See the [Ruby on Rails](https://rubyonrails.org/) website for more information.
 
-- [Agile Development with Rails](https://pragprog.com/book/rails4/agile-web-development-with-rails-4) is also a great resource.
+- [Agile Development with Rails](https://pragprog.com/titles/rails4/agile-web-development-with-rails-4/) is also a great resource.

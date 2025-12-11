@@ -41,7 +41,7 @@ Install Exim4 <mail-services/install-exim4>
     
 ## Mail Delivery Agent
 
-[Dovecot](https://www.dovecot.org/) is an MDA written with security primarily in mind. It supports the [mbox](https://en.wikipedia.org/wiki/Mbox) and [Maildir](https://en.wikipedia.org/wiki/Maildir) mailbox formats. 
+[Dovecot](https://dovecot.org/) is an MDA written with security primarily in mind. It supports the [mbox](https://en.wikipedia.org/wiki/Mbox) and [Maildir](https://en.wikipedia.org/wiki/Maildir) mailbox formats. 
   
 * {ref}`Install Dovecot <install-dovecot>` explains how to set up Dovecot as an IMAP or POP3 server
 

@@ -170,6 +170,6 @@ Now that you know how to configure Apache2, you may also want to know {ref}`how 
 
 - The [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the `apache2-doc` package for the official Apache2 docs.
 
-- O'Reilly's [Apache Cookbook](http://shop.oreilly.com/product/9780596529949.do) is a good resource for accomplishing specific Apache2 configurations.
+- O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
 
-- For Ubuntu specific Apache2 questions, ask in the `#ubuntu-server` IRC channel on [libera.chat](https://libera.chat/).
+- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.
