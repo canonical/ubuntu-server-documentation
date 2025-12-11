@@ -396,8 +396,8 @@ Here are some troubleshooting tips.
 
 ## Further reading
 
-- See [exim.org](http://www.exim.org/) for more information.
+- See [exim.org](https://www.exim.org/) for more information.
   
 - Another resource is the [Exim4 Ubuntu Wiki](https://help.ubuntu.com/community/Exim4) page.
 
-- Further resources to [set up mailman3 with Exim4](https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#exim).
+- Further resources to [set up mailman3 with Exim4](https://docs.mailman3.org/projects/mailman/en/latest/src/mailman/docs/mta.html#exim).

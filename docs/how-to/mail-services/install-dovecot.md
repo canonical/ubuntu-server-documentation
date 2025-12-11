@@ -27,7 +27,7 @@ To configure Dovecot, edit the file `/etc/dovecot/dovecot.conf` and its included
 
 IMAPS and POP3S are more secure because they use SSL encryption to connect. A basic self-signed SSL certificate is automatically set up by package `ssl-cert` and used by Dovecot in `/etc/dovecot/conf.d/10-ssl.conf`.
 
-`Mbox` format is configured by default, but you can also use `Maildir` if required. More details can be found in the comments in `/etc/dovecot/conf.d/10-mail.conf`. Also see [the Dovecot web site](https://doc.dovecot.org/admin_manual/mailbox_formats/) to learn about further benefits and details.
+`Mbox` format is configured by default, but you can also use `Maildir` if required. More details can be found in the comments in `/etc/dovecot/conf.d/10-mail.conf`. Also see [the Dovecot web site](https://doc.dovecot.org/main/) to learn about further benefits and details.
 
 Make sure to also configure your chosen Mail Transport Agent (MTA) to transfer the incoming mail to the selected type of mailbox.
 
@@ -70,7 +70,7 @@ ssl_key = </etc/dovecot/private/dovecot.key
 You can get the SSL certificate from a Certificate Issuing Authority or you can create self-signed one. Once you create the certificate, you will have a key file and a certificate file that you want to make known in the config shown above.
 
 ```{seealso}
-For more details on creating custom certificates, see our guide on [security certificates](https://discourse.ubuntu.com/t/security-certificates/11885).
+For more details on creating custom certificates, see our guide on [security certificates](https://discourse.ubuntu.com/t/certificates/11885).
 ```
 
 ## Configure a firewall for an email server
@@ -87,6 +87,6 @@ To access your mail server from another computer, you must configure your firewa
 
 ## Further reading
 
-- The [Dovecot website](http://www.dovecot.org/) has more general information about Dovecot.
-- The [Dovecot manual](https://doc.dovecot.org) provides full documentation for Dovecot use.
+- The [Dovecot website](https://dovecot.org/) has more general information about Dovecot.
+- The [Dovecot manual](https://doc.dovecot.org/latest/) provides full documentation for Dovecot use.
 - The [Dovecot Ubuntu Wiki](https://help.ubuntu.com/community/Dovecot) page has more details on configuration.

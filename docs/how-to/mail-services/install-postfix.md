@@ -172,7 +172,7 @@ sudo systemctl restart postfix.service
 
 ## SASL
 
-Postfix supports SMTP-AUTH as defined in [RFC2554](http://www.ietf.org/rfc/rfc2554.txt). It is based on [SASL](http://www.ietf.org/rfc/rfc2222.txt). However it is still necessary to set up SASL authentication before you can use SMTP-AUTH.
+Postfix supports SMTP-AUTH as defined in [RFC2554](https://www.ietf.org/rfc/rfc2554.txt). It is based on [SASL](https://www.ietf.org/rfc/rfc2222.txt). However it is still necessary to set up SASL authentication before you can use SMTP-AUTH.
 
 When using IPv6, the `mynetworks` parameter may need to be modified to allow IPv6 addresses, for example:
 
@@ -364,7 +364,7 @@ Some of the options above can drastically increase the amount of information sen
 Administering a Postfix server can be a very complicated task. At some point you may need to turn to the Ubuntu community for more experienced help.
 
 - The [Postfix website](http://www.postfix.org/documentation.html) documents all available configuration options.
-- O'Reilly's [Postfix: The Definitive Guide](http://shop.oreilly.com/product/9780596002121.do) is rather dated but provides deep background information about configuration options.
+- O'Reilly's [Postfix: The Definitive Guide](https://www.oreilly.com/library/view/postfix-the-definitive/0596002122/) is rather dated but provides deep background information about configuration options.
 - The [Ubuntu Wiki Postfix](https://help.ubuntu.com/community/Postfix) page has more information from an Ubuntu context. 
 - There is also a [Debian Wiki Postfix](https://wiki.debian.org/Postfix) page that's a bit more up to date; they also have a set of [Postfix Tutorials](https://wiki.debian.org/Postfix/Tutorials) for different Debian versions.
-- Info on how to [set up mailman3 with postfix](https://mailman.readthedocs.io/en/latest/src/mailman/docs/mta.html#postfix).
+- Info on how to [set up mailman3 with postfix](https://docs.mailman3.org/projects/mailman/en/latest/src/mailman/docs/mta.html).

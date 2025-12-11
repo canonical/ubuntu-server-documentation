@@ -20,7 +20,7 @@ Some of the most notable benefits that NFS can provide are:
 ```{warning}
 If you use **NFS and authd** at the same time, you must add a Kerberos configuration on both the client and the server. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/en/stable/howto/use-with-nfs/).
+For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/stable-docs/howto/use-with-nfs/).
 ```
 
 ## Installation
