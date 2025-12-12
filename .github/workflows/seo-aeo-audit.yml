@@ -1,0 +1,219 @@
+name: SEO/AEO Documentation Audit
+
+on:
+  # Run on schedule (every 2 months on the 1st at 9 AM UTC)
+  schedule:
+    - cron: '0 9 1 */2 *'
+  
+  # Allow manual triggering
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for comparison
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run SEO/AEO Audit
+        id: audit
+        run: |
+          # Create audits directory
+          mkdir -p tools/seo-aeo/audits
+          
+          # Set date for filename
+          AUDIT_DATE=$(date +%Y-%m-%d)
+          AUDIT_FILE="tools/seo-aeo/audits/audit-${AUDIT_DATE}.csv"
+          
+          # Run audit
+          python tools/seo-aeo/scripts/seo_aeo_analyzer.py --output "$AUDIT_FILE"
+          
+          # Save filename for later steps
+          echo "audit_file=$AUDIT_FILE" >> $GITHUB_OUTPUT
+          echo "audit_date=$AUDIT_DATE" >> $GITHUB_OUTPUT
+      
+      - name: Download baseline audit (if exists)
+        id: baseline
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: baseline-audit
+          path: tools/seo-aeo/audits/
+      
+      - name: Compare with baseline
+        if: steps.baseline.outcome == 'success'
+        id: compare
+        run: |
+          BASELINE_FILE=$(ls tools/seo-aeo/audits/baseline-*.csv | head -1)
+          REPORT_FILE="tools/seo-aeo/audits/report-${{ steps.audit.outputs.audit_date }}.md"
+          
+          if [ -f "$BASELINE_FILE" ]; then
+            echo "Comparing with baseline: $BASELINE_FILE"
+            python tools/seo-aeo/scripts/compare_audits.py \
+              "$BASELINE_FILE" \
+              "${{ steps.audit.outputs.audit_file }}" \
+              --output "$REPORT_FILE"
+            
+            echo "report_file=$REPORT_FILE" >> $GITHUB_OUTPUT
+            echo "has_report=true" >> $GITHUB_OUTPUT
+          else
+            echo "No baseline found, skipping comparison"
+            echo "has_report=false" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Extract key metrics
+        id: metrics
+        run: |
+          # Extract average scores from audit CSV
+          AVG_SEO=$(awk -F',' 'NR>1 {sum+=$17; count++} END {printf "%.2f", sum/count}' "${{ steps.audit.outputs.audit_file }}")
+          AVG_AEO=$(awk -F',' 'NR>1 {sum+=$18; count++} END {printf "%.2f", sum/count}' "${{ steps.audit.outputs.audit_file }}")
+          AVG_OVERALL=$(awk -F',' 'NR>1 {sum+=$19; count++} END {printf "%.2f", sum/count}' "${{ steps.audit.outputs.audit_file }}")
+          TOTAL_PAGES=$(awk 'END {print NR-1}' "${{ steps.audit.outputs.audit_file }}")
+          
+          echo "avg_seo=$AVG_SEO" >> $GITHUB_OUTPUT
+          echo "avg_aeo=$AVG_AEO" >> $GITHUB_OUTPUT
+          echo "avg_overall=$AVG_OVERALL" >> $GITHUB_OUTPUT
+          echo "total_pages=$TOTAL_PAGES" >> $GITHUB_OUTPUT
+      
+      - name: Comment on PR (if PR)
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            
+            let comment = `## 📊 SEO/AEO Audit Results\n\n`;
+            comment += `**Pages analyzed:** ${{ steps.metrics.outputs.total_pages }}\n\n`;
+            comment += `| Metric | Score |\n`;
+            comment += `|--------|-------|\n`;
+            comment += `| SEO Score | ${{ steps.metrics.outputs.avg_seo }}/5.0 |\n`;
+            comment += `| AEO Score | ${{ steps.metrics.outputs.avg_aeo }}/5.0 |\n`;
+            comment += `| Overall Score | ${{ steps.metrics.outputs.avg_overall }}/5.0 |\n\n`;
+            
+            if ('${{ steps.compare.outputs.has_report }}' === 'true') {
+              const report = fs.readFileSync('${{ steps.compare.outputs.report_file }}', 'utf8');
+              const summary = report.split('## Executive Summary')[1]?.split('##')[0] || '';
+              comment += `### Changes Since Baseline\n\n${summary}\n\n`;
+            }
+            
+            comment += `<details><summary>View full audit results</summary>\n\n`;
+            comment += `Download the full CSV audit file from the workflow artifacts.\n\n`;
+            comment += `</details>`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+      
+      - name: Upload audit results
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-aeo-audit-${{ steps.audit.outputs.audit_date }}
+          path: |
+            ${{ steps.audit.outputs.audit_file }}
+            tools/seo-aeo/audits/report-*.md
+          retention-days: 90
+      
+      - name: Save as baseline (if scheduled run)
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseline-audit
+          path: ${{ steps.audit.outputs.audit_file }}
+          retention-days: 365
+      
+      - name: Check for quality regression
+        if: github.event_name == 'pull_request'
+        run: |
+          # Fail if overall score drops below 3.5
+          OVERALL=${{ steps.metrics.outputs.avg_overall }}
+          if (( $(echo "$OVERALL < 3.5" | bc -l) )); then
+            echo "❌ Overall quality score ($OVERALL) is below acceptable threshold (3.5)"
+            echo "Please review and improve documentation quality before merging."
+            exit 1
+          fi
+          
+          echo "✅ Quality score ($OVERALL) meets threshold"
+      
+      - name: Create issue for low-scoring pages (if scheduled)
+        if: github.event_name == 'schedule' && github.ref == 'refs/heads/main'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const csv = require('csv-parse/sync');
+            
+            // Read CSV
+            const csvContent = fs.readFileSync('${{ steps.audit.outputs.audit_file }}', 'utf8');
+            const records = csv.parse(csvContent, { columns: true });
+            
+            // Find pages with score < 3.0
+            const lowScoring = records
+              .filter(r => parseFloat(r.overall_score) < 3.0)
+              .sort((a, b) => parseFloat(a.overall_score) - parseFloat(b.overall_score));
+            
+            if (lowScoring.length === 0) {
+              console.log('No low-scoring pages found!');
+              return;
+            }
+            
+            // Create issue
+            let issueBody = `## Low-Scoring Documentation Pages\n\n`;
+            issueBody += `The automated SEO/AEO audit found ${lowScoring.length} pages with scores below 3.0:\n\n`;
+            issueBody += `| Page | Score | Issues |\n`;
+            issueBody += `|------|-------|--------|\n`;
+            
+            lowScoring.forEach(page => {
+              issueBody += `| \`${page.file_path}\` | ${page.overall_score}/5.0 | ${page.notes} |\n`;
+            });
+            
+            issueBody += `\n### Recommended Actions\n\n`;
+            issueBody += `1. Review these pages and identify root causes\n`;
+            issueBody += `2. Prioritize pages with multiple issues\n`;
+            issueBody += `3. Focus on high-traffic pages first\n`;
+            issueBody += `4. Reference the full audit report for details\n\n`;
+            issueBody += `**Audit date:** ${{ steps.audit.outputs.audit_date }}\n`;
+            issueBody += `**Workflow run:** ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            
+            // Check if issue already exists
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'documentation,seo-audit'
+            });
+            
+            const existingIssue = issues.data.find(i => 
+              i.title.includes('Low-Scoring Documentation Pages')
+            );
+            
+            if (existingIssue) {
+              // Update existing issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existingIssue.number,
+                body: `## Update: ${{ steps.audit.outputs.audit_date }}\n\n${issueBody}`
+              });
+              console.log(`Updated issue #${existingIssue.number}`);
+            } else {
+              // Create new issue
+              const issue = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title: `📊 Low-Scoring Documentation Pages - ${{ steps.audit.outputs.audit_date }}`,
+                body: issueBody,
+                labels: ['documentation', 'seo-audit', 'needs-improvement']
+              });
+              console.log(`Created issue #${issue.data.number}`);
+            }
