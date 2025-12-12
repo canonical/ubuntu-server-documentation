@@ -161,7 +161,25 @@ Manpages: {manpage}`package-name(section)` (e.g. {manpage}`dpkg(1)`)
 
 Rendered as {manpage}`dpkg(1)`
 
-It is not necessary to provide the hard-coded URL to a manual page - they are
+```
+Matrix: {matrix}`channel-name` (e.g. {matrix}`server`)
+```
+
+Rendered as {matrix}`server`
+
+```
+Launchpad source: {lpsrc}`package-name` (e.g. {lpsrc}`bash`)
+```
+
+Rendered as {lpsrc}`bash`
+
+```
+Launchpad bug: {lpbug}`bug-number` (e.g. {lpbug}`1852389`
+```
+
+Rendered as {lpbug}`1852389`
+
+With these roles, it is not necessary to provide the hard-coded URL to a - they are
 generated when Sphinx rebuilds the documentation so that they are always up
 to date.
 
