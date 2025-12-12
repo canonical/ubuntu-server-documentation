@@ -71,6 +71,8 @@ sudo systemctl restart ssh.service
 Many other configuration directives for `sshd` are available to change the server application's behavior to fit your needs. Be advised, however, if your only method of access to a server is SSH, and you make a mistake when configuring `sshd` via the `/etc/ssh/sshd_config` file, you may find you are locked out of the server upon restarting it. Additionally, if an incorrect configuration directive is supplied, the `sshd` server may refuse to start, so be particularly careful when editing this file on a remote server.
 ```
 
+(openssh-server-ssh-keys)=
+
 ## SSH keys
 
 SSH allows authentication between two hosts without the need of a password, using cryptographic keys instead.

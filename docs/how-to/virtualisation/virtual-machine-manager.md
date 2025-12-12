@@ -30,7 +30,7 @@ virt-manager -c qemu+ssh://virtnode1.mydomain.com/system
 ```
 
 ```{note}
-The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <smart-card-authentication-with-ssh>`.
+The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <openssh-server-ssh-keys>`.
 ```
 
 ## Use virt-manager to manage guests
