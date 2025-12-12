@@ -316,6 +316,7 @@ extensions = [
 # Custom extensions in this project
 # ---------------------------------
     "myst_parser",
+    "sphinx.ext.extlinks",
     "hoverxref.extension",
     "sphinxext.rediraffe",
     "sphinxcontrib.mermaid",
@@ -337,6 +338,14 @@ hoverxref_role_types = {
     "term": "tooltip",
 }
 hoverxref_roles = ["term",]
+
+
+# Allow for use of link substitutions
+extlinks = {
+    "lpsrc": ("https://launchpad.net/ubuntu/+source/%s", "%s"),
+    "lpbug": ("https://bugs.launchpad.net/bugs/%s", "LP: #%s"),
+    "matrix": ("https://matrix.to/#/#%s:ubuntu.com", "#%s:ubuntu.com"),
+}
 
 
 # Excludes files or directories from processing
