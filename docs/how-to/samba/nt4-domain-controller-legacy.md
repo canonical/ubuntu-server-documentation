@@ -97,7 +97,7 @@ When configured as a domain controller, a *`[netlogon]`* share needs to be confi
 ```
 
 ```{note}
-The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv` is the correct location](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
+The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv` is the correct location](https://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
 ```
 
 Now create the `netlogon` directory, and an empty (for now) `logon.cmd` script file:
@@ -200,9 +200,9 @@ Another thing to keep in mind is if you have configured the `logon home` option 
 
 - For in depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
 
-- The guide is also available [in printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is also a good reference.
+- O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is also a good reference.
 
 - [Chapter 4](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-pdc.html) of the Samba HOWTO Collection explains setting up a Primary Domain Controller.
 

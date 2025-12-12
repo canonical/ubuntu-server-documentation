@@ -165,8 +165,8 @@ Please be aware that this is a full clone, therefore any secrets, keys, and for 
 
 ## Resources
 
-- See the [KVM](http://www.linux-kvm.org/) home page for more details.
+- See the [KVM](https://linux-kvm.org/page/Main_Page) home page for more details.
 
-- For more information on libvirt see the [libvirt home page](http://libvirt.org/)
+- For more information on libvirt see the [libvirt home page](https://libvirt.org/)
 
 - The [Virtual Machine Manager](https://virt-manager.org/) site has more information on `virt-manager` development.

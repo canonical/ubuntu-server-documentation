@@ -10,7 +10,7 @@ myst:
 
 ## Deploying rocks with Docker
 
-As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favorite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
+As with any other OCI-compliant container image, [rocks](https://documentation.ubuntu.com/rockcraft/latest/explanation/rocks/) can be deployed with your favorite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
 
 First, install Docker if it's not already installed:
 
