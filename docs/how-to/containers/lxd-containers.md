@@ -7,7 +7,7 @@ myst:
 (lxd-containers)=
 # LXD containers
 
-[LXD](https://ubuntu.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
+[LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
 It provides a unified experience for running and managing full Linux systems inside containers or virtual machines. You can access it via the command line, its [built-in graphical user interface](https://documentation.ubuntu.com/lxd/latest/howto/access_ui/), or a set of powerful [REST APIs](https://documentation.ubuntu.com/lxd/latest/restapi_landing/). 
 

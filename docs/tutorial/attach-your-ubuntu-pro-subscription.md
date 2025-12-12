@@ -77,6 +77,6 @@ Available services can be enabled or disabled on the command line with `pro enab
 
 ## Next steps
 
-- For more information about the Ubuntu Pro Client, you can [read our documentation](https://canonical-ubuntu-pro-client.readthedocs-hosted.com/en/latest/).
+- For more information about the Ubuntu Pro Client, you can [read our documentation](https://documentation.ubuntu.com/pro-client/en/latest/).
 
 - For a guided tour through the most commonly-used commands available through the Ubuntu Pro Client, [check out this tutorial](https://documentation.ubuntu.com/pro-client/en/latest/tutorials/basic_commands/).

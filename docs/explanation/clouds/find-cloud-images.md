@@ -10,7 +10,7 @@ myst:
 
 Canonical produces a variety of cloud-specific images, which are available directly via the clouds themselves, as well as on [https://cloud-images.ubuntu.com](https://cloud-images.ubuntu.com).
 
-For expanded documentation, please see the separate [public-cloud documentation.](https://documentation.ubuntu.com/public-cloud/en/latest/)
+For expanded documentation, please see the separate [public-cloud documentation.](https://documentation.ubuntu.com/public-cloud/)
 
 ## Public clouds
 
@@ -18,10 +18,10 @@ For expanded documentation, please see the separate [public-cloud documentation.
 
 Users can find Ubuntu images for virtual machines and bare-metal offerings published directly to the following clouds:
 
-* [Amazon Elastic Compute Cloud (EC2)](https://canonical-aws.readthedocs-hosted.com/en/latest/aws-how-to/instances/find-ubuntu-images/)
-* [Google Compute Engine (GCE)](https://canonical-gcp.readthedocs-hosted.com/en/latest/google-how-to/gce/find-ubuntu-images/)
+* [Amazon Elastic Compute Cloud (EC2)](https://documentation.ubuntu.com/aws/aws-how-to/instances/find-ubuntu-images/)
+* [Google Compute Engine (GCE)](https://documentation.ubuntu.com/gcp/google-how-to/gce/find-ubuntu-images/)
 * IBM Cloud
-* [Microsoft Azure](https://canonical-azure.readthedocs-hosted.com/en/latest/azure-how-to/instances/find-ubuntu-images/)
+* [Microsoft Azure](https://documentation.ubuntu.com/azure/azure-how-to/instances/find-ubuntu-images/)
 * Oracle Cloud
 
 ### Container offerings
