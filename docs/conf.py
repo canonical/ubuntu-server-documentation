@@ -133,7 +133,7 @@ disable_feedback_button = True
 # ==============================================================================
 
 # Use RTD canonical URL to ensure duplicate pages have a specific canonical URL
-html_baseurl = "https://ubuntu.com/server/docs"
+html_baseurl = "https://ubuntu.com/server/docs/"
 
 # URL scheme. Add language and version scheme elements.
 sitemap_url_scheme = "{link}"
