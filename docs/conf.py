@@ -316,6 +316,7 @@ extensions = [
 # Custom extensions in this project
 # ---------------------------------
     "myst_parser",
+    "sphinx.ext.extlinks",
     "hoverxref.extension",
     "sphinxext.rediraffe",
     "sphinxcontrib.mermaid",
