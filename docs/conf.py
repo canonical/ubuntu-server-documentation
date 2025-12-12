@@ -47,7 +47,7 @@ copyright = "%s, %s" % (datetime.date.today().year, author)
 # Documentation website URL
 # NOTE: The Open Graph Protocol (OGP) enhances page display in a social graph
 #       and is used by social media platforms; see https://ogp.me/
-ogp_site_url = "https://ubuntu.com/server/docs"
+ogp_site_url = "https://documentation.ubuntu.com/server/"
 
 # Preview name of the documentation website
 ogp_site_name = project
@@ -107,7 +107,7 @@ html_context = {
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
 # If your documentation is hosted on https://docs.ubuntu.com/, specify the
 # project slug here.
-slug = "server/docs"
+slug = "server"
 
 
 # Allow opt-in build of the OpenAPI "Hello" example so docs stay clean by default.
@@ -133,7 +133,7 @@ disable_feedback_button = True
 # ==============================================================================
 
 # Use RTD canonical URL to ensure duplicate pages have a specific canonical URL
-html_baseurl = "https://ubuntu.com/server/docs/"
+html_baseurl = "https://documentation.ubuntu.com/server/"
 
 # URL scheme. Add language and version scheme elements.
 sitemap_url_scheme = "{link}"
