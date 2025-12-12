@@ -224,15 +224,15 @@ Since DPDK itself is only a (massive) library, you most likely will continue to 
 
 ## Resources
 
-  - [DPDK documentation](http://dpdk.org/doc)
+  - [DPDK documentation](http://core.dpdk.org/doc/)
 
-  - [Release Notes matching the version packages in Ubuntu 16.04](http://dpdk.org/doc/guides/rel_notes/release_2_2.html)
+  - [Release Notes matching the version packages in Ubuntu 16.04](https://doc.dpdk.org/guides/rel_notes/release_2_2.html)
 
-  - [Linux DPDK user getting started](http://dpdk.org/doc/guides/linux_gsg/index.html)
+  - [Linux DPDK user getting started](https://doc.dpdk.org/guides/linux_gsg/index.html)
 
-  - [EAL command-line options](http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html)
+  - [EAL command-line options](https://doc.dpdk.org/guides/testpmd_app_ug/run_app.html)
 
-  - [DPDK API documentation](http://dpdk.org/doc/api/)
+  - [DPDK API documentation](https://doc.dpdk.org/api/)
 
   - [Open vSwitch DPDK installation](https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md)
 
