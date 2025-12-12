@@ -107,7 +107,7 @@ html_context = {
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
 # If your documentation is hosted on https://docs.ubuntu.com/, specify the
 # project slug here.
-slug = "server"
+slug = "server/docs"
 
 
 # Allow opt-in build of the OpenAPI "Hello" example so docs stay clean by default.
