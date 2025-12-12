@@ -220,7 +220,7 @@ linkcheck_ignore = [
     "http://prometheus:9090",
     "http://dnssec-failed.org",
     "https://dev.mysql.com/",
-    "http://en.wikipedia.org/*",
+    "https://en.wikipedia.org/*",
     "https://matrix.to/#/*",
     "https://linux.die.net",
     "https://www.mysql.com/",

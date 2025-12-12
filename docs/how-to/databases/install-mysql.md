@@ -347,6 +347,6 @@ You may find it useful to spend some time searching for database tuning tips bas
 
 ## Further reading
 
-- Full documentation is available in both online and offline formats from the [MySQL Developers portal](http://dev.mysql.com/doc/)
+- Full documentation is available in both online and offline formats from the [MySQL Developers portal](https://dev.mysql.com/doc/)
 
 - For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](https://www.oreilly.com/library/view/getting-started-with/9781491938607/) by {spellexception}`Thomas Nield` as an entry point and [SQL in a Nutshell](https://www.oreilly.com/library/view/sql-in-a/9780596155322/) as a quick reference.
