@@ -215,6 +215,16 @@ rediraffe_redirects = "redirects.txt"
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
     "https://manpages.ubuntu.com",
+    "https://calendar.google.com/*",
+    "http://localhost:3000",
+    "http://prometheus:9090",
+    "http://dnssec-failed.org",
+    "https://dev.mysql.com/",
+    "http://en.wikipedia.org/*",
+    "https://matrix.to/#/*",
+    "https://linux.die.net",
+    "https://www.mysql.com/",
+    "https://www.youtube.com/*",
     # Rate-limited domains that cause delays
     r"http://www\.gnu\.org/software/.*",
     r"https://github\.com/.*/blob/.*",
