@@ -2239,7 +2239,7 @@ Trivial File Transfer Protocol
 
 TGS
 Ticket Granting Service
-    TGS is a term used in the Kerberos authentication protocol, a key component of he Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
+    TGS is a term used in the Kerberos authentication protocol, a key component of the Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
 
 TGT
 Ticket Granting Ticket
