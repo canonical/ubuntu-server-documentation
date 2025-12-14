@@ -2276,7 +2276,7 @@ Trusted Platform Module
     encryption, and attestation.
 
 Traceback
-    traceback is term used in Python. Traceback is a report of the function call stack printed when an exception occurs, showing the sequence of calls leadiing to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by traciing execution backward from the failure point.
+    traceback is term used in Python. Traceback is a report of the function call stack printed when an exception occurs, showing the sequence of calls leadiing to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by tracing execution backward from the failure point.
 
 Traceroute
     Traceroute is a network diagnostic tool that shows the path packets take from your computer to a destination across the internet, revealing each hop (router) along the way.
