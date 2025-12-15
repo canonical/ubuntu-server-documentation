@@ -81,7 +81,7 @@ Similar to GnuTLS, OpenSSL also uses the concept of cipher strings to group seve
 
 OpenSSL distinguishes the ciphers used with TLSv1.3, and those used with TLSv1.2 and older. Specifically for the `openssl ciphers` command, we have:
 
-* `-ciphersuites`: used for the TLSv1.3 cipher suites. So far, there are only five listed in the [upstream documentation](https://docs.openssl.org/3.0/man1/openssl-ciphers/#TLS-v1.3-cipher-suites), and the defaults are:
+* `-ciphersuites`: used for the TLSv1.3 cipher suites. So far, there are only five listed in the [upstream documentation](https://docs.openssl.org/3.0/man1/openssl-ciphers/), and the defaults are:
 
     TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256
 
@@ -155,7 +155,7 @@ AES256-GCM-SHA384              TLSv1.2 Kx=RSA      Au=RSA   Enc=AESGCM(256)     
 AES256-SHA256                  TLSv1.2 Kx=RSA      Au=RSA   Enc=AES(256)               Mac=SHA256
 ```
 
-Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filtering, and still contains the **AES128** cipher. But TLSv1.2 and older no longer have **AES128** or **SHA1**. This type of filtering with '`+`', '`-`' and '`!`' can be done with the TLSv1.2 and older protocols and is detailed in the [`openssl ciphers` manual page](https://docs.openssl.org/3.0/man1/openssl-ciphers/#CIPHER-LIST-FORMAT).
+Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filtering, and still contains the **AES128** cipher. But TLSv1.2 and older no longer have **AES128** or **SHA1**. This type of filtering with '`+`', '`-`' and '`!`' can be done with the TLSv1.2 and older protocols and is detailed in the [`openssl ciphers` manual page](https://docs.openssl.org/3.0/man1/openssl-ciphers/).
 
 To filter out TLSv1.3 algorithms, there is no such mechanism, and we must list explicitly what we want by using `-ciphersuites`:
 

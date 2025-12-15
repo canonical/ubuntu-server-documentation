@@ -23,7 +23,7 @@ The list of upstream DPDK-supported network cards can be found at [supported NIC
 DPDK has "userspace" drivers for the cards called PMDs.
 The packages for these follow the pattern of `librte-pmd-<type>-<version>`. Therefore the example for an Intel e1000 in 18.11 would be `librte-pmd-e1000-18.11`.
 
-The more commonly used, tested and fully supported drivers are installed as dependencies of `dpdk`. But there are [many more "in-universe"](https://help.ubuntu.com/community/Repositories/Ubuntu#The_Four_Main_Repositories) that follow the same naming pattern.
+The more commonly used, tested and fully supported drivers are installed as dependencies of `dpdk`. But there are [many more "in-universe"](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#components) that follow the same naming pattern.
 
 (unassign-default-kernel-drivers)=
 ## Unassign the default kernel drivers

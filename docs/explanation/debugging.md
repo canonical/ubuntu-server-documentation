@@ -19,6 +19,6 @@ About debuginfod <debugging/about-debuginfod>
 Debug symbol packages <debugging/debug-symbol-packages>
 ```
 
-## See also
+## Further reading
 
-* External: [The Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/)
+* External: [The Ubuntu Project documentation](https://documentation.ubuntu.com/project/contributors/debugging/)

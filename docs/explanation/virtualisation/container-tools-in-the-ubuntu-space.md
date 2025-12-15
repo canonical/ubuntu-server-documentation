@@ -25,7 +25,7 @@ The [Linux Containers Daemon, or LXD](https://canonical.com/lxd) (pronounced "le
 
 To get started with LXD from an Ubuntu Server administrator's point of view, check out our {ref}`how to get started with LXD <lxd-containers>` guide. For a more general beginner's introduction to LXD, we [recommend this tutorial](https://documentation.ubuntu.com/lxd/latest/tutorial/) from the LXD team.
 
-In addition to creating and managing containers, LXD can also be [used to create virtual machines](https://documentation.ubuntu.com/lxd/en/latest/howto/instances_create/#launch-a-virtual-machine).
+In addition to creating and managing containers, LXD can also be [used to create virtual machines](https://documentation.ubuntu.com/lxd/latest/howto/instances_create/#create-a-virtual-machine).
 
 ## Docker
 

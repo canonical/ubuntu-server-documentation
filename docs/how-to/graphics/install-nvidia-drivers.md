@@ -224,7 +224,7 @@ sudo apt autoremove
 
 When NVIDIA stops support on a driver branch, then Canonical will transition you to the next supported driver branch automatically if you try to install that driver branch.
 
-See NVIDIA's [current support matrix](https://docs.nvidia.com/datacenter/tesla/drivers/index.html#branches) in their documentation.
+See NVIDIA's [current support matrix](https://docs.nvidia.com/datacenter/tesla/drivers/index.html) in their documentation.
 
 ## Troubleshooting
 

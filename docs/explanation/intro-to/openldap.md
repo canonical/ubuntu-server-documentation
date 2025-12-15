@@ -83,4 +83,4 @@ For users who want to set up OpenLDAP, we recommend following our series of guid
 - {spellexception}`Zytrax's` [LDAP for Rocket Scientists](https://www.zytrax.com/books/ldap/); a less pedantic but comprehensive treatment of LDAP
 Older references that might still be useful:
 - {spellexception}`O'Reilly's` [LDAP System Administration](https://www.oreilly.com/library/view/ldap-system-administration/1565924916/) (textbook; 2003)
-- {spellexception}`Packt's` [Mastering OpenLDAP](http://www.packtpub.com/OpenLDAP-Developers-Server-Open-Source-Linux/book) (textbook; 2007)
+- {spellexception}`Packt's` [Mastering OpenLDAP](https://www.packtpub.com/en-us/product/mastering-openldap-configuring-securing-and-integrating-directory-services-9781847191038) (textbook; 2007)
