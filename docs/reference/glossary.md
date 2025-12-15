@@ -50,7 +50,7 @@ Active Directory
 
 ADSys
     ADSys is an Ubuntu-specific Active Directory {term} `(AD)` client developed by Canonical.
-    ADSys complements System Security Services Daemon {term} `(SSSD)` by adding native
+    ADSys complements System Security Services Daemon ({term} `SSSD`) by adding native
     Group Policy Object support, privilege management, and custom scripts
     execution.
 
