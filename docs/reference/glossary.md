@@ -2304,7 +2304,7 @@ Unified Data Architecture
 
 UDP
 User Datagram Protocol
-    UDP is a network protocol used to send data between devices without creating or maintaining a connection. In other words, UDP is a connectionless transport layer protocol used for fast, low-overhead data transmission in {term}`iptables rules`, specified with the -p udp option alongside {TERM}`TCP` OR {TERM}`ICMP`.
+    UDP is a network protocol used to send data between devices without creating or maintaining a connection. In other words, UDP is a connectionless transport layer protocol used for fast, low-overhead data transmission in {term}`iptables rules`.
 
 UEFI
 Unified Extensible Firmware Interface
@@ -2352,9 +2352,9 @@ USN
 Update Sequence Number
     USN is a 64-bit monotonically increasing integer in Windows NTFS file system used by the change journal to log and track file/directory modifications like creations, deletions, renames, or data changes.
 
-USr
+`usr`
 Unix System Resources    
-    USR is a major directory in Unix like systems. Contains user programmmes, libraries, and documentation. 
+    `/usr` is a major directory in Unix like systems. Contains user programmmes, libraries, and documentation. 
     
 UUIDs
 Universally Unique Identifiers
@@ -2386,7 +2386,7 @@ Virtual Function I/O
     
 VFS
 Virtual File System
-    VFS is a {term}`kernel abstraction layer` in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics. 
+    VFS is a {term}`kernel abstraction layer` in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics.
 
 VFs
 Virtual Functions
@@ -2434,7 +2434,7 @@ Virtual Network Computing
 
 VPN
 Virtual Private Network
-   VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
+    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
 
     Related topic(s):
     * {term} `security`
@@ -2457,34 +2457,34 @@ Very Secure FTP Daemon
 
 WAL
 Write-Ahead Log
-    WAL is a fundamental technique used in databases and storage systems to ensure data durability and consistency. The basic principle is simple write what you are going to do before you do it, so if things go wrong you can always know what was happening. In other words, before any changes are made to the actual database files, the system first writes a record of what it is about to do to a sequential log file. If the system crashes mid-operation, it can replay the log during recovery to complete interrupted operations or roll them back. 
+    WAL is a fundamental technique used in databases and storage systems to ensure data durability and consistency. The basic principle is simple: Write what you are going to do before you do it, so if things go wrong you can always know what was happening. In other words, before any changes are made to the actual database files, the system first writes a record of what it is about to do to a sequential log file. If the system crashes mid-operation, it can replay the log during recovery to complete interrupted operations or roll them back.
 
     Related topic(s):
     * {term} `Crash recovery`, {term} `Performance`, {term} `Atomicity`
     
 WAN
 Wide Area Network
-    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term} `LANs`) across cities, countries, or even continents.
+    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs`) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
-    WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from {term} `routers` or switches to {term} `caching` or {term} `proxy devices`. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services. 
+    WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from {term}`routers` or switches to {term}`caching` or {term}`proxy devices`. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
     
      Related topic(s):
-    * {term} `WCCPv1`, {term} `WCCPv2`, {term} `Layer 2 redirection`, {term} `GRE tunneling`
+    * {term}`WCCPv1`, {term}`WCCPv2`, {term}`Layer 2 redirection`, {term}`GRE tunneling`
 
 Web server
     A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the {term} `internet` or an {term} `intranet`using {term} `HTTP/HTTPS` protocols.
 
     Related topic(s):
-    * {term} `static files`, {term} `MPLSnetworks`, {term} `VPN connections`
+    * {term}`static files`, {term}`MPLSnetworks`, {term}`VPN connections`
 
 winbind
 Windows Bind
-    winbind is a component of {term} `Samba` on Linux/UNIX systems that lets those systems use accounts from an {term} `AD` domain for logins and identity information. winbind makes a Linux machine "look like" a Windows client to AD, so the AD users and groups can log in to Linux and be resolved just liek local {term} `Unix` accounts. 
+    winbind is a component of {term}`Samba` on Linux/UNIX systems that lets those systems use accounts from an {term}`AD` domain for logins and identity information. winbind makes a Linux machine "look like" a Windows client to AD, so the AD users and groups can log in to Linux and be resolved just liek local {term}`Unix` accounts.
 
 WireGuard
-    WireGuard is a moden,  open-source {term} `VPN`  protocol designed to create fast, secure, and simple encrypted tunnels between devices. It is now built into the Linux kernel and widely used by VPN providers because of its performance and small codebase. 
+    WireGuard is a moden, open-source {term}`VPN`  protocol designed to create fast, secure, and simple encrypted tunnels between devices. It is now built into the Linux kernel and widely used by VPN providers because of its performance and small codebase.
 
 WLAN
 Wireless Local Area Network
@@ -2494,12 +2494,12 @@ WSGI
 Web Server Gateway Interface
     WSGI is a specification that defines a standard interface between web servers and Python web applications or frameworks, creating portability and flexibility. It is a universal translator that allows any WSGI-compliant web server to communicate with any WSGI-compliant Python application.
 
-       Related topic(s):
-    * {term} `ASGI`
+    Related topic(s):
+    * {term}`ASGI`
 
 WWID
 World Wide Identifier
-   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a {term} `disk` or {term} `LUN`, so the system can recognnise that device reliably, regardless of which cable, port, or path it is attached through. 
+   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a {term}`disk` or {term}`LUN`, so the system can recognnise that device reliably, regardless of which cable, port, or path it is attached through.
 
 :::
 
