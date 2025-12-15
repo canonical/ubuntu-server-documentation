@@ -386,6 +386,7 @@ exclude_patterns = [
     "readme.md",
     "legacy/*.md",
     ".github/*.md",
+    "../tools/**",
 ]
 
 
