@@ -2022,7 +2022,7 @@ Storage Area Network (SAN) Locking Daemon
 SASL
 Simple Authentication and Security Layer
      It is a framework that adds authentication and security to network protocols that do not have built-in authentication.
-     SASL itself does not define how to authenticate. It defines how to negotiate and use authentication mechanisms
+     SASL itself does not define how to authenticate. It defines how to negotiate and use authentication mechanisms.
 
      See also:
      * mechanisms supported
