@@ -2530,7 +2530,7 @@ Extensible Markup Language
 
 YAML
 YAML Ain't Markup Language
-    YAML is a popular programming language because it is human readable. YAML is a data serialisation language used mainly for configuration files and structured data exchange between programmes. YAML represents data as key-value pairs, lists, and nested structures, using indentation (spaces, not tabs) instead of brackets or tags, to show hierarchy.  
+    YAML is a data serialisation language used mainly for configuration files and structured data exchange between programmes. YAML represents data as key-value pairs, lists, and nested structures, using indentation instead of brackets or tags, to show hierarchy.  
 
 Yubikey
     A YubiKey is a physical security key made by Yubico that provides hardware-based authentication for securing access to computers, networks, and online services. It is a small USB device (about the size of a USB stick) that acts as a second factor for two-factor authentication {term}`(2FA)` or multi-factor authentication {term}`(MFA)`.
