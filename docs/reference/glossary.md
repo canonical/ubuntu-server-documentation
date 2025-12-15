@@ -2518,7 +2518,7 @@ Extensible HyperText Markup Language
 
 XML
 Extensible Markup Language
-   XML is a {term} `markup language` designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
+   XML is a {term}`markup language` designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
 
 :::
 
