@@ -1986,40 +1986,98 @@ Samba
 
 SAN
 Storage Area Network
-    *Work in Progress*
+    A SAN is a dedicated network that connects servers to {term}`storage devices` (like disk arrays, tape libraries). It is a specialized high-speed network that provides access to consolidated block-level data storage. It makes storage devices appear as locally attached to the operating system, even though they're on a separate network.
 
+    See also:
+    * [NAS (Network Attached Storage)]([(https://en.wikipedia.org/wiki/Network-attached_storage#:~:text=Network%2Dattached%20storage%20(NAS)%20is%20a%20file%2Dlevel%20computer,area%20networks%20(SAN)%20and%20direct%2Dattached%20storage%20(DAS).)]
+
+    Related topic(s):
+  
+
+    
 sandboxed
-    *Work in Progress*
+    Sandboxed means running software in an isolated environment that's separated from the rest of your system - like putting it in a "sandbox" where it can't affect anything outside.
+What sandboxing does:
+  * Isolation: The sandboxed program can't access:
+    * Your files (unless explicitly allowed)
+    * Other running programs
+    * System settings
+    * Network resources (in some cases)
 
+  * Security: If the sandboxed program is malicious or gets compromised, the damage is contained - it can't spread to your whole system
+
+
+    Related topic(s):
+      * Web browsers
+      * Mobile apps
+      * Virtual machines
+      * {term}`WSL`
+    
 SANLOCK
-SAN Locking Daemon
-    *Work in Progress*
+Storage Area Network (SAN) Locking Daemon
+    SAN Locking Daemon is a lock manager designed for shared storage in {term}`SAN (Storage Area Network)` environments.
+
+    SANLOCK provides distributed locking. In other words, it coordinates access to shared storage when multiple servers need to use the same storage resources simultaneously, preventing data corruption.
 
 SASL
 Simple Authentication and Security Layer
-    *Work in Progress*
+     It is a framework that adds authentication and security to network protocols that do not have built-in authentication.
+     SASL itself does not define how to authenticate. It defines how to negotiate and use authentication mechanisms
 
+     See also:
+     * mechanisms supported
+ 
 SBD
 Storage-Based Death
-    *Work in Progress*
+   SBD is a fencing mechanism used in high-availability (HA) Linux clusters to prevent split-brain scenarios and data corruption.
+  SBD uses shared storage as a communication channel to coordinate cluster nodes and forcibly reboot ("fence") problematic nodes that might cause issues.
+
+  
+    Related topic(s):
+    * [Split-brain scenario]([(https://en.wikipedia.org/wiki/Split-brain_(computing))] [(https://systemdr.substack.com/p/split-brain-problem-prevention-and)])
+
 
 sbin
 System Binaries
-    *Work in Progress*
+    sbin is a directory in Unix/Linux systems that contains essential system administration commands and executables. It holds programs needed for system administration, booting, and repair.
+    On many modern Linux distributions, /sbin is often symlinked to /usr/sbin, and both directories are merged as part of filesystem simplification efforts. The distinction is becoming less strict, but historically /sbin was for boot-essential tools.
 
-schemas
-    *Work in Progress*
+schema
+   Schema (plural: schemas or schemata) refers to a structured framework or blueprint that defines how data is organized. The meaning varies slightly depending on context.
+
+     Related topic(s):
+     * Database Schemas
+     * XML/JSON Schemas
+     * API Schemas
+     * Conceptual Schemas
+    
 
 SCP
 Secure Copy Protocol
-    *Work in Progress*
+    SCP is a network protocol for securely transferring files between computers over {term}`SSH (Secure Shell)`. SCP allows you to copy files between a local and remote host, or between two remote hosts, with encryption to protect the data during transfer.
+
+     See also:
+     * FTP
+     * SFTP
+     * rsync
+    
 
 Scrollback
-    *Work in Progress*
+    Scrollback refers to the ability to scroll back through previous content in a terminal or console window - essentially the "history" of text that has scrolled off the screen.
+     Scrollback is the buffer that stores this older content so you can scroll up to see it.
+     Limitations are lost on close, not infinite and the performace may suffer if the buffer is very large.
+     
+    Related topic(s):
+    * Command history
 
-SCSI
+SCSI (pronounced "scuzzy")
 Small Computer System Interface
-    *Work in Progress*
+    SCSI is both a physical interface (cables and connectors) and a command protocol, set of standards, for communicating with storage and peripheral devices like hard drives, tape drives, and scanners. Each device gets a unique ID number (0-7 or 0-15 depending on version). The last device in a SCSI chain needs a terminator to prevent signal reflection.
+
+      See also:
+     * Parallel connection
+     * Daisy-chaining
+
 
 SDN
 Software-Defined Networking
