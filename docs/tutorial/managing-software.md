@@ -33,7 +33,7 @@ To avoid making changes to your computer we will set up a virtual machine (VM), 
     
     Or you can install it directly from [the Multipass page](https://snapcraft.io/multipass) in the online snap store (make sure to select the "latest/stable" version from the dropdown menu next to the install button).
 
-  * Multipass can be installed on Windows, Mac and other Linux distributions [using these instructions](https://multipass.run/docs/tutorial#install-multipass).
+  * Multipass can be installed on Windows, Mac and other Linux distributions [using these instructions](https://documentation.ubuntu.com/multipass/stable/how-to-guides/install-multipass/).
 
 ## Create the virtual machine
 

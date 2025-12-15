@@ -152,5 +152,5 @@ git remote add gitolite git@$server:some/awesome/project.git
 
 - [Gitolite's code repository](https://github.com/sitaramc/gitolite) provides access to source code
 - [Gitolite's documentation](https://gitolite.com/gitolite/) includes more detailed configuration guides and a "fool-proof setup", with how-tos for common tasks
-- Gitolite's maintainer has written a book, [Gitolite Essentials](https://www.packtpub.com/hardware-and-creative/gitolite-essentials), for more in-depth information about the software
+- Gitolite's maintainer has written a book, [Gitolite Essentials](https://www.packtpub.com/en-us/product/gitolite-essentials-9781783282388), for more in-depth information about the software
 - General information about `git` itself can be found at the [Git homepage](https://git-scm.com/)

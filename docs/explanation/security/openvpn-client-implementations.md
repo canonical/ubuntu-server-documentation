@@ -25,7 +25,7 @@ Many Linux distributions (including Ubuntu Desktop variants) come with Network M
 
 [Tunnelblick](https://tunnelblick.net) is an excellent free, open source implementation of a GUI for OpenVPN for OS X. Download the latest OS X installer from there and install it.
 
-It also is [recommended by upstream](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/#alternative-openvpn-open-source-tunnelblick-program), which [has an alternative](https://openvpn.net/as-docs/tutorials/tutorial--connect-with-macos.html) of their own.
+It also is [recommended by upstream](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/), which [has an alternative](https://openvpn.net/as-docs/tutorials/tutorial--connect-with-macos.html) of their own.
 
 Then put your `client.ovpn` config file together with the certificates and keys in `/Users/username/Library/Application Support/Tunnelblick/Configurations/` and launch Tunnelblick from your 'Application' folder.
 
@@ -47,6 +47,6 @@ There is an [updated guide by the upstream](https://community.openvpn.net/openvp
 
 - See the [OpenVPN](https://openvpn.net/) website for additional information.
 
-- [OpenVPN hardening security guide](https://openvpn.net/index.php/open-source/documentation/howto.html#security)
+- [OpenVPN hardening security guide](https://openvpn.net/community-docs/hardening-openvpn-security-178571.html)
 
-- Also, {spellexception}`Packt's` [OpenVPN: Building and Integrating Virtual Private Networks](https://www.packtpub.com/openvpn/book) is a good resource.
+- Also, {spellexception}`Packt's` [OpenVPN: Building and Integrating Virtual Private Networks](https://www.packtpub.com/en-us/product/openvpn-building-and-integrating-virtual-private-networks-9781847190680) is a good resource.

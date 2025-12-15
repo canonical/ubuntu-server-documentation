@@ -49,7 +49,7 @@ utility, which has an API that provides easier automation to users.
 ### Vulnerability management
 
 In a standard Ubuntu LTS release, security support is provided 
-for packages in the [Main repository](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#components)
+for packages in the [Main repository](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#components)
 for 5 years. With Ubuntu Pro, this support is expanded 
 to 10 years, and also includes patching for medium, high and critical severity
 [vulnerabilities](https://ubuntu.com/security/cves/about) for the Universe
@@ -68,11 +68,10 @@ the need for an immediate reboot -- which reduces downtime. Learn more
 ### Security Compliance and Certification
 
 For enterprise users who must ensure compliance with specific standards, such as
-[FIPS](https://ubuntu.com/security/certifications/docs/fips),
-[CIS](https://ubuntu.com/security/certifications/docs/usg) and
-[DISA STIG](https://ubuntu.com/security/certifications/docs/disa-stig), Ubuntu
+[FIPS](https://documentation.ubuntu.com/security/compliance/fips/) and
+[CIS](https://documentation.ubuntu.com/security/compliance/usg/), Ubuntu
 also provides profile benchmarking. See our
-[security and compliance documentation](https://ubuntu.com/security/certifications/docs)
+[security and compliance documentation](https://documentation.ubuntu.com/security/)
 for more details.
  
 ## Reporting vulnerabilities
