@@ -2054,7 +2054,7 @@ schema
 
 SCP
 Secure Copy Protocol
-    SCP is a network protocol for securely transferring files between computers over {term}`SSH (Secure Shell)`. SCP allows you to copy files between a local and remote host, or between two remote hosts, with encryption to protect the data during transfer.
+    SCP is a network protocol for securely transferring files between computers over {term}`SSH`. SCP allows you to copy files between a local and remote host, or between two remote hosts, with encryption to protect the data during transfer.
 
      See also:
      * FTP
