@@ -2331,7 +2331,7 @@ unmount
 untrusted
     Untrusted refers to:
     1. data coming from outside the system, such as files uploaded by users
-    1. code coming fromo an external, unknown, or non-verified source, such as third-party plug-ins
+    1. code coming from an external, unknown, or non-verified source, such as third-party plug-ins
     1. network that cannot be assumed secured, such as public WI-FI 
 
 uptime
