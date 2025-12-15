@@ -46,7 +46,7 @@ Access Control List
 
 AD
 Active Directory
-    An AD is a Microsoft service that acts as a central database storing and managing information about network objects (user accounts, groups, computers and shared resources) and their security in a Window-based network.
+    An AD is a Microsoft service that acts as a central database storing and managing information about network objects (user accounts, groups, computers and shared resources) and their security in a Windows-based network.
 
 ADSys
     ADSys is an Ubuntu-specific Active Directory {term} `(AD)` client developed by Canonical.
