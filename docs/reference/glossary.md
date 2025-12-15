@@ -2015,7 +2015,7 @@ What sandboxing does:
     
 SANLOCK
 Storage Area Network (SAN) Locking Daemon
-    SAN Locking Daemon is a lock manager designed for shared storage in {term}`SAN (Storage Area Network)` environments.
+    SAN Locking Daemon is a lock manager designed for shared storage in {term}`SAN` environments.
 
     SANLOCK provides distributed locking. In other words, it coordinates access to shared storage when multiple servers need to use the same storage resources simultaneously, preventing data corruption.
 
