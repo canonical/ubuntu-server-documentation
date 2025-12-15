@@ -2491,8 +2491,7 @@ World Wide Identifier
 :::{glossary}
 
 X.509
-    Standard format for public key certificates used in TLS/SSL for secure communications.
-
+   X.509 is a standard format for public key certificates used in cryptography and network security. A digital certificate that binds a public key to an identity (like a website, person, or organization). X.509 is signed by a trusted Certificate Authority ({term}`CA`) to verify authenticity.
 xhtml
 Extensible HyperText Markup Language
     *Work in Progress*
