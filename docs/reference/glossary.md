@@ -2070,7 +2070,7 @@ Scrollback
     Related topic(s):
     * Command history
 
-SCSI (pronounced "scuzzy")
+SCSI
 Small Computer System Interface
     SCSI is both a physical interface (cables and connectors) and a command protocol, set of standards, for communicating with storage and peripheral devices like hard drives, tape drives, and scanners. Each device gets a unique ID number (0-7 or 0-15 depending on version). The last device in a SCSI chain needs a terminator to prevent signal reflection.
 
