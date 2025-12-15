@@ -2514,7 +2514,7 @@ X.509
 
 xhtml
 Extensible HyperText Markup Language
-    xhtml is a stricter HTML language. It reformulates HTML as XML by combining HTML elements with XML's strict syntax rules, so documents are well-formed, more consistent across browsers, and easier to process with XML tools. 
+    xhtml is a stricter HTML language. It reformulates HTML as XML by combining HTML elements with XML's strict syntax rules, so documents are well-formed, more consistent across browsers, and easier to process with XML tools.
 
 XML
 Extensible Markup Language
