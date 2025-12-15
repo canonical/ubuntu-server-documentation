@@ -2332,7 +2332,7 @@ untrusted
     Untrusted refers to:
     1. data coming from outside the system, such as files uploaded by users
     1. code coming from an external, unknown, or non-verified source, such as third-party plug-ins
-    1. network that cannot be assumed secured, such as public WI-FI 
+    1. network that cannot be assumed secure, such as public WI-FI 
 
 uptime
     Uptime is a measure of how long a system has been running continuously since its last boot, crash, or restart. Uptime indicates system stability and availability.
