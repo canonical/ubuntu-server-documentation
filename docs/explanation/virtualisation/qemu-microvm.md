@@ -46,7 +46,7 @@ There are a few common ways to adapt a workload to match this:
   A drawback of this solution is the fact that the guest system will not have
   control over the kernel anymore, thus restricting what can be done inside the
   guest system.
-- Sometimes a simpler user space like [BusyBox](https://www.busybox.net/) or a container-like environment
+- Sometimes a simpler user space like [BusyBox](https://github.com/SecureVirtualization/busybox) or a container-like environment
   is used.
 - In a similar fashion, you could use a customized kernel build with a reduced feature set
   with only what is needed for a given use case.

@@ -1324,7 +1324,7 @@ JavaScript Object Notation
     ideal lightweight data interchange language.
 
     See also:
-    * [The JSON website](https://www.json.org/json-en.html/)
+    * [The JSON website](https://www.json.org/json-en.html)
 
 :::
 

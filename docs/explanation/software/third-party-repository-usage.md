@@ -42,7 +42,7 @@ In other words, if you use a third party software you will have to contact its p
 
 ## A better solution to third party APT repositories: snaps
 
-As we have seen, third party APT repositories are not simple and should be handled carefully. But there is an alternative that is natively supported by Ubuntu and solves some of the issues affecting third party APT repositories: [snaps](https://ubuntu.com/core/services/guide/snaps-intro).
+As we have seen, third party APT repositories are not simple and should be handled carefully. But there is an alternative that is natively supported by Ubuntu and solves some of the issues affecting third party APT repositories: [snaps](https://snapcraft.io/docs/get-started).
 
 Due to the way they are architected, snaps already carry all of their dependencies inside them. When they are installed, they are placed in an isolated directory in the system, which means that they cannot conflict with existing Ubuntu packages (or even with other snaps).
 

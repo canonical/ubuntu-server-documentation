@@ -81,7 +81,7 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
 - `--mount`: it accepts multiple key-value pairs (`<key>=<value>`). This is the preferred option to use.
   - `type`: for volumes it will always be `tmpfs`;
   - `destination`, `dst` or `target`: container’s directory to be mounted;
-  - `tmpfs-size` and `tmpfs-mode` options (optional). For a full list see the [Docker documentation](https://docs.docker.com/storage/tmpfs/#specify-tmpfs-options).
+  - `tmpfs-size` and `tmpfs-mode` options (optional). For a full list see the [Docker documentation](https://docs.docker.com/engine/storage/tmpfs/#options-for---tmpfs).
 - `--tmpfs`: it accepts no configurable options, just mount the tmpfs for a standalone container.
 
 ### Storage drivers
@@ -121,7 +121,7 @@ The following logging drivers are available (at the time of writing):
 - **`syslog`**: send logs to a syslog server.
 - **`logentries`**: send container logs to the [Logentries](https://www.rapid7.com/products/siem/) server.
 - **{term}`gelf`**: write logs in a {term}`Graylog` Extended Format which is understood by many tools, such as [Graylog](https://graylog.org/), [Logstash](https://www.elastic.co/logstash), and [Fluentd](https://www.fluentd.org).
-- **`awslogs`**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/details/#log-monitoring).
+- **`awslogs`**: send container logs to [Amazon CloudWatch Logs](https://aws.amazon.com/cloudwatch/features/).
 - **`etwlogs`**: forward container logs as ETW events. ETW stands for Event Tracing in Windows, and is the common framework for tracing applications in Windows. Not supported in Ubuntu systems.
 - **{term}`fluentd`**: send container logs to the [Fluentd](https://www.fluentd.org) collector as structured log data.
 - **{term}`gcplogs`**: send container logs to [Google Cloud Logging](https://docs.cloud.google.com/logging/docs) Logging.

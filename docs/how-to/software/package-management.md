@@ -272,5 +272,5 @@ Most of the material covered in this chapter is available in the respective man 
 - The [Installing Software](https://help.ubuntu.com/community/InstallingSoftware) Ubuntu wiki page has more information.
 - The [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide) contains useful information regarding APT usage.
 - For more information about systemd timer units (and systemd in general), visit the {manpage}`systemd(1)` manual page and {manpage}`systemd.timer(5)` manual page
-- See the [Aptitude user's manual](https://www.debian.org/doc/user-manuals#aptitude-guide) for more Aptitude options.
+- See the [Aptitude user's manual](https://www.debian.org/doc/user-manuals#aptitude) for more Aptitude options.
 - The [Adding Repositories HOWTO (Ubuntu Wiki)](https://help.ubuntu.com/community/Repositories/Ubuntu) page contains more details on adding repositories.
