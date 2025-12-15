@@ -369,7 +369,7 @@ The above is a very simple working VPN. The client can access services on the VP
 The example config files that we have been using in this guide are full of these advanced options in the form of a comment and a disabled configuration line as an example.
 
 ```{note}
-Read the OpenVPN [hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security) for further security advice.
+Read the OpenVPN [hardening security guide](https://openvpn.net/community-docs/security.html) for further security advice.
 ```
 
 ### Advanced bridged VPN configuration on server

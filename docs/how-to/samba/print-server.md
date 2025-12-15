@@ -50,7 +50,7 @@ The default Samba configuration will automatically share any printers installed.
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba HOWTO Collection](http://samba.org/samba/docs/man/Samba-HOWTO-Collection/).
+  - For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
 
   - The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
