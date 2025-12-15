@@ -2239,12 +2239,11 @@ Trivial File Transfer Protocol
 
 TGS
 Ticket Granting Service
-    TGS is a term used in the Kerberos authentication protocol, a key component of the Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
+    TGS is a credential issued by Kerberos used in the Kerberos authentication protocol, a key component of the Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
 
 TGT
 Ticket Granting Ticket
-    TGT is a credential issued by Kerberos authentication systems that allows users to request service tickets without re-entering their password.
-It is a central component of Kerberos, the network authentication protocol used in Active Directory ({term} `AD`) and many Unix/Linux environments.
+    TGT is a credential issued by Kerberos authentication systems that allows users to request service tickets without re-entering their password. It is a central component of Kerberos, the network authentication protocol used in Active Directory ({term} `AD`) and many Unix/Linux environments.
 
 TLB
 Translation Lookaside Buffer
@@ -2256,7 +2255,7 @@ Transport Layer Security
 
 tmpfs
 Temporary Filesystem
-    tmfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it extremely fast but also volatile - data disappears when the system reboots or loses power.
+    tmfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it fast but also volatile - data disappears when the system reboots or loses power.
 
 tmux
 Terminal Multiplexer
@@ -2271,12 +2270,11 @@ Time-based One-Time Password
 
 TPM
 Trusted Platform Module
-    A hardware security chip that securely stores cryptographic keys, measures
-    system integrity during boot, and enables features such as secure storage,
-    encryption, and attestation.
+    A hardware security chip that securely stores cryptographic keys, measures system integrity during boot, and enables features such as secure storage,
+ encryption, and attestation.
 
 Traceback
-    traceback is term used in Python. Traceback is a report of the function call stack printed when an exception occurs, showing the sequence of calls leadiing to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by tracing execution backward from the failure point.
+    traceback is a term used in Python. Traceback is a report of the function call stack printed when an exception occurs. It shows the sequence of calls leading to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by tracing execution backward from the failure point.
 
 Traceroute
     Traceroute is a network diagnostic tool that shows the path packets take from your computer to a destination across the internet, revealing each hop (router) along the way.
