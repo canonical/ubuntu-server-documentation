@@ -2552,7 +2552,7 @@ Zettabyte File System
     ZFS is an advanced 64-bit file system that also includes its own built-in volume manager. It is designed for high-capacity and reliable storage. It is know for its strong data-integrity features, easy pooling of disks, and convenient features like snapshots, compression, and built in {term}`RAID (RAID-Z)`.
 
 z/VM
-    z/VM is IBM's virtualization operating system for their mainframe computers (IBM Z systems, formerly known as System z). z/VM is a {term} `hypervisor` that allows multiple operating systems to run simultaneously on a single mainframe, effectively turning one physical machine into many virtual machines.
+    z/VM is IBM's virtualization operating system for their mainframe computers (IBM Z systems, formerly known as System z). z/VM is a {term}`hypervisor` that allows multiple operating systems to run simultaneously on a single mainframe, effectively turning one physical machine into many virtual machines.
     
 :::
 
