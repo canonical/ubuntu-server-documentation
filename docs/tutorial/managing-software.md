@@ -954,7 +954,7 @@ Each pocket is split into four **components**, depending on whether the packages
 - **restricted** contains the packages that are officially supported by Canonical but are not available under a completely free license.
 - **multiverse** contains community-maintained proprietary software -- these packages are completely unsupported by Canonical.
 
-If you would like more information about the Ubuntu release process, how packages are produced, or to learn more about the sort of terminology you might come across, you may be interested in the [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/), which is a great resource containing all this information (and much more!).
+If you would like more information about the Ubuntu release process, how packages are produced, or to learn more about the sort of terminology you might come across, you may be interested in the [Ubuntu Project documentation](https://documentation.ubuntu.com/project/), which is a great resource containing all this information (and much more!).
 
 ## Installing a .deb file
 

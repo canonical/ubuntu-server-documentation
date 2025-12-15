@@ -240,6 +240,7 @@ linkcheck_ignore = [
     "https://nfs.sourceforge.net/*",
     "https://sourceforge.net/*",
     "https://ubuntu.com/blog/*",
+    "https://help.ubuntu.com/*",
     # Rate-limited domains that cause delays
     r"http://www\.gnu\.org/software/.*",
     r"https://github\.com/.*/blob/.*",
