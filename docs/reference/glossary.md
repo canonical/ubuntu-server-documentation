@@ -2243,8 +2243,8 @@ Ticket Granting Service
 
 TGT
 Ticket Granting Ticket
-    TGT is a credential issued by Kerberos authentication systems that allows users to request service tickets without re-entering their password. It is a central component of Kerberos, the network authentication protocol used in Active Directory ({term} `AD`) and many Unix/Linux environments.
-
+    TGT is a credential issued by Kerberos authentication systems. TGT allows users to request service tickets without re-entering their password.
+    
 TLB
 Translation Lookaside Buffer
     TLB is a specialized cache in the {term}`CPU` that stores recent virtual-to-physical address translations, dramatically speeding up memory access by avoiding repeated page table lookups. It is a critical component of virtual memory systems that makes address translation fast enough to be practical. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it is missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
