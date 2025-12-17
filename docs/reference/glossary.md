@@ -2300,7 +2300,7 @@ Trusted Execution Technology
 
 UDA
 Unified Data Architecture
-   UDA is a framework or approach for integrating and managing data across an organization in a cohesive, standardized manner. The main idea is that instead of having siloed, fragmented data systems across different departments or applications, UDA provides a unified framework for how data is stored, accessed, processed, governed, and shared across the organization.
+   UDA is an approach that provides a unified framework for integrating and managing data across an organization in a cohesive, standardized manner.
 
 UDP
 User Datagram Protocol
@@ -2343,8 +2343,7 @@ Uniform Resource Identifier
 
 URL
 Uniform Resource Locator
-  URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet. 
-  
+  URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet.
 userspace
     userspace (also appears as "user space" or "user-space") is the memory area and execution environment where normal applications and user programms run, as opposed to kernel space where the operating system kernel runs.
 
@@ -2402,10 +2401,7 @@ Virtual Graphics Processing Uunit
 
 virsh
 Virtual Shell.
-    virsh may refer to one of these three related ideas:  
-      1. Shell in a virtual/remote session. In this context virsh means to use a shell inside a virtual or remote environment instead of using the shell in the local console.
-      1. Virtual console plus shell. On Unix/Linux virsh usually means "a shell running on a virtual console/termminal" rather that on a physical serial terminal or local hardware console.
-      1. Shells provided by apps or sandboxes. In this context, it means an "emulated or constraint environment" rather than a direct login to the underlying operating system ({term}`OS`).
+    virsh refers to '/usr/bin/virsh'. It is a command-line program (from the libvirt-clients software package) that lets you create, start, stop, and manage virtual machines on Linux.
       
 VirtIO
 Virtualization I/O
