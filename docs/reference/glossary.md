@@ -340,6 +340,15 @@ Backports
 Backtrace
     *Work in Progress*
 
+BaseDN
+Base Distinguished Name
+    BaseDN is the highest level entry in your {term}`LDAP` directory hierarchy, like the root folder in a file system. Everything in your directory exists under this base.
+
+    Related topic(s):
+    * {term}`BindDN`
+    * {term}`rootPW`
+    * {term}`rootDN`
+    
 BDC
 Backup Domain Controller
     *Work in Progress*
@@ -348,7 +357,13 @@ bind
     *Work in Progress*
 
 BindDN
-    *Work in Progress*
+Bin Distinguished Name
+    BinDN is the account credentials you use to connect to {term}`LDAP`. The "login name" in LDAP's Distinguished Name format.
+
+    Related topic(s):
+    * {term}`BaseDN`
+    * {term}`rootPW`
+    * {term}`rootDN`
 
 BIOS
     *Work in Progress*
@@ -1231,7 +1246,16 @@ Internet Protocol
     *Work in Progress*
 
 IP address
-    *Work in Progress*
+Internet Protocol Address
+    IP address is a unique numerical identifier assigned to every device connected to a network. It is used to identify the device and its location, enabling data to be sent and received across the internet. Therefore, IP addresses have two functions: network interface identification, and location addressing.
+
+    See also:
+    * [Types of IP addresses](https://en.wikipedia.org/wiki/IP_address) and also (https://surfshark.com/blog/types-of-ip-addresses?srsltid=AfmBOootFd41l6RuqpGZR5Zxwm-3ervwdkWxvXLyJbRtRGxNmhdiTrmk)
+    * [IP address functions](https://en.wikipedia.org/wiki/IP_address)
+
+    Related topic(s):
+    * {term}`non-ruotable`
+    * {term}`routable`
 
 IPC
 Inter-Process Communication
@@ -1380,7 +1404,10 @@ Local Area Network
 
 LDAP
 Lightweight Directory Access Protocol
-    *Work in Progress*
+    LDAP is a standardised protocol for accessing and managing directory information services over a network.
+
+    See also:
+    * [LDAP Server Administration and Use](https://publibz.boulder.ibm.com/epubs/pdf/glda2a11.pdf)
 
 LDIF
 LDAP Data Interchange Format
@@ -1596,6 +1623,14 @@ Network Information Service
 NMI
 Non-Maskable Interrupt
     *Work in Progress*
+
+Non-routable 
+    Non-routable refers to data traffic that works only within within local/private networks. Non-routable are IP addresses reserved for private use.
+
+    Related topic(s):
+    * {term}`routable`
+    * {term}`IP adress`
+    
 
 NRPE
 Nagios Remote Plugin Executor
@@ -1945,19 +1980,40 @@ Rocks
 
 ROM
 Read-Only Memory
-    *Work in Progress*
+    ROM is a type of computer memory that permanently stores data and cannot be easily modified or erased - hence "read-only"
+
+    See also:
+    * [types of ROM](https://www.geeksforgeeks.org/computer-organization-architecture/different-types-of-rom/)
+    * [key characteristics](https://en.wikipedia.org/wiki/Read-only_memory)
 
 rootDN
 Root Distinguished Name
-    *Work in Progress*
+    rootDN is the top-level administrator identity in an LDAP directory with full permissions to read, write, modify, and delete any entry in the directory tree.
+
+    Related topic(s):
+    * {term}`BaseDN`
+    * {term}`BindDN`
+    * {term}`rootPW`
 
 rootfs
 Root File System
-    *Work in Progress*
+    rootfs is the top-level filesystem that contains all the essential files needed to boot and run a Linux/Unix system. It is the foundation upon what everthing else is built.
+
+    See also:
+    * [Types of roofs](https://refspecs.linuxfoundation.org/FHS_3.0/fhs/ch03.html)
+    * [Boot process and rootfs](https://www.youtube.com/watch?v=XpFsMB6FoOs)
+
+rootPW
+Root Password
+    rootPW is the administrative password that grants full access to the rootDN account. RootPW and {term}`rootDN gives full administrative access to {term}`LDAP`
 
 routable
-    *Work in Progress*
+    It is the ability for data packets to travel from one network to another. Routable data packets are Public IP addresses.
 
+    Related topic(s):
+    * {term}`non-ruotable`
+    * {term}`IP address`
+    
 RSA
 Rivest–Shamir–Adleman
     RSA is an asymmetric encryption algorithm
