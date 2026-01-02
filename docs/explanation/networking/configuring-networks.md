@@ -231,9 +231,9 @@ ip address show lo
 
 ### Adding a virtual IP address
 
-Virtual IP is a method for broadcasting multiple IP addresses to the network. For example, use virtual IP to:
+Virtual IP is a method for broadcasting multiple IP addresses to the network *on a single network interface*. For example, configuring a single network interface, use virtual IP to:
 
-- host multiple web domains using different IP addresses rather than configuring virtual hosts in the web server
+- host multiple web domains by configuring virtual hosts using different IP addresses rather than server names
 - host multiple server names using Samba
 
 Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`.
