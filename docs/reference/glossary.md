@@ -2233,6 +2233,13 @@ TCP
 Transmission Control Protocol
     *Work in Progress*
 
+TDX
+Trust domain extensions
+  It is security technology from Intel that creates isolated, encrypted virtual machines called "Trust Domains".
+  TDX:
+  * Protects confidential workloads in cloud environments
+  * Encrypts VM memory to protect it from the host system or hypervisor
+
 TEE
 Trusted Execution Environment
     A secure processor enclave that isolates code and data to ensure
