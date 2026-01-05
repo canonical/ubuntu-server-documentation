@@ -2233,7 +2233,7 @@ TCP
 Transmission Control Protocol
     *Work in Progress*
 
-TDX (Intel)
+TDX
 Trust domain extensions
   It is security technology from Intel that creates isolated, encrypted virtual machines called "Trust Domains".
   TDX:
