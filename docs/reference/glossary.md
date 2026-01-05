@@ -2062,7 +2062,7 @@ Storage-Based Death
 
 sbin
 System Binaries
-    sbin is a directory in Unix/Linux systems that contains essential system administration commands and executables. It holds programs needed for system administration, booting, and repair.
+    `sbin/` is a directory in Unix/Linux systems that contains essential system administration commands and executables. It holds programs needed for system administration, booting, and repair.
     On many modern Linux distributions, `/sbin` is often symlinked to `/usr/sbin`, and both directories are merged as part of filesystem simplification efforts. The distinction is becoming less strict, but historically `/sbin` was for boot-essential tools.
 
 schema
