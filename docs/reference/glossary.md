@@ -502,7 +502,7 @@ Defense Advanced Research Projects Agency
 
 DAS
 Direct Attached Storage
-    DAS is storage that is physically and directly connected to one computer. DAS is not share over a network and it is accessible ONLY to the host it is connected to.
+    DAS is storage that is physically and directly connected to one computer. DAS is not shared over a network and it is accessible ONLY to the host it is connected to.
 
      See also:
      * {term}`NAS`
@@ -2028,7 +2028,7 @@ Storage Area Network
     
 sandboxed
     Sandboxed means running software in an isolated environment where it cannot affect anything outside the sandbox.
-What sandboxing does is two things:
+    Sandboxing does two things:
 
   * Isolates: The sandboxed program cannot access:
             * Your files (unless explicitly allowed)
@@ -2036,7 +2036,7 @@ What sandboxing does is two things:
             * System settings
             * Network resources (in some cases)
 
-  * Secures: If the sandboxed program is malicious or gets compromised, the damage is contained. It cannot spread to your whole system
+    * Secures: If the sandboxed program is malicious or gets compromised, the damage is contained. It cannot spread to your whole system.
 
     Related topic(s):
       * Web browsers
