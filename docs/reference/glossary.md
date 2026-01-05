@@ -2030,7 +2030,7 @@ sandboxed
     Sandboxed means running software in an isolated environment where it cannot affect anything outside the sandbox.
     Sandboxing does two things:
 
-  * Isolates: The sandboxed program cannot access:
+    * Isolates: The sandboxed program cannot access:
             * Your files (unless explicitly allowed)
             * Other running programs
             * System settings
