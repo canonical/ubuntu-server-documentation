@@ -2056,7 +2056,6 @@ SBD
 Storage-Based Death
    SBD is a fencing mechanism used in high-availability (HA) Linux clusters to prevent split-brain scenarios and data corruption. SBD uses shared storage as a communication channel to coordinate cluster nodes and forcibly reboot ("fence") problematic nodes that might cause issues.
 
-  
     Related topic(s):
     * Split-brain scenario
 
