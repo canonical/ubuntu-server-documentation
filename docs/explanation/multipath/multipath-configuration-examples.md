@@ -412,7 +412,7 @@ multipaths {
 #
 ```
 
-### Example of a blocklist section
+### Example of a blacklist section
 
 ```
 # name    : blacklist
@@ -435,7 +435,7 @@ multipaths {
 # }
 ```
 
-### Example of a blocklist exception section
+### Example of a blacklist exception section
 
 ```
 # name    : blacklist_exceptions
