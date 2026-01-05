@@ -2105,7 +2105,7 @@ Secure computing mode
 
 SFTP
 SSH File Transfer Protocol
-    SFTP is a secure file transfer protocol that runs over {term}`SSH`. SFTP is fully encripted. The port used is 22
+    SFTP is a secure file transfer protocol that runs over {term}`SSH`. SFTP is fully encrypted. The port used is 22.
     
     See also:
      * {term}`FTP`
