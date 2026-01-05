@@ -2086,7 +2086,7 @@ Secure Copy Protocol
     
 
 Scrollback
-    Scrollback refers to the ability to scroll back through previous content in a terminal or console window. Scrollback is the buffer that stores older content so you can scroll up to see it. Limitations are lost on close, not infinite, and the performace may suffer if the buffer is very large.
+    Scrollback refers to the ability to scroll back through previous content in a terminal or console window. Scrollback is the buffer that stores older content so you can scroll up to see it. Limitations are lost on close, not infinite, and the performance may suffer if the buffer is very large.
      
     Related topic(s):
     * Command history
