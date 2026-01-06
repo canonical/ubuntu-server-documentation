@@ -290,7 +290,7 @@ After you restart the service with `systemctl restart rpc-gssd.service`, the `ro
 
 ## References
 
-* [Linux NFS wiki](http://linux-nfs.org/wiki/)
+* [Linux NFS wiki](https://linux-nfs.org/wiki/index.php/Main_Page)
 * [Linux NFS FAQ](https://nfs.sourceforge.net/)
 
 * [Ubuntu Wiki NFS How-to](https://help.ubuntu.com/community/SettingUpNFSHowTo)
