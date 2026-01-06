@@ -80,7 +80,7 @@ The recommended method is to use the curated Ubuntu image from the Hyper-V Quick
 
 1. On the 'Actions' pane select 'Quick Create' and the Quick Create tool will open.
 
-1. Select a version of Ubuntu from the versions on the list. A build of the [most recent LTS](https://wiki.ubuntu.com/LTS) version of Ubuntu and the [most recent interim release](https://wiki.ubuntu.com/Releases) are provided.
+1. Select a version of Ubuntu from the versions on the list.
 
    * The **LTS version** is recommended if you are developing for Ubuntu Server or an enterprise environment.
    * The **interim release** is recommended if you would like to use the latest versions of software in Ubuntu.
