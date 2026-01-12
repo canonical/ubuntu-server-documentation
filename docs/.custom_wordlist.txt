@@ -200,7 +200,10 @@ rollouts
 rootfs
 routable
 rsnapshot
+Rsync
+rsync
 sandboxed
+Sandboxing
 Saslauthd
 saslauthd
 sbin
