@@ -500,6 +500,15 @@ Defense Advanced Research Projects Agency
     responsible for the development of emerging technologies for use in the
     military.
 
+DAS
+Direct Attached Storage
+    DAS is storage that is physically and directly connected to one computer. DAS is not shared over a network and it is accessible ONLY to the host it is connected to.
+
+     See also:
+     * {term}`NAS`
+     * {term}`SAN`
+
+
 DASD
 Direct Access Storage Device
     This term was coined by IBM to refer to a type of storage that allows random
@@ -805,6 +814,16 @@ filesystem
 
     Related topic(s):
     * Storage
+
+FTP 
+File Transfer Protocol
+    It is one of the tools used to move files between computers. FTP was created in 1970s. It is not secure as it transfers files, usernames, and passwords in plain text. It uses port 21.
+    Use only with legacy systems. Avoid unless wrapped in a secure network. 
+    
+    Related topic(s):
+    * {term}`SFTP`
+    * {term}`rsync`
+    * {term}`SCP`
 
 FIPS
 Federal Information Processing Standard
@@ -1559,8 +1578,12 @@ namespace
 
 NAS
 Network Attached Storage
-    *Work in Progress*
+    NAS is a file-level computer data storage server connected to a computer network providing data access to a heterogeneous group of clients. In this context, the term "NAS" can refer to both the technology and systems involved, and a specialized computer appliance device unit built for such functionality, a NAS appliance or NAS box.
 
+     See also:
+     * {term}`DAS`
+     * {term}`SAN`
+  
 NAT
 Network Address Translation
     *Work in Progress*
@@ -1963,6 +1986,18 @@ Rivest–Shamir–Adleman
     RSA is an asymmetric encryption algorithm
     *Work in Progress*
 
+rsync
+Remote Sync
+    Rsync is not strictly a protocol. Rsync is a file synchronization and transfer tool. It uses port 22, when over SSH, or 873 for rsync daemon. Rsync is the most efficient tool to synchronise backup tasks because it uses the Delta Transfer Algorithm method.
+    
+    See also:
+     * {term}`FTP`
+     * {term}`SCP`
+     * {term}`SFTP`
+
+     Related topic(s):
+     * Delta transfer algorithm
+    
 RTC
 Real-Time Clock
     *Work in Progress*
@@ -1986,41 +2021,80 @@ Samba
 
 SAN
 Storage Area Network
-    *Work in Progress*
+    A SAN is a dedicated network that connects servers to {term}`storage devices` (like disk arrays, tape libraries). It is a specialized high-speed network that provides access to consolidated block-level data storage. It makes storage devices appear as locally attached to the operating system, even though they are on a separate network.
 
+    See also:
+    * {term}`NAS`
+    
 sandboxed
-    *Work in Progress*
+    Sandboxed means running software in an isolated environment where it cannot affect anything outside the sandbox.
+    Sandboxing does two things:
 
+    * Isolates: The sandboxed program cannot access:
+            * Your files (unless explicitly allowed)
+            * Other running programs
+            * System settings
+            * Network resources (in some cases)
+
+    * Secures: If the sandboxed program is malicious or gets compromised, the damage is contained. It cannot spread to your whole system.
+
+    Related topic(s):
+      * Web browsers
+      * Mobile apps
+      * Virtual machines
+      * {term}`WSL`
+    
 SANLOCK
-SAN Locking Daemon
-    *Work in Progress*
-
+Storage Area Network Locking Daemon
+    SAN Locking Daemon is a lock manager designed for shared storage in {term}`SAN` environments.
+    
 SASL
 Simple Authentication and Security Layer
-    *Work in Progress*
-
+    SASL is a framework that adds authentication and security to network protocols. SASL itself does not define how to authenticate. It defines how to negotiate and use authentication mechanisms.
+ 
 SBD
 Storage-Based Death
-    *Work in Progress*
+   SBD is a fencing mechanism used in high-availability (HA) Linux clusters to prevent split-brain scenarios and data corruption. SBD uses shared storage as a communication channel to coordinate cluster nodes and forcibly reboot ("fence") problematic nodes that might cause issues.
+
+    Related topic(s):
+    * Split-brain scenario
+
 
 sbin
 System Binaries
-    *Work in Progress*
+    `sbin/` is a directory in Unix/Linux systems that contains essential system administration commands and executables. It holds programs needed for system administration, booting, and repair.
+    On many modern Linux distributions, `/sbin` is often symlinked to `/usr/sbin`, and both directories are merged as part of filesystem simplification efforts. The distinction is becoming less strict, but historically `/sbin` was for boot-essential tools.
 
-schemas
-    *Work in Progress*
+schema
+   Schema (plural: schemas or schemata) refers to a structured framework or blueprint that defines how data is organized. The meaning varies slightly depending on context.
+
+     Related topic(s):
+     * Database Schemas
+     * XML/JSON Schemas
+     * API Schemas
+     * Conceptual Schemas
+    
 
 SCP
 Secure Copy Protocol
-    *Work in Progress*
+    SCP is a network protocol for securely transferring files between computers over {term}`SSH`. SCP allows you to copy files between a local and remote host, or between two remote hosts, with encryption to protect the data during transfer.
+
+     See also:
+     * {term}`FTP`
+     * {term}`SFTP`
+     * {term}`rsync`
+    
 
 Scrollback
-    *Work in Progress*
+    Scrollback refers to the ability to scroll back through previous content in a terminal or console window. Scrollback is the buffer that stores older content so you can scroll up to see it. Limitations are lost on close, not infinite, and the performance may suffer if the buffer is very large.
+     
+    Related topic(s):
+    * Command history
 
 SCSI
 Small Computer System Interface
-    *Work in Progress*
-
+    SCSI (pronounced "scuzzy") is both a physical interface (cables and connectors) and a command protocol (set of standards) for communicating with storage and peripheral devices like hard drives, tape drives, and scanners. Each device gets a unique ID number (0-7 or 0-15 depending on version). The last device in a SCSI chain needs a terminator to prevent signal reflection.
+    
 SDN
 Software-Defined Networking
     *Work in Progress*
@@ -2031,7 +2105,12 @@ Secure computing mode
 
 SFTP
 SSH File Transfer Protocol
-    *Work in Progress*
+    SFTP is a secure file transfer protocol that runs over {term}`SSH`. SFTP is fully encrypted. The port used is 22.
+    
+    See also:
+     * {term}`FTP`
+     * {term}`SCP`
+     * {term}`rsync`
 
 SGI
 Silicon Graphics Inc.
@@ -2232,6 +2311,13 @@ TB
 TCP
 Transmission Control Protocol
     *Work in Progress*
+
+TDX
+Trust domain extensions
+  It is security technology from Intel that creates isolated, encrypted virtual machines called "Trust Domains".
+  TDX:
+  * Protects confidential workloads in cloud environments
+  * Encrypts VM memory to protect it from the host system or hypervisor
 
 TEE
 Trusted Execution Environment
