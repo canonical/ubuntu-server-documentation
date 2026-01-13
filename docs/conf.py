@@ -47,7 +47,7 @@ copyright = "%s, %s" % (datetime.date.today().year, author)
 # Documentation website URL
 # NOTE: The Open Graph Protocol (OGP) enhances page display in a social graph
 #       and is used by social media platforms; see https://ogp.me/
-ogp_site_url = "https://ubuntu.com/server/docs"
+ogp_site_url = "https://ubuntu.com/server/docs/"
 
 # Preview name of the documentation website
 ogp_site_name = project
@@ -107,7 +107,7 @@ html_context = {
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
 # If your documentation is hosted on https://docs.ubuntu.com/, specify the
 # project slug here.
-slug = "server"
+slug = "server/docs"
 
 
 # Allow opt-in build of the OpenAPI "Hello" example so docs stay clean by default.
@@ -178,6 +178,7 @@ html_js_files = [
     "js/header-nav.js",
     "js/github_issue_links.js",
     "js/bundle.js",
+    "js/url_overwrite.js",
 ]
 
 source_suffix = {
