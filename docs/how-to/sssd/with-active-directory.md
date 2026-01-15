@@ -299,7 +299,7 @@ To login with an Active Directory user for the first time, follow these steps:
 
 When logging in on a system joined with an Active Directory domain, `sssd` (the package responsible for this integration) will try to apply Group Policies by default. There are cases where if a specific policy is missing, the login will be denied.
 
-This is being tracked in [bug #1934997](https://bugs.launchpad.net/ubuntu/+source/sssd/+bug/1934997). Until the fix becomes available, please see [comment #5](https://bugs.launchpad.net/ubuntu/+source/sssd/+bug/1934997/comments/5) in that bug report for existing workarounds.
+This is being tracked in {lpbug}`1934997`. Until the fix becomes available, please see comment number 5 in that bug report for existing workarounds.
 
 ## Further reading
 

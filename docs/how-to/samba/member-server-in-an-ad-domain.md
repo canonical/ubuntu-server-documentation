@@ -97,7 +97,7 @@ This command also installed the `libpam-winbind` package, **which allows AD user
 If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
 ```
 
-Until [bug #1980246](https://bugs.launchpad.net/ubuntu/+source/samba/+bug/1980246) is fixed, one extra step is needed:
+Until {lpbug}`1980246` is fixed, one extra step is needed:
 - Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
 
   ```text 

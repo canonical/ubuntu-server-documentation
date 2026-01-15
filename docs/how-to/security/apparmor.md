@@ -153,7 +153,7 @@ After editing a profile file the profile must be reloaded.
   sudo aa-genprof slapd
   ```
 
-- To get your new profile included in the `apparmor-profiles` package, file a bug in Launchpad against the [AppArmor package](https://bugs.launchpad.net/ubuntu/+source/apparmor/+filebug):
+- To get your new profile included in the `apparmor-profiles` package, [file a bug in Launchpad against the AppArmor package](https://bugs.launchpad.net/ubuntu/+source/apparmor/+filebug):
     
   - Include your test plan and test cases 
   - Attach your new profile to the bug

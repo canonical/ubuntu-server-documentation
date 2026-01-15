@@ -107,7 +107,7 @@ When upgrading to Ubuntu 22.04 LTS ("jammy") from a release that still uses the 
  * a default `/etc/nfs.conf` configuration file will be installed
  * if the `/etc/default/nfs-*` files have been modified, a conversion script will be run and it will create `/etc/nfs.conf.d/local.conf` with the local modifications.
 
-If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please file a bug using this link: [https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug)
+If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please [file a bug for the nfs-utils package](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug).
 
 You can run the conversion tool manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
 

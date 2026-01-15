@@ -198,7 +198,7 @@ Breaking down the changes to the command-line elements and their purpose:
 > Sadly, polluting this nice showcase there is currently an issue with the
 > RTC initialisation not working in this mode - which makes the guest
 > kernel wait ~1.3 + ~1.4 seconds. See this
-> [qemu bug](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2074073)
+> {lpbug}`QEMU bug <2074073>`
 > if you are curious about that.
 >
 > But these changes were not about making the guest faster once it runs, instead

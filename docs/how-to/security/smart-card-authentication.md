@@ -412,7 +412,7 @@ or only try to use it:
 auth    [success=ok default=ignore]    pam_sss.so allow_missing_name try_cert_auth
 ```
 
-See [`man pam.conf`](https://manpages.ubuntu.com/manpages/jammy/en/man5/pam.conf.5.html), [`man pam_sss`](https://manpages.ubuntu.com/manpages/jammy/en/man8/pam_sss.8.html) for further details.
+See {manpage}`pam.conf(5)`, {manpage}`pam_sss(8)` for further details.
 
 ```{Warning}
 A global configuration such as this requires a smart card for `su` and `sudo` authentication as well!

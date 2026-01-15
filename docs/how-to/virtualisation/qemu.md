@@ -57,7 +57,7 @@ qemu-img create -f qcow2 disk.qcow 5G
 
 And then we can use the disk space we have just allocated for storage by adding the argument: `-drive file=disk.qcow,format=qcow2`.
 
-These tools can do much more, as you'll discover in their respective (long) [manual pages](https://manpages.ubuntu.com/). They can also be made more consumable for specific use-cases and needs through a vast selection of auxiliary tools - for example [virt-manager](https://virt-manager.org/) for UI-driven use through [libvirt](https://libvirt.org/). But in general, it comes down to:
+These tools can do much more, as you'll discover in their respective (long) manual pages. They can also be made more consumable for specific use-cases and needs through a vast selection of auxiliary tools - for example [virt-manager](https://virt-manager.org/) for UI-driven use through [libvirt](https://libvirt.org/). But in general, it comes down to:
 
 ```bash
 qemu-system-x86_64 options image[s]

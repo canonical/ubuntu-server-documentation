@@ -13,7 +13,7 @@ The OpenSSL configuration file is located at `/etc/ssl/openssl.cnf` and is used 
 
 ## Structure of the config file
 
-The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The [SSL config manual page](https://manpages.ubuntu.com/manpages/plucky/en/man5/config.5ssl.html) has all the details.
+The OpenSSL configuration file is very similar to a standard INI file. It starts with a nameless default section, not inside any `[section]` block, and after that we have the traditional `[section-name]` followed by the `key = value` lines. The {manpage}`SSL config manual page <config(5ssl)>` has all the details.
 
 This is what it looks like:
 
