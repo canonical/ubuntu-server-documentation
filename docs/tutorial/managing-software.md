@@ -135,7 +135,7 @@ When we run this command, it will ask us to confirm if the summary of proposed c
 Let's type {kbd}`Y`, then press {kbd}`Enter` to confirm that yes, we do want that, and then the upgrade will proceed. This may take a few minutes.
 
 ```{tip}
-You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran the command `sudo apt upgrade -y` it would proceed with the upgrade without asking us to confirm. Shorthand versions of flags are common -- for most packages, you can check which flags are equivalent using the manual pages or using the `man` command, as we'll see later.
+You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran the command `sudo apt upgrade -y` it would proceed with the upgrade without asking us to confirm. Shorthand versions of flags are common -- for most packages, you can check which flags are equivalent using [the manual pages](https://manpages.ubuntu.com/) or using the `man` command, as we'll see later.
 ```
 
 In the output, we'll see where `apt upgrade` is fetching the upgrade from for each package. For example:
