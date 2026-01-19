@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Install Apache2 HTTP web server on Ubuntu and learn about its configuration files and directives for LAMP stack deployment.
+    description: Install Apache2 HTTP web server on Ubuntu and learn about its configuration files and directives.
 ---
 
 (install-apache2)=
