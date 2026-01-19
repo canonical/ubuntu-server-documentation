@@ -10,7 +10,7 @@ myst:
 > System tuning tools are either about better understanding the system's
 > performance, or applying such knowledge to improve it. See our common
 > {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+> some generally applicable considerations about that.
 
 ## CPU governors
 

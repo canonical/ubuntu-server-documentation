@@ -5,8 +5,12 @@ myst:
 ---
 
 (perf-epp)=
-
 # Energy Performance Preference
+
+> System tuning tools are either about better understanding the system's
+> performance, or applying such knowledge to improve it. See our common
+> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+> some generally applicable considerations about that.
 
 Energy Performance Preference (EPP) is a CPU power-management feature available on many modern processors (particularly Intel and AMD). It allows the operating system or user to influence the CPU's balance between performance and power consumption. Instead of forcing a strict maximum performance or minimum power mode, EPP provides a hint to the processor’s hardware power control logic about the desired balance.
 
