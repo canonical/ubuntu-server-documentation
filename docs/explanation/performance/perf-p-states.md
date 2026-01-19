@@ -7,10 +7,12 @@ myst:
 (perf-p-states)=
 # CPU Power states
 
-> System tuning tools are either about better understanding the system's
-> performance, or applying such knowledge to improve it. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> some generally applicable considerations about that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
 A modern CPU usually can be in one of many P-states (mostly controlling
 voltage and frequency) when working as well as C-states (mostly defining how

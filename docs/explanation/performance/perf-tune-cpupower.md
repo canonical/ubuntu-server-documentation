@@ -7,10 +7,12 @@ myst:
 (perf-tune-cpupower)=
 # The cpupower tool
 
-> System tuning tools are either about better understanding the system's
-> performance, or applying such knowledge to improve it. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> some generally applicable considerations about that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
 This page is about the cpupower tool, which can be handy to inspect and manage
 the CPU power settings. This is mostly controlled via {ref}`perf-p-states`

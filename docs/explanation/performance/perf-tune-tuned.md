@@ -7,10 +7,12 @@ myst:
 (perf-tune-tuned)=
 # TuneD
 
-> Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
 The same is true for the TuneD profiles - they are only suggestions and starting
 points for a few named workload categories that allow you to react dynamically.
