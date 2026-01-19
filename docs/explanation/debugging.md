@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: Understanding debugging tools on Ubuntu Server including debuginfod and debug symbols. As well as the usage of eBPF for system analysis.
+    description: Understanding debugging tools on Ubuntu Server including debuginfod and debug symbols, as well as the use of eBPF for system analysis.
 ---
 
 (explanation-debugging)=
 # Debugging
 
-These pages are for those interested in deeper debugging and analysis on a Ubuntu system.
+These pages are for those interested in deeper debugging and analysis on an Ubuntu system.
 
 * {ref}`About debuginfod <about-debuginfod>`
 * {ref}`Debug symbol packages <debug-symbol-packages>`
