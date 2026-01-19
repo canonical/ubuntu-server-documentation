@@ -23,15 +23,15 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
    * [differences-from-original-sudo](https://github.com/trifectatechfoundation/sudo-rs#differences-from-original-sudo)
    * [aim-of-the-project](https://github.com/trifectatechfoundation/sudo-rs?tab=readme-ov-file#aim-of-the-project)
 
-2. `sudo-rs` prompt. 
+2. `sudo-rs` prompt.
 
-  This is the most common error users encounter when using Expect-based automation. The error often is a TIMEOUT because Expect is pattern matching on the `sudo.ws` prompt.
+   This is the most common error users encounter when using Expect-based automation. The error often is a TIMEOUT because Expect is pattern matching on the `sudo.ws` prompt.
 
-  `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
+   `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
 
-  You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
+   You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
 
-  [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
+   [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
 
 3. I/O logging and `sudoreplay` is not supported. The discontinued programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
 
