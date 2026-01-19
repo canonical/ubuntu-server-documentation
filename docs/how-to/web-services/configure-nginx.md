@@ -145,4 +145,4 @@ Beyond the settings outlined above, nginx can be further customized through the 
 
 * [nginx's beginner's guide](https://nginx.org/en/docs/beginners_guide.html) covers use cases such as proxy servers, {term}`FastCGI` for use with PHP and other frameworks, and optimising the handling of static content.
 * The [nginx documentation](https://nginx.org/en/docs/http/configuring_https_servers.html) describes HTTPS server configuration in greater detail, including certificate chains, disambiguating various multi-site certificate situations, performance optimisations and compatibility issues.
-* For Ubuntu-specific nginx questions, ask in the `#ubuntu-server` IRC channel on <a>libera.chat</a>.
+* For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

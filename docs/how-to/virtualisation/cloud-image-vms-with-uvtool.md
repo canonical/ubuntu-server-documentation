@@ -171,6 +171,6 @@ A complete description of all available modifiers is available in the {manpage}`
 
 If you are interested in learning more, have questions or suggestions, please contact the Ubuntu Server Team at:
 
-- [#server on Ubuntu Matrix](https://matrix.to/#/#server:ubuntu.com)
+- {matrix}`#server in Ubuntu Matrix <server>`
 
 - Mailing list: [`ubuntu-server` at `lists.ubuntu.com`](https://lists.ubuntu.com/mailman/listinfo/ubuntu-server)
