@@ -5,33 +5,16 @@ myst:
 ---
 
 (perf-tune-cpupower)=
-# CPU Governors and the cpupower tool
+# The cpupower tool
 
 > System tuning tools are either about better understanding the system's
 > performance, or applying such knowledge to improve it. See our common
 > {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
 > some generally applicable considerations about that.
 
-## CPU governors
-
-The kernel provides several CPU governors which can be configured, per core, to
-optimize for different needs.
-
-| **Governor**   | Design philosophy   |
-| -------------- | ------------------- |
-| `ondemand`     | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
-| `conservative` | Similar to `ondemand`, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behavior is more suitable in a battery-powered environment. |
-| `performance` | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being under-used. |
-| `powersave`   | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
-| `userspace`   | Allows a user-space program to control the CPU frequency. |
-
-See the [Linux {spellexception}`CPUFreq` Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
-for a more extensive discussion and explanation of the available Linux CPU governors.
-
-While these governors can be checked and changed directly in `sysfs` at
-`/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`, the command `cpupower`
-which comes with the package `linux-tools-common` makes this easier by providing
-a command line interface and providing access to several related values.
+This page is about the cpupower tool, which can be handy to inspect and manage
+the CPU power settings. This is mostly controlled via {ref}`perf-p-states`
+which are important to be understood before taking action.
 
 ## Monitor CPU frequency
 
