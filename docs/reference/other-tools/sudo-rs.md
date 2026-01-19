@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for sudo-rs, a memory-safe Rust implementation of the sudo command on Ubuntu Server."
+    description: "Reference documentation for sudo-rs outlining differences to the former sudo.ws, to guide upgraders of Ubuntu Server how they might need to adapt to the new implementation."
 ---
 
 (sudo-rs)=
