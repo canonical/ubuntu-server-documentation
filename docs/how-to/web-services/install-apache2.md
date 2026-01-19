@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: Install Apache2 HTTP web server on Ubuntu and learn about its configuration files and directives for LAMP stack deployment.
+    description: Install Apache2 HTTP web server on Ubuntu and learn about its configuration files and directives.
 ---
 
 (install-apache2)=
 # How to install Apache2
 
-[The Apache HTTP Server](https://httpd.apache.org/) ("httpd") is the most commonly used web server on Linux systems, and is often used as part of the LAMP configuration. In this guide, we will show you how to install and configure Apache2, which is the current release of "httpd".
+[The Apache HTTP Server](https://httpd.apache.org/) ("httpd") is a widely used web server on Linux systems, and is often used as part of the LAMP configuration (Linux + Apache + MySQL + PHP/Perl/Python). In this guide, we will show you how to install and configure Apache2, which is the current release of "httpd".
 
 ## Install `apache2`
 
