@@ -12,8 +12,8 @@ myst:
 > {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
 > the general reasons for that.
 
-The default installed package `hwloc-nox` provides various tools to discover the
-topology of the chip internal structures as well as any associated devices
+The package `hwloc-nox` provides various tools to discover the
+topology of the chip, its internal structures as well as any associated devices
 like PCI cards, NVME devices and memory.
 
 By default the tools provide command line interfaces, but it can also render
