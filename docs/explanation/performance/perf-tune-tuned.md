@@ -148,7 +148,7 @@ cpu
 	energy_performance_preference
 	boost
 ```
-And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
+And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_<plugin-name>.py`.
 
 ### Customizing a profile
 
