@@ -52,13 +52,11 @@ Docker storage, networking, and logging <virtualisation/docker-storage-networkin
 ## Other virtualisation tools
 
 * {ref}`About OpenStack <about-openstack>` provides an introduction to OpenStack
-* {ref}`Introduction to eBPF <introduction-to-ebpf>` discusses eBPF, which is a lightweight VM that runs in the kernel space
 
 ```{toctree}
 :hidden:
 
 About OpenStack <virtualisation/about-openstack>
-eBPF <intro-to/ebpf>
 ```
 
 ## See also

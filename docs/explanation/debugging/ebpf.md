@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Introduction to eBPF (Extended Berkeley Packet Filter) for safe and efficient kernel-level programming on Ubuntu Server systems.
+    description: Introduction to eBPF (Extended Berkeley Packet Filter) for safe and efficient kernel-level analysis on Ubuntu Server systems.
 ---
 
 (introduction-to-ebpf)=
