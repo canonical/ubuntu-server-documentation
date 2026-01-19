@@ -91,7 +91,7 @@ example.
 $ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
 # Unpack that to a local directory
 $ sudo apt install oci-image-tool
-$ oci-image-tool  unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
 # Create some paths the kernel would be unhappy if they would be missing
 $ mkdir /tmp/chiselled-hello/{dev,proc,sys,run,var}
 # Convert the directory to a qcow2 image
@@ -229,7 +229,7 @@ artifact above to a shareable directory:
 $ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
 # Unpack that to a directory
 $ sudo apt install oci-image-tool
-$ oci-image-tool  unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
 ```
 
 Exposing that directory to a guest via `virtiofsd`:
