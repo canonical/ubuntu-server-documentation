@@ -270,7 +270,7 @@ linkcheck_workers = 20
 # NOTE: If set, adding "{manpage}" to an .md file adds a link to the
 # corresponding man section at the bottom of the page.
 
-stable_distro = "plucky"
+stable_distro = "resolute"
 
 manpages_url = (
     "https://manpages.ubuntu.com/manpages/"
