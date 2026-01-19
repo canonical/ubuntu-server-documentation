@@ -157,7 +157,7 @@ For some specific workloads, the predefined profiles might not be enough and you
 Custom profiles live in `/etc/tuned/profiles/<profile-name>/tuned.conf`. There are 3 ways they can be created:
 
 * Copy an existing profile from `/usr/lib/tuned/profiles/<profile-name>` to `/etc/tuned/profiles/<profile-name>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
-* Create an entirely new profile in `/etc/tuned/<new-profile-name>` from scratch.
+* Create an entirely new profile in `/etc/tuned/profiles/<new-profile-name>` from scratch.
 * Create a new profile in `/etc/tuned/profiles/<new-profile-name>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/profiles/<profile-name>`.
 
 After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
