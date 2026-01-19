@@ -98,4 +98,4 @@ You've completed the nginx guide! See the following resources for more in-depth 
 
 * O'Reilly's nginx cookbook provides guidance on solving specific needs.
 
-* For Ubuntu-specific nginx questions, ask in the `#ubuntu-server` IRC channel on <a>libera.chat</a>.
+* For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

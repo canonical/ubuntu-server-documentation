@@ -94,4 +94,4 @@ The `apache2` daemon will run as the `www-data` user, which has a corresponding 
 
 - O'Reilly's [Apache Cookbook](http://shop.oreilly.com/product/9780596529949.do) is a good resource for accomplishing specific Apache2 configurations.
 
-- For Ubuntu specific Apache2 questions, ask in the `#ubuntu-server` IRC channel on [libera.chat](https://libera.chat/).
+- For Ubuntu specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

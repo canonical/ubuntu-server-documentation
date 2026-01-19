@@ -75,4 +75,4 @@ For more detailed information on configuring Apache2, check out our follow-up gu
 
 - O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
 
-- For Ubuntu-specific Apache2 questions, ask in the *\#ubuntu-server* IRC channel on [libera.chat](https://libera.chat/).
+- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.
