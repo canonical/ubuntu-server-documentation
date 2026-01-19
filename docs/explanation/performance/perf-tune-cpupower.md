@@ -109,21 +109,26 @@ cpupower frequency-info
 Output:
 
 ```bash
-analyzing CPU 3:
-  driver: intel_pstate
-  CPUs which run at the same hardware frequency: 3
-  CPUs which need to have their frequency coordinated by software: 3
-  maximum transition latency:  Cannot determine or is not supported.
-  hardware limits: 400 MHz - 4.00 GHz
+analyzing CPU 8:
+  driver: amd-pstate-epp
+  CPUs which run at the same hardware frequency: 8
+  CPUs which need to have their frequency coordinated by software: 8
+  energy performance preference: balance_performance
+  hardware limits: 400 MHz - 5.14 GHz
   available cpufreq governors: performance powersave
-  current policy: frequency should be within 400 MHz and 4.00 GHz.
+  current policy: frequency should be within 1.10 GHz and 5.14 GHz.
                   The governor "powersave" may decide which speed to use
                   within this range.
-  current CPU frequency: Unable to call hardware
-  current CPU frequency: 1.80 GHz (asserted by call to kernel)
+  current CPU frequency: 2.63 GHz (asserted by call to kernel)
   boost state support:
     Supported: yes
     Active: yes
+  amd-pstate limits:
+    Highest Performance: 196. Maximum Frequency: 5.14 GHz.
+    Nominal Performance: 145. Nominal Frequency: 3.80 GHz.
+    Lowest Non-linear Performance: 42. Lowest Non-linear Frequency: 1.10 GHz.
+    Lowest Performance: 16. Lowest Frequency: 400 MHz.
+    Preferred Core Support: 1. Preferred Core Ranking: 220.
 ```
 
 By default this checks the CPU it is executed on. The argument `-c` can be set
