@@ -13,8 +13,8 @@ myst:
 > the general reasons for that.
 
 The package `hwloc-nox` provides various tools to discover the
-topology of the chip, its internal structures as well as any associated devices
-like PCI cards, NVME devices and memory.
+hardware topology, including the chip's internal structures and any associated devices
+like PCI cards, NVMe devices, and memory.
 
 By default the tools provide command line interfaces, but it can also render
 those complex relations in a {term}`GUI` environment. Depending on which one you want
