@@ -502,3 +502,5 @@ tools-byobu reference/other-tools/byobu/
 byobu reference/other-tools/byobu/
 
 pam-motd reference/other-tools/pam-motd/
+
+explanation/performance/perf-epp explanation/performance/perf-p-states/
