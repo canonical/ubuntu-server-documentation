@@ -9,7 +9,8 @@ myst:
 
 This page serves as a reference for the key differences between `sudo.ws` and `sudo-rs`.
 
-Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences. This is a list of major differences as of the Ubuntu 25.10 release.
+Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences.
+This is a list of major differences as of the Ubuntu 25.10 and 26.04 releases, to help users upgrading to those.
 
 For the most accurate and current information, refer to
 `sudo-rs --help` for a list of supported options in your installed version.
