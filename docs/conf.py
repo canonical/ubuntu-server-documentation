@@ -178,6 +178,7 @@ html_js_files = [
     "js/header-nav.js",
     "js/github_issue_links.js",
     "js/bundle.js",
+    "js/hoverxref-dark-mode.js",
 ]
 
 source_suffix = {
