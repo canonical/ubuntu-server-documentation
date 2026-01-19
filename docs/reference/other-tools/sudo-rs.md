@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for sudo-rs, a memory-safe Rust implementation of the sudo command on Ubuntu Server."
+    description: "Reference documentation for sudo-rs outlining differences to the former sudo.ws, to guide users of Ubuntu Server on the new implementation."
 ---
 
 (sudo-rs)=
@@ -9,7 +9,8 @@ myst:
 
 This page serves as a reference for the key differences between `sudo.ws` and `sudo-rs`.
 
-Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences. This is a list of major differences as of the Ubuntu 25.10 release.
+Note: Both projects are under active development, so it is not possible to maintain a fully up-to-date list of differences.
+This is a list of major differences as of the Ubuntu 25.10 and 26.04 releases, to help users upgrading to those.
 
 For the most accurate and current information, refer to
 `sudo-rs --help` for a list of supported options in your installed version.
@@ -22,17 +23,17 @@ Refer to `man sudoers-rs` for the `/etc/sudoers` configuration options supported
    * [differences-from-original-sudo](https://github.com/trifectatechfoundation/sudo-rs#differences-from-original-sudo)
    * [aim-of-the-project](https://github.com/trifectatechfoundation/sudo-rs?tab=readme-ov-file#aim-of-the-project)
 
-2. `sudo-rs` prompt. 
+2. `sudo-rs` prompt.
 
-  This is the most common error users encounter when using Expect-based automation. The error often is a TIMEOUT because Expect is pattern matching on the `sudo.ws` prompt.
+   This is the most common error users encounter when using Expect-based automation. The error often is a TIMEOUT because Expect is pattern matching on the `sudo.ws` prompt.
 
-  `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
+   `sudo.ws` prompt for password says `[sudo] password for <USERNAME>`, whereas `sudo-rs` prompt says `[sudo: authenticate] <METHOD>:`. `sudo-rs` transparently prints whatever PAM says such as `Password:`, `PIN:`, etc.
 
-  You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
+   You can use `--prompt ""` in Expect-based scripts to skip the regex-based matching of the prompt.
 
-  [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
+   [See more information](https://github.com/trifectatechfoundation/sudo-rs/issues/1242)
 
-3. I/O logging and `sudoreplay` is not supported. The programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
+3. I/O logging and `sudoreplay` is not supported. The discontinued programs are `sudo_logsrvd`, `sudo_sendlog`, and `sudoreplay`.
 
 4. There is no `sudoers.ldap`. You need to use [LDAP authentication via PAM](https://github.com/trifectatechfoundation/sudo-rs/issues/445).
 
