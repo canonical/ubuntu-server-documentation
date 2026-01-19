@@ -7,10 +7,12 @@ myst:
 (perf-tune-hwloc)=
 # hwloc
 
-> System tuning tools are either about better understanding the system's
-> performance, or applying such knowledge to improve it. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
 The package `hwloc-nox` provides various tools to discover the
 hardware topology, including the chip's internal structures and any associated devices
