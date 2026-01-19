@@ -71,16 +71,16 @@ summary=A short summary
 description=A short description
 
 [plugin instance]
-type=TYPE
-replace=REPLACE
-enabled=ENABLED
-devices=DEVICES
+type=<TYPE like cpu, scheduler, ...>
+replace=<REPLACE = true | false>
+enabled=<ENABLED = true | false>
+devices=<DEVICES like /dev/sda, /dev/sdb>
 
 [another plugin instance]
-type=TYPE
-replace=REPLACE
-enabled=ENABLED
-devices=DEVICES
+type=<TYPE like cpu, scheduler, ...>
+replace=<REPLACE = true | false>
+enabled=<ENABLED = true | false>
+devices=<DEVICES like /dev/sda, /dev/sdb>
 ... other plugin-specific options ...
 
 ...
