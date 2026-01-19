@@ -391,3 +391,115 @@ p code.literal {
 .highlight .o {
     color: #BB5400;
 }
+
+/* Hoverxref tooltip dark mode support
+   The hoverxref extension uses Tippy.js which renders tooltips with light backgrounds by default.
+   These styles ensure tooltips match the current theme (light/dark mode). */
+
+/* Light mode tooltip styles (default) */
+.tippy-box[data-theme~='material'] {
+    background-color: #fff;
+    color: #111;
+    border: 1px solid #e0e0e0;
+}
+
+.tippy-box[data-theme~='material'] .tippy-content {
+    background-color: #fff;
+    color: #111;
+}
+
+.tippy-box[data-theme~='material'][data-placement^='top'] > .tippy-arrow::before {
+    border-top-color: #e0e0e0;
+}
+
+.tippy-box[data-theme~='material'][data-placement^='bottom'] > .tippy-arrow::before {
+    border-bottom-color: #e0e0e0;
+}
+
+.tippy-box[data-theme~='material'][data-placement^='left'] > .tippy-arrow::before {
+    border-left-color: #e0e0e0;
+}
+
+.tippy-box[data-theme~='material'][data-placement^='right'] > .tippy-arrow::before {
+    border-right-color: #e0e0e0;
+}
+
+/* Dark mode tooltip styles - when user selects dark theme */
+@media not print {
+    body[data-theme="dark"] .tippy-box[data-theme~='material'] {
+        background-color: #2b2b2b;
+        color: #f7f7f7;
+        border: 1px solid #555;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'] .tippy-content {
+        background-color: #2b2b2b;
+        color: #f7f7f7;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'][data-placement^='top'] > .tippy-arrow::before {
+        border-top-color: #555;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'][data-placement^='bottom'] > .tippy-arrow::before {
+        border-bottom-color: #555;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'][data-placement^='left'] > .tippy-arrow::before {
+        border-left-color: #555;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'][data-placement^='right'] > .tippy-arrow::before {
+        border-right-color: #555;
+    }
+
+    /* Style links within tooltips for dark mode */
+    body[data-theme="dark"] .tippy-box[data-theme~='material'] a {
+        color: #58a6ff;
+    }
+
+    body[data-theme="dark"] .tippy-box[data-theme~='material'] code {
+        background-color: #3b3b3b;
+        color: #e0e0e0;
+    }
+}
+
+/* Dark mode tooltip styles - when system prefers dark scheme */
+@media (prefers-color-scheme: dark) {
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'] {
+        background-color: #2b2b2b;
+        color: #f7f7f7;
+        border: 1px solid #555;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'] .tippy-content {
+        background-color: #2b2b2b;
+        color: #f7f7f7;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'][data-placement^='top'] > .tippy-arrow::before {
+        border-top-color: #555;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'][data-placement^='bottom'] > .tippy-arrow::before {
+        border-bottom-color: #555;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'][data-placement^='left'] > .tippy-arrow::before {
+        border-left-color: #555;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'][data-placement^='right'] > .tippy-arrow::before {
+        border-right-color: #555;
+    }
+
+    /* Style links within tooltips for dark mode */
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'] a {
+        color: #58a6ff;
+    }
+
+    body:not([data-theme="light"]) .tippy-box[data-theme~='material'] code {
+        background-color: #3b3b3b;
+        color: #e0e0e0;
+    }
+}
