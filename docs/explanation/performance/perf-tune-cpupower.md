@@ -14,7 +14,7 @@ performance, or applying such knowledge to improve it. See our common
 some generally applicable considerations about that.
 :::
 
-This page is about the cpupower tool, which can be handy to inspect and manage
+This page is about the `cpupower` tool, which can be handy to inspect and manage
 the CPU power settings. This is mostly controlled via {ref}`perf-p-states`
 which are important to be understood before taking action.
 

@@ -30,7 +30,7 @@ To identify those aspects and to then apply static or dynamic tuning Ubuntu carr
 * Profile-Guided Optimization {ref}`PGO <perf-pgo>`
 * Obtain the hierarchical map of key computing elements using {ref}`hwloc and lstopo <perf-tune-hwloc>`
 * Understand and directly influence {ref}`perf-p-states`
-* Monitori, analyze and control CPU governors, power and frequency with {ref}`cpupower <perf-tune-cpupower>`
+* Monitor, analyze and control CPU governors, power and frequency with {ref}`cpupower <perf-tune-cpupower>`
 * Dynamic, adaptive system tuning {ref}`with TuneD <perf-tune-tuned>`
 
 ```{toctree}

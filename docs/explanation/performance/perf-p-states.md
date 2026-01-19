@@ -25,7 +25,7 @@ Depending on manufacturer and chip generation different systems might be
 active - here we outline some common ones, but actually most others still
 share a lot of the same aspects.
 
-Below we will outline the direct access via sysfs, but there are tools that
+Below we will outline the direct access via `sysfs`, but there are tools that
 can inspect and manipulate such settings like EPP or scaling governors on
 Ubuntu. Please have a look at {ref}`perf-tune-cpupower` as well.
 
@@ -68,7 +68,7 @@ The full list of options is provided in:
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
 ```
 
-The value can be set via sysfs as well:
+The value can be set via `sysfs` as well:
 
 ```bash
 echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
@@ -78,7 +78,7 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governo
 ## Energy Performance Preference
 
 Energy Performance Preference (EPP) is a CPU power-management feature available on many modern processors (particularly Intel and AMD). It allows the operating system or user to influence the CPU's balance between performance and power consumption. Instead of forcing a strict maximum performance or minimum power mode, EPP provides a hint to the processor’s hardware power control logic about the desired balance.
-Consider it to be quite similar to scaling_governors, but partially handled in a harware/firmware assisted way.
+Consider it to be quite similar to scaling_governors, but partially handled in a hardware/firmware assisted way.
 
 The actual effect depends on the CPU model and firmware, but in general, lower EPP values tell a processor to favor performance while higher values tell it to favor lower power consumption.
 
