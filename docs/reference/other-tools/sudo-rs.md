@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for sudo-rs outlining differences to the former sudo.ws, to guide upgraders of Ubuntu Server how they might need to adapt to the new implementation."
+    description: "Reference documentation for sudo-rs outlining differences to the former sudo.ws, to guide users of Ubuntu Server on the new implementation."
 ---
 
 (sudo-rs)=
