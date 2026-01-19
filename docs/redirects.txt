@@ -396,7 +396,7 @@ networking-key-concepts explanation/networking/networking-key-concepts/
 network-configuration explanation/networking/configuring-networks/
 configuring-networks explanation/networking/configuring-networks/
 
-about-netplan explanation/networking/about-netplan/ 
+about-netplan explanation/networking/about-netplan/
 netplan explanation/networking/about-netplan/
 
 network-dhcp explanation/networking/about-dhcp/

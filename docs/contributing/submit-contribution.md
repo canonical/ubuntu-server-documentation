@@ -19,7 +19,7 @@ repository, which will guide you through those steps as you construct your chang
 ## Testing your changes
 
 Before pushing your changes or creating a pull request, you should first test
-the documentation to catch any spelling errors, broken links, or similar. 
+the documentation to catch any spelling errors, broken links, or similar.
 This allows the reviewers to focus on the main changes you are proposing and
 makes the review process more efficient.
 
@@ -29,7 +29,7 @@ You can run:
 make spelling
 make linkcheck
 ```
-   
+
 To perform a full spelling and link check. You can also run `make` by itself
 to see a list of all the possible `make` targets.
 
@@ -59,7 +59,7 @@ for more guidance, or reach out to us for help.
 
 Rediraffe doesn't currently handle redirects from a page to an external website.
 To redirect outside of the Server documentation, you will need to set up a
-redirect in the `custom_conf.py` file in the root directory. 
+redirect in the `custom_conf.py` file in the root directory.
 
 Under the Redirects section, you can add the source page and the target page as
 follows:
@@ -136,7 +136,7 @@ If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen
 your contribution. This is a collaboration, after all! It's quite normal to
 have some back-and-forth on a PR, but it should be a respectful dialogue on all
-sides. 
+sides.
 
 Once the discussion has concluded, and you have made any agreed changes, the PR
 will be approved and then merged. Congratulations (and thank you)! You are now
