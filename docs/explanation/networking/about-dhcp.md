@@ -47,17 +47,21 @@ The last two methods can be considered "automatic" because in each case the DHCP
 
 ## Available servers
 
-Ubuntu makes two DHCP servers available:
-
-- `isc-dhcp-server`:
-  This server installs `dhcpd`, the dynamic host configuration protocol daemon. Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/).
-
-  Find out {ref}`how to install and configure isc-dhcp-server <install-isc-dhcp-server>`.
+Ubuntu provides several DHCP servers. The following are the most common:
 
 - `isc-kea`:
-  [Kea](https://www.isc.org/kea/) was created by ISC to replace `isc-dhcp-server` -- It is supported in Ubuntu releases from 23.04 onward.
+  [Kea](https://www.isc.org/kea/) is the recommended DHCP server for new deployments. It was created by ISC to replace `isc-dhcp-server` and is supported in Ubuntu releases from 23.04 onward.
 
   Find out {ref}`how to install and configure isc-kea <install-isc-kea>`.
+
+- `dnsmasq`:
+  [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) provides combined DNS and DHCP functionality. It is lightweight and suitable for small networks and development environments.
+
+```{note}
+The `isc-dhcp-server` package is deprecated and unsupported since Ubuntu 24.04 LTS. Please use `isc-kea` or `dnsmasq` instead.
+```
+
+Legacy documentation for `isc-dhcp-server` is still available for existing deployments. You can find {ref}`information on how to configure it <install-isc-dhcp-server>` if needed.
 
 
 ## References
