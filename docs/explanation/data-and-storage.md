@@ -27,11 +27,10 @@ Databases are also a common data management tool in any setup.
 intro-to/databases
 ```
 
-## Storage and backups
+## Storage
 
 * Our {ref}`explanation-storage` section contains more detail about LVM and iSCSI
 * Our {ref}`explanation-multipath` section explains the key concepts and common configuration setups for Device Mapper Multipathing
-* Our {ref}`Backup <introduction-to-backups>` discusses various backup strategies to protect your data
 
 ```{toctree}
 :hidden:
@@ -43,3 +42,4 @@ multipath
 ## See also
 
 * How-to: {ref}`how-to-data-and-storage`
+* Our {ref}`Backup section <how-to-backups-and-version-control>` discusses various backup strategies to protect your data

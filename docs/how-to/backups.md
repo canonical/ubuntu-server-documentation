@@ -4,9 +4,8 @@ myst:
     description: Backup solutions for Ubuntu Server including Bacula, rsnapshot, shell scripts, and etckeeper for version control.
 ---
 
-(introduction-to-backups)=
+(how-to-backups-and-version-control)=
 # Backups and version control
-
 
 It's important to back up your Ubuntu installation so you can recover quickly if you experience data loss. You can create redundancy by using multiple back-up methods. Redundant data is useful if the primary back-up fails. 
 
@@ -40,7 +39,7 @@ Install Bacula <backups/install-bacula>
 Install rsnapshot <backups/install-rsnapshot>
 ```
 
-### Shell scripts
+## Shell scripts
 
 Usually laying out such base concepts as the *Backup utilities* above do, forces the implementation to follow some best practices and generally is recommended.
 But if you are looking for full flexibility and customization, another option is to use shell scripts around the most basic tools.
