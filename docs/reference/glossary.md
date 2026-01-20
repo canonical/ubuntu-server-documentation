@@ -113,6 +113,45 @@ Advanced Micro Devices
     Related topic(s):
     * Networking
 
+AMD-SME
+AMD Secure Memory Encryption
+    AMD-SME is a security technology that transparently encrypts all system memory
+    to protect data at rest. It encrypts the entire memory address space of the system
+    using a key derived from the processor, protecting against physical attacks on memory.
+
+    Related topic(s):
+    * Cryptography, Security
+
+AMD-SEV
+AMD Secure Encrypted Virtualization
+    AMD-SEV is a security technology that encrypts the memory of virtual machines
+    (guests) independently from the host system. It uses a dedicated memory encryption
+    key for each guest VM, preventing the hypervisor from reading or modifying guest
+    memory. This protects guest confidentiality even when the hypervisor is compromised.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-ES
+AMD Secure Encrypted Virtualization - Encrypted State
+    AMD-SEV-ES extends {term}`AMD-SEV` by encrypting the entire VM state, including
+    CPU register contents, in addition to guest memory. This provides enhanced protection
+    against hypervisor-based attacks by preventing the hypervisor from reading or modifying
+    sensitive VM state during execution.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-SNP
+AMD Secure Encrypted Virtualization - Secure Nested Paging
+    AMD-SEV-SNP is an extension of {term}`AMD-SEV-ES` that adds integrity protection
+    for guest memory using Secure Nested Paging. It prevents the hypervisor from modifying
+    guest memory contents and provides cryptographic attestation of the VM's launch state,
+    ensuring the integrity and confidentiality of guest data.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
 Ansible
     Ansible is an open-source IT automation tool developed by Red Hat. It offers
     several automation features, enabling developers and organizations to
