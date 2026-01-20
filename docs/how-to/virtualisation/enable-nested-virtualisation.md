@@ -59,7 +59,7 @@ modprobe kvm-amd nested=1
 
 ## Enable nested virtualisation 
 
-If the above checks indicate that nested virtualisation is not enabled, you can follow the below steps to enable it permanently on the system.
+If the above checks indicate that nested virtualisation is not enabled, you can follow the below steps to enable it persistently on the system.
 
 * Create a file in `/etc/modprobe.d` (e.g., `/etc/modprobe.d/kvm.conf`) and add the line `options kvm-intel nested=1` to that file (replace `kvm-intel` with `kvm-amd` for AMD hosts).
 
