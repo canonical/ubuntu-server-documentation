@@ -486,8 +486,10 @@ migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 
 basic-backup-shell-script reference/backups/basic-backup-shell-script/
 
-backups-archive-rotation reference/backups/archive-rotation-shell-script/
-archive-rotation-shell-script reference/backups/archive-rotation-shell-script/
+backups-archive-rotation how-to/backups/back-up-using-shell-scripts
+archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts
+reference/backups/archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts
+reference/backups how-to/backups/back-up-using-shell-scripts
 
 reference/debugging/ explanation/debugging/
 
