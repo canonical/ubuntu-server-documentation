@@ -117,7 +117,7 @@ AMD-SME
 AMD Secure Memory Encryption
     AMD-SME is a security technology that transparently encrypts all system memory
     to protect data at rest. It encrypts the entire memory address space of the system
-    using a key derived from the processor, protecting against physical attacks on memory
+    using a key derived from the processor, protecting against physical attacks on memory.
 
     Related topic(s):
     * Cryptography, Security
