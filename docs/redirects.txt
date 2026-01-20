@@ -498,8 +498,9 @@ reference/debugging/about-debuginfod/ explanation/debugging/about-debuginfod/
 debug-symbol-packages explanation/debugging/debug-symbol-packages/
 reference/debugging/debug-symbol-packages/ explanation/debugging/debug-symbol-packages/
 
-tools-byobu reference/other-tools/byobu/
-byobu reference/other-tools/byobu/
+tools-byobu reference/other-tools/terminal-multiplexers/
+byobu reference/other-tools/terminal-multiplexers/
+reference/other-tools/byobu reference/other-tools/terminal-multiplexers/
 
 pam-motd reference/other-tools/pam-motd/
 

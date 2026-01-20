@@ -145,6 +145,12 @@ The prefix `lp:` is implied and means fetching from Launchpad. The alternative `
 
 You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication {ref}`using U2F/FIDO hardware authentication devices <two-factor-authentication-with-u2f-or-fido>`. Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it {ref}`using HMAC/Time based One Time Passwords (HOTP/TOTP) <two-factor-authentication-with-totp-or-hotp>`.
 
+## Handling unstable connections
+
+When working on remote systems via SSH, unstable network connections or accidental disconnects can interrupt your work and terminate running processes. Terminal multiplexers provide a solution to this problem by allowing sessions to persist even after disconnection.
+
+Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `screen`, you can start a session on the remote machine that continues running independently of your SSH connection. If your connection drops, you can reconnect and reattach to your existing session, resuming your work exactly where you left off without losing any running processes or command output.
+
 ## Further reading
 
 - [Ubuntu Wiki SSH](https://help.ubuntu.com/community/SSH) page.
