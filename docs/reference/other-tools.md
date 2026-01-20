@@ -8,7 +8,7 @@ myst:
 # Other tools
 
 Terminal Multiplexers can be a useful tool for system administrators who need to execute multiple sessions in one terminal or SSH connection.
-Furthermore they allow to tolerate detaching from remote sessions.
+They also tolerate detaching or disconnection from remote sessions.
 
 * {ref}`Terminal Multiplexers <terminal-multiplexers>`
 
