@@ -205,41 +205,41 @@ With OpenLDAP configured it is time to configure the KDC. In this example we are
 
   ```text    
   [realms]
-          EXAMPLE.COM = {
-                  kdc = kdc01.example.com
-                  kdc = kdc02.example.com
-                  admin_server = kdc01.example.com
-                  default_domain = example.com
-                  database_module = openldap_ldapconf
-          }
+    EXAMPLE.COM = {
+      kdc = kdc01.example.com
+      kdc = kdc02.example.com
+      admin_server = kdc01.example.com
+      default_domain = example.com
+      database_module = openldap_ldapconf
+    }
   ```
   Then also add these new sections:
 
   ```text
   [dbdefaults]
-          ldap_kerberos_container_dn = cn=krbContainer,dc=example,dc=com
+    ldap_kerberos_container_dn = cn=krbContainer,dc=example,dc=com
 
   [dbmodules]
-          openldap_ldapconf = {
-                  db_library = kldap
+    openldap_ldapconf = {
+      db_library = kldap
 
-  				# if either of these is false, then the ldap_kdc_dn needs to
-  				# have write access
-  				disable_last_success = true
-  				disable_lockout  = true
+      # if either of these is false, then the ldap_kdc_dn needs to
+      # have write access
+      disable_last_success = true
+      disable_lockout  = true
 
-                  # this object needs to have read rights on
-                  # the realm container, principal container and realm sub-trees
-                  ldap_kdc_dn = "uid=kdc-service,dc=example,dc=com"
+      # this object needs to have read rights on
+      # the realm container, principal container and realm sub-trees
+      ldap_kdc_dn = "uid=kdc-service,dc=example,dc=com"
 
-                  # this object needs to have read and write rights on
-                  # the realm container, principal container and realm sub-trees
-                  ldap_kadmind_dn = "uid=kadmin-service,dc=example,dc=com"
+      # this object needs to have read and write rights on
+      # the realm container, principal container and realm sub-trees
+      ldap_kadmind_dn = "uid=kadmin-service,dc=example,dc=com"
 
-                  ldap_service_password_file = /etc/krb5kdc/service.keyfile
-                  ldap_servers = ldapi:///
-                  ldap_conns_per_server = 5
-          }
+      ldap_service_password_file = /etc/krb5kdc/service.keyfile
+      ldap_servers = ldapi:///
+      ldap_conns_per_server = 5
+    }
   ```
 
 - Next, use the `kdb5_ldap_util` utility to create the realm:
