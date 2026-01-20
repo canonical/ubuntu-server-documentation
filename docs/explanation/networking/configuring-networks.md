@@ -405,10 +405,10 @@ The [Netplan FAQ also has an example](https://netplan.io/faq/) on converting an 
 
   - The [Ubuntu Wiki Network page](https://help.ubuntu.com/community/Network) has links to articles covering more advanced network configuration.
 
-  - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/netplan-yaml/#) and documentation.
+  - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/examples/) and documentation.
 
   - The Netplan {manpage}`manual page <netplan(5)>` has more information on Netplan.
 
   - The {manpage}`systemd-resolved(8)` manual page has more information on `systemd-resolved` service.
 
-  - For more information on *bridging* see the [netplan.io examples page](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)
+  - For more information on *bridging* see the [netplan configuration reference](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)
