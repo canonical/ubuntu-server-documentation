@@ -9,7 +9,7 @@ myst:
 
 AMD offers a suite of security features designed to protect virtual machine workloads from unauthorized access by the host operating system and hypervisor. These technologies form a progression of capabilities, with each building upon previous generations:
 
-- {term}`AMD-SME`: **AMD Memory Encryption (SME)** is the foundation, providing transparent encryption of physical memory for both the host OS and guest VMs. It protects against physical attacks on memory but doesn't prevent the hypervisor from accessing VM memory contents.
+- {term}`AMD-SME`: **AMD Secure Memory Encryption (SME)** is the foundation, providing transparent encryption of physical memory for both the host OS and guest VMs. It protects against physical attacks on memory but doesn't prevent the hypervisor from accessing VM memory contents.
 
 - {term}`AMD-SEV`: **Secure Encrypted Virtualization (SEV)** extends SME specifically to virtual machines, encrypting each VM's memory with its own key. This prevents the hypervisor from reading or modifying VM memory, but the hypervisor can still access unencrypted CPU registers and state.
 
