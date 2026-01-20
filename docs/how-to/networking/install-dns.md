@@ -90,13 +90,9 @@ zone "example.com" {
 If BIND will be receiving automatic updates to the file as with {term}`DDNS`, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
 ```
 
-Now use an existing zone file as a template to create the `/etc/bind/db.example.com` file:
+Now, create a zone file in `/etc/bind/db.example.com`. Up until Ubuntu 25.04 this could be copied from a template, e.g. in `/etc/bind/db.local`.
 
-```bash
-sudo cp /etc/bind/db.local /etc/bind/db.example.com
-```
-
-Edit the new zone file `/etc/bind/db.example.com` and change `localhost.` to the FQDN of your server, including the additional `.` at the end. Change `127.0.0.1` to the nameserver's IP address and `root.localhost` to a valid email address, but with a `.` instead of the usual `@` symbol, again including the `.` at the end. Change the comment to indicate the domain that this file is for.
+Edit the new zone file `/etc/bind/db.example.com` adding the {term}`FQDN` of your server, including the additional `.` at the end, the nameserver's IP address and a valid email address (`root@example.com`), but with a `.` instead of the usual `@` symbol, again including the `.` at the end. You can add a comment at the top (using semicolons), to indicate the domain that this file is for.
 
 Create an **A record** for the base domain, `example.com`. Also, create an **A record** for `ns.example.com`, the name server in this example:
 
@@ -114,7 +110,7 @@ $TTL    604800
 
 @       IN      NS      ns.example.com.
 @       IN      A       192.168.1.10
-@       IN      AAAA    ::1
+@       IN      AAAA    2001:db8::10
 ns      IN      A       192.168.1.10
 ```
 
@@ -149,13 +145,7 @@ zone "1.168.192.in-addr.arpa" {
 Replace `1.168.192` with the first three octets of whatever network you are using. Also, name the zone file `/etc/bind/db.192` appropriately. It should match the first octet of your network.
 ```
 
-Now create the `/etc/bind/db.192` file:
-
-```bash
-sudo cp /etc/bind/db.127 /etc/bind/db.192
-```
-
-Next edit `/etc/bind/db.192`, changing the same options as `/etc/bind/db.example.com`:
+Now create the `/etc/bind/db.192` file, changing the same options as `/etc/bind/db.example.com`:
 
 ```
 ;
