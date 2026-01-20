@@ -80,8 +80,8 @@ If you would now like to serve the Network Time Protocol via `chrony`, this guid
 
 ## References
 
-- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
+- {manpage}`timedatectl(1)`
 
-- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
+- {manpage}`systemd-timesyncd.service(8)`
 
 - See the [Ubuntu Time wiki page](https://help.ubuntu.com/community/UbuntuTime) for more information.
