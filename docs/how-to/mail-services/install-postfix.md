@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Install and configure Postfix mail server on Ubuntu for SMTP email delivery without Virtual Domains or advanced configurations.
+    description: Install and configure Postfix mail server on Ubuntu for SMTP email delivery, with dovecot SASL, without Virtual Domains or advanced configurations.
 ---
 
 (install-postfix)=
