@@ -65,9 +65,9 @@ The output produced will look something like this:
        CGroup: /system.slice/systemd-timesyncd.service
                |-3744 /lib/systemd/systemd-timesyncd
     
-    Feb 23 08:55:46 bionic-test systemd[1]: Starting Network Time Synchronization...
-    Feb 23 08:55:46 bionic-test systemd[1]: Started Network Time Synchronization.
-    Feb 23 08:55:46 bionic-test systemd-timesyncd[3744]: Synchronized to time server 91.189.89.198:123 (ntp.ubuntu.com).
+    Feb 23 08:55:46 test-host systemd[1]: Starting Network Time Synchronization...
+    Feb 23 08:55:46 test-host systemd[1]: Started Network Time Synchronization.
+    Feb 23 08:55:46 test-host systemd-timesyncd[3744]: Synchronized to time server 91.189.89.198:123 (ntp.ubuntu.com).
 ```
 
 ### Configure `timesyncd`
