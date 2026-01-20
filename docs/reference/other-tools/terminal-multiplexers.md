@@ -125,7 +125,7 @@ Alternatively, you can use explicit resize commands:
 - {kbd}`Ctrl+b` {kbd}`:` then type `resize-pane -L 10` (Left by 10 columns)
 - {kbd}`Ctrl+b` {kbd}`:` then type `resize-pane -R 10` (Right by 10 columns)
 
-Some interactions like resizing panes can be complex, but custom key bindings can be configured to make whatever an administrator's common actions are more comfortable.
+Some interactions like resizing panes can be complex, but custom key bindings can be configured to make an administrator's common actions more comfortable.
 
 **Scrollback mode**:
 
@@ -217,14 +217,14 @@ tmux can be scripted to automate the creation of complex session layouts with mu
 
 ### tmux plugins
 
-The tmux ecosystem includes a plugin manager called TPM (Tmux Plugin Manager) that extends functionality. Install it from the Ubuntu archive:
+The tmux ecosystem includes a plugin manager called Tmux Plugin Manager (TPM) that extends functionality. Install it from the Ubuntu archive:
 
 ```bash
 sudo apt install tmux-plugin-manager
 ```
 
 :::{note}
-While tmux plugins can be powerful, be aware that they introduce third-party code and configuration into your system. The same considerations discussed in the [third-party repository usage](https://documentation.ubuntu.com/server/explanation/software/third-party-repository-usage/) documentation apply here - evaluate trustworthiness, security implications, and maintenance status before using plugins, especially in production environments.
+While tmux plugins can be powerful, be aware that they introduce third-party code and configuration into your system. The same considerations discussed in the {ref}`third-party-repository-usage` documentation apply here - evaluate trustworthiness, security implications, and maintenance status before using plugins, especially in production environments.
 :::
 
 Popular plugins include:
@@ -236,7 +236,7 @@ Popular plugins include:
 
 ### Mosh (mobile shell)
 
-While not a terminal multiplexer itself, Mosh (mobile shell) deserves mention as it complements SSH and terminal multiplexers. Mosh is closer to "ssh + tmux" than just tmux alone. Its primary strength is handling flaky network connections even more gracefully than tmux alone - it maintains connectivity through connection loss, IP address changes (roaming between networks), and even laptop sleep/wake cycles.
+While not a terminal multiplexer itself, Mosh (mobile shell) deserves a mention as it complements SSH and terminal multiplexers. Mosh is closer to "SSH + tmux" than just tmux alone. Its primary strength is handling flaky network connections even more gracefully than tmux alone - it maintains connectivity through connection loss, IP address changes (roaming between networks), and even laptop sleep/wake cycles.
 
 If your main interest in terminal multiplexers is protection against disconnects rather than the window/pane management features, Mosh combined with tmux might be the ideal solution. Mosh handles the network resilience while tmux provides session persistence and workspace management.
 

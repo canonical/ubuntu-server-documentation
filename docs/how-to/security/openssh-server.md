@@ -147,7 +147,7 @@ You can add an extra layer of security to the default key-based authentication u
 
 ## Handling unstable connections
 
-When working on remote systems via SSH, unstable network connections or accidental disconnects can interrupt your work and terminate running processes. Terminal multiplexers provide a solution to this problem by allowing sessions to persist even after disconnection.
+When working on remote systems via SSH, unstable network connections or accidental disconnects can interrupt your work and terminate running processes. Terminal multiplexers solve this problem by allowing sessions to persist even after disconnection.
 
 Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `screen`, you can start a session on the remote machine that continues running independently of your SSH connection. If your connection drops, you can reconnect and reattach to your existing session, resuming your work exactly where you left off without losing any running processes or command output.
 
