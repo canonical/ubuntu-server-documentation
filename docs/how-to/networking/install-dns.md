@@ -120,7 +120,7 @@ ns      IN      A       192.168.1.10
 
 You must increment the `Serial Number` every time you make changes to the zone file. If you make multiple changes before restarting BIND9, only increment `Serial` once.
 
-Now, you can add DNS records to the bottom of the zone file. See {ref}`Common Record Types <install-dns>` for details.
+Now, you can add DNS records to the bottom of the zone file. See {ref}`common-record-types` for details.
 
 ```{note}
 Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
@@ -458,6 +458,7 @@ sudo systemctl restart bind9.service
 
 You should see the file `/var/log/named/query.log` fill with query information. This is a simple example of the BIND9 logging options. For coverage of advanced options see the "Further Reading" section at the bottom of this page.
 
+(common-record-types)=
 ## Common record types
 
 This section covers some of the most common DNS record types.
