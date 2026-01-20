@@ -23,11 +23,15 @@ sudo apt install etckeeper
 
 The main configuration file, `/etc/etckeeper/etckeeper.conf`, is fairly simple. The main option defines which VCS to use, and by default etckeeper is configured to use git.
 
-The repository is automatically initialized (and committed for the first time) during package installation. It is possible to undo this by entering the following command:
+The repository is automatically initialized (and committed for the first time) during package installation.
+
+:::{note}
+It is possible to undo this by entering the following command:
 
 ```bash
 sudo etckeeper uninit
 ```
+:::
 
 ## Configure autocommit frequency
 
