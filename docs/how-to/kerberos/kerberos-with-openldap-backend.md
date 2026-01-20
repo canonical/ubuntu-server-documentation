@@ -165,9 +165,11 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   EOF
 
   modifying entry "olcDatabase={1}mdb,cn=config"
+  ```
 
-  This will make the existing {2} rule become {4}. Check with sudo slapcat -b cn=config (the output below was reformatted a bit for clarity):
+  This will make the existing `{2}` rule become `{4}`. Check with `sudo slapcat -b cn=config` (the output below was reformatted a bit for clarity):
 
+  ```text
   olcAccess: {0}to attrs=userPassword
 	  by self write
 	  by anonymous auth
@@ -185,8 +187,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   	by dn.exact="uid=kadmin-service,dc=example,dc=com" write
   	by * none
   olcAccess: {4}to * by * read
-
-    ```
+  ```
 
 Your LDAP directory is now ready to serve as a Kerberos principal database.
 
