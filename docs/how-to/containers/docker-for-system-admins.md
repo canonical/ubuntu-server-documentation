@@ -179,7 +179,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```bash
   $ docker info | grep "Storage Driver"
 
-  Storage Driver: overlay2
+  Storage Driver: overlayfs
   ```
 
 - Ensure the required Filesystem is available. We will be using the ZFS Filesystem.
