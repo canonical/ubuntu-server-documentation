@@ -25,6 +25,10 @@ The first step to using QEMU/KVM on Ubuntu is to check if your system supports K
 kvm-ok
 ```
 
+```{note}
+The command `kvm-ok` is part of the package `cpu-checker`
+```
+
 You should get an output saying `KVM acceleration can be used`.
 
 The next step is to install QEMU.
@@ -35,29 +39,29 @@ sudo apt-get install qemu-system
 
 ### Boot a VM
 
-The quickest way to get started with QEMU is by booting a VM directly from a netboot ISO. You can achieve this by running the following command:
+The quickest way to get started with QEMU is by booting a VM directly from a live ISO. You can achieve this by running the following command:
 
 ```bash
-qemu-system-x86_64 -enable-kvm -cdrom http://archive.ubuntu.com/ubuntu/dists/bionic-updates/main/installer-amd64/current/images/netboot/mini.iso
+qemu-system-x86_64 -m 4G -enable-kvm -cdrom http://releases.ubuntu.com/noble/ubuntu-24.04.3-live-server-amd64.iso
 ```
 
 ```{caution}
-This example is just for illustration purposes - it is not generally recommended without verifying the checksums; {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
+This example is just for illustration purposes - it is not generally recommended without verifying the checksums. {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
 ```
 
 If you are testing this example on a headless system, specify an alternative display method such as {term}`VNC`.
 
 ### Create a virtual disk
 
-The command in the previous sub-section boots the system entirely in RAM without persistent storage. To maintain the OS state across reboots, you should allocate space for the VM:
+The command in the previous sub-section boots the system entirely in RAM without persistent storage. To maintain the OS state across reboots or install the OS, you should attach a disk to the VM:
 
 ```bash
 qemu-img create -f qcow2 disk.qcow 5G
 ```
 
-And then we can use the disk space we have just allocated for storage by adding the argument: `-drive file=disk.qcow,format=qcow2`.
+The disk can then be added to the VM by using the argument: `-drive file=disk.qcow,format=qcow2`.
 
-These tools can do much more, as you'll discover in their respective (long) manual pages. They can also be made more consumable for specific use-cases and needs through a vast selection of auxiliary tools - for example [virt-manager](https://virt-manager.org/) for UI-driven use through [libvirt](https://libvirt.org/). But in general, it comes down to:
+These tools can do much more, as you will discover in their respective (long) manual pages. They can also be made more consumable for specific use cases and needs through a vast selection of auxiliary tools - for example [virt-manager](https://virt-manager.org/) for UI-driven use through [libvirt](https://libvirt.org/). But in general, it comes down to:
 
 ```bash
 qemu-system-x86_64 options image[s]
@@ -104,7 +108,7 @@ Now that we've covered high-vCPU configurations for x86_64 VMs, let's look at ho
 :sync: 23.10
 
 If you are using QEMU on Mantic, the special machine types are named in a similar fashion to Jammy's: `pc-q35-mantic-maxcpus` or `pc-i440fx-mantic-maxcpus`.
-Therefore, you command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
+Therefore, your command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
 
 ```
 qemu-system-x86_64 -M pc-q35-mantic-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
@@ -114,7 +118,7 @@ In the example above, the virtual machine will be launched using 300 vCPUs and a
 
 The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
-Note that both machine types for Mantic are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems. As noted in the previous section, it is also possible to create virtual machines using the special Jammy machine types on Mantic.
+Note that both machine types for Mantic are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer QEMU versions without problems. As noted in the previous section, it is also possible to create virtual machines using the special Jammy machine types on Mantic.
 :::
 
 :::{tab-item} 22.04 Jammy
@@ -132,7 +136,7 @@ In the example above, the virtual machine will be launched using 300 vCPUs and a
 
 The `kernel-irqchip=split -device intel-iommu,intremap=on` command line options are required, to make sure that the VM is created with a virtual IOMMU with interrupt mapping. This is needed due to some idiosyncrasies present in this scenario.
 
-Note that both machine types for Jammy are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer versions of QEMU in Ubuntu without problems.
+Note that both machine types for Jammy are supported in subsequent versions of Ubuntu, so you should be able to migrate your virtual machines to newer QEMU versions without problems.
 :::
 
 ::::
