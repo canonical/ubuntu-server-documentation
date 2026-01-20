@@ -42,7 +42,7 @@ The DNS configuration files are stored in the `/etc/bind` directory. The primary
 - **`/etc/bind/named.conf.local`**: For your zones
 - **`/etc/bind/named.conf.default-zones`**: Default zones such as localhost, its reverse, and the root hints
 
-The root nameservers used to be described in the file `/etc/bind/db.root`. This is now provided instead by the `/usr/share/dns/root.hints` file shipped with the `dns-root-data` package, and is referenced in the `named.conf.default-zones` configuration file above.
+The root nameservers are provided by the `/usr/share/dns/root.hints` file shipped with the `dns-root-data` package, and is referenced in the `named.conf.default-zones` configuration file above. Up until Ubuntu 18.04 LTS it used to be described in the file `/etc/bind/db.root`.
 
 It is possible to configure the same server to be a caching name server, primary, and secondary: it all depends on the zones it is serving. A server can be the Start of Authority (SOA) for one zone, while providing secondary service for another zone. All the while providing caching services for hosts on the local LAN.
 
