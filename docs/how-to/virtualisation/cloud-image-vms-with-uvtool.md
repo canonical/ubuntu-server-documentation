@@ -24,10 +24,15 @@ The following packages and their dependencies are required in order to use `uvto
 To install `uvtool`, run:
 
 ```bash
-sudo apt -y install uvtool
+sudo apt -y install uvtool uvtool-libvirt
 ```
 
 This will install `uvtool`'s main commands, `uvt-simplestreams-libvirt` and `uvt-kvm`.
+
+```{note}
+You might need logout and login again to use libvirt without root privilege.
+If not, you might encounter Permission denied error in the later steps.
+```
 
 ## Get the Ubuntu cloud image with `uvt-simplestreams-libvirt`
 
