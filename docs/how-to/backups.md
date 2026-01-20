@@ -44,7 +44,7 @@ Install rsnapshot <backups/install-rsnapshot>
 Usually laying out such base concepts as the *Backup utilities* above do, forces the implementation to follow some best practices and generally is recommended.
 But if you are looking for full flexibility and customization, another option is to use shell scripts around the most basic tools.
 
-Here a few examples
+Here are a few examples:
   * {ref}`how to use shell scripts for backups <back-up-using-shell-scripts>`
   * {ref}`An example of archive rotation with shell scripts <archive-rotation-shell-script>`
 
