@@ -97,7 +97,7 @@ Once the nested virtualization is enabled on the host, we can run a `L1` VM
 and a `L2` VM inside it. The following instructions assume that you are using libvirt to
 manage the VMs but other tools like `multipass` should also work out of the box.
 
-Log into the `L1` VM and check if this can host another `L1` VM on top by running the below command:
+Log into the `L1` VM and check if this can host another `L2` VM on top by running the below command:
 
 ```bash
 egrep "svm|vmx" /proc/cpuinfo
