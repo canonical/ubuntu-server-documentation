@@ -17,10 +17,10 @@ Ethernet interfaces are identified by the system using predictable network inter
 
 ### Identify Ethernet interfaces
 
-To quickly identify all available Ethernet interfaces, you can use the `ip` command as shown below.
+To quickly identify all available Ethernet interfaces, you can use the `ip` command from *iproute2* as shown below.
 
 ```
-ip a
+ip addr
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -33,6 +33,32 @@ ip a
        valid_lft 3257sec preferred_lft 3257sec
     inet6 fe80::216:3eff:fee2:5242/64 scope link
        valid_lft forever preferred_lft forever
+```
+
+Or call Netplan to get a higher level overview of your network interfaces and correlated information, such as nameserver or (default) routes.
+
+```
+sudo netplan status -a
+     Online state: online
+    DNS Addresses: 127.0.0.53 (stub)
+       DNS Search: internal
+
+●  1: lo ethernet UNKNOWN/UP (unmanaged)
+      MAC Address: 00:00:00:00:00:00
+        Addresses: 127.0.0.1/8
+                   ::1/128
+
+●  2: enp0s25 ethernet UP (networkd: enp0s25)
+      MAC Address: 00:16:3e:e2:52:42 (ASIX Electronics Corp.)
+        Addresses: 10.102.66.200/24 (dynamic, dhcp)
+                   fe80::216:3eff:fee2:5242/64 (link)
+    DNS Addresses: 10.102.66.1
+                   fd00::cece:1eff:fe3d:c737
+       DNS Search: internal
+           Routes: default via 10.102.66.1 from 10.102.66.200 metric 100 (dhcp)
+                   10.102.66.0/24 from 10.102.66.200 metric 100 (link)
+                   2001:16b8:bd99:3d00::/56 via fe80::cece:1eff:fe3d:c737 metric 100 (ra)
+                   default via fe80::cece:1eff:fe3d:c737 metric 100 (ra)
 ```
 
 Another application that can help identify all network interfaces available to your system is the `lshw` command. This command provides greater details around the hardware capabilities of specific adapters. In the example below, `lshw` shows a single Ethernet interface with the logical name of *eth4* along with bus information, driver details and all supported capabilities.
