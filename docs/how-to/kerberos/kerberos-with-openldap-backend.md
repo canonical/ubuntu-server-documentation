@@ -298,9 +298,9 @@ Let's say, however, that you already have a user in your directory, and it's in 
 $ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// <<EOF
 dn: olcDatabase={1}mdb,cn=config
 add: olcAccess
-olcAccess: {4}to dn.subtree=“ou=People,dc=example,dc=com”
-    by dn.exact=”uid=kdc-service,dc=example,dc=com” read
-    by dn.exact=”uid=kadmin-service,dc=example,dc=com” write
+olcAccess: {4}to dn.subtree="ou=People,dc=example,dc=com"
+    by dn.exact="uid=kdc-service,dc=example,dc=com" read
+    by dn.exact="uid=kadmin-service,dc=example,dc=com" write
     by * break
 EOF
 ```
