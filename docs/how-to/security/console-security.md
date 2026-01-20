@@ -22,3 +22,11 @@ To disable the reboot action taken by pressing the <kbd>Ctrl</kbd> + <kbd>Alt</k
 sudo systemctl mask ctrl-alt-del.target
 sudo systemctl daemon-reload
 ```
+
+:::{note}
+To re-enable this feature, use:
+
+```bash
+sudo systemctl unmask ctrl-alt-del.target
+```
+:::
