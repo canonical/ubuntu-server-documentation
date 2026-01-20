@@ -282,7 +282,7 @@ The default directory for non-authoritative zone files is `/var/cache/bind/`. Th
 
 ### resolv.conf
 
-The first step in testing BIND9 is to add the nameserver's IP address to a **hosts resolver**. The Primary nameserver should be configured as well as another host to double check things. Refer to {ref}`DNS client configuration <configuring-networks>` for details on adding nameserver addresses to your network clients. In the end your `nameserver` line in `/etc/resolv.conf` should be pointing at `127.0.0.53` and you should have a `search` parameter for your domain. Something like this:
+The first step in testing BIND9 is to add the nameserver's IP address to a **hosts resolver**. The Primary nameserver should be configured as well as another host to double check things. Refer to {ref}`DNS client configuration <dns-client-configuration>` for details on adding nameserver addresses to your network clients. In the end your `nameserver` line in `/etc/resolv.conf` should be pointing at `127.0.0.53` and you should have a `search` parameter for your domain. Something like this:
 
 ```text
 nameserver  127.0.0.53
