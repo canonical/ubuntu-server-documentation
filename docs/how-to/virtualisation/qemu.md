@@ -26,7 +26,7 @@ kvm-ok
 ```
 
 ```{note}
-The command `kvm-ok` is part of the package `cpu-checker`
+The command `kvm-ok` is part of the `cpu-checker` package. Install it with `sudo apt install cpu-checker` if it is not already present.
 ```
 
 You should get an output saying `KVM acceleration can be used`.
