@@ -268,7 +268,7 @@ After the above setup is ready one can pass through those devices, in `libvirt` 
 </hostdev>
 ```
 
-And for mediated devices, the format it is quite similar, but using the UUID.
+And for mediated devices, the format is quite similar, but uses the UUID.
 
 ```
 <hostdev mode='subsystem' type='mdev' managed='no' model='vfio-pci' display='on'>
