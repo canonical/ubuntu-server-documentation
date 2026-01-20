@@ -20,16 +20,16 @@ Users can find Ubuntu images for virtual machines and bare-metal offerings publi
 
 * [Amazon Elastic Compute Cloud (EC2)](https://documentation.ubuntu.com/aws/aws-how-to/instances/find-ubuntu-images/)
 * [Google Compute Engine (GCE)](https://documentation.ubuntu.com/gcp/google-how-to/gce/find-ubuntu-images/)
-* IBM Cloud
+* [IBM Cloud](https://canonical-ibm.readthedocs-hosted.com/ibm-how-to/find-ubuntu-images/)
 * [Microsoft Azure](https://documentation.ubuntu.com/azure/azure-how-to/instances/find-ubuntu-images/)
-* Oracle Cloud
+* [Oracle Cloud](https://documentation.ubuntu.com/oracle/oracle-how-to/find-ubuntu-images/)
 
 ### Container offerings
 
 Ubuntu images are also produced for a number of container offerings:
 
 * [Amazon Elastic Kubernetes Service (EKS)](https://cloud-images.ubuntu.com/docs/aws/eks/)
-* {term}`Google Kubernetes Engine (GKE) <GKE>`
+* {term}`Google Kubernetes Engine (GKE) <GKE>` works differently, there is no portfolio of images, for each verion found in [GKE releases](https://docs.cloud.google.com/kubernetes-engine/docs/release-schedule#schedule-for-release-channels) starting with `--image-type CUSTOM_CONTAINERD` will select one
 
 ## Private clouds
 
