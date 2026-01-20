@@ -1,15 +1,16 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for additional Ubuntu Server tools including sudo-rs, Byobu, and system utilities."
+    description: "Reference documentation for additional Ubuntu Server tools including sudo-rs, tmux, and system utilities."
 ---
 
 (reference-other-tools)=
 # Other tools
 
-Byobu is a useful tool for system administrators who need to execute multiple shells in one terminal. 
+Terminal Multiplexers can be a useful tool for system administrators who need to execute multiple sessions in one terminal or SSH connection.
+Furthermore they allow to tolerate detaching from remote sessions.
 
-* {ref}`Byobu <byobu>`
+* {ref}`Terminal Multiplexers <terminal-multiplexers>`
 
 `pam_motd` is a PAM module that allows customized "Message Of The Day" (MOTD) messages to be shown.
 
@@ -22,7 +23,7 @@ Byobu is a useful tool for system administrators who need to execute multiple sh
 ```{toctree}
 :hidden:
 
-Byobu <other-tools/byobu>
+terminal-multiplexers <other-tools/terminal-multiplexers>
 pam_motd <other-tools/pam-motd>
 sudo-rs <other-tools/sudo-rs>
 ```
