@@ -16,6 +16,7 @@ autoinstall
 autorid
 backtrace
 Bacula
+bitmask
 blocklisted
 BMC's
 bootable
