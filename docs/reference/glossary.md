@@ -127,7 +127,7 @@ AMD Secure Encrypted Virtualization
     AMD-SEV is a security technology that encrypts the memory of virtual machines
     (guests) independently from the host system. It uses a dedicated memory encryption
     key for each guest VM, preventing the hypervisor from reading or modifying guest
-    memory. This protects guest confidentiality even when the hypervisor is compromised
+    memory. This protects guest confidentiality even when the hypervisor is compromised.
 
     Related topic(s):
     * Cryptography, Security, Virtualization
