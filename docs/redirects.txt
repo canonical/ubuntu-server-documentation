@@ -368,8 +368,9 @@ explanation/intro-to/mail-services/ how-to/mail-services/
 web-servers-introduction explanation/intro-to/web-servers/
 introduction-to-web-servers explanation/intro-to/web-servers/
 
-backups-introduction explanation/intro-to/backups/
-introduction-to-backups explanation/intro-to/backups/
+backups-introduction how-to/backups/
+introduction-to-backups how-to/backups/
+explanation/intro-to/backups how-to/backups/
 
 databases-introduction explanation/intro-to/databases/
 introduction-to-databases explanation/intro-to/databases/

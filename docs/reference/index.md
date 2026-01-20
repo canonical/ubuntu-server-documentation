@@ -33,19 +33,6 @@ for memory and storage.
 installation/system-requirements
 ```
 
-## Data and storage
-
-This section provides details on storing and backing up your data.
-
-* {ref}`Backups and version control <reference-backups-and-version-control>`
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-Data and storage <backups>
-```
-
 ## High Availability
 
 The recommended tool for managing High Availability Pacemaker clusters is now
