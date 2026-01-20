@@ -14,7 +14,7 @@ We are going to explore set-ups for configuring storage, networking, and logging
 First, install Docker if it’s not already installed:
 
 ```bash
-$ sudo apt-get install -y docker.io docker-compose-v2
+$ sudo apt-get install -y docker.io docker-compose
 ```
 
 ## Configuring storage
