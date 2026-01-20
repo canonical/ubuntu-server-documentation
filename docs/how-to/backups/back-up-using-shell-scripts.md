@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Create automated backups using shell scripts with tar to archive files; Optionally do so to NFS-mounted filesystems, file rotation and tape.
+    description: Create automated backups using shell scripts with tar to archive files; Optionally do so to NFS-mounted file systems, file rotation and tape.
 ---
 
 (back-up-using-shell-scripts)=
