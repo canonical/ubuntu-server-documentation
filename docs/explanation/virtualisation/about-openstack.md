@@ -39,7 +39,7 @@ There are also many other [OpenStack components](https://www.openstack.org/softw
 
 The most straightforward way to get started with OpenStack on Ubuntu is to use [Canonical Openstack](https://canonical-openstack.readthedocs-hosted.com/en/latest/tutorial/get-started-with-openstack/) since the entire installation process requires only few commands and takes around 20 minutes.
 
-Apart from Canonical Openstack, multiple installation methods for OpenStack on Ubuntu are available. These include:
+Apart from Canonical OpenStack, multiple installation methods for OpenStack on Ubuntu are available. These include:
 
 * [OpenStack Charms](https://docs.openstack.org/project-deploy-guide/charm-deployment-guide/latest/)
 
