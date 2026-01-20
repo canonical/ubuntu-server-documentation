@@ -19,7 +19,7 @@ OpenLDAP is a popular implementation of the Lightweight Directory Access Protoco
 intro-to/openldap
 ```
 
-Databases are also a common data management tool in any setup. 
+Databases are also a common data management tool in any setup.
 
 ```{toctree}
 :titlesonly:
@@ -31,14 +31,13 @@ intro-to/databases
 
 * Our {ref}`explanation-storage` section contains more detail about LVM and iSCSI
 * Our {ref}`explanation-multipath` section explains the key concepts and common configuration setups for Device Mapper Multipathing
-* {ref}`introduction-to-backups` discusses various backup strategies to protect your data
+* Our {ref}`Backup <introduction-to-backups>` discusses various backup strategies to protect your data
 
 ```{toctree}
 :hidden:
 
 storage
 multipath
-intro-to/backups
 ```
 
 ## See also
