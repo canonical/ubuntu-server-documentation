@@ -120,7 +120,7 @@ The Options directive within a Directory stanza accepts one or more of the follo
   Allow CGI scripts to be run. CGI scripts are not run if this option is not chosen.
         
   ```{caution}
-  Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
+  Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should be kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
   ```
 
 - **Includes**
