@@ -177,11 +177,10 @@ default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
 ```
 
-If you require {term}`DNS` for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
+If you require {term}`DNS` for your temporary network configuration, you can use the `resolvectl` command to set DNS servers temporarily. The example below shows how to set two DNS servers for the interface `enp0s25`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
 
 ```
-nameserver 8.8.8.8
-nameserver 8.8.4.4
+sudo resolvectl dns enp0s25 8.8.8.8 8.8.4.4
 ```
 
 If you no longer need this configuration and wish to purge all IP configuration from an interface, you can use the `ip` command with the flush option:
@@ -191,7 +190,7 @@ ip addr flush eth0
 ```
 
 ```{note}
-Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+Flushing the IP configuration using the `ip` command does not clear the contents of `systemd-resolved`. You must remove or modify those entries manually, e.g by calling `sudo resolvectl revert enp0s25`. Or re-boot, which should also cause the symlink `/etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf`, to be restored.
 ```
 
 ### Dynamic IP address assignment (DHCP client)
@@ -261,10 +260,10 @@ Name resolution (as it relates to IP networking) is the process of mapping {term
 
 <h3 id="heading--dns-client-configuration">DNS client configuration</h3>
 
-Traditionally, the file `/etc/resolv.conf` was a static configuration file that rarely needed to be changed, or it automatically changed via DHCP client hooks. `systemd-resolved` handles nameserver configuration, and it should be interacted with through the `systemd-resolve` command. Netplan configures `systemd-resolved` to generate a list of nameservers and domains to put in `/etc/resolv.conf`, which is a symlink:
+Traditionally, the file `/etc/resolv.conf` was a static configuration file that rarely needed to be changed, or it automatically changed via DHCP client hooks. `systemd-resolved` handles nameserver configuration, and it should be interacted with through the `resolvectl` command. Up to Ubuntu 20.04 LTS the `systemd-resolve` command could as well be used. Netplan configures `systemd-resolved` to generate a list of nameservers and domains to put in `/etc/resolv.conf`, which is a symlink:
 
 ```
-/etc/resolv.conf -> ../run/systemd/resolve/stub-resolv.conf
+/etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf
 ```
 
 To configure the resolver, add the IP addresses of the appropriate nameservers for your network to the `netplan` configuration file. You can also add optional DNS suffix search-lists to match your network domain names. The resulting file might look like the following:
