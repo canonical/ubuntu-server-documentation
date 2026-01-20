@@ -30,7 +30,7 @@ sudo apt -y install uvtool uvtool-libvirt
 This will install `uvtool`'s main commands, `uvt-simplestreams-libvirt` and `uvt-kvm`.
 
 ```{note}
-You might need logout and login again to use libvirt without root privilege.
+You might need to log out and log in again to use libvirt without root privilege.
 If not, you might encounter Permission denied error in the later steps.
 ```
 
