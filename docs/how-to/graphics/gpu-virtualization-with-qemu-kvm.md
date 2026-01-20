@@ -152,7 +152,7 @@ For PCI passthrough, the above steps would be all the preparation needed, but fo
 
 There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
 
-Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
+Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that the driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
 ```bash
 lsmod | grep nvidia
