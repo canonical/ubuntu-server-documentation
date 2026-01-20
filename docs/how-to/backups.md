@@ -1,13 +1,12 @@
 ---
 myst:
   html_meta:
-    description: Introduction to Backup solutions for Ubuntu Server including Bacula, rsnapshot, shell scripts, and etckeeper for version control.
+    description: Backup solutions for Ubuntu Server including Bacula, rsnapshot, shell scripts, and etckeeper for version control.
 ---
 
 (introduction-to-backups)=
 # Backups and version control
 
-## Introduction to backups
 
 It's important to back up your Ubuntu installation so you can recover quickly if you experience data loss. You can create redundancy by using multiple back-up methods. Redundant data is useful if the primary back-up fails. 
 
@@ -20,12 +19,10 @@ It is important to develop a backup plan that consists of:
 
 It is good practice to store important backup media off-site in case of a disaster. Physical backup media like removable hard drives or tape can be moved off-site manually. When it is either impossible or impractical to move media, backups can be copied over a WAN link to a server in another location.
 
-(how-to-backups-and-version-control)=
-## Backup methods
 
 On Ubuntu, two primary ways of backing up your system are **backup utilities** and **shell scripts**. For additional protection, you can combine backup methods.
 
-### Backup utilities
+## Backup utilities
 
 The easiest way to create backups is to use a dedicated tool like [Bacula](https://www.bacula.org/) or [rsnapshot](https://rsnapshot.org/). These tools have easy-to-use interface or CLI to help simplify the backup management process. They have powerful features such as automation, compression, data recovery, encryption and incremental backups. Incremental backups only store changes made since the last backup which can significantly decrease storage space needs and backup time. 
 
@@ -72,4 +69,4 @@ Install gitolite <backups/install-gitolite>
 
 ## See also
 
-* Sometimes backup is quite application specific, an example of that is described in {ref}`ldap-backup-and-restore`
+* Sometimes backup is quite application-specific, an example of that is described in {ref}`ldap-backup-and-restore`
