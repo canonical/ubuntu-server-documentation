@@ -4,13 +4,11 @@ myst:
     description: Enable nested virtualisation on Ubuntu x86 systems using kvm_intel or kvm_amd kernel modules to run VMs inside VMs.
 ---
 
-(what-is-nested-virtualisation)=
-# What is nested virtualisation
+(enable-nested-virtualisation)=
+# How to enable nested virtualisation
 
 The nested virtualization capability allows a guest virtual machine (also referred to as `level 1` or `L1`) that runs on a physical host (`level 0` or `L0`) acting as a hypervisor to create its own guest virtual machines (`L2`).
 
-(enable-nested-virtualisation)=
-# How to enable nested virtualisation
 
 ```{important}
 Nested virtualisation is enabled by default on Ubuntu. If you are using Ubuntu, it's unlikely that you will need to manually enable the feature. If you check (using the steps below) and discover that nested virtualisation is enabled, then you will not need to do anything further.
