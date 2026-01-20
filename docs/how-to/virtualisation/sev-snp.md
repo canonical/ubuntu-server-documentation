@@ -17,7 +17,7 @@ AMD offers a suite of security features designed to protect virtual machine work
 
 - {term}`AMD-SEV-SNP`: **SEV with Secure Nested Paging (SEV-SNP)** represents the most comprehensive protection, adding memory integrity verification to SEV-ES. SEV-SNP prevents the hypervisor from manipulating the memory mapping and encrypts guest memory pages with per-page authentication tags, ensuring data integrity and preventing rollback attacks. These features are available on the latest AMD EPYC CPUs (starting from "Rome"). While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 24.04 LTS, the host enablement (QEMU and OVMF support) was only added later with Ubuntu 25.04.
 
-This documentation focuses only on {term}`AMD-SEV-SNP`, the latest generation of the AMD Confidential computing technologies.
+This documentation focuses only on {term}`AMD-SEV-SNP`, the latest generation of the AMD Confidential Computing technologies.
 
 ## Host configuration
 
