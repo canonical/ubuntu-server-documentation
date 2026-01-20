@@ -48,7 +48,7 @@ It is possible to configure the same server to be a caching name server, primary
 
 ## Set up a caching nameserver
 
-The default configuration acts as a caching server. Edit `/etc/bind/named.conf.options` to set the IP addresses of your ISP's DNS servers. Add the following inside the `options` block:
+The default configuration acts as a caching server. Edit `/etc/bind/named.conf.options` to set the IP addresses of your ISP's DNS servers. Add or modify the `options` block so that it includes a `forwarders` section as follows:
 
 ```
 options {
