@@ -17,9 +17,9 @@ In this guide, we will walk through how to use a shell script for backing up fil
 
 The following example shell script uses `tar` to create an archive file on a remotely mounted NFS file system. The archive filename is determined using additional command line utilities.
 
-This example is for the purpose of this explanation intentonally rather brief; however there are many options that can be included in such a script. For more information on shell scripting see the [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/).
+This example is for the purpose of this explanation intentionally rather brief; however there are many options that can be included in such a script. For more information on shell scripting see the [Advanced Bash-Scripting Guide](https://tldp.org/LDP/abs/html/).
 
-Conceptionally this example uses:
+Conceptually this example uses:
 
 - `$backup_files`: A variable listing which directories you would like to backup. The list should be customized to fit your needs.
 
