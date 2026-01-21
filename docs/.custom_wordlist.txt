@@ -61,9 +61,11 @@ denylist
 dev
 disambiguates
 discoverability
+dmesg
 dnsmasq
 dockerfiles
 DPDK's
+dpkg
 ELinks
 enablement
 Engenio
@@ -75,6 +77,7 @@ Fileset
 fileset
 FQDN's
 Freenode
+fsck
 gcplogs
 gcrypt
 GDB's
