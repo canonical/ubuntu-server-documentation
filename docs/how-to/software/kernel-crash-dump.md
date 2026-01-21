@@ -25,27 +25,10 @@ For some of these events (kernel panic, NMI) the kernel will react automatically
 
 When a kernel panic occurs, the kernel relies on the *`kexec`* mechanism to quickly reboot a new instance of the kernel in a pre-reserved section of memory that had been allocated when the system booted (see below). This permits the existing memory area to remain untouched in order to safely copy its contents to storage.
 
-## `kdump` enabled by default
-
-Starting in Oracular Oriole (24.10) the kernel crash dump facility will be enabled by default during standard Ubuntu Desktop or Ubuntu Server installations on systems that meet the following requirements:
- - the system has at least 4 CPU threads
- - the system has at least 6GB of RAM, and less than 2TB of RAM
- - the free space available in `/var` is more than 5 times the amount of RAM and swap space
- - and the CPU architecture is
-   - amd64 or s390x, or
-   - arm64 and UEFI is used
-
-On machines with it enabled (either by default or by manual installation), it can be disabled via the command:
-
-```bash
-sudo apt remove kdump-tools
-```
-
-On machines that do not meet these requirements and on pre-24.10 releases, the kernel crash dump facility can be enabled manually by following the installation instructions that follow.
-
 ## Installation
 
-The kernel crash dump utility is installed with the following command:
+The kernel crash dump utility is installed by default in most Ubuntu environments, especially those designated for execution on bare metal.
+In other cases it can be installed with following command:
 
 ```bash
 sudo apt install kdump-tools
@@ -70,147 +53,93 @@ During the installation, you will be prompted with the following dialog:
 
 'Yes' should be selected to enable `kdump-tools`.  If you want to revisit your choice, you can use the `dpkg-reconfigure kdump-tools` command and answer 'Yes' or 'No'.
 
-As well, you will also need to edit `/etc/default/kdump-tools` to enable `kdump` by including the following line:
+## `kdump` is enabled by default where applicable
 
-```text
-USE_KDUMP=1
+On manual install the interactive question will define if it is enabled or not
+and therefore depend on the users choice, but in cases when it is automatically
+preinstalled there is a balance to strike.
+The tool wants to be helpful by default, because when the crash happens it is
+too late to enable crash dump functionality.
+But at the same time it needs to reserve memory for the crash kernel to operate
+and that might have too much impact to very small systems as well as consume
+a lot of memory on systems with many devices.
+Therefore starting in Oracular Oriole (24.10), the kernel crash dump facility
+will be enabled by default during standard Ubuntu Desktop or Ubuntu Server
+installations on systems that meet the following requirements:
+ - the system has at least 4 CPU threads
+ - the system has at least 6GB of RAM, and less than 2TB of RAM
+ - the free space available in `/var` is more than 5 times the amount of RAM and swap space
+ - and the CPU architecture is
+   - amd64 or s390x, or
+   - arm64 and UEFI is used
+
+These conditions are evaluated at installation time by the tool `/usr/share/kdump-tools/kdump_set_default`.
+
+On machines that do not meet these requirements and on pre-24.10 releases,
+the kernel crash dump facility can be enabled manually by following the
+installation instructions that follow.
+
+## Disabling `kdump`
+
+No matter which way it got enabled, to disable the function it can be either entirely removed via the command:
+
+```bash
+sudo apt remove kdump-tools
 ```
 
-If you're disabling `kdump-tools`, either set USE_KDUMP=0 or remove the line from the file.
+or by changing the config at `/etc/default/kdump-tools` to contain:
 
-If a reboot has not been done since installation of the `linux-crashdump` package, a reboot will be required in order to activate the `crashkernel= boot` parameter. Upon reboot, `kdump-tools` will be enabled and active.
+```text
+USE_KDUMP=0
+```
+
+## Activating config changes
+
+If a reboot has not been done since installation/removal of the `kdump-tools` package,
+a reboot will be required in order to reconsider the `crashkernel= boot` parameter.
+
+## Verify if kdump is ready
+
+Upon reboot, the crashkernel memory will be reserved and the `kdump-tools` service will be enabled and active.
 
 If you enable `kdump-tools` after a reboot, you will only need to issue the `kdump-config load` command to activate the `kdump` mechanism.
 
 You can view the current status of `kdump` via the command `kdump-config show`.  This will display something like this:
 
 ```text
-DUMP_MODE:        kdump
-USE_KDUMP:        1
-KDUMP_SYSCTL:     kernel.panic_on_oops=1
-KDUMP_COREDIR:    /var/crash
-crashkernel addr: 
-   /var/lib/kdump/vmlinuz
-kdump initrd: 
-   /var/lib/kdump/initrd.img
+kdump-config show
+DUMP_MODE:                kdump
+USE_KDUMP:                1
+KDUMP_COREDIR:                /var/crash
+crashkernel addr: 0x60000000
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-6.18.0-8-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-6.18.0-8-generic
 current state:    ready to kdump
+
+crashkernel suggested size: 417M
+
 kexec command:
-  /sbin/kexec -p --command-line="..." --initrd=...
+  /sbin/kexec -p -s --command-line="BOOT_IMAGE=/vmlinuz-6.18.0-8-generic root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0 reset_devices systemd.unit=kdump-tools-dump.service nr_cpus=1 irqpoll usbcore.nousb" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
 ```
 
 This tells us that we will find core dumps in `/var/crash`.
 
-## Configuration
+## Reserving Memory
 
-In addition to local dump, it is now possible to use the remote dump functionality to send the kernel crash dump to a remote server, using either the SSH or NFS protocols.
+To operate kdump needs to pre-allocate a dedicated, isolated region of physical
+memory that remains untouched by the main operating system, ensuring a safe
+haven for the crash recovery process. When a kernel panic occurs, the running
+system is considered unstable and its memory potentially corrupted, making it
+unsafe to trust for saving diagnostic data. By reserving this memory at boot
+time, kdump guarantees that a second, small "capture kernel" can load into this
+pristine space without relying on the broken kernel's resources. This isolation
+allows the capture kernel to reliably access the frozen, crashed memory and
+write it to disk for analysis, functioning essentially like a fresh operating
+system inside the crashed one.
 
-### Local kernel crash dumps
-
-Local dumps are configured automatically and will remain in use unless a remote protocol is chosen. Many configuration options exist and are thoroughly documented in the `/etc/default/kdump-tools` file.
-
-### Remote kernel crash dumps using the SSH protocol
-
-To enable remote dumps using the SSH protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
-
-```text 
-# ---------------------------------------------------------------------------
-# Remote dump facilities:
-# SSH - username and hostname of the remote server that will receive the dump
-#       and dmesg files.
-# SSH_KEY - Full path of the ssh private key to be used to login to the remote
-#           server. use kdump-config propagate to send the public key to the
-#           remote server
-# HOSTTAG - Select if hostname of IP address will be used as a prefix to the
-#           timestamped directory when sending files to the remote server.
-#           'ip' is the default.
-SSH="ubuntu@kdump-netcrash"
-```
-
-The only mandatory variable to define is SSH. It must contain the username and {term}`hostname` of the remote server using the format `{username}@{remote server}`.
-
-`SSH_KEY` may be used to provide an existing private key to be used. Otherwise, the `kdump-config propagate` command will create a new keypair. The `HOSTTAG` variable may be used to use the hostname of the system as a prefix to the remote directory to be created instead of the IP address.
-
-The following example shows how `kdump-config propagate` is used to create and propagate a new keypair to the remote server:
-
-```bash
-sudo kdump-config propagate
-```
-
-Which produces an output like this:
-
-```text
-Need to generate a new ssh key...
-The authenticity of host 'kdump-netcrash (192.168.1.74)' can't be established.
-ECDSA key fingerprint is SHA256:iMp+5Y28qhbd+tevFCWrEXykDd4dI3yN4OVlu3CBBQ4.
-Are you sure you want to continue connecting (yes/no)? yes
-ubuntu@kdump-netcrash's password: 
-propagated ssh key /root/.ssh/kdump_id_rsa to server ubuntu@kdump-netcrash
-```
-
-The password of the account used on the remote server will be required in order to successfully send the public key to the server.
-
-The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the SSH protocol:
-
-```bash
-kdump-config show
-```
-
-Whose output appears like this:
-
-```text
-DUMP_MODE:        kdump
-USE_KDUMP:        1
-KDUMP_SYSCTL:     kernel.panic_on_oops=1
-KDUMP_COREDIR:    /var/crash
-crashkernel addr: 0x2c000000
-   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.4.0-10-generic
-kdump initrd: 
-   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.4.0-10-generic
-SSH:              ubuntu@kdump-netcrash
-SSH_KEY:          /root/.ssh/kdump_id_rsa
-HOSTTAG:          ip
-current state:    ready to kdump
-```
-
-### Remote kernel crash dumps using the NFS protocol
-
-To enable remote dumps using the NFS protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
-
-```text 
-# NFS -     Hostname and mount point of the NFS server configured to receive
-#           the crash dump. The syntax must be {HOSTNAME}:{MOUNTPOINT} 
-#           (e.g. remote:/var/crash)
-#
-NFS="kdump-netcrash:/var/crash"
-```
-
-As with the SSH protocol, the `HOSTTAG` variable can be used to replace the IP address by the hostname as the prefix of the remote directory.
-
-The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the NFS protocol :
-
-```bash 
-kdump-config show
-```
-
-Which produces an output like this:
-
-```text
-DUMP_MODE:        kdump
-USE_KDUMP:        1
-KDUMP_SYSCTL:     kernel.panic_on_oops=1
-KDUMP_COREDIR:    /var/crash
-crashkernel addr: 0x2c000000
-   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.4.0-10-generic
-kdump initrd: 
-   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.4.0-10-generic
-NFS:              kdump-netcrash:/var/crash
-HOSTTAG:          hostname
-current state:    ready to kdump
-```
-
-## Verification and Troubleshooting
-
-To confirm that the kernel dump mechanism is enabled, there are a few things to verify. First, confirm that the `crashkernel` boot parameter is present (note that the following line has been split into two to fit the format of this document):
+To confirm that this allocation worked there are a few things to verify.
+First, confirm that the `crashkernel` boot parameter is present.
 
 ```bash
 $ cat /proc/cmdline
@@ -261,36 +190,130 @@ Which shows:
 
 This example output is for a system with 3GB memory which correctly maps to 320 MB.
 
-Finally, as seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration :
+## Configuration
+
+In addition to local dump, it is now possible to use the remote dump functionality to send the kernel crash dump to a remote server, using either the SSH or NFS protocols.
+
+### Local kernel crash dumps
+
+Local dumps are configured automatically and will remain in use unless a remote protocol is chosen. Many configuration options exist and are thoroughly documented in the `/etc/default/kdump-tools` file.
+
+### Remote kernel crash dumps using the SSH protocol
+
+To enable remote dumps using the SSH protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
+
+```text
+# ---------------------------------------------------------------------------
+# Remote dump facilities:
+# SSH - username and hostname of the remote server that will receive the dump
+#       and dmesg files.
+# SSH_KEY - Full path of the ssh private key to be used to login to the remote
+#           server. use kdump-config propagate to send the public key to the
+#           remote server
+# HOSTTAG - Select if hostname of IP address will be used as a prefix to the
+#           timestamped directory when sending files to the remote server.
+#           'ip' is the default.
+SSH="ubuntu@kdump-netcrash"
+```
+
+The only mandatory variable to define is SSH. It must contain the username and {term}`hostname` of the remote server using the format `{username}@{remote server}`.
+
+`SSH_KEY` may be used to provide an existing private key to be used. Otherwise, the `kdump-config propagate` command will create a new keypair. The `HOSTTAG` variable may be used to use the hostname of the system as a prefix to the remote directory to be created instead of the IP address.
+
+The following example shows how `kdump-config propagate` is used to create and propagate a new keypair to the remote server:
+
+```bash
+sudo kdump-config propagate
+```
+
+Which produces an output like this:
+
+```text
+Need to generate a new ssh key...
+The authenticity of host 'kdump-netcrash (192.168.1.74)' can't be established.
+ECDSA key fingerprint is SHA256:iMp+5Y28qhbd+tevFCWrEXykDd4dI3yN4OVlu3CBBQ4.
+Are you sure you want to continue connecting (yes/no)? yes
+ubuntu@kdump-netcrash's password:
+propagated ssh key /root/.ssh/kdump_id_rsa to server ubuntu@kdump-netcrash
+```
+
+The password of the account used on the remote server will be required in order to successfully send the public key to the server.
+
+The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the SSH protocol:
 
 ```bash
 kdump-config show
 ```
 
-Which produces:
+Whose output appears like this:
 
 ```text
-kdump-config show
-DUMP_MODE:                kdump
-USE_KDUMP:                1
-KDUMP_COREDIR:                /var/crash
-crashkernel addr: 0x60000000
-   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-6.18.0-8-generic
+DUMP_MODE:        kdump
+USE_KDUMP:        1
+KDUMP_SYSCTL:     kernel.panic_on_oops=1
+KDUMP_COREDIR:    /var/crash
+crashkernel addr: 0x2c000000
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.4.0-10-generic
 kdump initrd:
-   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-6.18.0-8-generic
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.4.0-10-generic
+SSH:              ubuntu@kdump-netcrash
+SSH_KEY:          /root/.ssh/kdump_id_rsa
+HOSTTAG:          ip
 current state:    ready to kdump
-
-crashkernel suggested size: 417M
-
-kexec command:
-  /sbin/kexec -p -s --command-line="BOOT_IMAGE=/vmlinuz-6.18.0-8-generic root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0 reset_devices systemd.unit=kdump-tools-dump.service nr_cpus=1 irqpoll usbcore.nousb" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
 ```
 
-For example in a system without sufficient memory (here 1 GB) it would not reserve memory,
-due to that initialization would fail. The output of that for `kdump-config show` would look like:
+### Remote kernel crash dumps using the NFS protocol
+
+To enable remote dumps using the NFS protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
 
 ```text
-root@r-vm:~# kdump-config show
+# NFS -     Hostname and mount point of the NFS server configured to receive
+#           the crash dump. The syntax must be {HOSTNAME}:{MOUNTPOINT} 
+#           (e.g. remote:/var/crash)
+#
+NFS="kdump-netcrash:/var/crash"
+```
+
+As with the SSH protocol, the `HOSTTAG` variable can be used to replace the IP address by the hostname as the prefix of the remote directory.
+
+The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the NFS protocol :
+
+```bash
+kdump-config show
+```
+
+Which produces an output like this:
+
+```text
+DUMP_MODE:        kdump
+USE_KDUMP:        1
+KDUMP_SYSCTL:     kernel.panic_on_oops=1
+KDUMP_COREDIR:    /var/crash
+crashkernel addr: 0x2c000000
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.4.0-10-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.4.0-10-generic
+NFS:              kdump-netcrash:/var/crash
+HOSTTAG:          hostname
+current state:    ready to kdump
+```
+
+## Troubleshooting
+
+As seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration :
+But in a system without sufficient memory (here 1 GB) it would not reserve memory,
+due to that initialization would fail.
+
+Such conditions can be seen in `kdump-config show` as well, the primary
+value to check is `current state`.
+
+```bash
+kdump-config show
+```
+
+Which in this bad case would report
+
+```text
 DUMP_MODE:                kdump
 USE_KDUMP:                1
 KDUMP_COREDIR:                /var/crash
@@ -306,7 +329,8 @@ kexec command:
   no kexec command recorded
 ```
 
-At this same bad-state the journal output as well as the service status of kdump-tools would also report on that issue:
+Such allocation errors can also be seen in the journal output as well as the
+service status of kdump-tools:
 
 ```bash
 systemctl status kdump-tools
