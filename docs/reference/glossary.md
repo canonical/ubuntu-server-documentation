@@ -1762,6 +1762,13 @@ OSI
 Open Systems Interconnection
     *Work in Progress*
 
+OSPF
+Open Shortest Path First
+    Open Shortest Path First (OSPF) is a widely used Interior Gateway Protocol (IGP) for IP networks, classifying as a link-state protocol that helps routers find the most efficient paths within a single Autonomous System (AS). It works by each router building a complete map (Link-State Database) of the network topology and using Dijkstra's algorithm to calculate the shortest path to all destinations, ensuring fast convergence and scalability, especially in large enterprise network.
+
+    Related topic(s):
+    * Networking
+
 OTE
 Operational Test and Evaluation
     *Work in Progress*
@@ -1997,6 +2004,13 @@ Request For Comments
 rid
 Relative Identifier
     *Work in Progress*
+
+RIP
+Router Information Protocol
+    Routing Information Protocol (RIP) is an older, simple distance-vector routing protocol that helps routers find the best path in small networks by counting "hops" (routers passed), using the Bellman-Ford algorithm, and periodically sending full routing tables to neighbors, though its 15-hop limit and bandwidth usage make it outdated for large networks, with OSPF or IS-IS being modern alternatives.
+
+    Related topic(s):
+    * Networking
 
 RISC-V
 Reduced Instruction Set Computing - Version Five
