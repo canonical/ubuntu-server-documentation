@@ -12,7 +12,7 @@ In this section we'll look at configuring a Linux system as a Kerberos client. T
 
 Note that Kerberos alone is not enough for a user to exist in a Linux system. We cannot just point the system at a Kerberos server and expect all the Kerberos principals to be able to *log in* on the Linux system, simply because these users do not *exist* locally.
 
-Kerberos only provides authentication: it doesn't know about user groups, Linux UIDs and {term}`GIDs <GID>`, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
+Kerberos only provides authentication: it doesn't know about user groups, Linux {term}`UIDs <UID>` and {term}`GIDs <GID>`, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
 
 ## Set up a Linux system as a Kerberos client
 
