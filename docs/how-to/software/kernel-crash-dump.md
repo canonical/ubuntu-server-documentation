@@ -265,21 +265,45 @@ Finally, as seen previously, the `kdump-config show` command displays the curren
 
 ```bash
 kdump-config show
+```
 
 Which produces:
+
 ```text
-DUMP_MODE:        kdump
-USE_KDUMP:        1
-KDUMP_SYSCTL:     kernel.panic_on_oops=1
-KDUMP_COREDIR:    /var/crash
-crashkernel addr: 0x2c000000
-   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-4.4.0-10-generic
-kdump initrd: 
-      /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-4.4.0-10-generic
+kdump-config show
+DUMP_MODE:                kdump
+USE_KDUMP:                1
+KDUMP_COREDIR:                /var/crash
+crashkernel addr: 0x60000000
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-6.18.0-8-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-6.18.0-8-generic
 current state:    ready to kdump
 
+crashkernel suggested size: 417M
+
 kexec command:
-      /sbin/kexec -p --command-line="BOOT_IMAGE=/vmlinuz-4.4.0-10-generic root=/dev/mapper/VividS--vg-root ro debug break=init console=ttyS0,115200 irqpoll maxcpus=1 nousb systemd.unit=kdump-tools.service" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
+  /sbin/kexec -p -s --command-line="BOOT_IMAGE=/vmlinuz-6.18.0-8-generic root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0 reset_devices systemd.unit=kdump-tools-dump.service nr_cpus=1 irqpoll usbcore.nousb" --initrd=/var/lib/kdump/initrd.img /var/lib/kdump/vmlinuz
+```
+
+For example in a system without sufficient memory (here 1 GB) it would not reserve memory,
+due to that initialization would fail. The output of that for `kdump-config show` would look like:
+
+```text
+root@r-vm:~# kdump-config show
+DUMP_MODE:                kdump
+USE_KDUMP:                1
+KDUMP_COREDIR:                /var/crash
+crashkernel addr:
+   /var/lib/kdump/vmlinuz: symbolic link to /boot/vmlinuz-6.18.0-8-generic
+kdump initrd:
+   /var/lib/kdump/initrd.img: symbolic link to /var/lib/kdump/initrd.img-6.18.0-8-generic
+current state:    Not ready to kdump
+
+crashkernel suggested size: 329M
+
+kexec command:
+  no kexec command recorded
 ```
 
 ## Testing the crash dump mechanism
