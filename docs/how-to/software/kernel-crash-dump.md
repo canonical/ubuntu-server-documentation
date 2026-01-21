@@ -190,6 +190,12 @@ Which shows:
 
 This example output is for a system with 3GB memory which correctly maps to 320 MB.
 
+The defaults provided by the packaging try to be conservative to not waste too much.
+But in some rare cases that might break when the dump process fails to initialized.
+Only when a system is live can an estimation of the required memory be provided.
+`kdump-config show` includes a line like `crashkernel suggested size: 417M`
+based on what the current kernel consumed at boot time.
+
 ## Configuration
 
 In addition to local dump, it is now possible to use the remote dump functionality to send the kernel crash dump to a remote server, using either the SSH or NFS protocols.
