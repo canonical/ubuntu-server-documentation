@@ -187,16 +187,10 @@ When a recursive DNS server is also performing DNSSEC validation, it's called a 
 
 ![Validating Resolver](../images/ubuntu-local-validating-resolver.png)
 
-This is the case if you install the BIND9 DNS server: the default configuration is to act as a Validating Resolver. This can be seen in `/etc/bind/named.conf.options` after installing the `bind9` package:
-
-    options {
-        ...
-        dnssec-validation auto;
-        ...
-    };
+This is the case if you install the BIND9 DNS server: The default configuration is to act as a Validating Resolver, by having the `dnssec-validation auto` option implicitly enabled.
 
 ```{note}
-Starting with version `1:9.18.34-1` in Ubuntu 24.10 and above, the `dnssec-validation auto` setting became the implicit default and does not need to be set explicitly in `named.conf.options` anymore.
+Up to Ubuntu 24.04 LTS (version `1:9.18.34-1`) the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
 ```
 
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.
@@ -213,7 +207,7 @@ The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manual pag
 
 When the `ad` bit is set in a DNS response, it means that DNSSEC validation was performed and successful. The data was authenticated.
 
-Specifying `trust-ad` in `/etc/resolv.conf` implies in these assumptions:
+Specifying `trust-ad` in `/etc/resolv.conf` implies these assumptions:
 
  * The 127.0.0.53 name server is trusted to set the `ad` flag correctly in its responses. If it performs DNSSEC validation, it is trusted to perform this validation correctly, and set the `ad` flag accordingly. If it does not perform DNSSEC validation, then the `ad` flag will always be unset in the responses.
  * The network path between localhost and 127.0.0.53 is trusted.
