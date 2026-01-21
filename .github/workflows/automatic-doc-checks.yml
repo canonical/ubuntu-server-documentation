@@ -6,6 +6,14 @@ on:
   pull_request:
     paths:
       - 'docs/**'   # Only run on changes to the docs directory
+  workflow_call:
+    outputs:
+      spellcheck-result:
+        description: "Result of the spelling check"
+        value: ${{ jobs.docchecks.outputs.result_spelling }}
+      woke-result:
+        description: "Result of the inclusive language check"
+        value: ${{ jobs.docchecks.outputs.result_woke }}
 
   workflow_dispatch:
     # Manual trigger
@@ -16,8 +24,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  documentation-checks:
-    uses: canonical/documentation-workflows/.github/workflows/documentation-checks.yaml@main
-    with:
-      working-directory: 'docs'
-      fetch-depth: 0
+  docchecks:
+    name: Run documentation checks
+    runs-on: 'ubuntu-latest'
+    outputs:
+      result_spelling: ${{ steps.spellcheck-step.outcome }}
+      result_woke: ${{ steps.woke-step.outcome }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Spell Check
+        id: spellcheck-step
+        if: success() || failure()
+        uses: canonical/documentation-workflows/spellcheck@main
+        with:
+          working-directory: 'docs'
+          install-target: 'install'
+          spelling-target: 'spelling'
+          makefile: 'use-default'
+
+      - name: Inclusive Language Check
+        id: woke-step
+        if: success() || failure()
+        uses: canonical/documentation-workflows/inclusive-language@main
+        with:
+          working-directory: 'docs'
+          install-target: 'install'
+          woke-target: 'woke'
+          makefile: 'use-default'
