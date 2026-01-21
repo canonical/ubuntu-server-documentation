@@ -18,12 +18,6 @@ Install `logwatch` using the following command:
 sudo apt install logwatch
 ```
 
-You will also need to manually create a temporary directory in order for it to work:
-
-```bash
-sudo mkdir /var/cache/logwatch
-```
-
 ## Configure Logwatch
 
 Logwatch's default configuration is kept in `/usr/share/logwatch/default.conf/logwatch.conf`. However, configuration changes made directly to that file can be overwritten during updates, so instead the file should be copied into `/etc` and modified there:
