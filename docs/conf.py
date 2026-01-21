@@ -243,6 +243,8 @@ linkcheck_ignore = [
     "https://ubuntu.com/blog/*",
     "https://help.ubuntu.com/*",
     "https://git.launchpad.net/*",
+    "https://linuxcontainers.org/*",
+    "https://wiki.syslinux.org/*",
     # Rate-limited domains that cause delays
     r"http://www\.gnu\.org/software/.*",
     r"https://github\.com/.*/blob/.*",

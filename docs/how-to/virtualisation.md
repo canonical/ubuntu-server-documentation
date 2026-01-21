@@ -17,7 +17,7 @@ In this section we show how to install, configure and use various options for cr
 Multipass <virtualisation/multipass>
 UVtool <virtualisation/cloud-image-vms-with-uvtool>
 QEMU <virtualisation/qemu>
-AMD SEV-SNP <virtualisation/sev-snp>
+AMD SEV <virtualisation/sev-snp>
 ```
 
 * {ref}`Create VMs with Multipass <create-vms-with-multipass>`

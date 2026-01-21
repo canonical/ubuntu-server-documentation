@@ -113,6 +113,45 @@ Advanced Micro Devices
     Related topic(s):
     * Networking
 
+AMD-SME
+AMD Secure Memory Encryption
+    AMD-SME is a security technology that transparently encrypts all system memory
+    to protect data at rest. It encrypts the entire memory address space of the system
+    using a key derived from the processor, protecting against physical attacks on memory.
+
+    Related topic(s):
+    * Cryptography, Security
+
+AMD-SEV
+AMD Secure Encrypted Virtualization
+    AMD-SEV is a security technology that encrypts the memory of virtual machines
+    (guests) independently from the host system. It uses a dedicated memory encryption
+    key for each guest VM, preventing the hypervisor from reading or modifying guest
+    memory. This protects guest confidentiality even when the hypervisor is compromised.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-ES
+AMD Secure Encrypted Virtualization - Encrypted State
+    AMD-SEV-ES extends {term}`AMD-SEV` by encrypting the entire VM state, including
+    CPU register contents, in addition to guest memory. This provides enhanced protection
+    against hypervisor-based attacks by preventing the hypervisor from reading or modifying
+    sensitive VM state during execution.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-SNP
+AMD Secure Encrypted Virtualization - Secure Nested Paging
+    AMD-SEV-SNP is an extension of {term}`AMD-SEV-ES` that adds integrity protection
+    for guest memory using Secure Nested Paging. It prevents the hypervisor from modifying
+    guest memory contents and provides cryptographic attestation of the VM's launch state,
+    ensuring the integrity and confidentiality of guest data.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
 Ansible
     Ansible is an open-source IT automation tool developed by Red Hat. It offers
     several automation features, enabling developers and organizations to
@@ -1723,6 +1762,13 @@ OSI
 Open Systems Interconnection
     *Work in Progress*
 
+OSPF
+Open Shortest Path First
+    Open Shortest Path First (OSPF) is a widely used Interior Gateway Protocol (IGP) for IP networks, classifying as a link-state protocol that helps routers find the most efficient paths within a single Autonomous System (AS). It works by each router building a complete map (Link-State Database) of the network topology and using Dijkstra's algorithm to calculate the shortest path to all destinations, ensuring fast convergence and scalability, especially in large enterprise network.
+
+    Related topic(s):
+    * Networking
+
 OTE
 Operational Test and Evaluation
     *Work in Progress*
@@ -1958,6 +2004,13 @@ Request For Comments
 rid
 Relative Identifier
     *Work in Progress*
+
+RIP
+Router Information Protocol
+    Routing Information Protocol (RIP) is an older, simple distance-vector routing protocol that helps routers find the best path in small networks by counting "hops" (routers passed), using the Bellman-Ford algorithm, and periodically sending full routing tables to neighbors, though its 15-hop limit and bandwidth usage make it outdated for large networks, with OSPF or IS-IS being modern alternatives.
+
+    Related topic(s):
+    * Networking
 
 RISC-V
 Reduced Instruction Set Computing - Version Five

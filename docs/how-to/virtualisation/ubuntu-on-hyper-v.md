@@ -13,7 +13,7 @@ Hyper-V allows Ubuntu to be run in parallel or in isolation on Windows operating
 
 * To introduce Ubuntu in a Windows-centric IT environment.
 * To have access to a complete Ubuntu desktop environment without dual-booting a PC.
-* To use Linux software on Ubuntu that is not yet supported on the[ Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
+* To use Linux software on Ubuntu that is not yet supported on the [Windows Subsystem for Linux](https://learn.microsoft.com/windows/wsl/about).
 
 ## Hyper-V system requirements
 
@@ -73,8 +73,8 @@ The recommended method is to use the curated Ubuntu image from the Hyper-V Quick
    or
 
    * Selecting the Windows key, then
-      -> typing 'Hyper-V'
-      -> selecting 'Hyper-V Manager'
+      -> Typing 'Hyper-V'
+      -> Selecting 'Hyper-V Manager'
 
    In the future, the Quick Create tool can be accessed directly using the above methods, but it is useful to know where Hyper-V Manager is because it is what you will use to manage your Ubuntu VM.
 
@@ -130,4 +130,4 @@ It is possible to install Ubuntu on Hyper-V using a CD image ISO. This is useful
 
 1. Select 'Start' to run your VM.
 
-10. Complete the manual installation of Ubuntu.
+1. Complete the manual installation of Ubuntu.

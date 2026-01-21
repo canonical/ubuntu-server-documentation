@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Understand strategies for testing Ubuntu Server updates in advance using best practices for enterprise deployment environments."
+    description: "Understand strategies for testing Ubuntu Server proposed updates in advance using best practices for enterprise deployment environments."
 ---
 
 (advance-testing-of-updates-in-best-practice-server-deployments)=
