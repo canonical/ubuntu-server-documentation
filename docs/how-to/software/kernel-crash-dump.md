@@ -363,39 +363,82 @@ Verify that the *SysRQ* mechanism is enabled by looking at the value of the `/pr
 cat /proc/sys/kernel/sysrq
 ```
 
-If a value of *0* is returned, the dump and then reboot feature is disabled. A value greater than *1* indicates that a sub-set of `sysrq` features is enabled. See `/etc/sysctl.d/10-magic-sysrq.conf` for a detailed description of the options and their default values. Enable dump then reboot testing with the following command:
+If a value of *0* is returned, the dump and then reboot feature is likely disabled.
+A value greater than *1* indicates that a sub-set of `sysrq` features is enabled.
+See `/usr/lib/sysctl.d/55-magic-sysrq.conf` for a detailed description of the options
+and their default values.
+
+```{note}
+On 24.10 an earlier the location of this file was at `/etc/sysctl.d/10-magic-sysrq.conf`
+```
+
+If disabled on your system, enable sysrq dump:
 
 ```bash
 sudo sysctl -w kernel.sysrq=1
 ```
 
-Once this is done, you must become root, as just using `sudo` will not be sufficient. As the *root* user, you will have to issue the command `echo c > /proc/sysrq-trigger`. If you are using a network connection, you will lose contact with the system. This is why it is better to do the test while being connected to the system console. This has the advantage of making the kernel dump process visible.
+Once this is done, you must become root, as just using `sudo` will not be sufficient.
+As the *root* user, you will have to issue the command `echo c > /proc/sysrq-trigger`.
+If you are using a network connection, you will lose contact with the system.
+This is why it is better to do the test while being connected to the system console.
+This has the advantage of making the kernel dump process visible.
 
-A typical test output should look like the following :
+A typical test output should look like the following on e.g. a serial console:
 
 ```text
-sudo -s
-[sudo] password for ubuntu: 
-# echo c > /proc/sysrq-trigger
-[   31.659002] SysRq : Trigger a crash
-[   31.659749] BUG: unable to handle kernel NULL pointer dereference at           (null)
-[   31.662668] IP: [<ffffffff8139f166>] sysrq_handle_crash+0x16/0x20
-[   31.662668] PGD 3bfb9067 PUD 368a7067 PMD 0 
-[   31.662668] Oops: 0002 [#1] SMP 
-[   31.662668] CPU 1 
-....
+[  977.208267] sysrq: Trigger a crash
+[  977.209313] Kernel panic - not syncing: sysrq triggered crash
+[  977.210684] CPU: 0 UID: 0 PID: 1567 Comm: bash Kdump: loaded Not tainted 6.18.0-8-generic #8-Ubuntu PREEMPT(voluntary) 
+[  977.215248] Hardware name: QEMU Standard PC (Q35 + ICH9, 2009)/LXD, BIOS unknown 2/2/2022
+[  977.216319] Call Trace:
+...
 ```
 
-The rest of the output is truncated, but you should see the system rebooting and somewhere in the log, you will see the following line :
+The rest of the output might be truncated, but you should see the system rebooting and somewhere in the log, you will see the following line :
 
 ```text
-Begin: Saving vmcore from kernel crash ...
+[    5.171504] kdump-tools[740]: Starting kdump-tools:
+[    5.174084] kdump-tools[747]:  * running makedumpfile --dump-dmesg /proc/vmcore /var/crash/202601210724/dmesg.202601210724
+[    5.185243] kdump-tools[765]: The kernel version is not supported.
+[    5.188411] kdump-tools[765]: The makedumpfile operation may be incomplete.
+[    5.191528] kdump-tools[765]: The dmesg log is saved to /var/crash/202601210724/dmesg.202601210724.
+[    5.196300] kdump-tools[765]: makedumpfile Completed.
+[    5.199056] kdump-tools[747]:  * kdump-tools: saved dmesg content in /var/crash/202601210724
+[    5.204580] kdump-tools[747]:  * running makedumpfile -F -c -d 31 /proc/vmcore | compress > /var/crash/202601210724/dump-incomplete
+[    5.210935] kdump-tools[769]: The kernel version is not supported.
+[    5.214499] kdump-tools[769]: The makedumpfile operation may be incomplete.
+Copying data                                      : [100.0 %] \           eta: 0s
+[    7.000839] kdump-tools[769]: The dumpfile is saved to STDOUT.
+[    7.003347] kdump-tools[769]: makedumpfile Completed.
+[    7.006824] kdump-tools[747]:  * kdump-tools: saved vmcore in /var/crash/202601210724
 ```
 
 Once completed, the system will reboot to its normal operational mode. You will then find the kernel crash dump file, and related subdirectories, in the `/var/crash` directory by running, e.g. `ls /var/crash`, which produces the following:
 
 ```bash
-201809240744  kexec_cmd  linux-image-4.15.0-34-generic-201809240744.crash
+ll /var/crash
+```
+
+Showing
+
+```
+drwxr-xr-x  2 root root  4096 Jan 21 07:31 202601210724/
+-rw-r--r--  1 root root 28838 Jan 21 07:24 linux-image-6.18.0-8-generic-202601210724.crash
+```
+
+And in this example
+
+```bash
+ll /var/crash/202601210724
+```
+
+returning
+
+```
+-rw------- 1 root root    82264 Jan 21 07:24 dmesg.202601210724
+-rw-r--r-- 1 root root 51753823 Jan 21 07:24 dump.202601210724
+
 ```
 
 If the dump does not work due to an 'out of memory' (OOM) error, then try increasing the amount of reserved memory by editing `/etc/default/grub.d/kdump-tools.cfg`. For example, to reserve 512 megabytes:
