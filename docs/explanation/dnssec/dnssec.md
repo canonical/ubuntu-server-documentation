@@ -213,7 +213,7 @@ The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manual pag
 
 When the `ad` bit is set in a DNS response, it means that DNSSEC validation was performed and successful. The data was authenticated.
 
-Specifying `trust-ad` in `/etc/resolv.conf` implies in these assumptions:
+Specifying `trust-ad` in `/etc/resolv.conf` implies these assumptions:
 
  * The 127.0.0.53 name server is trusted to set the `ad` flag correctly in its responses. If it performs DNSSEC validation, it is trusted to perform this validation correctly, and set the `ad` flag accordingly. If it does not perform DNSSEC validation, then the `ad` flag will always be unset in the responses.
  * The network path between localhost and 127.0.0.53 is trusted.
