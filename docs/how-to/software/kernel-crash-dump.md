@@ -251,8 +251,11 @@ Which produces the following output in this case:
 
 ```bash
 ...
-[    0.000000] Reserving 64MB of memory at 800MB for crashkernel (System RAM: 1023MB)
+[    0.004623] crashkernel reserved: 0x0000000060000000 - 0x0000000074000000 (320 MB)
 ```
+
+The example output is for 3GB system memory which correctly maps to 320 MB.
+
 
 Finally, as seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration :
 
