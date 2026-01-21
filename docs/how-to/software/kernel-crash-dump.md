@@ -215,8 +215,9 @@ To confirm that the kernel dump mechanism is enabled, there are a few things to 
 ```bash
 cat /proc/cmdline
     
-BOOT_IMAGE=/vmlinuz-3.2.0-17-server root=/dev/mapper/PreciseS-root ro
-     crashkernel=384M-2G:64M,2G-:128M
+BOOT_IMAGE=/vmlinuz-6.18.0-8-generic
+ root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0
+ crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
 ```
 
 The `crashkernel` parameter has the following syntax:
@@ -226,19 +227,21 @@ crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
     range=start-[end] 'start' is inclusive and 'end' is exclusive.
 ```
 
-So for the `crashkernel` parameter found in `/proc/cmdline` we would have :
+So for the `crashkernel` parameter found in the `/proc/cmdline` example above we would have :
 
 ```bash
-crashkernel=384M-2G:64M,2G-:128M
+crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
 ```
 
-The above value means:
+The above values mean:
 
-  - if the RAM is smaller than 384M, then don't reserve anything (this is the "rescue" case)
+  - if the RAM is smaller than 2G, then don't reserve anything (this is to not impact small systems where it would take quite a share)
 
-  - if the RAM size is between 386M and 2G (exclusive), then reserve 64M
+  - if the RAM size is between 2G and 4G (exclusive), then reserve 320M
 
-  - if the RAM size is larger than 2G, then reserve 128M
+  - ...
+
+  - if the RAM size is larger than 128G, then reserve 4096M
 
 Second, verify that the kernel has reserved the requested memory area for the `kdump` kernel by running:
 ```bash
