@@ -492,14 +492,18 @@ archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/
 reference/backups/archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/
 reference/backups how-to/backups/back-up-using-shell-scripts/
 
-reference/debugging/ explanation/debugging/
+about-debuginfod how-to/debugging/about-debuginfod/
+service-debuginfod how-to/debugging/about-debuginfod/
+debug-symbol-packages how-to/debugging/debug-symbol-packages/
 
-about-debuginfod explanation/debugging/about-debuginfod/
-service-debuginfod explanation/debugging/about-debuginfod/
-reference/debugging/about-debuginfod/ explanation/debugging/about-debuginfod/
+reference/debugging/ how-to/debugging/
+reference/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/
+reference/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/
 
-debug-symbol-packages explanation/debugging/debug-symbol-packages/
-reference/debugging/debug-symbol-packages/ explanation/debugging/debug-symbol-packages/
+explanation/debugging how-to/debugging/
+explanation/debugging/about-debuginfod.md how-to/debugging/about-debuginfod/
+explanation/debugging/debug-symbol-packages how-to/debugging/debug-symbol-packages/
+explanation/debugging/ebpf how-to/debugging/ebpf/
 
 tools-byobu reference/other-tools/terminal-multiplexers/
 byobu reference/other-tools/terminal-multiplexers/
