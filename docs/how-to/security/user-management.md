@@ -345,7 +345,7 @@ Remove or rename the directory `.ssh/` in the user's home folder to prevent furt
 Be sure to check for any established SSH connections by the disabled account, as it is possible they may have existing inbound or outbound connections -- then `pkill` any that are found.
 
 ```bash
-who | grep username  (to get the pts/# terminal)
+w | grep username  (to get the pts/# terminal)
 sudo pkill -f pts/#
 ```
 
