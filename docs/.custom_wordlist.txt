@@ -75,6 +75,8 @@ Fileset
 fileset
 FQDN's
 Freenode
+gcplogs
+gcrypt
 GDB's
 GIDs
 Gitolite
@@ -230,6 +232,7 @@ Subiquity
 subnetwork
 substring
 subvolume
+sudo
 sysctls
 syslog
 systemctl
@@ -246,6 +249,7 @@ tunables
 Tunables
 Tunnelblick
 UEFI's
+ufw
 UIDs
 UIs
 uncomment
@@ -259,6 +263,7 @@ untrusted
 URIs
 usermode
 userspace
+usr
 UUIDs
 UVtool
 Valgrind
