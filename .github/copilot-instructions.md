@@ -9,22 +9,20 @@ This is the **Ubuntu Server documentation** - a Sphinx-based documentation proje
 ### Diátaxis Framework
 
 Content is organized using the [Diátaxis framework](https://diataxis.fr/):
-- `tutorial/` - Getting started guides (e.g., `basic-installation.md`)
-- `how-to/` - Task-oriented guides organized by topic (installation, security, networking, virtualisation, etc.)
-- `explanation/` - Conceptual overviews and background information
-- `reference/` - Technical specifications, glossaries, system requirements
+- Tutorials (`tutorial/`) - Getting started guides (e.g., `basic-installation.md`)
+- How-to Guides (`how-to/`) - Task-oriented guides organized by topic (installation, security, networking, virtualisation, etc.)
+- Explanations (`explanation/`) - Conceptual overviews and background information
+- Reference (`reference/`) - Technical specifications, glossaries, system requirements
 - `contributing/` - Contributor documentation
 
 ### File Types
 
 - **Markdown (`.md`)** - Primary format for content pages with MyST syntax support
-- **reStructuredText (`.rst`)** - Landing pages, index files, and structural elements
-- Mixed content: Both formats coexist and are processed by Sphinx
 
 ### Key Configuration Files
 
 - `conf.py` - Project-specific settings (edit here for customization)
-- `Makefile` / `Makefile.sp` - Build system (starter pack targets prefixed with `sp-`)
+- `Makefile` - Build system
 - `.readthedocs.yaml` - Read the Docs build configuration
 
 ## Development Workflow
@@ -47,8 +45,6 @@ make html         # Build only
 make serve        # Serve only
 make clean-doc    # Clean built files
 ```
-
-For remote/VM development, set `export SPHINX_HOST=0.0.0.0` before running `make run`.
 
 ### Testing & Quality Checks
 
@@ -81,12 +77,12 @@ This project does **not** use separate branches per Ubuntu release. Instead:
   :::
   ```
 - Major version differences use **MyST tabs** with sync keywords (e.g., `24.04`, `22.04`)
-- Order tabs from **newest to oldest** release
+- Order tabs from **newest to oldest** Ubuntu release
 
 ### Cross-References
 
-- Use reference labels in `.rst` files: `.. _my-label:`
-- Link with `:ref:\`my-label\``
+- Use reference labels in `.md` files: `(slug-name)=`
+- Link with `{ref}\`my-label\``
 - First mentions of packages/tools should link to official docs or manpages
 - Use semantic markup: `{kbd}\`Ctrl\``, `{manpage}\`dpkg(1)\``, `{term}\`DAC\``
 - Manpage links auto-generate URLs (no hardcoding needed)
@@ -103,7 +99,6 @@ This project does **not** use separate branches per Ubuntu release. Instead:
 - Content pages only referenced once (via their section's landing page)
 - Landing pages in `how-to/`, `tutorial/`, etc. organize navigation
 - Images stored in `<section>/images/` directories
-- Shared links defined in `reuse/links.txt` and auto-included via `rst_epilog`
 
 ## Critical Patterns
 
@@ -140,7 +135,7 @@ Add valid technical terms/acronyms to `.custom_wordlist.txt` (alphabetically sor
 
 1. Determine Diátaxis category (tutorial/how-to/explanation/reference)
 2. Create `.md` file in appropriate subdirectory
-3. Add to corresponding `index.rst` or section landing page
+3. Add to corresponding `index.md` or section landing page
 4. Use reference labels: `(my-label)=` at top of Markdown files
 5. Test: `make run` and verify navigation
 
@@ -163,3 +158,67 @@ Add valid technical terms/acronyms to `.custom_wordlist.txt` (alphabetically sor
 - Don't assume reader knowledge without explanation/links
 - Don't link to blog posts when official docs exist
 - Don't create version branches (use in-page version callouts)
+
+## Review Persona and checklist
+
+### Role & Review Persona
+
+You are a Technical Editor for the Ubuntu Server documentation. Your primary goal is to ensure the documentation is technically precise, follows MyST formatting standards, and adheres generally to the Canonical Style Guide.
+
+* Focus: Formatting accuracy, link integrity, language clarity, spelling and grammar, and Sphinx role usage.
+
+Perform the review in the following specific order:
+
+---
+
+### Technical Formatting & MyST Syntax
+
+The agent must flag any deviations from these specific formatting requirements:
+
+#### 1. Sphinx Roles & Semantic Markup
+Do not allow "raw" backticks for technical terms. Every technical entity must use a specific MyST role:
+* **Keyboard keys:** Must use {kbd}`Key` (e.g., {kbd}`Enter`).
+* **Command-line tools:** Use {manpage}`tool(section)` for the first mention (e.g., {manpage}`ls(1)`).
+* **Glossary terms:** Use {term}`term` for items defined in the glossary.
+* **Internal Links:** Use {ref}`label-name` instead of standard markdown links for internal cross-references.
+
+#### 2. Header & Document Structure
+* **Hierarchy:** Flag any skip in heading levels (e.g., # followed by ###).
+* **Target Labels:** Every file must start with a reference label: `(slug-name)=`.
+* **Code Blocks:** Every code block must specify a language for syntax highlighting (e.g., ```bash or ```python).
+
+#### 3. MyST Specifics
+* **Version Callouts:** Ensure version-specific notes use the following syntax:
+  :::{note}
+  For Ubuntu 24.04 LTS (Noble) onwards...
+  :::
+* **Tabs:** When showing version-specific commands, ensure the newest Ubuntu version is the first (left-most) tab.
+
+---
+
+### Language & Quality Standards
+Flag the following "obvious" language errors that degrade documentation quality:
+
+#### 1. Prohibited "Filler" Words
+Flag any use of "weak" or "subjective" adverbs that diminish technical authority:
+* "simply", "just", "easy/easily", "actually", "basically", "obviously".
+* Example: "Just run this command" should be changed to "Run this command".
+
+#### 2. Voice and Perspective
+* **Active Voice:** Flag passive phrasing. Change "The package is installed" to "Install the package".
+* **Person:** Use second person ("You"). "We" can be used in tutorials.
+* **Descriptive Links:** Flag links like "click here" or "see this page". Link text must describe the destination (e.g., "See the [Installation Guide](link)").
+
+#### 3. Technical Consistency
+* **US English:** Ensure US spelling (e.g., "initialize" not "initialise", "color" not "colour").
+* **Acronyms:** Flag any acronym used for the first time that isn't expanded, e.g., "Advanced Package Tool (APT)".
+* **Placeholders:** Ensure command-line placeholders are clear (e.g., `<ip_address>` or `<username>`).
+
+---
+
+### Repository Integrity
+* **Redirects:** If the PR modifies a filename, flag it if a corresponding entry is missing from `redirects.txt`.
+* **Wordlist:** If a technical term is flagged as a typo but is correct, suggest adding it to `.custom_wordlist.txt`.
+* **Lists:** Ensure all numbered lists use `1.` for every item (allowing for auto-numbering).
+
+
