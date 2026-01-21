@@ -213,8 +213,12 @@ current state:    ready to kdump
 To confirm that the kernel dump mechanism is enabled, there are a few things to verify. First, confirm that the `crashkernel` boot parameter is present (note that the following line has been split into two to fit the format of this document):
 
 ```bash
-cat /proc/cmdline
-    
+$ cat /proc/cmdline
+```
+
+Which shows:
+
+```text
 BOOT_IMAGE=/vmlinuz-6.18.0-8-generic
  root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0
  crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
@@ -229,7 +233,7 @@ crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
 
 So for the `crashkernel` parameter found in the `/proc/cmdline` example above we would have :
 
-```bash
+```text
 crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
 ```
 
@@ -243,25 +247,24 @@ The above values mean:
 
   - if the RAM size is larger than 128G, then reserve 4096M
 
-Second, verify that the kernel has reserved the requested memory area for the `kdump` kernel by running:
-```bash
-dmesg | grep -i crash
-```    
-Which produces the following output in this case:
+Second, verify that the kernel has reserved the requested memory area for the `kdump` kernel by running `dmesg`:
 
 ```bash
-...
+dmesg | grep -i crash
+```
+
+Which shows:
+
+```text
 [    0.004623] crashkernel reserved: 0x0000000060000000 - 0x0000000074000000 (320 MB)
 ```
 
-The example output is for 3GB system memory which correctly maps to 320 MB.
-
+This example output is for a system with 3GB memory which correctly maps to 320 MB.
 
 Finally, as seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration :
 
 ```bash
 kdump-config show
-```
 
 Which produces:
 ```text
