@@ -68,20 +68,20 @@ Note that `kinit` doesn't need the principal to exist as a local user in the sys
 The only remaining configuration now is for `sssd`. Create the file `/etc/sssd/sssd.conf` with the following content:
 
 ```text
-    [sssd]
-    config_file_version = 2
-    services = pam
-    domains = example.com
+[sssd]
+config_file_version = 2
+services = pam
+domains = example.com
 
-    [pam]
+[pam]
 
-    [domain/example.com]
-    id_provider = proxy
-    proxy_lib_name = files
-    auth_provider = krb5
-    krb5_server = kdc01.example.com,kdc02.example.com
-    krb5_kpasswd = kdc01.example.com
-    krb5_realm = EXAMPLE.COM
+[domain/example.com]
+id_provider = proxy
+proxy_lib_name = files
+auth_provider = krb5
+krb5_server = kdc01.example.com,kdc02.example.com
+krb5_kpasswd = kdc01.example.com
+krb5_realm = EXAMPLE.COM
 ```
 
 The above configuration will use Kerberos for **authentication** (`auth_provider`), but will use the local system users for user and group information (`id_provider`).
