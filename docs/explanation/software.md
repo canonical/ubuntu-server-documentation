@@ -7,7 +7,7 @@ myst:
 (explanation-managing-software)=
 # Managing software
 
-In this section we go into detail on package management and best practices.
+This section explains how software is managed on Ubuntu Server and outlines recommended best practices.
 
 ## Package sources
 
