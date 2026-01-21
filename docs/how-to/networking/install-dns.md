@@ -42,18 +42,20 @@ The DNS configuration files are stored in the `/etc/bind` directory. The primary
 - **`/etc/bind/named.conf.local`**: For your zones
 - **`/etc/bind/named.conf.default-zones`**: Default zones such as localhost, its reverse, and the root hints
 
-The root nameservers used to be described in the file `/etc/bind/db.root`. This is now provided instead by the `/usr/share/dns/root.hints` file shipped with the `dns-root-data` package, and is referenced in the `named.conf.default-zones` configuration file above.
+The root nameservers are provided by the `/usr/share/dns/root.hints` file shipped with the `dns-root-data` package, and is referenced in the `named.conf.default-zones` configuration file above. Up until Ubuntu 18.04 LTS it used to be described in the file `/etc/bind/db.root`.
 
 It is possible to configure the same server to be a caching name server, primary, and secondary: it all depends on the zones it is serving. A server can be the Start of Authority (SOA) for one zone, while providing secondary service for another zone. All the while providing caching services for hosts on the local LAN.
 
 ## Set up a caching nameserver
 
-The default configuration acts as a caching server. Simply uncomment and edit `/etc/bind/named.conf.options` to set the IP addresses of your ISP's DNS servers:
+The default configuration acts as a caching server. Edit `/etc/bind/named.conf.options` to set the IP addresses of your ISP's DNS servers. Add or modify the `options` block so that it includes a `forwarders` section as follows:
 
 ```
-forwarders {
-    1.2.3.4;
-    5.6.7.8;
+options {
+    forwarders {
+        1.2.3.4;
+        5.6.7.8;
+    };
 };
 ```
 
@@ -88,13 +90,9 @@ zone "example.com" {
 If BIND will be receiving automatic updates to the file as with {term}`DDNS`, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
 ```
 
-Now use an existing zone file as a template to create the `/etc/bind/db.example.com` file:
+Now, create a zone file in `/etc/bind/db.example.com`. Up until Ubuntu 25.04 this could be copied from a template, e.g. in `/etc/bind/db.local`.
 
-```bash
-sudo cp /etc/bind/db.local /etc/bind/db.example.com
-```
-
-Edit the new zone file `/etc/bind/db.example.com` and change `localhost.` to the FQDN of your server, including the additional `.` at the end. Change `127.0.0.1` to the nameserver's IP address and `root.localhost` to a valid email address, but with a `.` instead of the usual `@` symbol, again including the `.` at the end. Change the comment to indicate the domain that this file is for.
+Edit the new zone file `/etc/bind/db.example.com` adding the {term}`FQDN` of your server, including the additional `.` at the end, the nameserver's IP address and a valid email address (`root@example.com`), but with a `.` instead of the usual `@` symbol, again including the `.` at the end. You can add a comment at the top (using semicolons), to indicate the domain that this file is for.
 
 Create an **A record** for the base domain, `example.com`. Also, create an **A record** for `ns.example.com`, the name server in this example:
 
@@ -112,13 +110,13 @@ $TTL    604800
 
 @       IN      NS      ns.example.com.
 @       IN      A       192.168.1.10
-@       IN      AAAA    ::1
+@       IN      AAAA    2001:db8::10
 ns      IN      A       192.168.1.10
 ```
 
 You must increment the `Serial Number` every time you make changes to the zone file. If you make multiple changes before restarting BIND9, only increment `Serial` once.
 
-Now, you can add DNS records to the bottom of the zone file. See {ref}`Common Record Types <install-dns>` for details.
+Now, you can add DNS records to the bottom of the zone file. See {ref}`common-record-types` for details.
 
 ```{note}
 Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
@@ -147,13 +145,7 @@ zone "1.168.192.in-addr.arpa" {
 Replace `1.168.192` with the first three octets of whatever network you are using. Also, name the zone file `/etc/bind/db.192` appropriately. It should match the first octet of your network.
 ```
 
-Now create the `/etc/bind/db.192` file:
-
-```bash
-sudo cp /etc/bind/db.127 /etc/bind/db.192
-```
-
-Next edit `/etc/bind/db.192`, changing the same options as `/etc/bind/db.example.com`:
+Now create the `/etc/bind/db.192` file, changing the same options as `/etc/bind/db.example.com`:
 
 ```
 ;
@@ -280,7 +272,7 @@ The default directory for non-authoritative zone files is `/var/cache/bind/`. Th
 
 ### resolv.conf
 
-The first step in testing BIND9 is to add the nameserver's IP address to a **hosts resolver**. The Primary nameserver should be configured as well as another host to double check things. Refer to {ref}`DNS client configuration <configuring-networks>` for details on adding nameserver addresses to your network clients. In the end your `nameserver` line in `/etc/resolv.conf` should be pointing at `127.0.0.53` and you should have a `search` parameter for your domain. Something like this:
+The first step in testing BIND9 is to add the nameserver's IP address to a **hosts resolver**. The Primary nameserver should be configured as well as another host to double check things. Refer to {ref}`DNS client configuration <dns-client-configuration>` for details on adding nameserver addresses to your network clients. In the end your `nameserver` line in `/etc/resolv.conf` should be pointing at `127.0.0.53` and you should have a `search` parameter for your domain. Something like this:
 
 ```text
 nameserver  127.0.0.53
@@ -456,6 +448,7 @@ sudo systemctl restart bind9.service
 
 You should see the file `/var/log/named/query.log` fill with query information. This is a simple example of the BIND9 logging options. For coverage of advanced options see the "Further Reading" section at the bottom of this page.
 
+(common-record-types)=
 ## Common record types
 
 This section covers some of the most common DNS record types.
