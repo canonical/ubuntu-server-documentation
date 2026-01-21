@@ -196,6 +196,13 @@ Only when a system is live can an estimation of the required memory be provided.
 `kdump-config show` includes a line like `crashkernel suggested size: 417M`
 based on what the current kernel consumed at boot time.
 
+You might consider and configure for such a suggested size if it is larger than
+the defaults. That would help to avoid the dump to fail due to an 'out of memory'
+(OOM) error. To increasing the amount of reserved memory edit
+`/etc/default/grub.d/kdump-tools.cfg` changing the `crashkernel=` parameter.
+You can then run `sudo update-grub`, reboot afterwards, and then test again.
+
+
 ## Configuration
 
 In addition to local dump, it is now possible to use the remote dump functionality to send the kernel crash dump to a remote server, using either the SSH or NFS protocols.
@@ -441,13 +448,6 @@ returning
 
 ```
 
-If the dump does not work due to an 'out of memory' (OOM) error, then try increasing the amount of reserved memory by editing `/etc/default/grub.d/kdump-tools.cfg`. For example, to reserve 512 megabytes:
-
-```text
-GRUB_CMDLINE_LINUX_DEFAULT="$GRUB_CMDLINE_LINUX_DEFAULT crashkernel=384M-:512M"
-```
-
-You can then run `sudo update-grub`, reboot afterwards, and then test again.
 
 ## Resources
 
