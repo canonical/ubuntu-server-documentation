@@ -9,7 +9,7 @@ myst:
 
 There are several configuration management tools that can help manage IT
 infrastructure, typically through automating configuration and deployment
-processes. The most popular options are Ansible and Puppet.
+processes. Some popular options are Ansible and Puppet.
 
 Although they can be complex to set up initially, they have a clear advantage
 in environments where scalability and consistency are important. Both of
