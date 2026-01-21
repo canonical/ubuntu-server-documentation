@@ -31,7 +31,7 @@ $ sudo apt install krb5-user sssd-krb5
 You will be prompted for the addresses of your KDCs and admin servers. If you have followed our {ref}`how to install a Kerberos server <install-a-kerberos-server>` and {ref}`how to set up a secondary KDC <set-up-secondary-kdc>` guides, the KDCs will be  (space separated): 
 
 ```
-kdc01.example.com kdc02.example.com`
+kdc01.example.com kdc02.example.com
 ```
 
 And the admin server will be: 
