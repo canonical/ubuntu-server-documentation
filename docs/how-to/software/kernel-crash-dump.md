@@ -448,6 +448,71 @@ returning
 
 ```
 
+## Analyznig a crash dump
+
+To use a crash dump for debugging the uncompressed and unstripped kernel
+information with debug symbols are needed. To get access to those please
+follow {ref}`get-debug-symbol-packages` to make the repository and associated
+keys known to your system.
+
+```{note}
+This does not strictly need to happen on the system that had the crash, it can
+be copied away for analysis. But the examples are simplified to use e.g.
+`uname -r` to automatically select the right kernel - when running on a
+different system these might need to be adapted.
+```
+
+Then install the debug symbols for your kernel, assuming it is the same that
+runs currently that can be done with:
+
+```bash
+apt-get install linux-image-uname -r-dbgsym
+```
+
+Be warned, a kernel is a large binary and the debug symbols are much larger.
+This will take a while to load and quite some space on disk. In the example
+case that will fetch `linux-image-unsigned-6.18.0-8-generic-dbgsym` which
+will make all the debug info available in `/usr/lib/debug/lib/modules/6.18.0-8-generic`.
+
+With all that ready the crash dump can be opened like
+
+```bash
+crash /usr/lib/debug/boot/vmlinux-6.18.0-8-generic /var/crash/202601210724/dump.202601210724
+```
+
+Which will then look like:
+
+```text
+...
+      KERNEL: /usr/lib/debug/boot/vmlinux-6.18.0-8-generic
+    DUMPFILE: /var/crash/202601210724/dump.202601210724  [PARTIAL DUMP]
+        CPUS: 1
+        DATE: Thu Jan  1 00:00:00 UTC 1970
+      UPTIME: 00:16:16
+LOAD AVERAGE: 0.00, 0.00, 0.00
+       TASKS: 157
+    NODENAME: r-vm
+     RELEASE: 6.18.0-8-generic
+     VERSION: #8-Ubuntu SMP PREEMPT_DYNAMIC Wed Dec 17 16:14:24 UTC 2025
+     MACHINE: x86_64  (3792 Mhz)
+      MEMORY: 3 GB
+       PANIC: "Kernel panic - not syncing: sysrq triggered crash"
+         PID: 1567
+     COMMAND: "bash"
+        TASK: ffff89cd07908000  [THREAD_INFO: ffff89cd07908000]
+         CPU: 0
+       STATE: TASK_RUNNING (PANIC)
+
+crash>
+```
+
+For example we see here the crash reason being us following the above example:
+
+```text
+PANIC: "Kernel panic - not syncing: sysrq triggered crash"
+```
+
+And from there on it depends on what exactly you are looking for.
 
 ## Resources
 
