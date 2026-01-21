@@ -208,7 +208,7 @@ HOSTTAG:          hostname
 current state:    ready to kdump
 ```
 
-## Verification
+## Verification and Troubleshooting
 
 To confirm that the kernel dump mechanism is enabled, there are a few things to verify. First, confirm that the `crashkernel` boot parameter is present (note that the following line has been split into two to fit the format of this document):
 
@@ -304,6 +304,21 @@ crashkernel suggested size: 329M
 
 kexec command:
   no kexec command recorded
+```
+
+At this same bad-state the journal output as well as the service status of kdump-tools would also report on that issue:
+
+```bash
+systemctl status kdump-tools
+```
+
+Might then show:
+
+```text
+...
+... kdump-tools[5348]: Memory for crashkernel is not reserved
+... kdump-tools[5348]: Please reserve memory by passing"crashkernel=Y@X" parameter to kernel
+... kdump-tools[5348]: Then try to loading kdump kernel
 ```
 
 ## Testing the crash dump mechanism
