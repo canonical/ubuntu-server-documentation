@@ -101,7 +101,7 @@ The `gitolite-admin` contains two subdirectories:
 
 ### Adding a Gitolite user
 
-Gitolite users are virtual - they are not a system username (from {term}`nsswitch`).
+Gitolite users are virtual - they are not a system username (from {term}`nsswitch <NSS>`).
 
 Obtain their SSH public key (from their machine in `~user/.ssh/id_<name>.pub`) and add it to the `keydir` directory as `<desired-username>.pub` in the `gitolite-admin` repository, then commit and push the changes.
 
