@@ -26,7 +26,7 @@ sudo apt install rails
 
 This will install both the Ruby base packages, and Ruby on Rails.
 
-Alternatively, you may want to install it with the `--no-install-recommends` to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
+Alternatively, you may want to install it with the `--no-install-recommends` flag to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
 
 ```bash
 sudo apt install --no-install-recommends rails
