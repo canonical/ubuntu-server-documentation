@@ -51,13 +51,9 @@ The kernel crash dump utility is installed with the following command:
 sudo apt install kdump-tools
 ```
 
-```{note}
-Starting with 16.04, the kernel crash dump mechanism is enabled by default.
-```
-
 During the installation, you will be prompted with the following dialog:
 
-```text 
+```text
  |------------------------| Configuring kdump-tools |------------------------|
  |                                                                           |
  |                                                                           |
