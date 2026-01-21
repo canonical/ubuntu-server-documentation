@@ -26,6 +26,12 @@ sudo apt install rails
 
 This will install both the Ruby base packages, and Ruby on Rails.
 
+Alternatively, you may want to install it with the `--no-install-recommends` to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
+
+```bash
+sudo apt install --no-install-recommends rails
+```
+
 ## Configure the web server
 
 You will need to modify the `/etc/apache2/sites-available/000-default.conf` configuration file to set up your domains.
@@ -95,4 +101,4 @@ That's it! Now your Server is ready for your Ruby on Rails application. You can 
 
 - See the [Ruby on Rails](https://rubyonrails.org/) website for more information.
 
-- [Agile Development with Rails](https://pragprog.com/titles/rails4/agile-web-development-with-rails-4/) is also a great resource.
+- [Agile Development with Rails](https://pragprog.com/titles/rails7/agile-web-development-with-rails-7/) is also a great resource.
