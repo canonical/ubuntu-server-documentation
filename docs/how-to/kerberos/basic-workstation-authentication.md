@@ -70,7 +70,6 @@ The only remaining configuration now is for `sssd`. Create the file `/etc/sssd/s
 ```text
 [sssd]
 config_file_version = 2
-services = pam
 domains = example.com
 
 [pam]
