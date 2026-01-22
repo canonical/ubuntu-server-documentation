@@ -140,8 +140,8 @@ The NFS server will have the usual `nfs-kernel-server` package and its dependenc
 For this example, we will use:
  - `.vms` {term}`DNS` domain
  - `VMS` Kerberos realm
- - `j-nfs-server.vms` for the NFS server
- - `j-nfs-client.vms` for the NFS client
+ - `nfs-server.vms` for the NFS server
+ - `nfs-client.vms` for the NFS client
  - `ubuntu/admin` principal has admin privileges on the KDC
 
 Adjust these names according to your setup.
@@ -152,15 +152,15 @@ First, install the `krb5-user` package:
 
 Then, with an admin principal, let's create a key for the NFS server:
 
-    $ sudo kadmin -p ubuntu/admin -q "addprinc -randkey nfs/j-nfs-server.vms"
+    $ sudo kadmin -p ubuntu/admin -q "addprinc -randkey nfs/nfs-server.vms"
 
 And extract the key into the local keytab:
 
-    $ sudo kadmin -p ubuntu/admin -q "ktadd nfs/j-nfs-server.vms"
+    $ sudo kadmin -p ubuntu/admin -q "ktadd nfs/nfs-server.vms"
     Authenticating as principal ubuntu/admin with password.
     Password for ubuntu/admin@VMS:
-    Entry for principal nfs/j-nfs-server.vms with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
-    Entry for principal nfs/j-nfs-server.vms with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+    Entry for principal nfs/nfs-server.vms with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+    Entry for principal nfs/nfs-server.vms with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
 
 Confirm the key is available:
 
@@ -168,8 +168,8 @@ Confirm the key is available:
     Keytab name: FILE:/etc/krb5.keytab
     KVNO Principal
     ---- --------------------------------------------------------------------------
-       2 nfs/j-nfs-server.vms@VMS
-       2 nfs/j-nfs-server.vms@VMS
+       2 nfs/nfs-server.vms@VMS
+       2 nfs/nfs-server.vms@VMS
 
 Now install the NFS server:
 
@@ -199,11 +199,11 @@ The NFS client has a similar set of steps. First we will prepare the client's ke
 
 To allow the `root` user to mount NFS shares via Kerberos without a password, we have to create a host key for the NFS client:
 
-    sudo kadmin -p ubuntu/admin -q "addprinc -randkey host/j-nfs-client.vms"
+    sudo kadmin -p ubuntu/admin -q "addprinc -randkey host/nfs-client.vms"
 
 And extract it:
 
-    $ sudo kadmin -p ubuntu/admin -q "ktadd host/j-nfs-client.vms"
+    $ sudo kadmin -p ubuntu/admin -q "ktadd host/nfs-client.vms"
 
 Now install the NFS client package:
 
@@ -211,11 +211,11 @@ Now install the NFS client package:
 
 And you should be able to do your first NFS Kerberos mount:
 
-    $ sudo mount j-nfs-server:/storage /mnt
+    $ sudo mount nfs-server:/storage /mnt
 
 If you are using a machine credential, then the above mount will work without having a Kerberos ticket, i.e., `klist` will show no tickets:
 
-    # mount j-nfs-server:/storage /mnt
+    # mount nfs-server:/storage /mnt
     # ls -l /mnt/*
     -rw-r--r-- 1 root root 0 Apr  5 14:50 /mnt/hello-from-nfs-server.txt
     # klist
@@ -243,9 +243,9 @@ And now we have not only the TGT, but also a ticket for the NFS service:
     Valid starting     Expires            Service principal
     04/05/22 17:48:50  04/06/22 03:48:50  krbtgt/VMS@VMS
             renew until 04/06/22 17:48:48
-    04/05/22 17:48:52  04/06/22 03:48:50  nfs/j-nfs-server.vms@
+    04/05/22 17:48:52  04/06/22 03:48:50  nfs/nfs-server.vms@
             renew until 04/06/22 17:48:48
-            Ticket server: nfs/j-nfs-server.vms@VMS
+            Ticket server: nfs/nfs-server.vms@VMS
 
 One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd`s `-n` option. From `rpc.gssd(8)`:
 
