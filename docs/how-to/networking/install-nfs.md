@@ -57,6 +57,8 @@ The *`sync`*/*`async`* options control whether changes are guaranteed to be comm
 
 There are a number of optional settings for NFS mounts for tuning performance, tightening security, or providing conveniences. These settings each have their own trade-offs so it is important to use them with care, only as needed for the particular use case. *`no_root_squash`*, for example, adds a convenience to allow root-owned files to be modified by any client system's root user; in a multi-user environment where executables are allowed on a shared mount point, this could lead to security problems.
 
+Please see the {manpage}`exports(5)` manual page for details about this configuration file.
+
 ## NFS Client Configuration
 
 To enable NFS support on a client system, enter the following command at the terminal prompt:
