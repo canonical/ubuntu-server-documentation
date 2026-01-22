@@ -169,7 +169,7 @@ We start by creating the new peer's config normally, as if it were any other sys
 sudo apt install qrencode
 ```
 
-Next, run the following command (assuming the config was written to `phone.conf`):
+Next, run the following command (assuming a wireguard config, as shown in the other examples, was written to `phone.conf`):
 
 ```bash
 cat phone.conf | qrencode -t ansiutf8
