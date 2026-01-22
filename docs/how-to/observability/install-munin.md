@@ -45,7 +45,7 @@ On `server01` edit the `/etc/munin/munin.conf` file, adding the IP address for `
 Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
 ```
 
-Then, if you wish to access the munin reports from a host other than `server01`, you will also need to edit the `Directory` directives in `/etc/apache2/conf-enabled/munin.conf`. For instance, you may want to allow access to some specific IP address. To do so, add the following snippet below each `Require local` entry:
+Then, if you wish to access the Munin reports from a host other than `server01`, you will also need to edit the `Directory` directives in `/etc/apache2/conf-enabled/munin.conf`. For instance, you may want to allow access to some specific IP address. To do so, add the following snippet below each `Require local` entry:
 
 ```text
     Require ip 172.18.100.1
