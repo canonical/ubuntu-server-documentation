@@ -522,7 +522,7 @@ OpenVPN uses the OpenSSL 3 Default Provider on Ubuntu. However, you can include 
 You can still use legacy algorithms in Ubuntu, this is not recommended but might
 be required to support older clients not yet compatible with the more secure new algorithms.
 Enabling those is done by explicitly adding them through the `legacy` provider alongside `default`
-To do this, add the following line to your openvpn configuration.
+To do this, add the following line to your OpenVPN configuration.
 
 ```text
 providers legacy default
