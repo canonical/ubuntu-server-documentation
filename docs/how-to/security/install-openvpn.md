@@ -316,29 +316,31 @@ Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Initialization Sequence Completed
 On the server log, an incoming connection looks like the following (you can see client name and source address as well as success/failure messages):
 
 ```
-ovpn-myserver[4818]: 192.168.122.114:55738 TLS: Initial packet from [AF_INET]192.168.122.114:55738, sid=5e943ab8 40ab9fed
-ovpn-myserver[4818]: 192.168.122.114:55738 VERIFY OK: depth=1, CN=Easy-RSA CA
-ovpn-myserver[4818]: 192.168.122.114:55738 VERIFY OK: depth=0, CN=myclient1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_VER=2.4.7
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_PLAT=linux
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_PROTO=2
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_NCP=2
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZ4=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZ4v2=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZO=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_COMP_STUB=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_COMP_STUBv2=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_TCPNL=1
-ovpn-myserver[4818]: 192.168.122.114:55738 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, 2048 bit RSA
-ovpn-myserver[4818]: 192.168.122.114:55738 [myclient1] Peer Connection Initiated with [AF_INET]192.168.122.114:55738
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI_sva: pool returned IPv4=10.8.0.6, IPv6=(Not enabled)
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI: Learn: 10.8.0.6 -> myclient1/192.168.122.114:55738
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI: primary virtual IP for myclient1/192.168.122.114:55738: 10.8.0.6
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 PUSH: Received control message: 'PUSH_REQUEST'
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 SENT CONTROL [myclient1]: 'PUSH_REPLY,route 10.8.0.1,topology net30,ping 10,ping-restart 120,ifconfig 10.8.0.6 10.8.0.5,peer-id 0,cipher AES-256-GCM' (status=1)
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Data Channel: using negotiated cipher 'AES-256-GCM'
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
+ovpn-myserver[10556]: read UDPv4 [ECONNREFUSED]: Connection refused (fd=7,code=111)
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=1, CN=r-vm-2
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=0, CN=r-vm-1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_VER=2.6.15
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_PLAT=linux
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_TCPNL=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_MTU=1600
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_NCP=2
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_CIPHERS=AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_PROTO=990
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_LZO_STUB=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_COMP_STUB=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_COMP_STUBv2=1
+ovpn-myserver[10556]: 10.185.198.41:40732 TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
+ovpn-myserver[10556]: 10.185.198.41:40732 TLS: tls_multi_process: initial untrusted session promoted to trusted
+ovpn-myserver[10556]: 10.185.198.41:40732 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 768 bits X25519MLKEM768
+ovpn-myserver[10556]: 10.185.198.41:40732 [r-vm-1] Peer Connection Initiated with [AF_INET]10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: new connection by client 'r-vm-1' will cause previous active sessions by this client to be dropped.  Remember to use the --duplicate-cn option if you want multiple clients using the same certificate or username to concurrently connect.
+ovpn-myserver[10556]: MULTI_sva: pool returned IPv4=10.8.0.2, IPv6=(Not enabled)
+ovpn-myserver[10556]: MULTI: Learn: 10.8.0.2 -> r-vm-1/10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: primary virtual IP for r-vm-1/10.185.198.41:40732: 10.8.0.2
+ovpn-myserver[10556]: SENT CONTROL [r-vm-1]: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 0,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500' (status=1)
+ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Data Channel: cipher 'AES-256-GCM', peer-id: 0
+ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Timers: ping 10, ping-restart 240
+ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Protocol options: explicit-exit-notify 1, protocol-flags cc-exit tls-ekm dyn-tls-crypt
 ```
 
 And you can check on the client if it created a `tun0` interface:
