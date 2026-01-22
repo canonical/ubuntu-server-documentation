@@ -171,16 +171,16 @@ $ sudo systemctl status openvpn@myserver
      CGroup: /system.slice/system-openvpn.slice/openvpn@myserver.service
              └─10556 /usr/sbin/openvpn --daemon ovpn-myserver --status /run/openvpn/myserver.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/myserver.conf --writepid /r>
 
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: net_iface_up: set tun0 up
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: net_addr_v4_add: 10.8.0.1/24 dev tun0
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Could not determine IPv4/IPv6 protocol. Using AF_INET
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Socket Buffers: R=[212992->212992] S=[212992->212992]
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: UDPv4 link local (bound): [AF_INET][undef]:1194
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: UDPv4 link remote: [AF_UNSPEC]
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: MULTI: multi_init called, r=256 v=256
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: IFCONFIG POOL IPv4: base=10.8.0.2 size=253
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: IFCONFIG POOL LIST
-Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Initialization Sequence Completed
+Jan 21 10:38:01 server ovpn-myserver[10556]: net_iface_up: set tun0 up
+Jan 21 10:38:01 server ovpn-myserver[10556]: net_addr_v4_add: 10.8.0.1/24 dev tun0
+Jan 21 10:38:01 server ovpn-myserver[10556]: Could not determine IPv4/IPv6 protocol. Using AF_INET
+Jan 21 10:38:01 server ovpn-myserver[10556]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:38:01 server ovpn-myserver[10556]: UDPv4 link local (bound): [AF_INET][undef]:1194
+Jan 21 10:38:01 server ovpn-myserver[10556]: UDPv4 link remote: [AF_UNSPEC]
+Jan 21 10:38:01 server ovpn-myserver[10556]: MULTI: multi_init called, r=256 v=256
+Jan 21 10:38:01 server ovpn-myserver[10556]: IFCONFIG POOL IPv4: base=10.8.0.2 size=253
+Jan 21 10:38:01 server ovpn-myserver[10556]: IFCONFIG POOL LIST
+Jan 21 10:38:01 server ovpn-myserver[10556]: Initialization Sequence Completed
 ```
 
 You can enable/disable various OpenVPN services on one system, but you could also let Ubuntu do it for you. There is a config for `AUTOSTART `in `/etc/default/openvpn`. Allowed values are "all", "none" or a space-separated list of names of the VPNs. If empty, "all" is assumed. The VPN name refers to the VPN configuration file name, i.e., `home` would be `/etc/openvpn/home.conf`.
@@ -280,45 +280,45 @@ $ sudo systemctl status openvpn@client
      CGroup: /system.slice/system-openvpn.slice/openvpn@client.service
              └─11361 /usr/sbin/openvpn --daemon ovpn-client --status /run/openvpn/client.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/client.conf --writepid /run/openvpn/client.pid
 
-Jan 21 10:54:27 r-vm-1 systemd[1]: Starting openvpn@client.service - OpenVPN connection to client...
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Note: --cipher is not set. OpenVPN versions before 2.5 defaulted to BF-CBC as fallback when cipher negotiation failed in this case. If you need this fallback please add '--data-ciphers-fallback BF-CBC' to your configuration and/or add BF-CBC to --data-ciphers.
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Note: Kernel support for ovpn-dco missing, disabling data channel offload.
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OpenVPN 2.6.15 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: library versions: OpenSSL 3.5.3 16 Sep 2025, LZO 2.10
-Jan 21 10:54:27 r-vm-1 systemd[1]: Started openvpn@client.service - OpenVPN connection to client.
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: DCO version: N/A
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TCP/UDP: Preserving recently used remote address: [AF_INET]10.185.198.84:1194
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Socket Buffers: R=[212992->212992] S=[212992->212992]
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: UDPv4 link local: (not bound)
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: UDPv4 link remote: [AF_INET]10.185.198.84:1194
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: Initial packet from [AF_INET]10.185.198.84:1194, sid=46d7b1e7 da534d2d
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY OK: depth=1, CN=r-vm-2
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY KU OK
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Validating certificate extended key usage
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: ++ Certificate has EKU (str) TLS Web Server Authentication, expects TLS Web Server Authentication
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY EKU OK
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY OK: depth=0, CN=r-vm-2
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: [r-vm-2] Peer Connection Initiated with [AF_INET]10.185.198.84:1194
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: tls_multi_process: initial untrusted session promoted to trusted
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: PUSH: Received control message: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 1,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500'
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: --ifconfig/up options modified
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: route-related options modified
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: tun-mtu set to 1500
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TUN/TAP device tun0 opened
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_iface_mtu_set: mtu 1500 for tun0
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_iface_up: set tun0 up
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_addr_v4_add: 10.8.0.2/24 dev tun0
-Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Initialization Sequence Completed
+Jan 21 10:54:27 client systemd[1]: Starting openvpn@client.service - OpenVPN connection to client...
+Jan 21 10:54:27 client ovpn-client[11361]: Note: --cipher is not set. OpenVPN versions before 2.5 defaulted to BF-CBC as fallback when cipher negotiation failed in this case. If you need this fallback please add '--data-ciphers-fallback BF-CBC' to your configuration and/or add BF-CBC to --data-ciphers.
+Jan 21 10:54:27 client ovpn-client[11361]: Note: Kernel support for ovpn-dco missing, disabling data channel offload.
+Jan 21 10:54:27 client ovpn-client[11361]: OpenVPN 2.6.15 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
+Jan 21 10:54:27 client ovpn-client[11361]: library versions: OpenSSL 3.5.3 16 Sep 2025, LZO 2.10
+Jan 21 10:54:27 client systemd[1]: Started openvpn@client.service - OpenVPN connection to client.
+Jan 21 10:54:27 client ovpn-client[11361]: DCO version: N/A
+Jan 21 10:54:27 client ovpn-client[11361]: TCP/UDP: Preserving recently used remote address: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:54:27 client ovpn-client[11361]: UDPv4 link local: (not bound)
+Jan 21 10:54:27 client ovpn-client[11361]: UDPv4 link remote: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: Initial packet from [AF_INET]10.185.198.84:1194, sid=46d7b1e7 da534d2d
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY OK: depth=1, CN=server
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY KU OK
+Jan 21 10:54:27 client ovpn-client[11361]: Validating certificate extended key usage
+Jan 21 10:54:27 client ovpn-client[11361]: ++ Certificate has EKU (str) TLS Web Server Authentication, expects TLS Web Server Authentication
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY EKU OK
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY OK: depth=0, CN=server
+Jan 21 10:54:27 client ovpn-client[11361]: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256
+Jan 21 10:54:27 client ovpn-client[11361]: [server] Peer Connection Initiated with [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: tls_multi_process: initial untrusted session promoted to trusted
+Jan 21 10:54:27 client ovpn-client[11361]: PUSH: Received control message: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 1,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500'
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: --ifconfig/up options modified
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: route-related options modified
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: tun-mtu set to 1500
+Jan 21 10:54:27 client ovpn-client[11361]: TUN/TAP device tun0 opened
+Jan 21 10:54:27 client ovpn-client[11361]: net_iface_mtu_set: mtu 1500 for tun0
+Jan 21 10:54:27 client ovpn-client[11361]: net_iface_up: set tun0 up
+Jan 21 10:54:27 client ovpn-client[11361]: net_addr_v4_add: 10.8.0.2/24 dev tun0
+Jan 21 10:54:27 client ovpn-client[11361]: Initialization Sequence Completed
 ```
 
 On the server log, an incoming connection looks like the following (you can see client name and source address as well as success/failure messages):
 
 ```
 ovpn-myserver[10556]: read UDPv4 [ECONNREFUSED]: Connection refused (fd=7,code=111)
-ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=1, CN=r-vm-2
-ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=0, CN=r-vm-1
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=1, CN=server
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=0, CN=client
 ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_VER=2.6.15
 ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_PLAT=linux
 ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_TCPNL=1
@@ -332,15 +332,15 @@ ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_COMP_STUBv2=1
 ovpn-myserver[10556]: 10.185.198.41:40732 TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
 ovpn-myserver[10556]: 10.185.198.41:40732 TLS: tls_multi_process: initial untrusted session promoted to trusted
 ovpn-myserver[10556]: 10.185.198.41:40732 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 768 bits X25519MLKEM768
-ovpn-myserver[10556]: 10.185.198.41:40732 [r-vm-1] Peer Connection Initiated with [AF_INET]10.185.198.41:40732
-ovpn-myserver[10556]: MULTI: new connection by client 'r-vm-1' will cause previous active sessions by this client to be dropped.  Remember to use the --duplicate-cn option if you want multiple clients using the same certificate or username to concurrently connect.
+ovpn-myserver[10556]: 10.185.198.41:40732 [client] Peer Connection Initiated with [AF_INET]10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: new connection by client 'client' will cause previous active sessions by this client to be dropped.  Remember to use the --duplicate-cn option if you want multiple clients using the same certificate or username to concurrently connect.
 ovpn-myserver[10556]: MULTI_sva: pool returned IPv4=10.8.0.2, IPv6=(Not enabled)
-ovpn-myserver[10556]: MULTI: Learn: 10.8.0.2 -> r-vm-1/10.185.198.41:40732
-ovpn-myserver[10556]: MULTI: primary virtual IP for r-vm-1/10.185.198.41:40732: 10.8.0.2
-ovpn-myserver[10556]: SENT CONTROL [r-vm-1]: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 0,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500' (status=1)
-ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Data Channel: cipher 'AES-256-GCM', peer-id: 0
-ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Timers: ping 10, ping-restart 240
-ovpn-myserver[10556]: r-vm-1/10.185.198.41:40732 Protocol options: explicit-exit-notify 1, protocol-flags cc-exit tls-ekm dyn-tls-crypt
+ovpn-myserver[10556]: MULTI: Learn: 10.8.0.2 -> client/10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: primary virtual IP for client/10.185.198.41:40732: 10.8.0.2
+ovpn-myserver[10556]: SENT CONTROL [client]: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 0,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500' (status=1)
+ovpn-myserver[10556]: client/10.185.198.41:40732 Data Channel: cipher 'AES-256-GCM', peer-id: 0
+ovpn-myserver[10556]: client/10.185.198.41:40732 Timers: ping 10, ping-restart 240
+ovpn-myserver[10556]: client/10.185.198.41:40732 Protocol options: explicit-exit-notify 1, protocol-flags cc-exit tls-ekm dyn-tls-crypt
 ```
 
 And you can check on the client if it created a `tun0` interface:
