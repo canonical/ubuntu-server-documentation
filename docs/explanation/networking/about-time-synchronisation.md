@@ -13,23 +13,25 @@ Behind this simple description, there is a lot of complexity. There are three ti
 
 The client software is also a lot more complex than you might expect. It must factor in communication delays and adjust the time in a way that does not upset all the other processes that run on the server. Luckily, all that complexity is hidden from you\!
 
-By default, Ubuntu uses `chrony` to synchronize time, which is installed by default. See our guides, if you would like to know how to {ref}`synchronize time with chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
+Since Ubuntu 25.10 `chrony` is used to synchronize time by default. See our guides, if you would like to know how to {ref}`synchronize time with chrony <chrony-client>` or {ref}`use chrony to serve NTP <serve-ntp-with-chrony>`.
 
 Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
-## How time synchronization works
+```{note}
+Chrony is replacing `systemd-timesyncd` as the default in Ubuntu 25.10 and `ntpdate`/`ntpd`, which was the default before Ubuntu 18.04 LTS.
+```
 
-Since Ubuntu 25.10, `chrony` replaces most of `systemd-timesyncd` but still uses systemd's `timedatectl`.
+## How time synchronization works
 
 ### About `chrony`
 
-`chrony` replaces not only `ntpdate`, but also the Simple Network Time Protocol (SNTP) client of `timesyncd` (formerly `ntpd`). So, on top of the one-shot action that `ntpdate` provided on boot and network activation, `chrony` now regularly checks and keeps your local time in sync. It also stores time updates locally, so that after reboots the time monotonically advances (if applicable).
+`chrony` replaces not only `ntpdate`, but also the Simple Network Time Protocol (SNTP) client of `timesyncd`, still allowing for basic usage of systemd's `timedatectl`. So, on top of the one-shot action that `ntpdate` provided on boot and network activation, `chrony` now regularly checks and keeps your local time in sync. It also stores time updates locally, so that after reboots the time monotonically advances (if applicable).
 
 ### About `timedatectl`
 
-If `chrony` is installed, `timedatectl` can still be used to configure basic settings, such as setting the timezone. But more complex configuration needs to be set up using the `chronyc` command. This ensures that no two time-syncing services can conflict with each other.
+If `chrony` is installed, `timedatectl` can still be used to configure basic settings, such as the timezone. But more complex configuration needs to be set up using the `chronyc` command. This ensures that no two time-syncing services can conflict with each other.
 
-`ntpdate` is now considered deprecated in favor of `chrony` (or `timesyncd`) and is no longer installed by default. `chrony` will generally keep your time in sync and can be set up as a time server, `timesyncd` can help with simpler cases. But if you had one of a few known special `ntpdate` use cases, consider the following:
+`chrony` will generally keep your time in sync and can be set up as a time server, `timesyncd` can help with simpler cases. But if you had one of a few known special `ntpdate` use cases, consider the following:
 
   - If you require a one-shot sync, use: `chronyd -q`
   - If you require a one-shot time check (without setting the time), use: `chronyd -Q`
