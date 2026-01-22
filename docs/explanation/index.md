@@ -125,14 +125,3 @@ high-availability
 
 performance
 ```
-
-## Debugging
-
-{ref}`These debugging pages <explanation-debugging>` are for readers interested in packaging and Ubuntu development.
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-debugging
-```
