@@ -129,6 +129,7 @@ lightervisor
 livepatching
 localhost's
 lockfile
+Lockdown
 Logentries
 Logstash
 Logwatch
