@@ -48,8 +48,7 @@ You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it t
 As a `root` user, change to the newly created directory `/etc/openvpn/easy-rsa` and run:
 
 ```bash
-./easyrsa init-pki
-./easyrsa build-ca
+./easyrsa init-pki && ./easyrsa build-ca
 ```
 
 The PEM passphrase set when creating the CA will be asked for every time you need to encrypt the output of a command (such as a private key). The encryption here is important, to avoid printing any private key in plain text.
@@ -108,7 +107,7 @@ sudo gzip -d /etc/openvpn/myserver.conf.gz
 
 Edit `/etc/openvpn/myserver.conf` to make sure the following lines are pointing to the certificates and keys you created in the section above.
 
-```
+```text
 ca ca.crt
 cert myservername.crt
 key myservername.key
@@ -124,7 +123,7 @@ sudo openvpn --genkey secret ta.key
 
 Add a config file to `/etc/sysctl.conf.d` to enable IP forwarding:
 
-```
+```bash
 echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
@@ -139,7 +138,7 @@ You can consider to study and tweak all the default settings we got from the sam
 Now you can start the server.
 
 ```bash
-$ sudo systemctl start openvpn@myserver
+sudo systemctl start openvpn@myserver
 ```
 
 ```{note}
@@ -156,7 +155,12 @@ sudo journalctl -u openvpn@myserver -xe
 The same templated approach works for all of `systemctl`:
 
 ```bash
-$ sudo systemctl status openvpn@myserver
+sudo systemctl status openvpn@myserver
+```
+
+Which shows the current server status:
+
+```text
      Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
      Active: active (running) since Wed 2026-01-21 10:38:01 UTC; 37s ago
  Invocation: b2a3d68935e7423e8f822bc0c88db764
@@ -192,7 +196,12 @@ After `systemctl daemon-reload`, a restart of the "generic" OpenVPN will restart
 Now, check if OpenVPN created a `tun0` interface:
 
 ```bash
-root@server:/etc/openvpn# ip addr show dev tun0
+ip addr show dev tun0
+```
+
+Due to restricting it to `dev tun0` this will report just that:
+
+```text
 5: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
     link/none
     inet 10.8.0.1 peer 10.8.0.2/32 scope global tun0
@@ -210,8 +219,7 @@ This can be done either on the server (as with the keys and certificates above) 
 To create the certificate, enter the following in a terminal as a root user:
 
 ```bash
-./easyrsa gen-req myclient1 nopass
-./easyrsa sign-req client myclient1
+./easyrsa gen-req myclient1 nopass && ./easyrsa sign-req client myclient1
 ```
 
 If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-req` command.
@@ -258,13 +266,18 @@ remote vpnserver.example.com 1194
 Now start the OpenVPN client with the same templated mechanism:
 
 ```bash
-$ sudo systemctl start openvpn@client
+sudo systemctl start openvpn@client
 ```
 
 You can check the status as you did on the server:
 
 ```bash
-$ sudo systemctl status openvpn@client
+sudo systemctl status openvpn@client
+```
+
+Which shows the current client status:
+
+```text
 ● openvpn@client.service - OpenVPN connection to client
      Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
      Active: active (running) since Wed 2026-01-21 10:54:27 UTC; 55s ago
@@ -315,7 +328,7 @@ Jan 21 10:54:27 client ovpn-client[11361]: Initialization Sequence Completed
 
 On the server log, an incoming connection looks like the following (you can see client name and source address as well as success/failure messages):
 
-```
+```text
 ovpn-myserver[10556]: read UDPv4 [ECONNREFUSED]: Connection refused (fd=7,code=111)
 ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=1, CN=server
 ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=0, CN=client
@@ -346,7 +359,12 @@ ovpn-myserver[10556]: client/10.185.198.41:40732 Protocol options: explicit-exit
 And you can check on the client if it created a `tun0` interface:
 
 ```bash
-$ ip addr show dev tun0
+ip addr show dev tun0
+```
+
+Showing the tun0 device on the client:
+
+```text
 6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
     link/none
     inet 10.8.0.2/24 brd 10.8.0.255 scope global tun0
@@ -358,7 +376,12 @@ $ ip addr show dev tun0
 Check if you can ping the OpenVPN server:
 
 ```bash
-$ ping 10.8.0.1 -c 1
+ping 10.8.0.1 -c 1
+```
+
+Which should show a working ping with an answer:
+
+```text
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_seq=1 ttl=64 time=0.335 ms
 ```
@@ -371,6 +394,11 @@ Check out your routes:
 
 ```bash
 ip route show dev tun0
+```
+
+A system might have many many routes, but this call restricts to those on `tun0`:
+
+```text
 10.8.0.0/24 proto kernel scope link src 10.8.0.2
 ```
 
@@ -404,10 +432,9 @@ OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this 
 
 #### Prepare interface config for bridging on server
 
-First, use Netplan to configure a bridge device using the desired Ethernet device:
+First, use Netplan to configure a bridge device using the desired Ethernet device like `/etc/netplan/01-netcfg.yaml` to contain:
 
-```bash
-$ cat /etc/netplan/01-netcfg.yaml
+```text
 network:
     version: 2
     renderer: networkd
@@ -431,13 +458,10 @@ Static IP addressing is highly suggested. DHCP addressing can also work, but you
 The next step on the server is to configure the Ethernet device for promiscuous mode on boot. To do this, ensure the `networkd-dispatcher` package is installed and create the following configuration script:
 
 ```bash
-sudo apt update
-sudo apt install networkd-dispatcher
-sudo touch /etc/networkd-dispatcher/dormant.d/promisc_bridge
-sudo chmod +x /etc/networkd-dispatcher/dormant.d/promisc_bridge
+sudo apt update && sudo apt install networkd-dispatcher
 ```
 
-Then add the following contents:
+Then add the following contents to a file like `/etc/networkd-dispatcher/dormant.d/promisc_bridge`
 
 ```sh
 #!/bin/sh
@@ -448,11 +472,18 @@ if [ "$IFACE" = br0 ]; then
 fi
 ```
 
+And ensure it has the permission to be executed:
+
+```bash
+sudo chmod +x /etc/networkd-dispatcher/dormant.d/promisc_bridge
+```
+
+
 #### Prepare server config for bridging
 
 Edit `/etc/openvpn/server.conf` to use `tap` rather than `tun` and set the server to use the `server-bridge` directive:
 
-```
+```text
 ;dev tun
 dev tap
 ;server 10.8.0.0 255.255.255.0
@@ -493,7 +524,7 @@ be required to support older clients not yet compatible with the more secure new
 Enabling those is done by explicitly adding them through the `legacy` provider alongside `default`
 To do this, add the following line to your openvpn configuration.
 
-```
+```text
 providers legacy default
 ```
 
