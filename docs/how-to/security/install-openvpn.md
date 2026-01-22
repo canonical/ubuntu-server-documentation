@@ -156,7 +156,9 @@ Then apply this file through `sysctl`:
 sudo sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
-This is the minimum you need to configure to get a working OpenVPN server. You can use all the default settings in the sample `server.conf` file. Now you can start the server.
+This is the minimum you need to configure to get a working OpenVPN server.
+You can consider to study and tweak all the default settings we got from the sample `server.conf` file.
+Now you can start the server.
 
 ```bash
 $ sudo systemctl start openvpn@myserver
