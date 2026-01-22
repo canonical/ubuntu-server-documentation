@@ -78,6 +78,7 @@ fileset
 FQDN's
 Freenode
 fsck
+fwupd
 gcplogs
 gcrypt
 GDB's
@@ -175,6 +176,7 @@ NVSwitch
 O'Reilly
 O'Reilly's
 OTPs
+overlayroot
 parmfile
 parmfiles
 passcodes
