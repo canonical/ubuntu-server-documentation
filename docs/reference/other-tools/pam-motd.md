@@ -55,6 +55,85 @@ The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only 
   * update-notifier-common suggests regular filesystem checks: `98-fsck-at-reboot`
   * update-notifier-common also hints if a reboot is required: `98-reboot-required`
 
+## Customization
+
+You can modify the configuration provided by the system or consider to add your
+own dynamic information to the MOTD by adding to `/etc/update-motd.d/`.
+
+This is example is not meant to be serious, instead it is a bit of fun to
+demonstrate the usage of `pam_motd` for own messages.
+
+```bash
+#!/bin/bash
+
+# 1. Get timestamp and and calculate nearest sysadminday
+NOW=$(date +%s)
+THIS_YEAR=$(date +%Y)
+TARGET_PREV=$(date -d "$((THIS_YEAR-1))-08-01 last friday" +%s)
+TARGET_CURR=$(date -d "$THIS_YEAR-08-01 last friday" +%s)
+TARGET_NEXT=$(date -d "$((THIS_YEAR+1))-08-01 last friday" +%s)
+
+# 2. Loop to find the shortest distance
+MIN_DIFF=9999999999
+CHOSEN_DAYS=0
+TIMING=""
+for TARGET in $TARGET_PREV $TARGET_CURR $TARGET_NEXT; do
+    # Calculate difference
+    DIFF=$(( (TARGET - NOW) / 86400 ))
+
+    # Get absolute value for comparison
+    if [ $DIFF -lt 0 ]; then
+        ABS_DIFF=$((DIFF * -1))
+        CURRENT_TIMING="ago"
+    else
+        ABS_DIFF=$DIFF
+        CURRENT_TIMING="in"
+    fi
+
+    # Update if this is the closest date found so far
+    if [ $ABS_DIFF -lt $MIN_DIFF ]; then
+        MIN_DIFF=$ABS_DIFF
+        CHOSEN_DAYS=$ABS_DIFF
+        TIMING=$CURRENT_TIMING
+    fi
+done
+
+# 3. Report to gain some admin-love
+if [ "$CHOSEN_DAYS" -eq 0 ]; then
+    echo -e "System Administrator Appreciation Day is Today! Gifts welcome."
+elif [ "$TIMING" == "ago" ]; then
+    echo -e "System Administrator Appreciation Day is ${CHOSEN_DAYS} days ago but we'd appreciate to be treated well every day."
+else
+    echo -e "System Administrator Appreciation Day is in ${CHOSEN_DAYS} days but we'd appreciate to be treated well every day."
+fi
+```
+
+Then make it executable
+
+```bash
+chmod +x /etc/update-motd.d/98-admin-reminder
+```
+
+On next login you should now be greeted with that as part of the message of the day.
+
+```text
+$ ssh ubuntu@yoursystem
+...
+System Administrator Appreciation Day is 181 days ago but we'd appreciate to be treated well every day.
+```
+
+
+```{note}
+Be careful as this will be executed on every login, the usual pattern to prevent
+that from slowing down logins is to do anything even slightly complex
+asynchronously and only `cat` pre-generated content in the actual MOTD handling.
+Furthermore consider using stamp files to only update at regular intervals
+instead of at every login.
+This example was meant to be kept simple, but the existing serious MOTD entries
+placed there by the packages make use of such, please look at those for writing
+your own.
+```
+
 ## Resources
 
   - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
