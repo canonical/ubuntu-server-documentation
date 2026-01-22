@@ -179,29 +179,30 @@ The same templated approach works for all of `systemctl`:
 
 ```bash
 $ sudo systemctl status openvpn@myserver
-openvpn@myserver.service - OpenVPN connection to myserver
-   Loaded: loaded (/lib/systemd/system/openvpn@.service; disabled; vendor preset: enabled)
-   Active: active (running) since Thu 2019-10-24 10:59:25 UTC; 10s ago
-     Docs: man:openvpn(8)
-           https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
-           https://community.openvpn.net/openvpn/wiki/HOWTO
- Main PID: 4138 (openvpn)
-   Status: "Initialization Sequence Completed"
-    Tasks: 1 (limit: 533)
-   Memory: 1.0M
-   CGroup: /system.slice/system-openvpn.slice/openvpn@myserver.service
-           └─4138 /usr/sbin/openvpn --daemon ovpn-myserver --status /run/openvpn/myserver.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/myserver.conf --writepid /run/
+     Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
+     Active: active (running) since Wed 2026-01-21 10:38:01 UTC; 37s ago
+ Invocation: b2a3d68935e7423e8f822bc0c88db764
+       Docs: man:openvpn(8)
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 10556 (openvpn)
+     Status: "Initialization Sequence Completed"
+      Tasks: 1 (limit: 10)
+     Memory: 1.7M (peak: 1.9M)
+        CPU: 17ms
+     CGroup: /system.slice/system-openvpn.slice/openvpn@myserver.service
+             └─10556 /usr/sbin/openvpn --daemon ovpn-myserver --status /run/openvpn/myserver.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/myserver.conf --writepid /r>
 
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: /sbin/ip addr add dev tun0 local 10.8.0.1 peer 10.8.0.2
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: /sbin/ip route add 10.8.0.0/24 via 10.8.0.2
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Could not determine IPv4/IPv6 protocol. Using AF_INET
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Socket Buffers: R=[212992->212992] S=[212992->212992]
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: UDPv4 link local (bound): [AF_INET][undef]:1194
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: UDPv4 link remote: [AF_UNSPEC]
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: MULTI: multi_init called, r=256 v=256
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: IFCONFIG POOL: base=10.8.0.4 size=62, ipv6=0
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: IFCONFIG POOL LIST
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Initialization Sequence Completed
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: net_iface_up: set tun0 up
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: net_addr_v4_add: 10.8.0.1/24 dev tun0
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Could not determine IPv4/IPv6 protocol. Using AF_INET
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: UDPv4 link local (bound): [AF_INET][undef]:1194
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: UDPv4 link remote: [AF_UNSPEC]
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: MULTI: multi_init called, r=256 v=256
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: IFCONFIG POOL IPv4: base=10.8.0.2 size=253
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: IFCONFIG POOL LIST
+Jan 21 10:38:01 r-vm-2 ovpn-myserver[10556]: Initialization Sequence Completed
 ```
 
 You can enable/disable various OpenVPN services on one system, but you could also let Ubuntu do it for you. There is a config for `AUTOSTART `in `/etc/default/openvpn`. Allowed values are "all", "none" or a space-separated list of names of the VPNs. If empty, "all" is assumed. The VPN name refers to the VPN configuration file name, i.e., `home` would be `/etc/openvpn/home.conf`.
