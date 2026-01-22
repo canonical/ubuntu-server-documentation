@@ -419,7 +419,9 @@ network:
             interfaces: [enp0s31f6]
             dhcp4: no
             addresses: [10.0.1.100/24]
-            gateway4: 10.0.1.1
+            routes:
+               - to: default
+                 via: 10.0.1.1
             nameservers:
                 addresses: [10.0.1.1]
 ```
