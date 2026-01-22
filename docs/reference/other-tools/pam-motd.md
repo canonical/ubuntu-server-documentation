@@ -15,7 +15,7 @@ There are various packages that add to the MOTD by placing configuration in `/et
 
 ### Landscape-sysinfo
 
-Here one example that is about system information obtained and displayed due to landscape:
+Here is one example of system information obtained and displayed by Landscape:
 
   - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://ubuntu.com/landscape) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
 
@@ -42,12 +42,12 @@ Here one example that is about system information obtained and displayed due to 
 
 The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only deliver output if there is something meaningful to report):
 
-  * base-files establishing the basic mechanism: `00-header`, `10-help-text,`, `50-motd-news`
+  * base-files establishing the basic mechanism: `00-header`, `10-help-text`, `50-motd-news`
   * base-files also provides Ubuntu news: `50-motd-news`
   * landscape info about the system: `50-landscape-sysinfo`
   * fwupd presents potential firmware updates: `85-fwupd`
   * update-notifier-common reports about available updates: `90-updates-available`
-  * [ubuntu-pro-client](https://documentation.ubuntu.com/pro-client/en/latest/explanations/motd_messages/) mentioned expiring pro subscriptions: `91-contract-ua-esm-status`
+  * [ubuntu-pro-client](https://documentation.ubuntu.com/pro-client/en/latest/explanations/motd_messages/) mentions expiring Ubuntu Pro subscriptions: `91-contract-ua-esm-status`
   * ubuntu-release-upgrader-core suggests upgrades: `91-release-upgrade`
   * unattended-upgrades informs if updates could not be installed automatically: `92-unattended-upgrades`
   * update-notifier-common notifies if the HWE kernel might go end of life: `95-hwe-eol`
@@ -57,16 +57,16 @@ The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only 
 
 ## Customization
 
-You can modify the configuration provided by the system or consider to add your
+You can modify the configuration provided by the system or consider adding your
 own dynamic information to the MOTD by adding to `/etc/update-motd.d/`.
 
-This is example is not meant to be serious, instead it is a bit of fun to
-demonstrate the usage of `pam_motd` for own messages.
+This example is not meant to be serious, instead it is a bit of fun to
+demonstrate the usage of `pam_motd` for your own messages.
 
 ```bash
 #!/bin/bash
 
-# 1. Get timestamp and and calculate nearest sysadminday
+# 1. Get timestamp and calculate nearest sysadminday
 NOW=$(date +%s)
 THIS_YEAR=$(date +%Y)
 TARGET_PREV=$(date -d "$((THIS_YEAR-1))-08-01 last friday" +%s)
@@ -124,7 +124,7 @@ System Administrator Appreciation Day is 181 days ago but we'd appreciate to be 
 
 
 ```{note}
-Be careful as this will be executed on every login, the usual pattern to prevent
+Be careful as this will be executed on every login. The usual pattern to prevent
 that from slowing down logins is to do anything even slightly complex
 asynchronously and only `cat` pre-generated content in the actual MOTD handling.
 Furthermore consider using stamp files to only update at regular intervals
