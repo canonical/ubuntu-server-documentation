@@ -216,10 +216,10 @@ Now, check if OpenVPN created a `tun0` interface:
 ```bash
 root@server:/etc/openvpn# ip addr show dev tun0
 5: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
-    link/none 
+    link/none
     inet 10.8.0.1 peer 10.8.0.2/32 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::b5ac:7829:f31e:32c5/64 scope link stable-privacy 
+    inet6 fe80::b5ac:7829:f31e:32c5/64 scope link stable-privacy
        valid_lft forever preferred_lft forever
 ```
 
