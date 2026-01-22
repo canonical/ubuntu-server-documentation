@@ -36,7 +36,9 @@ If `chrony` is installed, `timedatectl` can still be used to configure basic set
   - If you require a one-shot sync, use: `chronyd -q`
   - If you require a one-shot time check (without setting the time), use: `chronyd -Q`
 
-While use of `ntpd` is no longer recommended, this also still applies to `ntpd` being installed to retain any previous behavior/config that you had through an upgrade. However, it also implies that on an upgrade from a former release, `ntp`/`ntpdate` might still be installed and therefore renders the new `systemd`-based services disabled.
+```{note}
+On upgraded systems (from Ubuntu 25.04 or below) `systemd-timesyncd` might still be the active time-daemon and thus render the new `chrony` service disabled. Similarly, while the use of `ntpd` is no longer recommended, it might still be installed to retain any previous behavior/config on upgrades (up to Ubuntu 22.04 LTS).
+```
 
 ## Further reading
 
