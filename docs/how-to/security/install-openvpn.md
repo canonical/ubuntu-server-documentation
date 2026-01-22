@@ -112,8 +112,8 @@ Included with your OpenVPN installation are these (and many more) sample configu
 ```
 
 If these files under `/usr/share/doc/*` are not available (for example, the system was provisioned as a minimal install), you can fetch them directly from the Ubuntu package repositories:
- * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf?h=applied/ubuntu/noble-devel)
- * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf?h=applied/ubuntu/noble-devel)
+ * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf?h=applied/ubuntu/resolute-devel)
+ * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf?h=applied/ubuntu/resolute-devel)
 
 Start by copying the example server configuration to `/etc/openvpn/server.conf`:
 
