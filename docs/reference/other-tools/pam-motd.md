@@ -38,43 +38,22 @@ Here one example that is about system information obtained and displayed due to 
 
 `pam_motd` executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 
-You can add your own dynamic information to the MOTD. For example, to add local weather information:
+## Other default MOTD entries
 
-  - First, install the `weather-util` package:
-    
-        sudo apt install weather-util
+The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only deliver output if there is something meaningful to report):
 
-  - The weather utility uses METAR data from the National Oceanic and Atmospheric Administration and forecasts from the National Weather Service. In order to find local information you will need the 4-character ICAO location indicator. This can be determined by browsing to the [National Weather Service](https://www.weather.gov/tg/siteloc) site.
-    
-    Although the National Weather Service is a United States government agency there are weather stations available world wide. However, local weather information for all locations outside the U.S. may not be available.
-
-  - Create `/usr/local/bin/local-weather`, a simple shell script to use weather with your local ICAO indicator:
-    
-        #!/bin/sh
-        #
-        #
-        # Prints the local weather information for the MOTD.
-        #
-        #
-        
-        # Replace KINT with your local weather station.
-        # Local stations can be found here: http://www.weather.gov/tg/siteloc.shtml
-        
-        echo
-        weather KINT
-        echo
-
-  - Make the script executable:
-    
-        sudo chmod 755 /usr/local/bin/local-weather
-
-  - Next, create a symlink to `/etc/update-motd.d/98-local-weather`:
-    
-        sudo ln -s /usr/local/bin/local-weather /etc/update-motd.d/98-local-weather
-
-  - Finally, exit the server and re-login to view the new MOTD.
-
-You should now be greeted with some useful information, and some information about the local weather that may not be quite so useful. Hopefully the local-weather example demonstrates the flexibility of `pam_motd`.
+  * base-files establishing the basic mechanism: `00-header`, `10-help-text,`, `50-motd-news`
+  * base-files also provides Ubuntu news: `50-motd-news`
+  * landscape info about the system: `50-landscape-sysinfo`
+  * fwupd presents potential firmware updates: `85-fwupd`
+  * update-notifier-common reports about available updates: `90-updates-available`
+  * ubuntu-pro-client mentioned expiring pro subscriptions: `91-contract-ua-esm-status`
+  * ubuntu-release-upgrader-core suggests upgrades: `91-release-upgrade`
+  * unattended-upgrades informs if updates could not be installed automatically: `92-unattended-upgrades`
+  * update-notifier-common notifies if the HWE kernel might go end of life: `95-hwe-eol`
+  * overlayroot reports if any overlays are active: `97-overlayroot`
+  * update-notifier-common suggests regular filesystem checks: `98-fsck-at-reboot`
+  * update-notifier-common also hints if a reboot is required: `98-reboot-required`
 
 ## Resources
 
