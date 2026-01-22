@@ -158,7 +158,6 @@ Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `scre
 - [Advanced OpenSSH Wiki Page](https://wiki.ubuntu.com/AdvancedOpenSSH)
 
 ```{toctree}
-self
 2FA with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp.md>
 2FA with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>
 ```
