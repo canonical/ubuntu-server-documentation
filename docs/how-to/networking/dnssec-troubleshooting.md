@@ -26,7 +26,7 @@ By default, the {ref}`BIND9 server <install-dnssec>` will log certain DNSSEC fai
 For example, if we ask a BIND9 Validating Resolver for the IP address of the `www.dnssec-failed.org` name, we get a failure:
 
     $ dig @127.0.0.1 -t A www.dnssec-failed.org
-    ; <<>> DiG 9.18.28-0ubuntu0.24.04.1-Ubuntu <<>> @127.0.0.1 -t A www.dnssec-failed.org
+    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.1 -t A www.dnssec-failed.org
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
@@ -75,7 +75,7 @@ For example, let's query the local systemd-resolved DNS stub resolver (running a
 
     $ dig @127.0.0.53 -t A +dnssec +multiline isc.org
 
-    ; <<>> DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline isc.org
+    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline isc.org
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
@@ -112,7 +112,7 @@ If we repeat this query with a domain that we know fails DNSSEC validation, we g
 
     $ dig @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
 
-    ; <<>> DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
+    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
@@ -149,7 +149,7 @@ We can tell the local stub resolver (systemd-resolved running at `@127.0.0.53` a
 
     $ dig @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
 
-    ; <<>> DiG 9.18.30-0ubuntu0.24.04.2-Ubuntu <<>> @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
+    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
