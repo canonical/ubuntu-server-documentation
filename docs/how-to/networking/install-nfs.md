@@ -80,6 +80,10 @@ The general syntax for the line in `/etc/fstab` file is as follows:
 
     example.hostname.com:/srv /opt/example nfs rsize=8192,wsize=8192,timeo=14,intr
 
+```{note}
+Details about all the NFS related options that can go into `/etc/fstab` can be found in the {manpage}`nfs(5)` manual page.
+```
+
 After modifying `/etc/fstab`, systemd should be told about the change, otherwise you will get this warning when trying to mount:
 ```
 mount: (hint) your fstab has been modified, but systemd still uses
