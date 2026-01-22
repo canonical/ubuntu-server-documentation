@@ -41,7 +41,7 @@ You can configure the directories to be exported by adding them to the `/etc/exp
     /home    *.hostname.com(rw,sync,no_subtree_check)
     /scratch *(rw,async,no_subtree_check,no_root_squash)
 
-Make sure any custom mount points you're adding have been created (/srv and /home will already exist):
+Make sure any custom mount points you're adding have been created (`/srv` and `/home` will already exist):
 
     sudo mkdir /scratch
 
