@@ -100,38 +100,9 @@ sudo systemctl daemon-reload
 
 NFS is comprised of several services, both on the server and the client. Each one of these services can have its own default configuration, and depending on the Ubuntu Server release you have installed, this configuration is done in different files, and with a different syntax.
 
-### Ubuntu Server 22.04 LTS ("Jammy")
-
 All NFS related services read a single configuration file: `/etc/nfs.conf`. This is a INI-style config file, see the {manpage}`nfs.conf(5)` manual page for details. Furthermore, there is a `/etc/nfs.conf.d` directory which can hold `*.conf` snippets that can override settings from previous snippets or from the `nfs.conf` main config file itself.
 
 There is a new command-line tool called {manpage}`nfsconf(8)` which can be used to query or even set configuration parameters in `nfs.conf`. In particular, it has a `--dump` parameter which will show the effective configuration including all changes done by `/etc/nfs.conf.d/*.conf` snippets.
-
-### For Ubuntu Server 20.04 LTS ("Focal") and earlier
-
-Earlier Ubuntu releases use the traditional configuration mechanism for the NFS services via `/etc/defaults/` configuration files. These are `/etc/default/nfs-common` and `/etc/default/nfs/kernel-server`, and are used basically to adjust the command-line options given to each daemon.
-
-Each file has a small explanation about the available settings.
-
-```{warning}
-The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
-In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
-```
-
-## Upgrading to Ubuntu 22.04 LTS ("Jammy")
-
-The main change to the NFS packages in Ubuntu 22.04 LTS ("jammy") is the configuration file. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, now there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
-When upgrading to Ubuntu 22.04 LTS ("jammy") from a release that still uses the `/etc/defaults/nfs-*` configuration files, the following will happen:
-
- * a default `/etc/nfs.conf` configuration file will be installed
- * if the `/etc/default/nfs-*` files have been modified, a conversion script will be run and it will create `/etc/nfs.conf.d/local.conf` with the local modifications.
-
-If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please [file a bug for the nfs-utils package](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug).
-
-You can run the conversion tool manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
-
-If all goes well, as it should in most cases, the system will have `/etc/nfs.conf` with the defaults, and `/etc/nfs.conf.d/local.conf` with the changes. You can merge these two together manually, and then delete `local.conf`, or leave it as is. Just keep in mind that `/etc/nfs.conf` is not the whole story: always inspect `/etc/nfs.conf.d` as well, as it may contain files overriding the defaults.
-
-You can always run `nfsconf --dump` to check the final settings, as it merges together all configuration files and shows the resulting non-default settings.
 
 ## Restarting NFS services
 
@@ -304,6 +275,33 @@ And paste the following into the editor that will open:
 Or manually create the file `/etc/systemd/system/rpc-gssd.service.d/override.conf` and any needed directories up to it, with the contents above.
 
 After you restart the service with `systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
+
+## Upgrading from Ubuntu 20.04 ("Focal") and earlier
+
+Earlier Ubuntu releases used the traditional configuration mechanism for the NFS services via `/etc/defaults/` configuration files. These are `/etc/default/nfs-common` and `/etc/default/nfs/kernel-server`, and were basically used to adjust the command-line options given to each daemon.
+
+Each file has a small explanation about the available settings.
+
+```{warning}
+The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("Focal") and Ubuntu 18.04 LTS ("Bionic").
+In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```
+
+Ubuntu 22.04 LTS ("Jammy") and later have a new configuration file format for the NFS packages. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
+
+When upgrading from Ubuntu 20.04 ("Focal") and earlier, the following will happen:
+
+ * a default `/etc/nfs.conf` configuration file will be installed
+ * if the `/etc/default/nfs-*` files have been modified, a conversion script will run and create `/etc/nfs.conf.d/local.conf` with the local modifications.
+
+If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please [file a bug for the nfs-utils package](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug).
+
+The conversion tool can be run manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
+
+If all goes well, as it should in most cases, the system will have `/etc/nfs.conf` with the defaults, and `/etc/nfs.conf.d/local.conf` with the changes. You can merge these two together manually, and then delete `local.conf`, or leave it as is. Just keep in mind that `/etc/nfs.conf` is not the whole story: always inspect `/etc/nfs.conf.d` as well, as it may contain files overriding the defaults.
+
+You can always run `nfsconf --dump` to check the final settings, as it merges together all configuration files and shows the resulting non-default settings.
+
 
 
 ## References
