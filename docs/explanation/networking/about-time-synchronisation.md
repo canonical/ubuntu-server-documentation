@@ -44,11 +44,8 @@ On upgraded systems (from Ubuntu 25.04 or below) `systemd-timesyncd` might still
 
 - [ntp.org: home of the Network Time Protocol project](http://www.ntp.org/)
 - [pool.ntp.org: project of virtual cluster of timeservers](https://www.ntppool.org/en/)
-
-- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/latest/timedatectl.html)
-- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/latest/systemd-timesyncd.service.html)
-
+- {manpage}`timedatectl(1)`
+- {manpage}`systemd-timesyncd.service(8)`
 - [`chrony` FAQ](https://chrony-project.org/faq.html)
 - [Feeding `chrony` from GPSD](https://gpsd.gitlab.io/gpsd/gpsd-time-service-howto.html#_feeding_chrony_from_gpsd) 
-
 - Also see the [Ubuntu Time wiki page](https://help.ubuntu.com/community/UbuntuTime) for more information.
