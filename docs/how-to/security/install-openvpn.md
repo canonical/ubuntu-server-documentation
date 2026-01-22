@@ -347,11 +347,11 @@ And you can check on the client if it created a `tun0` interface:
 
 ```bash
 $ ip addr show dev tun0
-4: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
-    link/none 
-    inet 10.8.0.6 peer 10.8.0.5/32 scope global tun0
+6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none
+    inet 10.8.0.2/24 brd 10.8.0.255 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::5a94:ae12:8901:5a75/64 scope link stable-privacy 
+    inet6 fe80::3c08:9432:f898:d1c0/64 scope link stable-privacy proto kernel_ll 
        valid_lft forever preferred_lft forever
 ```
 
