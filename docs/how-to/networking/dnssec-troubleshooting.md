@@ -21,7 +21,7 @@ It helps to have some good known domains with broken and working DNSSEC availabl
 
 ## Logs
 
-By default, the BIND9 server will log certain DNSSEC failures, and the journal log should be the first place to check.
+By default, the {ref}`BIND9 server <install-dnssec>` will log certain DNSSEC failures, and the journal log should be the first place to check.
 
 For example, if we ask a BIND9 Validating Resolver for the IP address of the `www.dnssec-failed.org` name, we get a failure:
 
