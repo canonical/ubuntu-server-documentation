@@ -358,9 +358,9 @@ $ ip addr show dev tun0
 Check if you can ping the OpenVPN server:
 
 ```bash
-root@client:/etc/openvpn# ping 10.8.0.1
+$ ping 10.8.0.1 -c 1
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
-64 bytes from 10.8.0.1: icmp_req=1 ttl=64 time=0.920 ms
+64 bytes from 10.8.0.1: icmp_seq=1 ttl=64 time=0.335 ms
 ```
 
 ```{note}
