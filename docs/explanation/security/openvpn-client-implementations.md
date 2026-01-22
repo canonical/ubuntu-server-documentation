@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Explore different OpenVPN client implementations available for Ubuntu Server, including compatibility and configuration options."
+    description: "Explore different OpenVPN client implementations providing GUI options to Ubuntu and connectivity to OpenVPN from other Operating Systems."
 ---
 
 (openvpn-client-implementations)=
