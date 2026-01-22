@@ -80,30 +80,6 @@ All certificates and keys have been generated in subdirectories. Common practice
 cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.key /etc/openvpn/
 ```
 
-### Create client certificates
-
-The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client. 
-
-This can be done either on the server (as with the keys and certificates above) and then securely distributed to the client, or the client can generate and submit a request that is sent and signed by the server.
-
-To create the certificate, enter the following in a terminal as a root user:
-
-```bash
-./easyrsa gen-req myclient1 nopass
-./easyrsa sign-req client myclient1
-```
-
-If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-req` command.
-
-After this is done, in both cases you will need to copy the following files to the client using a secure method:
-
-- `pki/ca.crt`
-- `pki/issued/myclient1.crt`
-- `pki/private/myclient1.key`
-- `ta.key`
-
-Since the client certificates and keys are only required on the client machine, you can remove them from the server.
-
 ## Simple server configuration
 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
@@ -224,6 +200,30 @@ root@server:/etc/openvpn# ip addr show dev tun0
     inet6 fe80::b5ac:7829:f31e:32c5/64 scope link stable-privacy
        valid_lft forever preferred_lft forever
 ```
+
+### Create client certificates
+
+The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client. 
+
+This can be done either on the server (as with the keys and certificates above) and then securely distributed to the client, or the client can generate and submit a request that is sent and signed by the server.
+
+To create the certificate, enter the following in a terminal as a root user:
+
+```bash
+./easyrsa gen-req myclient1 nopass
+./easyrsa sign-req client myclient1
+```
+
+If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-req` command.
+
+After this is done, in both cases you will need to copy the following files to the client using a secure method:
+
+- `pki/ca.crt`
+- `pki/issued/myclient1.crt`
+- `pki/private/myclient1.key`
+- `ta.key`
+
+Since the client certificates and keys are only required on the client machine, you can remove them from the server.
 
 ## Simple client configuration
 
