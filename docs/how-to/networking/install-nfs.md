@@ -307,7 +307,3 @@ You can always run `nfsconf --dump` to check the final settings, as it merges to
 ## References
 
 * [Linux NFS wiki](https://linux-nfs.org/wiki/index.php/Main_Page)
-* [Linux NFS FAQ](https://nfs.sourceforge.net/)
-
-* [Ubuntu Wiki NFS How-to](https://help.ubuntu.com/community/SettingUpNFSHowTo)
-* [Ubuntu Wiki NFSv4 How-to](https://help.ubuntu.com/community/NFSv4Howto)
