@@ -73,13 +73,19 @@ For DNSSEC troubleshooting purposes, we are interested in the following features
 
 For example, let's query the local systemd-resolved DNS stub resolver (running at **127.0.0.53**) for the *isc.org* type *A* record, and request DNSSEC data:
 
+```{note}
+We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC capable upstream servers (e.g. Cloudflare's `1.1.1.1`, in case your upstream DNS server cannot properly handle it) in systemd-resolved, as shown below. After our experiments, we might want to restore the default settings, using: `resolvectl revert eth0`
+```
+
+    $ resolvectl dnssec eth0 true
+    $ resolvectl dns eth0 1.1.1.1
     $ dig @127.0.0.53 -t A +dnssec +multiline isc.org
 
     ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline isc.org
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 13164
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23376
     ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
 
     ;; OPT PSEUDOSECTION:
@@ -88,18 +94,18 @@ For example, let's query the local systemd-resolved DNS stub resolver (running a
     ;isc.org.		IN A
 
     ;; ANSWER SECTION:
-    isc.org.		300 IN A 151.101.130.217
-    isc.org.		300 IN A 151.101.66.217
-    isc.org.		300 IN A 151.101.2.217
-    isc.org.		300 IN A 151.101.194.217
-    isc.org.		300 IN RRSIG A 13 2 300 (
-    				20250830114017 20250816111944 27566 isc.org.
-    				u6hKKZGX3DUD6JJAjHsGog+nfR9bz5qp2g1h3qibZI+A
-    				qWH05fWJJjoSMzcnOgzIO1299zPIZd0xdMAh1wbkjw== )
+    isc.org.		299 IN A 151.101.2.217
+    isc.org.		299 IN A 151.101.66.217
+    isc.org.		299 IN A 151.101.130.217
+    isc.org.		299 IN A 151.101.194.217
+    isc.org.		299 IN RRSIG A 13 2 300 (
+                    20260130043603 20260116034316 27566 isc.org.
+                    kp+MQSlXw7xOqU072l4g3/Fq815ucOv5rN77kxizdxnL
+                    EMwYbgtcvI+AgDIwhm9qgLhc2GO6pUUF+puJCokxNA== )
 
-    ;; Query time: 83 msec
+    ;; Query time: 26 msec
     ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Mon Aug 25 13:28:33 CEST 2025
+    ;; WHEN: Thu Jan 22 13:56:58 UTC 2026
     ;; MSG SIZE  rcvd: 203
 
 Let's unpack this answer for the important troubleshooting parts:
@@ -116,34 +122,31 @@ If we repeat this query with a domain that we know fails DNSSEC validation, we g
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 8314
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 2
+    ;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 2028
+    ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
 
     ;; OPT PSEUDOSECTION:
     ; EDNS: version: 0, flags: do; udp: 65494
+    ; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
     ;; QUESTION SECTION:
     ;dnssec-failed.org.	IN A
 
-    ;; ANSWER SECTION:
-    dnssec-failed.org.	300 IN A 96.99.227.255
-
-    ;; ADDITIONAL SECTION:
-    dnssec-failed.org.	300 IN RRSIG A 5 2 300 (
-    				20250904145125 20250818144625 44973 dnssec-failed.org.
-    				UF75l9JkH/AZ9ApNF86stA81B+L36j0F/L8ENvMknsfK
-    				Fwll6cLEJWBalKeyhK7p3U/Lqet9L3Oti8H7RudmgZ4v
-    				kdYMDrb9mqnXscY1R/kmSrtu3gOO1ob+khKinyAVwKLb
-    				R0CVZnJLSb7c++BI9fRJjE2caZ+2RkHwkLATR28= )
-
-    ;; Query time: 138 msec
+    ;; Query time: 219 msec
     ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Mon Aug 25 13:37:11 CEST 2025
-    ;; MSG SIZE  rcvd: 239
+    ;; WHEN: Thu Jan 22 13:57:33 UTC 2026
+    ;; MSG SIZE  rcvd: 103
 
 This time:
 
  * There is no `ad` flag set in the answer.
  * The status of the query is a generic `SERVFAIL`, and zero answers were provided.
+ * An error logged in `journalctl`
+
+```
+$ journalctl -u systemd-resolved.service -f
+(...)
+systemd-resolved[9203]: [🡕] DNSSEC validation failed for question dnssec-failed.org IN A: no-signature
+```
 
 We can tell the local stub resolver (systemd-resolved running at `@127.0.0.53` address) that we don't want it to perform DNSSEC validation. We do that by setting the `+cd` (check disabled) flag. Then things change in our answer:
 
@@ -153,28 +156,28 @@ We can tell the local stub resolver (systemd-resolved running at `@127.0.0.53` a
     ; (1 server found)
     ;; global options: +cmd
     ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 55352
+    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32064
     ;; flags: qr rd ra cd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
 
     ;; OPT PSEUDOSECTION:
     ; EDNS: version: 0, flags: do; udp: 65494
-    ; EDE: 9 (DNSKEY Missing)
+    ; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
     ;; QUESTION SECTION:
     ;dnssec-failed.org.	IN A
 
     ;; ANSWER SECTION:
-    dnssec-failed.org.	181 IN A 96.99.227.255
-    dnssec-failed.org.	181 IN RRSIG A 5 2 300 (
-    				20250904145125 20250818144625 44973 dnssec-failed.org.
-    				UF75l9JkH/AZ9ApNF86stA81B+L36j0F/L8ENvMknsfK
-    				Fwll6cLEJWBalKeyhK7p3U/Lqet9L3Oti8H7RudmgZ4v
-    				kdYMDrb9mqnXscY1R/kmSrtu3gOO1ob+khKinyAVwKLb
-    				R0CVZnJLSb7c++BI9fRJjE2caZ+2RkHwkLATR28= )
+    dnssec-failed.org.	299 IN A 96.99.227.255
+    dnssec-failed.org.	299 IN RRSIG A 5 2 300 (
+                    20260204145120 20260118144620 44973 dnssec-failed.org.
+                    U8NkuyOJBdX6vA/f+o4DclA0x5YrCVOpMCGyCnXqaTTv
+                    8+QhDuwRGsAhXYtAZTx4k6q7B2NbqPFsavHKbbsEY46J
+                    SLpA1MIYydHTnUPHnu+foH4Dq/QctoXbUejMySdyZwPp
+                    MU5hm5IkwN8LgKjoE0YL89mr4ueu01DtESG6P+I= )
 
-    ;; Query time: 3 msec
+    ;; Query time: 119 msec
     ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Mon Aug 25 13:39:09 CEST 2025
-    ;; MSG SIZE  rcvd: 245
+    ;; WHEN: Thu Jan 22 13:58:49 UTC 2026
+    ;; MSG SIZE  rcvd: 296
 
 Looks like we have some sort of answer, but:
 
@@ -226,11 +229,16 @@ Given that above we used the `+cd` flag, this means that the validation was done
 
 The local stub resolver *systemd-resolved* can perform DNSSEC validation locally using its high-level `resolvectl` tool. The local cache and state about DNS servers should be reset in systemd-resolved, to get reliable results.
 
+```{note}
+We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC capable upstream servers (e.g. Cloudflare's `1.1.1.1`, in case your upstream DNS server cannot properly handle it) in systemd-resolved, as shown below. After our experiments, we might want to restore the default settings, using: `resolvectl revert eth0`
+```
+
 Flush systemd-resolved caches & state and confirm DNSSEC is enabled:
 
     $ sudo resolvectl flush-caches
     $ sudo resolvectl reset-server-features
     $ sudo resolvectl dnssec eth0 yes
+    $ sudo resolvectl dns eth0 1.1.1.1
     $ resolvectl dnssec
     Global: no
     Link 44 (eth0): yes
