@@ -152,7 +152,7 @@ First, install the `krb5-user` package:
 
 Then, with an admin principal, let's create a key for the NFS server:
 
-    $ sudo kadmin -p ubuntu/admin -q "addprinc -randkey nfs/nfs-server.vms"
+    kadmin -p ubuntu/admin -q "addprinc -randkey nfs/nfs-server.vms"
 
 And extract the key into the local keytab:
 
@@ -176,6 +176,10 @@ Now install the NFS server:
     $ sudo apt install nfs-kernel-server
 
 This will already automatically start the Kerberos-related nfs services, because of the presence of `/etc/krb5.keytab`.
+
+```{note}
+If enabling Kerberos on an already existing NFS server, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started: `sudo systemctl restart nfs-server`
+```
 
 Now populate `/etc/exports`, restricting the exports to krb5 authentication. For example, exporting `/storage` using `krb5p`:
 
