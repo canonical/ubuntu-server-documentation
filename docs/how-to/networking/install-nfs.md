@@ -110,15 +110,15 @@ Since NFS is comprised of several individual services, it can be difficult to de
 
 The tables below summarize all available services, which "meta" service they are linked to, and which configuration file each service uses.
 
-| Service       | `nfs-utils.service` | `nfs-server.service` | config file (22.04)       | config file (< 22.04) `/etc/default/nfs-*` |
-| ------------- | ------------------- | -------------------- | ------------------------- | ------------------------------------------ |
-| `nfs-blkmap`  | PartOf              |                      | `nfs.conf`                |                                            |
-| `nfs-mountd`  |                     | BindsTo              | `nfs.conf`                | `nfs-kernel-server`                        |
-| `nfsdcld`     |                     |                      |                           |                                            |
-| `nfs-idmapd`  |                     | BindsTo              | `nfs.conf`, `idmapd.conf` | `idmapd.conf`                              |
-| `rpc-gssd`    | PartOf              |                      | `nfs.conf`                |                                            |
-| `rpc-statd`   | PartOf              |                      | `nfs.conf`                | `nfs-common`                               |
-| `rpc-svcgssd` | PartOf              | BindsTo              | `nfs.conf`                | `nfs-kernel-server`                        |
+| Service       | `nfs-utils.service` | `nfs-server.service` | config file               |
+| ------------- | ------------------- | -------------------- | ------------------------- |
+| `nfs-blkmap`  | PartOf              |                      | `nfs.conf`                |
+| `nfs-mountd`  |                     | BindsTo              | `nfs.conf`                |
+| `nfsdcld`     |                     |                      |                           |
+| `nfs-idmapd`  |                     | BindsTo              | `nfs.conf`, `idmapd.conf` |
+| `rpc-gssd`    | PartOf              |                      | `nfs.conf`                |
+| `rpc-statd`   | PartOf              |                      | `nfs.conf`                |
+| `rpc-svcgssd` | PartOf              | BindsTo              | `nfs.conf`                |
 
 For example, `systemctl restart nfs-server.service` will restart `nfs-mountd`, `nfs-idmapd` and `rpc-svcgssd` (if running). On the other hand, restarting `nfs-utils.service` will restart `nfs-blkmap`, `rpc-gssd`, `rpc-statd` and `rpc-svcgssd`.
 
