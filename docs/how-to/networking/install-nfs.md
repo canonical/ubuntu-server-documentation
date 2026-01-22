@@ -225,7 +225,7 @@ And you should be able to do your first NFS Kerberos mount:
 
     sudo mount nfs-server:/storage /mnt
 
-If you are using a machine credential, then the above mount will work without having a Kerberos ticket, i.e., `klist` will show no tickets:
+This setup is using a so called *machine credential*, which means the above mount command works without having a Kerberos ticket. The `klist` will show no tickets:
 
     # mount nfs-server:/storage /mnt
     # ls -l /mnt/*
@@ -259,7 +259,7 @@ And now we have not only the TGT, but also a ticket for the NFS service:
             renew until 04/06/22 17:48:48
             Ticket server: nfs/nfs-server.vms@VMS
 
-One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd`s `-n` option. From `rpc.gssd(8)`:
+One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd's` `-n` option. From {manpage}`rpc.gssd(8)`:
 
 - `-n`: when specified, UID 0 is forced to obtain user credentials which are used instead of the local system's machine credentials.
 
@@ -269,24 +269,12 @@ When this option is enabled and `rpc.gssd` restarted, then even the `root` user 
 Note that this prevents automatic NFS mounts via `/etc/fstab`, unless a Kerberos ticket is obtained before.
 ```
 
-In Ubuntu 22.04 LTS ("jammy"), this option is controlled in `/etc/nfs.conf` in the `[gssd]` section:
+This option is controlled in `/etc/nfs.conf` in the `[gssd]` section:
 
     [gssd]
     use-machine-creds=0
 
-In older Ubuntu releases, the command line options for the `rpc.gssd` daemon are not exposed in `/etc/default/nfs-common`, therefore a systemd override file needs to be created. You can either run:
-
-    $ sudo systemctl edit rpc-gssd.service
-
-And paste the following into the editor that will open:
-
-    [Service]
-    ExecStart=
-    ExecStart=/usr/sbin/rpc.gssd $GSSDARGS -n
-
-Or manually create the file `/etc/systemd/system/rpc-gssd.service.d/override.conf` and any needed directories up to it, with the contents above.
-
-After you restart the service with `systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
+After you restart the service with `sudo systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
 
 ## Upgrading from Ubuntu 20.04 ("Focal") and earlier
 
