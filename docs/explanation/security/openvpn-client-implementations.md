@@ -7,6 +7,9 @@ myst:
 (openvpn-client-implementations)=
 # OpenVPN client implementations
 
+Ubuntu Server can be the platform for an {ref}`OpenVPN server<install-openvpn>`,
+but clients might need a GUI for Desktop usage or need to operate from other
+operating systems.
 
 ## Linux Network-Manager GUI for OpenVPN
 
