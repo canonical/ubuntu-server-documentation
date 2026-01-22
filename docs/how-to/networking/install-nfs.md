@@ -203,19 +203,19 @@ The NFS client has a similar set of steps. First we will prepare the client's ke
 
 To allow the `root` user to mount NFS shares via Kerberos without a password, we have to create a host key for the NFS client:
 
-    sudo kadmin -p ubuntu/admin -q "addprinc -randkey host/nfs-client.vms"
+    kadmin -p ubuntu/admin -q "addprinc -randkey host/nfs-client.vms"
 
 And extract it:
 
-    $ sudo kadmin -p ubuntu/admin -q "ktadd host/nfs-client.vms"
+    sudo kadmin -p ubuntu/admin -q "ktadd host/nfs-client.vms"
 
 Now install the NFS client package:
 
-    $ sudo apt install nfs-common
+    sudo apt install nfs-common
 
 And you should be able to do your first NFS Kerberos mount:
 
-    $ sudo mount nfs-server:/storage /mnt
+    sudo mount nfs-server:/storage /mnt
 
 If you are using a machine credential, then the above mount will work without having a Kerberos ticket, i.e., `klist` will show no tickets:
 
