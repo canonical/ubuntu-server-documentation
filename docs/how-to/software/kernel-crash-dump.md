@@ -55,13 +55,13 @@ During the installation, you will be prompted with the following dialog:
 
 ## `kdump` is enabled by default where applicable
 
-On manual install the interactive question will define if it is enabled or not
-and therefore depend on the users choice, but in cases when it is automatically
+On manual installations, the interactive question will define if it is enabled or not
+and therefore depends on the users choice. In cases where it is automatically
 preinstalled there is a balance to strike.
 The tool wants to be helpful by default, because when the crash happens it is
 too late to enable crash dump functionality.
-But at the same time it needs to reserve memory for the crash kernel to operate
-and that might have too much impact to very small systems as well as consume
+At the same time, it needs to reserve memory for the crash kernel to operate,
+and that might have too much impact on very small systems as well as consume
 a lot of memory on systems with many devices.
 Therefore starting in Oracular Oriole (24.10), the kernel crash dump facility
 will be enabled by default during standard Ubuntu Desktop or Ubuntu Server
@@ -100,7 +100,7 @@ a reboot will be required in order to reconsider the `crashkernel= boot` paramet
 
 ## Verify if kdump is ready
 
-Upon reboot, the crashkernel memory will be reserved and the `kdump-tools` service will be enabled and active.
+Upon reboot, the `crashkernel` memory will be reserved and the `kdump-tools` service will be enabled and active.
 
 If you enable `kdump-tools` after a reboot, you will only need to issue the `kdump-config load` command to activate the `kdump` mechanism.
 
@@ -127,12 +127,12 @@ This tells us that we will find core dumps in `/var/crash`.
 
 ## Reserving Memory
 
-To operate kdump needs to pre-allocate a dedicated, isolated region of physical
+To operate, `kdump` needs to pre-allocate a dedicated, isolated region of physical
 memory that remains untouched by the main operating system, ensuring a safe
 haven for the crash recovery process. When a kernel panic occurs, the running
 system is considered unstable and its memory potentially corrupted, making it
 unsafe to trust for saving diagnostic data. By reserving this memory at boot
-time, kdump guarantees that a second, small "capture kernel" can load into this
+time, `kdump` guarantees that a second, small "capture kernel" can load into this
 pristine space without relying on the broken kernel's resources. This isolation
 allows the capture kernel to reliably access the frozen, crashed memory and
 write it to disk for analysis, functioning essentially like a fresh operating
@@ -160,7 +160,7 @@ crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
     range=start-[end] 'start' is inclusive and 'end' is exclusive.
 ```
 
-So for the `crashkernel` parameter found in the `/proc/cmdline` example above we would have :
+So for the `crashkernel` parameter found in the `/proc/cmdline` example above we would have:
 
 ```text
 crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
@@ -191,7 +191,7 @@ Which shows:
 This example output is for a system with 3GB memory which correctly maps to 320 MB.
 
 The defaults provided by the packaging try to be conservative to not waste too much.
-But in some rare cases that might break when the dump process fails to initialized.
+But in some rare cases that might break when the dump process fails to initialize.
 Only when a system is live can an estimation of the required memory be provided.
 `kdump-config show` includes a line like `crashkernel suggested size: 417M`
 based on what the current kernel consumed at boot time.
@@ -313,7 +313,7 @@ current state:    ready to kdump
 
 ## Troubleshooting
 
-As seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration :
+As seen previously, the `kdump-config show` command displays the current status of the `kdump-tools` configuration:
 But in a system without sufficient memory (here 1 GB) it would not reserve memory,
 due to that initialization would fail.
 
@@ -324,7 +324,7 @@ value to check is `current state`.
 kdump-config show
 ```
 
-Which in this bad case would report
+Which in this bad case would report:
 
 ```text
 DUMP_MODE:                kdump
@@ -343,7 +343,7 @@ kexec command:
 ```
 
 Such allocation errors can also be seen in the journal output as well as the
-service status of kdump-tools:
+service status of `kdump-tools`:
 
 ```bash
 systemctl status kdump-tools
@@ -376,10 +376,10 @@ See `/usr/lib/sysctl.d/55-magic-sysrq.conf` for a detailed description of the op
 and their default values.
 
 ```{note}
-On 24.10 an earlier the location of this file was at `/etc/sysctl.d/10-magic-sysrq.conf`
+On 24.10 and earlier the location of this file was at `/etc/sysctl.d/10-magic-sysrq.conf`
 ```
 
-If disabled on your system, enable sysrq dump:
+If disabled on your system, enable `sysrq` dump:
 
 ```bash
 sudo sysctl -w kernel.sysrq=1
@@ -427,20 +427,20 @@ Once completed, the system will reboot to its normal operational mode. You will 
 ll /var/crash
 ```
 
-Showing
+Showing:
 
 ```
 drwxr-xr-x  2 root root  4096 Jan 21 07:31 202601210724/
 -rw-r--r--  1 root root 28838 Jan 21 07:24 linux-image-6.18.0-8-generic-202601210724.crash
 ```
 
-And in this example
+And in this example:
 
 ```bash
 ll /var/crash/202601210724
 ```
 
-returning
+returning:
 
 ```
 -rw------- 1 root root    82264 Jan 21 07:24 dmesg.202601210724
@@ -448,9 +448,9 @@ returning
 
 ```
 
-## Analyznig a crash dump
+## Analyzing a crash dump
 
-To use a crash dump for debugging the uncompressed and unstripped kernel
+To use a crash dump for debugging, the un-compressed and un-stripped kernel
 information with debug symbols are needed. To get access to those please
 follow {ref}`get-debug-symbol-packages` to make the repository and associated
 keys known to your system.
@@ -462,11 +462,11 @@ be copied away for analysis. But the examples are simplified to use e.g.
 different system these might need to be adapted.
 ```
 
-Then install the debug symbols for your kernel, assuming it is the same that
-runs currently that can be done with:
+Then install the debug symbols for your kernel; assuming it is the same that
+runs currently, that can be done with:
 
 ```bash
-apt-get install linux-image-uname -r-dbgsym
+apt-get install linux-image-$(uname -r)-dbgsym
 ```
 
 Be warned, a kernel is a large binary and the debug symbols are much larger.
@@ -474,7 +474,7 @@ This will take a while to load and quite some space on disk. In the example
 case that will fetch `linux-image-unsigned-6.18.0-8-generic-dbgsym` which
 will make all the debug info available in `/usr/lib/debug/lib/modules/6.18.0-8-generic`.
 
-With all that ready the crash dump can be opened like
+With all that ready the crash dump can be opened:
 
 ```bash
 crash /usr/lib/debug/boot/vmlinux-6.18.0-8-generic /var/crash/202601210724/dump.202601210724

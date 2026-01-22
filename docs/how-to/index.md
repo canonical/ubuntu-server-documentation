@@ -171,7 +171,7 @@ observability
 ## Debugging
 
 {ref}`These debugging pages <how-to-debugging>` are for readers interested in
-analyzing the state of a Ubuntu system.
+analyzing the state of their Ubuntu system.
 
 ```{toctree}
 :hidden:
