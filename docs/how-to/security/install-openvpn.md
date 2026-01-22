@@ -378,7 +378,7 @@ ip route show dev tun0
 
 If the above didn't work for you, check the following:
 
-- Check your `journal -xe`.
+- Check your `journal -xe`, also consider limiting it to the unit with `-u` as done in the examples shown above.
 - Check that you have specified the key filenames correctly in the client and server `conf` files.
 - Can the client connect to the server machine? Maybe a firewall is blocking access? Check the journal on the server.
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
