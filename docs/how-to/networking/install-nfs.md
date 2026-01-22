@@ -80,6 +80,18 @@ The general syntax for the line in `/etc/fstab` file is as follows:
 
     example.hostname.com:/srv /opt/example nfs rsize=8192,wsize=8192,timeo=14,intr
 
+After modifying `/etc/fstab`, systemd should be told about the change, otherwise you will get this warning when trying to mount:
+```
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
+```
+
+Therefore, issue the command:
+
+```
+sudo systemctl daemon-reload
+```
+
 ## Advanced Configuration
 
 NFS is comprised of several services, both on the server and the client. Each one of these services can have its own default configuration, and depending on the Ubuntu Server release you have installed, this configuration is done in different files, and with a different syntax.
