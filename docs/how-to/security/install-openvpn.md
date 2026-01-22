@@ -99,6 +99,8 @@ After this is done, in both cases you will need to copy the following files to t
 
 - `pki/ca.crt`
 - `pki/issued/myclient1.crt`
+- `pki/private/myclient1.key`
+- `ta.key`
 
 Since the client certificates and keys are only required on the client machine, you can remove them from the server.
 
