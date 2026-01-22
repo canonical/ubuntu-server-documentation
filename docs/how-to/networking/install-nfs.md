@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Set up NFS on Ubuntu to share directories and files over a network, enabling remote access to data and reducing local disk space needs.
+    description: Set up NFS on Ubuntu to share files over a network, including optional Kerberos authentication.
 ---
 
 (install-nfs)=
