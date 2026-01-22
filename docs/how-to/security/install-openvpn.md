@@ -370,12 +370,8 @@ The OpenVPN server always uses the first usable IP address in the client network
 Check out your routes:
 
 ```bash
-$ ip route 
-default via 192.168.122.1 dev ens3 proto dhcp src 192.168.122.114 metric 100 
-10.8.0.1 via 10.8.0.5 dev tun0 
-10.8.0.5 dev tun0 proto kernel scope link src 10.8.0.6 
-192.168.122.0/24 dev ens3 proto kernel scope link src 192.168.122.114 
-192.168.122.1 dev ens3 proto dhcp scope link src 192.168.122.114 metric 100
+ip route show dev tun0
+10.8.0.0/24 proto kernel scope link src 10.8.0.2
 ```
 
 ## First troubleshooting
