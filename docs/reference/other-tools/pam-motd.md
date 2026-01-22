@@ -47,7 +47,7 @@ The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only 
   * landscape info about the system: `50-landscape-sysinfo`
   * fwupd presents potential firmware updates: `85-fwupd`
   * update-notifier-common reports about available updates: `90-updates-available`
-  * ubuntu-pro-client mentioned expiring pro subscriptions: `91-contract-ua-esm-status`
+  * [ubuntu-pro-client](https://documentation.ubuntu.com/pro-client/en/latest/explanations/motd_messages/) mentioned expiring pro subscriptions: `91-contract-ua-esm-status`
   * ubuntu-release-upgrader-core suggests upgrades: `91-release-upgrade`
   * unattended-upgrades informs if updates could not be installed automatically: `92-unattended-upgrades`
   * update-notifier-common notifies if the HWE kernel might go end of life: `95-hwe-eol`
