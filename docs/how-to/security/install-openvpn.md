@@ -130,11 +130,11 @@ echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/50-enable-ipv4-forwardin
 Then apply this file through `sysctl`:
 
 ```bash
-sudo sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
+sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
 This is the minimum you need to configure to get a working OpenVPN server.
-You can consider to study and tweak all the default settings we got from the sample `server.conf` file.
+You can consider studying and tweaking all the default settings we got from the sample `server.conf` file.
 Now you can start the server.
 
 ```bash
@@ -362,7 +362,7 @@ And you can check on the client if it created a `tun0` interface:
 ip addr show dev tun0
 ```
 
-Showing the tun0 device on the client:
+Showing the `tun0` device on the client:
 
 ```text
 6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
@@ -461,7 +461,7 @@ The next step on the server is to configure the Ethernet device for promiscuous 
 sudo apt update && sudo apt install networkd-dispatcher
 ```
 
-Then add the following contents to a file like `/etc/networkd-dispatcher/dormant.d/promisc_bridge`
+Then add the following contents to a file like `/etc/networkd-dispatcher/dormant.d/promisc_bridge`:
 
 ```sh
 #!/bin/sh
@@ -521,7 +521,7 @@ OpenVPN uses the OpenSSL 3 Default Provider on Ubuntu. However, you can include 
 
 You can still use legacy algorithms in Ubuntu, this is not recommended but might
 be required to support older clients not yet compatible with the more secure new algorithms.
-Enabling those is done by explicitly adding them through the `legacy` provider alongside `default`
+Enabling those is done by explicitly adding them through the `legacy` provider alongside `default`.
 To do this, add the following line to your OpenVPN configuration.
 
 ```text
