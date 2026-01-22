@@ -433,8 +433,8 @@ The next step on the server is to configure the Ethernet device for promiscuous 
 ```bash
 sudo apt update
 sudo apt install networkd-dispatcher
-sudo touch /usr/lib/networkd-dispatcher/dormant.d/promisc_bridge
-sudo chmod +x /usr/lib/networkd-dispatcher/dormant.d/promisc_bridge
+sudo touch /etc/networkd-dispatcher/dormant.d/promisc_bridge
+sudo chmod +x /etc/networkd-dispatcher/dormant.d/promisc_bridge
 ```
 
 Then add the following contents:
