@@ -203,7 +203,7 @@ root@server:/etc/openvpn# ip addr show dev tun0
 
 ### Create client certificates
 
-The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client. 
+The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client.
 
 This can be done either on the server (as with the keys and certificates above) and then securely distributed to the client, or the client can generate and submit a request that is sent and signed by the server.
 
@@ -265,29 +265,52 @@ You can check the status as you did on the server:
 
 ```bash
 $ sudo systemctl status openvpn@client
-openvpn@client.service - OpenVPN connection to client
-   Loaded: loaded (/lib/systemd/system/openvpn@.service; disabled; vendor preset: enabled)
-   Active: active (running) since Thu 2019-10-24 11:42:35 UTC; 6s ago
-     Docs: man:openvpn(8)
-           https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
-           https://community.openvpn.net/openvpn/wiki/HOWTO
- Main PID: 3616 (openvpn)
-   Status: "Initialization Sequence Completed"
-    Tasks: 1 (limit: 533)
-   Memory: 1.3M
-   CGroup: /system.slice/system-openvpn.slice/openvpn@client.service
-           └─3616 /usr/sbin/openvpn --daemon ovpn-client --status /run/openvpn/client.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/client.conf --writepid /run/openvp
+● openvpn@client.service - OpenVPN connection to client
+     Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
+     Active: active (running) since Wed 2026-01-21 10:54:27 UTC; 55s ago
+ Invocation: f65eae29fc8e4403bd06236309a1db2c
+       Docs: man:openvpn(8)
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 11361 (openvpn)
+     Status: "Initialization Sequence Completed"
+      Tasks: 1 (limit: 10)
+     Memory: 1.9M (peak: 2.1M)
+        CPU: 22ms
+     CGroup: /system.slice/system-openvpn.slice/openvpn@client.service
+             └─11361 /usr/sbin/openvpn --daemon ovpn-client --status /run/openvpn/client.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/client.conf --writepid /run/openvpn/client.pid
 
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: ROUTE_GATEWAY 192.168.122.1/255.255.255.0 IFACE=ens3 HWADDR=52:54:00:3c:5a:88
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: TUN/TAP device tun0 opened
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: TUN/TAP TX queue length set to 100
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip link set dev tun0 up mtu 1500
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip addr add dev tun0 local 10.8.0.6 peer 10.8.0.5
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip route add 10.8.0.1/32 via 10.8.0.5
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Initialization Sequence Completed
+Jan 21 10:54:27 r-vm-1 systemd[1]: Starting openvpn@client.service - OpenVPN connection to client...
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Note: --cipher is not set. OpenVPN versions before 2.5 defaulted to BF-CBC as fallback when cipher negotiation failed in this case. If you need this fallback please add '--data-ciphers-fallback BF-CBC' to your configuration and/or add BF-CBC to --data-ciphers.
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Note: Kernel support for ovpn-dco missing, disabling data channel offload.
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OpenVPN 2.6.15 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: library versions: OpenSSL 3.5.3 16 Sep 2025, LZO 2.10
+Jan 21 10:54:27 r-vm-1 systemd[1]: Started openvpn@client.service - OpenVPN connection to client.
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: DCO version: N/A
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TCP/UDP: Preserving recently used remote address: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: UDPv4 link local: (not bound)
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: UDPv4 link remote: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: Initial packet from [AF_INET]10.185.198.84:1194, sid=46d7b1e7 da534d2d
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY OK: depth=1, CN=r-vm-2
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY KU OK
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Validating certificate extended key usage
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: ++ Certificate has EKU (str) TLS Web Server Authentication, expects TLS Web Server Authentication
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY EKU OK
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: VERIFY OK: depth=0, CN=r-vm-2
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: [r-vm-2] Peer Connection Initiated with [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TLS: tls_multi_process: initial untrusted session promoted to trusted
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: PUSH: Received control message: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 1,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500'
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: --ifconfig/up options modified
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: route-related options modified
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: OPTIONS IMPORT: tun-mtu set to 1500
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: TUN/TAP device tun0 opened
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_iface_mtu_set: mtu 1500 for tun0
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_iface_up: set tun0 up
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: net_addr_v4_add: 10.8.0.2/24 dev tun0
+Jan 21 10:54:27 r-vm-1 ovpn-client[11361]: Initialization Sequence Completed
 ```
 
 On the server log, an incoming connection looks like the following (you can see client name and source address as well as success/failure messages):
