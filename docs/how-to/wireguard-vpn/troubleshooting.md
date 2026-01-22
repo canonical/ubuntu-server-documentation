@@ -45,7 +45,45 @@ peer: ZliZ1hlarZqvfxPMyME2ECtXDk611NB7uzLAD4McpgI=
 
 ## Kernel debug messages
 
-WireGuard is also silent when it comes to logging. Being (essentially) a kernel module, we need to explicitly enable verbose logging of its module. This is done with the following command:
+WireGuard is also rather silent when it comes to logging. Being (essentially) a
+kernel module, we need to explicitly enable verbose logging of its module.
+
+:::{note}
+To be able to use the commands outlined below {manpage}`kernel_lockdown(7)`
+needs to be disabled. That is because the debug interfaces used are considered
+a way to tamper with the integrity of the kernel.
+
+Lockdown is enabled by default in secure boot mode.
+Check the status via:
+
+```bash
+cat /sys/kernel/security/lockdown
+```
+
+Which shows this as enabled:
+
+```text
+none [integrity] confidentiality
+```
+
+Or that when disabled
+
+```text
+[none] integrity confidentiality
+```
+
+
+To disable it either disable secure boot in bios or your virtualization platform.
+
+If that is impossible, consider not using the dynamic module debug control
+shown below, but instead using a kernel boot parameter `wireguard.dyndbg=+p`
+which has the drawback that it needs a reboot to enable/disable it.
+
+Before 20.04 [Kernel Lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) was not yet present, therefore such systemd can skip this step.
+:::
+
+
+This is done with the following command:
 
 ```bash
 echo "module wireguard +p" | sudo tee /sys/kernel/debug/dynamic_debug/control
