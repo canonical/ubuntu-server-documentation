@@ -93,7 +93,7 @@ To create the certificate, enter the following in a terminal as a root user:
 ./easyrsa sign-req client myclient1
 ```
 
-If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-eq` command.
+If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-req` command.
 
 After this is done, in both cases you will need to copy the following files to the client using a secure method:
 
