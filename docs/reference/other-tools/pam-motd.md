@@ -7,21 +7,29 @@ myst:
 (pam-motd)=
 # pam_motd
 
+When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD).
 
-When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD). This information is obtained and displayed using a couple of packages:
+## Packages adding to MOTD
 
-  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://landscape.canonical.com/) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
-    
-    ``` 
-    
-          System load:  0.0               Processes:           76
-          Usage of /:   30.2% of 3.11GB   Users logged in:     1
-          Memory usage: 20%               IP address for eth0: 10.153.107.115
-          Swap usage:   0%
-    
-          Graph this data and manage this system at https://landscape.canonical.com/
+There are various packages that add to the MOTD by placing configuration in `/etc/update-motd.d/`.
+
+### Landscape-sysinfo
+
+Here one example that is about system information obtained and displayed due to landscape:
+
+  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://ubuntu.com/landscape) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
+
+    ```text
+    System load:             0.0
+    Usage of /:              25.7% of 8.55GB
+    Memory usage:            31%
+    Swap usage:              0%
+    Processes:               125
+    Users logged in:         0
+    IPv4 address for enp5s0: 10.185.198.41
+    IPv6 address for enp5s0: fd42:50cb:3a48:1f2c:216:3eff:fe27:c18a
     ```
-    
+
     ```{note}
     You can run `landscape-sysinfo` manually at any time.
     ```
