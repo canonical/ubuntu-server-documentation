@@ -144,19 +144,19 @@ Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-
 sudo openvpn --genkey secret ta.key
 ```
 
-Edit `/etc/sysctl.conf` and uncomment the following line to enable IP forwarding:
+Add a config file to `/etc/sysctl.conf.d` to enable IP forwarding:
 
 ```
-#net.ipv4.ip_forward=1
+echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
-Then reload `sysctl`:
+Then apply this file through `sysctl`:
 
 ```bash
-sudo sysctl -p /etc/sysctl.conf
+sudo sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
-This is the minimum you need to configure to get a working OpenVPN server. You can use all the default settings in the sample `server.conf` file. Now you can start the server. 
+This is the minimum you need to configure to get a working OpenVPN server. You can use all the default settings in the sample `server.conf` file. Now you can start the server.
 
 ```bash
 $ sudo systemctl start openvpn@myserver
