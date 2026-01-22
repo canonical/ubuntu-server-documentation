@@ -61,9 +61,11 @@ denylist
 dev
 disambiguates
 discoverability
+dmesg
 dnsmasq
 dockerfiles
 DPDK's
+dpkg
 ELinks
 enablement
 Engenio
@@ -75,6 +77,10 @@ Fileset
 fileset
 FQDN's
 Freenode
+fsck
+fwupd
+gcplogs
+gcrypt
 GDB's
 GIDs
 Gitolite
@@ -170,6 +176,7 @@ NVSwitch
 O'Reilly
 O'Reilly's
 OTPs
+overlayroot
 parmfile
 parmfiles
 passcodes
@@ -230,6 +237,7 @@ Subiquity
 subnetwork
 substring
 subvolume
+sudo
 sysctls
 syslog
 systemctl
@@ -246,6 +254,7 @@ tunables
 Tunables
 Tunnelblick
 UEFI's
+ufw
 UIDs
 UIs
 uncomment
@@ -259,6 +268,7 @@ untrusted
 URIs
 usermode
 userspace
+usr
 UUIDs
 UVtool
 Valgrind

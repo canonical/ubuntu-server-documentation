@@ -1,27 +1,35 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for pam_motd, the PAM module that generates message-of-the-day on Ubuntu Server login."
+    description: "Reference documentation for pam_motd, the PAM infrastructure that generates and displays message-of-the-day on login at an Ubuntu Server."
 ---
 
 (pam-motd)=
 # pam_motd
 
+When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD).
 
-When logging into an Ubuntu server you may have noticed the informative Message Of The Day (MOTD). This information is obtained and displayed using a couple of packages:
+## Packages adding to MOTD
 
-  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://landscape.canonical.com/) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
-    
-    ``` 
-    
-          System load:  0.0               Processes:           76
-          Usage of /:   30.2% of 3.11GB   Users logged in:     1
-          Memory usage: 20%               IP address for eth0: 10.153.107.115
-          Swap usage:   0%
-    
-          Graph this data and manage this system at https://landscape.canonical.com/
+There are various packages that add to the MOTD by placing configuration in `/etc/update-motd.d/`.
+
+### Landscape-sysinfo
+
+Here is one example of system information obtained and displayed by Landscape:
+
+  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://ubuntu.com/landscape) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
+
+    ```text
+    System load:             0.0
+    Usage of /:              25.7% of 8.55GB
+    Memory usage:            31%
+    Swap usage:              0%
+    Processes:               125
+    Users logged in:         0
+    IPv4 address for enp5s0: 10.185.198.41
+    IPv6 address for enp5s0: fd42:50cb:3a48:1f2c:216:3eff:fe27:c18a
     ```
-    
+
     ```{note}
     You can run `landscape-sysinfo` manually at any time.
     ```
@@ -30,43 +38,101 @@ When logging into an Ubuntu server you may have noticed the informative Message 
 
 `pam_motd` executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 
-You can add your own dynamic information to the MOTD. For example, to add local weather information:
+## Other default MOTD entries
 
-  - First, install the `weather-util` package:
-    
-        sudo apt install weather-util
+The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only deliver output if there is something meaningful to report):
 
-  - The weather utility uses METAR data from the National Oceanic and Atmospheric Administration and forecasts from the National Weather Service. In order to find local information you will need the 4-character ICAO location indicator. This can be determined by browsing to the [National Weather Service](https://www.weather.gov/tg/siteloc) site.
-    
-    Although the National Weather Service is a United States government agency there are weather stations available world wide. However, local weather information for all locations outside the U.S. may not be available.
+  * base-files establishing the basic mechanism: `00-header`, `10-help-text`, `50-motd-news`
+  * base-files also provides Ubuntu news: `50-motd-news`
+  * landscape info about the system: `50-landscape-sysinfo`
+  * fwupd presents potential firmware updates: `85-fwupd`
+  * update-notifier-common reports about available updates: `90-updates-available`
+  * [ubuntu-pro-client](https://documentation.ubuntu.com/pro-client/en/latest/explanations/motd_messages/) mentions expiring Ubuntu Pro subscriptions: `91-contract-ua-esm-status`
+  * ubuntu-release-upgrader-core suggests upgrades: `91-release-upgrade`
+  * unattended-upgrades informs if updates could not be installed automatically: `92-unattended-upgrades`
+  * update-notifier-common notifies if the HWE kernel might go end of life: `95-hwe-eol`
+  * overlayroot reports if any overlays are active: `97-overlayroot`
+  * update-notifier-common suggests regular filesystem checks: `98-fsck-at-reboot`
+  * update-notifier-common also hints if a reboot is required: `98-reboot-required`
 
-  - Create `/usr/local/bin/local-weather`, a simple shell script to use weather with your local ICAO indicator:
-    
-        #!/bin/sh
-        #
-        #
-        # Prints the local weather information for the MOTD.
-        #
-        #
-        
-        # Replace KINT with your local weather station.
-        # Local stations can be found here: http://www.weather.gov/tg/siteloc.shtml
-        
-        echo
-        weather KINT
-        echo
+## Customization
 
-  - Make the script executable:
-    
-        sudo chmod 755 /usr/local/bin/local-weather
+You can modify the configuration provided by the system or consider adding your
+own dynamic information to the MOTD by adding to `/etc/update-motd.d/`.
 
-  - Next, create a symlink to `/etc/update-motd.d/98-local-weather`:
-    
-        sudo ln -s /usr/local/bin/local-weather /etc/update-motd.d/98-local-weather
+This example is not meant to be serious, instead it is a bit of fun to
+demonstrate the usage of `pam_motd` for your own messages.
 
-  - Finally, exit the server and re-login to view the new MOTD.
+```bash
+#!/bin/bash
 
-You should now be greeted with some useful information, and some information about the local weather that may not be quite so useful. Hopefully the local-weather example demonstrates the flexibility of `pam_motd`.
+# 1. Get timestamp and calculate nearest sysadminday
+NOW=$(date +%s)
+THIS_YEAR=$(date +%Y)
+TARGET_PREV=$(date -d "$((THIS_YEAR-1))-08-01 last friday" +%s)
+TARGET_CURR=$(date -d "$THIS_YEAR-08-01 last friday" +%s)
+TARGET_NEXT=$(date -d "$((THIS_YEAR+1))-08-01 last friday" +%s)
+
+# 2. Loop to find the shortest distance
+MIN_DIFF=9999999999
+CHOSEN_DAYS=0
+TIMING=""
+for TARGET in $TARGET_PREV $TARGET_CURR $TARGET_NEXT; do
+    # Calculate difference
+    DIFF=$(( (TARGET - NOW) / 86400 ))
+
+    # Get absolute value for comparison
+    if [ $DIFF -lt 0 ]; then
+        ABS_DIFF=$((DIFF * -1))
+        CURRENT_TIMING="ago"
+    else
+        ABS_DIFF=$DIFF
+        CURRENT_TIMING="in"
+    fi
+
+    # Update if this is the closest date found so far
+    if [ $ABS_DIFF -lt $MIN_DIFF ]; then
+        MIN_DIFF=$ABS_DIFF
+        CHOSEN_DAYS=$ABS_DIFF
+        TIMING=$CURRENT_TIMING
+    fi
+done
+
+# 3. Report to gain some admin-love
+if [ "$CHOSEN_DAYS" -eq 0 ]; then
+    echo -e "System Administrator Appreciation Day is Today! Gifts welcome."
+elif [ "$TIMING" == "ago" ]; then
+    echo -e "System Administrator Appreciation Day is ${CHOSEN_DAYS} days ago but we'd appreciate to be treated well every day."
+else
+    echo -e "System Administrator Appreciation Day is in ${CHOSEN_DAYS} days but we'd appreciate to be treated well every day."
+fi
+```
+
+Then make it executable
+
+```bash
+chmod +x /etc/update-motd.d/98-admin-reminder
+```
+
+On next login you should now be greeted with that as part of the message of the day.
+
+```text
+$ ssh ubuntu@yoursystem
+...
+System Administrator Appreciation Day is 181 days ago but we'd appreciate to be treated well every day.
+```
+
+
+```{note}
+Be careful as this will be executed on every login. The usual pattern to prevent
+that from slowing down logins is to do anything even slightly complex
+asynchronously and only `cat` pre-generated content in the actual MOTD handling.
+Furthermore consider using stamp files to only update at regular intervals
+instead of at every login.
+This example was meant to be kept simple, but the existing serious MOTD entries
+placed there by the packages make use of such, please look at those for writing
+your own.
+```
 
 ## Resources
 

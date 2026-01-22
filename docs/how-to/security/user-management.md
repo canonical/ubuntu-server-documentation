@@ -199,7 +199,22 @@ sudo adduser username groupname
 
 When a new user is created, the `adduser` utility creates a brand new home directory named `/home/username`. The default profile is modelled after the contents found in the directory of `/etc/skel`, which includes all profile basics.
 
-If your server will be home to multiple users, you should pay close attention to the user home directory permissions to ensure confidentiality. By default, user home directories in Ubuntu are created with world read/execute permissions. This means that all users can browse and access the contents of other users home directories, which may not be suitable for your environment.
+If your server will be home to multiple users, you should pay close attention
+to the user home directory permissions to ensure confidentiality.
+
+::::{tab-set}
+:::{tab-item} Ubuntu 21.10 Impish and later
+Home directories are created with private permissions (`0750` or `drwxr-x---`)
+by default. This ensures that only the user and members of their group can
+access the directory.
+:::
+:::{tab-item} Ubuntu 21.04 Hirsute and earlier
+Home directories were created with world read/execute permissions (`0755` or
+`drwxr-xr-x`) by default. This meant that all users on the system could browse
+and access the contents of other users home directories, which may not be
+suitable for your environment.
+:::
+::::
 
 To verify your current user home directory permissions, use the following syntax:
 
@@ -330,7 +345,7 @@ Remove or rename the directory `.ssh/` in the user's home folder to prevent furt
 Be sure to check for any established SSH connections by the disabled account, as it is possible they may have existing inbound or outbound connections -- then `pkill` any that are found.
 
 ```bash
-who | grep username  (to get the pts/# terminal)
+w | grep username  (to get the pts/# terminal)
 sudo pkill -f pts/#
 ```
 

@@ -167,3 +167,15 @@ This section focuses on the classic LMA stack.
 
 observability
 ```
+
+## Debugging
+
+{ref}`These debugging pages <how-to-debugging>` are for readers interested in
+analyzing the state of their Ubuntu system.
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+debugging
+```

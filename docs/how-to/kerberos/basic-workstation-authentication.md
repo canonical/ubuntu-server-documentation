@@ -12,7 +12,7 @@ In this section we'll look at configuring a Linux system as a Kerberos client. T
 
 Note that Kerberos alone is not enough for a user to exist in a Linux system. We cannot just point the system at a Kerberos server and expect all the Kerberos principals to be able to *log in* on the Linux system, simply because these users do not *exist* locally.
 
-Kerberos only provides authentication: it doesn't know about user groups, Linux UIDs and {term}`GIDs <GID>`, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
+Kerberos only provides authentication: it doesn't know about user groups, Linux {term}`UIDs <UID>` and {term}`GIDs <GID>`, home directories, etc. Normally, another network source is used for this information, such as an LDAP or Windows server, and, in the old days, NIS was used for that as well.
 
 ## Set up a Linux system as a Kerberos client
 
@@ -31,7 +31,7 @@ $ sudo apt install krb5-user sssd-krb5
 You will be prompted for the addresses of your KDCs and admin servers. If you have followed our {ref}`how to install a Kerberos server <install-a-kerberos-server>` and {ref}`how to set up a secondary KDC <set-up-secondary-kdc>` guides, the KDCs will be  (space separated): 
 
 ```
-kdc01.example.com kdc02.example.com`
+kdc01.example.com kdc02.example.com
 ```
 
 And the admin server will be: 
@@ -68,20 +68,19 @@ Note that `kinit` doesn't need the principal to exist as a local user in the sys
 The only remaining configuration now is for `sssd`. Create the file `/etc/sssd/sssd.conf` with the following content:
 
 ```text
-    [sssd]
-    config_file_version = 2
-    services = pam
-    domains = example.com
+[sssd]
+config_file_version = 2
+domains = example.com
 
-    [pam]
+[pam]
 
-    [domain/example.com]
-    id_provider = proxy
-    proxy_lib_name = files
-    auth_provider = krb5
-    krb5_server = kdc01.example.com,kdc02.example.com
-    krb5_kpasswd = kdc01.example.com
-    krb5_realm = EXAMPLE.COM
+[domain/example.com]
+id_provider = proxy
+proxy_lib_name = files
+auth_provider = krb5
+krb5_server = kdc01.example.com,kdc02.example.com
+krb5_kpasswd = kdc01.example.com
+krb5_realm = EXAMPLE.COM
 ```
 
 The above configuration will use Kerberos for **authentication** (`auth_provider`), but will use the local system users for user and group information (`id_provider`).
