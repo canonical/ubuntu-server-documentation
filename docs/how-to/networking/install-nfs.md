@@ -78,7 +78,7 @@ An alternate way to mount an NFS share from another machine is to add a line to 
 
 The general syntax for the line in `/etc/fstab` file is as follows:
 
-    example.hostname.com:/srv /opt/example nfs rsize=8192,wsize=8192,timeo=14,intr
+    example.hostname.com:/srv /opt/example nfs
 
 ```{note}
 Details about all the NFS related options that can go into `/etc/fstab` can be found in the {manpage}`nfs(5)` manual page.
