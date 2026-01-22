@@ -177,8 +177,10 @@ Now install the NFS server:
 
 This will already automatically start the Kerberos-related nfs services, because of the presence of `/etc/krb5.keytab`.
 
-```{note}
-If enabling Kerberos on an already existing NFS server, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started: `sudo systemctl restart nfs-server`
+If you had this package already installed, and were just enabling Kerberos for the first time, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started:
+
+```
+sudo systemctl restart nfs-server
 ```
 
 Now populate `/etc/exports`, restricting the exports to krb5 authentication. For example, exporting `/storage` using `krb5p`:
@@ -212,6 +214,12 @@ And extract it:
 Now install the NFS client package:
 
     sudo apt install nfs-common
+
+If you had this package already installed, and were just enabling Kerberos for the first time, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started:
+
+```
+sudo systemctl restart nfs-client.target
+```
 
 And you should be able to do your first NFS Kerberos mount:
 
