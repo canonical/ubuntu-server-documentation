@@ -142,7 +142,7 @@ sudo systemctl restart vsftpd.service
 To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no shell access, edit `/etc/shells` adding the *`nologin`* shell:
 
 ```bash
-    # /etc/shells: valid login shells
+# /etc/shells: valid login shells
     /bin/csh
     /bin/sh
     /usr/bin/es
