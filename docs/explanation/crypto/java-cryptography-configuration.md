@@ -37,9 +37,9 @@ This is a very large file, with many options and comments. Its structure is simp
 * `jdk.certpath.disabledAlgorithms`: Restrictions on algorithms and key lengths used in certificate path processing.
 * `jdk.tls.disabledAlgorithms`: Restrictions on algorithms and key lengths used in SSL/TLS connections.
 
-The list of restrictions has its own format which allows for constructs that disable whole families of algorithms, key sizes, usage, and more. The [`java.security` configuration file](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/noble-devel#n520) has comments explaining this syntax with some examples.
+The list of restrictions has its own format which allows for constructs that disable whole families of algorithms, key sizes, usage, and more. The [`java.security` configuration file](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security) has comments explaining this syntax with some examples.
 
-Changes to these security settings can be made directly in the `/etc/java-<VERSION>-openjdk/security/java.security` file, or in an alternate file that can be specified to a Java application by setting the `java.security.properties` value. For example, if your java application is called `myapp.java`, you can invoke it as shown below to specify an additional security properties file:
+Changes to these security settings can be made directly in the `/etc/java-<VERSION>-openjdk/security/java.security` file, or in an alternate file that can be specified to a Java application by setting the `java.security.properties` value. For example, if your Java application is called `myapp.java`, you can invoke it as shown below to specify an additional security properties file:
 
 ```bash
 java -Djava.security.properties=file://$HOME/java.security
