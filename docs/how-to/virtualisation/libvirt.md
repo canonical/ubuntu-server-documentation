@@ -295,7 +295,7 @@ virsh detach-device <guestname> <device-xml>
 
 The [QEMU Monitor](https://en.wikibooks.org/wiki/QEMU/Monitor) is the way to interact with QEMU/KVM while a guest is running. This interface has many powerful features for experienced users. When running under libvirt, the monitor interface is bound by libvirt itself for management purposes, but you can still run QEMU monitor commands via libvirt. The general syntax is `virsh qemu-monitor-command [options] [guest] 'command'`.
 
-Libvirt covers most needed use cases, but if you need to work around libvirt or tweak special options, you can add a device as follows:
+Libvirt covers most needed use cases, but if you need to work around libvirt or tweak special options, you can, for example, add a device as follows:
 
 ```bash
 virsh qemu-monitor-command --hmp focal-test-log 'drive_add 0 if=none,file=/var/lib/libvirt/images/test.img,format=raw,id=disk1'
