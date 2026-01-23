@@ -68,13 +68,20 @@ Of course, any of these backup steps also negate any benefit of 2FA should someo
 
 ## Configure the SSH server
 
-Once all users are configured, configure `sshd` itself by editing `/etc/ssh/sshd_config`. Depending on your installation, some of these settings may be configured already, but not necessarily with the values required for this configuration. Check for and adjust existing occurrences of these configuration directives, or add new ones, as required:
+Once all users are configured, configure `sshd` itself by creating a new
+configuration file in `/etc/ssh/sshd_config.d/` with the following directives:
 
 ```
 KbdInteractiveAuthentication yes
 PasswordAuthentication no
 AuthenticationMethods publickey,keyboard-interactive
 ```
+
+Depending on your installation, some of these settings may be configured
+already, but not necessarily with the values required for this configuration.
+Check for and adjust existing occurrences of these configuration directives, or
+add new ones, as required.
+
 
 ```{note}
 On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAUthentication yes`.
