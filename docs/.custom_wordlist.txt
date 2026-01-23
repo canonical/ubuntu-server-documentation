@@ -173,6 +173,7 @@ Netfilter
 netfilter
 netmask
 NICs
+Noble
 NVLink
 NVSwitch
 O'Reilly
@@ -205,7 +206,6 @@ QDevice
 Quokka
 RangeSize
 Rediraffe
-Resolute
 rollout
 rollouts
 rootfs

@@ -92,10 +92,10 @@ lxc image list ubuntu:
 To see more information about a particular image, including all the aliases it is known by, you can use:
 
 ``` 
-lxc image info ubuntu:resolute
+lxc image info ubuntu:noble
 ```
 
-You can generally refer to an Ubuntu image using the release name (`resolute`) or the release number (`26.04`). The `ubuntu` remote knows many aliases such as `26.04`, `resolute`, and `lts` which is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
+You can generally refer to an Ubuntu image using the release name (`noble`) or the release number (`24.04`). The `ubuntu` remote knows many aliases such as `24.04`, `noble`, and `lts` which is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
 
 ``` 
 lxc image info ubuntu:lts/arm64
@@ -104,31 +104,31 @@ lxc image info ubuntu:lts/arm64
 Now, let's start our first container:
 
 ``` 
-lxc launch ubuntu:resolute r1
+lxc launch ubuntu:noble n1
 ```
 
-This will download the official current Resolute cloud image for your current architecture, then create a container named `r1` using that image, and finally start it. Once the command returns, you can see it using:
+This will download the official current Noble cloud image for your current architecture, then create a container named `n1` using that image, and finally start it. Once the command returns, you can see it using:
 
 ``` 
 lxc list
-lxc info r1
+lxc info n1
 ```
 
 and open a shell in it using:
 
 ``` 
-lxc exec r1 -- sudo -i -u ubuntu
+lxc exec n1 -- sudo -i -u ubuntu
 ```
 
 A convenient alias for the command above is:
 
 ```
-lxc shell r1
+lxc shell n1
 ```
 
 The try-it page mentioned above gives a full synopsis of the commands you can use to administer containers.
 
-Now that the `resolute` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
+Now that the `noble` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
 
 ## LXD server configuration
 
