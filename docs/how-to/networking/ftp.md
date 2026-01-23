@@ -156,7 +156,7 @@ To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no sh
     /bin/bash
     /bin/rbash
     /usr/bin/screen
-    /usr/sbin/nologin
+/usr/sbin/nologin
 ```
 
 This is necessary because, by default `vsftpd` uses PAM for authentication, and the `/etc/pam.d/vsftpd` configuration file contains:
