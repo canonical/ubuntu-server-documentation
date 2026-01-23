@@ -143,7 +143,7 @@ To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no sh
 
 ```bash
 # /etc/shells: valid login shells
-    /bin/csh
+/bin/csh
     /bin/sh
     /usr/bin/es
     /usr/bin/ksh
