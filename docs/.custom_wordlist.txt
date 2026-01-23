@@ -85,6 +85,7 @@ GDB's
 GIDs
 Gitolite
 globbing
+gpasswd
 GPUs
 Graylog
 HBAs
@@ -204,6 +205,7 @@ QDevice
 Quokka
 RangeSize
 Rediraffe
+Resolute
 rollout
 rollouts
 rootfs

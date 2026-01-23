@@ -512,3 +512,4 @@ reference/other-tools/byobu reference/other-tools/terminal-multiplexers/
 pam-motd reference/other-tools/pam-motd/
 
 explanation/performance/perf-epp explanation/performance/perf-p-states/
+how-to/containers/lxd-containers/ how-to/virtualisation/lxd-containers/

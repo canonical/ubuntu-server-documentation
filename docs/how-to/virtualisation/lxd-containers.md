@@ -5,7 +5,7 @@ myst:
 ---
 
 (lxd-containers)=
-# LXD containers
+# LXD containers and virtual machines
 
 [LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
@@ -29,15 +29,17 @@ sudo snap install lxd
 
 This will install the self-contained LXD snap package.
 
-## Kernel preparation
-
-In general, Ubuntu should have all the desired features enabled by default. One exception to this is that in order to enable swap accounting, the boot argument `swapaccount=1` must be set. This can be done by appending it to the `GRUB_CMDLINE_LINUX_DEFAULT=`variable in /etc/default/grub, then running 'update-grub' as root and rebooting.
-
 ## Configuration
 
-In order to use LXD, some basic settings need to be configured first. This is done by running `lxd init`, which will allow you to choose:
+In order to use LXD, some basic settings need to be configured first. This is done by running:
 
-  - Directory or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
+```
+lxd init
+```
+
+This will allow you to choose:
+
+  - Directory, [Btrfs](https://btrfs.readthedocs.io/), or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
 
   - Availability over the network.
 
@@ -46,7 +48,7 @@ In order to use LXD, some basic settings need to be configured first. This is do
 You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group lxd. If user `joe` is not a member of group `lxd`, you may run:
 
 ``` 
-adduser joe lxd
+gpasswd -a joe lxd
 ```
 
 as root to change it. The new membership will take effect on the next login, or after running `newgrp lxd` from an existing login.
@@ -69,13 +71,19 @@ Every new container is created based on either an image, an existing container, 
 
   - `images`: this server provides unofficial images for a variety of Linux distributions. This is not the recommended server for Ubuntu images.
 
-The command to create and start a container is
+The command to create and start a container is:
 
 ``` 
 lxc launch remote:image containername
 ```
 
-Images are identified by their hash, but are also aliased. The `ubuntu` remote knows many aliases such as `18.04` and `bionic`. A list of all images available from the Ubuntu Server can be seen using:
+Alternatively, you can create a container without starting it using:
+
+``` 
+lxc init remote:image containername
+```
+
+Images are identified by their hash, but are also aliased. A list of all images available from the Ubuntu Server can be seen using:
 
 ``` 
 lxc image list ubuntu:
@@ -84,10 +92,10 @@ lxc image list ubuntu:
 To see more information about a particular image, including all the aliases it is known by, you can use:
 
 ``` 
-lxc image info ubuntu:bionic
+lxc image info ubuntu:resolute
 ```
 
-You can generally refer to an Ubuntu image using the release name (`bionic`) or the release number (`18.04`). In addition, `lts` is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
+You can generally refer to an Ubuntu image using the release name (`resolute`) or the release number (`26.04`). The `ubuntu` remote knows many aliases such as `26.04`, `resolute`, and `lts` which is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
 
 ``` 
 lxc image info ubuntu:lts/arm64
@@ -96,31 +104,31 @@ lxc image info ubuntu:lts/arm64
 Now, let's start our first container:
 
 ``` 
-lxc launch ubuntu:bionic b1
+lxc launch ubuntu:resolute r1
 ```
 
-This will download the official current Bionic cloud image for your current architecture, then create a container named `b1` using that image, and finally start it. Once the command returns, you can see it using:
+This will download the official current Resolute cloud image for your current architecture, then create a container named `r1` using that image, and finally start it. Once the command returns, you can see it using:
 
 ``` 
 lxc list
-lxc info b1
+lxc info r1
 ```
 
 and open a shell in it using:
 
 ``` 
-lxc exec b1 -- bash
+lxc exec r1 -- sudo -i -u ubuntu
 ```
 
 A convenient alias for the command above is:
 
 ```
-lxc shell b1
+lxc shell r1
 ```
 
 The try-it page mentioned above gives a full synopsis of the commands you can use to administer containers.
 
-Now that the `bionic` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
+Now that the `resolute` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
 
 ## LXD server configuration
 
@@ -156,13 +164,7 @@ lxc config trust add r1 certfile.crt
 
 Now when the client adds r1 as a known remote, it will not need to provide a password as it is already trusted by the server.
 
-The other step is to configure a 'trust password' with `r1`, either at initial configuration using `lxd init`, or after the fact using:
-
-```
-lxc config set core.trust_password PASSWORD
-```
-
-The password can then be provided when the client registers `r1` as a known remote.
+The other step is to configure a 'trust password' with `r1` at initial configuration using `lxd init`. The password can then be provided when the client registers `r1` as a known remote.
 
 ### Backing store
 
@@ -179,7 +181,7 @@ Container configuration includes properties like the architecture, limits on res
 Devices can be of several types, including UNIX character, UNIX block, network interface, or disk. In order to insert a host mount into a container, a 'disk' device type would be used. For instance, to mount `/opt` in container `c1` at `/opt`, you could use:
 
 ``` 
-lxc config device add c1 opt disk source=/opt path=opt
+lxc config device add c1 opt-mount disk source=/opt path=/opt
 ```
 
 See:
@@ -273,19 +275,19 @@ lxc move c1 final-beta
 They can also be snapshotted:
 
 ``` 
-lxc snapshot c1 YYYY-MM-DD
+lxc snapshot c1 snapshot-name
 ```
 
 Later changes to c1 can then be reverted by restoring the snapshot:
 
 ``` 
-lxc restore u1 YYYY-MM-DD
+lxc restore c1 snapshot-name
 ```
 
 New containers can also be created by copying a container or snapshot:
 
 ``` 
-lxc copy u1/YYYY-MM-DD testcontainer
+lxc copy c1/snapshot-name testcontainer
 ```
 
 ### Publishing images
@@ -293,13 +295,13 @@ lxc copy u1/YYYY-MM-DD testcontainer
 When a container or container snapshot is ready for consumption by others, it can be published as a new image using;
 
 ``` 
-lxc publish u1/YYYY-MM-DD --alias foo-2.0
+lxc publish c1/snapshot-name --alias foo-2.0
 ```
 
 The published image will be private by default, meaning that LXD will not allow clients without a trusted certificate to see them. If the image is safe for public viewing (i.e. contains no private information), then the 'public' flag can be set, either at publish time using
 
 ``` 
-lxc publish u1/YYYY-MM-DD --alias foo-2.0 public=true
+lxc publish c1/snapshot-name --alias foo-2.0 public=true
 ```
 
 or after the fact using

@@ -9,17 +9,19 @@ myst:
 
 In this section we show how to install, configure and use various options for creating virtual machines (VMs). For more information about these options, you may want to refer to our {ref}`Introduction to virtualization <introduction-to-virtualization>`
   
-## Virtual machines
+## Virtual machines and containers
 
 ```{toctree}
 :hidden:
 
+LXD <virtualisation/lxd-containers>
 Multipass <virtualisation/multipass>
 UVtool <virtualisation/cloud-image-vms-with-uvtool>
 QEMU <virtualisation/qemu>
 AMD SEV <virtualisation/sev-snp>
 ```
 
+* {ref}`LXD containers and virtual machines <lxd-containers>`
 * {ref}`Create VMs with Multipass <create-vms-with-multipass>`
 * {ref}`Create cloud image VMs with UVtool <cloud-image-vms-with-uvtool>`
 * {ref}`QEMU <qemu>`
