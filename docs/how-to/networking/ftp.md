@@ -111,7 +111,7 @@ If chroot_local_user is set to YES (setting all users to be limited to just thei
 After uncommenting the above options, create a `/etc/vsftpd.chroot_list` containing a list of users one per line. Then restart `vsftpd`:
 
 ```bash
-    sudo systemctl restart vsftpd.service
+sudo systemctl restart vsftpd.service
 ```
 
 Also, the `/etc/ftpusers` file is a list of users that are *disallowed* FTP access. The default list includes root, daemon, nobody, etc. To disable FTP access for additional users simply add them to the list.
