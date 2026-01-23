@@ -25,7 +25,7 @@ In the Anonymous mode, remote clients can access the FTP server by using the def
 `vsftpd` is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install `vsftpd`, run the following command:
 
 ```bash
-    sudo apt install vsftpd
+sudo apt install vsftpd
 ```
 
 ## Anonymous FTP configuration
