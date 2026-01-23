@@ -32,7 +32,7 @@ In the Anonymous mode, remote clients can access the FTP server by using the def
 
 By default `vsftpd` is *not* configured to allow anonymous download. If you wish to enable anonymous download, edit `/etc/vsftpd.conf` by changing:
 
-```bash
+```text
     anonymous_enable=YES
 ```
 
