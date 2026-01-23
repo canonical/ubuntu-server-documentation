@@ -48,7 +48,7 @@ changes separate from system defaults.
 ```
 
 For information about the configuration directives, refer to the online
-{manpage}`sshd_config(8)` manual page or run `man sshd_config` at a terminal
+{manpage}`sshd_config(5)` manual page or run `man sshd_config` at a terminal
 prompt.
 
 ### Example configuration directive
@@ -56,7 +56,7 @@ prompt.
 Let's take a look at an example of a configuration directive change. To make
 your OpenSSH server display the contents of the `/etc/issue.net` file as a
 pre-login banner, you can add or modify this line in the `/etc/ssh/sshd_config`
-or in a snippet file in `/etc/ssh/sshd_config.d/` file:
+or in a snippet file in `/etc/ssh/sshd_config.d/`:
 
 ```text
 Banner /etc/issue.net
