@@ -23,7 +23,7 @@ The Java installation in Ubuntu ships a system-wide configuration tree under `/e
 
 This is a very large file, with many options and comments. Its structure is simple, with configuration keys and their values. For crypto algorithms, we will be looking into the following settings:
 
-* `jdk.certpah.disabledAlgorithms`: Restrictions on algorithms and key lengths used in certificate path processing.
+* `jdk.certpath.disabledAlgorithms`: Restrictions on algorithms and key lengths used in certificate path processing.
 * `jdk.tls.disabledAlgorithms`: Restrictions on algorithms and key lengths used in SSL/TLS connections.
 
 The list of restrictions has its own format which allows for constructs that disable whole families of algorithms, key sizes, usage, and more. The [`java.security` configuration file](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520) has comments explaining this syntax with some examples.
