@@ -56,7 +56,7 @@ If you wish to change this location, to `/srv/files/ftp` for example, simply cre
 After making the change restart `vsftpd`:
 
 ```bash
-    sudo systemctl restart vsftpd.service
+sudo systemctl restart vsftpd.service
 ```
 
 Now, when the client connects with `anonymous` username, it will see the files hosted in `/srv/files/ftp` instead of `/srv/ftp`.
