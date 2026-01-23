@@ -79,7 +79,7 @@ Now when system users login to FTP they will start in their *home* directories w
 
 Similarly, by default, anonymous users are not allowed to upload files to FTP server. To change this setting, uncomment the following line, and restart `vsftpd`:
 
-```bash
+```text
     anon_upload_enable=YES
 ```
 
