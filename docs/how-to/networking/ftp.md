@@ -121,7 +121,7 @@ FTP can also be encrypted using *FTPS*. *FTPS* is different from *SFTP*, *FTPS* 
 To configure *FTPS*, edit `/etc/vsftpd.conf` and at the bottom add:
 
 ```bash
-    ssl_enable=YES
+ssl_enable=YES
 ```
 
 Also, notice the certificate and key related options:
