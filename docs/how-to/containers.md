@@ -9,13 +9,14 @@ myst:
 
 Containers are a lightweight, portable virtualization technology. They package software together with its dependencies so that applications can run consistently even across different environments.
 
-* {ref}`LXD <lxd-containers>`
+* {ref}`LXD <lxd>`
 * {ref}`Docker for sysadmins <docker-for-system-admins>`
 * {ref}`How to run rocks on your server <run-rocks-on-your-server>`
 
 ```{toctree}
 :hidden:
 
+LXD <virtualisation/lxd>
 Docker for sysadmins <containers/docker-for-system-admins>
 How to run rocks on your server <containers/run-rocks-on-your-server>
 ```

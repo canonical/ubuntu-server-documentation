@@ -4,7 +4,7 @@ myst:
     description: Install and manage LXD system containers and virtual machines with command-line administration for development and production workloads.
 ---
 
-(lxd-containers)=
+(lxd)=
 # LXD containers and virtual machines
 
 [LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.

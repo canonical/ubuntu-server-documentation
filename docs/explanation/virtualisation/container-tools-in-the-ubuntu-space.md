@@ -23,7 +23,7 @@ To get started with LXC containers, check out the [LXC Introduction](https://lin
 
 The [Linux Containers Daemon, or LXD](https://canonical.com/lxd) (pronounced "lex-dee") is the lightervisor, or lightweight container hypervisor. It is a system container management tool built on top of LXC. Since it is an abstraction layer away from LXC it offers a more user-friendly interface, including both a REST API and a command-line interface. The LXD API deals with "remotes", which serve images and containers. In fact, it comes with a built-in image store, so that containers can be created more quickly. 
 
-To get started with LXD from an Ubuntu Server administrator's point of view, check out our {ref}`how to get started with LXD <lxd-containers>` guide. For a more general beginner's introduction to LXD, we [recommend this tutorial](https://documentation.ubuntu.com/lxd/latest/tutorial/) from the LXD team.
+To get started with LXD from an Ubuntu Server administrator's point of view, check out our {ref}`how to get started with LXD <lxd>` guide. For a more general beginner's introduction to LXD, we [recommend this tutorial](https://documentation.ubuntu.com/lxd/latest/tutorial/) from the LXD team.
 
 In addition to creating and managing containers, LXD can also be [used to create virtual machines](https://documentation.ubuntu.com/lxd/latest/howto/instances_create/#create-a-virtual-machine).
 
