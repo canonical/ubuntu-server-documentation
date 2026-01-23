@@ -515,7 +515,7 @@ In the guest definition, you can add `filesystem` sections to specify host paths
 </filesystem>
 ```
 
-In the guest, use this based on the tag `myfs`:
+In the guest, you can now use this based on the tag `myfs`:
 
 ```bash
 sudo mount -t virtiofs myfs /mnt/
