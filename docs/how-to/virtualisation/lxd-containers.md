@@ -314,7 +314,7 @@ and changing the value of the public field.
 
 ### Image export and import
 
-Image can be exported as, and imported from, tarballs:
+Images can be exported as, and imported from, tarballs:
 
 ``` 
 lxc image export foo-2.0 foo-2.0.tar.gz
