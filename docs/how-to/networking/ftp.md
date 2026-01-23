@@ -155,7 +155,7 @@ To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no sh
     /bin/dash
     /bin/bash
     /bin/rbash
-    /usr/bin/screen
+/usr/bin/screen
 /usr/sbin/nologin
 ```
 
