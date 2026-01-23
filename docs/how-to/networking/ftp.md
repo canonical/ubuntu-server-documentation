@@ -49,7 +49,7 @@ During installation an *`ftp`* user is created with a home directory of `/srv/ft
 If you wish to change this location, to `/srv/files/ftp` for example, simply create a directory in another location and change the *`ftp`* user's home directory:
 
 ```bash
-    sudo mkdir -p /srv/files/ftp
+sudo mkdir -p /srv/files/ftp
 sudo usermod -d /srv/files/ftp ftp 
 ```
 
