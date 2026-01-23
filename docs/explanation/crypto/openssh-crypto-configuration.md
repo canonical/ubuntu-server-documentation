@@ -117,7 +117,7 @@ $ sudo sshd -T | grep ciphers
 ciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
 ```
 
-Now let's make our change. On the server, we can edit `/etc/ssh/sshd_config` and add this line:
+Now let's make our change. On the server, we can create a new configuration file `/etc/ssh/sshd_config.d/crypto-hardening.conf` and add this line:
 
 ```text
 Ciphers -aes128*
