@@ -39,7 +39,7 @@ By default `vsftpd` is *not* configured to allow anonymous download. If you wish
 Restart the `vsftp` server:
 
 ```bash
-    sudo systemctl restart vsftp
+sudo systemctl restart vsftp
 ```
 
 ## FTP files location
