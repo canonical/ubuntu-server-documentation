@@ -72,7 +72,7 @@ To check what effect a configuration change has on the server, it's helpful to u
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers 3des-cbc,chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
 
 The output will include changes made to the configuration key. There is no need to restart the service.
@@ -114,7 +114,7 @@ First, let's see what the default is:
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
 
 Now let's make our change. On the server, we can create a new configuration file `/etc/ssh/sshd_config.d/crypto-hardening.conf` and add this line:
@@ -128,7 +128,7 @@ And then check what is left:
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers chacha20-poly1305@openssh.com,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes192-ctr,aes256-ctr
 ```
 
 To activate the change, `ssh` has to be restarted:
