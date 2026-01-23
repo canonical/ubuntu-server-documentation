@@ -99,7 +99,7 @@ chroot_local_user=YES
 
 You can also limit a specific list of users to just their home directories:
 
-```bash
+```text
     chroot_list_enable=YES
     chroot_list_file=/etc/vsftpd.chroot_list
 ```
