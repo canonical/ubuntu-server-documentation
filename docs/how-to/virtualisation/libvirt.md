@@ -494,7 +494,7 @@ To be able to exchange data, allocate the guest memory as "shared". To do so, ad
 </memoryBacking>
 ```
 
-For performance reasons (it helps `virtiofs` and is generally wise to consider), using huge pages is recommended, which would look like:
+For performance reasons (it helps `virtiofs`, but is generally wise to consider), using huge pages is recommended, which would look like:
 
 ```xml
 <memoryBacking>
