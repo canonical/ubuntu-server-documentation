@@ -128,7 +128,7 @@ Also, notice the certificate and key related options:
 
 ```text
 rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
-    rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
+rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 ```
 
 By default these options are set to the certificate and key provided by the ssl-cert package. In a production environment these should be replaced with a certificate and key generated for the specific host. For more information on certificates see {ref}`Security - Certificates <certificates>`.
