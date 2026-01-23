@@ -101,7 +101,7 @@ You can also limit a specific list of users to just their home directories:
 
 ```text
 chroot_list_enable=YES
-    chroot_list_file=/etc/vsftpd.chroot_list
+chroot_list_file=/etc/vsftpd.chroot_list
 ```
 
 ```{warning}
