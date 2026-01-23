@@ -486,7 +486,7 @@ Two files are available for this purpose. Both are local overrides which allow y
 
 ## Sharing files between Host<->Guest
 
-To exchange data, allocate the guest memory as "shared". Add the following to the guest config:
+To be able to exchange data, allocate the guest memory as "shared". To do so, add the following to the guest config:
 
 ```xml
 <memoryBacking>
