@@ -49,7 +49,7 @@ Apply the new config via:
 
     sudo exportfs -a
 
-You can replace `*` with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount. Be aware that `*.hostname.com` will match` foo.hostname.com` and all its subdomains, as the `*` character also matches dots.
+You can replace `*` with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount. Be aware that `*.hostname.com` will match `foo.hostname.com` and all its subdomains, as the `*` character also matches dots.
 
 The *`sync`*/*`async`* options control whether changes are guaranteed to be committed to stable storage before replying to requests. *`async`* thus gives a performance benefit but risks data loss or corruption. Some older versions of `exportfs` will issue a warning if this option left unspecified.
 
@@ -259,7 +259,7 @@ And now we have not only the TGT, but also a ticket for the NFS service:
             renew until 04/06/22 17:48:48
             Ticket server: nfs/nfs-server.vms@VMS
 
-One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd's` `-n` option. From {manpage}`rpc.gssd(8)`:
+One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd`'s `-n` option. From {manpage}`rpc.gssd(8)`:
 
 - `-n`: when specified, UID 0 is forced to obtain user credentials which are used instead of the local system's machine credentials.
 
