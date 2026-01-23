@@ -9,7 +9,7 @@ myst:
 
 In this section we show how to install, configure and use various options for creating virtual machines (VMs). For more information about these options, you may want to refer to our {ref}`Introduction to virtualization <introduction-to-virtualization>`
   
-## Virtual machines and containers
+## Virtual machines
 
 ```{toctree}
 :hidden:

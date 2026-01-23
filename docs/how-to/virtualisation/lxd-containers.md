@@ -77,6 +77,12 @@ The command to create and start a container is:
 lxc launch remote:image containername
 ```
 
+To create a virtual machine instead of a container, use:
+
+``` 
+lxc launch --vm remote:image vmname
+```
+
 Alternatively, you can create a container without starting it using:
 
 ``` 
@@ -120,7 +126,9 @@ and open a shell in it using:
 lxc exec n1 -- sudo -i -u ubuntu
 ```
 
-A convenient alias for the command above is:
+This command provides a proper login shell with full session initialization, including PTY ownership and systemd user session setup.
+
+A convenient alias that opens a shell without the full login process is:
 
 ```
 lxc shell n1
@@ -165,12 +173,6 @@ lxc config trust add r1 certfile.crt
 Now when the client adds r1 as a known remote, it will not need to provide a password as it is already trusted by the server.
 
 The other step is to configure a 'trust password' with `r1` at initial configuration using `lxd init`. The password can then be provided when the client registers `r1` as a known remote.
-
-### Backing store
-
-LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed `zpool` will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
-
-The other supported backing stores are described in detail in the [Storage configuration](https://documentation.ubuntu.com/lxd/latest/explanation/storage/) section of the LXD documentation.
 
 ## Container configuration
 
@@ -287,7 +289,7 @@ lxc restore c1 snapshot-name
 New containers can also be created by copying a container or snapshot:
 
 ``` 
-lxc copy c1/snapshot-name testcontainer
+lxc copy c1/snapshot-name new-container
 ```
 
 ### Publishing images
