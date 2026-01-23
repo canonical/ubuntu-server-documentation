@@ -161,7 +161,7 @@ To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no sh
 
 This is necessary because, by default `vsftpd` uses PAM for authentication, and the `/etc/pam.d/vsftpd` configuration file contains:
 
-```bash
+```text
     auth    required        pam_shells.so
 ```
 
