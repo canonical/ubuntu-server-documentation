@@ -73,7 +73,7 @@ The following section covers `virsh`, a virtual machine management tool that is 
 
 ## Manage VMs with `virsh`
 
-Several utilities are available to manage virtual machines and libvirt. `libvirt` comes with the command line utility `virsh`, this allows to interact with the  libvirt daemon to manage the VMs. Some examples:
+Several utilities are available to manage virtual machines and libvirt. `libvirt` comes with the command line utility `virsh`, which allows you to interact with the libvirt daemon to manage VMs. Some examples:
 
 - To list running virtual machines:
 
