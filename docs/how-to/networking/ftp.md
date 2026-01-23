@@ -66,7 +66,7 @@ Now, when the client connects with `anonymous` username, it will see the files h
 By default `vsftpd` is configured to authenticate system users and allow them to download files. If you want users to be able to upload files, edit `/etc/vsftpd.conf`:
 
 ```bash
-    write_enable=YES
+write_enable=YES
 ```
 
 Now restart `vsftpd`:
