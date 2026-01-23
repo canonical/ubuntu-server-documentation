@@ -66,20 +66,20 @@ Which shows this as enabled:
 none [integrity] confidentiality
 ```
 
-Or that when disabled
+Or that when disabled:
 
 ```text
 [none] integrity confidentiality
 ```
 
 
-To disable it either disable secure boot in bios or your virtualization platform.
+To disable it either disable secure boot in BIOS or your virtualization platform.
 
 If that is impossible, consider not using the dynamic module debug control
 shown below, but instead using a kernel boot parameter `wireguard.dyndbg=+p`
 which has the drawback that it needs a reboot to enable/disable it.
 
-Before 20.04 [Kernel Lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) was not yet present, therefore such systemd can skip this step.
+Before 20.04 [Kernel Lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) was not yet present, therefore such systems can skip this step.
 :::
 
 
