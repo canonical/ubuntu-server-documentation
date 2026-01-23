@@ -72,7 +72,7 @@ write_enable=YES
 Now restart `vsftpd`:
 
 ```bash
-    sudo systemctl restart vsftpd.service
+sudo systemctl restart vsftpd.service
 ```
 
 Now when system users login to FTP they will start in their *home* directories where they can download, upload, create directories, etc.
