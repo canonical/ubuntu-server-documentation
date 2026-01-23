@@ -112,12 +112,11 @@ Changes to PAM configuration have immediate effect, and no separate reloading co
 Now when you log in using SSH, in addition to the normal public key authentication, you will be prompted for your TOTP or HOTP code:
 
 ```bash
-$ ssh jammy.server
+$ ssh ubuntu.server
 Enter passphrase for key 'id_rsa':
-(ubuntu@jammy.server) Verification code:
-Welcome to Ubuntu Jammy Jellyfish...
-(...)
-ubuntu@jammy.server:~$
+(ubuntu@ubuntu.server) Verification code:
+Welcome to Ubuntu (...)
+ubuntu@ubuntu.server:~$
 ```
 ## Special cases
 
