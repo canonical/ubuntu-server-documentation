@@ -136,7 +136,7 @@ By default these options are set to the certificate and key provided by the `ssl
 Now restart `vsftpd`, and non-anonymous users will be forced to use *FTPS*:
 
 ```bash
-    sudo systemctl restart vsftpd.service
+sudo systemctl restart vsftpd.service
 ```
 
 To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no shell access, edit `/etc/shells` adding the *`nologin`* shell:
