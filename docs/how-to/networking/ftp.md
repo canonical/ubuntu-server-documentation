@@ -93,7 +93,7 @@ The configuration file consists of many configuration parameters. The informatio
 
 There are options in `/etc/vsftpd.conf` to help make `vsftpd` more secure. For example users can be limited to their home directories by uncommenting:
 
-```bash
+```text
     chroot_local_user=YES
 ```
 
