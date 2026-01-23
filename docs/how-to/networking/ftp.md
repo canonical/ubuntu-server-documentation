@@ -50,7 +50,7 @@ If you wish to change this location, to `/srv/files/ftp` for example, simply cre
 
 ```bash
     sudo mkdir -p /srv/files/ftp
-    sudo usermod -d /srv/files/ftp ftp 
+sudo usermod -d /srv/files/ftp ftp 
 ```
 
 After making the change restart `vsftpd`:
