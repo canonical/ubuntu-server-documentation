@@ -2289,10 +2289,10 @@ Teletype Terminals
 TXT
 Trusted Execution Technology
     TXT is Intel's hardware-based security technology that creates a trusted execution environment to protect systems from software-based attacks. In other words, TXT was designed to make sure that a computer boots into a trusted and verified state before loading the operating system or applications.
-It protects against:
-* Rootkits
-* Boot-level malware
-* Unauthorized changes to firmware or system software
+    It protects against:
+    * Rootkits
+    * Boot-level malware
+    * Unauthorized changes to firmware or system software
 
 :::
 
