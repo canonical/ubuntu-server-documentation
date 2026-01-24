@@ -2282,9 +2282,9 @@ Traceroute
 TTYS
 Teletype Terminals
     TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term tty still exists in Unix/Linux systems to represent:
-* A text-based input/output device
-* A terminal session
-* A console connection
+    * A text-based input/output device
+    * A terminal session
+    * A console connection
 
 TXT
 Trusted Execution Technology
