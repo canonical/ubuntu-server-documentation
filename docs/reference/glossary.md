@@ -2266,7 +2266,7 @@ topologies
 
 TOTP
 Time-based One-Time Password
-    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It Is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Authy, Microsoft Authenticator, and many others.
+    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Authy, Microsoft Authenticator, and many others.
 
 TPM
 Trusted Platform Module
