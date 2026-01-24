@@ -87,6 +87,8 @@ Gitolite
 globbing
 GPUs
 Graylog
+GUI
+GUIs
 HBAs
 hostgroup
 hostnames
@@ -174,6 +176,7 @@ netmask
 NICs
 NVLink
 NVSwitch
+Observability 
 O'Reilly
 O'Reilly's
 OTPs
