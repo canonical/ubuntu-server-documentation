@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Prepare to join an Active Directory domain with winbind by configuring DNS resolver, installing packages, and planning identity mapping.
+    description: Prepare to join an Active Directory domain with winbind by completing tasks in common to all identity mapping backends prior to selecting one.
 ---
 
 (join-a-domain-with-winbind-preparation)=
