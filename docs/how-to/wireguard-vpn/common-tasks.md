@@ -16,13 +16,13 @@ The `wg-quick` tool is a simple way to bring the WireGuard interface up and down
 Probably the greatest benefit of this is that it gives you the ability to configure the interface to be brought up automatically on system boot. For example, to configure the `wg0` interface to be brought up at boot, run the following command:
 
 ```bash
-$ sudo systemctl enable wg-quick@wg0
+sudo systemctl enable wg-quick@wg0
 ```
 
 The name of the systemd service follows the WireGuard interface name, and multiple such services can be enabled/started at the same time.  You can also use the `systemctl status`, `start`, `stop`, `reload` and `restart` commands to control the WireGuard interface and query its status:
 
 ```bash
-$ sudo systemctl reload wg-quick@wg0
+sudo systemctl reload wg-quick@wg0
 ```
 
 The `reload` action does exactly what we expect: it reloads the configuration of the interface without disrupting existing WireGuard tunnels. To add or remove peers, `reload` is sufficient, but if `wg-quick` options, such as `PostUp`, `Address`, or similar are changed, then a `restart` is needed.
@@ -56,7 +56,12 @@ These two `resolvectl` commands tell the local *systemd-resolved* resolver to:
 When you bring the `home0` WireGuard interface up again, it will run the `resolvectl` commands:
 
 ```bash
-$ sudo wg-quick up home0
+sudo wg-quick up home0
+```
+
+Will look like:
+
+```text
 [#] ip link add home0 type wireguard
 [#] wg setconf home0 /dev/fd/63
 [#] ip -4 address add 10.10.11.2/24 dev home0
@@ -68,7 +73,12 @@ $ sudo wg-quick up home0
 You can verify that it worked by pinging some {term}`hostname` in your home network, or checking the DNS resolution status for the `home0` interface:
 
 ```bash
-$ resolvectl status home0
+resolvectl status home0
+```
+
+reports:
+
+```text
 Link 26 (home0)
     Current Scopes: DNS
          Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
@@ -140,7 +150,7 @@ AllowedIPs = 10.10.11.3
 To update the interface with the new peer without disrupting existing connections, we use the `reload` action of the systemd unit:
 
 ```bash
-$ systemctl reload wg-quick@wg0
+systemctl reload wg-quick@wg0
 ```
 
 ```{note}
@@ -156,13 +166,13 @@ Such a mobile client can be configured more easily with the use of QR codes.
 We start by creating the new peer's config normally, as if it were any other system (generate keys, pick an IP address, etc). Then, to convert that configuration file to a QR code, install the `qrencode` package:
 
 ```bash
-$ sudo apt install qrencode
+sudo apt install qrencode
 ```
 
-Next, run the following command (assuming the config was written to `phone.conf`):
+Next, run the following command (assuming a WireGuard config, as shown in the other examples, was written to `phone.conf`):
 
 ```bash
-$ cat phone.conf | qrencode -t ansiutf8 
+cat phone.conf | qrencode -t ansiutf8
 ```
 
 That will generate a QR code in the terminal, ready for scanning with the smartphone app. Note that there is no need for a graphical environment, and this command can be run remotely over SSH for example.

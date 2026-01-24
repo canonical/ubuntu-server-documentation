@@ -34,7 +34,7 @@ interface: wg0
   listening port: 51000
 
 peer: 2cJdFcNzXv4YUGyDTahtOfrbsrFsCByatPnNzKTs0Qo=
-  endpoint: 10.172.196.106:51000 
+  endpoint: 10.172.196.106:51000
   allowed ips: 10.10.11.2/32
   latest handshake: 3 hours, 27 minutes, 35 seconds ago
   transfer: 3.06 KiB received, 2.80 KiB sent
@@ -45,30 +45,73 @@ peer: ZliZ1hlarZqvfxPMyME2ECtXDk611NB7uzLAD4McpgI=
 
 ## Kernel debug messages
 
-WireGuard is also silent when it comes to logging. Being (essentially) a kernel module, we need to explicitly enable verbose logging of its module. This is done with the following command:
+WireGuard is also rather silent when it comes to logging. Being (essentially) a
+kernel module, we need to explicitly enable verbose logging of its module.
+
+:::{note}
+To be able to use the commands outlined below {manpage}`kernel_lockdown(7)`
+needs to be disabled. That is because the debug interfaces used are considered
+a way to tamper with the integrity of the kernel.
+
+Lockdown is enabled by default in secure boot mode.
+Check the status via:
 
 ```bash
-$ echo "module wireguard +p" | sudo tee /sys/kernel/debug/dynamic_debug/control
+cat /sys/kernel/security/lockdown
+```
+
+Which shows this as enabled:
+
+```text
+none [integrity] confidentiality
+```
+
+Or that when disabled:
+
+```text
+[none] integrity confidentiality
+```
+
+
+To disable it either disable secure boot in BIOS or your virtualization platform.
+
+If that is impossible, consider not using the dynamic module debug control
+shown below, but instead using a kernel boot parameter `wireguard.dyndbg=+p`
+which has the drawback that it needs a reboot to enable/disable it.
+
+Before 20.04 [Kernel Lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) was not yet present, therefore such systems can skip this step.
+:::
+
+
+This is done with the following command:
+
+```bash
+echo "module wireguard +p" | sudo tee /sys/kernel/debug/dynamic_debug/control
 ```
 
 This will write WireGuard logging messages to the kernel log, which can be watched live with:
 
 ```bash
-$ sudo dmesg -wT
+sudo dmesg -wT
 ```
 
 To disable logging, run this:
 
 ```bash
-$ echo "module wireguard -p" | sudo tee /sys/kernel/debug/dynamic_debug/control
+echo "module wireguard -p" | sudo tee /sys/kernel/debug/dynamic_debug/control
 ```
 
 ## Destination address required
 
-If you ping an IP and get back an error like this:
+If you ping an IP ...
 
 ```bash
-$ ping 10.10.11.2
+ping 10.10.11.2
+```
+
+... and get back an error like this:
+
+```text
 PING 10.10.11.2 (10.10.11.2) 56(84) bytes of data.
 From 10.10.11.1 icmp_seq=1 Destination Host Unreachable
 ping: sendmsg: Destination address required
@@ -89,7 +132,7 @@ Another possibility is that one of the peers is behind a NAT, and there wasn't e
 This error:
 
 ```bash
-$ ping 10.10.11.1 
+$ ping 10.10.11.1
 PING 10.10.11.1 (10.10.11.1) 56(84) bytes of data.
 From 10.10.11.2 icmp_seq=1 Destination Host Unreachable
 ping: sendmsg: Required key not available

@@ -19,21 +19,21 @@ The process for network booting the live server installer is similar for both mo
 4. The bootloader downloads configuration, also over TFTP, telling it where to download the kernel, RAM Disk and kernel command line to use.
 5. The RAM Disk looks at the kernel command line to learn how to configure the network and where to download the server ISO from.
 6. The RAM Disk downloads the ISO and mounts it as a loop device.
-7. From this point on the install follows the same path as if the ISO was on a local block device.
+7. From this point on the install follows the same path as if the ISO were on a local block device.
 
-The difference between UEFI and legacy modes is that in UEFI mode the bootloader is an {term}`EFI` executable, signed so that is accepted by Secure Boot, and in legacy mode it is [PXELINUX](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX). Most DHCP/BOOTP servers can be configured to serve the right bootloader to a particular machine.
+The difference between UEFI and legacy modes is that in UEFI mode the bootloader is an {term}`EFI` executable, signed so that it is accepted by Secure Boot, and in legacy mode it is [PXELINUX](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX). Most DHCP/BOOTP servers can be configured to serve the right bootloader to a particular machine.
 
 ## Configure DHCP/BOOTP and TFTP
 
-There are several implementations of the DHCP/BOOTP and TFTP protocols available. This document will briefly describe how to configure {term}`dnsmasq` to perform both of these roles.
+There are several implementations of the DHCP/BOOTP and TFTP protocols available. This document describes how to configure {term}`dnsmasq` to perform both of these roles.
 
-1. Install `dnsmasq` with:
+- Install `dnsmasq` with:
 
    ```
    sudo apt install dnsmasq
    ```
 
-2. Put something like this in `/etc/dnsmasq.d/pxe.conf`:
+- Put something like this in `/etc/dnsmasq.d/pxe.conf`:
 
    ```
    interface=<your interface>,lo
@@ -50,7 +50,7 @@ There are several implementations of the DHCP/BOOTP and TFTP protocols available
 This assumes several things about your network; read `man dnsmasq` or the default `/etc/dnsmasq.conf` for many more options.
 ```
 
-1. Restart `dnsmasq` with:
+- Restart `dnsmasq` with:
 
    ```
    sudo systemctl restart dnsmasq.service
@@ -69,21 +69,35 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 ```
 -->
 
+- Install TFTP
+
+```
+$ sudo apt install tftpd-hpa
+```
+
+If the installation is successful, check that the corresponding TFTP service is active using this command:
+
+```
+$ systemctl status tftpd-hpa.service
+```
+
+It is expected to show **active (running)** in the output messages. We will also assume your TFTP root path is `/srv/tftp` for the remainder of this guide.
+
 ### Mode-independent set up
 
-1. Download the latest live server ISO for the release you want to install:
+- Download the latest live server ISO for the release you want to install:
 
    ```
    wget http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
    ```
 
-2. Mount it:
+- Mount it:
 
    ```
    sudo mount noble-live-server-amd64.iso /mnt
    ```
 
-3. Copy the kernel and `initrd` from it to where the `dnsmasq` serves TFTP from:
+- Copy the kernel and `initrd` from it to the TFTP directory served by `dnsmasq`:
 
    ```
    sudo cp /mnt/casper/{vmlinuz,initrd} /srv/tftp/
@@ -91,28 +105,28 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
 ### Set up the files for UEFI booting
 
-1. Copy the signed shim binary into place:
+- Copy the signed shim binary into place:
 
    ```
    apt download shim-signed
    dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O | sudo tee /srv/tftp/bootx64.efi >/dev/null
    ```
 
-2. Copy the signed GRUB binary into place:
+- Copy the signed GRUB binary into place:
 
    ```
    apt download grub-efi-amd64-signed
    dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O | sudo tee /srv/tftp/grubx64.efi >/dev/null
    ```
 
-3. GRUB also needs a font to be available over TFTP:
+- GRUB also needs a font to be available over TFTP:
 
    ```
    apt download grub-common
    dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O | sudo tee /srv/tftp/unicode.pf2 >/dev/null
    ```
 
-4. Create `/srv/tftp/grub/grub.cfg` that contains:
+- Create `/srv/tftp/grub/grub.cfg` that contains:
 
    ```
    sudo mkdir -p /srv/tftp/grub/
@@ -157,7 +171,7 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
 ### Set up the files for legacy boot
 
-1. Download `pxelinux.0` and put it into place:
+- Download `pxelinux.0` and put it into place:
 
    ```
    wget http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/pxelinux.0
@@ -165,13 +179,13 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
    mv pxelinux.0 /srv/tftp/
    ```
 
-5. Make sure to have installed package `syslinux-common` and then:
+- Ensure the `syslinux-common` package is installed, then:
 
    ```
    cp /usr/lib/syslinux/modules/bios/ldlinux.c32 /srv/tftp/
    ```
 
-6. Create `/srv/tftp/pxelinux.cfg/default` containing:
+- Create `/srv/tftp/pxelinux.cfg/default` containing:
 
    ```
     DEFAULT install
