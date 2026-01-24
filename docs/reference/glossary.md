@@ -459,6 +459,16 @@ CIDR
 Classless Inter-Domain Routing
     *Work in Progress*
 
+Command history
+    Command history is a feature in terminals and shells (like Bash, Zsh, or PowerShell) that stores the commands you have previously typed, allowing you to recall and reuse them. Common ways to acccess this feature are:
+    * Press the up arrow to cycle through previous commands
+    * Type history to see a numbered list of past commands
+    * Use Ctrl+R to search through your history
+    * Re-run a specific command with !123 (where 123 is the command number)
+
+    Related topic(s):
+    * {term}`Scrollback`
+    
 CIFS
 Common Internet File System
     *Work in Progress*
@@ -2126,7 +2136,7 @@ Scrollback
     Scrollback refers to the ability to scroll back through previous content in a terminal or console window. Scrollback is the buffer that stores older content so you can scroll up to see it. Limitations are lost on close, not infinite, and the performance may suffer if the buffer is very large.
 
     Related topic(s):
-    * Command history
+    * {term}`Command history`
 
 SCSI
 Small Computer System Interface
