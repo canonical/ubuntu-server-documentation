@@ -86,7 +86,7 @@ Alertmanager
     * [the Alertmanager documentation](https://prometheus.io/docs/alerting/latest/alertmanager/)
 
     Related topic(s):
-    * Observability and {term}`Prometheus`
+    * {term}`Observability` and {term}`Prometheus`
 
 ALUA
 Asymmetric Logical Unit Access
@@ -1708,6 +1708,17 @@ NVIDIA NVLink Switch
 
 :::{glossary}
 
+Observability
+    Observability is the practice of understanding what is happening inside a complex software system by analysing the data it emits (metrics, logs, traces, events).
+
+    See also:
+    *[OpenTelemetry](https://opentelemetry.io) 
+    
+    Related topic(s):
+    * {term}`Alertmanager`
+    * {term}`Prometheus`
+
+    
 OCF
 Open Cluster Framework
     *Work in Progress*
@@ -1917,7 +1928,14 @@ preseed
     *Work in Progress*
 
 Prometheus
-    *Work in Progress*
+    Prometheus is an open‑source monitoring and alerting toolkit used to collect and query metrics from applications and infrastructure. It was inspired by the monitoring tool Borgmon used at Google.
+
+    See also:
+    * ["Prometheus"](https://en.wikipedia.org/wiki/Prometheus_(software))
+    * ["Prometheus official site"](https://prometheus.io/)
+
+    Related topic(s):
+    * {term}`Alertmanager <web Alertmanager>`
 
 proxy
     *Work in Progress*
@@ -1942,6 +1960,7 @@ PXE Linux Loader
 
 
 (terms_Q)=
+
 ## Q
 
 :::{glossary}
