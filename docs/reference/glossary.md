@@ -2225,7 +2225,7 @@ TB
 
 TCP
 Transmission Control Protocol
-     TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications rely on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
+     TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications depend on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
 
 TEE
 Trusted Execution Environment
