@@ -2255,7 +2255,7 @@ Transport Layer Security
 
 tmpfs
 Temporary Filesystem
-    tmfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it fast but also volatile - data disappears when the system reboots or loses power.
+    tmpfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it fast but also volatile - data disappears when the system reboots or loses power.
 
 tmux
 Terminal Multiplexer
