@@ -491,8 +491,15 @@ config
 connectionless
     *Work in Progress*
 
+container
+    Container (like Doker) is an isolated, lightweight environment that packages an application and its dependencies.
+
 containerization
-    *Work in Progress*
+    Containerization is an isolation method that refers to the practice of using containers.
+
+    Related topic(s):
+    * {term}`sandboxed`
+    * {term}`virtualization`
 
 CPU
 Central Processing Unit
@@ -2091,7 +2098,7 @@ sandboxed
     * Secures: If the sandboxed program is malicious or gets compromised, the damage is contained. It cannot spread to your whole system.
 
     Related topic(s):
-    * Virtualization and containers
+    * {term}`virtualization` and {term}`containerization` 
 
 SANLOCK
 Storage Area Network Locking Daemon
@@ -2536,7 +2543,11 @@ virtual
     *Work in Progress*
 
 virtualization
-    *Work in Progress*
+    Virtualization is a method to achieve isolation. It creates entire virtual machines (VM) with their own operating system, providing strong isolation between the VM and the host system.
+
+    Related topic(s):
+    * {term}`sandboxed`
+    * {term}`container`
 
 VLAN
 Virtual Local Area Network
