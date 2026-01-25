@@ -52,25 +52,21 @@ sudo update-ca-certificates
 - Verify that your certificate is in PEM format
 
 ```bash
-sudo ls /etc/ssl/certs/ | grep local-ca
-```
+$ sudo ls /etc/ssl/certs/ | grep local-ca
 
-```bash
 local-ca.pem
 ```
 
 - You can also verify that your certificate is available in the trust store by selecting a few texts from your certificate and comparing them with the certificate at the end of the trust store file to see if it matches yours.
 
 ```bash
-sudo cat local-ca.crt
+$ sudo cat local-ca.crt
 
 ...
 L4zOd3b41xJtYldofPve
 -----END CERTIFICATE-----
-```
 
-```bash
-sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
 
 L4zOd3b41xJtYldofPve
 ```
@@ -92,7 +88,9 @@ Snap applications, including snap-packaged browsers, are unlikely to automatical
 - Verify that the certificate you'd like to uninstall exists.
 
 ```bash
-sudo ls /usr/local/share/ca-certificates/local-ca.crt
+$ sudo ls /usr/local/share/ca-certificates/local-ca.crt
+
+/usr/local/share/ca-certificates/local-ca.crt
 ```
 
 - Delete the certificate
@@ -104,19 +102,21 @@ sudo rm /usr/local/share/ca-certificates/local-ca.crt
 - The certificate still exists in the trust store.
 
 ```bash
-sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+
+L4zOd3b41xJtYldofPve
 ```
 
 - Update the trust store
 
 ```bash
-sudo update-ca-certificates --fresh
+$ sudo update-ca-certificates --fresh
 ```
 
 - Verify that the certificate has been uninstalled
 
 ```bash
-sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
+$ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
 ```
 
 ## Convert from DER to PEM format
@@ -124,7 +124,7 @@ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
 You can convert a DER-formatted certificate called `local-ca.der` to PEM form like this:
 
 ```bash
-sudo openssl x509 -inform der -outform pem -in local-ca.der -out local-ca.crt
+sudo openssl x509 -inform der -outform pem -in local-ca.der -out local-ca.crt`
 ```
 
 ## The CA trust store location
