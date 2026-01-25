@@ -32,15 +32,13 @@ Snapshot service <software/snapshot-service>
 ## Troubleshooting
 
 * {ref}`Reporting bugs <report-a-bug>` shows you how to report a bug using the Apport utility
-* {ref}`Kernel crash dump <kernel-crash-dump>` shows how to use the kernel crash dump utility
 
 ```{toctree}
 :hidden:
 
 Reporting bugs <software/report-a-bug>
-Kernel crash dump <software/kernel-crash-dump>
 ```
- 
+
 ## See also
 
 * Explanation: {ref}`explanation-managing-software`

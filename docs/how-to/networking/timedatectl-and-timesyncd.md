@@ -65,9 +65,9 @@ The output produced will look something like this:
        CGroup: /system.slice/systemd-timesyncd.service
                |-3744 /lib/systemd/systemd-timesyncd
     
-    Feb 23 08:55:46 bionic-test systemd[1]: Starting Network Time Synchronization...
-    Feb 23 08:55:46 bionic-test systemd[1]: Started Network Time Synchronization.
-    Feb 23 08:55:46 bionic-test systemd-timesyncd[3744]: Synchronized to time server 91.189.89.198:123 (ntp.ubuntu.com).
+    Feb 23 08:55:46 test-host systemd[1]: Starting Network Time Synchronization...
+    Feb 23 08:55:46 test-host systemd[1]: Started Network Time Synchronization.
+    Feb 23 08:55:46 test-host systemd-timesyncd[3744]: Synchronized to time server 91.189.89.198:123 (ntp.ubuntu.com).
 ```
 
 ### Configure `timesyncd`
@@ -80,8 +80,8 @@ If you would now like to serve the Network Time Protocol via `chrony`, this guid
 
 ## References
 
-- [Freedesktop.org info on `timedatectl`](https://www.freedesktop.org/software/systemd/man/timedatectl.html)
+- {manpage}`timedatectl(1)`
 
-- [Freedesktop.org info on systemd-timesyncd service](https://www.freedesktop.org/software/systemd/man/systemd-timesyncd.service.html#)
+- {manpage}`systemd-timesyncd.service(8)`
 
 - See the [Ubuntu Time wiki page](https://help.ubuntu.com/community/UbuntuTime) for more information.

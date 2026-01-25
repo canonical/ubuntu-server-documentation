@@ -420,7 +420,7 @@ However, it can be very important when driving more advanced use cases. If one n
 
 ### `-hpb` machine types
 
-Since Ubuntu 18.04, the QEMU in Ubuntu has [provided special machine-types](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/1776189). These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The "{term}`HPB`" abbreviation stands for "host-physical-bits", which is the QEMU option that this represents.
+Since Ubuntu 18.04, the QEMU in Ubuntu has {lpbug}`provided special machine-types <1776189>`. These include machine types like `pc-q35-jammy` or `pc-i440fx-jammy`, but with a `-hpb` suffix. The "{term}`HPB`" abbreviation stands for "host-physical-bits", which is the QEMU option that this represents.
 
 For example, by using `pc-q35-jammy-hpb`, the guest would use the number of physical bits that the Host CPU has available.
 

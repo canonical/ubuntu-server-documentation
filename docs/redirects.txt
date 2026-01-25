@@ -368,8 +368,9 @@ explanation/intro-to/mail-services/ how-to/mail-services/
 web-servers-introduction explanation/intro-to/web-servers/
 introduction-to-web-servers explanation/intro-to/web-servers/
 
-backups-introduction explanation/intro-to/backups/
-introduction-to-backups explanation/intro-to/backups/
+backups-introduction how-to/backups/
+introduction-to-backups how-to/backups/
+explanation/intro-to/backups how-to/backups/
 
 databases-introduction explanation/intro-to/databases/
 introduction-to-databases explanation/intro-to/databases/
@@ -396,7 +397,7 @@ networking-key-concepts explanation/networking/networking-key-concepts/
 network-configuration explanation/networking/configuring-networks/
 configuring-networks explanation/networking/configuring-networks/
 
-about-netplan explanation/networking/about-netplan/ 
+about-netplan explanation/networking/about-netplan/
 netplan explanation/networking/about-netplan/
 
 network-dhcp explanation/networking/about-dhcp/
@@ -486,19 +487,28 @@ migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 
 basic-backup-shell-script reference/backups/basic-backup-shell-script/
 
-backups-archive-rotation reference/backups/archive-rotation-shell-script/
-archive-rotation-shell-script reference/backups/archive-rotation-shell-script/
+backups-archive-rotation how-to/backups/back-up-using-shell-scripts/
+archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/
+reference/backups/archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/
+reference/backups how-to/backups/back-up-using-shell-scripts/
 
-reference/debugging/ explanation/debugging/
+about-debuginfod how-to/debugging/about-debuginfod/
+service-debuginfod how-to/debugging/about-debuginfod/
+debug-symbol-packages how-to/debugging/debug-symbol-packages/
 
-about-debuginfod explanation/debugging/about-debuginfod/
-service-debuginfod explanation/debugging/about-debuginfod/
-reference/debugging/about-debuginfod/ explanation/debugging/about-debuginfod/
+reference/debugging/ how-to/debugging/
+reference/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/
+reference/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/
 
-debug-symbol-packages explanation/debugging/debug-symbol-packages/
-reference/debugging/debug-symbol-packages/ explanation/debugging/debug-symbol-packages/
+explanation/debugging how-to/debugging/
+explanation/debugging/about-debuginfod.md how-to/debugging/about-debuginfod/
+explanation/debugging/debug-symbol-packages how-to/debugging/debug-symbol-packages/
+explanation/debugging/ebpf how-to/debugging/ebpf/
 
-tools-byobu reference/other-tools/byobu/
-byobu reference/other-tools/byobu/
+tools-byobu reference/other-tools/terminal-multiplexers/
+byobu reference/other-tools/terminal-multiplexers/
+reference/other-tools/byobu reference/other-tools/terminal-multiplexers/
 
 pam-motd reference/other-tools/pam-motd/
+
+explanation/performance/perf-epp explanation/performance/perf-p-states/

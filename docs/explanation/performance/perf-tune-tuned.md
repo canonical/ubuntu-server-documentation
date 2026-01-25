@@ -7,10 +7,12 @@ myst:
 (perf-tune-tuned)=
 # TuneD
 
-> Any tool related to system tuning is either about better understanding the
-> system or after doing so applying this knowledge. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
 The same is true for the TuneD profiles - they are only suggestions and starting
 points for a few named workload categories that allow you to react dynamically.
@@ -33,7 +35,7 @@ TuneD can perform two types of tuning: **static** and **dynamic**.
 
 * In dynamic tuning, it watches how various system components are used throughout the uptime of your system. TuneD then adjusts the system settings dynamically based on that monitoring information. For example, the hard drive is used heavily during startup and login, but is barely used later when the user is mainly working with applications (e.g. web browsers or email clients). Similarly, the CPU and network devices are used differently at different times. TuneD monitors the activity of these components and reacts to the changes in their use.
 
-By default, dynamic tuning is enabled. To disable it, edit the `/etc/tuned/tuned-main.conf` file and change the `dynamic_tuning` option to `0`. TuneD then periodically analyzes system statistics and uses them to update your system tuning settings. To configure the time interval in seconds between these updates, use the `update_interval` option. After any change in this configuration file, the systemd service needs to be restarted.
+By default, dynamic tuning is disabled. To enable it, edit the `/etc/tuned/tuned-main.conf` file and change the `dynamic_tuning` option to `1`. TuneD then periodically analyzes system statistics and uses them to update your system tuning settings. To configure the time interval in seconds between these updates, use the `update_interval` option. After any change in this configuration file, the systemd service needs to be restarted.
 
 ## Profiles
 
@@ -48,13 +50,12 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 
 ### Anatomy of a profile
 
-Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/<profile-name>`,
-those added by the administrator should be placed in `/etc/tuned/<profile-name>`.
+Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/profiles/<profile-name>`,
+those added by the administrator should be placed in `/etc/tuned/profiles/<profile-name>`.
 
-> In TuneD version 2.24 and thereby Ubuntu 25.04 Plucky (and later) the location
-> of these files changed. An upgrade will migrate any custom profiles, however
-> since most users are not yet on the new release, the rest of this page uses
-> the old paths in the examples.
+> In TuneD version 2.23 and thereby Ubuntu 24.04 Noble (and earlier), the location
+> of the profiles was different. An upgrade would have migrated any custom
+> profiles, however for reference the paths changes were:
 > Predefined profiles:
 >   `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
 > User defined profiles:
@@ -70,16 +71,16 @@ summary=A short summary
 description=A short description
 
 [plugin instance]
-type=TYPE
-replace=REPLACE
-enabled=ENABLED
-devices=DEVICES
+type=<TYPE like cpu, scheduler, ...>
+replace=<REPLACE = true | false>
+enabled=<ENABLED = true | false>
+devices=<DEVICES like /dev/sda, /dev/sdb>
 
 [another plugin instance]
-type=TYPE
-replace=REPLACE
-enabled=ENABLED
-devices=DEVICES
+type=<TYPE like cpu, scheduler, ...>
+replace=<REPLACE = true | false>
+enabled=<ENABLED = true | false>
+devices=<DEVICES like /dev/sda, /dev/sdb>
 ... other plugin-specific options ...
 
 ...
@@ -145,22 +146,23 @@ cpu
 	no_turbo
 	pm_qos_resume_latency_us
 	energy_performance_preference
+	boost
 ```
-And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_cpu.py`.
+And their description can be found in `/usr/lib/python3/dist-packages/tuned/plugins/plugin_<plugin-name>.py`.
 
 ### Customizing a profile
 
 For some specific workloads, the predefined profiles might not be enough and you may want to customize your own profile. You may customize an existing profile, just overriding a few settings, or create an entirely new one.
 
-Custom profiles live in `/etc/tuned/<profile-name>/tuned.conf` (Remember this location changed in 25.04 Plucky and later). There are 3 ways they can be created:
+Custom profiles live in `/etc/tuned/profiles/<profile-name>/tuned.conf`. There are 3 ways they can be created:
 
-* Copy an existing profile from `/usr/lib/tuned/<profile-name>` to `/etc/tuned/<profile-name>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
-* Create an entirely new profile in `/etc/tuned/<new-profile-name>` from scratch.
-* Create a new profile in `/etc/tuned/<new-profile-name>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/<profile-name>`.
+* Copy an existing profile from `/usr/lib/tuned/profiles/<profile-name>` to `/etc/tuned/profiles/<profile-name>`, and make changes to it in that location. A profile defined in `/etc/tuned` takes precedence over one from `/usr/lib/tuned` with the same name.
+* Create an entirely new profile in `/etc/tuned/profiles/<new-profile-name>` from scratch.
+* Create a new profile in `/etc/tuned/profiles/<new-profile-name>`, with a name that doesn't match an existing profile, and inherit from another profile. In this way you only have to specify the changes you want, and inherit the rest from the existing profile in `/usr/lib/tuned/profiles/<profile-name>`.
 
 After that, the new profile will be visible by TuneD via the `tuned-adm list` command.
 
-Here is a simple example of a customized profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/postgresql` profile. The child profile is defined in `/etc/tuned/mypostgresql/tuned.conf`:
+Here is a simple example of a customized profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/profiles/postgresql` profile. The child profile is defined in `/etc/tuned/profiles/mypostgresql/tuned.conf`:
 
 ```text
 [main]
@@ -197,7 +199,7 @@ Just because `tuned-adm` accepted to merge two profiles doesn't mean it makes se
 
 ## An example profile: hpc-compute
 
-Let's take look at the predefined `hpc-compute` profile in more detail as an example. You can find the configuration of this profile in `/usr/lib/tuned/hpc-compute/tuned.conf`:
+Let's take look at the predefined `hpc-compute` profile in more detail as an example. You can find the configuration of this profile in `/usr/lib/tuned/profiles/hpc-compute/tuned.conf`:
 
 ```ini
 #

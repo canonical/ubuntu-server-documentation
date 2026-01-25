@@ -79,7 +79,7 @@ ideas of reduced firmware and microvms play into all of this.
 ## Create the example workload artifact
 
 To create an example of such a small workload, we will follow the tutorial on
-how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/stable/tutorial/hello-world/).
+how to build a [sliced rock](https://documentation.ubuntu.com/rockcraft/stable/tutorial/chisel/).
 
 Out of these tutorials one gets an [OCI-compatible](https://github.com/opencontainers/image-spec/blob/main/spec.md)
 artifact. It will be called `chiselled-hello_latest_amd64.rock`.
@@ -91,7 +91,7 @@ example.
 $ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
 # Unpack that to a local directory
 $ sudo apt install oci-image-tool
-$ oci-image-tool  unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
 # Create some paths the kernel would be unhappy if they would be missing
 $ mkdir /tmp/chiselled-hello/{dev,proc,sys,run,var}
 # Convert the directory to a qcow2 image
@@ -198,7 +198,7 @@ Breaking down the changes to the command-line elements and their purpose:
 > Sadly, polluting this nice showcase there is currently an issue with the
 > RTC initialisation not working in this mode - which makes the guest
 > kernel wait ~1.3 + ~1.4 seconds. See this
-> [qemu bug](https://bugs.launchpad.net/ubuntu/+source/qemu/+bug/2074073)
+> {lpbug}`QEMU bug <2074073>`
 > if you are curious about that.
 >
 > But these changes were not about making the guest faster once it runs, instead
@@ -229,7 +229,7 @@ artifact above to a shareable directory:
 $ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
 # Unpack that to a directory
 $ sudo apt install oci-image-tool
-$ oci-image-tool  unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
 ```
 
 Exposing that directory to a guest via `virtiofsd`:

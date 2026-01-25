@@ -7,7 +7,7 @@ myst:
 (explanation-managing-software)=
 # Managing software
 
-In this section we go into detail on package management and best practices.
+This section explains how software is managed on Ubuntu Server and outlines recommended best practices.
 
 ## Package sources
 
@@ -35,7 +35,7 @@ Configuration managers <software/config-managers>
 
 ## Updates
 
-* {ref}`About apt upgrade and phased updates <about-apt-upgrade-and-phased-updates>`; you may occasionally see messages about phased updates.
+* {ref}`About apt upgrade and phased updates <about-apt-upgrade-and-phased-updates>` explains phased updates and why you may see related messages.
 * {ref}`Advance testing of updates in best practice server deployments <advance-testing-of-updates-in-best-practice-server-deployments>` helps you to avoid updates being rolled out on your production systems without them being tested first.
 
 ```{toctree}

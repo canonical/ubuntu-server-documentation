@@ -9,7 +9,12 @@ myst:
 
 ## Before you begin
 
-It is assumed you are starting with a working OpenLDAP server, with a hostname of `ldap-server.example.com`. If not, follow this guide {ref}`Install and configure OpenLDAP<install-openldap>` to set it up. It is also assumed that the `EXAMPLE.COM` realm is set up, and the Kerberos client tools (krb5-user) are installed on the LDAP server. You will need to create an Ubuntu principal. See {ref}`How to install a Kerberos server <install-a-kerberos-server>`. You should also know how to create service principals. See {ref}`How to configure Kerberos service principals <configure-service-principals>`.
+This guide makes several assumptions about the OpenLDAP setup:
+ * Working OpenLDAP server: it is assumed you are starting with a working OpenLDAP server, with a hostname of `ldap-server.example.com`. If not, follow this guide {ref}`Install and configure OpenLDAP<install-openldap>` to set it up.
+ * Working Kerberos realm: it is also assumed that the `EXAMPLE.COM` realm is set up, and the Kerberos client tools (krb5-user) are installed on the LDAP server. You will need to create an Ubuntu principal. See {ref}`How to install a Kerberos server <install-a-kerberos-server>`.
+ * Working {term}`TLS` setup for OpenLDAP: since simple binds and clear text passwords are involved, the OpenLDAP server must have a working TLS setup, and connections to it must be using TLS. Refer to {ref}`ldap-and-tls` to set it up.
+ * You should also know how to create service principals. See {ref}`How to configure Kerberos service principals <configure-service-principals>`.
+
 All the following configuration will be on `ldap-server.example.com`.
 
 ```{note}
@@ -26,7 +31,12 @@ Here is a diagram showing how all the different pieces work together:
 
 ![openldap saslauthd detailed diagram](../images/openldap-saslauthd-diagram-detailed.png)
 
-We will go over all these details next.
+The diagram shows the overall picture of how passthrough authentication can be used with OpenLDAP.
+
+It also highlights where the password is used in clear text format:
+ * Between the application and OpenLDAP, since it's a simple bind, the connection must be protected via {term}`TLS` (see {ref}`ldap-and-tls`).
+ * Between OpenLDAP and saslauthd, the credentials are passed via a UNIX local socket and protected via normal filesystem permissions. It's still clear text and localhost (the traffic doesn't go over the network), but only the root user, or the user under which saslauthd runs, can read that data.
+ * Between saslauthd and the authentication mechanism that is chosen, it will depend on the mechanism. Here in this documentation, since we are using Kerberos, the traffic is not clear text, so there is nothing else to do.
 
 ## Package installation
 
@@ -244,10 +254,10 @@ That will trigger the passthrough authentication, because the `userPassword` att
 Note how the username present in the `userPassword` attribute is independent of the bindDN used in the simple bind! If the `userPassword` attribute contained, say, `{SASL}anotheruser@EXAMPLE.COM`, OpenLDAP would ask `saslauthd` to authenticate `anotheruser@EXAMPLE.COM`, and not the user from the bindDN! Therefore, it's important to use OpenLDAP ACLs to prevent users from changing the `userPassword` attribute when using passthrough authentication!
 ```
 
-To continue with this how-to, let's create the `uid=ubuntu` entry in the directory, which will use passthrough authentication:
+To continue with this how-to, let's create the `uid=ubuntu` entry in the directory, which will use passthrough authentication. Note the usage of `-ZZ`, which forces the connection to use StartTLS and thus encrypt the traffic, including the simple bind credentials:
 
 ```text
-ldapadd -x -D cn=admin,dc=example,dc=com -W <<LDIF
+ldapadd -x -D cn=admin,dc=example,dc=com -W -ZZ <<LDIF
 dn: uid=ubuntu,dc=example,dc=com
 uid: ubuntu
 objectClass: account
@@ -265,7 +275,7 @@ Note how we don't need to add the posix attributes like user id, home directory,
 To test that the simple bind is working, and using the Kerberos password for the `ubuntu` user, let's use `ldapwhoami`:
 
 ```text
-ldapwhoami -D uid=ubuntu,dc=example,dc=com -W -x
+ldapwhoami -D uid=ubuntu,dc=example,dc=com -W -x -ZZ
 Enter LDAP Password:
 ```
 

@@ -32,9 +32,59 @@ sudo apt install openssh-server
 
 ## Configure OpenSSH
 
-To configure the default behavior of the OpenSSH server application, `sshd`, edit the file `/etc/ssh/sshd_config`. For information about the configuration directives used in this file, refer to the online {manpage}`sshd_config(5)` manual page or run `man sshd_config` at a terminal prompt.
+To configure the default behavior of the OpenSSH server application, `sshd`,
+you can modify the main configuration file at `/etc/ssh/sshd_config` or add
+modular configuration snippets to the `/etc/ssh/sshd_config.d/` directory.
 
-There are many directives in the `sshd` configuration file, which control things like communication settings and authentication modes. The following are examples of configuration directives that can be changed by editing the `/etc/ssh/sshd_config` file.
+```{important}
+By default, Ubuntu's configuration includes the line `Include
+/etc/ssh/sshd_config.d/*.conf` at the very top of `/etc/ssh/sshd_config`.
+Because OpenSSH uses the first value set for most directives, any settings
+defined in files within `sshd_config.d/` will override those in the main
+configuration file.
+
+Using snippets in `sshd_config.d/` makes updates easier and keeps your custom
+changes separate from system defaults.
+```
+
+For information about the configuration directives, refer to the online
+{manpage}`sshd_config(5)` manual page or run `man sshd_config` at a terminal
+prompt.
+
+### Example configuration directive
+
+Let's take a look at an example of a configuration directive change. To make
+your OpenSSH server display the contents of the `/etc/issue.net` file as a
+pre-login banner, you can add or modify this line in the `/etc/ssh/sshd_config`
+or in a snippet file in `/etc/ssh/sshd_config.d/`:
+
+```text
+Banner /etc/issue.net
+```
+
+Since losing an SSH server might mean losing your way to reach a server, check
+the configuration after changing it and before restarting the server:
+
+```bash
+sudo sshd -t
+```
+
+After making changes to the configuration, save the file. Then, restart the
+`sshd` server application to effect the changes using the following command:
+
+```bash
+sudo systemctl restart ssh.service
+```
+
+```{warning}
+Many other configuration directives for `sshd` are available to change the
+server application's behavior to fit your needs. Be advised, however, if your
+only method of access to a server is SSH, and you make a mistake when
+configuring `sshd` you may find you are locked out of the server upon
+restarting it. Additionally, if an incorrect configuration directive is
+supplied, the `sshd` server may refuse to start, so be particularly careful
+when editing the configuration on a remote server.
+```
 
 ````{tip}
 You can use {ref}`etckeeper <install-etckeeper>` to track changes in your `/etc/` with `git`.
@@ -47,29 +97,6 @@ sudo chmod a-w /etc/ssh/sshd_config.original
 ```
 ````
 
-Since losing an SSH server might mean losing your way to reach a server, check the configuration after changing it and before restarting the server:
-
-```bash
-sudo sshd -t -f /etc/ssh/sshd_config
-```
-
-### Example configuration directive
-
-Let's take a look at an example of a configuration directive change. To make your OpenSSH server display the contents of the `/etc/issue.net` file as a pre-login banner, you can add or modify this line in the `/etc/ssh/sshd_config` file:
-
-```text
-Banner /etc/issue.net
-```
-
-After making changes to the `/etc/ssh/sshd_config` file, save the file. Then, restart the `sshd` server application to effect the changes using the following command:
-
-```bash
-sudo systemctl restart ssh.service
-```
-
-```{warning}
-Many other configuration directives for `sshd` are available to change the server application's behavior to fit your needs. Be advised, however, if your only method of access to a server is SSH, and you make a mistake when configuring `sshd` via the `/etc/ssh/sshd_config` file, you may find you are locked out of the server upon restarting it. Additionally, if an incorrect configuration directive is supplied, the `sshd` server may refuse to start, so be particularly careful when editing this file on a remote server.
-```
 
 (openssh-server-ssh-keys)=
 
@@ -145,6 +172,12 @@ The prefix `lp:` is implied and means fetching from Launchpad. The alternative `
 
 You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication {ref}`using U2F/FIDO hardware authentication devices <two-factor-authentication-with-u2f-or-fido>`. Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it {ref}`using HMAC/Time based One Time Passwords (HOTP/TOTP) <two-factor-authentication-with-totp-or-hotp>`.
 
+## Handling unstable connections
+
+When working on remote systems via SSH, unstable network connections or accidental disconnects can interrupt your work and terminate running processes. Terminal multiplexers solve this problem by allowing sessions to persist even after disconnection.
+
+Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `screen`, you can start a session on the remote machine that continues running independently of your SSH connection. If your connection drops, you can reconnect and reattach to your existing session, resuming your work exactly where you left off without losing any running processes or command output.
+
 ## Further reading
 
 - [Ubuntu Wiki SSH](https://help.ubuntu.com/community/SSH) page.
@@ -152,7 +185,6 @@ You can add an extra layer of security to the default key-based authentication u
 - [Advanced OpenSSH Wiki Page](https://wiki.ubuntu.com/AdvancedOpenSSH)
 
 ```{toctree}
-self
 2FA with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp.md>
 2FA with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>
 ```

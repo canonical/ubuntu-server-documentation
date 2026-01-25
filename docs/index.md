@@ -76,7 +76,7 @@ page.
 * Read our [Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/project/server/17)
-* [Chat to us on Matrix](https://matrix.to/#/#server:ubuntu.com)
+* {matrix}`Chat to us on Matrix <server>`
 * [Download Ubuntu Server](https://ubuntu.com/server)
 * Find out how to {ref}`contribute to the Server Guide <contribute>`
 

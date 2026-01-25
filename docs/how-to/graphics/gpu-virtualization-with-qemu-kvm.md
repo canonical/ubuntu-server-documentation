@@ -15,13 +15,13 @@ Graphics for QEMU/KVM always comes in two pieces: a {term}`frontend` and a backe
 
 - `backend`: Controlled via the `-display` argument. This is what the host uses to actually display the graphical content, which can be an application window via `gtk` or a `vnc`.
 
-- In addition, one can enable the `-spice` back end (which can be done in addition to `vnc`). This can be faster and provides more authentication methods than `vnc`.
+In addition, one can enable the `-spice` back end (which can be done in addition to `vnc`). This can be faster and provides more authentication methods than `vnc`.
 
-- If you want no graphical output at all, you can save some memory and CPU cycles by setting `-nographic`.
+If you want no graphical output at all, you can save some memory and CPU cycles by setting `-nographic`.
 
 If you run with `spice` or `vnc` you can use native `vnc` tools or virtualization-focused tools like `virt-viewer`. You can read more about these in the {ref}`libvirt section <libvirt>`.
 
-All these options  are considered basic usage of graphics, but there are also advanced options for more specific use-cases. Those cases usually differ in their [ease-of-use and capability](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/), such as:
+All these options are considered basic usage of graphics, but there are also advanced options for more specific use-cases. Those cases usually differ in their [ease-of-use and capability](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/), such as:
 
 - *Need 3D acceleration*: Use `-vga virtio` with a local display having a {term}`GL` context `-display gtk,gl=on`. This will use [virgil3d](https://virgil3d.github.io/) on the host, and guest drivers are needed (which are common in Linux since [Kernels >= 4.4](https://www.kraxel.org/blog/2016/09/using-virtio-gpu-with-libvirt-and-spice/) but can be hard to come by for other cases). While not as fast as the next two options, the major benefit is that it can be used without additional hardware and without a proper input-output memory management unit (IOMMU) [set up for device passthrough](https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt).
 
@@ -152,7 +152,7 @@ For PCI passthrough, the above steps would be all the preparation needed, but fo
 
 There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
 
-Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that that driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
+Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that the driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
 ```bash
 lsmod | grep nvidia
@@ -268,7 +268,7 @@ After the above setup is ready one can pass through those devices, in `libvirt` 
 </hostdev>
 ```
 
-And for mediated devices it is quite similar, but using the UUID.
+And for mediated devices, the format is quite similar, but uses the UUID.
 
 ```
 <hostdev mode='subsystem' type='mdev' managed='no' model='vfio-pci' display='on'>
@@ -278,7 +278,7 @@ And for mediated devices it is quite similar, but using the UUID.
 </hostdev>
 ```
 
-Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add remove if the hardware device and its drivers support it `virsh attach-device`.
+Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add and remove if the hardware device and its drivers support it `virsh attach-device`.
 
 ```{note}
 This works great on Focal, but `type='none'` as well as `display='off'` weren't available on Bionic. If this level of control is required one would need to consider using the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive) or [Server-Backports](https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports) for a newer stack of the virtualisation components.

@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Explore container tools available on Ubuntu Server, including Docker, LXD, Podman, and other containerisation technologies."
+    description: "Explore container tools available on Ubuntu Server, including Docker, LXD, and other containerization technologies."
 ---
 
 (container-tools-in-the-ubuntu-space)=

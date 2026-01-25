@@ -7,7 +7,7 @@ myst:
 (attach-your-ubuntu-pro-subscription)=
 # Attach your Ubuntu Pro subscription
 
-Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings you the [enterprise lifecycle](https://ubuntu.com/about/release-cycle), including [Linux kernel livepatching](https://ubuntu.com/security/livepatch), access to [FIPS-validated packages](https://documentation.ubuntu.com/security/compliance/fips/), and [compliance with security profiles](https://ubuntu.com/security/security-standards) such as CIS. This is not required for Ubuntu Pro instances [through public clouds](https://ubuntu.com/cloud/public-cloud) such as [AWS](https://ubuntu.com/aws/pro), [Azure](https://ubuntu.com/azure/pro) or [GCP](https://ubuntu.com/gcp/pro), since these are automatically attached from launch.
+Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings you the [enterprise lifecycle](https://ubuntu.com/about/release-cycle), including [Linux kernel livepatching](https://ubuntu.com/security/livepatch), access to [FIPS-validated packages](https://documentation.ubuntu.com/security/compliance/fips/), and [compliance with security profiles](https://ubuntu.com/security/security-standards) such as CIS or DISA-STIG. This is not required for Ubuntu Pro instances [through public clouds](https://ubuntu.com/cloud/public-cloud) such as [AWS](https://ubuntu.com/aws/pro), [Azure](https://ubuntu.com/azure/pro) or [GCP](https://ubuntu.com/gcp/pro), since these are automatically attached from launch.
 
 ```{note}
 Subscriptions are not just for enterprise customers. Anyone can get [a personal subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
@@ -19,13 +19,13 @@ The following instructions explain how to attach your subscription to your Ubunt
 
 This step is necessary for Ubuntu Pro users or holders of personal subscriptions. If you are an Ubuntu Pro user through a public cloud offering, your subscription is already attached and you can skip these instructions.
 
-First, make sure that you have the latest version of the Ubuntu Pro Client running. The package used to access the Pro Client (`pro`) is `ubuntu-advantage-tools`:
+First, make sure that you have the latest version of the Ubuntu Pro Client running. The package used to access the Pro Client (`pro`) is `ubuntu-pro-client`:
 
 ```bash
-sudo apt update && sudo apt install ubuntu-advantage-tools
+sudo apt update && sudo apt install ubuntu-pro-client
 ```
 
-If you already have `ubuntu-advantage-tools` installed, this install command will upgrade the package to the latest version.
+Most systems will have `ubuntu-pro-client` installed by default. If that is the case, this install command will upgrade the package to the latest version.
 
 ## Step 2: Attach your subscription
 
@@ -35,7 +35,11 @@ To attach your machine to a subscription, run the following command in your term
 sudo pro attach
 ```
 
-You should see output like this, giving you a link and a code:
+```{note}
+For users who need to attach many systems or automate the process, as in many enterprise scenarios, there are parameters to the attach command to help you. Please check the Ubuntu Pro documentation for [attaching your system with a configuration file](https://documentation.ubuntu.com/pro-client/en/latest/howtoguides/how_to_attach_with_config_file/)
+```
+
+After running the command, you should see output like this, giving you a link and a code:
 
 ```bash
 ubuntu@test:~$ sudo pro attach
@@ -58,16 +62,12 @@ The attach process will then continue in the terminal window, and you should eve
 
 ```
 Attaching the machine...
-Enabling default service esm-apps
-Updating Ubuntu Pro: ESM Apps package lists
+Enabling Ubuntu Pro: ESM Apps
 Ubuntu Pro: ESM Apps enabled
-Enabling default service esm-infra
-Updating Ubuntu Pro: ESM Infra package lists
+Enabling Ubuntu Pro: ESM Infra
 Ubuntu Pro: ESM Infra enabled
-Enabling default service livepatch
-Installing snapd snap
-Installing canonical-livepatch snap
-Canonical Livepatch enabled
+Enabling Livepatch
+Livepatch enabled
 This machine is now attached to 'Ubuntu Pro - free personal subscription'
 ```
 

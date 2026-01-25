@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Introduction to eBPF (Extended Berkeley Packet Filter) for safe and efficient kernel-level programming on Ubuntu Server systems.
+    description: Introduction to eBPF (Extended Berkeley Packet Filter) for safe and efficient kernel-level analysis on Ubuntu Server systems.
 ---
 
 (introduction-to-ebpf)=
@@ -214,8 +214,8 @@ $ sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 $ sudo vim /usr/sbin/opensnoop-bpfcc.new
 ...
 $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
---- /usr/sbin/opensnoop-bpfcc	2024-11-12 09:15:17.172939237 +0100
-+++ /usr/sbin/opensnoop-bpfcc.new	2024-11-12 09:31:48.973939968 +0100
+--- /usr/sbin/opensnoop-bpfcc	2025-10-24 12:17:00.000000000 +0000
++++ /usr/sbin/opensnoop-bpfcc.new	2026-01-19 10:45:13.620367441 +0000
 @@ -40,6 +40,7 @@
      ./opensnoop -u 1000                # only trace UID 1000
      ./opensnoop -d 10                  # trace for 10 seconds only
@@ -243,7 +243,7 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
  debug = 0
  if args.duration:
      args.duration = timedelta(seconds=int(args.duration))
-@@ -440,6 +446,12 @@
+@@ -478,6 +484,12 @@
          if args.name and bytes(args.name) not in event.comm:
              skip = True
  
@@ -256,7 +256,7 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
          if not skip:
              if args.timestamp:
                  delta = event.ts - initial_ts
-@@ -458,9 +470,7 @@
+@@ -502,9 +514,7 @@
              if not args.full_path:
                  printb(b"%s" % event.name)
              else:

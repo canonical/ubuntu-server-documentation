@@ -1,12 +1,15 @@
 ---
 myst:
   html_meta:
-    description: "Explore different OpenVPN client implementations available for Ubuntu Server, including compatibility and configuration options."
+    description: "Explore different OpenVPN client implementations providing GUI options to Ubuntu and connectivity to OpenVPN from other operating systems."
 ---
 
 (openvpn-client-implementations)=
 # OpenVPN client implementations
 
+Ubuntu Server can be the platform for an {ref}`OpenVPN server<install-openvpn>`,
+but clients might need a GUI for Desktop usage or need to operate from other
+operating systems.
 
 ## Linux Network-Manager GUI for OpenVPN
 

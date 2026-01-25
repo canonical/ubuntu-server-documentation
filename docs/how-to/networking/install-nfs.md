@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Set up NFS on Ubuntu to share directories and files over a network, enabling remote access to data and reducing local disk space needs.
+    description: Set up NFS on Ubuntu to share files over a network, including optional Kerberos authentication.
 ---
 
 (install-nfs)=
@@ -41,7 +41,7 @@ You can configure the directories to be exported by adding them to the `/etc/exp
     /home    *.hostname.com(rw,sync,no_subtree_check)
     /scratch *(rw,async,no_subtree_check,no_root_squash)
 
-Make sure any custom mount points you're adding have been created (/srv and /home will already exist):
+Make sure any custom mount points you're adding have been created (`/srv` and `/home` will already exist):
 
     sudo mkdir /scratch
 
@@ -49,13 +49,15 @@ Apply the new config via:
 
     sudo exportfs -a
 
-You can replace \* with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount. Be aware that `*.hostname.com` will match` foo.hostname.com` but not `foo.bar.my-domain.com`.
+You can replace `*` with one of the {term}`hostname` formats. Make the hostname declaration as specific as possible so unwanted systems cannot access the NFS mount. Be aware that `*.hostname.com` will match `foo.hostname.com` and all its subdomains, as the `*` character also matches dots.
 
-The *`sync`*/*`async`* options control whether changes are guaranteed to be committed to stable storage before replying to requests. *`async`* thus gives a performance benefit but risks data loss or corruption. Even though *`sync`* is the default, it's worth setting since `exportfs` will issue a warning if it's left unspecified.
+The *`sync`*/*`async`* options control whether changes are guaranteed to be committed to stable storage before replying to requests. *`async`* thus gives a performance benefit but risks data loss or corruption. Some older versions of `exportfs` will issue a warning if this option is left unspecified.
 
-*`subtree_check`* and *`no_subtree_check`* enables or disables a security verification that subdirectories a client attempts to mount for an exported {term}`filesystem` are ones they're permitted to do so. This verification step has some performance implications for some use cases, such as home directories with frequent file renames. Read-only filesystems are more suitable to enable *`subtree_check`* on. Like with sync, `exportfs` will warn if it's left unspecified.
+*`subtree_check`* and *`no_subtree_check`* enables or disables a security verification that subdirectories a client attempts to mount for an exported {term}`filesystem` are ones they're permitted to do so. This verification step has some performance implications for some use cases, such as home directories with frequent file renames. Read-only filesystems are more suitable to enable *`subtree_check`* on. In some older versions, `exportfs` will warn if this option is left unspecified.
 
 There are a number of optional settings for NFS mounts for tuning performance, tightening security, or providing conveniences. These settings each have their own trade-offs so it is important to use them with care, only as needed for the particular use case. *`no_root_squash`*, for example, adds a convenience to allow root-owned files to be modified by any client system's root user; in a multi-user environment where executables are allowed on a shared mount point, this could lead to security problems.
+
+Please see the {manpage}`exports(5)` manual page for details about this configuration file.
 
 ## NFS Client Configuration
 
@@ -76,44 +78,31 @@ An alternate way to mount an NFS share from another machine is to add a line to 
 
 The general syntax for the line in `/etc/fstab` file is as follows:
 
-    example.hostname.com:/srv /opt/example nfs rsize=8192,wsize=8192,timeo=14,intr
+    example.hostname.com:/srv /opt/example nfs
 
-## Advanced Configuration
+```{note}
+Details about all the NFS related options that can go into `/etc/fstab` can be found in the {manpage}`nfs(5)` manual page.
+```
+
+After modifying `/etc/fstab`, systemd should be told about the change, otherwise you will get this warning when trying to mount:
+```
+mount: (hint) your fstab has been modified, but systemd still uses
+       the old version; use 'systemctl daemon-reload' to reload.
+```
+
+Therefore, issue the command:
+
+```
+sudo systemctl daemon-reload
+```
+
+## Advanced configuration
 
 NFS is comprised of several services, both on the server and the client. Each one of these services can have its own default configuration, and depending on the Ubuntu Server release you have installed, this configuration is done in different files, and with a different syntax.
 
-### Ubuntu Server 22.04 LTS ("Jammy")
-
-All NFS related services read a single configuration file: `/etc/nfs.conf`. This is a INI-style config file, see the {manpage}`nfs.conf(5)` manual page for details. Furthermore, there is a `/etc/nfs.conf.d` directory which can hold `*.conf` snippets that can override settings from previous snippets or from the `nfs.conf` main config file itself.
+All NFS related services read a single configuration file: `/etc/nfs.conf`. This is an INI-style config file, see the {manpage}`nfs.conf(5)` manual page for details. Furthermore, there is a `/etc/nfs.conf.d` directory which can hold `*.conf` snippets that can override settings from previous snippets or from the `nfs.conf` main config file itself.
 
 There is a new command-line tool called {manpage}`nfsconf(8)` which can be used to query or even set configuration parameters in `nfs.conf`. In particular, it has a `--dump` parameter which will show the effective configuration including all changes done by `/etc/nfs.conf.d/*.conf` snippets.
-
-### For Ubuntu Server 20.04 LTS ("Focal") and earlier
-
-Earlier Ubuntu releases use the traditional configuration mechanism for the NFS services via `/etc/defaults/` configuration files. These are `/etc/default/nfs-common` and `/etc/default/nfs/kernel-server`, and are used basically to adjust the command-line options given to each daemon.
-
-Each file has a small explanation about the available settings.
-
-```{warning}
-The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("focal") and Ubuntu 18.04 LTS ("bionic").
-In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
-```
-
-## Upgrading to Ubuntu 22.04 LTS ("Jammy")
-
-The main change to the NFS packages in Ubuntu 22.04 LTS ("jammy") is the configuration file. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, now there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
-When upgrading to Ubuntu 22.04 LTS ("jammy") from a release that still uses the `/etc/defaults/nfs-*` configuration files, the following will happen:
-
- * a default `/etc/nfs.conf` configuration file will be installed
- * if the `/etc/default/nfs-*` files have been modified, a conversion script will be run and it will create `/etc/nfs.conf.d/local.conf` with the local modifications.
-
-If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please file a bug using this link: [https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug)
-
-You can run the conversion tool manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
-
-If all goes well, as it should in most cases, the system will have `/etc/nfs.conf` with the defaults, and `/etc/nfs.conf.d/local.conf` with the changes. You can merge these two together manually, and then delete `local.conf`, or leave it as is. Just keep in mind that `/etc/nfs.conf` is not the whole story: always inspect `/etc/nfs.conf.d` as well, as it may contain files overriding the defaults.
-
-You can always run `nfsconf --dump` to check the final settings, as it merges together all configuration files and shows the resulting non-default settings.
 
 ## Restarting NFS services
 
@@ -121,15 +110,15 @@ Since NFS is comprised of several individual services, it can be difficult to de
 
 The tables below summarize all available services, which "meta" service they are linked to, and which configuration file each service uses.
 
-| Service       | `nfs-utils.service` | `nfs-server.service` | config file (22.04)       | config file (< 22.04) `/etc/default/nfs-*` |
-| ------------- | ------------------- | -------------------- | ------------------------- | ------------------------------------------ |
-| `nfs-blkmap`  | PartOf              |                      | `nfs.conf`                |                                            |
-| `nfs-mountd`  |                     | BindsTo              | `nfs.conf`                | `nfs-kernel-server`                        |
-| `nfsdcld`     |                     |                      |                           |                                            |
-| `nfs-idmapd`  |                     | BindsTo              | `nfs.conf`, `idmapd.conf` | `idmapd.conf`                              |
-| `rpc-gssd`    | PartOf              |                      | `nfs.conf`                |                                            |
-| `rpc-statd`   | PartOf              |                      | `nfs.conf`                | `nfs-common`                               |
-| `rpc-svcgssd` | PartOf              | BindsTo              | `nfs.conf`                | `nfs-kernel-server`                        |
+| Service       | `nfs-utils.service` | `nfs-server.service` | config file               |
+| ------------- | ------------------- | -------------------- | ------------------------- |
+| `nfs-blkmap`  | PartOf              |                      | `nfs.conf`                |
+| `nfs-mountd`  |                     | BindsTo              | `nfs.conf`                |
+| `nfsdcld`     |                     |                      |                           |
+| `nfs-idmapd`  |                     | BindsTo              | `nfs.conf`, `idmapd.conf` |
+| `rpc-gssd`    | PartOf              |                      | `nfs.conf`                |
+| `rpc-statd`   | PartOf              |                      | `nfs.conf`                |
+| `rpc-svcgssd` | PartOf              | BindsTo              | `nfs.conf`                |
 
 For example, `systemctl restart nfs-server.service` will restart `nfs-mountd`, `nfs-idmapd` and `rpc-svcgssd` (if running). On the other hand, restarting `nfs-utils.service` will restart `nfs-blkmap`, `rpc-gssd`, `rpc-statd` and `rpc-svcgssd`.
 
@@ -151,8 +140,8 @@ The NFS server will have the usual `nfs-kernel-server` package and its dependenc
 For this example, we will use:
  - `.vms` {term}`DNS` domain
  - `VMS` Kerberos realm
- - `j-nfs-server.vms` for the NFS server
- - `j-nfs-client.vms` for the NFS client
+ - `nfs-server.vms` for the NFS server
+ - `nfs-client.vms` for the NFS client
  - `ubuntu/admin` principal has admin privileges on the KDC
 
 Adjust these names according to your setup.
@@ -163,15 +152,15 @@ First, install the `krb5-user` package:
 
 Then, with an admin principal, let's create a key for the NFS server:
 
-    $ sudo kadmin -p ubuntu/admin -q "addprinc -randkey nfs/j-nfs-server.vms"
+    kadmin -p ubuntu/admin -q "addprinc -randkey nfs/nfs-server.vms"
 
 And extract the key into the local keytab:
 
-    $ sudo kadmin -p ubuntu/admin -q "ktadd nfs/j-nfs-server.vms"
+    $ sudo kadmin -p ubuntu/admin -q "ktadd nfs/nfs-server.vms"
     Authenticating as principal ubuntu/admin with password.
     Password for ubuntu/admin@VMS:
-    Entry for principal nfs/j-nfs-server.vms with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
-    Entry for principal nfs/j-nfs-server.vms with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+    Entry for principal nfs/nfs-server.vms with kvno 2, encryption type aes256-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
+    Entry for principal nfs/nfs-server.vms with kvno 2, encryption type aes128-cts-hmac-sha1-96 added to keytab FILE:/etc/krb5.keytab.
 
 Confirm the key is available:
 
@@ -179,14 +168,20 @@ Confirm the key is available:
     Keytab name: FILE:/etc/krb5.keytab
     KVNO Principal
     ---- --------------------------------------------------------------------------
-       2 nfs/j-nfs-server.vms@VMS
-       2 nfs/j-nfs-server.vms@VMS
+       2 nfs/nfs-server.vms@VMS
+       2 nfs/nfs-server.vms@VMS
 
 Now install the NFS server:
 
     $ sudo apt install nfs-kernel-server
 
 This will already automatically start the Kerberos-related nfs services, because of the presence of `/etc/krb5.keytab`.
+
+If you had this package already installed, and were just enabling Kerberos for the first time, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started:
+
+```
+sudo systemctl restart nfs-server
+```
 
 Now populate `/etc/exports`, restricting the exports to krb5 authentication. For example, exporting `/storage` using `krb5p`:
 
@@ -210,23 +205,29 @@ The NFS client has a similar set of steps. First we will prepare the client's ke
 
 To allow the `root` user to mount NFS shares via Kerberos without a password, we have to create a host key for the NFS client:
 
-    sudo kadmin -p ubuntu/admin -q "addprinc -randkey host/j-nfs-client.vms"
+    kadmin -p ubuntu/admin -q "addprinc -randkey host/nfs-client.vms"
 
 And extract it:
 
-    $ sudo kadmin -p ubuntu/admin -q "ktadd host/j-nfs-client.vms"
+    sudo kadmin -p ubuntu/admin -q "ktadd host/nfs-client.vms"
 
 Now install the NFS client package:
 
-    $ sudo apt install nfs-common
+    sudo apt install nfs-common
+
+If you had this package already installed, and were just enabling Kerberos for the first time, then at this point the NFS services should be restarted, so that the Kerberos-related NFS services are also started:
+
+```
+sudo systemctl restart nfs-client.target
+```
 
 And you should be able to do your first NFS Kerberos mount:
 
-    $ sudo mount j-nfs-server:/storage /mnt
+    sudo mount nfs-server:/storage /mnt
 
-If you are using a machine credential, then the above mount will work without having a Kerberos ticket, i.e., `klist` will show no tickets:
+This setup is using a so called *machine credential*, which means the above mount command works without having a Kerberos ticket. The `klist` will show no tickets:
 
-    # mount j-nfs-server:/storage /mnt
+    # mount nfs-server:/storage /mnt
     # ls -l /mnt/*
     -rw-r--r-- 1 root root 0 Apr  5 14:50 /mnt/hello-from-nfs-server.txt
     # klist
@@ -254,11 +255,11 @@ And now we have not only the TGT, but also a ticket for the NFS service:
     Valid starting     Expires            Service principal
     04/05/22 17:48:50  04/06/22 03:48:50  krbtgt/VMS@VMS
             renew until 04/06/22 17:48:48
-    04/05/22 17:48:52  04/06/22 03:48:50  nfs/j-nfs-server.vms@
+    04/05/22 17:48:52  04/06/22 03:48:50  nfs/nfs-server.vms@
             renew until 04/06/22 17:48:48
-            Ticket server: nfs/j-nfs-server.vms@VMS
+            Ticket server: nfs/nfs-server.vms@VMS
 
-One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd`s `-n` option. From `rpc.gssd(8)`:
+One drawback of using a machine credential for mounts done by the `root` user is that you need a persistent secret (the `/etc/krb5.keytab` file) in the filesystem. Some sites may not allow such a persistent secret to be stored in the filesystem. An alternative is to use `rpc.gssd`'s `-n` option. From {manpage}`rpc.gssd(8)`:
 
 - `-n`: when specified, UID 0 is forced to obtain user credentials which are used instead of the local system's machine credentials.
 
@@ -268,30 +269,41 @@ When this option is enabled and `rpc.gssd` restarted, then even the `root` user 
 Note that this prevents automatic NFS mounts via `/etc/fstab`, unless a Kerberos ticket is obtained before.
 ```
 
-In Ubuntu 22.04 LTS ("jammy"), this option is controlled in `/etc/nfs.conf` in the `[gssd]` section:
+This option is controlled in `/etc/nfs.conf` in the `[gssd]` section:
 
     [gssd]
     use-machine-creds=0
 
-In older Ubuntu releases, the command line options for the `rpc.gssd` daemon are not exposed in `/etc/default/nfs-common`, therefore a systemd override file needs to be created. You can either run:
+After you restart the service with `sudo systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
 
-    $ sudo systemctl edit rpc-gssd.service
+## Upgrading from Ubuntu 20.04 ("Focal") and earlier
 
-And paste the following into the editor that will open:
+Earlier Ubuntu releases used the traditional configuration mechanism for the NFS services via `/etc/defaults/` configuration files. These are `/etc/default/nfs-common` and `/etc/default/nfs/kernel-server`, and were basically used to adjust the command-line options given to each daemon.
 
-    [Service]
-    ExecStart=
-    ExecStart=/usr/sbin/rpc.gssd $GSSDARGS -n
+Each file has a small explanation about the available settings.
 
-Or manually create the file `/etc/systemd/system/rpc-gssd.service.d/override.conf` and any needed directories up to it, with the contents above.
+```{warning}
+The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("Focal") and Ubuntu 18.04 LTS ("Bionic").
+In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
+```
 
-After you restart the service with `systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
+Ubuntu 22.04 LTS ("Jammy") and later have a new configuration file format for the NFS packages. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
+
+When upgrading from Ubuntu 20.04 ("Focal") and earlier, the following will happen:
+
+ * a default `/etc/nfs.conf` configuration file will be installed
+ * if the `/etc/default/nfs-*` files have been modified, a conversion script will run and create `/etc/nfs.conf.d/local.conf` with the local modifications.
+
+If this conversion script fails, then the package installation will fail. This can happen if the `/etc/default/nfs-*` files have an option that the conversion script wasn't prepared to handle, or a syntax error for example. In such cases, please [file a bug for the nfs-utils package](https://bugs.launchpad.net/ubuntu/+source/nfs-utils/+filebug).
+
+The conversion tool can be run manually to gather more information about the error: it's in `/usr/share/nfs-common/nfsconvert.py` and must be run as `root`.
+
+If all goes well, as it should in most cases, the system will have `/etc/nfs.conf` with the defaults, and `/etc/nfs.conf.d/local.conf` with the changes. You can merge these two together manually, and then delete `local.conf`, or leave it as is. Just keep in mind that `/etc/nfs.conf` is not the whole story: always inspect `/etc/nfs.conf.d` as well, as it may contain files overriding the defaults.
+
+You can always run `nfsconf --dump` to check the final settings, as it merges together all configuration files and shows the resulting non-default settings.
+
 
 
 ## References
 
 * [Linux NFS wiki](https://linux-nfs.org/wiki/index.php/Main_Page)
-* [Linux NFS FAQ](https://nfs.sourceforge.net/)
-
-* [Ubuntu Wiki NFS How-to](https://help.ubuntu.com/community/SettingUpNFSHowTo)
-* [Ubuntu Wiki NFSv4 How-to](https://help.ubuntu.com/community/NFSv4Howto)

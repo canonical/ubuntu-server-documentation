@@ -113,6 +113,45 @@ Advanced Micro Devices
     Related topic(s):
     * Networking
 
+AMD-SME
+AMD Secure Memory Encryption
+    AMD-SME is a security technology that transparently encrypts all system memory
+    to protect data at rest. It encrypts the entire memory address space of the system
+    using a key derived from the processor, protecting against physical attacks on memory.
+
+    Related topic(s):
+    * Cryptography, Security
+
+AMD-SEV
+AMD Secure Encrypted Virtualization
+    AMD-SEV is a security technology that encrypts the memory of virtual machines
+    (guests) independently from the host system. It uses a dedicated memory encryption
+    key for each guest VM, preventing the hypervisor from reading or modifying guest
+    memory. This protects guest confidentiality even when the hypervisor is compromised.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-ES
+AMD Secure Encrypted Virtualization - Encrypted State
+    AMD-SEV-ES extends {term}`AMD-SEV` by encrypting the entire VM state, including
+    CPU register contents, in addition to guest memory. This provides enhanced protection
+    against hypervisor-based attacks by preventing the hypervisor from reading or modifying
+    sensitive VM state during execution.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
+AMD-SEV-SNP
+AMD Secure Encrypted Virtualization - Secure Nested Paging
+    AMD-SEV-SNP is an extension of {term}`AMD-SEV-ES` that adds integrity protection
+    for guest memory using Secure Nested Paging. It prevents the hypervisor from modifying
+    guest memory contents and provides cryptographic attestation of the VM's launch state,
+    ensuring the integrity and confidentiality of guest data.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
 Ansible
     Ansible is an open-source IT automation tool developed by Red Hat. It offers
     several automation features, enabling developers and organizations to
@@ -186,7 +225,7 @@ Advanced Package Tool
     APT is a package management system used by Debian and Debian-based Linux
     distributions like Ubuntu. APT helps install, update, upgrade, and remove
     software packages from the command line.
-    
+
     See also:
     * {ref}`package-management`
 
@@ -210,7 +249,7 @@ Address Resolution Protocol
 
 ASCII
 American Standard Code for Information Interchange
-   A character encoding standard.
+    A character encoding standard.
 
 async
 asynchronous
@@ -486,7 +525,7 @@ DAC
 Discretionary access control
     A form of access control where the owner of a resource can grant/revoke
     permissions to other users.
-    
+
     Related topic(s):
     * Security
 
@@ -504,9 +543,9 @@ DAS
 Direct Attached Storage
     DAS is storage that is physically and directly connected to one computer. DAS is not shared over a network and it is accessible ONLY to the host it is connected to.
 
-     See also:
-     * {term}`NAS`
-     * {term}`SAN`
+    See also:
+    * {term}`NAS`
+    * {term}`SAN`
 
 
 DASD
@@ -622,7 +661,7 @@ Direct Memory Access Remapping
     often used in virtualized environments to isolate devices between
     {term}`virtual machines (VMs) <VM>` and the host system.
 
-`dmesg`
+dmesg
     A command in Linux systems that displays system logs related to hardware,
     drivers, and kernel events, such as system startup, device detection, and
     errors. It is commonly used for troubleshooting hardware issues and system
@@ -664,7 +703,7 @@ Docker
 
 DocumentRoot
     A directive in web server configuration files that specifies the directory
-    on the server where web files are stored (root location). 
+    on the server where web files are stored (root location).
 
 DoT
 DNS over TLS
@@ -688,7 +727,7 @@ DNS over HTTPS
     * Networking
     * Security
 
-`dpkg`
+dpkg
     `dpkg` is a package manager for Debian-based systems. It can install, remove,
     and build packages, but unlike other package management systems, it cannot
     automatically download and install packages -– or their dependencies.
@@ -759,7 +798,7 @@ ESM
 Expanded Security Maintenance
     A service provided by Canonical to extend security updates and patches for
     older {term}`LTS` releases of the Ubuntu operating system after the LTS
-    standard support period has ended. 
+    standard support period has ended.
 
 ESXi
     A bare-metal virtualization platform created by VMWare that enables
@@ -815,11 +854,11 @@ filesystem
     Related topic(s):
     * Storage
 
-FTP 
+FTP
 File Transfer Protocol
     It is one of the tools used to move files between computers. FTP was created in 1970s. It is not secure as it transfers files, usernames, and passwords in plain text. It uses port 21.
-    Use only with legacy systems. Avoid unless wrapped in a secure network. 
-    
+    Use only with legacy systems. Avoid unless wrapped in a secure network.
+
     Related topic(s):
     * {term}`SFTP`
     * {term}`rsync`
@@ -854,11 +893,12 @@ Free Identity, Policy, and Audit
     and enables authentication, policy enforcement, and auditing through
     integrations with {term}`SSSD` and {term}`Kerberos`.
 
-    Related topic(s): Security, OpenLDAP
+    Related topic(s):
+    * Security, OpenLDAP
 
 Freenode
     Freenode is an open-source {term}`Internet Relay Chat (IRC) <IRC>` platform
-    used by many open-source communities for real-time discussions. 
+    used by many open-source communities for real-time discussions.
 
 frontend
     A frontend is a user-friendly interface for managing a complex system.
@@ -875,11 +915,11 @@ frontend
       LDAP databases inside {term}`slapd`, unless overridden.
 
     Related topic(s):
-    * Virtualization and containers, Security, OpenLDAP.
+    * Virtualization and containers, Security, OpenLDAP
 
-`fsck`
+fsck
 File System Check
-    `fsck` is a Linux/Unix-like system utility tool that checks for, and
+    fsck is a Linux/Unix-like system utility tool that checks for, and
     repairs, any {term}`filesystem` errors.
 
     Related topic(s):
@@ -917,14 +957,14 @@ Firmware
 
 :::{glossary}
 
-`gcplogs`
+gcplogs
     A logging driver that allows logs to be forwarded from a Docker container
     running in Google Cloud to the Google Cloud Logging service.
-    
+
     Related topic(s):
     * Cloud, Containers, Observability
 
-`gcrypt`
+gcrypt
     A cryptographic library that supports encryption, hashing, etc. for
     applications.
 
@@ -1051,7 +1091,8 @@ Group Policy Object
     A set of configuration rules used to manage and enforce security and system
     behaviours across users or computers within an Active Directory (AD) object.
 
-    Related topic(s): Active Directory integration
+    Related topic(s):
+    * Active Directory integration
 
 GRUB
 GRand Unified Bootloader
@@ -1086,7 +1127,7 @@ GZIP
 GNU Zip
     GZIP is a {term}`GNU` software package used to reduce the file size of a
     backup.
-    
+
     - When applied directly to files, it replaces the original file type with a
       `.gz` type.
     - When used in Bacula's {term}`fileset`, it reduces the storage size of
@@ -1119,7 +1160,7 @@ HBA
 Host Bus Adapter
     HBAs are interface cards that connect a server to a storage device.
 
-    Related topic(S):
+    Related topic(s):
     * Device mapper multipathing
 
 HMAC
@@ -1130,7 +1171,7 @@ Hash-based Message Authentication Code
     the integrity by computing the HMAC again -- if the message is altered, the
     value will differ.
 
-    Related topic(S):
+    Related topic(s):
     * Cryptography, Security
 
 HMC
@@ -1142,7 +1183,7 @@ Hardware Management Console
 hostgroup
     A group of backend web or database servers with similar configurations.
 
-    Related topic(S):
+    Related topic(s):
     * Observability
 
 hostname
@@ -1199,7 +1240,7 @@ HyperText Transfer Protocol Secure
     *Work in Progress*
 
 hugepage
-    A huge page increases the page size on a host, and as a result, when virtual memory is allocated to an application, there are fewer page table entries required to map the virtual memory to physical memory. The page table entries are stored in Random Access Memory (RAM) and cached in the {term}`Translation Lookaside Buffer (TLB) <TLB>`.
+    A hugepage increases the page size on a host, and as a result, when virtual memory is allocated to an application, there are fewer page table entries required to map the virtual memory to physical memory. The page table entries are stored in Random Access Memory (RAM) and cached in the {term}`Translation Lookaside Buffer (TLB) <TLB>`.
 
 HWE
 Hardware Enablement
@@ -1326,7 +1367,7 @@ journald
     journald stores logs in a binary format offering advantages, such as storage
     efficiency, searchability, and most especially structured logging. In
     containerized systems like Docker, it functions as a logging driver for
-    containers. 
+    containers.
 
     See also:
     * The {manpage}`journald.conf(5)` manual page
@@ -1419,7 +1460,7 @@ localhost
 
 Log files
     *Work in Progress*
-    
+
 Logstash
     *Work in Progress*
 
@@ -1580,9 +1621,9 @@ NAS
 Network Attached Storage
     NAS is a file-level computer data storage server connected to a computer network providing data access to a heterogeneous group of clients. In this context, the term "NAS" can refer to both the technology and systems involved, and a specialized computer appliance device unit built for such functionality, a NAS appliance or NAS box.
 
-     See also:
-     * {term}`DAS`
-     * {term}`SAN`
+    See also:
+    * {term}`DAS`
+    * {term}`SAN`
   
 NAT
 Network Address Translation
@@ -1722,6 +1763,13 @@ Open Systems Adapter
 OSI
 Open Systems Interconnection
     *Work in Progress*
+
+OSPF
+Open Shortest Path First
+    Open Shortest Path First (OSPF) is a widely used Interior Gateway Protocol (IGP) for IP networks, classifying as a link-state protocol that helps routers find the most efficient paths within a single Autonomous System (AS). It works by each router building a complete map (Link-State Database) of the network topology and using Dijkstra's algorithm to calculate the shortest path to all destinations, ensuring fast convergence and scalability, especially in large enterprise network.
+
+    Related topic(s):
+    * Networking
 
 OTE
 Operational Test and Evaluation
@@ -1959,6 +2007,13 @@ rid
 Relative Identifier
     *Work in Progress*
 
+RIP
+Router Information Protocol
+    Routing Information Protocol (RIP) is an older, simple distance-vector routing protocol that helps routers find the best path in small networks by counting "hops" (routers passed), using the Bellman-Ford algorithm, and periodically sending full routing tables to neighbors, though its 15-hop limit and bandwidth usage make it outdated for large networks, with OSPF or IS-IS being modern alternatives.
+
+    Related topic(s):
+    * Networking
+
 RISC-V
 Reduced Instruction Set Computing - Version Five
     *Work in Progress*
@@ -1983,21 +2038,18 @@ routable
 
 RSA
 Rivest–Shamir–Adleman
-    RSA is an asymmetric encryption algorithm
+    RSA is an asymmetric encryption algorithm.
     *Work in Progress*
 
 rsync
 Remote Sync
     Rsync is not strictly a protocol. Rsync is a file synchronization and transfer tool. It uses port 22, when over SSH, or 873 for rsync daemon. Rsync is the most efficient tool to synchronise backup tasks because it uses the Delta Transfer Algorithm method.
-    
-    See also:
-     * {term}`FTP`
-     * {term}`SCP`
-     * {term}`SFTP`
 
-     Related topic(s):
-     * Delta transfer algorithm
-    
+    See also:
+    * {term}`FTP`
+    * {term}`SCP`
+    * {term}`SFTP`
+
 RTC
 Real-Time Clock
     *Work in Progress*
@@ -2021,44 +2073,37 @@ Samba
 
 SAN
 Storage Area Network
-    A SAN is a dedicated network that connects servers to {term}`storage devices` (like disk arrays, tape libraries). It is a specialized high-speed network that provides access to consolidated block-level data storage. It makes storage devices appear as locally attached to the operating system, even though they are on a separate network.
+    A SAN is a dedicated network that connects servers to storage devices such as disk arrays and tape libraries. It is a specialized high-speed network that provides access to consolidated block-level data storage. It makes storage devices appear as locally attached to the operating system, even though they are on a separate network.
 
     See also:
     * {term}`NAS`
-    
+
 sandboxed
     Sandboxed means running software in an isolated environment where it cannot affect anything outside the sandbox.
     Sandboxing does two things:
 
     * Isolates: The sandboxed program cannot access:
-            * Your files (unless explicitly allowed)
-            * Other running programs
-            * System settings
-            * Network resources (in some cases)
+        * Your files (unless explicitly allowed)
+        * Other running programs
+        * System settings
+        * Network resources (in some cases)
 
     * Secures: If the sandboxed program is malicious or gets compromised, the damage is contained. It cannot spread to your whole system.
 
     Related topic(s):
-      * Web browsers
-      * Mobile apps
-      * Virtual machines
-      * {term}`WSL`
-    
+    * Virtualization and containers
+
 SANLOCK
 Storage Area Network Locking Daemon
     SAN Locking Daemon is a lock manager designed for shared storage in {term}`SAN` environments.
-    
+
 SASL
 Simple Authentication and Security Layer
     SASL is a framework that adds authentication and security to network protocols. SASL itself does not define how to authenticate. It defines how to negotiate and use authentication mechanisms.
- 
+
 SBD
 Storage-Based Death
-   SBD is a fencing mechanism used in high-availability (HA) Linux clusters to prevent split-brain scenarios and data corruption. SBD uses shared storage as a communication channel to coordinate cluster nodes and forcibly reboot ("fence") problematic nodes that might cause issues.
-
-    Related topic(s):
-    * Split-brain scenario
-
+    SBD is a fencing mechanism used in high-availability (HA) Linux clusters to prevent split-brain scenarios and data corruption. SBD uses shared storage as a communication channel to coordinate cluster nodes and forcibly reboot ("fence") problematic nodes that might cause issues.
 
 sbin
 System Binaries
@@ -2066,35 +2111,26 @@ System Binaries
     On many modern Linux distributions, `/sbin` is often symlinked to `/usr/sbin`, and both directories are merged as part of filesystem simplification efforts. The distinction is becoming less strict, but historically `/sbin` was for boot-essential tools.
 
 schema
-   Schema (plural: schemas or schemata) refers to a structured framework or blueprint that defines how data is organized. The meaning varies slightly depending on context.
-
-     Related topic(s):
-     * Database Schemas
-     * XML/JSON Schemas
-     * API Schemas
-     * Conceptual Schemas
-    
+    Schema (plural: schemas or schemata) refers to a structured framework or blueprint that defines how data is organized. The meaning varies slightly depending on context.
 
 SCP
 Secure Copy Protocol
     SCP is a network protocol for securely transferring files between computers over {term}`SSH`. SCP allows you to copy files between a local and remote host, or between two remote hosts, with encryption to protect the data during transfer.
 
-     See also:
-     * {term}`FTP`
-     * {term}`SFTP`
-     * {term}`rsync`
-    
+    See also:
+    * {term}`FTP`
+    * {term}`SFTP`
+    * {term}`rsync`
 
 Scrollback
     Scrollback refers to the ability to scroll back through previous content in a terminal or console window. Scrollback is the buffer that stores older content so you can scroll up to see it. Limitations are lost on close, not infinite, and the performance may suffer if the buffer is very large.
-     
+
     Related topic(s):
     * Command history
 
 SCSI
 Small Computer System Interface
     SCSI (pronounced "scuzzy") is both a physical interface (cables and connectors) and a command protocol (set of standards) for communicating with storage and peripheral devices like hard drives, tape drives, and scanners. Each device gets a unique ID number (0-7 or 0-15 depending on version). The last device in a SCSI chain needs a terminator to prevent signal reflection.
-    
 SDN
 Software-Defined Networking
     *Work in Progress*
@@ -2106,11 +2142,11 @@ Secure computing mode
 SFTP
 SSH File Transfer Protocol
     SFTP is a secure file transfer protocol that runs over {term}`SSH`. SFTP is fully encrypted. The port used is 22.
-    
+
     See also:
-     * {term}`FTP`
-     * {term}`SCP`
-     * {term}`rsync`
+    * {term}`FTP`
+    * {term}`SCP`
+    * {term}`rsync`
 
 SGI
 Silicon Graphics Inc.
@@ -2273,7 +2309,7 @@ substring
 subvolume
     *Work in Progress*
 
-`sudo`
+sudo
 superuser do
     *Work in Progress*
 
@@ -2314,10 +2350,10 @@ Transmission Control Protocol
 
 TDX
 Trust domain extensions
-  It is security technology from Intel that creates isolated, encrypted virtual machines called "Trust Domains".
-  TDX:
-  * Protects confidential workloads in cloud environments
-  * Encrypts VM memory to protect it from the host system or hypervisor
+    It is security technology from Intel that creates isolated, encrypted virtual machines called "Trust Domains".
+    TDX:
+    * Protects confidential workloads in cloud environments
+    * Encrypts VM memory to protect it from the host system or hypervisor
 
 TEE
 Trusted Execution Environment
@@ -2402,7 +2438,7 @@ UEFI
 Unified Extensible Firmware Interface
     *Work in Progress*
 
-`ufw`
+ufw
 Uncomplicated Firewall
     *Work in Progress*
 
@@ -2415,7 +2451,7 @@ User Interface
     *Work in Progress*
 
 unicast
-    One-to-one communication
+    One-to-one communication.
 
 unmount
     *Work in Progress*
@@ -2441,8 +2477,8 @@ USN
 Update Sequence Number
     *Work in Progress*
 
-`usr`
-    Refers to the `/usr/` directory and stands for "Unix System Resources"
+usr
+    Refers to the `/usr/` directory and stands for "Unix System Resources".
 
 UUIDs
 Universally Unique Identifiers
@@ -2577,7 +2613,8 @@ World Wide Identifier
 :::{glossary}
 
 X.509
-   X.509 is a standard format for public key certificates used in cryptography and network security. A digital certificate that binds a public key to an identity (like a website, person, or organization). X.509 is signed by a trusted Certificate Authority ({term}`CA`) to verify authenticity.
+    X.509 is a standard format for public key certificates used in cryptography and network security. It is a digital certificate that binds a public key to an identity (like a website, person, or organization). X.509 is signed by a trusted {term}`Certificate Authority <CA>` to verify authenticity.
+
 xhtml
 Extensible HyperText Markup Language
     *Work in Progress*
@@ -2619,5 +2656,6 @@ Zettabyte File System
 
 z/VM
     *Work in progress*
+
 :::
 

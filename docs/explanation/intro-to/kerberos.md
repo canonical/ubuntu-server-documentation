@@ -38,6 +38,6 @@ To put the pieces together, a Realm has at least one KDC, preferably more for re
 
   - For more information on MIT's version of Kerberos, see the [MIT Kerberos](http://web.mit.edu/Kerberos/) site.
 
-  - Also, feel free to stop by the *\#ubuntu-server* and *\#kerberos* IRC channels on [Libera.Chat](https://libera.chat/) if you have Kerberos questions.
+  - Also, feel free to stop by the {matrix}`Ubuntu Server <server>` Matrix channel and the *\#kerberos* IRC channel on [Libera.Chat](https://libera.chat/) if you have Kerberos questions.
 
  - [Another guide for installing Kerberos on Debian, includes PKINIT](http://techpubs.spinlocksolutions.com/dklar/kerberos.html)

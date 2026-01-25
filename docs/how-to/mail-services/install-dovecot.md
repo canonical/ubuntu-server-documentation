@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Install and configure Dovecot IMAP and POP3 server with optional modules for mail filtering, full-text search, and LDAP integration.
+    description: Install and configure Dovecot IMAP and POP3 server with basic SSL configuration.
 ---
 
 (install-dovecot)=

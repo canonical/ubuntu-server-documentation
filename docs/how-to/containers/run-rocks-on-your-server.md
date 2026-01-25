@@ -15,7 +15,7 @@ As with any other OCI-compliant container image, [rocks](https://documentation.u
 First, install Docker if it's not already installed:
 
 ```bash
-$ sudo apt-get install -y docker.io docker-compose-v2
+$ sudo apt-get install -y docker.io docker-compose
 ```
 
 We can deploy a container with the `docker run` command. This command has a number of [possible parameters](https://docs.docker.com/reference/cli/docker/container/run/). The [“Usage” section](https://hub.docker.com/r/ubuntu/grafana) of the Grafana rock’s documentation has a table with an overview of parameters specific to the image.
