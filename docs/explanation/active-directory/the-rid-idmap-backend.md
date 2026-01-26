@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Learn about the RID IDMap backend for deterministic UID/GID allocation for Linux systemd joined to Active Directory environments."
+    description: "Learn about the RID IDMap backend for deterministic UID/GID allocation for Linux systems joined to Active Directory environments."
 ---
 
 (the-rid-idmap-backend)=
