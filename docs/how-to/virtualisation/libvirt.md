@@ -459,7 +459,7 @@ You can either set a fixed value of addressing bits:
   <maxphysaddr mode='emulate' bits='42'/>
 ```
 
-Alternatively, use the best available by given hardware without exceeding a certain limit to retain compute node compatibility.
+Or, use the best available by a given hardware without exceeding a certain limit to retain some compute node compatibility.
 
 ```xml
   <maxphysaddr mode='passthrough' limit='41/>
