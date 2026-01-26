@@ -371,7 +371,7 @@ $ grep Hugepagesize /proc/meminfo
 Hugepagesize:       2048 kB
 ```
 
-However, more than one size can exist at the same time, so check:
+However, more than one size can exist at the same time, so it's a good idea to check:
 
 ```bash
 $ tail /sys/kernel/mm/hugepages/hugepages-*/nr_hugepages`
