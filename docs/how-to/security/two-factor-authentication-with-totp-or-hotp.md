@@ -84,7 +84,7 @@ add new ones, as required.
 
 
 ```{note}
-On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAUthentication yes`.
+On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAuthentication yes`.
 ```
 
 Restart the `ssh` service to pick up configuration changes:
