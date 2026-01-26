@@ -313,7 +313,7 @@ RSI=0000000000000000 RDI=ffff8f0fdd5c7e48 RBP=ffff8f0f5d5c7e18 RSP=ffff8f0f5d5c7
 
 ## Huge pages
 
-This section summarizes the allocation and structuring of memory in an OS, and its relationship to transparent huge pages and {term}`huge pages <hugepage>`.
+Let's start with a summary of the allocation and structuring of memory in an OS, and its relationship to transparent huge pages and {term}`huge pages <hugepage>`.
 
 When you launch an application, the OS allocates virtual memory to it as a range of virtual addresses. The virtual memory is not *truly* allocated on the physical memory; it allows the application to appear to have more memory than what's physically available.
 
