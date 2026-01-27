@@ -2355,6 +2355,11 @@ Trust domain extensions
     * Protects confidential workloads in cloud environments
     * Encrypts VM memory to protect it from the host system or hypervisor
 
+    See also:
+    * ["Intel TDX" technology here](https://en.wikipedia.org/wiki/Trust_Domain_Extensions)
+    * ["Trust Domain Extentions"](https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html)
+    * ["An overview of the Intel TDX technology, June 2025"](https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/documentation.html)
+
 TEE
 Trusted Execution Environment
     A secure processor enclave that isolates code and data to ensure
