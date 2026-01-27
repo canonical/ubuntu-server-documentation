@@ -4,8 +4,8 @@ myst:
     description: Install and manage LXD system containers and virtual machines with command-line administration for development and production workloads.
 ---
 
-(lxd-containers)=
-# LXD containers
+(lxd)=
+# LXD containers and virtual machines
 
 [LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
@@ -29,15 +29,17 @@ sudo snap install lxd
 
 This will install the self-contained LXD snap package.
 
-## Kernel preparation
-
-In general, Ubuntu should have all the desired features enabled by default. One exception to this is that in order to enable swap accounting, the boot argument `swapaccount=1` must be set. This can be done by appending it to the `GRUB_CMDLINE_LINUX_DEFAULT=`variable in /etc/default/grub, then running 'update-grub' as root and rebooting.
-
 ## Configuration
 
-In order to use LXD, some basic settings need to be configured first. This is done by running `lxd init`, which will allow you to choose:
+In order to use LXD, some basic settings need to be configured first. This is done by running:
 
-  - Directory or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
+```
+lxd init
+```
+
+This will allow you to choose:
+
+  - Directory, [Btrfs](https://btrfs.readthedocs.io/), or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
 
   - Availability over the network.
 
@@ -46,7 +48,7 @@ In order to use LXD, some basic settings need to be configured first. This is do
 You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group lxd. If user `joe` is not a member of group `lxd`, you may run:
 
 ``` 
-adduser joe lxd
+gpasswd -a joe lxd
 ```
 
 as root to change it. The new membership will take effect on the next login, or after running `newgrp lxd` from an existing login.
@@ -69,13 +71,25 @@ Every new container is created based on either an image, an existing container, 
 
   - `images`: this server provides unofficial images for a variety of Linux distributions. This is not the recommended server for Ubuntu images.
 
-The command to create and start a container is
+The command to create and start a container is:
 
 ``` 
 lxc launch remote:image containername
 ```
 
-Images are identified by their hash, but are also aliased. The `ubuntu` remote knows many aliases such as `18.04` and `bionic`. A list of all images available from the Ubuntu Server can be seen using:
+To create a virtual machine instead of a container, use:
+
+``` 
+lxc launch --vm remote:image vmname
+```
+
+Alternatively, you can create a container without starting it using:
+
+``` 
+lxc init remote:image containername
+```
+
+Images are identified by their hash, but are also aliased. A list of all images available from the Ubuntu Server can be seen using:
 
 ``` 
 lxc image list ubuntu:
@@ -84,10 +98,10 @@ lxc image list ubuntu:
 To see more information about a particular image, including all the aliases it is known by, you can use:
 
 ``` 
-lxc image info ubuntu:bionic
+lxc image info ubuntu:noble
 ```
 
-You can generally refer to an Ubuntu image using the release name (`bionic`) or the release number (`18.04`). In addition, `lts` is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
+You can generally refer to an Ubuntu image using the release name (`noble`) or the release number (`24.04`). The `ubuntu` remote knows many aliases such as `24.04`, `noble`, and `lts` which is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
 
 ``` 
 lxc image info ubuntu:lts/arm64
@@ -96,31 +110,33 @@ lxc image info ubuntu:lts/arm64
 Now, let's start our first container:
 
 ``` 
-lxc launch ubuntu:bionic b1
+lxc launch ubuntu:noble n1
 ```
 
-This will download the official current Bionic cloud image for your current architecture, then create a container named `b1` using that image, and finally start it. Once the command returns, you can see it using:
+This will download the official current Noble cloud image for your current architecture, then create a container named `n1` using that image, and finally start it. Once the command returns, you can see it using:
 
 ``` 
 lxc list
-lxc info b1
+lxc info n1
 ```
 
 and open a shell in it using:
 
 ``` 
-lxc exec b1 -- bash
+lxc exec n1 -- sudo -i -u ubuntu
 ```
 
-A convenient alias for the command above is:
+This command provides a proper login shell with full session initialization, including PTY ownership and systemd user session setup.
+
+A convenient alias that opens a shell without the full login process is:
 
 ```
-lxc shell b1
+lxc shell n1
 ```
 
 The try-it page mentioned above gives a full synopsis of the commands you can use to administer containers.
 
-Now that the `bionic` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
+Now that the `noble` image has been downloaded, it will be kept in sync until no new containers have been created based on it for (by default) 10 days. After that, it will be deleted.
 
 ## LXD server configuration
 
@@ -156,14 +172,6 @@ lxc config trust add r1 certfile.crt
 
 Now when the client adds r1 as a known remote, it will not need to provide a password as it is already trusted by the server.
 
-The other step is to configure a 'trust password' with `r1`, either at initial configuration using `lxd init`, or after the fact using:
-
-```
-lxc config set core.trust_password PASSWORD
-```
-
-The password can then be provided when the client registers `r1` as a known remote.
-
 ### Backing store
 
 LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed `zpool` will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
@@ -179,7 +187,7 @@ Container configuration includes properties like the architecture, limits on res
 Devices can be of several types, including UNIX character, UNIX block, network interface, or disk. In order to insert a host mount into a container, a 'disk' device type would be used. For instance, to mount `/opt` in container `c1` at `/opt`, you could use:
 
 ``` 
-lxc config device add c1 opt disk source=/opt path=opt
+lxc config device add c1 opt-mount disk source=/opt path=/opt
 ```
 
 See:
@@ -273,19 +281,19 @@ lxc move c1 final-beta
 They can also be snapshotted:
 
 ``` 
-lxc snapshot c1 YYYY-MM-DD
+lxc snapshot c1 snapshot-name
 ```
 
 Later changes to c1 can then be reverted by restoring the snapshot:
 
 ``` 
-lxc restore u1 YYYY-MM-DD
+lxc restore c1 snapshot-name
 ```
 
 New containers can also be created by copying a container or snapshot:
 
 ``` 
-lxc copy u1/YYYY-MM-DD testcontainer
+lxc copy c1/snapshot-name new-container
 ```
 
 ### Publishing images
@@ -293,13 +301,13 @@ lxc copy u1/YYYY-MM-DD testcontainer
 When a container or container snapshot is ready for consumption by others, it can be published as a new image using;
 
 ``` 
-lxc publish u1/YYYY-MM-DD --alias foo-2.0
+lxc publish c1/snapshot-name --alias foo-2.0
 ```
 
 The published image will be private by default, meaning that LXD will not allow clients without a trusted certificate to see them. If the image is safe for public viewing (i.e. contains no private information), then the 'public' flag can be set, either at publish time using
 
 ``` 
-lxc publish u1/YYYY-MM-DD --alias foo-2.0 public=true
+lxc publish c1/snapshot-name --alias foo-2.0 public=true
 ```
 
 or after the fact using
@@ -312,7 +320,7 @@ and changing the value of the public field.
 
 ### Image export and import
 
-Image can be exported as, and imported from, tarballs:
+Images can be exported as, and imported from, tarballs:
 
 ``` 
 lxc image export foo-2.0 foo-2.0.tar.gz
