@@ -6,30 +6,29 @@ In this diagram, we are depicting a home network with some devices and a router 
 
 ```{mermaid}
 
-flowchart LR
-  home0["home0"]
-  laptop["Laptop in Coffee shop"]
-  home0 --> laptop
-
-  internet(("public internet"))
-  vpn(("VPN network"))
-
-  subgraph home["home network, .home domain — 10.10.10.0/24"]
-    router["router (.1)"]
-    pi4["pi4"]
-    nas["NAS"]
-    extra["Y"]
-    dots["..."]
-    router --- pi4
-    router --- nas
-    router --- extra
-    router --- dots
+%% Conversion Markdown ASCII diagram peer-to-site-on-router 
+flowchart TB
+%% Home network LAN
+ subgraph home["home network, .home domain — 10.10.10.0/24"]
+        pi4["pi4"]
+        nas["NAS"]
+        Y["Y"]
+        dots["..."]
   end
 
-  laptop -- wlan0 --> internet
-  internet -- ppp0 --> router
-  laptop -. "wg0 10.10.11.2/24" .-> vpn
-  router -. "wg0 10.10.11.1/24" .-> vpn
+%% External/public and VPN elements
+    laptop["Laptop in<br>Coffee shop"] -- |wlan0| --> internet(("public internet"))
+    internet -- |ppp0| --> router["router.home =<br> 10.10.10.1"]
+    laptop -. "wg0<br>10.10.11.2/24" .-> vpn(("VPN network<br>10.10.11.0/24"))
+    router -. "wg0<br>10.10.11.1/24" .-> vpn
+    router --- pi4 & dots & nas & Y
+
+%% Styling - colours
+    style laptop fill:#E1BEE7
+    style internet fill:#C8E6C9
+    style router fill:#FFE0B2
+    style vpn fill:#BBDEFB
+    style home fill:#FFF9C4
 ```
 ```
 
