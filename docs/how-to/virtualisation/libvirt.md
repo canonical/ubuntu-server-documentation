@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Configure libvirt for KVM virtualisation on Ubuntu including virtual networking, bridging, and usermode networking with iptables.
+    description: Usage of libvirt to control Qemu/KVM guests; including more advanced tasks like migration, setting up huge pages and more.
 ---
 
 (libvirt)=
