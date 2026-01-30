@@ -2476,7 +2476,7 @@ URL
 Uniform Resource Locator
   URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet.
 userspace
-    userspace (also appears as "user space" or "user-space") is the memory area and execution environment where normal applications and user programms run, as opposed to kernel space where the operating system kernel runs.
+    userspace (also appears as "user space" or "user-space") is the memory area and execution environment where normal applications and user programs run, as opposed to kernel space where the operating system kernel runs.
 
 USN
 Update Sequence Number
