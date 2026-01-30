@@ -61,9 +61,11 @@ denylist
 dev
 disambiguates
 discoverability
+dmesg
 dnsmasq
 dockerfiles
 DPDK's
+dpkg
 ELinks
 enablement
 Engenio
@@ -75,6 +77,8 @@ Fileset
 fileset
 FQDN's
 Freenode
+fsck
+fwupd
 gcplogs
 gcrypt
 GDB's
@@ -125,6 +129,7 @@ lightervisor
 livepatching
 localhost's
 lockfile
+Lockdown
 Logentries
 Logstash
 Logwatch
@@ -172,6 +177,7 @@ NVSwitch
 O'Reilly
 O'Reilly's
 OTPs
+overlayroot
 parmfile
 parmfiles
 passcodes

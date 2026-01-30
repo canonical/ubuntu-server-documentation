@@ -22,7 +22,7 @@ Networking key concepts <networking/networking-key-concepts>
 
 ## Configuration
 
-Network configuration in Ubuntu is handled through Netplan. Find out more {ref}`About Netplan <about-netplan>` or get started with our walk-through on {ref}`network configuration <configuring-networks>` which gives a practical demonstration.
+Network configuration in Ubuntu is managed using Netplan. Find out more {ref}`About Netplan <about-netplan>` or get started with our {ref}`network configuration <configuring-networks>` walk-through, which gives a practical demonstration.
 
 ```{toctree}
 :hidden:
@@ -33,7 +33,7 @@ Configuring networks <networking/configuring-networks>
 
 ## Network tools
 
-In our how-to section we show to set up virtual switching using Open vSwitch (OVS) and the Data Plane Development Kit (DPDK) library. This page discusses DPDK in more detail.
+In our how-to section, we show how to set up virtual switching using Open vSwitch (OVS) and the Data Plane Development Kit (DPDK) library. This page discusses DPDK in more detail.
 
 * {ref}`about-dpdk` discusses DPDK in more detail
 
@@ -47,7 +47,7 @@ The DPDK library <networking/about-dpdk>
 
 The Dynamic Host Configuration Protocol (DHCP) handles automatic IP address assignment.
 
-* {ref}`About DHCP <about-dhcp>` gives detail about DHCP and how it works
+* {ref}`About DHCP <about-dhcp>` gives details about DHCP and how it works
 
 ```{toctree}
 :hidden:
