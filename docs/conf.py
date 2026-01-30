@@ -411,3 +411,20 @@ intersphinx_mapping = {
     "starter-pack": ("https://canonical-example-product-documentation.readthedocs-hosted.com/en/latest", None),
     "sphinxcontrib-mermaid": ("https://sphinxcontrib-mermaid-demo.readthedocs.io/en/latest", None)
 }
+
+# Override canonical_sphinx extension defaults
+# The canonical_sphinx extension sets html_copy_source = False by default.
+# We need to enable it for "View page source" links to work.
+html_copy_source = True
+html_show_sourcelink = True
+
+
+# Force html_copy_source to be True after all extensions have loaded
+def force_copy_source(app, config):
+    """Override canonical_sphinx's html_copy_source setting."""
+    config.html_copy_source = True
+    config.html_show_sourcelink = True
+
+def setup(app):
+    """Custom setup to ensure source files are copied."""
+    app.connect('config-inited', force_copy_source)
