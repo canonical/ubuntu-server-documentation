@@ -254,14 +254,14 @@ ip address show lo
        valid_lft forever preferred_lft forever
 ```
 
-### Adding a virtual IP address
+### Adding a multiple IP addresses to one interface
 
-Virtual IP is a method for broadcasting multiple IP addresses to the network *on a single network interface*. For example, configuring a single network interface, use virtual IP to:
+A single interface can broadcast multiple IP addresses to the network. Multiple IP addresses can be used to:
 
 - host multiple web domains by configuring virtual hosts using different IP addresses rather than server names
 - host multiple server names using Samba
 
-Configure virtual IPs by editing your `netplan` configuration found in `/etc/netplan`.
+Add IP addresses to an interface by editing your `netplan` configuration found in `/etc/netplan`.
 
 #### Multiple static IP addresses
 
@@ -300,12 +300,12 @@ network:
 ```
 
 :::{note}
-A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces.
+A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces. Do not add DHCP if it is configured on the same interface in another netplan file, such as one written by `cloud-init`.
 :::
 
 #### Apply and verify the IP addresses
 
-Apply the configuration to enable the virtual IP:
+Apply the configuration to enable the additional IP addresses:
 
 ```bash
 sudo netplan apply
