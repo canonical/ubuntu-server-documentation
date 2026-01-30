@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to WireGuard peer-to-site VPN configuration for connecting single systems to remote networks securely over the internet.
+---
+
 (wireguard-vpn-peer-to-site)=
 # WireGuard VPN peer-to-site
 
@@ -27,7 +33,7 @@ flowchart LR
     style home fill:#FFF9C4
 ```
 
-This diagram represents a typical simple home network setup. You have a router/modem, usually provided by the ISP (Internet Service Provider), and some internal devices like a Raspberry PI perhaps, a NAS (Network Attached Storage), and some other devices.
+This diagram represents a typical simple home network setup. You have a router/modem, usually provided by the ISP (Internet Service Provider), and some internal devices like a Raspberry PI perhaps, a NAS (Network Attached Storage), and some other device.
 
 There are basically two approaches that can be taken here: install WireGuard {ref}`on the router <wireguard-vpn-peer-to-site-on-router>`, or on {ref}`another system in the home network <wireguard-on-an-internal-system>`.
 
