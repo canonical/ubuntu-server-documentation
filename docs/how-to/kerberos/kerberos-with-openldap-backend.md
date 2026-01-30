@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure primary and secondary Kerberos servers using OpenLDAP backend for integrated principal storage and management.
+---
+
 (kerberos-with-openldap-backend)=
 # How to set up Kerberos with OpenLDAP backend
 
@@ -23,10 +29,10 @@ In this section we'll configure a primary and secondary Kerberos server to use O
 1. **Extended simple case**:
    - Multiple primary KDCs connected to one primary OpenLDAP
    - Multiple secondary KDCs connected to primary and secondary OpenLDAP
-1. **OpenLDAP with multi-master replication**:
+1. **OpenLDAP with {spellexception}`multi-master` replication**:
    - Multiple primary KDCs connected to all primary OpenLDAP servers
 
-We haven't covered OpenLDAP multi-master replication in this guide, so we will show the **simple case** only. The second scenario is an extension: just add another primary KDC to the mix, talking to the same primary OpenLDAP server.
+We haven't covered OpenLDAP {spellexception}`multi-master` replication in this guide, so we will show the **simple case** only. The second scenario is an extension: just add another primary KDC to the mix, talking to the same primary OpenLDAP server.
 
 ## Configure OpenLDAP
 
@@ -159,9 +165,11 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   EOF
 
   modifying entry "olcDatabase={1}mdb,cn=config"
+  ```
 
-  This will make the existing {2} rule become {4}. Check with sudo slapcat -b cn=config (the output below was reformatted a bit for clarity):
+  This will make the existing `{2}` rule become `{4}`. Check with `sudo slapcat -b cn=config` (the output below was reformatted a bit for clarity):
 
+  ```text
   olcAccess: {0}to attrs=userPassword
 	  by self write
 	  by anonymous auth
@@ -179,8 +187,7 @@ First, the necessary **schema** needs to be loaded on an OpenLDAP server that ha
   	by dn.exact="uid=kadmin-service,dc=example,dc=com" write
   	by * none
   olcAccess: {4}to * by * read
-
-    ```
+  ```
 
 Your LDAP directory is now ready to serve as a Kerberos principal database.
 
@@ -198,41 +205,41 @@ With OpenLDAP configured it is time to configure the KDC. In this example we are
 
   ```text    
   [realms]
-          EXAMPLE.COM = {
-                  kdc = kdc01.example.com
-                  kdc = kdc02.example.com
-                  admin_server = kdc01.example.com
-                  default_domain = example.com
-                  database_module = openldap_ldapconf
-          }
+    EXAMPLE.COM = {
+      kdc = kdc01.example.com
+      kdc = kdc02.example.com
+      admin_server = kdc01.example.com
+      default_domain = example.com
+      database_module = openldap_ldapconf
+    }
   ```
   Then also add these new sections:
 
   ```text
   [dbdefaults]
-          ldap_kerberos_container_dn = cn=krbContainer,dc=example,dc=com
+    ldap_kerberos_container_dn = cn=krbContainer,dc=example,dc=com
 
   [dbmodules]
-          openldap_ldapconf = {
-                  db_library = kldap
+    openldap_ldapconf = {
+      db_library = kldap
 
-  				# if either of these is false, then the ldap_kdc_dn needs to
-  				# have write access
-  				disable_last_success = true
-  				disable_lockout  = true
+      # if either of these is false, then the ldap_kdc_dn needs to
+      # have write access
+      disable_last_success = true
+      disable_lockout  = true
 
-                  # this object needs to have read rights on
-                  # the realm container, principal container and realm sub-trees
-                  ldap_kdc_dn = "uid=kdc-service,dc=example,dc=com"
+      # this object needs to have read rights on
+      # the realm container, principal container and realm sub-trees
+      ldap_kdc_dn = "uid=kdc-service,dc=example,dc=com"
 
-                  # this object needs to have read and write rights on
-                  # the realm container, principal container and realm sub-trees
-                  ldap_kadmind_dn = "uid=kadmin-service,dc=example,dc=com"
+      # this object needs to have read and write rights on
+      # the realm container, principal container and realm sub-trees
+      ldap_kadmind_dn = "uid=kadmin-service,dc=example,dc=com"
 
-                  ldap_service_password_file = /etc/krb5kdc/service.keyfile
-                  ldap_servers = ldapi:///
-                  ldap_conns_per_server = 5
-          }
+      ldap_service_password_file = /etc/krb5kdc/service.keyfile
+      ldap_servers = ldapi:///
+      ldap_conns_per_server = 5
+    }
   ```
 
 - Next, use the `kdb5_ldap_util` utility to create the realm:
@@ -291,9 +298,9 @@ Let's say, however, that you already have a user in your directory, and it's in 
 $ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// <<EOF
 dn: olcDatabase={1}mdb,cn=config
 add: olcAccess
-olcAccess: {4}to dn.subtree=“ou=People,dc=example,dc=com”
-    by dn.exact=”uid=kdc-service,dc=example,dc=com” read
-    by dn.exact=”uid=kadmin-service,dc=example,dc=com” write
+olcAccess: {4}to dn.subtree="ou=People,dc=example,dc=com"
+    by dn.exact="uid=kdc-service,dc=example,dc=com" read
+    by dn.exact="uid=kadmin-service,dc=example,dc=com" write
     by * break
 EOF
 ```
@@ -313,7 +320,7 @@ Principal "testuser1@EXAMPLE.COM" created.
 Since the specified DN already exists, `kadmin.local` will just add the required Kerberos attributes to this existing entry. If it didn't exist, it would be created from scratch, with only the Kerberos attributes, just like what happened with the `ubuntu` example above, but in the specified location.
 
 ```{note}
-The `ldap_kadmin_dn` DN (`uid=kadmin-service` in our example) does not have write access to the location specified by the `-x` parameter, you will get an `Insufficient access` error.
+If the `ldap_kadmin_dn` DN (`uid=kadmin-service` in our example) does not have write access to the location specified by the `-x` parameter, you will get an `Insufficient access` error.
 ```
 
 Both places are visible for `kinit`, since, when the realm was created with `kdb5_ldap_util`, the default value for the search scope and base were taken: `subtree`, and `dc=example,dc=com`.

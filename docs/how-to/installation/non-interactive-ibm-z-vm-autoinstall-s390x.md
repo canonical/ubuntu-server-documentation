@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Automated Ubuntu Server installation on IBM z/VM (s390x) using autoinstall with DASD storage and non-VLAN network configuration.
+---
+
 (non-interactive-ibm-z-vm-autoinstall-s390x)=
 # Non-interactive IBM z/VM autoinstall (s390x)
 
@@ -6,7 +12,7 @@ This non-interactive installation uses 'autoinstall', which can be considered th
 
 The example z/VM guest here uses a direct-access storage device ({term}`DASD`) and is connected to a regular (non-VLAN) network.
 
-For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR (s390x) installation using autoinstall](https://discourse.ubuntu.com/t/non-interactive-ibm-z-lpar-s390x-installation-using-autoinstall/16988) guide.
+For a zFCP and a VLAN network example, please see the {ref}`non-interactive IBM LPAR (s390x) installation using autoinstall <non-interactive-ibm-z-lpar-autoinstall-s390x>` guide.
 
 * Start with the preparation of the (FTP) install server (if it doesn't already exist).
 
@@ -122,7 +128,7 @@ For a zFCP and a VLAN network example, please see the [non-interactive IBM LPAR 
 
   In this particular example a single {term}`DASD` {term}`ECKD` disk with the address `1f00` is enabled. zFCP disk storage can be enabled via their host ({term}`host-bus-adapters <HBA>`) addresses, for example *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain Logical Unit Numbers (LUNs) assigned, which are all automatically discovered and activated by `chzdev zfcp-lun -e --online`. Activation of a QETH device would look like this: `chzdev qeth -e 0600`.
 
-* For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://ubuntu.com/server/docs/install/autoinstall-reference) and [autoinstall schema](https://ubuntu.com/server/docs/install/autoinstall-schema) page.
+* For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) page.
 
 * Now make sure a HTTP server is running with `/srv/www` as web-server root (in this particular example).
 

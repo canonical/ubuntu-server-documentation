@@ -1,6 +1,15 @@
+---
+myst:
+  html_meta:
+    description: "Explore different OpenVPN client implementations providing GUI options to Ubuntu and connectivity to OpenVPN from other operating systems."
+---
+
 (openvpn-client-implementations)=
 # OpenVPN client implementations
 
+Ubuntu Server can be the platform for an {ref}`OpenVPN server<install-openvpn>`,
+but clients might need a GUI for Desktop usage or need to operate from other
+operating systems.
 
 ## Linux Network-Manager GUI for OpenVPN
 
@@ -19,7 +28,7 @@ Many Linux distributions (including Ubuntu Desktop variants) come with Network M
 
 [Tunnelblick](https://tunnelblick.net) is an excellent free, open source implementation of a GUI for OpenVPN for OS X. Download the latest OS X installer from there and install it.
 
-It also is [recommended by upstream](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/#alternative-openvpn-open-source-tunnelblick-program), which [has an alternative](https://openvpn.net/vpn-server-resources/installation-guide-for-openvpn-connect-client-on-macos/) of their own.
+It also is [recommended by upstream](https://openvpn.net/vpn-server-resources/connecting-to-access-server-with-macos/), which [has an alternative](https://openvpn.net/as-docs/tutorials/tutorial--connect-with-macos.html) of their own.
 
 Then put your `client.ovpn` config file together with the certificates and keys in `/Users/username/Library/Application Support/Tunnelblick/Configurations/` and launch Tunnelblick from your 'Application' folder.
 
@@ -29,7 +38,7 @@ Instead of downloading manually, if you have brew set up on MacOS this is as eas
 
 ## OpenVPN with GUI for Win
 
-First, download and install the latest [OpenVPN Windows Installer](https://openvpn.net/community-downloads/). As of this writing, the management GUI is included with the Windows binary installer.
+First, download and install the latest [OpenVPN Windows Installer](https://openvpn.net/community/). As of this writing, the management GUI is included with the Windows binary installer.
 
 You need to start the OpenVPN service. Go to Start \> Computer \> Manage \> Services and Applications \> Services. Find the OpenVPN service and start it. Set its startup type to 'automatic'.
 
@@ -39,8 +48,8 @@ There is an [updated guide by the upstream](https://community.openvpn.net/openvp
 
 ## Further reading
 
-- See the [OpenVPN](http://openvpn.net/) website for additional information.
+- See the [OpenVPN](https://openvpn.net/) website for additional information.
 
-- [OpenVPN hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security)
+- [OpenVPN hardening security guide](https://openvpn.net/community-docs/hardening-openvpn-security-178571.html)
 
-- Also, {spellexception}`Packt's` [OpenVPN: Building and Integrating Virtual Private Networks](http://www.packtpub.com/openvpn/book) is a good resource.
+- Also, {spellexception}`Packt's` [OpenVPN: Building and Integrating Virtual Private Networks](https://www.packtpub.com/en-us/product/openvpn-building-and-integrating-virtual-private-networks-9781847190680) is a good resource.

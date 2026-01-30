@@ -1,15 +1,21 @@
+---
+myst:
+  html_meta:
+    description: Configure Samba as a print server to share CUPS printers with Windows clients over the network with or without authentication.
+---
+
 (samba-print-server)=
 # Set up Samba as a print server
 
 Another common way to network Ubuntu and Windows computers is to configure Samba as a *print server*. This will allow it to share printers installed on an Ubuntu server, whether locally or over the network.
 
-Just as we did in [using Samba as a file server](https://ubuntu.com/server/docs/samba-file-server), this section will configure Samba to allow any client on the local network to use the installed printers without prompting for a username and password.
+Just as we did in {ref}`using Samba as a file server <samba-file-server>`, this section will configure Samba to allow any client on the local network to use the installed printers without prompting for a username and password.
 
-If your environment requires stricter Access Controls see [Share Access Control](https://ubuntu.com/server/docs/samba-share-access-control).
+If your environment requires stricter Access Controls see {ref}`share-access-controls`.
 
 ## Install and configure CUPS
 
-Before installing and configuring Samba as a print server, it is best to already have a working CUPS installation. See [our guide on CUPS](https://ubuntu.com/server/docs/service-cups) for details.
+Before installing and configuring Samba as a print server, it is best to already have a working CUPS installation. See {ref}`our guide on CUPS <cups-print-server>` for details.
 
 ## Install Samba
 
@@ -44,7 +50,7 @@ The default Samba configuration will automatically share any printers installed.
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba HOWTO Collection](http://samba.org/samba/docs/man/Samba-HOWTO-Collection/).
+  - For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
 
   - The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 

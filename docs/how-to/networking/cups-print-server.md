@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure the Common UNIX Printing System (CUPS) on Ubuntu for managing print jobs, queues, and network printers.
+---
+
 (cups-print-server)=
 # Install and configure a CUPS print server
 
@@ -100,4 +106,4 @@ If you make this change, remember to change it back once you've solved your prob
 
 * [CUPS Website](http://www.cups.org/)
 
-* [Debian Open-iSCSI page](http://wiki.debian.org/SAN/iSCSI/open-iscsi)
+* [Debian Printing Wiki](https://wiki.debian.org/Printing)

@@ -1,15 +1,21 @@
+---
+myst:
+  html_meta:
+    description: Deploy and run Canonical rocks container images using Docker with practical examples for OCI-compliant image deployment workflows.
+---
+
 (run-rocks-on-your-server)=
 # How to run rocks on your server
 
 
 ## Deploying rocks with Docker
 
-As with any other OCI-compliant container image, [rocks](https://canonical-rockcraft.readthedocs-hosted.com/en/latest/explanation/rocks/#) can be deployed with your favorite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
+As with any other OCI-compliant container image, [rocks](https://documentation.ubuntu.com/rockcraft/latest/explanation/rocks/) can be deployed with your favorite container management tool. This section depicts a typical deployment workflow for a generic Grafana rock, using {term}`Docker`.
 
 First, install Docker if it's not already installed:
 
 ```bash
-$ sudo apt-get install -y docker.io docker-compose-v2
+$ sudo apt-get install -y docker.io docker-compose
 ```
 
 We can deploy a container with the `docker run` command. This command has a number of [possible parameters](https://docs.docker.com/reference/cli/docker/container/run/). The [“Usage” section](https://hub.docker.com/r/ubuntu/grafana) of the Grafana rock’s documentation has a table with an overview of parameters specific to the image.
@@ -157,4 +163,4 @@ Finally, click on "Explore" from the Grafana menu, and select the `prometheus` d
 
 ## Next Steps
 
-As you can see, `docker-compose` makes it convenient to set up multi-container applications without needing to perform runtime changes to the containers. As you can imagine, this can permit building a more sophisticated management system to handle fail-over, load-balancing, scaling, upgrading old nodes, and monitoring status. But rather than needing to implement all of this directly on top of `docker-container`, you may want to investigate Kubernetes-style cluster management software such as [microk8s](https://microk8s.io/docs).
+As you can see, `docker-compose` makes it convenient to set up multi-container applications without needing to perform runtime changes to the containers. As you can imagine, this can permit building a more sophisticated management system to handle fail-over, load-balancing, scaling, upgrading old nodes, and monitoring status. But rather than needing to implement all of this directly on top of `docker-container`, you may want to investigate Kubernetes-style cluster management software such as [microk8s](https://canonical.com/microk8s/docs).

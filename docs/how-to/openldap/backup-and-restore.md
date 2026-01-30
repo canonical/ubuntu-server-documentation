@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Back up and restore OpenLDAP databases including configuration backend and DIT using slapcat and shell scripts.
+---
+
 (ldap-backup-and-restore)=
 # Backup and restore OpenLDAP
 

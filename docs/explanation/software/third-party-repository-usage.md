@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about using third-party repositories on Ubuntu Server, including security considerations and best practices."
+---
+
 (third-party-repository-usage)=
 # Third party repository usage
 
@@ -36,7 +42,7 @@ In other words, if you use a third party software you will have to contact its p
 
 ## A better solution to third party APT repositories: snaps
 
-As we have seen, third party APT repositories are not simple and should be handled carefully. But there is an alternative that is natively supported by Ubuntu and solves some of the issues affecting third party APT repositories: [snaps](https://ubuntu.com/core/services/guide/snaps-intro).
+As we have seen, third party APT repositories are not simple and should be handled carefully. But there is an alternative that is natively supported by Ubuntu and solves some of the issues affecting third party APT repositories: [snaps](https://snapcraft.io/docs/get-started).
 
 Due to the way they are architected, snaps already carry all of their dependencies inside them. When they are installed, they are placed in an isolated directory in the system, which means that they cannot conflict with existing Ubuntu packages (or even with other snaps).
 
@@ -83,23 +89,23 @@ wget -O /usr/share/keyrings/externalrepo-archive-keyring.pgp https://thirdpartyr
 
 To add a third party APT repository to your system, you will need to create a file under `/etc/apt/sources.list.d/` with information about the external archive. This file is usually named after the repository (in our example, `externalrepo`). There are two standards the file can follow:
 
-* A one-line entry, which is the most common. In this case, the extension of the file should be `.list`.
-* The `deb822` format, which is more descriptive but less common. In this case, the extension of the file should be `.sources`.
-
-An example of a one-line entry would be the following:
-
-```
-deb [signed-by=/usr/share/keyrings/externalrepo-archive-keyring.pgp] https://thirdpartyrepo.com/ubuntu/ jammy main
-```
+* The `deb822` format, which is more descriptive, and is the current standard for Ubuntu. In this case, the extension of the file should be `.sources`.
+* A one-line entry, which was most common in past Ubuntu releases. In this case, the extension of the file should be `.list`.
 
 An example of a `deb822` file for the same case would be the following:
 
 ```
 Types: deb
 URIs: https://thirdpartyrepo.com/ubuntu
-Suites: jammy
+Suites: resolute
 Components: main
 Signed-By: /usr/share/keyrings/externalrepo-archive-keyring.pgp
+```
+
+An example of a one-line entry would be the following:
+
+```
+deb [signed-by=/usr/share/keyrings/externalrepo-archive-keyring.pgp] https://thirdpartyrepo.com/ubuntu/ resolute main
 ```
 
 There are cases when the third party APT repository may be served using HTTPS, in which case you will also need to install the `apt-transport-https` package.
@@ -128,7 +134,7 @@ If you have enabled a third party APT repository but found yourself in a situati
 
 The first step is to remove the files created in the steps above. These are:
 
-* The sources.list file, under `/etc/apt/sources.list.d/`.
+* The `.sources` (or `.list`) file, under `/etc/apt/sources.list.d/`.
 * The package pinning preference, under `/etc/apt/preferences.d/`.
 * If the third party APT repository does not provide the GPG key in a package, then you can also remove it manually from `/usr/share/keyrings/`.
 

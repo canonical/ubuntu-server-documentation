@@ -1,7 +1,13 @@
+---
+myst:
+  html_meta:
+    description: Report bugs in Ubuntu Server using apport-cli to file detailed bug reports on Launchpad with system information.
+---
+
 (report-a-bug)=
 # How to report a bug in Ubuntu Server
 
-The Ubuntu project, including Ubuntu Server, [uses Launchpad](https://launchpad.net/) as its bug tracker. To file a bug, you will first need to [create a Launchpad account](https://help.launchpad.net/YourAccount/NewAccount).
+The Ubuntu project, including Ubuntu Server, [uses Launchpad](https://launchpad.net/) as its bug tracker. To file a bug, you will first need to create a Launchpad account.
 
 ## Report bugs with `apport-cli`
 

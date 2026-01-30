@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Learn how to install Ubuntu Server with this step-by-step guide covering system requirements, ISO download, bootable USB creation, and installation process.
+---
+
 (basic-installation)=
 # Basic installation
 
@@ -42,7 +48,7 @@ There are platform specific how-to guides for installations on:
 
 ## Create a bootable USB
 
-There are many ways to boot the installer but the simplest and most common way is to [create a bootable USB stick](https://ubuntu.com/tutorials/tutorial-create-a-usb-stick-on-ubuntu) to boot from ([tutorials for other operating systems](https://ubuntu.com/search?q=%22create+a+bootable+USB+stick%22) are also available). 
+There are many ways to boot the installer but the simplest and most common way is to [create a bootable USB stick](https://documentation.ubuntu.com/desktop/en/latest/how-to/create-a-bootable-usb-stick/) to boot from ([tutorials for other operating systems](https://ubuntu.com/search?q=%22create+a+bootable+USB+stick%22) are also available). 
 
 ## Boot the installer
 

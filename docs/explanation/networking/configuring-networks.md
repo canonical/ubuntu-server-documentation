@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about network configuration options on Ubuntu Server, including Netplan, interfaces, and network management approaches."
+---
+
 (configuring-networks)=
 # Configuring networks
 
@@ -11,10 +17,10 @@ Ethernet interfaces are identified by the system using predictable network inter
 
 ### Identify Ethernet interfaces
 
-To quickly identify all available Ethernet interfaces, you can use the `ip` command as shown below.
+To quickly identify all available Ethernet interfaces, you can use the `ip` command from *iproute2* as shown below.
 
 ```
-ip a
+ip addr
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -27,6 +33,32 @@ ip a
        valid_lft 3257sec preferred_lft 3257sec
     inet6 fe80::216:3eff:fee2:5242/64 scope link
        valid_lft forever preferred_lft forever
+```
+
+Or call Netplan to get a higher level overview of your network interfaces and correlated information, such as nameserver or (default) routes.
+
+```
+sudo netplan status -a
+     Online state: online
+    DNS Addresses: 127.0.0.53 (stub)
+       DNS Search: internal
+
+●  1: lo ethernet UNKNOWN/UP (unmanaged)
+      MAC Address: 00:00:00:00:00:00
+        Addresses: 127.0.0.1/8
+                   ::1/128
+
+●  2: enp0s25 ethernet UP (networkd: enp0s25)
+      MAC Address: 00:16:3e:e2:52:42 (ASIX Electronics Corp.)
+        Addresses: 10.102.66.200/24 (dynamic, dhcp)
+                   fe80::216:3eff:fee2:5242/64 (link)
+    DNS Addresses: 10.102.66.1
+                   fd00::cece:1eff:fe3d:c737
+       DNS Search: internal
+           Routes: default via 10.102.66.1 from 10.102.66.200 metric 100 (dhcp)
+                   10.102.66.0/24 from 10.102.66.200 metric 100 (link)
+                   2001:16b8:bd99:3d00::/56 via fe80::cece:1eff:fe3d:c737 metric 100 (ra)
+                   default via fe80::cece:1eff:fe3d:c737 metric 100 (ra)
 ```
 
 Another application that can help identify all network interfaces available to your system is the `lshw` command. This command provides greater details around the hardware capabilities of specific adapters. In the example below, `lshw` shows a single Ethernet interface with the logical name of *eth4* along with bus information, driver details and all supported capabilities.
@@ -111,7 +143,7 @@ To temporarily configure an IP address, you can use the `ip` command in the foll
 sudo ip addr add 10.102.66.200/24 dev enp0s25
 ```
 
-The `ip` can then be used to set the link up or down.
+The `ip` command can then be used to set the link up or down.
 
 ```
 ip link set dev enp0s25 up
@@ -145,11 +177,10 @@ default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
 ```
 
-If you require {term}`DNS` for your temporary network configuration, you can add DNS server IP addresses in the file `/etc/resolv.conf`. In general, editing `/etc/resolv.conf` directly is not recommended, but this is a temporary and non-persistent configuration. The example below shows how to enter two DNS servers to `/etc/resolv.conf`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
+If you require {term}`DNS` for your temporary network configuration, you can use the `resolvectl` command to set DNS servers temporarily. The example below shows how to set two DNS servers for the interface `enp0s25`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
 
 ```
-nameserver 8.8.8.8
-nameserver 8.8.4.4
+sudo resolvectl dns enp0s25 8.8.8.8 8.8.4.4
 ```
 
 If you no longer need this configuration and wish to purge all IP configuration from an interface, you can use the `ip` command with the flush option:
@@ -159,7 +190,7 @@ ip addr flush eth0
 ```
 
 ```{note}
-Flushing the IP configuration using the `ip` command does not clear the contents of `/etc/resolv.conf`. You must remove or modify those entries manually (or re-boot), which should also cause `/etc/resolv.conf`, which is a symlink to `/run/systemd/resolve/stub-resolv.conf`, to be re-written.
+Flushing the IP configuration using the `ip` command does not clear the contents of `systemd-resolved`. You must remove or modify those entries manually, e.g by calling `sudo resolvectl revert enp0s25`. Or re-boot, which should also cause the symlink `/etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf`, to be restored.
 ```
 
 ### Dynamic IP address assignment (DHCP client)
@@ -227,12 +258,14 @@ ip address show lo
 
 Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
 
-<h3 id="heading--dns-client-configuration">DNS client configuration</h3>
+(dns-client-configuration)=
+### DNS client configuration
 
-Traditionally, the file `/etc/resolv.conf` was a static configuration file that rarely needed to be changed, or it automatically changed via DHCP client hooks. `systemd-resolved` handles nameserver configuration, and it should be interacted with through the `systemd-resolve` command. Netplan configures `systemd-resolved` to generate a list of nameservers and domains to put in `/etc/resolv.conf`, which is a symlink:
+
+Traditionally, the file `/etc/resolv.conf` was a static configuration file that rarely needed to be changed, or it automatically changed via DHCP client hooks. `systemd-resolved` handles nameserver configuration, and it should be interacted with through the `resolvectl` command. Up to Ubuntu 20.04 LTS the `systemd-resolve` command could also be used. Netplan configures `systemd-resolved` to generate a list of nameservers and domains to put in `/etc/resolv.conf`, which is a symlink:
 
 ```
-/etc/resolv.conf -> ../run/systemd/resolve/stub-resolv.conf
+/etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf
 ```
 
 To configure the resolver, add the IP addresses of the appropriate nameservers for your network to the `netplan` configuration file. You can also add optional DNS suffix search-lists to match your network domain names. The resulting file might look like the following:
@@ -361,7 +394,7 @@ Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., p
 Instead, to achieve this functionality with the `networkd` renderer, users can use {manpage}`networkd-dispatcher(8)`. The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
 ```{note}
-If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://developer.gnome.org/NetworkManager/unstable/NetworkManager.html) instead.
+If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://networkmanager.dev/docs/api/latest/) instead.
 ```
 
 The [Netplan FAQ has a great table](https://netplan.io/faq/) that compares event timings between `ifupdown`/`systemd-networkd`/`network-manager`.
@@ -374,10 +407,10 @@ The [Netplan FAQ also has an example](https://netplan.io/faq/) on converting an 
 
   - The [Ubuntu Wiki Network page](https://help.ubuntu.com/community/Network) has links to articles covering more advanced network configuration.
 
-  - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/netplan-yaml/#) and documentation.
+  - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/examples/) and documentation.
 
   - The Netplan {manpage}`manual page <netplan(5)>` has more information on Netplan.
 
   - The {manpage}`systemd-resolved(8)` manual page has more information on `systemd-resolved` service.
 
-  - For more information on *bridging* see the [netplan.io examples page](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)
+  - For more information on *bridging* see the [netplan configuration reference](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)

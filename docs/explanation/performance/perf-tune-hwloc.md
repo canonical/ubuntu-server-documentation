@@ -1,14 +1,22 @@
+---
+myst:
+  html_meta:
+    description: "Understand hwloc (Hardware Locality) for discovering hardware topology on Ubuntu Server for performance optimization."
+---
+
 (perf-tune-hwloc)=
 # hwloc
 
-> System tuning tools are either about better understanding the system's
-> performance, or applying such knowledge to improve it. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
-The default installed package `hwloc-nox` provides various tools to discover the
-topology of the chip internal structures as well as any associated devices
-like PCI cards, NVME devices and memory.
+The package `hwloc-nox` provides various tools to discover the
+hardware topology, including the chip's internal structures and any associated devices
+like PCI cards, NVMe devices, and memory.
 
 By default the tools provide command line interfaces, but it can also render
 those complex relations in a {term}`GUI` environment. Depending on which one you want

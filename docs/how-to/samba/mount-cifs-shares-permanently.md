@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure automatic mounting of CIFS shares at boot from Windows or Samba servers for persistent network file access on Ubuntu.
+---
+
 (mount-cifs-shares-permanently)=
 # How to mount CIFS shares permanently
 
@@ -116,7 +122,7 @@ If you need to change the owner of a share, you'll need to add a **UID** (short 
 
 If you use Samba and authd at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-If you *are* using Samba with authd, follow the instructions in the [steps for the client](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-client) guide in the authd documentation.
+If you *are* using Samba with authd, follow the instructions in the [steps for the client](https://documentation.ubuntu.com/authd/edge-docs/howto/use-with-samba/#steps-for-the-client) guide in the authd documentation.
 
 ## Mount password-protected shares using `libpam-mount`
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure an MIT Kerberos server on Ubuntu with primary and secondary KDC setup, including DNS and NTP prerequisites.
+---
+
 (install-a-kerberos-server)=
 # How to install a Kerberos server
 
@@ -35,7 +41,7 @@ Next, create the new realm with the `kdb5_newrealm` utility:
 sudo krb5_newrealm
 ```
 
-It will ask you for a database master password, which is used to encrypt the local database. Chose a secure password: its strength is not verified for you.
+It will ask you for a database {spellexception}`master` password, which is used to encrypt the local database. Chose a secure password: its strength is not verified for you.
 
 ## Configure the Kerberos server
 

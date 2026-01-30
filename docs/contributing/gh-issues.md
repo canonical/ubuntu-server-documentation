@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to find and select GitHub issues to work on for Ubuntu Server documentation contributions."
+---
+
 (finding-issues)=
 # Find issues to work on
 

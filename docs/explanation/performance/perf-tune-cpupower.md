@@ -1,31 +1,22 @@
+---
+myst:
+  html_meta:
+    description: "Learn about CPU governors and the cpupower tool for managing CPU frequency scaling and power management on Ubuntu Server."
+---
+
 (perf-tune-cpupower)=
-# CPU Governors and the cpupower tool
+# The cpupower tool
 
-> System tuning tools are either about better understanding the system's
-> performance, or applying such knowledge to improve it. See our common
-> {ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
-> the general reasons for that.
+:::{note}
+System tuning tools are either about better understanding the system's
+performance, or applying such knowledge to improve it. See our common
+{ref}`system tuning thoughts<explanation-system-tuning-disclaimer>` for
+some generally applicable considerations about that.
+:::
 
-## CPU governors
-
-The kernel provides several CPU governors which can be configured, per core, to
-optimize for different needs.
-
-| **Governor**   | Design philosophy   |
-| -------------- | ------------------- |
-| `ondemand`     | This sets the CPU frequency depending on the current system load. This behavior is usually a good balance between the more extreme options. |
-| `conservative` | Similar to `ondemand`, but adapting CPU speed more gracefully rather than jumping to max speed the moment there is any load on the CPU. This behavior is more suitable in a battery-powered environment. |
-| `performance` | This sets the CPU statically to the highest frequency. This behavior is best to optimize for speed and latency, but might waste power if being under-used. |
-| `powersave`   | Sets the CPU statically to the lowest frequency, essentially locking it to P2. This behavior is suitable to save power without compromises. |
-| `userspace`   | Allows a user-space program to control the CPU frequency. |
-
-See the [Linux {spellexception}`CPUFreq` Governors Documentation](https://www.kernel.org/doc/Documentation/cpu-freq/governors.txt)
-for a more extensive discussion and explanation of the available Linux CPU governors.
-
-While these governors can be checked and changed directly in `sysfs` at
-`/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`, the command `cpupower`
-which comes with the package `linux-tools-common` makes this easier by providing
-a command line interface and providing access to several related values.
+This page is about the `cpupower` tool, which can be handy to inspect and manage
+the CPU power settings. This is mostly controlled via {ref}`perf-p-states`
+which are important to be understood before taking action.
 
 ## Monitor CPU frequency
 
@@ -118,21 +109,26 @@ cpupower frequency-info
 Output:
 
 ```bash
-analyzing CPU 3:
-  driver: intel_pstate
-  CPUs which run at the same hardware frequency: 3
-  CPUs which need to have their frequency coordinated by software: 3
-  maximum transition latency:  Cannot determine or is not supported.
-  hardware limits: 400 MHz - 4.00 GHz
+analyzing CPU 8:
+  driver: amd-pstate-epp
+  CPUs which run at the same hardware frequency: 8
+  CPUs which need to have their frequency coordinated by software: 8
+  energy performance preference: balance_performance
+  hardware limits: 400 MHz - 5.14 GHz
   available cpufreq governors: performance powersave
-  current policy: frequency should be within 400 MHz and 4.00 GHz.
+  current policy: frequency should be within 1.10 GHz and 5.14 GHz.
                   The governor "powersave" may decide which speed to use
                   within this range.
-  current CPU frequency: Unable to call hardware
-  current CPU frequency: 1.80 GHz (asserted by call to kernel)
+  current CPU frequency: 2.63 GHz (asserted by call to kernel)
   boost state support:
     Supported: yes
     Active: yes
+  amd-pstate limits:
+    Highest Performance: 196. Maximum Frequency: 5.14 GHz.
+    Nominal Performance: 145. Nominal Frequency: 3.80 GHz.
+    Lowest Non-linear Performance: 42. Lowest Non-linear Frequency: 1.10 GHz.
+    Lowest Performance: 16. Lowest Frequency: 400 MHz.
+    Preferred Core Support: 1. Preferred Core Ranking: 220.
 ```
 
 By default this checks the CPU it is executed on. The argument `-c` can be set

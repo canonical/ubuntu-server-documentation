@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Enable smart card public key authentication with OpenSSH using opensc-pkcs11 drivers on Ubuntu Server 18.04 and later.
+---
+
 (smart-card-authentication-with-ssh)=
 # Smart card authentication with SSH
 

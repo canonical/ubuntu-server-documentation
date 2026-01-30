@@ -1,6 +1,7 @@
 # Leave a blank line at the end of this file to support concatenation
 agentless
 Alertmanager
+allowlisted
 Apport
 APT's
 architected
@@ -15,6 +16,8 @@ autoinstall
 autorid
 backtrace
 Bacula
+bitmask
+blocklisted
 BMC's
 bootable
 bootloader
@@ -58,9 +61,11 @@ denylist
 dev
 disambiguates
 discoverability
+dmesg
 dnsmasq
 dockerfiles
 DPDK's
+dpkg
 ELinks
 enablement
 Engenio
@@ -72,6 +77,10 @@ Fileset
 fileset
 FQDN's
 Freenode
+fsck
+fwupd
+gcplogs
+gcrypt
 GDB's
 GIDs
 Gitolite
@@ -120,6 +129,7 @@ lightervisor
 livepatching
 localhost's
 lockfile
+Lockdown
 Logentries
 Logstash
 Logwatch
@@ -167,6 +177,7 @@ NVSwitch
 O'Reilly
 O'Reilly's
 OTPs
+overlayroot
 parmfile
 parmfiles
 passcodes
@@ -198,7 +209,10 @@ rollouts
 rootfs
 routable
 rsnapshot
+Rsync
+rsync
 sandboxed
+Sandboxing
 Saslauthd
 saslauthd
 sbin
@@ -224,6 +238,7 @@ Subiquity
 subnetwork
 substring
 subvolume
+sudo
 sysctls
 syslog
 systemctl
@@ -240,6 +255,7 @@ tunables
 Tunables
 Tunnelblick
 UEFI's
+ufw
 UIDs
 UIs
 uncomment
@@ -253,6 +269,7 @@ untrusted
 URIs
 usermode
 userspace
+usr
 UUIDs
 UVtool
 Valgrind

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand the Data Plane Development Kit (DPDK), a framework for fast packet processing in user space on Ubuntu Server."
+---
+
 (about-dpdk)=
 # About DPDK
 
@@ -12,14 +18,15 @@ Ubuntu provides some additional infrastructure to increase DPDK's usability.
 
 This package is currently compiled for the lowest possible CPU requirements allowed by upstream. Starting with [DPDK 17.08](https://git.dpdk.org/dpdk/commit/?id=f27769f796a0639368117ce22fb124b6030dbf73), that means it requires at least SSE4_2 and for anything else activated by -march=corei7 (in GCC) to be supported by the CPU.
 
-The list of upstream DPDK-supported network cards can be found at [supported NICs](http://dpdk.org/doc/nics). However, a lot of those are disabled by default in the upstream project as they are not yet in a stable state. The subset of network cards that DPDK has enabled in the package (as available in Ubuntu 16.04) is:
+The list of upstream DPDK-supported network cards can be found at [supported NICs](http://core.dpdk.org/supported/). However, a lot of those are disabled by default in the upstream project as they are not yet in a stable state. The subset of network cards that DPDK has enabled in the package (as available in Ubuntu 16.04) is:
 
 DPDK has "userspace" drivers for the cards called PMDs.
 The packages for these follow the pattern of `librte-pmd-<type>-<version>`. Therefore the example for an Intel e1000 in 18.11 would be `librte-pmd-e1000-18.11`.
 
-The more commonly used, tested and fully supported drivers are installed as dependencies of `dpdk`. But there are [many more "in-universe"](https://help.ubuntu.com/community/Repositories/Ubuntu#The_Four_Main_Repositories) that follow the same naming pattern.
+The more commonly used, tested and fully supported drivers are installed as dependencies of `dpdk`. But there are [many more "in-universe"](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#components) that follow the same naming pattern.
 
-## <h2 id="heading--unassign-default-kernel-drivers">Unassign the default kernel drivers </a>
+(unassign-default-kernel-drivers)=
+## Unassign the default kernel drivers
 
 Cards must be unassigned from their kernel driver and instead be assigned to `uio_pci_generic` of `vfio-pci`. `uio_pci_generic` is older and it's (usually) easier to get it to work. However, it also has fewer features and less isolation.
 
@@ -217,15 +224,15 @@ Since DPDK itself is only a (massive) library, you most likely will continue to 
 
 ## Resources
 
-  - [DPDK documentation](http://dpdk.org/doc)
+  - [DPDK documentation](http://core.dpdk.org/doc/)
 
-  - [Release Notes matching the version packages in Ubuntu 16.04](http://dpdk.org/doc/guides/rel_notes/release_2_2.html)
+  - [Release Notes matching the version packages in Ubuntu 16.04](https://doc.dpdk.org/guides/rel_notes/release_2_2.html)
 
-  - [Linux DPDK user getting started](http://dpdk.org/doc/guides/linux_gsg/index.html)
+  - [Linux DPDK user getting started](https://doc.dpdk.org/guides/linux_gsg/index.html)
 
-  - [EAL command-line options](http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html)
+  - [EAL command-line options](https://doc.dpdk.org/guides/testpmd_app_ug/run_app.html)
 
-  - [DPDK API documentation](http://dpdk.org/doc/api/)
+  - [DPDK API documentation](https://doc.dpdk.org/api/)
 
   - [Open vSwitch DPDK installation](https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Logwatch to monitor server logs and automatically email reports about flagged items of interest on Ubuntu.
+---
+
 (install-logwatch)=
 # How to install and configure Logwatch
 
@@ -10,12 +16,6 @@ Install `logwatch` using the following command:
 
 ```bash
 sudo apt install logwatch
-```
-
-You will also need to manually create a temporary directory in order for it to work:
-
-```bash
-sudo mkdir /var/cache/logwatch
 ```
 
 ## Configure Logwatch

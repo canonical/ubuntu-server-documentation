@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about the AutoRID IDMap backend for simplified UID/GID allocation in Active Directory environments, particularly multidomain deployments."
+---
+
 (the-autorid-idmap-backend)=
 # The AutoRID IDMap backend
 

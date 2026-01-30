@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure GPU support on Ubuntu Server including NVIDIA driver installation and virtual GPU (vGPU) setup with QEMU/KVM.
+---
+
 (how-to-graphics)=
 # Graphics
 

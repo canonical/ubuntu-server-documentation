@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Step-by-step guide for submitting your Ubuntu Server documentation contributions through pull requests."
+---
+
 (submit-work)=
 # Submitting your work
 
@@ -6,14 +12,14 @@ repository**, whether you claimed your issue via the ODA repository or the
 Ubuntu Server repository.
 
 If you need help with any aspect of the process (forking the repository, committing,
-pushing, etc) then refer to the [getting started with git](https://canonical-coda.readthedocs-hosted.com/en/latest/docs/howto/get-started/using_git/) guide on the ODA
+pushing, etc) then refer to the [getting started with git](https://documentation.academy/docs/howto/get-started/using_git/) guide on the ODA
 repository, which will guide you through those steps as you construct your changes.
 
 (doc-testing)=
 ## Testing your changes
 
 Before pushing your changes or creating a pull request, you should first test
-the documentation to catch any spelling errors, broken links, or similar. 
+the documentation to catch any spelling errors, broken links, or similar.
 This allows the reviewers to focus on the main changes you are proposing and
 makes the review process more efficient.
 
@@ -23,7 +29,7 @@ You can run:
 make spelling
 make linkcheck
 ```
-   
+
 To perform a full spelling and link check. You can also run `make` by itself
 to see a list of all the possible `make` targets.
 
@@ -53,7 +59,7 @@ for more guidance, or reach out to us for help.
 
 Rediraffe doesn't currently handle redirects from a page to an external website.
 To redirect outside of the Server documentation, you will need to set up a
-redirect in the `custom_conf.py` file in the root directory. 
+redirect in the `custom_conf.py` file in the root directory.
 
 Under the Redirects section, you can add the source page and the target page as
 follows:
@@ -97,7 +103,7 @@ what you've presented in the guide?
 
 - [Create a Pull Request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) against the Ubuntu Server documentation repository.
 
-- [Link your pull request to your issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue), typically by adding
+- [Link your pull request to your issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/using-issues/linking-a-pull-request-to-an-issue), typically by adding
   `fixes #<issue-number>` to your description.
 
 - Give your pull request a description and click on submit!
@@ -130,7 +136,7 @@ If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen
 your contribution. This is a collaboration, after all! It's quite normal to
 have some back-and-forth on a PR, but it should be a respectful dialogue on all
-sides. 
+sides.
 
 Once the discussion has concluded, and you have made any agreed changes, the PR
 will be approved and then merged. Congratulations (and thank you)! You are now

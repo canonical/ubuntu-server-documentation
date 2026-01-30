@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure DRBD (Distributed Replicated Block Device) for transparent block device mirroring between multiple Ubuntu hosts.
+---
+
 (install-drbd)=
 # Distributed Replicated Block Device (DRBD)
 
@@ -136,7 +142,7 @@ Using `ls` you should see `/srv/default` copied from the former primary host `dr
 
 ## Further reading
 
-- For more information on DRBD see the [DRBD web site](http://www.drbd.org/).
+- For more information on DRBD see the [DRBD web site](https://linbit.com/linbit-software-download-page-for-linstor-and-drbd-linux-driver/).
 
 - The {manpage}`drbd.conf(5)` manual page contains details on the options not covered in this guide.
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Network Security Services (NSS) cryptographic library configuration and usage on Ubuntu Server."
+---
+
 (network-security-services-nss)=
 # Network Security Services (NSS)
 
@@ -7,7 +13,7 @@ Given its origins in the Netscape browser, this library used to be bundled toget
 
 ## Config file
 
-NSS doesn't have a system-wide policy configuration file in Ubuntu ([see #2016303](https://bugs.launchpad.net/ubuntu/+source/nss/+bug/2016303) for details). That leaves the remaining location for the configuration file to be in the NSS "database" directory. Depending on the application, it can be in the following places by default:
+NSS doesn't have a system-wide policy configuration file in Ubuntu ({lpbug}`2016303` for details). That leaves the remaining location for the configuration file to be in the NSS "database" directory. Depending on the application, it can be in the following places by default:
 
 - `~/.pki/nssdb/pkcs11.txt`
     This is where the system-provided `libnss3` library will look by default.

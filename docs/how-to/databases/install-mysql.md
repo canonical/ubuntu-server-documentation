@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure MySQL database server on Ubuntu for mission-critical, multi-threaded SQL database applications and workloads.
+---
+
 (install-mysql)=
 # Install and configure a MySQL server
 
@@ -136,7 +142,7 @@ While it is possible (and may be advantageous) to mix and match database engines
 
 As of MySQL 5.5, InnoDB is the default engine, and is highly recommended over MyISAM unless you have specific needs for features unique to that engine.
 
-InnoDB is a more modern database engine, designed to be [ACID compliant](http://en.wikipedia.org/wiki/ACID) which guarantees database transactions are processed reliably. To meet ACID compliance all transactions are journaled independently of the main tables. This allows for much more reliable data recovery as data consistency can be checked.
+InnoDB is a more modern database engine, designed to be [ACID compliant](https://en.wikipedia.org/wiki/ACID) which guarantees database transactions are processed reliably. To meet ACID compliance all transactions are journaled independently of the main tables. This allows for much more reliable data recovery as data consistency can be checked.
 
 Write locking can occur on a row-level basis within a table. That means multiple updates can occur on a single table simultaneously. Data caching is also handled in memory within the database engine, allowing caching on a more efficient row-level basis rather than file block.
 
@@ -146,7 +152,7 @@ MyISAM is the older of the two. It can be faster than InnoDB under certain circu
 
 MyISAM also supports the {term}`FULLTEXT` index type, which allows very fast searches of large quantities of text data. However MyISAM is only capable of locking an entire table for writing. This means only one process can update a table at a time. As any application that uses the table scales this may prove to be a hindrance.
 
-It also lacks journaling, which makes it harder for data to be recovered after a crash. The following link provides some points for consideration about using [MyISAM on a production database](http://www.mysqlperformanceblog.com/2006/06/17/using-myisam-in-production/).
+It also lacks journaling, which makes it harder for data to be recovered after a crash. The following link provides some points for consideration about using [MyISAM on a production database](https://www.percona.com/blog/using-myisam-in-production/).
 
 ## Backups
 
@@ -341,6 +347,6 @@ You may find it useful to spend some time searching for database tuning tips bas
 
 ## Further reading
 
-- Full documentation is available in both online and offline formats from the [MySQL Developers portal](http://dev.mysql.com/doc/)
+- Full documentation is available in both online and offline formats from the [MySQL Developers portal](https://dev.mysql.com/doc/)
 
-- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](http://shop.oreilly.com/product/0636920044994.do) by {spellexception}`Thomas Nield` as an entry point and [SQL in a Nutshell](http://shop.oreilly.com/product/9780596518851.do) as a quick reference.
+- For general SQL information see the O'Reilly books [Getting Started with SQL: A Hands-On Approach for Beginners](https://www.oreilly.com/library/view/getting-started-with/9781491938607/) by {spellexception}`Thomas Nield` as an entry point and [SQL in a Nutshell](https://www.oreilly.com/library/view/sql-in-a/9780596155322/) as a quick reference.

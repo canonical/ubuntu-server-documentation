@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Join a complex Active Directory forest using winbind with the autorid backend for automatic UID/GID range allocation across domains.
+---
+
 (join-a-forest-with-the-autorid-backend)=
 # Join a forest with the autorid backend
 

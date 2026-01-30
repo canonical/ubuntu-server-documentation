@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage local and remote virtual machines using virt-manager GUI with tools like virt-install, virt-clone, and virt-viewer on Ubuntu.
+---
+
 (virtual-machine-manager)=
 # Virtual Machine Manager
 
@@ -24,7 +30,7 @@ virt-manager -c qemu+ssh://virtnode1.mydomain.com/system
 ```
 
 ```{note}
-The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <smart-card-authentication-with-ssh>`.
+The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <openssh-server-ssh-keys>`.
 ```
 
 ## Use virt-manager to manage guests
@@ -159,8 +165,8 @@ Please be aware that this is a full clone, therefore any secrets, keys, and for 
 
 ## Resources
 
-- See the [KVM](http://www.linux-kvm.org/) home page for more details.
+- See the [KVM](https://linux-kvm.org/page/Main_Page) home page for more details.
 
-- For more information on libvirt see the [libvirt home page](http://libvirt.org/)
+- For more information on libvirt see the [libvirt home page](https://libvirt.org/)
 
-- The [Virtual Machine Manager](http://virt-manager.org/) site has more information on `virt-manager` development.
+- The [Virtual Machine Manager](https://virt-manager.org/) site has more information on `virt-manager` development.

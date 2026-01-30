@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Nagios Core 3 for availability monitoring of essential servers and services across multiple Ubuntu systems.
+---
+
 (install-nagios)=
 # How to install and configure Nagios Core 3
 
@@ -60,7 +66,7 @@ There are a couple of directories containing Nagios configuration and check file
 There are multiple checks Nagios can be configured to execute for any given host. For this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL {term}`hostgroup`. The DNS check will be on `server02`, and the MySQL hostgroup will include both `server01` and `server02`.
 
 ```{note}
-See these guides for details on [setting up Apache](https://discourse.ubuntu.com/t/web-servers-apache/11510), [Domain Name Service](https://discourse.ubuntu.com/t/service-domain-name-service-dns/11318), and [MySQL](https://discourse.ubuntu.com/t/databases-mysql/11515).
+See these guides for details on {ref}`setting up Apache <introduction-to-web-servers>`, {ref}`Domain Name Service <install-dns>`, and {ref}`MySQL <install-mysql>`.
 ```
 
 Additionally, there are some terms that once explained will hopefully make understanding Nagios configuration easier:
@@ -211,8 +217,8 @@ This section has just scratched the surface of Nagios' features. The `nagios-plu
 
 - For more information about Nagios, see [the Nagios website](https://www.nagios.org/).
 
-- The [Nagios Core Documentation](https://library.nagios.com/library/products/nagios-core/documentation/) and [Nagios Core 3 Documentation](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/toc.html) may also be useful.
+- The [Nagios Core Documentation](https://library.nagios.com/products/nagios-core/documentation/) and [Nagios Core 3 Documentation](https://assets.nagios.com/downloads/nagioscore/docs/nagioscore/3/en/toc.html) may also be useful.
 
-- They also provide a [list of books](https://www.nagios.org/propaganda/books/) related to Nagios and network monitoring.
+- They also provide a [list of books](https://www.nagios.org/about/propaganda/books-2/) related to Nagios and network monitoring.
 
 - The [Nagios Ubuntu Wiki](https://help.ubuntu.com/community/Nagios3) page also has more details.

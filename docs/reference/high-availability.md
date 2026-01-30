@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Reference documentation for high availability clustering and failover configurations on Ubuntu Server."
+---
+
 (reference-high-availability)=
 # High availability
 

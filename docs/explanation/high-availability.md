@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding High Availability concepts including redundancy, failover, load balancing, and DRBD for minimal downtime in Ubuntu Server.
+---
+
 (explanation-high-availability)=
 # High Availability
 

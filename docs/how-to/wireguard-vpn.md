@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up WireGuard VPN on Ubuntu Server for peer-to-site and site-to-site connections with security tips and troubleshooting.
+---
+
 (how-to-wireguard-vpn)=
 # WireGuard VPN
 

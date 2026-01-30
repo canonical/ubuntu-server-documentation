@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and manage Debian packages on Ubuntu Server using APT and Aptitude command-line tools for installing, upgrading, and removing software.
+---
+
 (package-management)=
 # Install and manage packages
 
@@ -12,14 +18,20 @@ and even upgrade the entire Ubuntu system.
 ## Update the package index
  
 The APT package index is a database of available packages from the
-repositories defined in the `/etc/apt/sources.list` file and in the
-`/etc/apt/sources.list.d` directory. To update the local package index with
-the latest changes made in the repositories, and thereby access the most
-up-to-date version of the package you're interested in, type the following:
+repositories defined in the `/etc/apt/sources.list.d` directory.
+Ubuntu repositories are defined in the `/etc/apt/sources.list.d/ubuntu.sources` file.
+To update the local package index with the latest changes made in the repositories,
+and thereby access the most up-to-date version of the package you're interested in,
+run the following:
 
 ```bash
 sudo apt update
 ```
+
+:::{note}
+Ubuntu releases prior to 24.04 LTS (Noble), which don't use the deb822 standard
+by default, have repository information defined in the `/etc/apt/sources.list` file.
+:::
 
 ## Install a package
 
@@ -69,7 +81,15 @@ For details on how to upgrade to a new Ubuntu release, see our {ref}`guide on up
 
 Launching Aptitude with no command-line options will give you a menu-driven, text-based {term}`frontend` to the APT system. Many of the common package management functions, such as installation, removal, and upgrade, can be performed in Aptitude with single-key commands, which are typically lowercase letters.
 
-Aptitude is best suited for use in a non-graphical terminal environment to ensure the command keys work properly. You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
+Aptitude is best suited for use in a non-graphical terminal environment to ensure the command keys work properly.
+
+Install Aptitude by running:
+
+```bash
+sudo apt install aptitude
+```
+
+You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
 
 ```bash
 sudo aptitude
@@ -204,14 +224,7 @@ For more `dpkg` options see the {manpage}`dpkg(1)` manual page: `man dpkg`.
 
 ## APT configuration
 
-Configuration of the APT system repositories is stored in the `/etc/apt/sources.list` file and the `/etc/apt/sources.list.d` directory. An example of this file is referenced here, along with information on adding or removing repository references from the file.
-
-You can edit the file to enable and disable repositories. For example, to disable the requirement to insert the Ubuntu CD-ROM whenever package operations occur, simply comment out the appropriate line for the CD-ROM, which appears at the top of the file:
-
-```text
-# no more prompting for CD-ROM please
-# deb cdrom:[DISTRO-APT-CD-NAME - Release i386 (20111013.1)]/ DISTRO-SHORT-CODENAME main restricted
-```
+Configuration of the APT system repositories is stored in the `/etc/apt/sources.list.d` directory. The Ubuntu repositories are stored in `/etc/apt/sources.list.d/ubuntu.sources`. You can edit this file to enable and disable repositories.
 
 ## Automatic updates
 
@@ -231,32 +244,20 @@ Be advised that packages in Universe and Multiverse are not officially supported
 
 Many other package sources are available -- sometimes even offering only one package, as in the case of packages provided by the developer of a single application. You should always be cautious when using non-standard package sources/repos, however. Research the packages and their origins carefully before performing any installation, as some packages could render your system unstable or non-functional in some respects.
 
-By default, the *universe* and *multiverse* repositories are enabled. If you would like to disable them, edit `/etc/apt/sources.list` and comment out the following lines:
+By default, the *universe* and *multiverse* repositories are enabled. If you would like to disable them, edit `/etc/apt/sources.list.d/ubuntu.sources` and remove `universe` and `multiverse` from `Components`:
 
 ```text
-deb http://archive.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME universe multiverse
-deb-src http://archive.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME universe multiverse
-    
-deb http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME universe
-deb-src http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME universe
-deb http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME-updates universe
-deb-src http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME-updates universe
-    
-deb http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME multiverse
-deb-src http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME multiverse
-deb http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME-updates multiverse
-deb-src http://us.archive.ubuntu.com/ubuntu/ DISTRO-SHORT-CODENAME-updates multiverse
-    
-deb http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security universe
-deb-src http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security universe
-deb http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security multiverse
-deb-src http://security.ubuntu.com/ubuntu DISTRO-SHORT-CODENAME-security multiverse
+Types: deb
+URIs: http://archive.ubuntu.com/ubuntu
+Suites: DISTRO-SHORT-CODENAME DISTRO-SHORT-CODENAME-updates DISTRO-SHORT-CODENAME-backports
+Components: main universe restricted multiverse
+Signed-By: /usr/share/keyrings/ubuntu-archive-keyring.gpg
 ```
-## logging
+
+## Logging
 
 Actions of the `apt` command, such as installation and removal of packages,
 are logged in the `/var/log/dpkg.log` log file.
-
 
 
 ## Further reading
@@ -266,5 +267,5 @@ Most of the material covered in this chapter is available in the respective man 
 - The [Installing Software](https://help.ubuntu.com/community/InstallingSoftware) Ubuntu wiki page has more information.
 - The [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide) contains useful information regarding APT usage.
 - For more information about systemd timer units (and systemd in general), visit the {manpage}`systemd(1)` manual page and {manpage}`systemd.timer(5)` manual page
-- See the [Aptitude user's manual](https://www.debian.org/doc/user-manuals#aptitude-guide) for more Aptitude options.
+- See the [Aptitude user's manual](https://www.debian.org/doc/user-manuals#aptitude) for more Aptitude options.
 - The [Adding Repositories HOWTO (Ubuntu Wiki)](https://help.ubuntu.com/community/Repositories/Ubuntu) page contains more details on adding repositories.

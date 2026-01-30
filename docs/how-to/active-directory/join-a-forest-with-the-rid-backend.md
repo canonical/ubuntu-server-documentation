@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Join an Active Directory forest with the RID identity mapping backend, managing multiple domains with carefully planned UID/GID ranges.
+---
+
 (join-a-forest-with-the-rid-backend)=
 # Join a forest with the rid backend
 

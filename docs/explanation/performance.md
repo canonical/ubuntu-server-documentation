@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: System performance tuning concepts and tools for Ubuntu Server including CPU power management, hardware locality, and workload optimization.
+---
+
 (explanation-system-tuning)=
 # Performance
 
@@ -23,16 +29,16 @@ To identify those aspects and to then apply static or dynamic tuning Ubuntu carr
 
 * Profile-Guided Optimization {ref}`PGO <perf-pgo>`
 * Obtain the hierarchical map of key computing elements using {ref}`hwloc and lstopo <perf-tune-hwloc>`
-* Check and control CPU governors, power and frequency with {ref}`cpupower <perf-tune-cpupower>`
+* Understand and directly influence {ref}`perf-p-states`
+* Monitor, analyze and control CPU governors, power and frequency with {ref}`cpupower <perf-tune-cpupower>`
 * Dynamic, adaptive system tuning {ref}`with TuneD <perf-tune-tuned>`
-* Energy Performance Preference {ref}`EPP <perf-epp>`
 
 ```{toctree}
 :hidden:
 
 Profile-Guided Optimization <performance/perf-pgo>
 hwloc <performance/perf-tune-hwloc>
-cpupower <performance/perf-tune-cpupower>
+CPU Power (states) <performance/perf-p-states>
+cpupower (tool) <performance/perf-tune-cpupower>
 TuneD <performance/perf-tune-tuned>
-Energy Performance Preference <performance/perf-epp>
 ```

@@ -1,9 +1,15 @@
+---
+myst:
+  html_meta:
+    description: "Introduction to identity mapping (idmap) backends for mapping Windows SIDs to Unix UIDs and GIDs in Active Directory integration."
+---
+
 (identity-mapping-idmap-backends)=
 # Identity Mapping (idmap) backends
 
 In order to have Domain users and groups from an Active Directory system appear in an Ubuntu system as valid, they need to have Linux specific attributes. Some of these attributes map directly to equivalent ones in Active Directory, some need to be translated to something else, and others do not exist at all. This is the problem that the Identity Mapping Backends (`idmap`) try to solve.
 
-There are basically three idmap backends to chose from:
+There are many different identity mapping backends to choose from, but these tend to be the most commonly used ones:
 - {manpage}`idmap_ad(8)`: requires that Active Directory be augmented with RFC-2307 attributes
 - {manpage}`idmap_rid(8)`: algorithmic user/group id generation, manual domain configuration
 - {manpage}`idmap_autorid(8)`: algorithmic user/group ID generation, automatic domain configuration

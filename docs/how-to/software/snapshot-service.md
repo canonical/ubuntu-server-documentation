@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Use the Ubuntu snapshot service to install historical package versions, ensure reproducible deployments, and manage structured update workflows.
+---
+
 (snapshot-service)=
 # How to use the Ubuntu snapshot service
 

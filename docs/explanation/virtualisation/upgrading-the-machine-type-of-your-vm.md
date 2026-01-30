@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand how to upgrade the machine type of your virtual machine on Ubuntu Server for improved hardware compatibility and features."
+---
+
 (upgrading-the-machine-type-of-your-vm)=
 # Upgrading the machine type of your VM
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about DNS Security Extensions (DNSSEC) for securing DNS queries and protecting against DNS spoofing on Ubuntu Server."
+---
+
 (dnssec)=
 # DNS Security Extensions (DNSSEC)
 
@@ -67,7 +73,7 @@ $ dig @127.0.0.53 isc.org +dnssec
 ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
 ```
 
-DNSSEC validation will reject DNS resource records, originating from a DNS resolver that indicates DNSSEC support through the `EDNS0` "DNSSEC OK" (`DO`) flag (c.f. [RFC 3225](https://datatracker.ietf.org/doc/html/rfc3225)), but at the same time does not properly respond to DNSSEC queries (e.g. the missing "authenticated data" = `AD` flag or missing `RRSIG` or `NSEC` records). In the past this has led to issues, especially in virtualization environments or when edge routers are involved, e.g. those provided by ISPs for home connectivity ([ref1](https://bugs.launchpad.net/ubuntu/+source/libvirt/+bug/2119652), [ref2](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/AFHNUEHKC5KJVGBGSJBH2BMESUAGDF4H/), [ref3](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/P63RI3VBQ7NGL3AKMTR7PCVHVSCPYCLF/), [ref4](https://bugs.launchpad.net/ubuntu/+source/systemd/+bug/2121483)). Therefore, DNSSEC should only be enabled in controlled environments, where the upstream DNS server is correctly configured to handle DNSSEC queries.
+DNSSEC validation will reject DNS resource records, originating from a DNS resolver that indicates DNSSEC support through the `EDNS0` "DNSSEC OK" (`DO`) flag (c.f. [RFC 3225](https://datatracker.ietf.org/doc/html/rfc3225)), but at the same time does not properly respond to DNSSEC queries (e.g. the missing "authenticated data" = `AD` flag or missing `RRSIG` or `NSEC` records). In the past this has led to issues, especially in virtualization environments or when edge routers are involved, e.g. those provided by ISPs for home connectivity ({lpbug}`2119652`, [ref2](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/AFHNUEHKC5KJVGBGSJBH2BMESUAGDF4H/), [ref3](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/message/P63RI3VBQ7NGL3AKMTR7PCVHVSCPYCLF/), {lpbug}`2121483`). Therefore, DNSSEC should only be enabled in controlled environments, where the upstream DNS server is correctly configured to handle DNSSEC queries.
 
 ```{warning}
 Be aware that enforcing DNSSEC in strict mode can lead to errors, especially for local, unsigned domains and you would only be able to reach such services by accessing them through their IP address directly. For example this could manifest itself by errors like `DNS_PROBE_FINISHED_NXDOMAIN` in your browser, when trying to access services in the local network.
@@ -181,16 +187,10 @@ When a recursive DNS server is also performing DNSSEC validation, it's called a 
 
 ![Validating Resolver](../images/ubuntu-local-validating-resolver.png)
 
-This is the case if you install the BIND9 DNS server: the default configuration is to act as a Validating Resolver. This can be seen in `/etc/bind/named.conf.options` after installing the `bind9` package:
-
-    options {
-        ...
-        dnssec-validation auto;
-        ...
-    };
+This is the case if you install the BIND9 DNS server: The default configuration is to act as a Validating Resolver, by having the `dnssec-validation auto` option implicitly enabled.
 
 ```{note}
-Starting with version `1:9.18.34-1` in Ubuntu 24.10 and above, the `dnssec-validation auto` setting became the implicit default and does not need to be set explicitly in `named.conf.options` anymore.
+Up to Ubuntu 24.04 LTS (version `1:9.18.34-1`) the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
 ```
 
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.
@@ -207,7 +207,7 @@ The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manual pag
 
 When the `ad` bit is set in a DNS response, it means that DNSSEC validation was performed and successful. The data was authenticated.
 
-Specifying `trust-ad` in `/etc/resolv.conf` implies in these assumptions:
+Specifying `trust-ad` in `/etc/resolv.conf` implies these assumptions:
 
  * The 127.0.0.53 name server is trusted to set the `ad` flag correctly in its responses. If it performs DNSSEC validation, it is trusted to perform this validation correctly, and set the `ad` flag accordingly. If it does not perform DNSSEC validation, then the `ad` flag will always be unset in the responses.
  * The network path between localhost and 127.0.0.53 is trusted.

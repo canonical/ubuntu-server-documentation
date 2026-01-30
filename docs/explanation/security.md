@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Security concepts and best practices for Ubuntu Server including authentication, cryptography, VPNs, and system hardening strategies.
+---
+
 (explanation-security)=
 # Security
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Pacemaker resource agents for managing cluster resources in high-availability environments on Ubuntu Server."
+---
+
 (pacemaker-resource-agents)=
 # Pacemaker resource agents
 
@@ -177,5 +183,5 @@ The `$SERVICE_NAME` can be any service managed by a systemd unit file, and it ne
 
 ## Further reading
 
-* [ClusterLabs website](http://www.clusterlabs.org/)
+* [ClusterLabs website](https://clusterlabs.org/)
 * [The OCF resource-agent developer's guide](https://github.com/ClusterLabs/resource-agents/blob/master/doc/dev-guides/ra-dev-guide.asc)

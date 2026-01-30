@@ -1,15 +1,44 @@
+---
+myst:
+  html_meta:
+    description: Enable AMD SEV-SNP confidential computing on Ubuntu 25.04 to run encrypted VMs with memory and register protection from the host.
+---
+
 (sev-snp)=
 # Confidential Computing with AMD
 
-Secure Encrypted Virtualization - Secure Nested Paging (SEV-SNP) are a set of virtualization features available on the latest AMD EPIC CPUs (starting from "Rome"). These features enable *Confidential Computing* which is a way to better isolate a workload from the hypervisor and the host Operating System.
-Virtual Machines launched with SEV-SNP features enabled have their CPU registers protected from the host OS and their memory encrypted and integrity protected. The memory protection relies on the CPU's Memory Management Unit (MMU) which verifies the integrity of the secure pages and generates per-VM encryption keys to encrypt them and prevent the host OS from reading their content.
-While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 24.04 LTS, the host enablement (QEMU and OVMF support) was only added later with Ubuntu 25.04.
+AMD offers a suite of security features designed to protect virtual machine workloads from unauthorized access by the host operating system and hypervisor. These technologies form a progression of capabilities, with each building upon previous generations:
+
+- {term}`AMD-SME`: **AMD Secure Memory Encryption (SME)** is the foundation, providing transparent encryption of physical memory for both the host OS and guest VMs. It protects against physical attacks on memory but doesn't prevent the hypervisor from accessing VM memory contents.
+
+- {term}`AMD-SEV`: **Secure Encrypted Virtualization (SEV)** extends SME specifically to virtual machines, encrypting each VM's memory with its own key. This prevents the hypervisor from reading or modifying VM memory, but the hypervisor can still access unencrypted CPU registers and state.
+
+- {term}`AMD-SEV-ES`: **SEV with Encrypted State (SEV-ES)** enhances SEV by also encrypting the VM's CPU registers and sensitive state information, preventing the hypervisor from reading or tampering with the guest's execution state during initial VM setup and operation.
+
+- {term}`AMD-SEV-SNP`: **SEV with Secure Nested Paging (SEV-SNP)** represents the most comprehensive protection, adding memory integrity verification to SEV-ES. SEV-SNP prevents the hypervisor from manipulating the memory mapping and encrypts guest memory pages with per-page authentication tags, ensuring data integrity and preventing rollback attacks. These features are available on the latest AMD EPYC CPUs (starting from "Rome"). While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 24.04 LTS, the host enablement (QEMU and OVMF support) was only added later with Ubuntu 25.04.
+
+This documentation focuses only on {term}`AMD-SEV-SNP`, the latest generation of the AMD Confidential Computing technologies.
 
 ## Host configuration
 
-AMD SEV-SNP is fully supported as of Ubuntu 25.04. To launch a VM with these features, enable memory encryption features and SNP in the firmware settings, and then assign Address-Space Identifiers (ASIDs) to SNP. For more details, refer to [AMD's documentation](https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/tuning-guides/58207-using-sev-with-amd-epyc-processors.pdf) and to the manuals for your specific mainboard or Baseboard Management Controller (BMC).
+To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP in the firmware settings, then allocate Address-Space Identifiers (ASIDs) for SNP use. For further details, see [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and consult the documentation for your specific motherboard or Baseboard Management Controller (BMC).
 
-On the host OS, install `qemu-system-x86_64` and launch QEMU with the following parameters:
+To check if the host supports `SEV-SNP`:
+
+```bash
+$ cat /sys/module/kvm_amd/parameters/sev
+Y
+$ cpuid -1 -l 0x8000001f
+CPU:
+   AMD Secure Encryption (0x8000001f):
+      SME: secure memory encryption support    = true
+      SEV: secure encrypted virtualize support = true
+      VM page flush MSR support                = false
+      SEV-ES: SEV encrypted state support      = true
+      SEV-SNP: SEV secure nested paging        = true
+```
+
+To launch a SEV-SNP-enabled VM using `QEMU`, first install `qemu-system-x86_64` and launch a VM with the following parameters:
 
 ```bash
 qemu-system-x86_64 \
@@ -22,16 +51,24 @@ qemu-system-x86_64 \
   -machine memory-encryption=sev0,vmport=off \
   -object memory-backend-memfd,id=ram1,size=6G,share=true,prealloc=false \
   -machine memory-backend=ram1 \
-  -object sev-snp-guest,id=sev0,cbitpos=47,reduced-phys-bits=1,kernel-hashes=on \
+  -object sev-snp-guest,id=sev0,cbitpos=47,reduced-phys-bits=1,kernel-hashes=on,policy=0x30000 \
   -kernel ./vmlinuz \
   -append "root=/dev/vda1 console=ttyS0" \
   -bios /usr/share/ovmf/OVMF.amdsev.fd
 ```
 
-Here we are configuring the VM to use 6GB of encrypted memory:
-* `cbitpos` and `reduced-phys-bits` have to be `47` and `1` respectively for all EPYC CPUs.
-* `kernel-hashes=on` makes sure the kernel, initramfs and command line will be measured during the launch. It can be disabled but if enabled, the kernel needs to be provided with `-kernel`
 * `OVMF.amdsev.fd` is a specific version of [EDK II](https://en.wikipedia.org/wiki/TianoCore_EDK_II).
+
+The important argument that tells `QEMU` that this VM is a SEV-SNP VM is:
+
+```bash
+  -object sev-snp-guest,id=sev0,cbitpos=47,reduced-phys-bits=1,kernel-hashes=on \
+```
+
+* `cbitpos`: Specifies the position of the C-bit in the physical address. This is a platform-specific value required for SEV to operate correctly.
+* `reduced-phys-bits`: Informs the hypervisor that one bit of the physical address space is reserved for memory encryption state (the C-bit) and therefore cannot be used for addressing. As a result, the usable physical address space is reduced by one bit; this is commonly set to 1.
+* `kernel-hashes=on`: Ensures that the kernel, initramfs, and kernel command line are measured at VM launch. This option can be disabled; however, when enabled, the kernel must be supplied explicitly using the `-kernel` option.
+* `policy`: Defines the SEV-SNP guest security policy enforced at launch. This bitmask controls which features and restrictions are enabled for the guest, such as whether debugging is permitted, whether SMT is allowed, or whether migration is restricted. The policy must be compatible with both the platform firmware and the guest workload, as it directly affects guest capabilities and security guarantees. For further details, see the [QEMU documentation](https://www.qemu.org/docs/master/system/i386/amd-memory-encryption.html).
 
 For more details about these parameters, refer to QEMU documentation pages for [invocation](https://www.qemu.org/docs/master/system/invocation.html) and [AMD SEV](https://www.qemu.org/docs/master/system/i386/amd-memory-encryption.html#sevapi).
 

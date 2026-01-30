@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Kerberos authentication on Ubuntu Server including KDC setup, service principals, and OpenLDAP backend integration.
+---
+
 (how-to-kerberos)=
 # Kerberos
 

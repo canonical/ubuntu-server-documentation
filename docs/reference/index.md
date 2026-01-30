@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Complete reference documentation for Ubuntu Server, including glossary, system requirements, and technical specifications."
+---
+
 (reference)=
 # Ubuntu Server reference
 
@@ -25,19 +31,6 @@ for memory and storage.
 :titlesonly:
 
 installation/system-requirements
-```
-
-## Data and storage
-
-This section provides details on storing and backing up your data.
-
-* {ref}`Backups and version control <reference-backups-and-version-control>`
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-Data and storage <backups>
 ```
 
 ## High Availability

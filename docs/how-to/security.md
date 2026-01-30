@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server security guides for user management, firewalls, AppArmor, Kerberos, SSSD, OpenSSH, smart cards, and VPN configuration.
+---
+
 (how-to-security)=
 # Security
 
