@@ -315,6 +315,8 @@ sudo netplan apply
 Verify the IP addresses are available locally using one or more of the following:
 
 ```bash
+netplan status #displays the current network state
+
 ip addr    #shows all network interfaces
 
 ip addr show <interface_name>    #shows single interface
