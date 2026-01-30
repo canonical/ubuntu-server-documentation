@@ -55,8 +55,8 @@ Active Directory
     An AD is a Microsoft service that acts as a central database storing and managing information about network objects (user accounts, groups, computers and shared resources) and their security in a Windows-based network.
 
 ADSys
-    ADSys is an Ubuntu-specific Active Directory {term} `(AD)` client developed by Canonical.
-    ADSys complements System Security Services Daemon ({term} `SSSD`) by adding native
+    ADSys is an Ubuntu-specific Active Directory ({term}`AD`) client developed by Canonical.
+    ADSys complements System Security Services Daemon ({term}`SSSD`) by adding native
     Group Policy Object support, privilege management, and custom scripts
     execution.
 
@@ -2435,7 +2435,7 @@ Unified Data Architecture
 
 UDP
 User Datagram Protocol
-    UDP is a network protocol used to send data between devices without creating or maintaining a connection. In other words, UDP is a connectionless transport layer protocol used for fast, low-overhead data transmission in {term}`iptables rules`.
+    UDP is a network protocol used to send data between devices without creating or maintaining a connection. In other words, UDP is a connectionless transport layer protocol used for fast, low-overhead data transmission in iptables rules.
 
 UEFI
 Unified Extensible Firmware Interface
@@ -2443,7 +2443,7 @@ Unified Extensible Firmware Interface
 
 UFW
 Uncomplicated Firewall
-    UFW is a user-friendly command-line tool for managing netfilter firewalls on Linux systems, simplifying complex {term}`iptables commands`.
+    UFW is a user-friendly command-line tool for managing netfilter firewalls on Linux systems, simplifying complex iptables commands.
 
 UID
 User Identifier
@@ -2457,7 +2457,7 @@ unicast
     Unicast is a one-to-one network communication method where data is sent from a single sender to a single specific receiver.
 
 unmount
-    Unmount is the process of safely detaching a filesystem from the system's directory tree, making it inaccessible until it is mounted again. Unmount is the opposite of mounting. Unmount is important for {term}`data integrity`, {term}`file system consistency`, and the safe removal of USB drives or SD cards.
+    Unmount is the process of safely detaching a filesystem from the system's directory tree, making it inaccessible until it is mounted again. Unmount is the opposite of mounting. Unmount is important for data integrity, file system consistency, and the safe removal of USB drives or SD cards.
 
 untrusted
     Untrusted refers to:
@@ -2512,36 +2512,32 @@ Virtual Ethernet
 VFIO
 Virtual Function I/O
    VFIO is a Linux kernel framework that allows safe, direct access to physical hardware devices (like GPUs, network cards, or storage controllers) from user space or {term}`VM`, using IOMMU ({term}`Input-Output Memory Management Unit`) hardware for security and isolation.
-    
 VFS
 Virtual File System
-    VFS is a {term}`kernel abstraction layer` in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics.
+    VFS is a kernel abstraction layer in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics.
 
 VFs
 Virtual Functions
-   VFs are functions defined in a base class (parent class) marked with the keyword virtual, enabling derived classes to override them for runtime polymorphism via dynamic dispatch. VFs is a concept from object-oriented programming (mainly in C++)
+   *Work in Progress*
 
 VG
 Volume Group
-    VG is a key component of LVM ({term}`Logical Volume Manager`), which is a flexible storage management system for Linux. The VG is a pool created from one or more physical volumes ({term}`PVs`).
+    VG is a key component of LVM ({term}`Logical Volume Manager`), which is a flexible storage management system for Linux. The VG is a pool created from one or more physical volumes (PVs).
 
 vGPU
-Virtual Graphics Processing Uunit
+Virtual Graphics Processing Unit
     vGPU is a technology that allows a physical {term}`GPU` to be shared among multiple virtual machines, with each {term}`VM` getting its own portion of GPU resources for graphics rendering, compute tasks, or AI/ML workloads.
 
 virsh
-Virtual Shell.
+Virtual Shell
     virsh refers to '/usr/bin/virsh'. It is a command-line program (from the libvirt-clients software package) that lets you create, start, stop, and manage virtual machines on Linux.
-      
 VirtIO
 Virtualization I/O
-    VirtIO is a standardized, open-source framework for creating efficient virtual device drivers in virtualized environments. VirtIO is a specification that defines how virtual machines communicate with the {term}`hypervisor` for I/O operations (disk, network, etc.) in a more efficient way than emulating real hardware.
+    VirtIO is a standardized, open-source framework for creating efficient virtual device drivers in virtualized environments. VirtIO is a specification that defines how virtual machines communicate with the hypervisor for I/O operations (disk, network, etc.) in a more efficient way than emulating real hardware.
 
 virtual
-    Virtual refers to something implemented in software or by abstraction rather than beign a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software. 
+    Virtual refers to something implemented in software or by abstraction rather than being a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software. 
     
-    Related topic(s):
-    * {term} `VN`, {term} `Virtual network`, {term} `Virtual router`
 
 virtualization
     Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like {term}`servers`, {term}`storage`, {term}`networks`, or {term}`operating systems`. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
@@ -2556,14 +2552,12 @@ Virtual Machine
 
 VNC
 Virtual Network Computing
-    VNC is a system for remotely viewing and controlloing another computer's graphical desktop over a network. VNC uses the remote frame buffer ({term}`RFB`) to send screen updates from the remote machine and to receive keyboard and mouse input from the local machine.
+    VNC is a system for remotely viewing and controlling another computer's graphical desktop over a network. VNC uses the remote frame buffer (RFB) to send screen updates from the remote machine and to receive keyboard and mouse input from the local machine.
 
 VPN
 Virtual Private Network
     VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
 
-    Related topic(s):
-    * {term} `security`
 
 VRRP
 Virtual Router Redundancy Protocol
@@ -2585,32 +2579,25 @@ WAL
 Write-Ahead Log
     WAL is a fundamental technique used in databases and storage systems to ensure data durability and consistency. The basic principle is simple: Write what you are going to do before you do it, so if things go wrong you can always know what was happening. In other words, before any changes are made to the actual database files, the system first writes a record of what it is about to do to a sequential log file. If the system crashes mid-operation, it can replay the log during recovery to complete interrupted operations or roll them back.
 
-    Related topic(s):
-    * {term} `Crash recovery`, {term} `Performance`, {term} `Atomicity`
-    
 WAN
 Wide Area Network
     WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs`) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
-    WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from {term}`routers` or switches to {term}`caching` or {term}`proxy devices`. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
+    WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from routers or switches to caching or proxy devices. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
     
-     Related topic(s):
-    * {term}`WCCPv1`, {term}`WCCPv2`, {term}`Layer 2 redirection`, {term}`GRE tunneling`
 
 Web server
     A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the {term} `internet` or an {term} `intranet`using {term} `HTTP/HTTPS` protocols.
 
-    Related topic(s):
-    * {term}`static files`, {term}`MPLSnetworks`, {term}`VPN connections`
 
 winbind
 Windows Bind
-    winbind is a component of {term}`Samba` on Linux/UNIX systems that lets those systems use accounts from an {term}`AD` domain for logins and identity information. winbind makes a Linux machine "look like" a Windows client to AD, so the AD users and groups can log in to Linux and be resolved just liek local {term}`Unix` accounts.
+    winbind is a component of {term}`Samba` on Linux/UNIX systems that lets those systems use accounts from an {term}`AD` domain for logins and identity information. winbind makes a Linux machine "look like" a Windows client to AD, so the AD users and groups can log in to Linux and be resolved just like local Unix accounts.
 
 WireGuard
-    WireGuard is a moden, open-source {term}`VPN`  protocol designed to create fast, secure, and simple encrypted tunnels between devices. It is now built into the Linux kernel and widely used by VPN providers because of its performance and small codebase.
+    WireGuard is a modern, open-source {term}`VPN` protocol designed to create fast, secure, and simple encrypted tunnels between devices. It is now built into the Linux kernel and widely used by VPN providers because of its performance and small codebase.
 
 WLAN
 Wireless Local Area Network
@@ -2620,12 +2607,10 @@ WSGI
 Web Server Gateway Interface
     WSGI is a specification that defines a standard interface between web servers and Python web applications or frameworks, creating portability and flexibility. It is a universal translator that allows any WSGI-compliant web server to communicate with any WSGI-compliant Python application.
 
-    Related topic(s):
-    * {term}`ASGI`
 
 WWID
 World Wide Identifier
-   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a {term}`disk` or {term}`LUN`, so the system can recognnise that device reliably, regardless of which cable, port, or path it is attached through.
+   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a disk or {term}`LUN`, so the system can recognize that device reliably, regardless of which cable, port, or path it is attached through.
 
 :::
 
@@ -2644,7 +2629,7 @@ Extensible HyperText Markup Language
 
 XML
 Extensible Markup Language
-   XML is a {term}`markup language` designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
+   XML is a markup language designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
 
 :::
 
@@ -2656,10 +2641,10 @@ Extensible Markup Language
 
 YAML
 YAML Ain't Markup Language
-    YAML is a data serialisation language used mainly for configuration files and structured data exchange between programmes. YAML represents data as key-value pairs, lists, and nested structures, using indentation instead of brackets or tags, to show hierarchy.  
+    YAML is a data serialization language used mainly for configuration files and structured data exchange between programmes. YAML represents data as key-value pairs, lists, and nested structures, using indentation instead of brackets or tags, to show hierarchy.
 
 Yubikey
-    A YubiKey is a physical security key made by Yubico that provides hardware-based authentication for securing access to computers, networks, and online services. It is a small USB device (about the size of a USB stick) that acts as a second factor for two-factor authentication {term}`(2FA)` or multi-factor authentication {term}`(MFA)`.
+    A YubiKey is a physical security key made by Yubico that provides hardware-based authentication for securing access to computers, networks, and online services. It is a small USB device (about the size of a USB stick) that acts as a second factor for two-factor authentication (2FA) or multi-factor authentication (MFA).
 
 :::
 
@@ -2671,14 +2656,13 @@ Yubikey
 
 zFCP
 zSeries Fibre Channel Protocol
-    zFCP is a Linux device driver that enables IBM Z mainframes (formerly {term}`System z`) to access storage devices over a Fibre Channel network using the {term}`SCSI` protocol.
+    zFCP is a Linux device driver that enables IBM Z mainframes (formerly System z) to access storage devices over a Fibre Channel network using the {term}`SCSI` protocol.
 
 ZFS
 Zettabyte File System
-    ZFS is an advanced 64-bit file system that also includes its own built-in volume manager. It is designed for high-capacity and reliable storage. It is know for its strong data-integrity features, easy pooling of disks, and convenient features like snapshots, compression, and built in {term}`RAID (RAID-Z)`.
+    ZFS is an advanced 64-bit file system that also includes its own built-in volume manager. It is designed for high-capacity and reliable storage. It is known for its strong data-integrity features, easy pooling of disks, and convenient features like snapshots, compression, and built in RAID (RAID-Z).
 
 z/VM
-    z/VM is IBM's virtualization operating system for their mainframe computers (IBM Z systems, formerly known as System z). z/VM is a {term}`hypervisor` that allows multiple operating systems to run simultaneously on a single mainframe, effectively turning one physical machine into many virtual machines.
-    
+    z/VM is IBM's virtualization operating system for their mainframe computers (IBM Z systems, formerly known as System z). z/VM is a hypervisor that allows multiple operating systems to run simultaneously on a single mainframe, effectively turning one physical machine into many virtual machines.
 :::
 
