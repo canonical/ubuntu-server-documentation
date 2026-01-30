@@ -268,7 +268,7 @@ Add IP addresses to an interface by editing your `netplan` configuration found i
 This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
 
 
-```yaml
+```
 network:
   version: 2
   ethernets:
@@ -288,7 +288,7 @@ Adding labels to the IP addresses allows you to reference the devices by name in
 
 This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
 
-```yaml
+```
 network:
   version: 2
   ethernets:
