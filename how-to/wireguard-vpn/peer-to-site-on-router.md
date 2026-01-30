@@ -5,16 +5,14 @@
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
 ```{mermaid}
-
-%% Conversion Markdown ASCII diagram peer-to-site-on-router 
 flowchart TB
 %% Home network LAN
- subgraph home["home network, .home domain — 10.10.10.0/24"]
+    subgraph home["home network, .home domain — 10.10.10.0/24"]
         pi4["pi4"]
         nas["NAS"]
         Y["Y"]
         dots["..."]
-  end
+    end
 
 %% External/public and VPN elements
     laptop["Laptop in<br>Coffee shop"] -- |wlan0| --> internet(("public internet"))
@@ -29,7 +27,6 @@ flowchart TB
     style router fill:#FFE0B2
     style vpn fill:#BBDEFB
     style home fill:#FFF9C4
-```
 ```
 
 Of course, this setup is only possible if you can install software on the router. Most of the time, when it's provided by your ISP, you can't. But some ISPs allow their device to be put into a bridge mode, in which case you can use your own device (a computer, a Raspberry PI, or something else) as the routing device.
