@@ -13,8 +13,7 @@
 # redirect/from/file/ redirect/to/file/
 
 # Some of the redirects capture traffic from the old Discourse docs and route
-# them to the right pages in the RTD docs. These redirects have "# Discourse"
-# after them.
+# them to the right pages in the RTD docs.
 
 # =============================================================================
 # Tutorials
