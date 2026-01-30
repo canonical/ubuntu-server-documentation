@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand Profile-Guided Optimization (PGO) for improving application performance on Ubuntu Server through profiling-based compilation."
+---
+
 (perf-pgo)=
 
 # Profile-Guided Optimization
@@ -26,7 +32,7 @@ Using `perf` to monitor a process and obtain data about its runtime workload pro
 
 * We must be mindful of the options we pass to `perf`, particularly when it comes to recording branch prediction events.  The options will likely vary depending on whether you are using an Intel or {term}`AMD` processor, for example.
 
-On top of that, the current `autofdo` version in Ubuntu (`0.19-3build3`, at the time of this writing) is not recent enough to process the `perfdata` files we will generate.  There is a PPA with a newer version of `autofdo` package [for Ubuntu Noble](https://launchpad.net/~sergiodj/+archive/ubuntu/autofdo).  If you are running another version of Ubuntu and want to install a newer version of `autofdo`, you will need to build the software manually (please refer to the [upstream repository](https://github.com/google/autofdo) for further instructions).
+On top of that, the current `autofdo` version in Ubuntu (Based on `0.19`, at the time of this writing) is not recent enough to process the `perfdata` files we will generate.  There is a PPA with a newer version of `autofdo` package [for Ubuntu Noble](https://launchpad.net/~sergiodj/+archive/ubuntu/autofdo).  If you are running another version of Ubuntu and want to install a newer version of `autofdo`, you will need to build the software manually (please refer to the [upstream repository](https://github.com/google/autofdo) for further instructions).
 
 ## A simple PGO scenario: `openssl speed`
 

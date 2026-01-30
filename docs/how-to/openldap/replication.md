@@ -1,9 +1,15 @@
+---
+myst:
+  html_meta:
+    description: Set up OpenLDAP replication using syncrepl for high availability with standard or delta replication in consumer-provider model.
+---
+
 (ldap-replication)=
 # OpenLDAP replication
 
 The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy ({term}`high availability <HA>`) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.
 
-Replication is achieved via the Sync replication engine, **`syncrepl`**. This allows changes to be synchronized using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](http://www.rfc-editor.org/rfc/rfc4533.txt).
+Replication is achieved via the Sync replication engine, **`syncrepl`**. This allows changes to be synchronized using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](https://www.rfc-editor.org/rfc/rfc4533.txt).
 
 There are two ways to use this replication:
 
@@ -123,7 +129,7 @@ olcSpSessionLog: 100
 
 ```{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
-Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
 ```
 
 Add the new content:
@@ -264,7 +270,7 @@ olcAccessLogPurge: 07+00:00 01+00:00
 
 ```{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://www.openldap.org/its/index.cgi/?findid=8125) for details on an existing bug.
+Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
 For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manpage.
 ```
 
@@ -369,4 +375,4 @@ uid: john
 
   - [Replication types, OpenLDAP Administrator's Guide](https://openldap.org/doc/admin24/guide.html#Configuring%20the%20different%20replication%20types)
   - [LDAP Sync Replication - OpenLDAP Administrator's Guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication)
-  - [RFC 4533](http://www.rfc-editor.org/rfc/rfc4533.txt).
+  - [RFC 4533](https://www.rfc-editor.org/rfc/rfc4533.txt).

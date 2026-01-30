@@ -1,17 +1,23 @@
+---
+myst:
+  html_meta:
+    description: Install and manage LXD system containers and virtual machines with command-line administration for development and production workloads.
+---
+
 (lxd-containers)=
 # LXD containers
 
-[LXD](https://ubuntu.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
+[LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
-It provides a unified experience for running and managing full Linux systems inside containers or virtual machines. You can access it via the command line, its [built-in graphical user interface](https://documentation.ubuntu.com/lxd/en/latest/howto/access_ui/), or a set of powerful [REST APIs](https://documentation.ubuntu.com/lxd/en/latest/restapi_landing/). 
+It provides a unified experience for running and managing full Linux systems inside containers or virtual machines. You can access it via the command line, its [built-in graphical user interface](https://documentation.ubuntu.com/lxd/latest/howto/access_ui/), or a set of powerful [REST APIs](https://documentation.ubuntu.com/lxd/latest/restapi_landing/). 
 
-LXD scales from one instance on a single machine [to a cluster](https://documentation.ubuntu.com/lxd/en/latest/explanation/clusters/) in a full data center rack, making it suitable for both development and production workloads. You can even use LXD to set up a small, scalable private cloud, [such as a MicroCloud](https://canonical.com/microcloud). 
+LXD scales from one instance on a single machine [to a cluster](https://documentation.ubuntu.com/lxd/latest/explanation/clusters/) in a full data center rack, making it suitable for both development and production workloads. You can even use LXD to set up a small, scalable private cloud, [such as a MicroCloud](https://canonical.com/microcloud). 
 
 This document will focus on how to configure and administer LXD on Ubuntu systems using the command line. On Ubuntu Server Cloud images, LXD comes pre-installed.
 
 ## Online resources
 
-You can visit [the official LXD documentation](https://documentation.ubuntu.com/lxd/), or get in touch with the LXD team in their [Ubuntu Discourse forum](https://discourse.ubuntu.com/c/lxd/). The team also maintains a [YouTube channel](https://www.youtube.com/c/LXDvideos) with helpful videos. 
+You can visit [the official LXD documentation](https://documentation.ubuntu.com/lxd/), or get in touch with the LXD team in their [Ubuntu Discourse forum](https://discourse.ubuntu.com/c/lxd/126). The team also maintains a [YouTube channel](https://www.youtube.com/c/LXDvideos) with helpful videos. 
 
 ## Installation
 
@@ -31,7 +37,7 @@ In general, Ubuntu should have all the desired features enabled by default. One 
 
 In order to use LXD, some basic settings need to be configured first. This is done by running `lxd init`, which will allow you to choose:
 
-  - Directory or [ZFS](http://open-zfs.org) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
+  - Directory or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
 
   - Availability over the network.
 
@@ -45,7 +51,7 @@ adduser joe lxd
 
 as root to change it. The new membership will take effect on the next login, or after running `newgrp lxd` from an existing login.
 
-See [How to initialize LXD](https://documentation.ubuntu.com/lxd/en/latest/howto/initialize/) in the LXD documentation for more information on the configuration settings. Also, refer to the definitive configuration provided with the source code for the server, container, profile, and device configuration. 
+See [How to initialize LXD](https://documentation.ubuntu.com/lxd/latest/howto/initialize/) in the LXD documentation for more information on the configuration settings. Also, refer to the definitive configuration provided with the source code for the server, container, profile, and device configuration. 
 
 ## Creating your first container
 
@@ -162,7 +168,7 @@ The password can then be provided when the client registers `r1` as a known remo
 
 LXD supports several backing stores. The recommended and the default backing store is `zfs`. If you already have a ZFS pool configured, you can tell LXD to use it during the `lxd init` procedure, otherwise a file-backed `zpool` will be created automatically. With ZFS, launching a new container is fast because the {term}`filesystem` starts as a copy on write clone of the images' filesystem. Note that unless the container is privileged (see below) LXD will need to change ownership of all files before the container can start, however this is fast and change very little of the actual filesystem data.
 
-The other supported backing stores are described in detail in the [Storage configuration](https://documentation.ubuntu.com/lxd/en/latest/explanation/storage/) section of the LXD documentation.
+The other supported backing stores are described in detail in the [Storage configuration](https://documentation.ubuntu.com/lxd/latest/explanation/storage/) section of the LXD documentation.
 
 ## Container configuration
 
@@ -226,7 +232,7 @@ LXD supports flexible constraints on the resources which containers can consume.
 
   - Processes: limit the number of concurrent processes in the container
 
-For a full list of limits known to LXD, see [the configuration documentation](https://documentation.ubuntu.com/lxd/en/latest/reference/instance_options/).
+For a full list of limits known to LXD, see [the configuration documentation](https://documentation.ubuntu.com/lxd/latest/reference/instance_options/).
 
 ## UID mappings and privileged containers
 

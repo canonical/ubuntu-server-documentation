@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Create Ubuntu virtual machines quickly using uvtool to synchronize and deploy cloud images locally with libvirt on Ubuntu 14.04+.
+---
+
 (cloud-image-vms-with-uvtool)=
 # Create cloud image VMs with UVtool
 
@@ -18,10 +24,15 @@ The following packages and their dependencies are required in order to use `uvto
 To install `uvtool`, run:
 
 ```bash
-sudo apt -y install uvtool
+sudo apt -y install uvtool uvtool-libvirt
 ```
 
 This will install `uvtool`'s main commands, `uvt-simplestreams-libvirt` and `uvt-kvm`.
+
+```{note}
+You might need to log out and log in again to use libvirt without root privilege.
+If not, you might encounter a Permission denied error in the later steps.
+```
 
 ## Get the Ubuntu cloud image with `uvt-simplestreams-libvirt`
 
@@ -165,6 +176,6 @@ A complete description of all available modifiers is available in the {manpage}`
 
 If you are interested in learning more, have questions or suggestions, please contact the Ubuntu Server Team at:
 
-- [#server on Ubuntu Matrix](https://matrix.to/#/#server:ubuntu.com)
+- {matrix}`#server in Ubuntu Matrix <server>`
 
 - Mailing list: [`ubuntu-server` at `lists.ubuntu.com`](https://lists.ubuntu.com/mailman/listinfo/ubuntu-server)

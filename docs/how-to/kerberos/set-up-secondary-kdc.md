@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up a secondary Key Distribution Center (KDC) for high availability and redundancy in your Kerberos infrastructure.
+---
+
 (set-up-secondary-kdc)=
 # How to set up secondary KDC
 

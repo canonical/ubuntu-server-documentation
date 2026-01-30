@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Ubuntu Server as an iSCSI initiator to connect to remote iSCSI targets for block-level network storage access.
+---
+
 (iscsi-initiator-or-client)=
 # iSCSI initiator (or client)
 
@@ -464,4 +470,4 @@ Make sure to read other important sessions in Ubuntu Server Guide to follow up w
 1. [`iscsi.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsi.service.template)
 1. [`iscsid.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsid.service.template)
 1. [Open-iSCSI](http://www.open-iscsi.com/)
-1. [Debian Open-iSCSI](http://wiki.debian.org/SAN/iSCSI/open-iscsi)
+1. [Debian Open-iSCSI](https://wiki.debian.org/SAN/iSCSI/open-iscsi)

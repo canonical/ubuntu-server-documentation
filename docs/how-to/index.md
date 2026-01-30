@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server how-to guides for installation, security, networking, databases, virtualization, containers, and system administration tasks.
+---
+
 (how-to)=
 # Ubuntu Server how-to guides
 
@@ -160,4 +166,16 @@ This section focuses on the classic LMA stack.
 :titlesonly:
 
 observability
+```
+
+## Debugging
+
+{ref}`These debugging pages <how-to-debugging>` are for readers interested in
+analyzing the state of their Ubuntu system.
+
+```{toctree}
+:hidden:
+:titlesonly:
+
+debugging
 ```

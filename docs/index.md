@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Official Ubuntu Server documentation - comprehensive guides for installation, configuration, security, networking, databases, virtualization, and system administration.
+---
+
 # Ubuntu Server documentation
 
 ```{only} latex
@@ -67,10 +73,10 @@ If you find any errors or have suggestions for improvements, please use the
 GitHub where you can share your comments or let us know about bugs with any
 page.
 
-* Read our [Code of Conduct](https://ubuntu.com/community/code-of-conduct)
+* Read our [Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)
-* [Join the Discourse forum](https://discourse.ubuntu.com/c/server/17)
-* [Chat to us on Matrix](https://matrix.to/#/#server:ubuntu.com)
+* [Join the Discourse forum](https://discourse.ubuntu.com/c/project/server/17)
+* {matrix}`Chat to us on Matrix <server>`
 * [Download Ubuntu Server](https://ubuntu.com/server)
 * Find out how to {ref}`contribute to the Server Guide <contribute>`
 

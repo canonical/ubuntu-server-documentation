@@ -1,7 +1,13 @@
+---
+myst:
+  html_meta:
+    description: Configure OpenSSH U2F/FIDO hardware authentication devices for enhanced two-factor security using ecdsa-sk or ed25519-sk keys.
+---
+
 (two-factor-authentication-with-u2f-or-fido)=
 # Two factor authentication with U2F/FIDO
 
-OpenSSH 8.2 has added [support for U2F/FIDO hardware authentication devices](https://www.openssh.com/txt/release-8.2). These devices are used to provide an extra layer of security on top of the existing key-based authentication, as the hardware token needs to be present to finish the authentication.
+OpenSSH 8.2 has added [support for U2F/FIDO hardware authentication devices](https://www.openssh.org/txt/release-8.2). These devices are used to provide an extra layer of security on top of the existing key-based authentication, as the hardware token needs to be present to finish the authentication.
 
 It's very simple to use and setup. The only extra step is to generate a new keypair that can be used with the hardware device. For that, there are two key types that can be used: `ecdsa-sk` and `ed25519-sk`. The former has broader hardware support, while the latter might need a more recent device.
 
@@ -99,5 +105,5 @@ If you used the `-O verify-required` option when generating the keys, or if that
 ```
 
 ## Further reading
-- [OpenSSH 8.2 release notes](https://www.openssh.com/txt/release-8.2)
+- [OpenSSH 8.2 release notes](https://www.openssh.org/txt/release-8.2)
 - [Yubikey documentation for OpenSSH FIDO/FIDO2 usage](https://developers.yubico.com/SSH/Securing_SSH_with_FIDO2.html)

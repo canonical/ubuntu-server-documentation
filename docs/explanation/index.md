@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Ubuntu Server explanation guides covering security, networking, virtualization, storage, performance, cryptography, and system concepts.
+---
+
 (explanation)=
 # Ubuntu Server explanation guides
 
@@ -96,17 +102,6 @@ Our {ref}`clouds section <explanation-cloud-images>` provides details on finding
 clouds
 ```
 
-## System tuning
-
-{ref}`Our system tuning <explanation-system-tuning>` section provides details on system performance and optimization, covering concepts like Profile-Guided Optimization (PGO) and some common tooling.
-
-```{toctree}
-:hidden:
-:titlesonly:
-
-performance
-```
-
 ## High Availability
 
 {ref}`High Availability <explanation-high-availability>` is a method for clustering resources to ensure minimal downtime if a particular component fails.
@@ -120,13 +115,13 @@ In this section we provide an introduction to High Availability and explain some
 high-availability
 ```
 
-## Debugging
+## System tuning
 
-{ref}`These debugging pages <explanation-debugging>` are for readers interested in packaging and Ubuntu development.
+{ref}`Our system tuning <explanation-system-tuning>` section provides details on system performance and optimization, covering concepts like Profile-Guided Optimization (PGO) and some common tooling.
 
 ```{toctree}
 :hidden:
 :titlesonly:
 
-debugging
+performance
 ```

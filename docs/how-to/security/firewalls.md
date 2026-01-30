@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Ubuntu Server firewalls using ufw (Uncomplicated Firewall) to manage iptables rules and control network traffic.
+---
+
 (firewalls)=
 # Firewall
 
@@ -326,8 +332,8 @@ There are many tools available to help you construct a complete firewall without
 
 - Also, the {manpage}`ufw(8)` manual page contains some very useful information: `man ufw`
 
-- See the [packet-filtering how-to](http://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
+- See the [packet-filtering how-to](https://www.netfilter.org/documentation/HOWTO/packet-filtering-HOWTO.html) for more information on using `iptables`
 
-- The [`nat` how-to](http://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
+- The [`nat` how-to](https://www.netfilter.org/documentation/HOWTO/NAT-HOWTO.html) contains further details on masquerading
 
 - The [`iptables` how-to](https://help.ubuntu.com/community/IptablesHowTo) in the Ubuntu wiki is a great resource

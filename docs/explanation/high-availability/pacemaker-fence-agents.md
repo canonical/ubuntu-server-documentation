@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Pacemaker fence agents for managing node fencing in high-availability clusters on Ubuntu Server."
+---
+
 (pacemaker-fence-agents)=
 # Pacemaker fence agents
 
@@ -100,7 +106,7 @@ $ pcs stonith create $RESOURCE_NAME fence_mpath \
 
 The `$NODE1_RES_KEY` is the reservation key used by this node 1 (same for the others node with access to the multipath device), please make sure you have `reservation_key <key>` in the `default` section inside `/etc/multipath.conf` and the multipathed service was reloaded after it.
 
-This is one way to set up `fence_mpath`, for more information please check its manual page.
+This is one way to set up `fence_mpath`, for more information please check {manpage}`its manual page <fence_mpath(8)>`.
 
 ## `fence_sbd`
 

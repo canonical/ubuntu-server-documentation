@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about Netplan, Ubuntu's network configuration abstraction layer that simplifies network management with YAML files."
+---
+
 (about-netplan)=
 # About Netplan
 

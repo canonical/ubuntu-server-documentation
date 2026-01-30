@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand debug symbol packages on Ubuntu Server for debugging applications with detailed symbol information."
+---
+
 (debug-symbol-packages)=
 # Debug symbol packages
 
@@ -11,6 +17,7 @@ If you are on Ubuntu Jammy (22.04) or later, you don't need to worry about insta
 
 You will only need to follow the methods outlined in this section if you are on Ubuntu Focal (20.04) or earlier.
 
+(get-debug-symbol-packages)=
 ## Getting `-dbgsym.ddeb` packages
 
 If you are debugging without debuginfod, your first step will be to enable the `ddebs.ubuntu.com` repository as described in this section, which will provide access to the `-dbgsym` packages.

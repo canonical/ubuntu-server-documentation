@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Explore virtualization tools available on Ubuntu Server, including QEMU, KVM, libvirt, and other VM management technologies."
+---
+
 (vm-tools-in-the-ubuntu-space)=
 # VM tools in the Ubuntu space
 
@@ -37,7 +43,7 @@ For details of how to get libvirt set up and the basics of how to use it, see th
 
 **Abstraction layer**: User-friendly, CLI-based VM management
 
-[Multipass](https://multipass.run/install) and [UVtool](https://launchpad.net/uvtool) provide an abstraction layer away from libvirt, using command-line interfaces to simplify VM management. Both Multipass and UVtool are widely used in development and testing; they are lightweight and straightforward to use, and can greatly simplify the process of creating and managing VMs. 
+[Multipass](https://canonical.com/multipass) and [UVtool](https://launchpad.net/uvtool) provide an abstraction layer away from libvirt, using command-line interfaces to simplify VM management. Both Multipass and UVtool are widely used in development and testing; they are lightweight and straightforward to use, and can greatly simplify the process of creating and managing VMs. 
 
 UVtool is essentially a wrapper around libvirt, providing an additional abstraction layer to simplify its use. Multipass is not based on libvirt, but can be integrated with it. This means that both tools can be used as part of a virtualization "stack" based around QEMU and libvirt.
 

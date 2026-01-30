@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure automatic security updates on Ubuntu Server with unattended-upgrades including reboot options, update sources, and blocking specific packages.
+---
+
 (automatic-updates)=
 # Automatic updates
 
@@ -62,7 +68,7 @@ With this change, the timer will trigger the service only on the next scheduled 
 
 ## Where to pick updates from
 
-In `/etc/apt/apt.conf.d/50unattended-upgrades`, the `Allowed-Origins` section specifies which repositories will be used to gather updates from. See the [Ubuntu Packaging Guide](https://canonical-ubuntu-packaging-guide.readthedocs-hosted.com/en/latest/explanation/archive/#pockets) for additional information about each official repository that Ubuntu uses.
+In `/etc/apt/apt.conf.d/50unattended-upgrades`, the `Allowed-Origins` section specifies which repositories will be used to gather updates from. See the [Ubuntu Project documentation](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#pockets) for additional information about each official repository that Ubuntu uses.
 
 This is the default:
 ```text
@@ -104,7 +110,7 @@ Unattended-Upgrade::Allowed-Origins {
 The `Origin` field is a standard field used in package repositories. By default, `unattended-upgrades` will ship with only official Ubuntu repositories configured, which is the configuration shown above. To have the system apply upgrades automatically from other repositories, its *Origin* needs to be added to this configuration option.
 
 ### Automatic upgrades from a PPA
-A very popular package repository type is a [Launchpad PPA](https://help.launchpad.net/Packaging/PPA). PPAs are normally referred to using the format `ppa:\<user\>/\<name\>`. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
+A very popular package repository type is a [Launchpad PPA](https://documentation.ubuntu.com/launchpad/user/Packaging/PPA/). PPAs are normally referred to using the format `ppa:\<user\>/\<name\>`. For example, the PPA at https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports is also referred to as `ppa:canonical-server/server-backports`.
 
 To use a PPA in the *Allowed-Origins* configuration, we need its *Origin* field. For PPAs, it is in the format *LP-PPA-\<user\>-\<name\>*. Adding it to the `Allowed-Origins` configuration would result in the following (continuing from the example above):
 ```text

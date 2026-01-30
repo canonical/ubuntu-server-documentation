@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Squid proxy server on Ubuntu for web traffic filtering, caching, and bandwidth optimization.
+---
+
 (install-a-squid-server)=
 # How to install a Squid server
 
@@ -46,7 +52,7 @@ The default setting is to use on-memory cache. This example tells squid to use u
 
 ```text
 cache_mem 512 MB
-maximum_memory_policy lru
+memory_replacement_policy lru
 ```
 
 ### Configure on-disk cache
@@ -181,10 +187,10 @@ sudo cat /var/log/squid/access.log
 For a status summary containing runtime statistics and configuration, run:
 
 ```bash
-squidclient mgr:info
+curl http://localhost:8888/squid-internal-mgr/info
 ```
 
-While monitoring, these cache status indicators can help identifying what is happening with requests:
+While monitoring the log files, these cache status indicators can help identifying what is happening with requests:
 - `TCP_MISS`: Content not in cache, fetched from origin
 - `TCP_HIT`: Content served from disk cache
 - `TCP_MEM_HIT`: Content served from memory cache

@@ -1,0 +1,37 @@
+name: Weekly link check
+
+on:
+  schedule:
+    - cron: "0 1 * * 4" # Runs at 01:00 AM on every Wednesday
+  workflow_call:
+    outputs:
+      linkcheck-result:
+        description: "Result of the link check"
+        value: ${{ jobs.docchecks.outputs.result_links }}
+
+jobs:
+  docchecks:
+    name: Run documentation checks
+    runs-on: 'ubuntu-latest'
+    outputs:
+      result_links: ${{ steps.linkcheck-step.outcome }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: '0'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Link Check
+        id: linkcheck-step
+        if: success() || failure()
+        uses: canonical/documentation-workflows/linkcheck@main
+        with:
+          working-directory: 'docs'
+          install-target: 'install'
+          linkcheck-target: 'linkcheck'
+          makefile: 'use-default'

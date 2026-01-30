@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how to contribute to Ubuntu Server documentation, including guidelines for writing, submitting, and reviewing content."
+---
+
 (contribute)=
 # Contribute to this documentation
 
@@ -27,7 +33,7 @@ started.
 There are some prerequisites to contributing to Ubuntu Server documentation.
 
 - **Code of Conduct**
-  You will need to read and agree to the Ubuntu [Code of Conduct](https://ubuntu.com/community/ethos/code-of-conduct). By
+  You will need to read and agree to the Ubuntu [Code of Conduct](https://ubuntu.com/community/docs/ethos/code-of-conduct). By
   participating, you implicitly agree to abide by the Code of Conduct. 
 
 - **GitHub account**
@@ -38,17 +44,6 @@ There are some prerequisites to contributing to Ubuntu Server documentation.
   need to work on the command line if you don't want to. Many documentation
   tasks can be done using [GitHub's web interface](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files). On the command line, we
   use the standard "fork and pull" process.
-
-- **Licensing**
-  The first time you contribute to a Canonical project, you will need to sign
-  the Canonical License agreement (CLA). If you have already signed it, e.g.
-  when contributing to another Canonical project, you do not need to sign it
-  again.
-  
-  This license protects your copyright over your contributions, including the
-  right to use them elsewhere, but grants us (Canonical) permission to use
-  them in our project. You can read [more about the CLA](https://ubuntu.com/legal/contributors) before you
-  [sign the CLA](https://ubuntu.com/legal/contributors/agreement).
 
 ## The Ubuntu Server docs overview
 

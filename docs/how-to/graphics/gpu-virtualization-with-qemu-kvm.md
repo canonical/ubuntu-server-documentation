@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure GPU virtualization with QEMU/KVM including graphics frontends, backends, 3D acceleration, and advanced passthrough options.
+---
+
 (gpu-virtualization-with-qemu-kvm)=
 # GPU virtualisation with QEMU/KVM
 
@@ -9,13 +15,13 @@ Graphics for QEMU/KVM always comes in two pieces: a {term}`frontend` and a backe
 
 - `backend`: Controlled via the `-display` argument. This is what the host uses to actually display the graphical content, which can be an application window via `gtk` or a `vnc`.
 
-- In addition, one can enable the `-spice` back end (which can be done in addition to `vnc`). This can be faster and provides more authentication methods than `vnc`.
+In addition, one can enable the `-spice` back end (which can be done in addition to `vnc`). This can be faster and provides more authentication methods than `vnc`.
 
-- If you want no graphical output at all, you can save some memory and CPU cycles by setting `-nographic`.
+If you want no graphical output at all, you can save some memory and CPU cycles by setting `-nographic`.
 
 If you run with `spice` or `vnc` you can use native `vnc` tools or virtualization-focused tools like `virt-viewer`. You can read more about these in the {ref}`libvirt section <libvirt>`.
 
-All these options  are considered basic usage of graphics, but there are also advanced options for more specific use-cases. Those cases usually differ in their [ease-of-use and capability](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/), such as:
+All these options are considered basic usage of graphics, but there are also advanced options for more specific use-cases. Those cases usually differ in their [ease-of-use and capability](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/), such as:
 
 - *Need 3D acceleration*: Use `-vga virtio` with a local display having a {term}`GL` context `-display gtk,gl=on`. This will use [virgil3d](https://virgil3d.github.io/) on the host, and guest drivers are needed (which are common in Linux since [Kernels >= 4.4](https://www.kraxel.org/blog/2016/09/using-virtio-gpu-with-libvirt-and-spice/) but can be hard to come by for other cases). While not as fast as the next two options, the major benefit is that it can be used without additional hardware and without a proper input-output memory management unit (IOMMU) [set up for device passthrough](https://www.kernel.org/doc/Documentation/vfio-mediated-device.txt).
 
@@ -31,7 +37,7 @@ All these options  are considered basic usage of graphics, but there are also ad
   -display gtk,gl=on -device vfio-pci,sysfsdev=/sys/bus/pci/devices/0000:00:02.0/4dd511f6-ec08-11e8-b839-2f163ddee3b3,display=on,rombar=0
   ```
 
-  You can read more [about vGPU at {spellexception}`kraxel`](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU `mdev` evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
+  You can read more [about vGPU at {spellexception}`kraxel`](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU `mdev` evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
 
 The advanced cases in particular can get pretty complex -- it is recommended to use QEMU through {ref}`libvirt section <libvirt>` for those cases. libvirt will take care of all but the host kernel/BIOS tasks of such configurations. Below are the common basic actions needed for faster options (i.e., passthrough and mediated devices passthrough).
 
@@ -111,7 +117,7 @@ Some older or non-server boards tend to group devices in one IOMMU group, which 
 
 For both, you'll want to ensure the normal driver isn't loaded. In some cases you can do that at runtime via `virsh nodedev-detach <pcidevice>`. `libvirt` will even do that automatically if, on the passthrough configuration, you have set `<hostdev mode='subsystem' type='pci' managed='yes'>`.
 
-This usually works fine for e.g. network cards, but some other devices like GPUs do not like to be unassigned, so there the required step usually is block loading the drivers you do not want to be loaded. In our GPU example the `nouveau` driver would load and that has to be blocked. To do so you can create a `modprobe` blacklist.
+This usually works fine for e.g. network cards, but some other devices like GPUs do not like to be unassigned, so there the required step usually is block loading the drivers you do not want to be loaded. In our GPU example the `nouveau` driver would load and that has to be blocked. To do so you can create a `modprobe` blocklist.
 
 ```bash
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf          
@@ -142,11 +148,11 @@ Kernel driver in use: nouveau
 
 ## Preparations for mediated devices pass-through - driver
 
-For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/grid/latest/product-support-matrix/index.html#abstract__ubuntu).
+For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html#abstract__ubuntu).
 
-There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
+There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
 
-Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that that driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
+Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that the driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
 ```bash
 lsmod | grep nvidia
@@ -162,9 +168,9 @@ drm                   491520  6 drm_kms_helper,drm_vram_helper,nvidia
 ```
 
 ```{note}
-While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/grid/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
+While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/vgpu/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
 
-It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/grid/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
+It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/vgpu/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
 ```
 
 Here is an example of those when running fine:
@@ -210,7 +216,7 @@ $ nvidia-smi -a | grep -A 2 "Licensed Product"
 
 A [mediated device](https://www.kernel.org/doc/html/latest/driver-api/vfio-mediated-device.html) is essentially the partitioning of a hardware device using {term}`firmware <FW>` and host driver features. This brings a lot of flexibility and options; in our example we can split our 16G GPU into 2x8G, 4x4G, 8x2G or 16x1G just as we need it. The following gives an example of how to split it into two 8G cards for a compute profile and pass those to guests.
 
-Please refer to the [NVIDIA documentation](https://docs.nvidia.com/grid/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu) for advanced tunings and different card profiles.
+Please refer to the [NVIDIA documentation](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu) for advanced tunings and different card profiles.
 
 The tool for listing and configuring these mediated devices is `mdevctl`: 
 
@@ -262,7 +268,7 @@ After the above setup is ready one can pass through those devices, in `libvirt` 
 </hostdev>
 ```
 
-And for mediated devices it is quite similar, but using the UUID.
+And for mediated devices, the format is quite similar, but uses the UUID.
 
 ```
 <hostdev mode='subsystem' type='mdev' managed='no' model='vfio-pci' display='on'>
@@ -272,10 +278,10 @@ And for mediated devices it is quite similar, but using the UUID.
 </hostdev>
 ```
 
-Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add remove if the hardware device and its drivers support it `virsh attach-device`.
+Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add and remove if the hardware device and its drivers support it `virsh attach-device`.
 
 ```{note}
 This works great on Focal, but `type='none'` as well as `display='off'` weren't available on Bionic. If this level of control is required one would need to consider using the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive) or [Server-Backports](https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports) for a newer stack of the virtualisation components.
 ```
 
-And finally, it might be worth noting that while mediated devices are becoming more common and known for vGPU handling, they are a general infrastructure also used (for example) for [s390x vfio-ccw](https://www.kernel.org/doc/html/latest/s390/vfio-ccw.html).
+And finally, it might be worth noting that while mediated devices are becoming more common and known for vGPU handling, they are a general infrastructure also used (for example) for [s390x vfio-ccw](https://docs.kernel.org/arch/s390/vfio-ccw.html).

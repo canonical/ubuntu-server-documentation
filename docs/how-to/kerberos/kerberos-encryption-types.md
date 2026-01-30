@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Kerberos encryption algorithms and key types for server-side database security and client-side principal authentication.
+---
+
 (kerberos-encryption-types)=
 # Kerberos encryption types
 
@@ -10,7 +16,7 @@ This document will explain the basic configuration parameters of Kerberos that c
 There are two main server-side configuration parameters that control the encryption types used on the server for its database and its collection or principals. Both exist in `/etc/krb5kdc/kdc.conf` inside the `[realms]` section and are as follows:
 
 * `master_key_type`
-    Specifies the key type of the master key. This is used to encrypt the database, and the default is `aes256-cts-hmac-sha1-96`.
+    Specifies the key type of the {spellexception}`master` key. This is used to encrypt the database, and the default is `aes256-cts-hmac-sha1-96`.
 
 * `supported_enctypes`
     Specifies the default key/salt combinations of principals for this realm. The default is `aes256-cts-hmac-sha1-96:normal aes128-cts-hmac-sha1-96:normal`, and the encryption types should be listed in order of preference.
@@ -29,7 +35,7 @@ Here is an example showing the default values (other settings removed for brevit
 }
 ```
 
-The master key is created once per realm, when the realm is bootstrapped. That is usually done with the `krb5_newrealm` tool (see {ref}`how to install a Kerberos server <install-a-kerberos-server>` for details). You can check the master key type with either of these commands on the KDC server:
+The {spellexception}`master` key is created once per realm, when the realm is bootstrapped. That is usually done with the `krb5_newrealm` tool (see {ref}`how to install a Kerberos server <install-a-kerberos-server>` for details). You can check the {spellexception}`master` key type with either of these commands on the KDC server:
 
 ```bash
 $ sudo kadmin.local
@@ -72,7 +78,7 @@ Key: vno 1, aes128-cts-hmac-sha1-96
 Two keys were created for the `ubuntu` principal, following the default setting of `supported_enctypes` in `kdc.conf` for this realm.
 
 ```{note}
-The server config `supported_enctypes` has the *default* list of key types that are created for a principal. This list applies to the moment when that principal is **created** by `kadmind`. Changing that setting after the fact won't affect the keys that the principal in question has after that event. In particular, principals can be created with specific key types regardless of the `supported_enctypes` setting. See the `-e` parameter for the [kadmin add_principal command](https://web.mit.edu/kerberos/krb5-latest/doc/admin/database.html#add-principal).
+The server config `supported_enctypes` has the *default* list of key types that are created for a principal. This list applies to the moment when that principal is **created** by `kadmind`. Changing that setting after the fact won't affect the keys that the principal in question has after that event. In particular, principals can be created with specific key types regardless of the `supported_enctypes` setting. See the `-e` parameter for the [kadmin add_principal command](https://web.mit.edu/kerberos/krb5-latest/doc/admin/database.html).
 ```
 
 If we had `supported_enctypes` set to `aes256-sha2:normal aes128-sha2:normal camellia256-cts:normal` in `kdc.conf`, then the `ubuntu` principal would get three key types:

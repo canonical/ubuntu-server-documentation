@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Docker storage, networking, and logging with practical examples using Docker CLI for system administrators on Ubuntu.
+---
+
 (docker-for-system-admins)=
 # Docker for system admins
 
@@ -8,7 +14,7 @@ We are going to explore set-ups for configuring storage, networking, and logging
 First, install Docker if it’s not already installed:
 
 ```bash
-$ sudo apt-get install -y docker.io docker-compose-v2
+$ sudo apt-get install -y docker.io docker-compose
 ```
 
 ## Configuring storage
@@ -173,7 +179,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```bash
   $ docker info | grep "Storage Driver"
 
-  Storage Driver: overlay2
+  Storage Driver: overlayfs
   ```
 
 - Ensure the required Filesystem is available. We will be using the ZFS Filesystem.

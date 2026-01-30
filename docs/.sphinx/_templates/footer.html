@@ -62,13 +62,6 @@
       {%- endtrans -%}
     </div>
     {%- endif %}
-
-    {%- if show_source and has_source and sourcename %}
-    <div class="show-source">
-      <a class="muted-link" href="{{ pathto('_sources/' + sourcename, true)|e }}"
-         rel="nofollow">Show source</a>
-    </div>
-    {%- endif %}
   </div>
   <div>
     {% if github_url and github_folder and pagename and page_source_suffix and display_contributors %}
@@ -106,7 +99,7 @@
     </div>
     {% endif %}
 
-    {% if github_url and repo_default_branch and repo_folder %}
+    {% if github_url and repo_default_branch and repo_folder and page_source_suffix %}
 
     {% if github_issues %}
     <div class="issue-github">
@@ -119,7 +112,7 @@
     </div>
     
     <div class="view-page-source">
-      <a class="muted-link" href="{{ html_baseurl }}/_sources/{{ pagename }}{{ page_source_suffix }}.txt">View page source</a>
+      <a class="muted-link" href="{{ pathto('_sources/' + pagename + page_source_suffix + '.txt', true)|e }}" rel="nofollow">View page source</a>
     </div>
     {% endif %}
 

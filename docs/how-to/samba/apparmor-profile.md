@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Create and configure AppArmor security profiles for Samba daemons smbd and nmbd to enforce mandatory access controls on Ubuntu.
+---
+
 (samba-apparmor-profile)=
 # Create a Samba AppArmor profile
 

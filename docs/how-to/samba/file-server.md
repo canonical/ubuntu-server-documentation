@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up Samba as a file server to share files between Ubuntu and Windows clients with or without authentication requirements.
+---
+
 (samba-file-server)=
 # Set up Samba as a file server
 
@@ -8,7 +14,7 @@ The server will be configured to share files with any client on the network with
 ```{warning}
 If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
-If you *are* using Samba with authd, you should follow the instructions in the [steps for the server](https://documentation.ubuntu.com/authd/en/latest/howto/use-with-samba/#steps-for-the-server) guide in the authd documentation instead.
+If you *are* using Samba with authd, you should follow the instructions in the [steps for the server](https://documentation.ubuntu.com/authd/edge-docs/howto/use-with-samba/#steps-for-the-server) guide in the authd documentation instead.
 ```
 
 ## Install Samba
@@ -54,7 +60,7 @@ A short description of the share. Adjust to fit your needs.
 The path to the directory you want to share.
     
   ```{note}
-  This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](http://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
+  This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](https://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
   ```
 
 - **`browsable`**
@@ -101,8 +107,8 @@ The file share named `[share]` and the path `/srv/samba/share` used in this exam
 
   - For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
 
-  - The guide is also available [in printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+  - The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is another good reference.
+  - O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
 
   - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.

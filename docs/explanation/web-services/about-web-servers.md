@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand web server options for Ubuntu Server, including Apache, Nginx, and other HTTP server technologies."
+---
+
 (about-web-servers)=
 # About web servers
 
@@ -7,13 +13,13 @@ Clients, mostly via **web browsers**, request specific resources and the server 
 
 ## URLs
 
-Users enter a Uniform Resource Locator (URL) to point to a web server by means of its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` and a path to the required resource. For example, to view the home page of the [Ubuntu Web site](https://www.ubuntu.com) a user will enter only the FQDN:
+Users enter a Uniform Resource Locator (URL) to point to a web server by means of its {term}`Fully Qualified Domain Name (FQDN) <FQDN>` and a path to the required resource. For example, to view the home page of the [Ubuntu Web site](https://ubuntu.com/) a user will enter only the FQDN:
 
 ```text
 www.ubuntu.com
 ```
 
-To view the [community](https://www.ubuntu.com/community) sub-page, a user will enter the FQDN followed by a path:
+To view the [community](https://ubuntu.com/community) sub-page, a user will enter the FQDN followed by a path:
 
 ```text
 www.ubuntu.com/community

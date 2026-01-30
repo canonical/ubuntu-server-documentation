@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install nginx HTTP server on Ubuntu as a powerful alternative to Apache for high-performance web services and applications.
+---
+
 (install-nginx)=
 # How to install nginx
 
@@ -92,4 +98,4 @@ For more information on customizing nginx for your needs, see these follow-up gu
 
   * O'Reilly's nginx cookbook provides guidance on solving specific needs
 
-  * For Ubuntu-specific nginx questions, ask in the `#ubuntu-server` IRC channel on <a>libera.chat</a>.
+  * For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

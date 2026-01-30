@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure network user authentication with SSSD on Ubuntu Server for Active Directory, LDAP, and Kerberos integration.
+---
+
 (how-to-network-user-authentication-with-sssd)=
 # Network user authentication with SSSD
 

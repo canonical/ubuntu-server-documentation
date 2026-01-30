@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure smart card authentication on Ubuntu Server 20.04+ using SSSD, pcscd, and PIV/CAC drivers for two-factor security.
+---
+
 (smart-card-authentication)=
 # Smart card authentication
 
@@ -5,7 +11,7 @@
 One of the most popular uses for smart cards is to control access to computer systems. The owner must physically *have* the smart card, and they must know the PIN to unlock it. This provides a higher degree of security than single-factor authentication (such as just using a password). In this page, we describe how to enable smart card authentication on Ubuntu.
 
 ```{note}
-This guide is meant for Ubuntu Server 20.04 and newer. If you want to configure a desktop installation refer to the [desktop guide](https://ubuntu.com/tutorials/how-to-use-smart-card-authentication-in-ubuntu-desktop#1-overview).
+This guide is meant for Ubuntu Server 20.04 and newer. If you want to configure a desktop installation refer to the [desktop guide](https://ubuntu.com/tutorials/how-to-use-smart-card-authentication-in-ubuntu-desktop#2-overview).
 ```
 
 ## Software requirements
@@ -406,7 +412,7 @@ or only try to use it:
 auth    [success=ok default=ignore]    pam_sss.so allow_missing_name try_cert_auth
 ```
 
-See [`man pam.conf`](https://manpages.ubuntu.com/manpages/jammy/en/man5/pam.conf.5.html), [`man pam_sss`](https://manpages.ubuntu.com/manpages/jammy/en/man8/pam_sss.8.html) for further details.
+See {manpage}`pam.conf(5)`, {manpage}`pam_sss(8)` for further details.
 
 ```{Warning}
 A global configuration such as this requires a smart card for `su` and `sudo` authentication as well!

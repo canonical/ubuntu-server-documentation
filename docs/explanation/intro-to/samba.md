@@ -1,9 +1,15 @@
+---
+myst:
+  html_meta:
+    description: Introduction to Samba for file and print sharing between Ubuntu and Windows systems including SMB protocol and Active Directory integration.
+---
+
 (introduction-to-samba)=
 # Introduction to Samba
 
 Computer networks are often comprised of diverse systems. While operating a network made up entirely of Ubuntu desktop and server computers would definitely be fun, some network environments require both Ubuntu and Microsoft Windows systems working together in harmony. 
 
-This is where [Samba](https://www.samba.org) comes in! Samba provides various tools for configuring your Ubuntu Server to share network resources with Windows clients. In this overview, we'll look at some of the key principles, how to install and configure the tools available, and some common Samba use cases.
+This is where [Samba](https://www.samba.org/) comes in! Samba provides various tools for configuring your Ubuntu Server to share network resources with Windows clients. In this overview, we'll look at some of the key principles, how to install and configure the tools available, and some common Samba use cases.
 
 ## Samba functionality
 

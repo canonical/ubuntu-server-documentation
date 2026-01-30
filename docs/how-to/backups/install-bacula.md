@@ -1,7 +1,13 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Bacula cross-platform backup management system for network-wide backup, restore, and verification operations.
+---
+
 (install-bacula)=
 # How to install and configure Bacula
 
-[Bacula](http://www.bacula.org/) is a backup management tool that enables you to backup, restore, and verify data across your network. There are Bacula clients for Linux, Windows, and Mac OS X -- making it a cross-platform and network-wide solution.
+[Bacula](https://www.bacula.org/) is a backup management tool that enables you to backup, restore, and verify data across your network. There are Bacula clients for Linux, Windows, and Mac OS X -- making it a cross-platform and network-wide solution.
 
 ## Bacula components
 
@@ -912,4 +918,4 @@ $ dir this*
 
 * For more Bacula configuration options, refer to the [Bacula documentation](https://www.bacula.org/documentation/documentation/).
 
-* The [Bacula home page](http://www.bacula.org/) contains the latest Bacula news and developments.
+* The [Bacula home page](https://www.bacula.org/) contains the latest Bacula news and developments.

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to WireGuard VPN including concepts, architecture, peer-to-site, site-to-site configurations, and security features.
+---
+
 (introduction-to-wireguard-vpn)=
 # Introduction to WireGuard VPN
 
@@ -93,7 +99,7 @@ $ sudo wg-quick up wg0
 [#] ip -4 route add 10.10.10.0/24 dev wg0
 ```
 
-This is what `wg-quick`:
+This is what `wg-quick` did:
 
 - Created the WireGuard `wg0` interface.
 - Configured it with the data from the configuration file.

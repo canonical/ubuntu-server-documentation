@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Secure OpenLDAP authentication with Transport Layer Security (TLS) by creating certificates and configuring encrypted sessions.
+---
+
 (ldap-and-tls)=
 # LDAP and Transport Layer Security (TLS)
 

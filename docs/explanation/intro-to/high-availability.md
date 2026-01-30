@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to High Availability concepts including redundancy, failover mechanisms, and distributed systems for minimal downtime.
+---
+
 (introduction-to-high-availability)=
 # Introduction to High Availability
 
@@ -47,19 +53,19 @@ Packages in this list are supported just like any other package available in the
 
 | Package | URL |
 |-|-|
-| `libqb` | [Ubuntu](https://launchpad.net/ubuntu/+source/libqb) \| [Upstream](http://clusterlabs.github.io/libqb/)
-| `kronosnet` | [Ubuntu](https://launchpad.net/ubuntu/+source/kronosnet) \| [Upstream](https://kronosnet.org/)
-| `corosync` | [Ubuntu](https://launchpad.net/ubuntu/+source/corosync) \| [Upstream](http://corosync.github.io/corosync/)
-| `pacemaker` | [Ubuntu](https://launchpad.net/ubuntu/+source/pacemaker) \| [Upstream](https://www.clusterlabs.org/pacemaker/)
-| `resource-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/resource-agents) \| [Upstream](https://github.com/ClusterLabs/resource-agents)
-| `fence-agents` |[Ubuntu](https://launchpad.net/ubuntu/+source/fence-agents) \| [Upstream](https://github.com/ClusterLabs/fence-agents)
-| `crmsh` |[Ubuntu](https://launchpad.net/ubuntu/+source/crmsh) \| [Upstream](https://github.com/ClusterLabs/crmsh)
-| `pcs*` |[Ubuntu](https://launchpad.net/ubuntu/+source/pcs) \| [Upstream](https://github.com/ClusterLabs/pcs/)
-| `cluster-glue` |[Ubuntu](https://launchpad.net/ubuntu/+source/cluster-glue) \| [Upstream](https://github.com/ClusterLabs/cluster-glue)
-| `drbd-utils` |[Ubuntu](https://launchpad.net/ubuntu/+source/drbd-utils) \| [Upstream](https://linbit.com/drbd/)
-| `dlm` |[Ubuntu](https://launchpad.net/ubuntu/+source/dlm) \| [Upstream](https://pagure.io/dlm)
-| `gfs2-utils` |[Ubuntu](https://launchpad.net/ubuntu/+source/gfs2-utils) \| [Upstream](https://pagure.io/gfs2-utils)
-| `keepalived` |[Ubuntu](https://launchpad.net/ubuntu/+source/keepalived) \| [Upstream](https://www.keepalived.org/)
+| `libqb` | {lpsrc}`libqb` \| [Upstream](http://clusterlabs.github.io/libqb/)
+| `kronosnet` | {lpsrc}`kronosnet` \| [Upstream](https://kronosnet.org/)
+| `corosync` | {lpsrc}`corosync` \| [Upstream](http://corosync.github.io/corosync/)
+| `pacemaker` | {lpsrc}`pacemaker` \| [Upstream](https://clusterlabs.org/projects/pacemaker/)
+| `resource-agents` |{lpsrc}`resource-agents` \| [Upstream](https://github.com/ClusterLabs/resource-agents)
+| `fence-agents` |{lpsrc}`fence-agents` \| [Upstream](https://github.com/ClusterLabs/fence-agents)
+| `crmsh` |{lpsrc}`crmsh` \| [Upstream](https://github.com/ClusterLabs/crmsh)
+| `pcs*` |{lpsrc}`pcs` \| [Upstream](https://github.com/ClusterLabs/pcs/)
+| `cluster-glue` |{lpsrc}`cluster-glue` \| [Upstream](https://github.com/ClusterLabs/cluster-glue)
+| `drbd-utils` |{lpsrc}`drbd-utils` \| [Upstream](https://linbit.com/drbd/)
+| `dlm` |{lpsrc}`dlm` \| [Upstream](https://pagure.io/dlm)
+| `gfs2-utils` |{lpsrc}`gfs2-utils` \| [Upstream](https://pagure.io/gfs2-utils)
+| `keepalived` |{lpsrc}`keepalived` \| [Upstream](https://www.keepalived.org/)
 
 
 - **`libqb`** - Library which provides a set of high performance client-server reusable features. It offers high performance logging, tracing, IPC and poll. Its initial features were spun off the `corosync` cluster communication suite to make them accessible for other projects.
@@ -139,7 +145,7 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
   The `lvmlockd` benefits over `clvm` are:
 
   * `lvmlockd` supports two cluster locking plugins: DLM and SANLOCK. SANLOCK plugin can supports up to ~2000 nodes that benefits LVM usage in big virtualization / storage cluster, while DLM plugin fits HA cluster.
-  * `lvmlockd` has better design than `clvmd`. `clvmd` is a command-line level based locking system, which means the whole LVM software will hang if any LVM command gets a dead-locking issue.
+  * `lvmlockd` has better design than `clvmd`. `clvmd` is a command-line level based locking system, which means the whole LVM software will freeze if any LVM command gets a dead-locking issue.
   * `lvmlockd` can work with `lvmetad`.
 
 ```{note}
@@ -151,10 +157,9 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 The Server documentation is not intended to document every option for all the HA related software described in this page. More complete documentation can be found upstream at:
 
 - ClusterLabs
-  - [Clusters From Scratch](https://clusterlabs.org/pacemaker/doc/en-US/Pacemaker/2.0/html-single/Clusters_from_Scratch/index.html)
-  - [Managing Pacemaker Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Clusters_from_Scratch/index.html)
-  - [Pacemaker Configuration Explained](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Explained/index.html)
-  - [Pacemaker Remote - Scaling HA Clusters](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/2.0/html/Pacemaker_Remote/index.html)
+  - [Clusters From Scratch](https://clusterlabs.org/projects/pacemaker/doc/3.0/Clusters_from_Scratch/html/)
+  - [Managing Pacemaker Clusters](https://clusterlabs.org/projects/pacemaker/doc/3.0/Pacemaker_Administration/html/)
+  - [Pacemaker Configuration Explained](https://clusterlabs.org/projects/pacemaker/doc/3.0/Pacemaker_Explained/html/)
 - Other
   - [Ubuntu Bionic HA in Shared Disk Environments (Azure)](https://discourse.ubuntu.com/t/ubuntu-high-availability-corosync-pacemaker-shared-disk-environments/14874)
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Upgrade Ubuntu Server to the next major LTS release with this comprehensive guide covering a pre-upgrade checklist and the do-release-upgrade procedure.
+---
+
 (upgrade-your-release)=
 # How to upgrade your Ubuntu release
 
@@ -5,7 +11,7 @@ In this page we show how to upgrade an Ubuntu Server or Ubuntu cloud image to th
 
 We recommend running a Long Term Support (LTS) release as it provides 5 years of standard support and security updates, whereas interim releases are only supported for nine months.
 
-After the initial standard support period ends for an LTS release, an extended maintenance period is available via an [Ubuntu Pro subscription](http://ubuntu.com/pro), which provides coverage for an additional five years and is available for free on up to five machines. Find out more about the [release lifecycle and support period](https://ubuntu.com/about/release-cycle) for your release.
+After the initial standard support period ends for an LTS release, an extended maintenance period is available via an [Ubuntu Pro subscription](https://ubuntu.com/pro), which provides coverage for an additional five years and is available for free on up to five machines. Find out more about the [release lifecycle and support period](https://ubuntu.com/about/release-cycle) for your release.
 
 ## Understanding Upgrade Paths
 You can only upgrade from one LTS release directly to the **next sequential LTS release**. For example, if you are on Ubuntu 16.04 LTS, you can upgrade to Ubuntu 18.04 LTS.
@@ -18,13 +24,13 @@ Before starting a major release upgrade, it's important to prepare your system t
 
 * **Review Releases notes:** Always check the **release notes** for the new Ubuntu version we are moving to. This can be found on the [Ubuntu Wiki Releases Page](https://wiki.ubuntu.com/Releases).
 
-* **Fully update the current system:** The release upgrade process requires that the current system has all the latest updates installed. This is a standard **package upgrade**: **apt update** will refresh package index database, and **apt upgrade** will download and install the latest versions of installed packages.
+* **Fully update the current system:** The release upgrade process requires that the current system has all the latest updates installed. This is a full **package upgrade** because **apt update** will refresh the package index database, and **apt dist-upgrade** will download and install the latest versions of installed packages, pulling in new dependencies, updating existing ones, and potentially removing packages from the system to make sure all packages are in their most recent version. Phased packages may also block the release upgrade, and need to be installed (see the {ref}`explanation on phased updates <about-apt-upgrade-and-phased-updates>` to know more).
 
   1. Run these commands to ensure everything is up to date:
 
       ```bash
       sudo apt update
-      sudo apt upgrade
+      sudo apt dist-upgrade -o APT::Get::Always-Include-Phased-Updates=true
       ```
   2. Confirm both commands complete successfully and no further updates are available.
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Meet the contributors who have helped improve Ubuntu Server documentation and see how to join the community."
+---
+
 (contributors)=
 
 # Our contributors

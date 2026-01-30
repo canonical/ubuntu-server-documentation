@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Understand OpenStack cloud computing platform and its integration with Ubuntu Server for building private and public clouds."
+---
+
 (about-openstack)=
 # About OpenStack
 
@@ -13,27 +19,27 @@ OpenStack consists of the following primary components:
    Serves as an identity service, providing authentication and authorisation functions for the users and enabling multi-tenancy.
 
 * **Glance**: 
-   This is an image service, responsible for uploading, managing and retrieving cloud images for VMs running on OpenStack.
+   Manages cloud images for VMs, handling uploading, retrieval and storage of images across OpenStack.
 
 * **Nova**:
-   This is the primary compute engine of OpenStack, responsible for VM scheduling, creation and termination.
+   Serves as the primary compute engine of OpenStack, responsible for VM scheduling, creation and termination.
 
 * **Neutron**:
    Provides network connectivity between VMs, enabling multi-VM deployments.
 
 * **Cinder**:
-   This is a storage component that is responsible for provisioning, management and termination of persistent block devices.
+   Manages provisioning, operation and termination of persistent block storage devices.
 
 * **Swift**:
-   This is another storage component that provides a highly available and scalable object storage service.
+   Provides highly available and scalable object storage service.
 
-There are also many other OpenStack components and supporting services available in the OpenStack ecosystem, enabling more advanced functions, such as load balancing, secrets management, etc.
+There are also many other [OpenStack components](https://www.openstack.org/software/project-navigator/openstack-components#openstack-services) and supporting services available in the OpenStack ecosystem, enabling more advanced functions such as load balancing and secrets management.
 
 ## OpenStack installation
 
-The most straightforward way to get started with OpenStack on Ubuntu is to use [MicroStack](https://microstack.run/docs/single-node) since the entire installation process requires only 2 commands and takes around 20 minutes.
+The most straightforward way to get started with OpenStack on Ubuntu is to use [Canonical OpenStack](https://canonical-openstack.readthedocs-hosted.com/en/latest/tutorial/get-started-with-openstack/) since the entire installation process requires only a few commands and takes around 20 minutes.
 
-Apart from MicroStack, multiple different installation methods for OpenStack on Ubuntu are available. These include:
+Apart from Canonical OpenStack, multiple installation methods for OpenStack on Ubuntu are available. These include:
 
 * [OpenStack Charms](https://docs.openstack.org/project-deploy-guide/charm-deployment-guide/latest/)
 

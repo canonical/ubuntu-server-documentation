@@ -19,14 +19,6 @@ Example:
 
 ---
 
-### Contributor License Agreement (CLA)
-
-By contributing to this project, you agree to the terms of
-the [Canonical Contributor License Agreement (CLA)](https://ubuntu.com/legal/contributors).  
-If you have not already signed the CLA, [please do so here](https://ubuntu.com/legal/contributors).
-
----
-
 ### Commit Message for Squash Merge
 
 We typically squash commits when merging. You can specify the commit message that should be used in this case if you wish.

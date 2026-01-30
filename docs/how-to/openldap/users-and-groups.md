@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage LDAP users and groups with ldapscripts package and integrate with SSSD for UNIX user information storage in OpenLDAP.
+---
+
 (ldap-users-and-groups)=
 # How to set up LDAP users and groups
 

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Configure Apache2 virtual hosts and server directives to customize web server settings for single or multiple sites on Ubuntu.
+---
+
 (configure-apache2-settings)=
 # How to configure Apache2 settings
 
@@ -84,7 +90,7 @@ This section explains configuration of the Apache2 server default settings. For 
     
 For example, when a user requests the page `http://www.example.com/this_directory/`, they will get either the DirectoryIndex page (if it exists), a server-generated directory list (if it does not and the Indexes option is specified), or a Permission Denied page if neither is true. 
 
-The server will try to find one of the files listed in the DirectoryIndex directive and will return the first one it finds. If it does not find any of these files and if **Options Indexes** is set for that directory, the server will generate and return a list, in HTML format, of the subdirectories and files in the directory. The default value, found in `/etc/apache2/mods-available/dir.conf` is "index.html index.cgi index.pl index.php index.xhtml index.htm". Thus, if Apache2 finds a file in a requested directory matching any of these names, the first will be displayed.
+The server will try to find one of the files listed in the DirectoryIndex directive and will return the first one it finds. If it does not find any of these files and if **Options Indexes** is set for that directory, the server will generate and return a list, in HTML format, of the subdirectories and files in the directory. The default value, found in `/etc/apache2/mods-available/dir.conf` is "index.html index.cgi index\.pl index.php index.xhtml index.htm". Thus, if Apache2 finds a file in a requested directory matching any of these names, the first will be displayed.
 
 ### The **ErrorDocument**
 
@@ -114,7 +120,7 @@ The Options directive within a Directory stanza accepts one or more of the follo
   Allow CGI scripts to be run. CGI scripts are not run if this option is not chosen.
         
   ```{caution}
-  Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
+  Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should be kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
   ```
 
 - **Includes**
@@ -164,6 +170,6 @@ Now that you know how to configure Apache2, you may also want to know {ref}`how 
 
 - The [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the `apache2-doc` package for the official Apache2 docs.
 
-- O'Reilly's [Apache Cookbook](http://shop.oreilly.com/product/9780596529949.do) is a good resource for accomplishing specific Apache2 configurations.
+- O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
 
-- For Ubuntu specific Apache2 questions, ask in the `#ubuntu-server` IRC channel on [libera.chat](https://libera.chat/).
+- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

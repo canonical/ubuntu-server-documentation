@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up OpenVPN server on Ubuntu with PKI authentication to create secure SSL/TLS VPN connections for remote access.
+---
+
 (install-openvpn)=
 # How to install and use OpenVPN
 
@@ -42,8 +48,7 @@ You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it t
 As a `root` user, change to the newly created directory `/etc/openvpn/easy-rsa` and run:
 
 ```bash
-./easyrsa init-pki
-./easyrsa build-ca
+./easyrsa init-pki && ./easyrsa build-ca
 ```
 
 The PEM passphrase set when creating the CA will be asked for every time you need to encrypt the output of a command (such as a private key). The encryption here is important, to avoid printing any private key in plain text.
@@ -74,28 +79,6 @@ All certificates and keys have been generated in subdirectories. Common practice
 cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.key /etc/openvpn/
 ```
 
-### Create client certificates
-
-The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client. 
-
-This can be done either on the server (as with the keys and certificates above) and then securely distributed to the client, or the client can generate and submit a request that is sent and signed by the server.
-
-To create the certificate, enter the following in a terminal as a root user:
-
-```bash
-./easyrsa gen-req myclient1 nopass
-./easyrsa sign-req client myclient1
-```
-
-If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-eq` command.
-
-After this is done, in both cases you will need to copy the following files to the client using a secure method:
-
-- `pki/ca.crt`
-- `pki/issued/myclient1.crt`
-
-Since the client certificates and keys are only required on the client machine, you can remove them from the server.
-
 ## Simple server configuration
 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
@@ -106,10 +89,10 @@ Included with your OpenVPN installation are these (and many more) sample configu
 ```
 
 If these files under `/usr/share/doc/*` are not available (for example, the system was provisioned as a minimal install), you can fetch them directly from the Ubuntu package repositories:
- * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf?h=applied/ubuntu/noble-devel)
- * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf?h=applied/ubuntu/noble-devel)
+ * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf)
+ * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf)
 
-Start by copying the example server configuration to `/etc/openvpn/server.conf`:
+Start by copying the example server configuration to `/etc/openvpn/myserver.conf`:
 
 ```bash
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
@@ -124,7 +107,7 @@ sudo gzip -d /etc/openvpn/myserver.conf.gz
 
 Edit `/etc/openvpn/myserver.conf` to make sure the following lines are pointing to the certificates and keys you created in the section above.
 
-```
+```text
 ca ca.crt
 cert myservername.crt
 key myservername.key
@@ -138,22 +121,24 @@ Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-
 sudo openvpn --genkey secret ta.key
 ```
 
-Edit `/etc/sysctl.conf` and uncomment the following line to enable IP forwarding:
-
-```
-#net.ipv4.ip_forward=1
-```
-
-Then reload `sysctl`:
+Add a config file to `/etc/sysctl.conf.d` to enable IP forwarding:
 
 ```bash
-sudo sysctl -p /etc/sysctl.conf
+echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
-This is the minimum you need to configure to get a working OpenVPN server. You can use all the default settings in the sample `server.conf` file. Now you can start the server. 
+Then apply this file through `sysctl`:
 
 ```bash
-$ sudo systemctl start openvpn@myserver
+sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
+```
+
+This is the minimum you need to configure to get a working OpenVPN server.
+You can consider studying and tweaking all the default settings we got from the sample `server.conf` file.
+Now you can start the server.
+
+```bash
+sudo systemctl start openvpn@myserver
 ```
 
 ```{note}
@@ -161,7 +146,7 @@ Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` yo
 OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
 ```
 
-You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
+You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
 
 ```bash
 sudo journalctl -u openvpn@myserver -xe
@@ -170,30 +155,36 @@ sudo journalctl -u openvpn@myserver -xe
 The same templated approach works for all of `systemctl`:
 
 ```bash
-$ sudo systemctl status openvpn@myserver
-openvpn@myserver.service - OpenVPN connection to myserver
-   Loaded: loaded (/lib/systemd/system/openvpn@.service; disabled; vendor preset: enabled)
-   Active: active (running) since Thu 2019-10-24 10:59:25 UTC; 10s ago
-     Docs: man:openvpn(8)
-           https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
-           https://community.openvpn.net/openvpn/wiki/HOWTO
- Main PID: 4138 (openvpn)
-   Status: "Initialization Sequence Completed"
-    Tasks: 1 (limit: 533)
-   Memory: 1.0M
-   CGroup: /system.slice/system-openvpn.slice/openvpn@myserver.service
-           └─4138 /usr/sbin/openvpn --daemon ovpn-myserver --status /run/openvpn/myserver.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/myserver.conf --writepid /run/
+sudo systemctl status openvpn@myserver
+```
 
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: /sbin/ip addr add dev tun0 local 10.8.0.1 peer 10.8.0.2
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: /sbin/ip route add 10.8.0.0/24 via 10.8.0.2
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Could not determine IPv4/IPv6 protocol. Using AF_INET
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Socket Buffers: R=[212992->212992] S=[212992->212992]
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: UDPv4 link local (bound): [AF_INET][undef]:1194
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: UDPv4 link remote: [AF_UNSPEC]
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: MULTI: multi_init called, r=256 v=256
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: IFCONFIG POOL: base=10.8.0.4 size=62, ipv6=0
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: IFCONFIG POOL LIST
-Oct 24 10:59:26 eoan-vpn-server ovpn-myserver[4138]: Initialization Sequence Completed
+Which shows the current server status:
+
+```text
+     Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
+     Active: active (running) since Wed 2026-01-21 10:38:01 UTC; 37s ago
+ Invocation: b2a3d68935e7423e8f822bc0c88db764
+       Docs: man:openvpn(8)
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 10556 (openvpn)
+     Status: "Initialization Sequence Completed"
+      Tasks: 1 (limit: 10)
+     Memory: 1.7M (peak: 1.9M)
+        CPU: 17ms
+     CGroup: /system.slice/system-openvpn.slice/openvpn@myserver.service
+             └─10556 /usr/sbin/openvpn --daemon ovpn-myserver --status /run/openvpn/myserver.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/myserver.conf --writepid /r>
+
+Jan 21 10:38:01 server ovpn-myserver[10556]: net_iface_up: set tun0 up
+Jan 21 10:38:01 server ovpn-myserver[10556]: net_addr_v4_add: 10.8.0.1/24 dev tun0
+Jan 21 10:38:01 server ovpn-myserver[10556]: Could not determine IPv4/IPv6 protocol. Using AF_INET
+Jan 21 10:38:01 server ovpn-myserver[10556]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:38:01 server ovpn-myserver[10556]: UDPv4 link local (bound): [AF_INET][undef]:1194
+Jan 21 10:38:01 server ovpn-myserver[10556]: UDPv4 link remote: [AF_UNSPEC]
+Jan 21 10:38:01 server ovpn-myserver[10556]: MULTI: multi_init called, r=256 v=256
+Jan 21 10:38:01 server ovpn-myserver[10556]: IFCONFIG POOL IPv4: base=10.8.0.2 size=253
+Jan 21 10:38:01 server ovpn-myserver[10556]: IFCONFIG POOL LIST
+Jan 21 10:38:01 server ovpn-myserver[10556]: Initialization Sequence Completed
 ```
 
 You can enable/disable various OpenVPN services on one system, but you could also let Ubuntu do it for you. There is a config for `AUTOSTART `in `/etc/default/openvpn`. Allowed values are "all", "none" or a space-separated list of names of the VPNs. If empty, "all" is assumed. The VPN name refers to the VPN configuration file name, i.e., `home` would be `/etc/openvpn/home.conf`.
@@ -205,14 +196,42 @@ After `systemctl daemon-reload`, a restart of the "generic" OpenVPN will restart
 Now, check if OpenVPN created a `tun0` interface:
 
 ```bash
-root@server:/etc/openvpn# ip addr show dev tun0
+ip addr show dev tun0
+```
+
+Due to restricting it to `dev tun0` this will report just that:
+
+```text
 5: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
-    link/none 
+    link/none
     inet 10.8.0.1 peer 10.8.0.2/32 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::b5ac:7829:f31e:32c5/64 scope link stable-privacy 
+    inet6 fe80::b5ac:7829:f31e:32c5/64 scope link stable-privacy
        valid_lft forever preferred_lft forever
 ```
+
+### Create client certificates
+
+The VPN client will also need a certificate to authenticate itself to the server. Usually you create a different certificate for each client.
+
+This can be done either on the server (as with the keys and certificates above) and then securely distributed to the client, or the client can generate and submit a request that is sent and signed by the server.
+
+To create the certificate, enter the following in a terminal as a root user:
+
+```bash
+./easyrsa gen-req myclient1 nopass && ./easyrsa sign-req client myclient1
+```
+
+If the first command above was done on a remote system, then copy the `.req` file to the CA server. From there, you can import it via `easyrsa import-req /incoming/myclient1.req myclient1`. Then you can go on with the second `sign-req` command.
+
+After this is done, in both cases you will need to copy the following files to the client using a secure method:
+
+- `pki/ca.crt`
+- `pki/issued/myclient1.crt`
+- `pki/private/myclient1.key`
+- `ta.key`
+
+Since the client certificates and keys are only required on the client machine, you can remove them from the server.
 
 ## Simple client configuration
 
@@ -247,84 +266,124 @@ remote vpnserver.example.com 1194
 Now start the OpenVPN client with the same templated mechanism:
 
 ```bash
-$ sudo systemctl start openvpn@client
+sudo systemctl start openvpn@client
 ```
 
 You can check the status as you did on the server:
 
 ```bash
-$ sudo systemctl status openvpn@client
-openvpn@client.service - OpenVPN connection to client
-   Loaded: loaded (/lib/systemd/system/openvpn@.service; disabled; vendor preset: enabled)
-   Active: active (running) since Thu 2019-10-24 11:42:35 UTC; 6s ago
-     Docs: man:openvpn(8)
-           https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
-           https://community.openvpn.net/openvpn/wiki/HOWTO
- Main PID: 3616 (openvpn)
-   Status: "Initialization Sequence Completed"
-    Tasks: 1 (limit: 533)
-   Memory: 1.3M
-   CGroup: /system.slice/system-openvpn.slice/openvpn@client.service
-           └─3616 /usr/sbin/openvpn --daemon ovpn-client --status /run/openvpn/client.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/client.conf --writepid /run/openvp
+sudo systemctl status openvpn@client
+```
 
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: ROUTE_GATEWAY 192.168.122.1/255.255.255.0 IFACE=ens3 HWADDR=52:54:00:3c:5a:88
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: TUN/TAP device tun0 opened
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: TUN/TAP TX queue length set to 100
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip link set dev tun0 up mtu 1500
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip addr add dev tun0 local 10.8.0.6 peer 10.8.0.5
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: /sbin/ip route add 10.8.0.1/32 via 10.8.0.5
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: WARNING: this configuration may cache passwords in memory -- use the auth-nocache option to prevent this
-Oct 24 11:42:36 eoan-vpn-client ovpn-client[3616]: Initialization Sequence Completed
+Which shows the current client status:
+
+```text
+● openvpn@client.service - OpenVPN connection to client
+     Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
+     Active: active (running) since Wed 2026-01-21 10:54:27 UTC; 55s ago
+ Invocation: f65eae29fc8e4403bd06236309a1db2c
+       Docs: man:openvpn(8)
+             https://community.openvpn.net/openvpn/wiki/Openvpn24ManPage
+             https://community.openvpn.net/openvpn/wiki/HOWTO
+   Main PID: 11361 (openvpn)
+     Status: "Initialization Sequence Completed"
+      Tasks: 1 (limit: 10)
+     Memory: 1.9M (peak: 2.1M)
+        CPU: 22ms
+     CGroup: /system.slice/system-openvpn.slice/openvpn@client.service
+             └─11361 /usr/sbin/openvpn --daemon ovpn-client --status /run/openvpn/client.status 10 --cd /etc/openvpn --script-security 2 --config /etc/openvpn/client.conf --writepid /run/openvpn/client.pid
+
+Jan 21 10:54:27 client systemd[1]: Starting openvpn@client.service - OpenVPN connection to client...
+Jan 21 10:54:27 client ovpn-client[11361]: Note: --cipher is not set. OpenVPN versions before 2.5 defaulted to BF-CBC as fallback when cipher negotiation failed in this case. If you need this fallback please add '--data-ciphers-fallback BF-CBC' to your configuration and/or add BF-CBC to --data-ciphers.
+Jan 21 10:54:27 client ovpn-client[11361]: Note: Kernel support for ovpn-dco missing, disabling data channel offload.
+Jan 21 10:54:27 client ovpn-client[11361]: OpenVPN 2.6.15 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] [DCO]
+Jan 21 10:54:27 client ovpn-client[11361]: library versions: OpenSSL 3.5.3 16 Sep 2025, LZO 2.10
+Jan 21 10:54:27 client systemd[1]: Started openvpn@client.service - OpenVPN connection to client.
+Jan 21 10:54:27 client ovpn-client[11361]: DCO version: N/A
+Jan 21 10:54:27 client ovpn-client[11361]: TCP/UDP: Preserving recently used remote address: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: Socket Buffers: R=[212992->212992] S=[212992->212992]
+Jan 21 10:54:27 client ovpn-client[11361]: UDPv4 link local: (not bound)
+Jan 21 10:54:27 client ovpn-client[11361]: UDPv4 link remote: [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: Initial packet from [AF_INET]10.185.198.84:1194, sid=46d7b1e7 da534d2d
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY OK: depth=1, CN=server
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY KU OK
+Jan 21 10:54:27 client ovpn-client[11361]: Validating certificate extended key usage
+Jan 21 10:54:27 client ovpn-client[11361]: ++ Certificate has EKU (str) TLS Web Server Authentication, expects TLS Web Server Authentication
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY EKU OK
+Jan 21 10:54:27 client ovpn-client[11361]: VERIFY OK: depth=0, CN=server
+Jan 21 10:54:27 client ovpn-client[11361]: Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256
+Jan 21 10:54:27 client ovpn-client[11361]: [server] Peer Connection Initiated with [AF_INET]10.185.198.84:1194
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
+Jan 21 10:54:27 client ovpn-client[11361]: TLS: tls_multi_process: initial untrusted session promoted to trusted
+Jan 21 10:54:27 client ovpn-client[11361]: PUSH: Received control message: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 1,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500'
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: --ifconfig/up options modified
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: route-related options modified
+Jan 21 10:54:27 client ovpn-client[11361]: OPTIONS IMPORT: tun-mtu set to 1500
+Jan 21 10:54:27 client ovpn-client[11361]: TUN/TAP device tun0 opened
+Jan 21 10:54:27 client ovpn-client[11361]: net_iface_mtu_set: mtu 1500 for tun0
+Jan 21 10:54:27 client ovpn-client[11361]: net_iface_up: set tun0 up
+Jan 21 10:54:27 client ovpn-client[11361]: net_addr_v4_add: 10.8.0.2/24 dev tun0
+Jan 21 10:54:27 client ovpn-client[11361]: Initialization Sequence Completed
 ```
 
 On the server log, an incoming connection looks like the following (you can see client name and source address as well as success/failure messages):
 
-```
-ovpn-myserver[4818]: 192.168.122.114:55738 TLS: Initial packet from [AF_INET]192.168.122.114:55738, sid=5e943ab8 40ab9fed
-ovpn-myserver[4818]: 192.168.122.114:55738 VERIFY OK: depth=1, CN=Easy-RSA CA
-ovpn-myserver[4818]: 192.168.122.114:55738 VERIFY OK: depth=0, CN=myclient1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_VER=2.4.7
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_PLAT=linux
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_PROTO=2
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_NCP=2
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZ4=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZ4v2=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_LZO=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_COMP_STUB=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_COMP_STUBv2=1
-ovpn-myserver[4818]: 192.168.122.114:55738 peer info: IV_TCPNL=1
-ovpn-myserver[4818]: 192.168.122.114:55738 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, 2048 bit RSA
-ovpn-myserver[4818]: 192.168.122.114:55738 [myclient1] Peer Connection Initiated with [AF_INET]192.168.122.114:55738
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI_sva: pool returned IPv4=10.8.0.6, IPv6=(Not enabled)
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI: Learn: 10.8.0.6 -> myclient1/192.168.122.114:55738
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 MULTI: primary virtual IP for myclient1/192.168.122.114:55738: 10.8.0.6
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 PUSH: Received control message: 'PUSH_REQUEST'
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 SENT CONTROL [myclient1]: 'PUSH_REPLY,route 10.8.0.1,topology net30,ping 10,ping-restart 120,ifconfig 10.8.0.6 10.8.0.5,peer-id 0,cipher AES-256-GCM' (status=1)
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Data Channel: using negotiated cipher 'AES-256-GCM'
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Outgoing Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
-ovpn-myserver[4818]: myclient1/192.168.122.114:55738 Incoming Data Channel: Cipher 'AES-256-GCM' initialized with 256 bit key
+```text
+ovpn-myserver[10556]: read UDPv4 [ECONNREFUSED]: Connection refused (fd=7,code=111)
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=1, CN=server
+ovpn-myserver[10556]: 10.185.198.41:40732 VERIFY OK: depth=0, CN=client
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_VER=2.6.15
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_PLAT=linux
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_TCPNL=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_MTU=1600
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_NCP=2
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_CIPHERS=AES-256-GCM:AES-128-GCM:CHACHA20-POLY1305
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_PROTO=990
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_LZO_STUB=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_COMP_STUB=1
+ovpn-myserver[10556]: 10.185.198.41:40732 peer info: IV_COMP_STUBv2=1
+ovpn-myserver[10556]: 10.185.198.41:40732 TLS: move_session: dest=TM_ACTIVE src=TM_INITIAL reinit_src=1
+ovpn-myserver[10556]: 10.185.198.41:40732 TLS: tls_multi_process: initial untrusted session promoted to trusted
+ovpn-myserver[10556]: 10.185.198.41:40732 Control Channel: TLSv1.3, cipher TLSv1.3 TLS_AES_256_GCM_SHA384, peer certificate: 2048 bits RSA, signature: RSA-SHA256, peer temporary key: 768 bits X25519MLKEM768
+ovpn-myserver[10556]: 10.185.198.41:40732 [client] Peer Connection Initiated with [AF_INET]10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: new connection by client 'client' will cause previous active sessions by this client to be dropped.  Remember to use the --duplicate-cn option if you want multiple clients using the same certificate or username to concurrently connect.
+ovpn-myserver[10556]: MULTI_sva: pool returned IPv4=10.8.0.2, IPv6=(Not enabled)
+ovpn-myserver[10556]: MULTI: Learn: 10.8.0.2 -> client/10.185.198.41:40732
+ovpn-myserver[10556]: MULTI: primary virtual IP for client/10.185.198.41:40732: 10.8.0.2
+ovpn-myserver[10556]: SENT CONTROL [client]: 'PUSH_REPLY,route-gateway 10.8.0.1,topology subnet,ping 10,ping-restart 120,ifconfig 10.8.0.2 255.255.255.0,peer-id 0,cipher AES-256-GCM,protocol-flags cc-exit tls-ekm dyn-tls-crypt,tun-mtu 1500' (status=1)
+ovpn-myserver[10556]: client/10.185.198.41:40732 Data Channel: cipher 'AES-256-GCM', peer-id: 0
+ovpn-myserver[10556]: client/10.185.198.41:40732 Timers: ping 10, ping-restart 240
+ovpn-myserver[10556]: client/10.185.198.41:40732 Protocol options: explicit-exit-notify 1, protocol-flags cc-exit tls-ekm dyn-tls-crypt
 ```
 
 And you can check on the client if it created a `tun0` interface:
 
 ```bash
-$ ip addr show dev tun0
-4: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
-    link/none 
-    inet 10.8.0.6 peer 10.8.0.5/32 scope global tun0
+ip addr show dev tun0
+```
+
+Showing the `tun0` device on the client:
+
+```text
+6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
+    link/none
+    inet 10.8.0.2/24 brd 10.8.0.255 scope global tun0
        valid_lft forever preferred_lft forever
-    inet6 fe80::5a94:ae12:8901:5a75/64 scope link stable-privacy 
+    inet6 fe80::3c08:9432:f898:d1c0/64 scope link stable-privacy proto kernel_ll 
        valid_lft forever preferred_lft forever
 ```
 
 Check if you can ping the OpenVPN server:
 
 ```bash
-root@client:/etc/openvpn# ping 10.8.0.1
+ping 10.8.0.1 -c 1
+```
+
+Which should show a working ping with an answer:
+
+```text
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
-64 bytes from 10.8.0.1: icmp_req=1 ttl=64 time=0.920 ms
+64 bytes from 10.8.0.1: icmp_seq=1 ttl=64 time=0.335 ms
 ```
 
 ```{note}
@@ -334,19 +393,20 @@ The OpenVPN server always uses the first usable IP address in the client network
 Check out your routes:
 
 ```bash
-$ ip route 
-default via 192.168.122.1 dev ens3 proto dhcp src 192.168.122.114 metric 100 
-10.8.0.1 via 10.8.0.5 dev tun0 
-10.8.0.5 dev tun0 proto kernel scope link src 10.8.0.6 
-192.168.122.0/24 dev ens3 proto kernel scope link src 192.168.122.114 
-192.168.122.1 dev ens3 proto dhcp scope link src 192.168.122.114 metric 100
+ip route show dev tun0
+```
+
+A system might have many many routes, but this call restricts to those on `tun0`:
+
+```text
+10.8.0.0/24 proto kernel scope link src 10.8.0.2
 ```
 
 ## First troubleshooting
 
 If the above didn't work for you, check the following:
 
-- Check your `journal -xe`.
+- Check your `journal -xe`, also consider limiting it to the unit with `-u` as done in the examples shown above.
 - Check that you have specified the key filenames correctly in the client and server `conf` files.
 - Can the client connect to the server machine? Maybe a firewall is blocking access? Check the journal on the server.
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
@@ -363,7 +423,7 @@ The above is a very simple working VPN. The client can access services on the VP
 The example config files that we have been using in this guide are full of these advanced options in the form of a comment and a disabled configuration line as an example.
 
 ```{note}
-Read the OpenVPN [hardening security guide](http://openvpn.net/index.php/open-source/documentation/howto.html#security) for further security advice.
+Read the OpenVPN [hardening security guide](https://openvpn.net/community-docs/security.html) for further security advice.
 ```
 
 ### Advanced bridged VPN configuration on server
@@ -372,10 +432,9 @@ OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this 
 
 #### Prepare interface config for bridging on server
 
-First, use Netplan to configure a bridge device using the desired Ethernet device:
+First, use Netplan to configure a bridge device using the desired Ethernet device like `/etc/netplan/01-netcfg.yaml` to contain:
 
-```bash
-$ cat /etc/netplan/01-netcfg.yaml
+```text
 network:
     version: 2
     renderer: networkd
@@ -387,7 +446,9 @@ network:
             interfaces: [enp0s31f6]
             dhcp4: no
             addresses: [10.0.1.100/24]
-            gateway4: 10.0.1.1
+            routes:
+               - to: default
+                 via: 10.0.1.1
             nameservers:
                 addresses: [10.0.1.1]
 ```
@@ -397,13 +458,10 @@ Static IP addressing is highly suggested. DHCP addressing can also work, but you
 The next step on the server is to configure the Ethernet device for promiscuous mode on boot. To do this, ensure the `networkd-dispatcher` package is installed and create the following configuration script:
 
 ```bash
-sudo apt update
-sudo apt install networkd-dispatcher
-sudo touch /usr/lib/networkd-dispatcher/dormant.d/promisc_bridge
-sudo chmod +x /usr/lib/networkd-dispatcher/dormant.d/promisc_bridge
+sudo apt update && sudo apt install networkd-dispatcher
 ```
 
-Then add the following contents:
+Then add the following contents to a file like `/etc/networkd-dispatcher/dormant.d/promisc_bridge`:
 
 ```sh
 #!/bin/sh
@@ -414,11 +472,18 @@ if [ "$IFACE" = br0 ]; then
 fi
 ```
 
+And ensure it has the permission to be executed:
+
+```bash
+sudo chmod +x /etc/networkd-dispatcher/dormant.d/promisc_bridge
+```
+
+
 #### Prepare server config for bridging
 
 Edit `/etc/openvpn/server.conf` to use `tap` rather than `tun` and set the server to use the `server-bridge` directive:
 
-```
+```text
 ;dev tun
 dev tap
 ;server 10.8.0.0 255.255.255.0
@@ -454,9 +519,12 @@ OpenVPN uses the OpenSSL 3 Default Provider on Ubuntu. However, you can include 
 
 #### Legacy provider
 
-In Ubuntu 24.04 LTS and later, you can still use legacy algorithms by explicitly adding them through the `legacy` provider alongside `default`. To do this, add the following line to your configuration.
+You can still use legacy algorithms in Ubuntu, this is not recommended but might
+be required to support older clients not yet compatible with the more secure new algorithms.
+Enabling those is done by explicitly adding them through the `legacy` provider alongside `default`.
+To do this, add the following line to your OpenVPN configuration.
 
-```
+```text
 providers legacy default
 ```
 
@@ -467,7 +535,7 @@ openvpn --providers legacy default ...
 ```
 
 ```{note}
-On Ubuntu 22.04 LTS, legacy algorithms are included in OpenVPN by default.
+On Ubuntu 22.04 LTS and earlier, legacy algorithms are included in OpenVPN by default.
 ```
 
 #### TPM 2.0
@@ -491,6 +559,6 @@ The provider order matters here as tpm2 currently requires the legacy provider t
 ## Further reading
 
 - [EasyRSA](https://github.com/OpenVPN/easy-rsa/blob/master/README.quickstart.md)
-- [OpenVPN quick start guide](https://openvpn.net/quick-start-guide/)
+- [OpenVPN quick start guide](https://openvpn.net/as-docs/getting-started.html)
 - OpenVPN as a snap [easy-openvpn](https://snapcraft.io/easy-openvpn-server)
 - Debian's [OpenVPN Guide](https://wiki.debian.org/OpenVPN)

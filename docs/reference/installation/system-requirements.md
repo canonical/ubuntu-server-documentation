@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Minimum and suggested resource requirements for installing or deploying Ubuntu Server."
+---
+
 (system-requirements)=
 # System requirements
 

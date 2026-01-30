@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Introduction to database systems on Ubuntu Server comparing MySQL and PostgreSQL features, use cases, and configuration options.
+---
+
 (introduction-to-databases)=
 # Introduction to databases
 

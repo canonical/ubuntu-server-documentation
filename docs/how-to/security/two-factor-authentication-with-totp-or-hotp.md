@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Implement TOTP/HOTP two-factor authentication on Ubuntu Server using time-based or HMAC-based one-time passwords with public keys.
+---
+
 (two-factor-authentication-with-totp-or-hotp)=
 # Two factor authentication with TOTP/HOTP
 
@@ -62,7 +68,8 @@ Of course, any of these backup steps also negate any benefit of 2FA should someo
 
 ## Configure the SSH server
 
-Once all users are configured, configure `sshd` itself by editing `/etc/ssh/sshd_config`. Depending on your installation, some of these settings may be configured already, but not necessarily with the values required for this configuration. Check for and adjust existing occurrences of these configuration directives, or add new ones, as required:
+Once all users are configured, configure `sshd` itself by creating a new
+configuration file in `/etc/ssh/sshd_config.d/` with the following directives:
 
 ```
 KbdInteractiveAuthentication yes
@@ -70,8 +77,14 @@ PasswordAuthentication no
 AuthenticationMethods publickey,keyboard-interactive
 ```
 
+Depending on your installation, some of these settings may be configured
+already, but not necessarily with the values required for this configuration.
+Check for and adjust existing occurrences of these configuration directives, or
+add new ones, as required.
+
+
 ```{note}
-On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAUthentication yes`.
+On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAuthentication yes`.
 ```
 
 Restart the `ssh` service to pick up configuration changes:
@@ -99,12 +112,11 @@ Changes to PAM configuration have immediate effect, and no separate reloading co
 Now when you log in using SSH, in addition to the normal public key authentication, you will be prompted for your TOTP or HOTP code:
 
 ```bash
-$ ssh jammy.server
+$ ssh ubuntu.server
 Enter passphrase for key 'id_rsa':
-(ubuntu@jammy.server) Verification code:
-Welcome to Ubuntu Jammy Jellyfish...
-(...)
-ubuntu@jammy.server:~$
+(ubuntu@ubuntu.server) Verification code:
+Welcome to Ubuntu (...)
+ubuntu@ubuntu.server:~$
 ```
 ## Special cases
 

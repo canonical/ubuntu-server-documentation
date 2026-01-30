@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Understanding Device Mapper Multipathing for aggregating I/O paths between server nodes and storage arrays on Ubuntu Server.
+---
+
 (explanation-multipath)=
 # Multipath
 

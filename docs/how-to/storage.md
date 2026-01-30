@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Manage storage on Ubuntu Server with guides for Logical Volume Management (LVM) and iSCSI configuration.
+---
+
 (how-to-storage)=
 # Storage
 

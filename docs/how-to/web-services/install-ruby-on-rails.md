@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up Ruby on Rails web framework on Ubuntu with Apache2 and MySQL for database-backed application development.
+---
+
 (install-ruby-on-rails)=
 # How to install and configure Ruby on Rails
 
@@ -19,6 +25,12 @@ sudo apt install rails
 ```
 
 This will install both the Ruby base packages, and Ruby on Rails.
+
+Alternatively, you may want to install it with the `--no-install-recommends` flag to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
+
+```bash
+sudo apt install --no-install-recommends rails
+```
 
 ## Configure the web server
 
@@ -87,6 +99,6 @@ That's it! Now your Server is ready for your Ruby on Rails application. You can 
 
 ## Further reading
 
-- See the [Ruby on Rails](http://rubyonrails.org/) website for more information.
+- See the [Ruby on Rails](https://rubyonrails.org/) website for more information.
 
-- [Agile Development with Rails](https://pragprog.com/book/rails4/agile-web-development-with-rails-4) is also a great resource.
+- [Agile Development with Rails](https://pragprog.com/titles/rails7/agile-web-development-with-rails-7/) is also a great resource.

@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure ISC Kea DHCP server on Ubuntu 23.04+, the modern replacement for isc-dhcp designed for contemporary networks.
+---
+
 (install-isc-kea)=
 # How to install and configure isc-kea
 
@@ -24,7 +30,7 @@ This will also install a few binary packages, including
 Since the `kea-ctrl-agent` service has some administrative rights to the Kea
 services, we need to ensure regular users are not allowed to use the API
 without permissions. Ubuntu does it by requiring user authentication to access
-the `kea-ctrl-agent` API service ([LP: #2007312 has more details on this](https://bugs.launchpad.net/ubuntu/+source/isc-kea/+bug/2007312)).
+the `kea-ctrl-agent` API service ({lpbug}`2007312` has more details on this).
 
 Therefore, the installation process described above will get a {term}`debconf` "high" priority prompt with 3 options:
 

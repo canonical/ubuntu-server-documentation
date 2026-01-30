@@ -1,8 +1,14 @@
+---
+myst:
+  html_meta:
+    description: Install and configure Open vSwitch with DPDK support on Ubuntu for high-performance networking with libvirt and qemu-kvm integration.
+---
+
 (dpdk-with-open-vswitch)=
 # How to use Open vSwitch with DPDK
 
 
-Since [DPDK is *just* a library](https://ubuntu.com/server/docs/network-dpdk), it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
+Since {ref}`DPDK is just a library <about-dpdk>`, it doesn't do a lot on its own so it depends on emerging projects making use of it. One consumer of the library that is already part of Ubuntu is Open vSwitch with DPDK (OvS-DPDK) support in the package `openvswitch-switch-dpdk`.
 
 Here is a brief example of how to install and configure a basic Open vSwitch using DPDK for later use via `libvirt`/`qemu-kvm`.
 
@@ -20,10 +26,10 @@ sudo service openvswitch-switch restart
 ```
 
 ```{note}
-You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on [unassigning the default kernel drivers](https://ubuntu.com/server/docs/network-dpdk/#heading--unassign-default-kernel-drivers).
+You need to assign devices to DPDK-compatible drivers before restarting --  see the DPDK section on {ref}`unassigning the default kernel drivers <unassign-default-kernel-drivers>`.
 ```
 
-Please note that the section `_dpdk-alloc-mem=2048_` in the above example is the most basic non-uniform memory access (NUMA) setup for a single socket system. If you have multiple sockets you may want to define how the memory should be split among them. More details about these options are outlined in [Open vSwitch setup](http://docs.openvswitch.org/en/latest/intro/install/dpdk/#setup-ovs).
+Please note that the section `_dpdk-alloc-mem=2048_` in the above example is the most basic non-uniform memory access (NUMA) setup for a single socket system. If you have multiple sockets you may want to define how the memory should be split among them. More details about these options are outlined in [Open vSwitch setup](https://docs.openvswitch.org/en/latest/intro/install/dpdk/#setup-ovs).
 
 ## Attach DPDK ports to Open vSwitch
 
@@ -86,9 +92,9 @@ DPDK is a fast-evolving project. In any search for support and/or further guides
 
 You can check if your issues is known on:
 
-  - [DPDK Mailing Lists](http://dpdk.org/ml)
-  - For OpenVswitch-DPDK [OpenStack Mailing Lists](http://openvswitch.org/mlists)
-  - Known issues in [DPDK Launchpad Area](https://bugs.launchpad.net/ubuntu/+source/dpdk)
+  - [DPDK Mailing Lists](https://www.dpdk.org/contribute/)
+  - For OpenVswitch-DPDK [OpenStack Mailing Lists](http://www.openvswitch.org/mlists/)
+  - Known issues in {lpsrc}`DPDK Launchpad Area <dpdk>`
   - Join the IRC channels \#DPDK or \#openvswitch on {term}`freenode`.
 
 Issues are often due to missing small details in the general setup. Later on, these missing details cause problems which can be hard to track down to their root cause. 

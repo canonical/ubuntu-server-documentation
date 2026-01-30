@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn about modifying package files on Ubuntu Server, including handling configuration files and package management best practices."
+---
+
 (changing-package-files)=
 # Changing package files
 
@@ -91,7 +97,7 @@ Restart=on-failure
 ```
 
 ```{note}
-Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/systemd.service.html) for more information.
+Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html) for more information.
 ```
 
 Once the changes are saved, the override file will be created in `/etc/systemd/system/apache2.service.d/override.conf`. To apply changes, run
@@ -125,7 +131,7 @@ systemctl status apache2
 
 ## AppArmor
 
-Packages that use [AppArmor](https://ubuntu.com/server/docs/security-apparmor) will install AppArmor profiles in the `/etc/apparmor.d/` directory. These files are often named after the process being protected, such as `usr.bin.firefox` and `usr.sbin.libvirtd`.
+Packages that use {ref}`AppArmor <apparmor>` will install AppArmor profiles in the `/etc/apparmor.d/` directory. These files are often named after the process being protected, such as `usr.bin.firefox` and `usr.sbin.libvirtd`.
 
 When these files are modified manually, it can lead to a conflict during updates. This will show up in `apt` with something like:
 

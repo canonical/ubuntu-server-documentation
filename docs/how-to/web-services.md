@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Set up web servers and proxy servers on Ubuntu Server with guides for Apache2, nginx, and Squid configuration.
+---
+
 (how-to-web-services)=
 # Web services
 

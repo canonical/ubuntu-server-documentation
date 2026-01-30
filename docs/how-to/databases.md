@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: Install and configure MySQL and PostgreSQL database servers on Ubuntu Server with these step-by-step guides.
+---
+
 (how-to-databases)=
 # Databases
 

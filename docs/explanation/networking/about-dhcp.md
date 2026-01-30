@@ -1,3 +1,9 @@
+---
+myst:
+  html_meta:
+    description: "Learn how Dynamic Host Configuration Protocol (DHCP) automatically assigns network settings to host computers, including IP addresses and gateway configurations."
+---
+
 (about-dhcp)=
 # About DHCP
 
@@ -13,7 +19,7 @@ The most common settings provided by a DHCP server to DHCP clients include:
 
 However, a DHCP server can also supply configuration properties such as:
 
-  - {term}`Hostname`
+  - {term}`Hostname <hostname>`
 
   - Domain name
 
@@ -32,26 +38,32 @@ A DHCP server can provide configuration settings using the following methods:
 This method uses DHCP to identify the unique hardware address of each network card connected to the network, and then supplies a static configuration each time the DHCP client makes a request to the DHCP server using that network device. This ensures that a particular address is assigned automatically to that network card, based on its MAC address.
 
 ### Dynamic allocation (address pool)  
- In this method, the DHCP server assigns an IP address from a pool of addresses (sometimes also called a range or scope) for a period of time (known as a lease) configured on the server, or until the client informs the server that it doesn't need the address anymore. This way, the clients receive their configuration properties dynamically and on a "first come, first served" basis. When a DHCP client is no longer on the network for a specified period, the configuration is expired and released back to the address pool for use by other DHCP clients. After the lease period expires, the client must renegotiate the lease with the server to maintain use of the same address.
+
+In this method, the DHCP server assigns an IP address from a pool of addresses (sometimes also called a range or scope) for a period of time (known as a lease) configured on the server, or until the client informs the server that it doesn't need the address anymore. This way, the clients receive their configuration properties dynamically and on a "first come, first served" basis. When a DHCP client is no longer on the network for a specified period, the configuration is expired and released back to the address pool for use by other DHCP clients. After the lease period expires, the client must renegotiate the lease with the server to maintain use of the same address.
 
 ### Automatic allocation
+
 Using this method, the DHCP automatically assigns an IP address permanently to a device, selecting it from a pool of available addresses. Usually, DHCP is used to assign a temporary address to a client, but a DHCP server can allow an infinite lease time.
 
 The last two methods can be considered "automatic" because in each case the DHCP server assigns an address with no extra intervention needed. The only difference between them is in how long the IP address is leased; in other words, whether a client's address varies over time.
 
 ## Available servers
 
-Ubuntu makes two DHCP servers available:
-
-- `isc-dhcp-server`:
-  This server installs `dhcpd`, the dynamic host configuration protocol daemon. Although Ubuntu still supports `isc-dhcp-server`, this software is [no longer supported by its vendor](https://www.isc.org/blogs/isc-dhcp-eol/).
-
-  Find out {ref}`how to install and configure isc-dhcp-server <install-isc-dhcp-server>`.
+Ubuntu provides several DHCP servers. The following are the most common:
 
 - `isc-kea`:
-  [Kea](https://www.isc.org/kea/) was created by ISC to replace `isc-dhcp-server` -- It is supported in Ubuntu releases from 23.04 onward.
+  [Kea](https://www.isc.org/kea/) is the recommended DHCP server for new deployments. It was created by ISC to replace `isc-dhcp-server` and is supported in Ubuntu releases from 23.04 onward.
 
   Find out {ref}`how to install and configure isc-kea <install-isc-kea>`.
+
+- `dnsmasq`:
+  [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) provides combined DNS and DHCP functionality. It is lightweight and suitable for small networks and development environments.
+
+```{note}
+The `isc-dhcp-server` package is deprecated and unsupported since Ubuntu 24.04 LTS. Please use `isc-kea` or `dnsmasq` instead.
+```
+
+Legacy documentation for `isc-dhcp-server` is still available for existing deployments. You can find {ref}`information on how to configure it <install-isc-dhcp-server>` if needed.
 
 
 ## References
@@ -60,6 +72,6 @@ Ubuntu makes two DHCP servers available:
 
 - For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
-- [ISC `dhcp-server`](https://www.isc.org/software/dhcp)
+- [ISC `dhcp-server`](https://www.isc.org/dhcp/)
 
 - [ISC Kea Documentation](https://kb.isc.org/docs/kea-administrator-reference-manual)

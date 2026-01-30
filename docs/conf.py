@@ -55,6 +55,8 @@ ogp_site_name = project
 # Preview image URL
 ogp_image = "https://assets.ubuntu.com/v1/cc828679-docs_illustration.svg"
 
+# Tell the Open Graph extension to use the standard HTML meta description
+ogp_enable_meta_description = True
 
 # Product favicon; shown in bookmarks, browser tabs, etc.
 html_favicon = ".sphinx/_static/favicon.png"
@@ -212,15 +214,51 @@ rediraffe_redirects = "redirects.txt"
 # A regex list of URLs that are ignored by "make linkcheck"
 linkcheck_ignore = [
     "http://127.0.0.1:8000",
-    "https://manpages.ubuntu.com",
+    "https://manpages.ubuntu.com/*",
+    "https://calendar.google.com/*",
+    "http://localhost:3000",
+    "http://prometheus:9090",
+    "http://dnssec-failed.org",
+    "https://dev.mysql.com/*",
+    "https://en.wikipedia.org/*",
+    "https://en.wikibooks.org/",
+    "https://matrix.to/#/*",
+    "https://linux.die.net/*",
+    "https://www.mysql.com/*",
+    "https://www.youtube.com/*",
+    "https://www.icann.org/*",
+    "https://www.java.com/*",
+    "https://wiki.samba.org/*",
+    "https://github.com/*",
+    "https://gitlab.com/*",
+    "https://www.samba.org/*",
+    "https://www.freedesktop.org/*",
+    "https://community.openvpn.net/*",
+    "https://openvpn.net/*",
+    "https://krbdev.mit.edu/*",
+    "https://www.cyberciti.biz/*",
+    "https://nfs.sourceforge.net/*",
+    "https://sourceforge.net/*",
+    "https://ubuntu.com/blog/*",
+    "https://help.ubuntu.com/*",
+    "https://git.launchpad.net/*",
+    "https://linuxcontainers.org/*",
+    "https://wiki.syslinux.org/*",
+    # Rate-limited domains that cause delays
+    r"http://www\.gnu\.org/software/.*",
+    r"https://github\.com/.*/blob/.*",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
 linkcheck_anchors_ignore_for_url = [r"https://github\.com/.*"]
 
 # Give linkcheck multiple tries on failure
-linkcheck_timeout = 30
-linkcheck_retries = 3
+linkcheck_timeout = 15
+linkcheck_retries = 2
+
+# Number of parallel workers for linkcheck (default is 5)
+# Higher values work well for network I/O-bound tasks
+linkcheck_workers = 20
 
 
 # ==============================================================================
@@ -234,7 +272,7 @@ linkcheck_retries = 3
 # NOTE: If set, adding "{manpage}" to an .md file adds a link to the
 # corresponding man section at the bottom of the page.
 
-stable_distro = "plucky"
+stable_distro = "resolute"
 
 manpages_url = (
     "https://manpages.ubuntu.com/manpages/"
@@ -307,6 +345,7 @@ extensions = [
 # Custom extensions in this project
 # ---------------------------------
     "myst_parser",
+    "sphinx.ext.extlinks",
     "hoverxref.extension",
     "sphinxext.rediraffe",
     "sphinxcontrib.mermaid",
@@ -328,6 +367,14 @@ hoverxref_role_types = {
     "term": "tooltip",
 }
 hoverxref_roles = ["term",]
+
+
+# Allow for use of link substitutions
+extlinks = {
+    "lpsrc": ("https://launchpad.net/ubuntu/+source/%s", "%s"),
+    "lpbug": ("https://bugs.launchpad.net/bugs/%s", "LP: #%s"),
+    "matrix": ("https://matrix.to/#/#%s:ubuntu.com", "#%s:ubuntu.com"),
+}
 
 
 # Excludes files or directories from processing
@@ -364,3 +411,20 @@ intersphinx_mapping = {
     "starter-pack": ("https://canonical-example-product-documentation.readthedocs-hosted.com/en/latest", None),
     "sphinxcontrib-mermaid": ("https://sphinxcontrib-mermaid-demo.readthedocs.io/en/latest", None)
 }
+
+# Override canonical_sphinx extension defaults
+# The canonical_sphinx extension sets html_copy_source = False by default.
+# We need to enable it for "View page source" links to work.
+html_copy_source = True
+html_show_sourcelink = True
+
+
+# Force html_copy_source to be True after all extensions have loaded
+def force_copy_source(app, config):
+    """Override canonical_sphinx's html_copy_source setting."""
+    config.html_copy_source = True
+    config.html_show_sourcelink = True
+
+def setup(app):
+    """Custom setup to ensure source files are copied."""
+    app.connect('config-inited', force_copy_source)
