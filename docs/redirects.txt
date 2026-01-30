@@ -20,614 +20,614 @@
 # Tutorials
 # =============================================================================
 
-installation tutorial/basic-installation/ # Discourse
-basic-installation tutorial/basic-installation/ # Discourse
+installation tutorial/basic-installation/
+basic-installation tutorial/basic-installation/
 
-install/subscription tutorial/attach-your-ubuntu-pro-subscription/ # Discourse
-attach-your-ubuntu-pro-subscription tutorial/attach-your-ubuntu-pro-subscription/ # Discourse
+install/subscription tutorial/attach-your-ubuntu-pro-subscription/
+attach-your-ubuntu-pro-subscription tutorial/attach-your-ubuntu-pro-subscription/
 
 # =============================================================================
 # Installation
 # =============================================================================
 
-install/netboot-amd64 how-to/installation/how-to-netboot-the-server-installer-on-amd64/ # Discourse
-how-to-netboot-the-server-installer-on-amd64 how-to/installation/how-to-netboot-the-server-installer-on-amd64/ # Discourse
+install/netboot-amd64 how-to/installation/how-to-netboot-the-server-installer-on-amd64/
+how-to-netboot-the-server-installer-on-amd64 how-to/installation/how-to-netboot-the-server-installer-on-amd64/
 
-install/netboot-arm64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/ # Discourse
-netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/ # Discourse
+install/netboot-arm64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/
+netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64 how-to/installation/netboot-the-server-installer-via-uefi-pxe-on-arm-aarch64-arm64-and-x86-64-amd64/
 
-install/netboot-ppc64el how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/ # Discourse
-netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/ # Discourse
+install/netboot-ppc64el how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/
+netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot how-to/installation/netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot/
 
-install/ppc64el how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot/ # Discourse
-how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot/ # Discourse
+install/ppc64el how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot/
+how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot how-to/installation/how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot/
 
-install/s390x-zvm how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x/ # Discourse
-interactive-live-server-installation-on-ibm-z-vm-s390x how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x/ # Discourse
+install/s390x-zvm how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x/
+interactive-live-server-installation-on-ibm-z-vm-s390x how-to/installation/interactive-live-server-installation-on-ibm-z-vm-s390x/
 
-install/vm-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x/ # Discourse
-non-interactive-ibm-z-vm-autoinstall-s390x how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x/ # Discourse
+install/vm-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x/
+non-interactive-ibm-z-vm-autoinstall-s390x how-to/installation/non-interactive-ibm-z-vm-autoinstall-s390x/
 
-install/s390x-lpar how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x/ # Discourse
-interactive-live-server-installation-on-ibm-z-lpar-s390x how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x/ # Discourse
+install/s390x-lpar how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x/
+interactive-live-server-installation-on-ibm-z-lpar-s390x how-to/installation/interactive-live-server-installation-on-ibm-z-lpar-s390x/
 
-install/lpar-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/ # Discourse
-non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/ # Discourse
+install/lpar-autoinstall-on-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
+non-interactive-ibm-z-lpar-autoinstall-s390x how-to/installation/non-interactive-ibm-z-lpar-autoinstall-s390x/
 
-explanation/installation/ how-to/installation/ # RTD
+explanation/installation/ how-to/installation/
 
-choosing-between-the-arm64-and-arm64-largemem-installer-options how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/ # Discourse
-explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/ how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/ # RTD
+choosing-between-the-arm64-and-arm64-largemem-installer-options how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/
+explanation/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/ how-to/installation/choosing-between-the-arm64-and-arm64-largemem-installer-options/
 
-system-requirements reference/installation/system-requirements/ # Discourse
+system-requirements reference/installation/system-requirements/
 
-reference/installation/ reference/ # RTD
+reference/installation/ reference/
 
 # =============================================================================
 # Virtualization
 # =============================================================================
 
-virtualization-qemu how-to/virtualisation/qemu/ # Discourse
-virtualisation-with-qemu how-to/virtualisation/qemu/ # Discourse
+virtualization-qemu how-to/virtualisation/qemu/
+virtualisation-with-qemu how-to/virtualisation/qemu/
 
-create-qemu-vms-with-up-to-1024-vcpus how-to/virtualisation/qemu-vms-up-to-1024-vcpus/ # Discourse
-how-to/virtualisation/qemu-vms-up-to-1024-vcpus/ how-to/virtualisation/qemu/ # RTD
+create-qemu-vms-with-up-to-1024-vcpus how-to/virtualisation/qemu-vms-up-to-1024-vcpus/
+how-to/virtualisation/qemu-vms-up-to-1024-vcpus/ how-to/virtualisation/qemu/
 
-boot-arm64-virtual-machines-on-qemu how-to/virtualisation/arm64-vms-on-qemu/ # Discourse
-how-to/virtualisation/arm64-vms-on-qemu/ how-to/virtualisation/qemu/ # RTD
+boot-arm64-virtual-machines-on-qemu how-to/virtualisation/arm64-vms-on-qemu/
+how-to/virtualisation/arm64-vms-on-qemu/ how-to/virtualisation/qemu/
 
-virtualization-multipass how-to/virtualisation/multipass/ # Discourse
-how-to-create-a-vm-with-multipass how-to/virtualisation/multipass/ # Discourse
+virtualization-multipass how-to/virtualisation/multipass/
+how-to-create-a-vm-with-multipass how-to/virtualisation/multipass/
 
-virtualization-uvt how-to/virtualisation/cloud-image-vms-with-uvtool/ # Discourse
-create-cloud-image-vms-with-uvtool how-to/virtualisation/cloud-image-vms-with-uvtool/ # Discourse
+virtualization-uvt how-to/virtualisation/cloud-image-vms-with-uvtool/
+create-cloud-image-vms-with-uvtool how-to/virtualisation/cloud-image-vms-with-uvtool/
 
-virtualization-libvirt how-to/virtualisation/libvirt/ # Discourse
-libvirt how-to/virtualisation/libvirt/ # Discourse
+virtualization-libvirt how-to/virtualisation/libvirt/
+libvirt how-to/virtualisation/libvirt/
 
-virtualization-virt-tools how-to/virtualisation/virtual-machine-manager/ # Discourse
-virtual-machine-manager how-to/virtualisation/virtual-machine-manager/ # Discourse
+virtualization-virt-tools how-to/virtualisation/virtual-machine-manager/
+virtual-machine-manager how-to/virtualisation/virtual-machine-manager/
 
-how-to-enable-nested-virtualization how-to/virtualisation/enable-nested-virtualisation/ # Discourse
+how-to-enable-nested-virtualization how-to/virtualisation/enable-nested-virtualisation/
 
-how-to-set-up-ubuntu-on-hyper-v how-to/virtualisation/ubuntu-on-hyper-v/ # Discourse
+how-to-set-up-ubuntu-on-hyper-v how-to/virtualisation/ubuntu-on-hyper-v/
 
-virtualization-introduction explanation/intro-to/virtualisation/ # Discourse
-introduction-to-virtualization explanation/intro-to/virtualisation/ # Discourse
+virtualization-introduction explanation/intro-to/virtualisation/
+introduction-to-virtualization explanation/intro-to/virtualisation/
 
-vm-tools-in-the-ubuntu-space explanation/virtualisation/vm-tools-in-the-ubuntu-space/ # Discourse
+vm-tools-in-the-ubuntu-space explanation/virtualisation/vm-tools-in-the-ubuntu-space/
 
-using-qemu-for-microvms explanation/virtualisation/qemu-microvm/ # Discourse
+using-qemu-for-microvms explanation/virtualisation/qemu-microvm/
 
-upgrading-the-machine-type-of-your-vm explanation/virtualisation/upgrading-the-machine-type-of-your-vm/ # Discourse
+upgrading-the-machine-type-of-your-vm explanation/virtualisation/upgrading-the-machine-type-of-your-vm/
 
-virtualization-openstack explanation/virtualisation/about-openstack/ # Discourse
-about-openstack explanation/virtualisation/about-openstack/ # Discourse
+virtualization-openstack explanation/virtualisation/about-openstack/
+about-openstack explanation/virtualisation/about-openstack/
 
-container-tools-in-the-ubuntu-space explanation/virtualisation/container-tools-in-the-ubuntu-space/ # Discourse
+container-tools-in-the-ubuntu-space explanation/virtualisation/container-tools-in-the-ubuntu-space/
 
-introduction-to-rock-images explanation/virtualisation/about-rock-images/ # Discourse
-about-rock-images explanation/virtualisation/about-rock-images/ # Discourse
+introduction-to-rock-images explanation/virtualisation/about-rock-images/
+about-rock-images explanation/virtualisation/about-rock-images/
 
-containers-lxd how-to/containers/lxd-containers/ # Discourse
-lxd-containers how-to/containers/lxd-containers/ # Discourse
+containers-lxd how-to/containers/lxd-containers/
+lxd-containers how-to/containers/lxd-containers/
 
-docker-for-system-admins how-to/containers/docker-for-system-admins/ # Discourse
+docker-for-system-admins how-to/containers/docker-for-system-admins/
 
-multi-node-rock-configuration-with-docker-compose how-to/containers/run-rocks-on-your-server/ # Discourse
-how-to-run-rocks-on-your-server how-to/containers/run-rocks-on-your-server/ # Discourse
+multi-node-rock-configuration-with-docker-compose how-to/containers/run-rocks-on-your-server/
+how-to-run-rocks-on-your-server how-to/containers/run-rocks-on-your-server/
 
 # =============================================================================
 # Networking
 # =============================================================================
 
-service-nfs how-to/networking/install-nfs/ # Discourse
-network-file-system-nfs how-to/networking/install-nfs/ # Discourse
+service-nfs how-to/networking/install-nfs/
+network-file-system-nfs how-to/networking/install-nfs/
 
-service-ftp how-to/networking/ftp/ # Discourse
-set-up-an-ftp-server how-to/networking/ftp/ # Discourse
+service-ftp how-to/networking/ftp/
+set-up-an-ftp-server how-to/networking/ftp/
 
-service-domain-name-service how-to/networking/install-dns/ # Discourse
-domain-name-service-dns how-to/networking/install-dns/ # Discourse
-service-domain-name-service-dns how-to/networking/install-dns/ # Discourse
+service-domain-name-service how-to/networking/install-dns/
+domain-name-service-dns how-to/networking/install-dns/
+service-domain-name-service-dns how-to/networking/install-dns/
 
-openvswitch-dpdk how-to/networking/dpdk-with-open-vswitch/ # Discourse
-how-to-use-dpdk-with-open-vswitch how-to/networking/dpdk-with-open-vswitch/ # Discourse
+openvswitch-dpdk how-to/networking/dpdk-with-open-vswitch/
+how-to-use-dpdk-with-open-vswitch how-to/networking/dpdk-with-open-vswitch/
 
-how-to-install-and-configure-isc-kea how-to/networking/install-isc-kea/ # Discourse
+how-to-install-and-configure-isc-kea how-to/networking/install-isc-kea/
 
-how-to-install-and-configure-isc-dhcp-server how-to/networking/install-isc-dhcp-server/ # Discourse
+how-to-install-and-configure-isc-dhcp-server how-to/networking/install-isc-dhcp-server/
 
-use-timedatectl-and-timesyncd how-to/networking/timedatectl-and-timesyncd/ # Discourse
+use-timedatectl-and-timesyncd how-to/networking/timedatectl-and-timesyncd/
 
-how-to-serve-the-network-time-protocol-with-chrony how-to/networking/serve-ntp-with-chrony/ # Discourse
+how-to-serve-the-network-time-protocol-with-chrony how-to/networking/serve-ntp-with-chrony/
 
-service-cups how-to/networking/cups-print-server/ # Discourse
-install-and-configure-a-cups-print-server how-to/networking/cups-print-server/ # Discourse
+service-cups how-to/networking/cups-print-server/
+install-and-configure-a-cups-print-server how-to/networking/cups-print-server/
 
-network-introduction explanation/intro-to/networking/ # Discourse
-introduction-to-networking explanation/intro-to/networking/ # Discourse
+network-introduction explanation/intro-to/networking/
+introduction-to-networking explanation/intro-to/networking/
 
-networking-key-concepts explanation/networking/networking-key-concepts/ # Discourse
+networking-key-concepts explanation/networking/networking-key-concepts/
 
-network-configuration explanation/networking/configuring-networks/ # Discourse
-configuring-networks explanation/networking/configuring-networks/ # Discourse
-how-to/network-configuration/ explanation/networking/configuring-networks/ # RTD
+network-configuration explanation/networking/configuring-networks/
+configuring-networks explanation/networking/configuring-networks/
+how-to/network-configuration/ explanation/networking/configuring-networks/
 
-about-netplan explanation/networking/about-netplan/ # Discourse
-netplan explanation/networking/about-netplan/ # Discourse
-explanation/networking/netplan/ explanation/networking/about-netplan/ # RTD
-how-to/networking/netplan/ explanation/networking/about-netplan/ # RTD
+about-netplan explanation/networking/about-netplan/
+netplan explanation/networking/about-netplan/
+explanation/networking/netplan/ explanation/networking/about-netplan/
+how-to/networking/netplan/ explanation/networking/about-netplan/
 
-network-dhcp explanation/networking/about-dhcp/ # Discourse
-about-dynamic-host-configuration-protocol-dhcp explanation/networking/about-dhcp/ # Discourse
+network-dhcp explanation/networking/about-dhcp/
+about-dynamic-host-configuration-protocol-dhcp explanation/networking/about-dhcp/
 
-network-ntp explanation/networking/about-time-synchronisation/ # Discourse
-about-time-synchronisation explanation/networking/about-time-synchronisation/ # Discourse
+network-ntp explanation/networking/about-time-synchronisation/
+about-time-synchronisation explanation/networking/about-time-synchronisation/
 
-network-dpdk explanation/networking/about-dpdk/ # Discourse
-about-dpdk explanation/networking/about-dpdk/ # Discourse
+network-dpdk explanation/networking/about-dpdk/
+about-dpdk explanation/networking/about-dpdk/
 
 # =============================================================================
 # Samba
 # =============================================================================
 
-samba-active-directory how-to/samba/member-server-in-an-ad-domain/ # Discourse
-member-server-in-an-active-directory-domain how-to/samba/member-server-in-an-ad-domain/ # Discourse
+samba-active-directory how-to/samba/member-server-in-an-ad-domain/
+member-server-in-an-active-directory-domain how-to/samba/member-server-in-an-ad-domain/
 
-samba-file-server how-to/samba/file-server/ # Discourse
-samba-as-a-file-server how-to/samba/file-server/ # Discourse
+samba-file-server how-to/samba/file-server/
+samba-as-a-file-server how-to/samba/file-server/
 
-samba-print-server how-to/samba/print-server/ # Discourse
-samba-as-a-print-server how-to/samba/print-server/ # Discourse
+samba-print-server how-to/samba/print-server/
+samba-as-a-print-server how-to/samba/print-server/
 
-samba-share-access-control how-to/samba/share-access-controls/ # Discourse
-share-access-controls how-to/samba/share-access-controls/ # Discourse
+samba-share-access-control how-to/samba/share-access-controls/
+share-access-controls how-to/samba/share-access-controls/
 
-samba-apparmor-profile how-to/samba/apparmor-profile/ # Discourse
+samba-apparmor-profile how-to/samba/apparmor-profile/
 
-how-to-mount-cifs-shares-permanently how-to/samba/mount-cifs-shares-permanently/ # Discourse
+how-to-mount-cifs-shares-permanently how-to/samba/mount-cifs-shares-permanently/
 
-samba-domain-controller how-to/samba/nt4-domain-controller-legacy/ # Discourse
-nt4-domain-controller-legacy how-to/samba/nt4-domain-controller-legacy/ # Discourse
+samba-domain-controller how-to/samba/nt4-domain-controller-legacy/
+nt4-domain-controller-legacy how-to/samba/nt4-domain-controller-legacy/
 
-samba-openldap-backend how-to/samba/openldap-backend-legacy/ # Discourse
-openldap-backend-legacy how-to/samba/openldap-backend-legacy/ # Discourse
+samba-openldap-backend how-to/samba/openldap-backend-legacy/
+openldap-backend-legacy how-to/samba/openldap-backend-legacy/
 
-samba-introduction explanation/intro-to/samba/ # Discourse
-introduction-to-samba explanation/intro-to/samba/ # Discourse
+samba-introduction explanation/intro-to/samba/
+introduction-to-samba explanation/intro-to/samba/
 
 # =============================================================================
 # Active Directory
 # =============================================================================
 
-prepare-to-join-a-domain how-to/active-directory/join-a-domain-with-winbind-preparation/ # Discourse
-join-a-domain-with-winbind-preparation how-to/active-directory/join-a-domain-with-winbind-preparation/ # Discourse
+prepare-to-join-a-domain how-to/active-directory/join-a-domain-with-winbind-preparation/
+join-a-domain-with-winbind-preparation how-to/active-directory/join-a-domain-with-winbind-preparation/
 
-join-a-simple-domain-with-the-rid-backend how-to/active-directory/join-a-simple-domain-with-the-rid-backend/ # Discourse
+join-a-simple-domain-with-the-rid-backend how-to/active-directory/join-a-simple-domain-with-the-rid-backend/
 
-join-a-forest-with-the-rid-backend how-to/active-directory/join-a-forest-with-the-rid-backend/ # Discourse
+join-a-forest-with-the-rid-backend how-to/active-directory/join-a-forest-with-the-rid-backend/
 
-join-a-forest-with-the-autorid-backend how-to/active-directory/join-a-forest-with-the-autorid-backend/ # Discourse
+join-a-forest-with-the-autorid-backend how-to/active-directory/join-a-forest-with-the-autorid-backend/
 
-active-directory-integration explanation/intro-to/AD-integration/ # Discourse
-introduction-to-active-directory-integration explanation/intro-to/AD-integration/ # Discourse
+active-directory-integration explanation/intro-to/AD-integration/
+introduction-to-active-directory-integration explanation/intro-to/AD-integration/
 
-choosing-an-integration-method explanation/active-directory/choosing-an-integration-method/ # Discourse
+choosing-an-integration-method explanation/active-directory/choosing-an-integration-method/
 
-security-identifiers explanation/active-directory/security-identifiers-sids/ # Discourse
-security-identifiers-sids explanation/active-directory/security-identifiers-sids/ # Discourse
+security-identifiers explanation/active-directory/security-identifiers-sids/
+security-identifiers-sids explanation/active-directory/security-identifiers-sids/
 
-identity-mapping-idmap-backends explanation/active-directory/identity-mapping-idmap-backends/ # Discourse
+identity-mapping-idmap-backends explanation/active-directory/identity-mapping-idmap-backends/
 
-the-rid-idmap-backend explanation/active-directory/the-rid-idmap-backend/ # Discourse
+the-rid-idmap-backend explanation/active-directory/the-rid-idmap-backend/
 
-the-autorid-idmap-backend explanation/active-directory/the-autorid-idmap-backend/ # Discourse
+the-autorid-idmap-backend explanation/active-directory/the-autorid-idmap-backend/
 
 # =============================================================================
 # Kerberos
 # =============================================================================
 
-service-kerberos how-to/kerberos/install-a-kerberos-server/ # Discourse
-how-to-install-a-kerberos-server how-to/kerberos/install-a-kerberos-server/ # Discourse
+service-kerberos how-to/kerberos/install-a-kerberos-server/
+how-to-install-a-kerberos-server how-to/kerberos/install-a-kerberos-server/
 
-service-kerberos-principals how-to/kerberos/configure-service-principals/ # Discourse
-how-to-configure-kerberos-service-principals how-to/kerberos/configure-service-principals/ # Discourse
+service-kerberos-principals how-to/kerberos/configure-service-principals/
+how-to-configure-kerberos-service-principals how-to/kerberos/configure-service-principals/
 
-kerberos-encryption-types how-to/kerberos/kerberos-encryption-types/ # Discourse
+kerberos-encryption-types how-to/kerberos/kerberos-encryption-types/
 
-service-kerberos-secondary-kdc how-to/kerberos/set-up-secondary-kdc/ # Discourse
-how-to-set-up-a-secondary-kdc how-to/kerberos/set-up-secondary-kdc/ # Discourse
+service-kerberos-secondary-kdc how-to/kerberos/set-up-secondary-kdc/
+how-to-set-up-a-secondary-kdc how-to/kerberos/set-up-secondary-kdc/
 
-service-kerberos-workstation-auth how-to/kerberos/basic-workstation-authentication/ # Discourse
-how-to-set-up-basic-workstation-authentication how-to/kerberos/basic-workstation-authentication/ # Discourse
+service-kerberos-workstation-auth how-to/kerberos/basic-workstation-authentication/
+how-to-set-up-basic-workstation-authentication how-to/kerberos/basic-workstation-authentication/
 
-service-kerberos-with-openldap-backend how-to/kerberos/kerberos-with-openldap-backend/ # Discourse
-how-to-set-up-kerberos-with-openldap-backend how-to/kerberos/kerberos-with-openldap-backend/ # Discourse
+service-kerberos-with-openldap-backend how-to/kerberos/kerberos-with-openldap-backend/
+how-to-set-up-kerberos-with-openldap-backend how-to/kerberos/kerberos-with-openldap-backend/
 
-kerberos-introduction explanation/intro-to/kerberos/ # Discourse
-introduction-to-kerberos explanation/intro-to/kerberos/ # Discourse
+kerberos-introduction explanation/intro-to/kerberos/
+introduction-to-kerberos explanation/intro-to/kerberos/
 
 # =============================================================================
 # SSSD
 # =============================================================================
 
-service-sssd-ad how-to/sssd/with-active-directory/ # Discourse
-how-to-set-up-sssd-with-active-directory how-to/sssd/with-active-directory/ # Discourse
+service-sssd-ad how-to/sssd/with-active-directory/
+how-to-set-up-sssd-with-active-directory how-to/sssd/with-active-directory/
 
-service-sssd-ldap how-to/sssd/with-ldap/ # Discourse
-how-to-set-up-sssd-with-ldap how-to/sssd/with-ldap/ # Discourse
+service-sssd-ldap how-to/sssd/with-ldap/
+how-to-set-up-sssd-with-ldap how-to/sssd/with-ldap/
 
-service-sssd-ldap-krb how-to/sssd/with-ldap-and-kerberos/ # Discourse
-how-to-set-up-sssd-with-ldap-and-kerberos how-to/sssd/with-ldap-and-kerberos/ # Discourse
+service-sssd-ldap-krb how-to/sssd/with-ldap-and-kerberos/
+how-to-set-up-sssd-with-ldap-and-kerberos how-to/sssd/with-ldap-and-kerberos/
 
-service-sssd-troubleshooting how-to/sssd/troubleshooting/ # Discourse
-troubleshooting-sssd how-to/sssd/troubleshooting/ # Discourse
+service-sssd-troubleshooting how-to/sssd/troubleshooting/
+troubleshooting-sssd how-to/sssd/troubleshooting/
 
-service-sssd explanation/intro-to/sssd/ # Discourse
-introduction-to-network-user-authentication-with-sssd explanation/intro-to/sssd/ # Discourse
+service-sssd explanation/intro-to/sssd/
+introduction-to-network-user-authentication-with-sssd explanation/intro-to/sssd/
 
 # =============================================================================
 # OpenLDAP
 # =============================================================================
 
-service-ldap how-to/openldap/install-openldap/ # Discourse
-install-and-configure-ldap how-to/openldap/install-openldap/ # Discourse
+service-ldap how-to/openldap/install-openldap/
+install-and-configure-ldap how-to/openldap/install-openldap/
 
-service-ldap-access-control how-to/openldap/access-control/ # Discourse
-ldap-access-control how-to/openldap/access-control/ # Discourse
+service-ldap-access-control how-to/openldap/access-control/
+ldap-access-control how-to/openldap/access-control/
 
-service-ldap-replication how-to/openldap/replication/ # Discourse
-openldap-replication how-to/openldap/replication/ # Discourse
+service-ldap-replication how-to/openldap/replication/
+openldap-replication how-to/openldap/replication/
 
-service-ldap-usage how-to/openldap/users-and-groups/ # Discourse
-how-to-set-up-ldap-users-and-groups how-to/openldap/users-and-groups/ # Discourse
+service-ldap-usage how-to/openldap/users-and-groups/
+how-to-set-up-ldap-users-and-groups how-to/openldap/users-and-groups/
 
-service-ldap-with-tls how-to/openldap/ldap-and-tls/ # Discourse
-ldap-and-transport-layer-security-tls how-to/openldap/ldap-and-tls/ # Discourse
+service-ldap-with-tls how-to/openldap/ldap-and-tls/
+ldap-and-transport-layer-security-tls how-to/openldap/ldap-and-tls/
 
-service-ldap-backup-restore how-to/openldap/backup-and-restore/ # Discourse
-backup-and-restore-openldap how-to/openldap/backup-and-restore/ # Discourse
+service-ldap-backup-restore how-to/openldap/backup-and-restore/
+backup-and-restore-openldap how-to/openldap/backup-and-restore/
 
-service-ldap-introduction explanation/intro-to/openldap/ # Discourse
-introduction-to-openldap explanation/intro-to/openldap/ # Discourse
+service-ldap-introduction explanation/intro-to/openldap/
+introduction-to-openldap explanation/intro-to/openldap/
 
 # =============================================================================
 # Databases
 # =============================================================================
 
-databases-mysql how-to/databases/install-mysql/ # Discourse
-install-and-configure-a-mysql-server how-to/databases/install-mysql/ # Discourse
+databases-mysql how-to/databases/install-mysql/
+install-and-configure-a-mysql-server how-to/databases/install-mysql/
 
-databases-postgresql how-to/databases/install-postgresql/ # Discourse
-install-and-configure-postgresql how-to/databases/install-postgresql/ # Discourse
+databases-postgresql how-to/databases/install-postgresql/
+install-and-configure-postgresql how-to/databases/install-postgresql/
 
-databases-introduction explanation/intro-to/databases/ # Discourse
-introduction-to-databases explanation/intro-to/databases/ # Discourse
+databases-introduction explanation/intro-to/databases/
+introduction-to-databases explanation/intro-to/databases/
 
 # =============================================================================
 # Mail Services
 # =============================================================================
 
-mail-postfix how-to/mail-services/install-postfix/ # Discourse
-install-and-configure-postfix how-to/mail-services/install-postfix/ # Discourse
+mail-postfix how-to/mail-services/install-postfix/
+install-and-configure-postfix how-to/mail-services/install-postfix/
 
-mail-dovecot how-to/mail-services/install-dovecot/ # Discourse
-install-and-configure-dovecot how-to/mail-services/install-dovecot/ # Discourse
+mail-dovecot how-to/mail-services/install-dovecot/
+install-and-configure-dovecot how-to/mail-services/install-dovecot/
 
-mail-exim4 how-to/mail-services/install-exim4/ # Discourse
-install-and-configure-exim4 how-to/mail-services/install-exim4/ # Discourse
+mail-exim4 how-to/mail-services/install-exim4/
+install-and-configure-exim4 how-to/mail-services/install-exim4/
 
-mail-introduction/ how-to/mail-services/ # Discourse
-introduction-to-mail-services/ how-to/mail-services/ # Discourse
-explanation/intro-to/mail-services/ how-to/mail-services/ # RTD
+mail-introduction/ how-to/mail-services/
+introduction-to-mail-services/ how-to/mail-services/
+explanation/intro-to/mail-services/ how-to/mail-services/
 
 # =============================================================================
 # Backups
 # =============================================================================
 
-backups-bacula how-to/backups/install-bacula/ # Discourse
-how-to-install-and-configure-bacula how-to/backups/install-bacula/ # Discourse
+backups-bacula how-to/backups/install-bacula/
+how-to-install-and-configure-bacula how-to/backups/install-bacula/
 
-tools-rsnapshot how-to/backups/install-rsnapshot/ # Discourse
-how-to-install-and-configure-rsnapshot how-to/backups/install-rsnapshot/ # Discourse
+tools-rsnapshot how-to/backups/install-rsnapshot/
+how-to-install-and-configure-rsnapshot how-to/backups/install-rsnapshot/
 
-backups-shell-scripts how-to/backups/back-up-using-shell-scripts/ # Discourse
-how-to-back-up-using-shell-scripts how-to/backups/back-up-using-shell-scripts/ # Discourse
-backups-archive-rotation how-to/backups/back-up-using-shell-scripts/ # Discourse
-archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/ # Discourse
-reference/backups/archive-rotation-shell-script/ how-to/backups/back-up-using-shell-scripts/ # RTD
-reference/backups/ how-to/backups/back-up-using-shell-scripts/ # RTD
+backups-shell-scripts how-to/backups/back-up-using-shell-scripts/
+how-to-back-up-using-shell-scripts how-to/backups/back-up-using-shell-scripts/
+backups-archive-rotation how-to/backups/back-up-using-shell-scripts/
+archive-rotation-shell-script how-to/backups/back-up-using-shell-scripts/
+reference/backups/archive-rotation-shell-script/ how-to/backups/back-up-using-shell-scripts/
+reference/backups/ how-to/backups/back-up-using-shell-scripts/
 
-tools-etckeeper how-to/backups/install-etckeeper/ # Discourse
-etckeeper how-to/backups/install-etckeeper/ # Discourse
+tools-etckeeper how-to/backups/install-etckeeper/
+etckeeper how-to/backups/install-etckeeper/
 
-service-gitolite how-to/backups/install-gitolite/ # Discourse
-how-to-install-and-configure-gitolite how-to/backups/install-gitolite/ # Discourse
+service-gitolite how-to/backups/install-gitolite/
+how-to-install-and-configure-gitolite how-to/backups/install-gitolite/
 
-backups-introduction/ how-to/backups/ # Discourse
-introduction-to-backups/ how-to/backups/ # Discourse
-explanation/intro-to/backups/ how-to/backups/ # RTD
+backups-introduction/ how-to/backups/
+introduction-to-backups/ how-to/backups/
+explanation/intro-to/backups/ how-to/backups/
 
-basic-backup-shell-script reference/backups/basic-backup-shell-script/ # Discourse
+basic-backup-shell-script reference/backups/basic-backup-shell-script/
 
 # =============================================================================
 # Web Services
 # =============================================================================
 
-proxy-servers-squid how-to/web-services/install-a-squid-server/ # Discourse
-how-to-install-a-squid-server how-to/web-services/install-a-squid-server/ # Discourse
+proxy-servers-squid how-to/web-services/install-a-squid-server/
+how-to-install-a-squid-server how-to/web-services/install-a-squid-server/
 
-web-servers-apache how-to/web-services/install-apache2/ # Discourse
-how-to-install-apache2 how-to/web-services/install-apache2/ # Discourse
+web-servers-apache how-to/web-services/install-apache2/
+how-to-install-apache2 how-to/web-services/install-apache2/
 
-how-to-configure-apache2-settings how-to/web-services/configure-apache2-settings/ # Discourse
+how-to-configure-apache2-settings how-to/web-services/configure-apache2-settings/
 
-how-to-use-apache2-modules how-to/web-services/use-apache2-modules/ # Discourse
+how-to-use-apache2-modules how-to/web-services/use-apache2-modules/
 
-how-to-install-nginx how-to/web-services/install-nginx/ # Discourse
+how-to-install-nginx how-to/web-services/install-nginx/
 
-how-to-configure-nginx how-to/web-services/configure-nginx/ # Discourse
+how-to-configure-nginx how-to/web-services/configure-nginx/
 
-how-to-use-nginx-modules how-to/web-services/use-nginx-modules/ # Discourse
+how-to-use-nginx-modules how-to/web-services/use-nginx-modules/
 
-programming-php how-to/web-services/install-php/ # Discourse
-how-to-install-and-configure-php how-to/web-services/install-php/ # Discourse
+programming-php how-to/web-services/install-php/
+how-to-install-and-configure-php how-to/web-services/install-php/
 
-programming-ruby-on-rails how-to/web-services/install-ruby-on-rails/ # Discourse
-how-to-install-and-configure-ruby-on-rails how-to/web-services/install-ruby-on-rails/ # Discourse
+programming-ruby-on-rails how-to/web-services/install-ruby-on-rails/
+how-to-install-and-configure-ruby-on-rails how-to/web-services/install-ruby-on-rails/
 
-web-servers-introduction explanation/intro-to/web-servers/ # Discourse
-introduction-to-web-servers explanation/intro-to/web-servers/ # Discourse
+web-servers-introduction explanation/intro-to/web-servers/
+introduction-to-web-servers explanation/intro-to/web-servers/
 
-about-web-servers explanation/web-services/about-web-servers/ # Discourse
+about-web-servers explanation/web-services/about-web-servers/
 
-about-squid-proxy-servers explanation/web-services/about-squid-proxy-servers/ # Discourse
+about-squid-proxy-servers explanation/web-services/about-squid-proxy-servers/
 
 # =============================================================================
 # Storage
 # =============================================================================
 
-how-to-manage-logical-volumes how-to/storage/manage-logical-volumes/ # Discourse
+how-to-manage-logical-volumes how-to/storage/manage-logical-volumes/
 
-service-iscsi how-to/storage/iscsi-initiator-or-client/ # Discourse
-iscsi-initiator-or-client how-to/storage/iscsi-initiator-or-client/ # Discourse
-explanation/storage/iscsi-initiator-or-client/ how-to/storage/iscsi-initiator-or-client/ # RTD
+service-iscsi how-to/storage/iscsi-initiator-or-client/
+iscsi-initiator-or-client how-to/storage/iscsi-initiator-or-client/
+explanation/storage/iscsi-initiator-or-client/ how-to/storage/iscsi-initiator-or-client/
 
-about-logical-volume-management-lvm explanation/storage/about-lvm/ # Discourse
+about-logical-volume-management-lvm explanation/storage/about-lvm/
 
 # =============================================================================
 # Graphics
 # =============================================================================
 
-nvidia-drivers-installation how-to/graphics/install-nvidia-drivers/ # Discourse
+nvidia-drivers-installation how-to/graphics/install-nvidia-drivers/
 
-gpu-virtualization-with-qemukvm how-to/graphics/gpu-virtualization-with-qemu-kvm/ # Discourse
-gpu-virtualization-with-qemu-kvm how-to/graphics/gpu-virtualization-with-qemu-kvm/ # Discourse
+gpu-virtualization-with-qemukvm how-to/graphics/gpu-virtualization-with-qemu-kvm/
+gpu-virtualization-with-qemu-kvm how-to/graphics/gpu-virtualization-with-qemu-kvm/
 
 # =============================================================================
 # Software Management
 # =============================================================================
 
-package-management how-to/software/package-management/ # Discourse
+package-management how-to/software/package-management/
 
-upgrade-introduction how-to/software/upgrade-your-release/ # Discourse
-how-to-upgrade-your-release how-to/software/upgrade-your-release/ # Discourse
+upgrade-introduction how-to/software/upgrade-your-release/
+how-to-upgrade-your-release how-to/software/upgrade-your-release/
 
-reporting-bugs how-to/software/report-a-bug/ # Discourse
-how-to-report-a-bug-in-ubuntu-server how-to/software/report-a-bug/ # Discourse
+reporting-bugs how-to/software/report-a-bug/
+how-to-report-a-bug-in-ubuntu-server how-to/software/report-a-bug/
 
-kernel-crash-dump how-to/software/kernel-crash-dump/ # Discourse
+kernel-crash-dump how-to/software/kernel-crash-dump/
 
-tools-puppet explanation/software/config-managers/ # Discourse
-how-to-install-and-use-puppet explanation/software/config-managers/ # Discourse
+tools-puppet explanation/software/config-managers/
+how-to-install-and-use-puppet explanation/software/config-managers/
 
-about-apt-upgrade-and-phased-updates explanation/software/about-apt-upgrade-and-phased-updates/ # Discourse
+about-apt-upgrade-and-phased-updates explanation/software/about-apt-upgrade-and-phased-updates/
 
-third-party-repository-usage explanation/software/third-party-repository-usage/ # Discourse
-third-party-apt-repositories explanation/software/third-party-repository-usage/ # Discourse
+third-party-repository-usage explanation/software/third-party-repository-usage/
+third-party-apt-repositories explanation/software/third-party-repository-usage/
 
-changing-package-files explanation/software/changing-package-files/ # Discourse
+changing-package-files explanation/software/changing-package-files/
 
-advance-testing-of-updates-in-best-practice-server-deployments explanation/software/advance-testing-of-updates-in-best-practice-server-deployments/ # Discourse
+advance-testing-of-updates-in-best-practice-server-deployments explanation/software/advance-testing-of-updates-in-best-practice-server-deployments/
 
-security-automatic-updates how-to/software/automatic-updates/ # Discourse
+security-automatic-updates how-to/software/automatic-updates/
 
 # =============================================================================
 # Security
 # =============================================================================
 
-service-openssh how-to/security/openssh-server/ # Discourse
-openssh-server how-to/security/openssh-server/ # Discourse
-security-ssh how-to/security/openssh-server/ # Discourse
+service-openssh how-to/security/openssh-server/
+openssh-server how-to/security/openssh-server/
+security-ssh how-to/security/openssh-server/
 
-service-openvpn how-to/security/install-openvpn/ # Discourse
-how-to-install-and-use-openvpn how-to/security/install-openvpn/ # Discourse
+service-openvpn how-to/security/install-openvpn/
+how-to-install-and-use-openvpn how-to/security/install-openvpn/
 
-security-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/ # Discourse
-install-a-root-ca-certificate-in-the-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/ # Discourse
+security-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/
+install-a-root-ca-certificate-in-the-trust-store how-to/security/install-a-root-ca-certificate-in-the-trust-store/
 
-security-firewall how-to/security/firewalls/ # Discourse
-firewalls how-to/security/firewalls/ # Discourse
-security-ufw how-to/security/firewalls/ # Discourse
+security-firewall how-to/security/firewalls/
+firewalls how-to/security/firewalls/
+security-ufw how-to/security/firewalls/
 
-security-apparmor how-to/security/apparmor/ # Discourse
-apparmor how-to/security/apparmor/ # Discourse
+security-apparmor how-to/security/apparmor/
+apparmor how-to/security/apparmor/
 
-security-smart-cards how-to/security/smart-card-authentication/ # Discourse
-smart-card-authentication how-to/security/smart-card-authentication/ # Discourse
+security-smart-cards how-to/security/smart-card-authentication/
+smart-card-authentication how-to/security/smart-card-authentication/
 
-security-smart-cards-ssh how-to/security/smart-card-authentication-with-ssh/ # Discourse
-smart-card-authentication-with-ssh how-to/security/smart-card-authentication-with-ssh/ # Discourse
+security-smart-cards-ssh how-to/security/smart-card-authentication-with-ssh/
+smart-card-authentication-with-ssh how-to/security/smart-card-authentication-with-ssh/
 
-security-users how-to/security/user-management/ # Discourse
-user-management how-to/security/user-management/ # Discourse
+security-users how-to/security/user-management/
+user-management how-to/security/user-management/
 
-security-console how-to/security/console-security/ # Discourse
-console-security how-to/security/console-security/ # Discourse
+security-console how-to/security/console-security/
+console-security how-to/security/console-security/
 
-security-introduction explanation/intro-to/security/ # Discourse
-introduction-to-security explanation/intro-to/security/ # Discourse
-explanation/intro-to-security/ explanation/intro-to/security/ # RTD
-security explanation/intro-to/security/ # Discourse
+security-introduction explanation/intro-to/security/
+introduction-to-security explanation/intro-to/security/
+explanation/intro-to-security/ explanation/intro-to/security/
+security explanation/intro-to/security/
 
-vpn-clients explanation/security/openvpn-client-implementations/ # Discourse
-openvpn-client-implementations explanation/security/openvpn-client-implementations/ # Discourse
+vpn-clients explanation/security/openvpn-client-implementations/
+openvpn-client-implementations explanation/security/openvpn-client-implementations/
 
-security-certificates explanation/security/certificates/ # Discourse
-certificates explanation/security/certificates/ # Discourse
+security-certificates explanation/security/certificates/
+certificates explanation/security/certificates/
 
 # =============================================================================
 # Cryptography
 # =============================================================================
 
-introduction-to-crypto-libraries explanation/intro-to/crypto-libraries/ # Discourse
+introduction-to-crypto-libraries explanation/intro-to/crypto-libraries/
 
-openssl explanation/crypto/openssl/ # Discourse
+openssl explanation/crypto/openssl/
 
-gnutls explanation/crypto/gnutls/ # Discourse
+gnutls explanation/crypto/gnutls/
 
-network-security-services-nss explanation/crypto/network-security-services-nss/ # Discourse
+network-security-services-nss explanation/crypto/network-security-services-nss/
 
-java-cryptography-configuration explanation/crypto/java-cryptography-configuration/ # Discourse
+java-cryptography-configuration explanation/crypto/java-cryptography-configuration/
 
-bind-9-dnssec-cryptography-selection explanation/crypto/bind-9-dnssec-cryptography-selection/ # Discourse
+bind-9-dnssec-cryptography-selection explanation/crypto/bind-9-dnssec-cryptography-selection/
 
-openssh-crypto-configuration explanation/crypto/openssh-crypto-configuration/ # Discourse
+openssh-crypto-configuration explanation/crypto/openssh-crypto-configuration/
 
-troubleshooting-tls-ssl explanation/crypto/troubleshooting-tls-ssl/ # Discourse
+troubleshooting-tls-ssl explanation/crypto/troubleshooting-tls-ssl/
 
 # =============================================================================
 # WireGuard VPN
 # =============================================================================
 
-wireguard-vpn-peer2site-introduction how-to/wireguard-vpn/peer-to-site/ # Discourse
-wireguard-vpn-peer-to-site how-to/wireguard-vpn/peer-to-site/ # Discourse
+wireguard-vpn-peer2site-introduction how-to/wireguard-vpn/peer-to-site/
+wireguard-vpn-peer-to-site how-to/wireguard-vpn/peer-to-site/
 
-wireguard-vpn-peer2site-router how-to/wireguard-vpn/peer-to-site-on-router/ # Discourse
-wireguard-vpn-peer-to-site-on-router how-to/wireguard-vpn/peer-to-site-on-router/ # Discourse
+wireguard-vpn-peer2site-router how-to/wireguard-vpn/peer-to-site-on-router/
+wireguard-vpn-peer-to-site-on-router how-to/wireguard-vpn/peer-to-site-on-router/
 
-wireguard-vpn-peer2site-inside how-to/wireguard-vpn/on-an-internal-system/ # Discourse
-wireguard-on-an-internal-system how-to/wireguard-vpn/on-an-internal-system/ # Discourse
+wireguard-vpn-peer2site-inside how-to/wireguard-vpn/on-an-internal-system/
+wireguard-on-an-internal-system how-to/wireguard-vpn/on-an-internal-system/
 
-wireguard-vpn-site2site how-to/wireguard-vpn/site-to-site/ # Discourse
-wireguard-vpn-site-to-site how-to/wireguard-vpn/site-to-site/ # Discourse
+wireguard-vpn-site2site how-to/wireguard-vpn/site-to-site/
+wireguard-vpn-site-to-site how-to/wireguard-vpn/site-to-site/
 
-wireguard-vpn-defaultgw how-to/wireguard-vpn/vpn-as-the-default-gateway/ # Discourse
-using-the-vpn-as-the-default-gateway how-to/wireguard-vpn/vpn-as-the-default-gateway/ # Discourse
+wireguard-vpn-defaultgw how-to/wireguard-vpn/vpn-as-the-default-gateway/
+using-the-vpn-as-the-default-gateway how-to/wireguard-vpn/vpn-as-the-default-gateway/
 
-wireguard-vpn-other-tasks how-to/wireguard-vpn/common-tasks/ # Discourse
-common-tasks-in-wireguard-vpn how-to/wireguard-vpn/common-tasks/ # Discourse
+wireguard-vpn-other-tasks how-to/wireguard-vpn/common-tasks/
+common-tasks-in-wireguard-vpn how-to/wireguard-vpn/common-tasks/
 
-wireguard-vpn-security how-to/wireguard-vpn/security-tips/ # Discourse
-security-tips-for-wireguard-vpn how-to/wireguard-vpn/security-tips/ # Discourse
+wireguard-vpn-security how-to/wireguard-vpn/security-tips/
+security-tips-for-wireguard-vpn how-to/wireguard-vpn/security-tips/
 
-wireguard-vpn-troubleshooting how-to/wireguard-vpn/troubleshooting/ # Discourse
-troubleshooting-wireguard-vpn how-to/wireguard-vpn/troubleshooting/ # Discourse
+wireguard-vpn-troubleshooting how-to/wireguard-vpn/troubleshooting/
+troubleshooting-wireguard-vpn how-to/wireguard-vpn/troubleshooting/
 
-wireguard-vpn-introduction explanation/intro-to/wireguard-vpn/ # Discourse
-introduction-to-wireguard-vpn explanation/intro-to/wireguard-vpn/ # Discourse
+wireguard-vpn-introduction explanation/intro-to/wireguard-vpn/
+introduction-to-wireguard-vpn explanation/intro-to/wireguard-vpn/
 
 # =============================================================================
 # High Availability
 # =============================================================================
 
-ubuntu-ha-drbd how-to/high-availability/install-drbd/ # Discourse
-distributed-replicated-block-device-drbd how-to/high-availability/install-drbd/ # Discourse
+ubuntu-ha-drbd how-to/high-availability/install-drbd/
+distributed-replicated-block-device-drbd how-to/high-availability/install-drbd/
 
-ubuntu-ha-introduction explanation/intro-to/high-availability/ # Discourse
-introduction-to-high-availability explanation/intro-to/high-availability/ # Discourse
+ubuntu-ha-introduction explanation/intro-to/high-availability/
+introduction-to-high-availability explanation/intro-to/high-availability/
 
-ubuntu-ha-pacemaker-resource-agents explanation/high-availability/pacemaker-resource-agents/ # Discourse
-pacemaker-resource-agents explanation/high-availability/pacemaker-resource-agents/ # Discourse
+ubuntu-ha-pacemaker-resource-agents explanation/high-availability/pacemaker-resource-agents/
+pacemaker-resource-agents explanation/high-availability/pacemaker-resource-agents/
 
-ubuntu-ha-pacemaker-fence-agents explanation/high-availability/pacemaker-fence-agents/ # Discourse
-pacemaker-fence-agents explanation/high-availability/pacemaker-fence-agents/ # Discourse
+ubuntu-ha-pacemaker-fence-agents explanation/high-availability/pacemaker-fence-agents/
+pacemaker-fence-agents explanation/high-availability/pacemaker-fence-agents/
 
-ubuntu-ha-migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/ # Discourse
-migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/ # Discourse
+ubuntu-ha-migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
+migrate-from-crmsh-to-pcs reference/high-availability/migrate-from-crmsh-to-pcs/
 
 # =============================================================================
 # Observability
 # =============================================================================
 
-logging-monitoring-alerting how-to/observability/set-up-your-lma-stack/ # Discourse
-set-up-your-lma-stack how-to/observability/set-up-your-lma-stack/ # Discourse
+logging-monitoring-alerting how-to/observability/set-up-your-lma-stack/
+set-up-your-lma-stack how-to/observability/set-up-your-lma-stack/
 
-logwatch how-to/observability/install-logwatch/ # Discourse
-how-to-install-and-configure-logwatch how-to/observability/install-logwatch/ # Discourse
+logwatch how-to/observability/install-logwatch/
+how-to-install-and-configure-logwatch how-to/observability/install-logwatch/
 
-tools-munin how-to/observability/install-munin/ # Discourse
-how-to-install-and-configure-munin how-to/observability/install-munin/ # Discourse
+tools-munin how-to/observability/install-munin/
+how-to-install-and-configure-munin how-to/observability/install-munin/
 
-tools-nagios how-to/observability/install-nagios/ # Discourse
-how-to-install-and-configure-nagios-core-3 how-to/observability/install-nagios/ # Discourse
+tools-nagios how-to/observability/install-nagios/
+how-to-install-and-configure-nagios-core-3 how-to/observability/install-nagios/
 
-monitoring-nagios-munin how-to/observability/use-nagios-with-munin/ # Discourse
-how-to-use-nagios-with-munin how-to/observability/use-nagios-with-munin/ # Discourse
+monitoring-nagios-munin how-to/observability/use-nagios-with-munin/
+how-to-use-nagios-with-munin how-to/observability/use-nagios-with-munin/
 
 # =============================================================================
 # Debugging
 # =============================================================================
 
-reference/debugging/ how-to/debugging/ # RTD
-explanation/debugging/ how-to/debugging/ # RTD
+reference/debugging/ how-to/debugging/
+explanation/debugging/ how-to/debugging/
 
-service-debuginfod how-to/debugging/about-debuginfod/ # Discourse
-about-debuginfod how-to/debugging/about-debuginfod/ # Discourse
-reference/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/ # RTD
-explanation/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/ # RTD
+service-debuginfod how-to/debugging/about-debuginfod/
+about-debuginfod how-to/debugging/about-debuginfod/
+reference/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/
+explanation/debugging/about-debuginfod/ how-to/debugging/about-debuginfod/
 
-debug-symbol-packages how-to/debugging/debug-symbol-packages/ # Discourse
-reference/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/ # RTD
-explanation/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/ # RTD
+debug-symbol-packages how-to/debugging/debug-symbol-packages/
+reference/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/
+explanation/debugging/debug-symbol-packages/ how-to/debugging/debug-symbol-packages/
 
-explanation/intro-to/ebpf/ how-to/debugging/ebpf/ # RTD
+explanation/intro-to/ebpf/ how-to/debugging/ebpf/
 
 # =============================================================================
 # Multipath
 # =============================================================================
 
-device-mapper-multipathing-configuration explanation/multipath/configuring-multipath/ # Discourse
-configuring-device-mapper-multipathing explanation/multipath/configuring-multipath/ # Discourse
+device-mapper-multipathing-configuration explanation/multipath/configuring-multipath/
+configuring-device-mapper-multipathing explanation/multipath/configuring-multipath/
 
-device-mapper-multipathing-setup explanation/multipath/multipath-configuration-examples/ # Discourse
-multipath-configuration-examples explanation/multipath/multipath-configuration-examples/ # Discourse
+device-mapper-multipathing-setup explanation/multipath/multipath-configuration-examples/
+multipath-configuration-examples explanation/multipath/multipath-configuration-examples/
 
-device-mapper-multipathing-usage-debug explanation/multipath/common-multipath-tasks-and-procedures/ # Discourse
-common-multipath-tasks-and-procedures explanation/multipath/common-multipath-tasks-and-procedures/ # Discourse
+device-mapper-multipathing-usage-debug explanation/multipath/common-multipath-tasks-and-procedures/
+common-multipath-tasks-and-procedures explanation/multipath/common-multipath-tasks-and-procedures/
 
 # =============================================================================
 # Performance
 # =============================================================================
 
-tuned explanation/performance/perf-tune-tuned/ # Discourse
+tuned explanation/performance/perf-tune-tuned/
 
-explanation/performance/perf-epp/ explanation/performance/perf-p-states/ # RTD
+explanation/performance/perf-epp/ explanation/performance/perf-p-states/
 
 # =============================================================================
 # Clouds
 # =============================================================================
 
-reference/clouds/ explanation/clouds/ # RTD
+reference/clouds/ explanation/clouds/
 
-cloud-images explanation/clouds/find-cloud-images/ # Discourse
-cloud-images/introduction explanation/clouds/find-cloud-images/ # Discourse
-reference/clouds/find-cloud-images/ explanation/clouds/find-cloud-images/ # RTD
+cloud-images explanation/clouds/find-cloud-images/
+cloud-images/introduction explanation/clouds/find-cloud-images/
+reference/clouds/find-cloud-images/ explanation/clouds/find-cloud-images/
 
 # =============================================================================
 # Other Tools
 # =============================================================================
 
-tools-byobu reference/other-tools/terminal-multiplexers/ # Discourse
-byobu reference/other-tools/terminal-multiplexers/ # Discourse
-reference/other-tools/byobu/ reference/other-tools/terminal-multiplexers/ # RTD
+tools-byobu reference/other-tools/terminal-multiplexers/
+byobu reference/other-tools/terminal-multiplexers/
+reference/other-tools/byobu/ reference/other-tools/terminal-multiplexers/
 
-pam-motd reference/other-tools/pam-motd/ # Discourse
+pam-motd reference/other-tools/pam-motd/
 
 # =============================================================================
 # General
 # =============================================================================
 
-explanation/intro-to/ explanation/ # RTD
-explanation/introduction-to/ explanation/ # RTD
+explanation/intro-to/ explanation/
+explanation/introduction-to/ explanation/
