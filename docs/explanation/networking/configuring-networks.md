@@ -305,13 +305,13 @@ A single interface can only have one address assigned by DHCP. To have multiple 
 
 #### Apply and verify the IP addresses
 
-- Apply the configuration to enable the virtual IP:
+Apply the configuration to enable the virtual IP:
 
 ```bash
 sudo netplan apply
 ```
 
-- Verify the IP addresses are available locally using one or more of the following:
+Verify the IP addresses are available locally using one or more of the following:
 
 ```bash
 ip addr    #shows all network interfaces
@@ -323,7 +323,7 @@ hostname -i    #shows only the available IP addresses on the host
 
 Check the output to see that the addresses were applied to the interface that was configured.
 
-- Verify the IP addresses are available on the network. From a different computer on the network:
+Verify the IP addresses are available on the network. From a different computer on the network:
 
 ```bash
 ping 192.168.0.100    #configured IP addresses
