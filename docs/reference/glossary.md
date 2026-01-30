@@ -2394,7 +2394,7 @@ topologies
 
 TOTP
 Time-based One-Time Password
-    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Authy, Microsoft Authenticator, and many others.
+    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Microsoft Authenticator, and many others.
 
 TPM
 Trusted Platform Module
@@ -2409,7 +2409,7 @@ Traceroute
 
 TTYS
 Teletype Terminals
-    TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term tty still exists in Unix/Linux systems to represent:
+    TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term TTY still exists in Unix/Linux systems to represent:
     * A text-based input/output device
     * A terminal session
     * A console connection
