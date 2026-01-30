@@ -4,18 +4,17 @@
 Another usual VPN configuration where one could deploy WireGuard is to connect two distinct networks over the internet. Here is a simplified diagram:
 
 ```{mermaid}
-
-       flowchart LR
- subgraph alpha["alpha site — 10.10.10.0/24"]
+flowchart LR
+    subgraph alpha["alpha site — 10.10.10.0/24"]
         alpha_gw["wgA<br>10.10.10.1<br>10.10.9.0"]
         a_left["..."]
         a_right["..."]
-  end
- subgraph beta["beta site — 10.10.11.0/24"]
+    end
+    subgraph beta["beta site — 10.10.11.0/24"]
         beta_gw["wgB<br>10.10.11.1<br>10.10.9.1"]
         b_left["..."]
         b_right["..."]
-  end
+    end
     alpha_gw --- a_left & a_right
     beta_gw --- b_left & b_right
     alpha_gw -. ext .- internet(("public internet"))
@@ -25,8 +24,6 @@ Another usual VPN configuration where one could deploy WireGuard is to connect t
     style internet fill:#BBDEFB
     style alpha fill:#FFF9C4
     style beta fill:#C8E6C9
-
-
 ```
 
 The goal here is to seamlessly integrate network **alpha** with network **beta**, so that systems on the alpha site can transparently access systems on the beta site, and vice-versa.
