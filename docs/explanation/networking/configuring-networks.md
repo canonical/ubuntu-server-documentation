@@ -274,10 +274,11 @@ network:
   ethernets:
     eno1:
       addresses:
-      - 192.168.0.100/24
-        label: eno1:0
-      - 192.168.0.101/24
-        label: eno1:1
+        - 192.168.2.99/24
+        - 192.168.2.100/24:
+            label: eno1:1
+        - 192.168.2.101/24:
+            label: eno1:some-label
 
 ```
 
@@ -293,8 +294,8 @@ network:
   ethernets:
     eno1:
       addresses:
-      - 192.168.0.101/24
-        label: eno1:1
+        - 192.168.2.100/24:
+            label: eno1:some-label
       dhcp4: true
 
 ```
