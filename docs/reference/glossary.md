@@ -86,7 +86,7 @@ Alertmanager
     * [the Alertmanager documentation](https://prometheus.io/docs/alerting/latest/alertmanager/)
 
     Related topic(s):
-    * {term}`Observability` and {term}`Prometheus`
+    * {ref}`how-to-observability`
 
 ALUA
 Asymmetric Logical Unit Access
