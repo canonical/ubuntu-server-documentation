@@ -1931,8 +1931,6 @@ Prometheus
     * ["Prometheus"](https://en.wikipedia.org/wiki/Prometheus_(software))
     * ["Prometheus official site"](https://prometheus.io/)
 
-    Related topic(s):
-    * {term}`Alertmanager <web Alertmanager>`
 
 proxy
     *Work in Progress*
