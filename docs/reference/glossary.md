@@ -1714,9 +1714,6 @@ Observability
     See also:
     *[OpenTelemetry](https://opentelemetry.io) 
     
-    Related topic(s):
-    * {term}`Alertmanager`
-    * {term}`Prometheus`
 
     
 OCF
