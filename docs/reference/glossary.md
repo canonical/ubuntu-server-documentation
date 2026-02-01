@@ -1928,7 +1928,7 @@ preseed
     *Work in Progress*
 
 Prometheus
-    Prometheus is an open‑source monitoring and alerting toolkit used to collect and query metrics from applications and infrastructure. It was inspired by the monitoring tool Borgmon used at Google.
+    Prometheus is an open‑source monitoring and alerting toolkit used to collect and query metrics from applications and infrastructure.
 
     See also:
     * ["Prometheus"](https://en.wikipedia.org/wiki/Prometheus_(software))
