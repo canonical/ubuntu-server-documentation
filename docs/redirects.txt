@@ -439,6 +439,7 @@ security-automatic-updates how-to/software/automatic-updates/
 service-openssh how-to/security/openssh-server/
 openssh-server how-to/security/openssh-server/
 security-ssh how-to/security/openssh-server/
+how-to/security/openssh/ how-to/security/openssh-server/
 
 service-openvpn how-to/security/install-openvpn/
 how-to-install-and-use-openvpn how-to/security/install-openvpn/
@@ -595,6 +596,8 @@ multipath-configuration-examples explanation/multipath/multipath-configuration-e
 
 device-mapper-multipathing-usage-debug explanation/multipath/common-multipath-tasks-and-procedures/
 common-multipath-tasks-and-procedures explanation/multipath/common-multipath-tasks-and-procedures/
+
+introduction-to-device-mapper-multipathing explanation/intro-to/multipath
 
 # =============================================================================
 # Performance
