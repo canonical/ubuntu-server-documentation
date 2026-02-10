@@ -16,6 +16,11 @@ First, install Docker if it’s not already installed:
 ```bash
 $ sudo apt-get install -y docker.io docker-compose
 ```
+:::{note}
+This guide uses the Docker packages provided by Ubuntu (`docker.io`), which are supported by Canonical.
+
+Canonical also provides an [official Docker snap](https://snapcraft.io/docker) that can be used as an alternative.
+:::
 
 ## Configuring storage
 
