@@ -52,11 +52,11 @@ Access Control List
 
 AD
 Active Directory
-    *Work in Progress*
+    An AD is a Microsoft service that acts as a central database storing and managing information about network objects (user accounts, groups, computers and shared resources) and their security in a Windows-based network.
 
 ADSys
-    ADSys is an Ubuntu-specific Active Directory client developed by Canonical.
-    ADSys complements System Security Services Daemon (SSSD) by adding native
+    ADSys is an Ubuntu-specific Active Directory ({term}`AD`) client developed by Canonical.
+    ADSys complements System Security Services Daemon ({term}`SSSD`) by adding native
     Group Policy Object support, privilege management, and custom scripts
     execution.
 
@@ -2338,7 +2338,7 @@ Systemd
 
 tasksel
 Task selector
-    *Work in Progress*
+     Tasksel is a Debian/Ubuntu tool that simplifies the installation of collections of related packages (called "tasks") for specific purposes, like setting up a mail server, LAMP stack, or desktop environment. Instead of manually installing dozens of packages, tasksel lets you install entire pre-configured software bundles with a single command.
 
 TB
     Terabyte (unit of measurement)
@@ -2346,7 +2346,7 @@ TB
 
 TCP
 Transmission Control Protocol
-    *Work in Progress*
+     TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications depend on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
 
 TDX
 Trust domain extensions
@@ -2363,61 +2363,64 @@ Trusted Execution Environment
 
 TFTP
 Trivial File Transfer Protocol
-    *Work in Progress*
+   TFTP is a very simple, lightweight file transfer protocol that uses {term}`UDP` instead of {term}`TCP`, designed for basic file transfers where simplicity is more important than features or security. It is "trivial" because it has minimal functionality - no authentication, no encryption, no directory listing, just basic reading and writing of files.
 
 TGS
 Ticket Granting Service
-    *Work in Progress*
+    TGS is a credential issued by Kerberos used in the Kerberos authentication protocol, a key component of the Key Distribution Center (KDC) that issues service tickets to clients after initial authentication.
 
 TGT
 Ticket Granting Ticket
-    *Work in Progress*
-
+    TGT is a credential issued by Kerberos authentication systems. TGT allows users to request service tickets without re-entering their password.
+    
 TLB
 Translation Lookaside Buffer
-    TLB is a {term}`CPU` cache that stores recent page table entries. When the
-    CPU translates a virtual address, it first checks the TLB. If the mapping is
-    found, the translation is fast. If it's missing, the CPU retrieves the
-    mapping from the page table in memory, which takes longer.
+    TLB is a specialized cache in the {term}`CPU` that stores recent virtual-to-physical address translations, dramatically speeding up memory access by avoiding repeated page table lookups. It is a critical component of virtual memory systems that makes address translation fast enough to be practical. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it is missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
 
 TLS
 Transport Layer Security
-    *Work in Progress*
+    TLS is a cryptographic protocol that provides secure communication over a network by encrypting data transmitted between clients and servers. It is the successor to SSL (Secure Sockets Layer) and is what makes {term}`HTTPS` secure (the padlock icon in your browser).
 
 tmpfs
 Temporary Filesystem
-    *Work in Progress*
+    tmpfs is a filesystem that stores all files in virtual memory (RAM) instead of on a physical disk, making it fast but also volatile - data disappears when the system reboots or loses power.
 
 tmux
 Terminal Multiplexer
-    *Work in Progress*
+    tmux is a powerful command-line tool that allows you to manage multiple terminal sessions from a single window, with the ability to detach and reattach sessions. It is a way to have multiple terminal windows and split-screen layouts, all within a single terminal, with sessions that persist even when you disconnect.
 
 topologies
-    *Work in Progress*
+    Topologies (in a networking context) refer to the physical or logical arrangement of devices and connections in a network - essentially how computers, switches, routers, and other devices are interconnected.
 
 TOTP
 Time-based One-Time Password
-    *Work in Progress*
+    TOTP is an algorithm that generates temporary, single-use passwords based on the current time and a shared secret key. It is one of the most common forms of two-factor authentication (2FA) used by apps like Google Authenticator, Microsoft Authenticator, and many others.
 
 TPM
 Trusted Platform Module
-    A hardware security chip that securely stores cryptographic keys, measures
-    system integrity during boot, and enables features such as secure storage,
-    encryption, and attestation.
+    A hardware security chip that securely stores cryptographic keys, measures system integrity during boot, and enables features such as secure storage,
+ encryption, and attestation.
 
-traceback
-    *Work in Progress*
+Traceback
+    traceback is a term used in Python. Traceback is a report of the function call stack printed when an exception occurs. It shows the sequence of calls leading to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by tracing execution backward from the failure point.
 
 Traceroute
-    *Work in Progress*
+    Traceroute is a network diagnostic tool that shows the path packets take from your computer to a destination across the internet, revealing each hop (router) along the way.
 
-ttys
+TTYS
 Teletype Terminals
-    *Work in Progress*
+    TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term TTY still exists in Unix/Linux systems to represent:
+    * A text-based input/output device
+    * A terminal session
+    * A console connection
 
 TXT
 Trusted Execution Technology
-    *Work in Progress*
+    TXT is Intel's hardware-based security technology that creates a trusted execution environment to protect systems from software-based attacks. In other words, TXT was designed to make sure that a computer boots into a trusted and verified state before loading the operating system or applications.
+    It protects against:
+    * Rootkits
+    * Boot-level malware
+    * Unauthorized changes to firmware or system software
 
 :::
 
@@ -2428,61 +2431,63 @@ Trusted Execution Technology
 
 UDA
 Unified Data Architecture
-    *Work in Progress*
+   UDA is an approach that provides a unified framework for integrating and managing data across an organization in a cohesive, standardized manner.
 
 UDP
 User Datagram Protocol
-    *Work in Progress*
+    UDP is a network protocol used to send data between devices without creating or maintaining a connection. In other words, UDP is a connectionless transport layer protocol used for fast, low-overhead data transmission in iptables rules.
 
 UEFI
 Unified Extensible Firmware Interface
-    *Work in Progress*
+    UEFI is the modern replacement for BIOS (Basic Input/Output System). UEFI is the firmware interface between a computer's hardware and its operating system. UEFI initializes hardware during boot and hands control over to the operating system.
 
-ufw
+UFW
 Uncomplicated Firewall
-    *Work in Progress*
+    UFW is a user-friendly command-line tool for managing netfilter firewalls on Linux systems, simplifying complex iptables commands.
 
 UID
 User Identifier
-    *Work in Progress*
+    UID known as User Identifier (in Unix/Linux contexts) or Unique Identifier (in general computing). In Unix-like systems, a UID is a numeric value assigned to each user account to uniquely identify them to the operating system.
 
 UI
 User Interface
-    *Work in Progress*
+    UI is the point of interaction between a user and a digital product, system, or application - essentially everything the user sees, touches, or interacts with when using software or hardware.
 
 unicast
-    One-to-one communication.
+    Unicast is a one-to-one network communication method where data is sent from a single sender to a single specific receiver.
 
 unmount
-    *Work in Progress*
+    Unmount is the process of safely detaching a filesystem from the system's directory tree, making it inaccessible until it is mounted again. Unmount is the opposite of mounting. Unmount is important for data integrity, file system consistency, and the safe removal of USB drives or SD cards.
 
 untrusted
-    *Work in Progress*
+    Untrusted refers to:
+    1. data coming from outside the system, such as files uploaded by users
+    1. code coming from an external, unknown, or non-verified source, such as third-party plug-ins
+    1. network that cannot be assumed secure, such as public WI-FI 
 
 uptime
-    *Work in Progress*
+    Uptime is a measure of how long a system has been running continuously since its last boot, crash, or restart. Uptime indicates system stability and availability.
 
 URI
 Uniform Resource Identifier
-    *Work in Progress*
+    URI is a compact string of characters that uniquely identifies an abstract or physical resource, such as a webpage, file, email address, or concept, without specifying how to access it.
 
 URL
 Uniform Resource Locator
-    The web address of a resource on the internet.
-
+  URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet.
 userspace
-    *Work in Progress*
+    userspace (also appears as "user space" or "user-space") is the memory area and execution environment where normal applications and user programs run, as opposed to kernel space where the operating system kernel runs.
 
 USN
 Update Sequence Number
-    *Work in Progress*
+    USN is a 64-bit monotonically increasing integer in Windows NTFS file system used by the change journal to log and track file/directory modifications like creations, deletions, renames, or data changes.
 
 usr
     Refers to the `/usr/` directory and stands for "Unix System Resources".
 
 UUIDs
 Universally Unique Identifiers
-    *Work in Progress*
+    UUIDs are 128-bit numbers (typically represented as 32 hexadecimal digits in groups like 8-4-4-4-12) designed to uniquely identify objects, resources, or entities across systems without requiring a central authority.
 
 :::
 
@@ -2493,74 +2498,74 @@ Universally Unique Identifiers
 :::{glossary}
 
 vCPU
-Virtual CPU
-    *Work in Progress*
+Virtual Central Processing Unit
+    vCPU is a virtualized processor core allocated to a virtual machine, representing the {term}`VM`'s share of the physical {term}`CPU` resources available on the host.
 
 VCS
 Version Control System
-    *Work in Progress*
+    VCS is a software tool that tracks, manages, and stores changes to files, over time, recording who made the modifications, when, and enabling reversion to prior versions. 
 
 veth
 Virtual Ethernet
-    *Work in Progress*
+   veth is a Linux networking feature that creates a pair of connected virtual network interfaces that act like a virtual cable - whatever goes into one end comes out of the other.
 
 VFIO
 Virtual Function I/O
-    *Work in Progress*
-
+   VFIO is a Linux kernel framework that allows safe, direct access to physical hardware devices (like GPUs, network cards, or storage controllers) from user space or {term}`VM`, using IOMMU ({term}`Input-Output Memory Management Unit`) hardware for security and isolation.
 VFS
 Virtual File System
-    *Work in Progress*
+    VFS is a kernel abstraction layer in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics.
 
 VFs
 Virtual Functions
-    *Work in Progress*
+   *Work in Progress*
 
 VG
 Volume Group
-    *Work in Progress*
+    VG is a key component of LVM ({term}`Logical Volume Manager`), which is a flexible storage management system for Linux. The VG is a pool created from one or more physical volumes (PVs).
 
 vGPU
-Virtual GPU
-    *Work in Progress*
+Virtual Graphics Processing Unit
+    vGPU is a technology that allows a physical {term}`GPU` to be shared among multiple virtual machines, with each {term}`VM` getting its own portion of GPU resources for graphics rendering, compute tasks, or AI/ML workloads.
 
 virsh
 Virtual Shell
-    *Work in Progress*
-
+    virsh refers to '/usr/bin/virsh'. It is a command-line program (from the libvirt-clients software package) that lets you create, start, stop, and manage virtual machines on Linux.
 VirtIO
-Virtual I/O
-    *Work in Progress*
+Virtualization I/O
+    VirtIO is a standardized, open-source framework for creating efficient virtual device drivers in virtualized environments. VirtIO is a specification that defines how virtual machines communicate with the hypervisor for I/O operations (disk, network, etc.) in a more efficient way than emulating real hardware.
 
 virtual
-    *Work in Progress*
+    Virtual refers to something implemented in software or by abstraction rather than being a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software. 
+    
 
 virtualization
-    *Work in Progress*
+    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like {term}`servers`, {term}`storage`, {term}`networks`, or {term}`operating systems`. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
 
 VLAN
 Virtual Local Area Network
-    *Work in Progress*
+    VLAN is a way to split one physical network (like a switch or group of switches) into multiple, separate logical networks at Layer 2. Each VLAN is its own broadcast domain. In other words, devices in different VLANs are isolated unless a router or Layer 3 switch is used between them.
 
 VM
 Virtual Machine
-    *Work in Progress*
+    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, {term}`storage`, {term}`network`) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
 
 VNC
 Virtual Network Computing
-    *Work in Progress*
+    VNC is a system for remotely viewing and controlling another computer's graphical desktop over a network. VNC uses the remote frame buffer (RFB) to send screen updates from the remote machine and to receive keyboard and mouse input from the local machine.
 
 VPN
 Virtual Private Network
-    *Work in Progress*
+    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
+
 
 VRRP
 Virtual Router Redundancy Protocol
-    *Work in Progress*
+    VRRP is a standard first-hop redundancy protocol that keeps a LAN's default gateway highly available. In other words, the VRRP is a router that lets multiple routers on the same subnet work together as a single "virtual" router with one shared IP or MAC address, so if one fails another can take over with minimal disruption, without changing host settings.
 
 vsftpd
 Very Secure FTP Daemon
-    *Work in Progress*
+    vsftpd is an FTP (File Transfer Protocol) server software for Unix-like systems (Linux, BSD) that is designed with security, performance, and stability as top priorities.
 
 :::
 
@@ -2571,38 +2576,41 @@ Very Secure FTP Daemon
 :::{glossary}
 
 WAL
-Write-Ahead Logging
-    *Work in Progress*
+Write-Ahead Log
+    WAL is a fundamental technique used in databases and storage systems to ensure data durability and consistency. The basic principle is simple: Write what you are going to do before you do it, so if things go wrong you can always know what was happening. In other words, before any changes are made to the actual database files, the system first writes a record of what it is about to do to a sequential log file. If the system crashes mid-operation, it can replay the log during recovery to complete interrupted operations or roll them back.
 
 WAN
 Wide Area Network
-    *Work in Progress*
+    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs`) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
-    *Work in Progress*
+    WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from routers or switches to caching or proxy devices. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
+    
 
 Web server
-    *Work in Progress*
+    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the {term} `internet` or an {term} `intranet`using {term} `HTTP/HTTPS` protocols.
+
 
 winbind
 Windows Bind
-    *Work in Progress*
+    winbind is a component of {term}`Samba` on Linux/UNIX systems that lets those systems use accounts from an {term}`AD` domain for logins and identity information. winbind makes a Linux machine "look like" a Windows client to AD, so the AD users and groups can log in to Linux and be resolved just like local Unix accounts.
 
 WireGuard
-    *Work in Progress*
+    WireGuard is a modern, open-source {term}`VPN` protocol designed to create fast, secure, and simple encrypted tunnels between devices. It is now built into the Linux kernel and widely used by VPN providers because of its performance and small codebase.
 
 WLAN
 Wireless Local Area Network
-    *Work in Progress*
+    WLAN is a local area network that uses wireless communication (typically Wi-Fi) instead of physical cables to connect devices within a limited area.
 
 WSGI
 Web Server Gateway Interface
-    *Work in Progress*
+    WSGI is a specification that defines a standard interface between web servers and Python web applications or frameworks, creating portability and flexibility. It is a universal translator that allows any WSGI-compliant web server to communicate with any WSGI-compliant Python application.
+
 
 WWID
 World Wide Identifier
-    *Work in Progress*
+   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a disk or {term}`LUN`, so the system can recognize that device reliably, regardless of which cable, port, or path it is attached through.
 
 :::
 
@@ -2617,11 +2625,11 @@ X.509
 
 xhtml
 Extensible HyperText Markup Language
-    *Work in Progress*
+    xhtml is a stricter HTML language. It reformulates HTML as XML by combining HTML elements with XML's strict syntax rules, so documents are well-formed, more consistent across browsers, and easier to process with XML tools.
 
 XML
 Extensible Markup Language
-    *Work in Progress*
+   XML is a markup language designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
 
 :::
 
@@ -2633,10 +2641,10 @@ Extensible Markup Language
 
 YAML
 YAML Ain't Markup Language
-    *Work in Progress*
+    YAML is a data serialization language used mainly for configuration files and structured data exchange between programmes. YAML represents data as key-value pairs, lists, and nested structures, using indentation instead of brackets or tags, to show hierarchy.
 
 Yubikey
-    *Work in Progress*
+    A YubiKey is a physical security key made by Yubico that provides hardware-based authentication for securing access to computers, networks, and online services. It is a small USB device (about the size of a USB stick) that acts as a second factor for two-factor authentication (2FA) or multi-factor authentication (MFA).
 
 :::
 
@@ -2648,14 +2656,13 @@ Yubikey
 
 zFCP
 zSeries Fibre Channel Protocol
-    *Work in progress*
+    zFCP is a Linux device driver that enables IBM Z mainframes (formerly System z) to access storage devices over a Fibre Channel network using the {term}`SCSI` protocol.
 
 ZFS
 Zettabyte File System
-    *Work in progress*
+    ZFS is an advanced 64-bit file system that also includes its own built-in volume manager. It is designed for high-capacity and reliable storage. It is known for its strong data-integrity features, easy pooling of disks, and convenient features like snapshots, compression, and built in RAID (RAID-Z).
 
 z/VM
-    *Work in progress*
-
+    z/VM is IBM's virtualization operating system for their mainframe computers (IBM Z systems, formerly known as System z). z/VM is a hypervisor that allows multiple operating systems to run simultaneously on a single mainframe, effectively turning one physical machine into many virtual machines.
 :::
 
