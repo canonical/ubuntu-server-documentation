@@ -1354,7 +1354,7 @@ jitter
     sent and when they are received over a network, causing irregular arrival
     times at the destination. This variation is often caused by network
     congestion, packet loss, poor hardware performance or differences in the
-    path packets take. 
+    path packets take.
 
     Related topic(s):
     * Networking
@@ -1624,7 +1624,7 @@ Network Attached Storage
     See also:
     * {term}`DAS`
     * {term}`SAN`
-  
+
 NAT
 Network Address Translation
     *Work in Progress*
@@ -2372,7 +2372,7 @@ Ticket Granting Service
 TGT
 Ticket Granting Ticket
     TGT is a credential issued by Kerberos authentication systems. TGT allows users to request service tickets without re-entering their password.
-    
+
 TLB
 Translation Lookaside Buffer
     TLB is a specialized cache in the {term}`CPU` that stores recent virtual-to-physical address translations, dramatically speeding up memory access by avoiding repeated page table lookups. It is a critical component of virtual memory systems that makes address translation fast enough to be practical. When the CPU translates a virtual address, it first checks the TLB. If the mapping is found, the translation is fast. If it is missing, the CPU retrieves the mapping from the page table in memory, which takes longer.
@@ -2463,7 +2463,7 @@ untrusted
     Untrusted refers to:
     1. data coming from outside the system, such as files uploaded by users
     1. code coming from an external, unknown, or non-verified source, such as third-party plug-ins
-    1. network that cannot be assumed secure, such as public WI-FI 
+    1. network that cannot be assumed secure, such as public WI-FI
 
 uptime
     Uptime is a measure of how long a system has been running continuously since its last boot, crash, or restart. Uptime indicates system stability and availability.
@@ -2503,7 +2503,7 @@ Virtual Central Processing Unit
 
 VCS
 Version Control System
-    VCS is a software tool that tracks, manages, and stores changes to files, over time, recording who made the modifications, when, and enabling reversion to prior versions. 
+    VCS is a software tool that tracks, manages, and stores changes to files, over time, recording who made the modifications, when, and enabling reversion to prior versions.
 
 veth
 Virtual Ethernet
@@ -2536,11 +2536,10 @@ Virtualization I/O
     VirtIO is a standardized, open-source framework for creating efficient virtual device drivers in virtualized environments. VirtIO is a specification that defines how virtual machines communicate with the hypervisor for I/O operations (disk, network, etc.) in a more efficient way than emulating real hardware.
 
 virtual
-    Virtual refers to something implemented in software or by abstraction rather than being a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software. 
-    
+    Virtual refers to something implemented in software or by abstraction rather than being a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software.
 
 virtualization
-    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like {term}`servers`, {term}`storage`, {term}`networks`, or {term}`operating systems`. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
+    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like servers, {term}`storage`, networks, or operating systems. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
 
 VLAN
 Virtual Local Area Network
@@ -2548,7 +2547,7 @@ Virtual Local Area Network
 
 VM
 Virtual Machine
-    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, {term}`storage`, {term}`network`) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
+    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, {term}`storage`, network) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
 
 VNC
 Virtual Network Computing
@@ -2556,8 +2555,7 @@ Virtual Network Computing
 
 VPN
 Virtual Private Network
-    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
-
+    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the internet, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP` address and protects the data that travels between your device and the VPN end point.
 
 VRRP
 Virtual Router Redundancy Protocol
@@ -2581,16 +2579,14 @@ Write-Ahead Log
 
 WAN
 Wide Area Network
-    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs`) across cities, countries, or even continents.
+    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs <LAN>`) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
     WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from routers or switches to caching or proxy devices. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
-    
 
 Web server
-    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the {term} `internet` or an {term} `intranet`using {term} `HTTP/HTTPS` protocols.
-
+    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the internet or an intranet using HTTP/HTTPS protocols.
 
 winbind
 Windows Bind
