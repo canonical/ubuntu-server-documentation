@@ -18,12 +18,14 @@ Multipass <virtualisation/multipass>
 UVtool <virtualisation/cloud-image-vms-with-uvtool>
 QEMU <virtualisation/qemu>
 AMD SEV <virtualisation/sev-snp>
+Intel TDX <virtualisation/intel-tdx>
 ```
 
 * {ref}`Create VMs with Multipass <create-vms-with-multipass>`
 * {ref}`Create cloud image VMs with UVtool <cloud-image-vms-with-uvtool>`
 * {ref}`QEMU <qemu>`
 * {ref}`Confidential Computing with AMD <sev-snp>`
+* {ref}`Confidential Computing with Intel <intel-tdx>`
 
 ## VM tooling
 

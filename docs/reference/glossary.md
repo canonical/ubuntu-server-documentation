@@ -1274,6 +1274,17 @@ init
 initialization
     *Work in Progress*
 
+Intel-TDX
+Intel Trust Domain Extensions
+    Intel-TDX is a hardware-based confidential computing technology that creates
+    isolated execution environments called Trust Domains (TDs) for virtual machines.
+    It provides memory encryption, CPU state protection, and integrity verification
+    to protect guest VMs from unauthorized access by the host and hypervisor. TDX
+    is available on 4th generation Intel Xeon Scalable processors and later.
+
+    Related topic(s):
+    * Cryptography, Security, Virtualization
+
 I/O
 Input/Output
     *Work in Progress*

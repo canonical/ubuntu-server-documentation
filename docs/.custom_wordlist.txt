@@ -246,6 +246,7 @@ syslog
 systemctl
 systemd
 tasksel
+TDs
 templated
 tmpfs
 tmux
@@ -298,6 +299,7 @@ winbind
 WWIDs
 www
 Xen
+Xeon
 xhtml
 XML's
 Xtrabackup
