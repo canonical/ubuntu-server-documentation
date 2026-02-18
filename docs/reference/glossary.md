@@ -181,7 +181,7 @@ Apache2
     * [The Apache project documentation](https://httpd.apache.org/docs/2.4/)
 
     Related topic(s):
-    * {term}`Web servers <Web server>`
+    * Web services
 
 API
 Application Programming Interface
@@ -2540,7 +2540,7 @@ virtual
     
 
 virtualization
-    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like {term}`servers`, {term}`storage`, {term}`networks`, or {term}`operating systems`. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
+    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like servers, storage, networks, or operating systems. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
 
 VLAN
 Virtual Local Area Network
@@ -2548,7 +2548,7 @@ Virtual Local Area Network
 
 VM
 Virtual Machine
-    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, {term}`storage`, {term}`network`) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
+    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, storage, network) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
 
 VNC
 Virtual Network Computing
@@ -2556,7 +2556,7 @@ Virtual Network Computing
 
 VPN
 Virtual Private Network
-    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the {term}`internet`, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
+    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the internet, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
 
 
 VRRP
@@ -2581,7 +2581,7 @@ Write-Ahead Log
 
 WAN
 Wide Area Network
-    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs`) across cities, countries, or even continents.
+    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like LANs) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
@@ -2589,7 +2589,7 @@ Web Cache Communication Protocol
     
 
 Web server
-    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the {term} `internet` or an {term} `intranet`using {term} `HTTP/HTTPS` protocols.
+    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the internet or an intranet using HTTP/HTTPS protocols.
 
 
 winbind
