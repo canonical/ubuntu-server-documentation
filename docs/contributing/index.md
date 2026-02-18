@@ -65,7 +65,7 @@ We reserve the right to reject any contribution at our own discretion where:
 : "Scope creep" makes it much harder to review and accept changes. If a pull request becomes too large, we may ask you to break it into multiple smaller PRs. Stick to the scope of the original issue as much as you can -- if you discover more changes need to be made, discuss them in the PR or the original issue. A new PR can be submitted with the extra fixes.
 
 **The contribution makes changes without value.**
-: To have value, changes must be a *specific and concrete improvement* over what already exists. We don't accept generic "polishing" (e.g. substituting synonyms, rewording without adding clarity). If your contribution contains *some* of these, we will ask you to undo them -- but will glady accept the remaining parts of your pull request that are real improvements. If your contribution *only* contains low-value changes, it will be rejected.
+: To have value, changes must be a *specific and concrete improvement* over what already exists. We don't accept generic "polishing" (e.g. substituting synonyms, rewording without adding clarity). If your contribution contains *some* of these, we will ask you to undo them -- but will gladly accept the remaining parts of your pull request that are real improvements. If your contribution *only* contains low-value changes, it will be rejected.
 
 **We deem the contribution to be AI generated.**
 : We don't want any part of the Server documentation to look or feel like it was produced by AI. Therefore, if what you submitted cannot be easily distinguished from AI output, it does not meet our contribution requirements. See our {ref}`acceptable-use-of-ai` policy.
