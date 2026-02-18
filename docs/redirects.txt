@@ -633,3 +633,11 @@ pam-motd reference/other-tools/pam-motd/
 
 explanation/intro-to/ explanation/
 explanation/introduction-to/ explanation/
+
+# =============================================================================
+# Contributing
+# =============================================================================
+
+contributing/build-locally/ contributing/local-development/
+contributing/submit-contribution/ contributing/local-development/
+contributing/gh-issues/ contributing/local-development/
