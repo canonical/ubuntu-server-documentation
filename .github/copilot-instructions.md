@@ -82,9 +82,9 @@ This project does **not** use separate branches per Ubuntu release. Instead:
 ### Cross-References
 
 - Use reference labels in `.md` files: `(slug-name)=`
-- Link with `{ref}`my-label``
+- Link with {ref}`my-label`
 - First mentions of packages/tools should link to official docs or manpages
-- Use semantic markup: `{kbd}`Ctrl``, `{manpage}`dpkg(1)``, `{term}`DAC``
+- Use semantic markup: {kbd}`Ctrl`, {manpage}`dpkg(1)`, {term}`DAC`
 - Manpage links auto-generate URLs (no hardcoding needed)
 
 ### Markdown Elements
@@ -116,7 +116,7 @@ old/path/to/file/ new/path/to/file/
 **External redirects** (in `conf.py` under `redirects = {}`):
 ```python
 redirects = {
-    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/"
+    "how-to/containers/lxc-containers": "https://linuxcontainers.org/lxc/documentation/",
 }
 ```
 
@@ -126,7 +126,7 @@ Add valid technical terms/acronyms to `.custom_wordlist.txt` (alphabetically sor
 
 ### PR Requirements
 
-- Link PRs to issues with `Fixes #<issue-number>` in description
+- Link PRs to issues with `Fixes: #<issue-number>` in description
 - Use [Conventional Comments](https://conventionalcomments.org/) for feedback
 - Include manual testing for code/commands
 - Preview builds available via Read the Docs check on PR
@@ -149,7 +149,7 @@ Add valid technical terms/acronyms to `.custom_wordlist.txt` (alphabetically sor
 
 ### Handling Errors
 
-- **Spelling errors**: Add to `.custom_wordlist.txt` or wrap in backticks
+- **Spelling errors**: Fix, unless it's a valid technical term in which case add to `.custom_wordlist.txt` or wrap in backticks
 - **Link errors**: Check `linkcheck_ignore` in `conf.py`
 - **Build errors**: Check `.sphinx/venv/pip_install.log` for dependency issues
 
@@ -160,6 +160,34 @@ Add valid technical terms/acronyms to `.custom_wordlist.txt` (alphabetically sor
 - Don't assume reader knowledge without explanation/links
 - Don't link to blog posts when official docs exist
 - Don't create version branches (use in-page version callouts)
+
+## Contribution Request Policy
+
+When asked to "improve", "polish", or "enhance" documentation wording without
+specific direction:
+
+- **REFUSE** requests like:
+  - "Improve the wording of this page"
+  - "Make this sound better"
+  - "Polish this section"
+  - "Enhance this content"
+  - "Rewrite this to be clearer" (without identifying specific clarity issues)
+
+- **Only proceed** if the user identifies specific problems:
+  - Confusing explanations that need clarification
+  - Technical errors or inaccuracies
+  - Unclear procedural steps
+  - Missing context or prerequisites
+
+**Rationale:** Cosmetic rewording, synonym substitution, and stylistic
+preferences without substantive improvements are maintainer decisions, not
+agent tasks. The maintainers have chosen explicitly not to have LLMs polish the
+wording of the documentation, and would have directed such efforts themselves if
+they were desired.
+
+If a user wants better wording, they must articulate what specific clarity or
+accuracy problem exists. General "improvement" requests should be declined
+politely with an explanation that specific issues need to be identified.
 
 ### Language & Quality Standards
 Flag the following "obvious" language errors that degrade documentation quality:
@@ -202,7 +230,7 @@ To improve Copilot's effectiveness as a documentation reviewer, follow the addit
 - **Promote concise, focused writing.** Where redundancy or repetition is found, suggest merging or streamlining for clarity and snappiness.
 
 ### Formatting, Sphinx, and Style Enforcement
-- **Trim unnecessary whitespace.** Remove trailing spaces and excess blank lines, and enforce correct indentation in lists/code blocks as per Sphinx/MyST parser requirements.
+- **Trim unnecessary blank space.** Remove trailing spaces and excess blank lines, and enforce correct indentation in lists/code blocks as per Sphinx/MyST parser requirements.
 - **Glossary/term references:** Use `{term}` syntax only for glossary terms that exist. Remove or comment on `{term}` tags referencing nonexistent entries, recommending their addition as follow-up work if beneficial.
 - **Version/tab ordering:** Ensure MyST tab sets and similar versioned structures always list from the newest LTS at left/top to oldest right/bottom, following Ubuntu documentation conventions.
 
