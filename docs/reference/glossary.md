@@ -181,7 +181,7 @@ Apache2
     * [The Apache project documentation](https://httpd.apache.org/docs/2.4/)
 
     Related topic(s):
-    * {term}`Web servers <Web server>`
+    * Web services
 
 API
 Application Programming Interface
@@ -2539,7 +2539,7 @@ virtual
     Virtual refers to something implemented in software or by abstraction rather than being a single, dedicated physical object or device. It behaves as if it were physical (from the user's or system's point of view), but it is created and controlled by software.
 
 virtualization
-    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like servers, {term}`storage`, networks, or operating systems. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
+    Virtualization is the technology that creates software-based ({term}`virtual`) representations of physical computing resources like servers, storage, networks, or operating systems. Virtualization is the fundamental concept of abstracting physical hardware to create multiple simulated environments or dedicated resources from a single physical system.
 
 VLAN
 Virtual Local Area Network
@@ -2547,7 +2547,7 @@ Virtual Local Area Network
 
 VM
 Virtual Machine
-    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, {term}`storage`, network) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
+    VM is a software-based emulation of a physical computer that runs an operating system and applications just like a real computer, but it exists as a file or set of files on a host system. A hypervisor creates and manages the VMs by allocating portions of the physical hardware ({term}`CPU`, {term}`RAM`, storage, network) to each virtual machine. Each VM is isolated and thinks it has its own dedicated hardware.
 
 VNC
 Virtual Network Computing
@@ -2555,7 +2555,8 @@ Virtual Network Computing
 
 VPN
 Virtual Private Network
-    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the internet, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP` address and protects the data that travels between your device and the VPN end point.
+    VPN is a technology that creates an encrypted "tunnel" over a public network, such as the internet, so that devices may communicate as if they were in a private network. It hides or masks your real {term}`IP`address and protects the data that travels between your device and the VPN end point. 
+
 
 VRRP
 Virtual Router Redundancy Protocol
@@ -2579,7 +2580,7 @@ Write-Ahead Log
 
 WAN
 Wide Area Network
-    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like {term}`LANs <LAN>`) across cities, countries, or even continents.
+    WAN is a telecommunications network that extends over a large geographical area, typically connecting multiple smaller networks (like LANs) across cities, countries, or even continents.
 
 WCCP
 Web Cache Communication Protocol
