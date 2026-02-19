@@ -174,7 +174,7 @@ You can also use the `ip` command to verify your default gateway configuration, 
 ip route show
 default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.0/24 dev eth0 proto kernel scope link src 10.102.66.200
-10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100 
+10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100
 ```
 
 If you require {term}`DNS` for your temporary network configuration, you can use the `resolvectl` command to set DNS servers temporarily. The example below shows how to set two DNS servers for the interface `enp0s25`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
@@ -254,6 +254,84 @@ ip address show lo
        valid_lft forever preferred_lft forever
 ```
 
+### Adding a multiple IP addresses to one interface
+
+A single interface can broadcast multiple IP addresses to the network. Multiple IP addresses can be used to:
+
+- host multiple web domains by configuring virtual hosts using different IP addresses rather than server names
+- host multiple server names using Samba
+
+Add IP addresses to an interface by editing your `netplan` configuration found in `/etc/netplan`.
+
+#### Multiple static IP addresses
+
+This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
+
+
+```
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+        - 192.168.2.99/24
+        - 192.168.2.100/24:
+            label: eno1:1
+        - 192.168.2.101/24:
+            label: eno1:some-label
+
+```
+
+Adding labels to the IP addresses allows you to reference the devices by name in configuration files rather than the IP address which can change.
+
+#### Dynamic IP addresses
+
+This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
+
+```
+network:
+  version: 2
+  ethernets:
+    eno1:
+      addresses:
+        - 192.168.2.100/24:
+            label: eno1:some-label
+      dhcp4: true
+
+```
+
+:::{note}
+A single interface can only have one address assigned by DHCP. To have multiple dynamic addresses, configure multiple interfaces. Do not add DHCP if it is configured on the same interface in another netplan file, such as one written by `cloud-init`.
+:::
+
+#### Apply and verify the IP addresses
+
+Apply the configuration to enable the additional IP addresses:
+
+```bash
+sudo netplan apply
+```
+
+Verify the IP addresses are available locally using one or more of the following:
+
+```bash
+netplan status #displays the current network state
+
+ip addr    #shows all network interfaces
+
+ip addr show <interface_name>    #shows single interface
+
+hostname -i    #shows only the available IP addresses on the host
+```
+
+Check the output to see that the addresses were applied to the interface that was configured.
+
+Verify the IP addresses are available on the network. From a different computer on the network:
+
+```bash
+ping 192.168.0.100    #configured IP addresses
+ping 192.168.0.101
+```
 ## Name resolution
 
 Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
@@ -358,7 +436,6 @@ To modify the order of these name resolution methods, you can simply change the 
 ```
 hosts:          files dns [NOTFOUND=return] mdns4_minimal mdns4
 ```
-
 ## Bridging multiple interfaces
 
 Bridging is a more advanced configuration, but is very useful in multiple scenarios. One scenario is setting up a bridge with multiple network interfaces, then using a firewall to filter traffic between two network segments. Another scenario is using bridge on a system with one interface to allow virtual machines direct access to the outside network. The following example covers the latter scenario:
