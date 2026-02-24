@@ -102,15 +102,17 @@ $ ls -l /usr/share/ovmf/OVMF.inteltdx.ms.fd
 
 ## 5. Create guest image
 
-Download an Ubuntu Server cloud image and generate a cloud-init ISO to set the root password.
+1. Download the Ubuntu 26.04 LTS (for example) cloud image.
 
-1. Download the Ubuntu 24.04 LTS (for example) cloud image.
 ```bash
-wget https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img
+# Download the Ubuntu 26.04 daily cloud image
+wget https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img
 ```
 
-2. Install required tools.
+2. Generate a cloud-init ISO to set the root password:
+
 ```bash
+# Install required tools
 sudo apt install cloud-image-utils
 ```
 
@@ -134,7 +136,6 @@ cloud-localds user-data.img user-data.yaml
 
 The user-data.img will be attached to the VM to apply the configuration.
 
-
 :::{note}
 For production use, set a strong password and configure SSH key-based authentication instead of password authentication.
 :::
@@ -156,7 +157,7 @@ qemu-system-x86_64 \
   -nographic \
   -nodefaults \
   -vga none \
-  -drive file=noble-server-cloudimg-amd64.img,if=none,id=virtio-disk0 \
+  -drive file=resolute-server-cloudimg-amd64.img,if=none,id=virtio-disk0 \
   -device virtio-blk-pci,drive=virtio-disk0 \
   -drive file=user-data.img,if=none,id=cloud-init,format=raw \
   -device virtio-blk-pci,drive=cloud-init \
@@ -195,10 +196,104 @@ ls -l /dev/tdx_guest
 crw------- 1 root root 10, 125 Jan  1 00:00 /dev/tdx_guest
 ```
 
-## 8. Troubleshooting tips
+## 8. Launch a TDX VM with libvirt
+
+Intel TDX VM can be managed by libvirt, the domain definition has to be modified to contain
+necessary information about the confidential VM. Here is a domain definition sample for Intel TDX VM:
+
+```bash
+cat > tdx-vm.xml << 'EOF'
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <name>tdx-guest</name>
+  <memory unit='GiB'>16</memory>
+  <memoryBacking>
+    <source type="anonymous"/>
+    <access mode="private"/>
+  </memoryBacking>
+  <vcpu placement="static">16</vcpu>
+  <os>
+    <type arch='x86_64' machine='q35'>hvm</type>
+    <loader type='rom' readonly='yes'>/usr/share/ovmf/OVMF.inteltdx.ms.fd</loader>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+    <ioapic driver='qemu'/>
+  </features>
+  <clock offset='utc'>
+    <timer name='hpet' present='no'/>
+  </clock>
+  <cpu mode='host-passthrough'>
+    <topology sockets='1' cores='16' threads='1'/>
+  </cpu>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <disk type="file" device="disk">
+      <driver name="qemu" type="qcow2"/>
+      <source file="/var/lib/libvirt/images/resolute-server-cloudimg-amd64.img"/>
+      <target dev="vda" bus="virtio"/>
+    </disk>
+    <console type='pty'>
+      <target type='virtio' port='1'/>
+    </console>
+  </devices>
+  <launchSecurity type='tdx'>
+    <policy>0x10000000</policy>
+    <quoteGenerationService>
+      <SocketAddress type='vsock' cid='2' port='4050'/>
+    </quoteGenerationService>
+  </launchSecurity>
+</domain>
+EOF
+```
+
+Define and start the TDX VM:
+
+```bash
+# Define the VM
+sudo virsh define tdx-vm.xml
+
+# Start the VM
+sudo virsh start tdx-guest
+
+# Connect to the console
+sudo virsh console tdx-guest
+```
+
+Key libvirt configuration elements for TDX:
+
+* `<launchSecurity type='tdx'>`: Enables TDX confidential computing for the VM
+* `<policy>0x10000001</policy>`: TDX policy controlling debug and other TD features
+* `<quote-generation-service>`: Configures the vsock channel for remote attestation
+* `<memoryBacking>`: Uses shared memory with memfd backend required for TDX
+* `<loader>`: Specifies the TDX-capable OVMF firmware
+
+To manage the VM:
+
+```bash
+# List all VMs
+sudo virsh list --all
+
+# Stop the VM
+sudo virsh shutdown tdx-guest
+
+# Force stop
+sudo virsh destroy tdx-guest
+
+# Remove the VM definition
+sudo virsh undefine tdx-guest
+```
+
+## 9. Troubleshooting tips
 1. Intel TDX is not enabled on the host.
    1. Ensure BIOS settings are correct and kernel parameters are enabled. 
-   2. Confirm these MSR checks: 
+   2. Confirm these MSR checks:
+
+      Install the MSR tools package:
+      ```bash
+      sudo apt install msr-tools
+      ```
       * Verify that MK-TME (Multi-Key Total Memory Encryption) is enabled by checking bit 1 of MSR 0x982: 
          ```bash
          sudo rdmsr 0x982 -f 1:1 1
@@ -235,3 +330,4 @@ crw------- 1 root root 10, 125 Jan  1 00:00 /dev/tdx_guest
 
 3. I rebooted my TD, but it actually shuts down instead.
    1. Legacy (non-TDX) guests support reboot by resetting VCPU context. However, TD guests does not allow it for security reasons. You must power it down and boot it up again.
+
