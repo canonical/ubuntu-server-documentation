@@ -245,10 +245,10 @@ linkcheck_ignore = [
     "https://linuxcontainers.org/*",
     "https://wiki.syslinux.org/*",
     "https://www.openstack.org/*",
-    "https://web.archive.org/web/20241130024605/http://networktimesecurity.org/"
+    "https://web.archive.org/web/20241130024605/http://networktimesecurity.org/",
     # Rate-limited domains that cause delays
-    r"http://www\.gnu\.org/software/.*",
-    r"https://github\.com/.*/blob/.*",
+    "http://www.gnu.org/software/*",
+    "https://github.com./*",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
