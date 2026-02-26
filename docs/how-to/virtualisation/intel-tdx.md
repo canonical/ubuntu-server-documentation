@@ -310,51 +310,55 @@ sudo virsh undefine tdx-guest
 ## Troubleshooting Intel TDX
 
 **Intel TDX is not enabled on the host**
-: Ensure BIOS settings are correct and kernel parameters are enabled. 
-: Confirm these MSR checks:
-: * Install the MSR tools package:
-:    ```bash
-:    sudo apt install msr-tools
-:    ```
 
-: * Verify that MK-TME (Multi-Key Total Memory Encryption) is enabled by checking bit 1 of MSR 0x982: 
-:   ```bash
-:   sudo rdmsr 0x982 -f 1:1 1
-:   ``` 
-:   Expected value of `1` indicates MK-TME is enabled in BIOS.
+Ensure BIOS settings are correct and kernel parameters are enabled. 
+Confirm the following MSR checks.
 
-: * Verify Intel TDX support by checking bit 11 of MSR 0x1401 (Enable bit for SEAMRR - SEAM Range Registers): 
-:   ```bash
-:   sudo rdmsr 0x1401 -f 11:11 1
-:   ```
-:   Expected value of `1` indicates SEAMRR is enabled.  
+* Install the MSR tools package:
+  ```bash
+  sudo apt install msr-tools
+  ```
 
-: * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: <br> 
-:   ```bash
-:   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
-:   ```
-:   This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.  
+* Verify that Multi-Key Total Memory Encryption (MK-TME) is enabled by checking bit 1 of MSR `0x982`:
+  ```bash
+  sudo rdmsr 0x982 -f 1:1 1
+  ``` 
+  Expected value of `1` indicates MK-TME is enabled in BIOS.
 
-: * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: 
-:   ```bash
-:   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
-:   ```
-:   This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.
+* Verify Intel TDX support by checking bit 11 of MSR `0x1401` (enable bit for `SEAMRR`--`SEAM` Range Registers): 
+  ```bash
+  sudo rdmsr 0x1401 -f 11:11 1
+  ```
+  Expected value of `1` indicates SEAMRR is enabled.  
 
-: * Verify the Intel SGX and MCHECK status.  
-:   ```bash
-:   sudo rdmsr 0xa0
-:   ```
-:   Expected value of `1` indicates it is enabled. A value of `1861` indicates SGX registration UEFI variables maybe corrupt. Boot into the BIOS and set `SGX Factory Reset` to `Enable`. This will result in two new keys. 
+* Verify the number of private keys allocated to TDs by checking bits `63:32` of `IA32_TME_CAPABILITY` MSR: 
+  ```bash
+  echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
+  ```
+  This shows the number of private keys available for Trust Domains (`NUM_TDX_PRIV_KEYS`) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.  
+
+* Verify the number of private keys allocated to TDs by checking bits `63:32` of `IA32_TME_CAPABILITY` MSR:
+  ```bash
+  echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
+  ```
+  This shows the number of private keys available for Trust Domains (`NUM_TDX_PRIV_KEYS`) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.
+
+* Verify the Intel SGX and MCHECK status.  
+  ```bash
+  sudo rdmsr 0xa0
+  ```
+  Expected value of `1` indicates it is enabled. A value of `1861` indicates SGX registration UEFI variables maybe corrupt. Boot into the BIOS and set `SGX Factory Reset` to `Enable`. This will result in two new keys. 
 
 
 **`sudo dmesg | grep -i tdx` shows `virt/tdx: module initialization failed (-5)`**
-: You may have an old and unsupported Intel TDX Module. Try [updating to the latest Intel TDX Module](https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/04/hardware_setup/#deploy-specific-intel-tdx-module-version).
+
+You may have an old and unsupported Intel TDX Module. Try [updating to the latest Intel TDX Module](https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/04/hardware_setup/#deploy-specific-intel-tdx-module-version).
 
 ```{note}
 If you chose to "Update Intel TDX Module via Binary Deployment", make sure you're using the correct Intel TDX Module version for your hardware. See the {ref}`Supported hardware <tdx-supported-hardware>` table.
 ```
 
 **I rebooted my TD, but it shuts down instead**
-: Legacy (non-TDX) guests support reboot by resetting vCPU context. However, TD guests do not allow it for security reasons. You must power it down and boot it up again.
+
+Legacy (non-TDX) guests support reboot by resetting vCPU context. However, TD guests do not allow it for security reasons. You must power it down and boot it up again.
 
