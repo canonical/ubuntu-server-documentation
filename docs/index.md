@@ -78,7 +78,7 @@ page.
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/project/server/17)
 * {matrix}`Chat to us on Matrix <server>`
 * [Download Ubuntu Server](https://ubuntu.com/server)
-* Find out how to {ref}`contribute to the Server Guide <contribute>`
+* {ref}`Contribute to the Server documentation <contribute>`
 
 Thinking about using Ubuntu Server for your next project? [Get in touch!](https://ubuntu.com/server/contact-us?product=server)
 
@@ -91,26 +91,8 @@ Thinking about using Ubuntu Server for your next project? [Get in touch!](https:
 :maxdepth: 2
 
 Tutorial <tutorial/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 How-to guides <how-to/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 Reference <reference/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 Explanation <explanation/index.md>
 ```
 
