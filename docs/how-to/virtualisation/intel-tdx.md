@@ -5,34 +5,34 @@ myst:
 ---
 
 (intel-tdx)=
-# 1. Confidential Computing with Intel® Trust Domain Extensions (TDX)
+# Confidential Computing with Intel Trust Domain Extensions (TDX)
 
-{term}`Intel TDX` is a Confidential Computing technology which deploys hardware-isolated Virtual Machines (VMs) called Trust Domains (TDs). It protects TDs from a broad range of software attacks by isolating them from the Virtual-Machine Manager (VMM), hypervisor, and other non-TD software on the host platform. As a result, Intel TDX enhances a platform user's control of data security and IP protection. It also enhances the Cloud Service Providers' (CSP) ability to provide managed cloud services without exposing tenant data to adversaries. For more information, see the [Intel TDX overview](https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html).
+[Intel TDX](https://www.intel.com/content/www/us/en/developer/tools/trust-domain-extensions/overview.html) is a Confidential Computing technology. It deploys hardware-isolated Virtual Machines (VMs) called Trust Domains (TDs), and protects them from a broad range of software attacks by isolating them from the Virtual Machine Manager (VMM), hypervisor, and other non-TD software on the host platform. This enhances a platform user's control of data security and IP protection. It also enhances a Cloud Service Providers' (CSP) ability to provide managed cloud services without exposing tenant data to adversaries.
 
 Ubuntu supports Intel TDX for both host and guest operating systems. Guest support is available from Ubuntu 24.04 LTS onwards, while host support begins with Ubuntu 25.10.
 
-<a id="supported-hardware"></a>
-## 2. Supported hardware
-This table lists Intel® Xeon® processors that support Intel TDX:
+(tdx-supported-hardware)=
+## Supported hardware
+
+This table lists Intel Xeon processors that support Intel TDX:
 
 | Processor | Code Name | TDX Module Version |
 | - | - | - |
-| 4th Gen Intel® Xeon® Scalable Processors (select SKUs with Intel® TDX) | Sapphire Rapids | 1.5.x |
-| 5th Gen Intel® Xeon® Scalable Processors | Emerald Rapids | 1.5.x |
-| Intel® Xeon® 6 Processors with E-Cores | Sierra Forest | 1.5.x |
-| Intel® Xeon® 6 Processors with P-Cores | Granite Rapids | 2.0.x |
+| 4th Gen Intel Xeon Scalable Processors (select SKUs with Intel TDX) | Sapphire Rapids | 1.5.x |
+| 5th Gen Intel Xeon Scalable Processors | Emerald Rapids | 1.5.x |
+| Intel Xeon 6 Processors with E-Cores | Sierra Forest | 1.5.x |
+| Intel Xeon 6 Processors with P-Cores | Granite Rapids | 2.0.x |
 
-## 3. Configure host
+## Configure host
 
 To enable Intel TDX on the host, BIOS and host OS configurations are required.
-
-1. First, enable Intel TDX settings in the BIOS.
+First, enable Intel TDX settings in the BIOS.
 
 :::{note}
 The following is a sample BIOS configuration. The necessary BIOS settings or menus may differ based on the platform used. Reach out to your OEM/ODM or independent BIOS vendor for platform-specific instructions.
 :::
 
-Navigate to `Socket Configuration > Processor Configuration > TME, TME-MT, TDX` and configure:
+Navigate to {menuselection}`Socket Configuration --> Processor Configuration --> TME, TME-MT, TDX` and configure:
 
 * Set `Memory Encryption (TME)` to `Enable`
 * Set `Total Memory Encryption Bypass` to `Enable` (optional setting for best host OS and regular VM performance)
@@ -42,40 +42,45 @@ Navigate to `Socket Configuration > Processor Configuration > TME, TME-MT, TDX` 
 * Set `TDX Secure Arbitration Mode Loader (SEAM Loader)` to `Enable` (allows loading Intel TDX Loader and Intel TDX Module from the ESP or BIOS)
 * Set `TME-MT/TDX key split` to a non-zero value
 
-Navigate to `Socket Configuration > Processor Configuration > Software Guard Extension (SGX)` and configure:
+Navigate to {menuselection}`Socket Configuration --> Processor Configuration --> Software Guard Extension (SGX)` and configure:
 
 * Set `SW Guard Extensions (SGX)` to `Enable`
 
-2. Save the BIOS settings and reboot.
+Save the BIOS settings and reboot. 
 
-3. Now, add the following kernel parameters to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`, run `sudo update-grub`, and then reboot.
-
-```
-nohibernate kvm_intel.tdx=1
-```
-
-4. After rebooting, verify the parameters are applied.
+Now, add the `nohibernate kvm_intel.tdx=1` kernel parameters to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`, run `sudo update-grub`, and then reboot again.
+After rebooting, verify that the parameters have been applied:
 
 ```bash
 cat /proc/cmdline 
+```
 
+You should see something like:
+
+```text
 BOOT_IMAGE=/boot/vmlinuz-6.19.0-3-generic root=UUID=f6ce4201-d6d1-4505-bdf5-019ee4fe842e ro nohibernate kvm_intel.tdx=1
 ```
 
-5. Confirm Intel TDX is enabled successfully with the message `virt/tdx: module initialized`.
+Next, confirm that Intel TDX has been successfully enabled:
 
 ```bash
 sudo dmesg | grep -i tdx
+```
 
+Which produces output like this:
+
+```text
 [    1.824045] virt/tdx: BIOS enabled: private KeyID range [32, 64)
 [    1.824049] virt/tdx: Disable ACPI S3. Turn off Intel TDX in the BIOS to use ACPI S3.
 [   24.195089] virt/tdx: 1050644 KB allocated for PAMT
 [   24.195098] virt/tdx: module initialized
 ```
 
-## 4. Install virtualization stack
+The message `virt/tdx: module initialized` tells us that TDX has indeed been enabled.
+ 
+## Install virtualization stack
 
-1. Install the required virtualization components to run TDs.
+The next step is to install the virtualization components required to run TDs.
 
 ```bash
 sudo apt update
@@ -93,30 +98,30 @@ This installs:
 * `libvirt-daemon-system` - Libvirt daemon for managing VMs
 * `libvirt-clients` - Command-line tools for libvirt (virsh, etc.)
 
-2. After installation, verify the Intel TDX-capable OVMF firmware is available.
+After installation, verify the Intel TDX-capable OVMF firmware is available:
 
 ```bash
 $ ls -l /usr/share/ovmf/OVMF.inteltdx.ms.fd
+
 -rw-r--r-- 1 root root 4194304 Jan 15 12:00 /usr/share/ovmf/OVMF.inteltdx.ms.fd
 ```
 
-## 5. Create guest image
+## Create a guest image
 
-1. Download the Ubuntu 26.04 LTS (for example) cloud image.
+Download a cloud image (Ubuntu 26.04 LTS in this example):
 
 ```bash
-# Download the Ubuntu 26.04 daily cloud image
 wget https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img
 ```
 
-2. Generate a cloud-init ISO to set the root password:
+Next, install the required tool:
 
 ```bash
-# Install required tools
 sudo apt install cloud-image-utils
 ```
 
-3. Create a cloud-init configuration file.
+Create a cloud-init configuration file:
+
 ```bash
 cat > user-data.yaml << 'EOF'
 #cloud-config
@@ -129,20 +134,21 @@ disable_root: false
 EOF
 ```
 
-4. Create a cloud-init ISO.
+From that, create a cloud-init ISO:
+
 ```bash
 cloud-localds user-data.img user-data.yaml
 ```
 
-The user-data.img will be attached to the VM to apply the configuration.
+The `user-data.img` will be attached to the VM to apply the configuration.
 
 :::{note}
 For production use, set a strong password and configure SSH key-based authentication instead of password authentication.
 :::
 
-## 6. Launch TD guest using QEMU
+## Launch a TD guest using QEMU
 
-1. Launch a TD using QEMU with the prepared image.
+Using QEMU, we can now launch a TD with the prepared image:
 
 ```bash
 qemu-system-x86_64 \
@@ -177,29 +183,33 @@ Key Intel TDX-specific parameters:
 
 For more details about these parameters, refer to the [QEMU documentation](https://www.qemu.org/docs/master/system/i386/tdx.html).
 
-## 7. Verify Intel TDX enablement in guest
+## Verify Intel TDX enablement in the guest
 
-Once the TD is launched, verify that Intel TDX is enabled by checking the kernel logs.
+Once the TD is launched, verify that Intel TDX is enabled by checking the kernel logs:
 
 ```bash
 sudo dmesg | grep tdx
+```
 
+You should see something like:
+
+```text
 [    0.000000] tdx: Guest detected
 [   11.162378] systemd[1]: Detected confidential virtualization tdx.
 ```
 
-You can also check the Intel TDX guest device.
+You can also check the Intel TDX guest device:
 
 ```bash
-ls -l /dev/tdx_guest
+$ ls -l /dev/tdx_guest
 
 crw------- 1 root root 10, 125 Jan  1 00:00 /dev/tdx_guest
 ```
 
-## 8. Launch a TDX VM with libvirt
+## Launch a TDX VM with libvirt
 
-Intel TDX VM can be managed by libvirt, the domain definition has to be modified to contain
-necessary information about the confidential VM. Here is a domain definition sample for Intel TDX VM:
+Intel TDX VM can be managed by libvirt. For this, the domain definition must be modified to contain
+certain necessary information about the confidential VM. Here is a domain definition sample for Intel TDX VM:
 
 ```bash
 cat > tdx-vm.xml << 'EOF'
@@ -248,16 +258,18 @@ cat > tdx-vm.xml << 'EOF'
 EOF
 ```
 
-Define and start the TDX VM:
-
+Next, define the VM:
 ```bash
-# Define the VM
 sudo virsh define tdx-vm.xml
+```
 
-# Start the VM
+Start the VM:
+```bash
 sudo virsh start tdx-guest
+```
 
-# Connect to the console
+Connect to the console:
+```bash
 sudo virsh console tdx-guest
 ```
 
@@ -266,68 +278,83 @@ Key libvirt configuration elements for TDX:
 * `<launchSecurity type='tdx'>`: Enables TDX confidential computing for the VM
 * `<policy>0x10000001</policy>`: TDX policy controlling debug and other TD features
 * `<quote-generation-service>`: Configures the vsock channel for remote attestation
-* `<memoryBacking>`: Uses shared memory with memfd backend required for TDX
+* `<memoryBacking>`: Uses shared memory with `memfd` backend required for TDX
 * `<loader>`: Specifies the TDX-capable OVMF firmware
 
-To manage the VM:
+## Manage the VM
+
+List all VMs:
 
 ```bash
-# List all VMs
 sudo virsh list --all
+```
 
-# Stop the VM
+Stop the VM:
+
+```bash
 sudo virsh shutdown tdx-guest
+```
 
-# Force stop
+Force stop the VM:
+
+```bash
 sudo virsh destroy tdx-guest
+```
 
-# Remove the VM definition
+Remove the VM definition:
+
+```bash
 sudo virsh undefine tdx-guest
 ```
 
-## 9. Troubleshooting tips
-1. Intel TDX is not enabled on the host.
-   1. Ensure BIOS settings are correct and kernel parameters are enabled. 
-   2. Confirm these MSR checks:
+## Troubleshooting Intel TDX
 
-      Install the MSR tools package:
-      ```bash
-      sudo apt install msr-tools
-      ```
-      * Verify that MK-TME (Multi-Key Total Memory Encryption) is enabled by checking bit 1 of MSR 0x982: 
-         ```bash
-         sudo rdmsr 0x982 -f 1:1 1
-         ``` 
-         Expected value of `1` indicates MK-TME is enabled in BIOS.
+**Intel TDX is not enabled on the host**
+: Ensure BIOS settings are correct and kernel parameters are enabled. 
+: Confirm these MSR checks:
+: * Install the MSR tools package:
+:    ```bash
+:    sudo apt install msr-tools
+:    ```
 
-      * Verify Intel TDX support by checking bit 11 of MSR 0x1401 (Enable bit for SEAMRR - SEAM Range Registers): 
-         ```bash
-         sudo rdmsr 0x1401 -f 11:11 1
-         ```
-         Expected value of `1` indicates SEAMRR is enabled.  
+: * Verify that MK-TME (Multi-Key Total Memory Encryption) is enabled by checking bit 1 of MSR 0x982: 
+:   ```bash
+:   sudo rdmsr 0x982 -f 1:1 1
+:   ``` 
+:   Expected value of `1` indicates MK-TME is enabled in BIOS.
 
-      * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: <br> 
-         ```bash
-         echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
-         ```
-         This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.  
+: * Verify Intel TDX support by checking bit 11 of MSR 0x1401 (Enable bit for SEAMRR - SEAM Range Registers): 
+:   ```bash
+:   sudo rdmsr 0x1401 -f 11:11 1
+:   ```
+:   Expected value of `1` indicates SEAMRR is enabled.  
 
-      * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: 
-         ```bash
-         echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
-         ```
-         This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.
+: * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: <br> 
+:   ```bash
+:   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
+:   ```
+:   This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.  
 
-      * Verify the Intel SGX and MCHECK status.  
-        ```bash
-        sudo rdmsr 0xa0
-        ```
-        Expected value of `1` indicates it is enabled.
-        A value of `1861` indicates SGX registration UEFI variables maybe corrupt. Boot into the BIOS and set `SGX Factory Reset` to `Enable`. This will result in two new keys. 
+: * Verify the number of private keys allocated to TDs by checking bits 63:32 of IA32_TME_CAPABILITY MSR: 
+:   ```bash
+:   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
+:   ```
+:   This shows the number of private keys available for Trust Domains (NUM_TDX_PRIV_KEYS) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.
 
-2. `sudo dmesg | grep -i tdx` shows `virt/tdx: module initialization failed (-5)`.
-   1. You may have an old and unsupported Intel TDX Module.  Try updating to the latest Intel TDX Module. See [link](https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/04/hardware_setup/#deploy-specific-intel-tdx-module-version) on ways to update your Intel TDX Module. <br> NOTE: If you chose to "Update Intel TDX Module via Binary Deployment", make sure you're using the correct Intel TDX Module version for your hardware. See the [Supported hardware](#supported-hardware) table.
+: * Verify the Intel SGX and MCHECK status.  
+:   ```bash
+:   sudo rdmsr 0xa0
+:   ```
+:   Expected value of `1` indicates it is enabled. A value of `1861` indicates SGX registration UEFI variables maybe corrupt. Boot into the BIOS and set `SGX Factory Reset` to `Enable`. This will result in two new keys. 
 
-3. I rebooted my TD, but it actually shuts down instead.
-   1. Legacy (non-TDX) guests support reboot by resetting VCPU context. However, TD guests does not allow it for security reasons. You must power it down and boot it up again.
+
+**`sudo dmesg | grep -i tdx` shows `virt/tdx: module initialization failed (-5)`**
+: You may have an old and unsupported Intel TDX Module. Try [updating to the latest Intel TDX Module](https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/04/hardware_setup/#deploy-specific-intel-tdx-module-version).
+
+```{note}
+If you chose to "Update Intel TDX Module via Binary Deployment", make sure you're using the correct Intel TDX Module version for your hardware. See the {ref}`Supported hardware <tdx-supported-hardware>` table.
+```
+
+**I rebooted my TD, but it shuts down instead**
+: Legacy (non-TDX) guests support reboot by resetting vCPU context. However, TD guests do not allow it for security reasons. You must power it down and boot it up again.
 
