@@ -1407,35 +1407,121 @@ JavaScript Object Notation
 
 KDC
 Key Distribution Center
-    *Work in Progress*
+    A KDC is a server that handles authentication in a {term}`Kerberos`
+    environment. It consists of two main components: the Authentication Server
+    (AS), which verifies user credentials and issues a {term}`TGT`, and the
+    {term}`Ticket Granting Service (TGS) <TGS>`, which uses the TGT to issue
+    service tickets for accessing specific network resources. The KDC stores
+    all secret keys for users and services in its database.
+
+    Related topic(s):
+    * Security, {term}`Kerberos`
 
 keepalive
-    *Work in Progress*
+    A keepalive is a signal sent between two devices over a network connection
+    to check that the link is still active and to prevent the connection from
+    being dropped due to inactivity. Keepalive messages are commonly used in
+    {term}`TCP`, {term}`SSH`, and {term}`HTTP` connections to maintain
+    persistent sessions and detect failed peers.
+
+    Related topic(s):
+    * Networking
 
 Kerberos
-    *Work in Progress*
+    Kerberos is a network authentication protocol that uses secret-key
+    cryptography to verify the identities of users and services over an
+    insecure network. It works by issuing time-limited tickets through a
+    trusted third party, the {term}`Key Distribution Center (KDC) <KDC>`,
+    eliminating the need to send passwords over the network. Kerberos is
+    widely used in enterprise environments, particularly with {term}`Active
+    Directory <AD>`.
+
+    See also:
+    * [The MIT Kerberos documentation](https://web.mit.edu/kerberos/)
+
+    Related topic(s):
+    * Security, {term}`OpenLDAP`, {term}`SSSD`
 
 keypair
-    *Work in Progress*
+    A keypair is a set of two cryptographically related keys: a public key
+    and a private key. The public key can be freely shared and is used to
+    encrypt data or verify signatures, while the private key is kept secret
+    and is used to decrypt data or create signatures. Keypairs are fundamental
+    to asymmetric encryption and are used in protocols such as {term}`SSH`,
+    {term}`TLS`, and {term}`GPG`.
+
+    Related topic(s):
+    * Security, Cryptography
 
 keyring
-    *Work in Progress*
+    A keyring is a secure storage mechanism for managing cryptographic keys,
+    passwords, and other sensitive credentials. In Linux systems, keyrings can
+    refer to the kernel keyring (used for storing encryption keys in kernel
+    memory) or application-level keyrings such as GNOME Keyring, which
+    securely store user passwords and secrets. In the context of {term}`APT`,
+    a keyring holds the {term}`GPG` keys used to verify the authenticity of
+    software packages.
+
+    Related topic(s):
+    * Security, Cryptography
 
 keysalt
-    *Work in Progress*
+    A keysalt is a combination of an encryption type and a salt type used in
+    {term}`Kerberos` to generate encryption keys from passwords. The
+    encryption type determines the algorithm (e.g., AES-256), while the salt
+    is additional data (typically derived from the principal name) mixed into
+    the key derivation process to prevent identical passwords from producing
+    identical keys.
+
+    Related topic(s):
+    * Security, {term}`Kerberos`, Cryptography
 
 keyservers
-    *Work in Progress*
+    Keyservers are servers that store and distribute public cryptographic keys,
+    allowing users to look up and retrieve {term}`GPG` or PGP public keys for
+    verifying signatures or encrypting messages. They form a distributed
+    network where keys can be uploaded and searched by key ID or email
+    address.
+
+    Related topic(s):
+    * Security, Cryptography
 
 keytab
-    *Work in Progress*
+    A keytab (key table) is a file that contains pairs of {term}`Kerberos`
+    principals and their associated encryption keys. Keytabs allow services
+    and automated processes to authenticate to a {term}`KDC` without
+    requiring interactive password entry. They are commonly used by server
+    applications, cron jobs, and service accounts that need to obtain
+    Kerberos tickets automatically.
+
+    Related topic(s):
+    * Security, {term}`Kerberos`
 
 keytool
-    *Work in Progress*
+    keytool is a command-line utility included with the Java Development Kit
+    (JDK) for managing cryptographic keys, certificates, and keystores. It
+    can generate {term}`keypair`\s, import and export certificates, and
+    manage Java KeyStores (JKS) and PKCS#12 stores. keytool is commonly used
+    to configure {term}`TLS`/{term}`SSL` for Java-based applications.
+
+    Related topic(s):
+    * Security, Cryptography
 
 KVM
 Kernel-based Virtual Machine
-    *Work in Progress*
+    KVM is a Linux kernel module that turns the kernel into a Type-1
+    (bare-metal) hypervisor, enabling the host system to run multiple
+    isolated {term}`virtual machines <VM>`. KVM leverages hardware
+    virtualization extensions (Intel VT-x or AMD-V) to provide near-native
+    performance. It is typically used alongside {term}`QEMU`, which provides
+    device emulation, and managed through tools such as {term}`virsh` and
+    libvirt.
+
+    See also:
+    * [The KVM project page](https://linux-kvm.org/)
+
+    Related topic(s):
+    * Virtualization and containers
 
 :::
 
