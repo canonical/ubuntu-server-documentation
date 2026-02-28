@@ -9,6 +9,9 @@ myst:
 
 This page shows how to install the NVIDIA drivers from the command line, using either the `ubuntu-drivers` tool (recommended), or APT.
 
+> **Warning**:
+> NVIDIA drivers installed from outside sources could potentially overwrite those provided by ubuntu-drivers and may break secure boot. This includes those installed via the steps outlined in NVIDIA's CUDA installation guide.
+
 ## NVIDIA drivers releases
 
 We package two types of NVIDIA drivers:
@@ -31,7 +34,16 @@ cat /proc/driver/nvidia/version
 
 The `ubuntu-drivers` tool relies on the same logic as the "Additional Drivers" graphical tool, and allows more flexibility on desktops and on servers.
 
-The `ubuntu-drivers` tool is recommended if your computer uses Secure Boot, since it always tries to install signed drivers which are known to work with Secure Boot.
+The `ubuntu-drivers` tool is recommended if your computer uses Secure Boot, since it will, by default, only install the pre-built, signed drivers which are known to work with Secure Boot. (Refer to "Building your own kernel modules using the NVIDIA DKMS package" later in this page if you have a specific use case that requires the DKMS drivers.)
+
+Note that if you currently have a version of the Nvidia drivers installed that conflicts with those being installed by `ubuntu-drivers`, `ubuntu-drivers` will uninstall your original drivers before installing the new drivers.
+
+### Ensure your system and kernel is up-to-date
+
+```bash
+sudo apt update && sudo apt upgrade
+```
+After the update is complete, reboot your system.
 
 ### Check the available drivers for your hardware
 
@@ -147,6 +159,8 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 
 #### Building your own kernel modules using the NVIDIA DKMS package
 
+Note: We don't recommend using the DKMS modules unless you are running a custom kernel for which the prebuilt drivers are not supported. This is because the DKMS drivers are not signed with Canonical's key and thus do not support secure boot.
+
 Install the relevant NVIDIA {term}`DKMS` package and `linux-headers` to build the kernel modules, and enroll your own key to sign the modules.
 
 Install the `linux-headers` metapackage for your kernel flavour (e.g. `generic`, `lowlatency`, etc):
@@ -171,6 +185,11 @@ Finally, install the NVIDIA DKMS package for your desired driver series (this ma
 
 ```bash
 sudo apt install nvidia-dkms-${DRIVER_BRANCH}${SERVER}
+```
+
+Alternatively, you can use ubuntu-drivers to automatically select an appropriate dkms driver branch:
+```bash
+sudo ubuntu-drivers install --include-dkms
 ```
 
 ### Installing the user-space drivers and the driver libraries
