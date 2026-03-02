@@ -16,17 +16,26 @@ To recap, our home network has the `10.10.10.0/24` address, and we want to conne
 ```{mermaid}
 flowchart LR
     subgraph home["home network, .home domain — 10.10.10.0/24"]
+        blank[" "]
         router["router"]
+        blank_switch((" "))
         pi4["pi4"]
         nas["NAS"]
         extra["Y"]
         dots["..."]
     end
-    router --- pi4 & nas & extra & dots
+    router --- blank_switch
+    blank_switch --> pi4 & nas & extra & dots
     host["home0<br>10.10.10.11/24"] -- |ppp0| --> internet(("public internet"))
     internet -- |ppp0| --> router
-    host -. "wg0<br>10.10.10.10/32" .- pi4
+    host --- |"wg0<br>10.10.10.10/32"| pi4
     note["Reserved for VPN users:<br>10.10.10.10–49"] --- router
+
+classDef invisible fill: transparent, stroke: transparent
+  class blank invisible
+classDef fill_node fill: #000
+  class blank_switch fill_node
+linkStyle 7 stroke:#333,stroke-width:2px,stroke-dasharray: 10 5;
 ```
 
 
