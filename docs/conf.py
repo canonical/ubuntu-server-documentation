@@ -177,6 +177,7 @@ html_css_files = [
 # Add custom JavaScript files (located under "html_static_path")
 html_js_files = [
     "js/footer.js",
+    "js/header-nav.js",
     "js/github_issue_links.js",
     "js/bundle.js",
     "js/url_overwrite.js",
