@@ -1,7 +1,7 @@
 // overwrite links.js
 
 // Replace oldDomain with newDomain
-const oldDomain = 'canonical-ubuntu-server.readthedocs-hosted.com';
+const oldDomain = 'canonical-ubuntu-server-documentation.readthedocs-hosted.com';
 const newDomain = 'ubuntu.com/server/docs';
 
 // // Logging for debugging purposes
