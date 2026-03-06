@@ -1,0 +1,94 @@
+name: Close stale incomplete issues
+
+on:
+  schedule:
+    # Run once per day at 00:00 UTC
+    - cron: '0 0 * * *'
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  issues: write
+
+jobs:
+  close-stale-incomplete:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Close incomplete issues older than 7 days
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const DAYS_BEFORE_CLOSE = 7;
+            const LABEL = 'State: Incomplete';
+            
+            console.log('Checking for incomplete issues older than ' + DAYS_BEFORE_CLOSE + ' days...');
+            
+            // Get all open issues with "State: Incomplete" label
+            const issues = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: LABEL,
+              per_page: 100
+            });
+            
+            console.log('Found ' + issues.data.length + ' open incomplete issues.');
+            
+            const now = new Date();
+            const millisecondsPerDay = 1000 * 60 * 60 * 24;
+            let closedCount = 0;
+            
+            for (const issue of issues.data) {
+              // Find when the "State: Incomplete" label was added
+              const timeline = await github.rest.issues.listEventsForTimeline({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                per_page: 100
+              });
+              
+              // Find the most recent "labelld" event for "State: Incomplete"
+              const labelledEvent = timeline.data
+                .filter(event => event.event === 'labelled' && event.label?.name === LABEL)
+                .pop(); // Get the most recent one
+              
+              if (!labelledEvent) {
+                console.log('Issue #' + issue.number + ': Could not find label event, skipping.');
+                continue;
+              }
+              
+              const labelledDate = new Date(labelledEvent.created_at);
+              const daysSinceLabelled = (now - labelledDate) / millisecondsPerDay;
+              
+              console.log('Issue #' + issue.number + ': Labelled ' + daysSinceLabelled.toFixed(1) + ' days ago');
+              
+              if (daysSinceLabelled >= DAYS_BEFORE_CLOSE) {
+                console.log('  → Closing issue #' + issue.number + ' (stale for ' + Math.floor(daysSinceLabelled) + ' days)');
+                
+                // Add a final comment before closing
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  body: 'This issue needed more information but has not been updated in the last 7 days. It will now be closed.\n\n' +
+                        'If you still need help with the documentation, please feel free to open a new issue with more details. We suggest using the [feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new?template=feedback.yml).'
+                });
+                
+                // Close the issue
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'not_planned'
+                });
+                
+                closedCount++;
+              } else {
+                const daysRemaining = Math.ceil(DAYS_BEFORE_CLOSE - daysSinceLabelled);
+                console.log('  → Keeping open (' + daysRemaining + ' days remaining)');
+              }
+            }
+            
+            console.log('Closed ' + closedCount + ' stale incomplete issue(s).');
+

@@ -1,0 +1,227 @@
+name: Validate new issue
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  validate-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Validate new issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const issueBody = issue.body || '';
+            const issueTitle = issue.title || '';
+            
+            console.log('Checking issue #' + issue.number);
+            console.log('Title: ' + issueTitle);
+            console.log('Body length: ' + issueBody.length);
+            
+            // Extract URLs from the issue body
+            const urlRegex = /(https?:\/\/[^\s\)]+)/gi;
+            const urlsWithProtocol = issueBody.match(urlRegex) || [];
+            
+            // Also extract URLs without protocol (common domains)
+            const domainRegex = /(?:^|\s)((?:documentation\.)?ubuntu\.com\/server[^\s]*)/gi;
+            const urlsWithoutProtocol = issueBody.match(domainRegex) || [];
+            
+            // Also extract from the "Page URL" template field
+            const pageUrlMatch = issueBody.match(/### Page URL\s*\n\s*([^\n]+)/);
+            let pageUrlFromTemplate = '';
+            if (pageUrlMatch && pageUrlMatch[1]) {
+              pageUrlFromTemplate = pageUrlMatch[1].trim();
+              console.log('Page URL from template: ' + pageUrlFromTemplate);
+            }
+            
+            // Combine all URLs and normalize them
+            const allUrls = [...urlsWithProtocol];
+            
+            // Add URLs without protocol
+            for (const url of urlsWithoutProtocol) {
+              const cleanUrl = url.trim();
+              const normalizedUrl = cleanUrl.startsWith('http') ? cleanUrl : 'https://' + cleanUrl;
+              if (!allUrls.includes(normalizedUrl)) {
+                allUrls.push(normalizedUrl);
+              }
+            }
+            
+            // Add page URL from template
+            if (pageUrlFromTemplate && !allUrls.some(u => u.includes(pageUrlFromTemplate))) {
+              const normalizedUrl = pageUrlFromTemplate.startsWith('http') ? pageUrlFromTemplate : 'https://' + pageUrlFromTemplate;
+              allUrls.push(normalizedUrl);
+            }
+            
+            const urls = allUrls;
+            console.log('URLs found: ' + urls.length);
+            if (urls.length > 0) {
+              console.log('URLs: ' + urls.join(', '));
+            }
+            
+            // Valid domain patterns for the docs
+            const validDomains = [
+              'documentation.ubuntu.com/server',
+              'ubuntu.com/server'
+            ];
+            
+            // Check if URLs are valid
+            const validUrls = urls.filter(url => 
+              validDomains.some(domain => url.includes(domain))
+            );
+            const invalidUrls = urls.filter(url => 
+              !validDomains.some(domain => url.includes(domain))
+            );
+            
+            console.log('Valid URLs: ' + validUrls.length);
+            console.log('Invalid URLs: ' + invalidUrls.length);
+            
+            // Check for "local build" exception: if no URL but contains ubuntu-server-documentation path from local error
+            const hasLocalBuildPath = issueBody.includes('ubuntu-server-documentation');
+            console.log('Contains ubuntu-server-documentation path: ' + hasLocalBuildPath);
+            
+            // Check for "missing documentation" exception where the reporter is requesting docs on a topic (no docs yet = no valid URL)
+            const missingDocPatterns = [
+              /missing documentation/i,
+              /new documentation/i,
+              /no documentation/i,
+              /lacks? documentation/i,
+              /needs? documentation/i,
+              /should (have|include|document)/i,
+              /would be/i,
+              /please add documentation/i,
+              /missing (page|guide|section)/i,
+              /no (page|guide|section) (for|on|about)/i,
+              /doesn't have (documentation|a page|a guide)/i,
+              /does not have (documentation|a page|a guide)/i,
+              /not documented/i,
+              /undocumented/i
+            ];
+            
+            const isMissingDocReport = missingDocPatterns.some(pattern => pattern.test(issueBody) || pattern.test(issueTitle));
+            console.log('Reports missing documentation: ' + isMissingDocReport);
+            
+            // Check issue quality
+            let bodyWithoutUrls = issueBody.replace(urlRegex, '').trim();
+            
+            // Check if the issue uses the feedback template
+            const hasTemplateMarkers = issueBody.includes('### Issue Description') || 
+                                       issueBody.includes('### Page URL') ||
+                                       issueBody.includes('### Select an option');
+            
+            console.log('Uses template: ' + hasTemplateMarkers);
+            
+            // If template is used, extract only the user's content after "### Issue Description"
+            if (hasTemplateMarkers) {
+              const issueDescMatch = issueBody.match(/### Issue Description\s*\n\s*([\s\S]*?)(?:\n###|\n\n###|$)/);
+              if (issueDescMatch && issueDescMatch[1]) {
+                const userContent = issueDescMatch[1].trim();
+                // Remove URLs from user content for word count
+                bodyWithoutUrls = userContent.replace(urlRegex, '').trim();
+                console.log('Extracted user content from template: "' + userContent.substring(0, 100) + '..."');
+              }
+            }
+            
+            const wordCount = bodyWithoutUrls.split(/\s+/).filter(word => word.length > 0).length;
+            const hasRandomCharacters = /^[^a-zA-Z0-9\s]*$/.test(bodyWithoutUrls) || 
+                                       bodyWithoutUrls.length < 10;
+            
+            console.log('Word count (excluding URLs): ' + wordCount);
+            console.log('Has random/insufficient content: ' + hasRandomCharacters);
+            
+            let invalidReason = null;
+            let incompleteReason = null;
+            let message = '';
+            let labelToApply = '';
+            let shouldClose = false;
+            
+            // Determine issue validity
+            if (urls.length === 0 && !hasLocalBuildPath && !isMissingDocReport) {
+              // Invalid; No URL provided and no exceptions apply
+              invalidReason = 'no_url';
+              labelToApply = 'State: invalid';
+              shouldClose = true;
+              message = 'Thank you for taking the time to report an issue with the Ubuntu Server documentation!\n\n' +
+                        'However, we need more information to understand the problem.\n\n' +
+                        'Please edit your issue and make sure you have told us:\n' +
+                        '- What page you found the problem on\n' +
+                        '- What specific problem you found?\n' +
+                        '- What information was unclear, incorrect, or missing?\n' +
+                        '- Anything else that would help us improve the documentation\n\n' +
+                        'To submit a properly formatted issue, please use the [feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new?template=feedback.yml).';
+              console.log('Invalid; No URL provided and no exceptions apply');
+              
+            } else if (urls.length === 0 && (hasLocalBuildPath || isMissingDocReport)) {
+              // No URL but has an exception - treat as valid if there's enough detail
+              console.log('Valid: No URL but exception applies (local build or missing doc report)');
+              
+            } else if (invalidUrls.length > 0 && validUrls.length === 0) {
+              // Invalid; Has URLs but none are valid
+              invalidReason = 'invalid_url';
+              labelToApply = 'State: invalid';
+              shouldClose = true;
+              message = 'Thank you for taking the time to report an issue!\n\n' +
+                        'However, it looks like you have reported this issue against the wrong project.\n\n' +
+                        'If you have a problem with the Ubuntu Server documentation, please submit a properly formatted issue using the [feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new?template=feedback.yml), including the URL of the page you are having problems with.';
+              console.log('Invalid: URLs present but none are valid');
+              
+            } else if ((validUrls.length > 0 || hasLocalBuildPath || isMissingDocReport) && (wordCount < 5 || hasRandomCharacters)) {
+              // Incomplete: Has valid URL or exception but lacks detail
+              incompleteReason = 'insufficient_detail';
+              labelToApply = 'State: Incomplete';
+              shouldClose = false;
+              message = 'Thank you for taking the time to report an issue with the Ubuntu Server documentation!\n\n' +
+                        'However, we need more information to understand the problem.\n\n' +
+                        'Please **edit your issue** and make sure you have told us:\n' +
+                        '- What specific problem you found?\n' +
+                        '- What information was unclear, incorrect, or missing?\n' +
+                        '- Anything else that would help us improve the documentation\n\n' +
+                        'To submit a properly formatted issue, please use the [feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new?template=feedback.yml).';
+                        '**Note:** This issue will be automatically closed in 7 days if there is no change to the issue.\n\n';
+              console.log('Incomplete: Has valid URL or exception but lacks detail (word count: ' + wordCount + ')');
+            }
+            
+            if (invalidReason || incompleteReason) {
+              // Add comment explaining the specific issue
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body: message
+              });
+              
+              // Apply the appropriate label
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: [labelToApply]
+              });
+              
+              if (invalidReason) {
+                console.log('Labelled as invalid. Reason: ' + invalidReason);
+              } else {
+                console.log('Labelled as incomplete. Reason: ' + incompleteReason);
+              }
+              
+              // Close the issue only if it's invalid (not incomplete)
+              if (shouldClose) {
+                await github.rest.issues.update({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: issue.number,
+                  state: 'closed',
+                  state_reason: 'not_planned'
+                });
+                
+                console.log('Issue #' + issue.number + ' has been closed.');
+              }
+            } else {
+              console.log('Issue is valid. No action needed.');
+            }
+
