@@ -71,7 +71,7 @@ jobs:
                   repo: context.repo.repo,
                   issue_number: issue.number,
                   body: 'This issue needed more information but has not been updated in the last 7 days. It will now be closed.\n\n' +
-                        'If you still need help with the documentation, please feel free to open a new issue with more details. We suggest using the [Feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new/choose).'
+                        'If you still need help with the documentation, please feel free to open a new issue with more details. We suggest using the [feedback template](https://github.com/' + context.repo.owner + '/' + context.repo.repo + '/issues/new?template=feedback.yml).'
                 });
                 
                 // Close the issue
