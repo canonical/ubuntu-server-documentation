@@ -204,13 +204,13 @@ Next, on the secondary server, install the `bind9` package the same way as on th
 
 ```
 zone "example.com" {
-    type secondary;
+    type slave;
     file "db.example.com";
     masters { 192.168.1.10; };
 };        
           
 zone "1.168.192.in-addr.arpa" {
-    type secondary;
+    type slave;
     file "db.192";
     masters { 192.168.1.10; };
 };
