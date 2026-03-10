@@ -83,7 +83,7 @@ page.
 Thinking about using Ubuntu Server for your next project? [Get in touch!](https://ubuntu.com/server/contact-us?product=server)
 
 **PDF versions**
-: [Current PDF](https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/) (for Ubuntu 20.04 LTS onward)
+: [Current PDF](https://ubuntu.com/server/docs/_/downloads/en/latest/pdf/) (for Ubuntu 20.04 LTS onward)
 : [Ubuntu 18.04 LTS PDF](https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf)
 
 ```{toctree}
