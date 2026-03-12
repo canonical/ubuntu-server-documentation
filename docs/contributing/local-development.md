@@ -77,7 +77,7 @@ as typos or minor corrections, it can be easier to edit pages directly through
 This approach is valid whether you are fixing a single typo, or making multiple
 changes to a single file.
 
-1. Navigate to the page you want to edit [in the documentation](https://documentation.ubuntu.com/server)
+1. Navigate to the page you want to edit [in the documentation](https://ubuntu.com/server/docs)
 1. Click the "Edit on GitHub" button (pencil icon) at the top of the page (you will be prompted to create a GitHub account if you don't already have one)
 1. Make your changes in the GitHub web editor and save them
 1. Select "Create a new branch for this commit and start a pull request"
@@ -263,7 +263,7 @@ redirects = {
 
 When you set up a redirect in this way, the path of the source file you're
 redirecting from should include everything *after* the base URL
-(https://documentation.ubuntu.com/server).
+(https://ubuntu.com/server/docs).
 
 (submit-work)=
 ## Submitting your pull request

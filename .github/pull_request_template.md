@@ -30,7 +30,7 @@ Provide the desired commit message below:
 
 ### Checklist
 
-- [ ] I have read and followed the [Ubuntu Server contributing guide](https://documentation.ubuntu.com/server/contributing/).
+- [ ] I have read and followed the [Ubuntu Server contributing guide](https://ubuntu.com/server/docs/contributing/).
 - [ ] My pull request is linked to an existing issue (if applicable).
 - [ ] I have tested my changes, and they work as expected.
 

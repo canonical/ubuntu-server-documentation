@@ -23,10 +23,10 @@ with any page.
 * [Get support](https://ubuntu.com/support/community-support)
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/server/17)
 * [Download Ubuntu Server](https://ubuntu.com/server)
-* [Find out how to contribute](https://documentation.ubuntu.com/server/contributing/)
+* [Find out how to contribute](https://ubuntu.com/server/docs/contributing/)
 
 ## Offline version
 
-You can [build this documentation locally](https://documentation.ubuntu.com/server/contributing/build-locally), or you can
-access [the PDF version](https://documentation.ubuntu.com/server/) of this
+You can [build this documentation locally](https://ubuntu.com/server/docs/contributing/build-locally), or you can
+access [the PDF version](https://ubuntu.com/server/docs/_/downloads/en/latest/pdf/) of this
 documentation from Read the Docs.

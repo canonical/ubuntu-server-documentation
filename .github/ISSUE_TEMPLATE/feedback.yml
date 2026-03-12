@@ -16,7 +16,7 @@ body:
     attributes:
       label: Page URL
       description: Please enter the URL of the page you are referring to.
-      placeholder: https://documentation.ubuntu.com/server/
+      placeholder: https://ubuntu.com/server/docs/
     validations:
       required: true
   - type: checkboxes
