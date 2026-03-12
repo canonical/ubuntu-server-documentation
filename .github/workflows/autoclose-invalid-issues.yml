@@ -1,0 +1,41 @@
+name: Autoclose invalid issues
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  issues: write
+
+jobs:
+  close-invalid:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Close issue if labelled as invalid
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const label = context.payload.label;
+            
+            console.log('Issue #' + issue.number + ' was labelled with: ' + label.name);
+            
+            // Check if the label is "State: invalid"
+            if (label.name === 'State: invalid') {
+              console.log('Issue labelled as invalid. Closing issue...');
+              
+              // Close the issue
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                state: 'closed',
+                state_reason: 'not_planned'
+              });
+              
+              console.log('Issue #' + issue.number + ' has been closed.');
+            } else {
+              console.log('Label is not "State: invalid". No action taken.');
+            }
+
