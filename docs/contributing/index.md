@@ -12,7 +12,7 @@ contributor to open source projects, no matter your level of experience!
 
 The Ubuntu Server documentation is
 [hosted in GitHub](https://github.com/canonical/ubuntu-server-documentation) and
-[rendered on Read the Docs](https://documentation.ubuntu.com/server/). It is a
+[rendered on Read the Docs](https://ubuntu.com/server/docs/). It is a
 collaborative effort between Canonical and the Ubuntu community. There are many
 ways to contribute to the Ubuntu Server documentation, including many {ref}`options
 that don't require any coding <contrib-types>`.
