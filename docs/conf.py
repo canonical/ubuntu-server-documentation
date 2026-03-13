@@ -248,6 +248,7 @@ linkcheck_ignore = [
     "https://wiki.syslinux.org/*",
     "https://www.openstack.org/*",
     "https://web.archive.org/web/20241130024605/http://networktimesecurity.org/",
+    "https://www.intel.com/*",
     # Rate-limited domains that cause delays
     "http://www.gnu.org/software/*",
     "https://github.com./*",
