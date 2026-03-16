@@ -108,8 +108,10 @@ container-tools-in-the-ubuntu-space explanation/virtualisation/container-tools-i
 introduction-to-rock-images explanation/virtualisation/about-rock-images/
 about-rock-images explanation/virtualisation/about-rock-images/
 
-containers-lxd how-to/containers/lxd-containers/
-lxd-containers how-to/containers/lxd-containers/
+containers-lxd how-to/virtualisation/lxd/
+lxd-containers how-to/virtualisation/lxd/
+how-to/containers/lxd-containers/ how-to/virtualisation/lxd/
+how-to/virtualisation/lxd-containers/ how-to/virtualisation/lxd/
 
 docker-for-system-admins how-to/containers/docker-for-system-admins/
 

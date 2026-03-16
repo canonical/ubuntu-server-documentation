@@ -58,9 +58,9 @@ Examples of that are:
 
 - Container-like, as in [kata containers](https://katacontainers.io/),
 - Function-based services as in [Firecracker](https://firecracker-microvm.github.io/),
-- System containers as in {ref}`LXD <lxd-containers>`.
+- System containers as in {ref}`LXD <lxd>`.
 
-In particular, {ref}`LXD <lxd-containers>` added VM mode to allow the very same UX
+In particular, {ref}`LXD <lxd>` added VM mode to allow the very same UX
 with namespaces and virtualization.
 
 Other related tools are more about creating VMs from containers like:

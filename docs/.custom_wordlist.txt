@@ -85,6 +85,7 @@ GDB's
 GIDs
 Gitolite
 globbing
+gpasswd
 GPUs
 Graylog
 HBAs
@@ -175,6 +176,7 @@ Netfilter
 netfilter
 netmask
 NICs
+Noble
 NVLink
 NVSwitch
 O'Reilly
