@@ -19,16 +19,27 @@ sudo apt install default-jre-headless
 
 ## Config file
 
-The Java installation in Ubuntu ships a system-wide configuration tree under `/etc/java-<VERSION>-openjdk`. In Ubuntu Jammy 22.04 LTS, the default Java version is 11, so this directory will be `/etc/java-11/openjdk`. In that directory, the file that defines Java security settings, including cryptographic algorithms, is `/etc/java-11-openjdk/security/java.security`.
+The Java installation in Ubuntu ships a system-wide configuration tree under
+`/etc/java-<VERSION>-openjdk`. To determine the exact path on your system, you
+can check which version is currently set as the default:
+
+```bash
+java -version 2>&1 | head -n 1
+```
+
+If your output shows version `21`, for example, your configuration directory
+will be `/etc/java-21-openjdk/`. In that directory, the file that defines Java
+security settings, including cryptographic algorithms restrictions, is located
+at `/etc/java-<VERSION>-openjdk/security/java.security`.
 
 This is a very large file, with many options and comments. Its structure is simple, with configuration keys and their values. For crypto algorithms, we will be looking into the following settings:
 
-* `jdk.certpah.disabledAlgorithms`: Restrictions on algorithms and key lengths used in certificate path processing.
+* `jdk.certpath.disabledAlgorithms`: Restrictions on algorithms and key lengths used in certificate path processing.
 * `jdk.tls.disabledAlgorithms`: Restrictions on algorithms and key lengths used in SSL/TLS connections.
 
-The list of restrictions has its own format which allows for constructs that disable whole families of algorithms, key sizes, usage, and more. The [`java.security` configuration file](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520) has comments explaining this syntax with some examples.
+The list of restrictions has its own format which allows for constructs that disable whole families of algorithms, key sizes, usage, and more. The [`java.security` configuration file](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security/#n520) has comments explaining this syntax with some examples.
 
-Changes to these security settings can be made directly in the `/etc/java-11-openjdk/security/java.security` file, or in an alternate file that can be specified to a Java application by setting the `java.security.properties` value. For example, if your java application is called `myapp.java`, you can invoke it as shown below to specify an additional security properties file:
+Changes to these security settings can be made directly in the `/etc/java-<VERSION>-openjdk/security/java.security` file, or in an alternate file that can be specified to a Java application by setting the `java.security.properties` value. For example, if your Java application is called `myapp.java`, you can invoke it as shown below to specify an additional security properties file:
 
 ```bash
 java -Djava.security.properties=file://$HOME/java.security
@@ -40,9 +51,9 @@ When using just one equals sign ("`=`") as above, the settings from the specifie
 java -Djava.security.properties==file://$HOME/java.security
 ```
 
-Then the settings from `$HOME/java.security` completely override the ones from the main file at `/etc/java-11-openjdk/security/java.security`.
+Then the settings from `$HOME/java.security` completely override the ones from the main file at `/etc/java-<VERSION>-openjdk/security/java.security`.
 
-To disable the ability to specify an additional properties file in the command line, set the key `security.overridePropertiesFile` to `false` in `/etc/java-11-openjdk/security/java.security`.
+To disable the ability to specify an additional properties file in the command line, set the key `security.overridePropertiesFile` to `false` in `/etc/java-<VERSION>-openjdk/security/java.security`.
 
 ## Practical examples
 
@@ -84,7 +95,7 @@ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -ssls
 These are the parameters:
 
 * `-J-Djava.security.properties=...`
-   This is used to point at the configuration file snippet that has our changes. It is NOT NEEDED if you are modifying `/etc/java-11-openjdk/security/java.security` instead.
+   This is used to point at the configuration file snippet that has our changes. It is NOT NEEDED if you are modifying `/etc/java-<VERSION>-openjdk/security/java.security` instead.
 
 * `-printcert -sslserver localhost:4443`
    Connect to a server on localhost (`-sslserver` is a parameter to `-printcert`, so we need the latter even though we are not interested in the certificate).

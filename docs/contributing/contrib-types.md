@@ -83,12 +83,4 @@ same (or a similar) issue -- if they have, then leave your thoughts as a reply
 on that issue. By keeping discussions together in one place, it makes it easier
 for us to understand the impact and gather opinions from affected readers.  
 
-### Copy editing
-
-You can edit individual documentation pages directly in the GitHub web
-interface if you don't want to work on the command line. To do this, select
-the pencil icon next to the "Give feedback" button. For details about how to
-use the web editor, you can [refer to their documentation](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files) which has several
-handy guides.
-
 [Find no-code issues to work on](https://github.com/canonical/ubuntu-server-documentation/issues?q=is%3Aissue+is%3Aopen+label%3A%22code%3A+non-code%22+no%3Aassignee).

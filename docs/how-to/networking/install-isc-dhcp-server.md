@@ -62,8 +62,6 @@ sudo systemctl restart isc-dhcp-server.service
 
 ## Further reading
 
-- The [isc-dhcp-server Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
-
 - For more `/etc/dhcp/dhcpd.conf` options see the {manpage}`dhcpd.conf(5)` manual page
 
 - [ISC dhcp-server](https://www.isc.org/dhcp/)

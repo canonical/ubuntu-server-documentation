@@ -14,9 +14,8 @@ will do our best to help.
 
 Each issue should contain a description of the task to be completed, and some
 suggestions for how you might want to tackle it if there are several options.
-You can always leave a question on an issue to ask for more information if
-there is something missing or some clarification if the issue is confusingly
-presented.
+You can always leave a question on an issue to ask for more information if you
+need more details or for something to be clarified.
 
 If you have not been able to work on the issue for a while, please leave a
 comment on it. This helps us know if you intend to complete the task, and to
@@ -36,19 +35,15 @@ can also "ping" them in that comment to send them a notification by using
 ## Community forums
 
 For more general questions about Ubuntu Server, you're welcome to
-[create a post](https://discourse.ubuntu.com/c/project/server/17) on the Ubuntu Server forum.
+[create a post](https://discourse.ubuntu.com/c/project/server/17) on the Ubuntu
+Server forum.
 
-You can also use the [Canonical Open Documentation Academy (CODA) forum](https://discourse.ubuntu.com/c/community/open-documentation-academy/166),
-which is the hub for questions about documentation specifically. It includes
-our Getting started guide and links to our weekly Documentation office hours,
-alongside meeting notes, updates, external links and discussions.
+The Canonical Open Documentation Academy (CODA)
+[also has a forum](https://discourse.ubuntu.com/c/community/open-documentation-academy/166),
+which is the hub for questions specifically about documentation.
 
-## Synchronous chat
+## Chat to us
 
-For more interactive chat, the documentation team {matrix}`can be found on Matrix <documentation>`.
-
-## Calendar
-
-Subscribe to the [Documentation event calendar](https://calendar.google.com/calendar/u/0?cid=Y19mYTY4YzE5YWEwY2Y4YWE1ZWNkNzMyNjZmNmM0ZDllOTRhNTIwNTNjODc1ZjM2ZmQ3Y2MwNTQ0MzliOTIzZjMzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20). Not only does this include
-the Documentation office hours, it will also include any other discussion or
-training events we organize.
+For more interactive chat, you can use Matrix:
+* {matrix}`To chat to the Server team <server>`
+* {matrix}`To talk to technical authors about documentation <documentation>`

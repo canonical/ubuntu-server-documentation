@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Prepare to join an Active Directory domain with winbind by configuring DNS resolver, installing packages, and planning identity mapping.
+    description: Prepare to join an Active Directory domain with winbind by completing tasks in common to all identity mapping backends prior to selecting one.
 ---
 
 (join-a-domain-with-winbind-preparation)=
@@ -18,23 +18,23 @@ Next, it will make everything much easier if the {term}`DNS` resolver is pointed
 For example, for a default netplan configuration file which looks like this:
 
 ```yaml
-    network:
-    version: 2
-    ethernets:
-        eth0:
-            dhcp4: true
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
 ```
 
 You can add a `nameservers` block which will override the DNS options sent by the DHCP server. For example, if the DNS server is at `10.10.4.5` and the domain search value is `example.internal`, this would be the new configuration:
 ```yaml
-    network:
-    version: 2
-    ethernets:
-        eth0:
-            dhcp4: true
-            nameservers:
-                addresses: [10.10.4.5]
-                search: [example.internal]
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      nameservers:
+        addresses: [10.10.4.5]
+        search: [example.internal]
 ```
 
 To make the changes effective, first make sure there are no syntax errors:

@@ -78,12 +78,12 @@ page.
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/project/server/17)
 * {matrix}`Chat to us on Matrix <server>`
 * [Download Ubuntu Server](https://ubuntu.com/server)
-* Find out how to {ref}`contribute to the Server Guide <contribute>`
+* {ref}`Contribute to the Server documentation <contribute>`
 
 Thinking about using Ubuntu Server for your next project? [Get in touch!](https://ubuntu.com/server/contact-us?product=server)
 
 **PDF versions**
-: [Current PDF](https://documentation.ubuntu.com/_/downloads/server/en/latest/pdf/) (for Ubuntu 20.04 LTS onward)
+: [Current PDF](https://ubuntu.com/server/docs/_/downloads/en/latest/pdf/) (for Ubuntu 20.04 LTS onward)
 : [Ubuntu 18.04 LTS PDF](https://assets.ubuntu.com/v1/8f8ea0cf-18-04-serverguide.pdf)
 
 ```{toctree}
@@ -91,26 +91,8 @@ Thinking about using Ubuntu Server for your next project? [Get in touch!](https:
 :maxdepth: 2
 
 Tutorial <tutorial/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 How-to guides <how-to/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 Reference <reference/index.md>
-```
-
-```{toctree}
-:hidden:
-:maxdepth: 2
-
 Explanation <explanation/index.md>
 ```
 

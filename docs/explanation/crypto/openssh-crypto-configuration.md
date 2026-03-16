@@ -53,7 +53,7 @@ Here are the configuration settings that control the cryptographic algorithms se
     List of Message Authentication Code algorithms, used for data integrity protection. The `-etm` versions calculate the MAC after encryption and are considered safer. Examples include `hmac-sha2-256` and `hmac-sha2-512-etm@openssh.com`.
 
 * `GSSAPIKexAlgorithms`
-    This option is not available in OpenSSH upstream, and is [provided via a patch](https://git.launchpad.net/ubuntu/+source/openssh/tree/debian/patches/gssapi.patch?h=applied/ubuntu/jammy-devel) that Ubuntu and many other Linux Distributions carry. It lists the key exchange (kex) algorithms that are offered for {term}`Generic Security Services Application Program Interface (GSSAPI) <GSSAPI>` key exchange, and only applies to connections using GSSAPI. Examples include `gss-gex-sha1-` and `gss-group14-sha256-`.
+    This option is not available in OpenSSH upstream, and is [provided via a patch](https://git.launchpad.net/ubuntu/+source/openssh/tree/debian/patches/gssapi.patch) that Ubuntu and many other Linux Distributions carry. It lists the key exchange (kex) algorithms that are offered for {term}`Generic Security Services Application Program Interface (GSSAPI) <GSSAPI>` key exchange, and only applies to connections using GSSAPI. Examples include `gss-gex-sha1-` and `gss-group14-sha256-`.
 
 * `KexAlgorithms`
     List of available key exchange (kex) algorithms. Examples include `curve25519-sha256` and `sntrup761x25519-sha512@openssh.com`.
@@ -72,7 +72,7 @@ To check what effect a configuration change has on the server, it's helpful to u
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers 3des-cbc,chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
 
 The output will include changes made to the configuration key. There is no need to restart the service.
@@ -114,10 +114,10 @@ First, let's see what the default is:
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
 
-Now let's make our change. On the server, we can edit `/etc/ssh/sshd_config` and add this line:
+Now let's make our change. On the server, we can create a new configuration file `/etc/ssh/sshd_config.d/crypto-hardening.conf` and add this line:
 
 ```text
 Ciphers -aes128*
@@ -128,7 +128,7 @@ And then check what is left:
 ```bash
 $ sudo sshd -T | grep ciphers
 
-ciphers chacha20-poly1305@openssh.com,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com
+ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes192-ctr,aes256-ctr
 ```
 
 To activate the change, `ssh` has to be restarted:

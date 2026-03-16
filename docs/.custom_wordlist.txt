@@ -101,6 +101,7 @@ initramfs
 initrd
 IPs
 IPsec
+iptables
 IPvlan
 iscsid
 ISOs
@@ -128,6 +129,7 @@ keytool
 LANs
 lightervisor
 livepatching
+LLMs
 localhost's
 lockfile
 Lockdown
@@ -146,6 +148,7 @@ Maildir
 mainboard
 maintainer's
 mbox
+memfd
 metapackage
 Microvm
 microvm
@@ -178,6 +181,7 @@ NVLink
 NVSwitch
 O'Reilly
 O'Reilly's
+onwards
 OTPs
 overlayroot
 parmfile
@@ -202,6 +206,7 @@ prepended
 Preprocessor
 preseed
 proxying
+PVs
 QDevice
 Quokka
 RangeSize
@@ -227,6 +232,7 @@ sendmail
 sharding
 Shorewall
 SIDs
+SKUs
 Slapd
 slapd
 snapshotted
@@ -242,10 +248,12 @@ substring
 subvolume
 sudo
 sysctls
+vsock
 syslog
 systemctl
 systemd
 tasksel
+TDs
 templated
 tmpfs
 tmux
@@ -286,20 +294,24 @@ virtualizations
 virtualize
 virtualized
 virtualizer
+VLANs
 VM's
 VPN
 VPNs
 vsftpd
 vSwitch
 WANs
+webpages
 winbind
 WWIDs
 www
 Xen
+Xeon
 xhtml
+XML's
 Xtrabackup
+Yubico
 Yubikey
 Zettabyte
 zfs
 zSeries
-
