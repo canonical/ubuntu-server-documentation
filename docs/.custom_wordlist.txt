@@ -128,6 +128,7 @@ keytool
 LANs
 lightervisor
 livepatching
+LLMs
 localhost's
 lockfile
 Lockdown
@@ -146,6 +147,7 @@ Maildir
 mainboard
 maintainer's
 mbox
+memfd
 metapackage
 Microvm
 microvm
@@ -177,6 +179,7 @@ NVLink
 NVSwitch
 O'Reilly
 O'Reilly's
+onwards
 OTPs
 overlayroot
 parmfile
@@ -227,6 +230,7 @@ sendmail
 sharding
 Shorewall
 SIDs
+SKUs
 Slapd
 slapd
 snapshotted
@@ -242,10 +246,12 @@ substring
 subvolume
 sudo
 sysctls
+vsock
 syslog
 systemctl
 systemd
 tasksel
+TDs
 templated
 tmpfs
 tmux
@@ -298,6 +304,7 @@ winbind
 WWIDs
 www
 Xen
+Xeon
 xhtml
 XML's
 Xtrabackup

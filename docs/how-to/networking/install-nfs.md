@@ -301,9 +301,3 @@ The conversion tool can be run manually to gather more information about the err
 If all goes well, as it should in most cases, the system will have `/etc/nfs.conf` with the defaults, and `/etc/nfs.conf.d/local.conf` with the changes. You can merge these two together manually, and then delete `local.conf`, or leave it as is. Just keep in mind that `/etc/nfs.conf` is not the whole story: always inspect `/etc/nfs.conf.d` as well, as it may contain files overriding the defaults.
 
 You can always run `nfsconf --dump` to check the final settings, as it merges together all configuration files and shows the resulting non-default settings.
-
-
-
-## References
-
-* [Linux NFS wiki](https://linux-nfs.org/wiki/index.php/Main_Page)
