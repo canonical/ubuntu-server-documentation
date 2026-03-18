@@ -15,6 +15,7 @@ While a fresh Ubuntu installation is usually safe for immediate use, there are s
 * {ref}`Firewalls <firewalls>` are recommended for network security
 * {ref}`AppArmor <apparmor>` limits permissions and access for the software running on your system
 * {ref}`Console security <console-security>` for an additional physical security barrier
+* {ref}`TPM-backed LUKS decryption <tpm-backed-luks-decryption-with-clevis>` to automate decryption of disks
 
 ```{toctree}
 :hidden:
@@ -23,6 +24,7 @@ User management <security/user-management>
 Firewalls <security/firewalls>
 AppArmor <security/apparmor>
 Console security <security/console-security>
+TPM-backed LUKS decryption with Clevis <security/tpm-backed-luks-decryption-with-clevis>
 ```
 
 ## Authentication

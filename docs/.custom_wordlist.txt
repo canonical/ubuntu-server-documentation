@@ -66,6 +66,7 @@ dnsmasq
 dockerfiles
 DPDK's
 dpkg
+Dracut
 ELinks
 enablement
 Engenio
@@ -123,6 +124,8 @@ keypairs
 keysalt
 keyserver
 keyservers
+keyslot
+keyslots
 Keytab
 keytab
 keytool
@@ -211,6 +214,7 @@ QDevice
 Quokka
 RangeSize
 Rediraffe
+ramdisk
 rollout
 rollouts
 rootfs

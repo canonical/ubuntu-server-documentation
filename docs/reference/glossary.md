@@ -835,6 +835,11 @@ Fiber Channel
     between a storage device and a node in a
     {term}`Storage Area Network (SAN) <SAN>`.
 
+FDE
+Full-Disk Encryption
+    FDE is a security method that encrypts data at rest on an entire storage
+    device or volume.
+
 FHS
 Filesystem Hierarchy Standard
     FHS is a standard that defines the directory structure and contents in
@@ -1497,6 +1502,11 @@ Logical Unit
 LUA
 Lua Scripting Language
     *Work in Progress*
+
+LUKS
+Linux Unified Key Setup
+    LUKS is an open specification for Linux block-device encryption. It defines
+    how encrypted volumes store metadata and keyslots.
 
 LUN
 Logical Unit Number
