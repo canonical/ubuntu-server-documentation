@@ -62,8 +62,9 @@ sudo clevis luks bind -d <encrypted_partition> tpm2 '{"pcr_ids": "7"}'
 ```
 
 You will be prompted to enter the LUKS passphrase you created during
-installation. Clevis will generate a new cryptographic token and store it in
-the LUKS header.
+installation. Clevis will generate a new cryptographic secret and store it in a
+new keyslot. It will also create a corresponding token linked to this new
+keyslot.
 
 ## Updating the initial ramdisk
 
