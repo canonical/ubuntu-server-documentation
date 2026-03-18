@@ -27,7 +27,8 @@ changes, which can prevent automatic unlock until you rebind Clevis.
 
 ## Prerequisites
 
-* An Ubuntu Server installation with LVM over LUKS.
+* An Ubuntu Server installation with LVM over LUKS, with Dracut as the
+  initramfs generator.
 * A system with a TPM 2.0 module.
 * Root or `sudo` privileges.
 
