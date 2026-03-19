@@ -8,6 +8,8 @@ public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
 cluster or a 50,000-node render farm, Ubuntu Server delivers the best value
 scale-out performance available.
 
+* [View the Ubuntu Server documentation](https://ubuntu.com/server/docs/)
+
 ## Project and community
 
 Ubuntu Server is a member of the Ubuntu family. It's an open source project
