@@ -148,7 +148,7 @@ Kernel driver in use: nouveau
 
 ## Preparations for mediated devices pass-through - driver
 
-For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/vgpu/latest/product-support-matrix/index.html#abstract__ubuntu).
+For PCI passthrough, the above steps would be all the preparation needed, but for mediated devices one also needs to install and set up the host driver. The example here continues with our NVIDIA V100 which is [supported and available from Nvidia](https://docs.nvidia.com/vgpu/latest/product-support-matrix/ubuntu.html#ubuntu).
 
 There is also an Nvidia document about the same steps available on [installation and configuration of vGPU on Ubuntu](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#ubuntu-install-configure-vgpu).
 
