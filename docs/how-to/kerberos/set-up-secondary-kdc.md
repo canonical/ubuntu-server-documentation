@@ -12,7 +12,7 @@ Once you have one Key Distribution Center (KDC) on your network, it is good prac
 Also, if you have Kerberos clients that are on different networks (possibly separated by routers using NAT), it is wise to place a secondary KDC in each of those networks.
 
 ```{note}
-The native replication mechanism explained here relies on a cron job; it essentially dumps the DB on the primary and loads it back up on the secondary. You may want to take a look at using the `kldap` backend, which can use the OpenLDAP replication mechanism. This is explained further below.
+The native replication mechanism explained here relies on a cron job; it essentially dumps the DB on the primary and loads it back up on the secondary. You may want to take a look at using the `kldap` backend, which can use the OpenLDAP replication mechanism. This is explained in {ref}`kerberos-with-openldap-backend`.
 ```
 
 ## Install the required packages
