@@ -88,8 +88,8 @@ Thank you for using nginx.
 
 For more information on customizing nginx for your needs, see these follow-up guides:
 
-  * Part 2: {ref}`How to configure nginx <configure-nginx>
-  * Part 3: {ref}`How to use nginx modules <use-nginx-modules>
+  * Part 2: {ref}`How to configure nginx <configure-nginx>`
+  * Part 3: {ref}`How to use nginx modules <use-nginx-modules>`
 
 
 ### Further reading
