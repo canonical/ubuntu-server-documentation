@@ -76,6 +76,36 @@ After making changes to the configuration, save the file. Then, restart the
 sudo systemctl restart ssh.service
 ```
 
+### Disable OS information disclosure through service banner
+
+When a client establishes a TCP connection with the OpenSSH server, the server
+returns a banner providing information about the host OS and OpenSSH versions.
+
+This banner is returned before the client authenticates to the service:
+
+```bash
+nc -nv 127.0.0.1 22
+Connection to 127.0.0.1 22 port [tcp/*] succeeded!
+SSH-2.0-OpenSSH_10.2p1 Ubuntu-2ubuntu1
+```
+
+The OS related information can be suppressed from that banner through the
+`DebianBanner` configuration directive in the `/etc/ssh/sshd_config` or in a
+snippet file in `/etc/ssh/sshd_config.d/`:
+
+```text
+DebianBanner no
+```
+
+As shown in the previous example, restart the `sshd` server and verify that the
+banner no longer contains the snippet announcing the OS related data:
+
+```bash
+nc -nv 127.0.0.1 22
+Connection to 127.0.0.1 22 port [tcp/*] succeeded!
+SSH-2.0-OpenSSH_10.2p1
+```
+
 ```{warning}
 Many other configuration directives for `sshd` are available to change the
 server application's behavior to fit your needs. Be advised, however, if your
