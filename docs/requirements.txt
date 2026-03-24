@@ -39,3 +39,4 @@ sphinx-hoverxref
 sphinxcontrib-mermaid
 sphinxext-rediraffe
 watchfiles
+sphinx-llm

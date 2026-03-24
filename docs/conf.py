@@ -355,6 +355,7 @@ extensions = [
     "sphinxext.rediraffe",
     "sphinxcontrib.mermaid",
     "sphinx_copybutton",
+    "sphinx_llm.txt",
 ]
 
 
