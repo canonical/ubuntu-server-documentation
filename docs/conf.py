@@ -102,6 +102,18 @@ html_context = {
 
     # To enable listing contributors on individual pages, set to True
     "display_contributors": True,
+
+    # Links for the "Ubuntu docs" dropdown in the site header
+    "ubuntu_docs": [
+        {"title": "Ubuntu release notes",  "url": "https://documentation.ubuntu.com/release-notes/"},
+        {"title": "Ubuntu security",       "url": "https://documentation.ubuntu.com/security/"},
+        {"title": "Ubuntu Desktop",        "url": "https://documentation.ubuntu.com/desktop/"},
+        # {"title": "Ubuntu Server",         "url": "https://ubuntu.com/server/docs/"},
+        {"title": "Ubuntu on WSL",         "url": "https://documentation.ubuntu.com/wsl/latest/"},
+        {"title": "Ubuntu for developers", "url": "https://documentation.ubuntu.com/ubuntu-for-developers/"},
+        {"title": "Ubuntu project",        "url": "https://documentation.ubuntu.com/project/"},
+        {"title": "Ubuntu Pro",            "url": "https://documentation.ubuntu.com/pro/"},
+    ],
 }
 
 # Project slug; see https://meta.discourse.org/t/what-is-category-slug/87897
