@@ -112,10 +112,10 @@ ca ca.crt
 cert myservername.crt
 key myservername.key
 dh dh.pem
-tls-auth ta.key 0
+tls-crypt ta.key
 ```
 
-Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-auth` like this:
+Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-crypt` like this:
 
 ```bash
 sudo openvpn --genkey secret ta.key
@@ -253,7 +253,7 @@ Copy the following client keys and certificate files you created in the section 
 ca ca.crt
 cert myclient1.crt
 key myclient1.key
-tls-auth ta.key 1
+tls-crypt ta.key
 ```
 
 And you have to specify the OpenVPN server name or address. Make sure the keyword **`client`** is in the config file, since that's what enables client mode.
@@ -412,7 +412,6 @@ If the above didn't work for you, check the following:
 - Client and server must use same protocol and port, e.g. UDP port 1194, see `port` and `proto` config options.
 - Client and server must use the same compression configuration, see `comp-lzo` config option.
 - Client and server must use same config regarding bridged vs. routed mode, see `server vs server-bridge` config option
-- Client must use the config `tls-auth` with index `1` (example client config: `tls-auth ta.key 1`), but server must use `tls-auth` with index `0` (example server config: `tls-auth ta.key 0`).
 
 ## Advanced configuration
 
