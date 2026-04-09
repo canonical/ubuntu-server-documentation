@@ -115,6 +115,12 @@ dh dh.pem
 tls-crypt ta.key
 ```
 
+:::{note}
+The `tls-crypt` option was introduced in OpenVPN 2.4.0. If you are running an
+Ubuntu Server release older than 18.04 LTS (Bionic Beaver), please use
+`tls-auth ta.key 0` instead.
+:::
+
 Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-crypt` like this:
 
 ```bash
@@ -255,6 +261,12 @@ cert myclient1.crt
 key myclient1.key
 tls-crypt ta.key
 ```
+
+:::{note}
+The `tls-crypt` option was introduced in OpenVPN 2.4.0. If you are running an
+Ubuntu Server release older than 18.04 LTS (Bionic Beaver), please use
+`tls-auth ta.key 1` instead.
+:::
 
 And you have to specify the OpenVPN server name or address. Make sure the keyword **`client`** is in the config file, since that's what enables client mode.
 
