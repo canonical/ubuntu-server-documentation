@@ -74,6 +74,45 @@ For more examples of configuration directives in the CUPS server configuration f
 man cupsd.conf
 ```
 
+### Configure network access
+
+Configuring CUPS to listen on a network interface is not sufficient on its own to make it accessible from other hosts. CUPS also enforces access control through `<Location>` directives in `cupsd.conf`, which by default restrict access to `localhost` only. Without updating these directives, remote hosts will receive a **"Forbidden"** error when trying to reach the web interface or submit print jobs.
+
+To allow access from your local network add or update the `<Location>` blocks in `/etc/cups/cupsd.conf` as follows:
+
+```text
+# Allow access to the web interface from the local network
+<Location />
+  Order allow,deny
+  Allow localhost
+  Allow 192.168.10.*
+</Location>
+
+# Allow access to the administration pages from the local network
+<Location /admin>
+  Order allow,deny
+  Allow localhost
+  Allow 192.168.10.*
+</Location>
+
+# Allow access to the admin configuration from the local network
+<Location /admin/conf>
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+  Allow localhost
+  Allow 192.168.10.*
+</Location>
+```
+
+Replace `192.168.10.*` with the subnet of your local network.
+
+If you have a {ref}`firewall <firewalls>` enabled (e.g. `ufw`), you must also open port 631 to allow incoming connections:
+
+```bash
+sudo ufw allow 631/tcp
+```
+
 ## Post-configuration restart
 
 Whenever you make changes to the `/etc/cups/cupsd.conf` configuration file, you'll need to restart the CUPS server by typing the following command at a terminal prompt:
