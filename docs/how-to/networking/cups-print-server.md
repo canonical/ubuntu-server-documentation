@@ -107,7 +107,7 @@ To allow access from your local network add or update the `<Location>` blocks in
 
 Replace `192.168.10.*` with the subnet of your local network.
 
-If you have a [firewall](https://ubuntu.com/server/docs/how-to/security/firewalls/) enabled (e.g. `ufw`), you must also open port 631 to allow incoming connections:
+If you have a {ref}`firewall <firewalls>` enabled (e.g. `ufw`), you must also open port 631 to allow incoming connections:
 
 ```bash
 sudo ufw allow 631/tcp
