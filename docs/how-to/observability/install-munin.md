@@ -15,7 +15,7 @@ In this example, we will use two servers with {term}`hostnames <hostname>`: **`s
 
 ## Prerequisites
 
-Before installing Munin on `server01`, {ref}`Apache2 will need to be installed <introduction-to-web-servers>`. The default configuration is fine for running a `munin` server.
+Before installing Munin on `server01`, {ref}`Apache2 will need to be installed <introduction-to-web-services>`. The default configuration is fine for running a `munin` server.
 
 ## Install `munin` and `munin-node`
 
