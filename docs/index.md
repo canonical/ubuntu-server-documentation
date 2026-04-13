@@ -47,7 +47,7 @@ Protect your system with access controls, firewalls, encrypted communications, a
 
 Install, update, upgrade, and troubleshoot the software packages running on your system.
 
-* **Managing software**: {ref}`Package management <package-management>` • {ref}`Get older package versions using snapshots <snapshot-service>`
+* **Managing software**: {ref}`Package management <package-management>` • {ref}`etckeeper <install-etckeeper>` • {ref}`Get older package versions using snapshots <snapshot-service>`
 * **Update considerations**: {ref}`Automatic updates <automatic-updates>` • {ref}`Phased updates <about-apt-upgrade-and-phased-updates>` • {ref}`Testing updates in advance <advance-testing-of-updates-in-best-practice-server-deployments>`
 * **Upgrade Ubuntu version**: {ref}`Release upgrades <upgrade-your-release>` • {ref}`Upgrade a virtual machine <upgrading-the-machine-type-of-your-vm>`
 * **Troubleshooting**: {ref}`Report a bug <report-a-bug>` • {ref}`Debugging with debuginfod <about-debuginfod>` • {ref}`kernel-crash-dump`
@@ -61,7 +61,7 @@ Store and manage data using directory services, databases, logical volumes, and 
 * **Directory services**: {ref}`introduction-to-openldap` • {ref}`Install OpenLDAP <install-openldap>` • {ref}`ldap-replication`
 * **Device mapper multipathing**: {ref}`Intro to multipathing <introduction-to-multipath>` • {ref}`configuring-multipath`
 * **Storage**: {ref}`About LVM <about-lvm>` • {ref}`Manage logical volumes <manage-logical-volumes>` • {ref}`Sharing data storage with iSCSI <iscsi-initiator-or-client>`
-* **Version control**: {ref}`etckeeper <install-etckeeper>` • {ref}`gitolite <install-gitolite>`
+* **Version control**: {ref}`gitolite <install-gitolite>`
 
 
 ### Web and mail services
