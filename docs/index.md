@@ -27,19 +27,21 @@ The tutorial walks you through a fresh installation and the first steps of opera
 Configure network interfaces, provide name and address services, share resources, and synchronize time.
 
 * **Understanding networks**: {ref}`Key concepts <networking-key-concepts>` • {ref}`About Netplan <about-netplan>` • {ref}`Time synchronization <about-time-synchronisation>`
-* **Configuration**: {ref}`Using Netplan <configuring-networks>` • {ref}`DNS <install-dns>` • {ref}`DHCP <install-isc-kea>`
-* **With Windows systems**: {ref}`Samba <how-to-samba>` • {ref}`Windows Active Directory <how-to-active-directory-integration>`
-* **Sharing**: {ref}`Files with NFS <install-nfs>` • {ref}`Printers with CUPS <cups-print-server>`
+* **Configuration**: {ref}`Using Netplan <configuring-networks>` • {ref}`Domain Name System (DNS) <install-dns>` • {ref}`Dynamic Host Configuration Protocol (DHCP) <install-isc-kea>`
+* **Securing your network**: {ref}`Install OpenSSH <openssh-server>` • {ref}`Firewalls <firewalls>` • {ref}`DNS Security Extensions (DNSSEC) <dnssec>`
 * **High throughput**: {ref}`Open vSwitch with DPDK <dpdk-with-open-vswitch>` • {ref}`about-dpdk`
+* **Sharing**: {ref}`Files with NFS <install-nfs>` • {ref}`Printers with CUPS <cups-print-server>`
+* **With Windows systems**: {ref}`Samba <how-to-samba>` • {ref}`Windows Active Directory <how-to-active-directory-integration>`
+
 
 ### Security
 
 Protect your system with access controls, firewalls, encrypted communications, and network authentication.
 
-* **Understanding security**: {ref}`Introduction <introduction-to-security>` • {ref}`security-suggestions` • {ref}`DNS Security Extensions (DNSSEC) <dnssec>`
-* **Basic security**: {ref}`User management <user-management>` • {ref}`Firewalls <firewalls>` • {ref}`AppArmor <apparmor>`
+* **Understanding security**: {ref}`Introduction <introduction-to-security>` • {ref}`security-suggestions`
+* **Basic security**: {ref}`User management <user-management>` • {ref}`AppArmor <apparmor>`
 * **Authentication**: {ref}`Install Kerberos <install-a-kerberos-server>` • {ref}`Set up SSSD with LDAP <sssd-with-ldap>` • {ref}`Smart cards <smart-card-authentication>`
-* **Cryptography**: {ref}`Cryptographic libraries <introduction-to-crypto-libraries>` • {ref}`Install OpenSSH <openssh-server>`
+* **Cryptography**: {ref}`Cryptographic libraries <introduction-to-crypto-libraries>` • {ref}`certificates` • {ref}`openssl`
 * **VPNs**: {ref}`OpenVPN <install-openvpn>` • {ref}`WireGuard VPN <wireguard-on-an-internal-system>`
 
 
@@ -80,8 +82,8 @@ Run workloads in virtual machines and containers using lightweight and full-virt
 * **Understand virtualization**: {ref}`Intro to virtualisation <introduction-to-virtualization>`
 * **Virtual machines**: {ref}`Multipass <create-vms-with-multipass>` • {ref}`QEMU <qemu>` • {ref}`qemu-microvm`
 * **VM tooling**: {ref}`libvirt and virsh <libvirt>` • {ref}`virt-manager <virtual-machine-manager>` • {ref}`Nested virtualization <enable-nested-virtualisation>`
-* **Containers**: {ref}`Docker for system admins <docker-for-system-admins>` • {ref}`docker-storage-networking-and-logging` • {ref}`run-rocks-on-your-server`
-* **Deployment**: {ref}`Find cloud images <cloud-images>` • {ref}`Introduction to cloud-init <introduction-to-cloud-init>` • {ref}`LXD <lxd>`
+* **Containers**: {ref}`Docker for system admins <docker-for-system-admins>` • {ref}`docker-storage-networking-and-logging` • {ref}`Run rocks on your server <run-rocks-on-your-server>`
+* **Deployment**: {ref}`Find cloud images <cloud-images>` • {ref}`About cloud-init <introduction-to-cloud-init>` • {ref}`LXD <lxd>`
 * **Confidential computing**: {ref}`AMD SEV <sev-snp>` • {ref}`Intel TDX <intel-tdx>`
 
 
