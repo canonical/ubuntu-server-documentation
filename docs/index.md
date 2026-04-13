@@ -70,7 +70,6 @@ Serve web content, proxy traffic, write server-side applications, and handle ema
 
 * **Web servers**: {ref}`About web servers <about-web-servers>` • {ref}`Apache2 <install-apache2>` • {ref}`nginx <install-nginx>`
 * **Squid proxy server**: {ref}`About Squid proxy <about-squid-proxy-servers>` • {ref}`Install a Squid proxy server <install-a-squid-server>`
-* **Web programming**: {ref}`PHP <install-php>` • {ref}`Ruby on Rails <install-ruby-on-rails>`
 * **Mail services**: {ref}`Postfix <install-postfix>` • {ref}`Exim4 <install-exim4>` • {ref}`Dovecot <install-dovecot>`
 
 
