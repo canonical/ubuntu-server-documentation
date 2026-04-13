@@ -30,7 +30,7 @@ we suggest some packages in the {ref}`advanced security <advanced-security>`
 section that you might want to investigate. Again, the list in this section
 is not intended to be exhaustive, but rather a starting point.
 
-For the most thorough treatment of security in Ubuntu, we also recommend reading the [Ubuntu Security documentation](https://ubuntu.com/security).
+For the most thorough treatment of security in Ubuntu, we also recommend reading the [Ubuntu Security documentation](https://documentation.ubuntu.com/security/).
 
 
 ## Ubuntu Pro
@@ -50,11 +50,9 @@ utility, which has an API that provides easier automation to users.
 
 In a standard Ubuntu LTS release, security support is provided 
 for packages in the [Main repository](https://documentation.ubuntu.com/project/how-ubuntu-is-made/concepts/package-archive/#components)
-for 5 years. With Ubuntu Pro, this support is expanded 
-to 10 years, and also includes patching for medium, high and critical severity
+for 5 years. With Ubuntu Pro, this support is expanded to 10 years, and also includes patching for medium, high and critical severity
 [vulnerabilities](https://ubuntu.com/security/cves/about) for the Universe
-repository. This service, known as Expanded Security Maintenance ({term}`ESM`), is recommended for every Ubuntu system. Learn more
-[about ESM here](https://ubuntu.com/security/esm).
+repository. This service, known as [Expanded Security Maintenance](https://documentation.ubuntu.com/security/security-updates/esm/) (ESM), is recommended for every Ubuntu system.
 
 
 ### Kernel application hardening
@@ -63,16 +61,15 @@ We also recommend Canonical's Livepatch service for
 every Ubuntu system, which applies kernel patches for high and 
 critical severity vulnerabilities while the system is running, without 
 the need for an immediate reboot -- which reduces downtime. Learn more
-[about Livepatch here](https://ubuntu.com/security/livepatch).
+[about Livepatch here](https://ubuntu.com/security/livepatch/docs).
 
 ### Security Compliance and Certification
 
 For enterprise users who must ensure compliance with specific standards, such as
 [FIPS](https://documentation.ubuntu.com/security/compliance/fips/) and
 [CIS](https://documentation.ubuntu.com/security/compliance/usg/), Ubuntu
-also provides profile benchmarking. See our
-[security and compliance documentation](https://documentation.ubuntu.com/security/)
-for more details.
+also provides profile benchmarking.
+
  
 ## Reporting vulnerabilities
 
