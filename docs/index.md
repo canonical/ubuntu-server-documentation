@@ -36,7 +36,7 @@ Configure network interfaces, provide name and address services, share resources
 
 ### Security
 
-Protect your system with access controls, firewalls, encrypted communications, and network authentication.
+Protect your system with access controls, firewalls, encrypted communications, and network authentication. For more general information about security in Ubuntu, refer also to the [Ubuntu Security documentation](https://documentation.ubuntu.com/security/).
 
 * **Understanding security**: {ref}`Introduction <introduction-to-security>` • {ref}`security-suggestions`
 * **Basic security**: {ref}`User management <user-management>` • {ref}`AppArmor <apparmor>`
