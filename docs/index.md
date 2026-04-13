@@ -77,7 +77,7 @@ Serve web content, proxy traffic, write server-side applications, and handle ema
 
 Run workloads in virtual machines and containers using lightweight and full-virtualisation tooling.
 
-* **Understanding virtualization**: {ref}`Intro to virtualisation <introduction-to-virtualization>` • {ref}`VM tools <vm-tools-in-the-ubuntu-space>` • {ref}`Container tools <container-tools-in-the-ubuntu-space>`
+* **Understand virtualization**: {ref}`Intro to virtualisation <introduction-to-virtualization>`
 * **Virtual machines**: {ref}`Multipass <create-vms-with-multipass>` • {ref}`QEMU <qemu>` • {ref}`qemu-microvm`
 * **VM tooling**: {ref}`libvirt and virsh <libvirt>` • {ref}`virt-manager <virtual-machine-manager>` • {ref}`Nested virtualization <enable-nested-virtualisation>`
 * **Containers**: {ref}`Docker for system admins <docker-for-system-admins>` • {ref}`docker-storage-networking-and-logging` • {ref}`run-rocks-on-your-server`
