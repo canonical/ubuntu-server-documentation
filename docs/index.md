@@ -30,7 +30,7 @@ Configure network interfaces, provide name and address services, share resources
 * **Configuration**: {ref}`Using Netplan <configuring-networks>` • {ref}`DNS <install-dns>` • {ref}`DHCP <install-isc-kea>`
 * **With Windows systems**: {ref}`Samba <how-to-samba>` • {ref}`Windows Active Directory <how-to-active-directory-integration>`
 * **Sharing**: {ref}`Files with NFS <install-nfs>` • {ref}`Printers with CUPS <cups-print-server>`
-
+* **High throughput**: {ref}`Open vSwitch with DPDK <dpdk-with-open-vswitch>` • {ref}`about-dpdk`
 
 ### Security
 
