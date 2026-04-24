@@ -611,7 +611,7 @@ The output looks quite complicated at first, so let's break it down using the fi
 | `Apr 21 17:46` | Timestamp   | The date and time the file was last modified |
 | `file2.txt`    | Name        | The actual name of the file or directory |
 
-Fields like the file name, size, and timestamp, are quite intuitive once you know that this is what the fields represent. Permissions, owner and group are a bit less intuitive, so let's exmine those in more detail. 
+Fields like the file name, size, and timestamp, are quite intuitive once you know that this is what the fields represent. Permissions, owner and group are a bit less intuitive, so let's examine those in more detail. 
 
 
 ## Users, groups, and permissions
@@ -764,7 +764,7 @@ ls -l numeric-test.sh
 -rwxr-xr-x 1 ubuntu ubuntu 0 Apr 23 15:58 numeric-test.sh
 ```
 
-755 means: owner has read+write+execute (7), group has read+execute (5), others have read+execute (5).
+From this we can see that `755` means: the owner has read, write and execute (7) privileges, the group has read and execute (5), while all others have read and execute (5).
 
 Some common permission combinations:
 
@@ -788,7 +788,7 @@ umask
 0002
 ```
 
-The umask works by subtracting permissions from the maximum (`777` for directories, `666` for files). A umask of `022` results in files being created with permissions of `644` and directories with `755` by default. 
+The `umask` works by subtracting permissions from the maximum (`777` for directories, `666` for files). A `umask` of `022` results in files being created with permissions of `644` and directories with `755` by default. 
 
 
 ### Temporary admin privileges with sudo
@@ -990,7 +990,9 @@ This brings us onto one of the most important skills when you are learning the t
 Linux comes with a comprehensive built-in manual, and learning to use it helps us explore on our own.
 Every command in Linux has a **manual page** that describes what it does, and lists all the option flags available.
 
+<!-- vale off -->
 Most documentation uses the short version of a flag when demonstrating a command -- mostly for convenience. However, if you are ever unsure what a flag does, you can look up the command's manual page (often called a "manpage" for short).
+<!-- vale on -->
 
 For example, you can invoke the manual page for `ls` using the `man ls` command.
 
