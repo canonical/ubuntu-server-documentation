@@ -9,10 +9,10 @@ myst:
 
 Starting from [Ubuntu Resolute 26.04](https://releases.ubuntu.com/resolute/), we introduce the hardware enablement (HWE) stack for virtualization components:
 
-- [**QEMU**](https://launchpad.net/ubuntu/+source/qemu-hwe): Hypervisor and system emulation
-- [**libvirt**](https://launchpad.net/ubuntu/+source/libvirt-hwe): Virtualization management library and tools
-- [**edk2**](https://launchpad.net/ubuntu/+source/edk2-hwe): Firmware for UEFI support
-- [**seabios**](https://launchpad.net/ubuntu/+source/seabios-hwe): BIOS firmware for compatibility
+- [**qemu-hwe**](https://launchpad.net/ubuntu/+source/qemu-hwe): Hypervisor and system emulation
+- [**libvirt-hwe**](https://launchpad.net/ubuntu/+source/libvirt-hwe): Virtualization management library and tools
+- [**edk2-hwe**](https://launchpad.net/ubuntu/+source/edk2-hwe): Firmware for UEFI support
+- [**seabios-hwe**](https://launchpad.net/ubuntu/+source/seabios-hwe): BIOS firmware for compatibility
 
 During the first 2 years of each Ubuntu LTS, this stack is upgraded every 6 months to have the latest upstream version supported in Ubuntu.
 
