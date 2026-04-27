@@ -1,13 +1,13 @@
 ---
 myst:
   html_meta:
-    description: Installing the hardware enablement (hwe) virtualization stack.
+    description: Installing the hardware enablement (HWE) virtualization stack.
 ---
 
 (virt-hwe)=
 # Virtualization Hardware Enablement Stack
 
-Starting from [Ubuntu Resolute 26.04](https://releases.ubuntu.com/resolute/), we introduce the hardware enablement stack for virtualization components:
+Starting from [Ubuntu Resolute 26.04](https://releases.ubuntu.com/resolute/), we introduce the hardware enablement (HWE) stack for virtualization components:
 
 - [**QEMU**](https://launchpad.net/ubuntu/+source/qemu-hwe): Hypervisor and system emulation
 - [**libvirt**](https://launchpad.net/ubuntu/+source/libvirt-hwe): Virtualization management library and tools
