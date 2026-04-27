@@ -20,6 +20,7 @@ UVtool <virtualisation/cloud-image-vms-with-uvtool>
 QEMU <virtualisation/qemu>
 AMD SEV <virtualisation/sev-snp>
 Intel TDX <virtualisation/intel-tdx>
+Hardware enablement virtualization stack <virtualisation/virt-hwe>
 ```
 
 * {ref}`LXD containers and virtual machines <lxd>`
@@ -28,6 +29,7 @@ Intel TDX <virtualisation/intel-tdx>
 * {ref}`QEMU <qemu>`
 * {ref}`Confidential Computing with AMD <sev-snp>`
 * {ref}`Confidential Computing with Intel <intel-tdx>`
+* {ref}`Hardware Enablement Virtualization Stack <virt-hwe>`
 
 ## VM tooling
 
