@@ -19,13 +19,13 @@ During the first 2 years of each Ubuntu LTS, this stack is upgraded every 6 mont
 We provide the helper script **ubuntu_virt_helper** via the new package **ubuntu-helper-virt-hwe** as a management tool of the HWE stack
 
 ```bash
-apt install ubuntu-helper-virt-hwe
+root@virt:~# apt install ubuntu-helper-virt-hwe
 ```
 
 On a freshly installed system, running **ubuntu_virt_helper** gives the following output:
 
 ```bash
-root@virt3:~# ubuntu_virt_helper
+root@virt:~# ubuntu_virt_helper
 Installed variant: none
 
 1 packages:
@@ -35,13 +35,13 @@ Installed variant: none
 The HWE stack is opt-in, so existing systems continue to work as-is. The base stack remains the default, and selecting HWE is an explicit action. For example, installing **virt-manager** pulls in the base virtualization packages:
 
 ```bash
-apt install virt-manager
+root@virt:~# apt install virt-manager
 ```
 
 These are the virtualization components installed as dependencies of **virt-manager**:
 
 ```bash
-root@virt2:~# ubuntu_virt_helper --verbose
+root@virt:~# ubuntu_virt_helper --verbose
 Installed variant: base
 
 8 packages:
@@ -58,7 +58,7 @@ Installed variant: base
 Since the 2 stacks are mutually exclusive and one package can be individually requested for installation, one variant can be selected by installing any package from this variant:
 
 <pre><code>
-root@virt2:~# apt install qemu-utils-hwe
+root@virt:~# apt install qemu-utils-hwe
 The following package was automatically installed and is no longer required:
   libxml2-utils
 Use 'apt autoremove' to remove it.
@@ -101,7 +101,7 @@ Removing qemu-block-extra (1:10.2.1+ds-1ubuntu3) ...</code></pre>
 The result is an incomplete stack (missing **libvirt-clients-hwe**), as shown below:
 
 ```bash
-root@virt3:~# ubuntu_virt_helper --verbose
+root@virt:~# ubuntu_virt_helper --verbose
 Installed variant: hwe
 
 7 packages:
@@ -116,7 +116,7 @@ Installed variant: hwe
 
 This can break existing **virt-manager** workflows. To avoid partial transitions, use the helper for a complete and safe switch:
 
-<pre><code>root@virt2:~# ubuntu_virt_helper switch
+<pre><code>root@virt:~# ubuntu_virt_helper switch
 Switching from base to hwe variant...
 Installing:                     
   <span style="color: #28c635;">libvirt-clients-hwe  libvirt-common-hwe  libvirt-l10n-hwe  libvirt0-hwe  qemu-block-extra-hwe  qemu-utils-hwe  ubuntu-virt-hwe</span>
@@ -137,7 +137,7 @@ Continue? [Y/n] </code></pre>
 
 The helper performs a one-to-one replacement, preserving dependencies and preventing partial transitions. It also preserves each package's auto/manual install mark, making the switch transparent to users:
 
-<pre><code>root@virt2:~# ubuntu_virt_helper --verbose
+<pre><code>root@virt:~# ubuntu_virt_helper --verbose
 Installed variant: hwe
 
 8 packages:
