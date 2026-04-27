@@ -92,7 +92,7 @@ Get:6 http://archive.ubuntu.com/ubuntu resolute/main amd64 qemu-block-extra-hwe 
 Fetched 8003 kB in 5s (1488 kB/s)
 <span style="color: #c62828;">Virt: switch of the ubuntu-virt[-hwe] stack is detected and there are orphaned removals (no counterpart being installed):</span>
 <span style="color: #c62828;">  - libvirt-clients</span>
-<span style="color: #c62828;">Virt: Please install them back and use the ubuntu-virt-helper script to switch between ubuntu-virt[-hwe] packages.</span>
+<span style="color: #c62828;">Virt: Please install them back and use the ubuntu_virt_helper script to switch between ubuntu-virt[-hwe] packages.</span>
 (Reading database ... 97187 files and directories currently installed.)
 Removing libvirt-clients (12.0.0-1ubuntu5) ...
 Removing libvirt-l10n (12.0.0-1ubuntu5) ...
