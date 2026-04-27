@@ -25,7 +25,7 @@ apt install ubuntu-helper-virt-hwe
 On a freshly installed system, running **ubuntu_virt_helper** gives the following output:
 
 ```bash
-root@virt3:~# ubuntu_virt_helper 
+root@virt3:~# ubuntu_virt_helper
 Installed variant: none
 
 1 packages:
