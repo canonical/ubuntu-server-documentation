@@ -19,7 +19,7 @@ For full details on any command, run `man <command>` in your terminal.
 | `ls` | List all files and directories in the current directory |
 | `ls -l` | Long list, with permissions, owner, size, and date |
 | `ls -a` | List all, including hidden files (file names starting with `.`) |
-| `ls -la` | Long listing including hidden files |
+| `ls -la` or `ll` | Long listing including hidden files |
 | `ls -ld <dir>` | Show the directory entry itself, not its contents, for directory `<dir>` |
 | `ls -l <file>` | Show file type, permissions, owner, and size for `<file>` |
 | `cd <path>` | Change to the specified directory |
@@ -47,11 +47,13 @@ For full details on any command, run `man <command>` in your terminal.
 | `touch <file>` | Create a new (empty) file, or update the timestamp of an existing file |
 | `cp <src> <dest>` | Copy a file from a source (`src`) to a new destination (`dest`) |
 | `cp -a <src> <dest>` | Copy a directory recursively, preserving permissions |
-| `mv <src> <dest>` | Move or rename a file or directory |
+| `mv <src> <dest>` | Rename a file or directory |
+| `mv <src>/file <dest>/file` | Move a file without renaming it | 
 | `rm <file>` | Remove a file |
+| `rm -r <dir>` | Remove a non-empty directory and all its contents |
 | `cat <file>` | Print the contents of `<file>` to the screen |
 | `less <file>` | View file contents one page at a time |
-| `head <file>` | Print the first 10 lines of a file |
+| `head -n 20 <file>` | Print the first 20 lines of a file (default without the flag is 10) |
 | `tail <file>` | Print the last 10 lines of a file |
 
 
