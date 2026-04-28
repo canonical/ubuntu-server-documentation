@@ -16,6 +16,8 @@ Starting from [Ubuntu Resolute 26.04](https://releases.ubuntu.com/resolute/), we
 
 During the first 2 years of each Ubuntu LTS, this stack is upgraded every 6 months to have the latest upstream version supported in Ubuntu.
 
+## Helper package
+
 We provide the helper script **ubuntu_virt_helper** via the new package **ubuntu-helper-virt-hwe** as a management tool of the HWE stack
 
 ```bash
@@ -31,6 +33,8 @@ Installed variant: none
 1 packages:
   - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe)
 ```
+
+## Impact on current usage
 
 The HWE stack is opt-in, so existing systems continue to work as-is. The base stack remains the default, and selecting HWE is an explicit action. For example, installing **qemu-system-x86** pulls in the base virtualization packages:
 
@@ -64,6 +68,8 @@ Installed variant: base
 ```
 
 The output indicates the **apt mark** for each package: ubuntu-helper-virt-hwe and qemu-system-x86 are marked as **manual** because they were directly installed, while the other packages are marked as **auto** as they were pulled in as dependencies.
+
+## Uncontrolled variant switches and dependency management implications
 
 Since the 2 stacks are mutually exclusive and one package can be individually requested for installation, one variant can be selected by installing any package from this variant:
 
@@ -99,7 +105,7 @@ Summary:
 Continue? [Y/n]
 ```
 
-In this specific example, installing qemu-utils-hwe does not automatically install the HWE counterparts for several related packages, as they are part of qemu-utils-hwe’s dependencies. Consequently, APT issues a warning, noting that packages have been removed but have not been replaced with their respective HWE counterparts:
+In this specific example, installing qemu-utils-hwe does not automatically install the HWE counterparts for several related packages, as they aren't part of qemu-utils-hwe’s dependencies. Consequently, APT issues a warning, noting that packages have been removed but have not been replaced with their respective HWE counterparts:
 
 ```bash
 Get:1 http://archive.ubuntu.com/ubuntu resolute/main amd64 ubuntu-virt-hwe all 1:10.2.1+ds-1ubuntu4 [11.6 kB]
@@ -139,7 +145,9 @@ Installed variant: hwe
   - ubuntu-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
 ```
 
-This can break existing workflows that make use of the virtualization features. To avoid such partial exchanges, instead use the helper for a complete and safe switch. The example starts from the same conditions as above:
+## Proper variant switch using the helper script
+
+Manual unmanaged switch can break existing workflows that make use of the virtualization features. To avoid such partial exchanges, instead use the helper for a complete and safe switch. The example starts from the same conditions as above:
 
 ```bash
 root@enticed-cichlid:~# ubuntu_virt_helper switch
