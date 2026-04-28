@@ -19,134 +19,176 @@ During the first 2 years of each Ubuntu LTS, this stack is upgraded every 6 mont
 We provide the helper script **ubuntu_virt_helper** via the new package **ubuntu-helper-virt-hwe** as a management tool of the HWE stack
 
 ```bash
-root@virt:~# apt install ubuntu-helper-virt-hwe
+root@enticed-cichlid:~# apt install ubuntu-helper-virt-hwe
 ```
 
 On a freshly installed system, running **ubuntu_virt_helper** gives the following output:
 
 ```bash
-root@virt:~# ubuntu_virt_helper
+root@enticed-cichlid:~# ubuntu_virt_helper
 Installed variant: none
 
 1 packages:
   - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe)
 ```
 
-The HWE stack is opt-in, so existing systems continue to work as-is. The base stack remains the default, and selecting HWE is an explicit action. For example, installing **virt-manager** pulls in the base virtualization packages:
+The HWE stack is opt-in, so existing systems continue to work as-is. The base stack remains the default, and selecting HWE is an explicit action. For example, installing **qemu-system-x86** pulls in the base virtualization packages:
 
 ```bash
-root@virt:~# apt install virt-manager
+root@enticed-cichlid:~# apt install qemu-system-x86
 ```
 
-These are the virtualization components installed as dependencies of **virt-manager**:
+These are the virtualization components installed as dependencies of **qemu-system-x86**:
 
 ```bash
-root@virt:~# ubuntu_virt_helper --verbose
+root@enticed-cichlid:~# ubuntu_virt_helper --verbose
 Installed variant: base
 
-8 packages:
-  - libvirt-clients (12.0.0-1ubuntu5, src:libvirt, auto)
-  - libvirt-common (12.0.0-1ubuntu5, src:libvirt, auto)
-  - libvirt-l10n (12.0.0-1ubuntu5, src:libvirt, auto)
-  - libvirt0:amd64 (12.0.0-1ubuntu5, src:libvirt, auto)
+
+15 packages:
+  - ovmf (2025.11-3ubuntu7, src:edk2, auto)
+  - ovmf-amdsev (2025.11-3ubuntu7, src:edk2, auto)
+  - ovmf-generic (2025.11-3ubuntu7, src:edk2, auto)
+  - ovmf-inteltdx (2025.11-3ubuntu7, src:edk2, auto)
   - qemu-block-extra (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-common (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-data (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-gui (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-modules-opengl (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-modules-spice (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - qemu-system-x86 (1:10.2.1+ds-1ubuntu3, src:qemu, manual)
   - qemu-utils (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
+  - seabios (1.17.0-1ubuntu1, src:seabios, auto)
   - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, manual)
   - ubuntu-virt (1:10.2.1+ds-1ubuntu3, src:qemu, auto)
 ```
 
+The output indicates the **apt mark** for each package: ubuntu-helper-virt-hwe and qemu-system-x86 are marked as **manual** because they were directly installed, while the other packages are marked as **auto** as they were pulled in as dependencies.
+
 Since the 2 stacks are mutually exclusive and one package can be individually requested for installation, one variant can be selected by installing any package from this variant:
 
-<pre><code>
-root@virt:~# apt install qemu-utils-hwe
-The following package was automatically installed and is no longer required:
-  libxml2-utils
-Use 'apt autoremove' to remove it.
+```bash
+root@enticed-cichlid:~# apt install qemu-utils-hwe
+The following packages were automatically installed and are no longer required:
+  adwaita-icon-theme              libflac14
+  …
+  x11-common
+Use 'sudo apt autoremove' to remove them.
+
 
 Installing:
-  <span style="color: #28c635;">qemu-utils-hwe</span>
+  qemu-utils-hwe
+
 
 Installing dependencies:
-  <span style="color: #28c635;">libvirt-common-hwe  libvirt-l10n-hwe  libvirt0-hwe  qemu-block-extra-hwe  ubuntu-virt-hwe</span>
+  qemu-block-extra-hwe  ubuntu-virt-hwe
+
 
 REMOVING:
-  <span style="color: #f30707;">libvirt-clients  libvirt-common  libvirt-l10n  libvirt0  qemu-block-extra  qemu-utils  ubuntu-virt</span>
+  ovmf          ovmf-inteltdx       qemu-system-data            qemu-system-modules-spice  seabios
+  ovmf-amdsev   qemu-block-extra    qemu-system-gui             qemu-system-x86            ubuntu-virt
+  ovmf-generic  qemu-system-common  qemu-system-modules-opengl  qemu-utils
+
 
 Summary:
-  Upgrading: 0, Installing: 6, Removing: 7, Not Upgrading: 130
-  Download size: 8003 kB
-  Space needed: 23.6 MB / 6638 MB available
+  Upgrading: 0, Installing: 3, Removing: 14, Not Upgrading: 9
+  Download size: 2496 kB
+  Freed space: 118 MB
 
-Continue? [Y/n] 
-</code></pre>
 
-In this example, the installation of the **qemu-utils-hwe** misses installing the counterpart package of **libvirt-clients** since it is only a Recommends dependency. Here, APT warns that **libvirt-clients** is removed but not replaced with **libvirt-clients-hwe**:
+Continue? [Y/n]
+```
 
-<pre><code>Continue? [Y/n]
-Get:1 http://archive.ubuntu.com/ubuntu resolute/main amd64 libvirt0-hwe amd64 12.0.0-1ubuntu5 [1676 kB]
-Get:2 http://archive.ubuntu.com/ubuntu resolute/main amd64 ubuntu-virt-hwe all 1:10.2.1+ds-1ubuntu4 [11.6 kB]
-Get:3 http://archive.ubuntu.com/ubuntu resolute/main amd64 libvirt-common-hwe amd64 12.0.0-1ubuntu5 [116 kB]
-Get:4 http://archive.ubuntu.com/ubuntu resolute/main amd64 libvirt-l10n-hwe all 12.0.0-1ubuntu5 [3715 kB]
-Get:5 http://archive.ubuntu.com/ubuntu resolute/main amd64 qemu-utils-hwe amd64 1:10.2.1+ds-1ubuntu4 [2389 kB]
-Get:6 http://archive.ubuntu.com/ubuntu resolute/main amd64 qemu-block-extra-hwe amd64 1:10.2.1+ds-1ubuntu4 [95.4 kB]
-Fetched 8003 kB in 5s (1488 kB/s)
-<span style="color: #c62828;">Virt: switch of the ubuntu-virt[-hwe] stack is detected and there are orphaned removals (no counterpart being installed):</span>
-<span style="color: #c62828;">  - libvirt-clients</span>
-<span style="color: #c62828;">Virt: Please install them back and use the ubuntu_virt_helper script to switch between ubuntu-virt[-hwe] packages.</span>
-(Reading database ... 97187 files and directories currently installed.)
-Removing libvirt-clients (12.0.0-1ubuntu5) ...
-Removing libvirt-l10n (12.0.0-1ubuntu5) ...
-Removing qemu-block-extra (1:10.2.1+ds-1ubuntu3) ...</code></pre>
-
-The result is an incomplete stack (missing **libvirt-clients-hwe**), as shown below:
+In this specific example, installing qemu-utils-hwe does not automatically install the HWE counterparts for several related packages, as they are part of qemu-utils-hwe’s dependencies. Consequently, APT issues a warning, noting that packages have been removed but have not been replaced with their respective HWE counterparts:
 
 ```bash
-root@virt:~# ubuntu_virt_helper --verbose
+Get:1 http://archive.ubuntu.com/ubuntu resolute/main amd64 ubuntu-virt-hwe all 1:10.2.1+ds-1ubuntu4 [11.6 kB]
+Get:2 http://archive.ubuntu.com/ubuntu resolute/main amd64 qemu-utils-hwe amd64 1:10.2.1+ds-1ubuntu4 [2389 kB]
+Get:3 http://archive.ubuntu.com/ubuntu resolute/main amd64 qemu-block-extra-hwe amd64 1:10.2.1+ds-1ubuntu4 [95.4 kB]
+Fetched 2496 kB in 1s (3358 kB/s)
+Virt: switch of the ubuntu-virt[-hwe] stack is detected and there are orphaned removals (no counterpart being installed):
+  - ovmf
+  - ovmf-amdsev
+  - ovmf-generic
+  - ovmf-inteltdx
+  - qemu-system-x86
+  - qemu-system-modules-spice
+  - qemu-system-common
+  - qemu-system-data
+  - qemu-system-gui
+  - qemu-system-modules-opengl
+  - seabios
+Virt: Please install them back and use the ubuntu-virt-helper script to switch between ubuntu-virt[-hwe] packages.
+(Reading database ... 96412 files and directories currently installed.)
+Removing ovmf (2025.11-3ubuntu7) ...
+Removing ovmf-amdsev (2025.11-3ubuntu7) ...
+Removing ovmf-generic (2025.11-3ubuntu7) ...
+```
+
+The result can be an incomplete stack (in this case missing 11 packages when compared to before), as shown below:
+
+```bash
+root@enticed-cichlid:~# ubuntu_virt_helper --verbose
 Installed variant: hwe
 
-7 packages:
-  - libvirt-common-hwe (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
-  - libvirt-l10n-hwe (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
-  - libvirt0-hwe:amd64 (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
+
+4 packages:
   - qemu-block-extra-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
   - qemu-utils-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, manual)
   - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, manual)
   - ubuntu-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
 ```
 
-This can break existing **virt-manager** workflows. To avoid partial transitions, use the helper for a complete and safe switch:
+This can break existing workflows that make use of the virtualization features. To avoid such partial exchanges, instead use the helper for a complete and safe switch. The example starts from the same conditions as above:
 
-<pre><code>root@virt:~# ubuntu_virt_helper switch
+```bash
+root@enticed-cichlid:~# ubuntu_virt_helper switch
 Switching from base to hwe variant...
-Installing:                     
-  <span style="color: #28c635;">libvirt-clients-hwe  libvirt-common-hwe  libvirt-l10n-hwe  libvirt0-hwe  qemu-block-extra-hwe  qemu-utils-hwe  ubuntu-virt-hwe</span>
+Installing:
+  ovmf-amdsev-hwe   ovmf-inteltdx-hwe       qemu-system-data-hwe            qemu-system-modules-spice-hwe  seabios-hwe
+  ovmf-generic-hwe  qemu-block-extra-hwe    qemu-system-gui-hwe             qemu-system-x86-hwe            ubuntu-virt-hwe
+  ovmf-hwe          qemu-system-common-hwe  qemu-system-modules-opengl-hwe  qemu-utils-hwe
+
 
 Suggested packages:
-  libvirt-clients-qemu  libvirt-daemon  libvirt-login-shell
+  samba  vde2  passt
+
 
 REMOVING:
-  <span style="color: #c62828;">libvirt-clients  libvirt-common  libvirt-l10n  libvirt0  qemu-block-extra  qemu-utils  ubuntu-virt</span>
+  ovmf         ovmf-generic   qemu-block-extra    qemu-system-data  qemu-system-modules-opengl  qemu-system-x86  seabios
+  ovmf-amdsev  ovmf-inteltdx  qemu-system-common  qemu-system-gui   qemu-system-modules-spice   qemu-utils       ubuntu-virt
+
 
 Summary:
-  Upgrading: 0, Installing: 7, Removing: 7, Not Upgrading: 130
-  Download size: 8431 kB
-  Space needed: 24.8 MB / 6674 MB available
+  Upgrading: 0, Installing: 14, Removing: 14, Not Upgrading: 9
+  Download size: 25.5 MB
+  Freed space: 7168 B
 
-Continue? [Y/n] </code></pre>
 
+Continue? [Y/n]
+```
 
 The helper performs a one-to-one replacement, preserving dependencies and preventing partial transitions. It also preserves each package's auto/manual install mark, making the switch transparent to users:
 
-<pre><code>root@virt:~# ubuntu_virt_helper --verbose
+```bash
+root@enticed-cichlid:~# ubuntu_virt_helper --verbose
 Installed variant: hwe
 
-8 packages:
-  - libvirt-clients-hwe (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
-  - libvirt-common-hwe (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
-  - libvirt-l10n-hwe (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
-  - libvirt0-hwe:amd64 (12.0.0-1ubuntu5, src:libvirt-hwe, auto)
+
+15 packages:
+  - ovmf-amdsev-hwe (2025.11-3ubuntu8, src:edk2-hwe, auto)
+  - ovmf-generic-hwe (2025.11-3ubuntu8, src:edk2-hwe, auto)
+  - ovmf-hwe (2025.11-3ubuntu8, src:edk2-hwe, auto)
+  - ovmf-inteltdx-hwe (2025.11-3ubuntu8, src:edk2-hwe, auto)
   - qemu-block-extra-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-common-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-data-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-gui-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-modules-opengl-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-modules-spice-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - qemu-system-x86-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, manual)
   - qemu-utils-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
-  - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
+  - seabios-hwe (1.17.0-1ubuntu2, src:seabios-hwe, auto)
+  - ubuntu-helper-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, manual)
   - ubuntu-virt-hwe (1:10.2.1+ds-1ubuntu4, src:qemu-hwe, auto)
-</code></pre>
+```
