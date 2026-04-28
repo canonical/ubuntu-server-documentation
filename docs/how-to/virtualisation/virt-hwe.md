@@ -147,7 +147,7 @@ Installed variant: hwe
 
 ## Proper variant switch using the helper script
 
-Manual unmanaged switch can break existing workflows that make use of the virtualization features. To avoid such partial exchanges, instead use the helper for a complete and safe switch. The example starts from the same conditions as above:
+Manual un-managed switch can break existing workflows that make use of the virtualization features. To avoid such partial exchanges, instead use the helper for a complete and safe switch. The example starts from the same conditions as above:
 
 ```bash
 root@enticed-cichlid:~# ubuntu_virt_helper switch
