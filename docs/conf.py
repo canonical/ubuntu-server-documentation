@@ -295,7 +295,7 @@ stable_distro = "resolute"
 manpages_url = (
     "https://manpages.ubuntu.com/manpages/"
     + stable_distro
-    + "/en/man{section}/{page}.{section}.html"
+    + "/man{section}/{page}.{section}.html"
 )
 
 

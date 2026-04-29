@@ -12,12 +12,14 @@ are available, and how to interact with various tools.
 
 * Our {ref}`reference-glossary` contains definitions for common terminology
   used in this documentation.
+* Our {ref}`command-line-cheat-sheet` provides a quick reference for basic CLI commands.
 
 ```{toctree}
 :hidden:
 :titlesonly:
 
 glossary
+cli-cheatsheet
 ```
 
 ## Server installation
@@ -55,3 +57,4 @@ administrators.
 
 other-tools
 ```
+

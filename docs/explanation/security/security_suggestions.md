@@ -55,11 +55,11 @@ relevant for your setup.
    but is free for personal/business use on up to 5 machines. The most useful
    Pro features for *any* Ubuntu Server are:
 
-   * [Expanded Security Maintenance (ESM)](https://ubuntu.com/security/esm)
+   * [Expanded Security Maintenance (ESM)](https://documentation.ubuntu.com/security/security-updates/esm/)
      which expands the Ubuntu LTS commitment on packages in Main from 5 years
      to 10 years -- and now also covers packages in Ubuntu Universe.
    
-   * [Livepatch](https://ubuntu.com/security/livepatch) applies kernel patches
+   * [Livepatch](https://ubuntu.com/security/livepatch/docs) applies kernel patches
      for high and critical severity vulnerabilities while the system is running.
      This avoids the need for an immediate reboot.
 
@@ -103,7 +103,7 @@ system. These how-to guides will help you set up these additional precautions:
 
 The following section will help direct you to the security-related packages for
 which we provide documentation. For more discussion about advanced security
-considerations, refer to the [Ubuntu Security](https://ubuntu.com/security)
+considerations, refer to the [Ubuntu Security](https://documentation.ubuntu.com/security/)
 documentation. 
 
 ### Advanced Access Control
@@ -185,7 +185,7 @@ Authorities (CA), our how-to guide will show you how to
 
 If you need to adhere to specific industry standards, or are otherwise operating
 in a high security environment, refer to the
-[Ubuntu Security documentation](https://ubuntu.com/security/security-standards).
+[Ubuntu Security documentation](https://documentation.ubuntu.com/security/compliance/).
 
 
 
