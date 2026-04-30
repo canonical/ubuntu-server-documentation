@@ -262,7 +262,7 @@ linkcheck_ignore = [
     "https://web.archive.org/web/20241130024605/http://networktimesecurity.org/",
     "https://www.intel.com/*",
     "https://www.packtpub.com/*",
-    # Rate-limited domains that cause delays
+    "https://www.redbooks.ibm.com/*",
     "http://www.gnu.org/software/*",
     "https://github.com./*",
 ]

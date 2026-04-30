@@ -7,7 +7,7 @@ myst:
 (how-to-web-services)=
 # Web services
 
-Web servers are used to serve content over a network (or the Internet). If you want more of an introduction to the different types of web servers available in Ubuntu, check out our {ref}`introduction-to-web-servers`.
+Web servers are used to serve content over a network (or the Internet). If you want more of an introduction to the different types of web servers available in Ubuntu, check out our {ref}`introduction-to-web-services`.
 
 ## Proxy servers
 

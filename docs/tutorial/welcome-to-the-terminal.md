@@ -18,6 +18,7 @@ In this tutorial, we'll use a virtual machine (VM) with Ubuntu Server to poke ar
   The Multipass virtual machine needs at least **5 GB of disk space**, and **1 GB of memory**.
 
 
+(tutorial-install-multipass)=
 ## Install Multipass
 
 ::::{tab-set}
@@ -33,7 +34,6 @@ If you're on Windows, Mac, or another Linux operating system, Multipass can be i
 
 ::::
 
-## Open a terminal window
 
 Now that Multipass is installed, we need a terminal window to run our commands in. How you open one depends on your operating system.
 
@@ -65,6 +65,8 @@ To confirm everything is working, type `multipass version` and press {kbd}`Enter
 :::
 
 ::::
+
+## Understanding the terminal
 
 In our new terminal window, we see a **shell prompt** (sometimes called a command prompt), which is constructed as `your-user-name@your-machine-name` and followed by a dollar sign (`$`). This is where we input commands to the computer.
 
@@ -111,15 +113,17 @@ We've just successfully run our first command on the CLI!
 
 ### The shell
 
-You may be wondering: "why we need a shell at all? Why can't we just tell the operating system what to do directly?"
+You may be wondering: "why we need a shell at all? Why can't we just tell the operating system what to do using our Desktop environment?"
 
-This is a good question. In short, it's because the hardware in our machines doesn't speak "human", and it's difficult and time consuming for us to try and speak "computer". So, we use the shell as a translation layer to convert what we want into precise **system calls** that the computer can understand. 
+This is a good question. The simple answer is that while you *can* use the Desktop's Graphical User Interface (GUI) to interact with your computer, the shell is much more resource-efficient and faster, since it doesn't need to handle computationally expensive graphics. Servers rarely even have a GUI installed for precisely this reason.
 
 ![shell](./images/shell.png)
 
-This makes computers much easier to work with, and it means we don't need to be fluent in binary code. Instead, we can learn commands, which are a sort of shorthand.
+For simple tasks, like renaming a single file, there's little difference between using your GUI and the CLI to complete it. However, if you need to rename 1,000 files to include the date they were created in the name, this would be a tiresome and time-consuming task to do in the GUI -- lots of clicking and typing. Using the CLI, you can pull in the date automatically, set the pattern you want the names to follow, and have all 1,000 files renamed instantly.
 
-In fact, Multipass *itself* is a shell. Instead of being a translation layer around our physical machine, it's a translation layer around the *virtual* machine we've just made. Let's access our virtual machine now by running this command:
+The real power and efficiency of the shell can be felt when you need to do something many times. You can even automate routine or large/complex tasks with shell scripts and command chaining -- more on that in the next tutorial, though!
+
+The virtual machine provided by Multipass has no Graphical User Interface (GUI). It **abstracts** away all the details of virtualization, which is quite complicated, so we don't have to worry about them. This means we can just open a shell inside our Multipass VM **instance**. Let's do that now by running this command:
 
 ```{terminal}
 :copy:
@@ -171,10 +175,10 @@ You've probably noticed that your shell prompt has changed, and now says `ubuntu
 
 ### Other ways to use commands
 
-As we've now seen, commands are the instructions that we give the computer by typing them into the terminal. In our documentation, commands are `formatted like this`.
+As we've now seen, CLI commands are the instructions that we give the computer by typing them into the terminal. In our documentation, commands are `formatted like this`.
 
 Sometimes, we might want to run a whole set of commands at once.
-For convenience, we can save them in a file called a **shell script**, in the order we want the computer to run them. Then, we just need to command the computer to run the script, and it runs the commands in the script by itself.
+For convenience, we can save them in a file called a **shell script**, in the order we want the shell to execute them. Then, we just need to tell the shell to run the script, and it executes the commands in the script by itself.
 
 As you become more familiar with the command line, you can also begin to define your own commands built from other commands. These are called **aliases**, and they can be very handy shortcuts for small sets of commands you want to run often.
 
@@ -267,6 +271,13 @@ mv <file-name-1> <file-name-2> <folder-name> # Move all the named files to this 
 
 You can move any number of files you want. The names of the files you want to move always come right after the `mv` command. The folder you want to move those files to is *always* at the end. That's to say, these are **positional arguments** -- the order of where they appear in the command is important.
 
+:::{note}
+It's also worth highlighting the common convention `command [foo] <bar>` for arguments that you'll see in most CLI documentation.
+* Square brackets (`[ ]`): anything inside is *optional*, so the command will run without it. This is common for **flags** that change or extend the behaviour of a command, as we'll see shortly.
+* Side angle brackets (`< >`): this is a *required* placeholder, where you should substitute your own information.
+In both cases, you exclude the brackets when you run the command -- the brackets exist to show you what's required and what's optional.
+:::
+
 If you have a lot of files to move, though, there's a handy shortcut.
 
 ```{terminal}
@@ -310,7 +321,7 @@ ls
 my-first-file.txt my-second-file.txt my-third-file.txt
 ```
 
-Did you notice how the shell prompt changed to `ubuntu@tutorial:~/my-folder$` after we used the `cd` command? This is our biggest navigation help! The tilde (`~`) symbol signifies our home directory, which was our starting point. This is often called the "root directory". All the directories and subdirectories we create can trace a path back to the root directory.
+Did you notice how the shell prompt changed to `ubuntu@tutorial:~/my-folder$` after we used the `cd` command? This is our biggest navigation help! The tilde (`~`) symbol signifies our home directory (located at `/home/your_user_name`, which was our starting point. All the directories and subdirectories we create can trace a path back to this home directory.
 
 Let's illustrate how this works by moving around a bit more. Start by making a subdirectory:
 
@@ -322,7 +333,7 @@ Let's illustrate how this works by moving around a bit more. Start by making a s
 mkdir second-level
 ```
 
-Another helpful feature of the command line is "tab completion". If a command, directory, or file already exists, we can start typing it and then press the {kbd}`TAB` key on the keyboard to complete it. Let's navigate to the directory we just made by typing `cd s`, and then press {kbd}`TAB`. The CLI automatically fills in the rest!
+Another helpful feature of the command line is "tab completion". If a command, directory, or file already exists, we can start typing it and then press the {kbd}`TAB` key on the keyboard to complete it. Let's navigate to the directory we just made by typing `cd s`, and then press {kbd}`TAB`. The shell automatically fills in the rest!
 
 
 ```{terminal}
@@ -554,6 +565,10 @@ cp file1.txt new-folder/
 
 Double check with `ls` and `cd` that this has worked. You should now have `file1.txt` in both the home directory, and in `new-folder`.
 
+:::{note}
+Be aware that the terminal will not check for, or warn you about, collisions between names. If you tell it to rename a file where a file of that name already exists, it will gleefully overwrite the original!
+:::
+
 The `cp` command is not just for files. We can make backup copies of a whole directory (and all its contents) using the `-a` (or `--archive`) flag. This flag preserves all the file permissions:
 
 ```{terminal}
@@ -581,7 +596,7 @@ Remember, there is no recycle bin in the Linux terminal -- once you `rm` a file,
 ```
 
 
-## Understanding file types
+## Understanding file attributes
 
 In Linux, everything is represented as a file -- including directories, devices, and network connections. When we use `ls -l`, the very first character of each line tells us what type of file it is.
 
@@ -604,7 +619,7 @@ The output looks quite complicated at first, so let's break it down using the fi
 | Column         | What it is  | Description |
 | ---            | ---         | --- |
 | `-rw-rw-r--`   | Permissions | The type of file and who can read/write/execute it |
-| `1`            | Links       | The number of hard links to the file or directory |
+| `1`            | Links       | The number of distinct filesystem paths that refer to this file or directory (called "hard links") |
 | `ubuntu`       | Owner       | The username of the person who owns the file |
 | `ubuntu`       | Group       | The name of the group that has specific permissions |
 | `0`            | Size        | The size of the file in bytes |
@@ -774,6 +789,7 @@ Some common permission combinations:
 | `755` | `rwxr-xr-x` | Owner can do everything; others can read and execute. Suitable for scripts and directories. |
 | `700` | `rwx------` | Only the owner has any access. |
 | `600` | `rw-------` | Owner can read/write; no one else has any access. |
+| `777` | `rwxrwxrwx` | Full access to *everyone*. **This is a dangerous permission to grant**, but may be useful for debugging permission-related problems or on temporary files. Please avoid using this one unless you really know what you're doing, and if you do see it, you should probably change it to one of the less permissive combinations. |
 
 
 When we create a new file, it gets a default set of permissions. The **`umask`** ("user file-creation mode mask") controls what those defaults are. We can check the current `umask` with:
@@ -840,7 +856,7 @@ Where:
 
 ## The Filesystem Hierarchy Standard
 
-Now that we know how to move around the filesystem, it's worth understanding how it is organised. Linux follows the **Filesystem Hierarchy Standard** (FHS), which defines where different types of files and directories belong. This is maintained by the Linux Foundation, and it means the structure of any Linux system is predictable and consistent.
+Now that we know how to move around the filesystem, it's worth understanding how it is organised. Most Linux distributions, including Ubuntu, follow the **Filesystem Hierarchy Standard** (FHS), which defines where different types of files and directories belong. This is maintained by the Linux Foundation, and it means the structure of any conforming system is predictable and consistent.
 
 All files and directories live under the **root directory**, represented by a single forward slash `/`. Even files stored on separate physical disks appear as part of this single tree.
 
@@ -861,13 +877,15 @@ Here is what the most important directories contain:
 
 | Directory | Purpose |
 |-----------|---------|
-| `/bin` and `/sbin` | Essential command binaries (e.g., `ls`, `cp`, `mv`) and system binaries (e.g. `iptables`, `reboot`) respectively |
+| `/bin`  | Essential command binaries (e.g., `ls`, `cp`, `mv`) |
+| `/sbin` | System binaries (e.g. `iptables`, `reboot`) |
 | `/boot` | Static files needed to boot the system, including the Linux kernel and bootloader files |
 | `/dev` | Device files (e.g. `/dev/sda` and `/dev/null`) |
 | `/etc` | System configuration files (e.g. `/etc/group` and `/etc/password`) |
 | `/home` | User home directories (optional, but standard) |
 | `/lib` | Essential shared libraries (needed by the binaries in `/bin` and `/sbin`) |
-| `/media` and `/mnt` | Temporary mount points for removable media (like USBs and CDs) and for manually mounting filesystems (respectively) |
+| `/media` | Mount points for temporarily mounted removable media (like USBs or CDs) |
+| `/mnt` | Mount points for manually mounted filesystems (kept separate to avoid clashes) |
 | `/root` | The home directory for the root user specifically |
 | `/srv` | Service data, for services provided by the system |
 | `/tmp` | Temporary files (cleared on reboot) |
@@ -1063,11 +1081,11 @@ This lists every command whose description mentions "copy", which can help us fi
 
 ## Next steps
 
-This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help.
+This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help. All the commands we covered here (as well as some extra ones) can be found in our reference {ref}`cli-cheatsheet`.
 
-If you wish, you can continue to explore the file system on your virtual machine.
+If you wish, you can continue to explore the file system on your virtual machine, or proceed straight to the {ref}`cli-in-depth` tutorial where you can use the same VM.
 
-Once you are finished and want to exit the VM, just type "`exit`".
+However, if you're done for now and want to exit the VM, just type "`exit`".
 
 ```{terminal}
 :copy:
@@ -1087,3 +1105,4 @@ This will take you out of the VM and back to your live machine. Then, you can ru
 multipass delete tutorial
 multipass purge
 ```
+
