@@ -117,7 +117,7 @@ You may be wondering: "why we need a shell at all? Why can't we just tell the op
 
 This is a good question. The simple answer is that while you *can* use the Desktop's Graphical User Interface (GUI) to interact with your computer, the shell is much more resource-efficient and faster, since it doesn't need to handle computationally expensive graphics. Servers rarely even have a GUI installed for precisely this reason.
 
-![shell](./images/shell.png)
+![shell](./images/shells.svg)
 
 For simple tasks, like renaming a single file, there's little difference between using your GUI and the CLI to complete it. However, if you need to rename 1,000 files to include the date they were created in the name, this would be a tiresome and time-consuming task to do in the GUI -- lots of clicking and typing. Using the CLI, you can pull in the date automatically, set the pattern you want the names to follow, and have all 1,000 files renamed instantly.
 
@@ -1081,7 +1081,7 @@ This lists every command whose description mentions "copy", which can help us fi
 
 ## Next steps
 
-This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help. All the commands we covered here (as well as some extra ones) can be found in our reference {ref}`cli-cheatsheet`.
+This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help. All the commands we covered here (as well as some extra ones) can be found in our reference {ref}`command-line-cheat-sheet`.
 
 If you wish, you can continue to explore the file system on your virtual machine, or proceed straight to the {ref}`cli-in-depth` tutorial where you can use the same VM.
 
