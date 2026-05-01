@@ -17,7 +17,7 @@ In this tutorial, we'll use a virtual machine (VM) with Ubuntu Server to poke ar
 
   The Multipass virtual machine needs at least **5 GB of disk space**, and **1 GB of memory**.
 
-
+(tutorial-install-multipass)=
 ## Install Multipass
 
 ::::{tab-set}
@@ -1061,7 +1061,7 @@ man -k copy
 This lists every command whose description mentions "copy", which can help us find the right tool for the job.
 
 
-## Next steps
+## Success!
 
 This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help.
 
@@ -1087,3 +1087,7 @@ This will take you out of the VM and back to your live machine. Then, you can ru
 multipass delete tutorial
 multipass purge
 ```
+
+## Next steps
+
+If you wish to continue learning, we recommend following the {ref}`cli-in-depth` tutorial next. This tutorial will teach you the more advanced ways to interact with the Command Line Interface; how data flows, how input and output can be used more efficiently, and how to use variables.
