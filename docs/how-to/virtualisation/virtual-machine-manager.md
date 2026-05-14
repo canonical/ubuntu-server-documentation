@@ -39,11 +39,11 @@ The above example assumes that SSH connectivity between the management system an
 
 When using `virt-manager`, it is always important to know the context you're looking at. The main window initially lists only the currently-defined guests. You'll see their **name**, **state** (e.g., 'Shutoff' or 'Running') and a small chart showing the **CPU usage**.
 
-![virt-manager-gui-start|499x597](https://assets.ubuntu.com/v1/07edc140-virt-manager-gui-start.png) 
+![virt-manager-gui-start|499x597](../../images/07edc140-virt-manager-gui-start.png) 
 
 In this context, there isn't much to do except start/stop a guest. However, by double-clicking on a guest or by clicking the **Open** button at the top of the window, you can see the guest itself. For a running guest, that includes the guest's main-console/virtual-screen output.
 
-![virt-manager-gui-showoutput|690x386](https://assets.ubuntu.com/v1/dda60637-virt-manager-gui-show-output.png) 
+![virt-manager-gui-showoutput|690x386](../../images/dda60637-virt-manager-gui-show-output.png) 
 
 If you are deeper in the guest configuration, clicking on "Show the graphical console" in the top left of the guest's window will get you back to this output.
 
@@ -51,13 +51,13 @@ If you are deeper in the guest configuration, clicking on "Show the graphical co
 
 `virt-manager` provides a handy, GUI-assisted way to edit guest definitions. To do so, the per-guest context view will have "Show virtual hardware details" at the top of the guest window. Here, you can edit the virtual hardware of the guest, which will alter the [guest representation](https://libvirt.org/formatdomain.html) behind the scenes.
 
-![virt-manager-gui-edit|690x346](https://assets.ubuntu.com/v1/7422b267-virt-manager-gui-edit.png) 
+![virt-manager-gui-edit|690x346](../../images/7422b267-virt-manager-gui-edit.png) 
 
 The UI edit ability is limited to the features known to (and supported by) that GUI feature. Not only does libvirt grow features faster than `virt-manager` can keep up -- adding every feature would also overload the UI and render it unusable.
 
 To strike a balance between the two, there also is the XML view which can be reached via the "Edit libvirt XML" button.
 
-![virt-manager-gui-XML|690x346](https://assets.ubuntu.com/v1/34e3503f-virt-manager-gui-xml.png) 
+![virt-manager-gui-XML|690x346](../../images/34e3503f-virt-manager-gui-xml.png) 
 
 By default, this will be read-only and you can see what the UI-driven actions have changed. You can allow read-write access in this view via the "Preferences". This is the same content that the `virsh edit` of the {ref}`libvirt-client <libvirt>` exposes.
 
@@ -81,7 +81,7 @@ virt-viewer <guestname>
 
 The UI will show a window representing the virtual screen of the guest, just like with `virt-manager` above, but without the extra buttons and features around it.
 
-![virt-viewer-gui-showoutput|690x598](https://assets.ubuntu.com/v1/a38dc56a-virt-viewer-gui-show-output.png) 
+![virt-viewer-gui-showoutput|690x598](../../images/a38dc56a-virt-viewer-gui-show-output.png) 
 
 Similarly to `virt-manager`, `virt-viewer` can also connect to a remote host using SSH with key authentication:
 

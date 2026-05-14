@@ -32,7 +32,7 @@ The configuration above gives us 19 domains (or slots) with the capacity of 1 mi
 - ...
 - 19th slot (last): IDs from `19000000` up to `19999999`
 
-![domain-slots-2|794x188](https://assets.ubuntu.com/v1/346983ee-domain-slots-2.png)
+![domain-slots-2|794x188](../../images/346983ee-domain-slots-2.png)
 
 
 Which domain will get which slot? That is **not deterministic**. It will basically be a first come, first serve. Furthermore, if a domain exhausts the available IDs from a slot, an extension slot will be used, in which case the domain will be using two (possibly non-consecutive even) slots.

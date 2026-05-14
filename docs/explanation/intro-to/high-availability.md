@@ -28,7 +28,7 @@ A definition of high availability clusters [from Wikipedia:](https://en.wikipedi
 
 ### Example of HA cluster quorum
 
-![2-node HA cluster|578x674,75%](https://assets.ubuntu.com/v1/14896401-HA_intro.png)
+![2-node HA cluster|578x674,75%](../../images/14896401-HA_intro.png)
 
 ## Fencing
 

@@ -35,7 +35,7 @@ This configuration is using two IDMap backends, and carving out two ranges:
 - `*` domain, or "default domain": any SID that is not mapped via another more specific IDMap configuration will use this backend. Since this mapping is not deterministic, a database is needed to keep a record, hence the `tdb` backend is used.
 - `EXAMPLE` domain: uses the RID IDMap backend, and users from the `EXAMPLE` domain will be allocated IDs in the range of 1,000,000 to 1,999,999, that is, there is space for 1 million IDs. Since the mapping is deterministic, there is no need for a database.
 
-![simple-rid-ranges|794x315, 75%](https://assets.ubuntu.com/v1/87c43d5d-simple-rid-ranges.png)
+![simple-rid-ranges|794x315, 75%](../../images/87c43d5d-simple-rid-ranges.png)
 
 
 
