@@ -70,7 +70,7 @@ bootstrap server instead of a public CA-signed certificate like the one used for
 We can see the public CA certificate of `1.ntp.ubuntu.com` by:
 
 ```bash
-openssl s_client -connect 1.ntp.ubuntu.com:4460
+openssl s_client -connect 1.ntp.ubuntu.com:4460 -servername 1.ntp.ubuntu.com
 ```
 
 The output contains the certificate:
