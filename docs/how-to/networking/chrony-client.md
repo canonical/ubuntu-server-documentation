@@ -42,7 +42,7 @@ Leap status     : Normal
 
 ### Network Time Security (NTS)
 
-`chrony` supports "Network Time Security" (NTS) and enables it by default by using the Ubuntu NTS pools.
+`chrony` supports "Network Time Security" (NTS) and enables it by default using the Ubuntu NTS pools.
 The Ubuntu pools are specified in the file `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. Here is the
 default configuration used by Ubuntu:
 
