@@ -83,7 +83,7 @@ issuer=C=US, O=Let's Encrypt, CN=R13
 ---
 ```
 
-whereas the certificate of `ntp-bootstrap.ubuntu.com`:
+By contrast, the certificate of `ntp-bootstrap.ubuntu.com` is:
 
 ```text
 Server certificate
