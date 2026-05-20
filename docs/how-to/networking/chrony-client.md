@@ -68,13 +68,15 @@ One important detail is the use of a privately trusted, private CA-signed certif
 bootstrap server instead of a public CA-signed certificate like the one used for servers such as
 `1.ntp.ubuntu.com`.
 
-We can see the public CA certificate of `1.ntp.ubuntu.com` by:
+
+That command returns the certificate of the server `1.ntp.ubuntu.com`, and in that certificate we
+can see who issued it (the CA):
 
 ```bash
 openssl s_client -connect 1.ntp.ubuntu.com:4460 -servername 1.ntp.ubuntu.com
 ```
 
-The output contains the certificate:
+The output contains the certificate, and the field issuer shows who issued it:
 
 ```text
 Server certificate
@@ -93,10 +95,9 @@ subject=CN=ntp-bootstrap.ubuntu.com
 issuer=CN=ubuntu
 ```
 
-shows the issuer as `ubuntu`, which is not a Certificate Authority (CA), compared with `Let's Encrypt`,
-which is a CA.
+This shows the issuer as `ubuntu`, which is not a publicly recognized Certificate Authority, unlike `Let's Encrypt`.
 
-This certificate is configured in the file `/etc/chrony/nts-bootstrap-ubuntu.crt`, and `chrony` is configured to trust
+This certificate is shipped in the file `/etc/chrony/nts-bootstrap-ubuntu.crt`, and `chrony` is configured to trust
 it in `/etc/chrony/conf.d/ubuntu-nts.conf`:
 
 ```text
