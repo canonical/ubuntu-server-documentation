@@ -63,8 +63,9 @@ pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
 ```
 adds the `ntp-bootstrap.ubuntu.com` source, which is used for systems with a large clock offset.
 
-One important detail is the use of a private, self-signed certificate for the bootstrap server instead of
-a CA-signed certificate like the one used for servers such as `1.ntp.ubuntu.com`.
+One important detail is the use of a privately trusted, private CA-signed certificate chain for the
+bootstrap server instead of a public CA-signed certificate like the one used for servers such as
+`1.ntp.ubuntu.com`.
 
 We can see the public CA certificate of `1.ntp.ubuntu.com` by:
 
