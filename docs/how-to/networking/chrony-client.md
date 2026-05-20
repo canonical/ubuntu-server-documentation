@@ -42,12 +42,101 @@ Leap status     : Normal
 
 ### Network Time Security (NTS)
 
-`chrony` supports "Network Time Security" (NTS) and enables it by default, using the Ubuntu NTS pools. This is done by specifying a `server` or `pool` as usual. Afterwards, options can be listed and it is there that `nts` can be added. For example:
+`chrony` supports "Network Time Security" (NTS) and enables it by default by using the Ubuntu NTS pools.
+The Ubuntu pools are specified in the file `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. Here is the
+default configuration used by Ubuntu:
 
 ```text
-server <server-fqdn-or-IP> iburst nts
-# or as concrete example
 pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 2.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 3.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 4.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
+```
+
+The `nts` flag forces the use of `NTS`, and `prefer` marks that source as the preferred time source when
+selecting among multiple valid servers.
+
+The line:
+```text
+pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
+```
+adds the `ntp-bootstrap.ubuntu.com` source, which is used for systems with a large clock offset.
+
+One important detail is the use of a private, self-signed certificate for the bootstrap server instead of
+a CA-signed certificate like the one used for servers such as `1.ntp.ubuntu.com`.
+
+We can see the public CA certificate of `1.ntp.ubuntu.com` by:
+
+```bash
+openssl s_client -connect 1.ntp.ubuntu.com:4460
+```
+
+The output contains the certificate:
+
+```text
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFCDCCA/CgAwIBAgISBfnsZ8n3rFXSTdTEB2J75x67MA0GCSqGSIb3DQEBCwUA
+MDMxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQwwCgYDVQQD
+EwNSMTMwHhcNMjYwMjIzMTM0MjMzWhcNMjYwNTI0MTM0MjMyWjAZMRcwFQYDVQQD
+Ew5udHAudWJ1bnR1LmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEB
+AKp1kSGolwviZkcVpI7TizQypYZY+tziv2qK2KrwIq1KGNuI2QkJ71umUBJOVXQi
+DiDWDEN/NoYgU41O5TmEVxm2Czt+CjykreWPcsiVUz4+IQAYDTgE413okdLwv8ex
+chez886aGS/OhxMK1AqV+LsarZQ3tZys/rDhX9DD5008hxEPzv0CJFD9W3pzRg8w
+VymLY6MWKY4oAUJQ+U1M2I3kXWSqECjKWYgzCfn874GBncE51mCv33vXQn3froud
+eo79NHqKDNPsXAEPjawe3O5jT4bW3KpJ7DTAmpMOltNf64KYiIxXy46DZteQQxDn
+tmGmxxaaFEtAiIdLPbD5IWECAwEAAaOCAi4wggIqMA4GA1UdDwEB/wQEAwIFoDAT
+BgNVHSUEDDAKBggrBgEFBQcDATAMBgNVHRMBAf8EAjAAMB0GA1UdDgQWBBQeEVXj
+f0aOqBFprkHW0i4sYm0SgzAfBgNVHSMEGDAWgBTnq58PLDOgU9NeT3jIsoQOO9aS
+MzAzBggrBgEFBQcBAQQnMCUwIwYIKwYBBQUHMAKGF2h0dHA6Ly9yMTMuaS5sZW5j
+ci5vcmcvMCsGA1UdEQQkMCKCECoubnRwLnVidW50dS5jb22CDm50cC51YnVudHUu
+Y29tMBMGA1UdIAQMMAowCAYGZ4EMAQIBMC4GA1UdHwQnMCUwI6AhoB+GHWh0dHA6
+Ly9yMTMuYy5sZW5jci5vcmcvNjAuY3JsMIIBDAYKKwYBBAHWeQIEAgSB/QSB+gD4
+AH8AGoudaUpXmMiZoMqIvfSPwLRWYMzDYA0fcfRp/8fRrKMAAAGcivJXAAAIAAAF
+AE0Xp5AEAwBIMEYCIQD5yGSZQ6rDRHghiRYaRDAlTBnwunjCficXxsxjA7R6YAIh
+AMl5KEFUOaF6+IJk568ba9WJkSswUr267XDyG2sGVKoAAHUAlpdkv1VYl633Q4do
+NwhCd+nwOtX2pPM2bkakPw/KqcYAAAGcivJdQQAABAMARjBEAiA8neOLPD9+uloP
+Kd021DLomNul5LJUsM/0B9zzJPVFuQIgIBqO87d3UkZEWbyzGbsjkpgbyI66wTfw
+T9M65wjNpYYwDQYJKoZIhvcNAQELBQADggEBAERBPZTHjkEE+VKaFZi+zOLYmImI
+H5SPbRC3jTa/YWVlS0IMyxAmCDD/zXxJRUdx+nZU04t6M2FzY1Yf3PzOeFApqgxH
+Dpqhob7vaOB3Shrid4KsXaUlgcyJrqeMqxdjUMLXJ1C3PNlct44aUELDPg/H/X5g
+RHfEMZ0ALsiVD5Osag0h4o72iGEMa1QBkL1IKs9dAQIpN3ces7g9JWbIyiZSajSY
+rgIPGboKovspOzntKbqR+DCh/OPqEbBMB0yKZGjOcBR3YsQSv6caZSO/TM5VByUE
+Lw+nu7qRxIOwXjLtt2gb6F4BLZRzKEeKc8LM2MHizlD3ITMme4R7igjVpio=
+-----END CERTIFICATE-----
+subject=CN=ntp.ubuntu.com
+issuer=C=US, O=Let's Encrypt, CN=R13
+---
+```
+
+whereas the certificate of `ntp-bootstrap.ubuntu.com`:
+
+```text
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIBiTCCAS+gAwIBAgIUPlSKCl0OHrnDiEB3/4yJAoeMh18wCgYIKoZIzj0EAwIw
+ETEPMA0GA1UEAwwGdWJ1bnR1MCAXDTcwMDEwMTAwMDAwMFoYDzIxMDAwMTAxMDAw
+MDAwWjAjMSEwHwYDVQQDDBhudHAtYm9vdHN0cmFwLnVidW50dS5jb20wWTATBgcq
+hkjOPQIBBggqhkjOPQMBBwNCAAS7TU/9OynpZSHZIF5/AUQPwCewy50pybP3/DBR
+PV5cNtdj4CefCp09x7hEsrofm2XSh0HkcuoADgO6pioVAOQXo1EwTzA/BgNVHREE
+ODA2ghhudHAtYm9vdHN0cmFwLnVidW50dS5jb22CGioubnRwLWJvb3RzdHJhcC51
+YnVudHUuY29tMAwGA1UdEwEB/wQCMAAwCgYIKoZIzj0EAwIDSAAwRQIhAK06wN7r
+Ys7PDAIvFn2qlIKL8FFLhYtHZLcJwwV6vFgBAiATxuquFRB/xn4Y3ZSMvAxRx9rG
+8vLwOy6cp6CVWRVvWQ==
+-----END CERTIFICATE-----
+subject=CN=ntp-bootstrap.ubuntu.com
+issuer=CN=ubuntu
+```
+
+shows the issuer as `ubuntu`, which is not a Certificate Authority (CA), compared with `Let's Encrypt`,
+which is a CA.
+
+This certificate is configured in the file `/etc/chrony/nts-bootstrap-ubuntu.crt`, and `chrony` is configured to trust
+it in `/etc/chrony/conf.d/ubuntu-nts.conf`:
+
+```text
+ntstrustedcerts 1 /etc/chrony/nts-bootstrap-ubuntu.crt
 ```
 
 For **validation of NTS enablement**, one can list the time sources in use by executing the `chronyc -N sources` command, to find the timeserver in use, as indicated by the `^*` symbol in the first column. Then check the `authdata` of that connection using `sudo chronyc -N authdata`. If the client was able to successfully establish a NTS connection, it will show the `Mode: NTS` field and non-zero values for `KeyID`, `Type` and `KLen`:
