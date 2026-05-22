@@ -35,6 +35,8 @@ Both the server and the client will authenticate each other by first verifying t
 
 ### Set up the Certificate Authority
 
+OpenVPN uses its own internal Public Key Infrastructure (PKI) where every client and server holds a certificate signed by the same CA. This is different from obtaining a public TLS certificate for a web service; the CA here is private and only used to authenticate VPN participants.
+
 To set up your own CA, and generate certificates and keys for an OpenVPN server with multiple clients, first copy the `easy-rsa` directory to `/etc/openvpn`. This will ensure that any changes to the scripts will not be lost when the package is updated. From a terminal, run:
 
 ```bash
