@@ -77,38 +77,53 @@ Several third party entities provide their own instructions on how to add their 
 
 The first step before adding a third party APT repository to your system is to fetch the GPG key for it. This key must be obtained from the third party entity; it should be available at the root of the repository's URL, but you might need to contact them and ask for the key file.
 
-Although several third party guides instruct the user to use `apt-key` in order to add the GPG key to `apt`'s keyring, this is no longer recommended. Instead, you should explicitly list the key in the `sources.list` entry by using the `signed-by` option (see below).
+Although several third party guides instruct the user to use `apt-key` in order to add the GPG key to `apt`'s keyring, this is no longer recommended. Instead, you should explicitly list the key in the sources entry by using the `Signed-By` option (see below).
 
-Third party APT repositories should also provide a special package called `REPONAME-archive-keyring` whose purpose is to provide updates to the GPG key used to sign the archive. Because this package is signed using the GPG key that is not present in the system when we are initially configuring the repository, we need to manually download and put it in the right place the first time. Assuming that `REPONAME` is `externalrepo`, something like the following should work:
+GPG keys are commonly distributed in two formats:
+
+* **ASCII-armored** (`.asc`): a text-encoded format that begins with `-----BEGIN PGP PUBLIC KEY BLOCK-----`. Many upstream projects distribute their keys in this format.
+* **Binary** (`.gpg` or `.pgp`): a compact binary format.
+
+To download an ASCII-armored key:
 
 ```
-wget -O /usr/share/keyrings/externalrepo-archive-keyring.pgp https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.pgp
+sudo wget -O /usr/share/keyrings/externalrepo-archive-keyring.asc \
+    https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.asc
 ```
 
-#### Sources.list entry
+You may want to convert (de-armor) the ASCII-armored key into binary format before storing it. You can do this with `gpg --dearmor`:
+
+```
+curl -fsSL https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.asc \
+    | sudo gpg --dearmor -o /usr/share/keyrings/externalrepo-archive-keyring.gpg
+```
+
+The `.list` source file format used on Ubuntu 22.04 and earlier only supports the de-armored binary format. For the deb822 format, default in 24.04 and later, either an `.asc` or a `.gpg` key works.
+
+Third party APT repositories should also provide a special package called `REPONAME-archive-keyring` whose purpose is to provide updates to the GPG key used to sign the archive. Because this package is signed using the GPG key that is not present in the system when we are initially configuring the repository, we need to manually download and put it in the right place the first time.
+
+#### Sources file entry
 
 To add a third party APT repository to your system, you will need to create a file under `/etc/apt/sources.list.d/` with information about the external archive. This file is usually named after the repository (in our example, `externalrepo`). There are two standards the file can follow:
 
 * The `deb822` format, which is more descriptive, and is the current standard for Ubuntu. In this case, the extension of the file should be `.sources`.
-* A one-line entry, which was most common in past Ubuntu releases. In this case, the extension of the file should be `.list`.
+* A one-line entry, which was most common in past Ubuntu releases (22.04 or earlier). In this case, the extension of the file should be `.list`.
 
-An example of a `deb822` file for the same case would be the following:
+An example of a `deb822` file for the same case would be a file called `externalrepo.sources` containing the following (using an ASCII-armored key directly):
 
 ```
 Types: deb
 URIs: https://thirdpartyrepo.com/ubuntu
 Suites: resolute
 Components: main
-Signed-By: /usr/share/keyrings/externalrepo-archive-keyring.pgp
+Signed-By: /usr/share/keyrings/externalrepo-archive-keyring.asc
 ```
 
-An example of a one-line entry would be the following:
+An example of a one-line entry would be a file called `externalrepo.list` containing the following (using a de-armored binary key):
 
 ```
-deb [signed-by=/usr/share/keyrings/externalrepo-archive-keyring.pgp] https://thirdpartyrepo.com/ubuntu/ resolute main
+deb [signed-by=/usr/share/keyrings/externalrepo-archive-keyring.gpg] https://thirdpartyrepo.com/ubuntu/ resolute main
 ```
-
-There are cases when the third party APT repository may be served using HTTPS, in which case you will also need to install the `apt-transport-https` package.
 
 After adding the repository information, you need to run `apt update` in order to install the third party packages. Also, now that you have everything configured you should be able to install the `externalrepo-archive-keyring` package to automate the update of the GPG key.
 
