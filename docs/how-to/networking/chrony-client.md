@@ -139,10 +139,9 @@ traditional Ubuntu NTP pool.
   that the time can be synced without checking validation and expiration.
 
 :::{note}
-  A new CA is installed in `/etc/chrony/nts-bootstrap-ubuntu.crt` that is
-  used specifically for the Ubuntu NTS bootstrap server, needed for when the
-  clock is too far off. This is added to certificate set ID "1", and defined
-  via `/etc/chrony/conf.d/ubuntu-nts.conf`.
+   The certificate for ntp-bootstrap.ubuntu.com is installed in
+ `/etc/chrony/nts-bootstrap-ubuntu.crt` and is used specifically for the Ubuntu
+  NTS bootstrap server, needed for when the clock is too far off. This is added to certificate set ID "1", and defined via `/etc/chrony/conf.d/ubuntu-nts.conf`.
 :::
 
 ## Configure chrony
