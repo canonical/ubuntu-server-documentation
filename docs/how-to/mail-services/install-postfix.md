@@ -91,9 +91,9 @@ There are several SASL mechanism properties worth evaluating to improve the secu
 
 ### Configure TLS
 
-Next, generate or obtain a digital certificate for TLS. MUAs connecting to your mail server via TLS will need to recognize the certificate used for TLS. This can either be done using a certificate from Let's Encrypt, from a commercial CA or with a self-signed certificate that users manually install/accept.
+Next, generate or obtain a digital certificate for TLS. MUAs connecting to your mail server via TLS will need to recognize the certificate used for TLS. This can be done using a certificate from Let's Encrypt, from a commercial CA, or with a self-signed certificate that users manually install and accept.
 
-For MTA-to-MTA, TLS certificates are never validated without prior agreement from the affected organizations. For MTA-to-MTA TLS, there is no reason not to use a self-signed certificate unless local policy requires it. See our {ref}`guide on security certificates <certificates>` for details about generating digital certificates and setting up your own Certificate Authority (CA).
+For MTA-to-MTA, TLS certificates are never validated without prior agreement from the affected organizations. For MTA-to-MTA TLS, there is no reason not to use a self-signed certificate unless local policy requires it. See {ref}`obtain-tls-certificates` for how to set up your own Certificate Authority (CA).
 
 Once you have a certificate, configure Postfix to provide TLS encryption for both incoming and outgoing mail:
 
@@ -113,7 +113,7 @@ If you are using your own Certificate Authority to sign the certificate, enter:
 sudo postconf -e 'smtpd_tls_CAfile = /etc/ssl/certs/cacert.pem'
 ```
 
-Again, for more details about certificates see our {ref}`security certificates guide <certificates>`.
+Again, for more details about certificates see {ref}`obtain-tls-certificates`.
 
 ### Outcome of initial configuration
 

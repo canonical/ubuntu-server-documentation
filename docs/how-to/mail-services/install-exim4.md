@@ -97,7 +97,7 @@ sudo /usr/share/doc/exim4-base/examples/exim-gencert
 This command will ask some questions about the certificate, like country, city, and others. The most important one, and that must be correct otherwise TLS won't work for this server, is the "Server name" one. It **MUST** match the fully qualified hostname (FQDN) of the system where Exim4 is deployed.
 
 ```{warning}
-This will install a self-signed certificate. If deploying this system in production, you must get a proper certificate signed by a recognized Certificate Authority (CA), or, if using an internal, you will have to distribute the CA to all clients expected to connect to this server.
+This will install a self-signed certificate. If deploying this system in production, obtain a trusted certificate instead. See {ref}`obtain-tls-certificates` for how to get a certificate, or how to set up your own Certificate Authority (CA) for internal deployments.
 ```
 Configure Exim4 for TLS by editing the `/etc/exim4/conf.d/main/03_exim4-config_tlsoptions` file and adding the following:
 

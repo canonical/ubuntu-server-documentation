@@ -29,6 +29,7 @@ Byobu
 Canonical's
 CAs
 CDBs
+Certbot
 checksumming
 Chrony
 chroot
@@ -130,6 +131,7 @@ Keytab
 keytab
 keytool
 LANs
+lego
 lightervisor
 livepatching
 LLMs
@@ -308,6 +310,7 @@ vsftpd
 vSwitch
 WANs
 webpages
+webroot
 winbind
 WWIDs
 www

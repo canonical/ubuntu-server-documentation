@@ -47,10 +47,13 @@ Smart cards <security/smart-card-authentication>
 
 The Secure Shell (SSH) cryptographic protocol that provides secure channels on an unsecured network. In Ubuntu, OpenSSH is the most commonly used implementation of SSH. It provides a suite of utilities for encrypting data transfers and can also be used for remote login and authentication.
 
+* {ref}`Obtain TLS certificates <obtain-tls-certificates>` covers both Let's Encrypt (for internet-facing servers) and running your own Certificate Authority (CA) for internal networks
+
 ```{toctree}
 :titlesonly:
 
 OpenSSH <security/openssh-server>
+Obtain TLS certificates <security/obtain-tls-certificates>
 Install a root CA certificate <security/install-a-root-ca-certificate-in-the-trust-store>
 ```
 
