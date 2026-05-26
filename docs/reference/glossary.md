@@ -743,6 +743,15 @@ Distributed Replicated Block Device
     Related topic(s):
     * Storage
 
+DSCP
+Differentiated Services Code Point
+    DSCP is a 6-bit field in the IP header used to classify and prioritize
+    network traffic, allowing different packets to receive different forwarding
+    treatment for quality-of-service purposes.
+
+    Related topic(s):
+    * Networking
+
 DTLS
 Datagram Transport Layer Security
     A protocol that provides security for datagram-based communication, such as
@@ -1963,6 +1972,15 @@ PowerPC
 PPD
 PostScript Printer Description
     *Work in Progress*
+
+PPPoE
+Point-to-Point Protocol over Ethernet
+    PPPoE is a network protocol that encapsulates Point-to-Point Protocol (PPP)
+    frames inside Ethernet frames. It is commonly used by Internet service
+    providers to manage and authenticate broadband connections such as DSL.
+
+    Related topic(s):
+    * Networking
 
 PPS
 Pulse Per Second
