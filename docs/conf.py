@@ -353,7 +353,7 @@ extensions = [
     "sphinx_filtered_toctree",
     "sphinx_related_links",
     "sphinx_roles",
-#    "sphinx_terminal",
+    "sphinx_terminal",
     "sphinx_ubuntu_images",
 #    "sphinx_youtube_links",
     "sphinxcontrib.cairosvgconverter",

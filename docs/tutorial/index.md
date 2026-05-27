@@ -36,6 +36,7 @@ collection of related tutorials and topics that will help you learn more about
 how it works and what's available to you. These tutorials can be viewed in any
 order.
 
+* {ref}`welcome-to-the-terminal`
 * {ref}`Managing software in Ubuntu Server <managing-software>`
 * {ref}`Attach your Ubuntu Pro subscription <attach-your-ubuntu-pro-subscription>`
 
@@ -55,6 +56,7 @@ you to expand your knowledge of the operating system and additional software.
 :hidden:
 
 basic-installation
+welcome-to-the-terminal
 managing-software
 attach-your-ubuntu-pro-subscription
 ```
