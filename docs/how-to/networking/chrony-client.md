@@ -76,7 +76,7 @@ can see who issued it (the CA):
 openssl s_client -connect 1.ntp.ubuntu.com:4460 -servername 1.ntp.ubuntu.com
 ```
 
-The output contains the certificate, and the field issuer shows who issued it:
+The output contains the certificate, and the `issuer` field shows who issued it:
 
 ```text
 Server certificate
