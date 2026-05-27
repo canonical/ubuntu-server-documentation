@@ -1,7 +1,7 @@
 (cli-in-depth)=
 # The command line in depth
 
-In {ref}`welcome-to-the-terminal`, we learned how to navigate the filesystem, work with files and directories, and manage permissions. Now we'll go deeper into how the terminal handles data flowing between programs, how to redirect that data to files and other programs, and how **shell variables** and **expansion** make our commands *even more* powerful.
+In {ref}`welcome-to-the-terminal`, we learned how to navigate the filesystem, work with files and directories, and manage permissions on the command line. Now we'll go deeper into how to handle data flowing between programs, how to redirect that data to files and other programs, and how **shell variables** and **expansion** make our commands *even more* powerful.
 
 
 ## Prerequisites
@@ -26,11 +26,11 @@ Now that we can work with files, we're ready to understand something fundamental
 
 Every program that runs has three open communication channels by default:
 
-![Standard input, output, and error streams](./images/streams.png)
-
 - **Standard input (stdin)** -- the channel through which the program receives input. By default, this is your keyboard.
 - **Standard output (stdout)** -- the channel through which the program sends its results. By default, this is your terminal screen.
 - **Standard error (stderr)** -- the channel through which the program sends error messages. This also appears on your terminal screen by default, but it is a separate channel from stdout.
+
+![Standard input, output, and error streams](./images/streams.png)
 
 Each stream has a numerical identifier called a **file descriptor**:
 
@@ -38,7 +38,9 @@ Each stream has a numerical identifier called a **file descriptor**:
 - `1` -- stdout
 - `2` -- stderr
 
-You may be wondering: "why three separate channels? Why not just one?" The answer is that separating normal output from error output gives us much more flexibility. We can save the output of a command to a file while still seeing errors on screen -- or silence errors entirely while saving results. We'll see exactly how in the next sections.
+You may be wondering: "why three separate channels? Why not just one?".
+
+The answer is that separating normal output from error output gives us much more flexibility. We can save the output of a command to a file while still seeing errors on screen -- or silence errors entirely while saving results. We'll see exactly how in the next sections.
 
 
 ### Redirecting output
@@ -96,7 +98,7 @@ For longer files, `less` is more comfortable -- with `less` we can scroll throug
 less /etc/passwd
 ```
 
-Press {kbd}`Space` to move down a page, and {kbd}`q` to quit when you are done.
+Press {kbd}`Space` to move down a page, and {kbd}`Q` to quit when you are done.
 
 If we only want to see the first lines of a file, we can use `head`:
 
@@ -151,7 +153,7 @@ Let's make our file a bit longer by using `>>` to add extra contents:
 ls -l /tmp >> file-list.txt
 ```
 
-Now `file-list.txt` contains the original home directory listing followed by the `/tmp` listing. We can check on this by using `cat file-list.txt`.
+Now `file-list.txt` contains the original home directory listing followed by the `/tmp` listing. We can check on this by using `cat file-list.txt` again.
 
 Sometimes we want a command to run **silently**, i.e. with its output discarded entirely. We can redirect stdout to `/dev/null`, a special file that throws away everything written to it:
 
@@ -220,7 +222,7 @@ The `-l` flag tells `wc` to count lines only. When we use `<`, the file name doe
 
 ### Here-documents
 
-There is a related form called a **here-document**, written as `<<`. It lets us type multi-line input directly in the terminal, ending when we type a delimiter we choose ourselves (often `EOF` -- short for "end of file"). Let's test this by sending a greeting into a new file called `greeting.txt`:
+There is a related form called a **here-document**, written as `<<`. It lets us type multi-line input directly in the terminal, ending when we type a delimiter we choose ourselves (often `EOF` is used as this marker -- short for "end of file"). Let's test this by sending a greeting into a new file called `greeting.txt`:
 
 ```{terminal}
 :copy:
@@ -261,7 +263,7 @@ For example, `ls -la /usr/bin` produces many lines of output -- more than can fi
 ls -la /usr/bin | less
 ```
 
-Press {kbd}`q` to quit `less` when you are done.
+Press {kbd}`Q` to quit `less` when you are done.
 
 We can also pipe to `grep` to filter the output, keeping only lines that match a pattern. Let's find all currently set environment variables whose names contain the word `LANG`:
 
@@ -353,27 +355,27 @@ Host is up
 
 A few other operators are useful to know. Try each of these out, both with and without the operators, to see how they change the behaviour for yourself:
 
-Background execution (`&`)
+Background execution; `&`
 : Runs a command in the background. The shell prompt returns immediately, and the command continues running, e.g.:
 : ```text
   nano file-list.txt &
   ```
   Would open the `file-list.txt` file in a text editor but still keep the terminal free to use.
 
-Command grouping (`{}`)
+Command grouping; `{}`
 : Group scommands together so they share the same output redirection or run as a unit. E.g. to create a quick log file you could run:
 : ```text
   { echo "System Report"; date; uptime; } > report.txt
   ```
 
-Subshell execution (`()`)
+Subshell execution; `()`
 : Run commands in a subshell, where the commands are forgotten the moment they finish running. This is useful for isolating side effects like a `cd` -- the directory change does not affect the current shell.
 : ```text
   (export NAME="Alice"; echo "Hello $NAME")
   echo "Name is: $NAME"
   ```
 
-Line continuation (`\`)
+Line continuation; `\`
 : Continue a long command on the next line, which helps a lot with command readability.
 
 The `()` subshell is particularly handy when we want to work in a different directory without losing our current location:
@@ -397,7 +399,7 @@ Think of a variable as a labelled box: we give it a name, put a value inside, an
 
 ### Built-in variables
 
-The shell has already set up a number of variables for us. To see every variable currently set in our environment, we can run:
+The shell already has a number of variables set up for us. To see every variable currently set in our environment, we can run:
 
 ```{terminal}
 :copy:
@@ -480,7 +482,7 @@ echo $GREETING
 
 ```
 
-No output -- the variable no longer exists.
+This time we get no output, because the variable no longer exists.
 
 ### Exporting variables to subshells
 
