@@ -63,7 +63,7 @@ CD/DVD](https://help.ubuntu.com/community/BootFromCD).
 
 After a few moments, the installer will start in its language selection screen.
 
-![Welcome screen of the Server installer showing the language selection options](https://assets.ubuntu.com/v1/92bda8a0-basic_installation_1.png) 
+![Welcome screen of the Server installer showing the language selection options](../images/92bda8a0-basic_installation_1.png) 
 
 ## Using the installer
 

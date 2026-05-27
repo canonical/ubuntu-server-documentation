@@ -59,16 +59,14 @@ command line options in Ubuntu releases lower than 24.04.
 
 The following table describes whether the snapshot service can be used with
 each supported Ubuntu release, and whether or not it is necessary to configure
-the `snapshot` option in the `sources.list` file.
+the `snapshot` option in your sources configuration.
 
-| Ubuntu Release       | Supports Snapshot Service?   | Need to configure `sources.list`? |
-|----------------------|------------------------------|-----------------------------------|
-| Next Ubuntu releases | Yes                          | No                                |
-| Ubuntu 25.10         | Yes                          | No                                |
-| Ubuntu 25.04         | Yes                          | No                                |
-| Ubuntu 24.04 LTS     | Yes                          | No                                |
-| Ubuntu 22.04 LTS     | Yes (with `apt` >= `2.4.11`) | Yes                               |
-| Ubuntu 20.04 LTS     | Yes (with `apt` >= `2.0.10`) | Yes                               |
+| Ubuntu Release       | Supports Snapshot Service?   | Need to configure sources? |
+|----------------------|------------------------------|----------------------------|
+| Next Ubuntu releases | Yes                          | No                         |
+| Ubuntu 24.04 LTS     | Yes                          | No                         |
+| Ubuntu 22.04 LTS     | Yes (with `apt` >= `2.4.11`) | Yes                        |
+| Ubuntu 20.04 LTS     | Yes (with `apt` >= `2.0.10`) | Yes                        |
 
 ## Quick start
 
@@ -194,23 +192,15 @@ package.
 ### Configuring the snapshot service for specific repositories
 
 In your `apt` repositories configuration files, it is possible to specify
-snapshots to be used for each specific repository.
-
-For Ubuntu 24.04 LTS and later, which uses the deb822 style by default, we add
-a `Snapshot` option to the relevant sources file in the following format:
+snapshots to be used for each specific repository. In the deb822 format, add a
+`Snapshot` option to the relevant stanza in your `.sources` file:
 
 ```
 Snapshot: $SNAPSHOT_ID
 ```
 
-For Ubuntu series lower than 24.04, you change the value of the `snapshot`
-option in your sources file, i.e., if you had the following entry in your `/etc/apt/sources.list` file
-
-```
-deb [snapshot=yes] http://archive.ubuntu.com/ubuntu ...
-```
-
-you replace the `yes` value with the snapshot ID:
+If you are using the one-line format in `/etc/apt/sources.list` (Ubuntu 22.04
+and earlier), replace the `yes` value with the snapshot ID:
 
 ```
 deb [snapshot=$SNAPSHOT_ID] http://archive.ubuntu.com/ubuntu ...

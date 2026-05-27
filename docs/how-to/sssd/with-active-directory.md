@@ -278,20 +278,20 @@ To login with an Active Directory user for the first time, follow these steps:
   - Click on the "Not listed?" option:
 <div align="center">
 
-![Click "not listed"|690x517,50%](https://assets.ubuntu.com/v1/291d9ae9-not_listed.png)
+![Click "not listed"|690x517,50%](../../images/291d9ae9-not_listed.png)
 </div>
 
  - Type in the login name followed by the password:
 <div align="center">
 
-![Type in username|690x517,50%](https://assets.ubuntu.com/v1/6940e589-login.png)
+![Type in username|690x517,50%](../../images/6940e589-login.png)
 
 </div>
 
   - Next time you login, the AD user will be listed as if it was a local user:
 <div align="center">
 
-![Next time|690x517,50%](https://assets.ubuntu.com/v1/9c174441-local_user.png)
+![Next time|690x517,50%](../../images/9c174441-local_user.png)
 
 </div>
 

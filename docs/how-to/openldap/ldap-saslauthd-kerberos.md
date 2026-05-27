@@ -29,7 +29,7 @@ The test user we will be using is `ubuntu@EXAMPLE.COM`, which must exist in the 
 
 Here is a diagram showing how all the different pieces work together:
 
-![openldap saslauthd detailed diagram](../images/openldap-saslauthd-diagram-detailed.png)
+![openldap saslauthd detailed diagram](../../images/openldap-saslauthd-diagram-detailed.png)
 
 The diagram shows the overall picture of how passthrough authentication can be used with OpenLDAP.
 

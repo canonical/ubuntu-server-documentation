@@ -257,6 +257,7 @@ sudo
 sysctls
 vsock
 syslog
+SysRq
 systemctl
 systemd
 tasksel

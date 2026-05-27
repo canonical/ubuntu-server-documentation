@@ -223,11 +223,11 @@ monitor:~# snap restart prometheus
 
 While we'll be using Grafana for visualization, Prometheus also has a web interface for viewing and interacting with the collected data. At this stage, we can load it to verify that our setup is working properly. In a web browser, navigate to the Monitor's IP address, and port `9090`. You should see Prometheus' interface, as in the following image:
 
-![prometheus_0|690x454,80%](https://assets.ubuntu.com/v1/54610cab-promotheus_0.png)
+![prometheus_0|690x454,80%](../../images/54610cab-promotheus_0.png)
 
 In the entry box, enter `cpu_usage_system`, select the "Graph" tab and click "Execute". This should show a graph of our collected CPU data so far. Prometheus also has a secondary web UI using `React.js`.
 
-![prometheus_1|690x638,40%](https://assets.ubuntu.com/v1/d56f0ceb-promotheus_1.png) ![prometheus_2|690x638,40%](https://assets.ubuntu.com/v1/d46d3705-promotheus_2.png)
+![prometheus_1|690x638,40%](../../images/d56f0ceb-promotheus_1.png) ![prometheus_2|690x638,40%](../../images/d46d3705-promotheus_2.png)
 
 ### Configure Alertmanager
 
@@ -338,7 +338,7 @@ $ firefox http://10.69.244.104:3000
 
 Log in with 'admin' and 'admin' as the username and password. This should bring you to the main Grafana page, where you can find links to tutorials and documentation. Delete any example data sources and/or dashboards.
 
-![grafana_0|690x638,80%](https://assets.ubuntu.com/v1/bb8a72f8-grafana_0.png)
+![grafana_0|690x638,80%](../../images/bb8a72f8-grafana_0.png)
 
 Select the button to add a new data source and select "Prometheus". On the "Data Sources / Prometheus" edit page, set:
 - the name to Prometheus
@@ -347,20 +347,20 @@ Select the button to add a new data source and select "Prometheus". On the "Data
 
 The remaining settings can be left as defaults. Click "Save & Test".
 
-![grafana_1|690x638,40%](https://assets.ubuntu.com/v1/5bf5a238-grafana_1.png) ![grafana_2|690x638,40%](https://assets.ubuntu.com/v1/72f14261-grafana_2.png)
+![grafana_1|690x638,40%](../../images/5bf5a238-grafana_1.png) ![grafana_2|690x638,40%](../../images/72f14261-grafana_2.png)
 
 Returning to the Grafana home page, next set up a "New Dashboard". A dashboard can hold one or more panels, each of which can be connected to one or more data queries. Let's add a panel for CPU data. For the query, enter "cpu_usage_system" in the Metrics field.
 
-![grafana_3|690x638,25%](https://assets.ubuntu.com/v1/bf7c1660-grafana_3.png) ![grafana_4|690x638,25%](https://assets.ubuntu.com/v1/50532a03-grafana_4.png) ![grafana_5|690x638,25%](https://assets.ubuntu.com/v1/0830c195-grafana_5.png)
+![grafana_3|690x638,25%](../../images/bf7c1660-grafana_3.png) ![grafana_4|690x638,25%](../../images/50532a03-grafana_4.png) ![grafana_5|690x638,25%](../../images/0830c195-grafana_5.png)
 
 On the left you can see four buttons to configure four elements of the panel: data source, visualization, general settings, and alerts. The general settings page allows us to set a title for the panel, for instance. Make any other customizations you want, and then save the dashboard using the save icon at the top of the page.
 
-![grafana_6|690x638,40%](https://assets.ubuntu.com/v1/cfaca920-grafana_6.png) ![grafana_7|690x638,40%](https://assets.ubuntu.com/v1/3dfc6d9d-grafana_7.png)
+![grafana_6|690x638,40%](../../images/cfaca920-grafana_6.png) ![grafana_7|690x638,40%](../../images/3dfc6d9d-grafana_7.png)
 
 Using the same procedure, add additional panels for processor load and memory usage. Panels can be used to present other types of data as well, such as numerical indicators, logs, news feeds, or markdown-formatted documentation. For example, you can add a panel to display the system uptime, such as in the following image:
 
-![grafana_9|690x638,40%](https://assets.ubuntu.com/v1/2441c52c-grafana_9.png)
+![grafana_9|690x638,40%](../../images/2441c52c-grafana_9.png)
 
 Try also adding a panel with the "Text" visualization option for entering descriptive text about our demo. Save, and then view the final dashboard:
 
-![grafana_X|690x638,80%](https://assets.ubuntu.com/v1/55658d4d-grafana_X.png)
+![grafana_X|690x638,80%](../../images/55658d4d-grafana_X.png)
