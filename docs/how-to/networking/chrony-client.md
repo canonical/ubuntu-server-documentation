@@ -69,7 +69,7 @@ bootstrap server instead of a public CA-signed certificate like the one used for
 `1.ntp.ubuntu.com`.
 
 
-That command returns the certificate of the server `1.ntp.ubuntu.com`, and in that certificate we
+The following command returns the certificate of the server `1.ntp.ubuntu.com`, and in that certificate we
 can see who issued it (the CA):
 
 ```bash
