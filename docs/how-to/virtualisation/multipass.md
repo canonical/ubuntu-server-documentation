@@ -41,7 +41,7 @@ docker                                        latest           A Docker environm
 minikube                                      latest           minikube is local Kubernetes
 ```
 
-## Launch a fresh instance of the current Ubuntu LTS (26.04)
+## Launch a fresh instance of Ubuntu 26.04 LTS
 
 You can launch a fresh instance by specifying either the image name from the list (in this example, 26.04) or using an alias, if the image has one.
 
