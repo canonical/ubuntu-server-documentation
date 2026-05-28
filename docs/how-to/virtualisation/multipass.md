@@ -76,6 +76,17 @@ Image hash:     dc5b5a43c267 (Ubuntu 26.04 LTS)
 Load:           0.45 0.19 0.07
 Disk usage:     1.4G out of 4.7G
 Memory usage:   168.3M out of 969.5M
+$ multipass info cleansing-guanaco
+Name:           cleansing-guanaco
+State:          Running
+Snapshots:      0
+IPv4:           10.140.26.17
+Release:        Ubuntu 26.04 LTS
+Image hash:     dc5b5a43c267 (Ubuntu 26.04 LTS)
+CPU(s):         1
+Load:           0.74 0.35 0.13
+Disk usage:     2.2GiB out of 4.8GiB
+Memory usage:   347.4MiB out of 950.8MiB
 Mounts:         --
 ```
 
