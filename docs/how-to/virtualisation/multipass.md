@@ -70,15 +70,6 @@ You can use the `multipass info` command to find out more details about the VM i
 $ multipass info cleansing-guanaco
 Name:           cleansing-guanaco
 State:          Running
-IPv4:           10.140.26.17
-Release:        Ubuntu 26.04 LTS
-Image hash:     dc5b5a43c267 (Ubuntu 26.04 LTS)
-Load:           0.45 0.19 0.07
-Disk usage:     1.4G out of 4.7G
-Memory usage:   168.3M out of 969.5M
-$ multipass info cleansing-guanaco
-Name:           cleansing-guanaco
-State:          Running
 Snapshots:      0
 IPv4:           10.140.26.17
 Release:        Ubuntu 26.04 LTS
