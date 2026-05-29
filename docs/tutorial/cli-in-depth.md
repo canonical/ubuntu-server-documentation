@@ -230,8 +230,26 @@ There is a related form called a **here-document**, written as `<<`. It lets us 
 :host: tutorial
 :dir: ~
 cat > greeting.txt << EOF
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 Hello from the terminal!
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 This text is going into a file.
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 EOF
 ```
 
@@ -253,7 +271,7 @@ This text is going into a file.
 
 Pipes are one of the most powerful ideas in the Unix philosophy: the output of one command becomes the input of the next. We connect them with the `|` operator (the "pipe" character).
 
-For example, `ls -la /usr/bin` produces many lines of output -- more than can fit on screen, and you can only see the end of the output (you can't scroll back to the top). To make it more convenient, we can pipe the output to `less` so we can page through it with the {kbd}`space` key:
+For example, `ls -la /usr/bin` produces many lines of output -- more than can fit on screen, and you can only see the end of the output. Scrolling back up is often very inconvenient, if you can even do it at all (some terminals can't!). To make it more convenient, we can pipe the output to `less` so we can page through it with the {kbd}`space` key:
 
 ```{terminal}
 :copy:
@@ -296,7 +314,7 @@ Each command in the pipeline only ever sees the output of the command immediatel
 
 ## Chaining commands
 
-Pipes pass *data* from one command to another. Command chaining is different: it controls the *order* in which commands run, and whether the next command runs at all.
+Pipes pass data from one command to another and run all of their commands in parallel. This allows commands to begin working on long streams of data while their source is still producing more. However, there are scenarios where you might want a serial process, in which case you would use **command chaining** instead. Chaining is different: it controls the *order* in which commands run, and whether the next command runs at all.
 
 The simplest way to chain commands is to separate them with a semicolon (`;`). The shell runs each command in turn, regardless of whether the previous one succeeded, with the output of each command shown on separate lines:
 
@@ -310,6 +328,10 @@ ls; pwd; whoami
 errors.txt  file-list.txt  greeting.txt  output.txt
 /home/ubuntu
 ubuntu
+```
+
+```{note}
+On Linux, processes declare whether they have "succeeded" or not with an **exit code**. An exit code (or "exit status") is a number from 0--255 that a process gives to its parent upon completion. "Success" is defined by exiting with code `0`, with *all* other values indicating different types of failures. These might be specific to a particular program, but the generic failure status will usually be exit code `1`. You can use `exit n` to immediately exit with code `n`.
 ```
 
 Often we want the second command to run *only* if the first one succeeded. We use `&&` for this:
@@ -356,11 +378,15 @@ Host is up
 A few other operators are useful to know. Try each of these out, both with and without the operators, to see how they change the behaviour for yourself:
 
 Background execution; `&`
-: Runs a command in the background. The shell prompt returns immediately, and the command continues running, e.g.:
-: ```text
-  nano file-list.txt &
+: Runs a command in the background. The shell prompt returns immediately, and the command continues running. Let's compare the difference in running `sleep 10` and then `sleep 10 &`. The `sleep` command doesn't actually *do* anything, it just makes the system wait for the specified number of seconds. So, in this example our prompt disappears for 10 seconds and you can't interact with the terminal during that time. If we *background* it, using `sleep 10 &`, our command prompt returns immediately and we can continue to use the terminal.
+: When we use the ampersand (`&`) to background the process, it returns something like:
+  ```text
+  [1] 168658
   ```
-  Would open the `file-list.txt` file in a text editor but still keep the terminal free to use.
+  This number is the **process ID** (PID); a unique number identifying every process running on your machine. When the background process has finished running, you'll see a message returned that looks like this, so you know it's done:
+  ```text
+  [1]+  Done                    sleep 10
+  ```
 
 Command grouping; `{}`
 : Group scommands together so they share the same output redirection or run as a unit. E.g. to create a quick log file you could run:
@@ -376,10 +402,7 @@ Subshell execution; `()`
   ```
 
 Line continuation; `\`
-: Continue a long command on the next line, which helps a lot with command readability.
-
-The `()` subshell is particularly handy when we want to work in a different directory without losing our current location:
-
+: Continue a long command on the next line, which helps a lot with command readability. You'll see this often in documentation.
 
 Let's return home before continuing:
 
@@ -465,6 +488,12 @@ We can create our own variables by assigning a name and a value. By convention, 
 :host: tutorial
 :dir: ~
 GREETING="Hello, world!"
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 echo $GREETING
 
 Hello, world!
@@ -478,6 +507,12 @@ To remove a variable, we use `unset`:
 :host: tutorial
 :dir: ~
 unset GREETING
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 echo $GREETING
 
 ```
@@ -496,6 +531,12 @@ Let's demonstrate. First, we set a variable and try to access it from a subshell
 :host: tutorial
 :dir: ~
 MY_VAR="hello"
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 bash -c 'echo $MY_VAR'
 
 ```
@@ -508,6 +549,12 @@ Nothing is printed -- the subshell has no knowledge of `MY_VAR`. Now let's expor
 :host: tutorial
 :dir: ~
 export MY_VAR="hello"
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 bash -c 'echo $MY_VAR'
 
 hello
@@ -566,7 +613,7 @@ echo $?
 2
 ```
 
-This is especially useful in scripts, where we can check whether the previous command succeeded before deciding what to do next.
+This is especially useful when we build scripts, where we can check whether the previous command succeeded before deciding what to do next.
 
 ## Shell expansion
 
@@ -606,12 +653,40 @@ We have seen this already: `$VARIABLE_NAME` (or `${VARIABLE_NAME}`) is replaced 
 :host: tutorial
 :dir: ~
 DAY="Monday"
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 echo "Today is ${DAY}!"
 
 Today is Monday!
 ```
 
 Without the braces, the shell would try to expand `$DAY!` as a single variable name and find nothing.
+
+It's also important to note that this variable expansion applies *everywhere* in the line, even with the command name itself!:
+
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
+CMD="echo"
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
+$CMD "It's dynamic!"
+
+It's dynamic!
+```
+
+This can be useful in, say, a script that runs one of two very similar commands with the same argument, so you don't have to re-type everything twice in your conditional.
+
 
 ### Command substitution
 
@@ -649,6 +724,12 @@ echo $((5 + 3))
 :host: tutorial
 :dir: ~
 X=10
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 echo $((X * 2))
 
 20
@@ -698,6 +779,12 @@ Brace expansion is particularly useful for creating multiple files or directorie
 :host: tutorial
 :dir: ~
 mkdir {01..12}-reports
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 ls
 
 01-reports  02-reports  03-reports  04-reports  05-reports  06-reports
