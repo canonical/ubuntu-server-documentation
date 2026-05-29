@@ -1,66 +1,24 @@
 ---
 myst:
   html_meta:
-    description: Complete tutorial on managing software in Ubuntu Server - learn about Debian packages, snaps, APT commands, repositories, and package management using Multipass.
+    description: Complete tutorial on managing software in Ubuntu Server - learn about Debian packages, snaps, APT commands, repositories, and package management.
 ---
 
 (managing-software)=
 # Managing your software
 
-If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customizable according to your needs. There are two types of software found in Ubuntu: **Debian packages** and **snaps** -- we will learn about both!
+If you are new to Ubuntu, you may be wondering what to do after installation. After all, Ubuntu is endlessly customizable according to your needs. There are two types of software found in Ubuntu: **Debian packages** (debs) and **snaps** -- we will focus mainly on debs in this tutorial!
 
 To help you get the most from your Ubuntu experience, this tutorial will walk you through managing the software on your Ubuntu machine. This tutorial can be completed using either Ubuntu Server or Ubuntu Desktop.
 
-To avoid making changes to your computer we will set up a virtual machine (VM), which will provide us with a safe environment to run the commands in. Multipass is great for quickly creating Ubuntu virtual machines, so we will use that.
+If you are re-using a virtual machine from a different tutorial, skip directly to {ref}`update-with-apt`.
 
-## Prerequisites
-
-* **Knowledge:**
-
-  None! You don't even need to use an Ubuntu machine -- Multipass will give us an Ubuntu environment to play with.
-
-* **Hardware:**
-
-  The default Multipass VM will need **5** {term}`GB` **of disk space**, and **1 GiB of memory**.
-
-* **Software: -- Multipass**
-
-  * On Ubuntu, you can install Multipass by running the following command in your terminal (you can open a terminal window by pressing {kbd}`Ctrl` + {kbd}`Alt` + {kbd}`T` together):
-
-    ```bash
-    sudo snap install multipass
-    ```
-    
-    Or you can install it directly from [the Multipass page](https://snapcraft.io/multipass) in the online snap store (make sure to select the "latest/stable" version from the dropdown menu next to the install button).
-
-  * Multipass can be installed on Windows, Mac and other Linux distributions [using these instructions](https://documentation.ubuntu.com/multipass/stable/how-to-guides/install-multipass/).
-
-## Create the virtual machine
-
-Once you have installed and run Multipass, it is straightforward to launch a new VM. Let us launch a VM using the Ubuntu 24.04 LTS release (codename `noble`), and let's give our VM the name `tutorial` using the following command in our terminal window:
-
-```bash
-multipass launch noble --name tutorial
+% Include the multipass install instructions common to all tutorials
+```{include} common-multipass.txt
 ```
 
-Multipass will download the most recent daily **image** and create the VM for us. It may take a little time, depending on the speed of your internet connection.
 
-An Ubuntu **image** is a collection of files we need to install and run Ubuntu. We don't need to specify "server" or "desktop" anywhere in our command, because the image is the same for both. The only difference between Ubuntu Server and Ubuntu Desktop is the subset of software packages we use from the Ubuntu Archive - we will see this later!
-
-Now we can access the VM by running:
-
-```bash
-multipass shell tutorial
-```
-
-We will get a "Welcome to Ubuntu" message. Notice that when we run this command, the terminal username changes to `ubuntu` and the {term}`hostname` changes to `tutorial`:
-
-```bash
-ubuntu@tutorial
-```
-
-This shows that we are inside the VM, and this is where we will run all our commands.
-
+(update-with-apt)=
 ## Updating the system with APT
 
 The first thing we always want to do with a new system (whether a VM, container, bare metal, or cloud instance) is to make sure we have the latest versions of all the pre-installed software. 

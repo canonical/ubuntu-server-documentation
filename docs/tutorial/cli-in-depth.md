@@ -1,25 +1,22 @@
+---
+myst:
+  html_meta:
+    description: Tutorial on the Ubuntu terminal. Understand concepts like standard streams, piping, command chaining, and shell variables.
+---
+
 (cli-in-depth)=
 # The command line in depth
 
 In {ref}`welcome-to-the-terminal`, we learned how to navigate the filesystem, work with files and directories, and manage permissions on the command line. Now we'll go deeper into how to handle data flowing between programs, how to redirect that data to files and other programs, and how **shell variables** and **expansion** make our commands *even more* powerful.
 
+If you are re-using a virtual machine from a different tutorial, skip directly to {ref}`cli-standard-streams`.
 
-## Prerequisites
-
-* **Knowledge:**
-
-  None! You don't even need to use an Ubuntu machine -- we will use Multipass to create a virtual Ubuntu environment to play with.
-
-* **Hardware:**
-
-  The Multipass virtual machine (VM) needs at least **5 GB of disk space**, and **1 GB of memory**.
-
-* **Multipass:**
-
-  If you do not have Multipass installed on your computer, follow the {ref}`tutorial-install-multipass` step from "Welcome to the terminal" before continuing with this tutorial.
+% Include the multipass install instructions common to all tutorials
+```{include} common-multipass.txt
+```
 
 
-
+(cli-standard-streams)=
 ## Standard streams
 
 Now that we can work with files, we're ready to understand something fundamental about how programs work in the terminal: **standard streams**.
@@ -389,7 +386,7 @@ Background execution; `&`
   ```
 
 Command grouping; `{}`
-: Group scommands together so they share the same output redirection or run as a unit. E.g. to create a quick log file you could run:
+: Groups commands together so they share the same output redirection or run as a unit. E.g. to create a quick log file you could run:
 : ```text
   { echo "System Report"; date; uptime; } > report.txt
   ```
