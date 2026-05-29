@@ -8,7 +8,8 @@ myst:
 # How to set up LDAP users and groups
 
 
-Once you {ref}`have a working LDAP server <install-openldap>`, you will need to install libraries on the client that know how and when to contact it. On Ubuntu, this was traditionally done by installing the `libnss-ldap` package, but nowadays you should use the {ref}`System Security Services Daemon (SSSD) <introduction-to-network-user-authentication-with-sssd>`. To find out how to use LDAP with SSSD, refer to {ref}`our SSSD and LDAP <sssd-with-ldap>` guide.
+Once you {ref}`have a working LDAP server <install-openldap>`, you will need to install libraries on the client that know how and when to contact it.
+On Ubuntu, this can be done with {ref}`nslcd <ldap-client>` or {ref}`SSSD <introduction-to-network-user-authentication-with-sssd>`.
 
 ## User and group management - `ldapscripts`
 
