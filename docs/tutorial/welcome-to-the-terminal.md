@@ -91,32 +91,28 @@ After we run the command, our terminal window should show us a welcome message l
 :dir: ~
 multipass shell tutorial
 
-Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-106-generic x86_64)
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
 
- * Documentation:  https://help.ubuntu.com
+ * Documentation:  https://docs.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
- System information as of Thu Apr 16 14:25:25 BST 2026
+ System information as of Fri May 29 17:22:28 BST 2026
 
-  System load:  0.09              Processes:             99
-  Usage of /:   49.7% of 3.80GB   Users logged in:       0
-  Memory usage: 20%               IPv4 address for ens3: 10.234.118.216
+  System load:  0.17              Processes:             110
+  Usage of /:   56.8% of 3.70GB   Users logged in:       0
+  Memory usage: 22%               IPv4 address for ens3: 10.234.118.66
   Swap usage:   0%
 
 
 Expanded Security Maintenance for Applications is not enabled.
 
-51 updates can be applied immediately.
-42 of these updates are standard security updates.
+26 updates can be applied immediately.
+10 of these updates are standard security updates.
 To see these additional updates run: apt list --upgradable
 
 Enable ESM Apps to receive additional future security updates.
 See https://ubuntu.com/esm or run: sudo pro status
-
-
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
 ```
 
 You've probably noticed that your shell prompt has changed, and now says `ubuntu@tutorial:~$` -- `tutorial` is the name of our virtual machine, and `ubuntu` is the default username in a Multipass virtual machine. This is how we know we're now playing in our virtual sandbox, and not in our physical computer.

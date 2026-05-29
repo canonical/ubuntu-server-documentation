@@ -44,14 +44,11 @@ sudo apt update
 We will see an output like this:
 
 ```text
-Hit:1 http://security.ubuntu.com/ubuntu noble-security InRelease
-Hit:2 http://archive.ubuntu.com/ubuntu noble InRelease
-Hit:3 http://archive.ubuntu.com/ubuntu noble-updates InRelease
-Hit:4 http://archive.ubuntu.com/ubuntu noble-backports InRelease
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-88 packages can be upgraded. Run 'apt list --upgradable' to see them.
+Hit:1 http://archive.ubuntu.com/ubuntu resolute InRelease
+Hit:2 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
+Hit:3 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease
+19 packages can be upgraded. Run 'apt list --upgradable' to see them.
 ```
 
 As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 24.04 LTS release (`noble-security`, `noble`, `noble-updates` and `noble-backports` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
@@ -70,11 +67,11 @@ The output tells us:
 The specific packages included in this list changes over time, so the exact packages shown will be different, but the output will be structured like this:
 
 ```text
-Listing... Done
-base-files/noble-updates 13ubuntu10.1 amd64 [upgradable from: 13ubuntu10]
-bsdextrautils/noble-updates 2.39.3-9ubuntu6.1 amd64 [upgradable from: 2.39.3-9ubuntu6]
-bsdutils/noble-updates 1:2.39.3-9ubuntu6.1 amd64 [upgradable from: 1:2.39.3-9ubuntu6]
-cloud-init/noble-updates 24.2-0ubuntu1~24.04.2 all [upgradable from: 24.1.3-0ubuntu3.3]
+bind9-dnsutils/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
+bind9-host/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
+bind9-libs/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
+bpftool/resolute-updates 7.7.0+7.0.0-22.22 amd64 [upgradable from: 7.7.0+7.0.0-15.15]
+libgcrypt20/resolute-updates,resolute-security 1.12.0-2ubuntu0.1 amd64 [upgradable from: 1.12.0-2]
 [...]
 ```
 
@@ -99,13 +96,13 @@ You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran th
 In the output, we'll see where `apt upgrade` is fetching the upgrade from for each package. For example:
 
 ```text
-Get:1 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 libopeniscsiusr amd64 2.1.9-3ubuntu5.1 [49.1 kB]
+Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libgcrypt20 amd64 1.12.0-2ubuntu0.1 [670 kB]
 ```
 
-APT combines the various elements; the package name (`libopeniscsiusr`), version (`2.1.9-3ubuntu5.1`), source (`noble-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
+APT combines the various elements; the package name (`libgcrypt20`), version (`1.21.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
 
 ```{note}
-These commands only upgrade the packages for the release of Ubuntu that we are using (24.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
+These commands only upgrade the packages for the release of Ubuntu that we are using (26.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
 ```
 
 It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages -- so although `apt upgrade` is safe to use unattended (in a script, for example), you should only use `dist-upgrade` when you can pay attention to it.
@@ -121,13 +118,13 @@ apt search webserver
 This will return us a long list of all "`webserver`" packages it can find. But some of the descriptions don't actually contain the text "`webserver`" -- like in this section of the list:
 
 ```text
-inotify-tools/noble 3.22.6.0-4 amd64
+inotify-tools/resolute 4.25.9.0-1 amd64
   command-line programs providing a simple interface to inotify
 
-ipcalc/noble 0.51-1 all
+ipcalc/resolute 0.51-1build1 all
   parameter calculator for IPv4 addresses
 
-iwatch/noble 0.2.2-10 all
+iwatch/resolute 0.2.2-12 all
   realtime filesystem monitoring program using inotify
 ```
 
@@ -141,9 +138,9 @@ The summary has been replaced with `[...]` for brevity, but we can see that the 
 
 ```text
 Package: ipcalc
-Version: 0.51-1
+Version: 0.51-1build1
 [...]
-APT-Sources: http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages
+APT-Sources: http://archive.ubuntu.com/ubuntu resolute/universe amd64 Packages
 Description: parameter calculator for IPv4 addresses
  ipcalc takes an IPv4 address and netmask and calculates the resulting
  broadcast, network, Cisco wildcard mask, and host range. By giving a
@@ -154,7 +151,6 @@ Description: parameter calculator for IPv4 addresses
  Originally, ipcalc was intended for use from the shell prompt, but a
  CGI wrapper is provided to enable colorful HTML display through a
  webserver.
- You can find it in /usr/share/doc/ipcalc/examples directory.
 ```
 
 In many places, you will see reference to `apt-get` and `apt-cache` instead of `apt`. Historically, the *database* part of APT was accessed using `apt-cache` (e.g. `apt-cache show ipcalc`), and the *packages* part of APT used `apt-get` (e.g. `apt-get install ipcalc`).
@@ -203,19 +199,23 @@ The output should be similar to the below. It tells us:
 - a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
 
 ```text
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
-The following additional packages will be installed:
-  apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
+Installing:                     
+  apache2
+
+Installing dependencies:
+  apache2-bin    libapr1t64               libaprutil1t64
+  apache2-data   libaprutil1-dbd-sqlite3  liblua5.4-0
+  apache2-utils  libaprutil1-ldap         ssl-cert
+
 Suggested packages:
-  apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser
-The following NEW packages will be installed:
-  apache2 apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
-0 upgraded, 10 newly installed, 0 to remove and 2 not upgraded.
-Need to get 2084 kB of archives.
-After this operation, 8094 kB of additional disk space will be used.
-Do you want to continue? [Y/n] 
+  apache2-doc  apache2-suexec-pristine  | apache2-suexec-custom  www-browser
+
+Summary:
+  Upgrading: 0, Installing: 10, Removing: 0, Not Upgrading: 0
+  Download size: 2116 kB
+  Space needed: 8218 kB / 1328 MB available
+
+Continue? [Y/n] 
 ```
 
 Let's try and make sense of this output. 
@@ -238,11 +238,10 @@ If we look only at the sections on dependencies, we can see that `ssl-cert` is a
 
 ```text
 [...]
-Provides: httpd, httpd-cgi
-Pre-Depends: init-system-helpers (>= 1.54~)
-Depends: apache2-bin (= 2.4.58-1ubuntu8.4), apache2-data (= 2.4.58-1ubuntu8.4), apache2-utils (= 2.4.58-1ubuntu8.4), media-types, perl:any, procps
-Recommends: ssl-cert
-Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, www-browser, ufw
+Installing dependencies:
+  apache2-bin    libapr1t64               libaprutil1t64
+  apache2-data   libaprutil1-dbd-sqlite3  liblua5.4-0
+  apache2-utils  libaprutil1-ldap         ssl-cert
 [...]
 ```
 
@@ -258,15 +257,20 @@ Then the output becomes the following (type {kbd}`N` at the prompt again to avoi
 
 ```text
 [...]
-The following additional packages will be installed:
-  apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
+Installing dependencies:
+  apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
+  apache2-data  libapr1t64     libaprutil1-ldap         liblua5.4-0
+
 Suggested packages:
-  apache2-doc apache2-suexec-pristine | apache2-suexec-custom www-browser
+  apache2-doc  apache2-suexec-pristine  | apache2-suexec-custom  www-browser
+
 Recommended packages:
   ssl-cert
-The following NEW packages will be installed:
-  apache2 apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
-0 upgraded, 9 newly installed, 0 to remove and 25 not upgraded.
+
+Summary:
+  Upgrading: 0, Installing: 9, Removing: 0, Not Upgrading: 0
+  Download size: 2098 kB
+  Space needed: 8149 kB / 1328 MB available
 [...]
 ```
 
@@ -280,14 +284,20 @@ But actually, if we run this command:
 sudo apt install apache2 --install-suggests
 ```
 
-There is now an extremely long list of suggested packages (which I will not output here, but you can try it for yourself!). In fact, the number of suggested packages is so long that there is not enough space in this VM to install them all, so it won't even give us the option to proceed:
+By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
 
 ```text
 [...]
-0 upgraded, 4598 newly installed, 2 to remove and 0 not upgraded.
-Need to get 7415 MB of archives.
-After this operation, 19.6 GB of additional disk space will be used.
-E: You don't have enough free space in /var/cache/apt/archives/.
+Installing dependencies:
+  apache2-bin              apache2-utils            libaprutil1-ldap
+  apache2-data             chromium-browser         libaprutil1t64
+  apache2-doc              libapr1t64               liblua5.4-0
+  apache2-suexec-pristine  libaprutil1-dbd-sqlite3  ssl-cert
+
+Summary:
+  Upgrading: 0, Installing: 13, Removing: 0, Not Upgrading: 0
+  Download size: 6078 kB
+  Space needed: 34.1 MB / 1328 MB available
 ```
 
 This is because each of these suggested packages also comes with their own lists of dependencies, including suggested packages, all of which would *also* be installed. It's perhaps clear to see why this is not the default setting!
@@ -306,18 +316,23 @@ One of the required dependencies is the `apache2-data` package. Let's try to rem
 sudo apt remove apache2-data
 ```
 
-Once again, `apt` won't proceed without confirmation, so we get the following output -- let's take a look before choose anything:
+Once again, `apt` won't proceed without confirmation, so we get the following output -- let's take a look before we choose anything:
 
 ```text
 [...]
 The following packages were automatically installed and are no longer required:
-  apache2-bin apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
+  apache2-bin    libapr1t64               libaprutil1-ldap  liblua5.4-0
+  apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64    ssl-cert
 Use 'sudo apt autoremove' to remove them.
-The following packages will be REMOVED:
-  apache2 apache2-data
-0 upgraded, 0 newly installed, 2 to remove and 2 not upgraded.
-After this operation, 1342 kB disk space will be freed.
-Do you want to continue? [Y/n]
+
+REMOVING:
+  apache2  apache2-data
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 2, Not Upgrading: 0
+  Freed space: 1349 kB
+
+Continue? [Y/n] 
 ```
 
 Let's break this down a little bit, because there are some subtle differences here that we want to understand before we proceed.
@@ -348,11 +363,15 @@ When we run this command, `apt` once again gives us a summary of the operation w
 
 ```text
 [...]
-The following packages will be REMOVED:
-  apache2-bin apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0 ssl-cert
-0 upgraded, 0 newly installed, 8 to remove and 2 not upgraded.
-After this operation, 6751 kB disk space will be freed.
-Do you want to continue? [Y/n] 
+REMOVING:                       
+  apache2-bin    libapr1t64               libaprutil1-ldap  liblua5.4-0
+  apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64    ssl-cert
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 8, Not Upgrading: 0
+  Freed space: 6869 kB
+
+Continue? [Y/n] 
 ```
 
 You may be wondering why we don't need to specify any packages when we call the `autoremove` command -- after all, we've just been dealing with packages related to `apache2`. This is because `apt` will check all the packages on your system. It examines the dependency tree, and if the original reason for the package to be installed no longer exists (i.e., it isn't needed by anything), it will be flagged for auto-removal.
@@ -371,12 +390,10 @@ This sets `ssl-cert` to **manually installed**. We might well wonder "why didn't
 
 ```text
 [...]
-ssl-cert is already the newest version (1.1.2ubuntu1).
+ssl-cert is already the newest version (1.1.3ubuntu2).
 ssl-cert set to manually installed.
-The following packages were automatically installed and are no longer required:
-  apache2-bin apache2-utils libapr1t64 libaprutil1-dbd-sqlite3 libaprutil1-ldap libaprutil1t64 liblua5.4-0
-Use 'sudo apt autoremove' to remove them.
-0 upgraded, 0 newly installed, 0 to remove and 2 not upgraded.
+Summary:                    
+  Upgrading: 0, Installing: 0, Removing: 0, Not Upgrading: 0
 ```
 
 If the `ssl-cert` package is manually installed on our system, by us, then `apt` knows the package is wanted, and we can see that it has been removed from the auto-remove list so our next `autoremove` will not uninstall it. Let's test this, just to make sure!
@@ -394,8 +411,7 @@ apt list ssl-cert
 Which gives us this output, confirming that `ssl-cert` is currently installed:
 
 ```text
-Listing... Done
-ssl-cert/noble,now 1.1.2ubuntu1 all [installed]
+ssl-cert/resolute,now 1.1.3ubuntu2 all [installed]
 ```
 
 If you're curious, you can also run `apt list apache2` to see how the output differs for a package that was once installed and then removed!
@@ -426,18 +442,15 @@ This gives us the following list of files and their directory structure (the end
 /etc/ssl
 /etc/ssl/certs
 /etc/ssl/private
-/lib
-diverted by base-files to: /lib.usr-is-merged
-/lib/systemd
-/lib/systemd/system
-/lib/systemd/system/ssl-cert.service
 /usr
-/usr/sbin
-/usr/sbin/make-ssl-cert
-/usr/share
-/usr/share/doc
-/usr/share/doc/ssl-cert
-/usr/share/doc/ssl-cert/README
+/usr/lib
+/usr/lib/systemd
+[...]
+/usr/share/man
+/usr/share/man/man8
+/usr/share/man/man8/make-ssl-cert.8.gz
+/usr/share/ssl-cert
+/usr/share/ssl-cert/ssleay.cnf
 [...]
 ```
 
@@ -493,9 +506,9 @@ Unlike `dpkg --listfiles`, `dpkg-query` *also* gives us a string of letters and 
 ```text
  /etc/apache2/apache2.conf 354c9e6d2b88a0a3e0548f853840674c
  /etc/apache2/conf-available/charset.conf e6fbb8adf631932851d6cc522c1e48d7
+ /etc/apache2/conf-available/localized-error-pages.conf f542d267bfce7815f9453eb1476e5f73
+ /etc/apache2/conf-available/other-vhosts-access-log.conf 2cad303fc4221d6b0068a8b37597b9fb
  /etc/apache2/conf-available/security.conf 332668933023a463046fa90d9b057193
- /etc/apache2/envvars e4431a53c868ae0dfcde68564f3ce6a7
- /etc/apache2/magic a6d370833a02f53db6a0a30800704994
 [...]
 ```
 
@@ -611,18 +624,19 @@ sudo apt remove apache2
 Which will give us an output like this:
 
 ```text
-Reading package lists... Done
-Building dependency tree... Done
-Reading state information... Done
 The following packages were automatically installed and are no longer required:
-  apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3
-  libaprutil1-ldap libaprutil1t64 liblua5.4-0
+  apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
+  apache2-data  libapr1t64     libaprutil1-ldap         liblua5.4-0
 Use 'sudo apt autoremove' to remove them.
-The following packages will be REMOVED:
+
+REMOVING:
   apache2
-0 upgraded, 0 newly installed, 1 to remove and 44 not upgraded.
-After this operation, 465 kB disk space will be freed.
-Do you want to continue? [Y/n] 
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 1, Not Upgrading: 0
+  Freed space: 471 kB
+
+Continue? [Y/n] 
 ```
 
 Let's type {kbd}`Y` to proceed. 
@@ -635,7 +649,7 @@ dpkg --listfiles apache2
 
 ...and see what else might be left behind...
 
-```bash
+```text
 /etc
 /etc/apache2
 /etc/apache2/apache2.conf
@@ -690,23 +704,27 @@ sudo apt remove --purge apache2
 
 Which will give us this output:
 
-```bash
+```text
 [...]
 The following packages were automatically installed and are no longer required:
-  apache2-bin apache2-data apache2-utils libapr1t64 libaprutil1-dbd-sqlite3
-  libaprutil1-ldap libaprutil1t64 liblua5.4-0
+  apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
+  apache2-data  libapr1t64     libaprutil1-ldap         liblua5.4-0
 Use 'sudo apt autoremove' to remove them.
-The following packages will be REMOVED:
+
+REMOVING:
   apache2*
-0 upgraded, 0 newly installed, 1 to remove and 9 not upgraded.
-After this operation, 465 kB disk space will be freed.
-Do you want to continue? [Y/n] 
+
+Summary:
+  Upgrading: 0, Installing: 0, Removing: 1, Not Upgrading: 0
+  Space needed: 0 B / 1318 MB available
+
+Continue? [Y/n] 
 ```
 
 If we look very carefully, we see a little asterisk (\*) in the output.
 
-```bash
-The following packages will be REMOVED:
+```text
+REMOVING:
   apache2*
 ```
 
@@ -746,14 +764,13 @@ This will return a summary of all the versions that exist on our particular Ubun
 ```text
 apache2:
   Installed: (none)
-  Candidate: 2.4.58-1ubuntu8.4
+  Candidate: 2.4.66-2ubuntu2.1
   Version table:
-     2.4.58-1ubuntu8.4 500
-        500 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
-        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
-        100 /var/lib/dpkg/status
-     2.4.58-1ubuntu8 500
-        500 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages
+     2.4.66-2ubuntu2.1 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Packages
+     2.4.66-2ubuntu2 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
 ```
 
 We know that Apache2 isn't installed right now, because we removed and purged it, which is why the installed version shows as "none":
@@ -765,10 +782,10 @@ Installed: (none)
 If we were to install the default package, we would get this one:
 
 ```text
-Candidate: 2.4.58-1ubuntu8.4
+Candidate: 2.4.66-2ubuntu2.1
 ```
 
-Under each version we are also shown the **source**. The newest version (`2.4.58-1ubuntu8.4`) comes from `noble-updates` (main) and `noble-security` (main). The *original* version (`2.4.58-1ubuntu8`) comes from `noble` (main). This tells us that this was the version released with the with 24.04 LTS (Noble Numbat).
+Under each version we are also shown the **source**. The newest version (`2.4.66-2ubuntu2.1`) comes from `resolute-updates` (main) and `resolute-security` (main). The *original* version (`2.4.66-2ubuntu2`) comes from `resolute` (main). This tells us that this was the version released with the with 26.04 LTS (Resolute Raccoon).
 
 ### Installing older package versions
 
@@ -781,33 +798,39 @@ sudo apt install <package=version>
 However, this can be tricky and often leads to conflicts in dependency versions as APT always wants to install the most recent version. We can see an example of this if we run the following command:
 
 ```bash
-sudo apt install apache2=2.4.58-1ubuntu8
+sudo apt install apache2=2.4.66-2ubuntu2
 ```
 
 APT warns us that the version of apache2 we want to install depends on earlier versions of the dependencies, but it helpfully tells us which dependency versions we need to successfully install the package we want.
 
+% dependency error
 ```text
 [...]
+Solving dependencies... Error!  
 Some packages could not be installed. This may mean that you have
 requested an impossible situation or if you are using the unstable
 distribution that some required packages have not yet been created
 or been moved out of Incoming.
 The following information may help to resolve the situation:
 
-The following packages have unmet dependencies:
- apache2 : Depends: apache2-bin (= 2.4.58-1ubuntu8) but 2.4.58-1ubuntu8.4 is to be installed
-           Depends: apache2-data (= 2.4.58-1ubuntu8) but 2.4.58-1ubuntu8.4 is to be installed
-           Depends: apache2-utils (= 2.4.58-1ubuntu8) but 2.4.58-1ubuntu8.4 is to be installed
-E: Unable to correct problems, you have held broken packages.
+Unsatisfied dependencies:
+ apache2 : Depends: apache2-bin (= 2.4.66-2ubuntu2) but 2.4.66-2ubuntu2.1 is to be installed
+           Depends: apache2-data (= 2.4.66-2ubuntu2) but 2.4.66-2ubuntu2.1 is to be installed
+           Depends: apache2-utils (= 2.4.66-2ubuntu2) but 2.4.66-2ubuntu2.1 is to be installed
+Error: Unable to satisfy dependencies. Reached two conflicting assignments:
+   1. apache2:amd64=2.4.66-2ubuntu2 is selected for install
+   2. apache2:amd64=2.4.66-2ubuntu2 Depends apache2-bin (= 2.4.66-2ubuntu2)
+      but none of the choices are installable:
+      - apache2-bin:amd64=2.4.66-2ubuntu2 is not selected for install
 ```
 
 So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces:
 
 ```bash
-sudo apt install apache2-bin=2.4.58-1ubuntu8 \
-  apache2-data=2.4.58-1ubuntu8 \
-  apache2-utils=2.4.58-1ubuntu8 \
-  apache2=2.4.58-1ubuntu8
+sudo apt install apache2-bin=2.4.66-2ubuntu2 \
+  apache2-data=2.4.66-2ubuntu2 \
+  apache2-utils=2.4.66-2ubuntu2 \
+  apache2=2.4.66-2ubuntu2
 ```
 
 In this case we're also breaking the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
@@ -822,15 +845,16 @@ And we'll get confirmation that we're running on an older version:
 
 ```text
 apache2:
-  Installed: 2.4.58-1ubuntu8
-  Candidate: 2.4.58-1ubuntu8.4
+  Installed: 2.4.66-2ubuntu2
+  Candidate: 2.4.66-2ubuntu2.1
   Version table:
-     2.4.58-1ubuntu8.4 500
-        500 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
-        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
- *** 2.4.58-1ubuntu8 500
-        500 http://archive.ubuntu.com/ubuntu noble/main amd64 Packages
+     2.4.66-2ubuntu2.1 500
+        500 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 Packag>
+        500 http://security.ubuntu.com/ubuntu resolute-security/main amd64 Pack>
+ *** 2.4.66-2ubuntu2 500
+        500 http://archive.ubuntu.com/ubuntu resolute/main amd64 Packages
         100 /var/lib/dpkg/status
+lines 1-10/10 (END)
 ```
 
 ### Where do packages come from?
@@ -894,9 +918,9 @@ Every Ubuntu series (`noble`, `jammy`, etc) is split into **pockets**, which are
 - Once an update is released, they come from either **-security** or **-updates** depending on whether they are a security-related update or not.
 - And **-backports**, which contains packages that were not available at release time.
 
-This is why earlier, we saw that some updates came from `noble-updates` or `noble-security`. These refer to updates and security updates from the noble series (respectively). Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
+This is why earlier, we saw that some updates came from `resolute-updates` or `resolute-security`. These refer to updates and security updates from the noble series (respectively). Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
 
-Remember -- the original version of the `apache2` package we saw came from `noble`. The `-release` pocket only includes the software that was part of the original LTS release, and so it takes the name of the Ubuntu series by default (i.e., the `-release` pocket is implied). 
+Remember -- the original version of the `apache2` package we saw came from `resolute`. The `-release` pocket only includes the software that was part of the original LTS release, and so it takes the name of the Ubuntu series by default (i.e., the `-release` pocket is implied). 
 
 #### Components
 
