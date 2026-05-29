@@ -20,6 +20,7 @@ Ubuntu also supports [SSSD](https://sssd.io/) as an alternative LDAP client. SSS
 - A reachable LDAP server. To set one up, see {ref}`install-openldap`.
 - The server's base Distinguished Name ({term}`DN`) and URI.
 - The system CA certificates must trust the LDAP server's TLS certificate. See {ref}`ldap-and-tls` for guidance on TLS setup.
+- And of course {ref}`users/groups in LDAP <ldap-users-and-groups>`.
 
 ## Install the LDAP client daemon
 
