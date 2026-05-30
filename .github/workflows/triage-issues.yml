@@ -87,20 +87,19 @@ jobs:
             
             // Check for "missing documentation" exception where the reporter is requesting docs on a topic (no docs yet = no valid URL)
             const missingDocPatterns = [
-              /missing documentation/i,
-              /new documentation/i,
-              /no documentation/i,
-              /lacks? documentation/i,
-              /needs? documentation/i,
+              /add (documentation|page|guide|section|content)/i,
+              /missing (documentation|page|guide|section|content)/i,
+              /new (documentation|page|guide|section|content)/i,
+              /no (documentation|page|guide|section|content) (for|on|about)/i,
+              /lacks? (documentation|page|guide|section|content)/i,
+              /needs? (documentation|page|guide|section|content)/i,
               /should (have|include|document)/i,
               /would be/i,
-              /please add documentation/i,
-              /missing (page|guide|section)/i,
-              /no (page|guide|section) (for|on|about)/i,
               /doesn't have (documentation|a page|a guide)/i,
               /does not have (documentation|a page|a guide)/i,
               /not documented/i,
-              /undocumented/i
+              /undocumented/i,
+              /docs/i,
             ];
             
             const isMissingDocReport = missingDocPatterns.some(pattern => pattern.test(issueBody) || pattern.test(issueTitle));
