@@ -120,13 +120,16 @@ More detailed explanation of the commands and operators in this section can be f
 | Command | Description | Online manual page |
 |---------|-------------|--------------------|
 | `env` | List all environment variables |{manpage}`env(1)`|
-| `echo $VAR` | Print the value of variable `VAR` |{manpage}`echo(1)`|
+| `echo $VAR` | Print the value of variable `VAR` |See note below this table|
 | `VAR=value` | Set a shell variable (available in current shell only) ||
 | `export VAR=value` | Set a variable and export it to child processes ||
 | `unset VAR` | Remove a variable ||
 | `echo $?` | Print the exit status of the last command (`0` = success) ||
 | `echo $$` | Print the PID of the current shell ||
 
+:::{note}
+If you are using the bash, dash or zsh shell, `echo` is a builtin command documented under the shell manual page. For example, the [bash builtin shell section](https://manpages.ubuntu.com/manpages/resolute/man1/bash.1.html#shell-builtin-commands). If your shell doesn't have an `echo` builtin command, use the {manpage}`echo(1)` manual page instead.
+:::
 
 ## Shell expansion
 
