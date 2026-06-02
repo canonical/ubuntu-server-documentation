@@ -1,70 +1,19 @@
+---
+myst:
+  html_meta:
+    description: Introductory tutorial on the Ubuntu terminal. Understand what the terminal is, then use it to navigate the file system, work with files, and manage permissions.
+---
+
 (welcome-to-the-terminal)=
 # Welcome to the terminal
 
 On Ubuntu Server, the terminal is the primary way of interacting with your system.
-It's easier to use than you might think, and learning it gives you much more control over your system (including on your Ubuntu Desktop).
+It's easier to use than you might think, and learning it gives you much more control over your system (including on your Ubuntu Desktop). In this tutorial, you will learn how to use the terminal to navigate your Ubuntu system, find and work with files, and where to find help if you get stuck.
 
-In this tutorial, we'll use a virtual machine (VM) with Ubuntu Server to poke around and explore the terminal in a safe sandbox that won't affect your computer. You'll learn how to navigate your system, how to find and work with files, and where to find help if you get stuck.
+% Include the multipass install instructions common to all tutorials
+```{include} common-multipass.txt
+```
 
-
-## Prerequisites
-
-* **Knowledge:**
-
-  None! You don't even need to use an Ubuntu machine -- we will use Multipass to create a virtual Ubuntu environment to play with.
-
-* **Hardware:**
-
-  The Multipass virtual machine needs at least **5 GB of disk space**, and **1 GB of memory**.
-
-
-(tutorial-install-multipass)=
-## Install Multipass
-
-::::{tab-set}
-
-:::{tab-item} On Ubuntu
-You can install Multipass directly from [the Multipass page](https://snapcraft.io/multipass) in the online snap store (make sure to select the "latest/stable" version from the dropdown menu next to the install button).
-:::
-
-:::{tab-item} On other operating systems
-
-If you're on Windows, Mac, or another Linux operating system, Multipass can be installed [using these instructions](https://documentation.ubuntu.com/multipass/stable/how-to-guides/install-multipass/).
-:::
-
-::::
-
-
-Now that Multipass is installed, we need a terminal window to run our commands in. How you open one depends on your operating system.
-
-::::{tab-set}
-
-:::{tab-item} On Ubuntu
-Press {kbd}`Ctrl` + {kbd}`Alt` + {kbd}`T` together and a terminal window will open. You can also search for "Terminal" in your application launcher.
-:::
-
-:::{tab-item} On Windows
-PowerShell is the most reliable option for working with Multipass on Windows.
-
-1. Press the {kbd}`Windows` key.
-1. Type `PowerShell`.
-1. Right-click it and select **Run as Administrator** — this helps avoid permission issues when managing virtual machines.
-
-If you have Windows Terminal installed from the Microsoft Store, that works just as well and offers a nicer experience with tab support.
-
-To confirm everything is working, type `multipass version` and press {kbd}`Enter`. If you see version numbers, you're ready to continue.
-:::
-
-:::{tab-item} On macOS
-1. Press {kbd}`⌘` + {kbd}`Space` to open Spotlight.
-1. Type `Terminal` and press {kbd}`Enter`.
-
-If you use iTerm2, that works perfectly well too.
-
-To confirm everything is working, type `multipass version` and press {kbd}`Enter`. If you see version numbers, you're ready to continue.
-:::
-
-::::
 
 ## Understanding the terminal
 
@@ -142,32 +91,28 @@ After we run the command, our terminal window should show us a welcome message l
 :dir: ~
 multipass shell tutorial
 
-Welcome to Ubuntu 24.04.4 LTS (GNU/Linux 6.8.0-106-generic x86_64)
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
 
- * Documentation:  https://help.ubuntu.com
+ * Documentation:  https://docs.ubuntu.com
  * Management:     https://landscape.canonical.com
  * Support:        https://ubuntu.com/pro
 
- System information as of Thu Apr 16 14:25:25 BST 2026
+ System information as of Fri May 29 17:22:28 BST 2026
 
-  System load:  0.09              Processes:             99
-  Usage of /:   49.7% of 3.80GB   Users logged in:       0
-  Memory usage: 20%               IPv4 address for ens3: 10.234.118.216
+  System load:  0.17              Processes:             110
+  Usage of /:   56.8% of 3.70GB   Users logged in:       0
+  Memory usage: 22%               IPv4 address for ens3: 10.234.118.66
   Swap usage:   0%
 
 
 Expanded Security Maintenance for Applications is not enabled.
 
-51 updates can be applied immediately.
-42 of these updates are standard security updates.
+26 updates can be applied immediately.
+10 of these updates are standard security updates.
 To see these additional updates run: apt list --upgradable
 
 Enable ESM Apps to receive additional future security updates.
 See https://ubuntu.com/esm or run: sudo pro status
-
-
-To run a command as administrator (user "root"), use "sudo <command>".
-See "man sudo_root" for details.
 ```
 
 You've probably noticed that your shell prompt has changed, and now says `ubuntu@tutorial:~$` -- `tutorial` is the name of our virtual machine, and `ubuntu` is the default username in a Multipass virtual machine. This is how we know we're now playing in our virtual sandbox, and not in our physical computer.
@@ -1083,7 +1028,7 @@ This lists every command whose description mentions "copy", which can help us fi
 
 This is the end of our introduction to the terminal! We have covered a lot of ground: launching a virtual machine, navigating the filesystem, working with files and directories, understanding file types and the filesystem hierarchy, managing permissions, and finding help. All the commands we covered here (as well as some extra ones) can be found in our reference {ref}`command-line-cheat-sheet`.
 
-If you wish, you can continue to explore the file system on your virtual machine, or proceed straight to the {ref}`cli-in-depth` tutorial where you can use the same VM.
+If you wish, you can continue to explore the file system on your virtual machine, or proceed straight to the next tutorial where you can use the same VM.
 
 However, if you're done for now and want to exit the VM, just type "`exit`".
 
@@ -1106,3 +1051,6 @@ multipass delete tutorial
 multipass purge
 ```
 
+## Next steps
+
+If you wish to continue learning, we recommend following the {ref}`cli-in-depth` tutorial next. This tutorial will teach you the more advanced ways to interact with the Command Line Interface; how data flows, how input and output can be used more efficiently, and how to use variables.
