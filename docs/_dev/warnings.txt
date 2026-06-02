@@ -1,0 +1,4 @@
+/home/sally/src/ubuntu-server-documentation/docs/reference/glossary.md:66: WARNING: glossary term must be preceded by empty line
+/home/sally/src/ubuntu-server-documentation/docs/reference/glossary.md:46: WARNING: glossary term must be preceded by empty line
+/home/sally/src/ubuntu-server-documentation/docs/reference/glossary.md:15: WARNING: glossary term must be preceded by empty line
+/home/sally/src/ubuntu-server-documentation/docs/reference/glossary.md:34: WARNING: glossary term must be preceded by empty line
