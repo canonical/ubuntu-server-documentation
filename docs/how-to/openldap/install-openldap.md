@@ -1,41 +1,50 @@
 ---
 myst:
   html_meta:
-    description: Install and configure OpenLDAP server with slapd daemon, set up database suffix, and manage hierarchical directory data on Ubuntu.
+    description: Install and configure an OpenLDAP server with slapd on Ubuntu.
 ---
 
 (install-openldap)=
 # Install and configure LDAP
 
-[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol used for managing hierarchical data. OpenLDAP is the open-source implementation of LDAP used in Ubuntu. For information about OpenLDAP and explanations of the key terminology, see {ref}`introduction-to-openldap`.
+[Lightweight Directory Access Protocol](https://ldap.com/) (LDAP) is a protocol for managing hierarchical data. OpenLDAP is the open-source implementation of LDAP used in Ubuntu. For information about OpenLDAP and explanations of the key terminology, see {ref}`introduction-to-openldap`.
 
-Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/software/man.cgi?query=slapd) creates a minimal working configuration with a top level entry, and an administrator's Distinguished Name (DN). 
+Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/software/man.cgi?query=slapd) creates a minimal working configuration with a top level entry, and an administrator's Distinguished Name (DN).
 
-In particular, it creates a database instance that you can use to store your data. However, the **suffix** (or **base DN**) of this instance will be determined from the domain name of the host. If you want something different, you can change it right after the installation (before it contains any useful data).
+In particular, it creates a database instance to store your data. However, the **suffix** (or **base DN**) of this instance is determined from the host's domain name. If you want something different, you can change it right after installation.
 
 ```{note}
-This guide will use a database suffix of **`dc=example,dc=com`**. You can change this to match your particular setup.
+This guide uses a database suffix of **`dc=example,dc=com`**. Change this to match your particular setup.
 ```
 
 ## Install slapd
 
-You can install the server and the main command line utilities with the following command:
+Install the server and the main command line utilities:
 
-```console
+```bash
 sudo apt install slapd ldap-utils
 ```
 
+The installer prompts for an administrator password. This password is for the `cn=admin,dc=example,dc=com` DN (where `dc=example,dc=com` is derived from your system's domain name). If you leave it empty, the admin entry is created without a password and you must rely on SASL EXTERNAL authentication via Unix socket as root.
+
 ### Change the instance suffix (optional)
 
-If you want to change your Directory Information Tree ({term}`DIT`) suffix, now would be a good time since changing it discards your existing one. To change the suffix, run the following command:
+The suffix (or base DN) is the top-most entry in your directory tree, under which all other entries are created. If you want to change the suffix, now is a good time since changing it discards the existing database.
 
-```console
+To reconfigure `slapd`, run:
+
+```bash
 sudo dpkg-reconfigure slapd
 ```
 
-To switch your DIT suffix to **`dc=example,dc=com`**, for example, so you can follow this guide more closely, answer `example.com` when asked about the {term}`DNS` domain name.
+The reconfiguration wizard prompts for:
 
-Throughout this guide we will issue many commands with the LDAP utilities. To save some typing, we can configure the OpenLDAP libraries with certain defaults in `/etc/ldap/ldap.conf` (adjust these entries for your server name and directory suffix):
+1. **DNS domain name** — This determines your suffix. For example, entering `example.com` creates the suffix `dc=example,dc=com`.
+1. **Organisation name** — Stored as the `o` attribute of the base DN entry.
+1. **Administrator password** — This is the password for `cn=admin,dc=example,dc=com`.
+1. **Move old database** — The wizard offers to move the previous database to `/var/backups/`. Accept this if you want to keep the old data.
+
+Throughout this guide we will issue many commands with the LDAP utilities. To save some typing, configure the OpenLDAP libraries with defaults in `/etc/ldap/ldap.conf` (adjust for your server name and directory suffix):
 
 ```text
 BASE dc=example,dc=com
@@ -44,7 +53,11 @@ URI ldap://ldap01.example.com
 
 ## Default tree contents
 
-`slapd` is designed to be configured within the service itself by dedicating a separate DIT for that purpose. This allows for dynamic configuration of `slapd` without needing to restart the service or edit config files. This configuration database consists of a collection of text-based LDIF files located under `/etc/ldap/slapd.d`, but these should never be edited directly. This way of working is known by several names: the "slapd-config" method, the "Real Time Configuration (RTC)" method, or the "cn=config" method. You can still use the traditional flat-file method (`slapd.conf`) but that will not be covered in this guide.
+`slapd` is designed to be configured within the service itself by dedicating a separate DIT for that purpose. This allows for dynamic configuration of `slapd` without needing to restart the service or edit config files. This configuration database consists of a collection of text-based LDIF files located under `/etc/ldap/slapd.d`, but these should never be edited directly. This way of working is known by several names: the "slapd-config" method, the "Real Time Configuration (RTC)" method, or the "cn=config" method. You can still use the traditional flat-file method (`slapd.conf`) but that is not covered in this guide.
+
+```{note}
+Although the configuration is accessible via the LDAP protocol under the `cn=config` suffix, it is also stored on disk under `/etc/ldap/slapd.d/`. This allows the configuration to be replicated to other servers and backed up alongside the data.
+```
 
 Right after installation, you will get two databases, or suffixes: one for your data, which is based on your host's domain (**`dc=example,dc=com`**), and one for your configuration, with its root at **`cn=config`**. To change the data on each we need different credentials and access methods:
 
@@ -194,6 +207,8 @@ dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
 When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a combination of the {term}`uid` and {term}`gid` of the connecting user, followed by the suffix `cn=peercred,cn=external,cn=auth`. The server ACLs know about this, and grant the local root user complete write access to `cn=config` via the SASL mechanism.
+
+You can extend this to grant the local root user write access to your data tree as well, which simplifies administration by avoiding password prompts. See {ref}`ldap-access-control` for how to set this up.
 
 ```{note}
 OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
@@ -426,8 +441,8 @@ modifying entry "olcDatabase={1}mdb,cn=config"
 
 You can confirm the change with a search:
 
-```console
-ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
+```bash
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
 ```
 
 And the result will include all instances of the `olcDbIndex` attribute:
@@ -447,7 +462,9 @@ To learn more about OpenLDAP indexes, check the upstream documentation at https:
 
 ### Add a schema
 
-Schemas can only be added to `cn=config` if they are in LDIF format. If not, they will first have to be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
+A schema defines the structure and data types of object classes available in the LDAP tree. It specifies which attributes an entry can have and their syntax rules.
+
+Schemas can only be added to `cn=config` if they are in LDIF format. If not, they must first be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
 ```{note}
 It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
@@ -468,11 +485,11 @@ If the schema you want to add does not exist in LDIF format, a nice conversion t
 
 ## Logging
 
-Activity logging for `slapd` is very useful when implementing an OpenLDAP-based solution -- and it must be manually enabled after software installation. Otherwise, only rudimentary messages will appear in the logs. Logging, like any other such configuration, is enabled via the `slapd-config` database.
+Activity logging for `slapd` is useful when implementing an OpenLDAP-based solution, and must be manually enabled after installation. Otherwise, only rudimentary messages appear in the logs. Logging, like any other configuration, is enabled via the `slapd-config` database.
 
 OpenLDAP comes with multiple logging levels, with each level containing the lower one (additive). A good level to try is **stats**. The {manpage}`slapd-config(5)` manual page has more to say on the different subsystems.
 
-### Example logging with the stats level 
+### Example logging with the stats level
 
 Create the file `logging.ldif` with the following contents:
 
@@ -485,30 +502,16 @@ olcLogLevel: stats
 
 Run `ldapmodify` to implement the change:
 
-```console
+```bash
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f logging.ldif
 ```
 
-Depending on how active your OpenLDAP server is, this will produce a significant amount of logging. It is recommended to revert back to a less verbose level once the need for this detailed logging isn't there anymore.
+Depending on how active your OpenLDAP server is, this may produce a significant amount of logging. Revert to a less verbose level once the need for detailed logging is gone.
 
-While in this verbose mode your host's syslog engine (`rsyslog`) may have a hard time keeping up. If you see log message like this, it means some messages were dropped:
+View the logs with:
 
-```text
-rsyslogd-2177: imuxsock lost 228 messages from pid 2547 due to rate-limiting
-```
-
-You may consider a change to `rsyslog`'s configuration. In `/etc/rsyslog.conf`, add:
-
-```text
-# Disable rate limiting
-# (default is 200 messages in 5 seconds; below we make the 5 become 0)
-$SystemLogRateLimitInterval 0
-```
-
-And then restart the `rsyslog` daemon:
-
-```console
-sudo systemctl restart syslog.service
+```bash
+sudo journalctl -eu slapd.service
 ```
 
 ## Next steps

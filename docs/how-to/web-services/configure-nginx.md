@@ -122,17 +122,7 @@ server {
 
 Thanks to the `return 301` line in the above configuration, anyone visiting the site on port 80 via an HTTP URL will get automatically redirected to the equivalent secure HTTPS URL.
 
-Refer to the {ref}`security - certificates <certificates>` page in this manual for details on how to create and manage certificates, and the {ref}`OpenSSL <openssl>` page for additional details on configuring and using that service. The {ref}`GnuTLS <gnutls>` section explains how to configure different SSL protocol versions and their associated ciphers.
-
-For example, to generate a self-signed certificate, you might run a set of commands similar to these:
-
-```bash
-$ sudo openssl genrsa -out our-site.org.key 2048                                                                   
-$ openssl req -nodes -new -key our-site.org.key -out ca.csr                                                        
-$ openssl x509 -req -days 365 -in our-site.org.csr -signkey our-site.org.key -out our-site.org.crt                 
-$ mkdir /etc/apache2/ssl                                                                                           
-$ cp our-site.org.crt our-site.org.key our-site.org.csr /etc/apache2/ssl/
-```
+Refer to {ref}`obtain-tls-certificates` for how to obtain a trusted certificate from Let's Encrypt (recommended for internet-facing servers) or to set up your own Certificate Authority (CA). The {ref}`OpenSSL <openssl>` page has additional details on configuring and using that service. The {ref}`GnuTLS <gnutls>` section explains how to configure different SSL protocol versions and their associated ciphers.
 
 ## Setting up nginx
 

@@ -1,12 +1,11 @@
 ---
 myst:
   html_meta:
-    description: Configure OpenLDAP access control lists (ACLs) to manage read, write, and authentication permissions for LDAP resources.
+    description: Configure OpenLDAP access control lists (ACLs) to manage read, write, and authentication permissions.
 ---
 
 (ldap-access-control)=
 # Set up LDAP access control
-
 
 The management of what type of access (read, write, etc) users should be granted for resources is known as **access control**. The configuration directives involved are called **access control lists** or {term}`ACL`s.
 
@@ -16,20 +15,32 @@ To get the effective ACL for an LDAP query we need to look at the ACL entries of
 
 ## Getting the ACLs
 
-The following commands will give, respectively, the ACLs of the `mdb` database (`dc=example,dc=com`) and those of the frontend database:
+The following commands give the ACLs of the `mdb` database (`dc=example,dc=com`) and those of the frontend database respectively.
+
+For the main database:
 
 ```bash
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcDatabase={1}mdb)' olcAccess
-    
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcAccess
+```
+
+Output:
+
+```text
 dn: olcDatabase={1}mdb,cn=config
 olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
 olcAccess: {1}to attrs=shadowLastChange by self write by * read
 olcAccess: {2}to * by * read
+```
 
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcDatabase={-1}frontend)' olcAccess
-    
+For the frontend database:
+
+```bash
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={-1}frontend)' olcAccess
+```
+
+Output:
+
+```text
 dn: olcDatabase={-1}frontend,cn=config
 olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external
  ,cn=auth manage by * break
@@ -57,7 +68,7 @@ to attrs=userPassword
     by self write
     by anonymous auth
     by * none
-    
+
 to attrs=shadowLastChange
     by self write
     by * read
@@ -87,15 +98,18 @@ If this is unwanted then you need to change the ACL. To force authentication dur
 There is no administrative account ("Root DN") created for the `slapd-config` database. There is, however, a SASL identity that is granted full access to it. It represents the localhost's superuser (`root`/`sudo`). Here it is:
 
 ```text
-dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth 
+dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
-The following command will display the ACLs of the `slapd-config` database:
+The following command displays the ACLs of the `slapd-config` database:
 
 ```bash
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcDatabase={0}config)' olcAccess
-    
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={0}config)' olcAccess
+```
+
+Output:
+
+```text
 dn: olcDatabase={0}config,cn=config
 olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,
               cn=external,cn=auth manage by * break
@@ -107,11 +121,40 @@ Since this is a SASL identity we need to use a SASL **mechanism** when invoking 
 
 - The EXTERNAL mechanism works via **Inter-process Communication** (IPC, UNIX domain sockets). This means you must use the `ldapi` URI format.
 
-A succinct way to get all the ACLs is like this:
+(ldap-peercred-setup)=
+## Grant root passwordless access to the data tree
+
+By default, the local root user can manage `cn=config` via SASL EXTERNAL, but not the data tree (`dc=example,dc=com`). To allow root to also manage the data tree without entering a password, add an ACL rule.
+
+Create a file called `peercred.ldif`:
+
+```text
+# Allow root user (via peercred) to manage the primary database (mdb)
+dn: olcDatabase={1}mdb,cn=config
+changetype: modify
+add: olcAccess
+# Inserted as the first ACL rule
+olcAccess: {0}to * by dn.exact="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth" manage by * break
+```
+
+Apply the change:
 
 ```bash
-$ sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b \
-cn=config '(olcAccess=*)' olcAccess olcSuffix
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f peercred.ldif
+```
+
+Now you can run LDAP commands to modify the data tree, as root, without a LDAP password (when you run this on the OpenLDAP server machine):
+
+```bash
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f add_content.ldif
+```
+
+This simplifies administration and is used throughout the other guides in this series.
+
+A succinct way to get all the ACLs is:
+
+```bash
+sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcAccess=*)' olcAccess olcSuffix
 ```
 
 ## Next steps
@@ -121,4 +164,4 @@ See how to {ref}`set up LDAP users and groups <ldap-users-and-groups>`.
 ## Further reading
 
 - See the manual page for {manpage}`slapd.access(5)`
-- The [access control topic](https://openldap.org/doc/admin25/guide.html#Access%20Control) in the OpenLDAP administrator's guide.
+- The [access control topic](https://openldap.org/doc/admin26/guide.html#Access%20Control) in the OpenLDAP administrator's guide.

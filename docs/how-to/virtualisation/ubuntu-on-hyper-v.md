@@ -26,13 +26,17 @@ The following are typical [system requirements for Hyper-V](https://learn.micros
 
 ## Install Hyper-V
 
-Our first step in enabling Ubuntu is to install Hyper-V, which can be used on the Windows 11 Pro, Enterprise, Education, and Server operating systems.
+Hyper-V can be used on Windows 10 and Windows 11 Pro, Enterprise, and Education editions, as well as Windows Server. The installation method differs between Windows client and Windows Server editions.
 
-Hyper-V is not included in Windows 11 Home, which [would need to be upgraded](https://support.microsoft.com/en-us/windows/upgrade-windows-home-to-windows-pro-ef34d520-e73f-3198-c525-d1a218cc2818) to Windows 11 Pro.
+Hyper-V is not included in Windows 10 or Windows 11 Home, which [would need to be upgraded](https://support.microsoft.com/en-us/windows/upgrade-windows-home-to-windows-pro-ef34d520-e73f-3198-c525-d1a218cc2818) to the Pro edition.
 
-### Install Hyper-V graphically
+### Install Hyper-V on Windows client
 
-1. Right click on the Windows Start button and select 'Apps and Features'.
+The following steps apply to Windows 10 and Windows 11 editions.
+
+#### Install Hyper-V graphically
+
+1. Right-click on the Windows Start button and select 'Apps and Features'.
 
 1. Select 'Programs and Features' under Related Settings.
 
@@ -42,7 +46,7 @@ Hyper-V is not included in Windows 11 Home, which [would need to be upgraded](ht
 
 1. Restart when prompted.
 
-### Install Hyper-V using PowerShell
+#### Install Hyper-V using PowerShell
 
 1. Open a PowerShell console as Administrator.
 
@@ -54,11 +58,25 @@ Hyper-V is not included in Windows 11 Home, which [would need to be upgraded](ht
 
 1. Restart when prompted.
 
+### Install Hyper-V on Windows Server
+
+On Windows Server editions, Hyper-V is installed as a server role rather than an optional feature. In an elevated PowerShell session, run:
+
+```powershell
+Install-WindowsFeature -Name Hyper-V -IncludeManagementTools -Restart
+```
+
+For the complete steps — including remote installation and role verification — see Microsoft's guide on [installing the Hyper-V role on Windows Server](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/install-the-hyper-v-role-on-windows-server).
+
 ## Install Ubuntu on Hyper-V
 
 There are two main methods for installing Ubuntu on Hyper-V depending on your use case. Read each of the descriptions of the following methods and then determine the best for your situation.
 
 ### Using Quick Create
+
+:::{note}
+Quick Create is only available on Windows 10 and Windows 11 **client** editions. It is not available on Windows Server. If you are running Windows Server, use the {ref}`New Virtual Machine Wizard <using-the-new-virtual-machine-wizard>` method instead.
+:::
 
 The recommended method is to use the curated Ubuntu image from the Hyper-V Quick Create Gallery. This is ideal for desktop development on Ubuntu and for users interested in running a complete Ubuntu desktop environment. The Ubuntu image from the Quick Create Gallery includes pre-configured features, such as clipboard sharing, dynamic resolution display, and shared folders.
 
@@ -93,41 +111,36 @@ The recommended method is to use the curated Ubuntu image from the Hyper-V Quick
 
 1. Complete the final stages of the Ubuntu install, including username selection.
 
-### Using an Ubuntu CD image
+(using-the-new-virtual-machine-wizard)=
+### Using the New Virtual Machine Wizard
 
-It is possible to install Ubuntu on Hyper-V using a CD image ISO. This is useful if you are running Ubuntu Server and do not need an enhanced desktop experience. Note that the enhanced features of the Quick Create images are not enabled by default when you perform a manual install from an ISO.
+You can install Ubuntu on Hyper-V using an ISO image and the New Virtual Machine Wizard, which is available on Windows Server. Note that the enhanced features included in Quick Create images (clipboard sharing, dynamic resolution, and shared folders) are not enabled by default with a manual ISO install.
 
 1. Download an Ubuntu ISO from an [official Ubuntu source](https://ubuntu.com/download/server).
 
 1. Install Hyper-V as described above.
 
-1. Open 'Hyper-V Manager' by either:
+1. Open 'Hyper-V Manager'.
 
-   * Selecting the Windows Start button, then
-       -> Expanding the 'Windows Administrative Tools' folder
-       -> Selecting 'Hyper-V Manager'
+1. In the 'Actions' pane, select 'New', then 'Virtual Machine' to open the New Virtual Machine Wizard.
 
-      or
-   
-   * Selecting the Windows key, then
-      -> Typing 'Hyper-V'
-      -> Selecting 'Hyper-V Manager'
+1. Work through the wizard pages:
 
-1. On the 'Actions' pane click 'Quick Create' and the Quick Create tool will open.
+   * **Name and Location**: Enter a descriptive name (e.g. 'Ubuntu Server 24.04 LTS') and choose a storage location.
+   * **Generation**: Select 'Generation 2' for UEFI and Secure Boot support.
+   * **Memory**: Assign at least 2048 MB; enable Dynamic Memory if desired.
+   * **Networking**: Connect to a virtual switch, or configure networking later.
+   * **Virtual Hard Disk**: Create a new virtual hard disk; 25 GB or more is recommended.
+   * **Installation Options**: Select 'Install an operating system from a bootable image file' and browse to your ISO.
 
-1. Select 'Change installation source' and choose the ISO file you downloaded before.
+1. Select 'Finish' and wait for the virtual machine to be created.
 
-   If you want to give your virtual machine a more descriptive name, select the 'More options' down-arrow and change 'New Virtual Machine' to something more useful, e.g. 'Ubuntu Server 18.04 LTS'.
+1. Before starting the VM, configure Secure Boot: right-click the VM and select 'Settings', then navigate to 'Security'. Under 'Secure Boot', change the template from 'Microsoft Windows' to 'Microsoft UEFI Certificate Authority', then select 'Apply' and 'OK'.
 
-1. Select 'Create Virtual Machine' and wait for the virtual machine to be created.
-
-1. Select 'Connect' to open a connection to your VM.
-
-1. Select 'File' in the menu bar, then
-    -> Choose 'Settings' and select the 'Security' tab
-    -> Under Secure Boot choose 'Microsoft UEFI Certificate Authority'
-    -> Then select 'Apply' and 'OK' to return to your VM.
-
-1. Select 'Start' to run your VM.
+1. Right-click the VM and select 'Connect', then select 'Start' to run your VM.
 
 1. Complete the manual installation of Ubuntu.
+
+### Further reading
+
+For a complete guide on creating virtual machines on Windows Server Hyper-V, see Microsoft's documentation on [creating a virtual machine in Hyper-V](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/get-started/create-a-virtual-machine-in-hyper-v).
