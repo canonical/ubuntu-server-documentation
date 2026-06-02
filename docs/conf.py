@@ -348,6 +348,7 @@ exclude_patterns = [
     "readme.md",
     "legacy/*.md",
     ".github/*.md",
+    ".venv",
 ]
 
 myst_heading_anchors = 3
