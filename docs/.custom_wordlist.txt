@@ -328,3 +328,4 @@ Yubikey
 Zettabyte
 zfs
 zSeries
+zsh
