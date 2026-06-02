@@ -357,7 +357,7 @@ myst_heading_anchors = 3
 
 # Adds custom CSS files, located remotely or in 'html_static_path'.
 html_css_files = [
-    "css/cookie-banner.css",
+    "https://assets.ubuntu.com/v1/d86746ef-cookie_banner.css",
     "css/custom.css",
     "css/footer.css",
     "css/furo_colors.css",
@@ -369,7 +369,7 @@ html_css_files = [
 html_js_files = [
     "js/footer.js",
     "js/github_issue_links.js",
-    "js/bundle.js",
+    "https://assets.ubuntu.com/v1/287a5e8f-bundle.js",
     "js/url_overwrite.js",
 ]
 
