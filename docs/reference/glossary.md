@@ -381,13 +381,14 @@ Backtrace
 
 BDC
 Backup Domain Controller
-    *Work in Progress*
+    A (legacy) Windows NT4 domain controller that authenticates network users using a read-only copy of the Security Account Manager database (SAM). A BDC acts as a backup for a Primary Domain Controller ({term}`PDC`) and can authenticate users locally in a large network. A [Samba server](https://ubuntu.com/server/docs/explanation/intro-to/samba/#introduction-to-samba) may be deployed as a BDC in the deprecated Windows NT4 domain controller mode.
 
 bind
     *Work in Progress*
 
 BindDN
-    *Work in Progress*
+    A distinguished name (DN) that specifies the client or connection to authenticate to an LDAP directory server. A bindDN is supplied during a bind operation that authenticates and authorizes the client for subsequent operations. 
+    An attribute in an LDIF file.
 
 BIOS
     *Work in Progress*
