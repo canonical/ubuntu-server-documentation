@@ -250,6 +250,10 @@ linkcheck_ignore = [
     "http://www.gnu.org/software/*",
     "https://github.com./*",
     "https://ubuntu.com/*",
+    "https://docs.ubuntu.com/*",
+    "https://snapcraft.io/*",
+    "https://people.freedesktop.org/*",
+    "https://www.squid-cache.org/Doc/config/",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
