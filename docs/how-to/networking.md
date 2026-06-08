@@ -46,7 +46,7 @@ NVIDIA DOCA provides the software components required for high-performance netwo
 ```{toctree}
 :titlesonly:
 
-Install and maintain DOCA-OFED <networking/install-doca-ofed>
+Install DOCA-OFED <networking/install-doca-ofed>
 ```
 
 ## DHCP
