@@ -60,7 +60,7 @@ uname -r
    sudo apt install -y doca-ofed-<your_kernel_flavor>
    ```
 
-   For example, if `uname -r` returns `6.17.0-20-generic`, install:
+For example, if `uname -r` returns `6.17.0-20-generic`, you should install:
 
    ```bash
    sudo apt install -y doca-ofed-generic
