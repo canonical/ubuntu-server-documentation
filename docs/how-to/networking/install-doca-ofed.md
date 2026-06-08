@@ -10,21 +10,9 @@ myst:
 This guide explains how to install and maintain DOCA-OFED on Ubuntu Server.
 
 ```{note}
+[DOCA-OFED](https://developer.nvidia.com/networking/doca) is NVIDIA's distribution of OpenFabrics Enterprise Distribution (OFED) drivers and userspace libraries for high-performance networking.
+
 DOCA-OFED is available for Ubuntu 26.04 LTS (Resolute Raccoon).
-```
-
-### Determine your kernel flavor
-
-Use {manpage}`uname(1)` to identify your running kernel variant:
-
-```bash
-uname -r
-```
-
-For example, if `uname -r` returns `6.17.0-20-generic`, install:
-
-```bash
-sudo apt install -y doca-ofed-generic
 ```
 
 ## Available metapackages
@@ -52,7 +40,15 @@ The following DOCA-OFED metapackages are currently provided:
 
 To install the latest available DOCA-OFED version:
 
-1. Add the stable DOCA PPA:
+- Determine your kernel flavor
+
+Use {manpage}`uname(1)` to identify your running kernel variant:
+
+```bash
+uname -r
+```
+
+- Add the stable DOCA PPA:
 
    Use {manpage}`add-apt-repository(1)`:
 
@@ -60,7 +56,7 @@ To install the latest available DOCA-OFED version:
    sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
    ```
 
-1. Install the DOCA-OFED metapackage that matches your kernel flavor:
+- Install the DOCA-OFED metapackage that matches your kernel flavor:
 
    Use {manpage}`apt(8)`:
 
@@ -68,7 +64,13 @@ To install the latest available DOCA-OFED version:
    sudo apt install -y doca-ofed-<your_kernel_flavor>
    ```
 
-1. Reboot the machine.
+   For example, if `uname -r` returns `6.17.0-20-generic`, install:
+
+   ```bash
+   sudo apt install -y doca-ofed-generic
+   ```
+
+- Reboot the machine.
 
 ## Maintain and upgrade DOCA-OFED
 
@@ -92,18 +94,18 @@ Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upg
 
 ## Collect a sosreport for support
 
-If you need to collect an sosreport:
+If you need to collect a sosreport:
 
-1. Find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
+- Find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
 
    ```bash
    apt list --installed | grep doca-ofed-userspace
    ```
 
-1. Install the matching sosreport package:
+- Install the matching sosreport package:
 
    ```bash
    sudo apt install doca-sosreport-<doca_version>
    ```
 
-1. Follow NVIDIA's sosreport instructions.
+- Follow NVIDIA's sosreport instructions.
