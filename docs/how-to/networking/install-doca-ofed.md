@@ -44,9 +44,7 @@ To install the latest available DOCA-OFED version for your kernel flavor, use {m
 uname -r
 ```
 
-- Add the stable DOCA PPA:
-
-   Use {manpage}`add-apt-repository(1)`:
+Add the stable DOCA PPA using {manpage}`add-apt-repository(1)`:
 
    ```bash
    sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
