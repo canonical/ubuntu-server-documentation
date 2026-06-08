@@ -38,11 +38,7 @@ The following DOCA-OFED metapackages are currently provided:
 
 ## Install DOCA-OFED
 
-To install the latest available DOCA-OFED version:
-
-- Determine your kernel flavor
-
-Use {manpage}`uname(1)` to identify your running kernel variant:
+To install the latest available DOCA-OFED version for your kernel flavor, use {manpage}`uname(1)` to identify your running kernel variant:
 
 ```bash
 uname -r
