@@ -17,7 +17,7 @@ DOCA-OFED is available for Ubuntu 26.04 LTS (Resolute Raccoon).
 
 ## Available metapackages
 
-The following DOCA-OFED metapackages are currently provided:
+The following DOCA-OFED metapackages are provided:
 
 | Metapackage | Kernel flavor |
 | --- | --- |
@@ -46,21 +46,21 @@ uname -r
 
 Add the stable DOCA PPA using {manpage}`add-apt-repository(1)`:
 
-   ```bash
-   sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
-   ```
+```bash
+sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
+```
 
 Install the DOCA-OFED metapackage that matches your kernel flavor with {manpage}`apt(8)`:
 
-   ```bash
-   sudo apt install -y doca-ofed-<your_kernel_flavor>
-   ```
+```bash
+sudo apt install -y doca-ofed-<your_kernel_flavor>
+```
 
 For example, if `uname -r` returns `6.17.0-20-generic`, you should install:
 
-   ```bash
-   sudo apt install -y doca-ofed-generic
-   ```
+```bash
+sudo apt install -y doca-ofed-generic
+```
 
 Finally, reboot the machine.
 
@@ -81,21 +81,21 @@ sudo apt update && sudo apt full-upgrade
 Then reboot the machine.
 
 ```{warning}
-Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upgrade` for this workflow.
+Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upgrade` for this workflow. (DOCA-OFED updates from our PPA require uninstalling the old version's package names and installing the new version's package names (ex: `doca-ofed-userspace-3.3` is uninstalled, and `doca-ofed-userspace-3.4` is installed on update). `sudo apt upgrade` will hold such updates back.)
 ```
 
 ## Collect a sosreport for support
 
 If you need to collect a sosreport as part of a support request to NVIDIA, first find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
 
-   ```bash
-   apt list --installed | grep doca-ofed-userspace
-   ```
+```bash
+apt list --installed | grep doca-ofed-userspace
+```
 
 Next, install the matching sosreport package:
 
-   ```bash
-   sudo apt install doca-sosreport-<doca_version>
-   ```
+```bash
+sudo apt install doca-sosreport-<doca_version>
+```
 
 Then, follow NVIDIA's sosreport instructions.
