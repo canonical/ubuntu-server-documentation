@@ -50,9 +50,7 @@ Add the stable DOCA PPA using {manpage}`add-apt-repository(1)`:
    sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
    ```
 
-- Install the DOCA-OFED metapackage that matches your kernel flavor:
-
-   Use {manpage}`apt(8)`:
+Install the DOCA-OFED metapackage that matches your kernel flavor with {manpage}`apt(8)`:
 
    ```bash
    sudo apt install -y doca-ofed-<your_kernel_flavor>
