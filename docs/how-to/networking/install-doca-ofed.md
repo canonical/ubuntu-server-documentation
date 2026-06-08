@@ -62,7 +62,7 @@ For example, if `uname -r` returns `6.17.0-20-generic`, you should install:
    sudo apt install -y doca-ofed-generic
    ```
 
-- Reboot the machine.
+Finally, reboot the machine.
 
 ## Maintain and upgrade DOCA-OFED
 
