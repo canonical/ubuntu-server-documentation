@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Install DOCA-OFED on Ubuntu 26.04 LTS
+    description: Install NVIDIA's DOCA-OFED on Ubuntu 26.04 LTS and later releases.
 ---
 
 (install-doca-ofed)=
