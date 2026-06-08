@@ -1,0 +1,497 @@
+name: Enrich issue for Open Documentation Academy
+
+# Triggers:
+#  1. Automatic: when the "For: Open Documentation Academy" label is applied to an issue.
+#  2. Manual (GitHub UI): comment `/enrich-for-coda` on any issue (maintainers only).
+#  3. Manual (Actions tab): workflow_dispatch with an issue number.
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: 'Issue number to enrich for Open Documentation Academy'
+        required: true
+        type: number
+
+permissions:
+  issues: write
+  models: read
+  contents: read
+
+jobs:
+  enrich-issue:
+    name: Add CODA scaffolding to issue
+    runs-on: ubuntu-latest
+
+    # Only run when:
+    # - the "For: Open Documentation Academy" label was just applied, OR
+    # - a maintainer commented /enrich-for-coda on a (non-PR) issue, OR
+    # - the workflow was triggered manually
+    if: |
+      (github.event_name == 'issues' && github.event.label.name == 'For: Open Documentation Academy') ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body, '/enrich-for-coda') &&
+       github.event.issue.pull_request == null) ||
+      github.event_name == 'workflow_dispatch'
+
+    steps:
+      - name: Add CODA scaffolding
+        uses: actions/github-script@v7
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # The system prompt lives here so the JS block scalar never contains
+          # unindented content (which would terminate the YAML block prematurely).
+          CODA_SYSTEM_PROMPT: |
+            You are a documentation maintainer for the Ubuntu Server documentation
+            project (https://github.com/canonical/ubuntu-server-documentation).
+            Your job is to take raw issue reports and transform them into
+            well-structured, beginner-friendly issues for the Canonical Open
+            Documentation Academy (CODA) - a programme that guides new contributors
+            through their first technical documentation contributions.
+
+            CODA issues must:
+            - Be welcoming and accessible to first-time contributors with no prior
+              knowledge of the subject area.
+            - Clearly state what needs to be done and why, with direct links to the
+              relevant pages in this GitHub repository.
+            - Break the task into specific, actionable steps so a contributor knows
+              exactly where to start.
+            - Not assume pre-existing knowledge of the specific technology being
+              documented.
+            - Include the standard boilerplate sections shown in the output format.
+
+            Output the enriched issue body using exactly this Markdown structure
+            (preserve the headings verbatim):
+
+            ### Task
+
+            [Describe the problem and what the contributor needs to do. Include
+            direct links to the specific repository pages/files that need changing.
+            Prefer links such as
+            https://github.com/canonical/ubuntu-server-documentation/blob/main/docs/<path>.md
+            over rendered docs links. Note what
+            experience level or skills this task is suitable for, and why it makes a
+            good first contribution. Be welcoming and friendly.]
+
+            ### Details
+
+            [List specific, actionable bullet points. Name exact files or pages
+            where possible. Describe exactly what should change and why it matters.
+            Where the original issue references specific pages or files, include
+            links to them.]
+
+            Please submit your pull request to this repository. Include
+            "Fixes: #ISSUE_NUMBER" in your PR description so this issue is
+            automatically closed when your PR is merged.
+
+            ### Context
+
+            The [Ubuntu Server docs](https://github.com/canonical/ubuntu-server-documentation)
+            are hosted on GitHub and published via Read the Docs. Documentation
+            pages are written in Markdown using the MyST flavour, with some special
+            directives. No programming experience is required for most tasks.
+
+            ### Useful links
+
+            - Read the Ubuntu Server [contributing guide](https://documentation.ubuntu.com/server/contributing/).
+            - If you are new to the Canonical Open Documentation Academy, review the [Getting Started content](https://discourse.ubuntu.com/t/getting-started/42769).
+            - If there are specific areas you would like to learn or gain experience
+              with, I am happy to bring forward other issues that fit your goals.
+
+            Thanks in advance for your help!
+
+            <!-- coda-enriched -->
+
+            Rules:
+            - Replace ISSUE_NUMBER in "Fixes: #ISSUE_NUMBER" with the actual issue
+              number provided to you.
+            - Preserve ALL factual details from the original issue: URLs, file paths,
+              descriptions of the problem. Do not drop information.
+            - If the original issue includes file paths under this repository (for
+              example, how-to/samba/share-access-controls.md), treat these as valid
+              page references and include them.
+            - For links to specific docs pages, prefer repository file links over
+              rendered docs links whenever you can identify the file.
+            - Do NOT fabricate or guess URLs. Only link to pages explicitly mentioned
+              in the original issue. If a page is referenced but no URL is given, use
+              descriptive text such as "the [page title] page" rather than guessing.
+            - Do NOT add technical requirements beyond what the issue describes.
+            - Keep the tone friendly, encouraging, and appropriate for someone new to
+              open source.
+            - The Details section should give a contributor a clear starting point
+              without being an exhaustive walkthrough.
+        with:
+          script: |
+            const CODA_LABEL = 'For: Open Documentation Academy';
+            const SENTINEL = '<!-- coda-enriched -->';
+
+            async function postComment(body) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+                body,
+              });
+            }
+
+            function hasAny(text, patterns) {
+              return patterns.some((pattern) => pattern.test(text));
+            }
+
+            function hasRepoDocPath(text) {
+              return hasAny(text || '', [
+                /\b(?:docs\/)?(?:tutorial|how-to|explanation|reference|contributing)\/[\w./-]+\.md\b/i,
+                /\b[\w.-]+(?:\/[\w.-]+)+\.md\b/i,
+              ]);
+            }
+
+            function listMissingInputFields(issueTitle, issueBody) {
+              const title = issueTitle || '';
+              const body = issueBody || '';
+              const combined = `${title}\n${body}`;
+
+              const hasProblemStatement =
+                combined.replace(/https?:\/\/\S+/gi, '').trim().length >= 40;
+
+              const hasScope = hasAny(combined, [
+                /https?:\/\/\S+/i,
+                /\bdocs?\//i,
+                /\.md\b/i,
+                /\bpage\b/i,
+                /\bsection\b/i,
+                /\bfile\b/i,
+              ]);
+
+              const hasExpectedOutcome = hasAny(combined, [
+                /\bshould\b/i,
+                /\bexpected\b/i,
+                /\bneed(?:s|ed)? to\b/i,
+                /\bgoal\b/i,
+                /\bso that\b/i,
+                /\bclarif(?:y|ied|ication)\b/i,
+                /\bfix(?:ed|es)?\b/i,
+                /\bupdate(?:d)?\b/i,
+                /\bimprov(?:e|ed|ement)\b/i,
+              ]);
+
+              const hasSupportingLinks =
+                /https?:\/\/\S+/i.test(combined) ||
+                hasRepoDocPath(combined);
+
+              const missing = [];
+              if (!hasProblemStatement) {
+                missing.push('Problem statement: what is wrong or unclear right now');
+              }
+              if (!hasScope) {
+                missing.push('Scope: which page(s), file(s), or section(s) should be changed');
+              }
+              if (!hasExpectedOutcome) {
+                missing.push('Expected outcome: what “done” should look like for a contributor');
+              }
+              if (!hasSupportingLinks) {
+                missing.push('Supporting links or file paths: source issue, docs page, in-repo .md path, or related context (if available)');
+              }
+
+              return missing;
+            }
+
+            function extractRenderedDocsUrls(text) {
+              if (!text) return [];
+
+              const matches = text.match(/https?:\/\/documentation\.ubuntu\.com\/server\/[\w./%-]+\/?/gi) || [];
+              return Array.from(new Set(matches));
+            }
+
+            function extractSlugFromRenderedDocsUrl(rawUrl) {
+              try {
+                const url = new URL(rawUrl);
+                if (url.hostname !== 'documentation.ubuntu.com') return null;
+                const cleanPath = url.pathname.replace(/^\/|\/$/g, '');
+                if (!cleanPath.startsWith('server/')) return null;
+                const slug = cleanPath.replace(/^server\//, '').split('/').filter(Boolean).pop();
+                return slug || null;
+              } catch {
+                return null;
+              }
+            }
+
+            async function getRecursiveTree(owner, repo, branch) {
+              const { data: refData } = await github.rest.git.getRef({
+                owner,
+                repo,
+                ref: 'heads/' + branch,
+              });
+
+              const commitSha = refData.object.sha;
+              const { data: commitData } = await github.rest.git.getCommit({
+                owner,
+                repo,
+                commit_sha: commitSha,
+              });
+
+              const treeSha = commitData.tree.sha;
+              const { data: treeData } = await github.rest.git.getTree({
+                owner,
+                repo,
+                tree_sha: treeSha,
+                recursive: '1',
+              });
+
+              return treeData.tree || [];
+            }
+
+            async function convertRenderedDocsLinksToRepoLinks(markdown, owner, repo, branch) {
+              const urls = extractRenderedDocsUrls(markdown);
+              if (urls.length === 0) return markdown;
+
+              let rewritten = markdown;
+              let tree = [];
+              try {
+                tree = await getRecursiveTree(owner, repo, branch);
+              } catch (error) {
+                core.warning(
+                  'Could not read repository tree for docs-link conversion; keeping rendered docs URLs. ' +
+                  'Reason: ' + (error && error.message ? error.message : String(error))
+                );
+                return markdown;
+              }
+
+              for (const docsUrl of urls) {
+                const slug = extractSlugFromRenderedDocsUrl(docsUrl);
+                if (!slug) continue;
+
+                const basename = slug + '.md';
+                const candidates = tree
+                  .filter((node) => node.type === 'blob' && typeof node.path === 'string')
+                  .map((node) => node.path)
+                  .filter((path) =>
+                    path.startsWith('docs/') &&
+                    path.endsWith('/' + basename) &&
+                    !path.startsWith('docs/_build/')
+                  );
+
+                if (candidates.length !== 1) {
+                  continue;
+                }
+
+                const repoUrl =
+                  'https://github.com/' + owner + '/' + repo + '/blob/' + branch + '/' + candidates[0];
+
+                rewritten = rewritten.split(docsUrl).join(repoUrl);
+              }
+
+              return rewritten;
+            }
+
+            function listMissingOutputSections(output) {
+              const text = output || '';
+              const missing = [];
+
+              if (!/^### Task\b/m.test(text)) missing.push('### Task');
+              if (!/^### Details\b/m.test(text)) missing.push('### Details');
+              if (!/^### Context\b/m.test(text)) missing.push('### Context');
+              if (!/^### Useful links\b/m.test(text)) missing.push('### Useful links');
+              if (!text.includes(SENTINEL)) missing.push('sentinel marker <!-- coda-enriched -->');
+              if (text.trim().length < 400) missing.push('sufficient detail (output is too short)');
+
+              return missing;
+            }
+
+            // -- 1. Resolve issue number
+            let issueNumber;
+            if (context.eventName === 'workflow_dispatch') {
+              issueNumber = parseInt(context.payload.inputs.issue_number);
+            } else {
+              issueNumber = context.payload.issue.number;
+            }
+
+            // -- 2. For comment trigger: only allow maintainers / collaborators
+            if (context.eventName === 'issue_comment') {
+              const command = (context.payload.comment.body || '').trim();
+              if (command !== '/enrich-for-coda') {
+                console.log('Skipping: comment did not match exact /enrich-for-coda command.');
+                return;
+              }
+
+              const allowedAssociations = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+              const association = context.payload.comment.author_association;
+              if (!allowedAssociations.includes(association)) {
+                console.log(
+                  'Skipping: comment by ' + context.payload.comment.user.login +
+                  ' (' + association + ') is not from a maintainer or collaborator.'
+                );
+                return;
+              }
+            }
+
+            // -- 3. Fetch the issue
+            const { data: issue } = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+            });
+
+            const { data: repoInfo } = await github.rest.repos.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
+            const defaultBranch = repoInfo.default_branch || 'main';
+
+            const hasCodaLabel = (issue.labels || []).some((label) => {
+              if (typeof label === 'string') return label === CODA_LABEL;
+              return label && label.name === CODA_LABEL;
+            });
+
+            if (!hasCodaLabel) {
+              console.log('Skipping: issue #' + issueNumber + ' is not labeled for CODA.');
+              if (context.eventName !== 'issues') {
+                await postComment(
+                  'I could not enrich this issue because it is not labeled **' +
+                  CODA_LABEL +
+                  '**.\n\n' +
+                  'Please apply that label first, then run the command again:\n' +
+                  '`/enrich-for-coda`'
+                );
+              }
+              return;
+            }
+
+            if (issue.state !== 'open') {
+              console.log('Skipping: issue #' + issueNumber + ' is not open.');
+              return;
+            }
+
+            const issueBody = (issue.body || '').trim();
+            if (!issueBody) {
+              console.log('Skipping: issue #' + issueNumber + ' has an empty body.');
+              if (context.eventName !== 'issues') {
+                await postComment(
+                  'I could not enrich this issue because the issue body is empty.\n\n' +
+                  'This repository requires enough issue context before CODA scaffolding can be added.\n' +
+                  'Please add issue details and run `/enrich-for-coda` again.'
+                );
+              }
+              return;
+            }
+
+            // -- 4. Idempotency: skip if already enriched
+            if (issue.body && issue.body.includes(SENTINEL)) {
+              console.log('Issue #' + issueNumber + ' is already enriched. Skipping.');
+              return;
+            }
+
+            const missingInput = listMissingInputFields(issue.title, issue.body || '');
+            if (missingInput.length > 0) {
+              const bullets = missingInput.map((item) => '- ' + item).join('\n');
+              await postComment(
+                'Hi! I could not safely enrich this issue for Open Documentation Academy yet.\n\n' +
+                'I need a bit more information in the issue body before I can generate beginner-friendly scaffolding.\n\n' +
+                'Missing or unclear items:\n' +
+                bullets +
+                '\n\n' +
+                'What to do next:\n' +
+                '1. Edit this issue and add the missing details above.\n' +
+                '2. Keep or apply the **' + CODA_LABEL + '** label.\n' +
+                '3. Re-run enrichment by commenting exactly:\n' +
+                '   `/enrich-for-coda`\n\n' +
+                'I will leave the current issue body unchanged until enough information is available.'
+              );
+              core.notice('Issue #' + issueNumber + ' is missing required input context.');
+              return;
+            }
+
+            // -- 5. Build the request
+            const systemPrompt = process.env.CODA_SYSTEM_PROMPT;
+
+            const userMessage =
+              'Please enrich this issue for the Open Documentation Academy.\n\n' +
+              'Issue number: #' + issueNumber + '\n' +
+              'Issue title: ' + issue.title + '\n\n' +
+              'Issue body:\n' +
+              (issue.body || '(no description provided)');
+
+            // -- 6. Call the GitHub Models API
+            const response = await fetch(
+              'https://models.inference.ai.azure.com/chat/completions',
+              {
+                method: 'POST',
+                headers: {
+                  Authorization: 'Bearer ' + process.env.GITHUB_TOKEN,
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  model: 'gpt-4o',
+                  messages: [
+                    { role: 'system', content: systemPrompt },
+                    { role: 'user',   content: userMessage  },
+                  ],
+                  temperature: 0.3,
+                  max_tokens: 2000,
+                }),
+              }
+            );
+
+            if (!response.ok) {
+              const errorText = await response.text();
+              throw new Error(
+                'GitHub Models API returned ' + response.status + ': ' + errorText
+              );
+            }
+
+            const result = await response.json();
+            let enrichedBody = '';
+            if (result && result.choices && result.choices[0] && result.choices[0].message) {
+              enrichedBody = result.choices[0].message.content || '';
+            }
+
+            const missingOutput = listMissingOutputSections(enrichedBody);
+            if (missingOutput.length > 0) {
+              const bullets = missingOutput.map((item) => '- ' + item).join('\n');
+              await postComment(
+                'Hi! I could not safely enrich this issue yet because the generated scaffold was incomplete.\n\n' +
+                'Validation failed for:\n' +
+                bullets +
+                '\n\n' +
+                'Please add more concrete detail to the issue body (problem, scope, expected outcome, and links), then run again with:\n' +
+                '`/enrich-for-coda`\n\n' +
+                'I have left the current issue body unchanged.'
+              );
+              core.warning('Generated output failed validation for issue #' + issueNumber + '.');
+              return;
+            }
+
+            if (!enrichedBody.includes(SENTINEL)) {
+              enrichedBody += '\n\n' + SENTINEL;
+            }
+
+            enrichedBody = await convertRenderedDocsLinksToRepoLinks(
+              enrichedBody,
+              context.repo.owner,
+              context.repo.repo,
+              defaultBranch
+            );
+
+            const separator = '\n\n---\n\n';
+            const appendedBody = issueBody + separator + enrichedBody.trimStart();
+
+            // -- 7. Append the scaffold below the original issue body
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issueNumber,
+              body: appendedBody,
+            });
+
+            await postComment(
+              'Issue enriched successfully for Open Documentation Academy.\n\n' +
+              'The original issue text was preserved, and the CODA scaffold was appended below a horizontal rule.'
+            );
+
+            core.notice(
+              'Issue #' + issueNumber +
+              ' has been enriched for the Open Documentation Academy.'
+            );
