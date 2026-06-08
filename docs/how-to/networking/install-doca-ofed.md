@@ -90,9 +90,7 @@ Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upg
 
 ## Collect a sosreport for support
 
-If you need to collect a sosreport as part of a support request to NVIDIA:
-
-- Find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
+If you need to collect a sosreport as part of a support request to NVIDIA, first find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
 
    ```bash
    apt list --installed | grep doca-ofed-userspace
