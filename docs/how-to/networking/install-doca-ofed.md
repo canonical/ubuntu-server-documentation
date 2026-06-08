@@ -92,7 +92,7 @@ If you need to collect a sosreport as part of a support request to NVIDIA, first
    apt list --installed | grep doca-ofed-userspace
    ```
 
-- Install the matching sosreport package:
+Next, install the matching sosreport package:
 
    ```bash
    sudo apt install doca-sosreport-<doca_version>
