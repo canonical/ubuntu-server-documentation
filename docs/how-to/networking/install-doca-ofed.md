@@ -98,4 +98,4 @@ Next, install the matching sosreport package:
    sudo apt install doca-sosreport-<doca_version>
    ```
 
-- Follow NVIDIA's sosreport instructions.
+Then, follow NVIDIA's sosreport instructions.
