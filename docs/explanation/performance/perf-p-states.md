@@ -90,7 +90,7 @@ The actual effect depends on the CPU model and firmware, but in general, lower E
 
 * Hardware support is required. On some processors, EPP may have no effect even if it appears to be configurable in the OS.
 
-* Some systems may require an update to BIOS settings to allow OS control of power regulation.
+* Some systems may require an update to {term}`BIOS` settings to allow OS control of power regulation.
 
 ### EPP values on Ubuntu
 

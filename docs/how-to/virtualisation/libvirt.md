@@ -20,7 +20,7 @@ This command is part of the package `cpu-checker`, you might need to install it 
 This command prints a message informing you whether your CPU supports hardware virtualisation.
 
 ```{note}
-On many computers with processors supporting hardware-assisted virtualisation, you must activate an option in the BIOS to enable it.
+On many computers with processors supporting hardware-assisted virtualisation, you must activate an option in the {term}`BIOS` to enable it.
 ```
 
 ## Virtual networking

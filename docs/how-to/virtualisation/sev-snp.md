@@ -21,7 +21,7 @@ This documentation focuses only on {term}`AMD-SEV-SNP`, the latest generation of
 
 ## Host configuration
 
-To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP in the firmware settings, then allocate Address-Space Identifiers (ASIDs) for SNP use. For further details, see [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and consult the documentation for your specific motherboard or Baseboard Management Controller (BMC).
+To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP in the firmware settings, then allocate Address-Space Identifiers (ASIDs) for SNP use. For further details, see [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and consult the documentation for your specific motherboard or Baseboard Management Controller ({term}`BMC`).
 
 To check if the host supports `SEV-SNP`:
 

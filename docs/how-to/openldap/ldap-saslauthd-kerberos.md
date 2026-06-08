@@ -240,7 +240,7 @@ objectClass: simpleSecurityObject
 userPassword: {SSHA}S+WlmGneLDFeCwErKnY4mJngnVJMZAM5
 ```
 
-If a simple bind is performed using a bindDN of `uid=ubuntu,dc=example,dc=com`, the password will be checked against the hashed `userPassword` value as normal. That is, no passthrough authentication will be done at all.
+If a simple bind is performed using a {term}`bindDN` of `uid=ubuntu,dc=example,dc=com`, the password will be checked against the hashed `userPassword` value as normal. That is, no passthrough authentication will be done at all.
 
 However, if the `userPassword` attribute is in this format:
 
