@@ -1309,7 +1309,7 @@ Internet Protocol
     network information.
 
     See also:
-    * [Networking Key Concepts](https://ubuntu.com/server/docs/explanation/networking/networking-key-concepts/)
+    * {ref}`networking-key-concepts`
 
     Related topic(s):
     * Networking
@@ -1319,7 +1319,7 @@ IP address
     versions include IPv4 (32-bit, i.e. 192.168.1.1) and IPv6 (128-bit).
 
     See also:
-    * [Networking Key Concepts](https://ubuntu.com/server/docs/explanation/networking/networking-key-concepts/)
+    * {ref}`networking-key-concepts`
 
     Related topic(s):
     * Networking
@@ -1367,7 +1367,7 @@ Internet Small Computer System Interface
     attached.
 
     See also:
-    * [iSCSI Initiator (or client)](https://ubuntu.com/server/docs/how-to/storage/iscsi-initiator-or-client/)
+    * {ref}`iscsi-initiator-or-client`
 
     Related topic(s):
     * Networking
@@ -1529,7 +1529,7 @@ Long-Term Support
     compatibility updates, prioritizing stability over newer package versions.
 
     See also:
-    * {term}`Expanded Security Maintenance <ESM>`
+    * [Ubuntu Releases](https://documentation.ubuntu.com/project/release-team/ubuntu-releases/)
 
 LU
 Logical Unit
