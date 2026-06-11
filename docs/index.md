@@ -20,6 +20,7 @@ The tutorial walks you through a fresh installation and the first steps of opera
 
 * **Installation**: {ref}`System requirements <system-requirements>` • {ref}`Basic installation <basic-installation>` • {ref}`Ubuntu Pro subscription <attach-your-ubuntu-pro-subscription>`
 * **System basics**: {ref}`Managing software <managing-software>` • {ref}`Customizing package files <changing-package-files>` • {ref}`third-party-repository-usage`
+* **The Ubuntu command line**: {ref}`welcome-to-the-terminal` • {ref}`cli-in-depth` • {ref}`cli-cheatsheet`
 
 
 ### Networking
