@@ -155,6 +155,7 @@ maintainer's
 mbox
 memfd
 metapackage
+microcontroller
 Microvm
 microvm
 microvms
