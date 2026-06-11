@@ -114,64 +114,9 @@ Now configure any applications that have the ability to use public-key cryptogra
 
 ## Certification Authority
 
-If the services on your network require more than a few self-signed certificates it may be worth the additional effort to setup your own internal Certification Authority (CA). Using certificates signed by your own CA allows the various services using the certificates to easily trust other services using certificates issued from the same CA.
+If the services on your network require more than a few self-signed certificates it may be worth the additional effort to set up your own internal Certification Authority (CA). Using certificates signed by your own CA allows the various services using the certificates to easily trust other services using certificates issued from the same CA.
 
-First, create the directories to hold the CA certificate and related files:
-
-```bash
-sudo mkdir /etc/ssl/CA
-sudo mkdir /etc/ssl/newcerts
-```
-
-The CA needs a few additional files to operate; one to keep track of the last serial number used by the CA (each certificate must have a unique serial number), and another file to record which certificates have been issued:
-
-```bash
-sudo sh -c "echo '01' > /etc/ssl/CA/serial"
-sudo touch /etc/ssl/CA/index.txt
-```
-
-The third file is a CA configuration file. Though not strictly necessary, it is convenient when issuing multiple certificates. Edit `/etc/ssl/openssl.cnf`, and in the `[ CA_default ]`, change:
-
-```text
-dir             = /etc/ssl              # Where everything is kept
-database        = $dir/CA/index.txt     # database index file.
-certificate     = $dir/certs/cacert.pem # The CA certificate
-serial          = $dir/CA/serial        # The current serial number
-private_key     = $dir/private/cakey.pem# The private key
-```
-
-Next, create the self-signed root certificate:
-
-```bash
-openssl req -new -x509 -extensions v3_ca -keyout cakey.pem -out cacert.pem -days 3650
-```
-
-You will then be asked to enter the details about the certificate. Next, install the root certificate and key:
-
-```bash
-sudo mv cakey.pem /etc/ssl/private/
-sudo mv cacert.pem /etc/ssl/certs/
-```
-
-You are now ready to start signing certificates. The first item needed is a Certificate Signing Request (CSR) -- see the "Generating a CSR" section above for details. Once you have a CSR, enter the following to generate a certificate signed by the CA:
-
-```bash
-sudo openssl ca -in server.csr -config /etc/ssl/openssl.cnf
-```
-
-After entering the password for the CA key, you will be prompted to sign the certificate, and again to commit the new certificate. You should then see a somewhat large amount of output related to the certificate creation.
-
-There should now be a new file, `/etc/ssl/newcerts/01.pem`, containing the same output. Copy and paste everything beginning with the `-----BEGIN CERTIFICATE-----` line and continuing through to the `----END CERTIFICATE-----` lines to a file named after the {term}`hostname` of the server where the certificate will be installed. For example `mail.example.com.crt`, is a nice descriptive name.
-
-Subsequent certificates will be named `02.pem`, `03.pem`, etc.
-
-```{note}
-Replace `mail.example.com.crt` with your own descriptive name.
-```
-
-Finally, copy the new certificate to the host that needs it, and configure the appropriate applications to use it. The default location to install certificates is `/etc/ssl/certs`. This enables multiple services to use the same certificate without overly complicated file permissions.
-
-For applications that can be configured to use a CA certificate, you should also copy the `/etc/ssl/certs/cacert.pem` file to the `/etc/ssl/certs/` directory on each server.
+Creating and running your own CA is covered step by step in {ref}`obtain-tls-certificates`.
 
 ## Further reading
 

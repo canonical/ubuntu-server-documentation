@@ -29,6 +29,7 @@ Byobu
 Canonical's
 CAs
 CDBs
+Certbot
 checksumming
 Chrony
 chroot
@@ -130,6 +131,7 @@ Keytab
 keytab
 keytool
 LANs
+lego
 lightervisor
 livepatching
 LLMs
@@ -153,6 +155,7 @@ maintainer's
 mbox
 memfd
 metapackage
+microcontroller
 Microvm
 microvm
 microvms
@@ -172,6 +175,8 @@ Munin
 nameserver
 nameservers
 namespace
+nano
+nslcd
 NATed
 netboot
 netbooting
@@ -248,6 +253,8 @@ stdout
 StorageTek
 Subiquity
 subnetwork
+subshell
+Subshell
 substring
 subvolume
 sudo
@@ -282,6 +289,7 @@ Unicast
 unicast
 untrusted
 URIs
+USBs
 usermode
 userspace
 usr
@@ -307,6 +315,7 @@ vsftpd
 vSwitch
 WANs
 webpages
+webroot
 winbind
 WWIDs
 www
@@ -320,3 +329,4 @@ Yubikey
 Zettabyte
 zfs
 zSeries
+zsh

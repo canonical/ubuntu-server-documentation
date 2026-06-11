@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: Set up OpenLDAP replication using syncrepl for high availability with standard or delta replication in consumer-provider model.
+    description: Set up data synchronization between OpenLDAP servers for high availability using syncrepl.
 ---
 
 (ldap-replication)=
@@ -9,7 +9,7 @@ myst:
 
 The LDAP service becomes increasingly important as more networked systems begin to depend on it. In such an environment, it is standard practice to build redundancy ({term}`high availability <HA>`) into LDAP to prevent disruption should the LDAP server become unresponsive. This is done through **LDAP replication**.
 
-Replication is achieved via the Sync replication engine, **`syncrepl`**. This allows changes to be synchronized using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](https://www.rfc-editor.org/rfc/rfc4533.txt).
+Replication is achieved via the Sync replication engine, **`syncrepl`**. This allows changes to be synchronized using a *Consumer - Provider* model. A detailed description of this replication mechanism can be found in the [OpenLDAP administrator's guide](https://openldap.org/doc/admin26/guide.html#LDAP%20Sync%20Replication) and in its defining [RFC 4533](https://www.rfc-editor.org/rfc/rfc4533.txt).
 
 There are two ways to use this replication:
 
@@ -25,7 +25,7 @@ You **must** have Transport Layer Security (TLS) enabled already before proceedi
 
 ## Provider configuration - replication user
 
-Both replication strategies will need a replication user, as well as updates to the {term}`ACL`s and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
+Both replication strategies need a replication user, as well as updates to the {term}`ACL`s and limits regarding this user. To create the replication user, save the following contents to a file called `replicator.ldif`:
 
 ```text
 dn: cn=replicator,dc=example,dc=com
@@ -36,25 +36,26 @@ description: Replication user
 userPassword: {CRYPT}x
 ```
 
-Then add it with `ldapadd`:
+Then add it. If you have set up {ref}`passwordless access for root <ldap-peercred-setup>`, you can use:
 
 ```bash
-$ ldapadd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -f replicator.ldif
-Enter LDAP Password:
-adding new entry "cn=replicator,dc=example,dc=com"
+sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f replicator.ldif
+```
+
+Otherwise, use simple bind:
+
+```bash
+ldapadd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -f replicator.ldif
 ```
 
 Now set a password for it with `ldappasswd`:
 
 ```bash
-$ ldappasswd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
-New password:
-Re-enter new password:
-Enter LDAP Password:
+ldappasswd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
 ```
 
 ```{note}
-Please adjust the server URI in the `-H` parameter if needed to match your deployment.
+Adjust the server URI in the `-H` parameter if needed to match your deployment.
 ```
 
 The next step is to give this replication user the correct privileges, i.e.:
@@ -65,7 +66,12 @@ The next step is to give this replication user the correct privileges, i.e.:
 For that we need to update the ACLs on the provider. Since ordering matters, first check what the existing ACLs look like on the `dc=example,dc=com` tree:
 
 ```bash
-$ sudo ldapsearch -Q -Y EXTERNAL -H ldapi:/// -LLL -b cn=config '(olcSuffix=dc=example,dc=com)' olcAccess
+sudo ldapsearch -Q -Y EXTERNAL -H ldapi:/// -LLL -b cn=config '(olcSuffix=dc=example,dc=com)' olcAccess
+```
+
+Output:
+
+```text
 dn: olcDatabase={1}mdb,cn=config
 olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
 olcAccess: {1}to attrs=shadowLastChange by self write by * read
@@ -91,8 +97,7 @@ olcLimits: dn.exact="cn=replicator,dc=example,dc=com"
 And add it to the server:
 
 ```bash
-$ sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f replicator-acl-limits.ldif
-modifying entry "olcDatabase={1}mdb,cn=config"
+sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f replicator-acl-limits.ldif
 ```
 
 ## Provider configuration - standard replication
@@ -373,6 +378,6 @@ uid: john
 
 ## References
 
-  - [Replication types, OpenLDAP Administrator's Guide](https://openldap.org/doc/admin24/guide.html#Configuring%20the%20different%20replication%20types)
-  - [LDAP Sync Replication - OpenLDAP Administrator's Guide](https://openldap.org/doc/admin24/guide.html#LDAP%20Sync%20Replication)
+  - [Replication types, OpenLDAP Administrator's Guide](https://openldap.org/doc/admin26/guide.html#Configuring%20the%20different%20replication%20types)
+  - [LDAP Sync Replication - OpenLDAP Administrator's Guide](https://openldap.org/doc/admin26/guide.html#LDAP%20Sync%20Replication)
   - [RFC 4533](https://www.rfc-editor.org/rfc/rfc4533.txt).

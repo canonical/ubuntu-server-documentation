@@ -22,6 +22,7 @@ OpenLDAP and TLS <openldap/ldap-and-tls>
 Backup and restore <openldap/backup-and-restore>
 Introduction to passthrough authentication <openldap/ldap-saslauthd-authentication-intro>
 Passthrough authentication with Kerberos <openldap/ldap-saslauthd-kerberos>
+Set up an LDAP client <openldap/ldap-client>
 ```
 
 ## See also

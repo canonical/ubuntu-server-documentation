@@ -42,7 +42,7 @@ In this particular case, we’re using:
 
 This container, named `grafana-container`, serves Grafana 10.3.3 in an Ubuntu 22.04 LTS environment and can be accessed via local port 3000. Load the website up in your local web browser:
 
-![Welcome to Grafana](https://assets.ubuntu.com/v1/a6b735b3-welcome-to-grafana.png)
+![Welcome to Grafana](../../images/a6b735b3-welcome-to-grafana.png)
 
 If you don’t have Firefox handy, `curl` can be used instead:
 
@@ -145,21 +145,21 @@ prometheus-container   ubuntu/prometheus:2.49.1-22.04_stable   "/bin/pebble ente
 
 Opening [`http://localhost:3000`](http://localhost:3000) will give you the same Grafana login page as before:
 
-![Welcome to Grafana](https://assets.ubuntu.com/v1/a6b735b3-welcome-to-grafana.png)
+![Welcome to Grafana](../../images/a6b735b3-welcome-to-grafana.png)
 
 Use the default username `admin` and password `admin` to login:
 
-![Grafana login](https://assets.ubuntu.com/v1/2e14e3f3-login-to-grafana.png)
+![Grafana login](../../images/2e14e3f3-login-to-grafana.png)
 
 By clicking on "Data Sources" you can then add Prometheus and provide the server URL [`http://prometheus:9090`](http://prometheus:9090):
 
-![Prometheus data source](https://assets.ubuntu.com/v1/2a252ada-prometheus-data-source.png)
+![Prometheus data source](../../images/2a252ada-prometheus-data-source.png)
 
 This URL works because Docker Compose ensures both containers are on the same Docker network and that they can be discovered via their service name.
 
 Finally, click on "Explore" from the Grafana menu, and select the `prometheus` datasource. You can now query and visualize the Prometheus metrics. For example:
 
-![Prometheus data source](https://assets.ubuntu.com/v1/bd93d9c1-prometheus-metrics.png)
+![Prometheus data source](../../images/bd93d9c1-prometheus-metrics.png)
 
 ## Next Steps
 

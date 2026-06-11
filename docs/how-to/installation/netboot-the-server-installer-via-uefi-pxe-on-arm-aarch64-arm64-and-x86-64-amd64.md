@@ -138,8 +138,8 @@ Verify that the target file name for `linux` and `initrd` is correct. The defaul
 
 With a correct setup, `grub.cfg` redirects the process to an ephemeral environment where your target image is downloaded and assigned in the GRUB entry. When you access the console or monitor of your target machine, you will see a screen like this:
 
-![Downloading target image|690x246](https://assets.ubuntu.com/v1/fbdff13b-downloading_image.png) 
+![Downloading target image|690x246](../../images/fbdff13b-downloading_image.png) 
 
 Wait for the download to complete. If you see this Subiquity welcome page, the installer successfully launched via your UEFI PXE setup. Congratulations!
 
-![Subiquity welcome page|690x380](https://assets.ubuntu.com/v1/ef037190-subiquity_welcome_page.png)
+![Subiquity welcome page|690x380](../../images/ef037190-subiquity_welcome_page.png)

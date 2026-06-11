@@ -1305,10 +1305,25 @@ Internet of Things
 
 IP
 Internet Protocol
-    *Work in Progress*
+    IP is a connectionless network protocol responsible for routing packets across
+    networks. It uses the IP {term}`datagram <Datagram>` as its basic unit of
+    network information.
+
+    See also:
+    * {ref}`networking-key-concepts`
+
+    Related topic(s):
+    * Networking
 
 IP address
-    *Work in Progress*
+    An IP address is a unique numerical identifier for a device on a network. Common
+    versions include IPv4 (32-bit, i.e. 192.168.1.1) and IPv6 (128-bit).
+
+    See also:
+    * {ref}`networking-key-concepts`
+
+    Related topic(s):
+    * Networking
 
 IPC
 Inter-Process Communication
@@ -1348,7 +1363,16 @@ Internet Systems Consortium
 
 iSCSI
 Internet Small Computer System Interface
-    *Work in Progress*
+    iSCSI is a storage protocol that carries {term}`SCSI` commands over a TCP/IP
+    network, providing access to remote storage devices as if they were locally
+    attached.
+
+    See also:
+    * {ref}`iscsi-initiator-or-client`
+
+    Related topic(s):
+    * Networking
+    * Storage
 
 ISO
 International Organization for Standardization
@@ -1473,7 +1497,13 @@ Load-balancing
     *Work in Progress*
 
 localhost
-    *Work in Progress*
+    localhost is a {term}`hostname` that points back to the machine itself using the
+    loopback network interface. It is used to access services running locally
+    without the need for an external network. The reserved {term}`IP address` for
+    this is 127.0.0.1 (IPv4).
+
+    Related topic(s):
+    * Networking
 
 Log files
     *Work in Progress*
@@ -1494,7 +1524,13 @@ Logic Systems Incorporated
 
 LTS
 Long-Term Support
-    *Work in Progress*
+    LTS is a release policy that provides a stable version of a product for an
+    extended period of time. For example, Ubuntu LTS releases receive 5 years of
+    standard support, including security patches, bug fixes and hardware
+    compatibility updates, prioritizing stability over newer package versions.
+
+    See also:
+    * [Ubuntu Releases](https://documentation.ubuntu.com/project/release-team/ubuntu-releases/)
 
 LU
 Logical Unit

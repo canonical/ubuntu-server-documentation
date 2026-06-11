@@ -39,6 +39,7 @@ DNSSEC <dnssec/dnssec>
 
 * {ref}`Our cryptography section <explanation-cryptography>` explains in detail about the different cryptographic libraries and configurations you might encounter.
 * {ref}`Certificates <certificates>` are issued, stored and signed by a Certificate Authority (CA) to create trusted connections.
+* {ref}`How to obtain certificates <obtain-tls-certificates>` is a step-by-step guide covering Let's Encrypt (via Certbot) and local CA implementation.
 
 ```{toctree}
 :hidden:

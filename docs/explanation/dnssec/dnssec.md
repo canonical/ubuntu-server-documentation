@@ -138,7 +138,7 @@ It depends.
 
 Let's analyze the simple scenario of a system on a local network performing a DNS query for a domain.
 
-![Simple DNS](../images/ubuntu-local-recursive-dns.png)
+![Simple DNS](../../images/ubuntu-local-recursive-dns.png)
 
 Here we have:
 
@@ -147,7 +147,7 @@ Here we have:
 
 Let's zoom in a little bit on that Ubuntu system:
 
-![Stub Resolver](../images/ubuntu-stub-resolver.png)
+![Stub Resolver](../../images/ubuntu-stub-resolver.png)
 
 To translate a {term}`hostname` into an IP address, applications typically rely on standard `glibc` functions. This process involves a stub resolver, often referred to as a DNS client. A stub resolver is a simple client that doesn't perform recursive queries itself; instead, it delegates the task to a recursive DNS server, which handles the complex query resolution.
 
@@ -185,7 +185,7 @@ Well, any DNS server can perform the validation. Let's look at two scenarios, an
 
 When a recursive DNS server is also performing DNSSEC validation, it's called a *Validating Resolver*. That will typically be the DNS server on your local network, at your company, or in some cases at your ISP.
 
-![Validating Resolver](../images/ubuntu-local-validating-resolver.png)
+![Validating Resolver](../../images/ubuntu-local-validating-resolver.png)
 
 This is the case if you install the BIND9 DNS server: The default configuration is to act as a Validating Resolver, by having the `dnssec-validation auto` option implicitly enabled.
 

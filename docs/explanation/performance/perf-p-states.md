@@ -132,7 +132,7 @@ echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/energy_performa
 
 On Ubuntu Desktop, GNOME provides a power management menu in settings with options that may modify EPP values.
 
-![Power mode settings section](../images/power-mode-settings.png)
+![Power mode settings section](../../images/power-mode-settings.png)
 
 These settings will normally map to the following EPP profiles:
 

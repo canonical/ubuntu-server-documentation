@@ -1,16 +1,19 @@
 ---
 myst:
   html_meta:
-    description: Secure OpenLDAP authentication with Transport Layer Security (TLS) by creating certificates and configuring encrypted sessions.
+    description: Secure OpenLDAP connections with Transport Layer Security (TLS).
 ---
 
 (ldap-and-tls)=
 # LDAP and Transport Layer Security (TLS)
 
-
 When authenticating to an OpenLDAP server it is best to do so using an encrypted session. This can be accomplished using Transport Layer Security (TLS).
 
-Here, we will be our own Certificate Authority (CA) and then create and sign our LDAP server certificate as that CA. This guide will use the `certtool` utility to complete these tasks. For simplicity, this is being done on the OpenLDAP server itself, but your real internal CA should be elsewhere.
+Here, we will act as our Certificate Authority (CA) and create and sign the LDAP server certificate as that CA. This guide will use the `certtool` utility to complete these tasks. For simplicity, this is being done on the OpenLDAP server itself, but your real internal CA should be elsewhere.
+
+```{note}
+For general information on managing certificates in Ubuntu, see {ref}`certificates`. For installing a custom root CA, see {ref}`install-a-root-ca-certificate-in-the-trust-store`.
+```
 
 Install the `gnutls-bin` and `ssl-cert` packages:
 
@@ -43,13 +46,18 @@ sudo certtool --generate-self-signed \
 ```
 
 ```{note}
-Yes, the `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` will pick up trusted local CAs from. To pick up CAs from `/usr/share/ca-certificates`, a call to `dpkg-reconfigure ca-certificates` is necessary.
+The `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` picks up trusted local CAs from. To selectively enable CAs from `/usr/share/ca-certificates`, you can run `dpkg-reconfigure ca-certificates`.
 ```
 
 Run `update-ca-certificates` to add the new CA certificate to the list of trusted CAs. Note the one added CA:
 
 ```bash
-$ sudo update-ca-certificates
+sudo update-ca-certificates
+```
+
+Output:
+
+```text
 Updating certificates in /etc/ssl/certs...
 1 added, 0 removed; done.
 Running hooks in /etc/ca-certificates/update.d...
@@ -140,14 +148,24 @@ Note that *StartTLS* will be available without the change above, and does NOT ne
 Test *StartTLS*:
 
 ```bash
-$ ldapwhoami -x -ZZ -H ldap://ldap01.example.com
+ldapwhoami -x -ZZ -H ldap://ldap01.example.com
+```
+
+Output:
+
+```text
 anonymous
 ```
 
 Test LDAPS:
 
 ```bash
-$ ldapwhoami -x -H ldaps://ldap01.example.com
+ldapwhoami -x -H ldaps://ldap01.example.com
+```
+
+Output:
+
+```text
 anonymous
 ```
 
@@ -237,13 +255,23 @@ Like before, if you want to enable LDAPS, edit `/etc/default/slapd` and add `lda
 Test *StartTLS*:
 
 ```bash
-$ ldapwhoami -x -ZZ -H ldap://ldap02.example.com
+ldapwhoami -x -ZZ -H ldap://ldap02.example.com
+```
+
+Output:
+
+```text
 anonymous
 ```
 
 Test LDAPS:
 
 ```bash
-$ ldapwhoami -x -H ldaps://ldap02.example.com
+ldapwhoami -x -H ldaps://ldap02.example.com
+```
+
+Output:
+
+```text
 anonymous
 ```

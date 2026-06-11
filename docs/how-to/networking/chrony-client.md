@@ -42,12 +42,66 @@ Leap status     : Normal
 
 ### Network Time Security (NTS)
 
-`chrony` supports "Network Time Security" (NTS) and enables it by default, using the Ubuntu NTS pools. This is done by specifying a `server` or `pool` as usual. Afterwards, options can be listed and it is there that `nts` can be added. For example:
+`chrony` supports "Network Time Security" (NTS) and enables it by default using the Ubuntu NTS pools.
+The Ubuntu pools are specified in the file `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. Here is the
+default configuration used by Ubuntu:
 
 ```text
-server <server-fqdn-or-IP> iburst nts
-# or as concrete example
 pool 1.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 2.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 3.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool 4.ntp.ubuntu.com iburst maxsources 1 nts prefer
+pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
+```
+
+The `nts` flag forces the use of `NTS`, and `prefer` marks that source as the preferred time source when
+selecting among multiple valid servers.
+
+The line:
+```text
+pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
+```
+adds the `ntp-bootstrap.ubuntu.com` source, which allows systems with a large clock offset to still securely
+adjust their clocks.
+
+One important detail is the use of a private CA-signed certificate chain for the
+bootstrap server instead of a public CA-signed certificate like the one used for servers such as
+`1.ntp.ubuntu.com`.
+
+
+The following command returns the certificate of the server `1.ntp.ubuntu.com`, and in that certificate we
+can see who issued it (the CA):
+
+```bash
+openssl s_client -connect 1.ntp.ubuntu.com:4460 -servername 1.ntp.ubuntu.com
+```
+
+The output contains the certificate, and the `issuer` field shows who issued it:
+
+```text
+Server certificate
+...
+subject=CN=ntp.ubuntu.com
+issuer=C=US, O=Let's Encrypt, CN=R13
+---
+```
+
+By contrast, the certificate of `ntp-bootstrap.ubuntu.com` is:
+
+```text
+Server certificate
+...
+subject=CN=ntp-bootstrap.ubuntu.com
+issuer=CN=ubuntu
+```
+
+This shows the issuer as `ubuntu`, which is not a publicly recognized Certificate Authority, unlike `Let's Encrypt`.
+
+This certificate is shipped in the file `/etc/chrony/nts-bootstrap-ubuntu.crt`, and `chrony` is configured to trust
+it in `/etc/chrony/conf.d/ubuntu-nts.conf`:
+
+```text
+ntstrustedcerts 1 /etc/chrony/nts-bootstrap-ubuntu.crt
 ```
 
 For **validation of NTS enablement**, one can list the time sources in use by executing the `chronyc -N sources` command, to find the timeserver in use, as indicated by the `^*` symbol in the first column. Then check the `authdata` of that connection using `sudo chronyc -N authdata`. If the client was able to successfully establish a NTS connection, it will show the `Mode: NTS` field and non-zero values for `KeyID`, `Type` and `KLen`:
@@ -85,10 +139,9 @@ traditional Ubuntu NTP pool.
   that the time can be synced without checking validation and expiration.
 
 :::{note}
-  A new CA is installed in `/etc/chrony/nts-bootstrap-ubuntu.crt` that is
-  used specifically for the Ubuntu NTS bootstrap server, needed for when the
-  clock is too far off. This is added to certificate set ID "1", and defined
-  via `/etc/chrony/conf.d/ubuntu-nts.conf`.
+   The certificate for `ntp-bootstrap.ubuntu.com` is installed in
+ `/etc/chrony/nts-bootstrap-ubuntu.crt` and is used specifically for the Ubuntu
+  NTS bootstrap server, needed for when the clock is too far off. This is added to certificate set ID "1", and defined via `/etc/chrony/conf.d/ubuntu-nts.conf`.
 :::
 
 ## Configure chrony

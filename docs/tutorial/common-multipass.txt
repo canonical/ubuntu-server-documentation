@@ -1,0 +1,87 @@
+## Set up the virtual machine
+
+To avoid making changes to your computer we will set up a virtual machine (VM), which provides us with a safe environment to run the commands in. [Multipass](https://documentation.ubuntu.com/multipass/latest/) is great for quickly creating Ubuntu virtual machines, so we will use that. It is available on Windows, Mac and Linux, so you don't need to be already running Ubuntu on your computer to follow this tutorial.
+
+
+### Prerequisites
+
+* The Multipass VM needs **5** {term}`GB` **of disk space**, and **1 GB of memory** available.
+
+
+### Install Multipass
+
+::::{tab-set}
+
+:::{tab-item} On Ubuntu
+You can install Multipass directly from [the Multipass page](https://snapcraft.io/multipass) in the online snap store (make sure to select the "latest/stable" version from the dropdown menu next to the install button).
+:::
+
+:::{tab-item} On other operating systems
+
+If you're on Windows, Mac, or another Linux operating system, Multipass can be installed [using these instructions](https://documentation.ubuntu.com/multipass/stable/how-to-guides/install-multipass/).
+:::
+
+::::
+
+
+### Open a terminal window
+
+Now that Multipass is installed, we need a terminal window to run our commands in. How you open one depends on your operating system.
+
+::::{tab-set}
+
+:::{tab-item} On Ubuntu
+Press {kbd}`Ctrl` + {kbd}`Alt` + {kbd}`T` together and a terminal window will open. You can also search for "Terminal" in your application launcher.
+:::
+
+:::{tab-item} On Windows
+PowerShell is the most reliable option for working with Multipass on Windows.
+
+1. Press the {kbd}`Windows` key.
+1. Type `PowerShell`.
+1. Right-click it and select **Run as Administrator** — this helps avoid permission issues when managing virtual machines.
+
+If you have Windows Terminal installed from the Microsoft Store, that works just as well and offers a nicer experience with tab support.
+
+To confirm everything is working, type `multipass version` and press {kbd}`Enter`. If you see version numbers, you're ready to continue.
+:::
+
+:::{tab-item} On macOS
+1. Press {kbd}`⌘` + {kbd}`Space` to open Spotlight.
+1. Type `Terminal` and press {kbd}`Enter`.
+
+If you use iTerm2, that works perfectly well too.
+
+To confirm everything is working, type `multipass version` and press {kbd}`Enter`. If you see version numbers, you're ready to continue.
+:::
+
+::::
+
+
+### Create the virtual machine
+
+Once you have installed Multipass and opened your terminal, we can launch a new VM using the Ubuntu 26.04 LTS release (codename "`resolute`"), and let's give our VM the name `tutorial` using the following command in our terminal window:
+
+```bash
+multipass launch resolute --name tutorial
+```
+
+It may take a little time, depending on the speed of your internet connection. Multipass downloads the most recent daily **image** and creates the VM for us.
+
+```{note}
+An Ubuntu **image** is a collection of files we need to install and run Ubuntu. We don't need to specify "server" or "desktop" anywhere in our command, because the image is the same for both. The only difference between Ubuntu Server and Ubuntu Desktop is the subset of software packages we use from the Ubuntu Archive.
+```
+
+Once the above command has finished running, we can access the VM by running:
+
+```bash
+multipass shell tutorial
+```
+
+We will get a "Welcome to Ubuntu" message. Notice that when we run this command, the terminal username changes to `ubuntu` and the {term}`hostname` changes to `tutorial`:
+
+```bash
+ubuntu@tutorial
+```
+
+This shows that we are inside the VM, and this is where we will run all our commands. Now that our setup is complete, let's carry on with the tutorial!

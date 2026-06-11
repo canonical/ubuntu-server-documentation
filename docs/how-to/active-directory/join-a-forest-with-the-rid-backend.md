@@ -21,7 +21,7 @@ It's also possible to join an Active Directory forest using the *rid* identity m
         # 1,000,000 - 1,999,999
         idmap config EXAMPLE : range   = 1000000 - 1999999
 
-![simple-rid-ranges|600x238, 100%](https://assets.ubuntu.com/v1/87c43d5d-simple-rid-ranges.png)
+![simple-rid-ranges|600x238, 100%](../../images/87c43d5d-simple-rid-ranges.png)
 
 
 With this configuration, we are expected to join the *EXAMPLE.INTERNAL* domain, and have given it a range of 1 million IDs starting with the ID `1000000` (1,000,000). There is also the mandatory reserved range for the default domain, represented by the identity mapping configuration for "`*`", which has a smaller range of 100,000 IDs, starting at `100000` (100,000).
@@ -86,7 +86,7 @@ To address this, we can add another *idmap config* configuration for the *rid* b
         # 2,000,000 - 2,999,999
         idmap config MYDOMAIN : range   = 2000000 - 2999999
 
-![forest-rid-ranges|799x238](https://assets.ubuntu.com/v1/42506c6d-forest-rid-ranges.png)
+![forest-rid-ranges|799x238](../../images/42506c6d-forest-rid-ranges.png)
 
 
 With this configuration, nothing changed for the *EXAMPLE.INTERNAL* users, as expected:

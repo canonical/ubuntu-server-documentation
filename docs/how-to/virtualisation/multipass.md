@@ -28,39 +28,29 @@ To find available images you can use the `multipass find` command, which will pr
 
 ```text
 Image                       Aliases           Version          Description
-snapcraft:core18            18.04             20201111         Snapcraft builder for Core 18
-snapcraft:core20            20.04             20210921         Snapcraft builder for Core 20
-snapcraft:core22            22.04             20220426         Snapcraft builder for Core 22
-snapcraft:devel                               20221128         Snapcraft builder for the devel series
 core                        core16            20200818         Ubuntu Core 16
 core18                                        20211124         Ubuntu Core 18
-18.04                       bionic            20221117         Ubuntu 18.04 LTS
-20.04                       focal             20221115.1       Ubuntu 20.04 LTS
-22.04                       jammy,lts         20221117         Ubuntu 22.04 LTS
-22.10                       kinetic           20221101         Ubuntu 22.10
-daily:23.04                 devel,lunar       20221127         Ubuntu 23.04
-appliance:adguard-home                        20200812         Ubuntu AdGuard Home Appliance
-appliance:mosquitto                           20200812         Ubuntu Mosquitto Appliance
-appliance:nextcloud                           20200812         Ubuntu Nextcloud Appliance
-appliance:openhab                             20200812         Ubuntu openHAB Home Appliance
-appliance:plexmediaserver                     20200812         Ubuntu Plex Media Server Appliance
-anbox-cloud-appliance                         latest           Anbox Cloud Appliance
+core20                                        20230119         Ubuntu Core 20
+core22                                        20230717         Ubuntu Core 22
+22.04                       jammy             20260515         Ubuntu 22.04 LTS
+24.04                       noble             20260518         Ubuntu 24.04 LTS
+25.10                       questing          20260520         Ubuntu 25.10
+26.04                       resolute,lts      20260520         Ubuntu 26.04 LTS
 charm-dev                                     latest           A development and testing environment for charmers
 docker                                        latest           A Docker environment with Portainer and related tools
-jellyfin                                      latest           Jellyfin is a Free Software Media System that puts you in control of managing and streaming your media.
 minikube                                      latest           minikube is local Kubernetes
 ```
 
-## Launch a fresh instance of the Ubuntu Jammy (22.04) LTS
+## Launch a fresh instance of Ubuntu 26.04 LTS
 
-You can launch a fresh instance by specifying either the image name from the list (in this example, 22.04) or using an alias, if the image has one.
+You can launch a fresh instance by specifying either the image name from the list (in this example, 26.04) or using an alias, if the image has one.
 
 ```bash
-$ multipass launch 22.04
+$ multipass launch 26.04
 Launched: cleansing-guanaco
 ```
 
-This command is equivalent to: `multipass launch jammy` or `multipass launch lts` in the list above. It will launch an instance based on the specified image, and provide it with a random name -- in this case, `cleansing-guanaco`.
+This command is equivalent to: `multipass launch resolute` or `multipass launch lts` in the list above. It will launch an instance based on the specified image, and provide it with a random name -- in this case, `cleansing-guanaco`.
 
 ## Check out the running instances
 
@@ -69,7 +59,7 @@ You can check out the currently running instance(s) by using the `multipass list
 ```bash
 $ multipass list
 Name                    State             IPv4             Image
-cleansing-guanaco       Running           10.140.26.17     Ubuntu 22.04 LTS
+cleansing-guanaco       Running           10.140.26.17     Ubuntu 26.04 LTS
 ```
 
 ## Learn more about the VM instance you just launched
@@ -80,12 +70,14 @@ You can use the `multipass info` command to find out more details about the VM i
 $ multipass info cleansing-guanaco
 Name:           cleansing-guanaco
 State:          Running
+Snapshots:      0
 IPv4:           10.140.26.17
-Release:        Ubuntu 22.04.1 LTS
-Image hash:     dc5b5a43c267 (Ubuntu 22.04 LTS)
-Load:           0.45 0.19 0.07
-Disk usage:     1.4G out of 4.7G
-Memory usage:   168.3M out of 969.5M
+Release:        Ubuntu 26.04 LTS
+Image hash:     dc5b5a43c267 (Ubuntu 26.04 LTS)
+CPU(s):         1
+Load:           0.74 0.35 0.13
+Disk usage:     2.2GiB out of 4.8GiB
+Memory usage:   347.4MiB out of 950.8MiB
 Mounts:         --
 ```
 
@@ -95,7 +87,7 @@ To enter the VM you created, use the `shell` command:
 
 ```bash
 $ multipass shell cleansing-guanaco
-Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.15.0-53-generic x86_64)
+Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
 (...)
 ubuntu@cleansing-guanaco:~$
 ```
@@ -110,9 +102,9 @@ Don't forget to log out (or {kbd}`Ctrl` + {kbd}`D`) when you are done, or you ma
 $ multipass exec cleansing-guanaco -- lsb_release -a
 No LSB modules are available.
 Distributor ID:	Ubuntu
-Description:	Ubuntu 22.04.1 LTS
-Release:	22.04
-Codename:	jammy
+Description:	Ubuntu 26.04 LTS
+Release:	26.04
+Codename:	resolute
 ```
 
 ## Stop or start an instance
@@ -144,6 +136,7 @@ $ multipass list
 Name                    State             IPv4             Image
 cleansing-guanaco       Deleted           --               Not Available
 ```
+
 
 And when you want to completely get rid of it (and any other deleted instances), you can use the `purge` command:
 
