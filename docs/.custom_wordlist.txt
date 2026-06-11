@@ -156,6 +156,7 @@ mbox
 memfd
 metapackage
 metapackages
+microcontroller
 Microvm
 microvm
 microvms
@@ -175,6 +176,7 @@ Munin
 nameserver
 nameservers
 namespace
+nano
 nslcd
 NATed
 netboot
@@ -253,6 +255,8 @@ stdout
 StorageTek
 Subiquity
 subnetwork
+subshell
+Subshell
 substring
 subvolume
 sudo
@@ -327,3 +331,4 @@ Yubikey
 Zettabyte
 zfs
 zSeries
+zsh

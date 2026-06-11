@@ -12,7 +12,7 @@ When authenticating to an OpenLDAP server it is best to do so using an encrypted
 Here, we will act as our Certificate Authority (CA) and create and sign the LDAP server certificate as that CA. This guide will use the `certtool` utility to complete these tasks. For simplicity, this is being done on the OpenLDAP server itself, but your real internal CA should be elsewhere.
 
 ```{note}
-For general information on managing certificates in Ubuntu, see {ref}`certificates`. For installing a custom root CA, see {ref}`install-a-root-ca`.
+For general information on managing certificates in Ubuntu, see {ref}`certificates`. For installing a custom root CA, see {ref}`install-a-root-ca-certificate-in-the-trust-store`.
 ```
 
 Install the `gnutls-bin` and `ssl-cert` packages:

@@ -107,7 +107,7 @@ Press {kbd}`Ctrl+C` to stop this debug session.
 You can iterate with configuration or setup adjustments until the log output and `getent` results are satisfying.
 
 
-Finally, restart the service via {ref}`systemctl`:
+Finally, restart the service via `systemctl`:
 
 ```bash
 sudo systemctl start nslcd.service
@@ -130,7 +130,7 @@ By default, all users visible via LDAP can log in. To restrict which users are p
 
 Edit `/etc/security/access.conf` to define the allowed users and groups:
 
-```conf
+```text
 # Allow members of specific LDAP groups
 +:(some-admin-group) (some-user-group):ALL
 # Allow the local root user and members of the local "login" group (group name is customizable)
