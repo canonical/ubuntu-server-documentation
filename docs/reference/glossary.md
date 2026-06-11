@@ -381,7 +381,7 @@ Backtrace
 
 BDC
 Backup Domain Controller
-    Backup Domain Controller (BDC) is a (legacy) Windows NT4 domain controller that authenticates network users using a read-only copy of the Security Account Manager database (SAM). A BDC acts as a backup for a Primary Domain Controller ({term}`PDC`) and can authenticate users locally in a large network. A [Samba server](https://ubuntu.com/server/docs/explanation/intro-to/samba/#introduction-to-samba) may be deployed as a BDC in the deprecated Windows NT4 domain controller mode.
+    Backup Domain Controller (BDC) is a (legacy) Windows NT4 domain controller that authenticates network users using a read-only copy of the Security Account Manager database (SAM). A BDC acts as a backup for a Primary Domain Controller ({term}`PDC`) and can authenticate users locally in a large network. A {ref}`Samba server <introduction-to-samba>` may be deployed as a BDC in the deprecated Windows NT4 domain controller mode.
 
 bind
     *Work in Progress*
