@@ -155,6 +155,7 @@ maintainer's
 mbox
 memfd
 metapackage
+metapackages
 microcontroller
 Microvm
 microvm
@@ -246,6 +247,7 @@ Slapd
 slapd
 snapshotted
 Solaris
+sosreport
 SSSD's
 stderr
 stdin
