@@ -21,7 +21,7 @@ generator.
 
 :::{warning}
 Keep at least one well-known LUKS passphrase for recovery. TPM measurements can
-change after firmware updates, Secure Boot state changes, or some bootloader
+change after firmware updates, Secure Boot state changes, or some {term}`bootloader`
 changes, which can prevent automatic unlock until you rebind Clevis.
 :::
 

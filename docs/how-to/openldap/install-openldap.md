@@ -141,7 +141,7 @@ ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 
 Here the only new command-line option is `-x`, and we have a new parameter for `-H`:
 
-* `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **bindDN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
+* `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no {term}`bindDN` was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
 * `-H ldap:///`: Use the LDAP protocol over the network (and not over a Unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
 The output will be the top-level entry which represents the base of the DIT.

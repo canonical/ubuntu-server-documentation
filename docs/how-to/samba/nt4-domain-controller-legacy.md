@@ -145,7 +145,7 @@ You should now be able to join Windows clients to the Domain in the same manner 
 
 ## Backup domain controller
 
-With a Primary Domain Controller (PDC) on the network it is best to have a Backup Domain Controller (BDC) as well. This will allow clients to authenticate in case the PDC becomes unavailable.
+With a Primary Domain Controller (PDC) on the network it is best to have a Backup Domain Controller ({term}`BDC`) as well. This will allow clients to authenticate in case the PDC becomes unavailable.
 
 When configuring Samba as a BDC you need a way to sync account information with the PDC. There are multiple ways of accomplishing this; secure copy protocol (SCP), `rsync`, or by using LDAP as the `passdb` backend.
 

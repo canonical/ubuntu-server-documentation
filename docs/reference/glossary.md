@@ -381,23 +381,24 @@ Backtrace
 
 BDC
 Backup Domain Controller
-    *Work in Progress*
+    Backup Domain Controller (BDC) is a (legacy) Windows NT4 domain controller that authenticates network users using a read-only copy of the Security Account Manager database (SAM). A BDC acts as a backup for a Primary Domain Controller ({term}`PDC`) and can authenticate users locally in a large network. A {ref}`Samba server <introduction-to-samba>` may be deployed as a BDC in the deprecated Windows NT4 domain controller mode.
 
 bind
     *Work in Progress*
 
-BindDN
-    *Work in Progress*
+bindDN
+    bindDN is a distinguished name ({term}`DN`) that specifies the client or connection to authenticate to an LDAP directory server. A bindDN is supplied during a {term}`bind` operation that authenticates and authorizes the client for subsequent operations. 
 
 BIOS
-    *Work in Progress*
+Basic Input/Output System
+    Basic Input/Output System (BIOS) is the firmware that tests and initializes a system's hardware when you power on the system. The BIOS also finds and triggers the bootloader that launches the operating system (OS). BIOS has been succeeded by {term}`UEFI`.
 
 BMC
 Baseboard Management Controller
-    *Work in Progress*
+    A Baseboard Management Controller (BMC) is a specialized microcontroller embedded in the server's motherboard. The BMC allows administrators to monitor and control server hardware even when the server OS is shut down, not installed or not accessible. An administrator can monitor system health, control power states, update firmware and troubleshoot a server using the BMC's remote—out-of-band—access.
 
 bootloader
-    *Work in Progress*
+    The bootloader is a small program that launches an OS. It is itself launched by device firmware (typically {term}`BIOS` or {term}`UEFI`).
 
 BOOTP
 Bootstrap Protocol

@@ -39,7 +39,7 @@ booting a fully generic operating system, followed by more time to completely
 initialize your workload.
 
 There are a few common ways to adapt a workload to match this:
-- Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
+- Use faster {term}`bootloaders <bootloader>` and virtual firmware (see `qboot` below) with a reduced
   feature set, not as generally capable but sufficient for a particular use case.
 - Even the fastest bootloader is slower than no bootloader, so often
   the kernel is directly passed from the host {term}`filesystem`.

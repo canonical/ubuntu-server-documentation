@@ -151,7 +151,7 @@ ibmveth2         UNKNOWN        10.245.246.42/24
 >  ```
 
 
-Now use a browser and navigate to the BMC of the Power system, which should be installed (let's assume the BMC's IP address is `10.245.246.247`):
+Now use a browser and navigate to the {term}`BMC` of the Power system, which should be installed (let's assume the BMC's IP address is `10.245.246.247`):
 
 ```
 firefox http://10.245.246.247/ 

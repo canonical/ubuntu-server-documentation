@@ -73,7 +73,7 @@ Or that when disabled:
 ```
 
 
-To disable it either disable secure boot in BIOS or your virtualization platform.
+To disable it either disable secure boot in {term}`BIOS` or your virtualization platform.
 
 If that is impossible, consider not using the dynamic module debug control
 shown below, but instead using a kernel boot parameter `wireguard.dyndbg=+p`

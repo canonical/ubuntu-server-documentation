@@ -25,7 +25,7 @@ This table lists Intel Xeon processors that support Intel TDX:
 
 ## Configure host
 
-To enable Intel TDX on the host, BIOS and host OS configurations are required.
+To enable Intel TDX on the host, {term}`BIOS` and host OS configurations are required.
 First, enable Intel TDX settings in the BIOS.
 
 :::{note}

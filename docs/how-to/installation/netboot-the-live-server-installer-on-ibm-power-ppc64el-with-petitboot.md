@@ -9,7 +9,7 @@ myst:
 
 Open a terminal window on your workstation and make sure the `ipmitool` package is installed.
 
-Verify if you can reach the BMC of the IBM Power system via `ipmitool` with a simple `ipmitool` call like:
+Verify if you can reach the {term}`BMC` of the IBM Power system via `ipmitool` with a simple `ipmitool` call like:
 
 ```
 $ ipmitool -I lanplus -H Power9Box -U <user> -P <password> power status 
