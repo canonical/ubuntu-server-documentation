@@ -593,6 +593,114 @@ $ docker logs web-server
 Error response from daemon: configured logging driver does not support reading
 ```
 
+## Rootless Docker
+
+Starting in Ubuntu 26.04 (package version `docker.io-app_29.1.3-0ubuntu4`), Docker supports running both containers and the Docker daemon itself as a non-root user. This is a useful way to provide extra security if it is not desirable to run the Docker daemon as root. As long as the prerequisites are all met, you do not even need root permissions to *install* Docker with rootless mode.
+
+### Prerequisites
+
+You will need access to the `newuidmap` and `newgidmap` commands, which can be installed via the `uidmap` package:
+
+```bash
+$ sudo apt-get install uidmap
+```
+
+You will also need to ensure that the user in question has at least 65,536 subordinate UIDs and GIDs. To check this, consult the `/etc/subuid` and `/etc/subgid` files:
+
+```bash
+$ grep ^$(whoami): /etc/subuid
+$ grep ^$(whoami): /etc/subgid
+```
+
+Each of these should output a line like
+```
+yourusername:XXXXXX:65536
+```
+
+The second number is the number of subordinate UIDs or GIDs that the user has available. This value should be at least 65,536. f it is not, you will need to edit the `/etc/subuid` and `/etc/subgid` files to increase it.
+
+
+### Installation
+
+::::{note}
+
+If you are already running the rootful Docker daemon, disable it before proceeding:
+
+```bash
+$ sudo systemctl disable --now docker.service docker.socket
+$ sudo rm /var/run/docker.sock
+```
+
+::::
+
+Check `/usr/bin` for the presence of `dockerd-rootless-setuptool.sh`. If it is not present, install it with
+
+```bash
+$ sudo apt-get install docker-ce-rootless-extras
+```
+
+Then run it **as a non-root user** to install the rootless daemon: 
+
+```bash
+$ dockerd-rootless-setuptool.sh install
+```
+
+This command will also show help if any of the prerequisites are not met.
+
+
+After completing the installation, you can confirm Docker is running in rootless mode with `docker info`. You should see the following line:
+```
+  Context: Rootless
+```
+with the version number.
+
+
+### Running Rootless Docker inside Rootful Docker
+
+If you want to run rootless Docker inside a rootful Docker container, change your image to `docker:<version>-dind-rootless` instead of `docker:<version>-dind`:
+
+```bash
+$ docker run -d --name dind-rootless --privileged docker:<version>-dind-rootless
+```
+
+This image runs as UID 1000 by default, but `--privileged` is still required to disable seccomp, AppArmor, and mount masks.
+
+### Expose Docker API Socket
+
+#### Over TCP
+
+Run `docker-rootless.sh` with `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"` and the following flags:
+
+```bash
+$ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" ./docker-rootless.sh \
+    -H tcp://0.0.0.0:2376 \
+    --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
+```
+
+#### Over SSH
+
+Ensure `$DOCKER_HOST` is set:
+
+```bash
+$ ssh -l <REMOTEUSER> <REMOTEHOST> 'echo $DOCKER_HOST'
+unix:///run/user/1001/docker.sock
+```
+
+Run `docker` with `-H` set to the SSH connection string:
+
+```bash
+docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
+```
+
+### Expose Privileged Ports
+
+To expose ports less than 1024 (e.g 22 for SSH), set `CAP_NET_BIND_SERVICE` on the `rootlesskit` binary and restart the daemon:
+
+```bash
+$ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
+$ systemctl --user restart docker
+```
+
 ## Resources
 
 To read an explanatory guide to Docker storage, networking, and logging see:
