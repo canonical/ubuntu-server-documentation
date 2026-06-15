@@ -231,3 +231,12 @@ if you can include examples (although this is optional).
 
 Use a single backtick to mark inline commands and other string literals, like
 `paths/to/files`.
+
+### Admonition blocks
+
+To avoid conflicting with the backtick code blocks above, we use colon fences
+(`:::`) to enclose admonition or callout blocks.
+
+You can use the full range of admonition blocks
+[allowed by the MyST syntax](https://myst-parser.readthedocs.io/en/stable/syntax/admonitions.html),
+but try to avoid having many blocks in a short space of text.

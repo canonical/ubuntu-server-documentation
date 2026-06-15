@@ -92,6 +92,7 @@ This project does **not** use separate branches per Ubuntu release. Instead:
 - **Headings**: Use proper hierarchy (`#`, `##`, `###`, `####`); don't skip levels
 - **Lists**: Use `1.` for all numbered items (auto-renumbers)
 - **Code blocks**: Specify language for syntax highlighting
+- **Admonitions**: Use colon fences (`:::`) not backtick fences — e.g. `:::{note}` ... `:::`. Avoid many admonition blocks in a short space of text.
 - **MyST extensions**: `colon_fence`, `deflist`, `linkify`, `substitution`
 
 ### Sphinx Roles & Semantic Markup
