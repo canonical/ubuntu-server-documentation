@@ -41,10 +41,10 @@ As an example, to install the `nmap` network scanner, run the following command:
 sudo apt install nmap
 ```
 
-```{tip}
+:::{tip}
 You can install or remove multiple packages at once by separating them with
 spaces.
-```
+:::
 
 ## Remove a package
 
@@ -58,12 +58,12 @@ Adding the `--purge` option to `apt remove` will remove the package
 configuration files as well. This may or may not be what you want, so use it
 with caution.
 
-```{note}
+:::{note}
 While `apt` is a command-line tool, it is intended to be used interactively,
 and not to be called from non-interactive scripts. The `apt-get` command should
 be used in scripts (perhaps with the `--quiet` flag). For basic commands the
 syntax of the two tools is identical.
-```
+:::
 
 
 ### Upgrading packages 
@@ -194,9 +194,9 @@ base-files: /etc/host.conf
 
 The output shows that the `/etc/host.conf` belongs to the base-files package.
     
-```{note}
+:::{note}
 Many files are automatically generated during the package install process, and even though they are on the {term}`filesystem`, `dpkg -S` may not know which package they belong to.
-```
+:::
 
 ### Installing a deb file
 
@@ -216,9 +216,9 @@ You can uninstall a package by running:
 sudo dpkg -r zip
 ```
     
-```{caution}
+:::{caution}
 Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
-```
+:::
 
 For more `dpkg` options see the {manpage}`dpkg(1)` manual page: `man dpkg`.
 
@@ -236,9 +236,9 @@ In addition to the officially-supported package repositories available for Ubunt
 
 For more information, see our guide on {ref}`using third-party repositories <third-party-repository-usage>`.
 
-```{warning}
+:::{warning}
 Be advised that packages in Universe and Multiverse are not officially supported and do not receive security patches, except through Ubuntu Pro's [Expanded Security Maintenance](https://ubuntu.com/security/esm). A subscription to [Ubuntu Pro](https://ubuntu.com/pro) is free for personal use on up to five machines.
-```
+:::
 
 > Packages in the *multiverse* repository often have licensing issues that prevent them from being distributed with a free operating system, and they may be illegal in your locality.
 

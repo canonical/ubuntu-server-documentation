@@ -326,12 +326,12 @@ This provides output in the following form:
 
 For more complex scenarios there are many more advanced options for configuring NTS. These are documented in the {manpage}`chrony.conf(5)` manual page.
 
-```{admonition} *About certificate placement*
+:::{admonition} *About certificate placement*
 :class: note
 
 `chrony`, by default, is isolated via AppArmor and uses a number of `protect*` features of `systemd`. Due to that, there are not many paths `chrony` can access for the certificates. But `/etc/chrony/*` is allowed as read-only and that is enough.
 Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
-```
+:::
 
 ## References
 

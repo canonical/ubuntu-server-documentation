@@ -48,9 +48,9 @@ Either SQL database is suitable. For this document, we will use PostgreSQL:
 sudo apt install postgresql
 ```
 
-```{note}
+:::{note}
 Refer to {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <install-postgresql>` for more details on these powerful databases.
-```
+:::
 
 Next we can install Bacula. The `bacula` package has the necessary dependencies and will pull in what is needed for our deployment scenario:
 
@@ -113,9 +113,9 @@ What you should inspect and change:
 
 * `Password`: a random password will have been created for this installation, so it doesn't need to be changed, unless you would rather pick a different one.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `Director` resource, please check the upstream [Director Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023200000000000000000) documentation.
-```
+:::
 
 #### The `FileSet` resource
 
@@ -150,9 +150,9 @@ This example illustrates some interesting points, and shows the type of flexibil
 
 * `File`: This parameter can be specified multiple times, and it's additive. In this example we have it only used once, to select the `/home` directory and its subdirectories, subject to the exclusions defined in the `Options` block.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `FileSet` resource, please check the upstream [FileSet Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION0023700000000000000000) documentation.
-```
+:::
 
 #### The `Client` resource
 
@@ -187,9 +187,9 @@ By default, the backup job named `BackupClient1` is configured to archive the Ba
 
 * `AutoPrune`: This setting makes Bacula automatically apply the retention parameters at the end of a backup job. It is enabled by default.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `Client` resource, please check the upstream [Client Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231300000000000000000) documentation.
-```
+:::
 
 #### The `Pool` resource
 
@@ -220,9 +220,9 @@ We will use this pool to backup to a directory on the server (which will usually
 
 With the values in the example above, we will be storing at most 50G * 100 = 5000GB in this pool.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `Pool` resource, please check the upstream [Pool Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#SECTION00231600000000000000000) documentation.
-```
+:::
 
 #### The `Storage` resource
 
@@ -257,9 +257,9 @@ Here is what we have defined with the block above:
 
 * `Media Type`: Likewise, this must also match the same `Media Type` defined in the Storage daemon's configuration file.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `Pool` resource, please check the upstream [Storage Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#blb:StorageResource) documentation.
-```
+:::
 
 Next we need to edit the corresponding Storage daemon configuration in `/etc/bacula/bacula-sd.conf`.
 
@@ -378,11 +378,11 @@ Job {
 }
 ```
 
-```{tip}
+:::{tip}
 A job has many attributes that can only be specified once. This means that jobs are pretty much specific to what is being backed up, and from where, among other things. It therefore helps to come up with a naming convention.
 
 The upstream documentation has a section about [Naming Resources](https://docs.baculasystems.com/BEPlanningAndPreparation/BackupPolicy/NamingResources/index.html) with some suggestions.
-```
+:::
 
 We also need a Job definition for the restore task. The default configuration file will have a definition for this already, but it needs to be changed:
 
@@ -410,9 +410,9 @@ Important parameters defined above:
 * `FileSet` and `Pool`: These are not used, but must be present and point to valid resources. We changed `FileSet` to `Home Set` in this example.
 * `Where`: The path where the restored files should be placed. This can also be overridden when the job is invoked. We changed it to `/storage/restore` in this example.
 
-```{tip}
+:::{tip}
 For more details about all the options of the `Job` resource, please check the upstream [Job Resource](https://www.bacula.org/15.0.x-manuals/en/main/Configuring_Director.html#blb:JobResource) documentation.
-```
+:::
 
 ### Storage daemon
 
@@ -423,9 +423,9 @@ sudo chown bacula: -R /storage
 ```
 This will allow bacula, and only bacula, to read and write to the storage path. You can, of course, adjust the permissions and ownership to something that suits your deployment. Just be mindful that the bacula user needs to be able to create and remove files from the `/storage/backups` and `/storage/restore` paths, and that regular users should not be allowed to read those.
 
-```{tip}
+:::{tip}
 For more details about the Storage daemon configuration options, please check the upstream [Storage Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Storage_Daemon_Configuratio.html) documentation.
-```
+:::
 
 ### File daemon
 
@@ -451,9 +451,9 @@ After making the change and saving the file, restart the File daemon service:
 sudo systemctl restart bacula-fd.service
 ```
 
-```{tip}
+:::{tip}
 For more details about the File daemon configuration, please check the upstream [File Daemon](https://www.bacula.org/15.0.x-manuals/en/main/Client_File_daemon_Configur.html) documentation.
-```
+:::
 
 
 ### Console
@@ -468,9 +468,9 @@ sudo adduser <username> bacula
 
 Replace `<username>` with the actual username. Also, if you are adding the current user to the group you should log out and back in for the new permissions to take effect.
 
-```{warning}
+:::{warning}
 Be mindful of who is added to the `bacula` group: members of this group are able to read all the data that is being backed up!
-```
+:::
 
 ### Cleaning up
 
@@ -579,9 +579,9 @@ For example, if we run `list jobid=7`, this is the output:
 
 That tells us some details about this job, in particular that it finished correctly (the `T` code).
 
-```{tip}
+:::{tip}
 For a list of status and error codes, check the upstream [Job status and Error codes tables](https://www.bacula.org/15.0.x-manuals/en/main/Job_status_Error_codes.html#blb:director:job:status).
-```
+:::
 
 To see the full log of this specific job, we can use the `list joblog jobid=7` command. This is quite detailed, and the output below is truncated for brevity:
 

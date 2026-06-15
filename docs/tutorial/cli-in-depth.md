@@ -327,9 +327,9 @@ errors.txt  file-list.txt  greeting.txt  output.txt
 ubuntu
 ```
 
-```{note}
+:::{note}
 On Linux, processes declare whether they have "succeeded" or not with an **exit code**. An exit code (or "exit status") is a number from 0--255 that a process gives to its parent upon completion. "Success" is defined by exiting with code `0`, with *all* other values indicating different types of failures. These might be specific to a particular program, but the generic failure status will usually be exit code `1`. You can use `exit n` to immediately exit with code `n`.
-```
+:::
 
 Often we want the second command to run *only* if the first one succeeded. We use `&&` for this:
 

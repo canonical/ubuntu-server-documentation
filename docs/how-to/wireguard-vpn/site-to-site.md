@@ -54,9 +54,9 @@ HOST: b1                Loss%   Snt   Last   Avg  Best  Wrst StDev
   3.|-- 10.10.10.230     0.0%    10  299.1 299.1 298.0 300.2   0.6
 ```
 
-```{note}
+:::{note}
 Technically, a `/31` Classless Inter-Domain Routing (CIDR) network has no usable IP addresses, since the first one is the network address, and the second (and last) one is the broadcast address. [RFC 3021](https://www.ietf.org/rfc/rfc3021.txt) allows for it, but if you encounter routing or other networking issues, switch to a `/30` CIDR and its two valid host IPs.
-```
+:::
 
 ## Configure WireGuard
 
@@ -106,9 +106,9 @@ AllowedIPs = 10.10.10.0/24,10.10.9.0/31
 Endpoint = <alpha-gw-ip>:51000
 ```
 
-```{important}
+:::{important}
 WireGuard is being set up on the gateways for these two networks. As such, there are no changes needed on individual hosts of each network, but keep in mind that the WireGuard tunneling and encryption is only happening between the *alpha* and *beta* gateways, and **NOT** between the hosts of each network.
-```
+:::
 
 ## Bring the interfaces up
 

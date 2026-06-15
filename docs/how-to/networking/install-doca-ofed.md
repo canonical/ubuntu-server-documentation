@@ -9,11 +9,11 @@ myst:
 
 This guide explains how to install and maintain DOCA-OFED on Ubuntu Server.
 
-```{note}
+:::{note}
 [DOCA-OFED](https://developer.nvidia.com/networking/doca) is NVIDIA's distribution of OpenFabrics Enterprise Distribution (OFED) drivers and userspace libraries for high-performance networking.
 
 DOCA-OFED is available for Ubuntu 26.04 LTS (Resolute Raccoon).
-```
+:::
 
 ## Available metapackages
 
@@ -80,9 +80,9 @@ sudo apt update && sudo apt full-upgrade
 
 Then reboot the machine.
 
-```{warning}
+:::{warning}
 Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upgrade` for this workflow. (DOCA-OFED updates from our PPA require uninstalling the old version's package names and installing the new version's package names (ex: `doca-ofed-userspace-3.3` is uninstalled, and `doca-ofed-userspace-3.4` is installed on update). `sudo apt upgrade` will hold such updates back.)
-```
+:::
 
 ## Collect a sosreport for support
 

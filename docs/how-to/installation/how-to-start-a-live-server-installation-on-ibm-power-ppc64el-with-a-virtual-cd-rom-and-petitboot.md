@@ -7,9 +7,9 @@ myst:
 (how-to-start-a-live-server-installation-on-ibm-power-ppc64el-with-a-virtual-cd-rom-and-petitboot)=
 # How to start a live server installation on IBM Power (ppc64el) with a virtual CD-ROM and Petitboot
 
-```{note}
+:::{note}
 Not all IBM Power machines come with the capability of installing via a virtual CD-ROM! However, it is also possible to [boot the installer over the network](netboot-the-live-server-installer-on-ibm-power-ppc64el-with-petitboot.md).
-```
+:::
 
 A separate system (ideally in the same network, because of `ipmitool`) is needed to host the ppc64el ISO image file, which is later used as the virtual CD-ROM.
 
@@ -193,7 +193,7 @@ Password (optional):
 <Save> <Mount> <Unmount>
 ```
 
-````{note}
+::::{note}
 It’s important that you see a status like this:
 ```
 Device 1 There is an iso file mounted
@@ -203,7 +203,7 @@ Then the virtual CD-ROM is properly mounted and you will see the boot/install fr
 [CD/DVD: sr0 / 2020-03-23-08-02-42-00]
   Install Ubuntu Server
 ```
-````
+::::
 
 ## Boot into the Petitboot loader
 

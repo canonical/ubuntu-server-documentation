@@ -41,9 +41,9 @@ Make it executable:
 sudo chmod +x /usr/local/bin/ldapbackup
 ```
 
-```{note}
+:::{note}
 These files are uncompressed text files containing everything in your directory including the tree layout, usernames, and every password. Consider making `/export/backup` an encrypted partition and even having the script encrypt files as it creates them.
-```
+:::
 
 ## Schedule backups with systemd
 

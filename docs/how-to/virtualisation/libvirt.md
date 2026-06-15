@@ -13,15 +13,15 @@ The [libvirt library](https://libvirt.org/) interfaces with many different virtu
 kvm-ok
 ```
 
-```{note}
+:::{note}
 This command is part of the package `cpu-checker`, you might need to install it because it is not installed by default.
-```
+:::
 
 This command prints a message informing you whether your CPU supports hardware virtualisation.
 
-```{note}
+:::{note}
 On many computers with processors supporting hardware-assisted virtualisation, you must activate an option in the {term}`BIOS` to enable it.
-```
+:::
 
 ## Virtual networking
 
@@ -48,9 +48,9 @@ In a terminal enter:
 sudo adduser $USER libvirt
 ```
 
-```{note}
+:::{note}
 If you add the current user, log out and back in for the new group membership to take effect.
-```
+:::
 
 You are now ready to install a *Guest* operating system. Installing a virtual machine follows the same process as installing the operating system directly on the hardware.
 
@@ -135,9 +135,9 @@ This allows you to edit the [XML representation that defines the guest](https://
 
 Editing the XML directly is the most powerful method, but also the most complex. Tools like {ref}`Virtual Machine Manager / Viewer <virtual-machine-manager>` can help inexperienced users perform most common tasks.
 
-```{note}
+:::{note}
 If `virsh` (or other `vir*` tools) connects to something other than the default `qemu-kvm`/system hypervisor, you can find alternatives for the `--connect` option using `man virsh` or the [libvirt docs](https://libvirt.org/uri.html).
-```
+:::
 
 ### `system` and `session` scope
 
@@ -163,9 +163,9 @@ On the other hand, it cannot access system resources well, which includes networ
 
 Applications will usually decide on their primary use-case. Desktop-centric applications often choose `qemu:///session` while most solutions that involve an administrator anyway continue to default to `qemu:///system`.
 
-```{seealso}
+:::{seealso}
 There is more information about this topic in the [libvirt FAQ](https://wiki.libvirt.org/FAQ.html#what-is-the-difference-between-qemu-system-and-qemu-session-which-one-should-i-use) and this [blog post](https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html) about the topic.
-```
+:::
 
 ## Migration
 
@@ -267,9 +267,9 @@ Assign virtual functions via their PCI ID (domain, bus, slot, and function).
 </hostdev>
 ```
 
-```{note}
+:::{note}
 Getting the virtual function is device-dependent and cannot be fully covered here. In general, it involves setting up an {term}`IOMMU`, registering via [VFIO](https://www.kernel.org/doc/Documentation/vfio.txt), and sometimes requesting a number of VFs.
-```
+:::
 
 Here is an example of configuring a [ppc64el](https://wiki.debian.org/ppc64el) system to create four VFs on a device:
 
@@ -339,9 +339,9 @@ Dynamic page resizing can be an issue when using libvirt since huge pages must b
 
 Huge pages are harder to manage (especially later in the system's lifetime if memory is fragmented), but they provide a useful boost, especially for large guests.
 
-```{tip}
+:::{tip}
 When using device passthrough on very large guests, there is an extra benefit of using huge pages, as it is faster to do the initial memory clear on the VFIO {term}`DMA` pin.
-```
+:::
 
 ### Huge page allocation
 
@@ -525,9 +525,9 @@ Compared to other Host/Guest file sharing options -- commonly Samba, NFS, or 9P 
 
 See the [libvirt domain/filesystem documentation](https://libvirt.org/formatdomain.html#filesystems) for further details.
 
-```{note}
+:::{note}
 While `virtiofs` works with >=20.10 (Groovy), >=21.04 (Hirsute) made it more convenient, especially in small environments (no hard requirement to specify guest Numa topology or use huge pages). If you need to set up on 20.10 or want more details, the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) provides additional information.
-```
+:::
 
 ## Resources
 

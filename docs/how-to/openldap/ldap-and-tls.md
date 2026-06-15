@@ -11,9 +11,9 @@ When authenticating to an OpenLDAP server it is best to do so using an encrypted
 
 Here, we will act as our Certificate Authority (CA) and create and sign the LDAP server certificate as that CA. This guide will use the `certtool` utility to complete these tasks. For simplicity, this is being done on the OpenLDAP server itself, but your real internal CA should be elsewhere.
 
-```{note}
+:::{note}
 For general information on managing certificates in Ubuntu, see {ref}`certificates`. For installing a custom root CA, see {ref}`install-a-root-ca-certificate-in-the-trust-store`.
-```
+:::
 
 Install the `gnutls-bin` and `ssl-cert` packages:
 
@@ -45,9 +45,9 @@ sudo certtool --generate-self-signed \
 --outfile /usr/local/share/ca-certificates/mycacert.crt
 ```
 
-```{note}
+:::{note}
 The `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` picks up trusted local CAs from. To selectively enable CAs from `/usr/share/ca-certificates`, you can run `dpkg-reconfigure ca-certificates`.
-```
+:::
 
 Run `update-ca-certificates` to add the new CA certificate to the list of trusted CAs. Note the one added CA:
 
@@ -74,9 +74,9 @@ sudo certtool --generate-privkey \
 --outfile /etc/ldap/ldap01_slapd_key.pem
 ```
 
-```{note}
+:::{note}
 Replace `ldap01` in the filename with your server's {term}`hostname`. Naming the certificate and key for the host and service that will be using them will help keep things clear.
-```
+:::
 
 Create the `/etc/ssl/ldap01.info` info file containing:
 
@@ -203,9 +203,9 @@ Create the Consumer's certificate:
     --outfile ldap02_slapd_cert.pem
 ```
 
-```{note}
+:::{note}
 We had to use `sudo` to get access to the CA's private key. This means the generated certificate file is owned by root. You should change that ownership back to your regular user before copying these files over to the Consumer.
-```
+:::
 
 Get a copy of the CA certificate:
 

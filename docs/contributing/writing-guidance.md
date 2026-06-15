@@ -20,10 +20,10 @@ The structural elements, such as landing pages, are also written in Markdown.
 Each documentation page is only called once, by the landing page (or index) for that
 section.
 
-```{tip}
+:::{tip}
 For example, if a page appears in the How-to section about Virtualisation,
 the landing page you need will be `how-to/virtualisation.md`.
-```
+:::
 
 ## Versioning policy
 

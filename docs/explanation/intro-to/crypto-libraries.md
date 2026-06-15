@@ -183,9 +183,9 @@ $ apt-cache show golang-golang-x-crypto-dev | grep ^Source:
 Source: golang-go.crypto
 ```
 
-```{note}
+:::{note}
 If there is no `Source:` line, then it means the name of the source package is the same as the binary package that was queried.
-```
+:::
 
 ## What's next?
 

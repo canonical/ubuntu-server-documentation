@@ -7,11 +7,11 @@ myst:
 (set-up-your-lma-stack)=
 # Set up your LMA stack
 
-```{note}
+:::{note}
 **LMA to COS**
 
 The LMA stack is being succeeded by the Canonical Observability Stack (COS). While the current LMA still works, most users are recommended to consider COS instead. For more information, refer to [this COS topic](https://charmhub.io/topics/canonical-observability-stack/). In environments with more limited resources, there is also [COS lite](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
-```
+:::
 
 Logging, Monitoring, and Alerting (LMA) is a collection of tools that guarantee the availability of your running infrastructure. Your LMA stack will help point out issues in load, networking, and other resources before they become a failure point.
 
@@ -27,9 +27,9 @@ Prometheus works as a hub, polling data from different Telegraf nodes and sendin
 
 Let's set up a basic demonstration with two **nodes**, the first acting as a placeholder load with Telegraf installed - the "Workload", and the second acting as our data visualization system - the "Monitor". This will help us familiarize ourselves with the various components and how they inter-operate.
 
-```{note}
+:::{note}
 For clarity, we'll refer to these two hosts as named: `workload` and `monitor`. If you use other {term}`hostnames <hostname>`, substitute your preferred names as we go through this guide.
-```
+:::
 
 The Workload node will be running Telegraf to collect metrics from whatever load we're monitoring. For demonstration purposes we'll just read the CPU/memory data from the node. In a real environment, we'd have multiple hosts (each with their own Telegraf instance) collecting hardware, network, and software statuses particular to that node.
 

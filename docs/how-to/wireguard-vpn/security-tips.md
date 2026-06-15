@@ -37,9 +37,9 @@ AllowedIPs = ....
 PresharedKey = vxlX6eMMin8uhxbKEhe/iOxi8ru+q1qWzCdjESXoFZY=
 ```
 
-```{note}
+:::{note}
 Both sides need to have the same `PresharedKey` in their respective `[Peer]` sections.
-```
+:::
 
 ## Preventing accidental leakage of private keys
 

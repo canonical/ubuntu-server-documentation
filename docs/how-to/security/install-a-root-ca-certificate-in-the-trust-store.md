@@ -71,17 +71,17 @@ $ sudo cat /etc/ssl/certs/ca-certificates.crt | grep L4zOd3b41xJtYldofPve
 L4zOd3b41xJtYldofPve
 ```
 
-```{note}
+:::{note}
 It is important that the certificate file has the `.crt` extension, otherwise it will not be processed.
-```
+:::
 
 After this point, you can use tools like `curl` and `wget` to connect to local sites.
 
-```{note}
+:::{note}
 This procedure updates the system trust store and affects applications that rely on the host system’s OpenSSL configuration, such as `curl` and `wget`.
 
 Snap applications, including snap-packaged browsers, are unlikely to automatically trust certificates installed in the system trust store due to snap confinement.
-```
+:::
 
 ## Uninstall a PEM-format certificate
 

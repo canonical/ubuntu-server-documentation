@@ -27,11 +27,11 @@ Output: The results after running the command
 
 The output -- the results of running your commands -- is shown separately, underneath the shell prompt.
 
-```{tip}
+:::{tip}
 You can use your mouse to copy text *into* the terminal by holding the *left mouse button* and dragging your mouse to highlight the text you want to copy. Then, release the left button.
 
 Move your mouse pointer to the terminal window and press the *middle mouse button* (or click the *right mouse button* and select {guilabel}`paste`).
-```
+:::
 
 The **Command Line Interface (CLI)** is the language we use in our terminal to interact with our system. The CLI gives you far more control over your system than the **Graphical User Interface (GUI)** that you may be more familiar with.
 
@@ -536,9 +536,9 @@ Let's say we no longer want `file.txt`. We can use the `rm` command to remove it
 rm file1.txt
 ```
 
-```{warning}
+:::{warning}
 Remember, there is no recycle bin in the Linux terminal -- once you `rm` a file, it is gone. On your real system, double-check what you are deleting before running this command.
-```
+:::
 
 
 ## Understanding file attributes

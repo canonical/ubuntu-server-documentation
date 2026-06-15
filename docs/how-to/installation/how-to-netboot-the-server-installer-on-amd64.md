@@ -46,9 +46,9 @@ There are several implementations of the DHCP/BOOTP and TFTP protocols available
    tftp-root=/srv/tftp
    ```
 
-```{note}
+:::{note}
 This assumes several things about your network; read `man dnsmasq` or the default `/etc/dnsmasq.conf` for many more options.
-```
+:::
 
 - Restart `dnsmasq` with:
 
@@ -195,9 +195,9 @@ It is expected to show **active (running)** in the output messages. We will also
       APPEND root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
    ```
 
-```{note}
+:::{note}
 Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-init from downloading the ISO twice.
-```
+:::
 
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
 

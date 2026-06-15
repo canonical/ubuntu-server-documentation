@@ -30,9 +30,9 @@ Here is one example of system information obtained and displayed by Landscape:
     IPv6 address for enp5s0: fd42:50cb:3a48:1f2c:216:3eff:fe27:c18a
     ```
 
-    ```{note}
+    :::{note}
     You can run `landscape-sysinfo` manually at any time.
-    ```
+    :::
 
   - *`update-notifier-common`:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
 
@@ -123,7 +123,7 @@ System Administrator Appreciation Day is 181 days ago but we'd appreciate to be 
 ```
 
 
-```{note}
+:::{note}
 Be careful as this will be executed on every login. The usual pattern to prevent
 that from slowing down logins is to do anything even slightly complex
 asynchronously and only `cat` pre-generated content in the actual MOTD handling.
@@ -132,7 +132,7 @@ instead of at every login.
 This example was meant to be kept simple, but the existing serious MOTD entries
 placed there by the packages make use of such, please look at those for writing
 your own.
-```
+:::
 
 ## Resources
 

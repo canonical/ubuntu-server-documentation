@@ -34,9 +34,9 @@ that it's understood as such.
 
 - The entry's DN is not an attribute. It is not considered part of the entry itself.
 
-```{note}
+:::{note}
 The terms **object**, **container**, and **node** have certain connotations but they all essentially mean the same thing as **entry** (the technically correct term).
-```
+:::
 
 For example, below we have a single entry consisting of 11 attributes where the following is true:
 

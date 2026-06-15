@@ -360,9 +360,9 @@ Might then show:
 
 ## Testing the crash dump mechanism
 
-```{warning}
+:::{warning}
 Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
-```
+:::
 
 Verify that the *SysRQ* mechanism is enabled by looking at the value of the `/proc/sys/kernel/sysrq` kernel parameter:
 
@@ -375,9 +375,9 @@ A value greater than *1* indicates that a sub-set of `sysrq` features is enabled
 See `/usr/lib/sysctl.d/55-magic-sysrq.conf` for a detailed description of the options
 and their default values.
 
-```{note}
+:::{note}
 On 24.10 and earlier the location of this file was at `/etc/sysctl.d/10-magic-sysrq.conf`
-```
+:::
 
 If disabled on your system, enable `sysrq` dump:
 
@@ -455,12 +455,12 @@ information with debug symbols are needed. To get access to those please
 follow {ref}`get-debug-symbol-packages` to make the repository and associated
 keys known to your system.
 
-```{note}
+:::{note}
 This does not strictly need to happen on the system that had the crash, it can
 be copied away for analysis. But the examples are simplified to use e.g.
 `uname -r` to automatically select the right kernel - when running on a
 different system these might need to be adapted.
-```
+:::
 
 Then install the debug symbols for your kernel; assuming it is the same that
 runs currently, that can be done with:

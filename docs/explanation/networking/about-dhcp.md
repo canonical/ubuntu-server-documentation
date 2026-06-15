@@ -59,9 +59,9 @@ Ubuntu provides several DHCP servers. The following are the most common:
 - `dnsmasq`:
   [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) provides combined DNS and DHCP functionality. It is lightweight and suitable for small networks and development environments.
 
-```{note}
+:::{note}
 The `isc-dhcp-server` package is deprecated and unsupported since Ubuntu 24.04 LTS. Please use `isc-kea` or `dnsmasq` instead.
-```
+:::
 
 Legacy documentation for `isc-dhcp-server` is still available for existing deployments. You can find {ref}`information on how to configure it <install-isc-dhcp-server>` if needed.
 

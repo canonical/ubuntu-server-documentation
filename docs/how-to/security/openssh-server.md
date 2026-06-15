@@ -36,7 +36,7 @@ To configure the default behavior of the OpenSSH server application, `sshd`,
 you can modify the main configuration file at `/etc/ssh/sshd_config` or add
 modular configuration snippets to the `/etc/ssh/sshd_config.d/` directory.
 
-```{important}
+:::{important}
 By default, Ubuntu's configuration includes the line `Include
 /etc/ssh/sshd_config.d/*.conf` at the very top of `/etc/ssh/sshd_config`.
 Because OpenSSH uses the first value set for most directives, any settings
@@ -45,7 +45,7 @@ configuration file.
 
 Using snippets in `sshd_config.d/` makes updates easier and keeps your custom
 changes separate from system defaults.
-```
+:::
 
 For information about the configuration directives, refer to the online
 {manpage}`sshd_config(5)` manual page or run `man sshd_config` at a terminal
@@ -106,7 +106,7 @@ Connection to 127.0.0.1 22 port [tcp/*] succeeded!
 SSH-2.0-OpenSSH_10.2p1
 ```
 
-```{warning}
+:::{warning}
 Many other configuration directives for `sshd` are available to change the
 server application's behavior to fit your needs. Be advised, however, if your
 only method of access to a server is SSH, and you make a mistake when
@@ -114,9 +114,9 @@ configuring `sshd` you may find you are locked out of the server upon
 restarting it. Additionally, if an incorrect configuration directive is
 supplied, the `sshd` server may refuse to start, so be particularly careful
 when editing the configuration on a remote server.
-```
+:::
 
-````{tip}
+::::{tip}
 You can use {ref}`etckeeper <install-etckeeper>` to track changes in your `/etc/` with `git`.
 
 Alternatively, before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
@@ -125,7 +125,7 @@ Alternatively, before editing the configuration file, you should make a copy of 
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
 sudo chmod a-w /etc/ssh/sshd_config.original
 ```
-````
+::::
 
 
 (openssh-server-ssh-keys)=

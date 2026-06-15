@@ -17,11 +17,11 @@ Some of the most notable benefits that NFS can provide are:
 
 - Storage devices such as floppy disks, CDROM drives, and USB Thumb drives can be used by other machines on the network. This may reduce the number of removable media drives throughout the network.
 
-```{warning}
+:::{warning}
 If you use **NFS and authd** at the same time, you must add a Kerberos configuration on both the client and the server. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
 For details, see [Using authd with NFS](https://documentation.ubuntu.com/authd/stable-docs/howto/use-with-nfs/).
-```
+:::
 
 ## Installation
 
@@ -70,9 +70,9 @@ Use the mount command to mount a shared NFS directory from another machine, by t
     sudo mkdir /opt/example
     sudo mount example.hostname.com:/srv /opt/example
 
-```{warning}
+:::{warning}
 The mount point directory `/opt/example` must exist. There should be no files or subdirectories in the `/opt/example` directory, else they will become inaccessible until the nfs filesystem is unmounted.
-```
+:::
 
 An alternate way to mount an NFS share from another machine is to add a line to the `/etc/fstab` file. The line must state the hostname of the NFS server, the directory on the server being exported, and the directory on the local machine where the NFS share is to be mounted.
 
@@ -80,9 +80,9 @@ The general syntax for the line in `/etc/fstab` file is as follows:
 
     example.hostname.com:/srv /opt/example nfs
 
-```{note}
+:::{note}
 Details about all the NFS related options that can go into `/etc/fstab` can be found in the {manpage}`nfs(5)` manual page.
-```
+:::
 
 After modifying `/etc/fstab`, systemd should be told about the change, otherwise you will get this warning when trying to mount:
 ```
@@ -265,9 +265,9 @@ One drawback of using a machine credential for mounts done by the `root` user is
 
 When this option is enabled and `rpc.gssd` restarted, then even the `root` user will need to obtain a Kerberos ticket to perform an NFS Kerberos mount.
 
-```{warning}
+:::{warning}
 Note that this prevents automatic NFS mounts via `/etc/fstab`, unless a Kerberos ticket is obtained before.
-```
+:::
 
 This option is controlled in `/etc/nfs.conf` in the `[gssd]` section:
 
@@ -282,10 +282,10 @@ Earlier Ubuntu releases used the traditional configuration mechanism for the NFS
 
 Each file has a small explanation about the available settings.
 
-```{warning}
+:::{warning}
 The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("Focal") and Ubuntu 18.04 LTS ("Bionic").
 In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
-```
+:::
 
 Ubuntu 22.04 LTS ("Jammy") and later have a new configuration file format for the NFS packages. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
 

@@ -7,9 +7,9 @@ myst:
 (install-postfix)=
 # Install and configure Postfix
 
-```{note}
+:::{note}
 This guide does not cover setting up Postfix *Virtual Domains*. For information on Virtual Domains and other advanced configurations see the references list at the end of this page.
-```
+:::
 
 ## Install Postfix
 
@@ -21,9 +21,9 @@ sudo apt install postfix
 
 It is OK to accept defaults initially by pressing return for each question. Some of the configuration options will be investigated in greater detail in the configuration stage.
 
-```{warning}
+:::{warning}
 The `mail-stack-delivery` metapackage has been deprecated in Focal. The package still exists for compatibility reasons, but won't setup a working email system.
-```
+:::
 
 ## Configure Postfix
 
@@ -83,9 +83,9 @@ sudo postconf -e 'smtpd_recipient_restrictions = \
 permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
 ```
 
-```{note}
+:::{note}
 The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
-```
+:::
 
 There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "`noanonymous`" prevents the use of mechanisms that permit anonymous authentication.
 
@@ -355,9 +355,9 @@ As with Postfix, if you change a Dovecot configuration the process will need to 
 sudo systemctl reload dovecot.service
 ```
 
-```{note}
+:::{note}
 Some of the options above can drastically increase the amount of information sent to the log files. Remember to return the log level back to normal after you have corrected the problem -- then reload the appropriate daemon for the new configuration to take effect.
-```
+:::
 
 ## Further reading
 

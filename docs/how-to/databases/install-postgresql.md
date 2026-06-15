@@ -25,9 +25,9 @@ PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is
 
 The following discussion assumes that you wish to enable TCP/IP connections and use the `scram-sha-256` method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
 
-```{tip}
+:::{tip}
 To configure *IDENT* authentication, add entries to the `/etc/postgresql/*/main/pg_ident.conf` file. There are detailed comments in the file to guide you.
-```
+:::
 
 By default, only connections from the local system are allowed. To enable all other computers to connect to your PostgreSQL server, edit the file `/etc/postgresql/*/main/postgresql.conf`. Locate the line: *\#listen\_addresses = 'localhost'* and change it to `*`:
 
@@ -35,9 +35,9 @@ By default, only connections from the local system are allowed. To enable all ot
 listen_addresses = '*'
 ```
 
-```{note}
+:::{note}
 To listen on all IPv4 interfaces, set `listen_addresses` to '`0.0.0.0`', while '`::`' will listen on all IPv6 interfaces. '`*`' will cause PostgreSQL to listen on all available network interfaces, both IPv4 and IPv6.
-```
+:::
 
 For details on other parameters, refer to the configuration file or to the [PostgreSQL documentation](https://www.postgresql.org/docs/) for information on how they can be edited.
 
@@ -59,9 +59,9 @@ After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.con
 hostssl template1       postgres        192.168.1.1/24        scram-sha-256
 ```
 
-```{note}
+:::{note}
 The config statement `hostssl` used here will reject TCP connections that would not use SSL. PostgreSQL in Ubuntu has the SSL feature built in and configured by default, so it works right away. On your PostgreSQL server this uses the certificate created by the `ssl-cert` package which is suitable for testing, but for production use you should replace it with a certificate from a trusted Certificate Authority (CA). See {ref}`obtain-tls-certificates` for how to get a certificate from Let's Encrypt or set up your own CA.
-```
+:::
 
 Finally, you should restart the PostgreSQL service to initialize the new configuration. From a terminal prompt enter the following to restart PostgreSQL:
 
@@ -69,9 +69,9 @@ Finally, you should restart the PostgreSQL service to initialize the new configu
 sudo systemctl restart postgresql.service
 ```
 
-```{warning}
+:::{warning}
 The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) to configure more parameters.
-```
+:::
 
 You can test server connections from other machines by using the PostgreSQL client as follows, replacing the domain name with your actual server domain name or IP address:
 
