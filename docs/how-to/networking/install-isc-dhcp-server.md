@@ -8,7 +8,7 @@ myst:
 # How to install and configure isc-dhcp-server
 
 :::{warning}
-The `isc-dhcp-server` package is deprecated and unuspported since Ubuntu 24.04 LTS. It is no longer supported by its vendor. Please use [Kea](https://www.isc.org/kea/) or [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) instead.
+The `isc-dhcp-server` package is deprecated and unsupported since Ubuntu 24.04 LTS. It is no longer supported by its vendor. Please use [Kea](https://www.isc.org/kea/) or [dnsmasq](https://thekelleys.org.uk/dnsmasq/doc.html) instead.
 :::
 
 In this guide we show how to install and configure `isc-dhcp-server`, which installs the dynamic host configuration protocol daemon, {term}`DHCPD`. For `isc-kea` instructions, {ref}`refer to this guide instead <install-isc-kea>`.

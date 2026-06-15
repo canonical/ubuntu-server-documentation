@@ -166,7 +166,7 @@ $ sudo multipass set local.driver=libvirt
 ```
 
 :::{note}
-If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvert service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
+If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvirt service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
 :::
 
 Start a guest, and access it via tools like [virt-manager](https://virt-manager.org/) or `virsh`:

@@ -275,8 +275,8 @@ olcAccessLogPurge: 07+00:00 01+00:00
 
 :::{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
-For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manpage.
+Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
+For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manual page.
 :::
 
 Create a directory:

@@ -119,7 +119,7 @@ You must increment the `Serial Number` every time you make changes to the zone f
 Now, you can add DNS records to the bottom of the zone file. See {ref}`common-record-types` for details.
 
 :::{note}
-Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
+Many admins like to use the "last edited" date as the Serial of a zone, such as **`2020012100`** which is **`yyyymmddss`** (where **`ss`** is the Serial Number)
 :::
 
 Once you have made changes to the zone file, BIND9 needs to be restarted for the changes to take effect:

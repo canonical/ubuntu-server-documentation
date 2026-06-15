@@ -526,7 +526,7 @@ Compared to other Host/Guest file sharing options -- commonly Samba, NFS, or 9P 
 See the [libvirt domain/filesystem documentation](https://libvirt.org/formatdomain.html#filesystems) for further details.
 
 :::{note}
-While `virtiofs` works with >=20.10 (Groovy), >=21.04 (Hirsute) made it more convenient, especially in small environments (no hard requirement to specify guest Numa topology or use huge pages). If you need to set up on 20.10 or want more details, the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) provides additional information.
+While `virtiofs` works with >=20.10 (Groovy), >=21.04 (Hirsute) made it more convenient, especially in small environments (no hard requirement to specify guest Numa topology or use huge pages). If you need to set up on 20.10 or want more details, the libvirt [knowledge-base about `virtiofs`](https://libvirt.org/kbase/virtiofs.html) provides additional information.
 :::
 
 ## Resources

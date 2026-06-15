@@ -302,7 +302,7 @@ Reboots can be very disruptive, especially if the system fails to come back. The
  * `Unattended-Upgrade::Automatic-Reboot-Time "now";`: If automatic reboot is enabled and needed, reboot at the specific time instead of immediately. The time value is passed as-is to the {manpage}`shutdown(8)` command. It can be the text "now" (which is the default), or in the format "hh:mm" (hours:minutes), or an offset in minutes specified like "+m". Note that if using "hh:mm", it will be in the local system's timezone.
 
 :::{note}
-For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the {manpage}`shutdown(8)` manpage.
+For more information about this time specification for the reboot, and other options like cancelling a scheduled reboot, see the {manpage}`shutdown(8)` manual page.
 :::
 
 Below are the logs of an `unattended-upgrades` run that started at 20:43. The tool installed the available upgrades and detected that a reboot was requested, which was scheduled using the configured `Automatic-Reboot-Time` (20:45 in this example):
