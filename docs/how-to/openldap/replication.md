@@ -19,9 +19,9 @@ There are two ways to use this replication:
 
 The delta replication sends less data over the network, but is more complex to set up. We will show both in this guide.
 
-```{important}
+:::{important}
 You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the [LDAP with TLS guide](ldap-and-tls.md) for details of how to set this up.
-```
+:::
 
 ## Provider configuration - replication user
 
@@ -54,9 +54,9 @@ Now set a password for it with `ldappasswd`:
 ldappasswd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
 ```
 
-```{note}
+:::{note}
 Adjust the server URI in the `-H` parameter if needed to match your deployment.
-```
+:::
 
 The next step is to give this replication user the correct privileges, i.e.:
 
@@ -132,10 +132,10 @@ olcSpCheckpoint: 100 10
 olcSpSessionLog: 100
 ```
 
-```{warning}
+:::{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
 Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
-```
+:::
 
 Add the new content:
 
@@ -185,9 +185,9 @@ Ensure the following attributes have the correct values:
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **`rid`**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-```{note}
+:::{note}
 A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
-```
+:::
 
 Add the new configuration:
 
@@ -273,11 +273,11 @@ olcAccessLogSuccess: TRUE
 olcAccessLogPurge: 07+00:00 01+00:00
 ```
 
-```{warning}
+:::{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
-For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manpage.
-```
+Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
+For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manual page.
+:::
 
 Create a directory:
 
@@ -336,9 +336,9 @@ Ensure the following attributes have the correct values:
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **rid**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-```{note}
+:::{note}
 Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
-```
+:::
 
 Add the new configuration:
 

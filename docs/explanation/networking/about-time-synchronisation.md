@@ -17,11 +17,11 @@ Since Ubuntu 25.10 `chrony` is used to synchronize time by default. See our guid
 
 Users can optionally use {ref}`timedatectl and timesyncd <timedatectl-and-timesyncd>`.
 
-```{note}
+:::{note}
 Chrony is replacing `systemd-timesyncd` as the default in Ubuntu 25.10 and `ntpdate`/`ntpd`, which was the default before Ubuntu 18.04 LTS.
 
 On upgraded systems (from Ubuntu 25.04 or below) `systemd-timesyncd` might still be the active time-daemon and thus render the new `chrony` service disabled. Similarly, while the use of `ntpd` is no longer recommended, it might still be installed to retain any previous behavior/config on upgrades (up to Ubuntu 22.04 LTS).
-```
+:::
 
 ## How time synchronization works
 

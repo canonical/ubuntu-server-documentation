@@ -11,11 +11,11 @@ One of the most common ways to network Ubuntu and Windows computers is to config
 
 The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see [Share Access Control](share-access-controls.md).
 
-```{warning}
+:::{warning}
 If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
 If you *are* using Samba with authd, you should follow the instructions in the [steps for the server](https://documentation.ubuntu.com/authd/edge-docs/howto/use-with-samba/#steps-for-the-server) guide in the authd documentation instead.
-```
+:::
 
 ## Install Samba
 
@@ -31,9 +31,9 @@ That's all there is to it; you are now ready to configure Samba to share files.
 
 The main Samba configuration file is located in `/etc/samba/smb.conf`. The default configuration file contains a significant number of comments, which document various configuration directives.
 
-```{note}
+:::{note}
 Not all available options are included in the default configuration file. See the [`smb.conf` man page](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html) or the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/) for more details.
-```
+:::
 
 First, edit the `workgroup` parameter in the *\[global\]* section of `/etc/samba/smb.conf` and change it to better match your environment:
 
@@ -59,9 +59,9 @@ A short description of the share. Adjust to fit your needs.
 - **`path`**
 The path to the directory you want to share.
     
-  ```{note}
+  :::{note}
   This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](https://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
-  ```
+  :::
 
 - **`browsable`**
 Enables Windows clients to browse the shared directory using Windows Explorer.
@@ -93,9 +93,9 @@ Finally, restart the Samba services to enable the new configuration by running t
 sudo systemctl restart smbd.service nmbd.service
 ```
 
-```{warning}
+:::{warning}
 Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see [Share Access Control](share-access-controls.md).
-```
+:::
 
 From a Windows client you should now be able to browse to the Ubuntu file server and see the shared directory. If your client doesn't show your share automatically, try to access your server by its IP address, e.g. `\\192.168.1.1`, in a Windows Explorer window. To check that everything is working try creating a directory from Windows.
 

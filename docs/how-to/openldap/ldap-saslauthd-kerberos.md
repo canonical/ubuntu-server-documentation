@@ -17,13 +17,13 @@ This guide makes several assumptions about the OpenLDAP setup:
 
 All the following configuration will be on `ldap-server.example.com`.
 
-```{note}
+:::{note}
 This process is not the same as using [Generic Security Services Application Programming Interface](https://www.openldap.org/doc/admin26/sasl.html#GSSAPI) (GSSAPI) to log into the LDAP server.
 
 Rather it is using [simple authentication](https://www.openldap.org/doc/admin26/security.html#%22simple%22%20method) with the OpenLDAP server so this should be over a [Transport Layer Security](https://datatracker.ietf.org/wg/tls/documents/) (TLS) connection.
 
 The test user we will be using is `ubuntu@EXAMPLE.COM`, which must exist in the Kerberos database
-```
+:::
 
 ## How the passthrough authentication will work
 
@@ -113,9 +113,9 @@ Alternatively, we can issue the commands directly:
 kadmin -p ubuntu/admin -q "addprinc -randkey host/ldap-server.example.com"
 ```
 
-```{note}
+:::{note}
 `sudo` is not needed to remotely create a new principal.
-```
+:::
 
 And:
 
@@ -170,9 +170,9 @@ MECHANISMS="kerberos5"
 ...
 ```
 
-```{important}
+:::{important}
 For Ubuntu version 22.04 and earlier "`START=yes`" must also be added to the default config file for `saslauthd` to start.
-```
+:::
 
 Save and exit the editor.
 
@@ -200,9 +200,9 @@ testsaslauthd -u ubuntu -p ubuntusecretwrong
 0: NO "authentication failed"
 ```
 
-```{note}
+:::{note}
 In Ubuntu 22.04 LTS and earlier, the `/run/saslauthd` directory is restricted to members of the `sasl` group, so the `testsaslauthd` commands above need to be run as root (via `sudo`) or as a user who is in the `sasl` group.
-```
+:::
 
 ## Configure OpenLDAP
 
@@ -250,9 +250,9 @@ userPassword: {SASL}ubuntu@EXAMPLE.COM
 
 That will trigger the passthrough authentication, because the `userPassword` attribute starts with the special prefix `{SASL}`. This will direct OpenLDAP to use `saslauthd` for the authentication, and use the name provided in the `userPassword` attribute.
 
-```{important}
+:::{important}
 Note how the username present in the `userPassword` attribute is independent of the bindDN used in the simple bind! If the `userPassword` attribute contained, say, `{SASL}anotheruser@EXAMPLE.COM`, OpenLDAP would ask `saslauthd` to authenticate `anotheruser@EXAMPLE.COM`, and not the user from the bindDN! Therefore, it's important to use OpenLDAP ACLs to prevent users from changing the `userPassword` attribute when using passthrough authentication!
-```
+:::
 
 To continue with this how-to, let's create the `uid=ubuntu` entry in the directory, which will use passthrough authentication. Note the usage of `-ZZ`, which forces the connection to use StartTLS and thus encrypt the traffic, including the simple bind credentials:
 
@@ -266,9 +266,9 @@ userPassword: {SASL}ubuntu@EXAMPLE.COM
 LDIF
 ```
 
-```{note}
+:::{note}
 Note how we don't need to add the posix attributes like user id, home directory, group, etc. All we really need is a directory entry that contains a `userPassword` attribute.
-```
+:::
 
 ## Test the authentication
 

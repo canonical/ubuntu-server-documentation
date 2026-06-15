@@ -120,9 +120,9 @@ And for more verbose status information use:
 sudo ufw status verbose
 ```
 
-```{note}
+:::{note}
 If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
-```
+:::
 
 This is a quick introduction to using `ufw`. Please refer to the {manpage}`ufw(8)` manual page for more information.
 
@@ -150,9 +150,9 @@ ufw allow from 192.168.0.0/24 to any app Samba
 
 Replace `Samba` and `192.168.0.0/24` with the application profile you are using and the IP range for your network.
 
-```{note}
+:::{note}
 There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
-```
+:::
 
 To view details about which ports and protocols, and so on, are defined for an application, enter:
 
@@ -223,9 +223,9 @@ COMMIT
 
 For each **Table**, a corresponding `COMMIT` statement is required. In these examples only the `nat` and `filter` tables are shown, but you can also add rules for the `raw` and `mangle` tables.
 
-```{note}
+:::{note}
 In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
-```
+:::
 
 #### Restart ufw
 

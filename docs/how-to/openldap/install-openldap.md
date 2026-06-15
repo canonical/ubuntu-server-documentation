@@ -13,9 +13,9 @@ Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/softwa
 
 In particular, it creates a database instance to store your data. However, the **suffix** (or **base DN**) of this instance is determined from the host's domain name. If you want something different, you can change it right after installation.
 
-```{note}
+:::{note}
 This guide uses a database suffix of **`dc=example,dc=com`**. Change this to match your particular setup.
-```
+:::
 
 ## Install slapd
 
@@ -55,9 +55,9 @@ URI ldap://ldap01.example.com
 
 `slapd` is designed to be configured within the service itself by dedicating a separate DIT for that purpose. This allows for dynamic configuration of `slapd` without needing to restart the service or edit config files. This configuration database consists of a collection of text-based LDIF files located under `/etc/ldap/slapd.d`, but these should never be edited directly. This way of working is known by several names: the "slapd-config" method, the "Real Time Configuration (RTC)" method, or the "cn=config" method. You can still use the traditional flat-file method (`slapd.conf`) but that is not covered in this guide.
 
-```{note}
+:::{note}
 Although the configuration is accessible via the LDAP protocol under the `cn=config` suffix, it is also stored on disk under `/etc/ldap/slapd.d/`. This allows the configuration to be replicated to other servers and backed up alongside the data.
-```
+:::
 
 Right after installation, you will get two databases, or suffixes: one for your data, which is based on your host's domain (**`dc=example,dc=com`**), and one for your configuration, with its root at **`cn=config`**. To change the data on each we need different credentials and access methods:
 
@@ -179,9 +179,9 @@ dn:cn=admin,dc=example,dc=com
 
 When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authentication DN, the server will look for a `userPassword` attribute in the entry, and use that to verify the credentials. In this particular case above, we used the database **Root DN** entry, i.e., the actual administrator, and that is a special case whose password is set in the configuration when the package is installed.
 
-```{note}
+:::{note}
 A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
-```
+:::
 
 Let's try some SASL EXTERNAL authentication commands:
 
@@ -210,9 +210,9 @@ When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a co
 
 You can extend this to grant the local root user write access to your data tree as well, which simplifies administration by avoiding password prompts. See {ref}`ldap-access-control` for how to set this up.
 
-```{note}
+:::{note}
 OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
-```
+:::
 
 ## Populate the directory
 
@@ -257,9 +257,9 @@ loginShell: /bin/bash
 homeDirectory: /home/john
 ```
 
-```{note}
+:::{note}
 It's important that `uid` and `gid` values in your directory do not collide with local Linux users' values as defined in `/etc/passwd` and `/etc/group`. You can use higher number ranges, such as starting at 5000 or even higher.
-```
+:::
 
 Add the content:
 
@@ -336,9 +336,9 @@ Enter LDAP Password:
 dn:uid=john,ou=People,dc=example,dc=com
 ```
 
-```{note}
+:::{note}
 Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
-```
+:::
 
 (modifying-slapd-config)=
 ## Change the configuration
@@ -380,9 +380,9 @@ olcRootPW: {SSHA}Y0UjBUUmf08TC25ePVc6waI/mfvPNktk
 
 Since the `olcRootPW` password attribute we want to change is located under the `cn=config` suffix, we will also have to use the SASL EXTERNAL authentication to modify it, according to the table shown earlier.
 
-```{note}
+:::{note}
 Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` suffix!
-```
+:::
 
 To change the password associated with the `olcRootDN` administrative DN, we need to replace the value of the `olcRootPW` attribute. That value is not the literal password, but the hash of the password, using a specific hash algorithm.
 
@@ -456,9 +456,9 @@ olcDbIndex: member,memberUid eq
 olcDbIndex: mail eq,sub
 ```
 
-```{seealso}
+:::{seealso}
 To learn more about OpenLDAP indexes, check the upstream documentation at https://www.openldap.org/doc/admin26/tuning.html#Indexes
-```
+:::
 
 ### Add a schema
 
@@ -466,9 +466,9 @@ A schema defines the structure and data types of object classes available in the
 
 Schemas can only be added to `cn=config` if they are in LDIF format. If not, they must first be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
-```{note}
+:::{note}
 It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
-```
+:::
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 

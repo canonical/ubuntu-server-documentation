@@ -127,7 +127,7 @@ Enter=accept, e=edit, n=new, x=exit, l=language, g=log, h=help
 
 Select "*Exit to shell".
 
-````{note}
+::::{note}
 Make sure you really watch the SOL, since the Petitboot screen (above) has a time out (usually 10 or 30 seconds) and afterwards it automatically proceeds and tries to boot from the configured devices (usually disk). This can be prevented by just navigating in Petitboot.
 The petitboot shell is small Linux based OS:
  ```
@@ -135,11 +135,11 @@ The petitboot shell is small Linux based OS:
  Exiting petitboot. Type 'exit' to return.
  You may run 'pb-sos' to gather diagnostic data
  ```
-````
+::::
 
-```{note}
+:::{note}
 In case one needs to gather system details and diagnostic data for IBM support, this can be done here by running ‘pb-sos’ (see `msg`).
-```
+:::
 
 ## Download the ISO
 
@@ -179,9 +179,9 @@ Sent SIGKILL to all processes
 ...
 ```
 
-```{note}
+:::{note}
 In order to boot with and install the HWE kernel (if available), substitute `vmlinux` with `vmlinux-hwe` in the first `kexec` line.
-```
+:::
 
 The system now performs the initial boot of the installer:
 

@@ -89,9 +89,9 @@ When we run this command, it will ask us to confirm if the summary of proposed c
 
 Let's type {kbd}`Y`, then press {kbd}`Enter` to confirm that yes, we do want that, and then the upgrade will proceed. This may take a few minutes.
 
-```{tip}
+:::{tip}
 You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran the command `sudo apt upgrade -y` it would proceed with the upgrade without asking us to confirm. Shorthand versions of flags are common -- for most packages, you can check which flags are equivalent using [the manual pages](https://manpages.ubuntu.com/) or using the `man` command, as we'll see later.
-```
+:::
 
 In the output, we'll see where `apt upgrade` is fetching the upgrade from for each package. For example:
 
@@ -101,9 +101,9 @@ Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libgcrypt20 a
 
 APT combines the various elements; the package name (`libgcrypt20`), version (`1.21.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
 
-```{note}
+:::{note}
 These commands only upgrade the packages for the release of Ubuntu that we are using (26.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
-```
+:::
 
 It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages -- so although `apt upgrade` is safe to use unattended (in a script, for example), you should only use `dist-upgrade` when you can pay attention to it.
 
@@ -347,9 +347,9 @@ Let's break this down a little bit, because there are some subtle differences he
   
 Let's now choose {kbd}`Y` to confirm we want to remove this dependency.
 
-```{warning}
+:::{warning}
 Removing dependencies can, at worst, cause a system to become unusable -- you should always be careful when doing so. If you remove a dependency that is part of a chain, the removals will cascade up the chain as each dependency and the package that depends on it are removed. You can end up removing more than you originally anticipated!
-```
+:::
 
 #### Auto-remove dependencies
 
@@ -585,9 +585,9 @@ We now see something that looks like this:
 ??5??????   /usr/sbin/a2enmod
 ```
 
-```{note}
+:::{note}
 You might have noticed there's a "c" next to the top line but not the bottom -- the "c" shows the file is a conffile.
-```
+:::
 
 `dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2:
 
@@ -609,9 +609,9 @@ Then we'll get this output:
 
 ...so we can see that our change to the conffile has been preserved because the checksums are different, but the `a2enmod` file isn't listed anymore because it has been restored to the default. Phew!
 
-```{note}
+:::{note}
 We can use `sudo apt install <package>` to upgrade an installed package, but this will only upgrade to the latest version. In our case, we were already on the latest version of Apache2, so we needed to force APT to re-unpack the content to overwrite our "silly" changes.
-```
+:::
 
 ## Removing packages
 
@@ -743,9 +743,9 @@ dpkg-query: package 'apache2' is not installed
 Use dpkg --contents (= dpkg-deb --contents) to list archive files contents.
 ```
 
-```{note}
+:::{note}
 We could also use the `dpkg-query --show -f='${Conffiles}\n' apache2` command from earlier, and `dpkg-query` will find no packages matching `apache2`.
-```
+:::
 
 There are other ways to change package files. If you would like to read more, check out our {ref}`guide to changing package files <changing-package-files>`.
 

@@ -73,9 +73,9 @@ For DNSSEC troubleshooting purposes, we are interested in the following features
 
 For example, let's query the local systemd-resolved DNS stub resolver (running at **127.0.0.53**) for the *isc.org* type *A* record, and request DNSSEC data:
 
-```{note}
+:::{note}
 We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC capable upstream servers (e.g. Cloudflare's `1.1.1.1`, in case your upstream DNS server cannot properly handle it) in systemd-resolved, as shown below. After our experiments, we might want to restore the default settings, using: `resolvectl revert eth0`
-```
+:::
 
     $ resolvectl dnssec eth0 true
     $ resolvectl dns eth0 1.1.1.1
@@ -229,9 +229,9 @@ Given that above we used the `+cd` flag, this means that the validation was done
 
 The local stub resolver *systemd-resolved* can perform DNSSEC validation locally using its high-level `resolvectl` tool. The local cache and state about DNS servers should be reset in systemd-resolved, to get reliable results.
 
-```{note}
+:::{note}
 We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC capable upstream servers (e.g. Cloudflare's `1.1.1.1`, in case your upstream DNS server cannot properly handle it) in systemd-resolved, as shown below. After our experiments, we might want to restore the default settings, using: `resolvectl revert eth0`
-```
+:::
 
 Flush systemd-resolved caches & state and confirm DNSSEC is enabled:
 

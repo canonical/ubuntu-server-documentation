@@ -130,9 +130,9 @@ Replace `<your-service>` with the name of the service to reload after renewal (e
 
 If the services on your network require more than a few self-signed certificates it may be worth the additional effort to set up your own internal Certification Authority (CA). Using certificates signed by your own CA allows the various services using the certificates to easily trust other services using certificates issued from the same CA.
 
-```{note}
+:::{note}
 Clients that connect to your services must trust your CA. You will need to install your CA certificate in the trust store of every client, or distribute it to users. See {ref}`install-a-root-ca-certificate-in-the-trust-store` for how to add a CA certificate to Ubuntu's trust store.
-```
+:::
 
 ### Create the CA directory structure
 
@@ -179,9 +179,9 @@ sudo mv cacert.pem /etc/ssl/certs/
 
 You are now ready to start signing certificates. The first item needed is a Certificate Signing Request (CSR). If the certificate will be used by service daemons, such as Apache, Postfix, Dovecot, etc., a key without a passphrase is often appropriate. Not having a passphrase allows the services to start without manual intervention, usually the preferred way to start a daemon.
 
-```{warning}
+:::{warning}
 Running your secure service without a passphrase is convenient but insecure -- a compromise of the key means a compromise of the server as well.
-```
+:::
 
 To generate the keys for the Certificate Signing Request (CSR) run the following command from a terminal prompt:
 
@@ -231,9 +231,9 @@ There should now be a new file, `/etc/ssl/newcerts/01.pem`, containing the same 
 
 Subsequent certificates will be named `02.pem`, `03.pem`, etc.
 
-```{note}
+:::{note}
 Replace `mail.example.com.crt` with your own descriptive name.
-```
+:::
 
 ### Install the certificate
 

@@ -9,9 +9,9 @@ myst:
 
 One of the more challenging aspects of integrating with Active Directory is called Identity Mapping. Windows entities (users, groups, computers, etc) have identifiers called SID, which stands for *Security IDentifier*. This is not just a number: it has a structure and is composed of several values. Linux users and groups identifiers, on the other hand, are a single number..
 
-```{note}
+:::{note}
 For a full explanation of what an SID is, and how they are structured and allocated, please refer to [Understand Security Identifiers](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers).
-```
+:::
 
 For the purposes of integration, the more important fields of a SID are the *Domain Identifier* and the *Relative Identifier*:
 
@@ -31,6 +31,6 @@ The *winbind* package, part of the Samba suite of applications, is capable of pe
 
 See next:
 
-* [Identity mapping backends](identity-mapping-idmap-backends.md)
-* [The rid idmap backend](the-rid-idmap-backend.md)
-* [The autorid idmap backend](the-autorid-idmap-backend.md)
+* {ref}`Identity mapping backends <identity-mapping-idmap-backends>`
+* {ref}`The rid idmap backend <the-rid-idmap-backend>`
+* {ref}`The autorid idmap backend <the-autorid-idmap-backend>`

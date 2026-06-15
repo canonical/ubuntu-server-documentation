@@ -42,9 +42,9 @@ If you want to use an existing OpenLDAP server, that's also possible, but keep i
 
 First, the necessary **schema** needs to be loaded on an OpenLDAP server that has network connectivity to both the **primary** and **secondary** KDCs. The rest of this section assumes that you also have LDAP replication configured between at least two servers. For information on setting up OpenLDAP see {ref}`OpenLDAP Server <install-openldap>`.
 
-```{note}
+:::{note}
 `cn=admin,dc=example,dc=com` is a default admin user that is created during the installation of the `slapd` package (the OpenLDAP server). The domain component will change for your server, so adjust accordingly.
-```
+:::
 
 - Install the necessary packages (it's assumed that OpenLDAP is already installed):
    
@@ -261,9 +261,9 @@ With OpenLDAP configured it is time to configure the KDC. In this example we are
   sudo kdb5_ldap_util -D cn=admin,dc=example,dc=com stashsrvpw -f /etc/krb5kdc/service.keyfile uid=kadmin-service,dc=example,dc=com
   ```
 
-  ```{note}
+  :::{note}
   The `/etc/krb5kdc/service.keyfile` file now contains clear text versions of the passwords used by the KDC to contact the LDAP server!
-  ```
+  :::
 
 - Create a `/etc/krb5kdc/kadm5.acl` file for the admin server, if you haven't already:
 
@@ -319,9 +319,9 @@ Principal "testuser1@EXAMPLE.COM" created.
 
 Since the specified DN already exists, `kadmin.local` will just add the required Kerberos attributes to this existing entry. If it didn't exist, it would be created from scratch, with only the Kerberos attributes, just like what happened with the `ubuntu` example above, but in the specified location.
 
-```{note}
+:::{note}
 If the `ldap_kadmin_dn` DN (`uid=kadmin-service` in our example) does not have write access to the location specified by the `-x` parameter, you will get an `Insufficient access` error.
-```
+:::
 
 Both places are visible for `kinit`, since, when the realm was created with `kdb5_ldap_util`, the default value for the search scope and base were taken: `subtree`, and `dc=example,dc=com`.
 

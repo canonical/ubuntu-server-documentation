@@ -160,6 +160,7 @@ microcontroller
 Microvm
 microvm
 microvms
+minimalistic
 monospace
 MUAs
 Multicast
@@ -282,6 +283,7 @@ UEFI's
 ufw
 UIDs
 UIs
+unassign
 uncomment
 uncommented
 uncommenting

@@ -83,9 +83,9 @@ Similarly, by default, anonymous users are not allowed to upload files to FTP se
 anon_upload_enable=YES
 ```
 
-```{warning}
+:::{warning}
 Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on servers accessed directly from the Internet.
-```
+:::
 
 The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, `man 5 vsftpd.conf` for details of each parameter.
 
@@ -104,9 +104,9 @@ chroot_list_enable=YES
 chroot_list_file=/etc/vsftpd.chroot_list
 ```
 
-```{warning}
+:::{warning}
 If chroot_local_user is set to YES (setting all users to be limited to just their home directory), `/etc/vsftpd.chroot_list` becomes a list of users which are NOT limited to just their home directory
-```
+:::
 
 After uncommenting the above options, create a `/etc/vsftpd.chroot_list` containing a list of users one per line. Then restart `vsftpd`:
 

@@ -15,9 +15,9 @@ Since most of these options will deal with user authentication, we first need to
 
 Samba cannot authenticate existing Linux users using the its native protocols. This is just not compatible with the way Linux passwords are stored in the system (in `/etc/shadow`, for example). All local Linux users that the system may have are not automatically available as Samba users. To have a local Linux user available as a Samba user, they need to be created in the Samba credentials database. That means we will have two user databases: the Linux one, and the Samba one.
 
-```{seealso}
+:::{seealso}
 How to create and manage Linux users is covered in {ref}`Users and groups management <user-management>`.
-```
+:::
 
 To add an existing Linux user to the Samba user database, the command `smbpasswd` is used. For example, here we are adding an existing Linux user called `melissa` to the Samba user database:
 
@@ -27,9 +27,9 @@ sudo smbpasswd -a melissa
 
 The command will prompt for a password twice, for confirmation, and create the Samba user.
 
-```{note}
+:::{note}
 As this is a separate user database, the password selected for the Samba user does not need to be the same as the Linux password for that user. In fact, most Samba servers setup this way will have the Linux users setup without a valid password: these users only exist so that the corresponding Samba users can be created.
-```
+:::
 
 If this user does not exist in Linux, the `smbpasswd` command will fail. Samba users must first exist as Linux users.
 
@@ -66,9 +66,9 @@ For example, if you wanted to give the user *Melissa* administrative permissions
 admin users = melissa
 ```
 
-```{note}
+:::{note}
 Remember that the users listed in `smb.conf` for these access controls need to exist both as Linux users, and Samba users.
-```
+:::
 
 After editing `/etc/samba/smb.conf`, reload Samba for the changes to take effect by running the following command:
 
@@ -92,9 +92,9 @@ Then remount the partition:
 sudo mount -v -o remount /srv
 ```
 
-```{note}
+:::{note}
 This example assumes `/srv` is on a separate partition. If `/srv`, or wherever you have configured your share path, is part of the `/` partition then a reboot may be required.
-```
+:::
 
 To match the Samba configuration above, the "`sysadmin`" group will be given read, write, and execute permissions to `/srv/samba/share`, the "`qa`" group will be given read and execute permissions, and the files will be owned by the username "`melissa`". Enter the following in a terminal:
 
@@ -104,9 +104,9 @@ sudo chgrp -R sysadmin /srv/samba/share/
 sudo setfacl -R -m g:qa:rx /srv/samba/share/
 ```
 
-```{note}
+:::{note}
 The `setfacl` command above gives *execute* permissions to all files in the `/srv/samba/share` directory, which you may or may not want.
-```
+:::
 
 Now from a Windows client you should notice the new file permissions are implemented. See the {manpage}`acl(5)` and {manpage}`setfacl(1)` manual pages for more information on POSIX ACLs.
 

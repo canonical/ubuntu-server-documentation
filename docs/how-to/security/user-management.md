@@ -89,17 +89,17 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
 ...
 ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
 ```
-```{tip}
+:::{tip}
 The structure of the `/etc/passwd` file is explained in the {manpage}`passwd(5)` manual page.
-```
+:::
 There are basically three types of local users:
  * system pre-installed users: These are system users essential to a working Linux system, like `root`, `man`, `lp`, and others. Their {term}`UID`s are in the range between 0 and 99.
  * system users: These users are created dynamically, as services are installed. The UID range here is between 100 and 999.
  * Regular users: Finally, the remaining range is usable for "real" users, generally representing persons using the system. This UID range starts at 1000 and, by convention, ends at 59999.
 
-```{tip}
+:::{tip}
 For more details about these UID ranges, including groups and other configuration options for adding users, check the {manpage}`adduser.conf.5` manual page.
-```
+:::
 
 To list all local usernames, we can list the contents of `/etc/passwd` with some string manipulation. For example:
 ```console
@@ -122,9 +122,9 @@ The regular expression `:[0-9]{4,}` means all digits, repeated 4 times or more. 
 nobody:65534
 ubuntu:1000
 ```
-```{tip}
+:::{tip}
 By convention, the `nobody` users has an UID of 65534. That originated back when the user range was limited to 16 bits (so, 0-65535), and is kept for compatibility reasons.
-```
+:::
 
 #### A note about remote users
 
@@ -234,9 +234,9 @@ You can remove the world readable-permissions using the following command:
 sudo chmod 0750 /home/username
 ```
 
-```{note}
+:::{note}
 Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
-```
+:::
 
 A more efficient approach would be to modify the `adduser` global default permissions when creating user home folders. To do this, edit the `/etc/adduser.conf` file and modify the `DIR_MODE` variable to something appropriate, so that all new home directories will receive the correct permissions.
 
@@ -276,9 +276,9 @@ To adjust the minimum length to 8 characters, change the appropriate variable to
 password        [success=1 default=ignore]      pam_unix.so obscure sha512 minlen=8
 ```
 
-```{note}
+:::{note}
 Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
-```
+:::
 
 ### Password expiration
 

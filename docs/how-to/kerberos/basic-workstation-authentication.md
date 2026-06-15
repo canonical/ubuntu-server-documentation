@@ -42,9 +42,9 @@ kdc01.example.com
 
 Remember that `kdc02` is a read-only copy of the primary KDC, so it doesn't run an admin server.
 
-```{note}
+:::{note}
 If you have added the appropriate SRV records to {term}`DNS`, none of those prompts will need answering.
-```
+:::
 
 ### Configure Kerberos
 

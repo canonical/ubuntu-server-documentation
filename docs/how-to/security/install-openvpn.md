@@ -43,9 +43,9 @@ To set up your own CA, and generate certificates and keys for an OpenVPN server 
 sudo make-cadir /etc/openvpn/easy-rsa
 ```
 
-```{note}
+:::{note}
 You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it to your needs.
-```
+:::
 
 As a `root` user, change to the newly created directory `/etc/openvpn/easy-rsa` and run:
 
@@ -149,10 +149,10 @@ Now you can start the server.
 sudo systemctl start openvpn@myserver
 ```
 
-```{note}
+:::{note}
 Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` you just defined.
 OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
-```
+:::
 
 You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
 
@@ -400,9 +400,9 @@ PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_seq=1 ttl=64 time=0.335 ms
 ```
 
-```{note}
+:::{note}
 The OpenVPN server always uses the first usable IP address in the client network and only that IP is pingable. E.g., if you configured a `/24` for the client network mask, the `.1` address will be used. The P-t-P address you see in the `ip addr` output above does not usually answer ping requests.
-```
+:::
 
 Check out your routes:
 
@@ -435,9 +435,9 @@ The above is a very simple working VPN. The client can access services on the VP
 
 The example config files that we have been using in this guide are full of these advanced options in the form of a comment and a disabled configuration line as an example.
 
-```{note}
+:::{note}
 Read the OpenVPN [hardening security guide](https://openvpn.net/community-docs/security.html) for further security advice.
-```
+:::
 
 ### Advanced bridged VPN configuration on server
 
@@ -547,9 +547,9 @@ You can also run `openvpn` with the `--providers` argument.
 openvpn --providers legacy default ...
 ```
 
-```{note}
+:::{note}
 On Ubuntu 22.04 LTS and earlier, legacy algorithms are included in OpenVPN by default.
-```
+:::
 
 #### TPM 2.0
 
@@ -565,9 +565,9 @@ Alternatively, run with:
 openvpn --providers legacy default tpm2 ...
 ```
 
-```{note}
+:::{note}
 The provider order matters here as tpm2 currently requires the legacy provider to load first.
-```
+:::
 
 ## Further reading
 

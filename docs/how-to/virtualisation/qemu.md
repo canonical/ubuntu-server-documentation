@@ -25,9 +25,9 @@ The first step to using QEMU/KVM on Ubuntu is to check if your system supports K
 kvm-ok
 ```
 
-```{note}
+:::{note}
 The command `kvm-ok` is part of the `cpu-checker` package. Install it with `sudo apt install cpu-checker` if it is not already present.
-```
+:::
 
 You should get an output saying `KVM acceleration can be used`.
 
@@ -45,9 +45,9 @@ The quickest way to get started with QEMU is by booting a VM directly from a liv
 qemu-system-x86_64 -m 4G -enable-kvm -cdrom http://releases.ubuntu.com/noble/ubuntu-24.04.3-live-server-amd64.iso
 ```
 
-```{caution}
+:::{caution}
 This example is just for illustration purposes - it is not generally recommended without verifying the checksums. {ref}`Multipass <create-vms-with-multipass>` and {ref}`UVTool <cloud-image-vms-with-uvtool>` are much better ways to get actual guests easily.
-```
+:::
 
 If you are testing this example on a headless system, specify an alternative display method such as {term}`VNC`.
 
@@ -146,9 +146,9 @@ Note that both machine types for Jammy are supported in subsequent versions of U
 
 Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (e.g. on an x86 host) or accelerated with KVM if you have an ARM64 host. This page describes how to do both.
 
-```{note}
+:::{note}
 This requires Ubuntu 20.04 or greater
-```
+:::
 
 ### Install QEMU to run ARM64 virtual machines
 

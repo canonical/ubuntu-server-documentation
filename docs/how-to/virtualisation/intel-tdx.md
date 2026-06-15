@@ -354,9 +354,9 @@ Confirm the following MSR checks.
 
 You may have an old and unsupported Intel TDX Module. Try [updating to the latest Intel TDX Module](https://cc-enabling.trustedservices.intel.com/intel-tdx-enabling-guide/04/hardware_setup/#deploy-specific-intel-tdx-module-version).
 
-```{note}
+:::{note}
 If you chose to "Update Intel TDX Module via Binary Deployment", make sure you're using the correct Intel TDX Module version for your hardware. See the {ref}`Supported hardware <tdx-supported-hardware>` table.
-```
+:::
 
 **I rebooted my TD, but it shuts down instead**
 

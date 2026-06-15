@@ -31,9 +31,9 @@ sudo apt install krb5-kdc krb5-admin-server
 
 You will be asked at the end of the install to supply the {term}`hostname` for the Kerberos and Admin servers for the realm, which may or may not be the same server. Since we are going to create the realm, and thus these servers, type in the full hostname of this server.
 
-```{note}
+:::{note}
 By default the realm name will be domain name of the Key Distribution Center (KDC) server.
-```
+:::
 
 Next, create the new realm with the `kdb5_newrealm` utility:
 
@@ -51,9 +51,9 @@ The questions asked during installation are used to configure the `/etc/krb5.con
 sudo dpkg-reconfigure krb5-kdc
 ```
 
-```{note}
+:::{note}
 The manual page for `krb5.conf` is in the `krb5-doc` package.
-```
+:::
 
 Let's create our first principal. Since there is no principal create yet, we need to use `kadmin.local`, which uses a local UNIX socket to talk to the KDC, and requires root privileges:
 

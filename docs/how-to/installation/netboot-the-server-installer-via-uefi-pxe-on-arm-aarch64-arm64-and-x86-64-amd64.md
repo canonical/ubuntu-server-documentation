@@ -71,9 +71,9 @@ The GRUB binary redirects the download path to the target files via `grub.cfg`. 
 $ sudo wget https://ports.ubuntu.com/ubuntu-ports/dists/focal/main/uefi/grub2-arm64/current/grubnetaa64.efi.signed -O /srv/tftp/grubnetaa64.efi.signed
 ```
 
-```{note}
+:::{note}
 Change **the archive distribution's name** from `Focal` to your target distribution name if needed.
-```
+:::
 
 ### Download and serve more files
 

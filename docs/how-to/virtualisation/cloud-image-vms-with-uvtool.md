@@ -29,10 +29,10 @@ sudo apt -y install uvtool uvtool-libvirt
 
 This will install `uvtool`'s main commands, `uvt-simplestreams-libvirt` and `uvt-kvm`.
 
-```{note}
+:::{note}
 You might need to log out and log in again to use libvirt without root privilege.
 If not, you might encounter a Permission denied error in the later steps.
-```
+:::
 
 ## Get the Ubuntu cloud image with `uvt-simplestreams-libvirt`
 
@@ -148,9 +148,9 @@ Once you are finished with your VM, you can destroy it with:
 uvt-kvm destroy secondtest
 ```
 
-```{note}
+:::{note}
 Unlike libvirt's `destroy` or `undefine` actions, this will (by default) also remove the associated virtual storage files.
-```
+:::
 
 ## More `uvt-kvm` options
 

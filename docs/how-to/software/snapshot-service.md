@@ -180,14 +180,14 @@ $ docker --version
 Docker version 26.1.3, build 26.1.3-0ubuntu1~24.04.1
 ```
 
-```{note}
+:::{note}
 Note that, at the time of writing, the version of docker.io in the
 `noble-security` pocket is `27.5.1-0ubuntu3~24.04.2`, i.e., the version used in
 the example above may be affected by known vulnerabilities. When using the
 snapshot service, do make sure to check the latest version available in your
 Ubuntu release's `-security` pocket to make sure you are not installing a vulnerable
 package.
-```
+:::
 
 ### Configuring the snapshot service for specific repositories
 
@@ -265,10 +265,10 @@ As an alternative to configuring a specific snapshot for each individual
 repository, as described in the previous section, you can configure a snapshot
 globally for all repositories that have snapshots enabled.
 
-```{warning}
+:::{warning}
 If you are following these examples until here, make sure to revert the changes
 to the sources configuration file made in the previous section.
-```
+:::
 
 Let's configure `apt` to default to a specific snapshot by setting the
 `APT::Snapshot` option:

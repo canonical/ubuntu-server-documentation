@@ -29,9 +29,9 @@ You can connect to the libvirt service running on another host by entering the f
 virt-manager -c qemu+ssh://virtnode1.mydomain.com/system
 ```
 
-```{note}
+:::{note}
 The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <openssh-server-ssh-keys>`.
-```
+:::
 
 ## Use virt-manager to manage guests
 
@@ -159,9 +159,9 @@ You can also use the `-d` or `--debug` option to help troubleshoot problems with
 
 Replace *`focal`* with the appropriate virtual machine names for your case.
 
-```{caution}
+:::{caution}
 Please be aware that this is a full clone, therefore any secrets, keys, and for example, `/etc/machine-id`, will be shared. This will cause issues with security and anything that needs to identify the machine like {term}`DHCP`. You most likely want to edit those afterward and de-duplicate them as needed.
-```
+:::
 
 ## Resources
 

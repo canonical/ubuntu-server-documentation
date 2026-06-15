@@ -128,10 +128,10 @@ up-to-date with any recent changes made to the remote repository:
 git pull
 ```
 
-```{note}
+:::{note}
 This won't have any effect if you have only just cloned the repository
 (since you're already up-to-date).
-```
+:::
 
 Now, create a branch and switch to it:
 
@@ -167,11 +167,11 @@ export SPHINX_HOST=0.0.0.0
 
 The `make run` command should then work as expected.
 
-```{note}
+:::{note}
 If you have problems getting the documentation to run on your machine,
 reach out to the team or leave a comment on your issue to get additional
 support.
-```
+:::
 
 ### Other build commands
 
@@ -279,13 +279,13 @@ Make sure all your proposed changes are committed:
 - Select the ones you want to add to each commit using `git add <filename>`
 - Commit your selected changes using `git commit`
 
-```{note}
+:::{note}
 Try to group your changes logically. For example, if you have one set of
 changes that modifies spelling in 10 files, and another set of changes
 that modifies formatting in 10 different files, you can group them into
 two commits (one for spelling, and one for formatting). You don't need a
 separate commit for every file.
-```
+:::
 
 ### Push and create a pull request
 
@@ -319,10 +319,10 @@ have proposed, and they will either "Approve" the changes, or leave some
 feedback and suggested changes (with reasons). If you agree with the feedback,
 you can make the suggested changes, and the reviewer will approve the PR.
 
-```{note}
+:::{note}
 The team has adopted the [Conventional Comments](https://conventionalcomments.org/)
 approach with the intention of making feedback easier to parse.
-```
+:::
 
 If you disagree with any parts of the review, it's OK to discuss this with the
 reviewer -- feedback is made in good faith, and is intended to help strengthen

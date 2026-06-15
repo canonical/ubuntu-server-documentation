@@ -10,9 +10,9 @@ myst:
 The nested virtualization capability allows a guest virtual machine (also referred to as `level 1` or `L1`) that runs on a physical host (`level 0` or `L0`) acting as a hypervisor to create its own guest virtual machines (`L2`).
 
 
-```{important}
+:::{important}
 Nested virtualization is enabled by default on Ubuntu. If you are using Ubuntu, it's unlikely that you will need to manually enable the feature. If you check (using the steps below) and discover that nested virtualization is enabled, then you will not need to do anything further.
-```
+:::
 
 There may be use cases where you need to enable nested virtualization so that you can deploy VMs inside other VMs. The sections below explain how to check if nested virtualization is enabled/available and how to enable it if that is not the case. Bear in mind that currently nested virtualization is only supported in Ubuntu on `x86` machine architecture.
 
@@ -78,9 +78,9 @@ sudo modprobe -r <module>
 sudo modprobe <module>
 ```
 
-```{note}
+:::{note}
 Make sure to stop all running VMs that might use the kernel module and prevent its reload.
-```
+:::
 
 Example for Intel hosts:
 

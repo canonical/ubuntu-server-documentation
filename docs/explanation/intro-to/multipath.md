@@ -68,9 +68,9 @@ When the `user_friendly_names` configuration option is set to 'yes', the name of
 
 You can also set the name of a multipath device to a name of your choosing by using the `alias` option in the `multipaths` section of the multipath configuration file.
 
-```{seealso}
+:::{seealso}
 For information on the multipath configuration defaults, including the `user_friendly_names` and `alias` configuration options, see {ref}`DM-Multipath configuration <configuring-multipath>`.
-```
+:::
 
 ## Consistent multipath device names in a cluster
 
@@ -117,9 +117,9 @@ pvcreate /dev/mapper/mpatha
 
 You can use the resulting LVM physical device when you create an LVM volume group just as you would use any other LVM physical device.
 
-```{note}
+:::{note}
 If you try to create an LVM physical volume on a whole device on which you have configured partitions, the `pvcreate` command will fail.
-```
+:::
 
 Once you create an LVM logical volume that has active/passive multipath arrays as the underlying physical devices, you must add filters in the `lvm.conf` file to exclude the disks that underlie the multipath devices. This is because if the array automatically changes the active path to the passive path when it receives I/O, multipath will failover and {term}`fallbacks` whenever LVM scans the passive path if these devices are not filtered.
 
@@ -135,6 +135,6 @@ After updating `/etc/lvm.conf`, it's necessary to update the `initrd` so that th
 update-initramfs -u -k all
 ```
 
-```{note}
+:::{note}
 Every time either `/etc/lvm.conf` or `/etc/multipath.conf` is updated, the `initrd` should be rebuilt to reflect these changes. This is imperative when {term}`denylists <denylist>` and filters are necessary to maintain a stable storage configuration.
-```
+:::

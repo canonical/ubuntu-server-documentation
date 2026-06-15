@@ -8,9 +8,9 @@ myst:
 # Provisioning a Samba Active Directory Domain Controller
 A Samba Active Directory Domain Controller (also known as just Samba AD/DC) is a server running Samba services that can provide authentication to domain users and computers, linux or Windows. It should be dedicated to authentication and authorization services, and not provide file or print services: that should be the role of member servers joined to the domain.
 
-```{seealso}
+:::{seealso}
 For more information on why the Samba AD/DC server should not be used to provide file and print services, please refer to this [list of reasons and caveats in the Samba Wiki](https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_Domain_Controller#Using_the_Domain_Controller_as_a_File_Server_(Optional)).
-```
+:::
 
 This guide will show how to bootstrap a Samba AD/DC server and verify it's functioning properly.
 
@@ -31,9 +31,9 @@ And enable the Samba AD/DC service, but without starting it yet:
     sudo systemctl unmask samba-ad-dc
     sudo systemctl enable samba-ad-dc
 
-```{note}
+:::{note}
 A Samba AD/DC deployment represents a collection of services connected to each other, and needs its own specific systemd service unit.
-```
+:::
 
 The Samba AD/DC provisioning tool will want to create a new Samba configuration file, dedicated to the AD/DC role, but it will refrain from replacing an existing one. We have to therefore move it away before continuing:
 
@@ -58,9 +58,9 @@ To perform the provisioning, run this command:
 
 If you omit the `--adminpass` option, a random password will be chosen and be included in the provisioning output. Be sure to save it!
 
-```{warning}
+:::{warning}
 Providing passwords in the command line is generally unsafe. Other users on the system who can see the process listing can spot the password, and it will also be saved in the shell history, unless the command starts with a blank space.
-```
+:::
 
 The command will take a few seconds to run, and will output a lot of information. In the end, it should be like this (long lines truncated for better readability):
 
@@ -105,9 +105,9 @@ Next, we need to be sure this system will be using the Samba DNS server for its 
 
     sudo unlink /etc/resolv.conf
 
-```{note}
+:::{note}
 This will make `sudo` issue complaints about DNS from this point on, until the Samba DNS service is up and running.
-```
+:::
 
 And now recreate the file `/etc/resolv.conf` with this content:
 
@@ -142,9 +142,9 @@ The command will ask for a password. The password is the one supplied to the `sa
 
     Password for Administrator@EXAMPLE.INTERNAL:
 
-```{seealso}
+:::{seealso}
 If you are not familiar with Kerberos, please see our {ref}`Introduction to Kerberos<introduction-to-kerberos>`.
-```
+:::
 
 To verify the ticket was obtained, use `klist`, which should have output similar to the following:
 
@@ -229,9 +229,9 @@ When run **_locally as root_**, no further authentication is required:
 
 The command above will prompt for the desired password for the `noble` user, and if it satisfies the password complexity criteria, the user will be created. As with the *Administrator* Samba user, `kinit noble` can be used to test that the `noble` user can be authenticated.
 
-```{note}
+:::{note}
 `samba-tool` creates **Samba** users, not local Linux users! These Samba users only exist for domain joined computers and other SMB connections/shares.
-```
+:::
 
 The default password policy is quite severe, requiring complex passwords. To display the current policy, run:
 

@@ -11,9 +11,9 @@ This guide explains how to configure an Ubuntu machine as a [Lightweight Directo
 
 The approach used here is `nslcd` with `libnss-ldapd` and `libpam-ldapd`. The Name Service Switch ({term}`NSS`) and PAM modules communicate with the `nslcd` daemon, which maintains a single shared LDAP connection rather than each process opening its own. This keeps the setup lightweight and easy to debug.
 
-```{note}
+:::{note}
 Ubuntu also supports [SSSD](https://sssd.io/) as an alternative LDAP client. SSSD provides credential caching and offline authentication. If you need those features, see {ref}`sssd-with-ldap` instead.
-```
+:::
 
 ## Prerequisites
 
@@ -164,14 +164,14 @@ Apply the configuration to add these modules to `/etc/pam.d/common-*`:
 sudo pam-auth-update --enable ldap-access --enable ldap --enable mkhomedir
 ```
 
-```{note}
+:::{note}
 Local users not in any listed LDAP group can be permitted to log in by adding them to a local `login` group.
 The `login` group is allowed to log in through `/etc/security/access.conf`, see above.
 Create the group and add users as needed:
 
     sudo groupadd -r login
     sudo usermod -aG login <username>
-```
+:::
 
 ## Grant sudo access to an LDAP group
 

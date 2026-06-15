@@ -69,9 +69,9 @@ ssl_key = </etc/dovecot/private/dovecot.key
 
 You can obtain an SSL certificate from Let's Encrypt, from a commercial Certificate Authority (CA), or create a self-signed one. Once you have the certificate, you will have a key file and a certificate file to reference in the configuration above.
 
-```{seealso}
+:::{seealso}
 See {ref}`obtain-tls-certificates` for how to get a trusted certificate or set up your own CA.
-```
+:::
 
 ## Configure a firewall for an email server
 

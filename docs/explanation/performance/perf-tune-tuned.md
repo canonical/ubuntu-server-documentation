@@ -193,9 +193,9 @@ Another example of merging profiles is the combining of the `powersave` profile 
 
 This would optimise the system for a virtual guest, and then apply power saving parameters on top.
 
-```{warning}
+:::{warning}
 Just because `tuned-adm` accepted to merge two profiles doesn't mean it makes sense. There is no checking done on the resulting merged parameters, and the second profile could completely revert what the first profile adjusted.
-```
+:::
 
 ## An example profile: hpc-compute
 

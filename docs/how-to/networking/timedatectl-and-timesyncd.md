@@ -15,9 +15,9 @@ sudo apt-mark auto chrony && apt install systemd-timesyncd
 
 In this guide, we will show you how to configure these services.
 
-```{note}
+:::{note}
 If `chrony` is installed, `timedatectl` steps back to let `chrony` handle timekeeping. This ensures that no two time-syncing services will be in conflict. 
-```
+:::
 
 ## Check status of `timedatectl`
 

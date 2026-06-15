@@ -31,9 +31,9 @@ Our new **arm64+largemem** ISO includes a kernel with 64k page size. A larger pa
 * {term}`High performance computing <HPC>`
 * etc.
 
-```{note}
+:::{note}
 It is possible to switch between these kernel options after installation by installing the other kernel alternative, rebooting, and selecting the new kernel from the GRUB menu.
-```
+:::
 
 ## Switching kernels post-installation
 

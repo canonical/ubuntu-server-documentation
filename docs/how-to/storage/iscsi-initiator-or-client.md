@@ -20,9 +20,9 @@ myst:
 
 Ubuntu Server can be configured as both: **iSCSI initiator** and **iSCSI target**. This guide provides commands and configuration options to setup an **iSCSI initiator** (or Client).
 
-```{note}
+:::{note}
 It is assumed that **you already have an iSCSI target on your local network** and have the appropriate rights to connect to it. The instructions for setting up a target vary greatly between hardware providers, so consult your vendor documentation to configure your specific iSCSI target.
-```
+:::
 
 ## Network Interfaces Configuration
 
@@ -382,9 +382,9 @@ Now it is much easier to understand each recognized SCSI device and common paths
   - `/dev/sde`
   - `/dev/sdc`
 
-```{warning}
+:::{warning}
 **Do not use this in production** without checking appropriate multipath configuration options in the **Device Mapper Multipathing** section. The *default multipath configuration* is sub-optimal for regular usage.
-```
+:::
 
 Finally, to access the LUN (or remote iSCSI disk) you will:
 
