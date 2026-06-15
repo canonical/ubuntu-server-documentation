@@ -219,7 +219,7 @@ MinProtocol = TLSv1.3
 
 Since we are already forcing TLSv1.3, there is no need to tweak the `CipherString` list, since that applies only to TLSv1.2 and older.
 
-The OpenSSL `s_server` command is very handy to test this (see [the Troubleshooting section](troubleshooting-tls-ssl.md) for details on how to use it):
+The OpenSSL `s_server` command is very handy to test this (see {ref}`the Troubleshooting section <troubleshooting-tls-ssl>` for details on how to use it):
 
 ```bash
 $ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www

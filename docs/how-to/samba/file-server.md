@@ -9,7 +9,7 @@ myst:
 
 One of the most common ways to network Ubuntu and Windows computers is to configure Samba as a *file server*. It can be set up to share files with Windows clients, as we'll see in this section. 
 
-The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see [Share Access Control](share-access-controls.md).
+The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see {ref}`Share Access Control <share-access-controls>`.
 
 :::{warning}
 If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
@@ -94,7 +94,7 @@ sudo systemctl restart smbd.service nmbd.service
 ```
 
 :::{warning}
-Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see [Share Access Control](share-access-controls.md).
+Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see {ref}`Share Access Control <share-access-controls>`.
 :::
 
 From a Windows client you should now be able to browse to the Ubuntu file server and see the shared directory. If your client doesn't show your share automatically, try to access your server by its IP address, e.g. `\\192.168.1.1`, in a Windows Explorer window. To check that everything is working try creating a directory from Windows.

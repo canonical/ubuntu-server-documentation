@@ -20,7 +20,7 @@ There are two ways to use this replication:
 The delta replication sends less data over the network, but is more complex to set up. We will show both in this guide.
 
 :::{important}
-You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the [LDAP with TLS guide](ldap-and-tls.md) for details of how to set this up.
+You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the {ref}`LDAP with TLS guide <ldap-and-tls>` for details of how to set this up.
 :::
 
 ## Provider configuration - replication user
@@ -147,7 +147,7 @@ The Provider is now configured.
 
 ## Consumer configuration - standard replication
 
-Install the software by going through [the installation steps](install-openldap.md). Make sure schemas and the database suffix are the same, and [enable TLS](ldap-and-tls.md).
+Install the software by going through {ref}`the installation steps <install-openldap>`. Make sure schemas and the database suffix are the same, and {ref}`enable TLS <ldap-and-tls>`.
 
 Create an LDIF file with the following contents and name it `consumer_simple_sync.ldif`:
 
@@ -186,7 +186,7 @@ Ensure the following attributes have the correct values:
 - **`rid`**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
 :::{note}
-A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See {ref}`LDAP with TLS <ldap-and-tls>` for details on how to set up OpenLDAP with trusted SSL certificates.
 :::
 
 Add the new configuration:
@@ -295,7 +295,7 @@ The Provider is now configured.
 
 ## Consumer configuration
 
-Install the software by going through [the installation steps](install-openldap.md). Make sure schemas and the database suffix are the same, and [enable TLS](ldap-and-tls.md).
+Install the software by going through {ref}`the installation steps <install-openldap>`. Make sure schemas and the database suffix are the same, and {ref}`enable TLS <ldap-and-tls>`.
 
 Create an LDIF file with the following contents and name it `consumer_sync.ldif`:
 
@@ -337,7 +337,7 @@ Ensure the following attributes have the correct values:
 - **rid**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
 :::{note}
-Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
+Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See {ref}`LDAP with TLS <ldap-and-tls>` for details on how to set up OpenLDAP with trusted SSL certificates.
 :::
 
 Add the new configuration:

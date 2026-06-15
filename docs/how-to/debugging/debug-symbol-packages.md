@@ -13,7 +13,7 @@ This document describes how to set up the debugging symbol packages (`*-dbg.deb`
 
 ## Debuginfod
 
-If you are on Ubuntu Jammy (22.04) or later, you don't need to worry about installing debug symbol packages since the Ubuntu project maintains a [Debuginfod](about-debuginfod.md) server. [GNU Debugger (GDB)](https://www.sourceware.org/gdb/) and other debuginfo-consumer applications support Debuginfod (mostly) out of the box. For more information about it, please refer [to our Debuginfod guide](about-debuginfod.md).
+If you are on Ubuntu Jammy (22.04) or later, you don't need to worry about installing debug symbol packages since the Ubuntu project maintains a Debuginfod server. [GNU Debugger (GDB)](https://www.sourceware.org/gdb/) and other debuginfo-consumer applications support Debuginfod (mostly) out of the box. For more information about it, please refer {ref}`to our Debuginfod guide <about-debuginfod>`.
 
 You will only need to follow the methods outlined in this section if you are on Ubuntu Focal (20.04) or earlier.
 

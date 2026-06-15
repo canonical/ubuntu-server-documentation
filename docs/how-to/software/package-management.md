@@ -66,6 +66,7 @@ syntax of the two tools is identical.
 :::
 
 
+(upgrading-packages)=
 ### Upgrading packages 
 
 Installed packages on your computer may periodically have upgrades available from the package repositories (e.g., security updates). To upgrade your system, first update your package index and then perform the upgrade -- as follows:

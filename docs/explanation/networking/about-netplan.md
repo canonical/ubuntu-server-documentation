@@ -15,4 +15,4 @@ It is also flexible enough to be used in virtual environments and containerized 
 
 Netplan integrates with both of the primary Linux network management daemons: NetworkManager and systemd-networkd. For more general information about Netplan and how it works, see the [introduction to Netplan](https://netplan.readthedocs.io/en/stable/structure-id/) in the official Netplan documentation. 
 
-Server admins may want to get started by checking out our guide to [configuring networks](configuring-networks.md).  For more specific networking tasks with Netplan, we recommend checking out the [list of how-to guides](https://netplan.readthedocs.io/en/stable/howto/) in their documentation.
+Server admins may want to get started by checking out our guide to {ref}`configuring networks <configuring-networks>`.  For more specific networking tasks with Netplan, we recommend checking out the [list of how-to guides](https://netplan.readthedocs.io/en/stable/howto/) in their documentation.
