@@ -149,7 +149,7 @@ With a Primary Domain Controller (PDC) on the network it is best to have a Backu
 
 When configuring Samba as a BDC you need a way to sync account information with the PDC. There are multiple ways of accomplishing this; secure copy protocol (SCP), `rsync`, or by using LDAP as the `passdb` backend.
 
-Using LDAP is the most robust way to sync account information, because both domain controllers can use the same information in real time. However, setting up an LDAP server may be overly complicated for a small number of user and computer accounts. See [Samba - OpenLDAP Backend](openldap-backend-legacy.md) for details.
+Using LDAP is the most robust way to sync account information, because both domain controllers can use the same information in real time. However, setting up an LDAP server may be overly complicated for a small number of user and computer accounts. See {ref}`Samba - OpenLDAP Backend <openldap-backend-legacy>` for details.
 
 First, install `samba` and `libpam-winbind`. From a terminal enter:
 

@@ -459,4 +459,4 @@ smart-card-authentication-with-ssh
 
 ## SSH authentication
 
-See [this page on SSH authentication with smart cards](smart-card-authentication-with-ssh.md).
+See {ref}`this page on SSH authentication with smart cards <smart-card-authentication-with-ssh>`.

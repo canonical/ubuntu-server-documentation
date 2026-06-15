@@ -34,5 +34,5 @@ The Active Directory domain users and groups need to fit somewhere, and the larg
 
 See next:
 
-* [The rid idmap backend](the-rid-idmap-backend.md)
-* [The autorid idmap backend](the-autorid-idmap-backend.md)
+* {ref}`The rid idmap backend <the-rid-idmap-backend>`
+* {ref}`The autorid idmap backend <the-autorid-idmap-backend>`
