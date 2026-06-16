@@ -599,11 +599,16 @@ Starting in Ubuntu 26.04 (package version `docker.io-app_29.1.3-0ubuntu4`), Dock
 
 ### Prerequisites
 
-You will need access to the `newuidmap` and `newgidmap` commands, which can be installed via the `uidmap` package:
+You will need to install the following packages:
 
 ```bash
-$ sudo apt-get install uidmap
+$ sudo apt install rootlesskit uidmap slirp4netns fuse-overlayfs
 ```
+
+- `rootlesskit`: A tool for running rootless containers.
+- `uidmap`: Provides `newuidmap` and `newgidmap` commands for managing UID and GID mappings.
+- `slirp4netns`: Required for user-mode networking in rootless containers.
+- `fuse-overlayfs`: User-space overlay filesystem for rootless containers.
 
 You will also need to ensure that the user in question has at least 65,536 subordinate UIDs and GIDs. To check this, consult the `/etc/subuid` and `/etc/subgid` files:
 
@@ -630,16 +635,15 @@ If you are already running the rootful Docker daemon, disable it before proceedi
 $ sudo systemctl disable --now docker.service docker.socket
 $ sudo rm /var/run/docker.sock
 ```
-
 ::::
 
-Check `/usr/bin` for the presence of `dockerd-rootless-setuptool.sh`. If it is not present, install it with
+Ubuntu installs the scripts related to rootless Docker in `/usr/share/docker.io/contrib`. This directory should be added to your `$PATH`:
 
 ```bash
-$ sudo apt-get install docker-ce-rootless-extras
+$ export PATH=/usr/share/docker.io/contrib:$PATH
 ```
 
-Then run it **as a non-root user** to install the rootless daemon: 
+Then run `dockerd-rootless-setuptool.sh` **as a non-root user** to install the rootless daemon:
 
 ```bash
 $ dockerd-rootless-setuptool.sh install
@@ -647,13 +651,23 @@ $ dockerd-rootless-setuptool.sh install
 
 This command will also show help if any of the prerequisites are not met.
 
-
-After completing the installation, you can confirm Docker is running in rootless mode with `docker info`. You should see the following line:
+After completing, the installation, you can confirm Docker is running in rootless mode with `docker info` and checking the context:
+```bash
+$ docker info | grep Context
 ```
-  Context: Rootless
+You should see the following line:
 ```
-with the version number.
+Context: rootless
+```
 
+### Persisting the Rootless Daemon
+
+If you want to persist the rootless daemon across reboots and user logouts, enable the `docker` systemd user service and enable linger for your user:
+
+```bash
+$ systemctl --user enable docker
+$ loginctl enable-linger $(whoami)
+```
 
 ### Running Rootless Docker inside Rootful Docker
 
