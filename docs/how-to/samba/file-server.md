@@ -21,7 +21,11 @@ If you *are* using Samba with authd, you should follow the instructions in the [
 
 The first step is to install the `samba` package. From a terminal prompt enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install samba
 ```
 
@@ -35,15 +39,15 @@ The main Samba configuration file is located in `/etc/samba/smb.conf`. The defau
 Not all available options are included in the default configuration file. See the [`smb.conf` man page](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html) or the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/) for more details.
 :::
 
-First, edit the `workgroup` parameter in the *\[global\]* section of `/etc/samba/smb.conf` and change it to better match your environment:
+First, edit the `workgroup` parameter in the *`[global]`* section of `/etc/samba/smb.conf` and change it to better match your environment:
 
-```text
+```ini
 workgroup = EXAMPLE
 ```
 
 Create a new section at the bottom of the file, or uncomment one of the examples, for the directory you want to share:
 
-```text
+```ini
 [share]
     comment = Ubuntu File Server Share
     path = /srv/samba/share
@@ -78,8 +82,18 @@ Determines the permissions that new files will have when created.
 
 Now that Samba is configured, the directory needs to be created and the permissions changed. From a terminal, run the following commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -p /srv/samba/share
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown nobody:nogroup /srv/samba/share/
 ```
 
@@ -89,7 +103,11 @@ The `-p` switch tells `mkdir` to create the entire directory tree if it doesn't 
 
 Finally, restart the Samba services to enable the new configuration by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart smbd.service nmbd.service
 ```
 
@@ -105,10 +123,10 @@ The file share named `[share]` and the path `/srv/samba/share` used in this exam
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
+- For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
 
-  - The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
+- O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
 
-  - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.

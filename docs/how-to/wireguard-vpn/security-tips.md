@@ -22,14 +22,19 @@ You can add another layer of cryptographic protection to your VPN with the `PreS
 
 Such a key can be generated with the `genpsk` command:
 
-```bash
-$ wg genpsk
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genpsk
+
 vxlX6eMMin8uhxbKEhe/iOxi8ru+q1qWzCdjESXoFZY=
 ```
 
 And then used in a `[Peer]` section, like this:
 
-```
+```ini
 [Peer]
 PublicKey = ....
 Endpoint = ....
@@ -47,7 +52,7 @@ When troubleshooting WireGuard, it's common to post the contents of the interfac
 
 To avoid such mistakes, we can remove the private key from the configuration file and leave it in its own file. This can be done via a `PostUp`` hook. For example, let's update the `home0.conf` file to use such a hook:
 
-```
+```ini
 [Interface]
 ListenPort = 51000
 Address = 10.10.11.3/24

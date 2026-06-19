@@ -16,7 +16,11 @@ For `isc-dhcp-server` instructions, {ref}`refer to this guide instead <install-i
 
 At a terminal prompt, enter the following command to install `isc-kea`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install kea
 ```
 
@@ -96,11 +100,15 @@ This will result in the DHCP server listening on interface "eth4", giving client
 
 After changing the config file you can reload the server configuration through `kea-shell` with the following command (considering you have the `kea-ctrl-agent` running as described above):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kea-shell --host 127.0.0.1 --port 8000 --auth-user kea-api --auth-password $(cat /etc/kea/kea-api-password) --service dhcp4 config-reload
 ```
 
-Then, press <kbd>ctrl</kbd>-<kbd>d</kbd>. The server should respond with:
+Then, press {kbd}`Ctrl`-{kbd}`d`. The server should respond with:
 
 ```json
 [ { "result": 0, "text": "Configuration successful." } ]
@@ -110,7 +118,7 @@ meaning your configuration was received by the server.
 
 The `kea-dhcp4-server` service logs should contain an entry similar to:
 
-```
+```text
 DHCP4_DYNAMIC_RECONFIGURATION_SUCCESS dynamic server reconfiguration succeeded with file: /etc/kea/kea-dhcp4.conf
 ```
 
@@ -118,14 +126,22 @@ signaling that the server was successfully reconfigured.
 
 You can read `kea-dhcp4-server` service logs with `journalctl`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 journalctl -u kea-dhcp4-server
 ```
 
 Alternatively, instead of reloading the DHCP4 server configuration through
 `kea-shell`,  you can restart the `kea-dhcp4-service` with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl restart kea-dhcp4-server
 ```
 

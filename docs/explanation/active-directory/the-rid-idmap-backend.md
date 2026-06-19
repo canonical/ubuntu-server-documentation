@@ -15,17 +15,19 @@ To use this backend, we have to choose two or more ID ranges:
 
 Let's analyze an example configuration:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend       = tdb
-        idmap config * : range         = 100000 - 199999
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend       = tdb
+    idmap config * : range         = 100000 - 199999
 
-        idmap config EXAMPLE : backend = rid
-        idmap config EXAMPLE : range   = 1000000 - 1999999
+    idmap config EXAMPLE : backend = rid
+    idmap config EXAMPLE : range   = 1000000 - 1999999
+```
 
 :::{note}
 This is not yet a complete configuration file, and is just illustrating the IDMap configuration. More is needed to join an Active Directory domain.
@@ -47,20 +49,22 @@ Once this system is joined to the `EXAMPLE.INTERNAL` domain, users from that dom
 
 Things start to get more complicated if the `EXAMPLE.INTERNAL` domain establishes a trust relationship with another Active Directory domain. The correct way to handle this is to, *before*, add a new IDMap configuration for that domain. For example:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend       = tdb
-        idmap config * : range         = 100000 - 199999
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend       = tdb
+    idmap config * : range         = 100000 - 199999
 
-        idmap config EXAMPLE : backend = rid
-        idmap config EXAMPLE : range   = 1000000 - 1999999
+    idmap config EXAMPLE : backend = rid
+    idmap config EXAMPLE : range   = 1000000 - 1999999
 
-        idmap config COMPANY : backend = rid
-        idmap config COMPANY : range   = 2000000 - 2999999
+    idmap config COMPANY : backend = rid
+    idmap config COMPANY : range   = 2000000 - 2999999
+```
 
 This change is allocating a new range for the new `COMPANY` domain. Then, when the domain trust relationship is established between the Active Directory domains, the Ubuntu systems with this extra IDMap configuration will know that users from the `COMPANY` belong to the range `2000000 - 2999999`.
 

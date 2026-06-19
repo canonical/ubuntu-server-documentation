@@ -21,7 +21,11 @@ The directives set for a virtual host only apply to that particular virtual host
 
 If you want to configure a new virtual host or site, copy the `000-default.conf` file into the same directory with a name you choose. For example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/mynewsite.conf
 ```
 
@@ -38,25 +42,26 @@ Specifies the email address to be advertised for the server's administrator. The
 > Found in `/etc/apache2/ports.conf`
 
 Specifies the port, and optionally the IP address, Apache2 should listen on. If the IP address is not specified, Apache2 will listen on all IP addresses assigned to the machine it runs on. The default value for the **Listen** directive is `80`. Change this to:
-  - `127.0.0.1:80` to make Apache2 listen only on your loopback interface so that it will not be available to the Internet,
-  - to e.g. `81` to change the port that it listens on,
-  - or leave it as is for normal operation.
+
+- `127.0.0.1:80` to make Apache2 listen only on your loopback interface so that it will not be available to the Internet,
+- to e.g. `81` to change the port that it listens on,
+- or leave it as is for normal operation.
 
 ### The **ServerName** directive (optional)
 
 Specifies what {term}`FQDN` your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
 
-  Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
+Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
 
 ### The **ServerAlias** directive
 
 You may also want your site to respond to `www.mynewsite.com`, since many users will assume the www prefix is appropriate -- use the *ServerAlias* directive for this. You may also use wildcards in the ServerAlias directive.
     
-  For example, the following configuration will cause your site to respond to any domain request ending in *.mynewsite.com*.
+For example, the following configuration will cause your site to respond to any domain request ending in *.mynewsite.com*.
 
-  ```text
-  ServerAlias *.mynewsite.com
-  ```
+```
+ServerAlias *.mynewsite.com
+```
 
 ### The **DocumentRoot** directive
 
@@ -64,8 +69,18 @@ Specifies where Apache2 should look for the files that make up the site. The def
 
 Enable the new *VirtualHost* using the a2ensite utility and restart Apache2:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2ensite mynewsite
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
@@ -75,8 +90,18 @@ Be sure to replace `mynewsite` with a more descriptive name for the VirtualHost.
 
 Similarly, use the `a2dissite` utility to disable sites. This is can be useful when troubleshooting configuration problems with multiple virtual hosts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2dissite mynewsite
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
@@ -86,7 +111,7 @@ This section explains configuration of the Apache2 server default settings. For 
 
 ### The **DirectoryIndex**
 
- The **DirectoryIndex** is the default page served by the server when a user requests an index of a directory by specifying a forward slash (/) at the end of the directory name.
+The **DirectoryIndex** is the default page served by the server when a user requests an index of a directory by specifying a forward slash (/) at the end of the directory name.
     
 For example, when a user requests the page `http://www.example.com/this_directory/`, they will get either the DirectoryIndex page (if it exists), a server-generated directory list (if it does not and the Indexes option is specified), or a Permission Denied page if neither is true. 
 
@@ -108,7 +133,7 @@ You can also specify the file to which errors are logged, via the **ErrorLog** d
 
 Some options are specified on a per-directory basis rather than per-server. **Options** is one of these directives. A Directory stanza is enclosed in XML-like tags, like so:
 
-```text
+```
 <Directory /var/www/html/mynewsite>
 ...
 </Directory>
@@ -171,5 +196,3 @@ Now that you know how to configure Apache2, you may also want to know {ref}`how 
 - The [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the `apache2-doc` package for the official Apache2 docs.
 
 - O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
-
-- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

@@ -14,17 +14,19 @@ The {manpage}`idmap_autorid(8)` identity mapping backend, like the `rid` one, al
 
 Let's see an example:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend = autorid
-        # 1,000,000 - 19,999,999
-        idmap config * : range   = 1000000 - 19999999
-        # 1,000,000
-        idmap config * : rangesize = 1000000
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend = autorid
+    # 1,000,000 - 19,999,999
+    idmap config * : range   = 1000000 - 19999999
+    # 1,000,000
+    idmap config * : rangesize = 1000000
+```
 
 The configuration above gives us 19 domains (or slots) with the capacity of 1 million IDs in each:
 - first slot: IDs from `1000000` up to `1999999`

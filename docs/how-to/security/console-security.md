@@ -17,15 +17,29 @@ Anyone with physical access to the keyboard can use the {kbd}`Ctrl` + {kbd}`Alt`
 
 To disable the reboot action taken by pressing the {kbd}`Ctrl` + {kbd}`Alt` + {kbd}`Delete` key combination, run the following two commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl mask ctrl-alt-del.target
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl daemon-reload
 ```
 
 :::{note}
 To re-enable this feature, use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl unmask ctrl-alt-del.target
 ```
 :::
@@ -45,11 +59,13 @@ On most keyboards, {kbd}`SysRq` is labeled as {kbd}`PrtScn`.
 
 You can check which functions are currently enabled:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sysctl kernel.sysrq
-```
 
-```text
 kernel.sysrq = 176
 ```
 
@@ -57,8 +73,18 @@ The default value of `176` enables filesystem sync (16), remounting read-only
 (32), and reboot/poweroff (128). To disable all SysRq functions, create an override file in
 `/etc/sysctl.d/` with a higher sort order than the default SysRq configuration file `10-magic-sysrq.conf`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "kernel.sysrq = 0" | sudo tee /etc/sysctl.d/99-disable-sysrq.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl --system
 ```
 
@@ -74,19 +100,31 @@ Beyond that, further explanation can be found by referencing the [SysRq section 
 
 Verify the change has taken effect:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sysctl kernel.sysrq
-```
 
-```text
 kernel.sysrq = 0
 ```
 
 :::{note}
 To re-enable the default SysRq functions, remove the override file and reload:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rm /etc/sysctl.d/99-disable-sysrq.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl --system
 ```
 :::

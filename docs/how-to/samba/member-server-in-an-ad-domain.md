@@ -23,13 +23,21 @@ For this guide, though, we are going to use the `realmd` package and instruct it
 
 First, let's install the necessary packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install realmd samba
 ```
 
 In order to have the joined machine registered in the AD {term}`DNS`, it needs to have an {term}`FQDN` set. You might have that already, if running the `hostname -f` command returns a full {term}`hostname` with domain. If it doesn't, then set the hostname as follows:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo hostnamectl hostname <yourfqdn>
 ```
 
@@ -39,13 +47,13 @@ For this guide, we will be using `j1.internal.example.fake`, and the AD domain w
 
 Next, we need to verify that the AD server is both reachable and known by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo realm discover internal.example.fake
-```
 
-This should provide an output like this, given our setup:
-
-```text
 internal.example.fake
   type: kerberos
   realm-name: INTERNAL.EXAMPLE.FAKE
@@ -67,13 +75,13 @@ internal.example.fake
 
 Let's join the domain in verbose mode so we can see all the steps:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo realm join -v --membership-software=samba --client-software=winbind  internal.example.fake
-```
 
-This should produce the following output for us:
-
-```text
  * Resolving: _ldap._tcp.internal.example.fake
  * Performing LDAP DSE lookup on: 10.0.16.5
  * Successfully discovered: internal.example.fake
@@ -107,8 +115,13 @@ Until {lpbug}`1980246` is fixed, one extra step is needed:
 
   Now you will be able to query users from the AD domain. Winbind adds the short domain name as a prefix to domain users and groups:
 
-  ```
-  $ getent passwd INTEXAMPLE\\Administrator
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  getent passwd INTEXAMPLE\\Administrator
+
   INTEXAMPLE\administrator:*:2000500:2000513::/home/administrator@INTEXAMPLE:/bin/bash
   ```
   
@@ -135,7 +148,11 @@ If this is set to `yes`, then the domain name will not be part of the users and 
 
 To have the home directory created automatically the first time a user logs in to the system, and if you haven't removed `libpam-winbind`, then enable the `pam_mkhomedir` module via this command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update --enable mkhomedir
 ```
 
@@ -147,7 +164,7 @@ Shares can be exported as usual. Since this is now a Member Server, there is no 
 
 For example, let's create a simple `[storage]` share. Add this to the `/etc/samba/smb.conf` file:
 
-```text
+```ini
 [storage]
     path = /storage
     comment = Storage share
@@ -157,15 +174,30 @@ For example, let's create a simple `[storage]` share. Add this to the `/etc/samb
 
 Then create the `/storage` directory. Let's also make it `1777` so all users can use it, and then ask samba to reload its configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -m 1777 /storage
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo smbcontrol smbd reload-config
 ```
 
 With this, users from the AD domain will be able to access this share. For example, if there is a user `ubuntu` the following command would access the share from another system, using the domain credentials:
 
-```
-$ smbclient //j1.internal.example.fake/storage -U INTEXAMPLE\\ubuntu
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+smbclient //j1.internal.example.fake/storage -U INTEXAMPLE\\ubuntu
+
 Enter INTEXAMPLE\ubuntu's password:
 Try "help" to get a list of possible commands.
 smb: \>
@@ -173,8 +205,12 @@ smb: \>
 
 And `smbstatus` on the member server will show the connected user:
 
-```
-$ sudo smbstatus
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo smbstatus
 
 Samba version 4.15.5-Ubuntu
 PID     Username     Group        Machine                                   Protocol Version  Encryption           Signing
@@ -190,7 +226,7 @@ No locked files
 
 You can also restrict access to the share as usual. Just keep in mind the syntax for the domain users. For example, to restrict access to the `[storage]` share we just created to *only* members of the `LTS Releases` domain group, add the `valid users` parameter like below:
 
-```text
+```ini
 [storage]
     path = /storage
     comment = Storage share
@@ -228,8 +264,13 @@ Will reserve the `2,000,000` through `2,999,999` range for user and group ID all
 
 The `Administrator` user we inspected before with `getent passwd` can give us a glimpse of how these ranges are used (output format changed for clarity):
 
-```bash
-$ id INTEXAMPLE\\Administrator
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+id INTEXAMPLE\\Administrator
+
 uid=2000500(INTEXAMPLE\administrator)
 gid=2000513(INTEXAMPLE\domain users)
 groups=2000513(INTEXAMPLE\domain users),

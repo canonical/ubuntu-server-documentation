@@ -58,8 +58,13 @@ That default is also set at package building time, and in the case of Ubuntu, it
 
 The list of allowed ciphers in a security level can be obtained with the [`openssl ciphers`](https://docs.openssl.org/3.0/man1/openssl-ciphers/) command (output truncated for brevity):
 
-```bash
-$ openssl ciphers -s -v DEFAULT:@SECLEVEL=2
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl ciphers -s -v DEFAULT:@SECLEVEL=2
+
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
 TLS_AES_128_GCM_SHA256         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(128)            Mac=AEAD
@@ -101,8 +106,13 @@ In the end, without other constraints, the library will merge both lists into on
 
 This will list all supported/enabled ciphers, with defaults taken from the library and `/etc/ssl/openssl.cnf`. Since no other options were given, this will include TLSv1.3 ciphersuites and TLSv1.2 and older cipher strings:
 
-```bash
-$ openssl ciphers -s -v
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl ciphers -s -v
+
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
 TLS_AES_128_GCM_SHA256         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(128)            Mac=AEAD
@@ -135,10 +145,15 @@ AES256-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(256)        
 AES128-SHA                     SSLv3   Kx=RSA      Au=RSA   Enc=AES(128)               Mac=SHA1
 ```
 
-Let's filter this a bit, and just as an example, remove all {term}`AES`128 ciphers and SHA1 hashes:
+Let's filter this a bit, and just as an example, remove all {term}`AES128 <AES>` ciphers and {term}`SHA1 <SHA>` hashes:
 
-```bash
-$ openssl ciphers -s -v 'DEFAULTS:-AES128:-SHA1'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl ciphers -s -v 'DEFAULTS:-AES128:-SHA1'
+
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
 TLS_AES_128_GCM_SHA256         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(128)            Mac=AEAD
@@ -159,8 +174,13 @@ Since we didn't use `-ciphersuites`, the TLSv1.3 list was unaffected by our filt
 
 To filter out TLSv1.3 algorithms, there is no such mechanism, and we must list explicitly what we want by using `-ciphersuites`:
 
-```bash
-$ openssl ciphers -s -v -ciphersuites TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 'DEFAULTS:-AES128:-SHA1'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl ciphers -s -v -ciphersuites TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256 'DEFAULTS:-AES128:-SHA1'
+
 TLS_AES_256_GCM_SHA384         TLSv1.3 Kx=any      Au=any   Enc=AESGCM(256)            Mac=AEAD
 TLS_CHACHA20_POLY1305_SHA256   TLSv1.3 Kx=any      Au=any   Enc=CHACHA20/POLY1305(256) Mac=AEAD
 ECDHE-ECDSA-AES256-GCM-SHA384  TLSv1.2 Kx=ECDH     Au=ECDSA Enc=AESGCM(256)            Mac=AEAD
@@ -194,11 +214,22 @@ MinProtocol = TLSv1.3
 
 If you then try to connect securely to a server that only offers, say TLSv1.2, the connection will fail:
 
-```bash
-$ curl https://j-server.lxd/stats
-curl: (35) error:0A00042E:SSL routines::tlsv1 alert protocol version
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+curl https://j-server.lxd/stats
 
-$ wget https://j-server.lxd/stats
+curl: (35) error:0A00042E:SSL routines::tlsv1 alert protocol version
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget https://j-server.lxd/stats
+
 --2023-01-06 13:41:50--  https://j-server.lxd/stats
 Resolving j-server.lxd (j-server.lxd)... 10.0.100.87
 Connecting to j-server.lxd (j-server.lxd)|10.0.100.87|:443... connected.
@@ -221,8 +252,12 @@ Since we are already forcing TLSv1.3, there is no need to tweak the `CipherStrin
 
 The OpenSSL `s_server` command is very handy to test this (see {ref}`the Troubleshooting section <troubleshooting-tls-ssl>` for details on how to use it):
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www
 ```
 
 :::{note}
@@ -231,22 +266,36 @@ Be sure to use another system for this server, or else it will be subject to the
 
 As expected, a client will end up selecting TLSv1.3 and the `TLS_AES_256_GCM_SHA384` cipher suite:
 
-```bash
-$ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+
 New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
     Cipher    : TLS_AES_256_GCM_SHA384
 ```
 
 To be sure, we can tweak the server to only offer `TLS_CHACHA20_POLY1305_SHA256` for example:
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -ciphersuites TLS_CHACHA20_POLY1305_SHA256
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -ciphersuites TLS_CHACHA20_POLY1305_SHA256
 ```
 
 And now the client will fail:
 
-```bash
-$ wget https://j-server.lxd/stats -O /dev/stdout
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget https://j-server.lxd/stats -O /dev/stdout
+
 --2023-01-06 14:20:55--  https://j-server.lxd/stats
 Resolving j-server.lxd (j-server.lxd)... 10.0.100.87
 Connecting to j-server.lxd (j-server.lxd)|10.0.100.87|:443... connected.
@@ -267,49 +316,77 @@ MinProtocol = TLSv1.2
 
 To test, let's force our test `s_server` server to only offer TLSv1.2:
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls1_2
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls1_2
 ```
 
 And our client picks AES256:
 
-```bash
-$ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+
 New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
     Cipher    : ECDHE-RSA-AES256-GCM-SHA384
 ```
 
 But that could also be just because AES256 is stronger than AES128. Let's not offer AES256 on the server, and also jump ahead and also remove CHACHA20, which would be the next one preferable to AES128:
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls1_2 -cipher 'DEFAULT:!AES256:!CHACHA20'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -www -tls1_2 -cipher 'DEFAULT:!AES256:!CHACHA20'
 ```
 
 Surely `wget` should fail now. Well, turns out it does select AES128:
 
-```bash
-$ wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget https://j-server.lxd/stats -O /dev/stdout -q | grep Cipher -w
+
 New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
     Cipher    : ECDHE-RSA-AES128-GCM-SHA256
 ```
 
 It's unclear why. Maybe it's a safeguard, or maybe AES128 is always allowed in TLSv1.2 and we produced an invalid configuration. This case shows how crypto is complex, and also applications can override any such configuration setting that comes from the library. As a counter example, OpenSSL's `s_client` tool follows the library config, and fails in this case:
 
-```bash
-$ echo | openssl s_client -connect j-server.lxd:443  | grep -w -i cipher
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo | openssl s_client -connect j-server.lxd:443  | grep -w -i cipher
+
 4007F4F9D47F0000:error:0A000410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure:../ssl/record/rec_layer_s3.c:1584:SSL alert number 40
 New, (NONE), Cipher is (NONE)
 ```
 
 But we can override that as well with a command-line option and force `s_client` to allow AES128:
 
-```bash
-$ echo | openssl s_client -connect j-server.lxd:443 --cipher DEFAULT:AES128 2>&1| grep -w -i cipher
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo | openssl s_client -connect j-server.lxd:443 --cipher DEFAULT:AES128 2>&1| grep -w -i cipher
+
 New, TLSv1.2, Cipher is ECDHE-RSA-AES128-GCM-SHA256
     Cipher    : ECDHE-RSA-AES128-GCM-SHA256
 ```
 
-## References
+## Further reading
 
 * [OpenSSL home page](https://www.openssl.org)
 

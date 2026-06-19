@@ -23,7 +23,7 @@ The GnuTLS configuration file is structured as an INI-style text file. There
 are three sections, and each section contains `key = values` lines. For
 example:
 
-```text
+```ini
 [global]
 override-mode = blocklist
 
@@ -45,7 +45,7 @@ Note that in the `allowlist` mode, all algorithms that should be enabled must be
 
 When using `allowlist`, all options in `[overrides]` will be of the `enabled` form. For example:
 
-```text
+```ini
 [global]
 override-mode = allowlist
 
@@ -61,7 +61,7 @@ tls-enabled-group = secp256r1
 
 And when using `blocklist`, all `[override]` options have the opposite meaning (i.e. `disabled`):
 
-```text
+```ini
 [global]
 override-mode = blocklist
 
@@ -88,8 +88,13 @@ A priority string can start with a single initial keyword, and then add or remov
 
 To see the resulting list of ciphers and algorithms from a priority string, one can use the `gnutls-cli` command-line tool. For example, to list all the ciphers and algorithms allowed with the priority string `SECURE256`:
 
-```bash
-$ gnutls-cli --list --priority SECURE256
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli --list --priority SECURE256
+
 Cipher suites for SECURE256
 TLS_AES_256_GCM_SHA384                                  0x13, 0x02      TLS1.3
 TLS_CHACHA20_POLY1305_SHA256                            0x13, 0x03      TLS1.3
@@ -114,8 +119,13 @@ PK-signatures: SIGN-RSA-SHA384, SIGN-RSA-PSS-SHA384, SIGN-RSA-PSS-RSAE-SHA384, S
 
 You can manipulate the resulting set by manipulating the priority string. For example, to remove `CHACHA20-POLY1305` from the `SECURE256` set:
 
-```bash
-$ gnutls-cli --list --priority SECURE256:-CHACHA20-POLY1305
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli --list --priority SECURE256:-CHACHA20-POLY1305
+
 Cipher suites for SECURE256:-CHACHA20-POLY1305
 TLS_AES_256_GCM_SHA384                                  0x13, 0x02      TLS1.3
 TLS_ECDHE_ECDSA_AES_256_GCM_SHA384                      0xc0, 0x2c      TLS1.2
@@ -136,15 +146,19 @@ PK-signatures: SIGN-RSA-SHA384, SIGN-RSA-PSS-SHA384, SIGN-RSA-PSS-RSAE-SHA384, S
 
 And you can give this a new name by adding the following to the `[priorities]` section:
 
-```text
+```ini
 [priorities]
 MYSET = SECURE256:-CHACHA20-POLY1305
 ```
 
 Which allows the `MYSET` priority string to be used like this:
 
-```bash
-$ gnutls-cli --list --priority @MYSET
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli --list --priority @MYSET
 ```
 
 ## Verification profile (overrides)
@@ -153,7 +167,7 @@ When verifying a certificate, or TLS session parameters, GnuTLS uses a set of pr
 
 For example:
 
-```text
+```ini
 [overrides]
 # do not allow applications use the LOW or VERY-WEAK profiles.
 min-verification-profile = legacy
@@ -181,14 +195,23 @@ default-priority-string = NORMAL:-VERS-TLS-ALL:+VERS-TLS1.3
 
 With our test server providing everything but TLSv1.3:
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -no_tls1_3  -www
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -no_tls1_3  -www
 ```
 
 Connections will fail:
 
-```bash
-$ gnutls-cli j-server.lxd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli j-server.lxd
+
 Processed 125 CA certificate(s).
 Resolving 'j-server.lxd:443'...
 Connecting to '10.0.100.87:443'...
@@ -198,15 +221,25 @@ Connecting to '10.0.100.87:443'...
 
 An application linked with GnuTLS will also fail:
 
-```bash
-$ lftp -c "cat https://j-server.lxd/status"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lftp -c "cat https://j-server.lxd/status"
+
 cat: /status: Fatal error: gnutls_handshake: A TLS fatal alert has been received.
 ```
 
 But an application can override these settings, because it's only the priority string that is being manipulated in the GnuTLS config:
 
-```bash
-$ lftp -c "set ssl:priority NORMAL:+VERS-TLS-ALL; cat https://j-server.lxd/status" | grep ^New
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lftp -c "set ssl:priority NORMAL:+VERS-TLS-ALL; cat https://j-server.lxd/status" | grep ^New
+
 New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
 ```
 
@@ -226,8 +259,13 @@ Note that setting the same key multiple times will append the new value to the p
 
 In this scenario, the application cannot override the config anymore:
 
-```bash
-$ lftp -c "set ssl:priority NORMAL:+VERS-TLS-ALL; cat https://j-server.lxd/status" | grep ^New
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lftp -c "set ssl:priority NORMAL:+VERS-TLS-ALL; cat https://j-server.lxd/status" | grep ^New
+
 cat: /status: Fatal error: gnutls_handshake: A TLS fatal alert has been received.
 ```
 
@@ -248,14 +286,23 @@ tls-disabled-cipher = AES-128-GCM
 
 If we now connect to a server that was brought up with this config:
 
-```bash
-$ sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -ciphersuites TLS_AES_128_GCM_SHA256 -www
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo openssl s_server -cert j-server.pem -key j-server.key -port 443 -ciphersuites TLS_AES_128_GCM_SHA256 -www
 ```
 
 Our GnuTLS client will fail:
 
-```bash
-$ gnutls-cli j-server.lxd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli j-server.lxd
+
 Processed 126 CA certificate(s).
 Resolving 'j-server.lxd:443'...
 Connecting to '10.0.100.87:443'...
@@ -265,8 +312,13 @@ Connecting to '10.0.100.87:443'...
 
 And given GnuTLS' behavior regarding re-enabling a cipher that was once removed, we cannot allow AES128 from the command line either:
 
-```bash
-$ gnutls-cli --priority="NORMAL:+AES-128-GCM"  j-server.lxd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+gnutls-cli --priority="NORMAL:+AES-128-GCM"  j-server.lxd
+
 Processed 126 CA certificate(s).
 Resolving 'j-server.lxd:443'...
 Connecting to '10.0.100.87:443'...
@@ -274,7 +326,7 @@ Connecting to '10.0.100.87:443'...
 *** Received alert [40]: Handshake failed
 ```
 
-## References
+## Further reading
 
 * [System-wide configuration](https://www.gnutls.org/manual/html_node/System_002dwide-configuration-of-the-library.html)
 

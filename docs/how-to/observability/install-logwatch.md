@@ -7,14 +7,17 @@ myst:
 (install-logwatch)=
 # How to install and configure Logwatch
 
-
 Logs are an invaluable source of information about problems that may arise in your server. [Logwatch](https://sourceforge.net/projects/logwatch/) keeps an eye on your logs for you, flags items that may be of interest, and reports them via email.
 
 ## Install Logwatch
 
 Install `logwatch` using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install logwatch
 ```
 
@@ -22,7 +25,11 @@ sudo apt install logwatch
 
 Logwatch's default configuration is kept in `/usr/share/logwatch/default.conf/logwatch.conf`. However, configuration changes made directly to that file can be overwritten during updates, so instead the file should be copied into `/etc` and modified there:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /usr/share/logwatch/default.conf/logwatch.conf /etc/logwatch/conf/
 ```
 
@@ -49,13 +56,13 @@ Service = "-eximstats"
 
 Next, run `logwatch` manually to verify your configuration changes are valid:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo logwatch --detail Low --range today
-```
 
-The report produced should look something like this:
-
-```text
 ################### Logwatch 7.4.3 (12/07/16) ####################
        Processing Initiated: Fri Apr 24 16:58:14 2020
        Date Range Processed: today

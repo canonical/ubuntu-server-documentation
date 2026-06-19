@@ -48,8 +48,12 @@ From its manual page:
 
 In a system which supports IPMI and with `ipmitool` installed, a `fence_ipmilan` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME stonith:fence_ipmilan \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME stonith:fence_ipmilan \
             ip=$IP \
             ipport=$PORT \
             username=$USER \
@@ -60,8 +64,12 @@ $ crm configure primitive $RESOURCE_NAME stonith:fence_ipmilan \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs stonith create $RESOURCE_NAME fence_ipmilan \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs stonith create $RESOURCE_NAME fence_ipmilan \
             ip=$IP \
             ipport=$PORT \
             username=$USER \
@@ -82,8 +90,12 @@ From its manual page:
 
 One can configure a `fence_mpath` resource with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME stonith:fence_mpath \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME stonith:fence_mpath \
             pcmk_host_map="$NODE1:$NODE1_RES_KEY;$NODE2:$NODE2_RES_KEY;$NODE3:$NODE3_RES_KEY" \
             pcmk_host_argument=key \
             pcmk_monitor_action=metadata \
@@ -94,8 +106,12 @@ $ crm configure primitive $RESOURCE_NAME stonith:fence_mpath \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs stonith create $RESOURCE_NAME fence_mpath \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs stonith create $RESOURCE_NAME fence_mpath \
             pcmk_host_map="$NODE1:$NODE1_RES_KEY;$NODE2:$NODE2_RES_KEY;$NODE3:$NODE3_RES_KEY" \
             pcmk_host_argument=key \
             pcmk_monitor_action=metadata \
@@ -116,14 +132,22 @@ From its manual page:
 
 With STONITH Block Device (SBD) configured on a system, the `fence_sbd` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME stonith:fence_sbd devices=$DEVICE
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME stonith:fence_sbd devices=$DEVICE
 ```
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs stonith create $RESOURCE_NAME fence_sbd devices=$DEVICE
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs stonith create $RESOURCE_NAME fence_sbd devices=$DEVICE
 ```
 
 This is one way to set up `fence_sbd`, for more information refer {manpage}`to its manual page <fence_sbd(8)>`.
@@ -136,8 +160,12 @@ From its manual page:
 
 A `fence_scsi` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME stonith:fence_scsi \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME stonith:fence_scsi \
             pcmk_host_list="$NODE1 $NODE2 $NODE3" \
             devices=$SCSI_DEVICE \
             meta provides=unfencing
@@ -145,8 +173,12 @@ $ crm configure primitive $RESOURCE_NAME stonith:fence_scsi \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs stonith create $RESOURCE_NAME fence_scsi \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs stonith create $RESOURCE_NAME fence_scsi \
             pcmk_host_list="$NODE1 $NODE2 $NODE3" \
             devices=$SCSI_DEVICE \
             meta provides=unfencing
@@ -164,8 +196,12 @@ From its manual page:
 
 A `fence_virsh` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME stonith:fence_virsh \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME stonith:fence_virsh \
             ip=$HOST_IP_ADDRESS \
             login=$HOST_USER \
             identity_file=$SSH_KEY \
@@ -176,8 +212,12 @@ $ crm configure primitive $RESOURCE_NAME stonith:fence_virsh \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs stonith create $RESOURCE_NAME fence_virsh \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs stonith create $RESOURCE_NAME fence_virsh \
             ip=$HOST_IP_ADDRESS \
             login=$HOST_USER \
             identity_file=$SSH_KEY \
@@ -190,14 +230,22 @@ This is one way to set up `fence_virsh`, for more information refer {manpage}`to
 
 In order to avoid running the resource in the same node that should be fenced, we need to add a location restriction:
 
-```
-$ crm configure location fence-$NODE-location $RESOURCE_NAME -inf: $NODE
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure location fence-$NODE-location $RESOURCE_NAME -inf: $NODE
 ```
 
 Using `pcs`:
 
-```
-$ pcs constraint location $RESOURCE_NAME avoids $NODE
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs constraint location $RESOURCE_NAME avoids $NODE
 ```
 
 ## Further reading

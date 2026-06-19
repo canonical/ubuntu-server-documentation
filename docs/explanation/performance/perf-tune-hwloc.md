@@ -32,17 +32,17 @@ CPU and device topology on the system.
 ## hwloc-info - hierarchy and details
 
 By default, `hwloc-info` provides a summary of the topology levels that are
-present on this system.
+present on this system. In these examples we use a consumer-grade laptop.
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hwloc-info
-```
 
-Output (example on a laptop):
-
-```bash
 depth 0:           1 Machine (type #0)
  depth 1:          1 Package (type #1)
   depth 2:         1 L3Cache (type #6)
@@ -62,13 +62,13 @@ elements. Here is an example to get details on the first core.
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hwloc-info -p core:0
-```
 
-Output:
-
-```bash
 Core L#0
  type = Core
  full type = Core
@@ -104,13 +104,13 @@ between cores, sockets and hardware in the system.
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hwloc-ls
-```
 
-Output (example on a laptop):
-
-```bash
 Machine (31GB total)
   Package L#0
     NUMANode L#0 (P#0 31GB)
@@ -133,7 +133,8 @@ Machine (31GB total)
 
 Output (example on a server -- shortened for readability):
 
-```bash
+```{terminal}
+:output-only:
 Package L#0
     NUMANode L#0 (P#0 378GB)
     L3 L#0 (32MB)
@@ -177,17 +178,17 @@ Package L#0
 ## hwloc-ls - system topology in GUI
 
 Instead of `hwloc-nox` there also is `hwloc` with graphical capabilities which
-would render the same in a graphical representation.
+would render the same in a graphical representation. CLI output shows navigation info, the real content is in the GUI.
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hwloc-ls
-```
 
-Output (CLI shows navigation info, the real content is in the GUI):
-
-```bash
 Keyboard shortcuts:
  Zooming, scrolling and closing:
   Zoom-in or out ...................... + -

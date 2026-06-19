@@ -42,7 +42,11 @@ It also highlights where the password is used in clear text format:
 
 Install `saslauthd` on the OpenLDAP server (`ldap-server.example.com` in this document):
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sasl2-bin
 ```
 
@@ -50,31 +54,35 @@ sudo apt install sasl2-bin
 
 Get the hostname from the server:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hostname -f
-```
 
-Which should give you the hostname of:
-
-```text
 ldap-server.example.com
 ```
 
 Also check the hostname and domain using a reverse lookup with your IP. For example, if the IP address is `10.10.17.91`:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 nslookup 10.10.17.91
-```
 
-The reply should look like this:
-
-```text
 91.17.10.10.in-addr.arpa        name = ldap-server.example.com.
 ```
 
 If the result is the same as your host's canonical name them all is well. If the domain is missing, the [Fully Qualified Domain Name](https://en.wikipedia.org/wiki/Fully_qualified_domain_name) (FQDN) can be entered in the `/etc/hosts` file.
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo vi /etc/hosts
 ```
 
@@ -90,7 +98,11 @@ The `saslauthd` daemon needs a Kerberos service principal in order to authentica
 
 The simplest way to create this principal, and extract the key safely, is to run the `kadmin` tool remotely, instead of on the Kerberos server. Since the key needs to be written to `/etc/krb5.keytab`, the tool needs to be run with root privileges. Additionally, since creating a new service principal, as well as extracting its key, are privileged operations, we need an `/admin` instance of a principal in order to be allowed these actions. In this example, we will use `ubuntu/admin`:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo kadmin -p ubuntu/admin
 ```
 
@@ -109,7 +121,11 @@ Entry for principal host/ldap-server.example.com with kvno 2, encryption type ae
 
 Alternatively, we can issue the commands directly:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kadmin -p ubuntu/admin -q "addprinc -randkey host/ldap-server.example.com"
 ```
 
@@ -119,13 +135,21 @@ kadmin -p ubuntu/admin -q "addprinc -randkey host/ldap-server.example.com"
 
 And:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo kadmin -p ubuntu/admin -q "ktadd host/ldap-server.example.com"
 ```
 
 To check that the service principal was added to `/etc/krb5.keytab`, run this command:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo klist -k
 ```
 
@@ -143,7 +167,11 @@ KVNO Principal
 
 We now need to configure `saslauthd` such that it uses Kerberos authentication. This is an option that is selected at startup time, via command-line options. The configuration file for such options is `/etc/default/saslauthd`. Only one change is needed in this file: update `MECHANISMS` to `kerberos5`:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo vi /etc/default/saslauthd
 ```
 
@@ -180,7 +208,11 @@ Save and exit the editor.
 
 Continue by enabling and starting the saslauthd service.
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl enable --now saslauthd
 ```
 
@@ -188,15 +220,25 @@ sudo systemctl enable --now saslauthd
 
 The `saslauthd` service can be tested with with the `testsaslauthd` command. For example, with the correct Kerberos password for the `ubuntu` principal:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 testsaslauthd -u ubuntu -p ubuntusecret
+
 0: OK "Success."
 ```
 
 And with the wrong Kerberos password:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 testsaslauthd -u ubuntu -p ubuntusecretwrong
+
 0: NO "authentication failed"
 ```
 
@@ -208,7 +250,7 @@ In Ubuntu 22.04 LTS and earlier, the `/run/saslauthd` directory is restricted to
 
 In order for OpenLDAP to perform passthrough authentication using `saslauthd`, we need to create the configuration file `/etc/ldap/sasl2/slapd.conf` with the following content:
 
-```text
+```
 pwcheck_method: saslauthd
 ```
 
@@ -216,13 +258,21 @@ This will direct OpenLDAP to use `saslauthd` as the password checking mechanism 
 
 In Ubuntu 22.04 LTS and earlier, the `openldap` system user needs to be added to the `sasl` group, or else it will not have permission to contact the `saslauthd` Unix socket in `/run/saslauthd/`. To make this change, run:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo gpasswd -a openldap sasl
 ```
 
 Finally, restart the OpenLDAP service:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart slapd.service
 ```
 
@@ -232,7 +282,7 @@ What triggers OpenLDAP to perform a passthrough authentication when processing a
 
 For example, let's examine the directory entry below:
 
-```text
+```
 dn: uid=ubuntu,dc=example,dc=com
 uid: ubuntu
 objectClass: account
@@ -244,7 +294,7 @@ If a simple bind is performed using a {term}`bindDN` of `uid=ubuntu,dc=example,d
 
 However, if the `userPassword` attribute is in this format:
 
-```text
+```
 userPassword: {SASL}ubuntu@EXAMPLE.COM
 ```
 
@@ -256,7 +306,11 @@ Note how the username present in the `userPassword` attribute is independent of 
 
 To continue with this how-to, let's create the `uid=ubuntu` entry in the directory, which will use passthrough authentication. Note the usage of `-ZZ`, which forces the connection to use StartTLS and thus encrypt the traffic, including the simple bind credentials:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapadd -x -D cn=admin,dc=example,dc=com -W -ZZ <<LDIF
 dn: uid=ubuntu,dc=example,dc=com
 uid: ubuntu
@@ -274,20 +328,25 @@ Note how we don't need to add the posix attributes like user id, home directory,
 
 To test that the simple bind is working, and using the Kerberos password for the `ubuntu` user, let's use `ldapwhoami`:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -D uid=ubuntu,dc=example,dc=com -W -x -ZZ
+
 Enter LDAP Password:
 ```
 
 A successful bind will look like:
 
-```text
+```
 dn:uid=ubuntu,dc=example,dc=com
 ```
 
 A failed bind will look like:
 
-```text
+```
 ldap_bind: Invalid credentials (49)
 ```
 
@@ -297,8 +356,18 @@ These LDAP bind DNs can now be used with external applications that only support
 
 Saslauthd can be run in debug mode for more verbose messages to aid in troubleshooting:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl stop saslauthd
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo /usr/sbin/saslauthd -a kerberos5 -d -m /var/run/saslauthd -n 1
 ```
 

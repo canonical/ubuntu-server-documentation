@@ -13,7 +13,11 @@ myst:
 
 To install PostgreSQL, run the following command in the command prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postgresql
 ```
 
@@ -43,7 +47,11 @@ For details on other parameters, refer to the configuration file or to the [Post
 
 Now that we can connect to our PostgreSQL server, the next step is to set a password for the `postgres` user. Run the following command at a terminal prompt to connect to the default PostgreSQL template database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql template1
 ```
 
@@ -65,7 +73,11 @@ The config statement `hostssl` used here will reject TCP connections that would 
 
 Finally, you should restart the PostgreSQL service to initialize the new configuration. From a terminal prompt enter the following to restart PostgreSQL:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart postgresql.service
 ```
 
@@ -75,7 +87,11 @@ The above configuration is not complete by any means. Please refer to the [Postg
 
 You can test server connections from other machines by using the PostgreSQL client as follows, replacing the domain name with your actual server domain name or IP address:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postgresql-client
 psql --host your-servers-dns-or-ip --username postgres --password --dbname template1
 ```
@@ -86,7 +102,11 @@ PostgreSQL has a nice feature called **streaming replication** which provides th
 
 First, create a replication user in the main server, to be used from the standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres createuser --replication -P -e replicator
 ```
 
@@ -105,13 +125,21 @@ host  replication   replicator   <IP address of the standby>      scram-sha-256
 
 Restart the service to apply changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart postgresql
 ```
 
 Now, in the standby server, let's stop the PostgreSQL service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl stop postgresql
 ```
 
@@ -123,7 +151,11 @@ hot_standby = on
 
 Back up the current state of the main server (those commands are still issued on the standby system):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo su - postgres
 # backup the current content of the standby server (update the version of your postgres accordingly)
 cp -R /var/lib/postgresql/14/main /var/lib/postgresql/14/main_bak
@@ -143,13 +175,21 @@ After this, a full single pass will have been completed, copying the content of 
 
 Finally, let's start the PostgreSQL service on standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start postgresql
 ```
 
 To make sure it is working, go to the main server and run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql -c "select * from pg_stat_replication;"
 ```
 
@@ -157,8 +197,18 @@ As mentioned, this is a very simple introduction, there are way more great detai
 
 To test the replication you can now create a test database in the main server and check if it is replicated in the standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres createdb test # on the main server
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql -c "\l" # on the standby server
 ```
 
@@ -172,7 +222,11 @@ PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Adm
 
 - As mentioned above, the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install postgresql-doc
   ```
 

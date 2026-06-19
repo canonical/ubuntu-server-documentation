@@ -21,13 +21,21 @@ Before installing Munin on `server01`, {ref}`Apache2 will need to be installed <
 
 First, on `server01` install the `munin` package. In a terminal enter the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin
 ```
 
 Now on `server02`, install the `munin-node` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin-node
 ```
 
@@ -69,7 +77,11 @@ Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
 
 Now restart `munin-node` on `server02` for the changes to take effect:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart munin-node.service
 ```
 
@@ -82,7 +94,11 @@ In a browser, go to `http://server01/munin`, and you should see links to nice gr
 
 The `munin-plugins-extra` package contains performance checks and additional services such as {term}`DNS`, {term}`DHCP`, and Samba, etc. To install the package, from a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin-plugins-extra
 ```
 
@@ -92,7 +108,7 @@ Be sure to install the package on both the server and node machines.
 The `munin` package recommends `munin-node`, which recommends `munin-plugins-extra`. This means that in the most common use cases, you will already have `munin-plugins-extra` installed after following the instructions in this page.
 :::
 
-## References
+## Further reading
 
 - See the [Munin](https://munin-monitoring.org/) website for more details.
 

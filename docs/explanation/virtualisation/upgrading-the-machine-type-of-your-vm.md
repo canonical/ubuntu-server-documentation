@@ -46,7 +46,11 @@ virsh shutdown <your_machine>
 
 You can check the status of the machine with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virsh list --inactive
 ```
 
@@ -61,8 +65,13 @@ virsh edit <your_machine>
 
 Change this to the value you want. If you need to check what machine types are available via the `kvm -M ?` command first, then note that while upstream types are provided for convenience, only Ubuntu types are supported. There you can also see what the current default would be, as in this example: 
 
-```bash
-$ kvm -M ?
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+kvm -M ?
+
 pc-i440fx-xenial       Ubuntu 16.04 PC (i440FX + PIIX, 1996) (default)
 ...
 pc-i440fx-bionic       Ubuntu 18.04 PC (i440FX + PIIX, 1996) (default)

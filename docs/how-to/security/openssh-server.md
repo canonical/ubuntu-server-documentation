@@ -20,13 +20,21 @@ OpenSSH can use many authentication methods, including plain password, public ke
 
 To install the OpenSSH client applications on your Ubuntu system, use this command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install openssh-client
 ```
 
 To install the OpenSSH server application, and related support files, use this command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install openssh-server
 ```
 
@@ -65,14 +73,22 @@ Banner /etc/issue.net
 Since losing an SSH server might mean losing your way to reach a server, check
 the configuration after changing it and before restarting the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sshd -t
 ```
 
 After making changes to the configuration, save the file. Then, restart the
 `sshd` server application to effect the changes using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart ssh.service
 ```
 
@@ -83,7 +99,8 @@ returns a banner providing information about the host OS and OpenSSH versions.
 
 This banner is returned before the client authenticates to the service:
 
-```bash
+```{terminal}
+:output-only:
 nc -nv 127.0.0.1 22
 Connection to 127.0.0.1 22 port [tcp/*] succeeded!
 SSH-2.0-OpenSSH_10.2p1 Ubuntu-2ubuntu1
@@ -100,7 +117,8 @@ DebianBanner no
 As shown in the previous example, restart the `sshd` server and verify that the
 banner no longer contains the snippet announcing the OS related data:
 
-```bash
+```{terminal}
+:output-only:
 nc -nv 127.0.0.1 22
 Connection to 127.0.0.1 22 port [tcp/*] succeeded!
 SSH-2.0-OpenSSH_10.2p1
@@ -121,15 +139,24 @@ You can use {ref}`etckeeper <install-etckeeper>` to track changes in your `/etc/
 
 Alternatively, before editing the configuration file, you should make a copy of the original `/etc/ssh/sshd_config` file and protect it from writing so you will have the original settings as a reference and to reuse as necessary. You can do this with the following commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod a-w /etc/ssh/sshd_config.original
 ```
 ::::
 
 
 (openssh-server-ssh-keys)=
-
 ## SSH keys
 
 SSH allows authentication between two hosts without the need of a password, using cryptographic keys instead.
@@ -140,7 +167,11 @@ Alternatively, you can create a key using the **RSA Algorithm** (`-t rsa -b 4096
 
 To generate a key pair, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ssh-keygen -t ed25519
 ```
 
@@ -149,14 +180,22 @@ During creation, you will be prompted for a key passphrase, which you would ente
 By default, the public key is saved in the file `~/.ssh/id_<algorithm>.pub`, while `~/.ssh/id_<algorithm>` is the private key.
 To allow login for a user via key, append the content of `id_ed25519.pub` (`id_rsa.pub` for RSA) to `target_machine:~/.ssh/authorized_keys` by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ssh-copy-id username@target_machine
 ```
 
 Finally, double check the permissions on the `authorized_keys` file -- only the authenticated user must have write permissions.
 If the permissions are not correct then change them by:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 chmod go-w .ssh/authorized_keys
 ```
 
@@ -164,12 +203,15 @@ You should now be able to SSH to the `target_machine` without being prompted for
 
 To troubleshoot this, have a look at the `target_machine`'s live logs of `ssh.service`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo journalctl -fu ssh.service
 ```
 
 Since you can have multiple {term}`SSH-key`s, you can configure which to use for which target machine in `~/.ssh/config` (see {manpage}`ssh_config(5)`).
-
 
 
 ## Connection multiplexing
@@ -177,12 +219,14 @@ Since you can have multiple {term}`SSH-key`s, you can configure which to use for
 To reduce connection setup times, multiple SSH sessions to the same `target_machine` can reuse the same {term}`TCP` connection.
 
 Configuration to activate multiplexing in `~/.ssh/config`:
+
 ```text
 ControlMaster auto
 ControlPath %d/.ssh/ssh_mux_%u@%l_%r@%h:%p
 ```
 
 Optionally, if you want the session to still be re-usable `1` second after disconnecting, set:
+
 ```text
 ControlPersist 1
 ```
@@ -192,7 +236,11 @@ ControlPersist 1
 
 These days many users have already SSH keys registered with services like Launchpad or GitHub. Those can be imported with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ssh-import-id <username-on-remote-service>
 ```
 
@@ -215,6 +263,7 @@ Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `scre
 - [Advanced OpenSSH Wiki Page](https://wiki.ubuntu.com/AdvancedOpenSSH)
 
 ```{toctree}
+:hidden:
 2FA with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp.md>
 2FA with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>
 ```

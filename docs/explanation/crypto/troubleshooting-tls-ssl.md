@@ -23,13 +23,21 @@ The OpenSSL server and client tools are very handy to quickly bring up a server 
 
 To bring up an OpenSSL server, a certificate with a private key is needed. There are many ways to generate a pair, and here is a quick one:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -x509 -nodes -days 30 -out myserver.pem -keyout myserver.key
 ```
 
 Answer the questions as you prefer, but the one that needs special attention is the `commonName` (`CN`) one, which should match the {term}`hostname` of this server. Then bring up the OpenSSL server with this command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl s_server -cert myserver.pem -key myserver.key
 ```
 
@@ -43,24 +51,44 @@ That will bring up a TLS/SSL server on port 4433. Extra options that can be usef
 
 The client connection tool can be used like this when connecting to `server`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo | openssl s_client -connect server:port 2>&1 | grep '^New'
 ```
 
 That will generally show the TLS version used, and the selected cipher:
 
-```bash
-$ echo | openssl s_client -connect j-server.lxd:443 2>&1  | grep '^New'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo | openssl s_client -connect j-server.lxd:443 2>&1  | grep '^New'
+
 New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
 ```
 
 The ciphers and protocols can also be selected with the same command line options as the server:
 
-```bash
-$ echo | openssl s_client -connect j-server.lxd:443 -no_tls1_3 2>&1  | grep '^New'
-New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo | openssl s_client -connect j-server.lxd:443 -no_tls1_3 2>&1  | grep '^New'
 
-$ echo | openssl s_client -connect j-server.lxd:443 -no_tls1_3 2>&1 -cipher DEFAULT:-AES256 | grep '^New'
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo | openssl s_client -connect j-server.lxd:443 -no_tls1_3 2>&1 -cipher DEFAULT:-AES256 | grep '^New'
+
 New, TLSv1.2, Cipher is ECDHE-RSA-CHACHA20-POLY1305
 ```
 
@@ -70,13 +98,17 @@ The `sslscan` tool comes from a package with the same name, and it will scan a s
 
 To use the tool, point it at the server you want to scan:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sslscan j-server.lxd
 ```
 
 And you will get a report of the ciphers and algorithms supported by that server. Consult the {manpage}`sslscan(1)` manual page.
 
-## References
+## Further reading
 
 * {manpage}`OpenSSL s_server <openssl-s_server(1)>`
 * {manpage}`OpenSSL s_client <openssl-s_client(1)>`

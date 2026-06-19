@@ -14,14 +14,24 @@ Here are some tips to help troubleshoot SSSD.
 
 The debug level of SSSD can be changed on-the-fly via `sssctl`, from the `sssd-tools` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sssd-tools
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sssctl debug-level <new-level>
 ```
 
 Or add it to the config file and restart SSSD:
 
-```text
+```ini
 [sssd]
 config_file_version = 2
 domains = example.com
@@ -39,8 +49,13 @@ Caching is useful to speed things up, but it can get in the way big time when tr
 
 You can either remove the whole cache:
 
-```bash
-# sssctl cache-remove
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sssctl cache-remove
+
 Creating backup of local data...
 SSSD backup of local data already exists, override? (yes/no) [no] yes
 Removing cache files...
@@ -49,13 +64,21 @@ SSSD= needs to be running. Start SSSD now? (yes/no) [yes] yes
 
 Or just one element:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sssctl cache-expire -u john
 ```
 
 Or expire everything:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sssctl cache-expire -E
 ```
 
@@ -71,7 +94,7 @@ Make sure `hostname -f` returns a {term}`fully qualified domain name (FQDN) <FQD
 
 You can try disabling a default reverse name lookup, which the `krb5` libraries do, by editing (or creating) `/etc/krb5.conf` and setting `rdns = false` in the `[libdefaults]` section:
 
-```text
+```ini
 [libdefaults]
 rdns = false
 ```

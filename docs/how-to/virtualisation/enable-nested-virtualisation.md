@@ -21,13 +21,13 @@ There may be use cases where you need to enable nested virtualization so that yo
 
 Check if the required kernel module for your CPU is already loaded. Hosts with Intel CPUs require the `kvm_intel` module, while {term}`AMD` hosts require `kvm_amd` instead. Check this with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lsmod | grep -i kvm
-```
 
-Which should show:
-
-```text
 kvm_intel               204800  0
 kvm                  1347584  1 kvm_intel
 ```
@@ -37,13 +37,21 @@ kvm                  1347584  1 kvm_intel
 
 If the module is already loaded, you can check if nested virtualization is enabled by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/module/kvm_intel/parameters/nested
 ```
 
 Or, for AMD hosts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/module/kvm_amd/parameters/nested
 ```
 
@@ -54,13 +62,21 @@ If the output is either `1` or `Y`, then nested virtualization is enabled and yo
 
 If the module your host requires is not loaded, you can load it using `modprobe` in combination with the property `nested=1` to enable nested virtualization, as shown below for Intel hosts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 modprobe kvm-intel nested=1
 ```
 
 Or as follows for AMD hosts: 
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 modprobe kvm-amd nested=1
 ```
 
@@ -73,8 +89,18 @@ First, create a file in `/etc/modprobe.d` (e.g., `/etc/modprobe.d/kvm.conf`) and
 
 Next, reload the kernel module to apply the changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo modprobe -r <module>
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo modprobe <module>
 ```
 
@@ -84,14 +110,28 @@ Make sure to stop all running VMs that might use the kernel module and prevent i
 
 Example for Intel hosts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo modprobe -r kvm-intel
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo modprobe kvm-intel
 ```
 
 You should now be able to see nested virtualization enabled (example for Intel hosts):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/module/kvm_intel/parameters/nested
 ```
 
@@ -106,9 +146,13 @@ manage the VMs but other tools like `multipass` should also work out of the box.
 
 Log into the `L1` VM and check if this can host another `L2` VM on top by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 egrep "svm|vmx" /proc/cpuinfo
-``` 
+```
 
 If any of these are present in the output (depending on whether the host is AMD or Intel respectively), then virtualization is available in that instance. If this is not the case, you need to edit the instance CPU settings:
 

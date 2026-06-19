@@ -12,12 +12,12 @@ Some of the troubleshooting tips that will be shown here are focused on the BIND
 ## Handy "bad" and "good" DNSSEC domains
 It helps to have some good known domains with broken and working DNSSEC available for testing, so we can be sure our tooling is catching those, and not just failing everywhere. There is no guarantee that these domains will be up forever, and certainly there are more out there, but this list is a good first choice:
 
- * These should fail DNSSEC validation:
-   * *dnssec-failed.org*
-   * *sigfail.ippacket.stream*
- * These should pass DNSSEC validation:
-   * *isc.org*
-   * *sigok.ippacket.stream*
+* These should fail DNSSEC validation:
+  * *dnssec-failed.org*
+  * *sigfail.ippacket.stream*
+* These should pass DNSSEC validation:
+  * *isc.org*
+  * *sigok.ippacket.stream*
 
 ## Logs
 
@@ -25,40 +25,54 @@ By default, the {ref}`BIND9 server <install-dnssec>` will log certain DNSSEC fai
 
 For example, if we ask a BIND9 Validating Resolver for the IP address of the `www.dnssec-failed.org` name, we get a failure:
 
-    $ dig @127.0.0.1 -t A www.dnssec-failed.org
-    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.1 -t A www.dnssec-failed.org
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 26260
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.1 -t A www.dnssec-failed.org
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags:; udp: 1232
-    ; COOKIE: 6339d7228b8587f401000000671bc2eb2fe25bdf099ef1af (good)
-    ;; QUESTION SECTION:
-    ;www.dnssec-failed.org.         IN      A
+; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.1 -t A www.dnssec-failed.org
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 26260
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; Query time: 460 msec
-    ;; SERVER: 127.0.0.1#53(127.0.0.1) (UDP)
-    ;; WHEN: Fri Oct 25 16:10:19 UTC 2024
-    ;; MSG SIZE  rcvd: 78
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 1232
+; COOKIE: 6339d7228b8587f401000000671bc2eb2fe25bdf099ef1af (good)
+;; QUESTION SECTION:
+;www.dnssec-failed.org.         IN      A
+
+;; Query time: 460 msec
+;; SERVER: 127.0.0.1#53(127.0.0.1) (UDP)
+;; WHEN: Fri Oct 25 16:10:19 UTC 2024
+;; MSG SIZE  rcvd: 78
+```
 
 That's a very generic failure: it just says `SERVFAIL`, and gives us no IP: `IN A` is empty. The BIND9 logs, however, tell a more detailed story:
 
-    $ journalctl -u named.service -f
-    (...)
-    named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.85.132#53
-    named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.68.244#53
-    named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.76.228#53
-    named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.72.244#53
-    named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 69.252.250.103#53
-    named[286]: broken trust chain resolving 'www.dnssec-failed.org/A/IN': 68.87.72.244#53
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+journalctl -u named.service -f
+
+(...)
+named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.85.132#53
+named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.68.244#53
+named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.76.228#53
+named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.72.244#53
+named[286]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+named[286]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 69.252.250.103#53
+named[286]: broken trust chain resolving 'www.dnssec-failed.org/A/IN': 68.87.72.244#53
+```
 
 ## Client-side tooling: dig
 
@@ -66,10 +80,10 @@ One of the more versatile DNS troubleshooting tools is `dig`, generally used for
 
 For DNSSEC troubleshooting purposes, we are interested in the following features:
 
- * `+dnssec`: Set the "DNSSEC OK" bit in the queries, which tells the resolver to include in its responses the DNSSEC RRSIG records. This is also shown as a `do` flag in queries.
- * `+cd`: This means *check disabled* and tells the resolver we can accept unauthenticated data in the DNS responses.
- * `ad`: When included in a response, this flag means *authenticated data*, and tells us that the resolver who provided this answer has performed DNSSEC validation.
- * `@<IP>`: This parameter lets us direct the query to a specific DNS server running at the provided IP address.
+* `+dnssec`: Set the "DNSSEC OK" bit in the queries, which tells the resolver to include in its responses the DNSSEC RRSIG records. This is also shown as a `do` flag in queries.
+* `+cd`: This means *check disabled* and tells the resolver we can accept unauthenticated data in the DNS responses.
+* `ad`: When included in a response, this flag means *authenticated data*, and tells us that the resolver who provided this answer has performed DNSSEC validation.
+* `@<IP>`: This parameter lets us direct the query to a specific DNS server running at the provided IP address.
 
 For example, let's query the local systemd-resolved DNS stub resolver (running at **127.0.0.53**) for the *isc.org* type *A* record, and request DNSSEC data:
 
@@ -77,113 +91,148 @@ For example, let's query the local systemd-resolved DNS stub resolver (running a
 We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC capable upstream servers (e.g. Cloudflare's `1.1.1.1`, in case your upstream DNS server cannot properly handle it) in systemd-resolved, as shown below. After our experiments, we might want to restore the default settings, using: `resolvectl revert eth0`
 :::
 
-    $ resolvectl dnssec eth0 true
-    $ resolvectl dns eth0 1.1.1.1
-    $ dig @127.0.0.53 -t A +dnssec +multiline isc.org
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl dnssec eth0 true
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl dns eth0 1.1.1.1
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.53 -t A +dnssec +multiline isc.org
 
-    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline isc.org
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23376
-    ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
+; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline isc.org
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 23376
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags: do; udp: 65494
-    ;; QUESTION SECTION:
-    ;isc.org.		IN A
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 65494
+;; QUESTION SECTION:
+;isc.org.		IN A
 
-    ;; ANSWER SECTION:
-    isc.org.		299 IN A 151.101.2.217
-    isc.org.		299 IN A 151.101.66.217
-    isc.org.		299 IN A 151.101.130.217
-    isc.org.		299 IN A 151.101.194.217
-    isc.org.		299 IN RRSIG A 13 2 300 (
-                    20260130043603 20260116034316 27566 isc.org.
-                    kp+MQSlXw7xOqU072l4g3/Fq815ucOv5rN77kxizdxnL
-                    EMwYbgtcvI+AgDIwhm9qgLhc2GO6pUUF+puJCokxNA== )
+;; ANSWER SECTION:
+isc.org.		299 IN A 151.101.2.217
+isc.org.		299 IN A 151.101.66.217
+isc.org.		299 IN A 151.101.130.217
+isc.org.		299 IN A 151.101.194.217
+isc.org.		299 IN RRSIG A 13 2 300 (
+                20260130043603 20260116034316 27566 isc.org.
+                kp+MQSlXw7xOqU072l4g3/Fq815ucOv5rN77kxizdxnL
+                EMwYbgtcvI+AgDIwhm9qgLhc2GO6pUUF+puJCokxNA== )
 
-    ;; Query time: 26 msec
-    ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Thu Jan 22 13:56:58 UTC 2026
-    ;; MSG SIZE  rcvd: 203
+;; Query time: 26 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Jan 22 13:56:58 UTC 2026
+;; MSG SIZE  rcvd: 203
+```
 
 Let's unpack this answer for the important troubleshooting parts:
 
- * The answer has the `ad` flag set, meaning this data was authenticated. In other words, DNSSEC validation was successful.
- * The status of the query is `NOERROR`, and we have 5 records in the answer section.
- * An RRSIG record for the "A" Resource Record was returned as requested by the `+dnssec` command-line parameter. This is also confirmed by the presence of the "do" flag in the "OPT PSEUDOSECTION".
+* The answer has the `ad` flag set, meaning this data was authenticated. In other words, DNSSEC validation was successful.
+* The status of the query is `NOERROR`, and we have 5 records in the answer section.
+* An RRSIG record for the "A" Resource Record was returned as requested by the `+dnssec` command-line parameter. This is also confirmed by the presence of the "do" flag in the "OPT PSEUDOSECTION".
 
 If we repeat this query with a domain that we know fails DNSSEC validation, we get the following reply:
 
-    $ dig @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
 
-    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 2028
-    ;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
+; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: SERVFAIL, id: 2028
+;; flags: qr rd ra; QUERY: 1, ANSWER: 0, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags: do; udp: 65494
-    ; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
-    ;; QUESTION SECTION:
-    ;dnssec-failed.org.	IN A
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 65494
+; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
+;; QUESTION SECTION:
+;dnssec-failed.org.	IN A
 
-    ;; Query time: 219 msec
-    ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Thu Jan 22 13:57:33 UTC 2026
-    ;; MSG SIZE  rcvd: 103
+;; Query time: 219 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Jan 22 13:57:33 UTC 2026
+;; MSG SIZE  rcvd: 103
+```
 
 This time:
 
- * There is no `ad` flag set in the answer.
- * The status of the query is a generic `SERVFAIL`, and zero answers were provided.
- * An error logged in `journalctl`
+* There is no `ad` flag set in the answer.
+* The status of the query is a generic `SERVFAIL`, and zero answers were provided.
+* An error logged in `journalctl`
 
-```
-$ journalctl -u systemd-resolved.service -f
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+journalctl -u systemd-resolved.service -f
+
 (...)
 systemd-resolved[9203]: [🡕] DNSSEC validation failed for question dnssec-failed.org IN A: no-signature
 ```
 
 We can tell the local stub resolver (systemd-resolved running at `@127.0.0.53` address) that we don't want it to perform DNSSEC validation. We do that by setting the `+cd` (check disabled) flag. Then things change in our answer:
 
-    $ dig @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
 
-    ; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32064
-    ;; flags: qr rd ra cd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
+; <<>> DiG 9.20.11-Ubuntu <<>> @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 32064
+;; flags: qr rd ra cd; QUERY: 1, ANSWER: 2, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags: do; udp: 65494
-    ; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
-    ;; QUESTION SECTION:
-    ;dnssec-failed.org.	IN A
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 65494
+; EDE: 9 (DNSKEY Missing): (no SEP matching the DS found for dnssec-failed.org.)
+;; QUESTION SECTION:
+;dnssec-failed.org.	IN A
 
-    ;; ANSWER SECTION:
-    dnssec-failed.org.	299 IN A 96.99.227.255
-    dnssec-failed.org.	299 IN RRSIG A 5 2 300 (
-                    20260204145120 20260118144620 44973 dnssec-failed.org.
-                    U8NkuyOJBdX6vA/f+o4DclA0x5YrCVOpMCGyCnXqaTTv
-                    8+QhDuwRGsAhXYtAZTx4k6q7B2NbqPFsavHKbbsEY46J
-                    SLpA1MIYydHTnUPHnu+foH4Dq/QctoXbUejMySdyZwPp
-                    MU5hm5IkwN8LgKjoE0YL89mr4ueu01DtESG6P+I= )
+;; ANSWER SECTION:
+dnssec-failed.org.	299 IN A 96.99.227.255
+dnssec-failed.org.	299 IN RRSIG A 5 2 300 (
+                20260204145120 20260118144620 44973 dnssec-failed.org.
+                U8NkuyOJBdX6vA/f+o4DclA0x5YrCVOpMCGyCnXqaTTv
+                8+QhDuwRGsAhXYtAZTx4k6q7B2NbqPFsavHKbbsEY46J
+                SLpA1MIYydHTnUPHnu+foH4Dq/QctoXbUejMySdyZwPp
+                MU5hm5IkwN8LgKjoE0YL89mr4ueu01DtESG6P+I= )
 
-    ;; Query time: 119 msec
-    ;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
-    ;; WHEN: Thu Jan 22 13:58:49 UTC 2026
-    ;; MSG SIZE  rcvd: 296
+;; Query time: 119 msec
+;; SERVER: 127.0.0.53#53(127.0.0.53) (UDP)
+;; WHEN: Thu Jan 22 13:58:49 UTC 2026
+;; MSG SIZE  rcvd: 296
+```
 
 Looks like we have some sort of answer, but:
 
- * There is no `ad` flag in the answer, so this data was not authenticated.
- * The status is `NOERROR`, and we got two answers.
- * Note there is a `cd` flag in the answer, meaning "check disabled". No attempt at validating the answer was done by the resolver, as requested.
+* There is no `ad` flag in the answer, so this data was not authenticated.
+* The status is `NOERROR`, and we got two answers.
+* Note there is a `cd` flag in the answer, meaning "check disabled". No attempt at validating the answer was done by the resolver, as requested.
 
 In none of these cases, though, did `dig` perform DNSSEC validation: it just presented the results provided by the resolver, which in some cases was no validation at all (via the `+cd` flag). To perform the validation ourselves, we have to use a different tool.
 
@@ -193,35 +242,63 @@ The `delv` tool is very similar to `dig`, and can perform the same DNS queries, 
 
 But to bring the responsibility of doing DNSSEC validation to the tool itself, we use the `+cd` flag in our queries, to tell the resolver to not attempt that validation. Otherwise we will just get back a generic `SERVFAIL` error:
 
-    $ delv @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
-    ;; resolution failed: SERVFAIL
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+delv @127.0.0.53 -t A +dnssec +multiline dnssec-failed.org
+
+;; resolution failed: SERVFAIL
+```
 
 With the `+cd` flag present, however, `delv` itself will do the validation. It will fail again, but now with a DNSSEC-specific error:
 
-    $ delv @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
-    ;; validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    ;; no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 127.0.0.1#53
-    ;; broken trust chain resolving 'dnssec-failed.org/A/IN': 127.0.0.1#53
-    ;; resolution failed: broken trust chain
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+delv @127.0.0.53 -t A +dnssec +cd +multiline dnssec-failed.org
+
+;; validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+;; no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 127.0.0.1#53
+;; broken trust chain resolving 'dnssec-failed.org/A/IN': 127.0.0.1#53
+;; resolution failed: broken trust chain
+```
 
 If needed, `delv` can be told to not perform DNSSEC validation at all, by passing the `-i` flag. Together with the `+cd` flag, which instructs the Validating Resolver to not perform validation either, we get this result:
 
-    $ delv @127.0.0.53 -i -t A +dnssec +cd +multiline dnssec-failed.org
-    ; answer not validated
-    dnssec-failed.org.      100 IN A 96.99.227.255
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+delv @127.0.0.53 -i -t A +dnssec +cd +multiline dnssec-failed.org
+
+; answer not validated
+dnssec-failed.org.      100 IN A 96.99.227.255
+```
 
 For a good DNSSEC domain, `delv` will return a validated answer:
 
-    $ delv @127.0.0.53 -t A +multiline +cd isc.org
-    ; fully validated
-    isc.org.		299 IN A 151.101.2.217
-    isc.org.		299 IN A 151.101.66.217
-    isc.org.		299 IN A 151.101.130.217
-    isc.org.		299 IN A 151.101.194.217
-    isc.org.		299 IN RRSIG A 13 2 300 (
-    				20250908112301 20250825104017 27566 isc.org.
-    				9oclTno0Ub2NmUEXdyLv0zqwPBbbUVmT3RX4aP4BQQ+h
-    				4g839JXuCKHufXSPkWh/GJe/MveP83dDvJkrMmEIzg== )
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+delv @127.0.0.53 -t A +multiline +cd isc.org
+
+; fully validated
+isc.org.		299 IN A 151.101.2.217
+isc.org.		299 IN A 151.101.66.217
+isc.org.		299 IN A 151.101.130.217
+isc.org.		299 IN A 151.101.194.217
+isc.org.		299 IN RRSIG A 13 2 300 (
+                20250908112301 20250825104017 27566 isc.org.
+                9oclTno0Ub2NmUEXdyLv0zqwPBbbUVmT3RX4aP4BQQ+h
+                4g839JXuCKHufXSPkWh/GJe/MveP83dDvJkrMmEIzg== )
+```
 
 Given that above we used the `+cd` flag, this means that the validation was done by `delv` itself. We will get the same result without that flag if the resolver also succeeds in the DNSSEC validation, and provides an answer.
 
@@ -235,23 +312,61 @@ We need to (temporarily) enable DNSSEC validation and potentially set DNSSEC cap
 
 Flush systemd-resolved caches & state and confirm DNSSEC is enabled:
 
-    $ sudo resolvectl flush-caches
-    $ sudo resolvectl reset-server-features
-    $ sudo resolvectl dnssec eth0 yes
-    $ sudo resolvectl dns eth0 1.1.1.1
-    $ resolvectl dnssec
-    Global: no
-    Link 44 (eth0): yes
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl flush-caches
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl reset-server-features
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl dnssec eth0 yes
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl dns eth0 1.1.1.1
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl dnssec
+
+Global: no
+Link 44 (eth0): yes
+```
 
 Query a DNSSEC enabled domain and confirm the data was fetched from the network and authenticated, as displayed by the `Data is authenticated` and `Data from` fields:
 
-    $ resolvectl query --type=MX isc.org
-    isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
-    isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl query --type=MX isc.org
 
-    -- Information acquired via protocol DNS in 3.0ms.
-    -- Data is authenticated: yes; Data was acquired via local or encrypted transport: no
-    -- Data from: network
+isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
+isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+
+-- Information acquired via protocol DNS in 3.0ms.
+-- Data is authenticated: yes; Data was acquired via local or encrypted transport: no
+-- Data from: network
+```
 
 ## Incorrect time
 
@@ -266,20 +381,33 @@ An RRSIG record (a digital signature of a Resource Record) has a validity. For e
 
 Has this validity range:
 
- * valid until: 20241106131533 (2024-11-06 13:15:33 UTC)
- * valid since: 20241023195023 (2024-10-23 19:50:23 UTC)
+* valid until: 20241106131533 (2024-11-06 13:15:33 UTC)
+* valid since: 20241023195023 (2024-10-23 19:50:23 UTC)
 
 If the DNSSEC validator has an incorrect clock, outside of the validity range, the DNSSEC validation will fail. For example, with the clock incorrectly set to before the beginning of the validity period, `delv` will complain like this:
 
-    $ date
-    Tue Oct 10 10:10:19 UTC 2000
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+date
 
-    $ delv @10.10.17.229 -a example.internal.key +root=example.internal +multiline noble.example.internal
-    ;; validating example.internal/DNSKEY: verify failed due to bad signature (keyid=48112): RRSIG validity period has not begun
-    ;; validating example.internal/DNSKEY: no valid signature found (DS)
-    ;; no valid RRSIG resolving 'example.internal/DNSKEY/IN': 10.10.17.229#53
-    ;; broken trust chain resolving 'noble.example.internal/A/IN': 10.10.17.229#53
-    ;; resolution failed: broken trust chain
+Tue Oct 10 10:10:19 UTC 2000
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+delv @10.10.17.229 -a example.internal.key +root=example.internal +multiline noble.example.internal
+
+;; validating example.internal/DNSKEY: verify failed due to bad signature (keyid=48112): RRSIG validity period has not begun
+;; validating example.internal/DNSKEY: no valid signature found (DS)
+;; no valid RRSIG resolving 'example.internal/DNSKEY/IN': 10.10.17.229#53
+;; broken trust chain resolving 'noble.example.internal/A/IN': 10.10.17.229#53
+;; resolution failed: broken trust chain
+```
 
 Any other Validating Resolver will fail in a similar way, and should indicate this error in its logs.
 
@@ -291,16 +419,16 @@ BIND9 will complain loudly if it's running on a system with an incorrect clock, 
     named[3593]: broken trust chain resolving './NS/IN': 199.7.83.42#53
     named[3593]: resolver priming query complete: broken trust chain
 
-## Third-party Web-based diagnostics
+## Third-party web-based diagnostics
 
 There are some public third-party web-based tools that will check the status of DNSSEC of a public domain. Here are some:
 
- * <https://dnsviz.net>: Returns a graphical diagram showing the chain of trust and where it breaks down, if that's the case.
- * <https://dnssec-debugger.verisignlabs.com>: A DNSSEC debugger which also shows the chain of trust and where it breaks down, in a table format.
+* <https://dnsviz.net>: Returns a graphical diagram showing the chain of trust and where it breaks down, if that's the case.
+* <https://dnssec-debugger.verisignlabs.com>: A DNSSEC debugger which also shows the chain of trust and where it breaks down, in a table format.
 
 ## Further reading
 
- * [bind9's guide to DNSSEC troubleshooting](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#basic-dnssec-troubleshooting)
- * [How to validate DNSSEC using the command line](https://www.cyberciti.biz/faq/unix-linux-test-and-validate-dnssec-using-dig-command-line/)
- * {manpage}`delv(1)` manual page
- * {manpage}`dig(1)` manual page
+* [bind9's guide to DNSSEC troubleshooting](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#basic-dnssec-troubleshooting)
+* [How to validate DNSSEC using the command line](https://www.cyberciti.biz/faq/unix-linux-test-and-validate-dnssec-using-dig-command-line/)
+* {manpage}`delv(1)` manual page
+* {manpage}`dig(1)` manual page

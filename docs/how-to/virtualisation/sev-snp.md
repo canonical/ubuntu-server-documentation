@@ -25,10 +25,22 @@ To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP
 
 To check if the host supports `SEV-SNP`:
 
-```bash
-$ cat /sys/module/kvm_amd/parameters/sev
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /sys/module/kvm_amd/parameters/sev
+
 Y
-$ cpuid -1 -l 0x8000001f
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cpuid -1 -l 0x8000001f
+
 CPU:
    AMD Secure Encryption (0x8000001f):
       SME: secure memory encryption support    = true
@@ -40,7 +52,11 @@ CPU:
 
 To launch a SEV-SNP-enabled VM using `QEMU`, first install `qemu-system-x86_64` and launch a VM with the following parameters:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 \
   -enable-kvm \
   -nographic \
@@ -61,7 +77,7 @@ qemu-system-x86_64 \
 
 The important argument that tells `QEMU` that this VM is a SEV-SNP VM is:
 
-```bash
+```
   -object sev-snp-guest,id=sev0,cbitpos=47,reduced-phys-bits=1,kernel-hashes=on \
 ```
 
@@ -81,6 +97,10 @@ On the guest side, Ubuntu 24.04 LTS and newer fully support AMD SEV-SNP. You can
 Once the VM is launched, install `linux-generic` to get the `sev-guest` module and insert it with `modprobe sev-guest`. This will create a new character device on the guest that can be used to generate attestation reports from the TEE: `/dev/sev-guest`.
 Finally, you can use AMD's [`snpguest`](https://github.com/virtee/snpguest) to generate an attestation report that can be used for a remote attestation:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ./snpguest report --random attestation-report.bin request-file.txt
 ```

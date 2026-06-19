@@ -44,7 +44,11 @@ To begin with, we have to start with installing the database that will be used b
 
 Either SQL database is suitable. For this document, we will use PostgreSQL:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postgresql
 ```
 
@@ -54,7 +58,11 @@ Refer to {ref}`MySQL databases <install-mysql>` and {ref}`PostgreSQL databases <
 
 Next we can install Bacula. The `bacula` package has the necessary dependencies and will pull in what is needed for our deployment scenario:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install bacula
 ```
 
@@ -91,7 +99,7 @@ All the following sections involve the `/etc/bacula/bacula-dir.conf` Director co
 
 This block defines the attributes of the Director service:
 
-```
+```text
 Director {
   Name = bacula-server-dir
   DIRport = 9101
@@ -121,7 +129,7 @@ For more details about all the options of the `Director` resource, please check 
 
 Let's define what we want to backup. There will likely be multiple file sets defined in a production server, but as an example, here we will define a set for backing up the home directory:
 
-```
+```text
 FileSet {
   Name = "Home Set"
   Include {
@@ -160,7 +168,7 @@ The `Client` resource is used to define a system to be backed up. That system wi
 
 The default installation will have defined this resource already, and it should be similar to the following:
 
-```
+```text
 # Client (File Services) to backup
 Client {
   Name = bacula-server-fd
@@ -197,7 +205,7 @@ A *Pool* in Bacula represents a collection of volumes. A *Volume* is a single ph
 
 The default configuration file will have defined several *Pools* already. For this documentation, we are interested in the `File` pool:
 
-```
+```text
 Pool {
   Name = File
   Pool Type = Backup
@@ -232,7 +240,7 @@ In our current setup, that's the same system where the Director is running, but 
 
 This time we will have to change two configuration files: the Director one, and the Storage one. Let's begin by defining a `Storage` resource on `/etc/bacula/bacula-dir.conf`, the Director configuration file:
 
-```
+```text
 Storage {
   Name = FileBackup
   Address = bacula-server.lxd
@@ -265,7 +273,7 @@ Next we need to edit the corresponding Storage daemon configuration in `/etc/bac
 
 First, remove or comment out the `SDAddress` configuration, so that the daemon will listen on all network interfaces it finds:
 
-```
+```text
 Storage {
   Name = bacula-server-sd
   SDPort = 9103
@@ -286,7 +294,7 @@ Important points for the config above:
 
 Next, let's define a `Device`, also in `/etc/bacula/bacula-sd.conf`:
 
-```
+```text
 Device {
     Name = FileBackup
     Media Type = File
@@ -311,7 +319,7 @@ What we need to pay close attention to here is:
 
 Lastly, the Storage component needs to be told about the Director. This is done with a `Director` resource in `/etc/bacula/bacula-sd.conf`. No changes should be needed here because we installed the Storage component on the same host as the Director, but it's best to check:
 
-```
+```text
 Director {
     Name = bacula-server-dir
     Password = "<randomly generated>"
@@ -326,7 +334,11 @@ These two options need to match the following:
 
 After making all changes to the `bacula-sd.conf` configuration file, restart the Storage Daemon:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bacula-sd.service
 ```
 
@@ -343,7 +355,7 @@ The default Director configuration file includes a default Job resource, and mor
 
 Let's go over the Default Job resource first in `/etc/bacula/bacula-dir.conf` and change it a little bit:
 
-```
+```text
 JobDefs {
   Name = "DefaultJob"
   Type = Backup
@@ -371,7 +383,7 @@ This configuration is selecting some defaults:
 
 We can now take advantage of this set of defaults, and define a new Job resource with minimal config:
 
-```
+```text
 Job {
     Name = "DirectorHomeBackup"
     JobDefs = "DefaultJob"
@@ -386,7 +398,7 @@ The upstream documentation has a section about [Naming Resources](https://docs.b
 
 We also need a Job definition for the restore task. The default configuration file will have a definition for this already, but it needs to be changed:
 
-```
+```text
 Job {
     Name = "RestoreFiles"
     Type = Restore
@@ -417,10 +429,22 @@ For more details about all the options of the `Job` resource, please check the u
 ### Storage daemon
 
 There isn't much more to configure for the Storage daemon after the Director configuration steps done earlier, but we still need to create the directories for the backup and restore jobs:
-```console
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -m 0700 /storage /storage/backups /storage/restore
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown bacula: -R /storage
 ```
+
 This will allow bacula, and only bacula, to read and write to the storage path. You can, of course, adjust the permissions and ownership to something that suits your deployment. Just be mindful that the bacula user needs to be able to create and remove files from the `/storage/backups` and `/storage/restore` paths, and that regular users should not be allowed to read those.
 
 :::{tip}
@@ -433,7 +457,7 @@ The File daemon configuration is located in the `/etc/bacula/bacula-fd.conf` fil
 
 To make this change, we are going to remove or comment out the `FDAddress` option in the `FileDaemon` resource in `/etc/bacula/bacula-fd.conf` file:
 
-```
+```text
 FileDaemon {
   Name = bacula-server-fd
   FDport = 9102
@@ -447,7 +471,11 @@ FileDaemon {
 
 After making the change and saving the file, restart the File daemon service:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bacula-fd.service
 ```
 
@@ -462,7 +490,11 @@ There is no further configuration to be done for the Console at this time. The d
 
 The Console can be used to query the Director about jobs, but to use the Console with a *non-root* user, the user needs to be in the **Bacula group**. To add a user to the Bacula group, run the following command from a terminal:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo adduser <username> bacula
 ```
 
@@ -487,7 +519,11 @@ In `/etc/bacula/bacula-sd.conf`:
 
 We made many changes to a few configuration files, so let's restart all the related services:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bacula-dir.service bacula-fd.service bacula-sd.service
 ```
 
@@ -497,13 +533,18 @@ We now have everything in place to run our first backup job.
 
 On the Bacula Director system, run the `bconsole` command as root to enter the Bacula Console:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo bconsole
 ```
 
 The command will connect to the the local Director, and open up an interactive prompt:
 
-```text
+```{terminal}
+:output-only:
 Connecting to Director localhost:9101
 1000 OK: 10002 bacula-server-dir Version: 15.0.3 (25 March 2025)
 Enter a period to cancel a command.
@@ -514,7 +555,8 @@ You can type `help` for a full list of all the available commands, and `help <co
 
 For example, to obtain help text about the `run` command, type `help run` to obtain the following output:
 
-```text
+```{terminal}
+:output-only:
   Command       Description
   =======       ===========
   run           Run a job
@@ -531,7 +573,8 @@ When at a prompt, entering a period cancels the command.
 
 Let's interactively run a backup job. The output below will show the `run` command and all the replies that were typed in response to the console prompts:
 
-```text
+```{terminal}
+:output-only:
 *run
 Using Catalog "MyCatalog"
 A job name must be specified.
@@ -569,7 +612,8 @@ To check the result of a job, there are several methods:
 
 For example, if we run `list jobid=7`, this is the output:
 
-```text
+```{terminal}
+:output-only:
 +-------+------------+---------------------+------+-------+----------+----------+-----------+
 | jobid | name       | starttime           | type | level | jobfiles | jobbytes | jobstatus |
 +-------+------------+---------------------+------+-------+----------+----------+-----------+
@@ -585,7 +629,8 @@ For a list of status and error codes, check the upstream [Job status and Error c
 
 To see the full log of this specific job, we can use the `list joblog jobid=7` command. This is quite detailed, and the output below is truncated for brevity:
 
-```text
+```{terminal}
+:output-only:
 +----------------------------------------------------------------------------------------------------+
 | logtext                                                                                              |
 +----------------------------------------------------------------------------------------------------+
@@ -613,7 +658,8 @@ To see the full log of this specific job, we can use the `list joblog jobid=7` c
 
 If we inspect the backup target location on the Storage server (which in this deployment is the same as the Director), we can see that a volume file was created:
 
-```
+```{terminal}
+:output-only:
 -rw-r----- 1 bacula tape 345K Oct 20 20:21 /storage/backups/Vol-0001
 ```
 
@@ -621,7 +667,8 @@ If we inspect the backup target location on the Storage server (which in this de
 
 So what is it that was backed up? This job used the `Home Set`, so we expect to see files from the `/home` directory. To see what are the contents of that backup job, we can use the `restore` command (the `RestoreFiles` job should never be executed directly). Below is the output of an interactive `restore` session where we selected the option "Select the most recent backup for a client":
 
-```text
+```{terminal}
+:output-only:
 First you select one or more JobIds that contain files
 to be restored. You will be presented several methods
 of specifying the JobIds. Then you will be allowed to
@@ -654,12 +701,33 @@ $
 
 Here we can navigate the filesystem and inspect which files are part of the backup:
 
-```
-$ dir
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dir
+
 drwxr-xr-x   1 root     root              12  2025-10-20 14:03:44  /home/
-$ cd home/ubuntu
+```
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cd home/ubuntu
+
 cwd is: /home/ubuntu/
-$ dir
+```
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dir
+
 -rw-------   1 ubuntu   ubuntu            32  2025-10-20 18:10:51  /home/ubuntu/.bash_history
 -rw-r--r--   1 ubuntu   ubuntu           220  2025-10-20 14:03:50  /home/ubuntu/.bash_logout
 -rw-r--r--   1 ubuntu   ubuntu          3830  2025-10-20 14:03:50  /home/ubuntu/.bashrc
@@ -670,10 +738,22 @@ drwx------   1 ubuntu   ubuntu            30  2025-10-20 14:03:45  /home/ubuntu/
 
 To restore a file, we use the `mark` command on it. For example, let's restore `/home/ubuntu/.tmux.conf`:
 
-```text
-$ mark .tmux.conf
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+mark .tmux.conf
+
 1 file marked.
-$ done
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+done
+
 Bootstrap records written to /var/lib/bacula/bacula-server-dir.restore.1.bsr
 
 The Job will require the following (*=>InChanger):
@@ -707,7 +787,8 @@ Now we have some choices. Notice how the `RestoreFiles` job was automatically se
 
 If we accept these default, the marked files will be restored to the `/storage/restore` path on the `bacula-server-fd` system:
 
-```text
+```{terminal}
+:output-only:
 OK to run? (Yes/mod/no): yes
 Job queued. JobId=8
 *
@@ -715,13 +796,15 @@ Job queued. JobId=8
 
 And indeed, if we inspect that location, we see the file that we marked for restoration:
 
-```text
+```{terminal}
+:output-only:
 -rw-r--r-- 1 ubuntu ubuntu 2.4K Oct 20 14:03 /storage/restore/home/ubuntu/.tmux.conf
 ```
 
 If we wanted to restore it to its original place, for example, if the user mistakenly deleted it and wanted it back, we would select the `mod` option to change where the file should be placed:
 
-```text
+```{terminal}
+:output-only:
 OK to run? (Yes/mod/no): mod
 Parameters to modify:
      1: Level
@@ -765,13 +848,17 @@ If we want to start backing up a new system, we need to install the File Daemon 
 
 First, on the system that we want to add, let's install the client portion of Bacula, which is the File Daemon component:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install bacula-fd
 ```
 
 Next, update the Director resource in `/etc/bacula/bacula-fd.conf` to point at the existing Director we have already deployed:
 
-```
+```text
 Director {
   Name = bacula-server-dir # same as Director's Name on the Director server
   Password = "<randomly generated>"
@@ -785,7 +872,7 @@ Notes:
 
 Also in `/etc/bacula/bacula-fd.conf`, we have to remove or comment out the `FDAddress` parameter in the `FileDaemon` resource, so that this service will listen on all available network interfaces, and not just localhost:
 
-```
+```text
 FileDaemon {
   Name = workstation1-fd
   FDport = 9102           # where we listen for the director
@@ -799,7 +886,7 @@ FileDaemon {
 
 And finally, in the same file, update the `Messages` resource and update the Director name in there as well:
 
-```
+```text
 Messages {
     Name = Standard
     director = bacula-server-dir = all, !skipped, !restored, !verified, !saved
@@ -808,7 +895,11 @@ Messages {
 
 With these changes done, restart the File Daemon:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bacula-fd.service
 ```
 
@@ -816,7 +907,7 @@ Now we switch to the Director system, where we have to let it know about this ne
 
 In `/etc/bacula/bacula-dir.conf`, add a new `Client` resource:
 
-```
+```text
 Client {
     Name = workstation1-fd
     Address = workstation1.lxd
@@ -839,7 +930,7 @@ This makes the Director know how to reach the new client.
 
 Now we have to define a new job to backup files from this new client. Again on `/etc/bacula/bacula-dir.conf` on the Director, let's add a new `Job` resource:
 
-```
+```text
 Job {
     Name = "BackupWorkstation"
     JobDefs = "DefaultJob"
@@ -851,13 +942,18 @@ This job inherits all parameters from the `DefaultJob`, and just overrides the c
 
 With this done, we can restart the Director:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bacula-dir.service
 ```
 
 If we now enter the Bacula console, we should be able to list the new client, and run its new backup job:
 
-```text
+```{terminal}
+:output-only:
 *list clients
 Automatically selected Catalog: MyCatalog
 Using Catalog "MyCatalog"
@@ -871,7 +967,8 @@ Using Catalog "MyCatalog"
 
 Let's run the new `BackupWorkstation` job:
 
-```text
+```{terminal}
+:output-only:
 *run
 Using Catalog "MyCatalog"
 A job name must be specified.
@@ -897,7 +994,8 @@ You have messages.
 
 And for a quick check of the contents (for testing, there was a file called `this-is-workstation1.txt` in `/home/ubuntu` on that system):
 
-```text
+```{terminal}
+:output-only:
 *restore
 ...
      5: Select the most recent backup for a client

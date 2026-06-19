@@ -7,7 +7,6 @@ myst:
 (smart-card-authentication-with-ssh)=
 # Smart card authentication with SSH
 
-
 One of the authentication methods supported by the SSH protocol is public key authentication. A public key is copied to the SSH server where it is stored and marked as authorized. The owner of the corresponding private key in the smart card can then SSH login to the server.
 
 We will use `opensc-pkcs11` on the client to access the smart card drivers, and we will copy the public key from the smart card to the SSH server to make the authentication work.
@@ -15,9 +14,11 @@ We will use `opensc-pkcs11` on the client to access the smart card drivers, and 
 The following instructions apply to Ubuntu 18.04 later.
 
 ## Server configuration
+
 The SSH server and client must be configured to permit smart card authentication.
 
 ### Configure the SSH server
+
 The SSH server needs to allow public key authentication set in its configuration file and it needs the user’s public key.
 
 Ensure the server has the PubkeyAuthentication option set to ‘yes’ in its `/etc/ssh/sshd_config` file. In a default `/etc/ssh/sshd_config` in Ubuntu, the
@@ -29,7 +30,11 @@ PubkeyAuthentication yes
 
 ### Restart the SSH server
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart sshd
 ```
 
@@ -38,13 +43,17 @@ sudo systemctl restart sshd
 Extract the user’s public key from the smart card on the SSH client. Use `ssh-keygen` to read the public key from the smart card and into a format consumable
 for SSH.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ssh-keygen -D /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so > smartcard.pub
 ```
 
 Copy this key to the SSH server.
 
-```bash
+```sh
 ssh-copy-id -f -i smartcard.pub ubuntu@server-2
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: “smartcard.pub”
 ubuntu@server-2’s password:

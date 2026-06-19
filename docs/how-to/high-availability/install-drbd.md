@@ -13,7 +13,11 @@ Distributed Replicated Block Device (DRBD) mirrors block devices between multipl
 
 To get started using DRBD, first install the necessary packages. In a terminal window, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install drbd-utils
 ```
 
@@ -63,46 +67,80 @@ There are many other options in `/etc/drbd.conf`, but for this example the defau
 
 Now copy `/etc/drbd.conf` to the second host:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 scp /etc/drbd.conf drbd02:~
 ```
 
 And, on `drbd02`, move the file to `/etc`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv drbd.conf /etc/
 ```
 
 Now using the `drbdadm` utility, initialize the meta data storage. On both servers, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo drbdadm create-md r0
 ```
 
 Next, on both hosts, start the `drbd` daemon:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start drbd.service
 ```
 
 On `drbd01` (or whichever host you wish to be the primary), enter the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo drbdadm -- --overwrite-data-of-peer primary all
 ```
 
 After running the above command, the data will start syncing with the secondary host. To watch the progress, on `drbd02` enter the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 watch -n1 cat /proc/drbd
 ```
 
-To stop watching the output press <kbd>Ctrl</kbd> + <kbd>C</kbd>.
+To stop watching the output press {kbd}`Ctrl` + {kbd}`C`.
 
 Finally, add a filesystem to `/dev/drbd0` and mount it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkfs.ext3 /dev/drbd0
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /dev/drbd0 /srv
 ```
 
@@ -110,31 +148,51 @@ sudo mount /dev/drbd0 /srv
 
 To test that the data is actually syncing between the hosts copy some files on `drbd01`, the primary, to `/srv`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp -r /etc/default /srv
 ```
 
 Next, unmount `/srv`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo umount /srv
 ```
 
 Now demote the **primary** server to the **secondary** role:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo drbdadm secondary r0
 ```
 
 Now on the **secondary** server, promote it to the **primary** role:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo drbdadm primary r0
 ```
 
 Lastly, mount the partition:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /dev/drbd0 /srv
 ```
 

@@ -229,7 +229,7 @@ output
 ```
 
 Use the options to customize the displayed options as follows:
-* `:copy:` allows the command to be copied using the copybutton. By default, the terminal directive excludes the output and the command prompt from the copied command.
+* `:copy:` allows the command to be copied using the "copy" button. By default, the terminal directive excludes the output and the command prompt from the copied command.
 * `:user:` specify a username to display
 * `:host:` specify the hostname to display
 * `:dir:` specify the directory to be shown before the command prompt
@@ -259,6 +259,43 @@ command
 
 output
 ```
+
+If you want to insert some extra context or guidance between a command and the output, you can use the `:output-only:` role, as follows:
+
+````text
+```{terminal}
+:copy: 
+:user: username
+:host: ubuntu
+:dir: ~/src
+command
+```
+
+Some additional info for the reader.
+
+```{terminal}
+:output-only:
+The output
+```
+````
+
+Which renders as:
+
+```{terminal}
+:copy: 
+:user: username
+:host: ubuntu
+:dir: ~/src
+command
+```
+
+Some additional info for the reader.
+
+```{terminal}
+:output-only:
+The output
+```
+
 
 ### Code blocks
 

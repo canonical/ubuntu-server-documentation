@@ -21,7 +21,11 @@ Although QEMU has a [command line interface](https://qemu-project.gitlab.io/qemu
 
 The first step to using QEMU/KVM on Ubuntu is to check if your system supports KVM.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kvm-ok
 ```
 
@@ -33,7 +37,11 @@ You should get an output saying `KVM acceleration can be used`.
 
 The next step is to install QEMU.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install qemu-system
 ```
 
@@ -41,7 +49,11 @@ sudo apt-get install qemu-system
 
 The quickest way to get started with QEMU is by booting a VM directly from a live ISO. You can achieve this by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 -m 4G -enable-kvm -cdrom http://releases.ubuntu.com/noble/ubuntu-24.04.3-live-server-amd64.iso
 ```
 
@@ -55,7 +67,11 @@ If you are testing this example on a headless system, specify an alternative dis
 
 The command in the previous sub-section boots the system entirely in RAM without persistent storage. To maintain the OS state across reboots or install the OS, you should attach a disk to the VM:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-img create -f qcow2 disk.qcow 5G
 ```
 
@@ -63,7 +79,11 @@ The disk can then be added to the VM by using the argument: `-drive file=disk.qc
 
 These tools can do much more, as you will discover in their respective (long) manual pages. They can also be made more consumable for specific use cases and needs through a vast selection of auxiliary tools - for example [virt-manager](https://virt-manager.org/) for UI-driven use through [libvirt](https://libvirt.org/). But in general, it comes down to:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 options image[s]
 ```
 
@@ -95,7 +115,11 @@ To support more than 288 vCPUs, some QEMU versions are only compatible with spec
 
 From Noble onward, the regular `ubuntu` machine type supports up to 1024 vCPUs out of the box, which simplifies the command used to create such virtual machines:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 -M ubuntu,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
 ```
 
@@ -110,7 +134,11 @@ Now that we've covered high-vCPU configurations for x86_64 VMs, let's look at ho
 If you are using QEMU on Mantic, the special machine types are named in a similar fashion to Jammy's: `pc-q35-mantic-maxcpus` or `pc-i440fx-mantic-maxcpus`.
 Therefore, your command line to create a virtual machine with support for more than 288 vCPUs on Mantic should start with:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 -M pc-q35-mantic-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
 ```
 
@@ -128,7 +156,11 @@ If you are using QEMU on Jammy and want to create VMs with more than 288 vCPUs, 
 
 The command line needs to start with:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 -M pc-q35-jammy-maxcpus,accel=kvm,kernel-irqchip=split -device intel-iommu,intremap=on -smp cpus=300,maxcpus=300 ...
 ```
 
@@ -154,7 +186,11 @@ This requires Ubuntu 20.04 or greater
 
 The first step is to install the `qemu-system-arm` package, which needs to be done regardless of where the ARM64 virtual machine will run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install qemu-system-arm
 ```
 
@@ -162,14 +198,28 @@ sudo apt install qemu-system-arm
 
 Next, create a VM-specific flash volume for storing NVRAM variables, which are necessary when booting {term}`EFI` firmware:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 truncate -s 64m varstore.img
 ```
 
 We also need to copy the ARM UEFI firmware into a bigger file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 truncate -s 64m efi.img
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dd if=/usr/share/qemu-efi-aarch64/QEMU_EFI.fd of=efi.img conv=notrunc
 ```
 
@@ -181,7 +231,11 @@ You need to fetch the ARM64 variant of the Ubuntu cloud image you would like to 
 
 If you have access to an ARM64 host, you should be able to create and launch an ARM64 virtual machine there. Note that the command below assumes that you have already set up a network bridge to be used by the virtual machine.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-aarch64 \
  -enable-kvm \
  -m 1024 \
@@ -199,7 +253,11 @@ qemu-system-aarch64 \
 
 You can also emulate an ARM64 virtual machine on an x86 host. To do that:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-aarch64 \
  -m 2048\
  -cpu max \

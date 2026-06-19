@@ -9,7 +9,11 @@ myst:
 
 Ubuntu can use `timedatectl` and `timesyncd` for synchronizing time, which can be installed as follows. `systemd-timesyncd` used to be part of the default installation, but was replaced by `chrony` since Ubuntu 25.10. You can optionally use `chrony` as a {ref}`Network Time Security (NTS) client <chrony-client>` or to {ref}`serve the Network Time Protocol <serve-ntp-with-chrony>`.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-mark auto chrony && apt install systemd-timesyncd
 ```
 
@@ -23,7 +27,8 @@ If `chrony` is installed, `timedatectl` steps back to let `chrony` handle timeke
 
 The current status of time and time configuration via `timedatectl` and `timesyncd` can be checked with the `timedatectl status` command, which will produce output like this:
 
-```text
+```{terminal}
+:output-only:
                Local time: Wed 2023-06-14 12:05:11 BST
            Universal time: Wed 2023-06-14 11:05:11 UTC
                  RTC time: Wed 2023-06-14 11:05:11
@@ -35,7 +40,8 @@ System clock synchronized: yes
 
 If `chrony` is running, it will automatically switch to:
 
-```text
+```{terminal}
+:output-only:
 [...]
  systemd-timesyncd.service active: no 
 ```
@@ -48,13 +54,13 @@ By using `timedatectl`, an admin can control the timezone, how the system clock 
 
 `timesyncd` itself is a normal service, so you can check its status in more detail using:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl status systemd-timesyncd
-```
 
-The output produced will look something like this:
-
-```
       systemd-timesyncd.service - Network Time Synchronization
        Loaded: loaded (/lib/systemd/system/systemd-timesyncd.service; enabled; vendor preset: enabled)
        Active: active (running) since Fri 2018-02-23 08:55:46 UTC; 10s ago
@@ -78,7 +84,7 @@ The server from which to fetch time for `timedatectl` and `timesyncd` can be spe
 
 If you would now like to serve the Network Time Protocol via `chrony`, this guide will walk you through {ref}`how to install and configure your setup <serve-ntp-with-chrony>`.
 
-## References
+## Further reading
 
 - {manpage}`timedatectl(1)`
 

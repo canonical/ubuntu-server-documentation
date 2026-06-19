@@ -13,7 +13,11 @@ There are many versions of Java available in Ubuntu. It's best to install the "d
 
 To install the default Java Runtime on Ubuntu Server, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install default-jre-headless
 ```
 
@@ -23,7 +27,11 @@ The Java installation in Ubuntu ships a system-wide configuration tree under
 `/etc/java-<VERSION>-openjdk`. To determine the exact path on your system, you
 can check which version is currently set as the default:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 java -version 2>&1 | head -n 1
 ```
 
@@ -41,13 +49,21 @@ The list of restrictions has its own format which allows for constructs that dis
 
 Changes to these security settings can be made directly in the `/etc/java-<VERSION>-openjdk/security/java.security` file, or in an alternate file that can be specified to a Java application by setting the `java.security.properties` value. For example, if your Java application is called `myapp.java`, you can invoke it as shown below to specify an additional security properties file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 java -Djava.security.properties=file://$HOME/java.security
 ```
 
 When using just one equals sign ("`=`") as above, the settings from the specified file are appended to the existing ones. If, however, we use two equals signs:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 java -Djava.security.properties==file://$HOME/java.security
 ```
 
@@ -67,20 +83,38 @@ To use the test OpenSSL server, we will have to generate a certificate and key f
 
 First, generate a keypair for OpenSSL:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -x509 -days 30 -nodes -subj "/CN=localhost" -out localhost.pem -keyout localhost.key
 ```
 
 Now let's import this new certificate into the system-wide CA database. Execute the following commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp localhost.pem /usr/local/share/ca-certificates/localhost-test.crt
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-ca-certificates
 ```
 
 For our testing purposes, this is how we will launch our OpenSSL test server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl s_server -accept 4443 -cert localhost.pem -key localhost.key | grep ^CIPHER
 ```
 
@@ -88,7 +122,11 @@ This will show the cipher that was selected for each connection, as it occurs.
 
 The client part of our setup will be using the `keytool` utility that comes with Java, but any Java application that is capable of using SSL/TLS should suffice. We will be running the client as below:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443 > /dev/null;echo $?
 ```
 
@@ -120,16 +158,24 @@ Notice that TLSv1.3 is absent.
 
 When you then run the `keytool` utility:
 
-```bash
-$ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443 > /dev/null;echo $?
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443 > /dev/null;echo $?
 
 0
 ```
 
 The server should log:
 
-```bash
-$ openssl s_server -accept 4443 -key localhost.key -cert localhost.pem   | grep ^CIPHER
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl s_server -accept 4443 -key localhost.key -cert localhost.pem   | grep ^CIPHER
 
 CIPHER is TLS_AES_256_GCM_SHA384
 ```
@@ -138,8 +184,12 @@ That is a TLSv1.3 cipher. To really test that TLSv1.3 is the only protocol avail
 
 Force the client to try to use TLSv1.2:
 
-```bash
-$ keytool \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool \
   -J-Djava.security.properties=file://$HOME/java.security \
   -J-Djdk.tls.client.protocols=TLSv1.2 \
   -printcert -sslserver localhost:4443
@@ -151,8 +201,12 @@ Restart the server with the `no_tls1_3` option, disabling TLSv1.3, and run the c
 
 **Server**:
 
-```bash
-$ openssl s_server -accept 4443 -key localhost.key -cert localhost.pem -no_tls1_3
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl s_server -accept 4443 -key localhost.key -cert localhost.pem -no_tls1_3
 
 Using default temp DH parameters
 ACCEPT
@@ -164,16 +218,24 @@ CONNECTION CLOSED
 
 **Client**:
 
-```bash
-$ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443
 
 keytool error: java.lang.Exception: No certificate from the SSL server
 ```
 
 To get a little bit more verbosity in the `keytool` output, you can add the `-v` option. Then, inside the traceback that we get back, we can see an error message about an SSL protocol version:
 
-```bash
-$ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443  -v
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443  -v
 
 keytool error: java.lang.Exception: No certificate from the SSL server
 java.lang.Exception: No certificate from the SSL server
@@ -199,16 +261,24 @@ jdk.tls.disabledAlgorithms=TLSv1, TLSv1.1, TLSv1.2, SSLv3, SSLv2, TLS_AES_256_GC
 
 If we run our client now:
 
-```bash
-$ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443 > /dev/null; echo $?
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443 > /dev/null; echo $?
 
 0
 ```
 
 The server will show the new selected cipher:
 
-```bash
-$ openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
 
 CIPHER is TLS_AES_128_GCM_SHA256
 ```
@@ -225,16 +295,24 @@ jdk.tls.disabledAlgorithms=TLSv1, TLSv1.1, TLSv1.3, SSLv2, SSLv3
 
 When we run the client:
 
-```bash
-$ keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443  > /dev/null; echo $?
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+keytool -J-Djava.security.properties=file://$HOME/java.security -printcert -sslserver localhost:4443  > /dev/null; echo $?
 
 0
 ```
 
 The server reports:
 
-```bash
-$ openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
 
 CIPHER is ECDHE-RSA-AES256-GCM-SHA384
 ```
@@ -247,15 +325,19 @@ jdk.tls.disabledAlgorithms=TLSv1, TLSv1.1, TLSv1.3, SSLv2, SSLv3, AES_256_GCM
 
 And now the server reports:
 
-```bash
-$ openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl s_server -accept 4443 -key localhost.key -cert localhost.pem | grep ^CIPHER
 
 CIPHER is ECDHE-RSA-CHACHA20-POLY1305
 ```
 
-## References
+## Further reading
 
   * Additional information on [Java's Cryptographic Algorithms settings](https://www.java.com/en/configure_crypto.html)
   * Java Security [Standard Algorithm Names](https://docs.oracle.com/en/java/javase/12/docs/specs/security/standard-names.html)
   * [`keytool` upstream documentation](https://docs.oracle.com/en/java/javase/11/tools/keytool.html)
-  * [`java.security` file with comments](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520) -- links to the section which explains the crypto algorithm restrictions)
+  * [`java.security` file with comments](https://git.launchpad.net/ubuntu/+source/openjdk-lts/tree/src/java.base/share/conf/security/java.security?h=applied/ubuntu/jammy-devel#n520) -- links to the section which explains the crypto algorithm restrictions

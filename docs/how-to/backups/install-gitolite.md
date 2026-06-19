@@ -19,7 +19,11 @@ The repositories itself are owned by one system user of your choice, usually `gi
 
 Gitolite can be installed with the following command.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install gitolite3
 ```
 
@@ -34,7 +38,11 @@ This configuration repository manages all other git repositories, users and thei
 
 Create a `git` user for Gitolite to use for the service (you can adjust the git repository storage path as the `--home` directory):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo useradd --system --home /home/git --create-home git
 ```
 
@@ -45,13 +53,21 @@ We copy it to `/tmp` so our new `git` user is allowed to read the file to import
 Please adjust the path to the desired admin user's {term}`SSH-key` (and algorithm, like `id_rsa.pub`).
 
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cp ~/.ssh/id_ed25519.pub /tmp/admin.pub
 ```
 
 As the `git` user, proceed to import the administrator's key into Gitolite (it will get the `admin` username due to that key's filename).
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -i -u git gitolite setup -pk /tmp/admin.pub
 ```
 
@@ -67,10 +83,13 @@ You should not change these files - as they are managed through a cloned copy of
 
 To try if the setup worked, try `ssh` as the user owning the admin key we just added, so see the _Gitolite repository overview_:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ssh git@$yourserver
-```
-```
+
 hello admin, this is git@your-gitolite-server running gitolite3
 
  R W	gitolite-admin
@@ -83,14 +102,28 @@ hello admin, this is git@your-gitolite-server running gitolite3
 To configure Gitolite users, repositories and permissions, clone the configuration repository.
 `$yourserver` can be an IP address, hostname, or just `localhost` for your current machine.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git clone git@$yourserver:gitolite-admin.git
 ```
 
 To apply configuration change, commit them in the repository and **push the changes** back to the server with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git commit
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git push
 ```
 
@@ -120,7 +153,7 @@ When you commit and push your changes, gitolite applies them.
 
 ### Example configuration
 
-```cfg
+```text
 # Gitolite config
 # Users are created by having their public key in keydir/$username.pub
 
@@ -160,13 +193,21 @@ Once a user is created and has permissions, they can access the repositories.
 
 As a fresh clone:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git clone git@$server:some/awesome/project.git
 ```
 
 Or as a remote to an existing repository:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git remote add $somename git@$server:some/awesome/project.git
 ```
 
