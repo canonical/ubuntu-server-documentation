@@ -174,7 +174,7 @@ Launchpad source: {lpsrc}`package-name` (e.g. {lpsrc}`bash`)
 Rendered as {lpsrc}`bash`
 
 ```
-Launchpad bug: {lpbug}`bug-number` (e.g. {lpbug}`1852389`
+Launchpad bug: {lpbug}`bug-number` (e.g. {lpbug}`1852389`)
 ```
 
 Rendered as {lpbug}`1852389`
@@ -198,6 +198,68 @@ the list without having to re-number them all:
 Unless a list item includes punctuation, don't end it with a full stop. If
 one item in a list needs a full stop, add one to all the items in that list.
 
+
+### The {terminal} directive
+
+To show command input and output together, use the `{terminal}` Sphinx directive.
+
+````text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+command
+
+output
+```
+````
+
+When the options inside the terminal block are not specified, the terminal
+renders like this:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+command
+
+output
+```
+
+Use the options to customize the displayed options as follows:
+* `:copy:` allows the command to be copied using the copybutton. By default, the terminal directive excludes the output and the command prompt from the copied command.
+* `:user:` specify a username to display
+* `:host:` specify the hostname to display
+* `:dir:` specify the directory to be shown before the command prompt
+
+Here's an example:
+
+````text
+```{terminal}
+:copy: 
+:user: username
+:host: ubuntu
+:dir: ~/src
+command
+
+output
+```
+````
+
+Which renders as:
+
+```{terminal}
+:copy: 
+:user: username
+:host: ubuntu
+:dir: ~/src 
+command
+
+output
+```
+
 ### Code blocks
 
 Enclose a code block with three backticks:
@@ -208,29 +270,12 @@ Some code block here
 ```
 ````
 
-Use separate command input blocks from command output blocks. We do this
-because we have a "copy code" feature in the documentation, and it's more
-convenient for the reader to copy the code if it only contains the input.
-
-Avoid using a command line prompt (e.g. `$` or `#`) in an input block if
-possible, and precede the output block with some kind of text that explains
-what's happening. For example:
-  
-```bash
-uname -r
-```
-
-Produces the following output:
-
-```text
-4.14.151
-```
-
-It can also be helpful to orient the reader with what they *should* be seeing
-if you can include examples (although this is optional).
+Code blocks can be used to display blocks of code, output, example scripts, etc.
+Use the language after the triple backticks to enable syntax highlighting.
 
 Use a single backtick to mark inline commands and other string literals, like
 `paths/to/files`.
+
 
 ### Admonition blocks
 
