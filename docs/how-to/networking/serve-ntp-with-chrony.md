@@ -225,8 +225,10 @@ Ok, `gpsd` is now running, the GPS reception has found a fix, and it has fed thi
 
 Initially, before `gpsd` has started or before it has a lock, these sources will be new and "untrusted" - they will be marked with a "?" as shown in the example below. If your devices remain in the "?" state (even after some time) then `gpsd` is not feeding any data to `chrony` and you will need to debug why.
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
@@ -237,8 +239,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 Over time, `chrony` will classify all of the unknown sources as "good" or "bad".
 In the example below, the raw GPS had too much deviation (+- 200ms) but the PPS is good (+- 63us).
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address        Stratum Poll Reach LastRx Last sample
 ===============================================================================
@@ -249,8 +253,10 @@ MS Name/IP address        Stratum Poll Reach LastRx Last sample
 
 Finally, after a while it used the hardware PPS input (as it was better):
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ===============================================================================
@@ -261,8 +267,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 The PPS might also be OK -- but used in a combined way with the selected server, for example. See `man chronyc` for more details about how these combinations can look:
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 11
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
@@ -273,8 +281,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 If you're wondering if your SHM-based GPS data is any good, you can check on that as well. `chrony` will not only tell you if the data is classified as good or bad -- using `sourcestats` you can also check the details:
 
-```text
+```{terminal}
+:output-only:
 chronyc> sourcestats
+
 210 Number of sources = 10
 Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
 ==============================================================================
@@ -285,7 +295,13 @@ golem.canonical.com        15  10   783     +0.859      0.509   -750us   108us
 
 You can also track the raw data that `gpsd` or other `ntpd`-compliant reference clocks are sending via shared memory by using `ntpshmmon`. Let us run the command `sudo ntpshmmon -o`, which should provide the following output:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo ntpshmmon -o
+
 ntpshmmon: version 3.20
 #      Name          Offset       Clock                 Real                 L Prc
 sample NTP1          0.000223854  1588265805.000223854  1588265805.000000000 0 -10
@@ -324,7 +340,13 @@ Then restart `chrony` with `systemctl restart chrony` and it will be ready to pr
 
 A running `chrony` server measures various statistics. One of them counts the number of NTS connections that were established (or dropped) -- we can check this by running `sudo chronyc -N serverstats`, which shows us the statistics:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chronyc -N serverstats
+
 NTP packets received       : 213
 NTP packets dropped        : 0
 Command packets received   : 117

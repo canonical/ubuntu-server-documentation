@@ -181,6 +181,7 @@ One of tmux's powerful features is the ability to share sessions between multipl
 **Basic session sharing** (same user):
 
 User 1 creates a session:
+
 ```{terminal}
 :copy:
 :user:
@@ -190,6 +191,7 @@ tmux new-session -s shared
 ```
 
 User 2 (logged in as the same user on another terminal/SSH connection) attaches to it:
+
 ```{terminal}
 :copy:
 :user:
@@ -205,6 +207,7 @@ Both users now see and can provide input to the same terminal session in real-ti
 By default, all users attached to a session have read/write access to the terminal input/output. To allow someone to watch your session without being able to send input (read-only mode), they can attach with the `-r` flag:
 
 User 2 attaches in read-only mode:
+
 ```{terminal}
 :copy:
 :user:
@@ -220,6 +223,7 @@ In read-only mode, User 2 can see all terminal output but cannot type commands o
 For different users to share a session, you need to create a shared socket:
 
 User 1 creates a session with a shared socket:
+
 ```{terminal}
 :copy:
 :user:
@@ -314,6 +318,7 @@ While not a terminal multiplexer itself, Mosh (mobile shell) deserves a mention 
 If your main interest in terminal multiplexers is protection against disconnects rather than the window/pane management features, Mosh combined with tmux might be the ideal solution. Mosh handles the network resilience while tmux provides session persistence and workspace management.
 
 Install Mosh:
+
 ```{terminal}
 :copy:
 :user:
@@ -323,6 +328,7 @@ sudo apt install mosh
 ```
 
 Connect to a remote server:
+
 ```{terminal}
 :copy:
 :user:
