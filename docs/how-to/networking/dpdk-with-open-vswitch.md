@@ -54,7 +54,7 @@ ovs-vsctl set Open_vSwitch . "other_config:dpdk-init=true"
   ovs-vsctl set Open_vSwitch . "other_config:dpdk-alloc-mem=2048"
   ```
 
-* Limit to one whitelisted device
+* Limit to one allowlisted device
 
   ```{terminal}
   :copy:
