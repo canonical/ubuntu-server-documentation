@@ -26,7 +26,11 @@ Ubuntu also supports [SSSD](https://sssd.io/) as an alternative LDAP client. SSS
 
 Install `nslcd` and its PAM integration library:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nslcd libpam-ldapd libnss-ldapd
 ```
 
@@ -60,7 +64,11 @@ Adjust `uri` and `base` to match your directory. The `tls_reqcert demand` settin
 
 The installer updates `/etc/pam.d/common-*` automatically. To confirm that LDAP authentication and automatic home directory creation are enabled, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update
 ```
 
@@ -68,7 +76,11 @@ Select **LDAP Authentication** and **Create home directory on login** in the int
 
 Restart `nslcd` to apply the configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart nslcd
 ```
 
@@ -76,19 +88,31 @@ sudo systemctl restart nslcd
 
 Verify that a known LDAP user is visible to the system:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 id <username>
 ```
 
 List all users known to {term}`NSS`, including those from LDAP:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 getent passwd
 ```
 
 List all groups:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 getent group
 ```
 
@@ -97,19 +121,33 @@ If the output includes users and groups from the LDAP directory, {term}`NSS` int
 If this doesn't work, you can inspect live LDAP queries.
 Stop the `nslcd` service and run it in the foreground in "debug" mode:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl stop nslcd.service
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo nslcd -n -d
 ```
 
-Press {kbd}`Ctrl+C` to stop this debug session.
+Press {kbd}`Ctrl`+{kbd}`C` to stop this debug session.
 
 You can iterate with configuration or setup adjustments until the log output and `getent` results are satisfying.
 
 
 Finally, restart the service via `systemctl`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start nslcd.service
 ```
 
@@ -160,7 +198,11 @@ Session:
 
 Apply the configuration to add these modules to `/etc/pam.d/common-*`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update --enable ldap-access --enable ldap --enable mkhomedir
 ```
 
@@ -169,8 +211,20 @@ Local users not in any listed LDAP group can be permitted to log in by adding th
 The `login` group is allowed to log in through `/etc/security/access.conf`, see above.
 Create the group and add users as needed:
 
-    sudo groupadd -r login
-    sudo usermod -aG login <username>
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo groupadd -r login
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo usermod -aG login <username>
+```
 :::
 
 ## Grant sudo access to an LDAP group
@@ -184,6 +238,7 @@ To allow members of an LDAP group to use `sudo` access, add an entry to `/etc/su
 ```
 
 To allow `sudo` usage without entering a password, add this entry instead using {manpage}`visudo(8)`:
+
 ```text
 %your-admin-group   ALL=(ALL) NOPASSWD: ALL
 ```
@@ -202,7 +257,11 @@ AuthorizedKeysCommandUser nobody
 
 The following Python script can serve as `/usr/local/bin/ssh-ldap-key`. It performs an anonymous LDAP search for the given username and prints any `sshPublicKey` values it finds. Install the `python3-ldap3` package before use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install python3-ldap3
 ```
 
@@ -260,13 +319,21 @@ if __name__ == "__main__":
 
 Make the script executable and owned by root:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo install -o root -g root -m 0755 ssh-ldap-key /usr/local/bin/ssh-ldap-key
 ```
 
 After modifying `sshd_config`, restart the SSH service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart ssh
 ```
 

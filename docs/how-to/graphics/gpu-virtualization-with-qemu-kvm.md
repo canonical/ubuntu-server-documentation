@@ -50,8 +50,13 @@ On the kernel side, there are various [options you can enable/configure](https:/
 ::::{note}
 The card used in all examples below e.g. when filtering for or assigning PCI IDs, is an NVIDIA V100 on PCI ID 41.00.0
 
-```bash
-$ lspci | grep 3D
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lspci | grep 3D
+
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
 ```
 ::::
@@ -60,13 +65,13 @@ You can check your boot-up kernel messages for IOMMU/{term}`DMAR` messages or ev
 
 To list all:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dmesg | grep -i -e DMAR -e IOMMU
-```
 
-Which produces an output like this:
-
-```text
 [    3.509232] iommu: Default domain type: Translated
 ...
 [    4.516995] pci 0000:00:01.0: Adding to iommu group 0
@@ -76,13 +81,13 @@ Which produces an output like this:
 
 To filter for the installed 3D card:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dmesg | grep -i -e DMAR -e IOMMU | grep $(lspci | awk '/ 3D / {print $1}' )
-```
 
-Which shows the following output:
-
-```text
 [    4.598150] pci 0000:41:00.0: Adding to iommu group 66
 ```
 
@@ -90,20 +95,25 @@ If you have a particular device and want to check for its group you can do that 
 
 For example, to find the group for our example card:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 find /sys/kernel/iommu_groups/ -name "*$(lspci | awk '/ 3D / {print $1}')*"
-```
 
-Which it tells us is found here:
-
-```text
 /sys/kernel/iommu_groups/66/devices/0000:41:00.0
 ```
 
 We can also check if there are other devices in this group:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ll /sys/kernel/iommu_groups/66/devices/
+
 lrwxrwxrwx 1 root root 0 Jan  3 06:57 0000:41:00.0 -> ../../../../devices/pci0000:40/0000:40:03.1/0000:41:00.0/
 ```
 
@@ -119,22 +129,25 @@ For both, you'll want to ensure the normal driver isn't loaded. In some cases yo
 
 This usually works fine for e.g. network cards, but some other devices like GPUs do not like to be unassigned, so there the required step usually is block loading the drivers you do not want to be loaded. In our GPU example the `nouveau` driver would load and that has to be blocked. To do so you can create a `modprobe` blocklist.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf          
 echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/blacklist-nouveau.conf
-sudo update-initramfs -u                                                         
-sudo reboot                                                                      
-```   
+sudo update-initramfs -u
+sudo reboot                                                      ```
 
 You can check which kernel modules are loaded and available via `lspci -v`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lspci -v | grep -A 10 " 3D "
-```
 
-Which in our example shows:
-
-```text
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
 ...
 Kernel modules: nvidiafb, nouveau
@@ -154,13 +167,13 @@ There is also an Nvidia document about the same steps available on [installation
 
 Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that the driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lsmod | grep nvidia
-```
 
-Which we can see in the output:
-
-```text
 nvidia_vgpu_vfio       53248  38
 nvidia              35282944  586 nvidia_vgpu_vfio
 mdev                   24576  2 vfio_mdev,nvidia_vgpu_vfio
@@ -174,6 +187,7 @@ It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 3
 :::
 
 Here is an example of those when running fine:
+
 ```text
 # general status
 $ systemctl status nvidia-vgpu-mgr
@@ -220,7 +234,11 @@ Please refer to the [NVIDIA documentation](https://docs.nvidia.com/vgpu/latest/g
 
 The tool for listing and configuring these mediated devices is `mdevctl`: 
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mdevctl types
 ```
 
@@ -237,19 +255,48 @@ Which will list the available types:
 
 Knowing the PCI ID (`0000:41:00.0`) and the mediated device type we want (`nvidia-300`) we can now create those mediated devices:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl define --parent 0000:41:00.0 --type nvidia-300
+
 bc127e23-aaaa-4d06-a7aa-88db2dd538e0
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl define --parent 0000:41:00.0 --type nvidia-300
+
 1360ce4b-2ed2-4f63-abb6-8cdb92100085
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl start --parent 0000:41:00.0 --uuid bc127e23-aaaa-4d06-a7aa-88db2dd538e0
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl start --parent 0000:41:00.0 --uuid 1360ce4b-2ed2-4f63-abb6-8cdb92100085
 ```
 
 After that, you can check the UUID of your ready mediated devices:
 
-```
-$ sudo mdevctl list -d
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mdevctl list -d
+
 bc127e23-aaaa-4d06-a7aa-88db2dd538e0 0000:41:00.0 nvidia-108 manual (active)
 1360ce4b-2ed2-4f63-abb6-8cdb92100085 0000:41:00.0 nvidia-108 manual (active)
 ```
@@ -260,7 +307,7 @@ Those UUIDs can then be used to pass the mediated devices to the guest - which f
 
 After the above setup is ready one can pass through those devices, in `libvirt` for a PCI passthrough that looks like:
 
-```
+```text
 <hostdev mode='subsystem' type='pci' managed='yes'>
   <source>
     <address domain='0x0000' bus='0x41' slot='0x00' function='0x0'/>
@@ -270,7 +317,7 @@ After the above setup is ready one can pass through those devices, in `libvirt` 
 
 And for mediated devices, the format is quite similar, but uses the UUID.
 
-```
+```text
 <hostdev mode='subsystem' type='mdev' managed='no' model='vfio-pci' display='on'>
   <source>
     <address uuid='634fc146-50a3-4960-ac30-f09e5cedc674'/>

@@ -56,19 +56,41 @@ The **systemd-resolved** stub resolver is pre-installed in Ubuntu but ships with
 
 For example, here is how the strict mode can be enabled. To use the fallback mode instead, replace `DNSSEC=yes` with `DNSSEC=allow-downgrade`:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mkdir -p /etc/systemd/resolved.conf.d
 ```
-$ sudo mkdir -p /etc/systemd/resolved.conf.d
-$ sudo tee /etc/systemd/resolved.conf.d/10-dnssec.conf >/dev/null <<EOF
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo tee /etc/systemd/resolved.conf.d/10-dnssec.conf >/dev/null <<EOF
+
 [Resolve]
 DNSSEC=yes
 EOF
-
-$ sudo systemctl reload systemd-resolved.service
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl reload systemd-resolved.service
 ```
 
 Once reloaded, the functionality of DNSSEC in **systemd-resolved** can be confirmed, using the `dig` command on the local stub resolver at `127.0.0.53`, by checking for the existence of the **ad** (Authenticated Data) flag:
-```
-$ dig @127.0.0.53 isc.org +dnssec
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.53 isc.org +dnssec
+
 [...]
 ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 5, AUTHORITY: 0, ADDITIONAL: 1
 ```
@@ -98,30 +120,35 @@ DNSSEC introduces a set of new Resource Records. Here are the most important one
 
 For instance, when a DNSSEC-aware client queries a Resource Record that is signed, the corresponding RRSIG record is also returned:
 
-    $ dig @1.1.1.1 +dnssec -t MX isc.org
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @1.1.1.1 +dnssec -t MX isc.org
 
-    ; <<>> DiG 9.18.28-0ubuntu0.24.04.1-Ubuntu <<>> @1.1.1.1 +dnssec -t MX isc.org
-    ; (1 server found)
-    ;; global options: +cmd
-    ;; Got answer:
-    ;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 51256
-    ;; flags: qr rd ra ad; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
+; <<>> DiG 9.18.28-0ubuntu0.24.04.1-Ubuntu <<>> @1.1.1.1 +dnssec -t MX isc.org
+; (1 server found)
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 51256
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 3, AUTHORITY: 0, ADDITIONAL: 1
 
-    ;; OPT PSEUDOSECTION:
-    ; EDNS: version: 0, flags: do; udp: 1232
-    ;; QUESTION SECTION:
-    ;isc.org.                       IN      MX
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 1232
+;; QUESTION SECTION:
+;isc.org.                       IN      MX
 
-    ;; ANSWER SECTION:
-    isc.org.                300     IN      MX      5 mx.pao1.isc.org.
-    isc.org.                300     IN      MX      10 mx.ams1.isc.org.
-    isc.org.                300     IN      RRSIG   MX 13 2 300 20241029080338 20241015071431 27566 isc.org. LG/cvFmZ8jLz+CM14foaCtwsyCTwKXfVBZV2jcl2UV8zV79QRLs0YXJ3 sjag1vYCqc+Q5AwUi2DB8L/wZR6EJQ==
+;; ANSWER SECTION:
+isc.org.                300     IN      MX      5 mx.pao1.isc.org.
+isc.org.                300     IN      MX      10 mx.ams1.isc.org.
+isc.org.                300     IN      RRSIG   MX 13 2 300 20241029080338 20241015071431 27566 isc.org. LG/cvFmZ8jLz+CM14foaCtwsyCTwKXfVBZV2jcl2UV8zV79QRLs0YXJ3 sjag1vYCqc+Q5AwUi2DB8L/wZR6EJQ==
 
-    ;; Query time: 199 msec
-    ;; SERVER: 1.1.1.1#53(1.1.1.1) (UDP)
-    ;; WHEN: Tue Oct 22 16:44:33 UTC 2024
-    ;; MSG SIZE  rcvd: 187
-
+;; Query time: 199 msec
+;; SERVER: 1.1.1.1#53(1.1.1.1) (UDP)
+;; WHEN: Tue Oct 22 16:44:33 UTC 2024
+;; MSG SIZE  rcvd: 187
+```
 
 ## Other uses
 
@@ -142,8 +169,8 @@ Let's analyze the simple scenario of a system on a local network performing a DN
 
 Here we have:
 
- * An Ubuntu system, like a desktop, configured to use a DNS server in the local network.
- * A DNS server configured to perform recursive queries on behalf of the clients from the local network.
+* An Ubuntu system, like a desktop, configured to use a DNS server in the local network.
+* A DNS server configured to perform recursive queries on behalf of the clients from the local network.
 
 Let's zoom in a little bit on that Ubuntu system:
 
@@ -153,29 +180,34 @@ To translate a {term}`hostname` into an IP address, applications typically rely 
 
 In Ubuntu, the default stub resolver is `systemd-resolved`. That's a daemon, running locally, and listening on port 53/udp on IP 127.0.0.53. The system is configured to use that as its nameserver via `/etc/resolv.conf`:
 
-    nameserver 127.0.0.53
-    options edns0 trust-ad
+```
+nameserver 127.0.0.53
+options edns0 trust-ad
+```
 
 This stub resolver has its own configuration for which recursive DNS servers to use. That can be seen with the command `resolvectl`. For example:
 
-    Global
-             Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
-      resolv.conf mode: stub
+```
+Global
+            Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+    resolv.conf mode: stub
 
-    Link 12 (eth0)
-        Current Scopes: DNS
-             Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
-    Current DNS Server: 10.10.17.1
-           DNS Servers: 10.10.17.1
-            DNS Domain: lxd
+Link 12 (eth0)
+    Current Scopes: DNS
+            Protocols: +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+Current DNS Server: 10.10.17.1
+        DNS Servers: 10.10.17.1
+        DNS Domain: lxd
+```
 
 This configuration is usually provided via {term}`DHCP`, but could also be set via other means. In this particular example, the DNS server that the stub resolver (`systemd-resolved`) will use for all queries that go out on that network interface is 10.10.17.1. The output above also has `DNSSEC=no/unsupported`: we will get back to that in a moment, but it means that `systemd-resolved` is not performing the DNSSEC cryptographic validation.
 
 Given what we have:
- * an application
- * stub resolver ("DNS client")
- * recursive DNS server in the local network
- * several other DNS servers in the internet that will be queried by our recursive DNS server
+
+* an application
+* stub resolver ("DNS client")
+* recursive DNS server in the local network
+* several other DNS servers in the internet that will be queried by our recursive DNS server
 
 Where does the DNSSEC validation happen? Who is responsible?
 
@@ -197,20 +229,22 @@ A critical aspect of this deployment model is the trust in the network segment b
 
 This is where the `trust-ad` setting from `/etc/resolv.conf` comes into play:
 
-    nameserver 127.0.0.53
-    options edns0 trust-ad
+```
+nameserver 127.0.0.53
+options edns0 trust-ad
+```
 
 The `trust-ad` setting is documented in the {manpage}`resolv.conf(5)` manual page. It means that the local resolver will:
 
- * Set the `ad` bit (Authenticated Data) in the outgoing queries.
- * Trust the `ad` bit in the responses from the specified nameserver.
+* Set the `ad` bit (Authenticated Data) in the outgoing queries.
+* Trust the `ad` bit in the responses from the specified nameserver.
 
 When the `ad` bit is set in a DNS response, it means that DNSSEC validation was performed and successful. The data was authenticated.
 
 Specifying `trust-ad` in `/etc/resolv.conf` implies these assumptions:
 
- * The 127.0.0.53 name server is trusted to set the `ad` flag correctly in its responses. If it performs DNSSEC validation, it is trusted to perform this validation correctly, and set the `ad` flag accordingly. If it does not perform DNSSEC validation, then the `ad` flag will always be unset in the responses.
- * The network path between localhost and 127.0.0.53 is trusted.
+* The 127.0.0.53 name server is trusted to set the `ad` flag correctly in its responses. If it performs DNSSEC validation, it is trusted to perform this validation correctly, and set the `ad` flag accordingly. If it does not perform DNSSEC validation, then the `ad` flag will always be unset in the responses.
+* The network path between localhost and 127.0.0.53 is trusted.
 
 When using `systemd-resolved` as a stub resolver, as configured above, the network path to the local DNS resolver is inherently trusted, as it is a localhost interface. However, the actual nameserver used is not 127.0.0.53; it depends on `systemd-resolved`'s configuration. Unless local DNSSEC validation is enabled, `systemd-resolved` will strip the ad bit from queries sent to the Validating Resolver and from the received responses.
 
@@ -218,19 +252,22 @@ This is the default case in Ubuntu systems.
 
 Another valid configuration is to not use `systemd-resolved`, but rather point at the Validating Resolver of the network directly, like in this example:
 
-    nameserver 10.10.17.11
-    options edns0 trust-ad
+```
+nameserver 10.10.17.11
+options edns0 trust-ad
+```
 
 The `trust-ad` configuration functions similarly to the previous scenario. The `ad` bit is set in outgoing queries, and the resolver trusts the `ad` bit in incoming responses. However, in this case, the nameserver is located at a different IP address on the network. This configuration relies on the same assumptions as before:
 
- * The 10.10.17.11 name server is trusted to perform DNSSEC validation and set the `ad` flag accordingly in its responses.
- * The network path between localhost and 10.10.17.11 is trusted.
+* The 10.10.17.11 name server is trusted to perform DNSSEC validation and set the `ad` flag accordingly in its responses.
+* The network path between localhost and 10.10.17.11 is trusted.
 
 As these assumptions have a higher chance of not being true, this is not the default configuration.
 
 In any case, having a Validating Resolver in the network is a valid and very useful scenario, and good enough for most cases. And it has the extra benefit that the DNSSEC validation is done only once, at the resolver, for all clients on the network.
 
 ### Local DNSSEC validation
+
 Some stub resolvers, such as systemd-resolved, can perform DNSSEC validation locally. This eliminates the risk of network attacks between the resolver and the client, as they reside on the same system. However, local DNSSEC validation introduces additional overhead in the form of multiple DNS queries. For each DNS query, the resolver must fetch the desired record, its digital signature, and the corresponding public key. This process can increase latency, and with multiple clients on the same network requesting the same records, that's duplicated work.
 
 In general, local DNSSEC validation is still the more secure approach, validating and authenticating the DNS resource records end-to-end, without the need to trust any DNS server along the way. Besides this, {term}`DNS-over-TLS (DoT) <DoT>` or {term}`DNS-over-HTTPS (DoH) <DoH>` could be used to increase privacy, by encrypting the DNS connection between your local client and the remote Recursive Resolver.
@@ -239,72 +276,131 @@ As an example, let's perform the same query using `systemd-resolved` with and wi
 
 Without local DNSSEC validation. First, let's show it's disabled indeed:
 
-    $ resolvectl dnssec
-    Global: no
-    Link 44 (eth0): no
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl dnssec
+
+Global: no
+Link 44 (eth0): no
+```
 
 Now we perform the query:
 
-    $ resolvectl query --type=MX isc.org
-    isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
-    isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl query --type=MX isc.org
 
-    -- Information acquired via protocol DNS in 37.2ms.
-    -- Data is authenticated: no; Data was acquired via local or encrypted transport: no
-    -- Data from: network
+isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
+
+-- Information acquired via protocol DNS in 37.2ms.
+-- Data is authenticated: no; Data was acquired via local or encrypted transport: no
+-- Data from: network
+```
 
 Notice the `Data is authenticated: no` in the result.
 
 Now we enable local DNSSEC validation:
 
-    $ sudo resolvectl dnssec eth0 true
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl dnssec eth0 true
+```
 
 And repeat the query:
 
-    $ resolvectl query --type=MX isc.org
-    isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
-    isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl query --type=MX isc.org
 
-    -- Information acquired via protocol DNS in 3.0ms.
-    -- Data is authenticated: yes; Data was acquired via local or encrypted transport: no
-    -- Data from: network
+isc.org IN MX 5 mx.pao1.isc.org                             -- link: eth0
+isc.org IN MX 10 mx.ams1.isc.org                            -- link: eth0
+
+-- Information acquired via protocol DNS in 3.0ms.
+-- Data is authenticated: yes; Data was acquired via local or encrypted transport: no
+-- Data from: network
+```
 
 There is a tiny difference in the output:
 
-    -- Data is authenticated: yes
+```
+-- Data is authenticated: yes
+```
 
 This shows that local DNSSEC validation was applied, and the result is authenticated.
 
 ## What happens when DNSSEC validation fails
+
 When DNSSEC validation fails, how this error is presented to the user depends on multiple factors.
 
 For example, if the DNS client is not performing DNSSEC validation, and relying on a Validating Resolver for that, typically what the client will see is a generic failure. For example:
 
-    $ resolvectl query www.dnssec-failed.org
-    www.dnssec-failed.org: resolve call failed: Could not resolve 'www.dnssec-failed.org', server or network returned error SERVFAIL
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl query www.dnssec-failed.org
+
+www.dnssec-failed.org: resolve call failed: Could not resolve 'www.dnssec-failed.org', server or network returned error SERVFAIL
+```
 
 The Validating Resolver logs, however, will have more details about what happened:
 
-    Oct 22 17:14:50 n-dns named[285]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
-    Oct 22 17:14:50 n-dns named[285]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.68.244#53
-    ...
-    Oct 22 17:14:52 n-dns named[285]: broken trust chain resolving 'www.dnssec-failed.org/AAAA/IN': 68.87.72.244#53
+```
+Oct 22 17:14:50 n-dns named[285]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
+Oct 22 17:14:50 n-dns named[285]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.68.244#53
+...
+Oct 22 17:14:52 n-dns named[285]: broken trust chain resolving 'www.dnssec-failed.org/AAAA/IN': 68.87.72.244#53
+```
 
 In contrast, when DNSSEC validation is being performed locally, the error is more specific:
 
-    $ sudo resolvectl dnssec eth0 true
-    $ resolvectl query www.dnssec-failed.org
-    www.dnssec-failed.org: resolve call failed: DNSSEC validation failed: no-signature
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo resolvectl dnssec eth0 true
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl query www.dnssec-failed.org
+
+www.dnssec-failed.org: resolve call failed: DNSSEC validation failed: no-signature
+```
 
 But even when the validation is local, simpler clients might not get the full picture, and still just return a generic error:
 
-    $ host www.dnssec-failed.org
-    Host www.dnssec-failed.org not found: 2(SERVFAIL)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+host www.dnssec-failed.org
+
+Host www.dnssec-failed.org not found: 2(SERVFAIL)
+```
 
 ## Further reading
 
- * [DNSSEC - What Is It and Why Is It Important](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en)
- * [Tool to visualize the DNSSEC chain of trust of a domain](https://dnsviz.net/)
- * [DANE](https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities)
- * [RFC 4255](https://datatracker.ietf.org/doc/html/rfc4255) - Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints
- * {ref}`dnssec-troubleshooting`
+- [DNSSEC - What Is It and Why Is It Important](https://www.icann.org/resources/pages/dnssec-what-is-it-why-important-2019-03-05-en)
+- [Tool to visualize the DNSSEC chain of trust of a domain](https://dnsviz.net/)
+- [DANE](https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities)
+- [RFC 4255](https://datatracker.ietf.org/doc/html/rfc4255) - Using DNS to Securely Publish Secure Shell (SSH) Key Fingerprints
+- {ref}`dnssec-troubleshooting`

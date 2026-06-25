@@ -62,7 +62,11 @@ To confirm everything is working, type `multipass version` and press {kbd}`Enter
 
 Once you have installed Multipass and opened your terminal, we can launch a new VM using the Ubuntu 26.04 LTS release (codename "`resolute`"), and let's give our VM the name `tutorial` using the following command in our terminal window:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass launch resolute --name tutorial
 ```
 
@@ -74,14 +78,18 @@ An Ubuntu **image** is a collection of files we need to install and run Ubuntu. 
 
 Once the above command has finished running, we can access the VM by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass shell tutorial
 ```
 
 We will get a "Welcome to Ubuntu" message. Notice that when we run this command, the terminal username changes to `ubuntu` and the {term}`hostname` changes to `tutorial`:
 
 ```bash
-ubuntu@tutorial
+ubuntu@tutorial:~ $
 ```
 
 This shows that we are inside the VM, and this is where we will run all our commands. Now that our setup is complete, let's carry on with the tutorial!

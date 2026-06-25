@@ -20,7 +20,11 @@ Before installing Rails you should install Apache (or a preferred web server) an
 
 Once you have a web server and a database service installed and configured, you are ready to install the Ruby on Rails package, `rails`, by entering the following in the terminal prompt.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install rails
 ```
 
@@ -28,7 +32,11 @@ This will install both the Ruby base packages, and Ruby on Rails.
 
 Alternatively, you may want to install it with the `--no-install-recommends` flag to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install --no-install-recommends rails
 ```
 
@@ -56,21 +64,39 @@ Next, change the `<Directory "/path/to/rails/application/public">` directive:
 
 You should also enable the `mod_rewrite` module for Apache. To enable the `mod_rewrite` module, enter the following command into a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2enmod rewrite
 ```
 
 Finally, you will need to change the ownership of the `/path/to/rails/application/public` and `/path/to/rails/application/tmp` directories to the user that will be used to run the Apache process:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown -R www-data:www-data /path/to/rails/application/public
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown -R www-data:www-data /path/to/rails/application/tmp
 ```
 
 If you need to compile your application assets run the following command in
 your application directory:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 RAILS_ENV=production rake assets:precompile
 ```
 
@@ -78,7 +104,7 @@ RAILS_ENV=production rake assets:precompile
 
 With your database service in place, you need to make sure your app database configuration is also correct. For example, if you are using MySQL the your `config/database.yml` should look like this:
 
-```text
+```yaml
 # Mysql 
 production:
   adapter: mysql2
@@ -90,7 +116,11 @@ production:
 
 To finally create your application database and apply its migrations you can run the following commands from your app directory:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 RAILS_ENV=production rake db:create
 RAILS_ENV=production rake db:migrate
 ```

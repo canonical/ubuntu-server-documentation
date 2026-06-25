@@ -27,9 +27,12 @@ It is not recommended to configure U2F/FIDO at the same time as TOTP/HOTP. This 
 
 From a terminal prompt, install the `google-authenticator` PAM module:
 
-```bash
-sudo apt update
-sudo apt install libpam-google-authenticator
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt update && sudo apt install libpam-google-authenticator
 ```
 
 :::{note}
@@ -50,7 +53,11 @@ Each user needs to run the setup tool to configure 2FA. This will ask some quest
 
 As a user who needs 2FA configured, from a terminal prompt run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 google-authenticator
 ```
 
@@ -89,7 +96,11 @@ On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication 
 
 Restart the `ssh` service to pick up configuration changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl try-reload-or-restart ssh
 ```
 
@@ -111,13 +122,19 @@ Changes to PAM configuration have immediate effect, and no separate reloading co
 
 Now when you log in using SSH, in addition to the normal public key authentication, you will be prompted for your TOTP or HOTP code:
 
-```bash
-$ ssh ubuntu.server
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh ubuntu.server
+
 Enter passphrase for key 'id_rsa':
 (ubuntu@ubuntu.server) Verification code:
 Welcome to Ubuntu (...)
 ubuntu@ubuntu.server:~$
 ```
+
 ## Special cases
 
 On Ubuntu, the following settings are default in `/etc/ssh/sshd_config`, but if you have overridden them, note that they are required for this configuration to work correctly and must be restored as follows:
@@ -130,5 +147,6 @@ PubkeyAuthentication yes
 Remember to run `sudo systemctl try-reload-or-restart ssh` for any changes made to `sshd` configuration to take effect.
 
 ## Further reading
+
 - [Wikipedia on TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password)
 - [Wikipedia on HOTP](https://en.wikipedia.org/wiki/HMAC-based_one-time_password)

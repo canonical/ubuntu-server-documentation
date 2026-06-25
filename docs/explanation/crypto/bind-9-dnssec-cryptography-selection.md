@@ -14,8 +14,12 @@ Out of the box, the BIND 9 DNS server is configured to try to use DNSSEC wheneve
 
 DNSSEC can be quickly checked with the help of `dig`. Right after you installed `bind9`, you can run `dig` and ask it about the `isc.org` domain:
 
-```text
-$ dig @127.0.0.1 isc.org +dnssec +multiline
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.1 isc.org +dnssec +multiline
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 isc.org +dnssec +multiline
 ; (1 server found)
@@ -47,8 +51,12 @@ We can see that a `RRSIG` DNSSEC record was returned, but the important informat
 
 To see an example where this verification fails, we can use the `www.dnssec-failed.org` domain, which is specially crafted for this:
 
-```text
-$ dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 www.dnssec-failed.org +dnssec +multiline
 ; (1 server found)
@@ -77,8 +85,12 @@ Here we see that:
 
 In the `bind9` logs, we will see DNSSEC validation errors:
 
-```text
-$ journalctl -u named.service -n 10
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+journalctl -u named.service -n 10
 
 Apr 19 13:41:50 j named[3018]: validating dnssec-failed.org/DNSKEY: no valid signature found (DS)
 Apr 19 13:41:50 j named[3018]: no valid RRSIG resolving 'dnssec-failed.org/DNSKEY/IN': 68.87.76.228#53
@@ -88,8 +100,12 @@ Apr 19 13:41:50 j named[3018]: broken trust chain resolving 'www.dnssec-failed.o
 
 We can run `dig` with the `+cd` command line parameter which disables this verification, but notice that still we don't get the `ad` flag in the reply:
 
-```text
-$ dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline +cd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.1 www.dnssec-failed.org +dnssec +multiline +cd
 
 ; <<>> DiG 9.18.12-0ubuntu0.22.04.1-Ubuntu <<>> @127.0.0.1 www.dnssec-failed.org +dnssec +multiline +cd
 ; (1 server found)
@@ -164,14 +180,22 @@ disable-algorithms "." {
 
 And restart BIND:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
 Now the `ad` flag is gone, meaning that this answer wasn't validated:
 
-```text
-$ dig @127.0.0.1 isc.org +dnssec +multiline
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dig @127.0.0.1 isc.org +dnssec +multiline
 
 ; <<>> DiG 9.18.1-1ubuntu1-Ubuntu <<>> @127.0.0.1 isc.org +dnssec +multiline
 ; (1 server found)
@@ -213,7 +237,7 @@ In general, as always with cryptography, be careful with which algorithms you de
 Remember now to remove the disabling of `ECDSAP256SHA256` from `/etc/bind/named.conf.options` and restart BIND 9. This change was just a quick test!
 :::
 
-## References
+## Further reading
 
 * [ISC DNSSEC Guide](https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html)
 * [DNSSEC troubleshooting section of the ISC DNSSEC guide](https://bind9.readthedocs.io/en/v9.18.14/dnssec-guide.html#basic-dnssec-troubleshooting)

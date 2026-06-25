@@ -29,27 +29,83 @@ For the best results, we need a system we can reach on the internet and that we 
 
 Let's start the configuration by installing WireGuard and generating the keys. On the client, run the following commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install wireguard
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 wg genkey > wg0.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 wg pubkey < wg0.key > wg0.pub
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv wg0.key wg0.pub /etc/wireguard
 ```
 
 And on the gateway server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install wireguard
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 wg genkey > gateway0.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 wg pubkey < gateway0.key > gateway0.pub
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv gateway0.key gateway0.pub /etc/wireguard
 ```
 
 On the client, we will create `/etc/wireguard/wg0.conf`:
 
-```
+```ini
 [Interface]
 PostUp = wg set %i private-key /etc/wireguard/wg0.key
 ListenPort = 51000
@@ -68,7 +124,7 @@ Key points here:
 
 The counterpart configuration on the gateway server is `/etc/wireguard/gateway0.conf` with these contents:
 
-```
+```ini
 [Interface]
 PostUp = wg set %i private-key /etc/wireguard/%i.key
 Address = 10.90.90.2/24
@@ -92,19 +148,27 @@ The WireGuard configuration that we did so far is enough to send the traffic fro
 
 To enable routing, create `/etc/sysctl.d/70-wireguard-routing.conf` with this content:
 
-```
+```text
 net.ipv4.ip_forward = 1
 ```
 
 And run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl -p /etc/sysctl.d/70-wireguard-routing.conf -w
 ```
 
 To masquerade the traffic from the VPN, one simple rule is needed:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo iptables -t nat -A POSTROUTING -s 10.90.90.0/24 -o eth0 -j MASQUERADE
 ```
 
@@ -112,7 +176,7 @@ Replace `eth0` with the name of the network interface on the gateway server, if 
 
 To have this rule persist across reboots, you can add it to `/etc/rc.local` (create the file if it doesn't exist and make it executable):
 
-```
+```sh
 #!/bin/sh
 iptables -t nat -A POSTROUTING -s 10.90.90.0/24 -o eth0 -j MASQUERADE
 ```
@@ -123,8 +187,13 @@ This completes the gateway server configuration.
 
 Let's bring up the WireGuard interfaces on both peers. On the gateway server:
 
-```bash
-$ sudo wg-quick up gateway0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up gateway0
+
 [#] ip link add gateway0 type wireguard
 [#] wg setconf gateway0 /dev/fd/63
 [#] ip -4 address add 10.90.90.2/24 dev gateway0
@@ -134,8 +203,13 @@ $ sudo wg-quick up gateway0
 
 And on the client:
 
-```bash
-$ sudo wg-quick up wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up wg0
+
 [#] ip link add wg0 type wireguard
 [#] wg setconf wg0 /dev/fd/63
 [#] ip -4 address add 10.90.90.1/24 dev wg0
@@ -151,8 +225,13 @@ $ sudo wg-quick up wg0
 
 From the client you should now be able to verify that your traffic reaching out to the internet is going through the gateway server via the WireGuard VPN. For example:
 
-```bash
-$ mtr -r 1.1.1.1
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+mtr -r 1.1.1.1
+
 Start: 2022-09-01T12:42:59+0000
 HOST: laptop.lan                 Loss%   Snt   Last   Avg  Best  Wrst StDev
   1.|-- 10.90.90.2                 0.0%    10  184.9 185.5 184.9 186.9   0.6
@@ -165,8 +244,13 @@ Above, hop 1 is the `gateway0` interface on the gateway server, then `10.48.128.
 
 If you only look at the output of `ip route`, however, it's not immediately obvious that the WireGuard VPN is the default gateway:
 
-```bash
-$ ip route
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip route
+
 default via 192.168.122.1 dev enp1s0 proto dhcp src 192.168.122.160 metric 100 
 10.90.90.0/24 dev wg0 proto kernel scope link src 10.90.90.1 
 192.168.122.0/24 dev enp1s0 proto kernel scope link src 192.168.122.160 metric 100 
@@ -191,8 +275,13 @@ There are two things you can do about this: select a specific DNS server to use 
 
 If you can use a DNS server that you trust, or don't mind using, this is probably the easiest solution. Many people would start with the DNS server assigned to the gateway server used for the VPN. This address can be checked by running the following command in a shell on the gateway server:
 
-```bash
-$ resolvectl status
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+resolvectl status
+
 Global
        Protocols: -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
 resolv.conf mode: stub
@@ -213,7 +302,7 @@ Look for `Current DNS Server`. In the example above, it's `10.48.0.5`.
 
 Let's change the WireGuard `wg0` interface config to use that DNS server. Edit `/etc/wireguard/wg0.conf` and add a second `PostUp` line with the `resolvectl` command like below:
 
-```
+```ini
 [Interface]
 PostUp = wg set %i private-key /etc/wireguard/wg0.key
 PostUp = resolvectl dns %i 10.48.0.5; resolvectl domain %i \~.
@@ -228,13 +317,21 @@ AllowedIPs = 0.0.0.0/0
 
 You can run that `resolvectl` command by hand if you want to avoid having to restart the WireGuard VPN:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo resolvectl dns wg0 10.48.0.5; sudo resolvectl domain wg0 \~.
 ```
 
 Or just restart the WireGuard interface:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo wg-quick down wg0; sudo wg-quick up wg0
 ```
 
@@ -250,7 +347,11 @@ Here we will proceed with `bind9`, which is in the Ubuntu *main* repository.
 
 On the gateway server, install the `bind9` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install bind9
 ```
 
@@ -258,7 +359,7 @@ And that's it for the server part.
 
 On the client, add a `PostUp` line specifying this IP (or change the line we added in the previous section):
 
-```
+```ini
 [Interface]
 PostUp = wg set %i private-key /etc/wireguard/wg0.key
 PostUp = resolvectl dns %i 10.90.90.2; resolvectl domain %i \~.

@@ -20,7 +20,11 @@ For this setup, we will need:
 
 On the client host, install the following packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sssd-ldap sssd-krb5 ldap-utils krb5-user
 ```
 
@@ -28,8 +32,13 @@ You may be asked about the default Kerberos realm. For this guide, we are using 
 
 At this point, you should already be able to obtain tickets from your Kerberos server, assuming {term}`DNS` records point at it:
 
-```bash
-$ kinit ubuntu
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+kinit ubuntu
+
 Password for ubuntu@EXAMPLE.COM:
 
 ubuntu@ldap-krb-client:~$ klist
@@ -47,7 +56,7 @@ But we want to be able to login as an LDAP user, authenticated via Kerberos. Let
 
 Create the `/etc/sssd/sssd.conf` configuration file, with permissions `0600` and ownership `root:root`, and add the following content:
 
-```bash
+```ini
 [sssd]
 config_file_version = 2
 domains = example.com
@@ -67,7 +76,11 @@ This example uses two KDCs, which made it necessary to also specify the `krb5_kp
 
 Start the `sssd` service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start sssd.service
 ```
 
@@ -75,7 +88,11 @@ sudo systemctl start sssd.service
 
 To enable automatic home directory creation, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update --enable mkhomedir
 ```
 
@@ -83,7 +100,7 @@ sudo pam-auth-update --enable mkhomedir
 
 In this example, the LDAP server has the following user and group entry we are going to use for testing:
 
-```
+```text
 dn: uid=john,ou=People,dc=example,dc=com
 uid: john
 objectClass: inetOrgPerson
@@ -114,32 +131,53 @@ Note how the user `john` has no `userPassword` attribute.
 
 The user `john` should be known to the system:
 
-```bash
-ubuntu@ldap-client:~$ getent passwd john
-john:*:10001:10001:John Smith:/home/john:/bin/bash
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-client
+:dir: ~
+getent passwd john
 
-ubuntu@ldap-client:~$ id john
+john:*:10001:10001:John Smith:/home/john:/bin/bash
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-client
+:dir: ~
+id john
+
 uid=10001(john) gid=10001(john) groups=10001(john),10100(Engineering)
 ```
 
 Let's try a login as this user:
 
-```bash
-ubuntu@ldap-krb-client:~$ sudo login
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-krb-client
+:dir: ~
+sudo login
+
 ldap-krb-client login: john
 Password: 
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-24-generic x86_64)
 (...)
 Creating directory '/home/john'.
+```
+```{terminal}
+:copy:
+:user: john
+:host: ldap-krb-client
+:dir: ~
+klist
 
-john@ldap-krb-client:~$ klist
 Ticket cache: FILE:/tmp/krb5cc_10001_BOrxWr
 Default principal: john@EXAMPLE.COM
 
 Valid starting     Expires            Service principal
 04/17/20 20:29:50  04/18/20 06:29:50  krbtgt/EXAMPLE.COM@EXAMPLE.COM
 	renew until 04/18/20 20:29:50
-john@ldap-krb-client:~$
 ```
 
 We logged in using the Kerberos password, and user/group information from the LDAP server.
@@ -156,7 +194,7 @@ There is a configuration parameter that can be set to protect the workstation fr
 
 To enable it, edit `/etc/sssd/sssd.conf` and add this line to the domain section:
 
-```text
+```ini
 [sssd]
 config_file_version = 2
 domains = example.com
@@ -171,8 +209,13 @@ The second step is to create a `host` principal on the KDC for this workstation.
 
 After the host principal is created, its keytab needs to be stored on the workstation. This two step process can be easily done on the workstation itself via `kadmin` (not `kadmin.local`) to contact the KDC remotely:
 
-```bash
-$ sudo kadmin -p ubuntu/admin
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kadmin -p ubuntu/admin
+
 kadmin:  addprinc -randkey host/ldap-krb-client.example.com@EXAMPLE.COM
 WARNING: no policy specified for host/ldap-krb-client.example.com@EXAMPLE.COM; defaulting to no policy
 Principal "host/ldap-krb-client.example.com@EXAMPLE.COM" created.
@@ -184,8 +227,18 @@ Entry for principal host/ldap-krb-client.example.com with kvno 6, encryption typ
 
 Then exit the tool and make sure the permissions on the keytab file are tight:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0600 /etc/krb5.keytab
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown root:root /etc/krb5.keytab
 ```
 
@@ -193,14 +246,17 @@ You can also do it on the KDC itself using `kadmin.local`, but you will have to 
 
 Once these steps are complete, you can restart SSSD on the workstation and perform the login. If the rogue KDC notices the attempt and replies, it will fail the host verification. With debugging we can see this happening on the workstation:
 
-```
+```{terminal}
+:output-only:
 ==> /var/log/sssd/krb5_child.log <==
 (Mon Apr 20 19:43:58 2020) [[sssd[krb5_child[2102]]]] [validate_tgt] (0x0020): TGT failed verification using key for [host/ldap-krb-client.example.com@EXAMPLE.COM].
 (Mon Apr 20 19:43:58 2020) [[sssd[krb5_child[2102]]]] [get_and_save_tgt] (0x0020): 1741: [-1765328377][Server host/ldap-krb-client.example.com@EXAMPLE.COM not found in Kerberos database]
 ```
+
 And the login is denied. If the real KDC picks it up, however, the host verification succeeds:
 
-```
+```{terminal}
+:output-only:
 ==> /var/log/sssd/krb5_child.log <==
 (Mon Apr 20 19:46:22 2020) [[sssd[krb5_child[2268]]]] [validate_tgt] (0x0400): TGT verified using key for [host/ldap-krb-client.example.com@EXAMPLE.COM].
 ```

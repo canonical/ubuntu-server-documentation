@@ -21,7 +21,11 @@ This step is necessary for Ubuntu Pro users or holders of personal subscriptions
 
 First, make sure that you have the latest version of the Ubuntu Pro Client running. The package used to access the Pro Client (`pro`) is `ubuntu-pro-client`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt install ubuntu-pro-client
 ```
 
@@ -31,7 +35,11 @@ Most systems will have `ubuntu-pro-client` installed by default. If that is the 
 
 To attach your machine to a subscription, run the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pro attach
 ```
 
@@ -41,8 +49,13 @@ For users who need to attach many systems or automate the process, as in many en
 
 After running the command, you should see output like this, giving you a link and a code:
 
-```bash
-ubuntu@test:~$ sudo pro attach
+```{terminal}
+:copy:
+:user: ubuntu
+:host: test
+:dir: ~
+sudo pro attach
+
 Initiating attach operation...
 
 Please sign in to your Ubuntu Pro account at this link:
@@ -60,7 +73,8 @@ Once you have pasted your code and chosen the subscription you want to attach yo
 
 The attach process will then continue in the terminal window, and you should eventually be presented with the following message:
 
-```
+```{terminal}
+:output-only:
 Attaching the machine...
 Enabling Ubuntu Pro: ESM Apps
 Ubuntu Pro: ESM Apps enabled

@@ -15,7 +15,11 @@ CUPS manages print jobs and queues, and provides support for a wide range of pri
 
 A complete CUPS install has many package dependencies, but they can all be specified on the same command line. To perform a basic installation of CUPS, enter the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install cups
 ```
 
@@ -29,8 +33,18 @@ The CUPS server's behavior is configured through directives found in the `/etc/c
 
 We recommend that you make a copy of the original CUPS configuration file and protect it from writing, before you start configuring CUPS. You will then have the original settings as a reference, which you can reuse or restore as necessary.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/cups/cupsd.conf /etc/cups/cupsd.conf.original
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod a-w /etc/cups/cupsd.conf.original
 ```
 
@@ -58,7 +72,7 @@ Listen 192.168.10.250:631      # Listen on the LAN interface, Port 631 (IPP)
 
 In the example above, you can comment out or remove the reference to the loopback address (`127.0.0.1`) if you do not want the CUPS daemon (`cupsd`) to listen on that interface, but would rather have it only listen on the Ethernet interfaces of the Local Area Network (LAN). To enable listening for all network interfaces for which a certain hostname is bound, including the loopback, you could create a Listen entry for the hostname `socrates` like this:
 
-```text    
+```text
 Listen socrates:631  # Listen on all interfaces for the hostname 'socrates'
 ```
 
@@ -70,7 +84,11 @@ Port 631  # Listen on port 631 on all interfaces
 
 For more examples of configuration directives in the CUPS server configuration file, view the associated system manual page by entering the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 man cupsd.conf
 ```
 
@@ -109,7 +127,11 @@ Replace `192.168.10.*` with the subnet of your local network.
 
 If you have a {ref}`firewall <firewalls>` enabled (e.g. `ufw`), you must also open port 631 to allow incoming connections:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw allow 631/tcp
 ```
 
@@ -117,7 +139,11 @@ sudo ufw allow 631/tcp
 
 Whenever you make changes to the `/etc/cups/cupsd.conf` configuration file, you'll need to restart the CUPS server by typing the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart cups.service
 ```
 
@@ -129,7 +155,11 @@ To perform administrative tasks via the web interface, you must either have the 
 
 To add a user to the `lpadmin` group, run at the terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo usermod -aG lpadmin username
 ```
 
@@ -141,7 +171,7 @@ For troubleshooting purposes, you can access CUPS server errors via the error lo
 
 If you make this change, remember to change it back once you've solved your problem, to prevent the log file from becoming overly large.
 
-## References
+## Further reading
 
 * [CUPS Website](http://www.cups.org/)
 

@@ -51,25 +51,25 @@ Save the BIOS settings and reboot.
 Now, add the `nohibernate kvm_intel.tdx=1` kernel parameters to `GRUB_CMDLINE_LINUX_DEFAULT` in `/etc/default/grub`, run `sudo update-grub`, and then reboot again.
 After rebooting, verify that the parameters have been applied:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /proc/cmdline 
-```
 
-You should see something like:
-
-```text
 BOOT_IMAGE=/boot/vmlinuz-6.19.0-3-generic root=UUID=f6ce4201-d6d1-4505-bdf5-019ee4fe842e ro nohibernate kvm_intel.tdx=1
 ```
 
 Next, confirm that Intel TDX has been successfully enabled:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dmesg | grep -i tdx
-```
 
-Which produces output like this:
-
-```text
 [    1.824045] virt/tdx: BIOS enabled: private KeyID range [32, 64)
 [    1.824049] virt/tdx: Disable ACPI S3. Turn off Intel TDX in the BIOS to use ACPI S3.
 [   24.195089] virt/tdx: 1050644 KB allocated for PAMT
@@ -82,8 +82,18 @@ The message `virt/tdx: module initialized` tells us that TDX has indeed been ena
 
 The next step is to install the virtualization components required to run TDs.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install \
   qemu-system-x86 \
   ovmf-inteltdx \
@@ -100,8 +110,12 @@ This installs:
 
 After installation, verify the Intel TDX-capable OVMF firmware is available:
 
-```bash
-$ ls -l /usr/share/ovmf/OVMF.inteltdx.ms.fd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls -l /usr/share/ovmf/OVMF.inteltdx.ms.fd
 
 -rw-r--r-- 1 root root 4194304 Jan 15 12:00 /usr/share/ovmf/OVMF.inteltdx.ms.fd
 ```
@@ -110,19 +124,31 @@ $ ls -l /usr/share/ovmf/OVMF.inteltdx.ms.fd
 
 Download a cloud image (Ubuntu 26.04 LTS in this example):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 wget https://cloud-images.ubuntu.com/resolute/current/resolute-server-cloudimg-amd64.img
 ```
 
 Next, install the required tool:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install cloud-image-utils
 ```
 
 Create a cloud-init configuration file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat > user-data.yaml << 'EOF'
 #cloud-config
 chpasswd:
@@ -136,7 +162,11 @@ EOF
 
 From that, create a cloud-init ISO:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cloud-localds user-data.img user-data.yaml
 ```
 
@@ -150,7 +180,11 @@ For production use, set a strong password and configure SSH key-based authentica
 
 Using QEMU, we can now launch a TD with the prepared image:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 \
   -accel kvm \
   -smp 32 \
@@ -187,21 +221,25 @@ For more details about these parameters, refer to the [QEMU documentation](https
 
 Once the TD is launched, verify that Intel TDX is enabled by checking the kernel logs:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dmesg | grep tdx
-```
 
-You should see something like:
-
-```text
 [    0.000000] tdx: Guest detected
 [   11.162378] systemd[1]: Detected confidential virtualization tdx.
 ```
 
 You can also check the Intel TDX guest device:
 
-```bash
-$ ls -l /dev/tdx_guest
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls -l /dev/tdx_guest
 
 crw------- 1 root root 10, 125 Jan  1 00:00 /dev/tdx_guest
 ```
@@ -211,7 +249,11 @@ crw------- 1 root root 10, 125 Jan  1 00:00 /dev/tdx_guest
 Intel TDX VM can be managed by libvirt. For this, the domain definition must be modified to contain
 certain necessary information about the confidential VM. Here is a domain definition sample for Intel TDX VM:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat > tdx-vm.xml << 'EOF'
 <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
   <name>tdx-guest</name>
@@ -259,17 +301,32 @@ EOF
 ```
 
 Next, define the VM:
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh define tdx-vm.xml
 ```
 
 Start the VM:
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh start tdx-guest
 ```
 
 Connect to the console:
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh console tdx-guest
 ```
 
@@ -285,25 +342,41 @@ Key libvirt configuration elements for TDX:
 
 List all VMs:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh list --all
 ```
 
 Stop the VM:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh shutdown tdx-guest
 ```
 
 Force stop the VM:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh destroy tdx-guest
 ```
 
 Remove the VM definition:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo virsh undefine tdx-guest
 ```
 
@@ -315,38 +388,73 @@ Ensure BIOS settings are correct and kernel parameters are enabled.
 Confirm the following MSR checks.
 
 * Install the MSR tools package:
-  ```bash
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install msr-tools
   ```
 
 * Verify that Multi-Key Total Memory Encryption (MK-TME) is enabled by checking bit 1 of MSR `0x982`:
-  ```bash
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo rdmsr 0x982 -f 1:1 1
-  ``` 
+  ```
+
   Expected value of `1` indicates MK-TME is enabled in BIOS.
 
-* Verify Intel TDX support by checking bit 11 of MSR `0x1401` (enable bit for `SEAMRR`--`SEAM` Range Registers): 
-  ```bash
+* Verify Intel TDX support by checking bit 11 of MSR `0x1401` (enable bit for `SEAMRR`--`SEAM` Range Registers):
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo rdmsr 0x1401 -f 11:11 1
   ```
+
   Expected value of `1` indicates SEAMRR is enabled.  
 
-* Verify the number of private keys allocated to TDs by checking bits `63:32` of `IA32_TME_CAPABILITY` MSR: 
-  ```bash
+* Verify the number of private keys allocated to TDs by checking bits `63:32` of `IA32_TME_CAPABILITY` MSR:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
   ```
+
   This shows the number of private keys available for Trust Domains (`NUM_TDX_PRIV_KEYS`) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.  
 
 * Verify the number of private keys allocated to TDs by checking bits `63:32` of `IA32_TME_CAPABILITY` MSR:
-  ```bash
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   echo $((0x$(sudo rdmsr 0x87 -f 63:32)))
   ```
+
   This shows the number of private keys available for Trust Domains (`NUM_TDX_PRIV_KEYS`) in decimal format. A non-zero value indicates keys are allocated for Intel TDX.
 
-* Verify the Intel SGX and MCHECK status.  
-  ```bash
+* Verify the Intel SGX and MCHECK status:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo rdmsr 0xa0
   ```
+
   Expected value of `1` indicates it is enabled. A value of `1861` indicates SGX registration UEFI variables maybe corrupt. Boot into the BIOS and set `SGX Factory Reset` to `Enable`. This will result in two new keys. 
 
 

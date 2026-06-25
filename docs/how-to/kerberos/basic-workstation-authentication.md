@@ -24,19 +24,23 @@ We are going to use `sssd` with a trick so that it will fetch the user informati
 
 To install the packages enter the following in a terminal prompt:
 
-```bash
-$ sudo apt install krb5-user sssd-krb5
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install krb5-user sssd-krb5
 ```
 
-You will be prompted for the addresses of your KDCs and admin servers. If you have followed our {ref}`how to install a Kerberos server <install-a-kerberos-server>` and {ref}`how to set up a secondary KDC <set-up-secondary-kdc>` guides, the KDCs will be  (space separated): 
+You will be prompted for the addresses of your KDCs and admin servers. If you have followed our {ref}`how to install a Kerberos server <install-a-kerberos-server>` and {ref}`how to set up a secondary KDC <set-up-secondary-kdc>` guides, the KDCs will be (space separated): 
 
-```
+```text
 kdc01.example.com kdc02.example.com
 ```
 
 And the admin server will be: 
 
-```
+```text
 kdc01.example.com
 ```
 
@@ -50,14 +54,23 @@ If you have added the appropriate SRV records to {term}`DNS`, none of those prom
 
 If you missed the questions earlier, you can reconfigure the package to fill them in again: 
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg-reconfigure krb5-config
 ```
 
 You can test the Kerberos configuration by requesting a ticket using the `kinit` utility. For example:
 
-```bash
-$ kinit ubuntu
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+kinit ubuntu
+
 Password for ubuntu@EXAMPLE.COM:
 ```
 
@@ -67,7 +80,7 @@ Note that `kinit` doesn't need the principal to exist as a local user in the sys
 
 The only remaining configuration now is for `sssd`. Create the file `/etc/sssd/sssd.conf` with the following content:
 
-```text
+```ini
 [sssd]
 config_file_version = 2
 domains = example.com
@@ -87,16 +100,37 @@ The above configuration will use Kerberos for **authentication** (`auth_provider
 
 Adjust the permissions of the config file and start `sssd`:
 
-```bash
-$ sudo chown root:root /etc/sssd/sssd.conf
-$ sudo chmod 0600 /etc/sssd/sssd.conf
-$ sudo systemctl start sssd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chown root:root /etc/sssd/sssd.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chmod 0600 /etc/sssd/sssd.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl start sssd
 ```
 
-Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a {term}`fallback <fallbacks>` to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal (<kbd>Ctrl</kbd>-<kbd>Alt</kbd>-<kbd>number</kbd>), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
+Just by having installed `sssd` and its dependencies, PAM will already have been configured to use `sssd`, with a {term}`fallback <fallbacks>` to local user authentication. To try it out, if this is a workstation, simply switch users (in the GUI), or open a login terminal ({kbd}`Ctrl`-{kbd}`Alt`-{kbd}`number`), or spawn a login shell with `sudo login`, and try logging in using the name of a Kerberos principal. Remember that this user must already exist on the local system:
 
-```bash
-$ sudo login
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo login
+
 focal-krb5-client login: ubuntu
 Password:
 Welcome to Ubuntu Focal Fossa (development branch) (GNU/Linux 5.4.0-21-generic x86_64)

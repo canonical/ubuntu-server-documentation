@@ -40,12 +40,8 @@ The common configuration elements of TCP/IP and their purposes are as follows:
 - **Nameserver address**: Nameserver addresses represent the IP addresses of Domain Name Service (DNS) systems, which resolve network hostnames into IP addresses. There are three levels of nameserver addresses, which may be specified in order of precedence: The *primary* nameserver, the *secondary* nameserver, and the *tertiary* nameserver. So that your system can resolve network hostnames into their corresponding IP addresses, you must specify valid nameserver addresses that you are authorized to use in your system's TCP/IP configuration. In many cases, these addresses can and will be provided by your network service provider, but many free and publicly accessible nameservers are available for use, such as Quad9 (9.9.9.9) or Cloudflare (1.1.1.1), or the Level3/Lumen servers (4.2.2.1 to 4.2.2.6).
 
 :::{tip}
-The IP address (in CIDR notation), gateway (default route), and nameserver addresses are typically specified via Netplan configuration files in `/etc/netplan/`. For more information, view the system manual page for `netplan`, with the following command typed at a terminal prompt:
+The IP address (in CIDR notation), gateway (default route), and nameserver addresses are typically specified via Netplan configuration files in `/etc/netplan/`. For more information, view the system manual page for `netplan`, using `man netplan.5` at the terminal prompt.
 :::
-
-```
-man netplan.5
-```
 
 ### IP routing
 

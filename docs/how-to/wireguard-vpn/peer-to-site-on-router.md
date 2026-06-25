@@ -45,17 +45,45 @@ With this topology, if, say, the NAS wants to send traffic to `10.10.11.2/24`, i
 
 First, we need to create keys for the peers of this setup. We need one pair of keys for the laptop, and another for the home router:
 
-```bash
-$ umask 077
-$ wg genkey > laptop-private.key
-$ wg pubkey < laptop-private.key > laptop-public.key
-$ wg genkey > router-private.key
-$ wg pubkey < router-private.key > router-public.key
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey > laptop-private.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg pubkey < laptop-private.key > laptop-public.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey > router-private.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg pubkey < router-private.key > router-public.key
 ```
 
 Let's create the router `wg0` interface configuration file. The file will be `/etc/wireguard/wg0.conf` and have these contents:
 
-```text
+```ini
 [Interface]
 PrivateKey = <contents-of-router-private.key>
 ListenPort = 51000
@@ -73,8 +101,19 @@ Not having an endpoint here also means that the home network side will never be 
 ::::{important}
 This configuration file contains a secret: **PrivateKey**.
 Make sure to adjust its permissions accordingly, as follows:
-```
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0600 /etc/wireguard/wg0.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown root: /etc/wireguard/wg0.conf
 ```
 ::::
@@ -90,7 +129,7 @@ Finally, the `ListenPort` parameter specifies the **UDP** port on which WireGuar
 
 Now let's create a similar configuration on the other peer, the laptop. Here the interface is called `home0`, so the configuration file is `/etc/wireguard/home0.conf`:
 
-```
+```ini
 [Interface]
 PrivateKey = <contents-of-laptop-private.key>
 ListenPort = 51000
@@ -105,8 +144,19 @@ AllowedIPs = 10.10.11.0/24,10.10.10.0/24
 ::::{important}
 As before, this configuration file contains a secret: **PrivateKey**.
 You need to adjust its permissions accordingly, as follows:
-```
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0600 /etc/wireguard/home0.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown root: /etc/wireguard/home0.conf
 ```
 ::::
@@ -131,8 +181,13 @@ With these configuration files in place, it's time to bring the WireGuard interf
 
 On the home router, run:
 
-```bash
-$ sudo wg-quick up wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up wg0
+
 [#] ip link add wg0 type wireguard
 [#] wg setconf wg0 /dev/fd/63
 [#] ip -4 address add 10.10.11.1/24 dev wg0
@@ -141,8 +196,13 @@ $ sudo wg-quick up wg0
 
 Verify you have a `wg0` interface up with an address of `10.10.11.1/24`:
 
-```bash
-$ ip a show dev wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip a show dev wg0
+
 9: wg0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1378 qdisc noqueue state UNKNOWN group default qlen 1000
     link/none
     inet 10.10.11.1/24 scope global wg0
@@ -151,15 +211,25 @@ $ ip a show dev wg0
 
 And a route to the `10.10.1.0/24` network via the `wg0` interface:
 
-```bash
-$ ip route | grep wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip route | grep wg0
+
 10.10.11.0/24 dev wg0 proto kernel scope link src 10.10.11.1
 ```
 
 And `wg show` should show some status information, but no connected peer yet:
 
-```bash
-$ sudo wg show
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg show
+
 interface: wg0
   public key: <router public key>
   private key: (hidden)
@@ -173,14 +243,23 @@ In particular, verify that the listed public keys match what you created (and ex
 
 Before we start the interface on the other peer, it helps to leave the above `show` command running continuously, so we can see when there are changes:
 
-```bash
-$ sudo watch wg show
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo watch wg show
 ```
 
 Now start the interface on the laptop:
 
-```bash
-$ sudo wg-quick up home0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up home0
+
 [#] ip link add home0 type wireguard
 [#] wg setconf home0 /dev/fd/63
 [#] ip -4 address add 10.10.11.2/24 dev home0
@@ -190,14 +269,25 @@ $ sudo wg-quick up home0
 
 Similarly, verify the interface's IP and added routes:
 
-```bash
-$ ip a show dev home0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip a show dev home0
+
 24: home0: <POINTOPOINT,NOARP,UP,LOWER_UP> mtu 1420 qdisc noqueue state UNKNOWN group default qlen 1000
     link/none
     inet 10.10.11.2/24 scope global home0
        valid_lft forever preferred_lft forever
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip route | grep home0
 
-$ ip route | grep home0
 10.10.10.0/24 dev home0 scope link
 10.10.11.0/24 dev home0 proto kernel scope link src 10.10.11.2
 ```
@@ -206,8 +296,13 @@ Up to this point, the `wg show` output on the home router probably didn't change
 
 If we trigger some traffic, however, the VPN will "wake up". Let's ping the internal address of the home router a few times:
 
-```bash
-$ ping -c 3 10.10.10.1
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ping -c 3 10.10.10.1
+
 PING 10.10.10.1 (10.10.10.1) 56(84) bytes of data.
 64 bytes from 10.10.10.1: icmp_seq=1 ttl=64 time=603 ms
 64 bytes from 10.10.10.1: icmp_seq=2 ttl=64 time=300 ms
@@ -218,8 +313,13 @@ Note how the first ping was slower. That's because the VPN was "waking up" and b
 
 At the same time, the `wg show` output on the home router will have changed to something like this:
 
-```bash
-$ sudo wg show
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg show
+
 interface: wg0
   public key: <router public key>
   private key: (hidden)

@@ -14,14 +14,23 @@ As with any other OCI-compliant container image, [rocks](https://documentation.u
 
 First, install Docker if it's not already installed:
 
-```bash
-$ sudo apt-get install -y docker.io docker-compose
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt-get install -y docker.io docker-compose
 ```
 
 We can deploy a container with the `docker run` command. This command has a number of [possible parameters](https://docs.docker.com/reference/cli/docker/container/run/). The [“Usage” section](https://hub.docker.com/r/ubuntu/grafana) of the Grafana rock’s documentation has a table with an overview of parameters specific to the image.
 
-```
-$ sudo docker run -d --name grafana-container -e TZ=UTC -p 3000:3000 ubuntu/grafana:10.3.3-22.04_stable
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker run -d --name grafana-container -e TZ=UTC -p 3000:3000 ubuntu/grafana:10.3.3-22.04_stable
+
 Unable to find image 'ubuntu/grafana:10.3.3-22.04_stable' locally
 10.3.3-22.04_stable: Pulling from ubuntu/grafana
 bccd10f490ab: Already exists 
@@ -46,24 +55,44 @@ This container, named `grafana-container`, serves Grafana 10.3.3 in an Ubuntu 22
 
 If you don’t have Firefox handy, `curl` can be used instead:
 
-```bash
-$ curl -s http://localhost:3000/login | grep "<title>"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+curl -s http://localhost:3000/login | grep "<title>"
+
     <title>Grafana</title>
 ```
 
 Now that we’ve tested the deployment of the Grafana rock as a single container, let’s clean it up:
 
-```bash
-$ sudo docker ps
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker ps
+
 CONTAINER ID   IMAGE                                COMMAND                  CREATED          STATUS          PORTS                                       NAMES
 356e623ef2c1   ubuntu/grafana:10.3.3-22.04_stable   "/bin/pebble enter -…"   17 minutes ago   Up 17 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   grafana-container
 ```
 
 We can stop and remove the container as follows:
 
-```bash
-$ sudo docker stop grafana-container
-$ sudo docker rm grafana-container
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker stop grafana-container
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker rm grafana-container
 ```
 
 The [Grafana rock’s documentation](https://hub.docker.com/r/ubuntu/grafana) will also show you how to use Docker’s `-v` bind mounts to configure Grafana’s provisioning directory and data persistence. 
@@ -115,8 +144,13 @@ Note that the Prometheus configuration file is being given to the container via 
 
 Since we already installed Docker in the section above, all that is needed is to create and start the containers defined in this Compose file. This can be achieved with:
 
-```bash
-$ sudo docker compose up -d
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker compose up -d
+
 [+] Running 10/10
  ✔ grafana Pulled                                                                                                                                                                                                                                                                   
    ✔ bccd10f490ab Already exists                                                                                                                                                                                                                                                     
@@ -136,8 +170,13 @@ $ sudo docker compose up -d
 
 As before, the `-d` indicates that all containers in this stack should be started in the background. You can confirm they are live and running with:
 
-```bash
-$ sudo docker compose ps
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo docker compose ps
+
 NAME                   IMAGE                                   COMMAND                  SERVICE      CREATED         STATUS         PORTS
 grafana-container      ubuntu/grafana:10.3.3-22.04_stable      "/bin/pebble enter -…"   grafana      3 seconds ago   Up 3 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp
 prometheus-container   ubuntu/prometheus:2.49.1-22.04_stable   "/bin/pebble enter -…"   prometheus   3 seconds ago   Up 3 seconds   0.0.0.0:9090->9090/tcp, :::9090->9090/tcp
@@ -161,6 +200,6 @@ Finally, click on "Explore" from the Grafana menu, and select the `prometheus` d
 
 ![Prometheus data source](../../images/bd93d9c1-prometheus-metrics.png)
 
-## Next Steps
+## Next steps
 
 As you can see, `docker-compose` makes it convenient to set up multi-container applications without needing to perform runtime changes to the containers. As you can imagine, this can permit building a more sophisticated management system to handle fail-over, load-balancing, scaling, upgrading old nodes, and monitoring status. But rather than needing to implement all of this directly on top of `docker-container`, you may want to investigate Kubernetes-style cluster management software such as [microk8s](https://canonical.com/microk8s/docs).

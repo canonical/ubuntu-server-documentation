@@ -15,7 +15,7 @@ What we need is a way to back up the directory database(s) -- specifically the c
 
 Create `/usr/local/bin/ldapbackup` with the following content:
 
-```bash
+```sh
 #!/bin/bash
 set -euo pipefail
 
@@ -37,7 +37,11 @@ nice slapcat -b dc=example,dc=com > "$DATA_BACKUP"
 
 Make it executable:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod +x /usr/local/bin/ldapbackup
 ```
 
@@ -74,14 +78,28 @@ WantedBy=timers.target
 
 Enable and start the timer:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl daemon-reload
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl enable --now ldapbackup.timer
 ```
 
 Verify the timer is active:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl list-timers ldapbackup.timer
 ```
 
@@ -91,7 +109,7 @@ Now the files are created, they should be copied to a backup server.
 
 Assuming a fresh reinstall of LDAP, create `/usr/local/bin/ldaprestore`:
 
-```bash
+```sh
 #!/bin/bash
 set -euo pipefail
 

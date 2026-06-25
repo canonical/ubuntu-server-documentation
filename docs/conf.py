@@ -386,6 +386,10 @@ suppress_warnings = [
     'myst.glossary',  # Suppress glossary-related warnings from MyST parser
 ]
 
+# Prevent copying of continuation prompts in code blocks
+copybutton_selector = "span.copybutton, div:not(.terminal-code) > div.highlight > pre"
+copybutton_prompt_text = "> |"
+copybutton_prompt_is_regexp = True
 
 # Configure hoverxref options
 hoverxref_role_types = {

@@ -14,6 +14,7 @@ We recommend running a Long Term Support (LTS) release as it provides 5 years of
 After the initial standard support period ends for an LTS release, an extended maintenance period is available via an [Ubuntu Pro subscription](https://ubuntu.com/pro), which provides coverage for an additional five years and is available for free on up to five machines. Find out more about the [release lifecycle and support period](https://ubuntu.com/about/release-cycle) for your release.
 
 ## Understanding Upgrade Paths
+
 You can only upgrade from one LTS release directly to the **next sequential LTS release**. For example, if you are on Ubuntu 16.04 LTS, you can upgrade to Ubuntu 18.04 LTS.
 However, you cannot skip releases (e.g. jump from 16.04 LTS to 20.04 LTS).If you need to reach a later LTS, you will have to upgrade in stages: first to Ubuntu 18.04 LTS, then to Ubuntu 20.04 LTS, and so on.
 
@@ -28,9 +29,26 @@ Before starting a major release upgrade, it's important to prepare your system t
 
   1. Run these commands to ensure everything is up to date:
 
-      ```bash
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
       sudo apt update
-      sudo apt dist-upgrade -o APT::Get::Always-Include-Phased-Updates=true
+      ```
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
+      sudo apt dist-upgrade -o
+      ```
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
+      APT::Get::Always-Include-Phased-Updates=true
       ```
   2. Confirm both commands complete successfully and no further updates are available.
 
@@ -50,7 +68,11 @@ We recommend upgrading the system using the `do-release-upgrade` command on Serv
 
 To start the process, run this command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo do-release-upgrade
 ```
 
@@ -64,7 +86,8 @@ Upgrades from one LTS release to the next one are only available after the first
 
 Before making any changes the command `do-release-upgrade` will first do some checks to verify the system is ready to upgrade, and provide a summary of the upgrade before proceeding. If you accept the changes, the process will begin to update the system’s packages:
 
-```text
+```{terminal}
+:output-only:
 Do you want to start the upgrade?  
 
 
@@ -88,7 +111,8 @@ Continue [yN]  Details [d]
 
 During the upgrade process you may be presented with a message to make decisions about package updates. These prompts occur when there are existing configuration files (e.g. edited by the user) and the new package configuration file are different. Below is an example prompt:
 
-```text
+```{terminal}
+:output-only:
 Configuration file '/etc/ssh/ssh_config'
  ==> Modified (by you or by a script) since installation.
  ==> Package distributor has shipped an updated version.
@@ -107,7 +131,8 @@ You should look at the differences between the files and decide what to do. The 
 
 After all packages are updated, you can choose to remove any obsolete packages that are no longer needed:
 
-```text
+```{terminal}
+:output-only:
 Remove obsolete packages?  
 
 
@@ -120,7 +145,8 @@ Continue [yN]  Details [d]
 
 Finally, when the upgrade is complete you are prompted to reboot the system. The system is not considered upgraded until this reboot occurs:
 
-```text
+```{terminal}
+:output-only:
 System upgrade is complete.
 
 Restart required  

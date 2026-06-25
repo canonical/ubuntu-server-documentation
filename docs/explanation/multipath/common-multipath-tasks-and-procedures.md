@@ -19,8 +19,12 @@ For consistency, we will refer to device mapper multipathing as **multipath**.
 
 To resize online multipath devices, first find all the paths to the logical unit number (LUN) that is to be resized by running the following command:
 
-```bash
-$ sudo multipath -ll
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipath -ll
 
 mpathb (360014056eee8ec6e1164fcb959086482) dm-0 LIO-ORG,lun01
 size=1.0G features='0' hwhandler='1 alua' wp=rw
@@ -38,16 +42,30 @@ size=1.0G features='0' hwhandler='1 alua' wp=rw
 
 Now, reconfigure `mpathb` (with `wwid = 360014056eee8ec6e1164fcb959086482`) to have 2 GB instead of just 1 GB and check if it has changed:
 
-```bash
-$ echo 1 | sudo tee /sys/block/sde/device/rescan
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo 1 | sudo tee /sys/block/sde/device/rescan
 
 1
-
-$ echo 1 | sudo tee /sys/block/sdf/device/rescan
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo 1 | sudo tee /sys/block/sdf/device/rescan
 
 1
-
-$ sudo multipath -ll
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipath -ll
 
 mpathb (360014056eee8ec6e1164fcb959086482) dm-0 LIO-ORG,lun01
 size=1.0G features='0' hwhandler='1 alua' wp=rw
@@ -65,16 +83,24 @@ size=1.0G features='0' hwhandler='1 alua' wp=rw
 
 Not yet! We still need to re-scan the multipath map:
 
-```bash
-$ sudo multipathd resize map mpathb
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipathd resize map mpathb
 
 ok
 ```
 
 And then we are good:
 
-```bash
-$ sudo multipath -ll
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipath -ll
 
 mpathb (360014056eee8ec6e1164fcb959086482) dm-0 LIO-ORG,lun01
 size=2.0G features='0' hwhandler='1 alua' wp=rw
@@ -129,7 +155,8 @@ For each path:
 
 For example, the output of a multipath command might appear as follows:
 
-```text
+```{terminal}
+:output-only:
 mpathb (360014056eee8ec6e1164fcb959086482) dm-0 LIO-ORG,lun01
 size=2.0G features='0' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=50 status=active
@@ -162,7 +189,8 @@ The default verbosity level of multipath is 2 and can be globally modified by de
 
 The following example shows the output of a `sudo multipath -l` command:
 
-```text
+```{terminal}
+:output-only:
 mpathb (360014056eee8ec6e1164fcb959086482) dm-0 LIO-ORG,lun01
 size=2.0G features='0' hwhandler='1 alua' wp=rw
 |-+- policy='service-time 0' prio=0 status=active
@@ -181,46 +209,76 @@ size=1.0G features='0' hwhandler='1 alua' wp=rw
 
 You can use the `dmsetup` command to find out which device mapper entries match the multipathed devices. The following command displays all the device mapper devices and their major and minor numbers. The minor numbers determine the name of the **dm** device. For example, a minor number of 1 corresponds to the `multipathd` device `/dev/dm-1`.
 
-```bash
-$ sudo dmsetup ls
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo dmsetup ls
+
 mpathb  (253:0)
 mpatha  (253:1)
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls -lahd /dev/dm*
 
-$ ls -lahd /dev/dm*
 brw-rw---- 1 root disk 253, 0 Apr 27 14:49 /dev/dm-0
 brw-rw---- 1 root disk 253, 1 Apr 27 14:47 /dev/dm-1
 ```
 
 ## Troubleshooting with the multipathd interactive console
 
-The `multipathd -k` command is an interactive interface to the `multipathd` daemon. Running this command brings up an interactive multipath console where you can enter `help` to get a list of available commands, you can enter an interactive command, or you can enter <kbd>Ctrl</kbd>+<kbd>D</kbd> to quit.
+The `multipathd -k` command is an interactive interface to the `multipathd` daemon. Running this command brings up an interactive multipath console where you can enter `help` to get a list of available commands, you can enter an interactive command, or you can enter {kbd}`Ctrl`+{kbd}`D` to quit.
 
 The `multipathd` interactive console can be used to troubleshoot problems with your system. For example, the following command sequence displays the multipath configuration, including the defaults, before exiting the console. 
 
-```bash
-$ sudo multipathd -k
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipathd -k
+
   > show config
   > CTRL-D
 ```
 
 The following command sequence ensures that multipath has picked up any changes to the `multipath.conf`:
 
-```bash
-$ sudo multipathd -k
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipathd -k
+
 > reconfigure
 > CTRL-D
 ```
 
 Use the following command sequence to ensure that the path checker is working properly:
 
-```bash
-$ sudo multipathd -k
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipathd -k
+
 > show paths
 > CTRL-D
 ```
 
 Commands can also be streamed into `multipathd` using STDIN like so:
 
-```bash
-$ echo 'show config' | sudo multipathd -k
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo 'show config' | sudo multipathd -k
 ```

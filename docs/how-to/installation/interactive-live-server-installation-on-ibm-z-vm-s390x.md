@@ -13,9 +13,13 @@ The following guide assumes that a z/VM guest has been defined, and that it is a
 
 Find a place to download the installer image:
 
-```bash
-user@workstation:~$ wget 
-http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+wget http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso
+
 --2020-08-08 16:01:52--  
 http://cdimage.ubuntu.com/ubuntu/releases/20.04.5/release/ubuntu-20.04.5-live-server-s390x.iso
 Resolving cdimage.ubuntu.com (cdimage.ubuntu.com)... 2001:67c:1560:8001::1d, 2001:67c:1360:8001::27, 2001:67c:1360:8001::28, ...
@@ -34,12 +38,27 @@ ubuntu-20.04.5-live 100%[===================>] 672.94M  37.1MB/s    in
 
 Now loop-back mount the ISO to extract four files that are needed for a z/VM guest installation:
 
-```bash
-user@workstation:~$ mkdir iso
-user@workstation:~$ sudo mount -o loop ubuntu-20.04.5-live-server-s390x.iso iso
-user@workstation:~$ 
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+mkdir iso
+```
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+sudo mount -o loop ubuntu-20.04.5-live-server-s390x.iso iso
+```
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ls -1 ./iso/boot/{ubuntu.exec,parmfile.*,kernel.u*,initrd.u*}
 
-user@workstation:~$ ls -1 ./iso/boot/{ubuntu.exec,parmfile.*,kernel.u*,initrd.u*}
 ./iso/boot/initrd.ubuntu
 ./iso/boot/kernel.ubuntu
 ./iso/boot/parmfile.ubuntu
@@ -330,8 +349,12 @@ The next step is to remotely connect to the install system and to proceed with t
 
 Notice that at the end of the installer boot-up process, all necessary data is provided to proceed with running the installer in a remote SSH shell. The command to execute locally is:
 
-``` bash
-user@workstation:~$ ssh installer@10.222.111.24
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ssh installer@10.222.111.24
 ```
 
 A temporary random password for the installation was created and shared as well, which should be used without the leading and trailing double quotes:
@@ -340,8 +363,13 @@ A temporary random password for the installation was created and shared as well,
   "KRuXtz5dURAyPkcjcUvA"
 ```
   
-```text
-user@workstation:~$ ssh installer@10.222.111.24
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ssh installer@10.222.111.24
+
 The authenticity of host '10.222.111.24 (10.222.111.24)' can't be established.
 ECDSA key fingerprint is 
 SHA256:xd1xnkBpn49DUbuP8uWro2mu1GM4MtnqR2WEWg1fS3o.
@@ -352,7 +380,7 @@ installer@10.222.111.24's password: KRuXtz5dURAyPkcjcUvA
 
 You may now temporarily see some login messages like these:
 
-```
+```text
 Welcome to Ubuntu Focal Fossa (development branch) (GNU/Linux 5.4.0-42-generic s390x)
   
   * Documentation:  https://help.ubuntu.com
@@ -450,7 +478,8 @@ From this point, you can follow the normal Subiquity installation. For more deta
                                  [ Back       ]                               
 ```
 
-* If the list is long, hit the <kbd>End</kbd> key that will automatically scroll you down to the bottom of the Z devices list and screen.
+* If the list is long, hit the {kbd}`End` key that will automatically scroll you down to the bottom of the Z devices list and screen.
+
 ```text
 ====================================================================
   Zdev setup                                                      
@@ -899,17 +928,26 @@ Type `reset` to clear the screen and to revert it back to the defaults.
 
 Now remove the old host key, since the system got a new one during the installation:
 
-```bash
-user@workstation:~$ ssh-keygen -f "/home/user/.ssh/known_hosts" -R "10.222.111.24"
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ssh-keygen -f "/home/user/.ssh/known_hosts" -R "10.222.111.24"
+
 # Host 10.222.111.24 found: line 159
 /home/user/.ssh/known_hosts updated.
 Original contents retained as /home/user/.ssh/known_hosts.old
-user@workstation:~$
 ```
 
 And finally login to the newly installed z/VM guest:
-```bash
-user@workstation:~$ ssh ubuntu@10.222.111.24
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ssh ubuntu@10.222.111.24
+
 Warning: Permanently added the ECDSA host key for IP address
 '10.222.111.24' to the list of known hosts.
 Welcome to Ubuntu 20.04.5 LTS (GNU/Linux 5.4.0-42-generic s390x)
@@ -933,21 +971,46 @@ Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by applicable 
   
 To run a command as administrator (user "root"), use `sudo <command>`.
 See `man sudo_root` for details.
-  
-ubuntu@10.222.111.24:~$ uptime
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: 10.222.111.24
+:dir: ~
+uptime
+
  17:50:09 up 1 min,  1 user,  load average: 0.08, 0.11, 0.05
-ubuntu@10.222.111.24:~$ lsb_release -a
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: 10.222.111.24
+:dir: ~
+lsb_release -a
+
 No LSB modules are available.
 Distributor ID:	Ubuntu
 Description: Ubuntu 20.04.5 LTS
 Release:	20.04
 Codename:	focal
-ubuntu@10.222.111.24:~$ uname -a
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: 10.222.111.24
+:dir: ~
+uname -a
+
 Linux 10.222.111.24 5.4.0-42-generic #30-Ubuntu SMP Wed Aug 05 16:57:22 UTC 2020 s390x s390x s390x GNU/Linux
-ubuntu@10.222.111.24:~$ exit
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: 10.222.111.24
+:dir: ~
+exit
+
 logout
 Connection to 10.222.111.24 closed.
-user@workstation:~$
-```
 
 Done!

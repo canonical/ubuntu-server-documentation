@@ -29,7 +29,7 @@ To set up your Active Directory integrations, we suggest first familiarising you
 * {ref}`The rid idmap backend <the-rid-idmap-backend>`
 * {ref}`The autorid idmap backend <the-autorid-idmap-backend>`
 
-## References
+## Further reading
 
 - About Active Directory:
   - [Security Identifiers (SIDs)](https://learn.microsoft.com/en-us/windows-server/identity/ad-ds/manage/understand-security-identifiers)

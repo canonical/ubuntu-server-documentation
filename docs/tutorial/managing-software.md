@@ -37,13 +37,13 @@ The `apt update` command is about the **database**. Any bug fixes in a package (
 
 When we run the `update` command it updates the APT database on our machine, fetching the newest available metadata from the package index:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
-```
 
-We will see an output like this:
-
-```text
 Hit:1 http://archive.ubuntu.com/ubuntu resolute InRelease
 Hit:2 http://archive.ubuntu.com/ubuntu resolute-updates InRelease
 Hit:3 http://archive.ubuntu.com/ubuntu resolute-backports InRelease
@@ -53,7 +53,11 @@ Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease
 
 As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 24.04 LTS release (`noble-security`, `noble`, `noble-updates` and `noble-backports` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt list --upgradable
 ```
 
@@ -66,7 +70,8 @@ The output tells us:
 
 The specific packages included in this list changes over time, so the exact packages shown will be different, but the output will be structured like this:
 
-```text
+```{terminal}
+:output-only:
 bind9-dnsutils/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
 bind9-host/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
 bind9-libs/resolute-updates,resolute-security 1:9.20.18-1ubuntu2.1 amd64 [upgradable from: 1:9.20.18-1ubuntu2]
@@ -81,7 +86,11 @@ The `apt upgrade` command is about the **packages** on your system. It looks at 
 
 After we have updated the database (which we did by running `apt update`) we can then upgrade the packages to their newest versions by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt upgrade
 ```
 
@@ -95,7 +104,8 @@ You can use the `-y` flag, which is a shorthand for `--assume-yes`. If we ran th
 
 In the output, we'll see where `apt upgrade` is fetching the upgrade from for each package. For example:
 
-```text
+```{terminal}
+:output-only:
 Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libgcrypt20 amd64 1.12.0-2ubuntu0.1 [670 kB]
 ```
 
@@ -111,13 +121,18 @@ It's important to know that `apt upgrade` will only handle packages that can be 
 
 Now we're up-to-date, we can start exploring! As with any other database, we can search the list of available packages using APT in order to find software. Let's say that we want to find a web server, for example. We can run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt search webserver
 ```
 
 This will return us a long list of all "`webserver`" packages it can find. But some of the descriptions don't actually contain the text "`webserver`" -- like in this section of the list:
 
-```text
+```{terminal}
+:output-only:
 inotify-tools/resolute 4.25.9.0-1 amd64
   command-line programs providing a simple interface to inotify
 
@@ -130,13 +145,18 @@ iwatch/resolute 0.2.2-12 all
 
 We can use `apt show` to inspect the description and summary details of any package, so let's take a closer look at `ipcalc` from our list:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt show ipcalc
 ```
 
 The summary has been replaced with `[...]` for brevity, but we can see that the text "`webserver`" is in the long description of the "Description" field.
 
-```text
+```{terminal}
+:output-only:
 Package: ipcalc
 Version: 0.51-1build1
 [...]
@@ -169,7 +189,7 @@ When we run a command that asks us "`Do you want to continue? [Y/n]`", make sure
 
 Installing deb packages using APT is done using the `apt install` command. We can install either a single package, or a list of packages at once, by including their names in a space-separated list after the `install` command, in this format:
 
-```text
+```sh
 sudo apt install <package 1> <package 2> <package 3>
 ```
 
@@ -187,7 +207,11 @@ As we hinted earlier, packages often come with **dependencies** -- other package
 
 APT tells us how it will resolve any dependency conflicts or issues when we run the `install` command. Let's try this for ourselves, but remember, we **don't** want to proceed with the install yet, so let's type {kbd}`N` when it asks us if we want to continue:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2
 ```
 
@@ -198,7 +222,8 @@ The output should be similar to the below. It tells us:
 - suggested packages (which we'll discuss in the next section), and
 - a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
 
-```text
+```{terminal}
+:output-only:
 Installing:                     
   apache2
 
@@ -230,13 +255,18 @@ The relationship between a package and any other packages follows the [Debian po
 
 We can see, using `apt show`, exactly which packages fall into each of these categories. Let's use Apache2 as our example again:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt show apache2
 ```
 
 If we look only at the sections on dependencies, we can see that `ssl-cert` is a recommended package:
 
-```text
+```{terminal}
+:output-only:
 [...]
 Installing dependencies:
   apache2-bin    libapr1t64               libaprutil1t64
@@ -249,13 +279,18 @@ In Ubuntu, the default configuration of `apt install` is set to install recommen
 
 We can override this behavior by passing the `--no-install-recommends` flag to our command, like this:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2 --no-install-recommends
 ```
 
 Then the output becomes the following (type {kbd}`N` at the prompt again to avoid installing for now):
 
-```text
+```{terminal}
+:output-only:
 [...]
 Installing dependencies:
   apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
@@ -280,13 +315,18 @@ There is a second flag we could pass -- the `--install-suggests` flag. This will
 
 But actually, if we run this command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2 --install-suggests
 ```
 
 By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
 
-```text
+```{terminal}
+:output-only:
 [...]
 Installing dependencies:
   apache2-bin              apache2-utils            libaprutil1-ldap
@@ -306,19 +346,28 @@ This is because each of these suggested packages also comes with their own lists
 
 We'll go into more detail about removing packages later, but for now, let's see what happens if we remove a required *dependency*. First, we should (finally!) install the `apache2` package. Let's run the following command again, but this time when we are asked whether we want to continue, let's press {kbd}`Y` and then {kbd}`Enter` to confirm, and APT will install the package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2
 ```
 
 One of the required dependencies is the `apache2-data` package. Let's try to remove it using `apt remove`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt remove apache2-data
 ```
 
 Once again, `apt` won't proceed without confirmation, so we get the following output -- let's take a look before we choose anything:
 
-```text
+```{terminal}
+:output-only:
 [...]
 The following packages were automatically installed and are no longer required:
   apache2-bin    libapr1t64               libaprutil1-ldap  liblua5.4-0
@@ -355,13 +404,18 @@ Removing dependencies can, at worst, cause a system to become unusable -- you sh
 
 So, we have removed the `apache2` and `apache2-data` packages, but the other dependencies that were installed alongside `apache2` are still there. The output of our `remove` command gave us the hint about how to deal with these redundant packages -- the `autoremove` command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt autoremove
 ```
 
 When we run this command, `apt` once again gives us a summary of the operation we requested, but let's choose {kbd}`N` for now when it asks if we want to continue:
 
-```text
+```{terminal}
+:output-only:
 [...]
 REMOVING:                       
   apache2-bin    libapr1t64               libaprutil1-ldap  liblua5.4-0
@@ -382,13 +436,18 @@ We might, in the future, uninstall Apache2 without uninstalling the redundant pa
 
 We can solve this problem, and un-flag the `ssl-cert` package for removal, by *manually* installing it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install ssl-cert
 ```
 
 This sets `ssl-cert` to **manually installed**. We might well wonder "why didn't APT didn't ask us to confirm anything this time?". In this case, it's because `ssl-cert` is already present on the system so APT doesn't need to install anything new.
 
-```text
+```{terminal}
+:output-only:
 [...]
 ssl-cert is already the newest version (1.1.3ubuntu2).
 ssl-cert set to manually installed.
@@ -398,19 +457,23 @@ Summary:
 
 If the `ssl-cert` package is manually installed on our system, by us, then `apt` knows the package is wanted, and we can see that it has been removed from the auto-remove list so our next `autoremove` will not uninstall it. Let's test this, just to make sure!
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt autoremove
 ```
 
 This time we'll select {kbd}`Y` when prompted, and then we can run `apt list ssl-cert` to quickly see if our `ssl-cert` package is still on the system:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt list ssl-cert
-```
 
-Which gives us this output, confirming that `ssl-cert` is currently installed:
-
-```text
 ssl-cert/resolute,now 1.1.3ubuntu2 all [installed]
 ```
 
@@ -418,7 +481,11 @@ If you're curious, you can also run `apt list apache2` to see how the output dif
 
 Anyway, we're not quite finished with the Apache2 package, so let's reinstall it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2
 ```
 
@@ -430,13 +497,18 @@ In general, the default package configuration should just work well, and work "o
 
 Before we try to customize the package, we should probably look at what files are included in it. We can check this using {manpage}`dpkg(1)`, which is the Debian package manager. Although APT is now more commonly used for basic package handling, `dpkg` retains some really helpful commands for examining files and finding out package information. It's installed by default on Ubuntu systems so we can use it directly:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --listfiles ssl-cert
 ```
 
 This gives us the following list of files and their directory structure (the end of the list is truncated for brevity):
 
-```text
+```{terminal}
+:output-only:
 /.
 /etc
 /etc/ssl
@@ -454,19 +526,19 @@ This gives us the following list of files and their directory structure (the end
 [...]
 ```
 
-If we find a file but we're not sure what package it comes from, `dpkg` can help us there too! Let's use the example of one of the files from the previous output: `/usr/share/ssl-cert/ssleay.cnf` and do a search for it using `dpkg`:
+If we find a file but we're not sure what package it comes from, `dpkg` can help us there too! Let's use the example of one of the configuration files from the previous output: `/usr/share/ssl-cert/ssleay.cnf` and do a search for it using `dpkg`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --search /usr/share/ssl-cert/ssleay.cnf
-```
 
-This will provide us with the package name for the given file:
-
-```bash
 ssl-cert: /usr/share/ssl-cert/ssleay.cnf
 ```
 
-Although this seems obvious to us, because we already know the source of this file, the `dpkg` search function is really useful for tracking down the sources of files we don't know about!
+Although this is an obvious case, because we already know the source of this file, the `dpkg` search function is really useful for tracking down the sources of files we don't know about!
 
 ### Conffiles
 
@@ -495,7 +567,11 @@ After all, they are not marked by any particular file extension, and although th
 
 But that's our clue! So once more, `dpkg` can come to our rescue. The following command will show us (`--show`) the subset of files in the `apache2` package that have been marked as "`Conffiles`" (`-f='${Conffiles}\n'`) by the maintainer and shows each on a new line (`\n`) in the output:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg-query --show -f='${Conffiles}\n' apache2
 ```
 
@@ -503,7 +579,8 @@ If you want to understand more about what this command does, you can refer to th
 
 Unlike `dpkg --listfiles`, `dpkg-query` *also* gives us a string of letters and numbers. This string is known as the **"MD5 checksum"** or **"MD5 hash"**. 
 
-```text
+```{terminal}
+:output-only:
  /etc/apache2/apache2.conf 354c9e6d2b88a0a3e0548f853840674c
  /etc/apache2/conf-available/charset.conf e6fbb8adf631932851d6cc522c1e48d7
  /etc/apache2/conf-available/localized-error-pages.conf f542d267bfce7815f9453eb1476e5f73
@@ -512,15 +589,15 @@ Unlike `dpkg --listfiles`, `dpkg-query` *also* gives us a string of letters and 
 [...]
 ```
 
-We can see the checksum of a specific file by running this command:
+We can see the checksum of a specific file by running this command, which returns us the checksum followed by the file and its location:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 md5sum /etc/apache2/apache2.conf
-```
 
-Which returns us the checksum followed by the file and its location:
-
-```bash
 354c9e6d2b88a0a3e0548f853840674c  /etc/apache2/apache2.conf
 ```
 
@@ -532,7 +609,11 @@ The checksum is like a fingerprint - it's unique for every *version* of a file, 
 
 Let's set up a situation so we can poke a bit at this idea. We can start by making some changes to a conffile. In Apache2, the main conffile is `/etc/apache2/apache2.conf`, so let's use that. In a situation where we are setting up a new web server, we might reasonably want to increase the `LogLevel` from "warn" to "debug" to get more debugging messages, so let's run this command and use `sed` to make that change in the conffile:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sed -e 's/LogLevel warn/LogLevel debug/' -i /etc/apache2/apache2.conf
 ```
 
@@ -540,27 +621,40 @@ We won't be prompted to confirm if we want to make these changes -- but we do ne
 
 Next, we'll restart our Apache2 server so that we can activate our configuration changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2
 ```
 
 Now if we run the `md5sum` command again, we can see the hash changed:
 
-```bash
-ubuntu@tutorial:~$ md5sum /etc/apache2/apache2.conf
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
+md5sum /etc/apache2/apache2.conf
 
 1109a77001754a836fb4a1378f740702  /etc/apache2/apache2.conf
 ```
 
 This works great if we know that there's a file *we* changed, but what about if someone else tampered with a file, and we don't know which one? In that case, we can use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --verify apache2
 ```
 
 This will verify the checksums of the files on our system against those held in the package index for `apache2`, and return a rather strange looking result if (or when) it finds a mismatch:
 
-```text
+```{terminal}
+:output-only:
 ??5?????? c /etc/apache2/apache2.conf
 ```
 
@@ -568,19 +662,23 @@ Which is exactly what we were expecting to see, since we know we changed this fi
 
 But what if something else was messed with...something that shouldn't be, and something not changed by us? Let's make a "silly" change to a different file to test this -- in this case, changing all instances of the word "warning" to "silly" in a random package file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sed -e 's/warning/silly/' -i /usr/sbin/a2enmod
 ```
 
 And then run the verification again with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --verify apache2
-```
 
-We now see something that looks like this:
-
-```bash
 ??5?????? c /etc/apache2/apache2.conf
 ??5??????   /usr/sbin/a2enmod
 ```
@@ -591,19 +689,23 @@ You might have noticed there's a "c" next to the top line but not the bottom -- 
 
 `dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install --reinstall apache2
 ```
 
 By using the `--reinstall` flag, we can force `apt` to re-unpack all of the default content. If we then verify once more...
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --verify apache2
-```
 
-Then we'll get this output:
-
-```text
 ??5?????? c /etc/apache2/apache2.conf
 ```
 
@@ -617,13 +719,13 @@ We can use `sudo apt install <package>` to upgrade an installed package, but thi
 
 Since we have just reinstalled the Apache2 package, we know it is in good shape. But what if we decide we're done with it and just want to remove it? Then we can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt remove apache2
-```
 
-Which will give us an output like this:
-
-```text
 The following packages were automatically installed and are no longer required:
   apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
   apache2-data  libapr1t64     libaprutil1-ldap         liblua5.4-0
@@ -643,13 +745,18 @@ Let's type {kbd}`Y` to proceed.
 
 As before, we see that the dependencies will still be there even when `apache2` has been removed. Let's check with `dpkg`...
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --listfiles apache2
 ```
 
 ...and see what else might be left behind...
 
-```text
+```{terminal}
+:output-only:
 /etc
 /etc/apache2
 /etc/apache2/apache2.conf
@@ -678,7 +785,11 @@ By leaving the conffiles in place, if we decide to reinstall `apache2` again in 
 
 Let's see the difference in installing `apache2` after it has been installed (and removed) compared to the first time we installed it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2
 ```
 
@@ -688,7 +799,11 @@ Notice that it did not ask us to confirm if we wanted to proceed this time. Why 
 
 Since the dependencies and conffiles are still there, we can use our former config immediately. It even retains the changes we made before, which we can verify by looking at the checksum again:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 md5sum /etc/apache2/apache2.conf
 ```
 
@@ -698,13 +813,13 @@ What if we decide that we don't want the changed conffiles? Perhaps we want to g
 
 In that case, we can use the `--purge` option of the `remove` command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt remove --purge apache2
-```
 
-Which will give us this output:
-
-```text
 [...]
 The following packages were automatically installed and are no longer required:
   apache2-bin   apache2-utils  libaprutil1-dbd-sqlite3  libaprutil1t64
@@ -723,7 +838,8 @@ Continue? [Y/n]
 
 If we look very carefully, we see a little asterisk (\*) in the output.
 
-```text
+```{terminal}
+:output-only:
 REMOVING:
   apache2*
 ```
@@ -732,16 +848,18 @@ This tiny indicator tells us that the package will be removed AND purged. Howeve
 
 Let's type {kbd}`Y` again to confirm we want to proceed. Then, once the removal is complete, we can check the list once more:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg --listfiles apache2
-```
 
-And this time, the output is very different!
-
-```bash
 dpkg-query: package 'apache2' is not installed
 Use dpkg --contents (= dpkg-deb --contents) to list archive files contents.
 ```
+
+This time the output is very different!
 
 :::{note}
 We could also use the `dpkg-query --show -f='${Conffiles}\n' apache2` command from earlier, and `dpkg-query` will find no packages matching `apache2`.
@@ -755,13 +873,18 @@ As we saw earlier, we can search the APT package database for keywords using `ap
 
 For every package, we can see what versions of it exist in the database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt policy apache2
 ```
 
 This will return a summary of all the versions that exist on our particular Ubuntu release, ordered by "most recent" first:
 
-```text
+```{terminal}
+:output-only:
 apache2:
   Installed: (none)
   Candidate: 2.4.66-2ubuntu2.1
@@ -775,13 +898,15 @@ apache2:
 
 We know that Apache2 isn't installed right now, because we removed and purged it, which is why the installed version shows as "none":
 
-```text
+```{terminal}
+:output-only:
 Installed: (none)
 ```
 
 If we were to install the default package, we would get this one:
 
-```text
+```{terminal}
+:output-only:
 Candidate: 2.4.66-2ubuntu2.1
 ```
 
@@ -792,19 +917,24 @@ Under each version we are also shown the **source**. The newest version (`2.4.66
 We can install specific older versions if we want to, for example, to satisfy dependency requirements of another package. We can do that by specifying the package name and version:
 
 ```bash
-sudo apt install <package=version>
+sudo apt install <package>=<version>
 ```
 
 However, this can be tricky and often leads to conflicts in dependency versions as APT always wants to install the most recent version. We can see an example of this if we run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2=2.4.66-2ubuntu2
 ```
 
 APT warns us that the version of apache2 we want to install depends on earlier versions of the dependencies, but it helpfully tells us which dependency versions we need to successfully install the package we want.
 
 % dependency error
-```text
+```{terminal}
+:output-only:
 [...]
 Solving dependencies... Error!  
 Some packages could not be installed. This may mean that you have
@@ -826,7 +956,11 @@ Error: Unable to satisfy dependencies. Reached two conflicting assignments:
 
 So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2-bin=2.4.66-2ubuntu2 \
   apache2-data=2.4.66-2ubuntu2 \
   apache2-utils=2.4.66-2ubuntu2 \
@@ -835,15 +969,15 @@ sudo apt install apache2-bin=2.4.66-2ubuntu2 \
 
 In this case we're also breaking the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
 
-APT will warn us that we are downgrading the package, but let us press {kbd}`Y` to confirm (when prompted), and it will go ahead and downgrade us anyway. Let's run the following command again:
+APT will warn us that we are downgrading the package, but let us press {kbd}`Y` to confirm (when prompted), and it will go ahead and downgrade us anyway. Let's run the following command again to get confirmation that we're running on an older version:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt policy apache2
-```
 
-And we'll get confirmation that we're running on an older version:
-
-```text
 apache2:
   Installed: 2.4.66-2ubuntu2
   Candidate: 2.4.66-2ubuntu2.1
@@ -905,7 +1039,7 @@ flowchart TD;
 
 #### Series
 
-The **series** is a set of packages that are released with a specific version of Ubuntu -- they're usually referred to by their codename (e.g., `mantic`, `noble` and `oracular` in our diagram). Each version of Ubuntu may have multiple releases (for example, an LTS will have an initial release when it launches (e.g. 24.04 LTS), and then "subsequent point releases" (e.g. 24.04.1 LTS) -- these are all part of the same series (`noble`).
+The **series** is a set of packages that are released with a specific version of Ubuntu -- they're usually referred to by their codename (e.g., `mantic`, `noble` and `oracular` in our diagram). Each version of Ubuntu may have multiple releases. For example, an LTS will have an initial release when it launches (e.g. 24.04 LTS), and then "subsequent point releases" (e.g. 24.04.1 LTS) -- these are all part of the same series (`noble`).
 
 In practice, people often use the term "Ubuntu release" and "Ubuntu series" interchangeably.
 
@@ -973,14 +1107,28 @@ If you would like to try out snaps, we recommend the excellent [quickstart tour]
 
 Once you are finished and want to leave the tutorial, you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 exit
 ```
 
 This will take you out of the VM and back to your live machine. Then, you can run the following commands to delete the VM and remove it completely from your machine:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass delete tutorial
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass purge
 ```
 

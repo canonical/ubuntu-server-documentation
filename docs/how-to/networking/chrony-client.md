@@ -13,7 +13,8 @@ Ubuntu uses `chrony` for synchronizing time, which is installed by default as of
 
 The current status of time synchronization can be checked with the `timedatectl status` command, which is available via `systemd` and will produce output like this:
 
-```text
+```{terminal}
+:output-only:
                Local time: Mo 2025-06-16 15:21:46 CEST
            Universal time: Mo 2025-06-16 13:21:46 UTC
                  RTC time: Mo 2025-06-16 13:21:46
@@ -24,7 +25,9 @@ System clock synchronized: yes
 ```
 
 For more details on time accuracy, `chrony` can be queried directly, using the `chronyc -N tracking` command, producing output like this:
-```text
+
+```{terminal}
+:output-only:
 Reference ID    : B97DBE7B (2.ntp.ubuntu.com)
 Stratum         : 3
 Ref time (UTC)  : Mon Jun 16 13:06:04 2025
@@ -58,9 +61,11 @@ The `nts` flag forces the use of `NTS`, and `prefer` marks that source as the pr
 selecting among multiple valid servers.
 
 The line:
+
 ```text
 pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
 ```
+
 adds the `ntp-bootstrap.ubuntu.com` source, which allows systems with a large clock offset to still securely
 adjust their clocks.
 
@@ -72,13 +77,13 @@ bootstrap server instead of a public CA-signed certificate like the one used for
 The following command returns the certificate of the server `1.ntp.ubuntu.com`, and in that certificate we
 can see who issued it (the CA):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl s_client -connect 1.ntp.ubuntu.com:4460 -servername 1.ntp.ubuntu.com
-```
 
-The output contains the certificate, and the `issuer` field shows who issued it:
-
-```text
 Server certificate
 ...
 subject=CN=ntp.ubuntu.com
@@ -88,7 +93,8 @@ issuer=C=US, O=Let's Encrypt, CN=R13
 
 By contrast, the certificate of `ntp-bootstrap.ubuntu.com` is:
 
-```text
+```{terminal}
+:output-only:
 Server certificate
 ...
 subject=CN=ntp-bootstrap.ubuntu.com
@@ -106,8 +112,13 @@ ntstrustedcerts 1 /etc/chrony/nts-bootstrap-ubuntu.crt
 
 For **validation of NTS enablement**, one can list the time sources in use by executing the `chronyc -N sources` command, to find the timeserver in use, as indicated by the `^*` symbol in the first column. Then check the `authdata` of that connection using `sudo chronyc -N authdata`. If the client was able to successfully establish a NTS connection, it will show the `Mode: NTS` field and non-zero values for `KeyID`, `Type` and `KLen`:
 
-```text
-$ sudo chronyc -N authdata
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chronyc -N authdata
+
 Name/IP address             Mode KeyID Type KLen Last Atmp  NAK Cook CLen
 =========================================================================
 1.ntp.ubuntu.com             NTS     6   30  128  14d    0    0    8   64
@@ -125,23 +136,23 @@ This is a new deployment, running on different IP addresses than the
 traditional Ubuntu NTP pool.
 
 :::{warning}
-  If the network does not allow access to the Ubuntu NTS servers and required
-  ports, with the default configuration is in place, `chrony` will not be able
-  to adjust the system's clock. To revert to NTP, edit the configuration file
-  in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` and revert to using
-  the listed NTP servers in favor of the NTS ones.
+If the network does not allow access to the Ubuntu NTS servers and required
+ports, with the default configuration is in place, `chrony` will not be able
+to adjust the system's clock. To revert to NTP, edit the configuration file
+in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources` and revert to using
+the listed NTP servers in favor of the NTS ones.
 :::
 
 **Bad Clocks and secure time syncing:** NTS is based on TLS, and TLS needs a
-  reasonably correct clock. Due to that, an NTS-based sync might fail if the
-  clock is too far off. On hardware affected by this problem, one can consider
-  using the `nocerttimecheck` option, which allows to set the number of times
-  that the time can be synced without checking validation and expiration.
+reasonably correct clock. Due to that, an NTS-based sync might fail if the
+clock is too far off. On hardware affected by this problem, one can consider
+using the `nocerttimecheck` option, which allows to set the number of times
+that the time can be synced without checking validation and expiration.
 
 :::{note}
-   The certificate for `ntp-bootstrap.ubuntu.com` is installed in
- `/etc/chrony/nts-bootstrap-ubuntu.crt` and is used specifically for the Ubuntu
-  NTS bootstrap server, needed for when the clock is too far off. This is added to certificate set ID "1", and defined via `/etc/chrony/conf.d/ubuntu-nts.conf`.
+The certificate for `ntp-bootstrap.ubuntu.com` is installed in
+`/etc/chrony/nts-bootstrap-ubuntu.crt` and is used specifically for the Ubuntu
+NTS bootstrap server, needed for when the clock is too far off. This is added to certificate set ID "1", and defined via `/etc/chrony/conf.d/ubuntu-nts.conf`.
 :::
 
 ## Configure chrony
@@ -171,7 +182,8 @@ Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if 
 ### Time sources provided by DHCP (option 42)
 
 `chrony` consumes time sources provided by DHCP (option 42). Those could be traditional, non-authenticated NTP sources. Should one want to avoid this behavior, overruling the choices made by a local DHCP administrator, it can be disabled in `/etc/chrony/chrony.conf`. To do that one would comment out the corresponding setting:
-```
+
+```text
 # Use time sources from DHCP.
 # sourcedir /run/chrony-dhcp
 ```
@@ -180,12 +192,13 @@ Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if 
 
 `chronyd` itself is a normal service, so you can check its status in more detail using:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl status chrony.service
-```
 
-The output produced will look something like this:
-```
 ● chrony.service - chrony, an NTP client/server
      Loaded: loaded (/usr/lib/systemd/system/chrony.service; enabled; preset: enabled)
      Active: active (running) since Mon 2025-06-02 11:27:09 CEST; 2 weeks 0 days ago
@@ -212,7 +225,11 @@ The output produced will look something like this:
 
 Default configuration such as `sourcedir`, `ntsdumpdir` or `rtcsync` is provided in `/etc/chrony/chrony.conf` and additional config files can be stored in `/etc/chrony/conf.d/`. The NTS servers from which to fetch time for `chrony` are in defined in `/etc/chrony/sources.d/ubuntu-ntp-pools.sources`. There are more advanced options documented in the {manpage}`chrony.conf(5)` manual page. Common use cases are specifying an explicit trusted certificate. After changing any part of the config file you need to restart `chrony`, as follows:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart chrony.service
 ```
 
@@ -220,7 +237,7 @@ sudo systemctl restart chrony.service
 
 If you would now like to also serve the Network Time Protocol via `chrony`, this guide will walk you through {ref}`how to configure your chrony setup <serve-ntp-with-chrony>`.
 
-## References
+## Further reading
 
 - {manpage}`chronyc(1)` manual page
 

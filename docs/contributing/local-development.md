@@ -106,7 +106,11 @@ commands to `ubuntu-server-documentation`!
 
 In your terminal, clone the Ubuntu Server documentation repository by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git clone git@github.com:canonical/ubuntu-server-documentation.git
 ```
 
@@ -115,7 +119,11 @@ This creates a new folder on your machine called
 
 Navigate to this folder:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cd ubuntu-server-documentation
 ```
 
@@ -124,7 +132,11 @@ cd ubuntu-server-documentation
 Before making any changes, ensure the `main` branch on your machine is
 up-to-date with any recent changes made to the remote repository:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git pull
 ```
 
@@ -135,7 +147,11 @@ This won't have any effect if you have only just cloned the repository
 
 Now, create a branch and switch to it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git checkout -b my-new-branch
 ```
 
@@ -148,7 +164,11 @@ will know at a glance what each of them is for.
 You're now ready to start working on the docs! Run the following command to
 build a live preview:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 make run
 ```
 
@@ -161,7 +181,11 @@ If you are building locally on an Ubuntu Cloud VM or a container, you may
 experience issues accessing the page from your host's browser. To resolve this,
 add the export variable to your shell by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 export SPHINX_HOST=0.0.0.0
 ```
 
@@ -201,7 +225,11 @@ makes the review process more efficient.
 
 Always run these commands before submitting a pull request:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 make spelling
 make linkcheck
 ```
@@ -291,7 +319,11 @@ separate commit for every file.
 
 Push the changes to your fork:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 git push <your username> <branch name>
 ```
 

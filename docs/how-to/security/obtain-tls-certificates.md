@@ -25,7 +25,11 @@ Transport Layer Security (TLS) certificates authenticate your server's identity 
 
 [Certbot](https://certbot.eff.org/) is the recommended ACME client for Let's Encrypt. Install it from the snap store:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo snap install --classic certbot
 ```
 
@@ -37,7 +41,11 @@ Certbot supports several modes depending on whether a web server is already runn
 
 Certbot's [nginx plugin](https://certbot.eff.org/docs/using.html#nginx) finds the server block matching the specified domains in your nginx configuration (typically in `/etc/nginx/sites-enabled/`) and adds the necessary TLS directives in place, then reloads nginx:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot --nginx -d example.com -d www.example.com
 ```
 
@@ -45,7 +53,11 @@ sudo certbot --nginx -d example.com -d www.example.com
 
 Certbot's [Apache plugin](https://certbot.eff.org/docs/using.html#apache) finds the VirtualHost block matching the specified domains in your Apache configuration (typically in `/etc/apache2/sites-enabled/`) and adds the necessary TLS directives in place, then reloads Apache:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot --apache -d example.com -d www.example.com
 ```
 
@@ -53,7 +65,11 @@ sudo certbot --apache -d example.com -d www.example.com
 
 Certbot starts a temporary web server on port 80 to complete the ACME challenge. Stop any service already listening on port 80 before running this.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot certonly --standalone -d example.com -d www.example.com
 ```
 
@@ -61,7 +77,11 @@ sudo certbot certonly --standalone -d example.com -d www.example.com
 
 If you want to obtain a certificate without modifying your web server configuration, specify the directory the web server serves:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot certonly --webroot -w /var/www/html -d example.com
 ```
 
@@ -69,7 +89,11 @@ sudo certbot certonly --webroot -w /var/www/html -d example.com
 
 Each `-d` flag adds a domain as a Subject Alternative Name (SAN), so a single certificate can cover multiple domains and subdomains. If a certificate for any of the listed domains already exists, Certbot expands it to include all specified domains. Pass the complete desired domain list — both existing and new — in a single command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot --nginx -d example.com -d www.example.com -d mail.example.com
 ```
 
@@ -101,26 +125,38 @@ ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
 
 Certbot installs a systemd timer that attempts renewal twice a day. Check that it is active:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl status snap.certbot.renew.timer
 ```
 
 Test the renewal process without making any changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certbot renew --dry-run
 ```
 
 Services configured using the Certbot nginx or Apache plugins are reloaded automatically after a successful renewal. For other services, add a renewal hook. Create `/etc/letsencrypt/renewal-hooks/deploy/reload-service.sh`:
 
-```bash
+```sh
 #!/bin/sh
 systemctl reload <your-service>
 ```
 
 Then make it executable:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-service.sh
 ```
 
@@ -138,15 +174,35 @@ Clients that connect to your services must trust your CA. You will need to insta
 
 First, create the directories to hold the CA certificate and related files:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir /etc/ssl/CA
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir /etc/ssl/newcerts
 ```
 
 The CA needs a few additional files to operate: one to keep track of the last serial number used by the CA (each certificate must have a unique serial number), and another file to record which certificates have been issued:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sh -c "echo '01' > /etc/ssl/CA/serial"
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo touch /etc/ssl/CA/index.txt
 ```
 
@@ -154,7 +210,7 @@ sudo touch /etc/ssl/CA/index.txt
 
 The third file needed is a CA configuration file. Though not strictly necessary, it is convenient when issuing multiple certificates. Edit `/etc/ssl/openssl.cnf`, and in the `[ CA_default ]` section, change:
 
-```text
+```ini
 dir             = /etc/ssl               # Where everything is kept
 database        = $dir/CA/index.txt      # database index file.
 certificate     = $dir/certs/cacert.pem  # The CA certificate
@@ -164,14 +220,28 @@ private_key     = $dir/private/cakey.pem # The private key
 
 ### Create the self-signed root certificate
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -x509 -extensions v3_ca -keyout cakey.pem -out cacert.pem -days 3650
 ```
 
 You will then be asked to enter the details about the certificate. Next, install the root certificate and key:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv cakey.pem /etc/ssl/private/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv cacert.pem /etc/ssl/certs/
 ```
 
@@ -185,7 +255,11 @@ Running your secure service without a passphrase is convenient but insecure -- a
 
 To generate the keys for the Certificate Signing Request (CSR) run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl genrsa -des3 -out server.key 2048
 
 Generating RSA private key, 2048 bit long modulus
@@ -201,7 +275,11 @@ Re-type the passphrase to verify. Once you have re-typed it correctly, the serve
 
 Now create the insecure key, the one without a passphrase, and shuffle the key names:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl rsa -in server.key -out server.key.insecure
 mv server.key server.key.secure
 mv server.key.insecure server.key
@@ -211,7 +289,11 @@ The insecure key is now named `server.key`, and you can use this file to generat
 
 To create the CSR, run the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -key server.key -out server.csr
 ```
 
@@ -221,7 +303,11 @@ It will prompt you to enter the passphrase. If you enter the correct passphrase,
 
 Enter the following to generate a certificate signed by the CA:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo openssl ca -in server.csr -config /etc/ssl/openssl.cnf
 ```
 
@@ -239,8 +325,18 @@ Replace `mail.example.com.crt` with your own descriptive name.
 
 Copy the new certificate to the host that needs it, and configure the appropriate applications to use it. The default location to install certificates is `/etc/ssl/certs`. This enables multiple services to use the same certificate without overly complicated file permissions.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp server.key /etc/ssl/private/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp mail.example.com.crt /etc/ssl/certs/
 ```
 

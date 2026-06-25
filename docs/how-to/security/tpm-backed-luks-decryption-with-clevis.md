@@ -28,15 +28,19 @@ changes, which can prevent automatic unlock until you rebind Clevis.
 ## Prerequisites
 
 * An Ubuntu Server installation with LVM over LUKS, with Dracut as the
-  initramfs generator.
-* A system with a TPM 2.0 module.
-* Root or `sudo` privileges.
+  initramfs generator
+* A system with a TPM 2.0 module
+* Root or `sudo` privileges
 
 ## Install Clevis and Dracut integration
 
 Install the necessary packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt install clevis clevis-tpm2 clevis-dracut clevis-luks
 ```
 
@@ -47,7 +51,11 @@ can use Clevis to add a new key to the LUKS header, sealed against the TPM.
 
 First, identify the encrypted partition before binding:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lsblk -f
 ```
 
@@ -58,7 +66,11 @@ Bind against Platform Configuration Register (PCR) 7, which tracks secure boot
 state. If your environment requires different trust guarantees, choose PCR
 values that match your threat model.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo clevis luks bind -d <encrypted_partition> tpm2 '{"pcr_ids": "7"}'
 ```
 
@@ -75,20 +87,24 @@ disk, you must regenerate the initial ramdisk.
 
 To force a rebuild of the initial ramdisk for the current kernel, use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dracut -f
 ```
 
 You can verify that the Clevis modules were successfully included with
 {manpage}`lsinitrd(1)` by inspecting the generated image:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lsinitrd | grep '^clevis'
-```
 
-It should produce the following output:
-
-```text
 clevis
 clevis-pin-null
 clevis-pin-sss
@@ -96,28 +112,28 @@ clevis-pin-tang
 clevis-pin-tpm2
 ```
 
-You can also verify that a Clevis token exists in the LUKS metadata:
+You can also verify that a Clevis token exists in the LUKS metadata -- it should show a TPM pin bound to the device:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo clevis luks list -d <encrypted_partition>
-```
 
-It should show a TPM pin bound to the device:
-
-```text
 2: tpm2 '{"hash":"sha256","key":"ecc"}'
 ```
 
 For a lower-level check, inspect LUKS token metadata with
-{manpage}`cryptsetup(8)`:
+{manpage}`cryptsetup(8)`, which should show the Clevis token and the keyslot it is bound to:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cryptsetup luksDump <encrypted_partition> | grep -A2 -i Tokens
-```
 
-It should show the Clevis token and the keyslot it is bound to:
-
-```text
 Tokens:
   0: clevis
         Keyslot:    2
@@ -136,13 +152,21 @@ To setup automatic unlocking, you must first bind the secondary disk to the
 TPM. Replace `<secondary_encrypted_partition>` with your secondary encrypted
 partition.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo clevis luks bind -d <secondary_encrypted_partition> tpm2 '{"pcr_ids": "7"}'
 ```
 
 Then, get the UUID of the locked LUKS partition:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 blkid -s UUID -o value <secondary_encrypted_partition>
 ```
 
@@ -165,12 +189,20 @@ If you need to remove a Clevis binding (for example, if you are decommissioning
 a server or moving the drive), you can unbind it. First, list the active Clevis tokens
 to find the correct LUKS slot:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo clevis luks list -d <encrypted_partition>
 ```
 
 Then, unbind the specific slot (replacing `1` with the slot number identified above).
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo clevis luks unbind -d <encrypted_partition> -s 1
 ```

@@ -52,7 +52,7 @@ The following steps apply to Windows 10 and Windows 11 editions.
 
 1. Run the following command:
    
-   ```
+   ```powershell
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
    ```
 
