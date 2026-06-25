@@ -2207,6 +2207,7 @@ Scrollback
 SCSI
 Small Computer System Interface
     SCSI (pronounced "scuzzy") is both a physical interface (cables and connectors) and a command protocol (set of standards) for communicating with storage and peripheral devices like hard drives, tape drives, and scanners. Each device gets a unique ID number (0-7 or 0-15 depending on version). The last device in a SCSI chain needs a terminator to prevent signal reflection.
+
 SDN
 Software-Defined Networking
     *Work in Progress*
@@ -2414,7 +2415,7 @@ Systemd
 
 tasksel
 Task selector
-     Tasksel is a Debian/Ubuntu tool that simplifies the installation of collections of related packages (called "tasks") for specific purposes, like setting up a mail server, LAMP stack, or desktop environment. Instead of manually installing dozens of packages, tasksel lets you install entire pre-configured software bundles with a single command.
+    Tasksel is a Debian/Ubuntu tool that simplifies the installation of collections of related packages (called "tasks") for specific purposes, like setting up a mail server, LAMP stack, or desktop environment. Instead of manually installing dozens of packages, tasksel lets you install entire pre-configured software bundles with a single command.
 
 TB
     Terabyte (unit of measurement)
@@ -2422,7 +2423,7 @@ TB
 
 TCP
 Transmission Control Protocol
-     TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications depend on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
+    TCP is one of the core protocols of the Internet Protocol Suite, providing reliable, ordered, and error-checked delivery of data between applications over a network. It is the "reliable" protocol that most internet applications depend on. You use {term}`TCP` whenever you need to be sure your data arrives intact and in order.
 
 TDX
 Trust domain extensions
@@ -2439,7 +2440,7 @@ Trusted Execution Environment
 
 TFTP
 Trivial File Transfer Protocol
-   TFTP is a very simple, lightweight file transfer protocol that uses {term}`UDP` instead of {term}`TCP`, designed for basic file transfers where simplicity is more important than features or security. It is "trivial" because it has minimal functionality - no authentication, no encryption, no directory listing, just basic reading and writing of files.
+    TFTP is a very simple, lightweight file transfer protocol that uses {term}`UDP` instead of {term}`TCP`, designed for basic file transfers where simplicity is more important than features or security. It is "trivial" because it has minimal functionality - no authentication, no encryption, no directory listing, just basic reading and writing of files.
 
 TGS
 Ticket Granting Service
@@ -2475,7 +2476,7 @@ Time-based One-Time Password
 TPM
 Trusted Platform Module
     A hardware security chip that securely stores cryptographic keys, measures system integrity during boot, and enables features such as secure storage,
- encryption, and attestation.
+    encryption, and attestation.
 
 Traceback
     traceback is a term used in Python. Traceback is a report of the function call stack printed when an exception occurs. It shows the sequence of calls leading to the error, including file names, line numbers, and the exception type. It helps developers identify and debug issues by tracing execution backward from the failure point.
@@ -2507,7 +2508,7 @@ Trusted Execution Technology
 
 UDA
 Unified Data Architecture
-   UDA is an approach that provides a unified framework for integrating and managing data across an organization in a cohesive, standardized manner.
+    UDA is an approach that provides a unified framework for integrating and managing data across an organization in a cohesive, standardized manner.
 
 UDP
 User Datagram Protocol
@@ -2550,7 +2551,8 @@ Uniform Resource Identifier
 
 URL
 Uniform Resource Locator
-  URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet.
+    URL is a standardized string that specifies the address of a web resource, such as webpages, image, or file, enabling browsers to locate and retrieve it over the internet.
+
 userspace
     userspace (also appears as "user space" or "user-space") is the memory area and execution environment where normal applications and user programs run, as opposed to kernel space where the operating system kernel runs.
 
@@ -2583,18 +2585,19 @@ Version Control System
 
 veth
 Virtual Ethernet
-   veth is a Linux networking feature that creates a pair of connected virtual network interfaces that act like a virtual cable - whatever goes into one end comes out of the other.
+    veth is a Linux networking feature that creates a pair of connected virtual network interfaces that act like a virtual cable - whatever goes into one end comes out of the other.
 
 VFIO
 Virtual Function I/O
-   VFIO is a Linux kernel framework that allows safe, direct access to physical hardware devices (like GPUs, network cards, or storage controllers) from user space or {term}`VM`, using IOMMU ({term}`Input-Output Memory Management Unit`) hardware for security and isolation.
+    VFIO is a Linux kernel framework that allows safe, direct access to physical hardware devices (like GPUs, network cards, or storage controllers) from user space or {term}`VM`, using IOMMU ({term}`Input-Output Memory Management Unit`) hardware for security and isolation.
+
 VFS
 Virtual File System
     VFS is a kernel abstraction layer in operating systems like Linux that provides a uniform interface for applications to access diverse underlying file systems without needing to know their specifics.
 
 VFs
 Virtual Functions
-   *Work in Progress*
+    *Work in Progress*
 
 VG
 Volume Group
@@ -2607,6 +2610,7 @@ Virtual Graphics Processing Unit
 virsh
 Virtual Shell
     virsh refers to '/usr/bin/virsh'. It is a command-line program (from the libvirt-clients software package) that lets you create, start, stop, and manage virtual machines on Linux.
+
 VirtIO
 Virtualization I/O
     VirtIO is a standardized, open-source framework for creating efficient virtual device drivers in virtualized environments. VirtIO is a specification that defines how virtual machines communicate with the hypervisor for I/O operations (disk, network, etc.) in a more efficient way than emulating real hardware.
@@ -2682,7 +2686,7 @@ Web Server Gateway Interface
 
 WWID
 World Wide Identifier
-   WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a disk or {term}`LUN`, so the system can recognize that device reliably, regardless of which cable, port, or path it is attached through.
+    WWID is a globally unique ID, long numeric/hex value, burned into or associated with a storage device like a disk or {term}`LUN`, so the system can recognize that device reliably, regardless of which cable, port, or path it is attached through.
 
 :::
 
@@ -2701,7 +2705,7 @@ Extensible HyperText Markup Language
 
 XML
 Extensible Markup Language
-   XML is a markup language designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
+    XML is a markup language designed to store and transport data in a format that is both human and machine readable. Unlike HTML which focuses on displaying data, XML focuses on describing and structuring data.
 
 :::
 
