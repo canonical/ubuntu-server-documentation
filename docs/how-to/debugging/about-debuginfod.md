@@ -87,23 +87,12 @@ set debuginfod enabled off
 :user:
 :host:
 :dir:
-readelf -n /usr/bin/bash
-
-Displaying notes found in: .note.gnu.property
-  Owner                Data size        Description
-  GNU                  0x00000020       NT_GNU_PROPERTY_TYPE_0
-      Properties: x86 feature: IBT, SHSTK
-        x86 ISA needed: x86-64-baseline
+readelf -j .note.gnu.build-id /bin/bash
 
 Displaying notes found in: .note.gnu.build-id
-  Owner                Data size        Description
-  GNU                  0x00000014       NT_GNU_BUILD_ID (unique build ID bitstring)
-    Build ID: 3e770d2cd0302c6ff2a184e8d2bf4ec98cfcded4
-
-Displaying notes found in: .note.ABI-tag
-  Owner                Data size        Description
-  GNU                  0x00000010       NT_GNU_ABI_TAG (ABI version tag)
-    OS: Linux, ABI: 3.2.0
+  Owner                Data size 	Description
+  GNU                  0x00000014	NT_GNU_BUILD_ID (unique build ID bitstring)
+    Build ID: 7426cc87c256cb386b52891bbe4300f2f5bab8c6
 ```
 
 When you are debugging a program, GDB will send the program's Build-ID to the `debuginfod` server, which will check if it has the corresponding debug information for that binary/library. If it does, then it will send the debug symbols via HTTPS back to GDB.
@@ -115,3 +104,7 @@ Yes. GDB will try to use local debug information if available. That means that i
 ## Can I use `debuginfod` with my own binary that links against system libraries?
 
 Yes! `debuginfod` will not be able to provide any debug symbols for your own program, but it will happily serve debug information for any system libraries that your program links against.
+
+## Bug reports
+
+Please report bugs on [Launchpad for ubuntu-debuginfod](https://bugs.launchpad.net/ubuntu-debuginfod/+filebug).
