@@ -254,6 +254,7 @@ linkcheck_ignore = [
     "https://snapcraft.io/*",
     "https://people.freedesktop.org/*",
     "https://www.squid-cache.org/Doc/config/",
+    "https://tunnelblick.net/*",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
