@@ -33,6 +33,26 @@ Gather these inputs, asking only for the ones they have not already provided:
 The chosen type fully determines the shape of the outline (see Step 2). The same type must
 always produce the same skeleton, regardless of which model runs this prompt.
 
+## Step 1b — If the section does not exist yet
+
+If the landing page the contributor named does not exist, the section is new. Do not force
+the page into an unrelated existing section. Instead:
+
+- Create the new section folder under `docs/<diataxis-type>/`, a new landing page with its
+  own `(slug)=` anchor and `toctree`, and wire that landing page into the parent Diátaxis
+  `index.md`, following the structure of the existing landing pages and index.
+- Follow `.github/instructions/landing-pages.instructions.md` for the landing page's shape:
+  start from its minimal template, and group entries with explanatory text rather than a flat
+  list of links.
+- The new page becomes the first entry in the new section's `toctree`.
+
+When an existing section clearly fits the proposed content (for example, a Valkey page when a
+`databases` section already exists), you may point this out as **non-prescriptive guidance** and
+offer the alternative — but the section is the contributor's decision. Do not override it.
+Mismatches are picked up at review time, where the contributor has the opportunity to defend
+their choice. Many topics and sections are legitimately undocumented, so the absence of a
+section is not by itself a reason to refuse.
+
 ## Step 2 — Follow the matching template
 
 Apply the template instructions for the chosen type, which are the single source of truth
