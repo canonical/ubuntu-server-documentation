@@ -25,7 +25,10 @@ Gather these inputs, asking only for the ones they have not already provided:
    - **Explanation** — a reader wants to understand a concept, with background and reasoning.
    - **Reference** — a reader looks up accurate, complete, factual detail.
 1. **Topic / title** of the page.
-1. **Target file path** under `docs/<type>/` (and the parent directory if grouped by topic).
+1. **Target file path** under `docs/<diataxis-type>/` (and the parent directory if grouped by topic).
+1. **Parent landing page / toctree file** — the `index.md` or section landing page that should
+   list the new page in its `toctree`. This must be an explicit path (e.g.
+   `docs/how-to/software.md`). Do not guess; ask if the contributor has not stated it.
 
 The chosen type fully determines the shape of the outline (see Step 2). The same type must
 always produce the same skeleton, regardless of which model runs this prompt.
@@ -60,12 +63,34 @@ If the contributor pasted rough notes, slot each note under the heading it belon
 bullet inside that section's HTML comment, kept close to their original wording. Do not
 expand notes into finished prose — the contributor writes the actual content.
 
-## Step 4 — Remind about wiring up the page
+## Step 4 — Wire up the toctree
 
-After creating the file, tell the contributor to:
+After creating the skeleton file, add the new page to the `toctree` in the landing page
+confirmed in Step 1. Do this yourself — do not ask the contributor to do it.
 
-- Add the page to the relevant `toctree` (usually the section `index.md` or parent landing page).
+- Open the landing page file.
+- Add an entry in the appropriate `toctree` block, for example:
+  `Page title <type/filename>`
+- Add a matching bullet in the prose list below the `toctree` (if the landing page follows
+  that pattern), using a `{ref}` role and a one-line description of what the page covers.
 - Add a redirect to `docs/redirects.txt` only if this page replaces or moves an existing one.
-- Run `make spelling`, `make vale`, and `make lint-md` from `docs/` once they have written content.
+
+## Step 5 — Give the contributor their next steps
+
+After creating the file and wiring the toctree, do not run lint, tests or other validation commands.
+Tell the contributor:
+
+- The skeleton has been created at the agreed path and wired into the toctree.
+- Suggest to the contributor that they can view their rendered page locally, by running:
+  ```
+  make clean && make run
+  ```
+  Then they can open <http://127.0.0.1:8000> in a browser.
+- Once they have written their content, suggest that they run the following checks from the `docs/` directory:
+  ```
+  make spelling
+  make vale
+  make lint-md
+  ```
 
 Keep the skeleton minimal and correct; leave the writing to the contributor.
