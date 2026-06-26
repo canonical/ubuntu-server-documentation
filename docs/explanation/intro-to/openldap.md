@@ -76,7 +76,7 @@ For users who want to set up OpenLDAP, we recommend following our series of guid
 * {ref}`Replication <ldap-replication>`
 * {ref}`Backup and restore <ldap-backup-and-restore>`
 
-## References
+## Further reading
 
 - The [OpenLDAP administrators guide](https://openldap.org/doc/admin25/)
 - [RFC 4515: LDAP string representation of search filters](https://www.rfc-editor.org/rfc/rfc4515.txt)

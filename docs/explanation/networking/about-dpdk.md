@@ -32,13 +32,13 @@ Cards must be unassigned from their kernel driver and instead be assigned to `ui
 
 The newer VFIO-PCI requires that you activate the following kernel parameters to enable the input-output memory management unit (IOMMU):
 
-``` 
+```text
 iommu=pt intel_iommu=on          
 ```
 
 Alternatively, on {term}`AMD`:
 
-``` 
+```text
 amd_iommu=pt
 ```
 
@@ -50,13 +50,13 @@ VirtIO is special. DPDK can directly work on these devices without `vfio_pci`/`u
 
 Manual configuration and status checks can be done via `sysfs`, or with the tool `dpdk_nic_bind`:
 
-```
+```text
 dpdk_nic_bind.py --help
 ```
 
 ## Usage
 
-```
+```sh
 dpdk-devbind.py [options] DEVICE1 DEVICE2 ....
 
 where DEVICE1, DEVICE2 etc, are specified via PCI "domain:bus:slot.func" syntax
@@ -119,15 +119,14 @@ To bind 0000:02:00.0 and 0000:02:00.1 to the ixgbe kernel driver
     dpdk-devbind.py -b ixgbe 02:00.0 02:00.1
 ```
 
+(unassigndrivers)=
 ## DPDK device configuration
-
-<a name="unassigndrivers"></a>
 
 The package `dpdk` provides *init* scripts that ease configuration of device assignment and huge pages. It also makes them persistent across reboots.
 
 The following is an example of the file `/etc/dpdk/interfaces` configuring two ports of a network card: one with `uio_pci_generic` and the other with `vfio-pci`.
 
-``` 
+```text
 # <bus>         Currently only "pci" is supported
 # <id>          Device ID on the specified bus
 # <driver>      Driver to bind against (vfio-pci or uio_pci_generic)
@@ -144,7 +143,7 @@ pci 0000:04:00.1 vfio-pci
 
 Cards are identified by their PCI-ID. If you are need to check, you can use the tool `dpdk_nic_bind.py` to show the currently available devices -- and the drivers they are assigned to. For example, running the command `dpdk_nic_bind.py --status` provides the following details:
 
-``` 
+```text
 Network devices using DPDK-compatible driver
 ============================================
 0000:04:00.0 'Ethernet Controller 10-Gigabit X540-AT2' drv=uio_pci_generic unused=ixgbe
@@ -170,7 +169,7 @@ If you have more consumers of hugepages than just DPDK in your system -- or very
 
 As an example, we can specify a configuration of 1024 hugepages of 2M each and four 1G pages in `/etc/dpdk/dpdk.conf` by adding:
 
-``` 
+```text
 NR_2M_PAGES=1024
 NR_1G_PAGES=4
 ```
@@ -187,8 +186,18 @@ You will often find guides that tell you to fetch the DPDK sources, build them t
 
 DPDK provides a [valid pkg-config file](https://people.freedesktop.org/~dbn/pkg-config-guide.html) to simplify setting the proper variables and options:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install dpdk-dev libdpdk-dev
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 gcc testdpdkprog.c $(pkg-config --libs --cflags libdpdk) -o testdpdkprog
 ```
 
@@ -196,7 +205,11 @@ An example of a complex (auto-configure) user of pkg-config of DPDK including {t
 
 Depending on what you are building, it may be a good idea to install all DPDK build dependencies before the make. On Ubuntu, this can be done automatically with the following command:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install build-dep dpdk
 ```
 
@@ -206,13 +219,13 @@ Even if you have no access to DPDK-supported network cards, you can still work w
 
 The default CPU model used by QEMU/libvirt is only up to SSE2. So, you will need to define a model that passes the proper feature flags (or use `host-passthrough`). As an example, you can add the following snippet to your `virsh` XML (or the equivalent `virsh` interface you use).
 
-``` 
+```xml
 <cpu mode='host-passthrough'>
 ```
 
 Nowadays, VirtIO supports multi-queue, which DPDK in turn can exploit for increased speed. To modify a normal VirtIO definition to have multiple queues, add the following snippet to your interface definition. 
 
-``` 
+```xml
 <driver name="vhost" queues="4"/>
 ```
 
@@ -222,7 +235,7 @@ This will enhance a normal VirtIO NIC to have multiple queues, which can later b
 
 Since DPDK itself is only a (massive) library, you most likely will continue to {ref}`Open vSwitch DPDK <dpdk-with-open-vswitch>` as an example to put it to use.
 
-## Resources
+## Further reading
 
   - [DPDK documentation](http://core.dpdk.org/doc/)
 

@@ -7,7 +7,6 @@ myst:
 (smart-card-authentication)=
 # Smart card authentication
 
-
 One of the most popular uses for smart cards is to control access to computer systems. The owner must physically *have* the smart card, and they must know the PIN to unlock it. This provides a higher degree of security than single-factor authentication (such as just using a password). In this page, we describe how to enable smart card authentication on Ubuntu.
 
 :::{note}
@@ -24,7 +23,11 @@ The following packages must be installed to obtain a smart card configuration on
 
 To install these packages, run the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install opensc-pkcs11 pcscd sssd libpam-sss
 ```
 
@@ -42,8 +45,12 @@ If custom PKCS#11 modules are used, you need to ensure that `p11-kit` is [proper
 
 In any case, `p11-kit` can be used to see all the configured modules that can be used for authentication:
 
-```bash
-$ p11-kit list-modules
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+p11-kit list-modules
 
 p11-kit-trust: p11-kit-trust.so
     library-description: PKCS#11 Kit Trust Module
@@ -82,20 +89,24 @@ Before continuing, you may need to export or reference the certificate ID that m
 
 This is a more generic implementation that just uses the PKCS#11 protocol so it should work with all modules:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install gnutls-bin
 p11tool --list-tokens
 ```
 
 Alternatively, URLs can be listed via:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 p11tool --list-token-urls
-```
 
-For example:
-
-```text
 Token 1:
 	URL: pkcs11:model=PKCS%2315%20emulated;manufacturer=IC%3A%20Infineon%3B%20mask%3A%20IDEMIA%20%28O...;serial=6090033068507002;token=MARCO%20TREVISAN%20%28PIN%20CNS1%29
 	Label: MARCO TREVISAN (PIN CNS1)
@@ -109,14 +120,23 @@ Token 1:
 
 The command above will show all the available smart cards in the system and their associated PKCS#11 URI. Copy the URI token of the selected card in the following command, which prints all certificates that can be used for authentication and their associated token URIs.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 p11tool --list-all-certs 'pkcs11:token=[TOKEN-ID]'
 ```
 
 So in the above example:
 
-```text
-$ p11tool --list-all-certs 'pkcs11:token=MARCO%20TREVISAN%20%28PIN%20CNS1%29'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+p11tool --list-all-certs 'pkcs11:token=MARCO%20TREVISAN%20%28PIN%20CNS1%29'
+
 Object 0:
 	URL: pkcs11:model=PKCS%2315%20emulated;manufacturer=IC%3A%20Infineon%3B%20mask%3A%20IDEMIA%20%28O...;serial=6090033068507002;token=MARCO%20TREVISAN%20%28PIN%20CNS1%29;id=%02;object=CNS1;type=cert
 	Type: X.509 Certificate (RSA-2048)
@@ -129,32 +149,53 @@ Now, once the URI of the certificate that will be used for authentication is kno
 
 It can be exported as text Privacy Enhanced Mail (PEM) format using:
 
-```bash
-$ p11tool --export 'pkcs11:id=%02;type=cert'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+p11tool --export 'pkcs11:id=%02;type=cert'
 ```
 
 ### Using opensc
 
-```bash
-$ sudo apt install opensc
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install opensc
 ```
 
 Certificates can be via:
 
-```bash
-$ pkcs15-tool --list-certificates
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pkcs15-tool --list-certificates
 ```
 
 And exported using
 
-```bash
-$ pkcs15-tool --read-certificate [CERTIFICATE_ID]
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pkcs15-tool --read-certificate [CERTIFICATE_ID]
 ```
 
 So, for example:
 
-```bash
-$ pkcs15-tool --list-certificates 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pkcs15-tool --list-certificates 
+
 Using reader with a card: Alcor Micro AU9560 00 00
 X.509 Certificate [CNS1]
 	Object Flags   : [0x00]
@@ -162,7 +203,14 @@ X.509 Certificate [CNS1]
 	Path           : 3f00140090012002
 	ID             : 02
 	Encoded serial : 02 10 0357B1EC0EB725BA67BD2D838DDF93D5
-$ pkcs15-tool --read-certificate 2
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pkcs15-tool --read-certificate 2
+
 Using reader with a card: Alcor Micro AU9560 00 00
 -----BEGIN CERTIFICATE-----
 MIIHXDCCBUSgAwIBAgIQA1ex7A6.....
@@ -172,22 +220,59 @@ MIIHXDCCBUSgAwIBAgIQA1ex7A6.....
 
 The card certificate verification can be simulated using openssl:
 
-```bash
-$ sudo apt install openssl
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install openssl
+```
 
-# Save the certificate, using one of the method stated above
-$ pkcs15-tool --read-certificate 2 > card-cert.pem
-$ p11tool --export 'pkcs11:id=%02;type=cert' > card-cert.pem
+Save the certificate, using one of the methods stated above:
 
-# See the certificate contents with
-$ openssl x509 -text -noout -in card-cert.pem
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pkcs15-tool --read-certificate 2 > card-cert.pem
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+p11tool --export 'pkcs11:id=%02;type=cert' > card-cert.pem
+```
 
-# Verify it is valid for the given CA, where 'Ca-Auth-CERT.pem'
-# contains all the certificates chain
-$ openssl verify -verbose -CAfile CA-Auth-CERT.pem card-cert.pem
+See the certificate contents with:
 
-# If only the parent CA Certificate is available, can use -partial_chain:
-$ openssl verify -verbose -partial_chain -CAfile intermediate_CA_cert.pem
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl x509 -text -noout -in card-cert.pem
+```
+
+Verify it is valid for the given CA, where 'Ca-Auth-CERT.pem' contains all the certificates chain:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl verify -verbose -CAfile CA-Auth-CERT.pem card-cert.pem
+```
+
+If only the parent CA Certificate is available, you can use `-partial_chain`:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl verify -verbose -partial_chain -CAfile intermediate_CA_cert.pem
 ```
 
 
@@ -196,11 +281,12 @@ $ openssl verify -verbose -partial_chain -CAfile intermediate_CA_cert.pem
 To enable smart card authentication we should rely on a module that allows PAM supported systems to use X.509 certificates to authenticate logins. The module relies on a PKCS#11 library, such as `opensc-pkcs11` to access the smart card for the credentials it will need. 
 
 When a PAM smart card module is enabled, the login process is as follows:
- 1. Enter login
- 2. Enter PIN
- 3. Validate the X.509 certificate
- 4. Map the certificate to a user
- 5. Verify the login and match
+
+1. Enter login
+1. Enter PIN
+1. Validate the X.509 certificate
+1. Map the certificate to a user
+1. Verify the login and match
 
 To enable that process we have to configure the PAM module, add the relevant certificate authorities, add the PAM module to PAM configuration and set the mapping of certificate names to logins.
 
@@ -231,7 +317,11 @@ The card certificate must be allowed by a Certificate Authority, these should be
 
 As per SSSD using openssl, we need to add the whole certificates chain to the SSSD CA certificates path (if not changed via `sssd.certificate_verification` ), so adding the certificates to the `pam_cert_db_path` is enough:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cat Ca-Auth-CERT*.pem >> /etc/sssd/pki/sssd_auth_ca_db.pem
 ```
 
@@ -256,17 +346,37 @@ certificate_verification = partial_chain
 
 Card certificate verification can be simulated using SSSD tools directly, by using the command SSSD's `p11_child`:
 
-```bash
-# In ubuntu 20.04
-$ sudo /usr/libexec/sssd/p11_child --pre -d 10 --debug-fd=2 --nssdb=/etc/sssd/pki/sssd_auth_ca_db.pem
+::::{tab-set}
 
-# In ubuntu 22.04 and later versions
-$ sudo /usr/libexec/sssd/p11_child --pre -d 10 --debug-fd=2 --ca_db=/etc/sssd/pki/sssd_auth_ca_db.pem
+:::{tab-item} 22.04 LTS onward
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo /usr/libexec/sssd/p11_child --pre -d 10 --debug-fd=2 --ca_db=/etc/sssd/pki/sssd_auth_ca_db.pem
 ```
+:::
+
+:::{tab-item} 20.04 LTS and earlier
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo /usr/libexec/sssd/p11_child --pre -d 10 --debug-fd=2 --nssdb=/etc/sssd/pki/sssd_auth_ca_db.pem
+```
+:::
+
+
+::::
 
 If certificate verification succeeds, the tool should output the card certificate name, its ID and the certificate itself in base64 format (other than debug data):
 
-```text
+```{terminal}
+:output-only:
 (Mon Sep 11 16:33:32:129558 2023) [p11_child[1965]] [do_card] (0x4000): Found certificate has key id [02].
 MARCO TREVISAN (PIN CNS1)
 /usr/lib/x86_64-linux-gnu/pkcs11/opensc-pkcs11.so
@@ -291,8 +401,13 @@ When using only local users, SSSD can be easily configured to define an `implici
 
 Certificate mapping for local users can be easily done using the certificate Subject check, in our example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl x509 -noout -subject -in card-cert.pem | sed "s/, /,/g;s/ = /=/g"
+
 subject=C=IT,O=Actalis S.p.A.,OU=REGIONE TOSCANA,SN=TREVISAN,GN=MARCO,CN=TRVMRC[...data-removed...]/6090033068507002.UyMnHxfF3gkAeBYHhxa6V1Edazs=
 ```
 
@@ -314,15 +429,22 @@ pam_cert_auth = True
 
 User mapping can be tested working in versions newer than Ubuntu 20.04 with:
 
-```bash
-$ sudo dbus-send --system --print-reply \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo dbus-send --system --print-reply \
     --dest=org.freedesktop.sssd.infopipe \
     /org/freedesktop/sssd/infopipe/Users \
     org.freedesktop.sssd.infopipe.Users.ListByCertificate \
     string:"$(cat card-cert.pem)" uint32:10
 ```
+
 That should return the object path containing the expected user ID:
-```text
+
+```{terminal}
+:output-only:
 method return time=1605127192.698667 sender=:1.1628 -> destination=:1.1629 serial=6 reply_serial=2
    array [
       object path "/org/freedesktop/sssd/infopipe/Users/implicit_5ffiles/1000"
@@ -379,46 +501,75 @@ The next step includes the `pam_sss` module into the PAM stack. There are variou
 
 Edit `/etc/pam.d/common-auth` to include the `pam_sss` module as follows:
 
-#### For Ubuntu later than 23.10
+::::{tab-set}
 
-```
-$ sudo pam-auth-update
+:::{tab-item} For Ubuntu later than 23.10
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo pam-auth-update
 ```
 
 Then you can interactively enable SSSD profiles for smart-card-only or optional smart card access.
+You can also set this non-interactively.
 
-You can also set this non-interactively by using:
+To use smart-card only authentication:
 
-```
-# To use smart-card only authentication
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo pam-auth-update --disable sss-smart-card-optional --enable sss-smart-card-required
-
-# To use smart-card authentication with fallback
-$ sudo pam-auth-update --disable sss-smart-card-required --enable sss-smart-card-optional
-
 ```
 
-#### For Ubuntu 23.10 and lower
+To use smart-card authentication with fallback:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo pam-auth-update --disable sss-smart-card-required --enable sss-smart-card-optional
 ```
-# require SSSD smart card login
+:::
+
+:::{tab-item} For Ubuntu 23.10 and earlier
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+require SSSD smart card login
+
 auth    [success=done default=die]    pam_sss.so allow_missing_name require_cert_auth
 ```
 
 or only try to use it:
 
-```
-# try SSSD smart card login
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+try SSSD smart card login
+
 auth    [success=ok default=ignore]    pam_sss.so allow_missing_name try_cert_auth
 ```
+:::
+::::
 
 See {manpage}`pam.conf(5)`, {manpage}`pam_sss(8)` for further details.
 
-```{Warning}
+:::{warning}
 A global configuration such as this requires a smart card for `su` and `sudo` authentication as well!
 
 If you want to reduce the scope of this module, move it to the appropriate PAM configuration file in `/etc/pam.d` and ensure that it's referenced by `pam_p11_allowed_services` in `sssd.conf`.
-```
+:::
 
 The OS is now ready to do a smart card login for the user `foo`.
 
@@ -434,25 +585,62 @@ pam_verbosity = 10
 debug_level = 10
 ```
 
-You can use it to check your configuration without having to login/logout for real, by just using:
+You can use it to check your configuration without having to login/logout for real. First install it:
 
-```bash
-# Install it!
-$ sudo apt install pamtester
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install pamtester
+```
 
-# Run the authentication service as standalone
-$ pamtester -v login $USER authenticate
+Run the authentication service as standalone:
 
-# Run the authentication service to get user from cert
-$ pamtester -v login "" authenticate
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pamtester -v login $USER authenticate
+```
 
-# You can check what happened in the logs, reading:
+Run the authentication service to get user from cert:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pamtester -v login "" authenticate
+```
+
+You can check what happened in the logs:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo less /var/log/auth.log
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo less /var/log/sssd/sssd_pam.log
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo less /var/log/sssd/p11_child.log
 ```
 
 ```{toctree}
+:hidden:
 self
 smart-card-authentication-with-ssh
 ```

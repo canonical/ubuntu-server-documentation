@@ -95,6 +95,16 @@ Active Directory integration <active-directory>
 * {ref}`Samba <how-to-samba>`
 * {ref}`Active Directory integration <how-to-active-directory-integration>`
 
+## Traffic management
+
+Traffic shaping allows you to prioritize certain types of network traffic, reducing latency for interactive applications when using Ubuntu as a router.
+
+```{toctree}
+:titlesonly:
+
+Traffic shaping with tc and CAKE <networking/traffic-shaping-tc-cake>
+```
+
 ## Printing
 
 The Common UNIX Printing System (CUPS) is the most common way to manage print services in Ubuntu. 

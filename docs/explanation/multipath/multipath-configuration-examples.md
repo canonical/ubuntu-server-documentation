@@ -22,7 +22,11 @@ A very simple `/etc/multipath.conf` file exists, as explained in {ref}`the confi
 
 The **internal attributes** database can be acquired by running the following on the command line:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo multipath -t
 ```
 
@@ -32,7 +36,7 @@ With the internal attributes (described above), and the example below, you will 
 
 ### Example of a defaults section
 
-```
+```text
 defaults {
     #
     # name    : polling_interval
@@ -374,7 +378,7 @@ You can obtain the WWIDs for your LUNs by running: `multipath -ll`
 after the service `multipath-tools.service` has been restarted.
 :::
 
-```
+```text
 multipaths {
     multipath {
         wwid 360000000000000000e00000000030001
@@ -401,7 +405,7 @@ multipaths {
 
 ### Example of a devices section
 
-```
+```text
 # devices {
 #     device {
 #         vendor "IBM"
@@ -414,7 +418,7 @@ multipaths {
 
 ### Example of a blocklist section
 
-```
+```text
 # name    : blacklist
 # scope   : multipath & multipathd
 # desc    : list of device names to discard as not multipath candidates 
@@ -437,7 +441,7 @@ multipaths {
 
 ### Example of a blocklist exception section
 
-```
+```text
 # name    : blacklist_exceptions
 # scope   : multipath & multipathd
 # desc    : list of device names to be treated as multipath candidates

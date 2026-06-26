@@ -41,8 +41,12 @@ From its manual page:
 
 One could configure a `IPaddr2` resource with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
             ip=$IP_ADDRESS \
             cidr_netmask=$NET_MASK \
             op monitor interval=30s
@@ -50,8 +54,12 @@ $ crm configure primitive $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME ocf:heartbeat:IPaddr2 \
             ip=$IP_ADDRESS \
             cidr_netmask=$NET_MASK \
             op monitor interval=30s
@@ -67,16 +75,24 @@ From its manual page:
 
 Once the iSCSI target is ready to accept connections from the initiator(s), with all the appropriate permissions, the `iscsi` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME ocf:heartbeat:iscsi \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME ocf:heartbeat:iscsi \
           target=$TARGET \
           portal=$PORTAL
 ```
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME ocf:heartbeat:iscsi \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME ocf:heartbeat:iscsi \
           target=$TARGET \
           portal=$PORTAL
 ```
@@ -93,8 +109,12 @@ From its manual page:
 
 This agent is usually used alongside with `iSCSITarget` to manage the target itself and its Logical Units. The supported implementation of iSCSI targets is using `targetcli-fb`, due to that, make sure to use `lio-t` as the implementation type. Considering one has an iSCSI target in place, the `iSCSILogicalUnit` resource could be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
           implementation=lio-t \
           target_iqn=$IQN_TARGET \
           path=$DEVICE \
@@ -103,8 +123,12 @@ $ crm configure primitive $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSILogicalUnit \
           implementation=lio-t \
           target_iqn=$IQN_TARGET \
           path=$DEVICE \
@@ -123,16 +147,24 @@ From its manual page:
 
 This agent is usually used alongside with `iSCSILogicalUnit` to manage the target itself and its Logical Units. The supported implementation of iSCSI targets is using `targetcli-fb`, due to that, make sure to use `lio-t` as the implementation type. With `targetcli-fb` installed on the system, the `iSCSITarget` resource can be configured with the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
           implementation=lio-t \
           iqn=$IQN_TARGET
 ```
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME ocf:heartbeat:iSCSITarget \
           implementation=lio-t \
           iqn=$IQN_TARGET
 ```
@@ -149,16 +181,24 @@ From its manual page:
 
 If the LVM setup is ready to be activated and deactivated by this resource agent (make sure the `system_id_resource` is set to `uname` in `/etc/lvm/lvm.conf`), the `LVM-activate` resource can be configured with the following command:
 
-```bash
-$ crm configure primitive $RESOURCE_NAME ocf:heartbeat:LVM-activate \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME ocf:heartbeat:LVM-activate \
              vgname=$VOLUME_GROUP \
              vg_access_mode=system_id
 ```
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME ocf:heartbeat:LVM-activate \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME ocf:heartbeat:LVM-activate \
              vgname=$VOLUME_GROUP \
              vg_access_mode=system_id
 ```
@@ -169,14 +209,22 @@ This is one way to set up `LVM-activate`, for more information refer {manpage}`t
 
 There is also a way to manage systemd unit files via a resource agent. One need to have the systemd unit file in place (already loaded by systemd) and configure a resource using the following command:
 
-```
-$ crm configure primitive $RESOURCE_NAME systemd:$SERVICE_NAME
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+crm configure primitive $RESOURCE_NAME systemd:$SERVICE_NAME
 ```
 
 One can do the same using `pcs` via the following command:
 
-```
-$ pcs resource create $RESOURCE_NAME systemd:$SERVICE_NAME
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+pcs resource create $RESOURCE_NAME systemd:$SERVICE_NAME
 ```
 
 The `$SERVICE_NAME` can be any service managed by a systemd unit file, and it needs to be available for the cluster nodes.

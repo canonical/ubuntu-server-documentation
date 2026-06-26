@@ -63,8 +63,12 @@ Both `bpftrace` and `bpfcc-tools` install sets of tools to handle these
 different functionalities. Apart from the `bpftrace` tool itself, you can fetch
 a comprehensive list of these tools with the following command:
 
-```bash
-$ dpkg -L bpftrace bpfcc-tools | grep -E '/s?bin/.*$' | xargs -n1 basename
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -L bpftrace bpfcc-tools | grep -E '/s?bin/.*$' | xargs -n1 basename
 ```
 
 Most of the tools listed above are quite well documented. Their manual pages
@@ -115,14 +119,29 @@ For this task, you'd run `execsnoop-bpfcc` with the following arguments:
 * `-Uu root` - to reduce the noisy output only to things done in root context (like here the package install)
 * `-T` - to get time info along the log
 
-```bash
-# In one console run:
-$ sudo execsnoop-bpfcc -Uu root -T
+In one console run:
 
-# In another trigger what you want to watch for
-$ sudo apt install --reinstall vim-nox
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo execsnoop-bpfcc -Uu root -T
+```
 
-# Execsnoop in the first console will now report probably more than you expected:
+In another trigger what you want to watch for
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install --reinstall vim-nox
+```
+
+`execsnoop` in the first console will now report probably more than you expected:
+
+```text
 TIME     UID   PCOMM            PID     PPID    RET ARGS
 10:58:07 1000  sudo             1323101 1322857   0 /usr/bin/sudo apt install --reinstall vim-nox
 10:58:10 0     apt              1323107 1323106   0 /usr/bin/apt install --reinstall vim-nox
@@ -172,17 +191,30 @@ needs. The example will use the following arguments:
   unfiltered output of `opensnoop` that it is length limited, so only the shorter
   qemu-system-x86 can be used.
 
-```bash
-# This will collect a log of files opened by QEMU
-$ sudo /usr/sbin/opensnoop-bpfcc --full-path --name qemu-system-x86
-#
-# If now you in another console or anyone on this system in general runs QEMU,
-# this would log the files opened
-#
-# For example calling LXD for an ephemeral VM
-$ lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
-#
-# Will in opensnoop deliver a barrage of files opened
+
+This will collect a log of files opened by QEMU:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo /usr/sbin/opensnoop-bpfcc --full-path --name qemu-system-x86
+```
+
+If now you in another console or anyone on this system in general runs QEMU, this would log the files opened. For example calling LXD for an ephemeral VM:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lxc launch ubuntu-daily:n n-vm-test --ephemeral --vm
+```
+
+Will, in `opensnoop`, deliver a barrage of files opened:
+
+```text
 1308728 qemu-system-x86    -1   2 PID    COMM               FD ERR PATH
 /snap/lxd/current/zfs-2.2/lib/glibc-hwcaps/x86-64-v3/libpixman-1.so.0
 1308728 qemu-system-x86    -1   2 /snap/lxd/current/zfs-2.2/lib/glibc-hwcaps/x86-64-v2/libpixman-1.so.0
@@ -209,11 +241,29 @@ very own eBPF solutions from scratch.
 So while `opensnoop-bpfcc` as of right now has no option to filter on the file
 names, it could ...
 
-```bash
-$ sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo cp /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo vim /usr/sbin/opensnoop-bpfcc.new
+
 ...
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
+
 --- /usr/sbin/opensnoop-bpfcc	2025-10-24 12:17:00.000000000 +0000
 +++ /usr/sbin/opensnoop-bpfcc.new	2026-01-19 10:45:13.620367441 +0000
 @@ -40,6 +40,7 @@
@@ -272,8 +322,13 @@ $ diff -Naur /usr/sbin/opensnoop-bpfcc /usr/sbin/opensnoop-bpfcc.new
 Running the modified version now allows you to probe for specific file 
 names, like all the `.bin` files:
 
-```bash
-$ sudo /usr/sbin/opensnoop-bpfcc.new --contains '.bin' --name qemu-system-x86
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo /usr/sbin/opensnoop-bpfcc.new --contains '.bin' --name qemu-system-x86
+
 PID     COMM               FD ERR PATH
 1316661 qemu-system-x86    21   0 /snap/lxd/current/share/qemu//kvmvapic.bin
 1316661 qemu-system-x86    39   0 /snap/lxd/current/share/qemu//vgabios-virtio.bin
@@ -286,8 +341,13 @@ And just like with all the other tools and examples, the limit is your
 imagination. Wanted to know which files in `/etc` your complex intertwined
 apache config is really loading?
 
-```bash
-$ sudo /usr/sbin/opensnoop-bpfcc.new --name 'apache2' --contains '/etc'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo /usr/sbin/opensnoop-bpfcc.new --name 'apache2' --contains '/etc'
+
 PID     COMM               FD ERR PATH
 1319357 apache2             3   0 /etc/apache2/apache2.conf
 1319357 apache2             4   0 /etc/apache2/mods-enabled
@@ -331,7 +391,7 @@ directly in kernel-space (i.e., fast and omniscient), with no need to disrupt
 running services. It is an invaluable tool for system administrators and
 software engineers.
 
-## References
+## Further reading
 
 * [Introduction to eBPF video, given at the Ubuntu summit
   2024](https://www.youtube.com/live/byPpJW5l6pg?t=30314s), eventually

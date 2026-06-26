@@ -9,17 +9,19 @@ myst:
 
 It's also possible to join an Active Directory forest using the *rid* identity mapping backend. To better understand what is involved, and why it is tricky, let's reuse the example where we joined a single domain with this backend:
 
-    [global]
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
+```ini
+[global]
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
 
-        idmap config * : backend       = tdb
-        # 100,000 - 199,999
-        idmap config * : range         = 100000 - 199999
-        idmap config EXAMPLE : backend = rid
-        # 1,000,000 - 1,999,999
-        idmap config EXAMPLE : range   = 1000000 - 1999999
+    idmap config * : backend       = tdb
+    # 100,000 - 199,999
+    idmap config * : range         = 100000 - 199999
+    idmap config EXAMPLE : backend = rid
+    # 1,000,000 - 1,999,999
+    idmap config EXAMPLE : range   = 1000000 - 1999999
+```
 
 ![simple-rid-ranges|600x238, 100%](../../images/87c43d5d-simple-rid-ranges.png)
 
@@ -28,40 +30,96 @@ With this configuration, we are expected to join the *EXAMPLE.INTERNAL* domain, 
 
 The `testparm` utility is happy with this configuration, and there is no overlap of ID ranges:
 
-    $ testparm
-    Load smb config files from /etc/samba/smb.conf
-    Loaded services file OK.
-    Weak crypto is allowed by GnuTLS (e.g. NTLM as a compatibility fallback)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+testparm
 
-    Server role: ROLE_DOMAIN_MEMBER
+Load smb config files from /etc/samba/smb.conf
+Loaded services file OK.
+Weak crypto is allowed by GnuTLS (e.g. NTLM as a compatibility fallback)
+
+Server role: ROLE_DOMAIN_MEMBER
+```
 
 We next adjust the {term}`hostname` and perform the join:
 
-    $ sudo hostnamectl hostname n3.example.internal
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo hostnamectl hostname n3.example.internal
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+hostname
 
-    $ hostname
-    n3.example.internal
+n3.example.internal
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+hostname -f
 
-    $ hostname -f
-    n3.example.internal
+n3.example.internal
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo net ads join -U Administrator
 
-    $ sudo net ads join -U Administrator
-    Password for [EXAMPLE\Administrator]:
-    Using short domain name -- EXAMPLE
-    Joined 'N3' to dns domain 'example.internal'
-
-    $ sudo hostnamectl hostname n3
-    $ sudo systemctl restart winbind.service
+Password for [EXAMPLE\Administrator]:
+Using short domain name -- EXAMPLE
+Joined 'N3' to dns domain 'example.internal'
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo hostnamectl hostname n3
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl restart winbind.service
+```
 
 A quick check shows that the users from *EXAMPLE.INTERNAL* are recognized:
 
-    $ id jammy@example.internal
-    uid=1001103(EXAMPLE\jammy) gid=1000513(EXAMPLE\domain users) groups=1000513(EXAMPLE\domain users),1001103(EXAMPLE\jammy)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+id jammy@example.internal
+
+uid=1001103(EXAMPLE\jammy) gid=1000513(EXAMPLE\domain users) groups=1000513(EXAMPLE\domain users),1001103(EXAMPLE\jammy)
+```
 
 But what happens if this single domain establishes a trust relationship with another domain, and we don't modify the `/etc/samba/smb.conf` file to cope with that? Where will the users from the new trusted domain get their IDs from? Since there is no specific idmap configuration for the new trusted domain, its users will get IDs from the default domain:
 
-    $ id noble@mydomain.internal
-    uid=100000(MYDOMAIN\noble) gid=100000(MYDOMAIN\domain users) groups=100000(MYDOMAIN\domain users)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+id noble@mydomain.internal
+
+uid=100000(MYDOMAIN\noble) gid=100000(MYDOMAIN\domain users) groups=100000(MYDOMAIN\domain users)
+```
 
 Oops. That is from the much smaller range 100,000 - 199,999, reserved for the catch-all default domain. Furthermore, if yet another trust relationship is established, those users will also get their IDs from this range, mixing multiple domains up in the same ID range, in whatever order they are being looked up.
 
@@ -69,35 +127,50 @@ If above we had looked up another user instead of *noble@mydomain.internal*, tha
 
 To address this, we can add another *idmap config* configuration for the *rid* backend, giving the new domain a separate range:
 
-    [global]
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
+```ini
+[global]
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
 
-        idmap config * : backend       = tdb
-        # 100,000 - 199,999
-        idmap config * : range         = 100000 - 199999
-        idmap config EXAMPLE : backend = rid
-        # 1,000,000 - 1,999,999
-        idmap config EXAMPLE : range   = 1000000 - 1999999
+    idmap config * : backend       = tdb
+    # 100,000 - 199,999
+    idmap config * : range         = 100000 - 199999
+    idmap config EXAMPLE : backend = rid
+    # 1,000,000 - 1,999,999
+    idmap config EXAMPLE : range   = 1000000 - 1999999
 
-        # MYDOMAIN.INTERNAL idmap configuration
-        idmap config MYDOMAIN : backend = rid
-        # 2,000,000 - 2,999,999
-        idmap config MYDOMAIN : range   = 2000000 - 2999999
+    # MYDOMAIN.INTERNAL idmap configuration
+    idmap config MYDOMAIN : backend = rid
+    # 2,000,000 - 2,999,999
+    idmap config MYDOMAIN : range   = 2000000 - 2999999
+```
 
 ![forest-rid-ranges|799x238](../../images/42506c6d-forest-rid-ranges.png)
 
-
 With this configuration, nothing changed for the *EXAMPLE.INTERNAL* users, as expected:
 
-    $ id jammy@example.internal
-    uid=1001103(EXAMPLE\jammy) gid=1000513(EXAMPLE\domain users) groups=1000513(EXAMPLE\domain users),1001103(EXAMPLE\jammy)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+id jammy@example.internal
+
+uid=1001103(EXAMPLE\jammy) gid=1000513(EXAMPLE\domain users) groups=1000513(EXAMPLE\domain users),1001103(EXAMPLE\jammy)
+```
 
 But the users from the trusted domain *MYDOMAIN.INTERNAL* will get their IDs allocated from the 2,000,000 - 2,999,999 range, instead of the default one:
 
-    $ id noble@mydomain.internal
-    uid=2001104(MYDOMAIN\noble) gid=2000513(MYDOMAIN\domain users) groups=2000513(MYDOMAIN\domain users),2001104(MYDOMAIN\noble)
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+id noble@mydomain.internal
+
+uid=2001104(MYDOMAIN\noble) gid=2000513(MYDOMAIN\domain users) groups=2000513(MYDOMAIN\domain users),2001104(MYDOMAIN\noble)
+```
 
 And this allocation, which is using the *rid* backend, is deterministic.
 

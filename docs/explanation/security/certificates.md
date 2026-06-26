@@ -53,7 +53,11 @@ Running your secure service without a passphrase is convenient because you will 
 
 To generate the keys for the Certificate Signing Request (CSR) run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl genrsa -des3 -out server.key 2048
 
 Generating RSA private key, 2048 bit long modulus
@@ -69,7 +73,11 @@ Re-type the passphrase to verify. Once you have re-typed it correctly, the serve
 
 Now create the insecure key, the one without a passphrase, and shuffle the key names:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl rsa -in server.key -out server.key.insecure
 mv server.key server.key.secure
 mv server.key.insecure server.key
@@ -79,7 +87,11 @@ The insecure key is now named `server.key`, and you can use this file to generat
 
 To create the CSR, run the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -key server.key -out server.csr
 ```
 
@@ -91,7 +103,11 @@ You can now submit this CSR file to a CA for processing. The CA will use this CS
 
 To create the self-signed certificate, run the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 
@@ -105,7 +121,11 @@ If your secure server is to be used in a production environment, you probably ne
 
 You can install the key file `server.key` and certificate file `server.crt`, or the certificate file issued by your CA, by running following commands at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp server.crt /etc/ssl/certs
 sudo cp server.key /etc/ssl/private
 ```

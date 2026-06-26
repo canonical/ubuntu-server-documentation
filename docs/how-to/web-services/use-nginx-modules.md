@@ -13,8 +13,13 @@ Like other web servers, nginx supports dynamically loaded modules to provide in-
 
 nginx will report the modules it has been built with via its `-V` option.  A quick and dirty way to list the available modules is thus:
 
-```bash
-$ nginx -V 2>&1 | tr -- - '\n' | grep _module                                                                    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+nginx -V 2>&1 | tr -- - '\n' | grep _module
+
 http_ssl_module                                                                                                  
 http_stub_status_module                                                                                          
 http_realip_module                                                                                               
@@ -27,8 +32,13 @@ stream_geoip_module=dynamic
 
 Many of these modules are built-in and thus are always available with nginx, but some exist as separate packages whose installation status can be checked via `apt`. For example:
 
-```bash
-$ apt policy libnginx-mod-http-image-filter                                                                      
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+apt policy libnginx-mod-http-image-filter
+
 libnginx-mod-http-image-filter:                                                                                  
   Installed: (none)                                                                                              
   Candidate: 1.24.0-1ubuntu1                                                                                     
@@ -39,8 +49,13 @@ libnginx-mod-http-image-filter:
 
 `apt` can also be used to install the desired dynamic module:
 
-```bash
-$ sudo apt install libnginx-mod-http-image-filter                                                                
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install libnginx-mod-http-image-filter
+
 ...                                                                                                              
 The following NEW packages will be installed:                                                                    
   libnginx-mod-http-image-filter                                                                                 
@@ -54,16 +69,31 @@ Triggering nginx reload
 
 Dynamic modules are automatically enabled and get reloaded by nginx on installation. If you need to manually disable an installed module, remove its file from the `/etc/nginx/modules-enabled` directory, for example:
 
-```bash
-$ ls /etc/nginx/modules-*                                                                                        
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls /etc/nginx/modules-*
+
 /etc/nginx/modules-available:                                                                                    
                                                                                                                      
 /etc/nginx/modules-enabled:                                                                                      
 50-mod-http-image-filter.conf
-
-$ sudo mv /etc/nginx/modules-enabled/50-mod-http-image-filter.conf /etc/nginx/modules-available/
-
-$ service nginx restart
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mv /etc/nginx/modules-enabled/50-mod-http-image-filter.conf /etc/nginx/modules-available/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+service nginx restart
 ```
 
 Note that built-in modules cannot be disabled/enabled.
@@ -97,5 +127,3 @@ You've completed the nginx guide! See the following resources for more in-depth 
 * The [nginx documentation](https://nginx.org/en/docs/) provides detailed explanations of configuration directives.
 
 * O'Reilly's nginx cookbook provides guidance on solving specific needs.
-
-* For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

@@ -19,7 +19,7 @@ Default multipath configuration values can be overridden by editing the `/etc/mu
 
 The `multipath.conf` configuration file contains entries of the form:
 
-```
+```text
 <section> {
        <attribute> <value>
        ...
@@ -165,7 +165,11 @@ Regular expression for a `udev` property. All devices that have matching `udev` 
 
 The protocol strings that multipath recognizes are `scsi:fcp`, `scsi:spi`, `scsi:ssa`, `scsi:sbp`, `scsi:srp`, `scsi:iscsi`, `scsi:sas`, `scsi:adt`, `scsi:ata`, `scsi:unspec`, `ccw`, `cciss`, `nvme`, and `undef`. The protocol that a path is using can be viewed by running: 
    
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipathd show paths format "%d %P"
 ```
 

@@ -17,21 +17,45 @@ Ubuntu compiles Apache2 to allow the dynamic loading of modules. Configuration d
 
 You can install additional Apache2 modules and use them with your web server. For example, run the following command at a terminal prompt to install the Python 3 WSGI module:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install libapache2-mod-wsgi-py3
 ```
 
 The installation will enable the module automatically, but we can disable it with `a2dismod`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2dismod wsgi
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
 And then use the `a2enmod` utility to re-enable it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2enmod wsgi
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
@@ -43,7 +67,11 @@ The `mod_ssl` module adds an important feature to the Apache2 server - the abili
 
 The `mod_ssl` module is available in the `apache2-common` package. Run the following command at a terminal prompt to enable the `mod_ssl` module:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2enmod ssl
 ```
 
@@ -55,7 +83,11 @@ For more information on generating a key and obtaining a certificate see {ref}`C
 
 To configure Apache2 for HTTPS, enter the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2ensite default-ssl
 ```
 
@@ -65,7 +97,11 @@ The directories `/etc/ssl/certs` and `/etc/ssl/private` are the default location
 
 With Apache2 now configured for HTTPS, restart the service to enable the new settings:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
@@ -77,8 +113,18 @@ You can access the secure server pages by typing `https://your_hostname/url/` in
 
 For more than one user to be able to write to the same directory you will need to grant write permission to a group they share in common. The following example grants shared write permission to `/var/www/html` to the group "webmasters".
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chgrp -R webmasters /var/www/html
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod -R g=rwX /var/www/html/
 ```
 
@@ -93,5 +139,3 @@ The `apache2` daemon will run as the `www-data` user, which has a corresponding 
 - The [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the apache2-doc package for the official Apache2 docs.
 
 - O'Reilly's [Apache Cookbook](http://shop.oreilly.com/product/9780596529949.do) is a good resource for accomplishing specific Apache2 configurations.
-
-- For Ubuntu specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

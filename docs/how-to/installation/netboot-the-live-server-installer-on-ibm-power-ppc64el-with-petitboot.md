@@ -11,15 +11,25 @@ Open a terminal window on your workstation and make sure the `ipmitool` package 
 
 Verify if you can reach the {term}`BMC` of the IBM Power system via `ipmitool` with a simple `ipmitool` call like:
 
-```
-$ ipmitool -I lanplus -H Power9Box -U <user> -P <password> power status 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H Power9Box -U <user> -P <password> power status
+
 Chassis Power is off
 ```
 
 or:
 
-```
-$ ipmitool -I lanplus -H Power9Box -U <user> -P <password> fru print 47
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H Power9Box -U <user> -P <password> fru print 47
+
   Product Name          : OpenPOWER Firmware
   Product Version       : open-power-SUPERMICRO-P9DSU-V2.12-20190404-prod
   Product Extra         : 	op-build-1b9269e
@@ -33,8 +43,13 @@ $ ipmitool -I lanplus -H Power9Box -U <user> -P <password> fru print 47
 
 or:
   
-```
-$ ipmitool -I lanplus -H Power9Box -U <user> -P <password> sol info
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H Power9Box -U <user> -P <password> sol info
+
   Set in progress                 : set-complete
   Enabled                         : true
   Force Encryption                : false
@@ -59,21 +74,32 @@ Open a second terminal and activate serial-over-LAN (SOL), so that you have two 
 
 Activate serial-over-LAN:
 
-```
-$ ipmitool -I lanplus -H Power9Box -U <user> -P <password> sol activate
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H Power9Box -U <user> -P <password> sol activate
+
 ...
 ```
 
 Power the system on in the ‘control terminal’ and watch the SOL console:
 
-```
-$ ipmitool -I lanplus -H Power9Box -U <user> -P <password> power on
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H Power9Box -U <user> -P <password> power on
+
 ...
 ```
 
 It takes some time to see the first lines in the SOL console:
 
-```
+```{terminal}
+:output-only:
 [SOL Session operational.  Use ~? for help]
 --== Welcome to Hostboot  ==--
 
@@ -99,7 +125,8 @@ It takes some time to see the first lines in the SOL console:
 
 After a moment the system reaches the Petitboot screen:
 
-```
+```{terminal}
+:output-only:
 Petitboot (v1.7.5-p8f5fc86)                                   9006-12P 1302NXA 
   ─────────────────────────────────────────────────
  [Network: enP2p1s0f0 / 0c:c4:7a:87:04:d8]
@@ -130,7 +157,8 @@ Select "*Exit to shell".
 ::::{note}
 Make sure you really watch the SOL, since the Petitboot screen (above) has a time out (usually 10 or 30 seconds) and afterwards it automatically proceeds and tries to boot from the configured devices (usually disk). This can be prevented by just navigating in Petitboot.
 The petitboot shell is small Linux based OS:
- ```
+ ```{terminal}
+ :output-only:
  ...
  Exiting petitboot. Type 'exit' to return.
  You may run 'pb-sos' to gather diagnostic data

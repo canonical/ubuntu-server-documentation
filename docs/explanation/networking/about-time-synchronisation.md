@@ -5,7 +5,7 @@ myst:
 ---
 
 (about-time-synchronisation)=
-# About time synchronisation
+# About time synchronization
 
 Network Time Protocol (NTP) is a networking protocol for synchronizing time over a network. Basically, a client requests the current time from a server, and uses it to set its own clock.
 

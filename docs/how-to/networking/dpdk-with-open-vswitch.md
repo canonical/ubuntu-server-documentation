@@ -12,16 +12,65 @@ Since {ref}`DPDK is just a library <about-dpdk>`, it doesn't do a lot on its own
 
 Here is a brief example of how to install and configure a basic Open vSwitch using DPDK for later use via `libvirt`/`qemu-kvm`.
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install openvswitch-switch-dpdk
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-alternatives --set ovs-vswitchd /usr/lib/openvswitch-switch-dpdk/ovs-vswitchd-dpdk
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl set Open_vSwitch . "other_config:dpdk-init=true"
-# run on core 0 only
-ovs-vsctl set Open_vSwitch . "other_config:dpdk-lcore-mask=0x1"
-# Allocate 2G huge pages (not Numa node aware)
-ovs-vsctl set Open_vSwitch . "other_config:dpdk-alloc-mem=2048"
-# limit to one whitelisted device
-ovs-vsctl set Open_vSwitch . "other_config:dpdk-extra=--pci-whitelist=0000:04:00.0"
+```
+
+* To run on core 0 only
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  ovs-vsctl set Open_vSwitch . "other_config:dpdk-lcore-mask=0x1"
+  ```
+
+* Allocate 2G huge pages (not Numa node aware)
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  ovs-vsctl set Open_vSwitch . "other_config:dpdk-alloc-mem=2048"
+  ```
+
+* Limit to one allowlisted device
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  ovs-vsctl set Open_vSwitch . "other_config:dpdk-extra=--pci-whitelist=0000:04:00.0"
+  ```
+
+Then restart the service:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service openvswitch-switch restart
 ```
 
@@ -35,14 +84,28 @@ Please note that the section `_dpdk-alloc-mem=2048_` in the above example is the
 
 The Open vSwitch you started above supports all the same port types as Open vSwitch usually does, *plus* DPDK port types. The following example shows how to create a bridge and -- instead of a normal external port -- add an external DPDK port to it. When doing so you can specify the associated device.
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl add-br ovsdpdkbr0 -- set bridge ovsdpdkbr0 datapath_type=netdev
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl add-port ovsdpdkbr0 dpdk0 -- set Interface dpdk0 type=dpdk  "options:dpdk-devargs=${OVSDEV_PCIID}"      
 ```
 
 You can tune this further by setting options:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl set Interface dpdk0 "options:n_rxq=2"
 ```
 
@@ -52,7 +115,11 @@ If you are not building some sort of software-defined networking (SDN) switch or
 
 The recommended way to get to a KVM guest is using `vhost_user_client`. This will cause OvS-DPDK to connect to a socket created by QEMU. In this way, we can avoid old issues like "guest failures on OvS restart". Here is an example of how to add such a port to the bridge you created above.
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl add-port ovsdpdkbr0 vhost-user-1 -- set Interface vhost-user-1 type=dpdkvhostuserclient "options:vhost-server-path=/var/run/vhostuserclient/vhost-user-client-1"
 ```
 
@@ -60,7 +127,7 @@ This will connect to the specified path that has to be created by a guest listen
 
 To let `libvirt`/`kvm` consume this socket and create a guest VirtIO network device for it, add the following snippet to your guest definition as the network definition.
 
-``` 
+```text
 <interface type='vhostuser'>
 <source type='unix'
 path='/var/run/vhostuserclient/vhost-user-client-1'
@@ -73,8 +140,18 @@ mode='server'/>
 
 DPDK has plenty of options -- in combination with Open vSwitch-DPDK the two most commonly used are:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl set Open_vSwitch . other_config:n-dpdk-rxqs=2
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ovs-vsctl set Open_vSwitch . other_config:pmd-cpu-mask=0x6
 ```
 
@@ -92,16 +169,15 @@ DPDK is a fast-evolving project. In any search for support and/or further guides
 
 You can check if your issues is known on:
 
-  - [DPDK Mailing Lists](https://www.dpdk.org/contribute/)
-  - For OpenVswitch-DPDK [OpenStack Mailing Lists](http://www.openvswitch.org/mlists/)
-  - Known issues in {lpsrc}`DPDK Launchpad Area <dpdk>`
-  - Join the IRC channels \#DPDK or \#openvswitch on {term}`freenode`.
+- [DPDK Mailing Lists](https://www.dpdk.org/contribute/)
+- For OpenVswitch-DPDK [OpenStack Mailing Lists](http://www.openvswitch.org/mlists/)
+- Known issues in {lpsrc}`DPDK Launchpad Area <dpdk>`
 
 Issues are often due to missing small details in the general setup. Later on, these missing details cause problems which can be hard to track down to their root cause. 
 
 A common case seems to be the "could not open network device dpdk0 (No such device)" issue. This occurs rather late when setting up a port in Open vSwitch with DPDK, but the root cause (most of the time) is very early in the setup and initialization. Here is an example of how proper initialization of a device looks - this can be found in the `syslog/journal` when starting Open vSwitch with DPDK enabled.
 
-``` 
+```text
 ovs-ctl[3560]: EAL: PCI device 0000:04:00.1 on NUMA socket 0
 ovs-ctl[3560]: EAL:   probe driver: 8086:1528 rte_ixgbe_pmd
 ovs-ctl[3560]: EAL:   PCI memory mapped at 0x7f2140000000
@@ -110,7 +186,7 @@ ovs-ctl[3560]: EAL:   PCI memory mapped at 0x7f2140200000
 
 If this is missing, either by ignored cards, failed initialisation or other reasons, later on there will be no DPDK device to refer to. Unfortunately, the logging is spread across `syslog/journal` and the `openvswitch` log. To enable some cross-checking, here is an example of what can be found in these logs, relative to the entered command.
 
-``` 
+```text
 #Note: This log was taken with dpdk 2.2 and openvswitch 2.5 but still looks quite similar (a bit extended) these days
 Captions:
 CMD: that you enter
@@ -260,18 +336,16 @@ Eventually we can see the poll thread in top
  3595 root      10 -10 4975344 103936   9916 S 100.0  0.3  33:13.56 ovs-vswitchd
 ```
 
-## Resources
+## Further reading
 
-  - [DPDK documentation](http://dpdk.org/doc)
+- [DPDK documentation](http://dpdk.org/doc)
 
-  - [Release Notes matching the version packages in Ubuntu 16.04](http://dpdk.org/doc/guides/rel_notes/release_2_2.html)
+- [Linux DPDK user getting started](http://dpdk.org/doc/guides/linux_gsg/index.html)
 
-  - [Linux DPDK user getting started](http://dpdk.org/doc/guides/linux_gsg/index.html)
+- [EAL command-line options](http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html)
 
-  - [EAL command-line options](http://dpdk.org/doc/guides/testpmd_app_ug/run_app.html)
+- [DPDK API documentation](http://dpdk.org/doc/api/)
 
-  - [DPDK API documentation](http://dpdk.org/doc/api/)
+- [Open Vswitch DPDK installation](https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md)
 
-  - [Open Vswitch DPDK installation](https://github.com/openvswitch/ovs/blob/branch-2.5/INSTALL.DPDK.md)
-
-  - [Wikipedia's definition of DPDK](https://en.wikipedia.org/wiki/Data_Plane_Development_Kit)
+- [Wikipedia's definition of DPDK](https://en.wikipedia.org/wiki/Data_Plane_Development_Kit)

@@ -68,15 +68,25 @@ Read the application documentation again. It might have crypto options directly 
 
 Since package dependencies are a good way to check what is needed at runtime by the application, you can find out which package owns what file with the `dpkg -S` command. For example:
 
-```bash
-$ dpkg -S /usr/bin/lynx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -S /usr/bin/lynx
+
 lynx: /usr/bin/lynx
 ```
 
 Now that you have the package name, check the package's dependencies. You should also look for `Recommends`, as they are installed by default. Using the current example, we can now do the following:
 
-```bash
-$ dpkg -s lynx | grep -E "^(Depends|Recommends)"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -s lynx | grep -E "^(Depends|Recommends)"
+
 Depends: libbsd0 (>= 0.0), libbz2-1.0, libc6 (>= 2.34), libgnutls30 (>= 3.7.0), libidn2-0 (>= 2.0.0), libncursesw6 (>= 6), libtinfo6 (>= 6), zlib1g (>= 1:1.1.4), lynx-common
 Recommends: mime-support
 ```
@@ -89,8 +99,13 @@ If a dynamic library is needed by an application, it should always be correctly 
 
 In this situation, you can use the `ldd` tool, which is installed in all Ubuntu systems. It lists all the dynamic libraries needed by the given binary, including dependencies of dependencies, i.e. the command is recursive. Going back to the `lynx` example:
 
-```bash
-$ ldd /usr/bin/lynx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ldd /usr/bin/lynx
+
     linux-vdso.so.1 (0x00007ffffd2df000)
     libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1 (0x00007feb69d77000)
     libbz2.so.1.0 => /lib/x86_64-linux-gnu/libbz2.so.1.0 (0x00007feb69d64000)
@@ -116,8 +131,13 @@ We again see the GnuTLS library (via `libgnutls.so.30`) in the list, and can rea
 Another way to check for such dependencies (without recursion) is via `objdump`. You may need to install it with the `binutils` package, as it's not mandatory.
 The way to use it is to grep for the `NEEDED` string:
 
-```bash
-$ objdump -x /usr/bin/lynx|grep NEEDED
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+objdump -x /usr/bin/lynx|grep NEEDED
+
   NEEDED               libz.so.1
   NEEDED               libbz2.so.1.0
   NEEDED               libidn2.so.0
@@ -130,8 +150,13 @@ $ objdump -x /usr/bin/lynx|grep NEEDED
 
 Finally, if you want to see the dependency *tree*, you can use `lddtree` from the `pax-utils` package:
 
-```bash
-$ lddtree /usr/bin/lynx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lddtree /usr/bin/lynx
+
 lynx => /usr/bin/lynx (interpreter => /lib64/ld-linux-x86-64.so.2)
     libz.so.1 => /lib/x86_64-linux-gnu/libz.so.1
     libbz2.so.1.0 => /lib/x86_64-linux-gnu/libbz2.so.1.0
@@ -162,15 +187,25 @@ Identifying which libraries were used in a static build is a bit more involved. 
 
 For example, let's try to discover which crypto libraries, if any, the `rclone` tool uses. First, let's try the packaging dependencies:
 
-```bash
-$ dpkg -s rclone | grep -E "^(Depends|Recommends)"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -s rclone | grep -E "^(Depends|Recommends)"
+
 Depends: libc6 (>= 2.34)
 ```
 
 Uh, that's a short list. But `rclone` definitely supports encryption, so what is going on? Turns out this is a tool written in the Go language, and that uses static linking of libraries. So let's try to inspect the package data more carefully, and this time look for the `Built-Using` header:
 
-```bash
-$ dpkg -s rclone | grep Built-Using
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -s rclone | grep Built-Using
+
 Built-Using: go-md2man-v2 (= 2.0.1+ds1-1), golang-1.18 (= 1.18-1ubuntu1), golang-bazil-fuse (= 0.0~git20160811.0.371fbbd-3), ...
 ```
 
@@ -178,8 +213,13 @@ Ok, this time we have a lot of information (truncated above for brevity, since i
 
 If the `Built-Using` header was not there, or didn't yield any clues, we could try one more step and look for the build dependencies. These can be found in the `debian/control` file of the source package. In the case of `rclone` for Ubuntu Jammy, that can be seen at https://git.launchpad.net/ubuntu/+source/rclone/tree/debian/control?h=ubuntu/jammy-devel#n7, and a quick look at the `Build-Depends` list shows us the `golang-golang-x-crypto-dev` build dependency, whose source package is `golang-go.crypto` as expected:
 
-```bash
-$ apt-cache show golang-golang-x-crypto-dev | grep ^Source:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+apt-cache show golang-golang-x-crypto-dev | grep ^Source:
+
 Source: golang-go.crypto
 ```
 
@@ -187,7 +227,7 @@ Source: golang-go.crypto
 If there is no `Source:` line, then it means the name of the source package is the same as the binary package that was queried.
 :::
 
-## What's next?
+## Next steps
 
 Once you have uncovered which library your application is using, the following guides may help you to understand the associated configuration files and what options you have available (including some handy examples).
 

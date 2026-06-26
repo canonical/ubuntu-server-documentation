@@ -13,7 +13,11 @@ myst:
 
 To install `rsnapshot` open a terminal shell and run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install rsnapshot
 ```
 
@@ -25,7 +29,7 @@ The `rsnapshot` configuration resides in `/etc/rsnapshot.conf`. Below you can fi
 
 The root directory where all snapshots will be stored is found at:
 
-```bash
+```text
 snapshot_root       /var/cache/rsnapshot/
 ```
 
@@ -33,7 +37,7 @@ snapshot_root       /var/cache/rsnapshot/
 
 Since `rsnapshot` uses incremental backups, we can afford to keep older backups for a while before removing them. You set these up under the `BACKUP LEVELS / INTERVALS` section. You can tell `rsnapshot` to retain a specific number of backups of each kind of interval. 
 
-```bash
+```text
 retain  daily   6
 retain  weekly    7
 retain  monthly   4
@@ -45,7 +49,7 @@ In this example we will keep 6 snapshots of our daily strategy, 7 snapshots of o
 
 If you are accessing a remote machine over SSH and the port to bind is not the default (port `22`), you need to set the following variable with the port number:
 
-```bash
+```text
 ssh_args       -p 22222
 ```
 
@@ -55,7 +59,7 @@ Now the most important part; you need to decide what you would like to backup.
 
 If you are backing up locally to the same machine, this is as easy as specifying the directories that you want to save and following it with `localhost/` which will be a sub-directory in the `snapshot_root` that you set up earlier.
 
-```bash
+```text
 backup  /home/          localhost/
 backup  /etc/           localhost/
 backup  /usr/local/     localhost/
@@ -63,7 +67,8 @@ backup  /usr/local/     localhost/
 
 If you are backing up a remote machine you just need to tell `rsnapshot` where the server is and which directories you would like to back up.
 
-```bash
+```{terminal}
+:output-only:
 backup root@example.com:/home/ example.com/    +rsync_long_args=--bwlimit=16,exclude=core
 backup root@example.com:/etc/  example.com/    exclude=mtab,exclude=core
 ```
@@ -76,19 +81,31 @@ You can check the comments in `/etc/rsnapshot.conf` and the {manpage}`rsnapshot(
 
 After modifying the configuration file, it is good practice to check if the syntax is OK:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rsnapshot configtest
 ```
 
 You can also test your backup levels with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rsnapshot -t daily
 ```
 
 If you are happy with the output and want to see it in action you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rsnapshot daily
 ```
 

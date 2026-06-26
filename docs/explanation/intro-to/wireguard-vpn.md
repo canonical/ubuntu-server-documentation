@@ -45,15 +45,19 @@ The `wg-quick` configuration file can have an arbitrary name, and can even be pl
 
 For example, a file called `/etc/wireguard/wg0.conf` will have the needed configuration settings for a WireGuard network interface called `wg0`. By following this practice, you get the benefit of being able to call `wg-quick` with just the interface name:
 
-```bash
-$ sudo wg-quick up wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up wg0
 ```
 
 That will bring the `wg0` interface up, give it an IP address, set up routing, and configure the WireGuard-specific parameters for it to work. This interface is usually called `wg0`, but can have any valid network interface name, like `office` (it doesn't need an index number after the name), `home1`, etc. It can help to give it a meaningful name if you plan to connect to multiple peers.
 
 Let's go over an example of such a configuration file:
 
-```
+```ini
 [Interface]
 PrivateKey = eJdSgoS7BZ/uWkuSREN+vhCJPPr3M3UlB3v1Su/amWk=
 ListenPort = 51000
@@ -80,18 +84,39 @@ The **peers** list, each one in its own `[Peer]` section (example above has just
 
 To generate the keypairs for each peer, the `wg` command is used:
 
-```bash
-$ umask 077
-$ wg genkey > wg0.key
-$ wg pubkey < wg0.key > wg0.pub
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey > wg0.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg pubkey < wg0.key > wg0.pub
 ```
 
 And then the contents of `wg0.key` and `wg0.pub` can be used in the configuration file.
 
 This is what it looks like when this interface is brought up by `wg-quick`:
 
-```bash
-$ sudo wg-quick up wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up wg0
+
 [#] ip link add wg0 type wireguard
 [#] wg setconf wg0 /dev/fd/63
 [#] ip -4 address add 10.10.11.10/24 dev wg0
@@ -113,8 +138,13 @@ To better understand how `AllowedIPs` work, let's go through a quick example.
 
 Let's say this system wants to send traffic to `10.10.10.201/24`. There is a route for it which says to use the `wg0` interface for that:
 
-```bash
-$ ip route get 10.10.10.201
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip route get 10.10.10.201
+
 10.10.10.201 dev wg0 src 10.10.11.10 uid 1000
     cache
 ```
@@ -122,7 +152,7 @@ $ ip route get 10.10.10.201
 Since `wg0` is a WireGuard interface, it will consult its configuration to see if any peer has that target address in the `AllowedIPs` list. Turns out one peer has it, in which case the traffic will:
 
   a) Be authenticated as us, and encrypted for that peer.
-  b) Sent away via the configured `Endpoint`.
+  b) Be sent away via the configured `Endpoint`.
 
 Now let's picture the reverse. This system received traffic on the `ListenPort` UDP port. If it can be decrypted, and verified as having come from one of the listed peers using its respective public key, and if the source IP matches the corresponding `AllowedIPs` list, then the traffic is accepted.
 

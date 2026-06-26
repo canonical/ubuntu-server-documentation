@@ -17,7 +17,11 @@ In this guide we show how to install and configure `isc-dhcp-server`, which inst
 
 At a terminal prompt, enter the following command to install `isc-dhcp-server`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install isc-dhcp-server
 ```
 
@@ -56,7 +60,11 @@ INTERFACESv4="eth4"
 
 After changing the config files you need to restart the `dhcpd` service:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart isc-dhcp-server.service
 ```
 

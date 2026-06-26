@@ -17,7 +17,11 @@ The NTP daemon `chronyd` calculates the drift and offset of your system clock an
 
 To install `chrony`, run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install chrony
 ```
 
@@ -32,9 +36,7 @@ This will provide two binaries:
 You can install `chrony` (above) and configure special Hardware (below) for a local synchronization
 and as-installed that is the default to stay on the secure and conservative side. But if you want to *serve* NTP you need adapt your configuration.
 
-To enable serving NTP you'll need to at least set the `allow` rule. This controls which clients/networks you want `chrony` to serve NTP to.
-
-An example would be:
+To enable serving NTP you'll need to at least set the `allow` rule. This controls which clients/networks you want `chrony` to serve NTP to. An example would be:
 
 ```text
 allow 1.2.3.4
@@ -46,7 +48,8 @@ See the section "NTP server" in the {manpage}`chrony.conf(5)` manual page for mo
 
 You can use `chronyc` to see query the status of the `chrony` daemon. For example, to get an overview of the currently available and selected time sources, run `chronyc sources`, which provides output like this:
 
-```text
+```{terminal}
+:output-only:
 MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ===============================================================================
 ^+ gamma.rueckgr.at              2   8   377   135  -1048us[-1048us] +/-   29ms
@@ -73,7 +76,8 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 You can also make use of the `chronyc sourcestats` command, which produces output like this:
 
-```text
+```{terminal}
+:output-only:
 210 Number of sources = 20
 Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
 ==============================================================================
@@ -109,13 +113,21 @@ Certain `chronyc` commands are privileged and cannot be run via the network with
 
 For the installation and setup you will first need to run the following command in your terminal window:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install gpsd chrony
 ```
 
 However, since you will want to test/debug your setup (especially the GPS reception), you should also install:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install pps-tools gpsd-clients
 ```
 
@@ -123,7 +135,8 @@ GPS devices usually communicate via serial interfaces. The most common type thes
 
 When plugging in such a device (or at boot time) {term}`dmesg` should report a serial connection of some sort, as in this example:
 
-```text
+```{terminal}
+:output-only:
 [   52.442199] usb 1-1.1: new full-speed USB device number 3 using xhci_hcd
 [   52.546639] usb 1-1.1: New USB device found, idVendor=067b, idProduct=2303, bcdDevice= 4.00
 [   52.546654] usb 1-1.1: New USB device strings: Mfr=1, Product=2, SerialNumber=0
@@ -139,20 +152,24 @@ When plugging in such a device (or at boot time) {term}`dmesg` should report a s
 
 We see in this example that the device appeared as `ttyUSB0`. So that `chrony` later accepts being fed time information by this device, we have to set it up in `/etc/chrony/chrony.conf` (please replace `USB0` with whatever applies to your setup):
 
-```
+```text
 refclock SHM 0 refid GPS precision 1e-1 offset 0.9999 delay 0.2
 refclock SOCK /var/run/chrony.ttyUSB0.sock refid PPS
 ```
 
 Next, we need to restart `chrony` to make the socket available and have it waiting.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart chrony
 ```
 
 We then need to tell `gpsd` which device to manage. Therefore, in `/etc/default/gpsd` we set:
 
-```
+```text
 DEVICES="/dev/ttyUSB0"
 ```
 
@@ -160,15 +177,17 @@ It should be noted that since the *default* use-case of `gpsd` is, well, for *gp
 
 For the use case of `gpsd` as a PPS-providing-daemon, you want to set the option to:
 
- - Immediately start (even without a client connected). This can be set in `GPSD_OPTIONS` of `/etc/default/gpsd`: 
-   - `GPSD_OPTIONS="-n"`
+- Immediately start (even without a client connected). This can be set in `GPSD_OPTIONS` of `/etc/default/gpsd`: 
+  - `GPSD_OPTIONS="-n"`
 
- - Enable the service itself and not wait for a client to reach the socket in the future:
-   - `sudo systemctl enable /lib/systemd/system/gpsd.service`
+- Enable the service itself and not wait for a client to reach the socket in the future:
+
+  - `sudo systemctl enable /lib/systemd/system/gpsd.service`
 
 Restarting `gpsd` will now initialize the PPS from GPS and in `dmesg` you will see:
 
-```text
+```{terminal}
+:output-only:
  pps_ldisc: PPS line discipline registered
  pps pps0: new PPS source usbserial0
  pps pps0: source "/dev/ttyUSB0" added
@@ -176,20 +195,23 @@ Restarting `gpsd` will now initialize the PPS from GPS and in `dmesg` you will s
 
 If you have multiple PPS sources, the tool `ppsfind` may be useful to help identify which PPS belongs to which GPS. In our example, the command `sudo ppsfind /dev/ttyUSB0` would return the following:
 
-```text
+```{terminal}
+:output-only:
 pps0: name=usbserial0 path=/dev/ttyUSB0
 ```
 
 Now we have completed the basic setup. To proceed, we now need our GPS to get a lock. Tools like `cgps` or `gpsmon` need to report a 3D "fix" in order to provide accurate data. Let's run the command `cgps`, which in our case returns:
 
-```text
+```{terminal}
+:output-only:
 ...
 │ Status:         3D FIX (7 secs) ...
 ```
 
 You would then want to use `ppstest` in order to check that you are really receiving PPS data. So, let us run the command `sudo ppstest /dev/pps0`, which will produce an output like this:
 
-```text
+```{terminal}
+:output-only:
 trying PPS source "/dev/pps0"
 found PPS source "/dev/pps0"
 ok, found 1 source(s), now start fetching data...
@@ -203,8 +225,10 @@ Ok, `gpsd` is now running, the GPS reception has found a fix, and it has fed thi
 
 Initially, before `gpsd` has started or before it has a lock, these sources will be new and "untrusted" - they will be marked with a "?" as shown in the example below. If your devices remain in the "?" state (even after some time) then `gpsd` is not feeding any data to `chrony` and you will need to debug why.
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
@@ -215,8 +239,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 Over time, `chrony` will classify all of the unknown sources as "good" or "bad".
 In the example below, the raw GPS had too much deviation (+- 200ms) but the PPS is good (+- 63us).
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address        Stratum Poll Reach LastRx Last sample
 ===============================================================================
@@ -227,8 +253,10 @@ MS Name/IP address        Stratum Poll Reach LastRx Last sample
 
 Finally, after a while it used the hardware PPS input (as it was better):
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 10
 MS Name/IP address         Stratum Poll Reach LastRx Last sample
 ===============================================================================
@@ -239,8 +267,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 The PPS might also be OK -- but used in a combined way with the selected server, for example. See `man chronyc` for more details about how these combinations can look:
 
-```text
+```{terminal}
+:output-only:
 chronyc> sources
+
 210 Number of sources = 11
 MS Name/IP address         Stratum Poll Reach LastRx Last sample               
 ===============================================================================
@@ -251,8 +281,10 @@ MS Name/IP address         Stratum Poll Reach LastRx Last sample
 
 If you're wondering if your SHM-based GPS data is any good, you can check on that as well. `chrony` will not only tell you if the data is classified as good or bad -- using `sourcestats` you can also check the details:
 
-```text
+```{terminal}
+:output-only:
 chronyc> sourcestats
+
 210 Number of sources = 10
 Name/IP Address            NP  NR  Span  Frequency  Freq Skew  Offset  Std Dev
 ==============================================================================
@@ -263,7 +295,13 @@ golem.canonical.com        15  10   783     +0.859      0.509   -750us   108us
 
 You can also track the raw data that `gpsd` or other `ntpd`-compliant reference clocks are sending via shared memory by using `ntpshmmon`. Let us run the command `sudo ntpshmmon -o`, which should provide the following output:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo ntpshmmon -o
+
 ntpshmmon: version 3.20
 #      Name          Offset       Clock                 Real                 L Prc
 sample NTP1          0.000223854  1588265805.000223854  1588265805.000000000 0 -10
@@ -290,7 +328,11 @@ ntsserverkey /etc/chrony/privkey.pem
 
 It is important to note that for isolation reasons `chrony`, by default, runs as user and group `_chrony`. Therefore you need to grant access to the certificates for that user, by running the following command:.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown _chrony:_chrony /etc/chrony/*.pem
 ```
 
@@ -298,7 +340,13 @@ Then restart `chrony` with `systemctl restart chrony` and it will be ready to pr
 
 A running `chrony` server measures various statistics. One of them counts the number of NTS connections that were established (or dropped) -- we can check this by running `sudo chronyc -N serverstats`, which shows us the statistics:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chronyc -N serverstats
+
 NTP packets received       : 213
 NTP packets dropped        : 0
 Command packets received   : 117
@@ -311,13 +359,13 @@ Authenticated NTP packets  : 197
 
 There is also a per-client statistic which can be enabled by the `-p` option of the `clients` command.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chronyc -N clients -k
-```
 
-This provides output in the following form:
-
-```text
     Hostname                      NTP   Drop Int IntL Last  NTS-KE   Drop Int  Last
     ===============================================================================
     10.172.196.173                197      0  10   -   595       2      0   5   48h
@@ -333,7 +381,7 @@ For more complex scenarios there are many more advanced options for configuring 
 Check `/etc/apparmor.d/usr.sbin.chronyd` if you want other paths or allow custom paths in `/etc/apparmor.d/local/usr.sbin.chronyd`.
 :::
 
-## References
+## Further reading
 
 - [`chrony` FAQ](https://chrony-project.org/faq.html)
 

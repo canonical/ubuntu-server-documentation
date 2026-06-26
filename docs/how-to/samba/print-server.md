@@ -21,7 +21,11 @@ Before installing and configuring Samba as a print server, it is best to already
 
 To install the `samba` package, run the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install samba
 ```
 
@@ -29,20 +33,24 @@ sudo apt install samba
 
 After installing `samba`, edit `/etc/samba/smb.conf`. Change the *workgroup* attribute to what is appropriate for your network:
 
-```text
+```ini
 workgroup = EXAMPLE
 ```
 
-In the *\[printers\]* section, change the *guest ok* option to 'yes':
+In the *`[printers]`* section, change the *guest ok* option to 'yes':
 
-```text 
+```ini
 browsable = yes
 guest ok = yes
 ```
 
 After editing `smb.conf`, restart Samba:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart smbd.service nmbd.service
 ```
 
@@ -50,12 +58,12 @@ The default Samba configuration will automatically share any printers installed.
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
+- For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
 
-  - The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is another good reference.
+- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is another good reference.
 
-  - Also, see the [CUPS Website](http://www.cups.org/) for more information on configuring CUPS.
+- Also, see the [CUPS Website](http://www.cups.org/) for more information on configuring CUPS.
 
-  - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.

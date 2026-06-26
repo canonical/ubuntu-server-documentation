@@ -17,22 +17,35 @@ A separate system (ideally in the same network, because of `ipmitool`) is needed
 
 Log in to this separate host and make sure that the `ipmitool` package is installed:
 
-```
-$ sudo apt install ipmitool
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install ipmitool
 ```
 
 as well as Samba:
 
-```
-$ sudo apt install samba
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install samba
 ```
 
 ## Configure Samba
 
 Next, set up and configure Samba:
 
-```
-$ sudo touch /etc/samba/smb.conf && sudo tee -a /etc/samba/smb.conf <<EOF
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo touch /etc/samba/smb.conf && sudo tee -a /etc/samba/smb.conf <<EOF
+
 [winshare]
   path=/var/winshare
   browseable = yes
@@ -43,8 +56,13 @@ EOF
 
 And do a quick verification that the required lines are present:
 
-```
-$ tail -n 5 /etc/samba/smb.conf
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+tail -n 5 /etc/samba/smb.conf
+
 [winshare]
   path=/var/winshare
   browseable = yes
@@ -52,35 +70,60 @@ $ tail -n 5 /etc/samba/smb.conf
   guest ok = yes
 ```
 
-> **Optional step**
-> For downloading the image you may have to use a proxy server:
-> ```
-> $ sudo touch ~/.wgetrc && sudo tee -a ~/.wgetrc <<EOF
-> use_proxy=yes
-> http_proxy=squid.proxy:3128
-> https_proxy=squid.proxy:3128
-> EOF
-> ```
+:::{admonition} Optional step
+For downloading the image you may have to use a proxy server:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo touch ~/.wgetrc && sudo tee -a ~/.wgetrc <<EOF
+use_proxy=yes
+http_proxy=squid.proxy:3128
+https_proxy=squid.proxy:3128
+EOF
+```
+:::
 
 ## Download the ISO image
 
 The ISO image needs to be downloaded now:
 
-```
-$ wget http://cdimage.ubuntu.com/ubuntu/releases/focal/release/ubuntu-20.04-live-server-ppc64el.iso --directory-prefix=/var/winshare
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget http://cdimage.ubuntu.com/ubuntu/releases/focal/release/ubuntu-20.04-live-server-ppc64el.iso --directory-prefix=/var/winshare
 ```
 
 The proxy can also be passed over as a `wget` argument, like this:
 
-```
-$ wget -e use_proxy=yes -e http_proxy=squid.proxy:3128 http://cdimage.ubuntu.com/ubuntu/releases/focal/release/ubuntu-20.04-live-server-ppc64el.iso --directory-prefix=/var/winshare
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wget -e use_proxy=yes -e http_proxy=squid.proxy:3128 http://cdimage.ubuntu.com/ubuntu/releases/focal/release/ubuntu-20.04-live-server-ppc64el.iso --directory-prefix=/var/winshare
 ```
 
 Change the file mode of the ISO image file:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chmod -R 755 /var/winshare/
 ```
-$ sudo chmod -R 755 /var/winshare/
-$ ls -l /var/winshare/
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls -l /var/winshare/
+
 -rwxr-xr-x 1 ubuntu ubuntu  972500992 Mar 23 08:02 focal-live-server-ppc64el.iso
 ```
 
@@ -88,9 +131,20 @@ $ ls -l /var/winshare/
 
 Next we need to restart and check the Samba service:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo service smbd restart
 ```
-$ sudo service smbd restart
-$ sudo service smbd status
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo service smbd status
+
 ● smbd.service - Samba SMB Daemon
    Loaded: loaded (/lib/systemd/system/smbd.service; enabled; vendor 
 preset: ena
@@ -112,8 +166,13 @@ Feb 04 15:17:12 host systemd[1]: Started Samba SMB Daemon.
 
 Test Samba share:
 
-```
-ubuntu@host:~$ smbclient -L localhost
+```{terminal}
+:copy:
+:user: ubuntu
+:host: host
+:dir: ~
+smbclient -L localhost
+
 WARNING: The "syslog" option is deprecated
 Enter WORKGROUP\ubuntu's password: 
 	Sharename       Type      Comment
@@ -131,25 +190,48 @@ Enter WORKGROUP\ubuntu's password:
 
 Get the IP address of the Samba host:
 
-```
-$ ip -4 -brief address show
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ip -4 -brief address show
+
 lo               UNKNOWN        127.0.0.1/8 
 ibmveth2         UNKNOWN        10.245.246.42/24 
 ```
 
-> **Optional step**:
-> Additional testing to make certain the Samba share is accessible from remote:
->  ```
->  user@workstation:~$ mkdir -p /tmp/test
->  user@workstation:~$ sudo mount -t cifs -o 
->  username=guest,password=guest //10.245.246.42/winshare /tmp/test/
->  user@workstation:~$ ls -la /tmp/test/
->  total 1014784
->  drwxr-xr-x  2 root root          0 May  4 15:46 .
->  drwxrwxrwt 18 root root        420 May  4 19:25 ..
->  -rwxr-xr-x  1 root root 1038249984 May  3 19:37 ubuntu-20.04-live-server-ppc64el.iso
->  ```
+:::{admonition} Optional step
+Additional testing to make certain the Samba share is accessible from remote:
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+mkdir -p /tmp/test
+```
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+sudo mount -t cifs -o 
 
+username=guest,password=guest //10.245.246.42/winshare /tmp/test/
+```
+```{terminal}
+:copy:
+:user: user
+:host: workstation
+:dir: ~
+ls -la /tmp/test/
+
+total 1014784
+drwxr-xr-x  2 root root          0 May  4 15:46 .
+drwxrwxrwt 18 root root        420 May  4 19:25 ..
+-rwxr-xr-x  1 root root 1038249984 May  3 19:37 ubuntu-20.04-live-server-ppc64el.iso
+```
+:::
 
 Now use a browser and navigate to the {term}`BMC` of the Power system, which should be installed (let's assume the BMC's IP address is `10.245.246.247`):
 
@@ -167,13 +249,13 @@ Enter the IP address of the Samba share:
 
 and the path to the Samba share:
 
-```
+```text
 \winshare\focal-live-server-ppc64el.iso
 ```
 
 Click "Save and Mount". Make sure that the virtual CD-ROM is really properly mounted!
 
-```
+```text
 CD-ROM Image:
   
 This option allows you to share a CD-ROM image over a Windows Share with a
@@ -185,7 +267,7 @@ Device 3	No disk emulation set.
 <Refresh Status>
 ```
 
-```
+```text
 Share host: 10.245.246.42
 Path to image: \winshare\focal-live-server-ppc64el.iso
 User (optional):
@@ -195,11 +277,11 @@ Password (optional):
 
 ::::{note}
 It’s important that you see a status like this:
-```
+```text
 Device 1 There is an iso file mounted
- ```
-Then the virtual CD-ROM is properly mounted and you will see the boot/install from CD-ROM entry in Petitboot:
 ```
+Then the virtual CD-ROM is properly mounted and you will see the boot/install from CD-ROM entry in Petitboot:
+```text
 [CD/DVD: sr0 / 2020-03-23-08-02-42-00]
   Install Ubuntu Server
 ```
@@ -209,16 +291,33 @@ Then the virtual CD-ROM is properly mounted and you will see the boot/install fr
 
 Now use `ipmitool` to boot the system into the Petitboot loader:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> power status
 ```
-$ ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> power status
-$ ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> sol activate
-$ ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> power on
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> sol activate
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ipmitool -I lanplus -H 10.245.246.247 -U ADMIN -P <password> power on
+
 Chassis Power Control: Up/On
 ```
 
 And reach the Petitboot screen:
 
-```
+```text
 Petitboot (v1.7.5-p8f5fc86)                                   9006-12C BOS0026
  ─────────────────────────────────────────────
   [Network: enP2p1s0f0 / ac:1f:6b:09:c0:52]
@@ -240,7 +339,7 @@ Petitboot (v1.7.5-p8f5fc86)                                   9006-12C BOS0026
 
 Make sure that booting from CD-ROM is enabled:
 
-```
+```text
 Petitboot (v1.7.5-p8f5fc86)                                   9006-12C BOS0026 
 ─────────────────────────────────────────────
   [Network: enP2p1s0f0 / ac:1f:6b:09:c0:52]
@@ -265,7 +364,7 @@ Petitboot (v1.7.5-p8f5fc86)                                   9006-12C BOS0026
  [sda3] Processing new Disk device
 ```
 
-```
+```text
 Petitboot System Configuration
    
 ──────────────────────────────────────────────
@@ -292,7 +391,7 @@ Petitboot System Configuration
  tab=next, shift+tab=previous, x=exit, h=help
 ```
 
-```
+```text
 Petitboot System Configuration
 ─────────────────────────────────────────────
   Network:       (*) DHCP on all active interfaces
@@ -319,14 +418,14 @@ Petitboot System Configuration
 
 Now select the 'Install Ubuntu Server' entry below the CD/DVD entry:
 
-```
+```text
   [CD/DVD: sr0 / 2020-03-23-08-02-42-00]
   *  Install Ubuntu Server                              
 ```
 
 And let Petitboot boot from the (virtual) CD-ROM image:
 
-```
+```text
 Sent SIGKILL to all processes
 [  119.355371] kexec_core: Starting new kernel
 [  194.483947394,5] OPAL: Switch to big-endian OS
@@ -335,7 +434,7 @@ Sent SIGKILL to all processes
 
 The initial Subiquity installer screen will show up in the console:
 
-```
+```text
 ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
   Willkommen! Bienvenue! Welcome! Добро пожаловать! Welkom
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀

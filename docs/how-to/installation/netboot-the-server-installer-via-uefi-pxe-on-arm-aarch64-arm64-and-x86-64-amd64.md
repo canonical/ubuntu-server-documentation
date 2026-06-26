@@ -16,14 +16,22 @@ This process applies to both arm64 and {term}`amd`64 architectures and is based 
 
 This article assumes that you have set up your Trivial File Transfer Protocol (TFTP) (and/or {term}`DHCP`/bootp if necessary, depending on your LAN configuration) by following [the netbooting method for legacy mode](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510). Alternatively, you can set up your own TFTP server as follows if your {term}`DNS` and DHCP are already configured:
 
-```
-$ sudo apt install tftpd-hpa
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install tftpd-hpa
 ```
 
 After installation, check that the TFTP service is active:
 
-```
-$ systemctl status tftpd-hpa.service
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+systemctl status tftpd-hpa.service
 ```
 
 The output should show **active (running)**. This article assumes your TFTP root path is `/srv/tftp`.
@@ -67,8 +75,12 @@ Replace the corresponding files if you want to work on an amd64 image. For examp
 
 The GRUB binary redirects the download path to the target files via `grub.cfg`. For more information about the Preboot Execution Environment (PXE) process and why this binary is required, see [the netbooting instructions for legacy mode](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510).
 
-```
-$ sudo wget https://ports.ubuntu.com/ubuntu-ports/dists/focal/main/uefi/grub2-arm64/current/grubnetaa64.efi.signed -O /srv/tftp/grubnetaa64.efi.signed
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wget https://ports.ubuntu.com/ubuntu-ports/dists/focal/main/uefi/grub2-arm64/current/grubnetaa64.efi.signed -O /srv/tftp/grubnetaa64.efi.signed
 ```
 
 :::{note}
@@ -81,18 +93,27 @@ Download an Ubuntu ARM server ISO to fetch the installer, such as the [20.04.5 l
 
 Mount the ISO and copy the target files we need over to the TFTP folder:
 
-```
-$ sudo mount ./ubuntu-20.04.5-live-server-arm64.iso /mnt
-$ sudo mkdir /srv/tftp/grub /srv/tftp/casper
-$ sudo cp /mnt/boot/grub/grub.cfg /srv/tftp/grub/
-$ sudo cp /mnt/casper/initrd /srv/tftp/casper/
-$ sudo cp /mnt/casper/vmlinuz /srv/tftp/casper/
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mount ./ubuntu-20.04.5-live-server-arm64.iso /mnt
+sudo mkdir /srv/tftp/grub /srv/tftp/casper
+sudo cp /mnt/boot/grub/grub.cfg /srv/tftp/grub/
+sudo cp /mnt/casper/initrd /srv/tftp/casper/
+sudo cp /mnt/casper/vmlinuz /srv/tftp/casper/
 ```
 
 So, the TFTP root folder should look like this now:
 
-```
-$ find /srv/tftp/
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+find /srv/tftp/
+
 /srv/tftp/
 /srv/tftp/grub
 /srv/tftp/grub/grub.cfg
@@ -104,9 +125,19 @@ $ find /srv/tftp/
 
 Customize the GRUB menu to install the target image by fetching it directly over the internet:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chmod +w /srv/tftp/grub/grub.cfg
 ```
-$ sudo chmod +w /srv/tftp/grub/grub.cfg
-$ sudo vi /srv/tftp/grub/grub.cfg
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo vi /srv/tftp/grub/grub.cfg
 ```
 
 Add a new boot entry at the top-level menu (not in any `submenu`):

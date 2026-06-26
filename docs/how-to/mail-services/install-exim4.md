@@ -11,7 +11,11 @@ myst:
 
 To install [Exim4](https://www.exim.org/), run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install exim4
 ```
 
@@ -19,7 +23,11 @@ sudo apt install exim4
 
 To configure Exim4, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg-reconfigure exim4-config
 ```
 
@@ -30,6 +38,7 @@ The default configuration layout for Exim4 is the single configuration file one.
 :::
 
 If using multiple configuration files, then the configuration will be split in a directory structure under `/etc/exim4/conf.d`, like so:
+
 ```text
 /etc/exim4/
 └── conf.d
@@ -48,7 +57,11 @@ If, however, Exim4 was set up to use a single configuration file, then that file
 
 In any of these scenarios, after making a change to the configuration, the following command must be executed to update the actual configuration file that Exim4 will use:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-exim4.conf
 ```
 
@@ -59,7 +72,12 @@ You should never manually edit the configuration file `/var/lib/exim4/config.aut
 :::
 
 If configuration changes were made, the service should also be restarted:
-```text
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart exim4
 ```
 
@@ -70,7 +88,11 @@ All the choices made via `dpkg-reconfigure exim4-config` are stored in the `/etc
 
 The following command will start the Exim4 daemon:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service exim4 start
 ```
 
@@ -78,8 +100,8 @@ sudo service exim4 start
 
 There are multiple authentication options available for Exim4. Here we will document two methods:
 
- * Authenticate Linux users present in the local shadow file (`/etc/shadow`), via `saslauthd` and PAM.
- * Authenticate arbitrary users against a custom Exim4 password database (`/etc/exim4/passwd`).
+* Authenticate Linux users present in the local shadow file (`/etc/shadow`), via `saslauthd` and PAM.
+* Authenticate arbitrary users against a custom Exim4 password database (`/etc/exim4/passwd`).
 
 Both of these methods use clear text passwords transmitted over the network, so they need to be protected by Transport Layer Security (TLS).
 
@@ -91,14 +113,20 @@ All configuration steps shown from now on will assume a split-configuration mode
 
 First, enter the following into a terminal prompt to create a certificate for use with TLS:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo /usr/share/doc/exim4-base/examples/exim-gencert
 ```
+
 This command will ask some questions about the certificate, like country, city, and others. The most important one, and that must be correct otherwise TLS won't work for this server, is the "Server name" one. It **MUST** match the fully qualified hostname (FQDN) of the system where Exim4 is deployed.
 
 :::{warning}
 This will install a self-signed certificate. If deploying this system in production, obtain a trusted certificate instead. See {ref}`obtain-tls-certificates` for how to get a certificate, or how to set up your own Certificate Authority (CA) for internal deployments.
 :::
+
 Configure Exim4 for TLS by editing the `/etc/exim4/conf.d/main/03_exim4-config_tlsoptions` file and adding the following:
 
 ```text
@@ -141,24 +169,45 @@ login_saslauthd_server:
 This enables the `PLAIN` and `LOGIN` authentication mechanisms via `saslauthd`.
 
 For Ubuntu 22.04 and earlier, of it you plan to use authentication mechanisms that will need read access to `/etc/sasldb2` (not covered in this guide), you need to add the `Debian-exim` user to the `sasl` group:
-```text
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo gpasswd -a Debian-exim sasl
 ```
 
 To make all these changes effective, the main configuration file needs to be updated, and Exim4 restarted:
-```text
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-exim4.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart exim4
 ```
 
 This concludes the Exim4 side of the configuration. Next, the `sasl2-bin` package needs to be installed:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sasl2-bin
 ```
 
 The main configuration for `saslauthd` is in the `/etc/default/saslauthd` file. What needs to be verified is the `MECHANISMS` setting, which we want to be `PAM`:
-```
+
+```text
 MECHANISMS="pam"
 ```
 
@@ -168,15 +217,27 @@ In Ubuntu 22.04 Jammy and earlier, we also need to add `START="yes"` to `/etc/de
 
 Finally, enable and start the `saslauthd` service:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl enable saslauthd
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start saslauthd
 ```
+
 Exim4 is now configured with SMTP-AUTH using TLS authenticating local Linux users via PAM.
 
 ### Authenticating arbitrary users
 
 Exim4 can also be configured to authenticate arbitrary users, that is, users that do note exist on the local system. These mechanisms are called `plain_server` and `login_server`. Edit `/etc/exim4/conf.d/auth/30_exim4-config_examples` and uncomment these sections:
+
 ```text
 plain_server:
   driver = plaintext
@@ -204,36 +265,58 @@ DO NOT enable both these and the `_saslauthd_server` variants (from "Authenticat
 :::
 
 These mechanisms will lookup usernames and passwords in the `/etc/exim4/passwd` file, which has to be created and populated. The format of this file is:
+
 ```text
 username:crypted-password:cleartext-password
 ```
 
 The Exim4 installation ships a helper script that can populate this file. It is a simple interactive script that can be run like this:
-```text
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo /usr/share/doc/exim4-base/examples/exim-adduser
 ```
 
 It will prompt for a username and password. In this example we are creating an `ubuntu` entry with the password `ubuntusecret`:
-```text
+
+```{terminal}
+:output-only:
 User: ubuntu
 Password: ubuntusecret
 ```
+
 After that, we will have a `/etc/exim4/passwd` file, owned by `root:root` and mode `0644`, with contents similar to this:
-```text
+
+```{terminal}
+:output-only:
 ubuntu:$1$ZvPA$HTddFobmJD1vURtJHBmbw/:ubuntusecret
 ```
 
 Since this file contains secrets, it should be protected, and Exim4 has to be allowed to read it:
-```text
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown root:Debian-exim /etc/exim4/passwd
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0640 /etc/exim4/passwd
 ```
 
 The same script can also be used to manage users in this `passwd` file:
 
- * To change the password of an existing user, edit the `passwd` file, delete the line corresponding to the user, save the file, and run the script again to provide the new password.
- * To add another user, run the script and provide the new user name, and their password.
- * To remove a user, edit the file with a text editor and delete the line corresponding to the user that should be removed.
+* To change the password of an existing user, edit the `passwd` file, delete the line corresponding to the user, save the file, and run the script again to provide the new password.
+* To add another user, run the script and provide the new user name, and their password.
+* To remove a user, edit the file with a text editor and delete the line corresponding to the user that should be removed.
 
 :::{warning}
 The `/usr/share/doc/exim4-base/examples/exim-adduser` serves mostly as an example and is not able to handle many scenarios. For example, it won't check if the username you are providing already exists in the `passwd` file, which can lead to multiple entries for the same user, with unpredictable results.
@@ -241,8 +324,18 @@ The `/usr/share/doc/exim4-base/examples/exim-adduser` serves mostly as an exampl
 
 Finally, update the Exim4 configuration and restart the service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-exim4.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart exim4
 ```
 
@@ -256,18 +349,28 @@ Exim4 has logs in its own directory in `/var/log/exim4/mainlog`. Whenever troubl
 
 A quick test to verify if `saslauthd` is working can be performed with the `testsaslauthd` command. Assuming you have a local user called `ubuntu` with a password of `ubuntusecret`, this command can be used to test the authentication on the Exim4 server:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 testsaslauthd -u ubuntu -p ubuntusecret
 ```
 
 The result should be OK:
-```text
+
+```{terminal}
+:output-only:
 0: OK "Success."
 ```
 
 Note that this tests only the `saslauthd` service, not the Exim4 integration with it. For that we need to actually connect to the SMTP service and try out the authentication. A good helper tool for this is shipped in the `cyrus-clients` package. Since this is part of another email system, it's best to install it on another machine, and not on the same machine as Exim4.
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install cyrus-clients --no-install-recommends
 ```
 
@@ -276,19 +379,23 @@ Here we are using the extra `--no-install-recommends` option because we don't ne
 The tool we are interested in is called `smtptest`, and its documentation can be inspected in its manual page at {manpage}`cyrus-smtptest(1)`.
 
 For our purposes, we will run it like this, assuming an `ubuntu` user with the `ubuntusecret` password, and that the Exim4 server is running on the `n-exim.lxd` system:
-```text
+
+```{terminal}
+:output-only:
 /usr/lib/cyrus/bin/smtptest -t "" -a ubuntu -w ubuntusecret n-exim.lxd
 ```
 
 The command-line parameters are:
 
- * `-t ""`: Enable TLS.
- * `-a ubuntu`: Use `ubuntu` as the authenticating user.
- * `-w ubuntusecret`: Authenticate using the `ubuntusecret` password.
- * `n-exim.lxd`: The hostname of the Exim4 server to connect to.
+* `-t ""`: Enable TLS.
+* `-a ubuntu`: Use `ubuntu` as the authenticating user.
+* `-w ubuntusecret`: Authenticate using the `ubuntusecret` password.
+* `n-exim.lxd`: The hostname of the Exim4 server to connect to.
 
 If all works well, the output will be similar to this, showing that the connection was switched to TLS, and the authentication worked:
-```text
+
+```{terminal}
+:output-only:
 S: 220 n-exim ESMTP Exim 4.97 Ubuntu Mon, 23 Jun 2025 21:11:59 +0000
 C: EHLO smtptest
 S: 250-n-exim Hello n-exim.lxd [10.10.17.9]
@@ -335,18 +442,28 @@ Interesting points to note in the output above:
 
 :::{tip}
 Want to obtain the original username and password back from the base64 encoded values? Feed those values to the `base64 -d` tool. Example, using the value from the session above:
-```text
-$ echo -n dWJ1bnR1c2VjcmV0 | base64 -d; echo
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo -n dWJ1bnR1c2VjcmV0 | base64 -d; echo
+
 ubuntusecret
 ```
 
 To test the `PLAIN` mechanism, add the `-m plain` command-line option:
-```text
+
+```{terminal}
+:output-only:
 /usr/lib/cyrus/bin/smtptest -t "" -a ubuntu -w ubuntusecret -m plain n-exim.lxd
 ```
 
 In the new output, `PLAIN` was selected:
-```text
+
+```{terminal}
+:output-only:
 S: 220 n-exim ESMTP Exim 4.97 Ubuntu Mon, 23 Jun 2025 21:15:39 +0000
 C: EHLO smtptest
 S: 250-n-exim Hello n-exim.lxd [10.10.17.9]

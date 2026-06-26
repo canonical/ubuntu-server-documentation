@@ -21,7 +21,11 @@ How to create and manage Linux users is covered in {ref}`Users and groups manage
 
 To add an existing Linux user to the Samba user database, the command `smbpasswd` is used. For example, here we are adding an existing Linux user called `melissa` to the Samba user database:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo smbpasswd -a melissa
 ```
 
@@ -35,7 +39,11 @@ If this user does not exist in Linux, the `smbpasswd` command will fail. Samba u
 
 To later change the password of an existing Samba user, the same command is used. For example:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo smbpasswd melissa
 ```
 
@@ -53,7 +61,7 @@ Read and write permissions define the explicit rights a computer or user has to 
 
 For example, if you have defined a Samba share called *share* and wish to give read-only permissions to the group of users known as "`qa`", but wanted to allow writing to the share by the group called "`sysadmin`" *and* the user named "`vincent`", then you could edit the `/etc/samba/smb.conf` file and add the following entries under the *`[share]`* entry:
 
-```text 
+```ini
 read list = @qa
 write list = @sysadmin, vincent
 ```
@@ -62,7 +70,7 @@ Another possible Samba permission is to declare *administrative* permissions to 
 
 For example, if you wanted to give the user *Melissa* administrative permissions to the *share* example, you would edit the `/etc/samba/smb.conf` file, and add the following line under the *`[share]`* entry:
 
-```text 
+```ini
 admin users = melissa
 ```
 
@@ -72,7 +80,11 @@ Remember that the users listed in `smb.conf` for these access controls need to e
 
 After editing `/etc/samba/smb.conf`, reload Samba for the changes to take effect by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo smbcontrol smbd reload-config
 ```
 
@@ -88,7 +100,11 @@ UUID=66bcdd2e-8861-4fb0-b7e4-e61c569fe17d /srv  ext3    noatime,relatime,acl 0  
 
 Then remount the partition:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount -v -o remount /srv
 ```
 
@@ -98,9 +114,25 @@ This example assumes `/srv` is on a separate partition. If `/srv`, or wherever y
 
 To match the Samba configuration above, the "`sysadmin`" group will be given read, write, and execute permissions to `/srv/samba/share`, the "`qa`" group will be given read and execute permissions, and the files will be owned by the username "`melissa`". Enter the following in a terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown -R melissa /srv/samba/share/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chgrp -R sysadmin /srv/samba/share/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo setfacl -R -m g:qa:rx /srv/samba/share/
 ```
 

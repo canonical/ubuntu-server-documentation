@@ -40,25 +40,41 @@ The following DOCA-OFED metapackages are provided:
 
 To install the latest available DOCA-OFED version for your kernel flavor, use {manpage}`uname(1)` to identify your running kernel variant:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 uname -r
 ```
 
 Add the stable DOCA PPA using {manpage}`add-apt-repository(1)`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
 ```
 
 Install the DOCA-OFED metapackage that matches your kernel flavor with {manpage}`apt(8)`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install -y doca-ofed-<your_kernel_flavor>
 ```
 
 For example, if `uname -r` returns `6.17.0-20-generic`, you should install:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install -y doca-ofed-generic
 ```
 
@@ -68,13 +84,21 @@ Finally, reboot the machine.
 
 When a newer DOCA-OFED package for your platform is published, it appears in:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt list --upgradable
 ```
 
 For regular system updates, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt full-upgrade
 ```
 
@@ -88,13 +112,21 @@ Use `sudo apt full-upgrade` for DOCA-OFED updates. Do not use only `sudo apt upg
 
 If you need to collect a sosreport as part of a support request to NVIDIA, first find the installed `doca-ofed-userspace` package and note the `doca_version` suffix:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt list --installed | grep doca-ofed-userspace
 ```
 
 Next, install the matching sosreport package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install doca-sosreport-<doca_version>
 ```
 

@@ -25,6 +25,8 @@ bootloaders
 Broadwell
 Btrfs
 btrfs
+Bufferbloat
+bufferbloat
 Byobu
 Canonical's
 CAs
@@ -183,9 +185,11 @@ nslcd
 NATed
 netboot
 netbooting
+netdev
 Netfilter
 netfilter
 netmask
+networkd
 NICs
 Noble
 NVLink
@@ -212,12 +216,14 @@ polkit
 Postcopy
 postcopy
 PPAs
+PPPoE
 Preboot
 prepended
 Preprocessor
 preseed
 proxying
 PVs
+qdisc
 QDevice
 Quokka
 RangeSize

@@ -66,7 +66,7 @@ The `isc-dhcp-server` package is deprecated and unsupported since Ubuntu 24.04 L
 Legacy documentation for `isc-dhcp-server` is still available for existing deployments. You can find {ref}`information on how to configure it <install-isc-dhcp-server>` if needed.
 
 
-## References
+## Further reading
 
 - The [`isc-dhcp-server` Ubuntu Wiki](https://help.ubuntu.com/community/isc-dhcp-server) page has more information.
 

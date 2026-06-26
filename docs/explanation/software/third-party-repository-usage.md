@@ -86,14 +86,22 @@ GPG keys are commonly distributed in two formats:
 
 To download an ASCII-armored key:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo wget -O /usr/share/keyrings/externalrepo-archive-keyring.asc \
     https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.asc
 ```
 
 You may want to convert (de-armor) the ASCII-armored key into binary format before storing it. You can do this with `gpg --dearmor`:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 curl -fsSL https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.asc \
     | sudo gpg --dearmor -o /usr/share/keyrings/externalrepo-archive-keyring.gpg
 ```
@@ -111,7 +119,7 @@ To add a third party APT repository to your system, you will need to create a fi
 
 An example of a `deb822` file for the same case would be a file called `externalrepo.sources` containing the following (using an ASCII-armored key directly):
 
-```
+```text
 Types: deb
 URIs: https://thirdpartyrepo.com/ubuntu
 Suites: resolute
@@ -121,7 +129,7 @@ Signed-By: /usr/share/keyrings/externalrepo-archive-keyring.asc
 
 An example of a one-line entry would be a file called `externalrepo.list` containing the following (using a de-armored binary key):
 
-```
+```text
 deb [signed-by=/usr/share/keyrings/externalrepo-archive-keyring.gpg] https://thirdpartyrepo.com/ubuntu/ resolute main
 ```
 
@@ -135,7 +143,7 @@ You can configure this preference level by creating a file under `/etc/apt/prefe
 
 In our example, a file named `/etc/apt/preferences.d/externalrepo` should be created with the following contents:
 
-```
+```text
 Package: *
 Pin: origin thirdpartyrepo.com
 Pin-Priority: 100
@@ -155,7 +163,11 @@ The first step is to remove the files created in the steps above. These are:
 
 Before you run `apt update`, you might want to also remove the third party packages that were installed from the repository. The following one-liner will list all those packages:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt remove --purge \
     $(grep "^Package: " /var/lib/apt/lists/#<SELECT_THE_FILE_FOR_YOUR_REPOSITORY>#_*_Packages \
         | cut -d " " -f2 | sort -u | \
@@ -175,7 +187,11 @@ It is important to mention that the same points raised above regarding security,
 
 If you would like to install packages from a PPA, first you will need to add it to your system. For that, you can use the `add-apt-repository` command. Suppose you want to add a PPA from user `thirdparty` named `externalrepo`. You can run:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 add-apt-repository ppa:thirdparty/externalrepo
 ```
 
@@ -183,6 +199,10 @@ This command will automatically set up the GPG key, as discussed above. After th
 
 If you decide you do not want to use the PPA anymore and would like to remove it (and its packages) from your system, the easiest way to do it is by installing the `ppa-purge` package. You can then execute it and provide the PPA reference as its argument. In our example, that would be:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ppa-purge ppa:thirdparty/externalrepo
 ```

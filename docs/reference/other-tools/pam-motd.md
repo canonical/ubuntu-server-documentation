@@ -17,24 +17,25 @@ There are various packages that add to the MOTD by placing configuration in `/et
 
 Here is one example of system information obtained and displayed by Landscape:
 
-  - *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://ubuntu.com/landscape) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
+- *`landscape-common`:* provides the core libraries of `landscape-client`, which is needed to manage systems with [Landscape](https://ubuntu.com/landscape) (proprietary). Yet the package also includes the `landscape-sysinfo` utility which is responsible for displaying core system data involving CPU, memory, disk space, etc. For instance:
 
-    ```text
-    System load:             0.0
-    Usage of /:              25.7% of 8.55GB
-    Memory usage:            31%
-    Swap usage:              0%
-    Processes:               125
-    Users logged in:         0
-    IPv4 address for enp5s0: 10.185.198.41
-    IPv6 address for enp5s0: fd42:50cb:3a48:1f2c:216:3eff:fe27:c18a
-    ```
+  ```{terminal}
+  :output-only:
+  System load:             0.0
+  Usage of /:              25.7% of 8.55GB
+  Memory usage:            31%
+  Swap usage:              0%
+  Processes:               125
+  Users logged in:         0
+  IPv4 address for enp5s0: 10.185.198.41
+  IPv6 address for enp5s0: fd42:50cb:3a48:1f2c:216:3eff:fe27:c18a
+  ```
 
-    :::{note}
-    You can run `landscape-sysinfo` manually at any time.
-    :::
+  :::{note}
+  You can run `landscape-sysinfo` manually at any time.
+  :::
 
-  - *`update-notifier-common`:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
+- *`update-notifier-common`:* provides information on available package updates, impending {term}`filesystem checks (fsck) <fsck>`, and required reboots (e.g.: after a kernel upgrade).
 
 `pam_motd` executes the scripts in `/etc/update-motd.d` in order based on the number prepended to the script. The output of the scripts is written to `/var/run/motd`, keeping the numerical order, then concatenated with `/etc/motd.tail`.
 
@@ -110,14 +111,23 @@ fi
 
 Then make it executable
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 chmod +x /etc/update-motd.d/98-admin-reminder
 ```
 
 On next login you should now be greeted with that as part of the message of the day.
 
-```text
-$ ssh ubuntu@yoursystem
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh ubuntu@yoursystem
+
 ...
 System Administrator Appreciation Day is 181 days ago but we'd appreciate to be treated well every day.
 ```
@@ -134,7 +144,7 @@ placed there by the packages make use of such, please look at those for writing
 your own.
 :::
 
-## Resources
+## Further reading
 
   - See the {manpage}`update-motd(5)` manual page for more options available to update-motd.
 

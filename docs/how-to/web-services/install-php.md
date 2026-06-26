@@ -22,7 +22,11 @@ PHP is available on Ubuntu Linux, but unlike Python (which comes pre-installed),
 
 To install PHP -- and the Apache PHP module -- you can enter the following command into a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install php libapache2-mod-php
 ```
 
@@ -31,30 +35,46 @@ sudo apt install php libapache2-mod-php
 The following packages are optional, and can be installed if you need them for your setup. 
 
 * **PHP-CLI**
-  You can run PHP scripts via the Command Line Interface (CLI). To do this, you must first install the `php-cli` package. You can install it by running the following command:
+  You can run PHP scripts via the Command Line Interface (CLI). To do this, you must first install the `php-cli` package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install php-cli
   ```
 
 * **PHP-CGI**
-  You can also execute PHP scripts without installing the Apache PHP module. To accomplish this, you should install the `php-cgi` package via this command:
+  You can also execute PHP scripts without installing the Apache PHP module. To accomplish this, you should install the `php-cgi` package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install php-cgi
   ```
 
 * **PHP-MySQL**
-  To use MySQL with PHP you should install the `php-mysql` package, like so:
+  To use MySQL with PHP you should install the `php-mysql` package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install php-mysql
   ```
 
 * **PHP-PgSQL**
   Similarly, to use PostgreSQL with PHP you should install the `php-pgsql` package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install php-pgsql
   ```
 
@@ -66,7 +86,11 @@ By default, when `libapache2-mod-php` is installed, the Apache2 web server is co
 
 Once you have installed the PHP-related packages and enabled the Apache PHP module, you should restart the Apache2 web server to run PHP scripts, by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service 
 ```
 
