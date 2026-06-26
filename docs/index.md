@@ -52,7 +52,7 @@ Install, update, upgrade, and troubleshoot the software packages running on your
 
 * **Managing software**: {ref}`Package management <package-management>` • {ref}`etckeeper <install-etckeeper>` • {ref}`Get older package versions using snapshots <snapshot-service>`
 * **Update considerations**: {ref}`Automatic updates <automatic-updates>` • {ref}`Phased updates <about-apt-upgrade-and-phased-updates>` • {ref}`Testing updates in advance <advance-testing-of-updates-in-best-practice-server-deployments>`
-* **Upgrade Ubuntu version**: {ref}`Release upgrades <upgrade-your-release>` • {ref}`Upgrade a virtual machine <upgrading-the-machine-type-of-your-vm>`
+* **Upgrade Ubuntu version**: {ref}`Release upgrades <upgrade-your-release>`
 * **Troubleshooting**: {ref}`Report a bug <report-a-bug>` • {ref}`Debugging with debuginfod <about-debuginfod>` • {ref}`kernel-crash-dump`
 
 
