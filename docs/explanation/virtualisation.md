@@ -22,14 +22,15 @@ intro-to/virtualisation
 We also give further details on some specific usage scenarios here:
 
 * {ref}`QEMU microvm <qemu-microvm>`
-* {ref}`Upgrading the machine type of your VM <upgrading-the-machine-type-of-your-vm>`
-
+* {ref}`QEMU/libvirt live migration <live-migration>`
+* {ref}`QEMU machine types <qemu-machine-types>`
 ```{toctree}
 :hidden:
 
 VM tools overview <virtualisation/vm-tools-in-the-ubuntu-space>
 QEMU microvm <virtualisation/qemu-microvm>
-Upgrade VM machine type <virtualisation/upgrading-the-machine-type-of-your-vm>
+QEMU/libvirt live migration<virtualisation/live-migration>
+QEMU machine types<virtualisation/qemu-machine-types>
 ```
 
 ## Containers

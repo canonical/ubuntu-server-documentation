@@ -245,7 +245,7 @@ Various options exist for these methods, but the entry point for all of them is 
 virsh migrate --help
 ```
 
-For constraints and considerations of live migration, see the [Ubuntu Wiki documentation on KVM migration](https://wiki.ubuntu.com/QemuKVMMigration).
+For further details on live migration, see {ref}`live-migration`.
 
 ## CPU model and topology
 
