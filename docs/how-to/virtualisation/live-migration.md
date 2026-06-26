@@ -5,7 +5,7 @@ myst:
 ---
 
 (live-migration)=
-# QEMU/KVM live migration and machine types
+# Live migration with libvirt/QEMU
 
 Live migration has been available for quite some time. Despite the complexities of
 testing live migration across a variety of releases, machine types, and
@@ -18,13 +18,30 @@ experience of live migration in Ubuntu. There is a good summary of the general
 steps taken during a migration at the [Red Hat live migration overview](https://developers.redhat.com/blog/2015/03/24/live-migrating-qemu-kvm-virtual-machines/) if you want to refresh your knowledge (especially the chapters
 on `vmstate`, updating devices, and their subsections).
 
-## Use cases
+Live migration with QEMU and libvirt is the process of moving a running virtual machine from one physical server to another with near-zero downtime.
 
-So far we have only added distribution-specific machine types to
-the x86 `pc-i440fx` type, even though most of the changes that caused us to do so
-actually affected the `pc-q35-` type as well. The same can be true for non-x86
-architectures. In principle, all of the points discussed below should apply to
-all supported major server architectures (amd64/i386, arm64, ppc64el, s390x).
+During this process:
+
+- QEMU acts as the engine, actively streaming the VM's live memory (RAM) and CPU state across the network. It can work without libvirt. A live migration can be triggered using QEMU Monitor Protocol (QMP).
+
+- libvirt acts as the manager, coordinating the setup, security, and handoff between the two physical servers so the guest operating system and its applications keep running without interruption.
+
+Migration can happen across hosts with different hardware and software versions (for example, different QEMU versions). Two mechanisms make this possible:
+
+- **Versioned machine types**, which keep the guest's virtual hardware layout stable across QEMU versions.
+- A **CPU model baseline**, which exposes only the CPU features common to both hosts.
+
+## Machine types
+
+The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. For a live migration to succeed, both the source and destination servers must use the exact same machine type version (e.g., pc-q35-8.2). If they don't match, the migration will fail, or worse, the VM will crash immediately after the handoff.
+Why the Machine Type Matters
+
+When you live-migrate a VM, you are taking a snapshot of a running system's RAM and CPU state and sending it over the wire. The destination host must have a virtual hardware environment that matches that state down to the very last byte.
+
+When you upgrade the QEMU software on your physical servers, the default machine type usually changes to the newest version. If Server A is upgraded to a newer QEMU version and Server B is still running an older version, Server B will not understand the newer default machine type. The Solution (Versioned Machine Types): QEMU includes backwards-compatible machine types for this exact reason. Even if Server A is running a brand new version of QEMU, it can still launch a VM using an older machine type (e.g., pc-q35-6.0) so that it can safely migrate back and forth to Server B.
+
+
+## Use cases
 
 There are two use cases that drive the need. First, we'd like to support users
 who have deployed VMs on Ubuntu LTSes to be able to live migrate their VMs to the
@@ -49,7 +66,16 @@ common across all SCSI-using architectures, can be seen in the
 Up to today, the default machine type is:
 
 ```text
-$MACHINE_ARCH-$QEMU_VERSION-$DISTRO_RELEASE
+$MACHINE_ARCH-$DISTRO_RELEASE
+```
+
+```text
+pc-i440fx-resolute   Ubuntu 26.04 PC (i440FX + PIIX, 1996) (default)
+pc-i440fx-questing-v2 Ubuntu 25.10 PC v2 (i440FX + PIIX, + 10.1 machine, 1996)
+pc-i440fx-questing   Ubuntu 25.10 PC (i440FX + PIIX, 1996)
+pc-i440fx-plucky     Ubuntu 25.04 PC (i440FX + PIIX, 1996)
+pc-i440fx-oracular   Ubuntu 24.10 PC (i440FX + PIIX, 1996)
+pc-i440fx-noble-v2   Ubuntu 24.04 PC v2 (i440FX + PIIX, arch-caps fix, 1996)
 ```
 
 Each following release keeps the previously defined aliases to the specific

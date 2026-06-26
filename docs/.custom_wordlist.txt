@@ -14,6 +14,8 @@ autodetect
 autodetection
 autoinstall
 autorid
+backport
+backported
 backtrace
 Bacula
 bitmask
@@ -27,12 +29,14 @@ Btrfs
 btrfs
 Bufferbloat
 bufferbloat
+bugfixes
 Byobu
 Canonical's
 CAs
 CDBs
 Certbot
 checksumming
+chipset
 Chrony
 chroot
 cipherlist
@@ -67,6 +71,7 @@ discoverability
 dmesg
 dnsmasq
 dockerfiles
+downstreams
 DPDK's
 dpkg
 Dracut
@@ -148,6 +153,7 @@ lookaside
 lookup
 lookups
 loopback
+LTSes
 Lua
 LUNs
 Macvlan
@@ -255,6 +261,7 @@ slapd
 snapshotted
 Solaris
 sosreport
+SRUs
 SSSD's
 stderr
 stdin
@@ -298,6 +305,7 @@ unmounts
 Unicast
 unicast
 untrusted
+unversioned
 URIs
 USBs
 usermode
