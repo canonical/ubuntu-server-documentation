@@ -24,6 +24,8 @@ On-demand workflows (Copilot prompt files, invoked with `/name` in chat):
   type as an outline only.
 - [`/review-page`](prompts/review-page.prompt.md) — check a finished page against the completeness
   checklist and offer refinement questions without rewriting the prose.
+- [`/capture-learnings`](prompts/capture-learnings.prompt.md) — fold a concrete improvement from a
+  session back into this scaffolding (optional; only for real improvements).
 
 Formatting and prose style are enforced automatically by Vale (`make vale`) and
 markdownlint (`make lint-md`) in CI — do not duplicate those mechanical rules here.
