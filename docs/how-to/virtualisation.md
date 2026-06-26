@@ -39,11 +39,13 @@ Hardware enablement virtualization stack <virtualisation/virt-hwe>
 Libvirt and virsh <virtualisation/libvirt>
 virt-manager <virtualisation/virtual-machine-manager>
 Nested virtualization <virtualisation/enable-nested-virtualisation>
+Live migration and machine types <virtualisation/live-migration>
 ```
 
 * {ref}`How to use the libvirt library with virsh <libvirt>`
 * {ref}`How to use virt-manager and other virt* tools <virtual-machine-manager>`
 * {ref}`How to enable nested virtualisation <enable-nested-virtualisation>`
+* {ref}`QEMU/KVM live migration and machine types <live-migration>`
 
 ## Ubuntu in other virtual environments
 
