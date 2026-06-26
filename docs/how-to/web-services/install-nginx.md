@@ -13,9 +13,12 @@ The nginx HTTP server is a powerful alternative to {ref}`Apache <install-apache2
 
 To install nginx, enter the following command at the terminal prompt:
 
-```bash
-$ sudo apt update
-$ sudo apt install nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt update && sudo apt install nginx
 ```
 
 This will also install any required dependency packages, and some common mods for your server, and then start the nginx web server.
@@ -24,8 +27,13 @@ This will also install any required dependency packages, and some common mods fo
 
 You can verify that nginx is running via this command:
 
-```bash
-$ sudo systemctl status nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl status nginx
+
   ● nginx.service - A high performance web server and a reverse proxy server
        Loaded: loaded (/lib/systemd/system/nginx.service; enabled; vendor preset: enabled)
        Active: active (running) since Sun 2023-08-20 01:04:22 UTC; 53s ago
@@ -47,22 +55,34 @@ $ sudo systemctl status nginx
 
 To restart nginx, run:
 
-```bash
-$ sudo systemctl restart nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl restart nginx
 ```
 
 ### Enable/disable nginx manually
 
 By default, Nginx will automatically start at boot time.  To disable this behavior so that you can start it up manually, you can disable it:
 
-```bash
-$ sudo systemctl disable nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl disable nginx
 ```
 
 Then, to re-enable it, run:
 
-```bash
-$ sudo systemctl enable nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl enable nginx
 ```
 
 ### The default nginx homepage
@@ -97,5 +117,3 @@ For more information on customizing nginx for your needs, see these follow-up gu
   * The [nginx documentation](https://nginx.org/en/docs/) provides detailed explanations of configuration directives.
 
   * O'Reilly's nginx cookbook provides guidance on solving specific needs
-
-  * For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

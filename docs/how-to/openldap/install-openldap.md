@@ -13,15 +13,19 @@ Installing [slapd (the Stand-alone LDAP Daemon)](https://www.openldap.org/softwa
 
 In particular, it creates a database instance to store your data. However, the **suffix** (or **base DN**) of this instance is determined from the host's domain name. If you want something different, you can change it right after installation.
 
-```{note}
+:::{note}
 This guide uses a database suffix of **`dc=example,dc=com`**. Change this to match your particular setup.
-```
+:::
 
 ## Install slapd
 
 Install the server and the main command line utilities:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install slapd ldap-utils
 ```
 
@@ -33,7 +37,11 @@ The suffix (or base DN) is the top-most entry in your directory tree, under whic
 
 To reconfigure `slapd`, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg-reconfigure slapd
 ```
 
@@ -55,9 +63,9 @@ URI ldap://ldap01.example.com
 
 `slapd` is designed to be configured within the service itself by dedicating a separate DIT for that purpose. This allows for dynamic configuration of `slapd` without needing to restart the service or edit config files. This configuration database consists of a collection of text-based LDIF files located under `/etc/ldap/slapd.d`, but these should never be edited directly. This way of working is known by several names: the "slapd-config" method, the "Real Time Configuration (RTC)" method, or the "cn=config" method. You can still use the traditional flat-file method (`slapd.conf`) but that is not covered in this guide.
 
-```{note}
+:::{note}
 Although the configuration is accessible via the LDAP protocol under the `cn=config` suffix, it is also stored on disk under `/etc/ldap/slapd.d/`. This allows the configuration to be replicated to other servers and backed up alongside the data.
-```
+:::
 
 Right after installation, you will get two databases, or suffixes: one for your data, which is based on your host's domain (**`dc=example,dc=com`**), and one for your configuration, with its root at **`cn=config`**. To change the data on each we need different credentials and access methods:
 
@@ -72,7 +80,11 @@ The configuration of `slapd` itself is stored under this suffix. Reading and wri
 This is what the `slapd-config` DIT looks like via the LDAP protocol (listing only the DNs):
 To see what the `slapd-config` DIT looks like via the LDAP protocol, listing only the DNs, run this command:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config dn
 ```
 
@@ -87,7 +99,8 @@ The command-line options mean the following:
 
 The output will be the similar to the following:
 
-```text
+```{terminal}
+:output-only:
 dn: cn=config
 dn: cn=module{0},cn=config
 dn: cn=schema,cn=config
@@ -116,13 +129,18 @@ Since the configuration is located under the `cn=config` suffix, we can use LDAP
 
 To see all the configuration, run this command:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config
 ```
 
 The output is too large to show here, but it will start like this:
 
-```text
+```{terminal}
+:output-only:
 dn: cn=config
 objectClass: olcGlobal
 cn: config
@@ -135,18 +153,23 @@ olcLogLevel: none
 
 After installing the `slapd` package, a default data tree is configured, based on the detected domain name of the system. Assuming a domain of `example.com`, this command can be run to show what it looks like:
 
-```console    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapsearch -x -LLL -H ldap:/// -b dc=example,dc=com dn
 ```
 
 Here the only new command-line option is `-x`, and we have a new parameter for `-H`:
 
-* `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no **bindDN** was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
+* `-x`: Use simple authentication instead of SASL, which is essentially a plain text authentication. Since no {term}`bindDN` was provided (via `-D`), this becomes an *anonymous* bind. Without `-x`, the default is to use a SASL bind.
 * `-H ldap:///`: Use the LDAP protocol over the network (and not over a Unix socket), and since no hostname was provided, it's assumed to be localhost. To access a server on another host, one would use `ldap://server.example.com/` as the URL, for example.
 
 The output will be the top-level entry which represents the base of the DIT.
 
-```text
+```{terminal}
+:output-only:
 dn: dc=example,dc=com
 ```
 
@@ -154,55 +177,76 @@ dn: dc=example,dc=com
 
 A very handy tool to verify the authentication is `ldapwhoami`, which can be used as follows:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x
 ```
 
 The output will say who we connected as:
 
-```text
+```{terminal}
+:output-only:
 anonymous
 ```
 
 Now let's perform an authenticated call, via simple authentication:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -D cn=admin,dc=example,dc=com -W
 ```
 
 This time we will be shown our authentication DN, after the password prompt:
 
-```text
+```{terminal}
+:output-only:
 Enter LDAP Password:
 dn:cn=admin,dc=example,dc=com
 ```
 
 When you use simple bind (`-x`) and specify a Bind DN with `-D` as your authentication DN, the server will look for a `userPassword` attribute in the entry, and use that to verify the credentials. In this particular case above, we used the database **Root DN** entry, i.e., the actual administrator, and that is a special case whose password is set in the configuration when the package is installed.
 
-```{note}
+:::{note}
 A simple bind without some sort of transport security mechanism is **clear text**, meaning the credentials are transmitted in the clear. You should {ref}`add Transport Layer Security (TLS) support <ldap-and-tls>` to your OpenLDAP server as soon as possible.
-```
+:::
 
 Let's try some SASL EXTERNAL authentication commands:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 ```
 
 The authentication DN is quite different from the simple bind one from before:
 
-```text
+```{terminal}
+:output-only:
 dn:gidNumber=1000+uidNumber=1000,cn=peercred,cn=external,cn=auth
 ```
 
 Let's try as root:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapwhoami -Y EXTERNAL -H ldapi:/// -Q
 ```
+
 Notice how the `uidNumber` and `gidNumber` changed:
 
-```text
+```{terminal}
+:output-only:
 dn:gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
@@ -210,9 +254,9 @@ When using SASL EXTERNAL via the `ldapi:///` transport, the Bind DN becomes a co
 
 You can extend this to grant the local root user write access to your data tree as well, which simplifies administration by avoiding password prompts. See {ref}`ldap-access-control` for how to set this up.
 
-```{note}
+:::{note}
 OpenLDAP ACLs are explained in {ref}`Set up access control <ldap-access-control>`
-```
+:::
 
 ## Populate the directory
 
@@ -257,19 +301,24 @@ loginShell: /bin/bash
 homeDirectory: /home/john
 ```
 
-```{note}
+:::{note}
 It's important that `uid` and `gid` values in your directory do not collide with local Linux users' values as defined in `/etc/passwd` and `/etc/group`. You can use higher number ranges, such as starting at 5000 or even higher.
-```
+:::
 
 Add the content:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapadd -x -D cn=admin,dc=example,dc=com -W -f add_content.ldif
 ```
 
 The command will ask for the admin password, and then show the entries as they are being added:
 
-```text
+```{terminal}
+:output-only:
 Enter LDAP Password: ********
 adding new entry "ou=People,dc=example,dc=com"
 
@@ -282,63 +331,78 @@ adding new entry "uid=john,ou=People,dc=example,dc=com"
 
 We can check that the information has been correctly added with the `ldapsearch` utility. For example, let's search for the "john" entry, and request the `cn` and `gidnumber` attributes:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapsearch -x -LLL -b dc=example,dc=com '(uid=john)' cn gidNumber
-```
 
-The output shows the DNs that matched the search criteria, and the requested attributes:
-
-```text
 dn: uid=john,ou=People,dc=example,dc=com
 cn: John Doe
 gidNumber: 5000
 ```
 
+The output shows the DNs that matched the search criteria, and the requested attributes.
+
 Here we used an LDAP "filter": `(uid=john)`. LDAP filters are very flexible and can become complex. For example, to list the group names of which **john** is a member, we could use the following command:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapsearch -x -LLL -b dc=example,dc=com '(&(objectClass=posixGroup)(memberUid=john))' cn gidNumber
-```
 
-And the result tells us that "john" is a member of the "miners" group:
-
-```text
 dn: cn=miners,ou=Groups,dc=example,dc=com
 cn: miners
 gidNumber: 5000
 ```
 
+Which tells us that "john" is a member of the "miners" group.
+
 That filter is a logical "AND" (signalled by the "`&`" character in the filter expression) between two attributes: `objectClass=posixGroup` AND `memberUid=john`. Filters are very important in LDAP and mastering their syntax is extremely helpful. They are used for simple queries like this, but can also select what content is to be replicated to a secondary server, or even in complex ACLs. The full specification is defined in [RFC 4515](https://www.rfc-editor.org/rfc/rfc4515.txt).
 
 Notice we set the `userPassword` field for the "john" entry to the cryptic value `{CRYPT}x`. This essentially is an invalid password, because no hashing will produce just `x`. It's a common pattern when adding a user entry without a default password. To change the password to something valid, you can now use `ldappasswd`:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldappasswd -x -D cn=admin,dc=example,dc=com -W -S uid=john,ou=people,dc=example,dc=com
 ```
 
 We will be prompted for the new password twice, and at the end for the bind password corresponding to the bind DN specified via `-D`:
 
-```text
+```{terminal}
+:output-only:
 New password:
 Re-enter new password:
 Enter LDAP Password:
 ```
 
 To verify the change, we can use `ldapwhoami` with simple bind authentication using john's DN as the bind DN:
-```console
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -D uid=john,ou=people,dc=example,dc=com -W
 ```
 
 If the new password worked, the output will show that we authenticated as the `uid=john,ou=People,dc=example,dc=com` DN:
 
-```text
+```{terminal}
+:output-only:
 Enter LDAP Password:
 dn:uid=john,ou=People,dc=example,dc=com
 ```
 
-```{note}
+:::{note}
 Remember that simple binds are insecure and you should {ref}`add TLS support <ldap-and-tls>` to your server as soon as possible!
-```
+:::
 
 (modifying-slapd-config)=
 ## Change the configuration
@@ -365,13 +429,18 @@ Besides this specific administrator entry, ACLs can also grant such privileges t
 
 There is really only one administrative DN that has an associated password, and it's the one created at install (or reconfigure) time. To locate it in the `cn=config` suffix, run this command:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcSuffix=dc=example,dc=com)' olcSuffix olcRootDN olcRootPW
 ```
 
 The output will be the configuration entry for the `dc=example,dc=com` suffix, and show only the selected attributes in the response:
 
-```text
+```{terminal}
+:output-only:
 dn: olcDatabase={1}mdb,cn=config
 olcSuffix: dc=example,dc=com
 olcRootDN: cn=admin,dc=example,dc=com
@@ -380,15 +449,16 @@ olcRootPW: {SSHA}Y0UjBUUmf08TC25ePVc6waI/mfvPNktk
 
 Since the `olcRootPW` password attribute we want to change is located under the `cn=config` suffix, we will also have to use the SASL EXTERNAL authentication to modify it, according to the table shown earlier.
 
-```{note}
+:::{note}
 Even though this `olcRootDN` is the administrative DN for the `dc=example,dc=com` suffix, it is stored under the `cn=config` suffix!
-```
+:::
 
 To change the password associated with the `olcRootDN` administrative DN, we need to replace the value of the `olcRootPW` attribute. That value is not the literal password, but the hash of the password, using a specific hash algorithm.
 
 To obtain the hash of a password, suitable to be used as the value of `olcRootPW`, run the `slappasswd` command and type the password you want, with a confirmation. The output will be the hash for that password, which we will need for the next step:
 
-```text
+```{terminal}
+:output-only:
 New password:
 Re-enter new password:
 {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
@@ -396,7 +466,8 @@ Re-enter new password:
 
 Now prepare a `changerootpw.ldif` file with this content, which includes the hashed password from the output above:
 
-```text
+```{terminal}
+:output-only:
 dn: olcDatabase={1}mdb,cn=config
 changetype: modify
 replace: olcRootPW
@@ -405,13 +476,18 @@ olcRootPW: {SSHA}VKrYMxlSKhONGRpC6rnASKNmXG2xHXFo
 
 Finally, run the `ldapmodify` command on this file:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f changerootpw.ldif
 ```
 
 If successful, the output will show the entry that is being modified:
 
-```
+```{terminal}
+:output-only:
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
@@ -421,7 +497,8 @@ Like in other database types, having an index for attributes commonly used in se
 
 Use `ldapmodify` to add an "Index" to your `{1}mdb,cn=config` database definition (for **`dc=example,dc=com`**). In this example, we will add an "equality" and a "sub-string" index to the `mail` attribute. Create a file called `add_index.ldif`, and add the following contents:
 
-```text
+```{terminal}
+:output-only:
 dn: olcDatabase={1}mdb,cn=config
 add: olcDbIndex
 olcDbIndex: mail eq,sub
@@ -429,25 +506,25 @@ olcDbIndex: mail eq,sub
 
 Then issue the command:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f add_index.ldif
-```
 
-The output will show the modifications being done:
-
-```text
 modifying entry "olcDatabase={1}mdb,cn=config"
 ```
 
 You can confirm the change with a search:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcDbIndex
-```
 
-And the result will include all instances of the `olcDbIndex` attribute:
-
-```text
 dn: olcDatabase={1}mdb,cn=config
 olcDbIndex: objectClass eq
 olcDbIndex: cn,uid eq
@@ -456,9 +533,9 @@ olcDbIndex: member,memberUid eq
 olcDbIndex: mail eq,sub
 ```
 
-```{seealso}
+:::{seealso}
 To learn more about OpenLDAP indexes, check the upstream documentation at https://www.openldap.org/doc/admin26/tuning.html#Indexes
-```
+:::
 
 ### Add a schema
 
@@ -466,18 +543,19 @@ A schema defines the structure and data types of object classes available in the
 
 Schemas can only be added to `cn=config` if they are in LDIF format. If not, they must first be converted. You can find unconverted schemas in addition to converted ones in the `/etc/ldap/schema` directory.
 
-```{note}
+:::{note}
 It is not trivial to remove a schema from the slapd-config database. Practice adding schemas on a test system.
-```
+:::
 
 In the following example we'll add one of the pre-installed policy schemas in `/etc/ldap/schema/`. The pre-installed schemas exists in both converted (`.ldif`) and native (`.schema`) formats, so we don't have to convert them and can use `ldapadd` directly:
 
-```console
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f /etc/ldap/schema/corba.ldif
-```
 
-The output will confirm the new schema being added:
-```
 adding new entry "cn=corba,cn=schema,cn=config"
 ```
 
@@ -493,7 +571,8 @@ OpenLDAP comes with multiple logging levels, with each level containing the lowe
 
 Create the file `logging.ldif` with the following contents:
 
-```text
+```{terminal}
+:output-only:
 dn: cn=config
 changetype: modify
 replace: olcLogLevel
@@ -502,7 +581,11 @@ olcLogLevel: stats
 
 Run `ldapmodify` to implement the change:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f logging.ldif
 ```
 
@@ -510,7 +593,11 @@ Depending on how active your OpenLDAP server is, this may produce a significant 
 
 View the logs with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo journalctl -eu slapd.service
 ```
 

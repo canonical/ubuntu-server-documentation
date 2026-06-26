@@ -10,7 +10,8 @@ myst:
 
 You may have noticed recently that updating your system with `apt upgrade` sometimes produces a weird message about packages being kept back...like this one:
 
-```bash
+```{terminal}
+:output-only:
 Reading package lists... Done
 Building dependency tree... Done
 Reading state information... Done
@@ -38,9 +39,9 @@ In other words, it directly benefits our users by increasing the safety, stabili
 
 The phasing system makes it so that different sets of users are chosen to be the first to get the updates, so that there isn't one group of unlucky people who always get potentially broken updates soon after release.
 
-```{note}
+:::{note}
 It should be mentioned here that security updates are *never* phased.
-```
+:::
 
 ## Can I turn off phased updates?
 
@@ -58,7 +59,7 @@ If you want to `apt upgrade` a package, you should first carefully examine the p
  
 If you're sure that you want to disable phased updates, reverting to the old behavior, you can change `apt`'s configuration by creating a file in `/etc/apt/apt.conf.d` called `99-Phased-Updates` (if `/etc/apt/apt.conf.d/99-Phased-Updates` doesn't already exist). In the file, simply add the following lines:
 
-```bash
+```
 Update-Manager::Always-Include-Phased-Updates true;
 APT::Get::Always-Include-Phased-Updates true;
 ```
@@ -87,7 +88,8 @@ apt policy <package>
 
 For example, at the time of writing, the package `libglapi-mesa` has a phased update. Running `apt policy libglapi-mesa` then produces an output like this:
 
-```bash
+```{terminal}
+:output-only:
 libglapi-mesa:
   Installed: 22.0.5-0ubuntu0.3
   Candidate: 22.2.5-0ubuntu0.1~22.04.1

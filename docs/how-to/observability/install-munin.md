@@ -21,13 +21,21 @@ Before installing Munin on `server01`, {ref}`Apache2 will need to be installed <
 
 First, on `server01` install the `munin` package. In a terminal enter the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin
 ```
 
 Now on `server02`, install the `munin-node` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin-node
 ```
 
@@ -41,9 +49,9 @@ On `server01` edit the `/etc/munin/munin.conf` file, adding the IP address for `
        address 172.18.100.101
 ```
 
-```{note}
+:::{note}
 Replace `server02` and `172.18.100.101` with the actual hostname and IP address for your server.
-```
+:::
 
 Then, if you wish to access the Munin reports from a host other than `server01`, you will also need to edit the `Directory` directives in `/etc/apache2/conf-enabled/munin.conf`. For instance, you may want to allow access to some specific IP address. To do so, add the following snippet below each `Require local` entry:
 
@@ -51,9 +59,9 @@ Then, if you wish to access the Munin reports from a host other than `server01`,
     Require ip 172.18.100.1
 ```
 
-```{note}
+:::{note}
 Replace `172.18.100.1` with the actual IP address for the host you want to allow.
-```
+:::
 
 ## Configure `munin-node`
 
@@ -63,13 +71,17 @@ Next, configure `munin-node` on `server02`. Edit `/etc/munin/munin-node.conf` to
 allow ^172\.18\.100\.100$
 ```
 
-```{note}
+:::{note}
 Replace `^172\.18\.100\.100$` with the IP address for your `munin` server.
-```
+:::
 
 Now restart `munin-node` on `server02` for the changes to take effect:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart munin-node.service
 ```
 
@@ -82,17 +94,21 @@ In a browser, go to `http://server01/munin`, and you should see links to nice gr
 
 The `munin-plugins-extra` package contains performance checks and additional services such as {term}`DNS`, {term}`DHCP`, and Samba, etc. To install the package, from a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install munin-plugins-extra
 ```
 
 Be sure to install the package on both the server and node machines.
 
-```{note}
+:::{note}
 The `munin` package recommends `munin-node`, which recommends `munin-plugins-extra`. This means that in the most common use cases, you will already have `munin-plugins-extra` installed after following the instructions in this page.
-```
+:::
 
-## References
+## Further reading
 
 - See the [Munin](https://munin-monitoring.org/) website for more details.
 

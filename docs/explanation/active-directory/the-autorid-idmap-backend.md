@@ -14,17 +14,19 @@ The {manpage}`idmap_autorid(8)` identity mapping backend, like the `rid` one, al
 
 Let's see an example:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend = autorid
-        # 1,000,000 - 19,999,999
-        idmap config * : range   = 1000000 - 19999999
-        # 1,000,000
-        idmap config * : rangesize = 1000000
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend = autorid
+    # 1,000,000 - 19,999,999
+    idmap config * : range   = 1000000 - 19999999
+    # 1,000,000
+    idmap config * : rangesize = 1000000
+```
 
 The configuration above gives us 19 domains (or slots) with the capacity of 1 million IDs in each:
 - first slot: IDs from `1000000` up to `1999999`
@@ -39,9 +41,9 @@ Which domain will get which slot? That is **not deterministic**. It will basical
 
 This also means that a persistent database is required to record which domain goes into which slot. This is managed automatically by the `autorid` backend in the `autorid.tdb` file.
 
-```{note}
+:::{note}
 The `autorid.tdb` domain mapping database file is kept in `/var/lib/samba/` and should be backed up regularly.
-```
+:::
 
 ## Pros and cons of the AutoRID backend
 

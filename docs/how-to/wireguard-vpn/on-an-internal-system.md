@@ -67,21 +67,41 @@ Now we are ready to configure the internal endpoint.
 
 Install the `wireguard` package:
 
-```bash
-$ sudo apt install wireguard
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install wireguard
 ```
 
 Generate the keys for this host:
 
-```bash
-$ umask 077
-$ wg genkey > internal-private.key
-$ wg pubkey < internal-private.key > internal-public.key
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey > internal-private.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg pubkey < internal-private.key > internal-public.key
 ```
 
 And create the `/etc/wireguard/wg0.conf` file with these contents:
 
-```
+```ini
 [Interface]
 Address = 10.10.10.10/32
 ListenPort = 51000
@@ -93,9 +113,9 @@ PublicKey = <contents of laptop-public.key>
 AllowedIPs = 10.10.10.11/32 # any available IP in the VPN range
 ```
 
-```{note}
+:::{note}
 Just like in the {ref}`peer-to-site <wireguard-vpn-peer-to-site-on-router>` scenario with WireGuard on the router, there is no `Endpoint` configuration here for the laptop peer, because we don't know where it will be connecting from beforehand.
-```
+:::
 
 The final step is to configure this internal system as a router for the VPN users. For that, we need to enable a couple of settings:
 
@@ -104,21 +124,29 @@ The final step is to configure this internal system as a router for the VPN user
 
 To do that, and make it persist across reboots, create the file `/etc/sysctl.d/70-wireguard-routing.conf` file with this content:
 
-```
+```text
 net.ipv4.ip_forward = 1
 net.ipv4.conf.all.proxy_arp = 1
 ```
 
 Then run this command to apply those settings:
 
-```bash
-$ sudo sysctl -p /etc/sysctl.d/70-wireguard-routing.conf -w
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo sysctl -p /etc/sysctl.d/70-wireguard-routing.conf -w
 ```
 
 Now the WireGuard interface can be brought up:
 
-```bash
-$ sudo wg-quick up wg0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up wg0
 ```
 
 ## Configuring the peer
@@ -127,7 +155,7 @@ The peer configuration will be very similar to what was done before. What change
 
 Let's call this new configuration file `/etc/wireguard/home0.conf`:
 
-```
+```ini
 [Interface]
 ListenPort = 51000
 Address = 10.10.10.11/24
@@ -141,13 +169,17 @@ AllowedIPs = 10.10.10.0/24
 
 And bring up this WireGuard interface:
 
-```bash
-$ sudo wg-quick up home0
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo wg-quick up home0
 ```
 
-```{note}
+:::{note}
 There is no need to add an index number to the end of the interface name. That is a convention, but not strictly a requirement.
-```
+:::
 
 ## Testing
 

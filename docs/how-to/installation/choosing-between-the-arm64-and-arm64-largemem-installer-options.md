@@ -31,42 +31,74 @@ Our new **arm64+largemem** ISO includes a kernel with 64k page size. A larger pa
 * {term}`High performance computing <HPC>`
 * etc.
 
-```{note}
+:::{note}
 It is possible to switch between these kernel options after installation by installing the other kernel alternative, rebooting, and selecting the new kernel from the GRUB menu.
-```
+:::
 
 ## Switching kernels post-installation
 
 To switch between the two kernels after the initial installation you can run the following commands, replacing `<desired-kernel>` with `linux-generic-64k` when swapping to 64k, or `linux-generic` when swapping to the default 4k kernel:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install <desired-kernel>
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo reboot
 ```
 
-Upon reboot you will be greeted with the GRUB menu (you may need to hold down the <kbd>Shift</kbd> key during the reboot for it to appear). Select “Advanced Options for Ubuntu”, then select your desired kernel to boot into Ubuntu.
+Upon reboot you will be greeted with the GRUB menu (you may need to hold down the {kbd}`Shift` key during the reboot for it to appear). Select “Advanced Options for Ubuntu”, then select your desired kernel to boot into Ubuntu.
 
 To permanently change the default to your `<desired-flavour>`, replace `<desired-flavour>` with `generic` or `generic-64k` and then run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "GRUB_FLAVOUR_ORDER=<desired-flavour>" | sudo tee /etc/default/grub.d/local-order.cfg
 ```
 
 To apply your change run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-grub
 ```
 
 Future boots will automatically use your new desired kernel flavour. You can verify this by rebooting using:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo reboot
 ```
 
 And then running the following command to display the active kernel: 
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 uname -r
 ```

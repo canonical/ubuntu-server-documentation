@@ -17,9 +17,9 @@ A **certificate** is a way to distribute a public key and other information abou
 
 To set up a secure server using public-key cryptography, in most cases, you send your certificate request (including your public key), proof of your company's identity, and payment to a CA. The CA verifies the certificate request and your identity, and then sends back a certificate for your secure server. Alternatively, you can create your own **self-signed** certificate.
 
-```{note}
+:::{note}
 Self-signed certificates should not be used in most production environments.
-```
+:::
 
 Continuing the HTTPS example, a CA-signed certificate provides two important capabilities that a self-signed certificate does not:
 
@@ -47,13 +47,17 @@ If the certificate will be used by service daemons, such as Apache, Postfix, Dov
 
 This section will cover generating a key both with or without a passphrase. The non-passphrase key will then be used to generate a certificate that can be used with various service daemons.
 
-```{warning}
+:::{warning}
 Running your secure service without a passphrase is convenient because you will not need to enter the passphrase every time you start your secure service. But it is insecure -- a compromise of the key means a compromise of the server as well.
-```
+:::
 
 To generate the keys for the Certificate Signing Request (CSR) run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl genrsa -des3 -out server.key 2048
 
 Generating RSA private key, 2048 bit long modulus
@@ -69,7 +73,11 @@ Re-type the passphrase to verify. Once you have re-typed it correctly, the serve
 
 Now create the insecure key, the one without a passphrase, and shuffle the key names:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl rsa -in server.key -out server.key.insecure
 mv server.key server.key.secure
 mv server.key.insecure server.key
@@ -79,7 +87,11 @@ The insecure key is now named `server.key`, and you can use this file to generat
 
 To create the CSR, run the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl req -new -key server.key -out server.csr
 ```
 
@@ -91,21 +103,29 @@ You can now submit this CSR file to a CA for processing. The CA will use this CS
 
 To create the self-signed certificate, run the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openssl x509 -req -days 365 -in server.csr -signkey server.key -out server.crt
 ```
 
 The above command will prompt you to enter the passphrase. Once you enter the correct passphrase, your certificate will be created and it will be stored in the `server.crt` file.
 
-```{warning}
+:::{warning}
 If your secure server is to be used in a production environment, you probably need a CA-signed certificate. It is not recommended to use self-signed certificates in production environments.
-```
+:::
 
 ## Install the certificate
 
 You can install the key file `server.key` and certificate file `server.crt`, or the certificate file issued by your CA, by running following commands at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp server.crt /etc/ssl/certs
 sudo cp server.key /etc/ssl/private
 ```

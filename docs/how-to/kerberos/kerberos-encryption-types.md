@@ -25,7 +25,7 @@ Possible values for the encryption algorithms are listed in the [MIT documentati
 
 Here is an example showing the default values (other settings removed for brevity):
 
-```text
+```ini
 [realms]
     EXAMPLE.INTERNAL = {
         (...)
@@ -37,16 +37,27 @@ Here is an example showing the default values (other settings removed for brevit
 
 The {spellexception}`master` key is created once per realm, when the realm is bootstrapped. That is usually done with the `krb5_newrealm` tool (see {ref}`how to install a Kerberos server <install-a-kerberos-server>` for details). You can check the {spellexception}`master` key type with either of these commands on the KDC server:
 
-```bash
-$ sudo kadmin.local
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kadmin.local
+
 kadmin.local:  getprinc K/M
 Principal: K/M@EXAMPLE.INTERNAL
 (...)
 Number of keys: 1
 Key: vno 1, aes256-cts-hmac-sha1-96
 (...)
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo klist -ke /etc/krb5kdc/stash
 
-$ sudo klist -ke /etc/krb5kdc/stash
 Keytab name: FILE:/etc/krb5kdc/stash
 KVNO Principal
 ---- --------------------------------------------------------------------------
@@ -57,8 +68,13 @@ When a new Kerberos principal is created through the `kadmind` service (via the 
 
 For example, let's create an `ubuntu` principal, and check the keys that were created for it (output abbreviated):
 
-```bash
-$ sudo kadmin.local
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kadmin.local
+
 Authenticating as principal root/admin@EXAMPLE.INTERNAL with password.
 kadmin.local:  addprinc ubuntu
 No policy specified for ubuntu@EXAMPLE.INTERNAL; defaulting to no policy
@@ -77,13 +93,14 @@ Key: vno 1, aes128-cts-hmac-sha1-96
 
 Two keys were created for the `ubuntu` principal, following the default setting of `supported_enctypes` in `kdc.conf` for this realm.
 
-```{note}
-The server config `supported_enctypes` has the *default* list of key types that are created for a principal. This list applies to the moment when that principal is **created** by `kadmind`. Changing that setting after the fact won't affect the keys that the principal in question has after that event. In particular, principals can be created with specific key types regardless of the `supported_enctypes` setting. See the `-e` parameter for the [kadmin add_principal command](https://web.mit.edu/kerberos/krb5-latest/doc/admin/database.html).
-```
+:::{note}
+The server config `supported_enctypes` has the *default* list of key types that are created for a principal. This list applies to the moment when that principal is **created** by `kadmind`. Changing that setting after the fact won't affect the keys that the principal in question has after that event. In particular, principals can be created with specific key types regardless of the `supported_enctypes` setting. See the `-e` parameter for the [`kadmin add_principal` command](https://web.mit.edu/kerberos/krb5-latest/doc/admin/database.html).
+:::
 
 If we had `supported_enctypes` set to `aes256-sha2:normal aes128-sha2:normal camellia256-cts:normal` in `kdc.conf`, then the `ubuntu` principal would get three key types:
 
-```text
+```{terminal}
+:output-only:
 kadmin.local:  getprinc ubuntu
 Principal: ubuntu@EXAMPLE.INTERNAL
 (...)
@@ -93,9 +110,9 @@ Key: vno 1, aes128-cts-hmac-sha256-128
 Key: vno 1, camellia256-cts-cmac
 ```
 
-```{note}
+:::{note}
 Bootstrapping a new Kerberos realm via the `krb5_newrealm` command also creates some system principals required by Kerberos, such as `kadmin/admin`, `kadmin/changepw` and others. They will all also get the same number of keys each: one per encryption type in `supported_enctypes`.
-```
+:::
 
 ## Client-side configuration
 
@@ -105,7 +122,7 @@ The encryption types supported by the Kerberos libraries are defined in the `/et
 
 Example:
 
-```text
+```ini
 [libdefaults]
 (...)
 permitted_enctypes = aes256-cts-hmac-sha1-96 aes128-cts-hmac-sha1-96
@@ -115,9 +132,9 @@ This parameter contains a space-separated list of encryption type names, in orde
 
 Possible values for the encryption algorithms are listed in [the MIT documentation](https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/kdc_conf.html#encryption-types) (same ones as for the KDC).
 
-```{note}
-There are more encryption-related parameters in `krb5.conf`, but most take their defaults from `permitted_enctypes`. See the [MIT libdefaults documentation](https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/krb5_conf.html#libdefaults) for more information.
-```
+:::{note}
+There are more encryption-related parameters in `krb5.conf`, but most take their defaults from `permitted_enctypes`. See the [MIT `libdefaults` documentation](https://web.mit.edu/kerberos/krb5-latest/doc/admin/conf_files/krb5_conf.html#libdefaults) for more information.
+:::
 
 ## Putting it all together
 
@@ -130,7 +147,8 @@ If there is no common algorithm between what the client accepts, and what the se
 
 For example, if the principal on the server has:
 
-```text
+```{terminal}
+:output-only:
 kadmin.local:  getprinc ubuntu
 Principal: ubuntu@EXAMPLE.INTERNAL
 (...)
@@ -141,14 +159,18 @@ Key: vno 1, aes128-cts-hmac-sha256-128
 
 And the client's `krb5.conf` has:
 
-```text
+```ini
 permitted_enctypes = aes256-sha1 aes128-sha1
 ```
 
 Then `kinit` will fail, because the client only supports `sha1` variants, and the server only has `sha2` to offer for that particular principal the client is requesting:
 
-```bash
-$ kinit ubuntu
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+kinit ubuntu
 
 kinit: Generic error (see e-text) while getting initial credentials
 ```
@@ -167,7 +189,7 @@ Changing encryption types of an existing Kerberos realm is no small task. Just c
 
 MIT Kerberos has a [guide on updating encryption types](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#migrating-away-from-older-encryption-types) that covers many scenarios, including deployments with multiple replicating servers: 
 
-## References
+## Further reading
 
 * [Encryption types in MIT Kerberos](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html)
 * [`krb5.conf` encryption related configurations options](https://web.mit.edu/kerberos/krb5-latest/doc/admin/enctypes.html#configuration-variables)

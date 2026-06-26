@@ -13,14 +13,18 @@ SSSD can also use LDAP for authentication, authorisation, and user/group informa
 
 For this setup, we need:
 
-  - An existing OpenLDAP server with SSL enabled and using the RFC2307 schema for users and groups
-  - A client host where we will install the necessary tools and login as a user from the LDAP server
+- An existing OpenLDAP server with SSL enabled and using the RFC2307 schema for users and groups
+- A client host where we will install the necessary tools and login as a user from the LDAP server
 
 ## Install necessary software
 
 Install the following packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sssd-ldap ldap-utils
 ```
 
@@ -28,7 +32,7 @@ sudo apt install sssd-ldap ldap-utils
 
 Create the `/etc/sssd/sssd.conf` configuration file, with permissions `0600` and ownership `root:root`, and add the following content:
 
-```text
+```ini
 [sssd]
 config_file_version = 2
 domains = example.com
@@ -43,19 +47,27 @@ ldap_search_base = dc=example,dc=com
 
 Make sure to start the `sssd` service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start sssd.service
 ```
 
-```{note}
+:::{note}
 `sssd` will use `START_TLS` by default for authentication requests against the LDAP server (the **`auth_provider`**), but not for the **`id_provider`**. If you want to also enable `START_TLS` for the `id_provider`, specify `ldap_id_use_start_tls = true`.
-```
+:::
 
 ## Automatic home directory creation
 
 To enable automatic home directory creation, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update --enable mkhomedir
 ```
 
@@ -72,26 +84,35 @@ If using a custom CA, an easy way to have a host trust it is to place it in `/us
 
 Alternatively, you can edit `/etc/ldap/ldap.conf` and point `TLS_CACERT` to the CA public key file.
 
-```{note}
+:::{note}
 You may have to restart `sssd` after these changes: `sudo systemctl restart sssd`
-```
+:::
 
 Once that is all done, check that you can connect to the LDAP server using verified SSL connections:
 
-```bash
-$ ldapwhoami -x -ZZ -H ldap://ldap01.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ldapwhoami -x -ZZ -H ldap://ldap01.example.com
+
 anonymous
 ```
 
 and for `ldaps` (if enabled in `/etc/default/slapd`):
 
-```bash
-$ ldapwhoami -x -H ldaps://ldap01.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ldapwhoami -x -H ldaps://ldap01.example.com
 ```
 
 The `-ZZ` parameter tells the tool to use `START_TLS`, and that it must not fail. If you have LDAP logging enabled on the server, it will show something like this:
 
-```
+```text
 slapd[779]: conn=1032 op=0 STARTTLS
 slapd[779]: conn=1032 op=0 RESULT oid= err=0 text=
 slapd[779]: conn=1032 fd=15 TLS established tls_ssf=256 ssf=256
@@ -108,7 +129,7 @@ slapd[779]: conn=1032 op=2 RESULT oid= err=0 text=
 
 In this example, the LDAP server has the following user and group entry we are going to use for testing:
 
-```
+```text
 dn: uid=john,ou=People,dc=example,dc=com
 uid: john
 objectClass: inetOrgPerson
@@ -138,22 +159,39 @@ memberUid: john
 
 The user `john` should be known to the system:
 
-```bash
-ubuntu@ldap-client:~$ getent passwd john
-john:*:10001:10001:John Smith:/home/john:/bin/bash
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-client
+:dir: ~
+getent passwd john
 
-ubuntu@ldap-client:~$ id john
+john:*:10001:10001:John Smith:/home/john:/bin/bash
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-client
+:dir: ~
+id john
+
 uid=10001(john) gid=10001(john) groups=10001(john),10100(Engineering)
 ```
 
 And we should be able to authenticate as `john`:
 
-```bash
-ubuntu@ldap-client:~$ sudo login
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-client
+:dir: ~
+sudo login
+
 ldap-client login: john
 Password:
 Welcome to Ubuntu Focal Fossa (development branch) (GNU/Linux 5.4.0-24-generic x86_64)
 (...)
 Creating directory '/home/john'.
+
 john@ldap-client:~$
 ```

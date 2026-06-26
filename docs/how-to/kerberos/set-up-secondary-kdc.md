@@ -11,33 +11,45 @@ Once you have one Key Distribution Center (KDC) on your network, it is good prac
 
 Also, if you have Kerberos clients that are on different networks (possibly separated by routers using NAT), it is wise to place a secondary KDC in each of those networks.
 
-```{note}
+:::{note}
 The native replication mechanism explained here relies on a cron job; it essentially dumps the DB on the primary and loads it back up on the secondary. You may want to take a look at using the `kldap` backend, which can use the OpenLDAP replication mechanism. This is explained in {ref}`kerberos-with-openldap-backend`.
-```
+:::
 
 ## Install the required packages
 
 First, install the packages, and when asked for the Kerberos and Admin server names enter the name of the Primary KDC:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install krb5-kdc krb5-admin-server
 ```
 
 Once you have installed the packages, create the host principals for both KDCs. From a terminal prompt, enter:
 
-```bash
-$ kadmin -q "addprinc -randkey host/kdc01.example.com"
-$ kadmin -q "addprinc -randkey host/kdc02.example.com"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+kadmin -q "addprinc -randkey host/kdc01.example.com"
+kadmin -q "addprinc -randkey host/kdc02.example.com"
 ```
 
-```{note}
+:::{note}
 The `kadmin` command defaults to using a principal like `username/admin@EXAMPLE.COM`, where `username` is your current shell user. If you need to override that, use `-p <principal-you-want>`.
-```
+:::
 
 Extract the **key file** for the `kdc02` principal, which is the server we are on:
 
-```bash
-$ sudo kadmin -p ubuntu/admin -q "ktadd host/kdc02.example.com"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kadmin -p ubuntu/admin -q "ktadd host/kdc02.example.com"
 ```
 
 Next, there needs to be a `kpropd.acl` file on each KDC that lists all KDCs for the realm. For example, on both the **primary and secondary KDC**, create `/etc/krb5kdc/kpropd.acl`:
@@ -47,40 +59,61 @@ host/kdc01.example.com@EXAMPLE.COM
 host/kdc02.example.com@EXAMPLE.COM
 ```
 
-```{note}
+:::{note}
 It's customary to allow both KDCs because one may want to switch their roles if one goes bad. For such an eventuality, both are already listed here.
-```
+:::
 
 Create an empty database on the **secondary KDC**:
 
-```bash
-$ sudo kdb5_util create -s
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kdb5_util create -s
 ```
 
 Now install `kpropd` daemon, which listens for connections from the `kprop` utility from the **primary KDC**:
 
-```bash
-$ sudo apt install krb5-kpropd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install krb5-kpropd
 ```
 
 The service will be running immediately after installation.
 
 From a terminal on the **primary KDC**, create a dump file of the principal database:
 
-```bash
-$ sudo kdb5_util dump /var/lib/krb5kdc/dump
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kdb5_util dump /var/lib/krb5kdc/dump
 ```
 
 Still on the **Primary KDC**, extract its **key**:
 
-```bash
-$ sudo kadmin.local -q "ktadd host/kdc01.example.com"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kadmin.local -q "ktadd host/kdc01.example.com"
 ```
 
 On the **primary KDC**, run the `kprop` utility to push the database dump made before to the secondary KDC:
 
-```bash
-$ sudo kprop -r EXAMPLE.COM -f /var/lib/krb5kdc/dump kdc02.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo kprop -r EXAMPLE.COM -f /var/lib/krb5kdc/dump kdc02.example.com
+
 Database propagation to kdc02.example.com: SUCCEEDED
 ```
 
@@ -95,17 +128,21 @@ You may also want to create a cron job to periodically update the database on th
 
 Finally, start the `krb5-kdc` daemon on the **secondary KDC**:
 
-```bash
-$ sudo systemctl start krb5-kdc.service
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl start krb5-kdc.service
 ```
 
-```{note}
+:::{note}
 The secondary KDC does not run an admin server, since it's a read-only copy.
-```
+:::
 
 From now on, you can specify both KDC servers in `/etc/krb5.conf` for the `EXAMPLE.COM` realm, in any host participating in this realm (including `kdc01` and `kdc02`), but remember that there can only be one admin server and that's the one running on `kdc01`:
 
-```text
+```ini
 [realms]
     EXAMPLE.COM = {
             kdc = kdc01.example.com

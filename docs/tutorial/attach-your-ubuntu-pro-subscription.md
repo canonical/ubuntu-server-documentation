@@ -9,9 +9,9 @@ myst:
 
 Attaching the [Ubuntu Pro](https://ubuntu.com/pro) subscription to Ubuntu brings you the [enterprise lifecycle](https://ubuntu.com/about/release-cycle), including [Linux kernel livepatching](https://ubuntu.com/security/livepatch), access to [FIPS-validated packages](https://documentation.ubuntu.com/security/compliance/fips/), and [compliance with security profiles](https://ubuntu.com/security/security-standards) such as CIS or DISA-STIG. This is not required for Ubuntu Pro instances [through public clouds](https://ubuntu.com/cloud/public-cloud) such as [AWS](https://ubuntu.com/aws/pro), [Azure](https://ubuntu.com/azure/pro) or [GCP](https://ubuntu.com/gcp/pro), since these are automatically attached from launch.
 
-```{note}
+:::{note}
 Subscriptions are not just for enterprise customers. Anyone can get [a personal subscription](https://ubuntu.com/pro) for free on up to 5 machines, or 50 if you are an [official Ubuntu Community member](https://wiki.ubuntu.com/Membership).
-```
+:::
 
 The following instructions explain how to attach your subscription to your Ubuntu systems.
 
@@ -21,7 +21,11 @@ This step is necessary for Ubuntu Pro users or holders of personal subscriptions
 
 First, make sure that you have the latest version of the Ubuntu Pro Client running. The package used to access the Pro Client (`pro`) is `ubuntu-pro-client`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt install ubuntu-pro-client
 ```
 
@@ -31,18 +35,27 @@ Most systems will have `ubuntu-pro-client` installed by default. If that is the 
 
 To attach your machine to a subscription, run the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pro attach
 ```
 
-```{note}
+:::{note}
 For users who need to attach many systems or automate the process, as in many enterprise scenarios, there are parameters to the attach command to help you. Please check the Ubuntu Pro documentation for [attaching your system with a configuration file](https://documentation.ubuntu.com/pro-client/en/latest/howtoguides/how_to_attach_with_config_file/)
-```
+:::
 
 After running the command, you should see output like this, giving you a link and a code:
 
-```bash
-ubuntu@test:~$ sudo pro attach
+```{terminal}
+:copy:
+:user: ubuntu
+:host: test
+:dir: ~
+sudo pro attach
+
 Initiating attach operation...
 
 Please sign in to your Ubuntu Pro account at this link:
@@ -60,7 +73,8 @@ Once you have pasted your code and chosen the subscription you want to attach yo
 
 The attach process will then continue in the terminal window, and you should eventually be presented with the following message:
 
-```
+```{terminal}
+:output-only:
 Attaching the machine...
 Enabling Ubuntu Pro: ESM Apps
 Ubuntu Pro: ESM Apps enabled

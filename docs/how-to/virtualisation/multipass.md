@@ -11,22 +11,30 @@ myst:
 
 On Linux it's available as a snap:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo snap install multipass
 ```
 
 If you're running an older version of Ubuntu where `snapd` isn't pre-installed, you will need to install it first:
 
-```bash
-sudo apt update
-sudo apt install snapd
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt update && sudo apt install snapd
 ```
 
 ## Find available images
 
 To find available images you can use the `multipass find` command, which will produce a list like this:
 
-```text
+```{terminal}
+:output-only:
 Image                       Aliases           Version          Description
 core                        core16            20200818         Ubuntu Core 16
 core18                                        20211124         Ubuntu Core 18
@@ -45,8 +53,13 @@ minikube                                      latest           minikube is local
 
 You can launch a fresh instance by specifying either the image name from the list (in this example, 26.04) or using an alias, if the image has one.
 
-```bash
-$ multipass launch 26.04
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass launch 26.04
+
 Launched: cleansing-guanaco
 ```
 
@@ -56,8 +69,13 @@ This command is equivalent to: `multipass launch resolute` or `multipass launch 
 
 You can check out the currently running instance(s) by using the `multipass list` command:
 
-```bash
-$ multipass list
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass list
+
 Name                    State             IPv4             Image
 cleansing-guanaco       Running           10.140.26.17     Ubuntu 26.04 LTS
 ```
@@ -66,8 +84,13 @@ cleansing-guanaco       Running           10.140.26.17     Ubuntu 26.04 LTS
 
 You can use the `multipass info` command to find out more details about the VM instance parameters:
 
-```bash
-$ multipass info cleansing-guanaco
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass info cleansing-guanaco
+
 Name:           cleansing-guanaco
 State:          Running
 Snapshots:      0
@@ -85,10 +108,16 @@ Mounts:         --
 
 To enter the VM you created, use the `shell` command:
 
-```bash
-$ multipass shell cleansing-guanaco
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass shell cleansing-guanaco
+
 Welcome to Ubuntu 26.04 LTS (GNU/Linux 7.0.0-15-generic x86_64)
 (...)
+
 ubuntu@cleansing-guanaco:~$
 ```
 
@@ -98,8 +127,13 @@ Don't forget to log out (or {kbd}`Ctrl` + {kbd}`D`) when you are done, or you ma
 
 ## Run commands inside an instance from outside
 
-```bash
-$ multipass exec cleansing-guanaco -- lsb_release -a
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass exec cleansing-guanaco -- lsb_release -a
+
 No LSB modules are available.
 Distributor ID:	Ubuntu
 Description:	Ubuntu 26.04 LTS
@@ -111,28 +145,45 @@ Codename:	resolute
 
 You can stop an instance to save resources using the `stop` command:
 
-```bash
-$ multipass stop cleansing-guanaco
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass stop cleansing-guanaco
 ```
 
 You can start it back up again using the `start` command:
 
-```bash
-$ multipass start cleansing-guanaco
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass start cleansing-guanaco
 ```
 
 ## Delete the instance
 
 Once you are finished with the instance, you can delete it as follows:
 
-```bash
-$ multipass delete cleansing-guanaco
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass delete cleansing-guanaco
 ```
 
 It will now show up as deleted when you use the `list` command:
 
-```bash
-$ multipass list
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass list
+
 Name                    State             IPv4             Image
 cleansing-guanaco       Deleted           --               Not Available
 ```
@@ -140,14 +191,23 @@ cleansing-guanaco       Deleted           --               Not Available
 
 And when you want to completely get rid of it (and any other deleted instances), you can use the `purge` command:
 
-```bash
-$ multipass purge
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass purge
 ```
 
 Which we can check again using `list`:
 
-```bash
-$ multipass list
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass list
+
 No instances found.
 ```
 
@@ -161,21 +221,36 @@ and be managed using `virsh`. However, Multipass runs as a headless system, so y
 
 To begin, integrate Multipass into your existing setup by selecting `libvirt` as your local driver:
 
-```bash
-$ sudo multipass set local.driver=libvirt
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipass set local.driver=libvirt
 ```
 
-```{note}
-If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvert service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
-```
+:::{note}
+If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvirt service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
+:::
 
 Start a guest, and access it via tools like [virt-manager](https://virt-manager.org/) or `virsh`:
 
-```bash
-$ multipass launch lts
-Launched: engaged-amberjack
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+multipass launch lts
 
-$ virsh list
+Launched: engaged-amberjack
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+virsh list
+
  Id    Name                           State
 ----------------------------------------------------
  15    engaged-amberjack              running
@@ -187,9 +262,25 @@ For more detailed and comprehensive instructions on changing your drivers, refer
 
 You can use the following commands on the CLI:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass help
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass help <command>
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 multipass help --all
 ```
 

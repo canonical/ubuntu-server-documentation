@@ -14,13 +14,21 @@ Domain Name Service (DNS) is an Internet service that maps IP addresses and {ter
 
 At a terminal prompt, run the following command to install the `bind9` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install bind9
 ```
 
 A useful package for testing and troubleshooting DNS issues is the `dnsutils` package. Very often these tools will be installed already, but to check and/or install `dnsutils` enter the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install dnsutils
 ```
 
@@ -59,17 +67,21 @@ options {
 };
 ```
 
-```{note}
+:::{note}
 Replace `1.2.3.4` and `5.6.7.8` with the IP addresses of actual nameservers.
-```
+:::
 
 To enable the new configuration, restart the DNS server. From a terminal prompt, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
-[See the dig section](#dig) for information on testing a caching DNS server.
+{ref}`See the dig section <dns-dig>` for information on testing a caching DNS server.
 
 ## Set up a primary server
 
@@ -86,9 +98,9 @@ zone "example.com" {
 };
 ```
 
-```{note}
+:::{note}
 If BIND will be receiving automatic updates to the file as with {term}`DDNS`, then use `/var/lib/bind/db.example.com` rather than `/etc/bind/db.example.com` both here and in the copy command below.
-```
+:::
 
 Now, create a zone file in `/etc/bind/db.example.com`. Up until Ubuntu 25.04 this could be copied from a template, e.g. in `/etc/bind/db.local`.
 
@@ -118,13 +130,17 @@ You must increment the `Serial Number` every time you make changes to the zone f
 
 Now, you can add DNS records to the bottom of the zone file. See {ref}`common-record-types` for details.
 
-```{note}
-Many admins like to use the "last edited" date as the Serial of a zone, such as **2020012100** which is **yyyymmddss** (where **ss** is the Serial Number)
-```
+:::{note}
+Many admins like to use the "last edited" date as the Serial of a zone, such as **`2020012100`** which is **`yyyymmddss`** (where **`ss`** is the Serial Number)
+:::
 
 Once you have made changes to the zone file, BIND9 needs to be restarted for the changes to take effect:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
@@ -141,9 +157,9 @@ zone "1.168.192.in-addr.arpa" {
 };
 ```
 
-```{note}
+:::{note}
 Replace `1.168.192` with the first three octets of whatever network you are using. Also, name the zone file `/etc/bind/db.192` appropriately. It should match the first octet of your network.
-```
+:::
 
 Now create the `/etc/bind/db.192` file, changing the same options as `/etc/bind/db.example.com`:
 
@@ -162,11 +178,16 @@ $TTL    604800
 @       IN      NS      ns.
 10      IN      PTR     ns.example.com.
 ```
+
 The `Serial Number` in the reverse zone needs to be incremented on each change as well. For each **A record** you configure in `/etc/bind/db.example.com` that is for a different address, you will need to create a **PTR record** in `/etc/bind/db.192`.
 
 After creating the reverse zone file restart BIND9:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
@@ -190,13 +211,17 @@ zone "1.168.192.in-addr.arpa" {
 };
 ```
 
-```{note}
+:::{note}
 Replace `192.168.1.11` with the IP address of your secondary nameserver.
-```
+:::
 
 Restart BIND9 on the primary server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
@@ -218,7 +243,11 @@ zone "1.168.192.in-addr.arpa" {
 
 Once again, replace `192.168.1.10` with the IP address of your primary nameserver, then restart BIND9 on the secondary server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
@@ -243,9 +272,9 @@ transfer of 'example.com/IN' from 192.168.1.10#53: Transfer completed: 1 message
 8 records, 225 bytes, 0.002 secs (112500 bytes/sec)
 ```
 
-```{note}
+:::{note}
 A zone is only transferred if the `Serial Number` on the primary is larger than the one on the secondary. If you want to have your primary DNS notify other secondary DNS servers of zone changes, you can add `also-notify { ipaddress; };` to `/etc/bind/named.conf.local` as shown in the example below:
-```
+:::
 
 ```
 zone "example.com" {
@@ -261,12 +290,11 @@ zone "1.168.192.in-addr.arpa" {
     allow-transfer { 192.168.1.11; };
     also-notify { 192.168.1.11; }; 
 };
-    
 ```
 
-```{note}
+:::{note}
 The default directory for non-authoritative zone files is `/var/cache/bind/`. This directory is also configured in AppArmor to allow the named daemon to write to it. See this page for {ref}`more information on AppArmor <apparmor>`.
-```
+:::
 
 ## Testing your setup
 
@@ -274,47 +302,52 @@ The default directory for non-authoritative zone files is `/var/cache/bind/`. Th
 
 The first step in testing BIND9 is to add the nameserver's IP address to a **hosts resolver**. The Primary nameserver should be configured as well as another host to double check things. Refer to {ref}`DNS client configuration <dns-client-configuration>` for details on adding nameserver addresses to your network clients. In the end your `nameserver` line in `/etc/resolv.conf` should be pointing at `127.0.0.53` and you should have a `search` parameter for your domain. Something like this:
 
-```text
+```
 nameserver  127.0.0.53
 search example.com
 ```
 
 To check which DNS server your local resolver is using, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 resolvectl status
 ```
 
-```{note}
+:::{note}
 You should also add the IP address of the secondary nameserver to your client configuration in case the primary becomes unavailable.
-```
+:::
 
+(dns-dig)=
 ### dig
 
 If you installed the `dnsutils` package you can test your setup using the DNS lookup utility `dig`:
 
 After installing BIND9 use `dig` against the loopback interface to make sure it is listening on port 53. From a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dig -x 127.0.0.1
-```
 
-You should see lines similar to the following in the command output:
-
-```
 ;; Query time: 1 msec
 ;; SERVER: 192.168.1.10#53(192.168.1.10)
 ```
 
-If you have configured BIND9 as a caching nameserver, "dig" an outside domain to check the query time:
+If you have configured BIND9 as a caching nameserver, "dig" an outside domain to check the query time (note the query time toward the end of the command output):
 
-```bash    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dig ubuntu.com
-```
 
-Note the query time toward the end of the command output:
-
-```
 ;; Query time: 49 msec
 ```
 
@@ -328,7 +361,11 @@ After a second `dig` there should be improvement:
 
 Now let's demonstrate how applications make use of DNS to resolve a host name, by using the `ping` utility to send an ICMP echo request:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ping example.com
 ```
 
@@ -346,33 +383,33 @@ A great way to test your zone files is by using the `named-checkzone` utility in
 
 To test our example forward zone file, enter the following from a command prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 named-checkzone example.com /etc/bind/db.example.com
-```
 
-If everything is configured correctly you should see output similar to:
-
-```
 zone example.com/IN: loaded serial 6
 OK
 ```
 
 Similarly, to test the reverse zone file enter the following:
     
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 named-checkzone 1.168.192.in-addr.arpa /etc/bind/db.192
-```
 
-The output should be similar to:
-
-```
 zone 1.168.192.in-addr.arpa/IN: loaded serial 3
 OK
 ```
 
-```{note}
+:::{note}
 The Serial Number of your zone file will probably be different.
-```
+:::
 
 ### Quick temporary query logging
 
@@ -380,13 +417,21 @@ With the `rndc` tool, you can quickly turn query logging on and off, without res
 
 To turn query logging on, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rndc querylog on
 ```
 
 Likewise, to turn it off, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rndc querylog off
 ```
 
@@ -398,9 +443,9 @@ Jan 20 19:40:50 new-n1 named[816]: query logging is now on
 Jan 20 19:40:57 new-n1 named[816]: client @0x7f48ec101480 192.168.1.10#36139 (ubuntu.com): query: ubuntu.com IN A +E(0)K (192.168.1.10)
 ```
 
-```{note}
+:::{note}
 The amount of logs generated by enabling `querylog` could be huge!
-```
+:::
 
 ## Logging
 
@@ -429,20 +474,34 @@ logging {
 };
 ```
 
-```{note}
+:::{note}
 The `debug` option can be set from 1 to 3. If a level isn't specified, level 1 is the default.
-```
+:::
 
 Since the **named daemon** runs as the `bind` user, the `/var/log/named` directory must be created and the ownership changed:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir /var/log/named
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown bind:bind /var/log/named
 ```
 
 Now restart BIND9 for the changes to take effect:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart bind9.service
 ```
 
@@ -492,5 +551,3 @@ This section covers some of the most common DNS record types.
 - [Upstream BIND9 Documentation](https://bind9.readthedocs.io/en/latest/)
 
 - [DNS and BIND](https://www.oreilly.com/library/view/dns-and-bind/0596100574/) is a popular book now in its fifth edition. There is now also a [DNS and BIND on IPv6](https://www.oreilly.com/library/view/dns-and-bind/9781449308025/) book.
-
-- A great place to ask for BIND9 assistance, and get involved with the Ubuntu Server community, is the {matrix}`Ubuntu Server <server>` Matrix channel.

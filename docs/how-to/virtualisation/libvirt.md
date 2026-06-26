@@ -9,19 +9,23 @@ myst:
 
 The [libvirt library](https://libvirt.org/) interfaces with many different virtualisation technologies. Before getting started with libvirt, verify that your hardware supports the necessary virtualisation extensions for [Kernel-based Virtual Machine (KVM)](https://www.linux-kvm.org/page/Main_Page). To check this, enter the following from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kvm-ok
 ```
 
-```{note}
+:::{note}
 This command is part of the package `cpu-checker`, you might need to install it because it is not installed by default.
-```
+:::
 
 This command prints a message informing you whether your CPU supports hardware virtualisation.
 
-```{note}
-On many computers with processors supporting hardware-assisted virtualisation, you must activate an option in the BIOS to enable it.
-```
+:::{note}
+On many computers with processors supporting hardware-assisted virtualisation, you must activate an option in the {term}`BIOS` to enable it.
+:::
 
 ## Virtual networking
 
@@ -35,8 +39,18 @@ There is a great example of [how to configure a bridge](https://netplan.readthed
 
 To install the necessary packages, from a terminal prompt enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install qemu-kvm libvirt-daemon-system
 ```
 
@@ -44,13 +58,17 @@ After installing `libvirt-daemon-system`, add the user who will manage virtual m
 
 In a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo adduser $USER libvirt
 ```
 
-```{note}
+:::{note}
 If you add the current user, log out and back in for the new group membership to take effect.
-```
+:::
 
 You are now ready to install a *Guest* operating system. Installing a virtual machine follows the same process as installing the operating system directly on the hardware.
 
@@ -77,31 +95,51 @@ Several utilities are available to manage virtual machines and libvirt. `libvirt
 
 - To list running virtual machines:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh list
   ```
 
 - To start a virtual machine:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh start <guestname>
   ```
 
 - Similarly, to start a virtual machine at boot:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh autostart <guestname>
   ```
 
 - Reboot a virtual machine with:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh reboot <guestname>
   ```
 
 - Save the **state** of virtual machines to a file to restore later. The following command saves the virtual machine state into a file:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh save <guestname> save-my.state
   ```
 
@@ -109,25 +147,41 @@ Several utilities are available to manage virtual machines and libvirt. `libvirt
 
 - Restore a saved virtual machine using:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh restore save-my.state
   ```
 
 - To shut down a virtual machine you can do:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh shutdown <guestname>
   ```
 
 - Mount a CD-ROM device in a virtual machine:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh attach-disk <guestname> /dev/cdrom /media/cdrom
   ```
 
 - To change the definition of a guest, `virsh` exposes the domain via:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   virsh edit <guestname>
   ```
 
@@ -135,15 +189,19 @@ This allows you to edit the [XML representation that defines the guest](https://
 
 Editing the XML directly is the most powerful method, but also the most complex. Tools like {ref}`Virtual Machine Manager / Viewer <virtual-machine-manager>` can help inexperienced users perform most common tasks.
 
-```{note}
+:::{note}
 If `virsh` (or other `vir*` tools) connects to something other than the default `qemu-kvm`/system hypervisor, you can find alternatives for the `--connect` option using `man virsh` or the [libvirt docs](https://libvirt.org/uri.html).
-```
+:::
 
 ### `system` and `session` scope
 
 You can pass connection strings to `virsh` - as well as to most other tools for managing virtualisation.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virsh --connect qemu:///system
 ```
 
@@ -163,9 +221,9 @@ On the other hand, it cannot access system resources well, which includes networ
 
 Applications will usually decide on their primary use-case. Desktop-centric applications often choose `qemu:///session` while most solutions that involve an administrator anyway continue to default to `qemu:///system`.
 
-```{seealso}
+:::{seealso}
 There is more information about this topic in the [libvirt FAQ](https://wiki.libvirt.org/FAQ.html#what-is-the-difference-between-qemu-system-and-qemu-session-which-one-should-i-use) and this [blog post](https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html) about the topic.
-```
+:::
 
 ## Migration
 
@@ -179,8 +237,12 @@ Different types of migration are available depending on the versions of libvirt 
 
 Various options exist for these methods, but the entry point for all of them is `virsh migrate`. Read the integrated help for more detail.
 
-```bash
- virsh migrate --help
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+virsh migrate --help
 ```
 
 For constraints and considerations of live migration, see the [Ubuntu Wiki documentation on KVM migration](https://wiki.ubuntu.com/QemuKVMMigration).
@@ -189,16 +251,16 @@ For constraints and considerations of live migration, see the [Ubuntu Wiki docum
 
 libvirt abstracts CPU configuration and provides several options to specify the VM CPU model in the domain definition:
 
- - custom
- - host-model
- - host-passthrough
- - maximum
+- custom
+- host-model
+- host-passthrough
+- maximum
 
 While most of these modes are straightforward, the behavior of `host-model` is more subtle and the source of many common misunderstandings. There is no direct
 translation of `host-model` into a single QEMU `-cpu` argument. Instead, libvirt selects a baseline CPU model and appends
 a list of features:
 
-```bash
+```
 # example snippet from qemu command line generated by libvirt
 ... -cpu Haswell-noTSX-IBRS,vmx=on,pdcm=off,...,vmx-entry-load-efer=on,vmx-eptp-switching=on ...
 ```
@@ -267,13 +329,13 @@ Assign virtual functions via their PCI ID (domain, bus, slot, and function).
 </hostdev>
 ```
 
-```{note}
+:::{note}
 Getting the virtual function is device-dependent and cannot be fully covered here. In general, it involves setting up an {term}`IOMMU`, registering via [VFIO](https://www.kernel.org/doc/Documentation/vfio.txt), and sometimes requesting a number of VFs.
-```
+:::
 
 Here is an example of configuring a [ppc64el](https://wiki.debian.org/ppc64el) system to create four VFs on a device:
 
-```bash
+```sh
 $ sudo modprobe vfio-pci
 # identify device
 $ lspci -n -s 0005:01:01.3
@@ -285,7 +347,7 @@ $ echo 4 | sudo tee /sys/bus/pci/devices/0005\:01\:00.0/sriov_numvfs
 
 You then attach or detach the device via libvirt by relating the guest with the XML snippet.
 
-```bash
+```sh
 virsh attach-device <guestname> <device-xml>
 # Use the Device in the Guest
 virsh detach-device <guestname> <device-xml>
@@ -297,14 +359,22 @@ The [QEMU Monitor](https://en.wikibooks.org/wiki/QEMU/Monitor) is the way to int
 
 Libvirt covers most needed use cases, but if you need to work around libvirt or tweak special options, you can, for example, add a device as follows:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virsh qemu-monitor-command --hmp focal-test-log 'drive_add 0 if=none,file=/var/lib/libvirt/images/test.img,format=raw,id=disk1'
 ```
 
 The monitor is a powerful tool, especially for debugging. For example, you can use the monitor to show the guest registers:
 
-```bash
-$ virsh qemu-monitor-command --hmp y-ipns 'info registers'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+virsh qemu-monitor-command --hmp y-ipns 'info registers'
 
 RAX=00ffffc000000000 RBX=ffff8f0f5d5c7e48 RCX=0000000000000000 RDX=ffffea00007571c0
 RSI=0000000000000000 RDI=ffff8f0fdd5c7e48 RBP=ffff8f0f5d5c7e18 RSP=ffff8f0f5d5c7df8
@@ -339,9 +409,9 @@ Dynamic page resizing can be an issue when using libvirt since huge pages must b
 
 Huge pages are harder to manage (especially later in the system's lifetime if memory is fragmented), but they provide a useful boost, especially for large guests.
 
-```{tip}
+:::{tip}
 When using device passthrough on very large guests, there is an extra benefit of using huge pages, as it is faster to do the initial memory clear on the VFIO {term}`DMA` pin.
-```
+:::
 
 ### Huge page allocation
 
@@ -349,14 +419,22 @@ Huge pages come in different sizes. A *normal* page is usually 4k and huge pages
 
 The simplest yet least reliable way to allocate some huge pages is to just echo a value to `sysfs`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo 256 | sudo tee /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 ```
 
 Be sure to re-check if it worked:
 
-```bash
-$ cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages
 
 256
 ```
@@ -365,16 +443,25 @@ One of these sizes is the "default huge page size", which is used in the auto-mo
 
 You can check the current default size:
 
-```bash
-$ grep Hugepagesize /proc/meminfo
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+grep Hugepagesize /proc/meminfo
 
 Hugepagesize:       2048 kB
 ```
 
 However, more than one size can exist at the same time, so it's a good idea to check:
 
-```bash
-$ tail /sys/kernel/mm/hugepages/hugepages-*/nr_hugepages`
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+tail /sys/kernel/mm/hugepages/hugepages-*/nr_hugepages`
+
 ==> /sys/kernel/mm/hugepages/hugepages-1048576kB/nr_hugepages <==
 0
 ==> /sys/kernel/mm/hugepages/hugepages-2048kB/nr_hugepages <==
@@ -389,9 +476,19 @@ The kernel must allocate huge pages as mentioned above, but to be consumable, th
 
 Add more mount points if you need different sized ones. Query an overview with [`hugeadm`](https://linux.die.net/man/8/hugeadm):
 
-```bash
-$ apt install libhugetlbfs-bin
-$ hugeadm --list-all-mounts
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+apt install libhugetlbfs-bin
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+hugeadm --list-all-mounts
 
 Mount Point          Options
 /dev/hugepages       rw,relatime,pagesize=2M
@@ -399,7 +496,11 @@ Mount Point          Options
 
 A one-stop info for the overall huge page status of the system can be reported with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hugeadm --explain
 ```
 
@@ -432,8 +533,13 @@ Providing the configuration that a guest should use more address bits as a machi
 
 You can check the bits available to a given CPU via the `procfs`:
 
-```bash
-$ cat /proc/cpuinfo | grep '^address sizes'
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /proc/cpuinfo | grep '^address sizes'
+
 ...
 # an older server with a E5-2620
 address sizes   : 46 bits physical, 48 bits virtual
@@ -517,7 +623,11 @@ In the guest definition, you can add `filesystem` sections to specify host paths
 
 In the guest, you can now use this based on the tag `myfs`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount -t virtiofs myfs /mnt/
 ```
 
@@ -525,9 +635,9 @@ Compared to other Host/Guest file sharing options -- commonly Samba, NFS, or 9P 
 
 See the [libvirt domain/filesystem documentation](https://libvirt.org/formatdomain.html#filesystems) for further details.
 
-```{note}
-While `virtiofs` works with >=20.10 (Groovy), >=21.04 (Hirsute) made it more convenient, especially in small environments (no hard requirement to specify guest Numa topology or use huge pages). If you need to set up on 20.10 or want more details, the libvirt [knowledge-base about virtiofs](https://libvirt.org/kbase/virtiofs.html) provides additional information.
-```
+:::{note}
+While `virtiofs` works with >=20.10 (Groovy), >=21.04 (Hirsute) made it more convenient, especially in small environments (no hard requirement to specify guest Numa topology or use huge pages). If you need to set up on 20.10 or want more details, the libvirt [knowledge-base about `virtiofs`](https://libvirt.org/kbase/virtiofs.html) provides additional information.
+:::
 
 ## Resources
 

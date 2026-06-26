@@ -13,7 +13,11 @@ myst:
 
 To install Apache2, enter the following command at the terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apache2
 ```
 
@@ -26,9 +30,9 @@ Apache2 is configured by placing **directives** in plain text configuration file
 - `apache2.conf`
   The main Apache2 configuration file. Contains settings that are **global** to Apache2.
 
-  ```{note}
+  :::{note}
   Historically, the main Apache2 configuration file was `httpd.conf`, named after the "httpd" daemon. In other distributions (or older versions of Ubuntu), the file might be present. In modern releases of Ubuntu, all configuration options have been moved to `apache2.conf` and the below referenced directories and `httpd.conf` no longer exists.
-  ```
+  :::
 
 - `envvars`
   File where Apache2 **environment** variables are set.
@@ -74,5 +78,3 @@ For more detailed information on configuring Apache2, check out our follow-up gu
 - [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the `apache2-doc` package for the official Apache2 docs.
 
 - O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
-
-- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

@@ -7,7 +7,7 @@ myst:
 (how-to-netboot-the-server-installer-on-amd64)=
 # How to netboot the server installer on amd64
 
-{term}`amd`64 systems boot in either UEFI or legacy ("BIOS") mode, and many systems can be configured to boot in either mode. The precise details depend on the system {term}`firmware <FW>`, but both modes usually support the "Preboot eXecution Environment" (PXE) specification, which allows the provisioning of a bootloader over the network.
+{term}`amd`64 systems boot in either UEFI or legacy {term}`BIOS` mode, and many systems can be configured to boot in either mode. The precise details depend on the system {term}`firmware <FW>`, but both modes usually support the "Preboot eXecution Environment" (PXE) specification, which allows the provisioning of a {term}`bootloader` over the network.
 
 ## Steps needed
 
@@ -29,32 +29,40 @@ There are several implementations of the DHCP/BOOTP and TFTP protocols available
 
 - Install `dnsmasq` with:
 
-   ```
-   sudo apt install dnsmasq
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo apt install dnsmasq
+  ```
 
 - Put something like this in `/etc/dnsmasq.d/pxe.conf`:
 
-   ```
-   interface=<your interface>,lo
-   bind-interfaces
-   dhcp-range=<your interface>,192.168.0.100,192.168.0.200
-   dhcp-boot=pxelinux.0
-   dhcp-match=set:efi-x86_64,option:client-arch,7
-   dhcp-boot=tag:efi-x86_64,bootx64.efi
-   enable-tftp
-   tftp-root=/srv/tftp
-   ```
+  ```ini
+  interface=<your interface>,lo
+  bind-interfaces
+  dhcp-range=<your interface>,192.168.0.100,192.168.0.200
+  dhcp-boot=pxelinux.0
+  dhcp-match=set:efi-x86_64,option:client-arch,7
+  dhcp-boot=tag:efi-x86_64,bootx64.efi
+  enable-tftp
+  tftp-root=/srv/tftp
+  ```
 
-```{note}
+:::{note}
 This assumes several things about your network; read `man dnsmasq` or the default `/etc/dnsmasq.conf` for many more options.
-```
+:::
 
 - Restart `dnsmasq` with:
 
-   ```
-   sudo systemctl restart dnsmasq.service
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo systemctl restart dnsmasq.service
+  ```
 
 <!-- XXX: This is an internal note & should not be presented in public, until fixed.
 ## Serve the bootloaders and configuration.
@@ -71,14 +79,22 @@ ln -s /usr/share/cd-boot-images-amd64 /srv/tftp/boot-amd64
 
 - Install TFTP
 
-```
-$ sudo apt install tftpd-hpa
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo apt install tftpd-hpa
+  ```
 
 If the installation is successful, check that the corresponding TFTP service is active using this command:
 
-```
-$ systemctl status tftpd-hpa.service
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+systemctl status tftpd-hpa.service
 ```
 
 It is expected to show **active (running)** in the output messages. We will also assume your TFTP root path is `/srv/tftp` for the remainder of this guide.
@@ -87,117 +103,149 @@ It is expected to show **active (running)** in the output messages. We will also
 
 - Download the latest live server ISO for the release you want to install:
 
-   ```
-   wget http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  wget http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
+  ```
 
 - Mount it:
 
-   ```
-   sudo mount noble-live-server-amd64.iso /mnt
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo mount noble-live-server-amd64.iso /mnt
+  ```
 
 - Copy the kernel and `initrd` from it to the TFTP directory served by `dnsmasq`:
 
-   ```
-   sudo cp /mnt/casper/{vmlinuz,initrd} /srv/tftp/
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo cp /mnt/casper/{vmlinuz,initrd} /srv/tftp/
+  ```
 
 ### Set up the files for UEFI booting
 
 - Copy the signed shim binary into place:
 
-   ```
-   apt download shim-signed
-   dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O | sudo tee /srv/tftp/bootx64.efi >/dev/null
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  apt download shim-signed
+  dpkg-deb --fsys-tarfile shim-signed*deb | tar x ./usr/lib/shim/shimx64.efi.signed.latest -O | sudo tee /srv/tftp/bootx64.efi >/dev/null
+  ```
 
 - Copy the signed GRUB binary into place:
 
-   ```
-   apt download grub-efi-amd64-signed
-   dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O | sudo tee /srv/tftp/grubx64.efi >/dev/null
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  apt download grub-efi-amd64-signed
+  dpkg-deb --fsys-tarfile grub-efi-amd64-signed*deb | tar x ./usr/lib/grub/x86_64-efi-signed/grubnetx64.efi.signed -O | sudo tee /srv/tftp/grubx64.efi >/dev/null
+  ```
 
 - GRUB also needs a font to be available over TFTP:
 
-   ```
-   apt download grub-common
-   dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O | sudo tee /srv/tftp/unicode.pf2 >/dev/null
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  apt download grub-common
+  dpkg-deb --fsys-tarfile grub-common*deb | tar x ./usr/share/grub/unicode.pf2 -O | sudo tee /srv/tftp/unicode.pf2 >/dev/null
+  ```
 
 - Create `/srv/tftp/grub/grub.cfg` that contains:
 
-   ```
-   sudo mkdir -p /srv/tftp/grub/
+  ```sh
+  sudo mkdir -p /srv/tftp/grub/
 
-   sudo tee /srv/tftp/grub/grub.cfg >/dev/null <<EOF
-   set default="0"
-   set timeout=-1
+  sudo tee /srv/tftp/grub/grub.cfg >/dev/null <<EOF
+  set default="0"
+  set timeout=-1
 
-   if loadfont unicode ; then
-      set gfxmode=auto
-      set locale_dir=$prefix/locale
-      set lang=en_US
-   fi
-   terminal_output gfxterm
+  if loadfont unicode ; then
+     set gfxmode=auto
+     set locale_dir=$prefix/locale
+     set lang=en_US
+  fi
+  terminal_output gfxterm
 
-   set menu_color_normal=white/black
-   set menu_color_highlight=black/light-gray
-   if background_color 44,0,30; then
-      clear
-   fi
+  set menu_color_normal=white/black
+  set menu_color_highlight=black/light-gray
+  if background_color 44,0,30; then
+     clear
+  fi
 
-   function gfxmode {
-      set gfxpayload="${1}"
-      if [ "${1}" = "keep" ]; then
-         set vt_handoff=vt.handoff=7
-      else
-         set vt_handoff=
-      fi
-   }
+  function gfxmode {
+     set gfxpayload="${1}"
+     if [ "${1}" = "keep" ]; then
+        set vt_handoff=vt.handoff=7
+     else
+        set vt_handoff=
+     fi
+  }
 
-   set linux_gfx_mode=keep
+  set linux_gfx_mode=keep
 
-   export linux_gfx_mode
+  export linux_gfx_mode
 
-   menuentry 'Ubuntu 24.04' {
-      gfxmode $linux_gfx_mode
-      linux /vmlinuz $vt_handoff quiet splash root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
-      initrd /initrd
-   }
-   EOF
-   ```
+  menuentry 'Ubuntu 24.04' {
+     gfxmode $linux_gfx_mode
+     linux /vmlinuz $vt_handoff quiet splash root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
+     initrd /initrd
+  }
+  EOF
+  ```
 
 ### Set up the files for legacy boot
 
 - Download `pxelinux.0` and put it into place:
 
-   ```
-   wget http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/pxelinux.0
-   mkdir -p /srv/tftp
-   mv pxelinux.0 /srv/tftp/
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  wget http://archive.ubuntu.com/ubuntu/dists/focal/main/installer-amd64/current/legacy-images/netboot/pxelinux.0
+  mkdir -p /srv/tftp
+  mv pxelinux.0 /srv/tftp/
+  ```
 
 - Ensure the `syslinux-common` package is installed, then:
 
-   ```
-   cp /usr/lib/syslinux/modules/bios/ldlinux.c32 /srv/tftp/
-   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  cp /usr/lib/syslinux/modules/bios/ldlinux.c32 /srv/tftp/
+  ```
 
 - Create `/srv/tftp/pxelinux.cfg/default` containing:
 
-   ```
-    DEFAULT install
-    LABEL install
-      KERNEL vmlinuz
-      INITRD initrd
-      APPEND root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
-   ```
+  ```text
+   DEFAULT install
+   LABEL install
+     KERNEL vmlinuz
+     INITRD initrd
+     APPEND root=/dev/ram0 ramdisk_size=1500000 cloud-config-url=/dev/null ip=dhcp url=http://cdimage.ubuntu.com/ubuntu-server/noble/daily-live/current/noble-live-server-amd64.iso
+  ```
 
-```{note}
+:::{note}
 Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-init from downloading the ISO twice.
-```
+:::
 
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
 

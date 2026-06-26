@@ -20,7 +20,7 @@ Hyper-V allows Ubuntu to be run in parallel or in isolation on Windows operating
 The following are typical [system requirements for Hyper-V](https://learn.microsoft.com/en-us/windows-server/virtualization/hyper-v/system-requirements-for-hyper-v-on-windows):
 
 * A 64-bit processor with Second Level Address Translation (SLAT)
-* CPU support for virtualization extensions and virtualization enabled in the system BIOS/EFI
+* CPU support for virtualization extensions and virtualization enabled in the system {term}`BIOS`/EFI
 * Minimum of 4 GB of memory, recommended 8 GB
 * Minimum of 5 GB of disk space, recommended 15 GB
 
@@ -52,7 +52,7 @@ The following steps apply to Windows 10 and Windows 11 editions.
 
 1. Run the following command:
    
-   ```
+   ```powershell
    Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
    ```
 

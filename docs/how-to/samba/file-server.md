@@ -9,19 +9,23 @@ myst:
 
 One of the most common ways to network Ubuntu and Windows computers is to configure Samba as a *file server*. It can be set up to share files with Windows clients, as we'll see in this section. 
 
-The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see [Share Access Control](share-access-controls.md).
+The server will be configured to share files with any client on the network without prompting for a password. If your environment requires stricter Access Controls see {ref}`Share Access Control <share-access-controls>`.
 
-```{warning}
+:::{warning}
 If you use **Samba and authd** at the same time, you must specify user and group mapping. Otherwise, you will encounter permission issues due to mismatched user and group identifiers.
 
 If you *are* using Samba with authd, you should follow the instructions in the [steps for the server](https://documentation.ubuntu.com/authd/edge-docs/howto/use-with-samba/#steps-for-the-server) guide in the authd documentation instead.
-```
+:::
 
 ## Install Samba
 
 The first step is to install the `samba` package. From a terminal prompt enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install samba
 ```
 
@@ -31,19 +35,19 @@ That's all there is to it; you are now ready to configure Samba to share files.
 
 The main Samba configuration file is located in `/etc/samba/smb.conf`. The default configuration file contains a significant number of comments, which document various configuration directives.
 
-```{note}
+:::{note}
 Not all available options are included in the default configuration file. See the [`smb.conf` man page](https://www.samba.org/samba/docs/current/man-html/smb.conf.5.html) or the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/) for more details.
-```
+:::
 
-First, edit the `workgroup` parameter in the *\[global\]* section of `/etc/samba/smb.conf` and change it to better match your environment:
+First, edit the `workgroup` parameter in the *`[global]`* section of `/etc/samba/smb.conf` and change it to better match your environment:
 
-```text
+```ini
 workgroup = EXAMPLE
 ```
 
 Create a new section at the bottom of the file, or uncomment one of the examples, for the directory you want to share:
 
-```text
+```ini
 [share]
     comment = Ubuntu File Server Share
     path = /srv/samba/share
@@ -59,9 +63,9 @@ A short description of the share. Adjust to fit your needs.
 - **`path`**
 The path to the directory you want to share.
     
-  ```{note}
+  :::{note}
   This example uses `/srv/samba/sharename` because, according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv`](https://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) is where site-specific data should be served. Technically, Samba shares can be placed anywhere on the {term}`filesystem` as long as the permissions are correct, but adhering to standards is recommended.
-  ```
+  :::
 
 - **`browsable`**
 Enables Windows clients to browse the shared directory using Windows Explorer.
@@ -78,8 +82,18 @@ Determines the permissions that new files will have when created.
 
 Now that Samba is configured, the directory needs to be created and the permissions changed. From a terminal, run the following commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -p /srv/samba/share
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown nobody:nogroup /srv/samba/share/
 ```
 
@@ -89,13 +103,17 @@ The `-p` switch tells `mkdir` to create the entire directory tree if it doesn't 
 
 Finally, restart the Samba services to enable the new configuration by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart smbd.service nmbd.service
 ```
 
-```{warning}
-Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see [Share Access Control](share-access-controls.md).
-```
+:::{warning}
+Once again, the above configuration gives full access to any client on the local network. For a more secure configuration see {ref}`Share Access Control <share-access-controls>`.
+:::
 
 From a Windows client you should now be able to browse to the Ubuntu file server and see the shared directory. If your client doesn't show your share automatically, try to access your server by its IP address, e.g. `\\192.168.1.1`, in a Windows Explorer window. To check that everything is working try creating a directory from Windows.
 
@@ -105,10 +123,10 @@ The file share named `[share]` and the path `/srv/samba/share` used in this exam
 
 ## Further reading
 
-  - For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
+- For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
 
-  - The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
 
-  - O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
+- O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
 
-  - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.

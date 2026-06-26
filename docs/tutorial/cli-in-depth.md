@@ -227,26 +227,8 @@ There is a related form called a **here-document**, written as `<<`. It lets us 
 :host: tutorial
 :dir: ~
 cat > greeting.txt << EOF
-```
-```{terminal}
-:copy:
-:user: ubuntu
-:host: tutorial
-:dir: ~
 Hello from the terminal!
-```
-```{terminal}
-:copy:
-:user: ubuntu
-:host: tutorial
-:dir: ~
 This text is going into a file.
-```
-```{terminal}
-:copy:
-:user: ubuntu
-:host: tutorial
-:dir: ~
 EOF
 ```
 
@@ -327,9 +309,9 @@ errors.txt  file-list.txt  greeting.txt  output.txt
 ubuntu
 ```
 
-```{note}
+:::{note}
 On Linux, processes declare whether they have "succeeded" or not with an **exit code**. An exit code (or "exit status") is a number from 0--255 that a process gives to its parent upon completion. "Success" is defined by exiting with code `0`, with *all* other values indicating different types of failures. These might be specific to a particular program, but the generic failure status will usually be exit code `1`. You can use `exit n` to immediately exit with code `n`.
-```
+:::
 
 Often we want the second command to run *only* if the first one succeeded. We use `&&` for this:
 
@@ -377,23 +359,35 @@ A few other operators are useful to know. Try each of these out, both with and w
 Background execution; `&`
 : Runs a command in the background. The shell prompt returns immediately, and the command continues running. Let's compare the difference in running `sleep 10` and then `sleep 10 &`. The `sleep` command doesn't actually *do* anything, it just makes the system wait for the specified number of seconds. So, in this example our prompt disappears for 10 seconds and you can't interact with the terminal during that time. If we *background* it, using `sleep 10 &`, our command prompt returns immediately and we can continue to use the terminal.
 : When we use the ampersand (`&`) to background the process, it returns something like:
-  ```text
+
+  ```{terminal}
+  :output-only:
   [1] 168658
   ```
   This number is the **process ID** (PID); a unique number identifying every process running on your machine. When the background process has finished running, you'll see a message returned that looks like this, so you know it's done:
-  ```text
+
+  ```{terminal}
+  :output-only:
   [1]+  Done                    sleep 10
   ```
 
 Command grouping; `{}`
 : Groups commands together so they share the same output redirection or run as a unit. E.g. to create a quick log file you could run:
-: ```text
+: ```{terminal}
+  :copy:
+  :user: ubuntu
+  :host: tutorial
+  :dir: /tmp
   { echo "System Report"; date; uptime; } > report.txt
   ```
 
 Subshell execution; `()`
 : Run commands in a subshell, where the commands are forgotten the moment they finish running. This is useful for isolating side effects like a `cd` -- the directory change does not affect the current shell.
-: ```text
+: ```{terminal}
+  :copy:
+  :user: ubuntu
+  :host: tutorial
+  :dir: /tmp
   (export NAME="Alice"; echo "Hello $NAME")
   echo "Name is: $NAME"
   ```
@@ -407,7 +401,7 @@ Let's return home before continuing:
 :copy:
 :user: ubuntu
 :host: tutorial
-:dir: /tmp
+:dir: /tmp 
 cd ~
 ```
 
@@ -511,7 +505,6 @@ unset GREETING
 :host: tutorial
 :dir: ~
 echo $GREETING
-
 ```
 
 This time we get no output, because the variable no longer exists.
@@ -853,6 +846,12 @@ This will take you out of the VM and back to your live machine. Then, you can ru
 :host: tutorial
 :dir: ~
 multipass delete tutorial
+```
+```{terminal}
+:copy:
+:user: ubuntu
+:host: tutorial
+:dir: ~
 multipass purge
 ```
 

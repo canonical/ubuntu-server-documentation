@@ -12,203 +12,283 @@ This non-interactive installation uses `autoinstall`, which can be considered th
 The example logical partition (LPAR) here uses zFCP storage and is connected to a VLAN network.
 For a {term}`DASD` and a non-VLAN network example, please see the {ref}`non-interactive IBM z/VM (s390x) auto-installation <non-interactive-ibm-z-vm-autoinstall-s390x>` guide.
 
-* Start with the preparation of the (FTP) install server (if it doesn't already exist).
+Start with the preparation of the (FTP) install server (if it doesn't already exist).
 
-  ```bash
-  user@local:~$ ssh admin@installserver.local
-  admin@installserver:~$ mkdir -p /srv/ftp/ubuntu-daily-live-server-20.04
-  admin@installserver:~$ wget http://cdimage.ubuntu.com/ubuntu-server/focal/daily-live/current/focal-live-server-s390x.iso --directory-prefix=/srv/ftp/ubuntu-daily-live-server-20.04
-  --2020-06-26 12:18:48--  http://cdimage.ubuntu.com/ubuntu-server/focal/daily-live/current/focal-live-server-s390x.iso
-  Resolving cdimage.ubuntu.com (cdimage.ubuntu.com)... 2001:67c:1560:8001::1d, 2001:67c:1360:8001::28, 2001:67c:1360:8001::27, 
-   ...
-  Connecting to cdimage.ubuntu.com (cdimage.ubuntu.com)|2001:67c:1560:8001::1d|:80... connected.
-  HTTP request sent, awaiting response... 200 OK
-  Length: 700952576 (668M) [application/x-iso9660-image]
-  Saving to: ‘focal-live-server-s390x.iso’
-  
-  focal-live-server-s 100%[===================>] 668.48M  2.73MB/s    in 4m 54s
-  
-  2020-06-26 12:23:42 (2.27 MB/s) - ‘focal-live-server-s390x.iso’ saved [700952576/700952576]
-  admin@installserver:~$
-  ```
-
-* The ISO image needs to be extracted now. Since files in its boot folder need to be modified, loopback mount is not an option here:
-
-  ```bash
-  admin@installserver:~$ cd /srv/ftp/ubuntu-daily-live-server-20.04
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ mkdir iso
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ sudo mount -o loop ./focal-live-server-s390x.iso ./iso
-  [sudo] password for admin: 
-  mount: /home/user/iso-test/iso: WARNING: device write-protected, mounted read-only.
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ ls -l
-  total 684530
-  -rw-rw-r--  1 user user 700952576 Jun 26 10:12 focal-live-server-s390x.iso
-  dr-xr-xr-x 10 root    root         2048 Jun 26 10:12 iso
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ rsync -rtvz ./iso/ . && sync
-  sending incremental file list
-  skipping non-regular file "ubuntu"
-  skipping non-regular file "ubuntu-ports"
-  ./
-  README.diskdefines
-  boot.catalog
-  md5sum.txt
-  ubuntu.ins
-  skipping non-regular file "dists/stable"
-  skipping non-regular file "dists/unstable"
-  .disk/
-  .disk/base_installable
-  .disk/casper-uuid-generic
-  .disk/cd_type
-  .disk/info
-  boot/
-  boot/README.boot
-  boot/initrd.off
-  boot/initrd.siz
-  boot/initrd.ubuntu
-  boot/kernel.ubuntu
-  boot/parmfile.ubuntu
-  boot/ubuntu.exec
-  boot/ubuntu.ikr
-  boot/ubuntu.ins
-  casper/
-    ...
-  sent 681,509,758 bytes  received 1,857 bytes  22,344,643.11 bytes/sec
-  total size is 700,317,941  speedup is 1.03
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ ls -l
-  total 684578
-  dr-xr-xr-x  2 user user      4096 Jun 26 10:12 boot
-  -r--r--r--  1 user user      2048 Jun 26 10:12 boot.catalog
-  dr-xr-xr-x  3 user user      4096 Jun 26 10:12 casper
-  dr-xr-xr-x  3 user user      4096 Jun 26 10:11 dists
-  -rw-rw-r--  1 user user 700952576 Jun 26 10:12 focal-live-server-s390x.iso
-  dr-xr-xr-x  2 user user      4096 Jun 26 10:11 install
-  dr-xr-xr-x 10 root    root         2048 Jun 26 10:12 iso
-  -r--r--r--  1 user user      4944 Jun 26 10:12 md5sum.txt
-  dr-xr-xr-x  2 user user      4096 Jun 26 10:11 pics
-  dr-xr-xr-x  3 user user      4096 Jun 26 10:11 pool
-  dr-xr-xr-x  2 user user      4096 Jun 26 10:11 preseed
-  -r--r--r--  1 user user       236 Jun 26 10:11 README.diskdefines
-  -r--r--r--  1 user user       185 Jun 26 10:12 ubuntu.ins
-  ```
-
-* Now create `.ins` and parmfiles dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default `.ins` and parmfiles that are shipped with the ISO image:
-
-  ```bash
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ chmod -R +rw ./boot
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ cp ./boot/ubuntu.ins ./boot/ubuntu_zlinlpar.ins
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ cp ./boot/parmfile.ubuntu ./boot/parmfile.zlinlpar
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ 
-  ```
-  ```bash  
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ vi ./boot/ubuntu_zlinlpar.ins
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ cat ./boot/ubuntu_zlinlpar.ins
-  * Ubuntu for z Series (default kernel)
-  kernel.ubuntu 0x00000000
-  initrd.off 0x0001040c
-  initrd.siz 0x00010414
-  parmfile.zlinlpar 0x00010480
-  initrd.ubuntu 0x01000000
-  admin@installserver:~$ 
-    ```
-    ```bash
-    admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ vi ./boot/parmfile.zlinlpar
-    admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ cat ./boot/parmfile.zlinlpar
-    ```
-    ```bash
-   ip=10.11.12.42::10.11.12.1:255.255.255.0:zlinlpar:encc000.4711:none:10.11.12.1 vlan=encc000.4711:encc000 url=http://installserver.local:80/ubuntu-daily-live-server-20.04/focal-live-server-s390x.iso autoinstall ds=nocloud-net;s=http://installserver.local:80/autoinstall/zlinlpar/ --- quiet
-   ```
-
-* Now make sure an FTP server is running in the `installserver` with `/srv/ftp` as ftp-server root (as used in this example).
-
-* Now prepare an *autoinstall* (HTTP) server, which hosts the configuration data for the non-interactive installation.
-
-  ```bash
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ mkdir -p /srv/www/autoinstall/zlinlpar
-  admin@installserver:/srv/ftp/ubuntu-daily-live-server-20.04$ cd /srv/www/autoinstall/zlinlpar
-  admin@installserver:/srv/www/autoinstall/zlinlpar$ 
-  admin@installserver:/srv/www/autoinstall/zlinlpar$ echo "instance-id: $(uuidgen || openssl rand -base64 8)" > meta-data
-  admin@installserver:/srv/www/autoinstall/zlinlpar$ cat meta-data
-  instance-id: 2c2215fb-6a38-417f-b72f-376b1cc44f01
-  admin@installserver:/srv/www/autoinstall/zlinlpar$
-  ```
-  ```bash
-  admin@installserver:/srv/www/autoinstall/zlinlpar$ vi user-data
-  admin@installserver:/srv/www/autoinstall/zlinlpar$ cat user-data
-  #cloud-config
-  autoinstall:
-    version: 1
-    refresh-installer:
-      update: yes
-    reporting:
-      builtin:
-        type: print
-    apt:
-      preserve_sources_list: false
-      primary:
-      - arches: [amd64, i386]
-        uri: http://archive.ubuntu.com/ubuntu
-      - arches: [default]
-        uri: http://ports.ubuntu.com/ubuntu-ports
-    keyboard:
-      layout: en
-      variant: us
-    locale: en_US
-    identity:
-      hostname: zlinlpar
-      password: 
-  "$6$ebJ1f8wxED22bTL4F46P0"
-        username: ubuntu
-      user-data:
-        timezone: America/Boston
-        users:
-          - name: ubuntu
-            password: 
-  "$6$KwuxED22bTL4F46P0"
-            lock_passwd: false
-      early-commands:
-        - touch /tmp/lets_activate_the_s390x_devices
-        - chzdev zfcp -e e000
-        - chzdev zfcp -e e100
-        - chzdev zfcp-lun -e --online
-        - touch /tmp/s390x_devices_activation_done
-      network:
-        ethernets:
-          encc000: {}
-        version: 2
-        vlans:
-          encc000.4711:
-            addresses: [10.11.12.42/24]
-            gateway4: 10.11.12.1
-            id: 4711
-            link: encc000
-            nameservers:
-              addresses: [10.11.12.1]
-      ssh:
-        install-server: true
-        allow-pw: true
-        authorized-keys: ['ssh-rsa  meQwtZ user@workstation # ssh-import-id lp:user']
-    admin@installserver:~$
-  ```
-
-* For s390x installations the `early-commands` section is the interesting part:
-
-  ```bash
-  early-commands:
-    - touch /tmp/lets_activate_the_s390x_devices
-    - chzdev zfcp -e e000
-    - chzdev zfcp -e e100
-    - chzdev zfcp-lun -e --online
-    - touch /tmp/s390x_devices_activation_done
-  ```
-  The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
-
-  In this particular example, two zFCP hosts (host-bus-adapters) are enabled via their addresses *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain logical unit numbers (LUNs) assigned that are all automatically discovered and activated by `chzdev zfcp-lun -e --online`.
-
-  Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a QETH device activation looks like: `chzdev qeth -e c000`.
-
-```{seealso}
-For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) pages.
+```{terminal}
+:copy:
+:user: user
+:host: local
+:dir: ~
+ssh admin@installserver.local
 ```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~
+mkdir -p /srv/ftp/ubuntu-daily-live-server-20.04
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~
+wget http://cdimage.ubuntu.com/ubuntu-server/focal/daily-live/current/focal-live-server-s390x.iso --directory-prefix=/srv/ftp/ubuntu-daily-live-server-20.04
+
+--2020-06-26 12:18:48--  http://cdimage.ubuntu.com/ubuntu-server/focal/daily-live/current/focal-live-server-s390x.iso
+Resolving cdimage.ubuntu.com (cdimage.ubuntu.com)... 2001:67c:1560:8001::1d, 2001:67c:1360:8001::28, 2001:67c:1360:8001::27, 
+  ...
+Connecting to cdimage.ubuntu.com (cdimage.ubuntu.com)|2001:67c:1560:8001::1d|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 700952576 (668M) [application/x-iso9660-image]
+Saving to: ‘focal-live-server-s390x.iso’
+
+focal-live-server-s 100%[===================>] 668.48M  2.73MB/s    in 4m 54s
+
+2020-06-26 12:23:42 (2.27 MB/s) - ‘focal-live-server-s390x.iso’ saved [700952576/700952576]
+```
+
+The ISO image needs to be extracted now. Since files in its boot folder need to be modified, loopback mount is not an option here:
+
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~
+cd /srv/ftp/ubuntu-daily-live-server-20.04
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+mkdir iso
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+sudo mount -o loop ./focal-live-server-s390x.iso ./iso
+
+[sudo] password for admin: 
+mount: /home/user/iso-test/iso: WARNING: device write-protected, mounted read-only.
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+ls -l
+
+total 684530
+-rw-rw-r--  1 user user 700952576 Jun 26 10:12 focal-live-server-s390x.iso
+dr-xr-xr-x 10 root    root         2048 Jun 26 10:12 iso
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+rsync -rtvz ./iso/ . && sync
+
+sending incremental file list
+skipping non-regular file "ubuntu"
+skipping non-regular file "ubuntu-ports"
+./
+README.diskdefines
+boot.catalog
+md5sum.txt
+ubuntu.ins
+skipping non-regular file "dists/stable"
+skipping non-regular file "dists/unstable"
+.disk/
+.disk/base_installable
+.disk/casper-uuid-generic
+.disk/cd_type
+.disk/info
+boot/
+boot/README.boot
+boot/initrd.off
+boot/initrd.siz
+boot/initrd.ubuntu
+boot/kernel.ubuntu
+boot/parmfile.ubuntu
+boot/ubuntu.exec
+boot/ubuntu.ikr
+boot/ubuntu.ins
+casper/
+  ...
+sent 681,509,758 bytes  received 1,857 bytes  22,344,643.11 bytes/sec
+total size is 700,317,941  speedup is 1.03
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+ls -l
+
+total 684578
+dr-xr-xr-x  2 user user      4096 Jun 26 10:12 boot
+-r--r--r--  1 user user      2048 Jun 26 10:12 boot.catalog
+dr-xr-xr-x  3 user user      4096 Jun 26 10:12 casper
+dr-xr-xr-x  3 user user      4096 Jun 26 10:11 dists
+-rw-rw-r--  1 user user 700952576 Jun 26 10:12 focal-live-server-s390x.iso
+dr-xr-xr-x  2 user user      4096 Jun 26 10:11 install
+dr-xr-xr-x 10 root    root         2048 Jun 26 10:12 iso
+-r--r--r--  1 user user      4944 Jun 26 10:12 md5sum.txt
+dr-xr-xr-x  2 user user      4096 Jun 26 10:11 pics
+dr-xr-xr-x  3 user user      4096 Jun 26 10:11 pool
+dr-xr-xr-x  2 user user      4096 Jun 26 10:11 preseed
+-r--r--r--  1 user user       236 Jun 26 10:11 README.diskdefines
+-r--r--r--  1 user user       185 Jun 26 10:12 ubuntu.ins
+```
+
+Now create `.ins` and parmfiles dedicated to the LPAR that will be installed (here `zlinlpar`), based on the default `.ins` and parmfiles that are shipped with the ISO image:
+
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+chmod -R +rw ./boot
+cp ./boot/ubuntu.ins ./boot/ubuntu_zlinlpar.ins
+cp ./boot/parmfile.ubuntu ./boot/parmfile.zlinlpar
+
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+vi ./boot/ubuntu_zlinlpar.ins
+cat ./boot/ubuntu_zlinlpar.ins
+
+* Ubuntu for z Series (default kernel)
+kernel.ubuntu 0x00000000
+initrd.off 0x0001040c
+initrd.siz 0x00010414
+parmfile.zlinlpar 0x00010480
+initrd.ubuntu 0x01000000
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: /srv/ftp/ubuntu-daily-live-server-20.04
+vi ./boot/parmfile.zlinlpar
+cat ./boot/parmfile.zlinlpar
+
+ip=10.11.12.42::10.11.12.1:255.255.255.0:zlinlpar:encc000.4711:none:10.11.12.1 vlan=encc000.4711:encc000 url=http://installserver.local:80/ubuntu-daily-live-server-20.04/focal-live-server-s390x.iso autoinstall ds=nocloud-net;s=http://installserver.local:80/autoinstall/zlinlpar/ --- quiet
+```
+
+Now make sure an FTP server is running in the `installserver` with `/srv/ftp` as ftp-server root (as used in this example).
+
+Now prepare an *autoinstall* (HTTP) server, which hosts the configuration data for the non-interactive installation.
+
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/ftp/ubuntu-daily-live-server-20.04
+mkdir -p /srv/www/autoinstall/zlinlpar
+cd /srv/www/autoinstall/zlinlpar
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/www/autoinstall/zlinlpar
+echo "instance-id: $(uuidgen || openssl rand -base64 8)" > meta-data
+cat meta-data
+
+instance-id: 2c2215fb-6a38-417f-b72f-376b1cc44f01
+admin@installserver:/srv/www/autoinstall/zlinlpar$
+```
+```{terminal}
+:copy:
+:user: admin
+:host: installserver
+:dir: ~/srv/www/autoinstall/zlinlpar
+vi user-data
+cat user-data
+
+#cloud-config
+autoinstall:
+  version: 1
+  refresh-installer:
+    update: yes
+  reporting:
+    builtin:
+      type: print
+  apt:
+    preserve_sources_list: false
+    primary:
+    - arches: [amd64, i386]
+      uri: http://archive.ubuntu.com/ubuntu
+    - arches: [default]
+      uri: http://ports.ubuntu.com/ubuntu-ports
+  keyboard:
+    layout: en
+    variant: us
+  locale: en_US
+  identity:
+    hostname: zlinlpar
+    password: 
+"$6$ebJ1f8wxED22bTL4F46P0"
+      username: ubuntu
+    user-data:
+      timezone: America/Boston
+      users:
+        - name: ubuntu
+          password: 
+"$6$KwuxED22bTL4F46P0"
+          lock_passwd: false
+    early-commands:
+      - touch /tmp/lets_activate_the_s390x_devices
+      - chzdev zfcp -e e000
+      - chzdev zfcp -e e100
+      - chzdev zfcp-lun -e --online
+      - touch /tmp/s390x_devices_activation_done
+    network:
+      ethernets:
+        encc000: {}
+      version: 2
+      vlans:
+        encc000.4711:
+          addresses: [10.11.12.42/24]
+          gateway4: 10.11.12.1
+          id: 4711
+          link: encc000
+          nameservers:
+            addresses: [10.11.12.1]
+    ssh:
+      install-server: true
+      allow-pw: true
+      authorized-keys: ['ssh-rsa  meQwtZ user@workstation # ssh-import-id lp:user']
+```
+
+For s390x installations the `early-commands` section is the interesting part:
+
+```bash
+early-commands:
+  - touch /tmp/lets_activate_the_s390x_devices
+  - chzdev zfcp -e e000
+  - chzdev zfcp -e e100
+  - chzdev zfcp-lun -e --online
+  - touch /tmp/s390x_devices_activation_done
+```
+
+The first and last `early-commands` are optional; they only frame and indicate the real s390x command activation.
+
+In this particular example, two zFCP hosts (host-bus-adapters) are enabled via their addresses *e000* (`chzdev zfcp -e e000`) and *e100* (`chzdev zfcp -e e000`). These have certain logical unit numbers (LUNs) assigned that are all automatically discovered and activated by `chzdev zfcp-lun -e --online`.
+
+Activation of a direct-access storage device (DASD) would look like this: `chzdev dasd -e 1f00`, and a QETH device activation looks like: `chzdev qeth -e c000`.
+
+:::{seealso}
+For more details about the autoinstall config options, please have a look at the [autoinstall reference](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-reference.html) and [autoinstall schema](https://canonical-subiquity.readthedocs-hosted.com/en/latest/reference/autoinstall-schema.html) pages.
+:::
 
 * Now make sure a HTTP server is running with `/srv/www` as web-server root (in this particular example).
 
@@ -317,41 +397,46 @@ For more details about the autoinstall config options, please have a look at the
   
 * At short notice, you can even log in to the system with the user 'installer' and the temporary password that was given at the end of the boot-up process (see above) of the installation system:
 
-  ```bash
-  user@workstation:~$ ssh installer@zlinlpar
+  ```{terminal}
+  :copy:
+  :user: user
+  :host: workstation
+  :dir: ~
+  ssh installer@zlinlpar
+
   The authenticity of host 'zlinlpar (10.11.12.42)' can't be established.
   ECDSA key fingerprint is SHA256:O/dU/D8jJAEGQcbqKGE9La24IRxUPLpzzs5li9F6Vvk.
   Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
   Warning: Permanently added 'zlinlpar,10.11.12.42' (ECDSA) to the list of known hosts.
   installer@zlinlpar's password: 
   Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-37-generic s390x)
-  
+
    * Documentation:  https://help.ubuntu.com
    * Management:     https://landscape.canonical.com
    * Support:        https://ubuntu.com/pro
-  
+
     System information as of Fri Jun 26 11:08:18 UTC 2020
-  
+
     System load:    1.25      Memory usage: 4%   Processes:       192
     Usage of /home: unknown   Swap usage:   0%   Users logged in: 0
-  
+
   0 updates can be installed immediately.
   0 of these updates are security updates.
-  
-  
+
+
   The list of available updates is more than a week old.
   To check for new updates run: sudo apt update
-  
-  
+
+
   The programs included with the Ubuntu system are free software;
   the exact distribution terms for each program are described in the
   individual files in /usr/share/doc/*/copyright.
-  
+
   Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
   applicable law.
-  
+
   the installer running on /dev/tty1 will perform the autoinstall
-  
+
   press enter to start a shell
   ```
 

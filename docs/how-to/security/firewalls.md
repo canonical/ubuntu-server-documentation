@@ -23,13 +23,21 @@ The default firewall configuration tool for Ubuntu is `ufw`. Developed to ease `
 
 To enable `ufw`, run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw enable
 ```
 
 To disable it, you can use the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw disable
 ```
 
@@ -37,13 +45,21 @@ sudo ufw disable
 
 To open a port (SSH in this case):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw allow 22
 ```
 
 Similarly, to close an opened port:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw deny 22
 ```
 
@@ -51,19 +67,31 @@ sudo ufw deny 22
 
 Rules can also be added using a **numbered** format:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw insert 1 allow 80
 ```
 
 To view the numbered format:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw status numbered
 ```
 
 To remove a rule, use `delete` followed by the rule:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw delete deny 22
 ```
 
@@ -71,7 +99,11 @@ sudo ufw delete deny 22
 
 It is possible to allow access from specific hosts or networks to a port. The following example allows SSH access from host `192.168.0.2` to any IP address on this host:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw allow proto tcp from 192.168.0.2 to any port 22
 ```
 
@@ -81,48 +113,60 @@ Replace `192.168.0.2` with `192.168.0.0/24` to allow SSH access from the entire 
 
 Adding the `--dry-run` option to a `ufw` command will output the resulting rules, but not apply them. For example, the following is what would be applied if opening the HTTP port:
 
-``` bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw --dry-run allow http
 
-    *filter
-    :ufw-user-input - [0:0]
-    :ufw-user-output - [0:0]
-    :ufw-user-forward - [0:0]
-    :ufw-user-limit - [0:0]
-    :ufw-user-limit-accept - [0:0]
-    ### RULES ###
+  *filter
+  :ufw-user-input - [0:0]
+  :ufw-user-output - [0:0]
+  :ufw-user-forward - [0:0]
+  :ufw-user-limit - [0:0]
+  :ufw-user-limit-accept - [0:0]
+  ### RULES ###
 
-    ### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0
-    -A ufw-user-input -p tcp --dport 80 -j ACCEPT
+  ### tuple ### allow tcp 80 0.0.0.0/0 any 0.0.0.0/0
+  -A ufw-user-input -p tcp --dport 80 -j ACCEPT
 
-    ### END RULES ###
-    -A ufw-user-input -j RETURN
-    -A ufw-user-output -j RETURN
-    -A ufw-user-forward -j RETURN
-    -A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT]: "
-    -A ufw-user-limit -j REJECT
-    -A ufw-user-limit-accept -j ACCEPT
-    COMMIT
-    Rules updated
+  ### END RULES ###
+  -A ufw-user-input -j RETURN
+  -A ufw-user-output -j RETURN
+  -A ufw-user-forward -j RETURN
+  -A ufw-user-limit -m limit --limit 3/minute -j LOG --log-prefix "[UFW LIMIT]: "
+  -A ufw-user-limit -j REJECT
+  -A ufw-user-limit-accept -j ACCEPT
+  COMMIT
+  Rules updated
 ```
 
 ### Check the status
 
 To see the firewall status, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw status
 ```
 
 And for more verbose status information use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw status verbose
 ```
 
-```{note}
+:::{note}
 If the port you want to open or close is defined in `/etc/services`, you can use the port name instead of the number. In the above examples, replace `22` with `ssh`.
-```
+:::
 
 This is a quick introduction to using `ufw`. Please refer to the {manpage}`ufw(8)` manual page for more information.
 
@@ -132,37 +176,57 @@ Applications that open ports can include a `ufw` profile, which details the port
 
 To view which applications have installed a profile, run the following in a terminal:
     
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw app list
 ```
 
 Similar to allowing traffic to a port, using an application profile is accomplished by entering:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw allow Samba
 ```
 
 An extended syntax is available as well:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ufw allow from 192.168.0.0/24 to any app Samba
 ```
 
 Replace `Samba` and `192.168.0.0/24` with the application profile you are using and the IP range for your network.
 
-```{note}
+:::{note}
 There is no need to specify the **protocol** for the application, because that information is detailed in the profile. Also, note that the `app` name replaces the `port` number.
-```
+:::
 
 To view details about which ports and protocols, and so on, are defined for an application, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw app info Samba
 ```
 
 Not all applications that require opening a network port come with `ufw` profiles, but if you have profiled an application and want the file to be included with the package, please file a bug against the package in Launchpad.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ubuntu-bug nameofpackage
 ```
 
@@ -223,15 +287,19 @@ COMMIT
 
 For each **Table**, a corresponding `COMMIT` statement is required. In these examples only the `nat` and `filter` tables are shown, but you can also add rules for the `raw` and `mangle` tables.
 
-```{note}
+:::{note}
 In the above example, replace `eth0`, `eth1`, and `192.168.0.0/24` with the appropriate interfaces and IP range for your network.
-```
+:::
 
 #### Restart ufw
 
 Finally, disable and re-enable `ufw` to apply the changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw disable && sudo ufw enable
 ```
 
@@ -255,13 +323,21 @@ net.ipv6.conf.default.forwarding=1
 
 Next, run the `sysctl` command to enable the new settings in the configuration file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl -p
 ```
 
 IP masquerading can now be accomplished with a single `iptables` rule, which may differ slightly based on your network configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o ppp0 -j MASQUERADE
 ```
     
@@ -279,8 +355,18 @@ The above command assumes that your private address space is `192.168.0.0/16` an
 
 Also, each chain in the filter table (the default table, and where most -- or all -- packet filtering occurs) has a default **policy** of `ACCEPT`, but if you are creating a firewall in addition to a gateway device, you may have set the policies to `DROP` or `REJECT`, in which case your masqueraded traffic needs to be allowed through the `FORWARD` chain for the above rule to work:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo iptables -A FORWARD -s 192.168.0.0/16 -o ppp0 -j ACCEPT
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo iptables -A FORWARD -d 192.168.0.0/16 -m state \
 --state ESTABLISHED,RELATED -i ppp0 -j ACCEPT
 ```
@@ -289,7 +375,11 @@ The above commands will allow all connections from your local network to the Int
 
 If you want masquerading to be enabled on reboot, which you probably do, edit `/etc/rc.local` and add any commands used above. For example add the first command with no filtering:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -o ppp0 -j MASQUERADE
 ```
 
@@ -299,7 +389,11 @@ Firewall logs are essential for recognizing attacks, troubleshooting your firewa
 
 If you are using `ufw`, you can turn on logging by entering the following in a terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ufw logging on
 ```
 
@@ -307,7 +401,11 @@ To turn logging off in `ufw`, replace `on` with `off` in the above command:
 
 If you are using `iptables` instead of `ufw`, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo iptables -A INPUT -m state --state NEW -p tcp --dport 80 \
  -j LOG --log-prefix "NEW_HTTP_CONN: "
 ```

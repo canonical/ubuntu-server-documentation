@@ -17,9 +17,13 @@ It's easier to use than you might think, and learning it gives you much more con
 
 ## Understanding the terminal
 
-In our new terminal window, we see a **shell prompt** (sometimes called a command prompt), which is constructed as `your-user-name@your-machine-name` and followed by a dollar sign (`$`). This is where we input commands to the computer.
+In our new terminal window, we see a **shell prompt** (sometimes called a command prompt), which is constructed as `your-username@your-hostname` and followed by a dollar sign (`$`). This is where we input commands to the computer.
 
 ```{terminal}
+:copy:
+:user: your-name
+:host: your-machine-name
+:dir: ~
 Input: The commands you type
 
 Output: The results after running the command
@@ -27,25 +31,17 @@ Output: The results after running the command
 
 The output -- the results of running your commands -- is shown separately, underneath the shell prompt.
 
-```{tip}
+:::{tip}
 You can use your mouse to copy text *into* the terminal by holding the *left mouse button* and dragging your mouse to highlight the text you want to copy. Then, release the left button.
 
 Move your mouse pointer to the terminal window and press the *middle mouse button* (or click the *right mouse button* and select {guilabel}`paste`).
-```
+:::
 
 The **Command Line Interface (CLI)** is the language we use in our terminal to interact with our system. The CLI gives you far more control over your system than the **Graphical User Interface (GUI)** that you may be more familiar with.
 
-In software documentation, you will often see instructions to "run" or "execute" a command (or a set of commands). What this means is: type the command into your terminal at the **shell prompt** and press {kbd}`Enter` on your keyboard. Let's try that out, and launch a new Multipass VM called "tutorial" with the following command:
+In software documentation, you will often see instructions to "run" or "execute" a command (or a set of commands). What this means is: type the command into your terminal at the **shell prompt** and press {kbd}`Enter` on your keyboard. We did this already when we ran the `multipass launch` command to create our VM.
 
-```{terminal}
-:copy:
-:user: user
-:host: computer
-:dir: ~
-multipass launch --name tutorial
-```
-
-The command is sent to the **shell**, which interprets the command and sends it to the operating system, which runs the command. It takes a little time for the `tutorial` instance to be created, but eventually the shell shows output like this:
+The command is sent to the **shell**, which interprets the command and sends it to the operating system, which runs the command. It took a little time for the `tutorial` instance to be created, but eventually the shell showed output like this:
 
 ```{terminal}
 :copy:
@@ -57,7 +53,7 @@ multipass launch --name tutorial
 Launched: tutorial
 ```
 
-We've just successfully run our first command on the CLI!
+So we know that the VM called `tutorial` was created successfully! 
 
 
 ### The shell
@@ -72,17 +68,9 @@ For simple tasks, like renaming a single file, there's little difference between
 
 The real power and efficiency of the shell can be felt when you need to do something many times. You can even automate routine or large/complex tasks with shell scripts and command chaining -- more on that in the next tutorial, though!
 
-The virtual machine provided by Multipass has no Graphical User Interface (GUI). It **abstracts** away all the details of virtualization, which is quite complicated, so we don't have to worry about them. This means we can just open a shell inside our Multipass VM **instance**. Let's do that now by running this command:
+The virtual machine provided by Multipass has no Graphical User Interface (GUI). It **abstracts** away all the details of virtualization, which is quite complicated, so we don't have to worry about them. This means we can just open a shell inside our Multipass VM **instance**, which we did when we ran the `multipass shell tutorial` command:
 
-```{terminal}
-:copy:
-:user: user
-:host: computer
-:dir: ~
-multipass shell tutorial
-```
-
-After we run the command, our terminal window should show us a welcome message like this:
+After we ran the command, our terminal window shows us a welcome message like this:
 
 ```{terminal}
 :copy:
@@ -115,7 +103,7 @@ Enable ESM Apps to receive additional future security updates.
 See https://ubuntu.com/esm or run: sudo pro status
 ```
 
-You've probably noticed that your shell prompt has changed, and now says `ubuntu@tutorial:~$` -- `tutorial` is the name of our virtual machine, and `ubuntu` is the default username in a Multipass virtual machine. This is how we know we're now playing in our virtual sandbox, and not in our physical computer.
+You've probably noticed that your shell prompt has changed, and now says `ubuntu@tutorial:~$` -- `tutorial` is the name of our virtual machine (the hostname), and `ubuntu` is the default username in a Multipass virtual machine. This is how we know we're now playing in our virtual sandbox, and not in our physical computer.
 
 
 ### Other ways to use commands
@@ -536,9 +524,9 @@ Let's say we no longer want `file.txt`. We can use the `rm` command to remove it
 rm file1.txt
 ```
 
-```{warning}
+:::{warning}
 Remember, there is no recycle bin in the Linux terminal -- once you `rm` a file, it is gone. On your real system, double-check what you are deleting before running this command.
-```
+:::
 
 
 ## Understanding file attributes

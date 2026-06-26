@@ -7,9 +7,9 @@ myst:
 (install-nagios)=
 # How to install and configure Nagios Core 3
 
-```{note}
+:::{note}
 Nagios Core 3 has been deprecated and is now replaced by Nagios Core 4. The `nagios3` package was last supported in Bionic, so subsequent releases should use `nagios4` instead.
-```
+:::
 
 The monitoring of essential servers and services is an important part of system administration. This guide walks through how to install and configure Nagios Core 3 for availability monitoring.
 
@@ -21,7 +21,11 @@ The example in this guide uses two servers with {term}`hostnames <hostname>`: **
 
 First, on `server01`, install the `nagios3` package by entering the following command into your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nagios3 nagios-nrpe-plugin
 ```
 
@@ -29,13 +33,21 @@ You will be asked to enter a password for the **`nagiosadmin`** user. The user's
 
 For example, to change the password for the `nagiosadmin` user, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo htpasswd /etc/nagios3/htpasswd.users nagiosadmin
 ```
 
 To add a user:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo htpasswd /etc/nagios3/htpasswd.users steve
 ```
 
@@ -43,13 +55,17 @@ sudo htpasswd /etc/nagios3/htpasswd.users steve
 
 Next, on `server02` install the `nagios-nrpe-server` package. From a terminal on `server02` enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nagios-nrpe-server
 ```
 
-```{note}
+:::{note}
 NRPE allows you to execute local checks on remote hosts. There are other ways of accomplishing this through other Nagios plugins, as well as other checks.
-```
+:::
 
 ## Configuration overview
 
@@ -65,9 +81,9 @@ There are a couple of directories containing Nagios configuration and check file
 
 There are multiple checks Nagios can be configured to execute for any given host. For this example, Nagios will be configured to check disk space, {term}`DNS`, and a MySQL {term}`hostgroup`. The DNS check will be on `server02`, and the MySQL hostgroup will include both `server01` and `server02`.
 
-```{note}
+:::{note}
 See these guides for details on {ref}`setting up Apache <introduction-to-web-services>`, {ref}`Domain Name Service <install-dns>`, and {ref}`MySQL <install-mysql>`.
-```
+:::
 
 Additionally, there are some terms that once explained will hopefully make understanding Nagios configuration easier:
 
@@ -91,14 +107,18 @@ Large Nagios installations can be quite complex to configure. It is usually best
 
 First, create a **host** configuration file for `server02`. Unless otherwise specified, run all these commands on `server01`. In a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/nagios3/conf.d/localhost_nagios2.cfg \
 /etc/nagios3/conf.d/server02.cfg
 ```
 
-```{note}
+:::{note}
 In all command examples, replace "`server01`", "`server02`", `172.18.100.100`, and `172.18.100.101` with the host names and IP addresses of your servers.
-```
+:::
 
 ### Edit the host config file    
 
@@ -123,7 +143,11 @@ define service {
 
 Restart the Nagios daemon to enable the new configuration:
 
-```bash    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart nagio3.service
 ```
 
@@ -155,17 +179,25 @@ define hostgroup {
 
 The Nagios check needs to authenticate to MySQL. To add a `nagios` user to MySQL enter:
 
-```bash    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysql -u root -p -e "create user nagios identified by 'secret';"
 ```
 
-```{note}
+:::{note}
 The `nagios` user will need to be added to all hosts in the **mysql-servers** hostgroup.
-```
+:::
 
 Restart nagios to start checking the MySQL servers.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart nagios3.service
 ```
 
@@ -199,13 +231,21 @@ command[check_all_disks]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -e
     
 Finally, restart `nagios-nrpe-server`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart nagios-nrpe-server.service
 ```
     
 Also, on `server01` restart Nagios:
 
-```bash    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart nagios3.service
 ```
 

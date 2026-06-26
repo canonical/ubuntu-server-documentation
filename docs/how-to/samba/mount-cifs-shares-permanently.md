@@ -28,7 +28,11 @@ In order to use this guide, you will need to ensure that your network connection
 
 To install CIFS, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install cifs-utils
 ```
 
@@ -36,7 +40,11 @@ sudo apt-get install cifs-utils
 
 First, let's create the mount directory. You will need a separate directory for each mount:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir /media/windowsshare
 ```
 
@@ -56,7 +64,11 @@ Where:
 
 After you add the entry to `/etc/fstab`, type:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /media/windowsshare
 ```
 
@@ -74,7 +86,11 @@ This is not a good idea however: `/etc/fstab` is readable by everyone -- and so 
 
 Using a text editor, create a file for your remote server’s logon credential:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 gedit ~/.smbcredentials
 ```
 
@@ -90,7 +106,11 @@ Save the file and exit the editor.
 
 Change the permissions of the file to prevent unwanted access to your credentials:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 chmod 600 ~/.smbcredentials
 ```
 
@@ -104,7 +124,11 @@ Save the file and exit the editor.
 
 Finally, test mounting the share by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /media/windowsshare
 ```
 
@@ -130,13 +154,21 @@ In addition to the initial assumptions, we're assuming here that your username a
 
 ### Install `libpam-mount`
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-get install libpam-mount
 ```
 
 Edit `/etc/security/pam_mount.conf.xml` using your preferred text editor.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo gedit /etc/security/pam_mount.conf.xml
 ```
 
@@ -146,13 +178,17 @@ Remove the commenting tags `(<!--` and `-->)` surrounding the section called `<l
 
 Save the file when done. With this in place, users can create their own `~/.pam_mount.conf.xml`.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 gedit ~/.pam_mount.conf.xml
 ```
 
 Add the following:
 
-```text
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 
 <pam_mount>

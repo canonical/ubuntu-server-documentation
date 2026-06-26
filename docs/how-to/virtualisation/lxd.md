@@ -23,7 +23,11 @@ You can visit [the official LXD documentation](https://canonical.com/lxd/docs/de
 
 LXD is pre-installed on Ubuntu Server cloud images. On other systems, the `lxd` package can be installed using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo snap install lxd
 ```
 
@@ -33,21 +37,29 @@ This will install the self-contained LXD snap package.
 
 In order to use LXD, some basic settings need to be configured first. This is done by running:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxd init
 ```
 
 This will allow you to choose:
 
-  - Directory, [Btrfs](https://btrfs.readthedocs.io/), or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
+- Directory, [Btrfs](https://btrfs.readthedocs.io/), or [ZFS](https://openzfs.org/wiki/Main_Page) container backend. If you choose ZFS, you can choose which block devices to use, or the size of a file to use as backing store.
 
-  - Availability over the network.
+- Availability over the network.
 
-  - A 'trust password' used by remote clients to vouch for their client certificate.
+- A 'trust password' used by remote clients to vouch for their client certificate.
 
 You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group lxd. If user `joe` is not a member of group `lxd`, you may run:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 gpasswd -a joe lxd
 ```
 
@@ -63,66 +75,108 @@ This section will describe the simplest container tasks.
 
 Every new container is created based on either an image, an existing container, or a container snapshot. At install time, LXD is configured with the following image servers:
 
-  - `ubuntu`: this serves official Ubuntu cloud image releases.
+- `ubuntu`: this serves official Ubuntu cloud image releases.
 
-  - `ubuntu-daily`: this serves official Ubuntu cloud images of the daily development releases.
+- `ubuntu-daily`: this serves official Ubuntu cloud images of the daily development releases.
 
-  - `ubuntu-minimal`: this serves official Ubuntu Minimal cloud image releases.
+- `ubuntu-minimal`: this serves official Ubuntu Minimal cloud image releases.
 
-  - `images`: this server provides unofficial images for a variety of Linux distributions. This is not the recommended server for Ubuntu images.
+- `images`: this server provides unofficial images for a variety of Linux distributions. This is not the recommended server for Ubuntu images.
 
 The command to create and start a container is:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc launch remote:image containername
 ```
 
 To create a virtual machine instead of a container, use:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc launch --vm remote:image vmname
 ```
 
 Alternatively, you can create a container without starting it using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc init remote:image containername
 ```
 
 Images are identified by their hash, but are also aliased. A list of all images available from the Ubuntu Server can be seen using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image list ubuntu:
 ```
 
 To see more information about a particular image, including all the aliases it is known by, you can use:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image info ubuntu:noble
 ```
 
 You can generally refer to an Ubuntu image using the release name (`noble`) or the release number (`24.04`). The `ubuntu` remote knows many aliases such as `24.04`, `noble`, and `lts` which is an alias for the latest supported LTS release. To choose a different architecture, you can specify the desired architecture:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image info ubuntu:lts/arm64
 ```
 
 Now, let's start our first container:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc launch ubuntu:noble n1
 ```
 
 This will download the official current Noble cloud image for your current architecture, then create a container named `n1` using that image, and finally start it. Once the command returns, you can see it using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc list
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc info n1
 ```
 
 and open a shell in it using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc exec n1 -- sudo -i -u ubuntu
 ```
 
@@ -130,7 +184,11 @@ This command provides a proper login shell with full session initialization, inc
 
 A convenient alias that opens a shell without the full login process is:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc shell n1
 ```
 
@@ -142,13 +200,21 @@ Now that the `noble` image has been downloaded, it will be kept in sync until no
 
 By default, LXD is socket activated and configured to listen only on a local UNIX socket. While LXD may not be running when you first look at the process listing, any LXC command will start it up. For instance:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc list
 ```
 
 This will create your client certificate and contact the LXD server for a list of containers. To make the server accessible over the network you can set the http port using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config set core.https_address :8443
 ```
 
@@ -160,13 +226,21 @@ By default, LXD will allow all members of group `lxd` to talk to it over the UNI
 
 Before client `c1` wishes to use remote `r1`, `r1` must be registered using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc remote add r1 r1.example.com:8443
 ```
 
 The fingerprint of r1's certificate will be shown, to allow the user at c1 to reject a false certificate. The server in turn will verify that c1 may be trusted in one of two ways. The first is to register it in advance from any already-registered client, using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config trust add r1 certfile.crt
 ```
 
@@ -186,19 +260,31 @@ Container configuration includes properties like the architecture, limits on res
 
 Devices can be of several types, including UNIX character, UNIX block, network interface, or disk. In order to insert a host mount into a container, a 'disk' device type would be used. For instance, to mount `/opt` in container `c1` at `/opt`, you could use:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config device add c1 opt-mount disk source=/opt path=/opt
 ```
 
 See:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc help config
 ```
 
 for more information about editing container configurations. You may also use:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config edit c1
 ```
 
@@ -210,7 +296,11 @@ Profiles are named collections of configurations which may be applied to more th
 
 To mask a device which would be inherited from a profile but which should not be in the final container, define a device by the same name but of type 'none':
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config device add c1 eth1 none
 ```
 
@@ -218,7 +308,11 @@ lxc config device add c1 eth1 none
 
 Containers all share the same host kernel. This means that there is always an inherent trade-off between features exposed to the container and host security from malicious containers. Containers by default are therefore restricted from features needed to nest child containers. In order to run lxc or lxd containers under a lxd container, the `security.nesting` feature must be set to true:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config set container1 security.nesting true
 ```
 
@@ -230,15 +324,15 @@ In order to run unprivileged (the default in LXD) containers nested under an unp
 
 LXD supports flexible constraints on the resources which containers can consume. The limits come in the following categories:
 
-  - CPU: limit CPU available to the container in several ways
+- CPU: limit CPU available to the container in several ways
 
-  - Disk: configure the priority of I/O requests under load
+- Disk: configure the priority of I/O requests under load
 
-  - RAM: configure memory and swap availability
+- RAM: configure memory and swap availability
 
-  - Network: configure the network priority under load
+- Network: configure the network priority under load
 
-  - Processes: limit the number of concurrent processes in the container
+- Processes: limit the number of concurrent processes in the container
 
 For a full list of limits known to LXD, see [the configuration documentation](https://canonical.com/lxd/docs/latest/reference/instance_options/).
 
@@ -250,7 +344,11 @@ Briefly, in an unprivileged container, 65536 UIDs are 'shifted' into the contain
 
 It is possible to request a container to run without a UID mapping by setting the `security.privileged` flag to true:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc config set c1 security.privileged true
 ```
 
@@ -274,25 +372,41 @@ LXD configures containers for the best balance of host safety and container usab
 
 Containers can be renamed and live-migrated using the `lxc move` command:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc move c1 final-beta
 ```
 
 They can also be snapshotted:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc snapshot c1 snapshot-name
 ```
 
 Later changes to c1 can then be reverted by restoring the snapshot:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc restore c1 snapshot-name
 ```
 
 New containers can also be created by copying a container or snapshot:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc copy c1/snapshot-name new-container
 ```
 
@@ -300,19 +414,31 @@ lxc copy c1/snapshot-name new-container
 
 When a container or container snapshot is ready for consumption by others, it can be published as a new image using;
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc publish c1/snapshot-name --alias foo-2.0
 ```
 
 The published image will be private by default, meaning that LXD will not allow clients without a trusted certificate to see them. If the image is safe for public viewing (i.e. contains no private information), then the 'public' flag can be set, either at publish time using
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc publish c1/snapshot-name --alias foo-2.0 public=true
 ```
 
 or after the fact using
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image edit foo-2.0
 ```
 
@@ -322,8 +448,18 @@ and changing the value of the public field.
 
 Images can be exported as, and imported from, tarballs:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image export foo-2.0 foo-2.0.tar.gz
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc image import foo-2.0.tar.gz --alias foo-2.0 --public
 ```
 
@@ -331,13 +467,21 @@ lxc image import foo-2.0.tar.gz --alias foo-2.0 --public
 
 To view debug information about LXD itself, on a systemd based host use
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 journalctl -u lxd
 ```
 
-Container log files for container c1 may be seen using:
+Container log files for container `c1` may be seen using:
 
-``` 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lxc info c1 --show-log
 ```
 

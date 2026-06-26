@@ -19,9 +19,9 @@ There are two ways to use this replication:
 
 The delta replication sends less data over the network, but is more complex to set up. We will show both in this guide.
 
-```{important}
-You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the [LDAP with TLS guide](ldap-and-tls.md) for details of how to set this up.
-```
+:::{important}
+You **must** have Transport Layer Security (TLS) enabled already before proceeding with this guide. Please consult the {ref}`LDAP with TLS guide <ldap-and-tls>` for details of how to set this up.
+:::
 
 ## Provider configuration - replication user
 
@@ -38,25 +38,37 @@ userPassword: {CRYPT}x
 
 Then add it. If you have set up {ref}`passwordless access for root <ldap-peercred-setup>`, you can use:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f replicator.ldif
 ```
 
 Otherwise, use simple bind:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapadd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -f replicator.ldif
 ```
 
 Now set a password for it with `ldappasswd`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldappasswd -x -ZZ -H ldap://ldap01.example.com -D cn=admin,dc=example,dc=com -W -S cn=replicator,dc=example,dc=com
 ```
 
-```{note}
+:::{note}
 Adjust the server URI in the `-H` parameter if needed to match your deployment.
-```
+:::
 
 The next step is to give this replication user the correct privileges, i.e.:
 
@@ -65,13 +77,13 @@ The next step is to give this replication user the correct privileges, i.e.:
 
 For that we need to update the ACLs on the provider. Since ordering matters, first check what the existing ACLs look like on the `dc=example,dc=com` tree:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -Y EXTERNAL -H ldapi:/// -LLL -b cn=config '(olcSuffix=dc=example,dc=com)' olcAccess
-```
 
-Output:
-
-```text
 dn: olcDatabase={1}mdb,cn=config
 olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
 olcAccess: {1}to attrs=shadowLastChange by self write by * read
@@ -96,7 +108,11 @@ olcLimits: dn.exact="cn=replicator,dc=example,dc=com"
 
 And add it to the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f replicator-acl-limits.ldif
 ```
 
@@ -132,14 +148,18 @@ olcSpCheckpoint: 100 10
 olcSpSessionLog: 100
 ```
 
-```{warning}
+:::{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint` and `olcSpSessionLog`.
 Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
-```
+:::
 
 Add the new content:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f provider_simple_sync.ldif
 ```
 
@@ -147,7 +167,7 @@ The Provider is now configured.
 
 ## Consumer configuration - standard replication
 
-Install the software by going through [the installation steps](install-openldap.md). Make sure schemas and the database suffix are the same, and [enable TLS](ldap-and-tls.md).
+Install the software by going through {ref}`the installation steps <install-openldap>`. Make sure schemas and the database suffix are the same, and {ref}`enable TLS <ldap-and-tls>`.
 
 Create an LDIF file with the following contents and name it `consumer_simple_sync.ldif`:
 
@@ -179,19 +199,23 @@ olcUpdateRef: ldap://ldap01.example.com
 Ensure the following attributes have the correct values:
 
 - **`provider`**: Provider server's {term}`hostname` -- `ldap01.example.com` in this example -- or IP address. It must match what is presented in the provider's SSL certificate.
-- **`binddn`**: The bind {term}`DN` for the replicator user.
+- **{term}`binddn <bindDN>`**: The bind {term}`DN` for the replicator user.
 - **`credentials`**: The password you selected for the replicator user.
 - **`searchbase`**: The database suffix you're using, i.e., content that is to be replicated.
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **`rid`**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-```{note}
-A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
-```
+:::{note}
+A successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See {ref}`LDAP with TLS <ldap-and-tls>` for details on how to set up OpenLDAP with trusted SSL certificates.
+:::
 
 Add the new configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f consumer_simple_sync.ldif
 ```
 
@@ -273,21 +297,29 @@ olcAccessLogSuccess: TRUE
 olcAccessLogPurge: 07+00:00 01+00:00
 ```
 
-```{warning}
+:::{warning}
 The LDIF above has some parameters that you should review before deploying in production on your directory. In particular -- `olcSpCheckpoint`, `olcSpSessionLog`.
-Please see the {manpage}`slapo-syncprov(5)` manpage. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
-For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manpage.
-```
+Please see the {manpage}`slapo-syncprov(5)` manual page. In general, `olcSpSessionLog` should be equal to (or preferably larger than) the number of entries in your directory. Also see [ITS #8125](https://bugs.openldap.org/show_bug.cgi?id=8125) for details on an existing bug.
+For `olcAccessLogPurge`, please check the {manpage}`slapo-accesslog(5)` manual page.
+:::
 
 Create a directory:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u openldap mkdir /var/lib/ldap/accesslog
 ```
 
 Add the new content:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f provider_sync.ldif
 ```
 
@@ -295,7 +327,7 @@ The Provider is now configured.
 
 ## Consumer configuration
 
-Install the software by going through [the installation steps](install-openldap.md). Make sure schemas and the database suffix are the same, and [enable TLS](ldap-and-tls.md).
+Install the software by going through {ref}`the installation steps <install-openldap>`. Make sure schemas and the database suffix are the same, and {ref}`enable TLS <ldap-and-tls>`.
 
 Create an LDIF file with the following contents and name it `consumer_sync.ldif`:
 
@@ -336,13 +368,17 @@ Ensure the following attributes have the correct values:
 - **`olcUpdateRef`**: Provider server's hostname or IP address, given to clients if they try to write to this consumer.
 - **rid**: Replica ID, a unique 3-digit ID that identifies the replica. Each consumer should have at least one `rid`.
 
-```{note}
-Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See [LDAP with TLS](ldap-and-tls.md/) for details on how to set up OpenLDAP with trusted SSL certificates.
-```
+:::{note}
+Note that a successful encrypted connection via `START_TLS` is being enforced in this configuration, to avoid sending the credentials in the clear across the network. See {ref}`LDAP with TLS <ldap-and-tls>` for details on how to set up OpenLDAP with trusted SSL certificates.
+:::
 
 Add the new configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f consumer_sync.ldif
 ```
 
@@ -352,8 +388,13 @@ You're done! The `dc=example,dc=com` tree should now be synchronising.
 
 Once replication starts, you can monitor it by running:
 
-```bash
-$ ldapsearch -z1 -LLL -x -s base -b dc=example,dc=com contextCSN
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ldapsearch -z1 -LLL -x -s base -b dc=example,dc=com contextCSN
+
 dn: dc=example,dc=com
 contextCSN: 20200423222317.722667Z#000000#000#000000
 ```
@@ -364,19 +405,28 @@ If your connection is slow and/or your LDAP database large, it might take a whil
 
 If the consumer's `contextCSN` is missing or does not match the provider, you should stop and figure out the issue before continuing. Try checking the `slapd` entries in `/var/log/syslog` in the provider to see if the consumer's authentication requests were successful, or that its requests to retrieve data return no errors. In particular, verify that you can connect to the provider from the consumer as the replicator BindDN using `START_TLS`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -ZZ -H ldap://ldap01.example.com -D cn=replicator,dc=example,dc=com -W
 ```
 
 For our example, you should now see the `john` user in the replicated tree:
 
-```bash
-$ ldapsearch -x -LLL -H ldap://ldap02.example.com -b dc=example,dc=com '(uid=john)' uid
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ldapsearch -x -LLL -H ldap://ldap02.example.com -b dc=example,dc=com '(uid=john)' uid
+
 dn: uid=john,ou=People,dc=example,dc=com
 uid: john
 ```
 
-## References
+## Further reading
 
   - [Replication types, OpenLDAP Administrator's Guide](https://openldap.org/doc/admin26/guide.html#Configuring%20the%20different%20replication%20types)
   - [LDAP Sync Replication - OpenLDAP Administrator's Guide](https://openldap.org/doc/admin26/guide.html#LDAP%20Sync%20Replication)

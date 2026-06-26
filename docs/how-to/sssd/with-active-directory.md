@@ -29,7 +29,11 @@ This guide does not explain Active Directory, how it works, how to set one up, o
 
 Install the following packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install sssd-ad sssd-tools realmd adcli
 ```
 
@@ -39,8 +43,13 @@ We will use the `realm` command, from the `realmd` package, to join the domain a
 
 Let's verify the domain is discoverable via DNS:
 
-```bash
-$ sudo realm -v discover ad1.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo realm -v discover ad1.example.com
+
  * Resolving: _ldap._tcp.ad1.example.com
  * Performing LDAP DSE lookup on: 10.51.0.5
  * Successfully discovered: ad1.example.com
@@ -63,15 +72,25 @@ This performs several checks and determines the best software stack to use with 
 
 Now let's join the domain:
 
-```bash
-$ sudo realm join ad1.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo realm join ad1.example.com
+
 Password for Administrator: 
 ```
 
 That was quite uneventful. If you want to see what it was doing, pass the `-v` option:
 
-```bash
-$ sudo realm join -v ad1.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo realm join -v ad1.example.com
+
  * Resolving: _ldap._tcp.ad1.example.com
  * Performing LDAP DSE lookup on: 10.51.0.5
  * Successfully discovered: ad1.example.com
@@ -129,7 +148,7 @@ The `realm` tool already took care of creating an SSSD configuration, adding the
 
 Let's take a look at `/etc/sssd/sssd.conf`:
 
-```text
+```ini
 [sssd]
 domains = ad1.example.com
 config_file_version = 2
@@ -149,17 +168,19 @@ ldap_id_mapping = True
 access_provider = ad
  ```
 
-```{note}
+:::{note}
 Something very important to remember is that this file must have permissions `0600` and ownership `root:root`, or else SSSD won't start!
-```
+:::
 
-```{note}
+:::{note}
+```text
 [FAILED] Failed to listen on sssd-nss.socket...
 [FAILED] Failed to listen on sssd-pam.socket...
 [FAILED] Dependency failed for sssd-pam-priv.socket...
+```
 
 If you get those errors on startup, just remove the line `services = nss, pam`
-```
+:::
 
 Let's highlight a few things from this config file:
 
@@ -171,7 +192,11 @@ Let's highlight a few things from this config file:
 
 What the `realm` tool didn't do for us is setup `pam_mkhomedir`, so that network users can get a home directory when they login. This remaining step can be done by running the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pam-auth-update --enable mkhomedir
 ```
 
@@ -179,31 +204,47 @@ sudo pam-auth-update --enable mkhomedir
 
 You should now be able to fetch information about AD users. In this example, `John Smith` is an AD user:
 
-```bash
-$ getent passwd john@ad1.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+getent passwd john@ad1.example.com
+
 john@ad1.example.com:*:1725801106:1725800513:John Smith:/home/john@ad1.example.com:/bin/bash
 ```
 
 Let's see his groups:
 
-```bash
-$ groups john@ad1.example.com
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+groups john@ad1.example.com
+
 john@ad1.example.com : domain users@ad1.example.com engineering@ad1.example.com
 ```
 
-```{note}
+:::{note}
 If you just changed the group membership of a user, it may be a while before SSSD notices due to caching.
-```
+:::
 
 Finally, how about we try a login:
 
-```bash
-$ sudo login
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo login
+
 ad-client login: john@ad1.example.com
 Password: 
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-24-generic x86_64)
 ...
 Creating directory '/home/john@ad1.example.com'.
+
 john@ad1.example.com@ad-client:~$ 
 ```
 
@@ -211,24 +252,35 @@ Notice how the home directory was automatically created.
 
 You can also use SSH, but note that the command will look a bit funny because of the multiple `@` signs:
 
-```bash
-$ ssh john@ad1.example.com@10.51.0.11
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh john@ad1.example.com@10.51.0.11
+
 Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-24-generic x86_64)
 (...)
 Last login: Thu Apr 16 21:22:55 2020
+
 john@ad1.example.com@ad-client:~$ 
 ```
 
-```{note}
+:::{note}
 In the SSH example, public key authentication was used, so no password was required. Remember that SSH password authentication is disabled by default in `/etc/ssh/sshd_config`.
-```
+:::
 
 ## Kerberos tickets
 
 If you install `krb5-user`, your AD users will also get a Kerberos ticket upon logging in:
 
-```bash
-john@ad1.example.com@ad-client:~$ klist
+```{terminal}
+:copy:
+:user: john
+:host: ad1.example.com@ad-client
+:dir: ~
+klist
+
 Ticket cache: FILE:/tmp/krb5cc_1725801106_9UxVIz
 Default principal: john@AD1.EXAMPLE.COM
 
@@ -237,14 +289,18 @@ Valid starting     Expires            Service principal
 	renew until 04/17/20 21:32:12
 ```
 
-```{note}
+:::{note}
 `realm` also configured `/etc/krb5.conf` for you, so there should be no further configuration prompts when installing `krb5-user`.
-```
+:::
 
 Let's test with `smbclient` using Kerberos authentication to list the shares of the domain controller:
 
-```bash
-john@ad1.example.com@ad-client:~$ smbclient -k -L server1.ad1.example.com
+```{terminal}
+:copy:
+:user: john
+:host: ad1.example.com@ad-client
+:dir: ~
+smbclient -k -L server1.ad1.example.com
 
 	Sharename       Type      Comment
 	---------       ----      -------
@@ -258,8 +314,13 @@ SMB1 disabled -- no workgroup available
 
 Notice how we now have a ticket for the `cifs` service, which was used for the share list above:
 
-```bash
-john@ad1.example.com@ad-client:~$ klist
+```{terminal}
+:copy:
+:user: john
+:host: ad1.example.com@ad-client
+:dir: ~
+klist
+
 Ticket cache: FILE:/tmp/krb5cc_1725801106_9UxVIz
 Default principal: john@AD1.EXAMPLE.COM
 
@@ -275,20 +336,20 @@ The desktop login only shows local users in the list to pick from, and that's on
 
 To login with an Active Directory user for the first time, follow these steps:
 
-  - Click on the "Not listed?" option:
+- Click on the "Not listed?" option:
 <div align="center">
 
 ![Click "not listed"|690x517,50%](../../images/291d9ae9-not_listed.png)
 </div>
 
- - Type in the login name followed by the password:
+- Type in the login name followed by the password:
 <div align="center">
 
 ![Type in username|690x517,50%](../../images/6940e589-login.png)
 
 </div>
 
-  - Next time you login, the AD user will be listed as if it was a local user:
+- Next time you login, the AD user will be listed as if it was a local user:
 <div align="center">
 
 ![Next time|690x517,50%](../../images/9c174441-local_user.png)

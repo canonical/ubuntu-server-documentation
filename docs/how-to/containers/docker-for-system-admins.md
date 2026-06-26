@@ -13,9 +13,14 @@ We are going to explore set-ups for configuring storage, networking, and logging
 
 First, install Docker if it’s not already installed:
 
-```bash
-$ sudo apt-get install -y docker.io docker-compose
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt-get install -y docker.io docker-compose
 ```
+
 :::{note}
 This guide uses the Docker packages provided by Ubuntu (`docker.io`), which are supported by Canonical. The instructions and examples below are written for these packages.
 
@@ -28,16 +33,24 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Create a volume
 
-  ```bash
-  $ docker volume create my-vol
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker volume create my-vol
 
   my-vol
   ```
 
 - List volumes
 
-  ```bash
-  $ docker volume ls
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker volume ls
 
   DRIVER	VOLUME NAME
   local 	my-vol
@@ -45,11 +58,13 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Inspect volume
 
-  ```bash
-  $ docker volume inspect my-vol
-  ```
-
-  ```json
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker volume inspect my-vol
+  
   [
     {
       "CreatedAt": "2023-10-25T00:53:24Z",
@@ -65,8 +80,12 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Run a container and mount a volume
 
-  ```bash
-  $ docker run --name web-server -d \
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker run --name web-server -d \
   --mount source=my-vol,target=/app \
   ubuntu/apache2
 
@@ -75,11 +94,13 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Inspect your container to make sure the volume is mounted correctly:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker inspect web-server --format '{{ json .Mounts }}' | jq .
-  ```
-
-  ```json
+  
   [
     {
       "Type": "volume",
@@ -98,9 +119,25 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Stop and remove the container, then remove its volume.
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker stop web-server
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker rm web-server
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker volume rm my-vol
   ```
 
@@ -108,8 +145,12 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Create a Docker container and bind mount your host directory:
 
-  ```bash
-  $ docker run -d \
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker run -d \
   --name web-server \
   --mount type=bind,source="$(pwd)",target=/app \
   ubuntu/apache2
@@ -119,11 +160,13 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Inspect your container to check for the bind mount:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker inspect web-server --format '{{ json .Mounts }}' | jq .
-  ```
 
-  ```json
   [
     {
       "Type": "bind",
@@ -138,17 +181,31 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Stop and remove the container
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker stop web-server
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker rm web-server
   ```
 
-### How to configure Tmpfs
+### How to configure tmpfs
 
 - Create a Docker container and mount a tmpfs:
 
-  ```bash
-  $ docker run --name web-server -d \
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker run --name web-server -d \
   --mount type=tmpfs,target=/app \
   ubuntu/apache2
 
@@ -157,11 +214,13 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 
 - Inspect your container to check for the tmpfs mount:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker inspect web-server --format '{{ json .Mounts }}' | jq .
-  ```
 
-  ```json
   [
     {
       "Type": "tmpfs",
@@ -181,20 +240,52 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 
 - Check the current storage driver
 
-  ```bash
-  $ docker info | grep "Storage Driver"
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker info | grep "Storage Driver"
 
   Storage Driver: overlayfs
   ```
 
-- Ensure the required Filesystem is available. We will be using the ZFS Filesystem.
+- Ensure the required filesystem is available. We will be using the ZFS filesystem.
 
-  ```bash
-  $ apt install zfsutils-linux -y # Install ZFS
-  $ fallocate -l 5G /zfs-pool.img  # Create a 5GB file
-  $ zpool create mypool /zfs-pool.img  # Create a ZFS pool
-  $ zfs create -o mountpoint=/var/lib/docker mypool/docker # Create a ZFS dataset and mount it to dockers directory, "/var/lib/docker".
-  $ zfs list # Verify that it mounted successfully
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  apt install zfsutils-linux -y # Install ZFS
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  fallocate -l 5G /zfs-pool.img  # Create a 5GB file
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  zpool create mypool /zfs-pool.img  # Create a ZFS pool
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  zfs create -o mountpoint=/var/lib/docker mypool/docker # Create a ZFS dataset and mount it to dockers directory, "/var/lib/docker".
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  zfs list # Verify that it mounted successfully
 
   NAME            USED  AVAIL  REFER  MOUNTPOINT
   mypool          162K  4.36G    24K  /mypool
@@ -205,17 +296,23 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 
   1.  Stop the docker daemon
 
-      ```bash
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
       systemctl stop docker
       ```
 
   1.  Edit `/etc/docker/daemon.json` using your favorite editor, then update the storage driver value to `zfs`.
 
-      ```bash
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
       vim /etc/docker/daemon.json
-      ```
 
-      ```json
       {
         "storage-driver": "zfs"
       }
@@ -223,14 +320,22 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 
   1.  Restart the docker daemon
 
-      ```bash
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
       systemctl restart docker
       ```
 
 - Verify the change
 
-  ```bash
-  $ docker info | grep "Storage Driver"
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker info | grep "Storage Driver"
 
   Storage Driver: zfs
   ```
@@ -241,16 +346,24 @@ This is how you can create a user-defined network using the Docker CLI:
 
 - Create a network
 
-  ```bash
-  $ docker network create --driver bridge my-net
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker network create --driver bridge my-net
 
   D84efaca11d6f643394de31ad8789391e3ddf29d46faecf0661849f5ead239f7
   ```
 
 - List networks
 
-  ```bash
-  $ docker network ls
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker network ls
 
   NETWORK ID 	NAME  	DRIVER	SCOPE
   1f55a8891c4a   bridge	bridge	local
@@ -261,11 +374,13 @@ This is how you can create a user-defined network using the Docker CLI:
 
 - Inspect the network we created
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker network inspect my-net
-  ```
 
-  ```json
   [
     {
       "Name": "my-net",
@@ -302,19 +417,25 @@ Containers can connect to a defined network when they are created (via `docker r
 
 ### Connecting a new container to an existing network
 
-```bash
-$ docker run -d --name c1 --network my-net ubuntu/apache2
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker run -d --name c1 --network my-net ubuntu/apache2
 
 C7aa78f45ce3474a276ca3e64023177d5984b3df921aadf97e221da8a29a891e
 ```
 
 - View the network connected to the container
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   docker inspect c1 --format '{{ json .NetworkSettings }}' | jq .
-  ```
 
-  ```json
   {
     "Bridge": "",
     "SandboxID": "ee1cc10093fdfdf5d4a30c056cef47abbfa564e770272e1e5f681525fdd85555",
@@ -361,20 +482,32 @@ C7aa78f45ce3474a276ca3e64023177d5984b3df921aadf97e221da8a29a891e
 
   1.  Create the container
 
-      ```bash
-      $ docker run -d --name c2 ubuntu/nginx
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
+      docker run -d --name c2 ubuntu/nginx
 
       Fea22fbb6e3685eae28815f3ad8c8a655340ebcd6a0c13f3aad0b45d71a20935
       ```
 
   1.  Connect the running container to the network and verify that it's connected.
 
-      ```bash
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
       docker network connect my-net c2
-      docker inspect c2 --format '{{ json .NetworkSettings }}' | jq .
       ```
+      ```{terminal}
+      :copy:
+      :user:
+      :host:
+      :dir:
+      docker inspect c2 --format '{{ json .NetworkSettings }}' | jq .
 
-      ```json
       {
         "Bridge": "",
         "SandboxID": "82a7ea6efd679dffcc3e4392e0e5da61a8ccef33dd78eb5381c9792a4c01f366",
@@ -438,33 +571,43 @@ The default network created by the Docker daemon is called `bridge` using the **
 
 - A system administrator can modify this default networks IP address by editing `/etc/docker/daemon.json` and including the below into the JSON object
 
-```bash
-vim /etc/docker/daemon.json
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  vim /etc/docker/daemon.json
 
-```json
-{
-  "bip": "192.168.1.1/24",
-  "fixed-cidr": "192.168.1.0/25",
-  "fixed-cidr-v6": "2001:db8::/64",
-  "mtu": 1500,
-  "default-gateway": "192.168.1.254",
-  "default-gateway-v6": "2001:db8:abcd::89",
-  "dns": ["10.20.1.2", "10.20.1.3"]
-}
-```
+  {
+    "bip": "192.168.1.1/24",
+    "fixed-cidr": "192.168.1.0/25",
+    "fixed-cidr-v6": "2001:db8::/64",
+    "mtu": 1500,
+    "default-gateway": "192.168.1.254",
+    "default-gateway-v6": "2001:db8:abcd::89",
+    "dns": ["10.20.1.2", "10.20.1.3"]
+  }
+  ```
 
 - Restart the Docker daemon
 
-```bash
-systemctl restart docker
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  systemctl restart docker
+  ```
 
 - Verify your changes
 
-```bash
-docker network inspect bridge
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker network inspect bridge
+  ```
 
 ### Exposing a container port to the host
 
@@ -480,34 +623,40 @@ The `--publish` option of Docker CLI accepts the following options:
 
 An example of how to publish port `80` of a container to port `8080` of the host:
 
--   Create a container and expose it's port to the host
+- Create a container and expose it's port to the host
 
-```bash
-$ docker run -d --name web-server --publish 8080:80 ubuntu/nginx
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker run -d --name web-server --publish 8080:80 ubuntu/nginx
 
-f451aa1990db7d2c9b065c6158e2315997a56a764b36a846a19b1b96ce1f3910
-```
+  f451aa1990db7d2c9b065c6158e2315997a56a764b36a846a19b1b96ce1f3910
+  ```
 
-- View the containers network settings
+- View the container's network settings
 
-```bash
-docker inspect web-server --format '{{ json .NetworkSettings.Ports }}' | jq .
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker inspect web-server --format '{{ json .NetworkSettings.Ports }}' | jq .
 
-```json
-{
-  "80/tcp": [
-    {
-      "HostIp": "0.0.0.0",
-      "HostPort": "8080"
-    },
-    {
-      "HostIp": "::",
-      "HostPort": "8080"
-    }
-  ]
-}
-```
+  {
+    "80/tcp": [
+      {
+        "HostIp": "0.0.0.0",
+        "HostPort": "8080"
+      },
+      {
+        "HostIp": "::",
+        "HostPort": "8080"
+      }
+    ]
+  }
+  ```
 
 The `HostIp` values are `0.0.0.0` (IPv4) and `::` (IPv6), and the service running in the container is accessible to everyone in the network (reaching the host), if you want to publish the port from the container and let the service be available just to the host you can use `--publish 127.0.0.1:8080:80` instead. The published port can be TCP or UDP and one can specify that passing `--publish 8080:80/tcp` or `--publish 8080:80/udp`.
 
@@ -523,15 +672,17 @@ The default logging driver is called `json file`, and the system administrator c
 
 - Edit the docker daemon file and update the logging driver 
 
-```bash
-vim /etc/docker/daemon.json
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  vim /etc/docker/daemon.json
 
-```json
-{
-  "log-driver": "journald"
-}
-```
+  {
+    "log-driver": "journald"
+  }
+  ```
 
 ### Modifying the logging driver when creating a container
 
@@ -539,35 +690,45 @@ Another option is specifying the logging driver during container creation time:
 
 - Specify a log driver when executing a `docker run`
 
-```bash
-$ docker run -d --name web-server --log-driver=journald ubuntu/nginx
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker run -d --name web-server --log-driver=journald ubuntu/nginx
 
-1c08b667f32d8b834f0d9d6320721e07de5f22168cfc8a024d6e388daf486dfa
-```
+  1c08b667f32d8b834f0d9d6320721e07de5f22168cfc8a024d6e388daf486dfa
+  ```
 
 - Verify your configuration
 
-```bash
-docker inspect web-server --format '{{ json .HostConfig.LogConfig }}' | jq .
-```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker inspect web-server --format '{{ json .HostConfig.LogConfig }}' | jq .
 
-```json
-{
-  "Type": "journald",
-  "Config": {}
-}
-```
+  {
+    "Type": "journald",
+    "Config": {}
+  }
+  ```
 
 - View logs
 
-```bash
-$ docker logs web-server
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker logs web-server
 
-/docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
-/docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
-/docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
-/docker-entrypoint.sh: Configuration complete; ready for start up
-```
+  /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+  /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+  /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+  /docker-entrypoint.sh: Configuration complete; ready for start up
+  ```
 
 Depending on the driver you might also want to pass some options. You can do that via the CLI, passing `--log-opt` or in the daemon config file adding the key `log-opts`. For more information check the [logging driver documentation](https://docs.docker.com/engine/logging/configure/).
 
@@ -587,8 +748,12 @@ The remote logging drivers are useful to store data in an external service/host,
 
 The option `cache-disabled` is used to disable the “dual logging” feature. If you try to run `docker logs` with that configuration you will get the following error:
 
-```bash
-$ docker logs web-server
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker logs web-server
 
 Error response from daemon: configured logging driver does not support reading
 ```
@@ -715,7 +880,7 @@ $ sudo setcap cap_net_bind_service=ep $(which rootlesskit)
 $ systemctl --user restart docker
 ```
 
-## Resources
+## Further reading
 
 To read an explanatory guide to Docker storage, networking, and logging see:
 

@@ -13,25 +13,37 @@ The [Virtual Machine Manager](https://virt-manager.org/), through the `virt-mana
 
 To install `virt-manager`, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install virt-manager
 ```
 
 Since `virt-manager` requires a {term}`Graphical User Interface (GUI) <GUI>` environment we recommend installing it on a workstation or test machine instead of a production server. To connect to the local libvirt service, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-manager
 ```
 
 You can connect to the libvirt service running on another host by entering the following in a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-manager -c qemu+ssh://virtnode1.mydomain.com/system
 ```
 
-```{note}
+:::{note}
 The above example assumes that SSH connectivity between the management system and the target system has already been configured, and uses **SSH keys** for authentication. SSH keys are needed because libvirt sends the password prompt to another process. See our guide on OpenSSH for details on {ref}`how to set up SSH keys <openssh-server-ssh-keys>`.
-```
+:::
 
 ## Use virt-manager to manage guests
 
@@ -69,13 +81,21 @@ The Virtual Machine Viewer application, through `virt-viewer`, allows you to con
 
 If `virt-viewer` is not already installed, you can install it from the terminal with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install virt-viewer
 ```
 
 Once a virtual machine is installed and running you can connect to the virtual machine's console by using:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-viewer <guestname>
 ```
 
@@ -85,7 +105,11 @@ The UI will show a window representing the virtual screen of the guest, just lik
 
 Similarly to `virt-manager`, `virt-viewer` can also connect to a remote host using SSH with key authentication:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-viewer -c qemu+ssh://virtnode1.mydomain.com/system <guestname>
 ```
 
@@ -101,13 +125,21 @@ If configured to use a **bridged** network interface, you can also set up SSH ac
 
 To install `virt-install`, if it is not installed already, run the following from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install virtinst
 ```
 
 There are several options available when using `virt-install`. For example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-install \
    --name web_devel \
    --ram 8192 \
@@ -145,7 +177,11 @@ After launching `virt-install`, you can connect to the virtual machine's console
 
 The `virt-clone` application can be used to copy one virtual machine to another. For example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 virt-clone --auto-clone --original focal
 ```
 
@@ -159,9 +195,9 @@ You can also use the `-d` or `--debug` option to help troubleshoot problems with
 
 Replace *`focal`* with the appropriate virtual machine names for your case.
 
-```{caution}
+:::{caution}
 Please be aware that this is a full clone, therefore any secrets, keys, and for example, `/etc/machine-id`, will be shared. This will cause issues with security and anything that needs to identify the machine like {term}`DHCP`. You most likely want to edit those afterward and de-duplicate them as needed.
-```
+:::
 
 ## Resources
 

@@ -26,20 +26,29 @@ user            = mysql
 port            = 3307
 ```
 
-```{note}
+:::{note}
 Some packages do not automatically create files for you to edit in their `.d` directories. In these cases it is often acceptable to just create an additional config file by any name there. When in doubt, check the package's documentation to confirm.
-```
+:::
 
 After saving the file, restart the service.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl restart mysql
 ```
 
 The `netstat` command shows that this was successful:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 netstat -tunpevaW | grep -i 3307
+
 tcp        0      0 127.0.0.1:3307          0.0.0.0:*               LISTEN      106        416022     1730/mysqld  
 ```
 
@@ -51,7 +60,11 @@ Instead, if you would like to modify a unit file, do so through Systemd. It prov
 
 For example, if you want to edit Apache2 such that it restarts after a failure instead of just when it aborts, you can run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl edit apache2
 ```
 
@@ -96,20 +109,29 @@ Restart=on-failure
 ...
 ```
 
-```{note}
+:::{note}
 Some options, such as `ExecStart` are additive. If you would like to fully override them add an extra line that clears it (e.g. `ExecStart=`) before providing new options. See [Systemd's man page](https://www.freedesktop.org/software/systemd/man/latest/systemd.service.html) for more information.
-```
+:::
 
 Once the changes are saved, the override file will be created in `/etc/systemd/system/apache2.service.d/override.conf`. To apply changes, run
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl daemon-reload
 ```
 
 To verify the change was successful, you can run the status command.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl status apache2
+
 ● apache2.service - The Apache HTTP Server
      Loaded: loaded (/lib/systemd/system/apache2.service; enabled; preset: enabled)
     Drop-In: /etc/systemd/system/apache2.service.d
@@ -135,7 +157,8 @@ Packages that use {ref}`AppArmor <apparmor>` will install AppArmor profiles in t
 
 When these files are modified manually, it can lead to a conflict during updates. This will show up in `apt` with something like:
 
-```
+```{terminal}
+:output-only:
 Configuration file '/etc/apparmor.d/usr.bin.swtpm'
  ==> Modified (by you or by a script) since installation.
  ==> Package distributor has shipped an updated version.
@@ -160,15 +183,16 @@ For example, if you would like `swtpm` to access a custom directory called `/var
 
 This method will work for all [AppArmor syntax](https://ubuntu.com/tutorials/beginning-apparmor-profile-development).
 
-```{note}
+:::{note}
 Although most local profiles have the same name as the maintainer's, you can often check what file is included based on the main profile's contents. In `swtpm`'s case, `/etc/apparmor.d/usr.bin.swtpm` contains the lines:
+
+```
+# Site-specific additions and overrides. See local/README for details.
+#include <local/usr.bin.swtpm>
 ```
 
-> ```
-> # Site-specific additions and overrides. See local/README for details.
-> #include <local/usr.bin.swtpm>
-> ```
-> showing that the local profile is located at `/etc/apparmor.d/local/usr.bin.swtpm`
+showing that the local profile is located at `/etc/apparmor.d/local/usr.bin.swtpm`
+:::
 
 ## Restoring configuration files
 
@@ -176,8 +200,12 @@ Since config files are meant to be intentional changes by the user/admin, they a
 
 If you have a particular config file, like in the example `/etc/rsyslog.conf`, you first want to find out which package owns that config file:
 
-```bash
-$ dpkg -S /etc/rsyslog.conf
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -S /etc/rsyslog.conf
 
 rsyslog: /etc/rsyslog.conf
 ```
@@ -185,9 +213,19 @@ rsyslog: /etc/rsyslog.conf
 So we now know that the package `rsyslog` owns the config file `/etc/rsyslog.conf`.
 This command just queries package metadata and works even if the file has been deleted.
 
-```bash
-$ rm /etc/rsyslog.conf
-$ dpkg -S /etc/rsyslog.conf
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+rm /etc/rsyslog.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -S /etc/rsyslog.conf
 
 rsyslog: /etc/rsyslog.con
 ```
@@ -195,8 +233,13 @@ rsyslog: /etc/rsyslog.con
 To restore that file you can re-install the package, telling `dpkg` to bring any missing files back.
 To do so you pass `dpkg` options through `apt` using `-o Dpkg::Options::="` and then set `--force-...` depending on what action you want. For example:
 
-```bash
-$ sudo apt install --reinstall -o Dpkg::Options::="--force-confmiss" rsyslog
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install --reinstall -o Dpkg::Options::="--force-confmiss" rsyslog
+
 ...
 Preparing to unpack .../rsyslog_8.2302.0-1ubuntu3_amd64.deb ...
 Unpacking rsyslog (8.2302.0-1ubuntu3) over (8.2302.0-1ubuntu3) ...
@@ -225,9 +268,20 @@ More details on these options can be found in the {manpage}`dpkg(1)` manual page
 
 So in the case of an accidental bad config entry, if you want to go back to the package default you could use `--force-confask` to check the difference and consider restoring the content.
 
-```bash
-$ echo badentry >> /etc/rsyslog.conf
-$ sudo apt install --reinstall -o Dpkg::Options::="--force-confask" rsyslog
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo badentry >> /etc/rsyslog.conf
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install --reinstall -o Dpkg::Options::="--force-confask" rsyslog
+
 ...
 Preparing to unpack .../rsyslog_8.2302.0-1ubuntu3_amd64.deb ...
 Unpacking rsyslog (8.2302.0-1ubuntu3) over (8.2302.0-1ubuntu3) ...
@@ -266,11 +320,29 @@ Installing new version of config file /etc/rsyslog.conf ...
 
 The same can be used if you removed a whole directory by accident, to detect and re-install all related packages config files.
 
-```bash
-$ rm -rf /etc/vim
-$ dpkg -S /etc/vim
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+rm -rf /etc/vim
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dpkg -S /etc/vim
+
 vim-common, vim-tiny: /etc/vim
-$ sudo apt install --reinstall -o Dpkg::Options::="--force-confmiss" vim-common vim-tiny
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install --reinstall -o Dpkg::Options::="--force-confmiss" vim-common vim-tiny
+
 ...
 Configuration file '/etc/vim/vimrc', does not exist on system.
 Installing new config file as you requested.

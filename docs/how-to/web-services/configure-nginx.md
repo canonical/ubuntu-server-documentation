@@ -16,7 +16,7 @@ for serving multiple sites.
 
 The single-site configuration serves files out of `/var/www/html`, as defined by the server block and as provided by `/etc/nginx/sites-enabled/default`:
 
-```text
+```
 server {
         listen 80 default_server;                                                                                    
         listen [::]:80 default_server;
@@ -38,7 +38,7 @@ server {
 
 Even for a single-site configuration, while you can place your website at `/var/www/html`, you may want to place the website's files at a different location in your {term}`filesystem`. For example, if you were hosting `www.my-site.org` from `/srv/my-site/html` you might edit the above file to look like this:
 
-```text
+```
 server {
         listen                80;
         root                  /srv/my-site/html;
@@ -53,22 +53,46 @@ server {
 
 Make sure to create your web root directory structure:
 
-```bash
-$ sudo mkdir -p /srv/my-site/html
-$ sudo chmod -R 755 /srv/my-site/html
-$ echo "<html><body><h1>My Site!</h1></body></html>" > /srv/my-site/html/index.html
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mkdir -p /srv/my-site/html
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chmod -R 755 /srv/my-site/html
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo "<html><body><h1>My Site!</h1></body></html>" > /srv/my-site/html/index.html
 ```
 
 Then, to make nginx reload its configuration, run:
 
-```bash
-$ sudo systemctl reload nginx
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl reload nginx
 ```
 
 Check that the settings have taken effect using your web browser:
 
-```bash
-$ www-browser www.my-site.org
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+www-browser www.my-site.org
 ```
 
 ## Multi-site hosting
@@ -79,21 +103,29 @@ To do that, first create a new server block in a configuration file as above, an
 
 Next, enable the site by creating a symlink to it from the `sites-enabled` directory:
 
-```bash
-$ sudo ln -s /etc/nginx/sites-available/<your-domain> /etc/nginx/sites-enabled/
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo ln -s /etc/nginx/sites-available/<your-domain> /etc/nginx/sites-enabled/
 ```
 
 To disable a website, you can delete the symlink in `sites-enabled`. For example, once you have your new site(s) configured and no longer need the default site configuration:
 
-```bash
-$ sudo rm /etc/nginx/sites-enabled/default
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo rm /etc/nginx/sites-enabled/default
 ```
 
 ## SSL and HTTPS 
 
 While establishing an HTTP website on port 80 is a good starting point (and perhaps adequate for static content), production systems will want HTTPS, such as serving on port 443 with SSL enabled via `cert` files.  A server block with such a configuration might look like this, with HTTP-to-HTTPS redirection handled in the first block, and HTTPS in the second block:
 
-```text
+```
 server {
         listen                80;
         server_name           our-site.org www.our-site.org;
@@ -135,4 +167,3 @@ Beyond the settings outlined above, nginx can be further customized through the 
 
 * [nginx's beginner's guide](https://nginx.org/en/docs/beginners_guide.html) covers use cases such as proxy servers, {term}`FastCGI` for use with PHP and other frameworks, and optimising the handling of static content.
 * The [nginx documentation](https://nginx.org/en/docs/http/configuring_https_servers.html) describes HTTPS server configuration in greater detail, including certificate chains, disambiguating various multi-site certificate situations, performance optimisations and compatibility issues.
-* For Ubuntu-specific nginx questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

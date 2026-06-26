@@ -20,9 +20,9 @@ myst:
 
 Ubuntu Server can be configured as both: **iSCSI initiator** and **iSCSI target**. This guide provides commands and configuration options to setup an **iSCSI initiator** (or Client).
 
-```{note}
+:::{note}
 It is assumed that **you already have an iSCSI target on your local network** and have the appropriate rights to connect to it. The instructions for setting up a target vary greatly between hardware providers, so consult your vendor documentation to configure your specific iSCSI target.
-```
+:::
 
 ## Network Interfaces Configuration
 
@@ -36,7 +36,7 @@ For all the iSCSI examples below please consider the following netplan configura
 > ```
 > 
 > */etc/netplan/50-cloud-init.yaml*
-> ```
+> ```yaml
 > network:
 >     ethernets:
 >         enp5s0:
@@ -75,8 +75,12 @@ From this point and beyond, 2 interfaces are going to be mentioned:  **iscsi01**
 
 To configure Ubuntu Server as an iSCSI initiator install the open-iscsi package. In a terminal enter:
 
-```
-$ sudo apt install open-iscsi
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install open-iscsi
 ```
 
 Once the package is installed you will find the following files:
@@ -148,8 +152,12 @@ node.session.xmit_thread_priority = -20
 
 and re-start the iSCSI daemon:
 
-```
-$ systemctl restart iscsid.service
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+systemctl restart iscsid.service
 ```
 
 This will set basic things up for the rest of configuration.
@@ -170,80 +178,180 @@ Before configuring the Logical Units that are going to be accessed by the initia
 
 A straightforward way to do that is by:
 
-* configuring the following environment variables
+* configuring the following environment variables:
 
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  iscsi01_ip=$(ip -4 -o addr show iscsi01 | sed -r 's:.* (([0-9]{1,3}\.){3}[0-9]{1,3})/.*:\1:')
   ```
-  $ iscsi01_ip=$(ip -4 -o addr show iscsi01 | sed -r 's:.* (([0-9]{1,3}\.){3}[0-9]{1,3})/.*:\1:')
-  $ iscsi02_ip=$(ip -4 -o addr show iscsi02 | sed -r 's:.* (([0-9]{1,3}\.){3}[0-9]{1,3})/.*:\1:')
-
-  $ iscsi01_mac=$(ip -o link show iscsi01 | sed -r 's:.*\s+link/ether (([0-f]{2}(\:|)){6}).*:\1:g')
-  $ iscsi02_mac=$(ip -o link show iscsi02 | sed -r 's:.*\s+link/ether (([0-f]{2}(\:|)){6}).*:\1:g')
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  iscsi02_ip=$(ip -4 -o addr show iscsi02 | sed -r 's:.* (([0-9]{1,3}\.){3}[0-9]{1,3})/.*:\1:')
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  iscsi01_mac=$(ip -o link show iscsi01 | sed -r 's:.*\s+link/ether (([0-f]{2}(\:|)){6}).*:\1:g')
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  iscsi02_mac=$(ip -o link show iscsi02 | sed -r 's:.*\s+link/ether (([0-f]{2}(\:|)){6}).*:\1:g')
   ```
 
-* configuring **iscsi01** interface
+* configuring **`iscsi01`** interface:
 
-  ```
-  $ sudo iscsiadm -m iface -I iscsi01 --op=new
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi01 --op=new
+
   New interface iscsi01 added
-  $ sudo iscsiadm -m iface -I iscsi01 --op=update -n iface.hwaddress -v $iscsi01_mac
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi01 --op=update -n iface.hwaddress -v $iscsi01_mac
+
   iscsi01 updated.
-  $ sudo iscsiadm -m iface -I iscsi01 --op=update -n iface.ipaddress -v $iscsi01_ip
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi01 --op=update -n iface.ipaddress -v $iscsi01_ip
+
   iscsi01 updated.
   ```
 
-* configuring **iscsi02** interface
+* configuring **`iscsi02`** interface
 
-  ```
-  $ sudo iscsiadm -m iface -I iscsi02 --op=new
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi02 --op=new
+
   New interface iscsi02 added
-  $ sudo iscsiadm -m iface -I iscsi02 --op=update -n iface.hwaddress -v $iscsi02_mac
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi02 --op=update -n iface.hwaddress -v $iscsi02_mac
+
   iscsi02 updated.
-  $ sudo iscsiadm -m iface -I iscsi02 --op=update -n iface.ipaddress -v $iscsi02_ip
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m iface -I iscsi02 --op=update -n iface.ipaddress -v $iscsi02_ip
+
   iscsi02 updated.
   ```
 
-* discovering the **targets**
+* discovering the **targets**:
 
-  ```
-  $ sudo iscsiadm -m discovery -I iscsi01 --op=new --op=del --type sendtargets --portal storage.iscsi01
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m discovery -I iscsi01 --op=new --op=del --type sendtargets --portal storage.iscsi01
+
   10.250.94.99:3260,1 iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2c084c8320ca
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m discovery -I iscsi02 --op=new --op=del --type sendtargets --portal storage.iscsi02
 
-  $ sudo iscsiadm -m discovery -I iscsi02 --op=new --op=del --type sendtargets --portal storage.iscsi02
   10.250.93.99:3260,1 iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2c084c8320ca
   ```
 
 * configuring **automatic login**
 
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m node --op=update -n node.conn[0].startup -v automatic
   ```
-  $ sudo iscsiadm -m node --op=update -n node.conn[0].startup -v automatic
-  $ sudo iscsiadm -m node --op=update -n node.startup -v automatic
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m node --op=update -n node.startup -v automatic
   ```
 
 * make sure needed **services** are enabled during OS initialization:
 
-  ```
-  $ systemctl enable open-iscsi
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  systemctl enable open-iscsi
+
   Synchronizing state of open-iscsi.service with SysV service script with /lib/systemd/systemd-sysv-install.
   Executing: /lib/systemd/systemd-sysv-install enable open-iscsi
   Created symlink /etc/systemd/system/iscsi.service → /lib/systemd/system/open-iscsi.service.
   Created symlink /etc/systemd/system/sysinit.target.wants/open-iscsi.service → /lib/systemd/system/open-iscsi.service.
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  systemctl enable iscsid
 
-  $ systemctl enable iscsid
   Synchronizing state of iscsid.service with SysV service script with /lib/systemd/systemd-sysv-install.
   Executing: /lib/systemd/systemd-sysv-install enable iscsid
   Created symlink /etc/systemd/system/sysinit.target.wants/iscsid.service → /lib/systemd/system/iscsid.service.
   ```
 
-* restarting **iscsid** service
+* restarting **`iscsid`** service:
 
-  ```
-  $ systemctl restart iscsid.service
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  systemctl restart iscsid.service
   ```
 
-* and, finally, **login in** discovered logical units
+* and, finally, **login in** discovered logical units:
 
-  ```
-  $ sudo iscsiadm -m node --loginall=automatic
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iscsiadm -m node --loginall=automatic
+
   Logging in to [iface: iscsi02, target: iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2c084c8320ca, portal: 10.250.93.99,3260] (multiple)
   Logging in to [iface: iscsi01, target: iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2c084c8320ca, portal: 10.250.94.99,3260] (multiple)
   Login to [iface: iscsi02, target: iqn.2003-01.org.linux-iscsi.storage.x8664:sn.2c084c8320ca, portal: 10.250.93.99,3260] successful.
@@ -331,16 +439,27 @@ Although not the objective of this session, let's find the 4 mapped LUNs using m
 
 You will find further details about multipath in {ref}`introduction-to-multipath`.
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+apt-get install multipath-tools
 ```
-$ apt-get install multipath-tools
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipath -r
 ```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo multipath -ll
 
-```
-$ sudo multipath -r
-```
-
-```
-$ sudo multipath -ll
 mpathd (360014051a042fb7c41c4249af9f2cfbc) dm-3 LIO-ORG,TCMU device
 size=1.0G features='0' hwhandler='0' wp=rw
 |-+- policy='service-time 0' prio=1 status=active
@@ -382,9 +501,9 @@ Now it is much easier to understand each recognized SCSI device and common paths
   - `/dev/sde`
   - `/dev/sdc`
 
-```{warning}
+:::{warning}
 **Do not use this in production** without checking appropriate multipath configuration options in the **Device Mapper Multipathing** section. The *default multipath configuration* is sub-optimal for regular usage.
-```
+:::
 
 Finally, to access the LUN (or remote iSCSI disk) you will:
 
@@ -398,8 +517,12 @@ For everything else, the created devices are block devices and all commands used
 
 * Creating a partition:
 
-  ```
-  $ sudo fdisk /dev/mapper/mpatha
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo fdisk /dev/mapper/mpatha
 
   Welcome to fdisk (util-linux 2.34).
   Changes will remain in memory only, until you decide to write them.
@@ -433,8 +556,13 @@ For everything else, the created devices are block devices and all commands used
 
 * Creating a {term}`filesystem`:
 
-  ```
-  $ sudo mkfs.ext4 /dev/mapper/mpatha-part1
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo mkfs.ext4 /dev/mapper/mpatha-part1
+
   mke2fs 1.45.5 (07-Jan-2020)
   Creating filesystem with 261888 4k blocks and 65536 inodes
   Filesystem UUID: cdb70b1e-c47c-47fd-9c4a-03db6f038988
@@ -449,14 +577,23 @@ For everything else, the created devices are block devices and all commands used
 
 * Mounting the block device:
 
-  ```
-  $ sudo mount /dev/mapper/mpatha-part1 /mnt
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo mount /dev/mapper/mpatha-part1 /mnt
   ```
 
 * Accessing the data:
 
-  ```
-  $ ls /mnt
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  ls /mnt
+
   lost+found
   ```
 
@@ -464,10 +601,10 @@ Make sure to read other important sessions in Ubuntu Server Guide to follow up w
 
 ## Further reading
 
-1. [`iscsid`](https://linux.die.net/man/8/iscsid)
-1. [`iscsi.conf`](https://linux.die.net/man/5/iscsi.conf)
-1. [`iscsid.conf`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/iscsid.conf)
-1. [`iscsi.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsi.service.template)
-1. [`iscsid.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsid.service.template)
-1. [Open-iSCSI](http://www.open-iscsi.com/)
-1. [Debian Open-iSCSI](https://wiki.debian.org/SAN/iSCSI/open-iscsi)
+- [`iscsid`](https://linux.die.net/man/8/iscsid)
+- [`iscsi.conf`](https://linux.die.net/man/5/iscsi.conf)
+- [`iscsid.conf`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/iscsid.conf)
+- [`iscsi.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsi.service.template)
+- [`iscsid.service`](https://github.com/open-iscsi/open-iscsi/blob/master/etc/systemd/iscsid.service.template)
+- [Open-iSCSI](http://www.open-iscsi.com/)
+- [Debian Open-iSCSI](https://wiki.debian.org/SAN/iSCSI/open-iscsi)

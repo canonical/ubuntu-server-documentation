@@ -15,13 +15,17 @@ Apache2 ships with a "virtual-host-friendly" default configuration -- it is conf
 
 If left alone, the default virtual host will serve as your default site, or the site users will see if the URL they enter does not match the **ServerName** directive of any of your custom sites. To modify the default virtual host, edit the file `/etc/apache2/sites-available/000-default.conf`.
 
-```{note}
+:::{note}
 The directives set for a virtual host only apply to that particular virtual host. If a directive is set server-wide and not defined in the virtual host settings, the default setting is used. For example, you can define a Webmaster email address and not define individual email addresses for each virtual host.
-```
+:::
 
 If you want to configure a new virtual host or site, copy the `000-default.conf` file into the same directory with a name you choose. For example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/mynewsite.conf
 ```
 
@@ -38,25 +42,26 @@ Specifies the email address to be advertised for the server's administrator. The
 > Found in `/etc/apache2/ports.conf`
 
 Specifies the port, and optionally the IP address, Apache2 should listen on. If the IP address is not specified, Apache2 will listen on all IP addresses assigned to the machine it runs on. The default value for the **Listen** directive is `80`. Change this to:
-  - `127.0.0.1:80` to make Apache2 listen only on your loopback interface so that it will not be available to the Internet,
-  - to e.g. `81` to change the port that it listens on,
-  - or leave it as is for normal operation.
+
+- `127.0.0.1:80` to make Apache2 listen only on your loopback interface so that it will not be available to the Internet,
+- to e.g. `81` to change the port that it listens on,
+- or leave it as is for normal operation.
 
 ### The **ServerName** directive (optional)
 
 Specifies what {term}`FQDN` your site should answer to. The default virtual host has no **ServerName** directive specified, so it will respond to all requests that do not match a ServerName directive in another virtual host. If you have just acquired the domain name `mynewsite.com` and wish to host it on your Ubuntu server, the value of the ServerName directive in your virtual host configuration file should be `mynewsite.com`.
 
-  Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
+Add this directive to the new virtual host file you created earlier (`/etc/apache2/sites-available/mynewsite.conf`).
 
 ### The **ServerAlias** directive
 
 You may also want your site to respond to `www.mynewsite.com`, since many users will assume the www prefix is appropriate -- use the *ServerAlias* directive for this. You may also use wildcards in the ServerAlias directive.
     
-  For example, the following configuration will cause your site to respond to any domain request ending in *.mynewsite.com*.
+For example, the following configuration will cause your site to respond to any domain request ending in *.mynewsite.com*.
 
-  ```text
-  ServerAlias *.mynewsite.com
-  ```
+```
+ServerAlias *.mynewsite.com
+```
 
 ### The **DocumentRoot** directive
 
@@ -64,19 +69,39 @@ Specifies where Apache2 should look for the files that make up the site. The def
 
 Enable the new *VirtualHost* using the a2ensite utility and restart Apache2:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2ensite mynewsite
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
-```{note}
+:::{note}
 Be sure to replace `mynewsite` with a more descriptive name for the VirtualHost. One method is to name the file after the **ServerName** directive of the VirtualHost.
-```
+:::
 
 Similarly, use the `a2dissite` utility to disable sites. This is can be useful when troubleshooting configuration problems with multiple virtual hosts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo a2dissite mynewsite
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart apache2.service
 ```
 
@@ -86,7 +111,7 @@ This section explains configuration of the Apache2 server default settings. For 
 
 ### The **DirectoryIndex**
 
- The **DirectoryIndex** is the default page served by the server when a user requests an index of a directory by specifying a forward slash (/) at the end of the directory name.
+The **DirectoryIndex** is the default page served by the server when a user requests an index of a directory by specifying a forward slash (/) at the end of the directory name.
     
 For example, when a user requests the page `http://www.example.com/this_directory/`, they will get either the DirectoryIndex page (if it exists), a server-generated directory list (if it does not and the Indexes option is specified), or a Permission Denied page if neither is true. 
 
@@ -108,7 +133,7 @@ You can also specify the file to which errors are logged, via the **ErrorLog** d
 
 Some options are specified on a per-directory basis rather than per-server. **Options** is one of these directives. A Directory stanza is enclosed in XML-like tags, like so:
 
-```text
+```
 <Directory /var/www/html/mynewsite>
 ...
 </Directory>
@@ -119,9 +144,9 @@ The Options directive within a Directory stanza accepts one or more of the follo
 - **ExecCGI**
   Allow CGI scripts to be run. CGI scripts are not run if this option is not chosen.
         
-  ```{caution}
+  :::{caution}
   Most files should not be run as CGI scripts. This would be very dangerous. CGI scripts should be kept in a directory separate from and outside your **DocumentRoot**, and only this directory should have the ExecCGI option set. This is the default, and the default location for CGI scripts is `/usr/lib/cgi-bin`.
-  ```
+  :::
 
 - **Includes**
   Allow **server-side includes**. Server-side includes allow an HTML file to *include* other files. See [Apache SSI documentation (Ubuntu community)](https://help.ubuntu.com/community/ServerSideIncludes) for more information.
@@ -132,9 +157,9 @@ The Options directive within a Directory stanza accepts one or more of the follo
 - **Indexes**
   Display a formatted list of the directory's contents, if no DirectoryIndex (such as `index.html`) exists in the requested directory.
 
-  ```{caution}
+  :::{caution}
   For security reasons, this should usually not be set, and certainly should not be set on your DocumentRoot directory. Enable this option carefully on a per-directory basis **only** if you are certain you want users to see the entire contents of the directory.
-  ```
+  :::
 
 - **Multiview**
   Support content-negotiated multiviews; this option is disabled by default for security reasons. See the [Apache2 documentation on this option](https://httpd.apache.org/docs/2.4/mod/mod_negotiation.html#multiviews).
@@ -155,9 +180,9 @@ This section briefly explains some basic Apache2 daemon configuration settings.
 - **User**
   The **User** directive sets the user ID used by the server to answer requests. This setting determines the server's access. Any files inaccessible to this user will also be inaccessible to your website's visitors. The default value for User is "www-data".
 
-  ```{warning}
+  :::{warning}
   Unless you know exactly what you are doing, do not set the User directive to root. Using root as the User will create large security holes for your Web server.
-  ```
+  :::
   
 - **Group**
   The **Group** directive is similar to the User directive. Group sets the group under which the server will answer requests. The default group is also "www-data".
@@ -171,5 +196,3 @@ Now that you know how to configure Apache2, you may also want to know {ref}`how 
 - The [Apache2 Documentation](https://httpd.apache.org/docs/2.4/) contains in depth information on Apache2 configuration directives. Also, see the `apache2-doc` package for the official Apache2 docs.
 
 - O'Reilly's [Apache Cookbook](https://www.oreilly.com/library/view/apache-cookbook-2nd/9780596529949/) is a good resource for accomplishing specific Apache2 configurations.
-
-- For Ubuntu-specific Apache2 questions, ask in the {matrix}`Ubuntu Server <server>` Matrix channel.

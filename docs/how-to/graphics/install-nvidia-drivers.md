@@ -9,8 +9,9 @@ myst:
 
 This page shows how to install the NVIDIA drivers from the command line, using either the `ubuntu-drivers` tool (recommended), or APT.
 
-> **Warning**:
-> NVIDIA drivers installed from sources outside of those listed in this guide could potentially overwrite those provided by ubuntu-drivers and may break secure boot.
+:::{warning}
+NVIDIA drivers installed from sources outside of those listed in this guide could potentially overwrite those provided by `ubuntu-drivers` and may break secure boot.
+:::
 
 ## NVIDIA drivers releases
 
@@ -26,7 +27,11 @@ Additionally, we package the **NVIDIA Fabric Manager** and the **NVIDIA Switch C
 
 To check the version of your currently running driver:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /proc/driver/nvidia/version
 ```
 
@@ -40,28 +45,37 @@ Note that if you currently have a version of the Nvidia drivers installed that c
 
 ### Ensure your system and kernel is up-to-date
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt upgrade
 ```
+
 After the update is complete, reboot your system.
 
 ### Check the available drivers for your hardware
 
 For desktop:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers list
 ```
 
 or, for servers:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers list --gpgpu
-```
 
-You should see a list such as the following:
-
-```text
 nvidia-driver-470
 nvidia-driver-470-server
 nvidia-driver-535
@@ -78,7 +92,11 @@ nvidia-driver-550-server-open
 
 You can either rely on automatic detection, which will install the driver that is considered the best match for your hardware:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers install
 ```
 
@@ -86,7 +104,11 @@ Or you can tell the `ubuntu-drivers` tool which driver you would like installed.
 
 Let's assume we want to install the `535` driver:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers install nvidia:535
 ```
 
@@ -94,7 +116,11 @@ sudo ubuntu-drivers install nvidia:535
 
 You can either rely on automatic detection, which will install the driver that is considered the best match for your hardware:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers install --gpgpu
 ```
 
@@ -102,26 +128,39 @@ Or you can tell the `ubuntu-drivers` tool which driver you would like installed.
 
 Let's assume we want to install the `535-server` driver (listed as `nvidia-driver-535-server`):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers install --gpgpu nvidia:535-server
 ```
 
 You will also want to install the following additional components:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nvidia-utils-535-server
 ```
 
 #### Optional step
 
 If your system comes with NVswitch hardware, then you will want to install Fabric Manager and the NVSwitch Configuration and Query library. You can do so by running the following:
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nvidia-fabricmanager-535 libnvidia-nscq-535
 ```
 
-```{note}
+:::{note}
 While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535 package`).
-```
+:::
 
 ## Manual driver installation (using APT)
 
@@ -135,7 +174,11 @@ If your system uses Secure Boot (as most x86 modern systems do), your kernel wil
 
 Install the metapackage for your kernel flavour (e.g. `generic`, `lowlatency`, etc) which is specific to the driver branch (e.g. `535`) that you want to install, and whether you want the compute vs. general display driver (e.g. `-server` or not):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-${LINUX_FLAVOUR}
 ```
 
@@ -143,7 +186,11 @@ sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-${LINUX_FLAVOUR}
 
 Check that the modules for your specific kernel/{term}`ABI` were installed by the metapackage:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-cache policy linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 ```
 
@@ -151,7 +198,11 @@ sudo apt-cache policy linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 
 If the modules were not installed for your current running kernel, upgrade to the latest kernel or install them by specifying the running kernel version:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install linux-modules-nvidia-${DRIVER_BRANCH}${SERVER}-$(uname -r)
 ```
 
@@ -165,30 +216,51 @@ Install the relevant NVIDIA {term}`DKMS` package and `linux-headers` to build th
 
 Install the `linux-headers` metapackage for your kernel flavour (e.g. `generic`, `lowlatency`, etc):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install linux-headers-${LINUX_FLAVOUR}
 ```
 
 Check that the headers for your specific kernel were installed by the metapackage:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt-cache policy linux-headers-$(uname -r)
 ```
 
 If the headers for your current running kernel were not installed, install them by specifying the running kernel version:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install linux-headers-$(uname -r)
 ```
 
 Finally, install the NVIDIA DKMS package for your desired driver series (this may automatically guide you through creating and enrolling a new key for Secure Boot):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nvidia-dkms-${DRIVER_BRANCH}${SERVER}
 ```
 
 Alternatively, you can use ubuntu-drivers to automatically select an appropriate dkms driver branch:
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ubuntu-drivers install --include-dkms
 ```
 
@@ -196,7 +268,11 @@ sudo ubuntu-drivers install --include-dkms
 
 After installing the correct kernel modules (see the relevant section of this document), install the correct driver metapackage:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nvidia-driver-${DRIVER_BRANCH}${SERVER}
 ```
 
@@ -204,38 +280,54 @@ sudo apt install nvidia-driver-${DRIVER_BRANCH}${SERVER}
 
 If your system comes with NVswitch hardware, then you will want to install Fabric Manager and the NVSwitch Configuration and Query library. You can do so by running the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nvidia-fabricmanager-${DRIVER_BRANCH} libnvidia-nscq-${DRIVER_BRANCH}
 ```
 
-```{note}
+:::{note}
 While `nvidia-fabricmanager` and `libnvidia-nscq` do not have the same `-server` label in their name, they are really meant to match the `-server` drivers in the Ubuntu archive. For example, `nvidia-fabricmanager-535` will match the `nvidia-driver-535-server` package version (not the `nvidia-driver-535` package).
-```
+:::
 
 ## Switching between pre-compiled and DKMS modules
 
 1. Uninstalling the NVIDIA drivers (below)
 
-2. <a href="#heading--manual-driver-installation-using-apt"> Manual driver installation using APT </a>
+2. Manual driver installation using APT
 
 ### Uninstalling the NVIDIA drivers
 
 Remove any NVIDIA packages from your system:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt --purge remove '*nvidia*${DRIVER_BRANCH}*'
 ```
 
 If you are unsure which `${DRIVER_BRANCH}` to pick for removal you might look at the installed nvidia packages and see the different `${DRIVER_BRANCH}` numbers that are present on your system.
 Since `autoremove` will take care of all indirect dependencies it is sufficient to list those that have been directly installed by using `apt-mark`.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt-mark showmanual | grep nvidia`.
 ```
 
 Remove any additional packages that may have been installed as a dependency (e.g. the `i386` libraries on amd64 systems) and which were not caught by the previous command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt autoremove
 ```
 
@@ -251,18 +343,30 @@ See NVIDIA's [current support matrix](https://docs.nvidia.com/datacenter/tesla/d
 
 If you encounter the following error when running the [nvidia-smi](https://developer.nvidia.com/system-management-interface) command:
 
-    Failed to initialize NVML: Driver/library version mismatch
+```{terminal}
+:output-only:
+Failed to initialize NVML: Driver/library version mismatch
+```
 
 This typically indicates that the userspace driver packages were upgraded while the kernel module is still on the older version (for example, the client reports one driver version while the kernel module reports another). This situation often occurs after a system upgrade. To verify this, check the kernel logs:
 
-    sudo dmesg
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo dmesg
+```
 
 Look for error messages similar to:
 
-    NVRM: API mismatch: the client has the version 570.172.08, but
-    NVRM: this kernel module has the version 570.158.01.  Please
-    NVRM: make sure that this kernel module and all NVIDIA driver
-    NVRM: components have the same version.
+```{terminal}
+:output-only:
+NVRM: API mismatch: the client has the version 570.172.08, but
+NVRM: this kernel module has the version 570.158.01.  Please
+NVRM: make sure that this kernel module and all NVIDIA driver
+NVRM: components have the same version.
+```
 
 **Solution**: Rebooting the system will load the updated kernel module and bring the versions back in sync.
 
@@ -270,17 +374,32 @@ Look for error messages similar to:
 
 If you encounter the following error when running the [nvidia-smi](https://developer.nvidia.com/system-management-interface) command:
 
-    No devices were found
+```{terminal}
+:output-only:
+No devices were found
+```
 
 This may occur if the open-source NVIDIA kernel driver [`nouveau`](https://nouveau.freedesktop.org/) is pre-installed and loaded, which conflicts with the proprietary NVIDIA driver. To check whether `nouveau` is loaded:
 
-    lsmod | grep nouveau
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lsmod | grep nouveau
+```
 
 **Solution**: If `nouveau` kernel module is loaded, blocklist it and rebuild the `initramfs`:
 
-    echo "blacklist nouveau" | sudo tee /etc/modprobe.d/disable-nouveau.conf
-    echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/disable-nouveau.conf
-    sudo rmmod nouveau || true
-    sudo update-initramfs -u
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo "blacklist nouveau" | sudo tee /etc/modprobe.d/disable-nouveau.conf
+echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/disable-nouveau.conf
+sudo rmmod nouveau || true
+sudo update-initramfs -u
+```
 
 Then reboot the system for the changes to take effect.

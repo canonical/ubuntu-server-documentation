@@ -53,13 +53,17 @@ TuneD works with profiles, which are configuration files grouping tuning plugins
 Predefined tuned profiles provided by the package are located in the directory `/usr/lib/tuned/profiles/<profile-name>`,
 those added by the administrator should be placed in `/etc/tuned/profiles/<profile-name>`.
 
-> In TuneD version 2.23 and thereby Ubuntu 24.04 Noble (and earlier), the location
-> of the profiles was different. An upgrade would have migrated any custom
-> profiles, however for reference the paths changes were:
-> Predefined profiles:
->   `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
-> User defined profiles:
->   `/etc/tuned/<profile-name>` -> `/etc/tuned/profiles/<profile-name>`
+:::{note}
+In TuneD version 2.23 and thereby Ubuntu 24.04 Noble (and earlier), the location
+of the profiles was different. An upgrade would have migrated any custom
+profiles, however for reference the paths changes were:
+* Predefined profiles:
+  
+  `/usr/lib/tuned/<profile-name>` -> `/usr/lib/tuned/profiles/<profile-name>`
+* User defined profiles:
+  
+  `/etc/tuned/<profile-name>` -> `/etc/tuned/profiles/<profile-name>`
+:::
 
 In each of these `<profile-name>` directories a file `tuned.conf` defines that profile.
 That file has an INI structure which looks like this:
@@ -97,6 +101,7 @@ Here is a brief explanation of these configuration parameters:
 See the {manpage}`tuned.conf(5)` manual page for details on the syntax of this configuration file.
 
 The plugin instance concept can be useful if you want to apply different tuning parameters to different devices. For example, you could have one plugin instance to take care of NVMe storage, and another one for spinning disks:
+
 ```ini
 [fast_storage]
 type=disk
@@ -111,17 +116,21 @@ devices=sda, sdb
 
 ### Available profiles and plugins
 
-The list of available profiles can be found using the following command:
+The list of available profiles can be found using the following command (output truncated for brevity):
 
-    tuned-adm list profiles
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+tuned-adm list profiles
 
-Which will result in a long list (output truncated for brevity):
-
-    Available profiles:
-    - accelerator-performance     - Throughput performance based tuning with disabled higher latency STOP states
-    - atomic-guest                - Optimize virtual guests based on the Atomic variant
-    - atomic-host                 - Optimize bare metal systems running the Atomic variant
-    (...)
+Available profiles:
+- accelerator-performance     - Throughput performance based tuning with disabled higher latency STOP states
+- atomic-guest                - Optimize virtual guests based on the Atomic variant
+- atomic-host                 - Optimize bare metal systems running the Atomic variant
+(...)
+```
 
 Here are some useful commands regarding profiles:
 
@@ -132,7 +141,9 @@ Here are some useful commands regarding profiles:
 The list of plugin types can be obtained with the `tuned-adm list plugins`, and to see plugin-specific options, run `tuned-adm list plugins -v`. Unfortunately at the moment the documentation of those options is only present in the source code of each plugin.
 
 For example, the `cpu` plugin options are:
-```
+
+```{terminal}
+:output-only:
 cpu
 	load_threshold
 	latency_low
@@ -164,7 +175,7 @@ After that, the new profile will be visible by TuneD via the `tuned-adm list` co
 
 Here is a simple example of a customized profile named `mypostgresql` that is inheriting from the existing `/usr/lib/tuned/profiles/postgresql` profile. The child profile is defined in `/etc/tuned/profiles/mypostgresql/tuned.conf`:
 
-```text
+```ini
 [main]
 include=postgresql
 
@@ -183,19 +194,31 @@ There are some profiles that are neither a parent profile, nor a child profile. 
 
 Here is an example which applies the base profile `cpu-partitioning` and then overlays `intel-sst` on top:
 
-    sudo tuned-adm profile cpu-partitioning intel-sst
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo tuned-adm profile cpu-partitioning intel-sst
+```
 
 In a sense, it's like a dynamic inheritance: instead of having the `intel-sst` profile include `cpu-partitioning` in a hard-coded `include` statement, it can be used in this way and merge its settings to any other base profile on-the-fly, at runtime.
 
 Another example of merging profiles is the combining of the `powersave` profile with another one:
 
-    sudo tuned-adm profile virtual-guest powersave
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo tuned-adm profile virtual-guest powersave
+```
 
 This would optimise the system for a virtual guest, and then apply power saving parameters on top.
 
-```{warning}
+:::{warning}
 Just because `tuned-adm` accepted to merge two profiles doesn't mean it makes sense. There is no checking done on the resulting merged parameters, and the second profile could completely revert what the first profile adjusted.
-```
+:::
 
 ## An example profile: hpc-compute
 

@@ -19,8 +19,13 @@ Ethernet interfaces are identified by the system using predictable network inter
 
 To quickly identify all available Ethernet interfaces, you can use the `ip` command from *iproute2* as shown below.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr
+
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -37,8 +42,13 @@ ip addr
 
 Or call Netplan to get a higher level overview of your network interfaces and correlated information, such as nameserver or (default) routes.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo netplan status -a
+
      Online state: online
     DNS Addresses: 127.0.0.53 (stub)
        DNS Search: internal
@@ -63,8 +73,13 @@ sudo netplan status -a
 
 Another application that can help identify all network interfaces available to your system is the `lshw` command. This command provides greater details around the hardware capabilities of specific adapters. In the example below, `lshw` shows a single Ethernet interface with the logical name of *eth4* along with bus information, driver details and all supported capabilities.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lshw -class network
+
   *-network
        description: Ethernet interface
        product: MT26448 [ConnectX EN 10GigE, PCIe 2.0 5GT/s]
@@ -88,7 +103,7 @@ sudo lshw -class network
 
 Interface logical names can also be configured via a Netplan configuration. If you would like control which interface receives a particular logical name use the `match` and `set-name` keys. The `match` key is used to find an adapter based on some criteria like MAC address, driver, etc. The `set-name` key can be used to change the device to the desired logical name.
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -104,8 +119,13 @@ network:
 
 `ethtool` is a program that displays and changes Ethernet card settings such as auto-negotiation, port speed, duplex mode, and Wake-on-LAN. The following is an example of how to view the supported features and configured settings of an Ethernet interface.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ethtool eth4
+
 Settings for eth4:
     Supported ports: [ FIBRE ]
     Supported link modes:   10000baseT/Full
@@ -139,21 +159,43 @@ For temporary network configurations, you can use the `ip` command which is also
 
 To temporarily configure an IP address, you can use the `ip` command in the following manner. Modify the IP address and subnet mask to match your network requirements.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ip addr add 10.102.66.200/24 dev enp0s25
 ```
 
-The `ip` command can then be used to set the link up or down.
+The `ip` command can then be used to set the link up:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip link set dev enp0s25 up
+```
+
+Or down:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip link set dev enp0s25 down
 ```
 
 To verify the IP address configuration of `enp0s25`, you can use the `ip` command in the following manner:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip address show dev enp0s25
+
 10: enp0s25: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
     link/ether 00:16:3e:e2:52:42 brd ff:ff:ff:ff:ff:ff link-netnsid 0
     inet 10.102.66.200/24 brd 10.102.66.255 scope global dynamic eth0
@@ -164,14 +206,23 @@ ip address show dev enp0s25
 
 To configure a default gateway, you can use the `ip` command in the following manner. Modify the default gateway address to match your network requirements.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ip route add default via 10.102.66.1
 ```
 
-You can also use the `ip` command to verify your default gateway configuration, as follows:
+You can also use the `ip` command to verify your default gateway configuration:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip route show
+
 default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 10.102.66.0/24 dev eth0 proto kernel scope link src 10.102.66.200
 10.102.66.1 dev eth0 proto dhcp scope link src 10.102.66.200 metric 100
@@ -179,25 +230,33 @@ default via 10.102.66.1 dev eth0 proto dhcp src 10.102.66.200 metric 100
 
 If you require {term}`DNS` for your temporary network configuration, you can use the `resolvectl` command to set DNS servers temporarily. The example below shows how to set two DNS servers for the interface `enp0s25`, which should be changed to servers appropriate for your network. A more lengthy description of the proper (persistent) way to do DNS client configuration is in a following section.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo resolvectl dns enp0s25 8.8.8.8 8.8.4.4
 ```
 
 If you no longer need this configuration and wish to purge all IP configuration from an interface, you can use the `ip` command with the flush option:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr flush eth0
 ```
 
-```{note}
+:::{note}
 Flushing the IP configuration using the `ip` command does not clear the contents of `systemd-resolved`. You must remove or modify those entries manually, e.g by calling `sudo resolvectl revert enp0s25`. Or re-boot, which should also cause the symlink `/etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf`, to be restored.
-```
+:::
 
 ### Dynamic IP address assignment (DHCP client)
 
 To configure your server to use DHCP for dynamic address assignment, create a Netplan configuration in the file `/etc/netplan/99_config.yaml`. The following example assumes you are configuring your first Ethernet interface identified as `enp3s0`.
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -208,7 +267,11 @@ network:
 
 The configuration can then be applied using the `netplan` command:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo netplan apply
 ```
 
@@ -216,7 +279,7 @@ sudo netplan apply
 
 To configure your system to use static address assignment, create a `netplan` configuration in the file `/etc/netplan/99_config.yaml`. The example below assumes you are configuring your first Ethernet interface identified as `eth0`. Change the `addresses`, `routes`, and `nameservers` values to meet the requirements of your network.
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -234,18 +297,27 @@ network:
 
 The configuration can then be applied using the `netplan` command.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo netplan apply
 ```
 
-```{note}
+:::{note}
 `netplan` in  Ubuntu Bionic 18.04 LTS doesn't understand the "`to: default`" syntax to specify a default route, and should use the older `gateway4: 10.10.10.1` key instead of the whole `routes:` block.
-```
+:::
 
 The loopback interface is identified by the system as `lo` and has a default IP address of 127.0.0.1. It can be viewed using the `ip` command.
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip address show lo
+
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
@@ -268,7 +340,7 @@ Add IP addresses to an interface by editing your `netplan` configuration found i
 This example assigns multiple static addresses to a single interface (enter the appropriate values for your server and network):
 
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -288,7 +360,7 @@ Adding labels to the IP addresses allows you to reference the devices by name in
 
 This example adds one (or more) IP addresses to an interface that also has a dynamic address assigned by DHCP.
 
-```
+```yaml
 network:
   version: 2
   ethernets:
@@ -308,19 +380,42 @@ A single interface can only have one address assigned by DHCP. To have multiple 
 
 Apply the configuration to enable the additional IP addresses:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo netplan apply
 ```
 
 Verify the IP addresses are available locally using one or more of the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 netplan status #displays the current network state
-
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr    #shows all network interfaces
-
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr show <interface_name>    #shows single interface
-
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 hostname -i    #shows only the available IP addresses on the host
 ```
 
@@ -328,10 +423,21 @@ Check the output to see that the addresses were applied to the interface that wa
 
 Verify the IP addresses are available on the network. From a different computer on the network:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ping 192.168.0.100    #configured IP addresses
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ping 192.168.0.101
 ```
+
 ## Name resolution
 
 Name resolution (as it relates to IP networking) is the process of mapping {term}`hostnames <hostname>` to IP addresses, and vice-versa, making it easier to identify resources on a network. The following section will explain how to properly configure your system for name resolution using DNS and static hostname records.
@@ -342,13 +448,13 @@ Name resolution (as it relates to IP networking) is the process of mapping {term
 
 Traditionally, the file `/etc/resolv.conf` was a static configuration file that rarely needed to be changed, or it automatically changed via DHCP client hooks. `systemd-resolved` handles nameserver configuration, and it should be interacted with through the `resolvectl` command. Up to Ubuntu 20.04 LTS the `systemd-resolve` command could also be used. Netplan configures `systemd-resolved` to generate a list of nameservers and domains to put in `/etc/resolv.conf`, which is a symlink:
 
-```
+```text
 /etc/resolv.conf -> /run/systemd/resolve/stub-resolv.conf
 ```
 
 To configure the resolver, add the IP addresses of the appropriate nameservers for your network to the `netplan` configuration file. You can also add optional DNS suffix search-lists to match your network domain names. The resulting file might look like the following:
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -368,7 +474,7 @@ The *search* option can also be used with multiple domain names so that DNS quer
 
 If you have multiple domains you wish to search, your configuration might look like the following:
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -400,7 +506,7 @@ Static hostnames are locally defined hostname-to-IP mappings located in the file
 
 The following is an example of a `hosts` file where a number of local servers have been identified by simple hostnames, aliases and their equivalent Fully Qualified Domain Names (FQDN's):
 
-```
+```text
 127.0.0.1   localhost
 127.0.1.1   ubuntu-server
 10.0.0.11   server1 server1.example.com vpn
@@ -409,15 +515,15 @@ The following is an example of a `hosts` file where a number of local servers ha
 10.0.0.14   server4 server4.example.com file
 ```
 
-```{note}
+:::{note}
 In this example, notice that each of the servers were given aliases in addition to their proper names and FQDN's. *Server1* has been mapped to the name *vpn*, *server2* is referred to as *mail*, *server3* as *www*, and *server4* as *file*.
-```
+:::
 
 ### Name Service Switch (NSS) configuration
 
 The order in which your system selects a method of resolving hostnames to IP addresses is controlled by the Name Service Switch (NSS) configuration file `/etc/nsswitch.conf`. As mentioned in the previous section, typically static hostnames defined in the systems `/etc/hosts` file have precedence over names resolved from DNS. The following is an example of the line responsible for this order of hostname lookups in the file `/etc/nsswitch.conf`.
 
-```
+```text
 hosts:          files mdns4_minimal [NOTFOUND=return] dns mdns4
 ```
 
@@ -433,16 +539,17 @@ hosts:          files mdns4_minimal [NOTFOUND=return] dns mdns4
 
 To modify the order of these name resolution methods, you can simply change the `hosts:` string to the value of your choosing. For example, if you prefer to use legacy unicast DNS versus multicast DNS, you can change the string in `/etc/nsswitch.conf` as shown below:
 
-```
+```text
 hosts:          files dns [NOTFOUND=return] mdns4_minimal mdns4
 ```
+
 ## Bridging multiple interfaces
 
 Bridging is a more advanced configuration, but is very useful in multiple scenarios. One scenario is setting up a bridge with multiple network interfaces, then using a firewall to filter traffic between two network segments. Another scenario is using bridge on a system with one interface to allow virtual machines direct access to the outside network. The following example covers the latter scenario:
 
 Configure the bridge by editing your `netplan` configuration found in `/etc/netplan/`, entering the appropriate values for your physical interface and network:
 
-```
+```yaml
 network:
   version: 2
   renderer: networkd
@@ -458,7 +565,11 @@ network:
 
 Now apply the configuration to enable the bridge:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo netplan apply
 ```
 
@@ -470,9 +581,9 @@ Users of the former  `ifupdown` may be familiar with using hook scripts (e.g., p
 
 Instead, to achieve this functionality with the `networkd` renderer, users can use {manpage}`networkd-dispatcher(8)`. The package provides both users and packages with hook points when specific network states are reached, to aid in reacting to network state.
 
-```{note}
+:::{note}
 If you are on Desktop (not Ubuntu Server) the network is driven by Network Manager - in that case you need [NM Dispatcher scripts](https://networkmanager.dev/docs/api/latest/) instead.
-```
+:::
 
 The [Netplan FAQ has a great table](https://netplan.io/faq/) that compares event timings between `ifupdown`/`systemd-networkd`/`network-manager`.
 
@@ -480,14 +591,14 @@ It is important to be aware that these hooks run asynchronously; i.e. they will 
 
 The [Netplan FAQ also has an example](https://netplan.io/faq/) on converting an old `ifupdown` hook to `networkd-dispatcher`.
 
-## Resources
+## Further reading
 
-  - The [Ubuntu Wiki Network page](https://help.ubuntu.com/community/Network) has links to articles covering more advanced network configuration.
+- The [Ubuntu Wiki Network page](https://help.ubuntu.com/community/Network) has links to articles covering more advanced network configuration.
 
-  - The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/examples/) and documentation.
+- The [Netplan website](https://netplan.io) has additional [examples](https://netplan.readthedocs.io/en/stable/examples/) and documentation.
 
-  - The Netplan {manpage}`manual page <netplan(5)>` has more information on Netplan.
+- The Netplan {manpage}`manual page <netplan(5)>` has more information on Netplan.
 
-  - The {manpage}`systemd-resolved(8)` manual page has more information on `systemd-resolved` service.
+- The {manpage}`systemd-resolved(8)` manual page has more information on `systemd-resolved` service.
 
-  - For more information on *bridging* see the [netplan configuration reference](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)
+- For more information on *bridging* see the [netplan configuration reference](https://netplan.readthedocs.io/en/stable/netplan-yaml/#properties-for-device-type-bridges)

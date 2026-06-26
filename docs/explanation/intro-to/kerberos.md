@@ -34,7 +34,7 @@ If you are new to Kerberos there are a few terms that are good to understand bef
 
 To put the pieces together, a Realm has at least one KDC, preferably more for redundancy, which contains a database of Principals. When a user principal logs into a workstation that is configured for Kerberos authentication, the KDC issues a Ticket Granting Ticket (TGT). If the user supplied credentials match, the user is authenticated and can then request tickets for Kerberized services from the Ticket Granting Server (TGS). The service tickets allow the user to authenticate to the service without entering another username and password.
 
-## Resources
+## Further reading
 
   - For more information on MIT's version of Kerberos, see the [MIT Kerberos](http://web.mit.edu/Kerberos/) site.
 

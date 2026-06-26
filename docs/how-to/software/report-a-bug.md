@@ -15,19 +15,24 @@ The preferred way to report a bug is with the `apport-cli` command. This command
 
 Getting this information to Launchpad can be a challenge if the system is not running a desktop environment with a browser (a common scenario with servers) or if it does not have Internet access. The steps to take in these situations are described below.
 
-```{note}
+:::{note}
 The commands `apport-cli` and `ubuntu-bug` should give the same results on a command-line interface (CLI) server. The latter is actually a symlink to `apport-bug`, which is intelligent enough to know whether a desktop environment is in use, and will choose `apport-cli` if not. Since server systems tend to be CLI-only, `apport-cli` was chosen from the outset in this guide.
-```
+:::
 
 Bug reports in Ubuntu need to be filed against a specific software package, so the name of the package (source package or program name/path) affected by the bug needs to be supplied to `apport-cli`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apport-cli PACKAGENAME
 ```
 
 Once `apport-cli` has finished gathering information you will be asked what to do with it. For instance, to report a bug against vim using `apport-cli vim` produces output like this:
 
-```text
+```{terminal}
+:output-only:
 *** Collecting problem information
     
 The collected information can be sent to the developers to improve the
@@ -54,7 +59,8 @@ The first three options are described below.
 
 Submits the collected information to Launchpad as part of the process of filing a new bug report. You will be given the opportunity to describe the bug in your own words.
     
-```text 
+```{terminal}
+:output-only: 
 *** Uploading problem information
     
 The collected information is being sent to the bug tracking system.
@@ -74,17 +80,18 @@ Choices:
 Please choose (1/C):  1
 ```
     
-The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the {manpage}`Debian alternatives system <update-alternatives(1)>`. Examples of text-based browsers to install include links, {term}`ELinks`, lynx, and w3m. You can also manually point an existing browser at the given URL.
+The browser that will be used when choosing '1' will be the one known on the system as `www-browser` via the {manpage}`Debian alternatives system <update-alternatives(1)>`. Examples of text-based browsers to install include `links`, `ELinks`, `lynx`, and `w3m`. You can also manually point an existing browser at the given URL.
 
 ### V: View
 
-This displays the collected information on the screen for review. This can be a lot of information! Press <kbd>Enter</kbd> to scroll through the screens. Press <kbd>q</kbd> to quit and return to the choice menu.
+This displays the collected information on the screen for review. This can be a lot of information! Press {kbd}`Enter` to scroll through the screens. Press {kbd}`q` to quit and return to the choice menu.
 
 ### K: Keep
 
 This writes the collected information to disk. The resulting file can be later used to file the bug report, typically after transferring it to another Ubuntu system.
-    
-```text    
+
+```{terminal}
+:output-only:  
 What would you like to do? Your options are:
   S: Send report (2.8 KB)
   V: View report
@@ -95,23 +102,31 @@ Please choose (S/V/K/I/C): k
 Problem report file: /tmp/apport.vim.1pg92p02.apport
 ```
 
-To report the bug, get the file onto an Internet-enabled Ubuntu system and apply `apport-cli` to it. This will cause the menu to appear immediately (since the information is already collected). You should then press <kbd>s</kbd> to send:
+To report the bug, get the file onto an Internet-enabled Ubuntu system and apply `apport-cli` to it. This will cause the menu to appear immediately (since the information is already collected). You should then press {kbd}`s` to send:
 
-```bash    
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apport-cli apport.vim.1pg92p02.apport
-```    
+```
 
 To directly save a report to disk (without menus) you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apport-cli vim --save apport.vim.test.apport
 ```
 
 Report names should end in `.apport`.
    
-```{note}
+:::{note}
 If this Internet-enabled system is non-Ubuntu/Debian, `apport-cli` is not available so the bug will need to be created manually. An `apport` report is also not to be included as an attachment to a bug either so it is completely useless in this scenario.
-```
+:::
 
 ## Reporting application crashes
 
@@ -119,17 +134,20 @@ The software package that provides the `apport-cli` utility, `apport`, can be co
 
 After an application crashes, if enabled, `apport` will store a crash report under `/var/crash`:
 
-```text
+```{terminal}
+:output-only:
 -rw-r----- 1 peter    whoopsie 150K Jul 24 16:17 _usr_lib_x86_64-linux-gnu_libmenu-cache2_libexec_menu-cached.1000.crash
 ```
 
 Use the `apport-cli` command with no arguments to process any pending crash reports. It will offer to report them one by one, as in the following example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apport-cli
-``` 
 
-```text
 *** Send problem report to the developers?
     
 After the problem report has been sent, please fill out the form in the
@@ -146,7 +164,8 @@ Please choose (S/V/K/I/C): s
 
 If you send the report, as was done above, the prompt will be returned immediately and the `/var/crash` directory will then contain 2 extra files:
 
-```text
+```{terminal}
+:output-only:
 -rw-r----- 1 peter    whoopsie 150K Jul 24 16:17 _usr_lib_x86_64-linux-gnu_libmenu-cache2_libexec_menu-cached.1000.crash
 -rw-rw-r-- 1 peter    whoopsie    0 Jul 24 16:37 _usr_lib_x86_64-linux-gnu_libmenu-cache2_libexec_menu-cached.1000.upload
 -rw------- 1 whoopsie whoopsie    0 Jul 24 16:37 _usr_lib_x86_64-linux-gnu_libmenu-cache2_libexec_menu-cached.1000.uploaded

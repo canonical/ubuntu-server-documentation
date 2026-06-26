@@ -7,50 +7,58 @@ myst:
 (install-postfix)=
 # Install and configure Postfix
 
-```{note}
+:::{note}
 This guide does not cover setting up Postfix *Virtual Domains*. For information on Virtual Domains and other advanced configurations see the references list at the end of this page.
-```
+:::
 
 ## Install Postfix
 
 To install [Postfix](https://www.postfix.org/) run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postfix
 ```
 
 It is OK to accept defaults initially by pressing return for each question. Some of the configuration options will be investigated in greater detail in the configuration stage.
 
-```{warning}
+:::{warning}
 The `mail-stack-delivery` metapackage has been deprecated in Focal. The package still exists for compatibility reasons, but won't setup a working email system.
-```
+:::
 
 ## Configure Postfix
 
 There are four things you should decide before configuring:
 
-  - The \<Domain> for which you'll accept email (we'll use **`mail.example.com`** in our example)
-  - The network and class range of your mail server (we'll use **`192.168.0.0/24`**)
-  - The username (we're using **`steve`**)
-  - Type of mailbox format (*`mbox`* is the default, but we'll use the alternative, **`Maildir`**)
+- The `<Domain>` for which you'll accept email (we'll use **`mail.example.com`** in our example)
+- The network and class range of your mail server (we'll use **`192.168.0.0/24`**)
+- The username (we're using **`steve`**)
+- Type of mailbox format (*`mbox`* is the default, but we'll use the alternative, **`Maildir`**)
 
 To configure postfix, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg-reconfigure postfix
 ```
 
 The user interface will be displayed. On each screen, select the following values:
 
-  - Internet Site
-  - **`mail.example.com`**
-  - **`steve`**
-  - **`mail.example.com`**, `localhost.localdomain`, `localhost`
-  - No
-  - `127.0.0.0/8 \[::ffff:127.0.0.0\]/104 \[::1\]/128` **`192.168.0.0/24`**
-  - 0
-  - \+
-  - all
+- `Internet Site`
+- **`mail.example.com`**
+- **`steve`**
+- **`mail.example.com`**, `localhost.localdomain`, `localhost`
+- `No`
+- `127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128` **`192.168.0.0/24`**
+- `0`
+- `+`
+- `all`
 
 To set the mailbox format, you can either edit the configuration file directly, or use the `postconf` command.  In either case, the configuration parameters will be stored in `/etc/postfix/main.cf` file. Later if you wish to re-configure a particular parameter, you can either run the command or change it manually in the file.
 
@@ -58,7 +66,11 @@ To set the mailbox format, you can either edit the configuration file directly, 
 
 To configure the mailbox format for **`Maildir`**:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'home_mailbox = Maildir/'
 ```
 
@@ -72,7 +84,11 @@ SMTP-AUTH allows a client to identify itself through the Simple Authentication a
 
 To configure Postfix for SMTP-AUTH using SASL (Dovecot SASL), run these commands at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'smtpd_sasl_type = dovecot'
 sudo postconf -e 'smtpd_sasl_path = private/auth'
 sudo postconf -e 'smtpd_sasl_local_domain ='
@@ -83,9 +99,9 @@ sudo postconf -e 'smtpd_recipient_restrictions = \
 permit_sasl_authenticated,permit_mynetworks,reject_unauth_destination'
 ```
 
-```{note}
+:::{note}
 The `smtpd_sasl_path` config parameter is a path relative to the Postfix queue directory.
-```
+:::
 
 There are several SASL mechanism properties worth evaluating to improve the security of your deployment. The option "`noanonymous`" prevents the use of mechanisms that permit anonymous authentication.
 
@@ -97,7 +113,11 @@ For MTA-to-MTA, TLS certificates are never validated without prior agreement fro
 
 Once you have a certificate, configure Postfix to provide TLS encryption for both incoming and outgoing mail:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'smtp_tls_security_level = may'
 sudo postconf -e 'smtpd_tls_security_level = may'
 sudo postconf -e 'smtp_tls_note_starttls_offer = yes'
@@ -109,7 +129,11 @@ sudo postconf -e 'myhostname = mail.example.com'
 
 If you are using your own Certificate Authority to sign the certificate, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'smtpd_tls_CAfile = /etc/ssl/certs/cacert.pem'
 ```
 
@@ -166,7 +190,11 @@ tls_random_source = dev:/dev/urandom
 
 The Postfix initial configuration is now complete. Run the following command to restart the Postfix daemon:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart postfix.service
 ```
 
@@ -186,7 +214,11 @@ Postfix supports two SASL implementations: **Cyrus SASL** and **Dovecot SASL**.
 
 To enable Dovecot SASL the `dovecot-core` package will need to be installed:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install dovecot-core
 ```
 
@@ -228,7 +260,11 @@ auth_mechanisms = plain login
 
 Once you have configured Dovecot, restart it with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart dovecot.service
 ```
 
@@ -236,13 +272,21 @@ sudo systemctl restart dovecot.service
 
 SMTP-AUTH configuration is complete -- now it is time to test the setup. To see if SMTP-AUTH and TLS work properly, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 telnet mail.example.com 25
 ```
 
 After you have established the connection to the Postfix mail server, type:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ehlo mail.example.com
 ```
 
@@ -277,7 +321,11 @@ smtp      inet  n       -       n       -       -       smtpd
 
 You will then need to restart Postfix to use the new configuration. From a terminal prompt enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service postfix restart
 ```
 
@@ -299,7 +347,11 @@ Postfix sends all log messages to `/var/log/mail.log`. However, error and warnin
 
 To see messages entered into the logs in real time you can use the `tail -f` command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 tail -f /var/log/mail.err
 ```
 
@@ -307,13 +359,21 @@ tail -f /var/log/mail.err
 
 The amount of detail recorded in the logs can be increased via the configuration options. For example, to increase TLS activity logging set the `smtpd_tls_loglevel` option to a value from 1 to 4.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'smtpd_tls_loglevel = 4'
 ```
 
 Reload the service after any configuration change, to activate the new config:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl reload postfix.service
 ```
 
@@ -321,8 +381,18 @@ sudo systemctl reload postfix.service
 
 If you are having trouble sending or receiving mail from a specific domain you can add the domain to the `debug_peer_list` parameter.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo postconf -e 'debug_peer_list = problem.domain'
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl reload postfix.service
 ```
 
@@ -330,13 +400,17 @@ sudo systemctl reload postfix.service
 
 You can increase the verbosity of any Postfix daemon process by editing the `/etc/postfix/master.cf` and adding a `-v` after the entry. For example, edit the `smtp` entry:
 
-```bash
+```text
 smtp      unix  -       -       -       -       -       smtp -v
 ```
 
 Then, reload the service as usual:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl reload postfix.service
 ```
 
@@ -344,20 +418,24 @@ sudo systemctl reload postfix.service
 
 To increase the amount of information logged when troubleshooting SASL issues you can set the following options in `/etc/dovecot/conf.d/10-logging.conf`
 
-```bash
+```text
 auth_debug=yes
 auth_debug_passwords=yes
 ```
 
 As with Postfix, if you change a Dovecot configuration the process will need to be reloaded:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl reload dovecot.service
 ```
 
-```{note}
+:::{note}
 Some of the options above can drastically increase the amount of information sent to the log files. Remember to return the log level back to normal after you have corrected the problem -- then reload the appropriate daemon for the new configuration to take effect.
-```
+:::
 
 ## Further reading
 

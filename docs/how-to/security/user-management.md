@@ -26,18 +26,33 @@ The original `sudo` utility (maintained by Todd C. Miller), `sudo.ws` remains su
 Switching the default back to `sudo.ws` is not recommended, but if you need to do so, follow these steps:
 
 Interactive:
-```
-# update-alternatives --config sudo
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+update-alternatives --config sudo
 ```
 
 Non-interactive:
-```
-# update-alternatives --set sudo /usr/bin/sudo.ws
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+update-alternatives --set sudo /usr/bin/sudo.ws
 ```
 
 You can always switch back to `sudo-rs` using:
-```
-# update-alternatives --set sudo /usr/lib/cargo/bin/sudo
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+update-alternatives --set sudo /usr/lib/cargo/bin/sudo
 ```
 
 You can learn more about the motivation for this change in the blog post [Adopting `sudo-rs` By Default in Ubuntu 25.10](https://discourse.ubuntu.com/t/adopting-sudo-rs-by-default-in-ubuntu-25-10/60583)
@@ -48,13 +63,18 @@ The rest of the article should work the same with both `sudo.ws` and `sudo-rs`.
 
 If for some reason you wish to enable the root account, you will need to give it a password:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo passwd
 ```
 
 `sudo` will prompt you for your password, and then ask you to supply a new password for `root` as shown below:
 
-```bash
+```{terminal}
+:output-only:
 [sudo: authenticate] Password: (enter your own password)
 New password: (enter a new password for root)
 Retype new password: (repeat new password for root)
@@ -65,7 +85,11 @@ passwd: password updated successfully
 
 To disable the root account password, use the following `passwd` syntax:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo passwd -l root
 ```
 
@@ -80,8 +104,10 @@ Managing local users and groups differs very little from most other {term}`GNU`/
 Local users and groups are those defined in the `/etc/passwd` and `/etc/group` files, respectively. Via the Name Service Switch ({term}`NSS`) mechanism, however, user and group accounts can also come from other sources, like remote Active Directory or Samba servers, OpenLDAP directory services, and more. Managing accounts in those services in an entirely different matter, and not covered in this document.
 
 ### Listing local users
+
 The local users are defined one per line in the `/etc/passwd` text file. The `cat /etc/passwd` command can be used to list its contents (only a few lines shown below, for brevity):
-```text
+
+```
 root:x:0:0:root:/root:/bin/bash
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -89,24 +115,35 @@ sys:x:3:3:sys:/dev:/usr/sbin/nologin
 ...
 ubuntu:x:1000:1000:Ubuntu:/home/ubuntu:/bin/bash
 ```
-```{tip}
-The structure of the `/etc/passwd` file is explained in the {manpage}`passwd(5)` manual page.
-```
-There are basically three types of local users:
- * system pre-installed users: These are system users essential to a working Linux system, like `root`, `man`, `lp`, and others. Their {term}`UID`s are in the range between 0 and 99.
- * system users: These users are created dynamically, as services are installed. The UID range here is between 100 and 999.
- * Regular users: Finally, the remaining range is usable for "real" users, generally representing persons using the system. This UID range starts at 1000 and, by convention, ends at 59999.
 
-```{tip}
+:::{tip}
+The structure of the `/etc/passwd` file is explained in the {manpage}`passwd(5)` manual page.
+:::
+
+There are basically three types of local users:
+
+* system pre-installed users: These are system users essential to a working Linux system, like `root`, `man`, `lp`, and others. Their {term}`UID`s are in the range between 0 and 99.
+* system users: These users are created dynamically, as services are installed. The UID range here is between 100 and 999.
+* Regular users: Finally, the remaining range is usable for "real" users, generally representing persons using the system. This UID range starts at 1000 and, by convention, ends at 59999.
+
+:::{tip}
 For more details about these UID ranges, including groups and other configuration options for adding users, check the {manpage}`adduser.conf.5` manual page.
-```
+:::
 
 To list all local usernames, we can list the contents of `/etc/passwd` with some string manipulation. For example:
-```console
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /etc/passwd | cut -d : -f 1
 ```
+
 This command will cut each line at the first column, using the "`:`" character as the delimiter, and result in an output showing all local users:
-```
+
+```{terminal}
+:output-only:
 root
 daemon
 bin
@@ -114,17 +151,26 @@ sys
 ...
 ```
 If you want to only show regular users, that is, users with an UID greater than 1000, we can use a regular expression for this filtering:
-```
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /etc/passwd | cut -d : -f 1,3 | grep -E ':[0-9]{4,}'
 ```
+
 The regular expression `:[0-9]{4,}` means all digits, repeated 4 times or more. The output will be similar to this:
-```
+
+```{terminal}
+:output-only:
 nobody:65534
 ubuntu:1000
 ```
-```{tip}
+
+:::{tip}
 By convention, the `nobody` users has an UID of 65534. That originated back when the user range was limited to 16 bits (so, 0-65535), and is kept for compatibility reasons.
-```
+:::
 
 #### A note about remote users
 
@@ -140,7 +186,11 @@ For more information on the Name Service Switch (NSS) mechanism, please consult 
 
 To add a user account, use the following syntax, and follow the prompts to give the account a password and identifiable characteristics, such as a full name, phone number, etc:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo adduser username
 ```
 
@@ -148,7 +198,11 @@ sudo adduser username
 
 To delete a user account and its primary group, use the following syntax:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo deluser username
 ```
 
@@ -158,9 +212,25 @@ Remember, any user added later with the same UID/GID as the previous owner will 
 
 You may want to change the UID/GID values to something more appropriate, such as the root account, and perhaps even relocate the folder to avoid future conflicts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chown -R root:root /home/username/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir /home/archived_users/
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mv /home/username /home/archived_users/
 ```
 
@@ -168,13 +238,21 @@ sudo mv /home/username /home/archived_users/
 
 To temporarily lock a user password, use the following syntax:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo passwd -l username
 ```
 
 Similarly, to unlock a user password:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo passwd -u username
 ```
 
@@ -182,8 +260,18 @@ sudo passwd -u username
 
 To add or delete a personalised group, use the following syntax, respectively:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo addgroup groupname
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo delgroup groupname
 ```
 
@@ -191,7 +279,11 @@ sudo delgroup groupname
 
 To add a user to a group, use the following syntax:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo adduser username groupname
 ```
 
@@ -218,41 +310,45 @@ suitable for your environment.
 
 To verify your current user home directory permissions, use the following syntax:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ls -ld /home/username
-```
 
-The following output shows that the directory `/home/username` has world-readable permissions:
-
-```
 drwxr-xr-x  2 username username    4096 2007-10-02 20:03 username
 ```
 
-You can remove the world readable-permissions using the following command:
+The output shows that the directory `/home/username` has world-readable permissions. You can remove the world readable-permissions using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0750 /home/username
 ```
 
-```{note}
+:::{note}
 Some people use the recursive option (`-R`) indiscriminately, which modifies all child folders and files. However, this is not necessary and may have undesirable/unintended consequences. Modifying only the parent directory is enough to prevent unauthorised access to anything below the parent.
-```
+:::
 
 A more efficient approach would be to modify the `adduser` global default permissions when creating user home folders. To do this, edit the `/etc/adduser.conf` file and modify the `DIR_MODE` variable to something appropriate, so that all new home directories will receive the correct permissions.
 
-```text
+```ini
 DIR_MODE=0750
 ```
 
 After correcting the directory permissions using any of the previously mentioned techniques, verify the results as follows:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ls -ld /home/username
-```
 
-The output below shows that world-readable permissions have been removed:
-
-```bash
 drwxr-x---   2 username username    4096 2007-10-02 20:03 username
 ```
 
@@ -276,9 +372,9 @@ To adjust the minimum length to 8 characters, change the appropriate variable to
 password        [success=1 default=ignore]      pam_unix.so obscure sha512 minlen=8
 ```
 
-```{note}
+:::{note}
 Basic password entropy checks and minimum length rules do not apply to the administrator using `sudo`-level commands to setup a new user.
-```
+:::
 
 ### Password expiration
 
@@ -286,13 +382,18 @@ When creating user accounts, you should make it a policy to have a minimum and m
 
 To view the current status of a user account:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chage -l username
 ```
 
 The output below shows interesting facts about the user account, namely that there are no policies applied:
 
-```text
+```{terminal}
+:output-only:
 Last password change                                    : Jan 20, 2015
 Password expires                                        : never
 Password inactive                                       : never
@@ -304,25 +405,38 @@ Number of days of warning before password expires       : 7
 
 To set any of these values, use the `chage` ("change age") command, and follow the interactive prompts:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chage username
 ```
 
 The following is also an example of how you can manually change the explicit expiration date (`-E`) to 01/31/2015, minimum password age (`-m`) of 5 days, maximum password age (`-M`) of 90 days, inactivity period (`-I`) of 30 days after password expiration, and a warning time period (`-W`) of 14 days before password expiration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chage -E 01/31/2015 -m 5 -M 90 -I 30 -W 14 username
 ```
 
 To verify changes, use the same syntax as mentioned previously:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chage -l username
 ```
 
 The output below shows the new policies that have been established for the account:
 
-```bash
+```{terminal}
+:output-only:
 Last password change                                    : Jan 20, 2015
 Password expires                                        : Apr 19, 2015
 Password inactive                                       : May 19, 2015
@@ -344,21 +458,41 @@ Remove or rename the directory `.ssh/` in the user's home folder to prevent furt
 
 Be sure to check for any established SSH connections by the disabled account, as it is possible they may have existing inbound or outbound connections -- then `pkill` any that are found.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 w | grep username  (to get the pts/# terminal)
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pkill -f pts/#
 ```
 
 Restrict SSH access to only user accounts that should have it. For example, you may create a group called `sshlogin` and add the group name as the value associated with the `AllowGroups` variable located in the file `/etc/ssh/sshd_config`:
 
-```bash
+```
 AllowGroups sshlogin
 ```
 
 Then add your permitted SSH users to the group `sshlogin`, and restart the SSH service.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo adduser username sshlogin
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart ssh.service
 ```
 

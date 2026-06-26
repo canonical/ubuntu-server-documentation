@@ -48,13 +48,18 @@ The first thing we have to do is to do several runs of `openssl speed` *before* 
 
 After confirming that everything looks OK, we are ready to start the benchmark.  Let's run the command:
 
-```bash
-$ openssl speed -seconds 60 -evp md5 sha512 rsa2048 aes-256-cbc
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+openssl speed -seconds 60 -evp md5 sha512 rsa2048 aes-256-cbc
 ```
 
 This will run benchmark tests for `md5`, `sha512`, `rsa2048` and `aes-256-cbc`.  Each test will last 60 seconds, and they will involve calculating as many cryptographic hashes from `N`-byte chunks of data (with `N` varying from 16 to 16384) with each algorithm (with the exception of `rsa2048`, whose performance is measured in signatures/verifications per second).  By the end, you should see a report like the following:
 
-```text
+```{terminal}
+:output-only:
 The 'numbers' are in 1000s of bytes per second processed.
 type             16 bytes     64 bytes    256 bytes   1024 bytes   8192 bytes  16384 bytes
 sha512           91713.74k   366632.96k   684349.30k  1060512.22k  1260359.00k  1273277.92k
@@ -68,8 +73,13 @@ rsa 2048 bits 0.000173s 0.000012s   5776.8  86791.9
 
 Before we are able to profile OpenSSL, we need sure that we compile the software in a way that the generated program meets the requirements.  In our case, you can use the `file` command after building the binary to make sure that it has not been stripped:
 
-```text
-$ file /usr/bin/openssl
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+file /usr/bin/openssl
+
 /usr/bin/openssl: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=42a5ac797b6981bd45a9ece3f67646edded56bdb, for GNU/Linux 3.2.0, with debug_info, not stripped
 ```
 
@@ -77,8 +87,13 @@ Note how `file` reports the binary as being `with debug_info, not stripped`.  Th
 
 You can use the `eu-readelf` command (from the `elfutils` package) to determine whether any compression was performed with `dwz`:
 
-```text
-$ eu-readelf -S /usr/bin/openssl
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+eu-readelf -S /usr/bin/openssl
+
 [...]
 Section Headers:
 [Nr] Name                 Type         Addr             Off      Size     ES Flags Lk Inf Al
@@ -93,16 +108,24 @@ If the `Flags` field has `C` (as in `compressed`) in it, this means that `dwz` w
 
 With OpenSSL prepared and ready to be profiled, it's now time to use `perf` to obtain profiling data from our workload.  First, let's make sure we can actually access profiling data in the system.  As `root`, run:
 
-```text
-# echo -1 > /proc/sys/kernel/perf_event_paranoid
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+echo -1 > /proc/sys/kernel/perf_event_paranoid
 ```
 
 This should allow all users to monitor events in the system.
 
 Then, if you are on an Intel system, you can invoke `perf` using:
 
-```bash
-$ sudo perf record \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo perf record \
 	-e br_inst_retired.near_taken \
 	--branch-any \
 	--all-cpus \
@@ -112,8 +135,12 @@ $ sudo perf record \
 
 On an AMD system, use the following invocation:
 
-```bash
-$ sudo perf record \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo perf record \
 	-e 'cpu/event=0xc4,umask=0x0,name=ex_ret_brn_tkn/' \
 	--branch-any \
 	--all-cpus \
@@ -125,8 +152,12 @@ After the command has finished running, you should see a file named `openssl-non
 
 Note that the only thing that differs between the Intel and AMD variants is the PMU event to be monitored.  Also, note how we are using `sudo` to invoke `perf record`.  This is necessary in order to obtain full access to Linux kernel symbols and relocation information.  It also means that the `openssl-nonpgo.perfdata` file ownership will need to be adjusted:
 
-```bash
-$ sudo chown ubuntu:ubuntu openssl-nonpgo.perfdata
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo chown ubuntu:ubuntu openssl-nonpgo.perfdata
 ```
 
 Now, we need to convert the file to `gcov`.
@@ -135,9 +166,12 @@ Now, we need to convert the file to `gcov`.
 
 With `autofdo` installed, you can convert the `perfdata` generated in the last step to `gcov` by doing:
 
-```bash
-
-$ create_gcov \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+create_gcov \
 	--binary /usr/bin/openssl \
 	--gcov openssl-nonpgo.gcov \
 	--profile openssl-nonpgo.perfdata \
@@ -147,7 +181,8 @@ $ create_gcov \
 
 `create_gcov` is verbose and will display several messages that may look like something is wrong.  For example, the following output is actually from a successful run of the command:
 
-```text
+```{terminal}
+:output-only:
 [WARNING:[...]/perf_reader.cc:1322] Skipping 200 bytes of metadata: HEADER_CPU_TOPOLOGY
 [WARNING:[...]/perf_reader.cc:1069] Skipping unsupported event PERF_RECORD_ID_INDEX
 [WARNING:[...]/perf_reader.cc:1069] Skipping unsupported event PERF_RECORD_EVENT_UPDATE
@@ -159,8 +194,13 @@ $ create_gcov \
 
 Nevertheless, you should inspect its output and also make sure to check the `$?` shell variable to make sure that it has finished successfully.  However, even if `create_gcov` finishes with exit `0` the generated file `openssl-nonpgo.gcov` might not be valid.  It is also a good idea to use the `dump_gcov` tool on it and make sure that it actually contains valid information.  For example:
 
-```text
-$ dump_gcov openssl-nonpgo.gcov
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+dump_gcov openssl-nonpgo.gcov
+
 cpu_get_tb_cpu_state total:320843603 head:8557544
   2: 8442523
   7: 8442518
@@ -183,7 +223,7 @@ We have everything we need to rebuild OpenSSL and make use of our profile data. 
 
 How you perform this `CFLAGS` adjustment depends on how you built the software in the first place, so we won't cover this part here.  The resulting `CFLAGS` variable should have the following GCC option, though:
 
-```
+```text
 -fauto-profile=/path/to/openssl-nonpgo.gcov
 ```
 
@@ -217,13 +257,18 @@ In order to reduce the size of the `perfdata` that is collected, you might want 
 
 Another useful trick is to profile in batches instead of running `perf record` for the entire duration of your program's workload.  To do that, you should use the `-p` option to specify a PID to `perf record` while also specifying `sleep` as the program to be executed during the profiling.  For example, this would be the command like we would use if we were to profile a program whose PID is `1234` for 2 minutes:
 
-```bash
-$ sudo perf record \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo perf record \
 	-e br_inst_retired.near_taken \
 	--branch-any \
 	--all-cpus \
 	-p 1234 \
 	--output myprogram.perfdata
+
 	-- sleep 2m
 ```
 

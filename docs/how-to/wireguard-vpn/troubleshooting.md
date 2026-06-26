@@ -25,7 +25,8 @@ The following general checklist should help as a first set of steps to try when 
 
 It can be helpful to leave a terminal open with the `watch wg` command. Here is a sample output showing a system with two peers configured, where only one has established the VPN so far:
 
-```bash
+```{terminal}
+:output-only:
 Every 2.0s: wg                j-wg: Fri Aug 26 17:44:37 2022
 
 interface: wg0
@@ -56,24 +57,30 @@ a way to tamper with the integrity of the kernel.
 Lockdown is enabled by default in secure boot mode.
 Check the status via:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/kernel/security/lockdown
-```
 
-Which shows this as enabled:
-
-```text
 none [integrity] confidentiality
 ```
 
 Or that when disabled:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /sys/kernel/security/lockdown
+
 [none] integrity confidentiality
 ```
 
 
-To disable it either disable secure boot in BIOS or your virtualization platform.
+To disable it either disable secure boot in {term}`BIOS` or your virtualization platform.
 
 If that is impossible, consider not using the dynamic module debug control
 shown below, but instead using a kernel boot parameter `wireguard.dyndbg=+p`
@@ -85,19 +92,31 @@ Before 20.04 [Kernel Lockdown](https://documentation.ubuntu.com/security/securit
 
 This is done with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "module wireguard +p" | sudo tee /sys/kernel/debug/dynamic_debug/control
 ```
 
 This will write WireGuard logging messages to the kernel log, which can be watched live with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dmesg -wT
 ```
 
 To disable logging, run this:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "module wireguard -p" | sudo tee /sys/kernel/debug/dynamic_debug/control
 ```
 
@@ -105,13 +124,18 @@ echo "module wireguard -p" | sudo tee /sys/kernel/debug/dynamic_debug/control
 
 If you ping an IP ...
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ping 10.10.11.2
 ```
 
 ... and get back an error like this:
 
-```text
+```{terminal}
+:output-only:
 PING 10.10.11.2 (10.10.11.2) 56(84) bytes of data.
 From 10.10.11.1 icmp_seq=1 Destination Host Unreachable
 ping: sendmsg: Destination address required
@@ -131,8 +155,13 @@ Another possibility is that one of the peers is behind a NAT, and there wasn't e
 
 This error:
 
-```bash
-$ ping 10.10.11.1
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ping 10.10.11.1
+
 PING 10.10.11.1 (10.10.11.1) 56(84) bytes of data.
 From 10.10.11.2 icmp_seq=1 Destination Host Unreachable
 ping: sendmsg: Required key not available
@@ -142,6 +171,7 @@ Can happen when you have a route directing traffic to the WireGuard interface, b
 
 If you have enabled kernel debugging for WireGuard, you will also see a message like this one in the {term}`dmesg` output:
 
-```
+```{terminal}
+:output-only:
 wireguard: home0: No peer has allowed IPs matching 10.10.11.1
 ```

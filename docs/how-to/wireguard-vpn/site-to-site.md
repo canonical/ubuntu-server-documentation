@@ -45,8 +45,13 @@ Such a setup has a few particular details:
 
 This is what an MTR (My Traceroute) report from a system in the beta network to an alpha system will look like:
 
-```bash
-ubuntu@b1:~$ mtr -n -r 10.10.10.230
+```{terminal}
+:copy:
+:user: ubuntu
+:host: b1
+:dir: ~
+mtr -n -r 10.10.10.230
+
 Start: 2022-09-02T18:56:51+0000
 HOST: b1                Loss%   Snt   Last   Avg  Best  Wrst StDev
   1.|-- 10.10.11.1       0.0%    10    0.1   0.1   0.1   0.2   0.0
@@ -54,23 +59,39 @@ HOST: b1                Loss%   Snt   Last   Avg  Best  Wrst StDev
   3.|-- 10.10.10.230     0.0%    10  299.1 299.1 298.0 300.2   0.6
 ```
 
-```{note}
+:::{note}
 Technically, a `/31` Classless Inter-Domain Routing (CIDR) network has no usable IP addresses, since the first one is the network address, and the second (and last) one is the broadcast address. [RFC 3021](https://www.ietf.org/rfc/rfc3021.txt) allows for it, but if you encounter routing or other networking issues, switch to a `/30` CIDR and its two valid host IPs.
-```
+:::
 
 ## Configure WireGuard
 
 On the system that is the gateway for each site (that has internet connectivity), we start by installing WireGuard and generating the keys. For the **alpha** site:
 
-```bash
-$ sudo apt install wireguard
-$ wg genkey | sudo tee /etc/wireguard/wgA.key
-$ sudo cat /etc/wireguard/wgA.key | wg pubkey | sudo tee /etc/wireguard/wgA.pub
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install wireguard
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey | sudo tee /etc/wireguard/wgA.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo cat /etc/wireguard/wgA.key | wg pubkey | sudo tee /etc/wireguard/wgA.pub
 ```
 
 And the configuration on alpha will be:
 
-```
+```ini
 [Interface]
 PostUp = wg set %i private-key /etc/wireguard/%i.key
 Address = 10.10.9.0/31
@@ -85,15 +106,31 @@ Endpoint = <beta-gw-ip>:51000
 
 On the gateway for the **beta** site we take similar steps:
 
-```bash
-$ sudo apt install wireguard
-$ wg genkey | sudo tee /etc/wireguard/wgB.key
-$ sudo cat /etc/wireguard/wgB.key | wg pubkey | sudo tee /etc/wireguard/wgB.pub
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install wireguard
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey | sudo tee /etc/wireguard/wgB.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo cat /etc/wireguard/wgB.key | wg pubkey | sudo tee /etc/wireguard/wgB.pub
 ```
 
 And create the corresponding configuration file for beta:
 
-```
+```ini
 [Interface]
 Address = 10.10.9.1/31
 PostUp = wg set %i private-key /etc/wireguard/%i.key
@@ -106,9 +143,9 @@ AllowedIPs = 10.10.10.0/24,10.10.9.0/31
 Endpoint = <alpha-gw-ip>:51000
 ```
 
-```{important}
+:::{important}
 WireGuard is being set up on the gateways for these two networks. As such, there are no changes needed on individual hosts of each network, but keep in mind that the WireGuard tunneling and encryption is only happening between the *alpha* and *beta* gateways, and **NOT** between the hosts of each network.
-```
+:::
 
 ## Bring the interfaces up
 
@@ -116,14 +153,22 @@ Since this VPN is permanent between static sites, it's best to use the systemd u
 
 On **alpha**:
 
-```bash
-$ sudo systemctl enable --now wg-quick@wgA
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl enable --now wg-quick@wgA
 ```
 
 And similarly on **beta**:
 
-```bash
-$ sudo systemctl enable --now wg-quick@wgB
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl enable --now wg-quick@wgB
 ```
 
 This both enables the interface on reboot, and starts it right away.
@@ -145,10 +190,22 @@ In general, what needs to be done or checked is:
 
   For example, if you want to prevent SSH between the sites, you could add a firewall rule like this one to **alpha**:
 
-  `$ sudo iptables -A FORWARD -i wgA -p tcp --dport 22 -j REJECT`
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iptables -A FORWARD -i wgA -p tcp --dport 22 -j REJECT
+  ```
 
   And similarly on **beta**:
 
-  `$ sudo iptables -A FORWARD -i wgB -p tcp --dport 22 -j REJECT`
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo iptables -A FORWARD -i wgB -p tcp --dport 22 -j REJECT
+  ```
 
   You can add these as `PostUp` actions in the WireGuard interface config. Just don't forget to remove them in the corresponding `PreDown` hook, or you will end up with multiple rules.

@@ -15,21 +15,23 @@ To use this backend, we have to choose two or more ID ranges:
 
 Let's analyze an example configuration:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend       = tdb
-        idmap config * : range         = 100000 - 199999
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend       = tdb
+    idmap config * : range         = 100000 - 199999
 
-        idmap config EXAMPLE : backend = rid
-        idmap config EXAMPLE : range   = 1000000 - 1999999
-
-```{note}
-This is not yet a complete configuration file, and is just illustrating the IDMap configuration. More is needed to join an Active Directory domain.
+    idmap config EXAMPLE : backend = rid
+    idmap config EXAMPLE : range   = 1000000 - 1999999
 ```
+
+:::{note}
+This is not yet a complete configuration file, and is just illustrating the IDMap configuration. More is needed to join an Active Directory domain.
+:::
 
 This configuration is using two IDMap backends, and carving out two ranges:
 - `*` domain, or "default domain": any SID that is not mapped via another more specific IDMap configuration will use this backend. Since this mapping is not deterministic, a database is needed to keep a record, hence the `tdb` backend is used.
@@ -39,28 +41,30 @@ This configuration is using two IDMap backends, and carving out two ranges:
 
 
 
-```{important}
+:::{important}
 Planning a range of IDs to be used for the mapping critically important. Such a range can never be reduced, just expanded (carefully!), and it must **NEVER** overlap with another allocated range.
-```
+:::
 
 Once this system is joined to the `EXAMPLE.INTERNAL` domain, users from that domain will be allocated corresponding Linux UIDs and GIDs from the specified range in a deterministic way, following a formula. As long as the above configuration is used in all Ubuntu systems joined to the domain, the same Active Directory user will always get the same Linux IDs in all those systems.
 
 Things start to get more complicated if the `EXAMPLE.INTERNAL` domain establishes a trust relationship with another Active Directory domain. The correct way to handle this is to, *before*, add a new IDMap configuration for that domain. For example:
 
-    [global]
-        ...
-        security = ads
-        realm = EXAMPLE.INTERNAL
-        workgroup = EXAMPLE
-        ...
-        idmap config * : backend       = tdb
-        idmap config * : range         = 100000 - 199999
+```ini
+[global]
+    ...
+    security = ads
+    realm = EXAMPLE.INTERNAL
+    workgroup = EXAMPLE
+    ...
+    idmap config * : backend       = tdb
+    idmap config * : range         = 100000 - 199999
 
-        idmap config EXAMPLE : backend = rid
-        idmap config EXAMPLE : range   = 1000000 - 1999999
+    idmap config EXAMPLE : backend = rid
+    idmap config EXAMPLE : range   = 1000000 - 1999999
 
-        idmap config COMPANY : backend = rid
-        idmap config COMPANY : range   = 2000000 - 2999999
+    idmap config COMPANY : backend = rid
+    idmap config COMPANY : range   = 2000000 - 2999999
+```
 
 This change is allocating a new range for the new `COMPANY` domain. Then, when the domain trust relationship is established between the Active Directory domains, the Ubuntu systems with this extra IDMap configuration will know that users from the `COMPANY` belong to the range `2000000 - 2999999`.
 

@@ -7,7 +7,7 @@ myst:
 (samba-apparmor-profile)=
 # Create a Samba AppArmor profile
 
-Ubuntu comes with the AppArmor security module, which provides mandatory access controls. The default AppArmor profile for Samba may need to be adapted to your configuration. More details on using AppArmor can be found [in this guide](https://ubuntu.com/server/docs/security-apparmor).
+Ubuntu comes with the AppArmor security module, which provides mandatory access controls. The default AppArmor profile for Samba may need to be adapted to your configuration. More details on using AppArmor can be found {ref}`in this guide <apparmor>`.
 
 There are default AppArmor profiles for `/usr/sbin/smbd` and `/usr/sbin/nmbd`, the Samba daemon binaries, as part of the `apparmor-profiles` package. 
 
@@ -15,13 +15,17 @@ There are default AppArmor profiles for `/usr/sbin/smbd` and `/usr/sbin/nmbd`, t
 
 To install the package, enter the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install apparmor-profiles apparmor-utils
 ```
 
-```{note}
+:::{note}
 This package contains profiles for several other binaries.
-```
+:::
 
 ## AppArmor profile modes
 
@@ -29,7 +33,8 @@ By default, the profiles for `smbd` and `nmbd` are set to 'complain' mode. In th
 
 This is what an `ALLOWED` message looks like. It means that, were the profile not in `complain` mode, this action would have been denied instead (formatted into multiple lines here for better visibility):
 
-```text
+```{terminal}
+:output-only:
 Jun 30 14:41:09 ubuntu kernel: [  621.478989] audit: 
 type=1400 audit(1656600069.123:418):
 apparmor="ALLOWED" operation="exec" profile="smbd"
@@ -40,8 +45,18 @@ target="smbd//null-/usr/lib/x86_64-linux-gnu/samba/samba-bgqd"
 
 The alternative to 'complain' mode is 'enforce' mode, where any operations that violate policy are blocked. To place the profile into `enforce` mode and reload it, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo aa-enforce /usr/sbin/smbd
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apparmor_parser -r -W -T /etc/apparmor.d/usr.sbin.smbd
 ```
 

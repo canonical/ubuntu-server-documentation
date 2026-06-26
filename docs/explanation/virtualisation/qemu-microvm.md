@@ -39,7 +39,7 @@ booting a fully generic operating system, followed by more time to completely
 initialize your workload.
 
 There are a few common ways to adapt a workload to match this:
-- Use faster bootloaders and virtual firmware (see `qboot` below) with a reduced
+- Use faster {term}`bootloaders <bootloader>` and virtual firmware (see `qboot` below) with a reduced
   feature set, not as generally capable but sufficient for a particular use case.
 - Even the fastest bootloader is slower than no bootloader, so often
   the kernel is directly passed from the host {term}`filesystem`.
@@ -86,17 +86,58 @@ artifact. It will be called `chiselled-hello_latest_amd64.rock`.
 That is now converted to a disk image for use as virtual disk in our later
 example.
 
-```bash
-# Convert the artifact of the ROCK tutorial into OCI format
-$ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
-# Unpack that to a local directory
-$ sudo apt install oci-image-tool
-$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
-# Create some paths the kernel would be unhappy if they would be missing
-$ mkdir /tmp/chiselled-hello/{dev,proc,sys,run,var}
-# Convert the directory to a qcow2 image
-$ sudo apt install guestfs-tools
-$ sudo virt-make-fs --format=qcow2 --size=50M /tmp/chiselled-hello chiselled-hello.qcow2
+Convert the artifact of the ROCK tutorial into OCI format
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
+```
+
+Unpack that to a local directory:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install oci-image-tool
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+```
+
+Create some paths the kernel would be unhappy if they would be missing:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+mkdir /tmp/chiselled-hello/{dev,proc,sys,run,var}
+```
+
+Convert the directory to a `qcow2` image:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install guestfs-tools
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo virt-make-fs --format=qcow2 --size=50M /tmp/chiselled-hello chiselled-hello.qcow2
 ```
 
 ## Run the stripped workload in QEMU
@@ -105,14 +146,19 @@ Now that we have a stripped-down workload as an example, we can run it
 in standard QEMU and see that this is much quicker than booting a full
 operating system.
 
-```bash
-$ sudo qemu-system-x86_64 -m 128M -machine accel=kvm \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo qemu-system-x86_64 -m 128M -machine accel=kvm \
     -kernel /boot/vmlinuz-$(uname -r) \
     -append 'console=ttyS0 root=/dev/vda fsck.mode=skip init=/usr/bin/hello' \
     -nodefaults -no-user-config \
     -display none -serial mon:stdio \
     -drive file=chiselled-hello.qcow2,index=0,format=qcow2,media=disk,if=none,id=virtio1 \
     -device virtio-blk-pci,drive=virtio1
+
 ...
 [    2.116207] Run /usr/bin/hello as init process
 Hello, world!
@@ -176,8 +222,12 @@ For more details on what else could be disabled see
 
 Run the guest in `qemu-system-x86_64-microvm`:
 
-```bash
-$ sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm,rtc=on \
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo qemu-system-x86_64-microvm -m 128M -machine accel=kvm,rtc=on \
     -bios /usr/share/qemu/qboot.rom \
     -kernel /boot/vmlinuz-$(uname -r) \
     -append 'console=ttyS0 root=/dev/vda fsck.mode=skip init=/usr/bin/hello' \
@@ -224,26 +274,51 @@ content with the guest via `virtiofsd`.
 Doing so for our example could start with a conversion of the container
 artifact above to a shareable directory:
 
-```bash
-# Copy out the example the tutorial had in OCI format
-$ sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
-# Unpack that to a directory
-$ sudo apt install oci-image-tool
-$ oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
+Copy out the example the tutorial had in OCI format:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo rockcraft.skopeo --insecure-policy copy oci-archive:chiselled-hello_latest_amd64.rock oci:chiselled-hello.oci:latest
+```
+
+Unpack that to a directory:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install oci-image-tool
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+oci-image-tool unpack --ref name=latest chiselled-hello.oci /tmp/chiselled-hello
 ```
 
 Exposing that directory to a guest via `virtiofsd`:
 
-```bash
-$ sudo apt install virtiofsd
-$ /usr/libexec/virtiofsd --socket-path=/tmp/vfsd.sock --shared-dir /tmp/chiselled-hello
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install virtiofsd
+/usr/libexec/virtiofsd --socket-path=/tmp/vfsd.sock --shared-dir /tmp/chiselled-hello
+
 ...
 [INFO  virtiofsd] Waiting for vhost-user socket connection...
 ```
 
 To the QEMU command-line one would then add the following options:
 
-```bash
+```{terminal}
+:output-only:
 ...
 -object memory-backend-memfd,id=mem,share=on,size=128M \
 -numa node,memdev=mem -chardev socket,id=char0,path=/tmp/vfsd.sock \

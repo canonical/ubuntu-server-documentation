@@ -13,7 +13,11 @@ Squid is a filtering and caching mechanism for web servers that can optimise ban
 
 At a terminal prompt, enter the following command to install the Squid server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install squid
 ```
 
@@ -25,8 +29,18 @@ Squid is configured by editing directives in the `/etc/squid/squid.conf` configu
 
 Before editing the configuration file, you should make a copy of the original and protect it from writing. You will then have the original settings as a reference, and can reuse it when needed. Run the following commands to make a copy of the original configuration file and protect it from being written to:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /etc/squid/squid.conf /etc/squid/squid.conf.original
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod a-w /etc/squid/squid.conf.original
 ```
 
@@ -34,7 +48,7 @@ sudo chmod a-w /etc/squid/squid.conf.original
 
 To set your Squid server to listen on TCP port 8888 instead of the default TCP port 3128, change the **`http_port`** directive as such:
 
-```text
+```
 http_port 8888
 ```
 
@@ -42,7 +56,7 @@ http_port 8888
 
 Change the **`visible_hostname`** directive to give the Squid server a specific {term}`hostname`. This hostname does not need to be the same as the computer's hostname. In this example it is set to `weezie`:
 
-```text
+```
 visible_hostname weezie
 ```
 
@@ -50,7 +64,7 @@ visible_hostname weezie
 
 The default setting is to use on-memory cache. This example tells squid to use up to 512MB of memory, erasing the last recently used content when the cache is full to free space for new items:
 
-```text
+```
 cache_mem 512 MB
 memory_replacement_policy lru
 ```
@@ -59,13 +73,13 @@ memory_replacement_policy lru
 
 By changing the **`cache_dir`** directive you can configure use of an on-disk cache. The `cache_dir` directive takes the following arguments:
 
-```text
+```
 cache_dir <Type> <Directory-Name> <Size-in-MB> <L1-Dirs> <L2-Dirs> [options]
 ```
 
 In this example we set the cache configuration to use a `ufs` storage in `/var/spool/squid`, up to 10GB, with 16 directories on the first level of the hierarchy, each of those containing 256 directories for organization.
 
-```text
+```
 cache_dir ufs /var/spool/squid 10000 16 256
 ```
 
@@ -79,7 +93,7 @@ The available storage types are:
 
 The following configuration directives control which objects get cached based on their size, for space optimization, both on disk and in memory:
 
-```text
+```
 maximum_object_size 512 MB
 minimum_object_size 0 KB
 maximum_object_size_in_memory 512 KB
@@ -89,7 +103,7 @@ maximum_object_size_in_memory 512 KB
 
 Using the `refresh_pattern` configuration directive controls how long cached objects stay fresh before they need to be re-validated with the origin server. It is configured as:
 
-```text
+```
 refresh_pattern regex min percent max [options]
 ```
 
@@ -97,7 +111,7 @@ where `regex` needs to match against the filename, `min` and `max` set the time 
 
 In the following example, static web assets (such as images, css and scripts) are configured to be kept for 7 to 30 days + 90% of their age, based on the `Last-Modified` header, while everything else is kept up to 3 days + 20% of their age.
 
-```text
+```
 refresh_pattern -i \.(gif|jpg|png|css|js)$  10080  90%  43200
 refresh_pattern .                           0      20%  4320
 ```
@@ -120,13 +134,13 @@ Using Squid's access control, you can configure use of Squid-proxied Internet se
 
 * Add the following to the **bottom** of the {term}`ACL` section of your `/etc/squid/squid.conf` file:
    
-   ```text
+   ```
    acl fortytwo_network src 192.168.42.0/24
    ```
 
 * Then, add the following to the **top** of the `http_access` section of your `/etc/squid/squid.conf` file:
     
-   ```text
+   ```
    http_access allow fortytwo_network
    ```
 
@@ -134,14 +148,14 @@ Using Squid's access control features, you can configure Squid-proxied Internet 
     
 * Add the following to the **bottom** of the ACL section of your `/etc/squid/squid.conf` file:
 
-   ```text
+   ```
    acl biz_network src 10.1.42.0/24
    acl biz_hours time M T W T F 9:00-17:00
    ```
 
 * Then, add the following to the **top** of the `http_access` section of your `/etc/squid/squid.conf` file:
 
-   ```text
+   ```
    http_access allow biz_network biz_hours
    ```
 
@@ -151,20 +165,28 @@ After making any changes to the `/etc/squid/squid.conf` file, you will need to s
 
 First, you can verify the syntax of your configuration file by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo squid -k parse
 ```
 
 You can restart the server using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart squid.service
 ```
 
-```{note}
+:::{note}
 If a formerly customized squid3 was used to set up the spool at `/var/log/squid3` to be a mount point, but otherwise kept the default configuration, the upgrade will fail. The upgrade tries to rename/move files as needed, but it can't do so for an active mount point. In that case you will need to adapt either the mount point or the config in `/etc/squid/squid.conf` so that they match.
 The same applies if the **include** config statement was used to pull in more files from the old path at `/etc/squid3/`. In those cases you should move and adapt your configuration accordingly.
-```
+:::
 
 ## Troubleshooting
 
@@ -172,21 +194,45 @@ To monitor Squid behavior and check for potential errors and problems, there are
 
 Squid version and status can be checked with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo squid -v
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl status squid
 ```
 
 Checking or watching the log files may be useful to see potential errors, and to verify cache hits and misses:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cat /var/log/squid/cache.log
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cat /var/log/squid/access.log
 ```
 
 For a status summary containing runtime statistics and configuration, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 curl http://localhost:8888/squid-internal-mgr/info
 ```
 

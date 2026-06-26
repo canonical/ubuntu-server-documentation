@@ -13,7 +13,11 @@ OpenVPN is a flexible, reliable and secure Virtual Private Networking (VPN) solu
 
 To install OpenVPN, run the following command in your terminal:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install openvpn easy-rsa
 ```
 
@@ -39,17 +43,25 @@ OpenVPN uses its own internal Public Key Infrastructure (PKI) where every client
 
 To set up your own CA, and generate certificates and keys for an OpenVPN server with multiple clients, first copy the `easy-rsa` directory to `/etc/openvpn`. This will ensure that any changes to the scripts will not be lost when the package is updated. From a terminal, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo make-cadir /etc/openvpn/easy-rsa
 ```
 
-```{note}
+:::{note}
 You can alternatively edit `/etc/openvpn/easy-rsa/vars` directly, adjusting it to your needs.
-```
+:::
 
 As a `root` user, change to the newly created directory `/etc/openvpn/easy-rsa` and run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ./easyrsa init-pki && ./easyrsa build-ca
 ```
 
@@ -59,25 +71,41 @@ The PEM passphrase set when creating the CA will be asked for every time you nee
 
 Next, we will generate a key pair for the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ./easyrsa gen-req myservername nopass
 ```
 
 {spellexception}`Diffie Hellman` parameters must be generated for the OpenVPN server. The following command will place them in `pki/dh.pem`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ./easyrsa gen-dh
 ```
 
 And finally, create a certificate for the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ./easyrsa sign-req server myservername
 ```
 
 All certificates and keys have been generated in subdirectories. Common practice is to copy them to `/etc/openvpn/`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.key /etc/openvpn/
 ```
 
@@ -85,27 +113,45 @@ cp pki/dh.pem pki/ca.crt pki/issued/myservername.crt pki/private/myservername.ke
 
 Included with your OpenVPN installation are these (and many more) sample configuration files:
 
-```bash
+```{terminal}
+:output-only:
 /usr/share/doc/openvpn/examples/sample-config-files/client.conf
 /usr/share/doc/openvpn/examples/sample-config-files/server.conf
 ```
 
 If these files under `/usr/share/doc/*` are not available (for example, the system was provisioned as a minimal install), you can fetch them directly from the Ubuntu package repositories:
- * [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf)
- * [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf)
+
+- [client.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/client.conf)
+- [server.conf](https://git.launchpad.net/ubuntu/+source/openvpn/tree/sample/sample-config-files/server.conf)
 
 Start by copying the example server configuration to `/etc/openvpn/myserver.conf`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/openvpn/myserver.conf
 ```
 
+:::{note}
 In Ubuntu 20.04 or older, the file is compressed, so do this instead:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf.gz /etc/openvpn/myserver.conf.gz
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo gzip -d /etc/openvpn/myserver.conf.gz
 ```
+:::
 
 Edit `/etc/openvpn/myserver.conf` to make sure the following lines are pointing to the certificates and keys you created in the section above.
 
@@ -125,19 +171,31 @@ Ubuntu Server release older than 18.04 LTS (Bionic Beaver), please use
 
 Complete this set with a TLS Authentication (TA) key in `/etc/openvpn` for `tls-crypt` like this:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo openvpn --genkey secret ta.key
 ```
 
 Add a config file to `/etc/sysctl.conf.d` to enable IP forwarding:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "net.ipv4.ip_forward = 1" | sudo tee /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
 Then apply this file through `sysctl`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl -p /etc/sysctl.d/50-enable-ipv4-forwarding.conf
 ```
 
@@ -145,30 +203,38 @@ This is the minimum you need to configure to get a working OpenVPN server.
 You can consider studying and tweaking all the default settings we got from the sample `server.conf` file.
 Now you can start the server.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start openvpn@myserver
 ```
 
-```{note}
+:::{note}
 Be aware that the `systemctl start openvpn` is **not** starting the `openvpn` you just defined.
 OpenVPN uses templated `systemd` jobs, `openvpn@CONFIGFILENAME`. So if, for example, your configuration file is `myserver.conf` your service is called `openvpn@myserver`. You can run all kinds of service and `systemctl` commands like `start/stop/enable/disable/preset` against a templated service like `openvpn@server`.
-```
+:::
 
 You will find logging and error messages in the journal. For example, if you started a [templated service](https://www.freedesktop.org/software/systemd/man/latest/systemd.unit.html) `openvpn@server` you can filter for this particular message source with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo journalctl -u openvpn@myserver -xe
 ```
 
-The same templated approach works for all of `systemctl`:
+The same templated approach works for all of `systemctl`, which shows the current server status:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl status openvpn@myserver
-```
 
-Which shows the current server status:
-
-```text
      Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
      Active: active (running) since Wed 2026-01-21 10:38:01 UTC; 37s ago
  Invocation: b2a3d68935e7423e8f822bc0c88db764
@@ -203,13 +269,18 @@ After `systemctl daemon-reload`, a restart of the "generic" OpenVPN will restart
 
 Now, check if OpenVPN created a `tun0` interface:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr show dev tun0
 ```
 
 Due to restricting it to `dev tun0` this will report just that:
 
-```text
+```{terminal}
+:output-only:
 5: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 100
     link/none
     inet 10.8.0.1 peer 10.8.0.2/32 scope global tun0
@@ -226,7 +297,11 @@ This can be done either on the server (as with the keys and certificates above) 
 
 To create the certificate, enter the following in a terminal as a root user:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ./easyrsa gen-req myclient1 nopass && ./easyrsa sign-req client myclient1
 ```
 
@@ -245,13 +320,21 @@ Since the client certificates and keys are only required on the client machine, 
 
 There are various different OpenVPN client implementations -- both with and without {term}`GUIs <GUI>`. You can read more about clients in {ref}`our page on OpenVPN Clients <openvpn-client-implementations>`. For now, we use the command-line/service-based OpenVPN client for Ubuntu, which is part of the same package as the server. So you must install the `openvpn` package again on the client machine:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install openvpn
 ```
 
 This time, copy the `client.conf` sample config file to `/etc/openvpn/`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp /usr/share/doc/openvpn/examples/sample-config-files/client.conf /etc/openvpn/
 ```
 
@@ -279,19 +362,23 @@ remote vpnserver.example.com 1194
 
 Now start the OpenVPN client with the same templated mechanism:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start openvpn@client
 ```
 
 You can check the status as you did on the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl status openvpn@client
-```
 
-Which shows the current client status:
-
-```text
 ● openvpn@client.service - OpenVPN connection to client
      Loaded: loaded (/usr/lib/systemd/system/openvpn@.service; disabled; preset: enabled)
      Active: active (running) since Wed 2026-01-21 10:54:27 UTC; 55s ago
@@ -372,13 +459,13 @@ ovpn-myserver[10556]: client/10.185.198.41:40732 Protocol options: explicit-exit
 
 And you can check on the client if it created a `tun0` interface:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip addr show dev tun0
-```
 
-Showing the `tun0` device on the client:
-
-```text
 6: tun0: <POINTOPOINT,MULTICAST,NOARP,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UNKNOWN group default qlen 500
     link/none
     inet 10.8.0.2/24 brd 10.8.0.255 scope global tun0
@@ -389,30 +476,35 @@ Showing the `tun0` device on the client:
 
 Check if you can ping the OpenVPN server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ping 10.8.0.1 -c 1
-```
 
-Which should show a working ping with an answer:
-
-```text
 PING 10.8.0.1 (10.8.0.1) 56(84) bytes of data.
 64 bytes from 10.8.0.1: icmp_seq=1 ttl=64 time=0.335 ms
 ```
 
-```{note}
+:::{note}
 The OpenVPN server always uses the first usable IP address in the client network and only that IP is pingable. E.g., if you configured a `/24` for the client network mask, the `.1` address will be used. The P-t-P address you see in the `ip addr` output above does not usually answer ping requests.
-```
+:::
 
 Check out your routes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ip route show dev tun0
 ```
 
 A system might have many many routes, but this call restricts to those on `tun0`:
 
-```text
+```{terminal}
+:output-only:
 10.8.0.0/24 proto kernel scope link src 10.8.0.2
 ```
 
@@ -435,9 +527,9 @@ The above is a very simple working VPN. The client can access services on the VP
 
 The example config files that we have been using in this guide are full of these advanced options in the form of a comment and a disabled configuration line as an example.
 
-```{note}
+:::{note}
 Read the OpenVPN [hardening security guide](https://openvpn.net/community-docs/security.html) for further security advice.
-```
+:::
 
 ### Advanced bridged VPN configuration on server
 
@@ -447,7 +539,7 @@ OpenVPN can be set up for either a routed or a bridged VPN mode. Sometimes this 
 
 First, use Netplan to configure a bridge device using the desired Ethernet device like `/etc/netplan/01-netcfg.yaml` to contain:
 
-```text
+```yaml
 network:
     version: 2
     renderer: networkd
@@ -470,7 +562,11 @@ Static IP addressing is highly suggested. DHCP addressing can also work, but you
 
 The next step on the server is to configure the Ethernet device for promiscuous mode on boot. To do this, ensure the `networkd-dispatcher` package is installed and create the following configuration script:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update && sudo apt install networkd-dispatcher
 ```
 
@@ -487,7 +583,11 @@ fi
 
 And ensure it has the permission to be executed:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod +x /etc/networkd-dispatcher/dormant.d/promisc_bridge
 ```
 
@@ -505,7 +605,11 @@ server-bridge 10.0.0.4 255.255.255.0 10.0.0.128 10.0.0.254
 
 After configuring the server, restart OpenVPN by entering:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart openvpn@myserver
 ```
 
@@ -513,14 +617,18 @@ sudo systemctl restart openvpn@myserver
 
 The only difference on the client side for bridged mode to what was outlined above is that you need to edit `/etc/openvpn/client.conf` and set `tap` mode:
 
-```
+```text
 dev tap
 ;dev tun
 ```
 
 Finally, restart OpenVPN:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart openvpn@client
 ```
 
@@ -543,31 +651,39 @@ providers legacy default
 
 You can also run `openvpn` with the `--providers` argument.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openvpn --providers legacy default ...
 ```
 
-```{note}
+:::{note}
 On Ubuntu 22.04 LTS and earlier, legacy algorithms are included in OpenVPN by default.
-```
+:::
 
 #### TPM 2.0
 
 OpenVPN also works with Trusted Platform Module (TPM) 2.0 encryption using the `tpm2` provider. Set it up by installing the `tpm2-openssl` package and including both `legacy` and `tpm2` in your provider configuration.
 
-```
+```text
 providers legacy default tpm2
 ```
 
 Alternatively, run with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 openvpn --providers legacy default tpm2 ...
 ```
 
-```{note}
+:::{note}
 The provider order matters here as tpm2 currently requires the legacy provider to load first.
-```
+:::
 
 ## Further reading
 

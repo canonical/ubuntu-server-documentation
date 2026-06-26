@@ -27,13 +27,13 @@ the available power monitors.
 
 Command (list all available `cpupower` monitors available on the system):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cpupower monitor -l
-```
 
-Output (An example from a common consumer laptop):
-
-```bash
 Monitor "Nehalem" (4 states) - Might overflow after 922000000 s
   C3	[C] -> Processor Core C3
   C6	[C] -> Processor Core C6
@@ -60,6 +60,7 @@ Monitor "Idle_Stats" (9 states) - Might overflow after 4294967295 s
   C10	[T] -> MWAIT 0x60
 ```
 
+This example output is from a common consumer laptop.
 Here we can see that the machine has four available monitors shown in `"`.
 
 * `Nehalem` - Hardware specific C states.
@@ -80,13 +81,13 @@ what was consumed at the different system levels of package, dram, core and
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cpupower monitor -i 60 -m Mperf,RAPL
-```
 
-Output:
-
-```bash
     | Mperf              || RAPL
  CPU| C0   | Cx   | Freq || pack    | dram    | core    | unco
    0| 61,83| 38,17|  1850||616950936|145911797|375373063|71556823
@@ -102,13 +103,13 @@ boost states. These can be collected with `cpupower frequency-info`
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cpupower frequency-info
-```
 
-Output:
-
-```bash
 analyzing CPU 8:
   driver: amd-pstate-epp
   CPUs which run at the same hardware frequency: 8
@@ -146,13 +147,13 @@ if one is curious about the details of a given state after running
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cpupower idle-info
-```
 
-Output:
-
-```bash
 CPUidle driver: intel_idle
 CPUidle governor: menu
 analyzing CPU 0:
@@ -212,13 +213,13 @@ filtering as now the further columns can be related to the above output.
 
 Command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cpupower monitor
-```
 
-Output:
-
-```bash
     | Nehalem                   || Mperf              || RAPL                           || Idle_Stats
  CPU| C3   | C6   | PC3  | PC6  || C0   | Cx   | Freq || pack | dram | core | unco      || POLL | C1   | C1E  | C3   | C6   | C7s  | C8   | C9   | C10
    0|  2,99| 11,92|  0,00|  0,00|| 70,98| 29,02|  1991||13733058|2706597|7438396|3080986||  0,05|  1,84|  5,01|  3,87| 14,05|  0,06|  3,81|  0,00|  0,04
@@ -254,7 +255,11 @@ An administrator can execute the `cpupower` command to set the CPU governor.
 
 Command (set the CPU governor to `performance` mode on all CPUs):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cpupower frequency-set -g performance
 ```
 
@@ -262,7 +267,12 @@ Since all commands of `cpupower` can be for a sub-set of CPUs, one can use `-c` 
 as well if that matches what is needed for more complex scenarios.
 
 Command (Set `conservative` on the first 8 cores in a system):
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cpupower -c 0-7 frequency-set -g conservative
 ```
 
@@ -274,7 +284,11 @@ The look and feel aligns with the well known `top`.
 `powertop` is not installed by default, before trying run `sudo apt install powertop`.
 This command needs elevated permissions, so run it with `sudo`.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo powertop
 ```
 

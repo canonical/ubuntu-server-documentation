@@ -157,9 +157,9 @@ For a zFCP and a VLAN network example, please see the {ref}`non-interactive IBM 
   00005 * * * End of File * * * 
   ```
 
-```{note}
+:::{note}
 In case of any issues hitting the 80-character-per-line limit of the file, you can write parameters across two lines as long as there are no unwanted white spaces. To view all 80 characters in one line, disable the prefix area on the left. "prefix off | on" will be  your friend -- use it in the command area. 
-```
+:::
 
 * You can now start the z/VM installation by executing the `UBUNTU REXX` script with `UBUNTU`.
 
@@ -269,41 +269,46 @@ In case of any issues hitting the 80-character-per-line limit of the file, you c
 
 * At short notice, you can even log in to the system with the user 'installer' and the temporary password that was given at the end of the boot-up process (see above) of the installation system:
 
-  ```
-  user@workstation:~$ ssh installer@zvmguest
+  ```{terminal}
+  :copy:
+  :user: user
+  :host: workstation
+  :dir: ~
+  ssh installer@zvmguest
+
   The authenticity of host 'zvmguest (10.11.12.23)' can't be established.
   ECDSA key fingerprint is SHA256:O/dU/D8jJAEGQcbqKGE9La24IRxUPLpzzs5li9F6Vvk.
   Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
   Warning: Permanently added 'zvmguest,10.11.12.23' (ECDSA) to the list of known hosts.
   installer@zvmguest's password: 
   Welcome to Ubuntu 20.04 LTS (GNU/Linux 5.4.0-37-generic s390x)
-  
+
    * Documentation:  https://help.ubuntu.com
    * Management:     https://landscape.canonical.com
    * Support:        https://ubuntu.com/pro
-  
+
     System information as of Fri Jun 26 11:08:18 UTC 2020
-  
+
     System load:    1.25      Memory usage: 4%   Processes:       192
     Usage of /home: unknown   Swap usage:   0%   Users logged in: 0
-  
+
   0 updates can be installed immediately.
   0 of these updates are security updates.
-  
-  
+
+
   The list of available updates is more than a week old.
   To check for new updates run: sudo apt update
-  
-  
+
+
   The programs included with the Ubuntu system are free software;
   the exact distribution terms for each program are described in the
   individual files in /usr/share/doc/*/copyright.
-  
+
   Ubuntu comes with ABSOLUTELY NO WARRANTY, to the extent permitted by
   applicable law.
-  
+
   the installer running on /dev/tty1 will perform the autoinstall
-  
+
   press enter to start a shell
   ```
 

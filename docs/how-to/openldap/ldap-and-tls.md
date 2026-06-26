@@ -11,19 +11,27 @@ When authenticating to an OpenLDAP server it is best to do so using an encrypted
 
 Here, we will act as our Certificate Authority (CA) and create and sign the LDAP server certificate as that CA. This guide will use the `certtool` utility to complete these tasks. For simplicity, this is being done on the OpenLDAP server itself, but your real internal CA should be elsewhere.
 
-```{note}
+:::{note}
 For general information on managing certificates in Ubuntu, see {ref}`certificates`. For installing a custom root CA, see {ref}`install-a-root-ca-certificate-in-the-trust-store`.
-```
+:::
 
 Install the `gnutls-bin` and `ssl-cert` packages:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install gnutls-bin ssl-cert
 ```
 
 Create a private key for the Certificate Authority:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certtool --generate-privkey --bits 4096 --outfile /etc/ssl/private/mycakey.pem
 ```
 
@@ -38,26 +46,30 @@ expiration_days = 3650
 
 Create the self-signed CA certificate:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certtool --generate-self-signed \
 --load-privkey /etc/ssl/private/mycakey.pem \
 --template /etc/ssl/ca.info \
 --outfile /usr/local/share/ca-certificates/mycacert.crt
 ```
 
-```{note}
+:::{note}
 The `--outfile` path is correct. We are writing the CA certificate to `/usr/local/share/ca-certificates`. This is where `update-ca-certificates` picks up trusted local CAs from. To selectively enable CAs from `/usr/share/ca-certificates`, you can run `dpkg-reconfigure ca-certificates`.
-```
+:::
 
 Run `update-ca-certificates` to add the new CA certificate to the list of trusted CAs. Note the one added CA:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo update-ca-certificates
-```
 
-Output:
-
-```text
 Updating certificates in /etc/ssl/certs...
 1 added, 0 removed; done.
 Running hooks in /etc/ca-certificates/update.d...
@@ -68,15 +80,19 @@ This also creates a `/etc/ssl/certs/mycacert.pem` symlink pointing to the real f
 
 Make a private key for the server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certtool --generate-privkey \
 --bits 2048 \
 --outfile /etc/ldap/ldap01_slapd_key.pem
 ```
 
-```{note}
+:::{note}
 Replace `ldap01` in the filename with your server's {term}`hostname`. Naming the certificate and key for the host and service that will be using them will help keep things clear.
-```
+:::
 
 Create the `/etc/ssl/ldap01.info` info file containing:
 
@@ -93,7 +109,11 @@ The above certificate is good for 1 year, and it's valid only for the `ldap01.ex
 
 Create the server's certificate:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo certtool --generate-certificate \
 --load-privkey /etc/ldap/ldap01_slapd_key.pem \
 --load-ca-certificate /etc/ssl/certs/mycacert.pem \
@@ -104,8 +124,18 @@ sudo certtool --generate-certificate \
 
 Adjust permissions and ownership:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chgrp openldap /etc/ldap/ldap01_slapd_key.pem
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chmod 0640 /etc/ldap/ldap01_slapd_key.pem
 ```
 
@@ -127,7 +157,11 @@ olcTLSCertificateKeyFile: /etc/ldap/ldap01_slapd_key.pem
 
 Use the `ldapmodify` command to tell `slapd` about our TLS work via the `slapd-config` database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f certinfo.ldif
 ```
 
@@ -139,7 +173,11 @@ SLAPD_SERVICES="ldap:/// ldapi:/// ldaps:///"
 
 And restart `slapd` with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart slapd
 ```
 
@@ -147,33 +185,38 @@ Note that *StartTLS* will be available without the change above, and does NOT ne
 
 Test *StartTLS*:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -ZZ -H ldap://ldap01.example.com
-```
 
-Output:
-
-```text
 anonymous
 ```
 
 Test LDAPS:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -H ldaps://ldap01.example.com
-```
 
-Output:
-
-```text
 anonymous
 ```
 
-<h2 id="heading--certs-for-consumer">Certificate for an OpenLDAP replica</h2>
+(certs-for-consumer)=
+Certificate for an OpenLDAP replica
 
 To generate a certificate pair for an OpenLDAP replica (consumer), create a holding directory (which will be used for the eventual transfer) and run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mkdir ldap02-ssl
 cd ldap02-ssl
 certtool --generate-privkey \
@@ -183,7 +226,7 @@ certtool --generate-privkey \
 
 Create an info file, `ldap02.info`, for the Consumer server, adjusting its values according to your requirements:
 
-```bash
+```
 organization = Example Company
 cn = ldap02.example.com
 tls_www_server
@@ -194,35 +237,51 @@ expiration_days = 365
 
 Create the Consumer's certificate:
 
-```bash
-    sudo certtool --generate-certificate \
-    --load-privkey ldap02_slapd_key.pem \
-    --load-ca-certificate /etc/ssl/certs/mycacert.pem \
-    --load-ca-privkey /etc/ssl/private/mycakey.pem \
-    --template ldap02.info \
-    --outfile ldap02_slapd_cert.pem
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo certtool --generate-certificate \
+--load-privkey ldap02_slapd_key.pem \
+--load-ca-certificate /etc/ssl/certs/mycacert.pem \
+--load-ca-privkey /etc/ssl/private/mycakey.pem \
+--template ldap02.info \
+--outfile ldap02_slapd_cert.pem
 ```
 
-```{note}
+:::{note}
 We had to use `sudo` to get access to the CA's private key. This means the generated certificate file is owned by root. You should change that ownership back to your regular user before copying these files over to the Consumer.
-```
+:::
 
 Get a copy of the CA certificate:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cp /etc/ssl/certs/mycacert.pem .
 ```
 
 We're done. Now transfer the `ldap02-ssl` directory to the Consumer. Here we use `scp` (adjust accordingly):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cd ..
 scp -r ldap02-ssl user@consumer:
 ```
 
 On the Consumer side, install the certificate files you just transferred:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo cp ldap02_slapd_cert.pem ldap02_slapd_key.pem /etc/ldap
 sudo chgrp openldap /etc/ldap/ldap02_slapd_key.pem
 sudo chmod 0640 /etc/ldap/ldap02_slapd_key.pem
@@ -246,7 +305,11 @@ olcTLSCertificateKeyFile: /etc/ldap/ldap02_slapd_key.pem
 
 Configure the `slapd-config` database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Y EXTERNAL -H ldapi:/// -f certinfo.ldif
 ```
 
@@ -254,24 +317,24 @@ Like before, if you want to enable LDAPS, edit `/etc/default/slapd` and add `lda
 
 Test *StartTLS*:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -ZZ -H ldap://ldap02.example.com
-```
 
-Output:
-
-```text
 anonymous
 ```
 
 Test LDAPS:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ldapwhoami -x -H ldaps://ldap02.example.com
-```
 
-Output:
-
-```text
 anonymous
 ```

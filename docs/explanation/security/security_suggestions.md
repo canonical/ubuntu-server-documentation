@@ -23,14 +23,22 @@ relevant for your setup.
    vulnerabilities. Run the following command periodically to update your
    system software:
 
-   ```bash
+   ```{terminal}
+   :copy:
+   :user:
+   :host:
+   :dir:
    sudo apt update && sudo apt upgrade
    ```
 
    You may want to use the `unattended-upgrade` package to fetch and install
    security updates and bug fixes automatically:
 
-   ```
+   ```{terminal}
+   :copy:
+   :user:
+   :host:
+   :dir:
    sudo apt install unattended-upgrades
    ```
 

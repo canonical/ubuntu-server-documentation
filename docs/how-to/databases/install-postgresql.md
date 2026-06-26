@@ -13,7 +13,11 @@ myst:
 
 To install PostgreSQL, run the following command in the command prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postgresql
 ```
 
@@ -25,9 +29,9 @@ PostgreSQL supports multiple client authentication methods. In Ubuntu, `peer` is
 
 The following discussion assumes that you wish to enable TCP/IP connections and use the `scram-sha-256` method for client authentication. PostgreSQL configuration files are stored in the `/etc/postgresql/<version>/main` directory. For example, if you install PostgreSQL 14, the configuration files are stored in the `/etc/postgresql/14/main` directory.
 
-```{tip}
+:::{tip}
 To configure *IDENT* authentication, add entries to the `/etc/postgresql/*/main/pg_ident.conf` file. There are detailed comments in the file to guide you.
-```
+:::
 
 By default, only connections from the local system are allowed. To enable all other computers to connect to your PostgreSQL server, edit the file `/etc/postgresql/*/main/postgresql.conf`. Locate the line: *\#listen\_addresses = 'localhost'* and change it to `*`:
 
@@ -35,15 +39,19 @@ By default, only connections from the local system are allowed. To enable all ot
 listen_addresses = '*'
 ```
 
-```{note}
+:::{note}
 To listen on all IPv4 interfaces, set `listen_addresses` to '`0.0.0.0`', while '`::`' will listen on all IPv6 interfaces. '`*`' will cause PostgreSQL to listen on all available network interfaces, both IPv4 and IPv6.
-```
+:::
 
 For details on other parameters, refer to the configuration file or to the [PostgreSQL documentation](https://www.postgresql.org/docs/) for information on how they can be edited.
 
 Now that we can connect to our PostgreSQL server, the next step is to set a password for the `postgres` user. Run the following command at a terminal prompt to connect to the default PostgreSQL template database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql template1
 ```
 
@@ -59,23 +67,31 @@ After configuring the password, edit the file `/etc/postgresql/*/main/pg_hba.con
 hostssl template1       postgres        192.168.1.1/24        scram-sha-256
 ```
 
-```{note}
+:::{note}
 The config statement `hostssl` used here will reject TCP connections that would not use SSL. PostgreSQL in Ubuntu has the SSL feature built in and configured by default, so it works right away. On your PostgreSQL server this uses the certificate created by the `ssl-cert` package which is suitable for testing, but for production use you should replace it with a certificate from a trusted Certificate Authority (CA). See {ref}`obtain-tls-certificates` for how to get a certificate from Let's Encrypt or set up your own CA.
-```
+:::
 
 Finally, you should restart the PostgreSQL service to initialize the new configuration. From a terminal prompt enter the following to restart PostgreSQL:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart postgresql.service
 ```
 
-```{warning}
+:::{warning}
 The above configuration is not complete by any means. Please refer to the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) to configure more parameters.
-```
+:::
 
 You can test server connections from other machines by using the PostgreSQL client as follows, replacing the domain name with your actual server domain name or IP address:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install postgresql-client
 psql --host your-servers-dns-or-ip --username postgres --password --dbname template1
 ```
@@ -86,7 +102,11 @@ PostgreSQL has a nice feature called **streaming replication** which provides th
 
 First, create a replication user in the main server, to be used from the standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres createuser --replication -P -e replicator
 ```
 
@@ -105,13 +125,21 @@ host  replication   replicator   <IP address of the standby>      scram-sha-256
 
 Restart the service to apply changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart postgresql
 ```
 
 Now, in the standby server, let's stop the PostgreSQL service:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl stop postgresql
 ```
 
@@ -123,7 +151,11 @@ hot_standby = on
 
 Back up the current state of the main server (those commands are still issued on the standby system):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo su - postgres
 # backup the current content of the standby server (update the version of your postgres accordingly)
 cp -R /var/lib/postgresql/14/main /var/lib/postgresql/14/main_bak
@@ -143,13 +175,21 @@ After this, a full single pass will have been completed, copying the content of 
 
 Finally, let's start the PostgreSQL service on standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl start postgresql
 ```
 
 To make sure it is working, go to the main server and run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql -c "select * from pg_stat_replication;"
 ```
 
@@ -157,8 +197,18 @@ As mentioned, this is a very simple introduction, there are way more great detai
 
 To test the replication you can now create a test database in the main server and check if it is replicated in the standby server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres createdb test # on the main server
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo -u postgres psql -c "\l" # on the standby server
 ```
 
@@ -172,7 +222,11 @@ PostgreSQL databases should be backed up regularly. Refer to the [PostgreSQL Adm
 
 - As mentioned above, the [PostgreSQL Administrator's Guide](https://www.postgresql.org/docs/current/admin.html) is an excellent resource. The guide is also available in the `postgresql-doc` package. Execute the following in a terminal to install the package:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   sudo apt install postgresql-doc
   ```
 

@@ -13,19 +13,23 @@ myst:
 
 To install MySQL, run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install mysql-server
 ```
 
 Once the installation is complete, the MySQL server should be started automatically. You can quickly check its current status via systemd:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service mysql status
-```
 
-Which should provide an output like the following:
-
-```text
 ● mysql.service - MySQL Community Server
    Loaded: loaded (/lib/systemd/system/mysql.service; enabled; vendor preset: enabled)
    Active: active (running) since Tue 2019-10-08 14:37:38 PDT; 2 weeks 5 days ago
@@ -39,26 +43,34 @@ Oct 08 14:37:38 db.example.org systemd[1]: Started MySQL Community Server.
 
 The network status of the MySQL service can also be checked by running the `ss` command at the terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ss -tap | grep mysql
-```
 
-When you run this command, you should see something similar to the following:
-
-```text
 LISTEN    0         151              127.0.0.1:mysql             0.0.0.0:*       users:(("mysqld",pid=149190,fd=29))
 LISTEN    0         70                       *:33060                   *:*       users:(("mysqld",pid=149190,fd=32))
 ```
 
 If the server is not running correctly, you can type the following command to start it:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service mysql restart
 ```
 
 A good starting point for troubleshooting problems is the systemd journal, which can be accessed from the terminal prompt with this command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo journalctl -u mysql
 ```
 
@@ -70,13 +82,17 @@ You can edit the files in `/etc/mysql/` to configure the basic settings -- log f
 bind-address            = 192.168.0.5
 ```
 
-```{note}
+:::{note}
 Replace `192.168.0.5` with the appropriate address, which can be determined via the `ip address show` command.
-```
+:::
 
 After making a configuration change, the MySQL daemon will need to be restarted with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart mysql.service
 ```
 
@@ -84,7 +100,11 @@ sudo systemctl restart mysql.service
 
 By default, `mysql-server` initially provides a `'root'@'localhost'` user for managing the server locally. You can enter the MySQL command-line as this user by running:
 
-```none
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mysql -u root
 ```
 
@@ -96,13 +116,13 @@ From the command-line, you can create additional MySQL users with different priv
 
 To create a user authenticated with a password, you can use MySQL's provided `caching_sha2_password` plugin. It can be invoked in the following way, providing the password in plain text:
 
-```none
+```text
 CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY 'password';
 ```
 
 A random password can also be generated here with:
 
-```none
+```text
 CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY RANDOM PASSWORD;
 ```
 
@@ -110,13 +130,13 @@ CREATE USER 'username'@'localhost' IDENTIFIED WITH caching_sha2_password BY RAND
 
 Socket-based authentication is used to allow a local system user to access an account without entering a password. Invoke this with:
 
-```none
+```text
 CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket;
 ```
 
 By default, only the system user with the matching username can access this account. If you want the MySQL account username to differ from the system user username, then use the `AS` option:
 
-```none
+```text
 CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket AS 'system-user-username';
 ```
 
@@ -124,7 +144,7 @@ CREATE USER 'username'@'localhost' IDENTIFIED WITH auth_socket AS 'system-user-u
 
 A newly created user will require privilege updates to interact with databases in any way. These are provided by the `GRANT` command alongside specified roles or operations. For example, to give your user the ability to view table entries using the `SELECT` operation on all databases, run the following:
 
-```none
+```text
 GRANT SELECT on *.* TO 'username'@'localhost';
 ```
 
@@ -171,19 +191,31 @@ MySQL databases should be backed up regularly. Backups can be accomplished throu
 
 To dump the data of a publicly available database on the local MySQL server into a file, run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysqldump [database name] > dump.sql
 ```
 
 For restricted databases, specify a user with the proper permissions using `-u`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysqldump -u root [database name] > dump.sql
 ```
 
 To restore a database from the backup file, run the `mysql` command and pipe the file through stdin:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysql -u root [database name] < dump.sql
 ```
 
@@ -196,17 +228,26 @@ MySQL Shell, supported in Ubuntu 24.04 LTS and later, contains a set of utilitie
 
 To install MySQL Shell, run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install mysql-shell
 ```
 
 Run the following to connect to the local MySQL server on Ubuntu with MySQL Shell in Python mode:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysqlsh --socket=/var/run/mysqld/mysqld.sock --no-password --python
 ```
 
 Initiate a local backup of all data in Python mode with:
+
 ```python
 util.dump_instance("/tmp/worlddump")
 ```
@@ -223,9 +264,9 @@ To restore dumped data, use the [dump loading utility](https://dev.mysql.com/doc
 util.load_dump("/tmp/worlddump")
 ```
 
-```{note}
+:::{note}
 To restore data from a local file, `local_infile` needs to be enabled on the MySQL server. Activate this by accessing the server with the `mysql` command and entering `SET GLOBAL local_infile=1;`.
-```
+:::
 
 See the [MySQL Shell dump documentation](https://dev.mysql.com/doc/mysql-shell/8.4/en/mysql-shell-utilities-dump-instance-schema.html) for more information.
 
@@ -236,19 +277,31 @@ Also supported in Ubuntu 24.04 LTS and later, Percona Xtrabackup is a tool for c
 
 To install Xtrabackup, run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install percona-xtrabackup
 ```
 
 Create a new backup with the `xtrabackup` command. This can be done while the server is running.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 xtrabackup --backup --target-dir=/tmp/worlddump
 ```
 
 To restore from a backup, service will need to be interrupted. This can be achieved with the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl stop mysql
 xtrabackup --prepare --target-dir=/tmp/worlddump
 sudo rm -rf /var/lib/mysql
@@ -269,7 +322,11 @@ Many parameters can be adjusted with the existing database, however some may aff
 
 First, if you have existing data, you will first need to carry out a `mysqldump` and reload:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mysqldump --all-databases --routines -u root -p > ~/fulldump.sql
 ```
 
@@ -277,19 +334,31 @@ This will then prompt you for the root password before creating a copy of the da
 
 Once the dump has been completed, shut down MySQL:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service mysql stop
 ```
 
 It's also a good idea to backup the original configuration:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rsync -avz /etc/mysql /root/mysql-backup
 ```
 
 Next, make any desired configuration changes. Then, delete and re-initialize the database space and make sure ownership is correct before restarting MySQL:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo rm -rf /var/lib/mysql/*
 sudo mysqld --initialize
 sudo chown -R mysql: /var/lib/mysql
@@ -298,28 +367,46 @@ sudo service mysql start
 
 The final step is re-importation of your data by piping your SQL commands to the database.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat ~/fulldump.sql | mysql
 ```
 
 For large data imports, the 'Pipe Viewer' utility can be useful to track import progress. Ignore any ETA times produced by `pv`; they're based on the average time taken to handle each row of the file, but the speed of inserting can vary wildly from row to row with `mysqldumps`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install pv
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 pv ~/fulldump.sql | mysql
 ```
 
 Once this step is complete, you are good to go\!
 
-```{note}
+:::{note}
 This is not necessary for all `my.cnf` changes. Most of the variables you can change to improve performance are adjustable even whilst the server is running. As with anything, make sure to have a good backup copy of your config files and data before making changes.
-```
+:::
 
 ### MySQL Tuner
 
 [MySQL Tuner](https://github.com/major/MySQLTuner-perl) is a Perl script that connects to a running MySQL instance and offers configuration suggestions for optimising the database for your workload. The longer the server has been running, the better the advice `mysqltuner` can provide. In a production environment, consider waiting for at least 24 hours before running the tool. You can install `mysqltuner` with the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install mysqltuner
 ```
 

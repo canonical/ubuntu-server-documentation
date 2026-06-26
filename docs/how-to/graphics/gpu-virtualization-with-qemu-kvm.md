@@ -39,7 +39,7 @@ All these options are considered basic usage of graphics, but there are also adv
 
   You can read more [about vGPU at {spellexception}`kraxel`](https://www.kraxel.org/blog/2018/04/vgpu-display-support-finally-merged-upstream/) and [Ubuntu GPU `mdev` evaluation](https://cpaelzer.github.io/blogs/006-mediated-device-to-pass-parts-of-your-gpu-to-a-guest/). The sharding of the cards is driver-specific and therefore will differ per manufacturer -- [Intel](https://github.com/intel/gvt-linux/wiki/GVTg_Setup_Guide), [Nvidia](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html), or {term}`AMD`.
 
-The advanced cases in particular can get pretty complex -- it is recommended to use QEMU through {ref}`libvirt section <libvirt>` for those cases. libvirt will take care of all but the host kernel/BIOS tasks of such configurations. Below are the common basic actions needed for faster options (i.e., passthrough and mediated devices passthrough).
+The advanced cases in particular can get pretty complex -- it is recommended to use QEMU through {ref}`libvirt section <libvirt>` for those cases. libvirt will take care of all but the host kernel/{term}`BIOS` tasks of such configurations. Below are the common basic actions needed for faster options (i.e., passthrough and mediated devices passthrough).
 
 The initial step for both options is the same; you want to ensure your system has its IOMMU enabled and the device to pass should be in a group of its own. Enabling the VT-d and IOMMU is usually a BIOS action and thereby manufacturer dependent.
 
@@ -47,26 +47,31 @@ The initial step for both options is the same; you want to ensure your system ha
 
 On the kernel side, there are various [options you can enable/configure](https://www.kernel.org/doc/html/latest/admin-guide/kernel-parameters.html?highlight=iommu) for the [IOMMU feature](https://www.kernel.org/doc/html/latest/arch/x86/iommu.html). In recent Ubuntu kernels (>=5.4 => Focal or Bionic-HWE kernels) everything usually works by default, unless your hardware setup makes you need any of those tuning options.
 
-````{note}
+::::{note}
 The card used in all examples below e.g. when filtering for or assigning PCI IDs, is an NVIDIA V100 on PCI ID 41.00.0
 
-```bash
-$ lspci | grep 3D
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lspci | grep 3D
+
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
 ```
-````
+::::
 
 You can check your boot-up kernel messages for IOMMU/{term}`DMAR` messages or even filter it for a particular PCI ID.
 
 To list all:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dmesg | grep -i -e DMAR -e IOMMU
-```
 
-Which produces an output like this:
-
-```text
 [    3.509232] iommu: Default domain type: Translated
 ...
 [    4.516995] pci 0000:00:01.0: Adding to iommu group 0
@@ -76,13 +81,13 @@ Which produces an output like this:
 
 To filter for the installed 3D card:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dmesg | grep -i -e DMAR -e IOMMU | grep $(lspci | awk '/ 3D / {print $1}' )
-```
 
-Which shows the following output:
-
-```text
 [    4.598150] pci 0000:41:00.0: Adding to iommu group 66
 ```
 
@@ -90,28 +95,33 @@ If you have a particular device and want to check for its group you can do that 
 
 For example, to find the group for our example card:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 find /sys/kernel/iommu_groups/ -name "*$(lspci | awk '/ 3D / {print $1}')*"
-```
 
-Which it tells us is found here:
-
-```text
 /sys/kernel/iommu_groups/66/devices/0000:41:00.0
 ```
 
 We can also check if there are other devices in this group:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ll /sys/kernel/iommu_groups/66/devices/
+
 lrwxrwxrwx 1 root root 0 Jan  3 06:57 0000:41:00.0 -> ../../../../devices/pci0000:40/0000:40:03.1/0000:41:00.0/
 ```
 
 Another useful tool for this stage (although the details are beyond the scope of this article) can be `virsh node*`, especially `virsh nodedev-list --tree` and `virsh nodedev-dumpxml <pcidev>`.
 
-```{note}
+:::{note}
 Some older or non-server boards tend to group devices in one IOMMU group, which isn't very useful as it means you'll need to pass "all or none of them" to the same guest.
-```
+:::
 
 ## Preparations for PCI and mediated devices pass-through -- block host drivers
 
@@ -119,22 +129,25 @@ For both, you'll want to ensure the normal driver isn't loaded. In some cases yo
 
 This usually works fine for e.g. network cards, but some other devices like GPUs do not like to be unassigned, so there the required step usually is block loading the drivers you do not want to be loaded. In our GPU example the `nouveau` driver would load and that has to be blocked. To do so you can create a `modprobe` blocklist.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo "blacklist nouveau" | sudo tee /etc/modprobe.d/blacklist-nouveau.conf          
 echo "options nouveau modeset=0" | sudo tee -a /etc/modprobe.d/blacklist-nouveau.conf
-sudo update-initramfs -u                                                         
-sudo reboot                                                                      
-```   
+sudo update-initramfs -u
+sudo reboot                                                      ```
 
 You can check which kernel modules are loaded and available via `lspci -v`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lspci -v | grep -A 10 " 3D "
-```
 
-Which in our example shows:
-
-```text
 41:00.0 3D controller: NVIDIA Corporation GV100GL [Tesla V100 PCIe 16GB] (rev a1)
 ...
 Kernel modules: nvidiafb, nouveau
@@ -154,26 +167,27 @@ There is also an Nvidia document about the same steps available on [installation
 
 Once you have the drivers from Nvidia, like `nvidia-vgpu-ubuntu-470_470.68_amd64.deb`, then install them and check (as above) that the driver is loaded. The one you need to see is `nvidia_vgpu_vfio`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 lsmod | grep nvidia
-```
 
-Which we can see in the output:
-
-```text
 nvidia_vgpu_vfio       53248  38
 nvidia              35282944  586 nvidia_vgpu_vfio
 mdev                   24576  2 vfio_mdev,nvidia_vgpu_vfio
 drm                   491520  6 drm_kms_helper,drm_vram_helper,nvidia
 ```
 
-```{note}
+:::{note}
 While it works without a vGPU manager, to get the full capabilities you'll need to configure the [vGPU manager (that came with above package)](https://docs.nvidia.com/vgpu/latest/grid-vgpu-user-guide/index.html#install-vgpu-package-ubuntu) and a license server so that each guest can get a license for the vGPU provided to it. Please see [Nvidia's documentation for the license server](https://docs.nvidia.com/vgpu/ls/latest/grid-license-server-user-guide/index.html). While not officially supported on Linux (as of Q1 2022), it's worthwhile to note that it runs fine on Ubuntu with `sudo apt install unzip default-jre tomcat9 liblog4j2-java libslf4j-java` using `/var/lib/tomcat9` as the server path in the license server installer.
 
 It's also worth mentioning that the Nvidia license server went [{term}`EOL` on 31 July 2023](https://docs.nvidia.com/vgpu/news/vgpu-software-license-server-eol-notice/index.html). At that time, it was replaced by the [NVIDIA License System](https://docs.nvidia.com/license-system/latest/nvidia-license-system-quick-start-guide/index.html).
-```
+:::
 
 Here is an example of those when running fine:
+
 ```text
 # general status
 $ systemctl status nvidia-vgpu-mgr
@@ -220,7 +234,11 @@ Please refer to the [NVIDIA documentation](https://docs.nvidia.com/vgpu/latest/g
 
 The tool for listing and configuring these mediated devices is `mdevctl`: 
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mdevctl types
 ```
 
@@ -237,19 +255,48 @@ Which will list the available types:
 
 Knowing the PCI ID (`0000:41:00.0`) and the mediated device type we want (`nvidia-300`) we can now create those mediated devices:
 
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl define --parent 0000:41:00.0 --type nvidia-300
+
 bc127e23-aaaa-4d06-a7aa-88db2dd538e0
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl define --parent 0000:41:00.0 --type nvidia-300
+
 1360ce4b-2ed2-4f63-abb6-8cdb92100085
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl start --parent 0000:41:00.0 --uuid bc127e23-aaaa-4d06-a7aa-88db2dd538e0
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 $ sudo mdevctl start --parent 0000:41:00.0 --uuid 1360ce4b-2ed2-4f63-abb6-8cdb92100085
 ```
 
 After that, you can check the UUID of your ready mediated devices:
 
-```
-$ sudo mdevctl list -d
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo mdevctl list -d
+
 bc127e23-aaaa-4d06-a7aa-88db2dd538e0 0000:41:00.0 nvidia-108 manual (active)
 1360ce4b-2ed2-4f63-abb6-8cdb92100085 0000:41:00.0 nvidia-108 manual (active)
 ```
@@ -260,7 +307,7 @@ Those UUIDs can then be used to pass the mediated devices to the guest - which f
 
 After the above setup is ready one can pass through those devices, in `libvirt` for a PCI passthrough that looks like:
 
-```
+```text
 <hostdev mode='subsystem' type='pci' managed='yes'>
   <source>
     <address domain='0x0000' bus='0x41' slot='0x00' function='0x0'/>
@@ -270,7 +317,7 @@ After the above setup is ready one can pass through those devices, in `libvirt` 
 
 And for mediated devices, the format is quite similar, but uses the UUID.
 
-```
+```text
 <hostdev mode='subsystem' type='mdev' managed='no' model='vfio-pci' display='on'>
   <source>
     <address uuid='634fc146-50a3-4960-ac30-f09e5cedc674'/>
@@ -280,8 +327,8 @@ And for mediated devices, the format is quite similar, but uses the UUID.
 
 Those sections can be [part of the guest definition](https://libvirt.org/formatdomain.html#usb-pci-scsi-devices) itself, to be added on guest startup and freed on guest shutdown. Or they can be in a file and used by for hot-add and remove if the hardware device and its drivers support it `virsh attach-device`.
 
-```{note}
+:::{note}
 This works great on Focal, but `type='none'` as well as `display='off'` weren't available on Bionic. If this level of control is required one would need to consider using the [Ubuntu Cloud Archive](https://wiki.ubuntu.com/OpenStack/CloudArchive) or [Server-Backports](https://launchpad.net/~canonical-server/+archive/ubuntu/server-backports) for a newer stack of the virtualisation components.
-```
+:::
 
 And finally, it might be worth noting that while mediated devices are becoming more common and known for vGPU handling, they are a general infrastructure also used (for example) for [s390x vfio-ccw](https://docs.kernel.org/arch/s390/vfio-ccw.html).

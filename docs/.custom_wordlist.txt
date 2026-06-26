@@ -25,6 +25,8 @@ bootloaders
 Broadwell
 Btrfs
 btrfs
+Bufferbloat
+bufferbloat
 Byobu
 Canonical's
 CAs
@@ -155,10 +157,12 @@ maintainer's
 mbox
 memfd
 metapackage
+metapackages
 microcontroller
 Microvm
 microvm
 microvms
+minimalistic
 monospace
 MUAs
 Multicast
@@ -180,9 +184,11 @@ nslcd
 NATed
 netboot
 netbooting
+netdev
 Netfilter
 netfilter
 netmask
+networkd
 NICs
 Noble
 NVLink
@@ -209,12 +215,14 @@ polkit
 Postcopy
 postcopy
 PPAs
+PPPoE
 Preboot
 prepended
 Preprocessor
 preseed
 proxying
 PVs
+qdisc
 QDevice
 Quokka
 RangeSize
@@ -247,6 +255,7 @@ Slapd
 slapd
 snapshotted
 Solaris
+sosreport
 SSSD's
 stderr
 stdin
@@ -281,6 +290,7 @@ UEFI's
 ufw
 UIDs
 UIs
+unassign
 uncomment
 uncommented
 uncommenting

@@ -24,7 +24,11 @@ In the Anonymous mode, remote clients can access the FTP server by using the def
 
 `vsftpd` is an FTP daemon available in Ubuntu. It is easy to install, set up, and maintain. To install `vsftpd`, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install vsftpd
 ```
 
@@ -32,13 +36,17 @@ sudo apt install vsftpd
 
 By default `vsftpd` is *not* configured to allow anonymous download. If you wish to enable anonymous download, edit `/etc/vsftpd.conf` by changing:
 
-```text
+```
 anonymous_enable=YES
 ```
 
 Restart the `vsftp` server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart vsftp
 ```
 
@@ -48,14 +56,28 @@ During installation an *`ftp`* user is created with a home directory of `/srv/ft
 
 If you wish to change this location, to `/srv/files/ftp` for example, simply create a directory in another location and change the *`ftp`* user's home directory:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -p /srv/files/ftp
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo usermod -d /srv/files/ftp ftp 
 ```
 
 After making the change restart `vsftpd`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart vsftpd.service
 ```
 
@@ -65,13 +87,17 @@ Now, when the client connects with `anonymous` username, it will see the files h
 
 By default `vsftpd` is configured to authenticate system users and allow them to download files. If you want users to be able to upload files, edit `/etc/vsftpd.conf`:
 
-```text
+```
 write_enable=YES
 ```
 
 Now restart `vsftpd`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart vsftpd.service
 ```
 
@@ -79,13 +105,13 @@ Now when system users login to FTP they will start in their *home* directories w
 
 Similarly, by default, anonymous users are not allowed to upload files to FTP server. To change this setting, uncomment the following line, and restart `vsftpd`:
 
-```text
+```
 anon_upload_enable=YES
 ```
 
-```{warning}
+:::{warning}
 Enabling anonymous FTP upload can be an extreme security risk. It is best to not enable anonymous upload on servers accessed directly from the Internet.
-```
+:::
 
 The configuration file consists of many configuration parameters. The information about each parameter is available in the configuration file. Alternatively, you can refer to the man page, `man 5 vsftpd.conf` for details of each parameter.
 
@@ -93,24 +119,28 @@ The configuration file consists of many configuration parameters. The informatio
 
 There are options in `/etc/vsftpd.conf` to help make `vsftpd` more secure. For example users can be limited to their home directories by uncommenting:
 
-```text
+```
 chroot_local_user=YES
 ```
 
 You can also limit a specific list of users to just their home directories:
 
-```text
+```
 chroot_list_enable=YES
 chroot_list_file=/etc/vsftpd.chroot_list
 ```
 
-```{warning}
+:::{warning}
 If chroot_local_user is set to YES (setting all users to be limited to just their home directory), `/etc/vsftpd.chroot_list` becomes a list of users which are NOT limited to just their home directory
-```
+:::
 
 After uncommenting the above options, create a `/etc/vsftpd.chroot_list` containing a list of users one per line. Then restart `vsftpd`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart vsftpd.service
 ```
 
@@ -120,13 +150,13 @@ FTP can also be encrypted using *FTPS*. *FTPS* is different from *SFTP*, *FTPS* 
 
 To configure *FTPS*, edit `/etc/vsftpd.conf` and at the bottom add:
 
-```text
+```
 ssl_enable=YES
 ```
 
 Also, notice the certificate and key related options:
 
-```text
+```
 rsa_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 rsa_private_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 ```
@@ -135,13 +165,17 @@ By default these options are set to the certificate and key provided by the `ssl
 
 Now restart `vsftpd`, and non-anonymous users will be forced to use *FTPS*:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart vsftpd.service
 ```
 
 To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no shell access, edit `/etc/shells` adding the *`nologin`* shell:
 
-```bash
+```sh
 # /etc/shells: valid login shells
 /bin/csh
 /bin/sh
@@ -161,7 +195,7 @@ To allow users with a shell of `/usr/sbin/nologin` access to FTP, but have no sh
 
 This is necessary because, by default `vsftpd` uses PAM for authentication, and the `/etc/pam.d/vsftpd` configuration file contains:
 
-```text
+```
 auth    required        pam_shells.so
 ```
 

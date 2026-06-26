@@ -53,24 +53,36 @@ a command line interface and providing access to several related values.
 
 ### Setting CPU Governors
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 ```
 
 This file will normally contain one of the following named profiles:
 
-   * `performance` - Prioritize responsiveness and raw performance.
-   * `powersave` - Prioritize a reduction in power consumption.
+* `performance` - Prioritize responsiveness and raw performance.
+* `powersave` - Prioritize a reduction in power consumption.
 
 The full list of options is provided in:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_available_governors
 ```
 
 The value can be set via `sysfs` as well:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
 ```
 
@@ -90,33 +102,37 @@ The actual effect depends on the CPU model and firmware, but in general, lower E
 
 * Hardware support is required. On some processors, EPP may have no effect even if it appears to be configurable in the OS.
 
-* Some systems may require an update to BIOS settings to allow OS control of power regulation.
+* Some systems may require an update to {term}`BIOS` settings to allow OS control of power regulation.
 
 ### EPP values on Ubuntu
 
 On Ubuntu, the EPP for each core on a CPU is stored in `/sys/devices/system/cpu/cpu#/cpufreq/energy_performance_preference`. To check the current status on cpu0, for example, you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference
 ```
 
 This file will normally contain one of the following named profiles:
 
-   * `performance` - Prioritize responsiveness and raw performance.
-   * `balance_performance` - Lean toward performance, with lower power consumption.
-   * `balance_power` - Lean toward reduced power, with some additional performance.
-   * `power` - Prioritize a reduction in power consumption.
-   * `default` - Use the default mix of power and performance as recommended by Ubuntu.
+* `performance` - Prioritize responsiveness and raw performance.
+* `balance_performance` - Lean toward performance, with lower power consumption.
+* `balance_power` - Lean toward reduced power, with some additional performance.
+* `power` - Prioritize a reduction in power consumption.
+* `default` - Use the default mix of power and performance as recommended by Ubuntu.
 
 The full list of options is provided in `/sys/devices/system/cpu/cpu#/cpufreq/energy_performance_available_preferences`. To see them, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_available_preferences
-```
 
-which will display something like:
-
-```text
 default performance balance_performance balance_power power
 ```
 
@@ -126,7 +142,11 @@ For more specificity, a raw numeric value from **0-255** can also be provided in
 
 EPP values are managed through each core's `energy_performance_preference` file, so the EPP values can be updated manually by overriding the contents of that file. For example, to set cpu0 to the `performance` profile, run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 echo performance | sudo tee /sys/devices/system/cpu/cpu0/cpufreq/energy_performance_preference
 ```
 

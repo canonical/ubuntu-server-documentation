@@ -15,7 +15,11 @@ First, you need a physical volume. Typically you start with a hard disk, and cre
 
 Once you have your LVM partition, you need to initialize it as a physical volume. Assuming this partition is `/dev/sda1`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pvcreate /dev/sda1
 ```
 
@@ -23,7 +27,11 @@ sudo pvcreate /dev/sda1
 
 After that, you can create a volume group; in our example, it will be named `foo` and uses only one physical volume:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo vgcreate foo /dev/sda1
 ```
 
@@ -31,7 +39,11 @@ sudo vgcreate foo /dev/sda1
 
 Now you want to create a logical volume from some of the free space in `foo`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lvcreate --name bar --size 5g foo
 ```
 
@@ -43,7 +55,11 @@ You might also want to try the `lvs` and `pvs` commands, which list the logical 
 
 You can extend a logical volume with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lvextend --resizefs --size +5g foo/bar
 ```
 
@@ -55,7 +71,11 @@ If you have multiple physical volumes you can add the names of one (or more) of 
 
 If you only have one physical volume then you are unlikely to ever need to move, but if you add a new disk, you might want to. To move the logical volume `bar` off of physical volume `/dev/sda1`, you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo pvmove --name bar /dev/sda1
 ```
 
@@ -71,7 +91,11 @@ The snapshot volume does not initially use any space, but as changes are made to
 
 The `lvs` command will tell you how much space has been used in a snapshot logical volume. If it starts to get full, you might want to extend it with the `lvextend` command. To create a snapshot of the bar logical volume and name it `lv_snapshot`, run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lvcreate --snapshot --name lv_snapshot --size 5g foo/bar
 ```
 
@@ -79,7 +103,11 @@ This will create a snapshot named `lv_snapshot` of the original logical volume `
 
 While you have the snapshot, you can mount it if you wish to see the original filesystem as it appeared when you made the snapshot. In the above example you would mount the `/dev/foo/lv_snapshot` device. You can modify the snapshot without affecting the original, and the original without affecting the snapshot. For example, if you take a snapshot of your root logical volume, make changes to your system, and then decide you would like to revert the system back to its previous state, you can merge the snapshot back into the original volume, which effectively reverts it to the state it was in when you made the snapshot. To do this, you can run:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo lvconvert --merge foo/lv_snapshot
 ```
 

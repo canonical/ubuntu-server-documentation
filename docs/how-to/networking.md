@@ -41,6 +41,14 @@ Open vSwitch (OVS) with the Data Plane Development Kit (DPDK) provides virtual s
 Use Open vSwitch with DPDK <networking/dpdk-with-open-vswitch>
 ```
 
+NVIDIA DOCA provides the software components required for high-performance networking with NVIDIA BlueField and ConnectX devices.
+
+```{toctree}
+:titlesonly:
+
+Install DOCA-OFED <networking/install-doca-ofed>
+```
+
 ## DHCP
 
 Set up Dynamic Host Configuration Protocol (DHCP) for automatic IP address assignment for devices on your network. There are two DHCP servers available in Ubuntu: `isc-kea` is the most modern, and is available from 23.04 onward.
@@ -86,6 +94,16 @@ Active Directory integration <active-directory>
 
 * {ref}`Samba <how-to-samba>`
 * {ref}`Active Directory integration <how-to-active-directory-integration>`
+
+## Traffic management
+
+Traffic shaping allows you to prioritize certain types of network traffic, reducing latency for interactive applications when using Ubuntu as a router.
+
+```{toctree}
+:titlesonly:
+
+Traffic shaping with tc and CAKE <networking/traffic-shaping-tc-cake>
+```
 
 ## Printing
 

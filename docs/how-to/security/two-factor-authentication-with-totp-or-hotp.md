@@ -19,22 +19,25 @@ HOTP is based on a sequence predictable only to those who share a secret. The us
 
 TOTP avoids this downside of HOTP by using the current timezone-independent date and time to determine the appropriate position in the sequence. However, this results in additional requirements and a different failure mode. Both devices must have the ability to tell the time, which is not practical for a USB 2FA token with no battery, for example. And both the server and client must agree on the correct time. If their clocks are skewed, then they will disagree on their current position in the sequence. Servers compensate for clock skew by allowing a few codes either side to also be valid. But like HOTP, they can only go so far before the server must refuse. One advantage of TOTP over HOTP is that correcting for this condition involves ensuring the clocks are correct at both ends; an out-of-band authentication to reset unfortunate users' secrets is not required. When using a modern smartphone app, for example, the requirement to keep the clock correct isn't usually a problem since this is typically done automatically at both ends by default.
 
-```{note}
+:::{note}
 It is not recommended to configure U2F/FIDO at the same time as TOTP/HOTP. This combination has not been tested, and using the configuration presented here, TOTP/HOTP would become mandatory for everyone, whether or not they are also using U2F/FIDO.
-```
+:::
 
 ## Install required software
 
 From a terminal prompt, install the `google-authenticator` PAM module:
 
-```bash
-sudo apt update
-sudo apt install libpam-google-authenticator
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt update && sudo apt install libpam-google-authenticator
 ```
 
-```{note}
+:::{note}
 The `libpam-google-authenticator` package is in Ubuntu's universe archive component, which receives best-effort community support only.
-```
+:::
 
 ## Configure users
 
@@ -50,7 +53,11 @@ Each user needs to run the setup tool to configure 2FA. This will ask some quest
 
 As a user who needs 2FA configured, from a terminal prompt run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 google-authenticator
 ```
 
@@ -83,13 +90,17 @@ Check for and adjust existing occurrences of these configuration directives, or
 add new ones, as required.
 
 
-```{note}
+:::{note}
 On Ubuntu 20.04 "Focal Fossa" and earlier, use `ChallengeResponseAuthentication yes` instead of `KbdInteractiveAuthentication yes`.
-```
+:::
 
 Restart the `ssh` service to pick up configuration changes:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl try-reload-or-restart ssh
 ```
 
@@ -111,13 +122,19 @@ Changes to PAM configuration have immediate effect, and no separate reloading co
 
 Now when you log in using SSH, in addition to the normal public key authentication, you will be prompted for your TOTP or HOTP code:
 
-```bash
-$ ssh ubuntu.server
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh ubuntu.server
+
 Enter passphrase for key 'id_rsa':
 (ubuntu@ubuntu.server) Verification code:
 Welcome to Ubuntu (...)
 ubuntu@ubuntu.server:~$
 ```
+
 ## Special cases
 
 On Ubuntu, the following settings are default in `/etc/ssh/sshd_config`, but if you have overridden them, note that they are required for this configuration to work correctly and must be restored as follows:
@@ -130,5 +147,6 @@ PubkeyAuthentication yes
 Remember to run `sudo systemctl try-reload-or-restart ssh` for any changes made to `sshd` configuration to take effect.
 
 ## Further reading
+
 - [Wikipedia on TOTP](https://en.wikipedia.org/wiki/Time-based_one-time_password)
 - [Wikipedia on HOTP](https://en.wikipedia.org/wiki/HMAC-based_one-time_password)

@@ -7,9 +7,9 @@ myst:
 (nt4-domain-controller-legacy)=
 # NT4 domain controller (legacy)
 
-```{note}
+:::{note}
 This section is flagged as *legacy* because nowadays, Samba can be deployed in full Active Directory domain controller mode, and the old-style NT4 Primary Domain Controller is deprecated.
-```
+:::
 
 A Samba server can be configured to appear as a Windows NT4-style domain controller. A major advantage of this configuration is the ability to centralise user and machine credentials. Samba can also use multiple backends to store the user information.
 
@@ -21,7 +21,11 @@ In this section, we'll install and configure Samba as a Primary Domain Controlle
 
 First, we'll install Samba, and `libpam-winbind` (to sync the user accounts), by entering the following in a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install samba libpam-winbind
 ```
 
@@ -29,7 +33,7 @@ sudo apt install samba libpam-winbind
 
 Next, we'll configure Samba by editing `/etc/samba/smb.conf`. The *security* mode should be set to *user*, and the *workgroup* should relate to your organization:
 
-```text 
+```ini
 workgroup = EXAMPLE
 ...
 security = user
@@ -37,7 +41,7 @@ security = user
 
 In the commented "Domains" section, add or uncomment the following (the last line has been split to fit the format of this document):
 
-```text 
+```ini
 domain logons = yes
 logon path = \\%N\%U\profile
 logon drive = H:
@@ -47,9 +51,9 @@ add machine script = sudo /usr/sbin/useradd -N -g machines -c Machine -d
       /var/lib/samba -s /bin/false %u
 ```
 
-```{note}
+:::{note}
 If you wish to not use *Roaming Profiles* leave the `logon home` and `logon path` options commented out.
-```
+:::
 
 - `domain logons`
   Provides the `netlogon` service, causing Samba to act as a domain controller.
@@ -75,7 +79,7 @@ In this example the *machines* group will need to be created using the `addgroup
 
 Uncomment the *`[homes]`* share to allow the `logon home` to be mapped:
 
-```text
+```ini
 [homes]
    comment = Home Directories
    browseable = no
@@ -87,7 +91,7 @@ Uncomment the *`[homes]`* share to allow the `logon home` to be mapped:
 
 When configured as a domain controller, a *`[netlogon]`* share needs to be configured. To enable the share, uncomment:
 
-```text
+```ini
 [netlogon]
    comment = Network Logon Service
    path = /srv/samba/netlogon
@@ -96,14 +100,24 @@ When configured as a domain controller, a *`[netlogon]`* share needs to be confi
    share modes = no
 ```
 
-```{note}
+:::{note}
 The original `netlogon` share path is `/home/samba/netlogon`, but according to the {term}`Filesystem Hierarchy Standard (FHS) <FHS>`, [`/srv` is the correct location](https://www.pathname.com/fhs/pub/fhs-2.3.html#SRVDATAFORSERVICESPROVIDEDBYSYSTEM) for site-specific data provided by the system.
-```
+:::
 
 Now create the `netlogon` directory, and an empty (for now) `logon.cmd` script file:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mkdir -p /srv/samba/netlogon
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo touch /srv/samba/netlogon/logon.cmd
 ```
 
@@ -111,7 +125,11 @@ You can enter any normal Windows logon script commands in `logon.cmd` to customi
 
 Restart Samba to enable the new domain controller, using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart smbd.service nmbd.service
 ```
 
@@ -121,7 +139,11 @@ Lastly, there are a few additional commands needed to set up the appropriate rig
 
 Since *root* is disabled by default, a system group needs to be mapped to the Windows *Domain Admins* group in order to join a workstation to the domain. Using the `net` utility, from a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo net groupmap add ntgroup="Domain Admins" unixgroup=sysadmin rid=512 type=d
 ```
 
@@ -129,13 +151,21 @@ You should change *sysadmin* to whichever group you prefer. Also, the user joini
 
 If the user does not have Samba credentials yet, you can add them with the `smbpasswd` utility. Change the *sysadmin* username appropriately:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo smbpasswd -a sysadmin
 ```
 
 Also, rights need to be explicitly provided to the *Domain Admins* group to allow the *add machine script* (and other admin functions) to work. This is achieved by executing:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 net rpc rights grant -U sysadmin "EXAMPLE\Domain Admins" SeMachineAccountPrivilege \
 SePrintOperatorPrivilege SeAddUsersPrivilege SeDiskOperatorPrivilege \
 SeRemoteShutdownPrivilege
@@ -145,21 +175,25 @@ You should now be able to join Windows clients to the Domain in the same manner 
 
 ## Backup domain controller
 
-With a Primary Domain Controller (PDC) on the network it is best to have a Backup Domain Controller (BDC) as well. This will allow clients to authenticate in case the PDC becomes unavailable.
+With a Primary Domain Controller (PDC) on the network it is best to have a Backup Domain Controller ({term}`BDC`) as well. This will allow clients to authenticate in case the PDC becomes unavailable.
 
 When configuring Samba as a BDC you need a way to sync account information with the PDC. There are multiple ways of accomplishing this; secure copy protocol (SCP), `rsync`, or by using LDAP as the `passdb` backend.
 
-Using LDAP is the most robust way to sync account information, because both domain controllers can use the same information in real time. However, setting up an LDAP server may be overly complicated for a small number of user and computer accounts. See [Samba - OpenLDAP Backend](openldap-backend-legacy.md) for details.
+Using LDAP is the most robust way to sync account information, because both domain controllers can use the same information in real time. However, setting up an LDAP server may be overly complicated for a small number of user and computer accounts. See {ref}`Samba - OpenLDAP Backend <openldap-backend-legacy>` for details.
 
 First, install `samba` and `libpam-winbind`. From a terminal enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install samba libpam-winbind
 ```
 
-Now, edit `/etc/samba/smb.conf` and uncomment the following in the *\[global\]*:
+Now, edit `/etc/samba/smb.conf` and uncomment the following in the *`[global]`*:
 
-```text 
+```ini
 workgroup = EXAMPLE
 ...
 security = user
@@ -167,20 +201,28 @@ security = user
 
 In the commented *Domains* uncomment or add:
 
-```text 
+```ini
 domain logons = yes
 domain master = no
 ```
 
 Make sure a user has rights to read the files in `/var/lib/samba`. For example, to allow users in the *admin* group to SCP the files, enter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo chgrp -R admin /var/lib/samba
 ```
 
 Next, sync the user accounts, using SCP to copy the `/var/lib/samba` directory from the PDC:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo scp -r username@pdc:/var/lib/samba /var/lib
 ```
 
@@ -188,7 +230,11 @@ You can replace *`username`* with a valid username and *`pdc`* with the {term}`h
 
 Finally, restart samba:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl restart smbd.service nmbd.service
 ```
 
@@ -206,6 +252,6 @@ Another thing to keep in mind is if you have configured the `logon home` option 
 
 - [Chapter 4](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-pdc.html) of the Samba HOWTO Collection explains setting up a Primary Domain Controller.
 
-  - [Chapter 5](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-bdc.html) of the Samba HOWTO Collection explains setting up a Backup Domain Controller.
+- [Chapter 5](https://www.samba.org/samba/docs/old/Samba3-HOWTO/samba-bdc.html) of the Samba HOWTO Collection explains setting up a Backup Domain Controller.
 
-  - The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.

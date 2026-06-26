@@ -11,9 +11,9 @@ Establishing an SSH connection to a remote service involves multiple stages. Eac
 
 The default selection of algorithms for each stage should be good enough for the majority of deployment scenarios. Sometimes, however, a compliance rule, or a set of legacy servers, or something else, requires a change in this selection. Perhaps a legacy system or piece of hardware that is still in production is not compatible with the current encryption schemes and requires legacy algorithms to be enabled again. Or a compliance rule that isn't up-to-date with the current crypto standards doesn't allow a more advanced cipher.
 
-```{warning}
+:::{warning}
 Be careful when restricting cryptographic algorithms in SSH, specially on the server side. You can inadvertently lock yourself out of a remote system!
-```
+:::
 
 ## Algorithm configuration general rules
 
@@ -36,9 +36,9 @@ Most of the configuration options that take a list of cryptographic algorithms f
 
 With rare exceptions, the list of algorithms can be queried by running `ssh -Q <config>`, where `<config>` is the configuration setting name. For example, `ssh -Q ciphers` will show the available list of ciphers.
 
-```{note}
+:::{note}
 The output of the `ssh -Q <name>` command will not take into consideration the configuration changes that may have been made. It cannot therefore be used to test the crypto configuration changes.
-```
+:::
 
 ## Configuration settings
 
@@ -69,8 +69,12 @@ Here are the configuration settings that control the cryptographic algorithms se
 
 To check what effect a configuration change has on the server, it's helpful to use the `-T` parameter and `grep` the output for the configuration key you want to inspect. For example, to check the current value of the `Ciphers` configuration setting after having set `Ciphers ^3des-cbc` in `sshd_config`:
 
-```bash
-$ sudo sshd -T | grep ciphers
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo sshd -T | grep ciphers
 
 ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
@@ -87,8 +91,12 @@ One way to examine which algorithm was selected is to add the `-v` parameter to 
 
 For example, assuming password-less public key authentication is being used (so no password prompt), we can use this command to initiate the connection and exit right away:
 
-```bash
-$ ssh -v <server> exit 2>&1 | grep "cipher:"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
 debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
@@ -96,8 +104,12 @@ debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit
 
 In the above case, the `chacha20` cipher was automatically selected. We can influence this decision and only offer one algorithm:
 
-```bash
-$ ssh -v -c aes128-ctr <server> exit 2>&1 | grep "cipher:"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -v -c aes128-ctr <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: aes128-ctr MAC: umac-64-etm@openssh.com compression: none
 debug1: kex: client->server cipher: aes128-ctr MAC: umac-64-etm@openssh.com compression: none
@@ -111,8 +123,12 @@ Let's configure an OpenSSH server to only offer the {term}`AES` 256-bit variant 
 
 First, let's see what the default is:
 
-```bash
-$ sudo sshd -T | grep ciphers
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo sshd -T | grep ciphers
 
 ciphers chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr
 ```
@@ -125,22 +141,34 @@ Ciphers -aes128*
 
 And then check what is left:
 
-```bash
-$ sudo sshd -T | grep ciphers
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo sshd -T | grep ciphers
 
 ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes192-ctr,aes256-ctr
 ```
 
 To activate the change, `ssh` has to be restarted:
 
-```bash
-$ sudo systemctl restart ssh.service
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl restart ssh.service
 ```
 
 After we restart the service, clients will no longer be able to use AES 128 to connect to it:
 
-```bash
-$ ssh -c aes128-ctr <server>
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -c aes128-ctr <server>
 
 Unable to negotiate with 10.0.102.49 port 22: no matching cipher found. Their offer: chacha20-poly1305@openssh.com,aes192-ctr,aes256-ctr,aes256-gcm@openssh.com
 ```
@@ -149,8 +177,12 @@ Unable to negotiate with 10.0.102.49 port 22: no matching cipher found. Their of
 
 If we just want to prioritize a particular cipher, we can use the "`^`" character to move it to the front of the list, without disabling any other cipher:
 
-```bash
-$ ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: aes256-ctr MAC: umac-64-etm@openssh.com compression: none
 debug1: kex: client->server cipher: aes256-ctr MAC: umac-64-etm@openssh.com compression: none
@@ -158,14 +190,18 @@ debug1: kex: client->server cipher: aes256-ctr MAC: umac-64-etm@openssh.com comp
 
 In this way, if the server we are connecting to does not support AES 256, the negotiation will pick up the next one from the list. If we do that on the server via `Ciphers -aes256*`, this is what the same client, with the same command line, now reports:
 
-```bash
-$ ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -c ^aes256-ctr -v <server> exit 2>&1 | grep "cipher:"
 
 debug1: kex: server->client cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
 debug1: kex: client->server cipher: chacha20-poly1305@openssh.com MAC: <implicit> compression: none
 ```
 
-## References
+## Further reading
 
 * [OpenSSH upstream documentation index](https://www.openssh.org/manual.html)
 * Ubuntu {manpage}`sshd_config(5)` manual page

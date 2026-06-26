@@ -87,13 +87,21 @@ ls -lh $dest
 
 The simplest way to use the above backup script is to copy and paste the contents into a file (called `backup.sh`, for example). The file must be made executable:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 chmod u+x backup.sh
 ```
 
 Then from a terminal prompt, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ./backup.sh
 ```
 
@@ -105,7 +113,7 @@ The `cron` utility can be used to automate use of the script. The `cron` daemon 
 
 `cron` is configured through entries in a `crontab` file. `crontab` files are separated into fields:
 
-```bash
+```sh
 # m h dom mon dow   command
 ```
 
@@ -127,26 +135,30 @@ To add or change entries in a `crontab` file the `crontab -e` command should be 
 
 To run the `backup.sh` script listed above using `cron`, enter the following from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo crontab -e
 ```
 
-```{note}
+:::{note}
 Using `sudo` with the `crontab -e` command edits the *root* user's `crontab`. This is necessary if you are backing up directories only the root user has access to.
-```
+:::
 
 As an example, if we add the following entry to the `crontab` file:
 
-```bash
+```sh
 # m h dom mon dow   command
 0 0 * * * bash /usr/local/bin/backup.sh
 ```
 
 The `backup.sh` script would be run every day at 12:00 pm.
 
-```{note}
+:::{note}
 The `backup.sh` script will need to be copied to the `/usr/local/bin/` directory in order for this entry to run properly. The script can reside anywhere on the file system, simply change the script path appropriately.
-```
+:::
 
 ## Restoring from the archive
 
@@ -154,12 +166,20 @@ Once an archive has been created, it is important to test the archive. The archi
 
 - To see a listing of the archive contents, run the following command from a terminal:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   tar -tzvf /mnt/backup/host-Monday.tgz
   ```
 
 - To restore a file from the archive back to a different directory, enter:
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   tar -xzvf /mnt/backup/host-Monday.tgz -C /tmp etc/hosts
   ```
 
@@ -167,14 +187,18 @@ Once an archive has been created, it is important to test the archive. The archi
 
 - To restore all files in the archive enter the following:
 
-  ```bash
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
   cd /
   sudo tar -xzvf /mnt/backup/host-Monday.tgz
   ```
 
-  ```{note}
+  :::{note}
   This will overwrite the files currently on the file system.
-  ```
+  :::
 
 (archive-rotation-shell-script)=
 ## Archive rotation shell script
@@ -306,14 +330,24 @@ echo "Backup finished"
 date
 ```
 
-```{note}
+:::{note}
 The default device name for a SCSI tape drive is `/dev/st0`. Use the appropriate device path for your system.
-```
+:::
 
 Restoring from a tape drive is basically the same as restoring from a file. Simply rewind the tape and use the device path instead of a file path. For example, to restore the `/etc/hosts` file to `/tmp/etc/hosts`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 mt -f /dev/st0 rewind
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 tar -xzf /dev/st0 -C /tmp etc/hosts
 ```
 

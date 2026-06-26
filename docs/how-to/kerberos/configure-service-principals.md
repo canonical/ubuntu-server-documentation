@@ -15,8 +15,13 @@ The specific steps to enable Kerberos for a service can vary, but in general bot
 
 For example, let's create a principal for an LDAP service running on the `ldap-server.example.com` host:
 
-```bash
-ubuntu@ldap-server:~$ sudo kadmin -p ubuntu/admin
+```{terminal}
+:copy:
+:user: ubuntu
+:host: ldap-server
+:dir: ~
+sudo kadmin -p ubuntu/admin
+
 Authenticating as principal ubuntu/admin with password.
 Password for ubuntu/admin@EXAMPLE.COM:
 kadmin:  addprinc -randkey ldap/ldap-server.example.com
@@ -41,8 +46,13 @@ Entry for principal ldap/ldap-server.example.com with kvno 2, encryption type ae
 
 This is why we needed to run `kadmin` with `sudo`: so that it can write to `/etc/krb5.keytab`. This is the system keytab file, which is the default file for all keys that might be needed for services on this host, and we can list them with `klist`. Back in the shell:
 
-```bash
-$ sudo klist -k
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo klist -k
+
 Keytab name: FILE:/etc/krb5.keytab
 KVNO Principal
 ---- --------------------------------------------------------------------------
@@ -58,16 +68,20 @@ Entry for principal ldap/ldap-server.example.com with kvno 3, encryption type ae
 Entry for principal ldap/ldap-server.example.com with kvno 3, encryption type aes128-cts-hmac-sha1-96 added to keytab WRFILE:/home/ubuntu/ldap.keytab.
 ````
 
-```{note}
+:::{note}
 Notice how the `kvno` changed from `2` to `3` in the example above, when using `ktadd` a second time? This is the key version, and it invalidated the previously extracted key with `kvno 2`. Every time a key is extracted with `ktadd`, its version is bumped and that invalidates the previous ones!
-```
+:::
 
 In this case, as long as the target location is writable, you don't even have to run `kadmin` with `sudo`.
 
 Then use `scp` to transfer it to the target host:
 
-```bash
-$ scp /home/ubuntu/ldap.keytab ldap-server.example.com:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+scp /home/ubuntu/ldap.keytab ldap-server.example.com:
 ```
 
 And over there copy it to `/etc/krb5.keytab`, making sure it's mode `0600` and owned by `root:root`.

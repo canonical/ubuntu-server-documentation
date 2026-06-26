@@ -24,7 +24,11 @@ To update the local package index with the latest changes made in the repositori
 and thereby access the most up-to-date version of the package you're interested in,
 run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
 ```
 
@@ -37,20 +41,28 @@ by default, have repository information defined in the `/etc/apt/sources.list` f
 
 As an example, to install the `nmap` network scanner, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install nmap
 ```
 
-```{tip}
+:::{tip}
 You can install or remove multiple packages at once by separating them with
 spaces.
-```
+:::
 
 ## Remove a package
 
 To remove the package installed in the previous example, run the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt remove nmap
 ```
 
@@ -58,23 +70,34 @@ Adding the `--purge` option to `apt remove` will remove the package
 configuration files as well. This may or may not be what you want, so use it
 with caution.
 
-```{note}
+:::{note}
 While `apt` is a command-line tool, it is intended to be used interactively,
 and not to be called from non-interactive scripts. The `apt-get` command should
 be used in scripts (perhaps with the `--quiet` flag). For basic commands the
 syntax of the two tools is identical.
-```
+:::
 
 
+(upgrading-packages)=
 ### Upgrading packages 
 
 Installed packages on your computer may periodically have upgrades available from the package repositories (e.g., security updates). To upgrade your system, first update your package index and then perform the upgrade -- as follows:
-    
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt update
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt upgrade
 ```
-    
+
 For details on how to upgrade to a new Ubuntu release, see our {ref}`guide on upgrading releases <upgrade-your-release>`. For further information about using APT, read the comprehensive [APT User's Guide](https://www.debian.org/doc/user-manuals#apt-guide), or type `apt help`.
 
 ## Aptitude
@@ -85,13 +108,21 @@ Aptitude is best suited for use in a non-graphical terminal environment to ensur
 
 Install Aptitude by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install aptitude
 ```
 
 You can start the menu-driven interface of Aptitude as a regular user by typing the following command at a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo aptitude
 ```
 
@@ -101,23 +132,23 @@ Using Aptitude for package management is relatively straightforward thanks to it
 
 ### Installing packages
 
-To install a package, locate it in the "Not Installed Packages" category by using the keyboard arrow keys and the <kbd>Enter</kbd> key.
+To install a package, locate it in the "Not Installed Packages" category by using the keyboard arrow keys and the {kbd}`Enter` key.
 
-Highlight the desired package, then press the <kbd>+</kbd> key. The package entry should turn **green**, which indicates it has been marked for installation. Now press <kbd>g</kbd> to be presented with a summary of package actions. Press <kbd>g</kbd> again, and the package will be downloaded and installed. When finished, press <kbd>Enter</kbd> to return to the menu.
+Highlight the desired package, then press the {kbd}`+` key. The package entry should turn **green**, which indicates it has been marked for installation. Now press {kbd}`g` to be presented with a summary of package actions. Press {kbd}`g` again, and the package will be downloaded and installed. When finished, press {kbd}`Enter` to return to the menu.
 
 ### Remove Packages
 
-To remove a package, locate it in the "Installed Packages" category by using the keyboard arrow keys and the <kbd>Enter</kbd> key.
+To remove a package, locate it in the "Installed Packages" category by using the keyboard arrow keys and the {kbd}`Enter` key.
 
-Highlight the package you want to remove, then press the <kbd>-</kbd> key. The package entry should turn **pink**, indicating it has been marked for removal. Now press <kbd>g</kbd> to be presented with a summary of package actions. Press <kbd>g</kbd> again, and the package will be removed. When finished, press <kbd>Enter</kbd> to return to the menu.
+Highlight the package you want to remove, then press the {kbd}`-` key. The package entry should turn **pink**, indicating it has been marked for removal. Now press {kbd}`g` to be presented with a summary of package actions. Press {kbd}`g` again, and the package will be removed. When finished, press {kbd}`Enter` to return to the menu.
 
 ### Updating the package index 
 
-To update the package index, press the <kbd>u</kbd> key.
+To update the package index, press the {kbd}`u` key.
 
 ### Upgrade packages
 
-To upgrade packages, first update the package index as detailed above, and then press the <kbd>U</kbd> key to mark all packages with available updates. Now press <kbd>g</kbd>, which will present you with a summary of package actions. Press <kbd>g</kbd> again to begin the download and installation. When finished, press <kbd>Enter</kbd> to return to the menu.
+To upgrade packages, first update the package index as detailed above, and then press the {kbd}`U` key to mark all packages with available updates. Now press {kbd}`g`, which will present you with a summary of package actions. Press {kbd}`g` again to begin the download and installation. When finished, press {kbd}`Enter` to return to the menu.
 
 The first column of information displayed in the package list (in the top pane) lists the current state of the package (when viewing packages). It uses the following key to describe the package state:
 
@@ -137,19 +168,27 @@ The first column of information displayed in the package list (in the top pane) 
 
 - **H** : Half-installed - removal failed and requires a fix
 
-To exit Aptitude, simply press the <kbd>q</kbd> key and confirm you want to exit. Many other functions are available from the Aptitude menu by pressing the <kbd>F10</kbd> key.
+To exit Aptitude, simply press the {kbd}`q` key and confirm you want to exit. Many other functions are available from the Aptitude menu by pressing the {kbd}`F10` key.
 
 ### Command-line Aptitude
 
 You can also use Aptitude as a command-line tool, similar to `apt`. To install the `nmap` package with all necessary dependencies (as in the `apt` example), you would use the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo aptitude install nmap
 ```
 
 To remove the same package, you would use the command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo aptitude remove nmap
 ```
 
@@ -165,44 +204,65 @@ APT and Aptitude are newer, and layer additional features on top of `dpkg`. This
 
 To list *all* packages in the system’s package database (both installed and uninstalled) run the following command from a terminal prompt:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg -l
 ```
 
 Depending on the number of packages on your system, this can generate a large amount of output. Pipe the output through `grep` to see if a specific package is installed:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg -l | grep apache2
 ```
-    
+
 Replace `apache2` with any package name, part of a package name, or a regular expression.
 
 ### List files
 
 To list the files installed by a package, in this case the `ufw` package, enter:
    
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg -L ufw
 ```
 
 If you are unsure which package installed a file, `dpkg -S` may be able to tell you. For example:
-    
-```bash
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dpkg -S /etc/host.conf 
+
 base-files: /etc/host.conf
 ```
 
 The output shows that the `/etc/host.conf` belongs to the base-files package.
-    
-```{note}
+
+:::{note}
 Many files are automatically generated during the package install process, and even though they are on the {term}`filesystem`, `dpkg -S` may not know which package they belong to.
-```
+:::
 
 ### Installing a deb file
 
 You can install a local `.deb` file by entering:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg -i zip_3.0-4_amd64.deb
 ```
 
@@ -212,13 +272,17 @@ Change `zip_3.0-4_amd64.deb` to the actual file name of the local `.deb` file yo
 
 You can uninstall a package by running:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo dpkg -r zip
 ```
-    
-```{caution}
+
+:::{caution}
 Uninstalling packages using `dpkg`, is **NOT** recommended in most cases. It is better to use a package manager that handles dependencies to ensure that the system is left in a consistent state. For example, using `dpkg -r zip` will remove the `zip` package, but any packages that depend on it will still be installed and may no longer function correctly as a result.
-```
+:::
 
 For more `dpkg` options see the {manpage}`dpkg(1)` manual page: `man dpkg`.
 
@@ -236,17 +300,17 @@ In addition to the officially-supported package repositories available for Ubunt
 
 For more information, see our guide on {ref}`using third-party repositories <third-party-repository-usage>`.
 
-```{warning}
+:::{warning}
 Be advised that packages in Universe and Multiverse are not officially supported and do not receive security patches, except through Ubuntu Pro's [Expanded Security Maintenance](https://ubuntu.com/security/esm). A subscription to [Ubuntu Pro](https://ubuntu.com/pro) is free for personal use on up to five machines.
-```
 
-> Packages in the *multiverse* repository often have licensing issues that prevent them from being distributed with a free operating system, and they may be illegal in your locality.
+Packages in the *multiverse* repository often have licensing issues that prevent them from being distributed with a free operating system, and they may be illegal in your locality.
+:::
 
 Many other package sources are available -- sometimes even offering only one package, as in the case of packages provided by the developer of a single application. You should always be cautious when using non-standard package sources/repos, however. Research the packages and their origins carefully before performing any installation, as some packages could render your system unstable or non-functional in some respects.
 
 By default, the *universe* and *multiverse* repositories are enabled. If you would like to disable them, edit `/etc/apt/sources.list.d/ubuntu.sources` and remove `universe` and `multiverse` from `Components`:
 
-```text
+```
 Types: deb
 URIs: http://archive.ubuntu.com/ubuntu
 Suites: DISTRO-SHORT-CODENAME DISTRO-SHORT-CODENAME-updates DISTRO-SHORT-CODENAME-backports

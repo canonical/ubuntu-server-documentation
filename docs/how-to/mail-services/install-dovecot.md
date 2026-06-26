@@ -11,7 +11,11 @@ myst:
 
 To install a basic Dovecot server with common POP3 and IMAP functions, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install dovecot-imapd dovecot-pop3d
 ```
 
@@ -35,14 +39,23 @@ Make sure to also configure your chosen Mail Transport Agent (MTA) to transfer t
 
 Once you have configured Dovecot, restart its daemon in order to test your setup using the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo service dovecot restart
 ```
 
 Try to log in with the commands `telnet localhost pop3` (for POP3) or `telnet localhost imap2` (for IMAP).  You should see something like the following:
 
-```text
-bhuvan@rainbow:~$ telnet localhost pop3
+```{terminal}
+:copy:
+:user: bhuvan
+:host: rainbow
+:dir: ~
+telnet localhost pop3
+
 Trying 127.0.0.1...
 Connected to localhost.localdomain.
 Escape character is '^]'.
@@ -55,7 +68,11 @@ By default, Dovecot is configured to use SSL automatically using the package `ss
 
 You can instead generate your own custom certificate for Dovecot using `openssh`, for example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo openssl req -new -x509 -days 1000 -nodes -out "/etc/dovecot/dovecot.pem" \
     -keyout "/etc/dovecot/private/dovecot.pem"
 ```
@@ -69,21 +86,21 @@ ssl_key = </etc/dovecot/private/dovecot.key
 
 You can obtain an SSL certificate from Let's Encrypt, from a commercial Certificate Authority (CA), or create a self-signed one. Once you have the certificate, you will have a key file and a certificate file to reference in the configuration above.
 
-```{seealso}
+:::{seealso}
 See {ref}`obtain-tls-certificates` for how to get a trusted certificate or set up your own CA.
-```
+:::
 
 ## Configure a firewall for an email server
 
 To access your mail server from another computer, you must configure your firewall to allow connections to the server on the necessary ports.
 
-  - IMAP - 143
+- IMAP - 143
 
-  - IMAPS - 993
+- IMAPS - 993
 
-  - POP3 - 110
+- POP3 - 110
 
-  - POP3S - 995
+- POP3S - 995
 
 ## Further reading
 

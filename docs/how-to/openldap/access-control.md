@@ -19,13 +19,13 @@ The following commands give the ACLs of the `mdb` database (`dc=example,dc=com`)
 
 For the main database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={1}mdb)' olcAccess
-```
 
-Output:
-
-```text
 dn: olcDatabase={1}mdb,cn=config
 olcAccess: {0}to attrs=userPassword by self write by anonymous auth by * none
 olcAccess: {1}to attrs=shadowLastChange by self write by * read
@@ -34,13 +34,13 @@ olcAccess: {2}to * by * read
 
 For the frontend database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={-1}frontend)' olcAccess
-```
 
-Output:
-
-```text
 dn: olcDatabase={-1}frontend,cn=config
 olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external
  ,cn=auth manage by * break
@@ -48,9 +48,9 @@ olcAccess: {1}to dn.exact="" by * read
 olcAccess: {2}to dn.base="cn=Subschema" by * read
 ```
 
-```{note}
+:::{note}
 The Root {term}`DN` always has full rights to its database and does not need to be included in any ACL.
-```
+:::
 
 ## Interpreting the results
 
@@ -97,19 +97,19 @@ If this is unwanted then you need to change the ACL. To force authentication dur
 
 There is no administrative account ("Root DN") created for the `slapd-config` database. There is, however, a SASL identity that is granted full access to it. It represents the localhost's superuser (`root`/`sudo`). Here it is:
 
-```text
+```
 dn.exact=gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
 ```
 
 The following command displays the ACLs of the `slapd-config` database:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcDatabase={0}config)' olcAccess
-```
 
-Output:
-
-```text
 dn: olcDatabase={0}config,cn=config
 olcAccess: {0}to * by dn.exact=gidNumber=0+uidNumber=0,cn=peercred,
               cn=external,cn=auth manage by * break
@@ -139,13 +139,21 @@ olcAccess: {0}to * by dn.exact="gidNumber=0+uidNumber=0,cn=peercred,cn=external,
 
 Apply the change:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapmodify -Q -Y EXTERNAL -H ldapi:/// -f peercred.ldif
 ```
 
 Now you can run LDAP commands to modify the data tree, as root, without a LDAP password (when you run this on the OpenLDAP server machine):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapadd -Q -Y EXTERNAL -H ldapi:/// -f add_content.ldif
 ```
 
@@ -153,7 +161,11 @@ This simplifies administration and is used throughout the other guides in this s
 
 A succinct way to get all the ACLs is:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ldapsearch -Q -LLL -Y EXTERNAL -H ldapi:/// -b cn=config '(olcAccess=*)' olcAccess olcSuffix
 ```
 

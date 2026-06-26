@@ -15,13 +15,21 @@ The `wg-quick` tool is a simple way to bring the WireGuard interface up and down
 
 Probably the greatest benefit of this is that it gives you the ability to configure the interface to be brought up automatically on system boot. For example, to configure the `wg0` interface to be brought up at boot, run the following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl enable wg-quick@wg0
 ```
 
 The name of the systemd service follows the WireGuard interface name, and multiple such services can be enabled/started at the same time.  You can also use the `systemctl status`, `start`, `stop`, `reload` and `restart` commands to control the WireGuard interface and query its status:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo systemctl reload wg-quick@wg0
 ```
 
@@ -41,7 +49,7 @@ For example, if we have a WireGuard setup as follows:
 
 We can add this `PostUp` command to the `home0.conf` configuration file to have our systemd-based resolver use `10.10.10.1` as the DNS server for any queries for the `.home` domain:
 
-```bash
+```ini
 [Interface]
 ...
 PostUp = resolvectl dns %i 10.10.10.1; resolvectl domain %i \~home
@@ -55,13 +63,13 @@ These two `resolvectl` commands tell the local *systemd-resolved* resolver to:
 
 When you bring the `home0` WireGuard interface up again, it will run the `resolvectl` commands:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo wg-quick up home0
-```
 
-Will look like:
-
-```text
 [#] ip link add home0 type wireguard
 [#] wg setconf home0 /dev/fd/63
 [#] ip -4 address add 10.10.11.2/24 dev home0
@@ -72,13 +80,13 @@ Will look like:
 
 You can verify that it worked by pinging some {term}`hostname` in your home network, or checking the DNS resolution status for the `home0` interface:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 resolvectl status home0
-```
 
-reports:
-
-```text
 Link 26 (home0)
     Current Scopes: DNS
          Protocols: -DefaultRoute +LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
@@ -89,9 +97,9 @@ Current DNS Server: 10.10.10.1
 
 If you are using `systemctl` to control the WireGuard interface, this is the type of change (adding or changing `PostUp`) where the `reload` action won't be enough, and you actually need to issue a `restart`.
 
-```{note}
+:::{note}
 The {manpage}`wg-quick(8)` manual page documents the DNS setting of the WireGuard interface which has the same purpose, but only works if you have `resolveconf` installed. Ubuntu systems by default don't, and rely on `systemd-resolved` instead.
-```
+:::
 
 ## Adding another peer
 
@@ -103,18 +111,41 @@ To add another peer to an existing WireGuard setup, we have to:
 
 Let's call the new system `ontheroad`, and generate the keys for it:
 
-```bash
-$ umask 077
-$ wg genkey > ontheroad-private.key
-$ wg pubkey < ontheroad-private.key > ontheroad-public.key
-$ ls -la ontheroad.*
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+umask 077
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg genkey > ontheroad-private.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+wg pubkey < ontheroad-private.key > ontheroad-public.key
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ls -la ontheroad.*
+
 -rw------- 1 ubuntu ubuntu 45 Aug 22 20:12 ontheroad-private.key
 -rw------- 1 ubuntu ubuntu 45 Aug 22 20:13 ontheroad-public.key
 ```
 
 As for its IP address, let's pick `10.10.11.3/24` for it, which is the next one in the sequence from one of the previous examples in our WireGuard guide:
 
-```
+```ini
 [Interface]
 PrivateKey = <contents-of-ontheroad-private.key>
 ListenPort = 51000
@@ -130,7 +161,7 @@ The only difference between this config and one for an existing system in this s
 
 On the "other side", we add the new `[Peer]` section to the existing config:
 
-```
+```ini
 [Interface]
 PrivateKey = <contents-of-router-private.key>
 ListenPort = 51000
@@ -149,13 +180,17 @@ AllowedIPs = 10.10.11.3
 
 To update the interface with the new peer without disrupting existing connections, we use the `reload` action of the systemd unit:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl reload wg-quick@wg0
 ```
 
-```{note}
+:::{note}
 For this case of a "server" or "VPN gateway", where we are just adding another peer to an existing config, the `systemctl reload` action will work well enough to insert the new peer into the WireGuard configuration. However, it won't create new routes, or do any of the other steps that `wg-quick` does. Depending on your setup, you might need a full restart so that `wg-quick` can fully do its job.
-```
+:::
 
 ## Adding a smartphone peer
 
@@ -165,13 +200,21 @@ Such a mobile client can be configured more easily with the use of QR codes.
 
 We start by creating the new peer's config normally, as if it were any other system (generate keys, pick an IP address, etc). Then, to convert that configuration file to a QR code, install the `qrencode` package:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install qrencode
 ```
 
 Next, run the following command (assuming a WireGuard config, as shown in the other examples, was written to `phone.conf`):
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat phone.conf | qrencode -t ansiutf8
 ```
 
@@ -179,6 +222,6 @@ That will generate a QR code in the terminal, ready for scanning with the smartp
 
 Note that you need to put the private key contents directly into that configuration file, and not use `PostUp` to load it from a separate file.
 
-```{important}
+:::{important}
 Treat this QR code as a secret, as it contains the private key for the WireGuard interface!
-```
+:::

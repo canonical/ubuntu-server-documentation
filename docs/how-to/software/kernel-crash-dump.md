@@ -9,15 +9,11 @@ myst:
 
 A 'kernel crash dump' refers to a portion of the contents of volatile memory (RAM) that is copied to disk whenever the execution of the kernel is disrupted. The following events can cause a kernel disruption:
 
-  - Kernel panic
-
-  - Non-maskable interrupts (NMI)
-
-  - Machine check exceptions (MCE)
-
-  - Hardware failure
-
-  - Manual intervention
+- Kernel panic
+- Non-maskable interrupts (NMI)
+- Machine check exceptions (MCE)
+- Hardware failure
+- Manual intervention
 
 For some of these events (kernel panic, NMI) the kernel will react automatically and trigger the crash dump mechanism through *`kexec`*. In other situations a manual intervention is required in order to capture the memory. Whenever one of the above events occurs, it is important to find out the root cause in order to prevent it from happening again. The cause can be determined by inspecting the copied memory contents.
 
@@ -30,7 +26,11 @@ When a kernel panic occurs, the kernel relies on the *`kexec`* mechanism to quic
 The kernel crash dump utility is installed by default in most Ubuntu environments, especially those designated for execution on bare metal.
 In other cases it can be installed with following command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install kdump-tools
 ```
 
@@ -66,12 +66,13 @@ a lot of memory on systems with many devices.
 Therefore starting in Oracular Oriole (24.10), the kernel crash dump facility
 will be enabled by default during standard Ubuntu Desktop or Ubuntu Server
 installations on systems that meet the following requirements:
- - the system has at least 4 CPU threads
- - the system has at least 6GB of RAM, and less than 2TB of RAM
- - the free space available in `/var` is more than 5 times the amount of RAM and swap space
- - and the CPU architecture is
-   - amd64 or s390x, or
-   - arm64 and UEFI is used
+
+- the system has at least 4 CPU threads
+- the system has at least 6GB of RAM, and less than 2TB of RAM
+- the free space available in `/var` is more than 5 times the amount of RAM and swap space
+- and the CPU architecture is
+  - amd64 or s390x, or
+  - arm64 and UEFI is used
 
 These conditions are evaluated at installation time by the tool `/usr/share/kdump-tools/kdump_set_default`.
 
@@ -83,13 +84,17 @@ installation instructions that follow.
 
 No matter which way it got enabled, to disable the function it can be either entirely removed via the command:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt remove kdump-tools
 ```
 
 or by changing the config at `/etc/default/kdump-tools` to contain:
 
-```text
+```
 USE_KDUMP=0
 ```
 
@@ -106,8 +111,13 @@ If you enable `kdump-tools` after a reboot, you will only need to issue the `kdu
 
 You can view the current status of `kdump` via the command `kdump-config show`.  This will display something like this:
 
-```text
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kdump-config show
+
 DUMP_MODE:                kdump
 USE_KDUMP:                1
 KDUMP_COREDIR:                /var/crash
@@ -141,13 +151,13 @@ system inside the crashed one.
 To confirm that this allocation worked there are a few things to verify.
 First, confirm that the `crashkernel` boot parameter is present.
 
-```bash
-$ cat /proc/cmdline
-```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /proc/cmdline
 
-Which shows:
-
-```text
 BOOT_IMAGE=/vmlinuz-6.18.0-8-generic
  root=UUID=0a86b691-f733-4cb0-9c5c-b88e0ef9e212 ro console=tty1 console=ttyS0
  crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
@@ -155,7 +165,7 @@ BOOT_IMAGE=/vmlinuz-6.18.0-8-generic
 
 The `crashkernel` parameter has the following syntax:
 
-```text
+```
 crashkernel=<range1>:<size1>[,<range2>:<size2>,...][@offset]
     range=start-[end] 'start' is inclusive and 'end' is exclusive.
 ```
@@ -168,27 +178,27 @@ crashkernel=2G-4G:320M,4G-32G:512M,32G-64G:1024M,64G-128G:2048M,128G-:4096M
 
 The above values mean:
 
-  - if the RAM is smaller than 2G, then don't reserve anything (this is to not impact small systems where it would take quite a share)
+- if the RAM is smaller than 2G, then don't reserve anything (this is to not impact small systems where it would take quite a share)
 
-  - if the RAM size is between 2G and 4G (exclusive), then reserve 320M
+- if the RAM size is between 2G and 4G (exclusive), then reserve 320M
 
-  - ...
+- ...
 
-  - if the RAM size is larger than 128G, then reserve 4096M
+- if the RAM size is larger than 128G, then reserve 4096M
 
 Second, verify that the kernel has reserved the requested memory area for the `kdump` kernel by running `dmesg`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 dmesg | grep -i crash
-```
 
-Which shows:
-
-```text
 [    0.004623] crashkernel reserved: 0x0000000060000000 - 0x0000000074000000 (320 MB)
 ```
 
-This example output is for a system with 3GB memory which correctly maps to 320 MB.
+This example output is for a system with 3 GB memory which correctly maps to 320 MB.
 
 The defaults provided by the packaging try to be conservative to not waste too much.
 But in some rare cases that might break when the dump process fails to initialize.
@@ -215,7 +225,7 @@ Local dumps are configured automatically and will remain in use unless a remote 
 
 To enable remote dumps using the SSH protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
 
-```text
+```
 # ---------------------------------------------------------------------------
 # Remote dump facilities:
 # SSH - username and hostname of the remote server that will receive the dump
@@ -235,13 +245,13 @@ The only mandatory variable to define is SSH. It must contain the username and {
 
 The following example shows how `kdump-config propagate` is used to create and propagate a new keypair to the remote server:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo kdump-config propagate
-```
 
-Which produces an output like this:
-
-```text
 Need to generate a new ssh key...
 The authenticity of host 'kdump-netcrash (192.168.1.74)' can't be established.
 ECDSA key fingerprint is SHA256:iMp+5Y28qhbd+tevFCWrEXykDd4dI3yN4OVlu3CBBQ4.
@@ -254,13 +264,13 @@ The password of the account used on the remote server will be required in order 
 
 The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the SSH protocol:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kdump-config show
-```
 
-Whose output appears like this:
-
-```text
 DUMP_MODE:        kdump
 USE_KDUMP:        1
 KDUMP_SYSCTL:     kernel.panic_on_oops=1
@@ -279,7 +289,7 @@ current state:    ready to kdump
 
 To enable remote dumps using the NFS protocol, the `/etc/default/kdump-tools` must be modified in the following manner:
 
-```text
+```
 # NFS -     Hostname and mount point of the NFS server configured to receive
 #           the crash dump. The syntax must be {HOSTNAME}:{MOUNTPOINT} 
 #           (e.g. remote:/var/crash)
@@ -291,13 +301,13 @@ As with the SSH protocol, the `HOSTTAG` variable can be used to replace the IP a
 
 The `kdump-config show` command can be used to confirm that `kdump` is correctly configured to use the NFS protocol :
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kdump-config show
-```
 
-Which produces an output like this:
-
-```text
 DUMP_MODE:        kdump
 USE_KDUMP:        1
 KDUMP_SYSCTL:     kernel.panic_on_oops=1
@@ -318,15 +328,15 @@ But in a system without sufficient memory (here 1 GB) it would not reserve memor
 due to that initialization would fail.
 
 Such conditions can be seen in `kdump-config show` as well, the primary
-value to check is `current state`.
+value to check is `current state`, which in this bad case would report the following.
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 kdump-config show
-```
 
-Which in this bad case would report:
-
-```text
 DUMP_MODE:                kdump
 USE_KDUMP:                1
 KDUMP_COREDIR:                /var/crash
@@ -345,13 +355,13 @@ kexec command:
 Such allocation errors can also be seen in the journal output as well as the
 service status of `kdump-tools`:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 systemctl status kdump-tools
-```
 
-Might then show:
-
-```text
 ...
 ... kdump-tools[5348]: Memory for crashkernel is not reserved
 ... kdump-tools[5348]: Please reserve memory by passing"crashkernel=Y@X" parameter to kernel
@@ -360,13 +370,17 @@ Might then show:
 
 ## Testing the crash dump mechanism
 
-```{warning}
+:::{warning}
 Testing the crash dump mechanism **will cause a system reboot**. In certain situations, this can cause data loss if the system is under heavy load. If you want to test the mechanism, make sure that the system is idle or under very light load.
-```
+:::
 
 Verify that the *SysRQ* mechanism is enabled by looking at the value of the `/proc/sys/kernel/sysrq` kernel parameter:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 cat /proc/sys/kernel/sysrq
 ```
 
@@ -375,13 +389,17 @@ A value greater than *1* indicates that a sub-set of `sysrq` features is enabled
 See `/usr/lib/sysctl.d/55-magic-sysrq.conf` for a detailed description of the options
 and their default values.
 
-```{note}
+:::{note}
 On 24.10 and earlier the location of this file was at `/etc/sysctl.d/10-magic-sysrq.conf`
-```
+:::
 
 If disabled on your system, enable `sysrq` dump:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo sysctl -w kernel.sysrq=1
 ```
 
@@ -393,7 +411,7 @@ This has the advantage of making the kernel dump process visible.
 
 A typical test output should look like the following on e.g. a serial console:
 
-```text
+```
 [  977.208267] sysrq: Trigger a crash
 [  977.209313] Kernel panic - not syncing: sysrq triggered crash
 [  977.210684] CPU: 0 UID: 0 PID: 1567 Comm: bash Kdump: loaded Not tainted 6.18.0-8-generic #8-Ubuntu PREEMPT(voluntary) 
@@ -404,7 +422,7 @@ A typical test output should look like the following on e.g. a serial console:
 
 The rest of the output might be truncated, but you should see the system rebooting and somewhere in the log, you will see the following line :
 
-```text
+```
 [    5.171504] kdump-tools[740]: Starting kdump-tools:
 [    5.174084] kdump-tools[747]:  * running makedumpfile --dump-dmesg /proc/vmcore /var/crash/202601210724/dmesg.202601210724
 [    5.185243] kdump-tools[765]: The kernel version is not supported.
@@ -423,29 +441,28 @@ Copying data                                      : [100.0 %] \           eta: 0
 
 Once completed, the system will reboot to its normal operational mode. You will then find the kernel crash dump file, and related subdirectories, in the `/var/crash` directory by running, e.g. `ls /var/crash`, which produces the following:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ll /var/crash
-```
 
-Showing:
-
-```
 drwxr-xr-x  2 root root  4096 Jan 21 07:31 202601210724/
 -rw-r--r--  1 root root 28838 Jan 21 07:24 linux-image-6.18.0-8-generic-202601210724.crash
 ```
 
 And in this example:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ll /var/crash/202601210724
-```
 
-returning:
-
-```
 -rw------- 1 root root    82264 Jan 21 07:24 dmesg.202601210724
 -rw-r--r-- 1 root root 51753823 Jan 21 07:24 dump.202601210724
-
 ```
 
 ## Analyzing a crash dump
@@ -455,17 +472,21 @@ information with debug symbols are needed. To get access to those please
 follow {ref}`get-debug-symbol-packages` to make the repository and associated
 keys known to your system.
 
-```{note}
+:::{note}
 This does not strictly need to happen on the system that had the crash, it can
 be copied away for analysis. But the examples are simplified to use e.g.
 `uname -r` to automatically select the right kernel - when running on a
 different system these might need to be adapted.
-```
+:::
 
 Then install the debug symbols for your kernel; assuming it is the same that
 runs currently, that can be done with:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 apt-get install linux-image-$(uname -r)-dbgsym
 ```
 
@@ -476,13 +497,13 @@ will make all the debug info available in `/usr/lib/debug/lib/modules/6.18.0-8-g
 
 With all that ready the crash dump can be opened:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 crash /usr/lib/debug/boot/vmlinux-6.18.0-8-generic /var/crash/202601210724/dump.202601210724
-```
 
-Which will then look like:
-
-```text
 ...
       KERNEL: /usr/lib/debug/boot/vmlinux-6.18.0-8-generic
     DUMPFILE: /var/crash/202601210724/dump.202601210724  [PARTIAL DUMP]
@@ -508,16 +529,16 @@ crash>
 
 For example we see here the crash reason being us following the above example:
 
-```text
+```
 PANIC: "Kernel panic - not syncing: sysrq triggered crash"
 ```
 
 And from there on it depends on what exactly you are looking for.
 
-## Resources
+## Further reading
 
 Kernel crash dump is a vast topic that requires good knowledge of the Linux kernel. You can find more information on the topic here:
 
-  - [`kdump` kernel documentation](https://www.kernel.org/doc/Documentation/kdump/kdump.txt).
+- [`kdump` kernel documentation](https://www.kernel.org/doc/Documentation/kdump/kdump.txt).
 
-  - [Analyzing Linux Kernel Crash](https://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)
+- [Analyzing Linux Kernel Crash](https://www.dedoimedo.com/computers/crash-analyze.html) (Based on Fedora, it still gives a good walk-through of kernel dump analysis)

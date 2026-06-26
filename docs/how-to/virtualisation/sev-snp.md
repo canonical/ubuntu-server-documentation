@@ -15,20 +15,32 @@ AMD offers a suite of security features designed to protect virtual machine work
 
 - {term}`AMD-SEV-ES`: **SEV with Encrypted State (SEV-ES)** enhances SEV by also encrypting the VM's CPU registers and sensitive state information, preventing the hypervisor from reading or tampering with the guest's execution state during initial VM setup and operation.
 
-- {term}`AMD-SEV-SNP`: **SEV with Secure Nested Paging (SEV-SNP)** represents the most comprehensive protection, adding memory integrity verification to SEV-ES. SEV-SNP prevents the hypervisor from manipulating the memory mapping and encrypts guest memory pages with per-page authentication tags, ensuring data integrity and preventing rollback attacks. These features are available on the latest AMD EPYC CPUs (starting from "Rome"). While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 24.04 LTS, the host enablement (QEMU and OVMF support) was only added later with Ubuntu 25.04.
+- {term}`AMD-SEV-SNP`: **SEV with Secure Nested Paging (SEV-SNP)** represents the most comprehensive protection, adding memory integrity verification to SEV-ES. SEV-SNP prevents the hypervisor from manipulating the memory mapping and encrypts guest memory pages with per-page authentication tags, ensuring data integrity and preventing rollback attacks. These features are available on the latest AMD EPYC CPUs (starting from "Milan"). While using Ubuntu as a guest OS on SEV-SNP VMs has been supported since Ubuntu 24.04 LTS, the host enablement (QEMU and OVMF support) was only added later with Ubuntu 25.04.
 
 This documentation focuses only on {term}`AMD-SEV-SNP`, the latest generation of the AMD Confidential Computing technologies.
 
 ## Host configuration
 
-To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP in the firmware settings, then allocate Address-Space Identifiers (ASIDs) for SNP use. For further details, see [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and consult the documentation for your specific motherboard or Baseboard Management Controller (BMC).
+To enable `SEV-SNP` on the host, first enable memory-encryption features and SNP in the firmware settings, then allocate Address-Space Identifiers (ASIDs) for SNP use. For further details, see [AMD's documentation](https://docs.amd.com/v/u/en-US/58207-using-sev-with-amd-epyc-processors) and consult the documentation for your specific motherboard or Baseboard Management Controller ({term}`BMC`).
 
 To check if the host supports `SEV-SNP`:
 
-```bash
-$ cat /sys/module/kvm_amd/parameters/sev
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cat /sys/module/kvm_amd/parameters/sev
+
 Y
-$ cpuid -1 -l 0x8000001f
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cpuid -1 -l 0x8000001f
+
 CPU:
    AMD Secure Encryption (0x8000001f):
       SME: secure memory encryption support    = true
@@ -40,7 +52,11 @@ CPU:
 
 To launch a SEV-SNP-enabled VM using `QEMU`, first install `qemu-system-x86_64` and launch a VM with the following parameters:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 qemu-system-x86_64 \
   -enable-kvm \
   -nographic \
@@ -61,7 +77,7 @@ qemu-system-x86_64 \
 
 The important argument that tells `QEMU` that this VM is a SEV-SNP VM is:
 
-```bash
+```
   -object sev-snp-guest,id=sev0,cbitpos=47,reduced-phys-bits=1,kernel-hashes=on \
 ```
 
@@ -81,6 +97,10 @@ On the guest side, Ubuntu 24.04 LTS and newer fully support AMD SEV-SNP. You can
 Once the VM is launched, install `linux-generic` to get the `sev-guest` module and insert it with `modprobe sev-guest`. This will create a new character device on the guest that can be used to generate attestation reports from the TEE: `/dev/sev-guest`.
 Finally, you can use AMD's [`snpguest`](https://github.com/virtee/snpguest) to generate an attestation report that can be used for a remote attestation:
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo ./snpguest report --random attestation-report.bin request-file.txt
 ```

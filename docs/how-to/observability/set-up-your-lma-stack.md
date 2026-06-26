@@ -7,11 +7,11 @@ myst:
 (set-up-your-lma-stack)=
 # Set up your LMA stack
 
-```{note}
+:::{note}
 **LMA to COS**
 
 The LMA stack is being succeeded by the Canonical Observability Stack (COS). While the current LMA still works, most users are recommended to consider COS instead. For more information, refer to [this COS topic](https://charmhub.io/topics/canonical-observability-stack/). In environments with more limited resources, there is also [COS lite](https://charmhub.io/topics/canonical-observability-stack/editions/lite).
-```
+:::
 
 Logging, Monitoring, and Alerting (LMA) is a collection of tools that guarantee the availability of your running infrastructure. Your LMA stack will help point out issues in load, networking, and other resources before they become a failure point.
 
@@ -27,9 +27,9 @@ Prometheus works as a hub, polling data from different Telegraf nodes and sendin
 
 Let's set up a basic demonstration with two **nodes**, the first acting as a placeholder load with Telegraf installed - the "Workload", and the second acting as our data visualization system - the "Monitor". This will help us familiarize ourselves with the various components and how they inter-operate.
 
-```{note}
+:::{note}
 For clarity, we'll refer to these two hosts as named: `workload` and `monitor`. If you use other {term}`hostnames <hostname>`, substitute your preferred names as we go through this guide.
-```
+:::
 
 The Workload node will be running Telegraf to collect metrics from whatever load we're monitoring. For demonstration purposes we'll just read the CPU/memory data from the node. In a real environment, we'd have multiple hosts (each with their own Telegraf instance) collecting hardware, network, and software statuses particular to that node.
 
@@ -50,19 +50,28 @@ As reference, here are the ports we'll be binding for each service:
 
 First, let's set up the Workload. We'll be using LXD as our container technology in this guide, but any VM, container, or bare metal host should work, so long as it's running Ubuntu 20.10. With LXD installed on our host we can use its `lxc` command line tool to create our containers:
 
-```bash
-$ lxc launch ubuntu:20.10 workload
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lxc launch ubuntu:20.10 workload
+
 Creating workload
 Starting workload
-
-$ lxc exec workload -- bash
-workload:~#
 ```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lxc exec workload -- bash
+```
+
 On the Workload, install Telegraf:
 
-```bash
-workload:~# apt update
-workload:~# apt install telegraf
+```sh
+workload:~# apt update && apt install telegraf
 ```
 
 Telegraf processes input data to transform, filter, and decorate it, and then performs selected aggregation functions on it such as tallies, averages, etc. The results are published for collection by external services; in our case Prometheus will be collecting the CPU/memory data from the Monitor node.
@@ -92,7 +101,7 @@ We won't be using `Influxdb`, so you can comment that section out (if it's enabl
 
 Now restart the Telegraf service:
 
-```bash
+```sh
 workload:~# systemctl restart telegraf
 workload:~# systemctl status telegraf
 ● telegraf.service - The plugin-driven server agent for reporting metrics into InfluxDB
@@ -113,7 +122,7 @@ workload:~# systemctl status telegraf
 
 Verify that it is collecting metrics by connecting to Telegraf's web interface:
 
-```bash
+```sh
 workload:~# wget -O- http://workload:9273/metrics
 
 # HELP cpu_usage_guest Telegraf collected metric
@@ -133,24 +142,34 @@ cpu_usage_idle{cpu="cpu10",host="workload"} 95.95141700494543
 
 Now let's create the Monitor. As before, we'll be using LXD as the container technology but feel free to adapt these steps to your chosen alternative:
 
-```bash
-$ lxc launch ubuntu:20.10 monitor
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lxc launch ubuntu:20.10 monitor
+
 Creating monitor
 Starting monitor
-$ lxc exec monitor -- bash
-monitor:~#
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+lxc exec monitor -- bash
 ```
 
 Make a note of the newly created container's IP address, which we'll need later on;
 
-```bash
+```sh
 monitor:~# ip addr | grep 'inet .* global'
 inet 10.69.244.104/24 brd 10.69.244.255 scope global dynamic eth0
 ```
 
 Verify the Workload's Telegraf instance can be reached from the Monitor:
 
-```bash
+```sh
 monitor:~# wget -O- http://workload:9273/metrics
 ```
 
@@ -313,14 +332,14 @@ grafana 6.7.4 from Alvaro Uría (aluria) installed
 
 It uses port `3000`:
 
-```bash
+```sh
 # ss -tulpn | grep grafana
 tcp    LISTEN  0      128                     *:3000               *:*      users:(("grafana-server",pid=1449,fd=10))
 ```
 
 We next need to know where it expects its configuration:
 
-```bash
+```sh
 monitor:~# journalctl | grep "grafana.*conf"
 ... msg="Config loaded from" logger=settings file=/snap/grafana/36/conf/defaults.ini
 ... msg="Config overridden from Environment variable" logger=settings var="GF_PATHS_PROVISIONING=/var/snap/grafana/common/conf/provisioning"
@@ -332,8 +351,12 @@ We can see it is getting its defaults from `/snap/grafana/36/conf/`, but `/snap/
 
 For a production installation, the `defaults.ini` has numerous parameters we'd want to customize for our site, however for the demo we'll accept all the defaults. We do need to configure our data sources, but can do this via the web interface:
 
-```bash
-$ firefox http://10.69.244.104:3000
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+firefox http://10.69.244.104:3000
 ```
 
 Log in with 'admin' and 'admin' as the username and password. This should bring you to the main Grafana page, where you can find links to tutorials and documentation. Delete any example data sources and/or dashboards.
