@@ -52,6 +52,9 @@ Create the new file at the agreed path containing **only**:
 - The section headings the template requires, in order.
 - Under each heading, a short HTML comment (`<!-- ... -->`) describing what the contributor
   should write there. Do not fill in real content, commands, or prose.
+- The template's "Further reading" heading as a placeholder, with an HTML comment noting that
+  this section is only for external links and should be removed if the finished page links to
+  none.
 
 If the contributor pasted rough notes, slot each note under the heading it belongs to as a
 bullet inside that section's HTML comment, kept close to their original wording. Do not

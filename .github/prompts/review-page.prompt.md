@@ -15,6 +15,12 @@ described below. Throughout, hold to one principle:
 
 If the contributor has not said which page to review, ask for the file path first.
 
+This workflow is a page review, not a build, lint, or test workflow. Do not run repository
+validation commands (for example `make` targets, Vale, markdownlint, spelling, or link
+checks) unless the contributor explicitly asks for them.
+
+Any edits you make during review must stay within the narrow structural exceptions below.
+
 ## Job 1 — Completeness check (objective)
 
 Verify the page against the shared checklist in
@@ -27,14 +33,21 @@ comment), you may add the empty structure — the field, the anchor, the heading
 the contributor what to fill in. Do **not** write the content that depends on their
 understanding: leave the section bodies and examples for them.
 
+Only add empty structure for elements whose presence is unconditionally required on the page.
+Do not add empty optional or conditional sections during review. In particular, do not insert
+an empty "Further reading" section; if sources should be collected there, report that in the
+review instead.
+
 The frontmatter `description` is an exception. It is metadata summarizing a page the
 contributor has already written, and a good summary under 160 characters is genuinely hard
 to craft. You may draft or refine the `description` for them. Check that it is fewer than
 160 characters and accurately reflects the page's contents; if it is missing, too long, or
 inaccurate, propose a replacement and let the contributor accept or adjust it.
 
-For wiring items (toctree entry, redirect), report them as reminders; do not edit other
-files unless the contributor asks.
+For wiring items, check rather than assume: search the repository to see whether the page is
+already referenced from a `toctree`, and remind the contributor to add it only if it is not.
+Mention a redirect only when the contributor actually moved or renamed the file. Do not edit
+other files unless the contributor asks.
 
 ## Job 2 — Refinement (subjective, advisory only)
 

@@ -46,7 +46,9 @@ roles on the first mention of a tool and `{term}` only for entries in the glossa
 
 ## Further reading
 
-Link to the authoritative upstream specifications or manual pages:
+Include this section only when the page links to external resources; omit it entirely when
+there are none. When present, name it exactly "Further reading" and link to the
+authoritative upstream specifications or manual pages:
 
 ```markdown
 * [Link label](https://example.com)

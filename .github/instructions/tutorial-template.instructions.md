@@ -61,7 +61,9 @@ Close by confirming what the reader has accomplished, then point to logical next
 
 ## Further reading
 
-Link to reputable upstream resources that help the reader go further:
+Include this section only when the page links to external resources; omit it entirely when
+there are none. When present, name it exactly "Further reading" and link to reputable
+upstream resources that help the reader go further:
 
 ```markdown
 * [Link label](https://example.com)

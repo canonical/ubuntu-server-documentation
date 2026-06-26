@@ -69,7 +69,10 @@ incoming cybersecurity legislation. When creating a new guide, include it so it 
 
 ## Further reading
 
-Link to reputable external resources (official upstream documentation, books, RFCs, etc.) that help the reader learn more:
+Include this section only when the guide links to external resources; omit it entirely when
+there are none. When present, name it exactly "Further reading" and link to reputable
+external resources (official upstream documentation, books, RFCs, etc.) that help the reader
+learn more:
 
 ```markdown
 * [Link label](https://example.com)
