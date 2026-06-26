@@ -118,14 +118,18 @@ Docker uses `containerd` to manage its images. `containerd` works via the use of
 
 `containerd` uses snapshotters to unpack layers of container images. You can see the available snapshotters on your system with
 
-```bash
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 ctr plugins ls | grep snapshot
 ```
 For example, you would see the following line:
 ```
 io.containerd.snapshotter.v1              overlayfs                linux/amd64    ok
 ```
-showing that `overlayfs` is available on your system, and loaded successfully. If the last entry shows `skip`, your system has this particular snapshotter, but you will need to do addditional configuration to enable it (such as mounting a filesystem). See {ref}`Docker for System Administrators <docker-for-system-admins>` for an example of doing this for `zfs`.
+showing that `overlayfs` is available on your system, and loaded successfully. If the last entry shows `skip`, your system has this particular snapshotter, but you will need to do additional configuration to enable it (such as mounting a filesystem). See {ref}`Docker for System Administrators <docker-for-system-admins>` for an example of doing this for `zfs`.
 
 
 A snapshotter can then be selected in the same manner as legacy storage drivers: by editing `/etc/docker/daemon.json` and adding the following:
@@ -136,7 +140,7 @@ A snapshotter can then be selected in the same manner as legacy storage drivers:
 }
 ```
 
-The following snapshotters are avaliable by default on Ubuntu as of 26.04 (from the output of `ctr plugins ls | grep snapshot` on a fresh install):
+The following snapshotters are available by default on Ubuntu as of 26.04 (from the output of `ctr plugins ls | grep snapshot` on a fresh install):
 
 - `overlayfs` **(default)**: A modern union filesystem. This is the recommended snapshotter.
 - `blockfile`: A snapshotter designed for block-level storage as opposed to file-level storage. Generally useful in specialized architectures.
