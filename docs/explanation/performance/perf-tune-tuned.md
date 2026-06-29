@@ -190,6 +190,7 @@ The inheritance is specified via the `include` option in the `[main]` section.
 After the `[main]` section come the plugins that we want to override, and their new settings. Settings not specified here will take the value defined in the parent profile, `postgresql` in this case. If you want to completely ignore whatever the `cpu` plugin defined in the parent profile, use the `replace=true` setting.
 
 ### Merging profiles
+
 There are some profiles that are neither a parent profile, nor a child profile. They only specify a few plugins and settings, and no inheritance relationship. By themselves, they are not useful, but they can be merged with an existing profile on-the-fly.
 
 Here is an example which applies the base profile `cpu-partitioning` and then overlays `intel-sst` on top:

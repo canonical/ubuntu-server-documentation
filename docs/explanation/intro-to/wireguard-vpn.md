@@ -194,6 +194,7 @@ To help better understand these (and other) concepts, we will create some WireGu
 * {ref}`Using the VPN as the default gateway <using-the-vpn-as-the-default-gateway>`
 
 ### Other common tasks, hints and tips
+
 * {ref}`Common tasks <common-tasks-in-wireguard-vpn>`
 * {ref}`Security tips <security-tips-for-wireguard-vpn>`
 * {ref}`Troubleshooting <troubleshooting-wireguard-vpn>`

@@ -38,6 +38,7 @@ The public key cryptography underpinning SSL/TLS operates in a similar manner, b
 For a more detailed explanation of how the DNSSEC validation is performed, please refer to the [Simplified 12-step DNSSEC validation process](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#the-12-step-dnssec-validation-process-simplified) guide from ISC.
 
 ## DNS daemons
+
 Ubuntu supports multiple DNS resolvers, covering a variety of use cases. Most of them support DNSSEC validation, but it might not be activated and set up with valid trust-anchors automatically.
 
 <!-- Using non-breaking hyphen & non-breaking space for improved table spacing. -->
@@ -111,6 +112,7 @@ In case of issues with Domain Name resolution, make sure to remove relevant drop
 :::
 
 ## New Resource Records (RRs)
+
 DNSSEC introduces a set of new Resource Records. Here are the most important ones:
 
  * RRSIG: Resource Record Signature. Each RRSIG record matches a corresponding Resource Record, i.e., it's the digital cryptographic signature of that Resource Record.
