@@ -86,13 +86,19 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
 
 ### The `containerd` image store
 
-:::{note}
+Docker uses `containerd` to manage its images. `containerd` works via the use of snapshotters to store image or container data. Using it has enabled various features previously impossible:
+- Local building and storing of multiplatform images.
+- Using images with attestations.
+- WebAssembly containers.
+- Use of advanced snapshotters to enable further feature sets:
+  - Lazy pulling of images (through [`stargz`](https://github.com/containerd/stargz-snapshotter))
+  - Peer-to-peer image distribution (through [`nydus`](https://github.com/containerd/nydus-snapshotter) and [`dragonfly`](https://github.com/dragonflyoss/dragonfly)).
 
 The `containerd` image store was elevated to the default storage backend in Docker version 29.0 and will be automatically used on fresh installs.
 If you are using a legacy version, or have not yet migrated, consult the upstream Docker documentation on [storage drivers](https://docs.docker.com/engine/storage/drivers/),
 as that is how legacy systems will store their images.
 
-To migrate, add
+To migrate from legacy storage drivers to `containerd`, add
 ```json
 {
   "features": {
@@ -103,16 +109,6 @@ To migrate, add
 to your `/etc/docker/daemon.json` file. Note that this will **hide, but not remove**, images using the legacy storage drivers. To access them, switch back to the legacy configuration.
 
 This migration is completely transparent to most users. Only the underlying backend has changed, not any user-facing workflows.
-
-:::
-
-Docker uses `containerd` to manage its images. `containerd` works via the use of snapshotters to store image or container data. Using it has enabled various features previously impossible:
-- Local building and storing of multiplatform images.
-- Using images with attestations.
-- WebAssembly containers.
-- Use of advanced snapshotters to enable further feature sets:
-  - Lazy pulling of images (through [`stargz`](https://github.com/containerd/stargz-snapshotter))
-  - Peer-to-peer image distribution (through [`nydus`](https://github.com/containerd/nydus-snapshotter) and [`dragonfly`](https://github.com/dragonflyoss/dragonfly)).
 
 #### Choosing a snapshotter
 
@@ -125,6 +121,7 @@ Docker uses `containerd` to manage its images. `containerd` works via the use of
 :dir:
 ctr plugins ls | grep snapshot
 ```
+
 For example, you would see the following line:
 showing that `overlayfs` is available on your system, and loaded successfully. If the last entry shows `skip`, your system has this particular snapshotter, but you will need to do additional configuration to enable it (such as mounting a filesystem). See {ref}`Docker for System Administrators <docker-for-system-admins>` for an example of doing this for `zfs`.
 
@@ -150,21 +147,14 @@ The following snapshotters are available by default on Ubuntu 26.04 LTS and onwa
 #### Managing disk space
 
 `containerd` uses more disk space than the legacy storage drivers. This is because images are stored both compressed and uncompressed (as opposed to just compressed). This buys you faster pulls and pushes
-at the cost of this disk capacity. If you want to change the storage directory, you can do so by editing `/etc/containerd/config.toml`:
+at the cost of this disk capacity. You can routinely run `docker image prune` to save disk space by removing unused images, or if you want to change the storage directory, you can do so by editing `/etc/containerd/config.toml`:
 
 ```toml
 version = 2
 root = "/mnt/my-extremely-large-drive"
 ```
 
-You can also routinely prune unused images with `docker image prune` to save disk space.
-
-:::{note}
-
-If you are migrating from a legacy storage driver, your previous `data-root` configuration operation will *not* affect `containerd`. You will need to set `root` as described above.
-
-:::
-
+This is now the only way to change the storage directory for Docker images. If you are migrating from legacy storage drivers, you will still need to update your `/etc/containerd/config.toml`'s `root` to reflect your previous `data-root`).
 
 ## Networking
 

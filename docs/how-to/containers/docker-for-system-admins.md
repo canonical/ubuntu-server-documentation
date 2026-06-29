@@ -240,47 +240,57 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 
 - Ensure the required filesystem is available. We will be using the ZFS filesystem.
 
+  Set the default mount point:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  export MOUNT_POINT="/var/lib/containerd/io.containerd.snapshotter.v1.zfs" # The default mount point
+  export MOUNT_POINT="/var/lib/containerd/io.containerd.snapshotter.v1.zfs"
   ```
+  Install ZFS:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  apt install zfsutils-linux -y                                             # Install ZFS
+  apt install zfsutils-linux -y
   ```
+
+  Create a 5GB file to use as a ZFS pool:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  fallocate -l 5G /zfs-pool.img                                             # Create a 5GB file
+  fallocate -l 5G /zfs-pool.img
   ```
+
+  Create the pool:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  sudo zpool create mypool /zfs-pool.img                                    # Create a ZFS pool
+  sudo zpool create mypool /zfs-pool.img
   ```
+
+  Create the ZFS dataset and mount it to your chosen mount point:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  sudo zfs create -o mountpoint=$MOUNT_POINT mypool/docker                  # Create a ZFS dataset and mount it to dockers directory, "/var/lib/docker".
+  sudo zfs create -o mountpoint=$MOUNT_POINT mypool/docker
   ```
+
+  Verify that it mounted successfully:
   ```{terminal}
   :copy:
   :user:
   :host:
   :dir:
-  sudo zfs list                                                             # Verify that it mounted successfully
+  sudo zfs list
  
   NAME            USED  AVAIL  REFER  MOUNTPOINT
   mypool          162K  4.36G    24K  /mypool
