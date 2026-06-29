@@ -49,9 +49,8 @@ the page into an unrelated existing section. Instead:
 When an existing section clearly fits the proposed content (for example, a Valkey page when a
 `databases` section already exists), you may point this out as **non-prescriptive guidance** and
 offer the alternative — but the section is the contributor's decision. Do not override it.
-Mismatches are picked up at review time, where the contributor has the opportunity to defend
-their choice. Many topics and sections are legitimately undocumented, so the absence of a
-section is not by itself a reason to refuse.
+Mismatches are picked up at review time. Many possible topics and sections are undocumented,
+so the absence of a section is not by itself a reason to refuse.
 
 ## Step 2 — Follow the matching template
 
