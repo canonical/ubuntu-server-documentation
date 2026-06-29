@@ -36,6 +36,7 @@ Fencing protects your data from being corrupted, and prevents your application f
 
 In cases where a clustered service cannot be stopped, a cluster can use fencing to force the whole node offline, making it safe to start the service elsewhere. The most popular example of fencing is cutting a host’s power.
 Key benefits:
+
 - An active counter-measure taken by a functioning host to isolate a misbehaving (usually dead) host from shared data.
 
 - Fencing is the **most critical** part of a cluster using Storage Area Network (SAN) or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).

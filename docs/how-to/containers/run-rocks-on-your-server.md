@@ -43,6 +43,7 @@ Status: Downloaded newer image for ubuntu/grafana:10.3.3-22.04_stable
 ```
 
 In this particular case, we’re using:
+
 - `-d` to run the container in the background.
 - We are also specifying a well-defined name for the container, with the `--name` parameter.
 - With `-e` we are setting the container’s timezone (`TZ`) environment variable to `UTC`.

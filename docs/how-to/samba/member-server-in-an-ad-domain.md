@@ -106,6 +106,7 @@ If you don't expect or need AD users to log into this system (unless it's via Sa
 :::
 
 Until {lpbug}`1980246` is fixed, one extra step is needed:
+
 - Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
 
   ```text 

@@ -12,6 +12,7 @@ With SSSD we can create a setup that is very similar to Active Directory in term
 ## Prerequisites and assumptions
 
 For this setup, we will need:
+
 - An existing {ref}`OpenLDAP server <install-openldap>` using the RFC2307 schema for users and groups. SSL support is recommended, but not strictly necessary because authentication in this setup is being done via Kerberos, and not LDAP.
 - A {ref}`Kerberos server <install-a-kerberos-server>`. It doesn't have to be {ref}`using the OpenLDAP backend <kerberos-with-openldap-backend>`.
 - A client host where we will install and configure SSSD.

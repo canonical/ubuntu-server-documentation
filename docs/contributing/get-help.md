@@ -45,5 +45,6 @@ which is the hub for questions specifically about documentation.
 ## Chat to us
 
 For more interactive chat, you can use Matrix:
+
 * {matrix}`To chat to the Server team <server>`
 * {matrix}`To talk to technical authors about documentation <documentation>`

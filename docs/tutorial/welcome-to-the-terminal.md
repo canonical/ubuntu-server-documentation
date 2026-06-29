@@ -206,8 +206,10 @@ You can move any number of files you want. The names of the files you want to mo
 
 :::{note}
 It's also worth highlighting the common convention `command [foo] <bar>` for arguments that you'll see in most CLI documentation.
+
 * Square brackets (`[ ]`): anything inside is *optional*, so the command will run without it. This is common for **flags** that change or extend the behaviour of a command, as we'll see shortly.
 * Side angle brackets (`< >`): this is a *required* placeholder, where you should substitute your own information.
+
 In both cases, you exclude the brackets when you run the command -- the brackets exist to show you what's required and what's optional.
 :::
 

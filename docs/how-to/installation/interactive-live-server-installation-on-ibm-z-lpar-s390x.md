@@ -44,7 +44,7 @@ sudo mount -o loop ubuntu-20.04.5-live-server-s390x.iso iso
 ./iso/boot/ubuntu.exec
 ```
 
-## Make the files available via your FTP server.
+## Make the files available via your FTP server
 
 * Open the IBM Z HMC and navigate to 'Systems Management' on your machine.
 
