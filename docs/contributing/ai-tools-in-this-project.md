@@ -40,7 +40,7 @@ Run these prompts as commands on the CLI or in your chat window. You can either 
 **What it does**
 : Run this prompt using `/new-page` to bootstrap an outline of a new page in your chosen Diátaxis type. If you also include brainstormed notes or bullet points with the prompt, these will be sorted (without amendment) into the appropriate sections of the outline. All the required syntax will be bootstrapped into place.
 
-: You should decide before you start what Diataxis section it belongs to, and which page should be its parent.
+: You should decide before you start what Diátaxis section it belongs to, and which page should be its parent.
 
 ### review-page
 
@@ -52,7 +52,7 @@ Run these prompts as commands on the CLI or in your chat window. You can either 
 ### capture-learnings
 
 **What it does**
-: Run this prompt using `/capture-learnings` at the end of a particularly helpful session. If you (or your LLM) discover an edge case that we hadn't considered, or find a better way to do somehting, this prompt allows the LLM to fold concrete improvements from your session back into our scaffolding so it works better the next time.
+: Run this prompt using `/capture-learnings` at the end of a particularly helpful session. If you (or your LLM) discover an edge case that we hadn't considered, or find a better way to do something, this prompt allows the LLM to fold concrete improvements from your session back into our scaffolding so it works better the next time.
 
 
 ## Instructions that guide the AI
@@ -63,7 +63,7 @@ We have two kinds of instructions files in `.github/instructions/`:
 - Auto-applied rules: these contain an `applyTo` glob at the top of the page (e.g. docs-review, and the per-Diátaxis-type templates: tutorial, how-to, explanation, reference). When any request touches a page that falls under these `applyTo` rules, the relevant instruction files are automatically added to the AI's context.
 - Shared references: these have no `applyTo` glob, and are pulled in specifically by name (landing-pages, page-completeness) when referenced in e.g. prompts or skills.
 
-We split our rules into separate instruction files for each task or scenario, so we can restrict the AI's context window to only include the instructions it needs to complete that task. For example, if you're looking at a tutorial page, the AI doesn't need instructions for all the other Diataxis types. By feeding the AI only what it needs, we can reduce the number of tokens a task takes.
+We split our rules into separate instruction files for each task or scenario, so we can restrict the AI's context window to only include the instructions it needs to complete that task. For example, if you're looking at a tutorial page, the AI doesn't need instructions for all the other Diátaxis types. By feeding the AI only what it needs, we can reduce the number of tokens a task takes.
 
 You can also reduce token spend by starting a new conversation with your AI for each task you want it to complete, so that it doesn't carry forward irrelevant files from older parts of a conversation.
 
