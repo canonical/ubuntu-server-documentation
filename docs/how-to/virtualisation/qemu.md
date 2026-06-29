@@ -179,7 +179,7 @@ Note that both machine types for Jammy are supported in subsequent versions of U
 Ubuntu ARM64 images can run inside QEMU. You can either do this fully emulated (e.g. on an x86 host) or accelerated with KVM if you have an ARM64 host. This page describes how to do both.
 
 :::{note}
-This requires Ubuntu 20.04 or greater
+This requires Ubuntu 20.04 LTS or later.
 :::
 
 ### Install QEMU to run ARM64 virtual machines

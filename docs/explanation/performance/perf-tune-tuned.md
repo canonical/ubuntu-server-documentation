@@ -54,7 +54,7 @@ Predefined tuned profiles provided by the package are located in the directory `
 those added by the administrator should be placed in `/etc/tuned/profiles/<profile-name>`.
 
 :::{note}
-In TuneD version 2.23 and thereby Ubuntu 24.04 Noble (and earlier), the location
+In TuneD version 2.23, available in Ubuntu 24.04 LTS and earlier releases, the location
 of the profiles was different. An upgrade would have migrated any custom
 profiles, however for reference the paths changes were:
 * Predefined profiles:

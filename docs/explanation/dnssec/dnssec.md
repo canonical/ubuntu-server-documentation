@@ -224,7 +224,7 @@ When a recursive DNS server is also performing DNSSEC validation, it's called a 
 This is the case if you install the BIND9 DNS server: The default configuration is to act as a Validating Resolver, by having the `dnssec-validation auto` option implicitly enabled.
 
 :::{note}
-Up to Ubuntu 24.04 LTS (version `1:9.18.34-1`) the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
+Up to Ubuntu 24.04 LTS, version `1:9.18.34-1`, the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
 :::
 
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.

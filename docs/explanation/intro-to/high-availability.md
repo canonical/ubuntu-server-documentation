@@ -41,7 +41,7 @@ Key benefits:
 
 - Fencing is the **most critical** part of a cluster using Storage Area Network (SAN) or other shared storage technology (*Ubuntu HA Clusters can only be supported if the fencing mechanism is configured*).
 
-- Required by OCFS2, {term}`GFS2`, `clvmd` (before Ubuntu 20.04), `lvmlockd` (from 20.04 and beyond).
+- Required by OCFS2, {term}`GFS2`, `clvmd` (before Ubuntu 20.04 LTS), `lvmlockd` (from 20.04 LTS onward).
 
 ## Linux High Availability projects
 
@@ -138,10 +138,10 @@ Packages in this list aren't necessarily **HA** related packages, but they play 
 
 * **LVM2** in a Shared-Storage Cluster Scenario
 
-  **CLVM** - supported before **Ubuntu 20.04**
+  **CLVM** - supported before **Ubuntu 20.04 LTS**
 
   A distributed lock manager (DLM) is used to broker concurrent {term}`LVM` metadata accesses. Whenever a cluster node needs to modify the LVM metadata, it must secure permission from its local  `clvmd` , which is in constant contact with other  `clvmd`  daemons in the cluster and can communicate a need to lock a particular set of objects.
-  **{manpage}`lvmlockd(8)`** - supported after **Ubuntu 20.04**
+  **{manpage}`lvmlockd(8)`** - supported after **Ubuntu 20.04 LTS**
   As of 2017, a stable LVM component that is designed to replace  `clvmd` by making the locking of LVM objects transparent to the rest of LVM, without relying on a distributed lock manager.
   The `lvmlockd` benefits over `clvm` are:
 

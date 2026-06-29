@@ -11,7 +11,7 @@ One of the authentication methods supported by the SSH protocol is public key au
 
 We will use `opensc-pkcs11` on the client to access the smart card drivers, and we will copy the public key from the smart card to the SSH server to make the authentication work.
 
-The following instructions apply to Ubuntu 18.04 later.
+The following instructions apply to Ubuntu 18.04 LTS later.
 
 ## Server configuration
 

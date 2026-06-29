@@ -10,7 +10,7 @@ myst:
 On Ubuntu Server, the terminal is the primary way of interacting with your system.
 It's easier to use than you might think, and learning it gives you much more control over your system (including on your Ubuntu Desktop). In this tutorial, you will learn how to use the terminal to navigate your Ubuntu system, find and work with files, and where to find help if you get stuck.
 
-% Include the multipass install instructions common to all tutorials
+% Include the Multipass install instructions common to all tutorials
 ```{include} common-multipass.txt
 ```
 

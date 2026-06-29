@@ -45,7 +45,7 @@ The default content in `/etc/update-motd.d/` in 26.04 covers (most of them only 
 
   * base-files establishing the basic mechanism: `00-header`, `10-help-text`, `50-motd-news`
   * base-files also provides Ubuntu news: `50-motd-news`
-  * landscape info about the system: `50-landscape-sysinfo`
+  * Landscape info about the system: `50-landscape-sysinfo`
   * fwupd presents potential firmware updates: `85-fwupd`
   * update-notifier-common reports about available updates: `90-updates-available`
   * [ubuntu-pro-client](https://documentation.ubuntu.com/pro-client/en/latest/explanations/motd_messages/) mentions expiring Ubuntu Pro subscriptions: `91-contract-ua-esm-status`
