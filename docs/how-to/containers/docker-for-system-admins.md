@@ -238,7 +238,7 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
 Before changing the configuration and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, or device mapper) is mounted at `/var/lib/docker`.
 Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem mounted at `/var/lib/docker`, a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
 
-- Ensure the required Filesystem is available. We will be using the ZFS Filesystem.
+- Ensure the required filesystem is available. We will be using the ZFS filesystem.
 
   ```{terminal}
   :copy:
@@ -295,6 +295,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   :host:
   :dir:
   docker info | grep "Storage Driver"
+
   Storage Driver: overlayfs
   ```
   ```{terminal}
@@ -303,6 +304,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   :host:
   :dir:
   docker info | grep "driver-type"
+
     driver-type: io.containerd.snapshotter.v1
   ```
 
@@ -359,6 +361,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   :host:
   :dir:
   docker info | grep "driver-type"
+
     driver-type: io.containerd.snapshotter.v1
   ```
 

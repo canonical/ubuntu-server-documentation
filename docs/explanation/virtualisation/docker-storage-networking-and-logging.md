@@ -84,12 +84,12 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
   - `tmpfs-size` and `tmpfs-mode` options (optional). For a full list see the [Docker documentation](https://docs.docker.com/engine/storage/tmpfs/#options-for---tmpfs).
 - `--tmpfs`: it accepts no configurable options, just mount the tmpfs for a standalone container.
 
-### The `containerd` image store.
+### The `containerd` image store
 
 :::{note}
 
-The `containerd` image store was elevated to the default storage backend in version 29.0 and will be automatically used on fresh installs. Hence, this is the only documentation path this page
-will cover. If you are using a legacy version, or have not yet migrated, consult the upstream Docker documentation on [storage drivers](https://docs.docker.com/engine/storage/drivers/),
+The `containerd` image store was elevated to the default storage backend in Docker version 29.0 and will be automatically used on fresh installs.
+If you are using a legacy version, or have not yet migrated, consult the upstream Docker documentation on [storage drivers](https://docs.docker.com/engine/storage/drivers/),
 as that is how legacy systems will store their images.
 
 To migrate, add
@@ -114,7 +114,7 @@ Docker uses `containerd` to manage its images. `containerd` works via the use of
   - Lazy pulling of images (through [`stargz`](https://github.com/containerd/stargz-snapshotter))
   - Peer-to-peer image distribution (through [`nydus`](https://github.com/containerd/nydus-snapshotter) and [`dragonfly`](https://github.com/dragonflyoss/dragonfly)).
 
-#### Choosing a Snapshotter
+#### Choosing a snapshotter
 
 `containerd` uses snapshotters to unpack layers of container images. You can see the available snapshotters on your system with
 
@@ -126,9 +126,6 @@ Docker uses `containerd` to manage its images. `containerd` works via the use of
 ctr plugins ls | grep snapshot
 ```
 For example, you would see the following line:
-```
-io.containerd.snapshotter.v1              overlayfs                linux/amd64    ok
-```
 showing that `overlayfs` is available on your system, and loaded successfully. If the last entry shows `skip`, your system has this particular snapshotter, but you will need to do additional configuration to enable it (such as mounting a filesystem). See {ref}`Docker for System Administrators <docker-for-system-admins>` for an example of doing this for `zfs`.
 
 
@@ -140,17 +137,17 @@ A snapshotter can then be selected in the same manner as legacy storage drivers:
 }
 ```
 
-The following snapshotters are available by default on Ubuntu as of 26.04 (from the output of `ctr plugins ls | grep snapshot` on a fresh install):
+The following snapshotters are available by default on Ubuntu 26.04 LTS and onward (from the output of `ctr plugins ls | grep snapshot` on a fresh install):
 
 - `overlayfs` **(default)**: A modern union filesystem. This is the recommended snapshotter.
 - `blockfile`: A snapshotter designed for block-level storage as opposed to file-level storage. Generally useful in specialized architectures.
 - `btrfs`: A copy-on-write filesystem included in the Linux kernel mainline.
 - `devmapper`: A kernel-based framework that underpins many advanced volume management technologies on Linux.
-- `erofs`: Enhanced Read-Only File System, a modern read-only filesystem that is optimized for space efficiency and performance.
+- `erofs`: Enhanced Read-Only File System, a modern read-only filesystem optimized for space efficiency and performance.
 - `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but will consume large amounts of disk space and will be very slow.
 - `zfs`: A next-generation filesystem that supports many advanced storage technologies such as volume management, snapshots, checksumming, compression and {term}`deduplication`, replication and more.
 
-#### Managing Disk Space
+#### Managing disk space
 
 `containerd` uses more disk space than the legacy storage drivers. This is because images are stored both compressed and uncompressed (as opposed to just compressed). This buys you faster pulls and pushes
 at the cost of this disk capacity. If you want to change the storage directory, you can do so by editing `/etc/containerd/config.toml`:
