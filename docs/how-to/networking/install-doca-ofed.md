@@ -58,7 +58,7 @@ Add the stable DOCA PPA using {manpage}`add-apt-repository(1)`:
 sudo add-apt-repository -y ppa:canonical-nvidia/doca-stable
 ```
 
-Update your apt sources:
+Update your `apt` sources:
 
 ```{terminal}
 :copy:
