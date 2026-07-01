@@ -231,6 +231,7 @@ ramdisk
 rollout
 rollouts
 rootfs
+rootful
 routable
 rsnapshot
 Rsync
