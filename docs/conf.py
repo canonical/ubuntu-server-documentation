@@ -67,7 +67,7 @@ html_context = {
     
     # Your documentation GitHub repository URL
     # If set, links for viewing the docs source files and creating GitHub issues are added at the bottom of each page.
-    "github_url": "https://github.com/canonical/ubuntu-server-documentation/",
+    "github_url": "https://github.com/canonical/ubuntu-server-documentation",
 
     # Docs branch in the repo; used in links for viewing the source files
     "repo_default_branch": "main",
