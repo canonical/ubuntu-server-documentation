@@ -9,7 +9,9 @@ myst:
 
 When choosing a crypto library, the following aspects should be considered to maintain security and compliance. Typically, you will want to answer questions such as: How can we ensure legacy crypto systems with known vulnerabilities are not being used? How can we enforce minimum key size requirements? And what criteria should we use to accept X.509 certificates when connecting to remote servers?
 
+<!-- vale Canonical.004-Canonical-product-names = NO -->
 However, the cryptographic library landscape is vast and complex, and there are many crypto libraries available on an Ubuntu system. When an application developer chooses a crypto library, they will consider many aspects, such as:
+<!-- vale Canonical.004-Canonical-product-names = YES -->
 
   * Technical requirements
   * Language bindings

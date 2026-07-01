@@ -23,7 +23,7 @@ The status of our proposed update pipeline is available on the [Pending SRU page
 
 Calls for testing are made on individual bugs that are being fixed by a proposed update. You can enable proposed testing as follows.
 
-On Ubuntu 24.04 and later, run `sudo add-apt-repository -yp proposed`. This makes proposed updates visible to APT, but will not install them by default.
+On Ubuntu 24.04 LTS and later, run `sudo add-apt-repository -yp proposed`. This makes proposed updates visible to APT, but will not install them by default.
 
 On releases prior to Ubuntu 23.04, in addition to `sudo add-apt-repository -yp proposed` it is also necessary to apply a "pin" to APT so that it does not attempt to automatically upgrade all packages to -proposed. See the [Enable proposed wiki page](https://wiki.ubuntu.com/Testing/EnableProposed) for instructions.
 

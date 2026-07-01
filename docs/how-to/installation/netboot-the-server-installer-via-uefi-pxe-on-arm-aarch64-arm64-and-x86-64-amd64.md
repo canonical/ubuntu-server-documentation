@@ -8,7 +8,7 @@ myst:
 # Netboot the server installer via UEFI PXE on ARM (aarch64, arm64) and x86_64 (amd64)
 
 
-This document describes the steps to install a system via netbooting and the live server installer (Subiquity) in UEFI mode with Ubuntu 20.04 (or later).
+This document describes the steps to install a system via netbooting and the live server installer (Subiquity) in UEFI mode with Ubuntu 20.04 LTS or later.
 
 This process applies to both arm64 and {term}`amd`64 architectures and is based on [this Ubuntu Discourse post for legacy mode netbooting](https://discourse.ubuntu.com/t/netbooting-the-live-server-installer/14510) (UEFI's predecessor). Focal (20.04, 20.04.5) and Groovy (20.10) have been tested with this method.
 

@@ -4,7 +4,13 @@ applyTo: "docs/how-to/**/*.md"
 
 # How-to guide template
 
-When creating or editing how-to guides in this repository, follow the structure below. All sections are required unless marked optional.
+When creating or editing how-to guides in this repository, follow the structure below. All sections are required unless marked optional. "you" is preferred over "we" in how-to guides, since the reader is performing the task.
+
+## Section structure
+
+The default flow is: intro → "Install \<package\>" → "Configure \<package\>" → optional usage → "Uninstall \<package\>". Keep this shape for guides that install and configure a package.
+
+When the task installs no package (for example, managing processes or using built-in tools), let the middle sections follow the natural shape of the content instead: replace "Install" and "Configure" with task-oriented `##` headings that match what the reader actually does. The structure should follow the shape of the content, not force the content into a fixed shape. The intro, the required "Uninstall" section (covering how to undo anything the guide changed), and the conditional "Further reading" section still apply.
 
 ## Frontmatter
 
@@ -56,9 +62,23 @@ Highlight any security considerations the reader should be aware of during confi
 
 Include best practices, worked examples, or other information that helps the reader get value from the software. This section is optional but encouraged.
 
+## Uninstall \<package\>
+
+Explain how to return the machine to its original state. Cover removing the package,
+purging configuration files where applicable (for example `apt remove` versus `apt purge`),
+and undoing any other changes the guide introduced, such as added repositories, created
+users, or modified system files. Warn the reader about anything destructive, such as data
+or configuration that purging will delete.
+
+This section is strongly encouraged on every how-to guide to support compliance with
+incoming cybersecurity legislation. When creating a new guide, include it so it will be considered by the author.
+
 ## Further reading
 
-Link to reputable external resources (official upstream documentation, books, RFCs, etc.) that help the reader learn more:
+Include this section only when the guide links to external resources; omit it entirely when
+there are none. When present, name it exactly "Further reading" and link to reputable
+external resources (official upstream documentation, books, RFCs, etc.) that help the reader
+learn more:
 
 ```markdown
 * [Link label](https://example.com)

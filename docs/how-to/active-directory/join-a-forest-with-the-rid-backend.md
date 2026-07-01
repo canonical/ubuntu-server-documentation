@@ -177,6 +177,7 @@ And this allocation, which is using the *rid* backend, is deterministic.
 Problem solved! Well, until another trust relationship is established, then we have to allocate another range for it.
 
 So is it possible to use the *rid* identity mapping backend with an Active Directory forest, with multiple domains? Yes, but following these steps **BEFORE** establishing any new trust relationship:
+
 - plan an ID range for the new domain
 - update **ALL** systems that are using the *rid* idmap backend with the new range configuration for the new domain
 - restart winbind on **ALL** such systems

@@ -1,0 +1,34 @@
+name: Style guide checks (advisory)
+
+# Aligned with the official Canonical documentation check structure, with one deviation:
+# the Vale step is advisory (continue-on-error) so it surfaces issues without blocking a
+# PR. Kept separate from automatic-doc-checks.yml so it can be toggled independently of
+# the always-on spelling and inclusive-language checks.
+
+on:
+  workflow_call:
+  push:
+    branches:
+    - main
+    paths:
+    - 'docs/**'   # Only run on changes to the docs directory
+  pull_request:
+    branches:
+    - '*'
+    paths:
+    - 'docs/**'   # Only run on changes to the docs directory
+
+jobs:
+  vale:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - name: Create venv
+      working-directory: "docs"
+      run: make install
+    - name: Vale style guide check
+      working-directory: "docs"
+      continue-on-error: true   # Advisory only: surfaces issues without blocking the PR
+      run: make vale

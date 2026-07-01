@@ -11,7 +11,7 @@ In {ref}`welcome-to-the-terminal`, we learned how to navigate the filesystem, wo
 
 If you are re-using a virtual machine from a different tutorial, skip directly to {ref}`cli-standard-streams`.
 
-% Include the multipass install instructions common to all tutorials
+% Include the Multipass install instructions common to all tutorials
 ```{include} common-multipass.txt
 ```
 

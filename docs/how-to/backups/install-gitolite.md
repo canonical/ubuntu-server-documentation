@@ -72,6 +72,7 @@ sudo -i -u git gitolite setup -pk /tmp/admin.pub
 ```
 
 This command creates several files in `git`'s home directory:
+
 - A global config in `~git/.gitolite.rc`
 - `~git/projects.list` as repository overview
 - `~git/.ssh/authorized_keys` with `command=` to force running Gitolite in `ssh` connections

@@ -69,6 +69,7 @@ The `%i` macro is replaced by the WireGuard interface name (`home0` in this case
 There are some other advantages to this method, and perhaps one disadvantage.
 
 Pros:
+
 - The configuration file can now safely be stored in version control, like a git repository, without fear of leaking the private key (unless you also use the `PreSharedKey` option, which is also a secret).
 - Since the key is now stored in a file, you can give that file a meaningful name, which helps to avoid mix-ups with keys and peers when setting up WireGuard.
 

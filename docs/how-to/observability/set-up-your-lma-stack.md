@@ -364,6 +364,7 @@ Log in with 'admin' and 'admin' as the username and password. This should bring 
 ![grafana_0|690x638,80%](../../images/bb8a72f8-grafana_0.png)
 
 Select the button to add a new data source and select "Prometheus". On the "Data Sources / Prometheus" edit page, set:
+
 - the name to Prometheus
 - the URL to `http://localhost:9090`
 - 'Access' to "Server (default)" to make Grafana pull data from the Prometheus service we set up.
