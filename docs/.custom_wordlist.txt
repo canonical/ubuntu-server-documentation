@@ -173,6 +173,7 @@ multipathed
 Multipathing
 multipathing
 multipaths
+multiplatform
 Multiview
 multiviews
 Munin
@@ -252,6 +253,8 @@ SIDs
 SKUs
 Slapd
 slapd
+snapshotter
+snapshotters
 snapshotted
 Solaris
 sosreport
