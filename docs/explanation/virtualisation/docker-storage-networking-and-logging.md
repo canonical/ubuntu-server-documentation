@@ -87,16 +87,17 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
 ### The `containerd` image store
 
 Docker uses `containerd` to manage its images. `containerd` works via the use of snapshotters to store image or container data. Using it has enabled various features previously impossible:
-- Local building and storing of multiplatform images.
-- Using images with attestations.
-- WebAssembly containers.
+
+- Local building and storing of multiplatform images
+- Using images with attestations
+- WebAssembly containers
 - Use of advanced snapshotters to enable further feature sets:
   - Lazy pulling of images (through [`stargz`](https://github.com/containerd/stargz-snapshotter))
   - Peer-to-peer image distribution (through [`nydus`](https://github.com/containerd/nydus-snapshotter) and [`dragonfly`](https://github.com/dragonflyoss/dragonfly)).
 
-The `containerd` image store was elevated to the default storage backend in Docker version 29.0 and will be automatically used on fresh installs.
+The `containerd` image store was elevated to the default storage backend in Docker version 29.0 and is automatically used on fresh installs.
 If you are using a legacy version, or have not yet migrated, consult the upstream Docker documentation on [storage drivers](https://docs.docker.com/engine/storage/drivers/),
-as that is how legacy systems will store their images.
+as that is how legacy systems store their images.
 
 To migrate from legacy storage drivers to `containerd`, add
 ```json
@@ -106,6 +107,7 @@ To migrate from legacy storage drivers to `containerd`, add
   }
 }
 ```
+
 to your `/etc/docker/daemon.json` file. Note that this will **hide, but not remove**, images using the legacy storage drivers. To access them, switch back to the legacy configuration.
 
 This migration is completely transparent to most users. Only the underlying backend has changed, not any user-facing workflows.
@@ -141,7 +143,7 @@ The following snapshotters are available by default on Ubuntu 26.04 LTS and onwa
 - `btrfs`: A copy-on-write filesystem included in the Linux kernel mainline.
 - `devmapper`: A kernel-based framework that underpins many advanced volume management technologies on Linux.
 - `erofs`: Enhanced Read-Only File System, a modern read-only filesystem optimized for space efficiency and performance.
-- `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but will consume large amounts of disk space and will be very slow.
+- `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but consumes large amounts of disk space and is very slow.
 - `zfs`: A next-generation filesystem that supports many advanced storage technologies such as volume management, snapshots, checksumming, compression and {term}`deduplication`, replication and more.
 
 #### Managing disk space

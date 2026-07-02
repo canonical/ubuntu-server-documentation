@@ -241,14 +241,16 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 - Ensure the required filesystem is available. We will be using the ZFS filesystem.
 
   Set the default mount point:
-  ```{terminal}
+  
   :copy:
   :user:
   :host:
   :dir:
   export MOUNT_POINT="/var/lib/containerd/io.containerd.snapshotter.v1.zfs"
   ```
+
   Install ZFS:
+
   ```{terminal}
   :copy:
   :user:
@@ -258,6 +260,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```
 
   Create a 5GB file to use as a ZFS pool:
+
   ```{terminal}
   :copy:
   :user:
@@ -267,6 +270,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```
 
   Create the pool:
+
   ```{terminal}
   :copy:
   :user:
@@ -276,6 +280,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```
 
   Create the ZFS dataset and mount it to your chosen mount point:
+
   ```{terminal}
   :copy:
   :user:
@@ -285,6 +290,7 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   ```
 
   Verify that it mounted successfully:
+
   ```{terminal}
   :copy:
   :user:
