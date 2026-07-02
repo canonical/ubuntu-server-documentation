@@ -143,7 +143,7 @@ The following snapshotters are available by default on Ubuntu 26.04 LTS and onwa
 - `btrfs`: A copy-on-write filesystem included in the Linux kernel mainline.
 - `devmapper`: A kernel-based framework that underpins many advanced volume management technologies on Linux.
 - `erofs`: Enhanced Read-Only File System, a modern read-only filesystem optimized for space efficiency and performance.
-- `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but consumes large amounts of disk space and is very slow.
+- `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but consumes large amounts of disk space and is 2-10 times slower than the default `overlayfs` (especially on write-heavy workloads).
 - `zfs`: A next-generation filesystem that supports many advanced storage technologies such as volume management, snapshots, checksumming, compression and {term}`deduplication`, replication and more.
 
 #### Managing disk space
