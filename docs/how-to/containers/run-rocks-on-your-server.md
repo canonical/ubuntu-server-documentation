@@ -43,6 +43,7 @@ Status: Downloaded newer image for ubuntu/grafana:10.3.3-22.04_stable
 ```
 
 In this particular case, we’re using:
+
 - `-d` to run the container in the background.
 - We are also specifying a well-defined name for the container, with the `--name` parameter.
 - With `-e` we are setting the container’s timezone (`TZ`) environment variable to `UTC`.
@@ -202,4 +203,4 @@ Finally, click on "Explore" from the Grafana menu, and select the `prometheus` d
 
 ## Next steps
 
-As you can see, `docker-compose` makes it convenient to set up multi-container applications without needing to perform runtime changes to the containers. As you can imagine, this can permit building a more sophisticated management system to handle fail-over, load-balancing, scaling, upgrading old nodes, and monitoring status. But rather than needing to implement all of this directly on top of `docker-container`, you may want to investigate Kubernetes-style cluster management software such as [microk8s](https://canonical.com/microk8s/docs).
+As you can see, `docker-compose` makes it convenient to set up multi-container applications without needing to perform runtime changes to the containers. As you can imagine, this can permit building a more sophisticated management system to handle fail-over, load-balancing, scaling, upgrading old nodes, and monitoring status. But rather than needing to implement all of this directly on top of `docker-container`, you may want to investigate Kubernetes-style cluster management software such as [MicroK8s](https://canonical.com/microk8s/docs).

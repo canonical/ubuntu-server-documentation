@@ -10,6 +10,7 @@ myst:
 ## Before you begin
 
 This guide makes several assumptions about the OpenLDAP setup:
+
  * Working OpenLDAP server: it is assumed you are starting with a working OpenLDAP server, with a hostname of `ldap-server.example.com`. If not, follow this guide {ref}`Install and configure OpenLDAP<install-openldap>` to set it up.
  * Working Kerberos realm: it is also assumed that the `EXAMPLE.COM` realm is set up, and the Kerberos client tools (krb5-user) are installed on the LDAP server. You will need to create an Ubuntu principal. See {ref}`How to install a Kerberos server <install-a-kerberos-server>`.
  * Working {term}`TLS` setup for OpenLDAP: since simple binds and clear text passwords are involved, the OpenLDAP server must have a working TLS setup, and connections to it must be using TLS. Refer to {ref}`ldap-and-tls` to set it up.

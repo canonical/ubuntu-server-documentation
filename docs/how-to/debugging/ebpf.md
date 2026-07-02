@@ -50,7 +50,7 @@ machine-code to optimize the program's execution.
 
 ## eBPF in Ubuntu Server
 
-Since Ubuntu 24.04, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection or BCC) are
+Since Ubuntu 24.04 LTS, `bpftrace` and `bpfcc-tools` (the BPF Compiler Collection or BCC) are
 available in every Ubuntu Server installation by default as part of our efforts 
 to [enhance the application developer and sysadmin experience in
 Ubuntu](https://discourse.ubuntu.com/t/spec-include-performance-tooling-in-ubuntu/43134).

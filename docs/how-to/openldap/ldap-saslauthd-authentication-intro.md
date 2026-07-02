@@ -30,6 +30,7 @@ A graphic showing this process is as follows:
 ## Saslauthd authentication providers
 
 Authentication providers that saslauthd can use are:
+
 - `getpwent`  -- use the `getpwent()` library function
 - `kerberos5` -- use Kerberos 5
 - `pam`       -- use PAM

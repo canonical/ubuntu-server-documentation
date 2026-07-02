@@ -24,7 +24,7 @@ Ubuntu Server supports various 64-bit architectures and 32-bit arm.
 
 For specific platforms, see our list of [Ubuntu certified servers](https://ubuntu.com/certified/servers).
 
-The numbers below are true for Ubuntu 24.04 Noble amd64. Other releases and architectures might differ slightly.
+The numbers below are true for Ubuntu 24.04 LTS (Noble) amd64. Other releases and architectures might differ slightly.
 
 ## Memory
 

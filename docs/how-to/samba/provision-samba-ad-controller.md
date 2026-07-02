@@ -6,6 +6,7 @@ myst:
 
 (provision-samba-ad-controller)=
 # Provisioning a Samba Active Directory Domain Controller
+
 A Samba Active Directory Domain Controller (also known as just Samba AD/DC) is a server running Samba services that can provide authentication to domain users and computers, linux or Windows. It should be dedicated to authentication and authorization services, and not provide file or print services: that should be the role of member servers joined to the domain.
 
 :::{seealso}
@@ -15,6 +16,7 @@ For more information on why the Samba AD/DC server should not be used to provide
 This guide will show how to bootstrap a Samba AD/DC server and verify it's functioning properly.
 
 ## Installation
+
 This command will install the packages necessary for bootstrapping and testing the Samba AD/DC services:
 
 ```{terminal}
@@ -76,6 +78,7 @@ sudo mv /etc/samba/smb.conf /etc/samba/smb.conf.orig
 ```
 
 ## Provisioning
+
 With the packages installed, the Samba AD/DC service can be provisioned. For this how-to, we will use the following values:
 
 - Domain: `EXAMPLE`

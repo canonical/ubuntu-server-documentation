@@ -168,7 +168,7 @@ login_saslauthd_server:
 
 This enables the `PLAIN` and `LOGIN` authentication mechanisms via `saslauthd`.
 
-For Ubuntu 22.04 and earlier, of it you plan to use authentication mechanisms that will need read access to `/etc/sasldb2` (not covered in this guide), you need to add the `Debian-exim` user to the `sasl` group:
+For Ubuntu 22.04 LTS and earlier, of it you plan to use authentication mechanisms that will need read access to `/etc/sasldb2` (not covered in this guide), you need to add the `Debian-exim` user to the `sasl` group:
 
 ```{terminal}
 :copy:
@@ -212,7 +212,7 @@ MECHANISMS="pam"
 ```
 
 :::{note}
-In Ubuntu 22.04 Jammy and earlier, we also need to add `START="yes"` to `/etc/default/saslauthd`.
+In Ubuntu 22.04 LTS (Jammy) and earlier, we also need to add `START="yes"` to `/etc/default/saslauthd`.
 :::
 
 Finally, enable and start the `saslauthd` service:
