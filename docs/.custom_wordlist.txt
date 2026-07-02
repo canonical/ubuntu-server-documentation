@@ -18,6 +18,7 @@ backtrace
 Bacula
 bitmask
 blocklisted
+boolean
 BMC's
 bootable
 bootloader
