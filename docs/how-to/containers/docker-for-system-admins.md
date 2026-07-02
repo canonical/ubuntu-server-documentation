@@ -799,6 +799,197 @@ docker logs web-server
 Error response from daemon: configured logging driver does not support reading
 ```
 
+## Rootless Docker
+
+Starting in Ubuntu 26.04 (package version `docker.io-app_29.1.3-0ubuntu4`), Docker supports running both containers and the Docker daemon itself as a non-root user. This is a useful way to provide extra security if it is not desirable to run the Docker daemon as root. As long as the prerequisites are all met, you do not need root privileges to convert a rootful Docker installation into a rootless one.
+
+### Prerequisites
+
+Install the following packages:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install rootlesskit uidmap slirp4netns fuse-overlayfs
+```
+
+- `rootlesskit`: A tool for running rootless containers.
+- `uidmap`: Provides `newuidmap` and `newgidmap` commands for managing UID and GID mappings.
+- `slirp4netns`: Required for user-mode networking in rootless containers.
+- `fuse-overlayfs`: User-space overlay filesystem for rootless containers.
+
+Ensure that the user in question has at least 65,536 subordinate UIDs and GIDs. To check this, consult the `/etc/subuid` and `/etc/subgid` files:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+grep ^$(whoami): /etc/subuid
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+grep ^$(whoami): /etc/subgid
+```
+
+Each of these should output a line like
+
+```{terminal}
+:output-only:
+yourusername:XXXXXX:65536
+```
+
+The second number is the number of subordinate UIDs or GIDs that the user has available. This value should be at least 65,536. If it is not, edit the `/etc/subuid` and `/etc/subgid` files to increase it.
+
+
+### Installation
+
+::::{note}
+
+If you are already running the rootful Docker daemon, disable it before proceeding:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl disable --now docker.service docker.socket
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo rm /var/run/docker.sock
+```
+::::
+
+Ubuntu installs the scripts related to rootless Docker in `/usr/share/docker.io/contrib`. Run `dockerd-rootless-setuptool.sh` **as a non-root user** to install the rootless daemon:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+/usr/share/docker.io/contrib/dockerd-rootless-setuptool.sh install
+```
+
+This command also shows help if any of the prerequisites are not met.
+
+After completing the installation, confirm Docker is running in rootless mode with `docker info` and checking the context:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker info | grep Context
+
+Context: rootless
+```
+
+### Persisting the rootless daemon
+
+If you want to persist the rootless daemon across reboots and user logouts, enable the `docker` systemd user service and enable linger for your user:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+systemctl --user enable docker
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+loginctl enable-linger $(whoami)
+```
+
+### Expose Docker API socket
+
+Exposing the Docker API Socket allows you to control the rootless Docker daemon from another machine. After connecting to a remote host, commands such as `docker ps` or `docker compose` will execute there. This could be useful if you, for instance, have a powerful server and a weak laptop, and you want to run containers on the server while controlling them from the laptop.
+
+#### Over SSH (recommended)
+
+Ensure `$DOCKER_HOST` is set:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ssh -l <REMOTEUSER> <REMOTEHOST> 'echo $DOCKER_HOST'
+unix:///run/user/1001/docker.sock
+```
+
+Run `docker` with `-H` set to the SSH connection string:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker -H ssh://<REMOTEUSER>@<REMOTEHOST> run ...
+```
+
+You can also create a Docker context to avoid specifying the remote host for every command:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker context create remote --docker "host=ssh://<REMOTEUSER>@<REMOTEHOST>"
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+docker context use remote
+```
+
+#### Over TCP
+
+Run `docker-rootless.sh` with `DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp"` and the following flags:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" /usr/share/docker.io/contrib/docker-rootless.sh \
+   -H tcp://0.0.0.0:2376 \
+   --tlsverify --tlscacert=ca.pem --tlscert=cert.pem --tlskey=key.pem
+```
+
+
+### Expose privileged ports
+
+To expose ports less than 1024 (e.g 22 for SSH), set `CAP_NET_BIND_SERVICE` on the `rootlesskit` binary and restart the daemon:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo setcap cap_net_bind_service=ep /usr/bin/rootlesskit
+```
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+systemctl --user restart docker
+```
+
 ## Further reading
 
 To read an explanatory guide to Docker storage, networking, and logging see:
