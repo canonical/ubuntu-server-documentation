@@ -351,7 +351,7 @@ Below are the logs of an `unattended-upgrades` run that started at 20:43. The to
 
 Many updates do not require a full reboot, but do require services that use the updated files to be restarted before the change takes effect. For example, updating a shared library means every running service linked against it keeps using the old version in memory until it is restarted.
 
-This is handled by the {manpage}`needrestart(1)` package, which `unattended-upgrades` calls after applying updates. Starting with Ubuntu 24.04 LTS (see [discourse post](https://discourse.ubuntu.com/t/needrestart-changes-in-ubuntu-24-04-service-restarts/44671)), `needrestart` restarts the affected services automatically by default.
+This is handled by the {manpage}`needrestart(1)` package, which `unattended-upgrades` calls after applying updates. [Starting with Ubuntu 24.04 LTS](https://discourse.ubuntu.com/t/needrestart-changes-in-ubuntu-24-04-service-restarts/44671), `needrestart` restarts the affected services automatically by default.
 
 It does not restart everything, though. It ships the default configuration file `/etc/needrestart/needrestart.conf` with a pre-set list of known cases that are never restarted automatically (such as the display manager), so only the services outside that list are affected.
 
