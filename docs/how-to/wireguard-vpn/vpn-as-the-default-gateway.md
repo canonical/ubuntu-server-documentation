@@ -118,6 +118,7 @@ AllowedIPs = 0.0.0.0/0
 ```
 
 Key points here:
+
 - We selected the `10.90.90.1/24` IP address for the WireGuard interface. This can be any private IP address, as long as it doesn't conflict with the network you are on, so double check that. If it needs to be changed, don't forget to also change the IP for the WireGuard interface on the gateway server.
 - The `AllowedIPs` value is `0.0.0.0/0`, which means "all IPv4 addresses".
 - We are using `PostUp` to load the private key instead of specifying it directly in the configuration file, so we don't have to set the permissions on the config file to `0600`.

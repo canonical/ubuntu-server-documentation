@@ -135,7 +135,7 @@ sudo cp /usr/share/doc/openvpn/examples/sample-config-files/server.conf /etc/ope
 ```
 
 :::{note}
-In Ubuntu 20.04 or older, the file is compressed, so do this instead:
+In Ubuntu 20.04 LTS or older, the file is compressed, so do this instead:
 
 ```{terminal}
 :copy:

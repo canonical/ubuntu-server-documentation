@@ -39,7 +39,7 @@ Each smart card is expected to contain an X.509 certificate and the correspondin
 
 ## Smart card PKCS#11 modules
 
-While `opensc-pkcs11` supports a wide number of smart cards, some of them may require specific PKCS#11 modules, and you must refer to your vendor to install the proper one. From Ubuntu 20.04 onward, all modules supported by [`p11-kit`](https://p11-glue.github.io/p11-glue/p11-kit.html) can be used. 
+While `opensc-pkcs11` supports a wide number of smart cards, some of them may require specific PKCS#11 modules, and you must refer to your vendor to install the proper one. From Ubuntu 20.04 LTS onward, all modules supported by [`p11-kit`](https://p11-glue.github.io/p11-glue/p11-kit.html) can be used. 
 
 If custom PKCS#11 modules are used, you need to ensure that `p11-kit` is [properly configured](https://p11-glue.github.io/p11-glue/p11-kit/manual/config.html).
 
@@ -427,7 +427,7 @@ pam_cert_auth = True
 
 #### Troubleshooting
 
-User mapping can be tested working in versions newer than Ubuntu 20.04 with:
+User mapping can be tested working in versions newer than Ubuntu 20.04 LTS with:
 
 ```{terminal}
 :copy:

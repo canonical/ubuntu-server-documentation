@@ -102,6 +102,8 @@ We want to be open and transparent with our users about the way in which AI is o
 
 4. **Responsibility**: Make sure that even if you use AI, you are still adding value based on your own personal skills and competency. You must understand what you're submitting, even if you used an LLM to help you.
 
+We have provided some {ref}`AI tooling <ai-tools-in-this-project>` which we hope will aid contributors in using AI in accordance with this AI policy.
+
 ## Thank you!
 
 Lastly, we would like to thank you for spending your time to help make the
@@ -118,6 +120,7 @@ self
 contrib-types
 local-development
 writing-guidance
+ai-tools-in-this-project
 get-help
 contributors
 ```

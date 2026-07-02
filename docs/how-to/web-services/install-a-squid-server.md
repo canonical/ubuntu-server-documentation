@@ -84,6 +84,7 @@ cache_dir ufs /var/spool/squid 10000 16 256
 ```
 
 The available storage types are:
+
 * `ufs`: This is the common Squid storage format, good for general use.
 * `aufs`: Uses the same storage format as `ufs`, using POSIX-threads to avoid blocking the main Squid process on disk-I/O. This was formerly known in Squid as `async-io`.
 * `diskd`: Uses the same storage format as `ufs`, using a separate process to avoid blocking the main Squid process on disk-I/O.

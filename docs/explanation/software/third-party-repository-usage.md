@@ -106,7 +106,7 @@ curl -fsSL https://thirdpartyrepo.com/ubuntu/externalrepo-archive-keyring.asc \
     | sudo gpg --dearmor -o /usr/share/keyrings/externalrepo-archive-keyring.gpg
 ```
 
-The `.list` source file format used on Ubuntu 22.04 and earlier only supports the de-armored binary format. For the deb822 format, default in 24.04 and later, either an `.asc` or a `.gpg` key works.
+The `.list` source file format used on Ubuntu 22.04 LTS (Jammy) and earlier only supports the de-armored binary format. For the deb822 format, default in Ubuntu 24.04 LTS (Noble) and later, either an `.asc` or a `.gpg` key works.
 
 Third party APT repositories should also provide a special package called `REPONAME-archive-keyring` whose purpose is to provide updates to the GPG key used to sign the archive. Because this package is signed using the GPG key that is not present in the system when we are initially configuring the repository, we need to manually download and put it in the right place the first time.
 

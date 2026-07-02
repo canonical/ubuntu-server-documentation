@@ -84,19 +84,79 @@ Tmpfs mounts can be managed via the Docker CLI with the following two options:
   - `tmpfs-size` and `tmpfs-mode` options (optional). For a full list see the [Docker documentation](https://docs.docker.com/engine/storage/tmpfs/#options-for---tmpfs).
 - `--tmpfs`: it accepts no configurable options, just mount the tmpfs for a standalone container.
 
-### Storage drivers
+### The `containerd` image store
 
-Storage drivers are used to store image layers and to store data in the writable layer of a container. In general, storage drivers are implemented trying to optimize the use of space, but write speed might be lower than native {term}`filesystem` performance depending on the driver in use. To better understand the options and make informed decisions, take a look at the Docker documentation on [how layers, images and containers work](https://docs.docker.com/engine/storage/drivers/#images-and-layers).
+Docker uses `containerd` to manage its images. `containerd` works via the use of snapshotters to store image or container data. Using it has enabled various features previously impossible:
 
-The default storage driver is the `overlay2` which is backed by `OverlayFS`. This driver is recommended by upstream for use in production systems. The following storage drivers are available and are supported in Ubuntu (as at the time of writing):
+- Local building and storing of multiplatform images
+- Using images with attestations
+- WebAssembly containers
+- Use of advanced snapshotters to enable further feature sets:
+  - Lazy pulling of images (through [`stargz`](https://github.com/containerd/stargz-snapshotter))
+  - Peer-to-peer image distribution (through [`nydus`](https://github.com/containerd/nydus-snapshotter) and [`dragonfly`](https://github.com/dragonflyoss/dragonfly)).
 
-- **OverlayFS**: it is a modern union filesystem. The Linux kernel driver is called `OverlayFS` and the Docker storage driver is called `overlay2`. **This is the recommended driver**.
-- **ZFS**: it is a next generation filesystem that supports many advanced storage technologies such as volume management, snapshots, checksumming, compression and {term}`deduplication`, replication and more. The Docker storage driver is called `zfs`.
-- **Btrfs**: it is a copy-on-write filesystem included in the Linux kernel mainline. The Docker storage driver is called `btrfs`.
-- **Device Mapper**: it is a kernel-based framework that underpins many advanced volume management technologies on Linux. The Docker storage driver is called `devicemapper`.
-- **VFS**: it is not a union filesystem, instead, each layer is a directory on disk, and there is no copy-on-write support. To create a new layer, a "deep copy" is done of the previous layer. This driver does not perform well compared to the others, however, it is robust, stable and works in any environment. The Docker storage driver is called `vfs`.
+The `containerd` image store was elevated to the default storage backend in Docker version 29.0 and is automatically used on fresh installs.
+If you are using a legacy version, or have not yet migrated, consult the upstream Docker documentation on [storage drivers](https://docs.docker.com/engine/storage/drivers/),
+as that is how legacy systems store their images.
 
-The storage drivers accept some options via `storage-opts`, check [the storage driver documentation](https://docs.docker.com/engine/storage/drivers/) for more information. Keep in mind that this is a {term}`JSON` file and all lines should end with a comma (`,`) except the last one.
+To migrate from legacy storage drivers to `containerd`, add
+```json
+{
+  "features": {
+    "containerd-snapshotter": true
+  }
+}
+```
+
+to your `/etc/docker/daemon.json` file. Note that this will **hide, but not remove**, images using the legacy storage drivers. To access them, switch back to the legacy configuration.
+
+This migration is completely transparent to most users. Only the underlying backend has changed, not any user-facing workflows.
+
+#### Choosing a snapshotter
+
+`containerd` uses snapshotters to unpack layers of container images. You can see the available snapshotters on your system with
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+ctr plugins ls | grep snapshot
+```
+
+For example, you would see the following line:
+showing that `overlayfs` is available on your system, and loaded successfully. If the last entry shows `skip`, your system has this particular snapshotter, but you will need to do additional configuration to enable it (such as mounting a filesystem). See {ref}`Docker for System Administrators <docker-for-system-admins>` for an example of doing this for `zfs`.
+
+
+A snapshotter can then be selected in the same manner as legacy storage drivers: by editing `/etc/docker/daemon.json` and adding the following:
+
+```json
+{
+    "storage-driver": "your-chosen-snapshotter"
+}
+```
+
+The following snapshotters are available by default on Ubuntu 26.04 LTS and onward (from the output of `ctr plugins ls | grep snapshot` on a fresh install):
+
+- `overlayfs` **(default)**: A modern union filesystem. This is the recommended snapshotter.
+- `blockfile`: A snapshotter designed for block-level storage as opposed to file-level storage. Generally useful in specialized architectures.
+- `btrfs`: A copy-on-write filesystem included in the Linux kernel mainline.
+- `devmapper`: A kernel-based framework that underpins many advanced volume management technologies on Linux.
+- `erofs`: Enhanced Read-Only File System, a modern read-only filesystem optimized for space efficiency and performance.
+- `native`: The universal fallback driver. By virtue of just doing standard full-directory copies for each layer, this will work absolutely anywhere but consumes large amounts of disk space and is 2-10 times slower than the default `overlayfs` (especially on write-heavy workloads).
+- `zfs`: A next-generation filesystem that supports many advanced storage technologies such as volume management, snapshots, checksumming, compression and {term}`deduplication`, replication and more.
+
+#### Managing disk space
+
+`containerd` uses more disk space than the legacy storage drivers. This is because images are stored both compressed and uncompressed (as opposed to just compressed). This buys you faster pulls and pushes
+at the cost of this disk capacity. You can routinely run `docker image prune` to save disk space by removing unused images, or if you want to change the storage directory, you can do so by editing `/etc/containerd/config.toml`:
+
+```toml
+version = 2
+root = "/mnt/my-extremely-large-drive"
+```
+
+This is now the only way to change the storage directory for Docker images. If you are migrating from legacy storage drivers, you will still need to update your `/etc/containerd/config.toml`'s `root` to reflect your previous `data-root`).
 
 ## Networking
 

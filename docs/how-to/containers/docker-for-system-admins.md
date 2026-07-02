@@ -233,12 +233,77 @@ Canonical also provides a [Docker snap](https://snapcraft.io/docker). This guide
   ]
   ```
 
-### Choosing the right storage drivers
+### Choosing the right containerd snapshotter
 
 Before changing the configuration and restarting the daemon, make sure that the specified filesystem (zfs, btrfs, or device mapper) is mounted at `/var/lib/docker`.
 Otherwise, if you configure the Docker daemon to use a storage driver different from the filesystem mounted at `/var/lib/docker`, a failure will happen. The Docker daemon expects that `/var/lib/docker` is correctly set up when it starts.
 
-- Check the current storage driver
+- Ensure the required filesystem is available. We will be using the ZFS filesystem.
+
+  Set the default mount point:
+  
+  :copy:
+  :user:
+  :host:
+  :dir:
+  export MOUNT_POINT="/var/lib/containerd/io.containerd.snapshotter.v1.zfs"
+  ```
+
+  Install ZFS:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  apt install zfsutils-linux -y
+  ```
+
+  Create a 5GB file to use as a ZFS pool:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  fallocate -l 5G /zfs-pool.img
+  ```
+
+  Create the pool:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo zpool create mypool /zfs-pool.img
+  ```
+
+  Create the ZFS dataset and mount it to your chosen mount point:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo zfs create -o mountpoint=$MOUNT_POINT mypool/docker
+  ```
+
+  Verify that it mounted successfully:
+
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  sudo zfs list
+ 
+  NAME            USED  AVAIL  REFER  MOUNTPOINT
+  mypool          162K  4.36G    24K  /mypool
+  mypool/docker    39K  4.36G    39K  /var/lib/containerd/io.containerd.snapshotter.v1.zfs
+  ```
+
+- Check the existing snapshotter.
 
   ```{terminal}
   :copy:
@@ -249,50 +314,17 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 
   Storage Driver: overlayfs
   ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker info | grep "driver-type"
 
-- Ensure the required filesystem is available. We will be using the ZFS filesystem.
-
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  apt install zfsutils-linux -y # Install ZFS
-  ```
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  fallocate -l 5G /zfs-pool.img  # Create a 5GB file
-  ```
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  zpool create mypool /zfs-pool.img  # Create a ZFS pool
-  ```
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  zfs create -o mountpoint=/var/lib/docker mypool/docker # Create a ZFS dataset and mount it to dockers directory, "/var/lib/docker".
-  ```
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  zfs list # Verify that it mounted successfully
-
-  NAME            USED  AVAIL  REFER  MOUNTPOINT
-  mypool          162K  4.36G    24K  /mypool
-  mypool/docker    39K  4.36G    39K  /var/lib/docker
+    driver-type: io.containerd.snapshotter.v1
   ```
 
-- Change the storage driver
+- Change the snapshotter
 
   1.  Stop the docker daemon
 
@@ -304,15 +336,16 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
       systemctl stop docker
       ```
 
-  1.  Edit `/etc/docker/daemon.json` using your favorite editor, then update the storage driver value to `zfs`.
+  1.  If you're using a non-default mount point, set that in `/etc/containerd/config.toml` to configure the snapshotter:
 
-      ```{terminal}
-      :copy:
-      :user:
-      :host:
-      :dir:
-      vim /etc/docker/daemon.json
+      ```toml
+      [plugins."io.containerd.snapshotter.v1.zfs"]
+      root_path = "/my/cool/new/mount/point.zfs"
+      ```
 
+  1.  Edit the docker config itself at `/etc/docker/daemon.json`:
+
+      ```json
       {
         "storage-driver": "zfs"
       }
@@ -336,8 +369,16 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
   :host:
   :dir:
   docker info | grep "Storage Driver"
-
   Storage Driver: zfs
+  ```
+  ```{terminal}
+  :copy:
+  :user:
+  :host:
+  :dir:
+  docker info | grep "driver-type"
+
+    driver-type: io.containerd.snapshotter.v1
   ```
 
 ## Configuring networking

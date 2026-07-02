@@ -4,8 +4,10 @@ myst:
     description: Install and use Multipass to quickly create Ubuntu VMs with a single command on Linux, Windows, and macOS using snap packages.
 ---
 
+<!-- vale Canonical.004-Canonical-product-names = NO -->
 (create-vms-with-multipass)=
 # How to create a VM with Multipass
+<!-- vale Canonical.004-Canonical-product-names = YES -->
 
 [Multipass](https://canonical.com/multipass) is the recommended method for creating Ubuntu VMs on Ubuntu. It's designed for developers who want a fresh Ubuntu environment with a single command, and it works on Linux, Windows and macOS.
 
@@ -230,7 +232,7 @@ sudo multipass set local.driver=libvirt
 ```
 
 :::{note}
-If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the multipass service from interacting with the [libvirt service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
+If you are having issues interacting with Multipass after switching to the libvirt driver, check if there is a restriction by {term}`AppArmor`, for example. AppArmor may have a default policy which restricts the Multipass service from interacting with the [libvirt service](https://libvirt.org/daemons.html). So you need to add an explicit permission that allows it.
 :::
 
 Start a guest, and access it via tools like [virt-manager](https://virt-manager.org/) or `virsh`:
