@@ -798,6 +798,8 @@ grep ^$(whoami): /etc/subgid
 
 Each of these should output a line like
 
+```{terminal}
+:output-only:
 yourusername:XXXXXX:65536
 ```
 
