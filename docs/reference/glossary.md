@@ -1016,7 +1016,7 @@ GFS2
 
 GB
     Gigabyte (unit of measurement)
-    1 GB = 1024 bytes
+    1 GB = 1,000,000,000 bytes
 
 GID
 Group ID

@@ -38,6 +38,7 @@ The public key cryptography underpinning SSL/TLS operates in a similar manner, b
 For a more detailed explanation of how the DNSSEC validation is performed, please refer to the [Simplified 12-step DNSSEC validation process](https://bind9.readthedocs.io/en/latest/dnssec-guide.html#the-12-step-dnssec-validation-process-simplified) guide from ISC.
 
 ## DNS daemons
+
 Ubuntu supports multiple DNS resolvers, covering a variety of use cases. Most of them support DNSSEC validation, but it might not be activated and set up with valid trust-anchors automatically.
 
 <!-- Using non-breaking hyphen & non-breaking space for improved table spacing. -->
@@ -111,6 +112,7 @@ In case of issues with Domain Name resolution, make sure to remove relevant drop
 :::
 
 ## New Resource Records (RRs)
+
 DNSSEC introduces a set of new Resource Records. Here are the most important ones:
 
  * RRSIG: Resource Record Signature. Each RRSIG record matches a corresponding Resource Record, i.e., it's the digital cryptographic signature of that Resource Record.
@@ -222,7 +224,7 @@ When a recursive DNS server is also performing DNSSEC validation, it's called a 
 This is the case if you install the BIND9 DNS server: The default configuration is to act as a Validating Resolver, by having the `dnssec-validation auto` option implicitly enabled.
 
 :::{note}
-Up to Ubuntu 24.04 LTS (version `1:9.18.34-1`) the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
+Up to Ubuntu 24.04 LTS, version `1:9.18.34-1`, the default was explicitly stated as `dnssec-validation auto;` in `/etc/bind/named.conf.options`.
 :::
 
 A critical aspect of this deployment model is the trust in the network segment between the stub resolver and the Validating Resolver. If this network is compromised, the security benefits of DNSSEC can be undermined. While the Validating Resolver performs DNSSEC checks and returns only verified responses, the response could still be tampered with on the final ("last mile") network segment.

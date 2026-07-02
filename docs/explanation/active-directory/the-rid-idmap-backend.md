@@ -10,6 +10,7 @@ myst:
 The {manpage}`idmap_rid(8)` IDMap backend provides an algorithmic mapping between Linux UIDs/{term}`GIDs <GID>` and Active Directory SIDs. That means that a given SID will always map to the same UID/GID, and vice-versa, within the same domain.
 
 To use this backend, we have to choose two or more ID ranges:
+
 - A range for the domain we are joining
 - Another range to serve as a "catch all", which will store mappings for users and groups that might come from other domains, as well as the default built-in entries
 

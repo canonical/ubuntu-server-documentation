@@ -577,6 +577,7 @@ For more details about the autoinstall config options, please have a look at the
   ```
 
 ## Some closing notes
+
   * It's always best to use the latest installer and autoinstall components. Be sure to update the installer to the most recent version, or just use a current daily live-server image.
 
   * The ISO image specified with the kernel parameters needs to fit in the boot folder. Its kernel and initrd are specified in the 'Load from Removable Media and Server' task at the hardware management console (HMC).

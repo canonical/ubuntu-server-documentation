@@ -4,8 +4,10 @@ myst:
     description: Install and manage LXD system containers and virtual machines with command-line administration for development and production workloads.
 ---
 
+<!-- vale Canonical.004-Canonical-product-names = NO -->
 (lxd)=
 # LXD containers and virtual machines
+<!-- vale Canonical.004-Canonical-product-names = YES -->
 
 [LXD](https://canonical.com/lxd) (pronounced lex-dee) is a modern, secure, and powerful system container and virtual machine manager.
 
@@ -53,7 +55,7 @@ This will allow you to choose:
 
 - A 'trust password' used by remote clients to vouch for their client certificate.
 
-You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group lxd. If user `joe` is not a member of group `lxd`, you may run:
+You must run `lxd init` as root. `lxc` commands can be run as any user who is a member of group `lxd`. If user `joe` is not a member of group `lxd`, you may run:
 
 ```{terminal}
 :copy:
@@ -306,7 +308,7 @@ lxc config device add c1 eth1 none
 
 ## Nesting
 
-Containers all share the same host kernel. This means that there is always an inherent trade-off between features exposed to the container and host security from malicious containers. Containers by default are therefore restricted from features needed to nest child containers. In order to run lxc or lxd containers under a lxd container, the `security.nesting` feature must be set to true:
+Containers all share the same host kernel. This means that there is always an inherent trade-off between features exposed to the container and host security from malicious containers. Containers by default are therefore restricted from features needed to nest child containers. In order to run `lxc` or `lxd` containers under a LXD container, the `security.nesting` feature must be set to true:
 
 ```{terminal}
 :copy:

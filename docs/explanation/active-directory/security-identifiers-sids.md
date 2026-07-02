@@ -18,6 +18,7 @@ For the purposes of integration, the more important fields of a SID are the *Dom
     S-1-5-<Domain-Identifier>-<Relative-Identifier>
 
 Here are some examples of what an SID looks like:
+
 - `S-1-5-32-544`: this is the so called well-known SID of the built-in (`32`) Administrators (`544`) group
 - `S-1-5-21-1004336348-1177238915-682003330-512`: a Domain Admins group (`512`) in a specific domain (`21-1004336348-1177238915-682003330`)
 - `S-1-5-21-1132786674-3270659749-157314226-512`: also a Domain Admins group (`512`), but in another domain (`21-1132786674-3270659749-157314226`)

@@ -337,12 +337,14 @@ The desktop login only shows local users in the list to pick from, and that's on
 To login with an Active Directory user for the first time, follow these steps:
 
 - Click on the "Not listed?" option:
+
 <div align="center">
 
 ![Click "not listed"|690x517,50%](../../images/291d9ae9-not_listed.png)
 </div>
 
 - Type in the login name followed by the password:
+
 <div align="center">
 
 ![Type in username|690x517,50%](../../images/6940e589-login.png)
@@ -350,6 +352,7 @@ To login with an Active Directory user for the first time, follow these steps:
 </div>
 
 - Next time you login, the AD user will be listed as if it was a local user:
+
 <div align="center">
 
 ![Next time|690x517,50%](../../images/9c174441-local_user.png)

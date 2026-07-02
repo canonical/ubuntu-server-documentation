@@ -433,20 +433,20 @@ use-machine-creds=0
 
 After you restart the service with `sudo systemctl restart rpc-gssd.service`, the `root` user won't be able to mount the NFS Kerberos share without obtaining a ticket first.
 
-## Upgrading from Ubuntu 20.04 ("Focal") and earlier
+## Upgrading from Ubuntu 20.04 LTS and earlier
 
 Earlier Ubuntu releases used the traditional configuration mechanism for the NFS services via `/etc/defaults/` configuration files. These are `/etc/default/nfs-common` and `/etc/default/nfs/kernel-server`, and were basically used to adjust the command-line options given to each daemon.
 
 Each file has a small explanation about the available settings.
 
 :::{warning}
-The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS ("Focal") and Ubuntu 18.04 LTS ("Bionic").
+The `NEED_*` parameters have no effect on systemd-based installations, like Ubuntu 20.04 LTS (Focal) and Ubuntu 18.04 LTS (Bionic).
 In those systems, to control whether a service should be running or not, use `systemctl enable` or `systemctl disable`, respectively.
 :::
 
-Ubuntu 22.04 LTS ("Jammy") and later have a new configuration file format for the NFS packages. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
+Ubuntu 22.04 LTS (Jammy) and later releases have a new configuration file format for the NFS packages. Instead of multiple files sourced by startup scripts from `/etc/default/nfs-*`, there is one main configuration file in `/etc/nfs.conf`, with an INI-style syntax.
 
-When upgrading from Ubuntu 20.04 ("Focal") and earlier, the following will happen:
+When upgrading from Ubuntu 20.04 LTS (Focal) and earlier, the following will happen:
 
 * a default `/etc/nfs.conf` configuration file will be installed
 * if the `/etc/default/nfs-*` files have been modified, a conversion script will run and create `/etc/nfs.conf.d/local.conf` with the local modifications.

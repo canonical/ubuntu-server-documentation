@@ -1,0 +1,34 @@
+name: Markdown style checks (advisory)
+
+# Aligned with the official Canonical Markdown style check, with one deviation:
+# the lint step is advisory (continue-on-error) so it surfaces issues without
+# blocking a PR. Kept separate from automatic-doc-checks.yml so it can be toggled
+# independently of the always-on spelling and inclusive-language checks.
+
+on:
+  workflow_call:
+  push:
+    branches:
+    - main
+    paths:
+    - 'docs/**'   # Only run on changes to the docs directory
+  pull_request:
+    branches:
+    - '*'
+    paths:
+    - 'docs/**'   # Only run on changes to the docs directory
+
+jobs:
+  markdown-lint:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+      with:
+        fetch-depth: 0
+    - name: Create venv
+      working-directory: "docs"
+      run: make install
+    - name: Lint markdown
+      working-directory: "docs"
+      continue-on-error: true   # Advisory only: surfaces issues without blocking the PR
+      run: make lint-md

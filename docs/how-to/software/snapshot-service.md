@@ -259,7 +259,7 @@ snapshots to be used for each specific repository. In the deb822 format, add a
 Snapshot: $SNAPSHOT_ID
 ```
 
-If you are using the one-line format in `/etc/apt/sources.list` (Ubuntu 22.04
+If you are using the one-line format in `/etc/apt/sources.list` (Ubuntu 22.04 LTS
 and earlier), replace the `yes` value with the snapshot ID:
 
 ```
