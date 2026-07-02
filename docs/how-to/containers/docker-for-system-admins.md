@@ -764,7 +764,7 @@ Starting in Ubuntu 26.04 (package version `docker.io-app_29.1.3-0ubuntu4`), Dock
 
 ### Prerequisites
 
-You will need to install the following packages:
+Install the following packages:
 
 ```{terminal}
 :copy:
@@ -779,7 +779,7 @@ sudo apt install rootlesskit uidmap slirp4netns fuse-overlayfs
 - `slirp4netns`: Required for user-mode networking in rootless containers.
 - `fuse-overlayfs`: User-space overlay filesystem for rootless containers.
 
-You will also need to ensure that the user in question has at least 65,536 subordinate UIDs and GIDs. To check this, consult the `/etc/subuid` and `/etc/subgid` files:
+Ensure that the user in question has at least 65,536 subordinate UIDs and GIDs. To check this, consult the `/etc/subuid` and `/etc/subgid` files:
 
 ```{terminal}
 :copy:
@@ -797,11 +797,11 @@ grep ^$(whoami): /etc/subgid
 ```
 
 Each of these should output a line like
-```
+
 yourusername:XXXXXX:65536
 ```
 
-The second number is the number of subordinate UIDs or GIDs that the user has available. This value should be at least 65,536. f it is not, you will need to edit the `/etc/subuid` and `/etc/subgid` files to increase it.
+The second number is the number of subordinate UIDs or GIDs that the user has available. This value should be at least 65,536. If it is not, edit the `/etc/subuid` and `/etc/subgid` files to increase it.
 
 
 ### Installation
@@ -836,22 +836,21 @@ Ubuntu installs the scripts related to rootless Docker in `/usr/share/docker.io/
 /usr/share/docker.io/contrib/dockerd-rootless-setuptool.sh install
 ```
 
-This command will also show help if any of the prerequisites are not met.
+This command also shows help if any of the prerequisites are not met.
 
-After completing, the installation, you can confirm Docker is running in rootless mode with `docker info` and checking the context:
+After completing the installation, confirm Docker is running in rootless mode with `docker info` and checking the context:
+
 ```{terminal}
 :copy:
 :user:
 :host:
 :dir:
 docker info | grep Context
-```
-You should see the following line:
-```
+
 Context: rootless
 ```
 
-### Persisting the Rootless Daemon
+### Persisting the rootless daemon
 
 If you want to persist the rootless daemon across reboots and user logouts, enable the `docker` systemd user service and enable linger for your user:
 
@@ -870,11 +869,11 @@ systemctl --user enable docker
 loginctl enable-linger $(whoami)
 ```
 
-### Expose Docker API Socket
+### Expose Docker API socket
 
 Exposing the Docker API Socket allows you to control the rootless Docker daemon from another machine. After connecting to a remote host, commands such as `docker ps` or `docker compose` will execute there. This could be useful if you, for instance, have a powerful server and a weak laptop, and you want to run containers on the server while controlling them from the laptop.
 
-#### Over SSH (Recommended)
+#### Over SSH (recommended)
 
 Ensure `$DOCKER_HOST` is set:
 
@@ -929,7 +928,7 @@ DOCKERD_ROOTLESS_ROOTLESSKIT_FLAGS="-p 0.0.0.0:2376:2376/tcp" /usr/share/docker.
 ```
 
 
-### Expose Privileged Ports
+### Expose privileged ports
 
 To expose ports less than 1024 (e.g 22 for SSH), set `CAP_NET_BIND_SERVICE` on the `rootlesskit` binary and restart the daemon:
 
