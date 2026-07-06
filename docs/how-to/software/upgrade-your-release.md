@@ -41,14 +41,7 @@ Before starting a major release upgrade, it's important to prepare your system t
       :user:
       :host:
       :dir:
-      sudo apt dist-upgrade -o
-      ```
-      ```{terminal}
-      :copy:
-      :user:
-      :host:
-      :dir:
-      APT::Get::Always-Include-Phased-Updates=true
+      sudo apt dist-upgrade -o APT::Get::Always-Include-Phased-Updates=true
       ```
   2. Confirm both commands complete successfully and no further updates are available.
 
