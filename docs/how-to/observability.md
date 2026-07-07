@@ -26,6 +26,6 @@ If you do not need a full LMA stack, there are some other supported tools that c
 Set up your LMA stack <observability/set-up-your-lma-stack>
 Install Logwatch <observability/install-logwatch>
 Install Munin <observability/install-munin>
-Install Nagios Core 3 <observability/install-nagios>
+Install Nagios Core 4 <observability/install-nagios>
 Use Nagios with Munin <observability/use-nagios-with-munin>
 ```
