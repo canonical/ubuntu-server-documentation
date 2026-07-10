@@ -7,7 +7,7 @@ myst:
 (qemu-machine-types)=
 # QEMU Machine types
 
-The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stabilized foundation they can run on so that they are not impacted by changes that happen under the hood on the virtualisation software stack at machine upgrade or guests migration.
+The QEMU machine type defines the exact virtual hardware blueprint (chipset, bus architecture, and version-locked features) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stable environment they can run not impacted by changes that happen under the hood like software upgrades or migrations to other systems.
 
 However, when the QEMU software is upgraded, machine types can evolve and get new features that might be incompatible with the migrated virtual machine. The solution is to version the machine types. The following is the list of Q35 machine types available in QEMU 10.2:
 
