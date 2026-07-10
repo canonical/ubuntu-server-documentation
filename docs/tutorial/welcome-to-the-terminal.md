@@ -465,7 +465,7 @@ If we `cd` to our `new-folder` we can see our file has been moved with the same 
 mv file2.txt file2-renamed.txt
 ```
 
-We can also combine both moving the file and renaming it into one command.
+We can also combine both moving the file and renaming it into one command. This time, instead of moving the file down a level by specifying the name of a sub-directory, we can use `../` to indicate we want to move the file up to the previous level:
 
 ```{terminal}
 :copy:
@@ -475,6 +475,7 @@ We can also combine both moving the file and renaming it into one command.
 mv file2-renamed.txt ../file2.txt
 ```
 
+We could achieve the same by specifying the name of the next directory up (instead of `..`), but this shorthand is much more convenient!
 Then if we `cd ..` back to the home directory, and run `ls` again, we'll see that our file has been moved back:
 
 ```{terminal}
