@@ -65,7 +65,9 @@ or you might prefer even more control and provide the exact CPU specification:
 ...
 ```
 
-While the first approach seems easier and more appealing, it is not suitable for heterogeneous infrastructure. To retain full control over migratability across every host in the migration pool, the second approach is better. Explicitly specifying the CPU definition advertises to the guest only the CPU features that are guaranteed to exist on every host in the pool, rather than everything the current host happens to offer. This creates a stable "lowest common denominator" CPU that looks identical on both the source and the destination, so the guest never comes to rely on a feature that could disappear after a migration.
+While the first approach of just using `host-passthrough` and even `host-model` seems easier and more appealing, it is not suitable for heterogeneous infrastructure. To retain full control over migratability across every host in the migration pool a CPU should be modeled.
+You can check the capabilities of every host in your pool and define the CPU definition to only advertise CPU features to the guest that are guaranteed to exist on every host in the pool.
+This creates a stable "lowest common denominator" CPU that looks identical on both the source and the destination, so the guest never comes to rely on a feature that could disappear after a migration.
 
 
 ### Determining the lowest common CPU denominator
