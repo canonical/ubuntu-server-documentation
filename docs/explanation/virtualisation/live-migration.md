@@ -40,7 +40,8 @@ Libvirt and QEMU allow the CPU to be expressed in ways that ease migration betwe
  tsa-sq-no=on,tsa-l1-no=on,pcid=off,la57=off
 ```
 
-You can ask libvirt to build the CPU for you by using the `host-model` CPU mode:
+Or in a level higher, you can ask libvirt to build the CPU for you by using the `host-model` CPU mode.
+This will detect the current CPU with all its features, but automatically expresses it as baseline CPU model +/- a list of features.
 
 ```xml
 ...
