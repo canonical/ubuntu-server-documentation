@@ -49,7 +49,7 @@ This will detect the current CPU with all its features, but automatically expres
 ...
 ```
 
-or provide the exact CPU specification:
+or you might prefer even more control and provide the exact CPU specification:
 
 ```xml
 ...
