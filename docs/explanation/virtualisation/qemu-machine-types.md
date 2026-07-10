@@ -39,7 +39,7 @@ pc-q35-resolute      Ubuntu 26.04 PC (Q35 + ICH9, 2009)
 `pc-q35-resolute` and `pc-i440fx-resolute` are forked respectively from `pc-q35-10.2` and `pc-i440fx-10.2` that are the latest x86 upstream machine types since QEMU 10.2 is the version for Ubuntu Resolute LTS. `pc-i440fx-resolute` is defined as the default machine type for every virtual machine and the `ubuntu` alias now points to it.
 
 These distro-specific machine types allow Ubuntu to support users who have deployed VMs on Ubuntu LTSes to be able to live migrate their VMs to the next LTS dealing with various changes we might introduce into an existing Ubuntu release through the SRU process. Whenever we need to make a change that modifies an existing machine type, we can make a "point-release" element in the Ubuntu names. This is not tied to a usual Ubuntu LTS point release, but to
-anything introducing a delta to the machine type / `vmstate`. Similar to CentOS/RHEL, we want:
+anything introducing a delta to the machine type / `vmstate`. The format generally follows:
 
 ```text
 $MACHINE_TYPE-$DISTRO-RELEASE[-v*]
