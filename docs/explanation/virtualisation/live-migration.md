@@ -15,14 +15,14 @@ During this process:
 
 - libvirt acts as the manager, coordinating the setup, security, and handoff between the two physical servers so the guest operating system and its applications keep running without interruption.
 
-Although migration is a complex process, it generally works well if you migrate VMs between source and destination hosts with very similar capabilities, both on hardware (CPU model) and software (QEMU version) levels. But the reality is that the infrastructure is very often heterogeneous, with CPUs and virtualisation software stacks at different generations or versions. Migration can still happen across hosts with different hardware and software versions (for example, different QEMU versions). Two mechanisms make this possible:
+Although migration is a complex process, it generally works well if you migrate VMs between source and destination hosts with very similar capabilities, both on hardware (CPU model) and software (QEMU version) levels. But the reality is that the infrastructure is very often heterogeneous, with CPUs and virtualization software stacks at different generations or versions. Migration can still happen across hosts with different hardware and software versions (for example, different QEMU versions). Two mechanisms make this possible:
 
 - **Versioned machine types**, which keep the guest's virtual hardware layout stable across QEMU versions.
 - **CPU model + named features**, which allows the CPU to be expressed as a baseline model name +/- named features.
 
 ## Versioned machine types
 
-The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stabilized foundation they can run on so that they are not impacted by changes that happen under the hood on the virtualisation software stack. The machine types happen to be very useful to ensure live migration succeeds, especially inside heterogeneous infrastructure.
+The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stabilized foundation they can run on so that they are not impacted by changes that happen under the hood on the virtualization software stack. The machine types happen to be very useful to ensure live migration succeeds, especially inside heterogeneous infrastructure.
 
 When you live-migrate a VM, you are taking a snapshot of a running system's RAM and CPU state and sending it over the wire. The destination host must have a virtual hardware environment that matches that state down to the very last byte; this is possible by keeping the machine type unchanged. However, when the QEMU software is upgraded, machine types can evolve and get new features that might be incompatible with the migrated virtual machine. The solution is to version the machine types by creating a new version of the machine type for each supported QEMU version.
 
