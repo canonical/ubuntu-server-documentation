@@ -9,7 +9,7 @@ myst:
 
 The QEMU machine type defines the exact virtual hardware blueprint (chipset, bus architecture, and version-locked features) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stable environment they can run not impacted by changes that happen under the hood like software upgrades or migrations to other systems.
 
-However, when the QEMU software is upgraded, machine types can evolve and get new features that might be incompatible with the migrated virtual machine. The solution is to version the machine types. The following is the list of Q35 machine types available in QEMU 10.2:
+However, when the QEMU software is upgraded, it might get new features and behavior that would be incompatible with the current definition virtual machine. But since the purpose of these types is to lock the feature set, they can't be changed - the solution is to version the machine types. The following is the list of Q35 machine types available in QEMU 10.2:
 
 ```text
 ...
