@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function() {
     link.classList.add("github-issue-link");
     link.text = "Give feedback";
     // use the issue template in the .github/ISSUE_TEMPLATE/feedback.yml file
-    link.href = githubUrl + "issues/new?template=feedback.yml";
+    link.href = githubUrl + "/issues/new?template=feedback.yml";
     link.target = "_blank";
 
     const div = document.createElement("div");
