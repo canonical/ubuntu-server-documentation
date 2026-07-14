@@ -22,7 +22,7 @@ Although migration is a complex process, it generally works well if you migrate 
 
 ## Versioned machine types
 
-The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. This allows QEMU to offer to virtual machines a well-defined and stabilized foundation they can run on so that they are not impacted by changes that happen under the hood on the virtualization software stack. The machine types happen to be very useful to ensure live migration succeeds, especially inside heterogeneous infrastructure.
+The QEMU machine type defines the exact virtual hardware blueprint (chipset, PCI slots, ACPI tables) of a virtual machine. This allows QEMU to offer VMs a well-defined and stabilized foundation they can run on, so they are not impacted by changes that happen "under the hood" on the virtualization software stack. The machine types are useful to ensure live migration succeeds, especially inside heterogeneous infrastructure.
 
 When you live-migrate a VM, you are taking a snapshot of a running system's RAM and CPU state and sending it over the wire. The destination host must have a virtual hardware environment that matches that state down to the very last byte; this is possible by keeping the machine type unchanged. However, when the QEMU software is upgraded, machine types can evolve and get new features that might be incompatible with the migrated virtual machine. The solution is to version the machine types by creating a new version of the machine type for each supported QEMU version.
 
