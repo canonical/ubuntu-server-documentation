@@ -98,8 +98,8 @@ vm-tools-in-the-ubuntu-space explanation/virtualisation/vm-tools-in-the-ubuntu-s
 
 using-qemu-for-microvms explanation/virtualisation/qemu-microvm/
 
-upgrading-the-machine-type-of-your-vm explanation/virtualisation/upgrading-the-machine-type-of-your-vm/qemu-machine-types/
-explanation/virtualisation/upgrading-the-machine-type-of-your-vm/ explanation/virtualisation/upgrading-the-machine-type-of-your-vm/qemu-machine-types/
+upgrading-the-machine-type-of-your-vm explanation/virtualisation/qemu-machine-types/
+explanation/virtualisation/upgrading-the-machine-type-of-your-vm/ explanation/virtualisation/qemu-machine-types/
 
 virtualization-openstack explanation/virtualisation/about-openstack/
 about-openstack explanation/virtualisation/about-openstack/
