@@ -45,7 +45,7 @@ anything introducing a delta to the machine type / `vmstate`. The format general
 $MACHINE_TYPE-$DISTRO-RELEASE[-v*]
 ```
 
-This is an example of "point-release" machine types that have been added to address the [arch-capabilities bug](https://bugs.launchpad.net/bugs/2131822) in Noble:
+This is an example of "point-release" machine types that have been added to address the {lpbug}`arch-capabilities bug <2131822>` in Noble:
 
 ```text
 pc-i440fx-questing-v2 Ubuntu 25.10 PC v2 (i440FX + PIIX, + 10.1 machine, 1996)
