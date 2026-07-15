@@ -347,6 +347,27 @@ Below are the logs of an `unattended-upgrades` run that started at 20:43. The to
 2025-03-13 20:43:40,207 WARNING Shutdown msg: b"Reboot scheduled for Thu 2025-03-13 20:45:00 UTC, use 'shutdown -c' to cancel."
 ```
 
+## Service restarts
+
+Many updates do not require a full reboot, but do require services that use the updated files to be restarted before the change takes effect. For example, updating a shared library means every running service linked against it keeps using the old version in memory until it is restarted.
+
+This is handled by the {manpage}`needrestart(1)` package, which `unattended-upgrades` calls after applying updates. [Starting with Ubuntu 24.04 LTS](https://discourse.ubuntu.com/t/needrestart-changes-in-ubuntu-24-04-service-restarts/44671), `needrestart` restarts the affected services automatically by default.
+
+It does not restart everything, though. It ships the default configuration file `/etc/needrestart/needrestart.conf` with a pre-set list of known cases that are never restarted automatically (such as the display manager), so only the services outside that list are affected.
+
+On a production system this might not be enough, and could cause a critical service to be restarted at an unexpected time. If you want to exclude some services from being restarted automatically and keep running the outdated files until they are restarted manually (so plan to restart them during a suitable maintenance window), you can add a file to `/etc/needrestart/conf.d/` rather than editing `/etc/needrestart/needrestart.conf` directly. Two options are relevant:
+
+- `$nrconf{restart}`: Sets the default restart mode. Set it to `'a'` to restart services automatically, or `'l'` to only list the services that need a restart, leaving the actual restart to you.
+- `$nrconf{override_rc}`: Maps service names to a boolean that decides whether `needrestart` may restart them. Set a critical service to `0` to exclude it from automatic restarts while still allowing the rest of the system to be handled automatically.
+
+For example, to prevent a critical service from being restarted automatically while keeping automatic restarts enabled for everything else:
+
+```perl
+$nrconf{override_rc} = {
+    qr(^whatever-critical-service\.service$) => 0,
+};
+```
+
 ## When to consider disabling automatic updates
 
 While automatic security updates are enabled in Ubuntu by default, in some situations it might make sense to disable this feature, or carefully limit its reach.
