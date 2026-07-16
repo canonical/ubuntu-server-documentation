@@ -255,6 +255,7 @@ linkcheck_ignore = [
     "https://people.freedesktop.org/*",
     "https://www.squid-cache.org/Doc/config/",
     "https://tunnelblick.net/*",
+    "https://graylog.org/",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
