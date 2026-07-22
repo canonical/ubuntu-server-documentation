@@ -215,7 +215,7 @@ Apport
     during development or testing.
 
     See also:
-    * [The Apport Wiki Page](https://wiki.ubuntu.com/Apport)
+    * [The Apport Wiki Page](http://web.archive.org/web/20260520041813/https://wiki.ubuntu.com/Apport)
 
     Related topic(s):
     * Debugging
