@@ -340,10 +340,7 @@ But actually, if we run this command:
 :host:
 :dir:
 sudo apt install apache2 --install-suggests
-```
 
-```{terminal}
-:output-only:
 [...]
 Installing dependencies:
   apache2-bin              apache2-utils            libaprutil1-ldap
@@ -357,7 +354,7 @@ Summary:
   Space needed: 34.1 MB / 1328 MB available
 ```
 
-By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
+By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system.
 
 This is because each of these suggested packages also comes with their own lists of dependencies, including suggested packages, all of which would *also* be installed. It's perhaps clear to see why this is not the default setting!
 
@@ -706,7 +703,7 @@ dpkg --verify apache2
 You might have noticed there's a "c" next to the top line but not the bottom -- the "c" shows the file is a conffile.
 :::
 
-`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2. We can use the `--reinstall` flag to force `apt` to re-unpack all of the default content.
+`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2. We can use the `--reinstall` flag to force `apt` to re-unpack all of the default content:
 
 ```{terminal}
 :copy:
@@ -973,7 +970,7 @@ Error: Unable to satisfy dependencies. Reached two conflicting assignments:
       - apache2-bin:amd64=2.4.66-2ubuntu2 is not selected for install
 ```
 
-So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces. We can also break the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
+So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces. We can also break the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command:
 
 ```{terminal}
 :copy:
