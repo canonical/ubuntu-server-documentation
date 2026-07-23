@@ -51,7 +51,7 @@ Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease
 19 packages can be upgraded. Run 'apt list --upgradable' to see them.
 ```
 
-As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 24.04 LTS release (`noble-security`, `noble`, `noble-updates` and `noble-backports` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
+As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 26.04 LTS release (`resolute`, `resolute-updates`, `resolute-backports`, and `resolute-security` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
 
 ```{terminal}
 :copy:
@@ -61,14 +61,7 @@ As we can see, it checks ("hits") the various archives (**pockets**) that update
 apt list --upgradable
 ```
 
-The output tells us:
-
-- the package name and where the update will come from (e.g. `base-files/noble-updates`),
-- the most up-to-date package version available (e.g. `13ubuntu10.1`)
-- the hardware version the update is for (e.g. `amd64`), and
-- what package version is currently installed (e.g. `13ubuntu10`)
-
-The specific packages included in this list changes over time, so the exact packages shown will be different, but the output will be structured like this:
+The specific packages included in this list change over time, so the exact packages shown will be different, but the output will be structured like this:
 
 ```{terminal}
 :output-only:
@@ -79,6 +72,13 @@ bpftool/resolute-updates 7.7.0+7.0.0-22.22 amd64 [upgradable from: 7.7.0+7.0.0-1
 libgcrypt20/resolute-updates,resolute-security 1.12.0-2ubuntu0.1 amd64 [upgradable from: 1.12.0-2]
 [...]
 ```
+
+The output tells us:
+
+- the package name and where the update will come from (e.g. `bind9-dnsutils` package from `resolute-updates` and `resolute-security`),
+- the most up-to-date package version available (e.g. `1:9.20.18-1ubuntu2.1`),
+- the hardware version the update is for (e.g. `amd64`), and
+- what package version is currently installed (e.g. `1:9.20.18-1ubuntu2`)
 
 ### apt upgrade
 
@@ -109,13 +109,13 @@ In the output, we'll see where `apt upgrade` is fetching the upgrade from for ea
 Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libgcrypt20 amd64 1.12.0-2ubuntu0.1 [670 kB]
 ```
 
-APT combines the various elements; the package name (`libgcrypt20`), version (`1.21.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
+APT combines the various elements; the package name (`libgcrypt20`), version (`1.12.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
 
 :::{note}
 These commands only upgrade the packages for the release of Ubuntu that we are using (26.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
 :::
 
-It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages -- so although `apt upgrade` is safe to use unattended (in a script, for example), you should only use `dist-upgrade` when you can pay attention to it.
+It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages. So it's safe to use `-y` (or a similar flag) with `apt upgrade`, but you should only run `dist-upgrade` when you can review which packages may be removed.
 
 ### Searching with APT
 
@@ -173,7 +173,7 @@ Description: parameter calculator for IPv4 addresses
  webserver.
 ```
 
-In many places, you will see reference to `apt-get` and `apt-cache` instead of `apt`. Historically, the *database* part of APT was accessed using `apt-cache` (e.g. `apt-cache show ipcalc`), and the *packages* part of APT used `apt-get` (e.g. `apt-get install ipcalc`).
+While we used `apt` in the `apt show` command, in many places you will see reference to `apt-get` and `apt-cache` instead of `apt`. Historically, the *database* part of APT was accessed using `apt-cache` (e.g. `apt-cache show ipcalc`), and the *packages* part of APT used `apt-get` (e.g. `apt-get install ipcalc`).
 
 APT has recently been streamlined, so although it uses `apt-get` and `apt-cache` "behind the scenes" (and these commands do still work), we don't need to worry about remembering which command to use -- we can use the more convenient `apt` directly. To find out more about these packages and how to use them (or indeed, any package in Ubuntu!) we can refer to the manual pages.
 
@@ -215,12 +215,7 @@ APT tells us how it will resolve any dependency conflicts or issues when we run 
 sudo apt install apache2
 ```
 
-The output should be similar to the below. It tells us:
-
-- which packages we have but don't need (we'll talk about that in the "auto-remove" section),
-- additional packages that will be installed (these are our dependencies),
-- suggested packages (which we'll discuss in the next section), and
-- a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
+The output should be similar to the below.
 
 ```{terminal}
 :output-only:
@@ -243,6 +238,13 @@ Summary:
 Continue? [Y/n] 
 ```
 
+It tells us:
+
+- which packages we have but don't need (not shown above because our Apache2 example has none),
+- additional packages that will be installed (these are our dependencies),
+- suggested packages, and
+- a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
+
 Let's try and make sense of this output. 
 
 #### Types of dependencies
@@ -261,9 +263,15 @@ We can see, using `apt show`, exactly which packages fall into each of these cat
 :host:
 :dir:
 apt show apache2
+
+[...]
+Depends: apache2-bin (= 2.4.66-2ubuntu2.4), apache2-data (= 2.4.66-2ubuntu2.4), apache2-utils (= 2.4.66-2ubuntu2.4), media-types, procps, perl:any
+Recommends: ssl-cert
+Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, ufw, www-browser
+[...]
 ```
 
-If we look only at the sections on dependencies, we can see that `ssl-cert` is a recommended package:
+We see that `ssl-cert` is a recommended package. In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
 ```{terminal}
 :output-only:
@@ -274,8 +282,6 @@ Installing dependencies:
   apache2-utils  libaprutil1-ldap         ssl-cert
 [...]
 ```
-
-In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
 We can override this behavior by passing the `--no-install-recommends` flag to our command, like this:
 
@@ -309,7 +315,7 @@ Summary:
 [...]
 ```
 
-Now, we see that `ssl-cert` is only mentioned as a recommended package, but is excluded from the list of packages to be installed.
+Now, we see that `ssl-cert` is only mentioned as a recommended package, and is excluded from the list of packages to be installed.
 
 There is a second flag we could pass -- the `--install-suggests` flag. This will not only install the strict dependencies and recommended packages, but *also* the suggested packages. From our previous output, it doesn't look like too much, right? It's only four additional packages.
 
@@ -321,12 +327,7 @@ But actually, if we run this command:
 :host:
 :dir:
 sudo apt install apache2 --install-suggests
-```
 
-By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
-
-```{terminal}
-:output-only:
 [...]
 Installing dependencies:
   apache2-bin              apache2-utils            libaprutil1-ldap
@@ -339,6 +340,8 @@ Summary:
   Download size: 6078 kB
   Space needed: 34.1 MB / 1328 MB available
 ```
+
+By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system.
 
 This is because each of these suggested packages also comes with their own lists of dependencies, including suggested packages, all of which would *also* be installed. It's perhaps clear to see why this is not the default setting!
 
@@ -687,7 +690,7 @@ dpkg --verify apache2
 You might have noticed there's a "c" next to the top line but not the bottom -- the "c" shows the file is a conffile.
 :::
 
-`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2:
+`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2. We can use the `--reinstall` flag to force `apt` to re-unpack all of the default content:
 
 ```{terminal}
 :copy:
@@ -697,7 +700,7 @@ You might have noticed there's a "c" next to the top line but not the bottom -- 
 sudo apt install --reinstall apache2
 ```
 
-By using the `--reinstall` flag, we can force `apt` to re-unpack all of the default content. If we then verify once more...
+If we then verify once more...
 
 ```{terminal}
 :copy:
@@ -954,7 +957,7 @@ Error: Unable to satisfy dependencies. Reached two conflicting assignments:
       - apache2-bin:amd64=2.4.66-2ubuntu2 is not selected for install
 ```
 
-So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces:
+So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces. We can also break the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command:
 
 ```{terminal}
 :copy:
@@ -966,8 +969,6 @@ sudo apt install apache2-bin=2.4.66-2ubuntu2 \
   apache2-utils=2.4.66-2ubuntu2 \
   apache2=2.4.66-2ubuntu2
 ```
-
-In this case we're also breaking the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
 
 APT will warn us that we are downgrading the package, but let us press {kbd}`Y` to confirm (when prompted), and it will go ahead and downgrade us anyway. Let's run the following command again to get confirmation that we're running on an older version:
 
@@ -1052,7 +1053,7 @@ Every Ubuntu series (`noble`, `jammy`, etc) is split into **pockets**, which are
 - Once an update is released, they come from either **-security** or **-updates** depending on whether they are a security-related update or not.
 - And **-backports**, which contains packages that were not available at release time.
 
-This is why earlier, we saw that some updates came from `resolute-updates` or `resolute-security`. These refer to updates and security updates from the noble series (respectively). Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
+This is why earlier, we saw that some updates came from `resolute-updates` or `resolute-security`. These refer to updates and security updates, respectively, from the `resolute` series. Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
 
 Remember -- the original version of the `apache2` package we saw came from `resolute`. The `-release` pocket only includes the software that was part of the original LTS release, and so it takes the name of the Ubuntu series by default (i.e., the `-release` pocket is implied). 
 
