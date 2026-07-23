@@ -61,7 +61,7 @@ As we can see, it checks ("hits") the various archives (**pockets**) that update
 apt list --upgradable
 ```
 
-The specific packages included in this list changes over time, so the exact packages shown will be different, but the output will be structured like this:
+The specific packages included in this list change over time, so the exact packages shown will be different, but the output will be structured like this:
 
 ```{terminal}
 :output-only:
@@ -109,13 +109,13 @@ In the output, we'll see where `apt upgrade` is fetching the upgrade from for ea
 Get:1 http://archive.ubuntu.com/ubuntu resolute-updates/main amd64 libgcrypt20 amd64 1.12.0-2ubuntu0.1 [670 kB]
 ```
 
-APT combines the various elements; the package name (`libgcrypt20`), version (`1.21.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
+APT combines the various elements; the package name (`libgcrypt20`), version (`1.12.0-2ubuntu0.1`), source (`resolute-updates/main`), etc into a single URL that it can use for the download. The package is then unpacked, and the upgrade applied to the system.
 
 :::{note}
 These commands only upgrade the packages for the release of Ubuntu that we are using (26.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
 :::
 
-It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages -- so although `apt upgrade` is safe to use unattended (in a script, for example), you should only use `dist-upgrade` when you can pay attention to it.
+It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages. So it's safe to use `-y` (or a similar flag) with `apt upgrade`, but you should only run `dist-upgrade` when you can review which packages may be removed.
 
 ### Searching with APT
 
@@ -173,7 +173,7 @@ Description: parameter calculator for IPv4 addresses
  webserver.
 ```
 
-In many places, you will see reference to `apt-get` and `apt-cache` instead of `apt`. Historically, the *database* part of APT was accessed using `apt-cache` (e.g. `apt-cache show ipcalc`), and the *packages* part of APT used `apt-get` (e.g. `apt-get install ipcalc`).
+While we used `apt` in the `apt show` command, in many places you will see reference to `apt-get` and `apt-cache` instead of `apt`. Historically, the *database* part of APT was accessed using `apt-cache` (e.g. `apt-cache show ipcalc`), and the *packages* part of APT used `apt-get` (e.g. `apt-get install ipcalc`).
 
 APT has recently been streamlined, so although it uses `apt-get` and `apt-cache` "behind the scenes" (and these commands do still work), we don't need to worry about remembering which command to use -- we can use the more convenient `apt` directly. To find out more about these packages and how to use them (or indeed, any package in Ubuntu!) we can refer to the manual pages.
 
@@ -215,12 +215,7 @@ APT tells us how it will resolve any dependency conflicts or issues when we run 
 sudo apt install apache2
 ```
 
-The output should be similar to the below. It tells us:
-
-- which packages we have but don't need (we'll talk about that in the "auto-remove" section),
-- additional packages that will be installed (these are our dependencies),
-- suggested packages (which we'll discuss in the next section), and
-- a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
+The output should be similar to the below.
 
 ```{terminal}
 :output-only:
@@ -243,6 +238,13 @@ Summary:
 Continue? [Y/n] 
 ```
 
+It tells us:
+
+- which packages we have but don't need (not shown above because our Apache2 example has none),
+- additional packages that will be installed (these are our dependencies),
+- suggested packages, and
+- a summary of which *new* packages will be present on the system after the install is done (which in this case is `apache2` itself, and all its dependencies).
+
 Let's try and make sense of this output. 
 
 #### Types of dependencies
@@ -263,7 +265,16 @@ We can see, using `apt show`, exactly which packages fall into each of these cat
 apt show apache2
 ```
 
-If we look only at the sections on dependencies, we can see that `ssl-cert` is a recommended package:
+```{terminal}
+:output-only:
+[...]
+Depends: apache2-bin (= 2.4.66-2ubuntu2.4), apache2-data (= 2.4.66-2ubuntu2.4), apache2-utils (= 2.4.66-2ubuntu2.4), media-types, procps, perl:any
+Recommends: ssl-cert
+Suggests: apache2-doc, apache2-suexec-pristine | apache2-suexec-custom, ufw, www-browser
+[...]
+```
+
+We see that `ssl-cert` is a recommended package. In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
 ```{terminal}
 :output-only:
@@ -274,8 +285,6 @@ Installing dependencies:
   apache2-utils  libaprutil1-ldap         ssl-cert
 [...]
 ```
-
-In Ubuntu, the default configuration of `apt install` is set to install recommended packages alongside `depends`, so when we ran the `apt install apache2` command, `ssl-cert` was included in the proposed packages to be installed (even though it's only recommended, not strictly needed).
 
 We can override this behavior by passing the `--no-install-recommends` flag to our command, like this:
 
@@ -309,7 +318,7 @@ Summary:
 [...]
 ```
 
-Now, we see that `ssl-cert` is only mentioned as a recommended package, but is excluded from the list of packages to be installed.
+Now, we see that `ssl-cert` is only mentioned as a recommended package, and is excluded from the list of packages to be installed.
 
 There is a second flag we could pass -- the `--install-suggests` flag. This will not only install the strict dependencies and recommended packages, but *also* the suggested packages. From our previous output, it doesn't look like too much, right? It's only four additional packages.
 
@@ -322,8 +331,6 @@ But actually, if we run this command:
 :dir:
 sudo apt install apache2 --install-suggests
 ```
-
-By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
 
 ```{terminal}
 :output-only:
@@ -339,6 +346,8 @@ Summary:
   Download size: 6078 kB
   Space needed: 34.1 MB / 1328 MB available
 ```
+
+By comparing the amount of space needed with "suggests" included, to the previous output, we can see that there's a considerable increase! Sometimes, including suggested packages will cause the package to not be installed due to a lack of space on the system:
 
 This is because each of these suggested packages also comes with their own lists of dependencies, including suggested packages, all of which would *also* be installed. It's perhaps clear to see why this is not the default setting!
 
