@@ -263,19 +263,6 @@ We can see, using `apt show`, exactly which packages fall into each of these cat
 :host:
 :dir:
 apt show apache2
-```
-
-```{terminal}
-:output-only:
-[...]
-Depends: apache2-bin (= 2.4.66-2ubuntu2.4), apache2-data (= 2.4.66-2ubuntu2.4), apache2-utils (= 2.4.66-2ubuntu2.4), media-types, procps, perl:any
-Recommends: ssl-cert
-```{terminal}
-:copy:
-:user:
-:host:
-:dir:
-apt show apache2
 
 [...]
 Depends: apache2-bin (= 2.4.66-2ubuntu2.4), apache2-data (= 2.4.66-2ubuntu2.4), apache2-utils (= 2.4.66-2ubuntu2.4), media-types, procps, perl:any
