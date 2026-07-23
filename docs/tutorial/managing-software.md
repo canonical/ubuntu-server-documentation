@@ -51,7 +51,7 @@ Hit:4 http://security.ubuntu.com/ubuntu resolute-security InRelease
 19 packages can be upgraded. Run 'apt list --upgradable' to see them.
 ```
 
-As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 24.04 LTS release (`noble-security`, `noble`, `noble-updates` and `noble-backports` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
+As we can see, it checks ("hits") the various archives (**pockets**) that updates can come from for the 26.04 LTS release (`resolute`, `resolute-updates`, `resolute-backports`, and `resolute-security` -- remember these, as we'll come back to them later). It has found some packages that can be upgraded to newer versions. If we want to see which packages those are, we can run the command hinted in the output:
 
 ```{terminal}
 :copy:
@@ -63,10 +63,10 @@ apt list --upgradable
 
 The output tells us:
 
-- the package name and where the update will come from (e.g. `base-files/noble-updates`),
-- the most up-to-date package version available (e.g. `13ubuntu10.1`)
+- the package name and where the update will come from (e.g. `bind9-dnsutils` package from `resolute-updates` and `resolute-security`),
+- the most up-to-date package version available (e.g. `1:9.20.18-1ubuntu2.1`),
 - the hardware version the update is for (e.g. `amd64`), and
-- what package version is currently installed (e.g. `13ubuntu10`)
+- what package version is currently installed (e.g. `1:9.20.18-1ubuntu2`)
 
 The specific packages included in this list changes over time, so the exact packages shown will be different, but the output will be structured like this:
 
@@ -1052,7 +1052,7 @@ Every Ubuntu series (`noble`, `jammy`, etc) is split into **pockets**, which are
 - Once an update is released, they come from either **-security** or **-updates** depending on whether they are a security-related update or not.
 - And **-backports**, which contains packages that were not available at release time.
 
-This is why earlier, we saw that some updates came from `resolute-updates` or `resolute-security`. These refer to updates and security updates from the noble series (respectively). Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
+This is why earlier, we saw that some updates came from `resolute-updates` or `resolute-security`. These refer to updates and security updates from the `resolute` series (respectively). Pockets are usually appended to the end of the series, and it's quite common to see the hyphen (`-`) included when referring to pockets. 
 
 Remember -- the original version of the `apache2` package we saw came from `resolute`. The `-release` pocket only includes the software that was part of the original LTS release, and so it takes the name of the Ubuntu series by default (i.e., the `-release` pocket is implied). 
 
