@@ -696,7 +696,7 @@ dpkg --verify apache2
 You might have noticed there's a "c" next to the top line but not the bottom -- the "c" shows the file is a conffile.
 :::
 
-`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2:
+`dpkg` can tell that the file has been changed, but won't tell us what the change was. However, since the file in question is not a conffile, we know that the change *won't be preserved* if we upgrade the package. This means that we can overwrite the changes and restore the default package content by "reinstalling" Apache2. We can use the `--reinstall` flag to force `apt` to re-unpack all of the default content.
 
 ```{terminal}
 :copy:
@@ -706,7 +706,7 @@ You might have noticed there's a "c" next to the top line but not the bottom -- 
 sudo apt install --reinstall apache2
 ```
 
-By using the `--reinstall` flag, we can force `apt` to re-unpack all of the default content. If we then verify once more...
+If we then verify once more...
 
 ```{terminal}
 :copy:
@@ -963,7 +963,7 @@ Error: Unable to satisfy dependencies. Reached two conflicting assignments:
       - apache2-bin:amd64=2.4.66-2ubuntu2 is not selected for install
 ```
 
-So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces:
+So, all we need to do is first install the dependencies, and then run the install command again. Remember that we can install multiple packages at once by separating them with spaces. We can also break the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
 
 ```{terminal}
 :copy:
@@ -975,8 +975,6 @@ sudo apt install apache2-bin=2.4.66-2ubuntu2 \
   apache2-utils=2.4.66-2ubuntu2 \
   apache2=2.4.66-2ubuntu2
 ```
-
-In this case we're also breaking the command over multiple lines using backslashes (`\`) to make it easier to read, but it will still be run as a single command.
 
 APT will warn us that we are downgrading the package, but let us press {kbd}`Y` to confirm (when prompted), and it will go ahead and downgrade us anyway. Let's run the following command again to get confirmation that we're running on an older version:
 
