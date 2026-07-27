@@ -115,7 +115,7 @@ APT combines the various elements; the package name (`libgcrypt20`), version (`1
 These commands only upgrade the packages for the release of Ubuntu that we are using (26.04 LTS). If we wanted to upgrade the entire system to the next release of Ubuntu (e.g. from 22.04 LTS to 24.04 LTS), we would use the `do-release-upgrade` command. See this guide on {ref}`how to upgrade your release <upgrade-your-release>` for more information.
 :::
 
-It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages. So it's safe to use `-y` (or a similar flag) with `apt upgrade`, but you should only run `dist-upgrade` when you can review which packages may be removed.
+It's important to know that `apt upgrade` will only handle packages that can be straightforwardly upgraded. If the package has **dependency** issues (i.e., the version you have "depends" on other packages that also need to be added, upgraded or removed), you would need to use `sudo apt dist-upgrade` instead. The `dist-upgrade` command is able to resolve conflicts between package versions, but it *could* end up removing some packages. So while `apt upgrade` is safe to use unattended (in a script, for example), you should only use `dist-upgrade` when you can review which packages may be removed.
 
 ### Searching with APT
 
