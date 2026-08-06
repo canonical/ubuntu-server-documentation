@@ -1,15 +1,15 @@
 ---
 myst:
   html_meta:
-    description: "Understand web server options for Ubuntu Server, including Apache, Nginx, and other HTTP server technologies."
+    description: "Understand web server options for Ubuntu Server, including Apache, Nginx, and other {term}`HTTP` server technologies."
 ---
 
 (about-web-servers)=
 # About web servers
 
-The primary function of a **web server** is to store, process and deliver **web pages** to clients. The clients communicate with the server by sending HTTP requests.
+The primary function of a **web server** is to store, process and deliver **web pages** to clients. The clients communicate with the server by sending {term}`HTTP` requests.
 
-Clients, mostly via **web browsers**, request specific resources and the server responds with the content of that resource (or an error message). The response is usually a web page in the form of HTML documents -- which may include images, style sheets, scripts, and text.
+Clients, mostly via **web browsers**, request specific resources and the server responds with the content of that resource (or an error message). The response is usually a web page in the form of {term}`HTML` documents -- which may include images, style sheets, scripts, and text.
 
 ## URLs
 
@@ -27,11 +27,11 @@ www.ubuntu.com/community
 
 ## Transfer protocols
 
-The most common protocol used to transfer web pages is the Hyper Text Transfer Protocol (HTTP). Protocols such as Hyper Text Transfer Protocol over Secure Sockets Layer (HTTPS), and File Transfer Protocol (FTP), a protocol for uploading and downloading files, are also supported.
+The most common protocol used to transfer web pages is the Hyper Text Transfer Protocol ({term}`HTTP`). Protocols such as Hyper Text Transfer Protocol over Secure Sockets Layer ({term}`HTTPS`), and File Transfer Protocol (FTP), a protocol for uploading and downloading files, are also supported.
 
 ### HTTP status codes
 
-When accessing a web server, every HTTP request received is responded to with content and a HTTP status code. HTTP status codes are three-digit codes, which are grouped into five different classes. The class of a status code can be quickly identified by its first digit:
+When accessing a web server, every {term}`HTTP` request received is responded to with content and a HTTP status code. {term}`HTTP` status codes are three-digit codes, which are grouped into five different classes. The class of a status code can be quickly identified by its first digit:
 
 * **1xx** :  *Informational* - Request received, continuing process
 * **2xx** :  *Success* - The action was successfully received, understood, and accepted
@@ -48,4 +48,4 @@ Web servers are heavily used in the deployment of websites, and there are two di
 * **Static web server**: The content of the server's response will be the hosted files "as-is".
 * **Dynamic web server**:  Consists of a web server plus additional software (usually an *application server* and a *database*).
 
-  For example, to produce the web pages you see in your web browser, the application server might fill an HTML template with contents from a database. We can therefore say that the content of the server's response is generated dynamically.
+  For example, to produce the web pages you see in your web browser, the application server might fill an {term}`HTML` template with contents from a database. We can therefore say that the content of the server's response is generated dynamically.

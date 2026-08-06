@@ -9,7 +9,7 @@ myst:
 
 One of the most common forms of cryptography today is **public-key** cryptography. Public-key cryptography uses a **public key** and a **private key**. The system works by encrypting information using the public key. The information can then only be decrypted using the private key.
 
-A common use for public-key cryptography is encrypting application traffic using a Secure Socket Layer (SSL) or Transport Layer Security (TLS) connection. One example: configuring Apache to provide HTTPS, the HTTP protocol over SSL/TLS. This allows a way to encrypt traffic using a protocol that does not itself provide encryption.
+A common use for public-key cryptography is encrypting application traffic using a Secure Socket Layer (SSL) or Transport Layer Security (TLS) connection. One example: configuring Apache to provide {term}`HTTPS`, the {term}`HTTP` protocol over SSL/TLS. This allows a way to encrypt traffic using a protocol that does not itself provide encryption.
 
 A **certificate** is a way to distribute a public key and other information about a server and the organization responsible for it. Certificates can be digitally signed by a **Certification Authority** (CA), which is a trusted third party that has confirmed the information contained in the certificate is accurate.
 
@@ -21,7 +21,7 @@ To set up a secure server using public-key cryptography, in most cases, you send
 Self-signed certificates should not be used in most production environments.
 :::
 
-Continuing the HTTPS example, a CA-signed certificate provides two important capabilities that a self-signed certificate does not:
+Continuing the {term}`HTTPS` example, a CA-signed certificate provides two important capabilities that a self-signed certificate does not:
 
 - Browsers will (usually) automatically recognize the CA signature and allow a secure connection to be made without prompting the user.
 
@@ -130,7 +130,7 @@ sudo cp server.crt /etc/ssl/certs
 sudo cp server.key /etc/ssl/private
 ```
 
-Now configure any applications that have the ability to use public-key cryptography so that they use the certificate and key files. For example, Apache can provide HTTPS, Dovecot can provide IMAPS and POP3S, etc.
+Now configure any applications that have the ability to use public-key cryptography so that they use the certificate and key files. For example, Apache can provide {term}`HTTPS`, Dovecot can provide IMAPS and POP3S, etc.
 
 ## Certification Authority
 
@@ -140,7 +140,7 @@ Creating and running your own CA is covered step by step in {ref}`obtain-tls-cer
 
 ## Further reading
 
-- The Wikipedia [HTTPS page](https://en.wikipedia.org/wiki/HTTPS) has more information regarding HTTPS.
+- The Wikipedia [HTTPS page](https://en.wikipedia.org/wiki/HTTPS) has more information regarding {term}`HTTPS`.
 
 - For more information on OpenSSL see the [OpenSSL Home Page](https://www.openssl.org/).
 

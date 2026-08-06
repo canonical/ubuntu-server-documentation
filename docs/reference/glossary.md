@@ -164,9 +164,9 @@ Ansible
     * Automation
 
 Apache2
-    A robust, open-source HTTP server software designed for the deployment and
+    A robust, open-source {term}`HTTP` server software designed for the deployment and
     delivery of web-based applications and content. Functioning as a
-    request-response service, Apache 2 processes HTTP requests from client
+    request-response service, Apache 2 processes {term}`HTTP` requests from client
     applications, facilitating the transmission of static and dynamic web
     resources. It has a modular architecture, supporting a wide array of
     extensions, enabling customizable functionality including security protocols
@@ -1236,23 +1236,24 @@ Highly-available Storage Virtualization
 
 HTCP
 Hyper Text Caching Protocol
-    *Work in Progress*
+    A protocol for querying, monitoring and managing {term}`HTTP` caches. It is described in detail in [RFC2756](https://www.rfc-editor.org/info/rfc2756/)
 
 HTML
 HyperText Markup Language
-    *Work in Progress*
+    A language for adding display and formatting information to text that is intended for display in web browsers. It is
+    standardized by the Web Hypertext Application Technology Working Group (WHATWG) at [HTML Living Standard](https://html.spec.whatwg.org/multipage/).
 
 HTTP
 HyperText Transfer Protocol
-    *Work in Progress*
+    A protocol for transferring {term}`HyperText Markup Language (HTML) <HTML>` documents between web servers and web clients (typically web browsers). It defined by a number of {term}`IETF Request for Comment (RFC) <RFC>` documents, available at [HTTP Documentation](https://httpwg.org/specs/).
 
 HTTPD
 HyperText Transfer Protocol Daemon
-    *Work in Progress*
+    A server process that serves {term}`HTML` documents to client applications (typically web browsers) according to the {term}`HTTP` protocol.
 
 HTTPS
 HyperText Transfer Protocol Secure
-    *Work in Progress*
+    An extension to the {term}`HTTP` protocol to implement encryption between web servers and clients. It is implemented using {term}`TLS`.
 
 hugepage
     A hugepage increases the page size on a host, and as a result, when virtual memory is allocated to an application, there are fewer page table entries required to map the virtual memory to physical memory. The page table entries are stored in Random Access Memory (RAM) and cached in the {term}`Translation Lookaside Buffer (TLB) <TLB>`.
@@ -2666,7 +2667,7 @@ Web Cache Communication Protocol
     WCCP is a Cisco-developed protocol used to transparently redirect network traffic (often web traffic) from routers or switches to caching or proxy devices. It is mainly used to improve performance, enable content filtering, and provide load balancing and fault tolerance for web or proxy services.
 
 Web server
-    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the internet or an intranet using HTTP/HTTPS protocols.
+    A web server is software (and sometimes the hardware it runs on) that serves web content to clients over the internet or an intranet using {term}`HTTP`/{term}`HTTPS` protocols.
 
 winbind
 Windows Bind
@@ -2701,7 +2702,7 @@ X.509
 
 xhtml
 Extensible HyperText Markup Language
-    xhtml is a stricter HTML language. It reformulates HTML as XML by combining HTML elements with XML's strict syntax rules, so documents are well-formed, more consistent across browsers, and easier to process with XML tools.
+    xhtml is a stricter {term}`HTML` language. It reformulates {term}`HTML` as XML by combining {term}`HTML` elements with XML's strict syntax rules, so documents are well-formed, more consistent across browsers, and easier to process with XML tools.
 
 XML
 Extensible Markup Language

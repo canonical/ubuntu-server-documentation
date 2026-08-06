@@ -11,7 +11,7 @@ myst:
 
 One of the main advantages to `debuginfod` is that debugging information can be retrieved on-demand for packages shipped with Ubuntu without the need to {ref}`manually install <debug-symbol-packages>` the debug symbol packages.
 
-Ubuntu maintains its own `debuginfod` service, which regularly indexes the debug symbols present in `ddebs` and other packages and serves this information over HTTPS.
+Ubuntu maintains its own `debuginfod` service, which regularly indexes the debug symbols present in `ddebs` and other packages and serves this information over {term}`HTTPS`.
 
 Currently, the service only provides DWARF information. There are plans for it to also index and serve source-code in the future.
 
@@ -95,7 +95,7 @@ Displaying notes found in: .note.gnu.build-id
     Build ID: 7426cc87c256cb386b52891bbe4300f2f5bab8c6
 ```
 
-When you are debugging a program, GDB will send the program's Build-ID to the `debuginfod` server, which will check if it has the corresponding debug information for that binary/library. If it does, then it will send the debug symbols via HTTPS back to GDB.
+When you are debugging a program, GDB will send the program's Build-ID to the `debuginfod` server, which will check if it has the corresponding debug information for that binary/library. If it does, then it will send the debug symbols via {term}`HTTPS` back to GDB.
 
 ## Can ddeb packages co-exist with debuginfod?
 

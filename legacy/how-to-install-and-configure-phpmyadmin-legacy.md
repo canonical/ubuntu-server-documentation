@@ -47,7 +47,7 @@ Once configured, log out of phpMyAdmin then back in again, and you should be acc
 
 ### Configuration files
 
-The `config.header.inc.php` and `config.footer.inc.php` files in the `/etc/phpmyadmin` directory are used to add a HTML header and footer, respectively, to phpMyAdmin.
+The `config.header.inc.php` and `config.footer.inc.php` files in the `/etc/phpmyadmin` directory are used to add a {term}`HTML` header and footer, respectively, to phpMyAdmin.
 
 Another important configuration file is `/etc/phpmyadmin/apache.conf`. This file is symlinked to `/etc/apache2/conf-available/phpmyadmin.conf`, and once enabled, is used to configure Apache2 to serve the phpMyAdmin site. The file contains directives for loading PHP, directory permissions, etc. From a terminal type:
 

@@ -7,7 +7,7 @@ myst:
 (install-php)=
 # How to install and configure PHP
 
-[PHP](https://www.php.net/) is a general-purpose scripting language well-suited for Web development since PHP scripts can be embedded into HTML. This guide explains how to install and configure PHP in an Ubuntu System with Apache2 and MySQL.
+[PHP](https://www.php.net/) is a general-purpose scripting language well-suited for Web development since PHP scripts can be embedded into {term}`HTML`. This guide explains how to install and configure PHP in an Ubuntu System with Apache2 and MySQL.
 
 ## Prerequisites
 

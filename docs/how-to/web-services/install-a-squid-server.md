@@ -119,7 +119,7 @@ refresh_pattern .                           0      20%  4320
 
 ### Caching HTTPS content
 
-By default, Squid can't cache HTTPS because the traffic is encrypted. There are different strategies for enabling HTTPS caching, such as TLS interception via `CONNECT` requests, origin server caching based on `Cache-Control` and `ETag` headers, or access-control only solutions.
+By default, Squid can't cache {term}`HTTPS` because the traffic is encrypted. There are different strategies for enabling {term}`HTTPS` caching, such as TLS interception via `CONNECT` requests, origin server caching based on `Cache-Control` and `ETag` headers, or access-control only solutions.
 
 Please refer to the [Squid HTTPS documentation](https://wiki.squid-cache.org/Features/HTTPS) to learn more.
 
