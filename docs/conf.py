@@ -257,6 +257,11 @@ linkcheck_ignore = [
     "https://tunnelblick.net/*",
     "https://graylog.org/",
     "https://www.dedoimedo.com/computers/crash-analyze.html",
+    "https://askubuntu.com/*",
+    "https://docs.aws.amazon.com/*",
+    "https://docs.nvidia.com/*",
+    "https://docs.amd.com",
+    "https://www.rapid7.com/products/siem/",
 ]
 
 # A regex list of URLs where anchors are ignored by "make linkcheck"
