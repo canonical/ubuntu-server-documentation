@@ -10,9 +10,18 @@ Starting with Ubuntu 25.10, the "oxidization" of Ubuntu (see [Ubuntu Discourse][
 `coreutils` and `sudo` to new Rust-based implementations. Previous Ubuntu
 releases are unaffected.
 - `coreutils`: changed from [GNU Coreutils][gnu-coreutils-manual-reference] to [uutils Coreutils][uutils-coreutils-manual-reference]
-- `sudo`: changed from [sudo.ws][sudo-ws-manual-reference] to [sudo-rs][sudo-rs-project-reference]
+- `sudo`: changed from [`sudo.ws`][sudo-ws-manual-reference] to [`sudo-rs`][sudo-rs-project-reference]
 
-This page provides guidance on the new implementations.
+For most users, no changes are required for normal usage. The new Rust-based
+implementations are intended to be drop-in replacements for the existing
+utilities, so existing commands and usage should generally continue to work
+as before. This page describes known differences, incompatibilities, and other
+considerations that may affect specific use cases.
+
+GNU Coreutils and `sudo.ws` continue to receive maintenance in Ubuntu releases
+where they are the default providers. In newer releases where the Rust-based
+implementations are the default, they remain available as providers, while
+the Rust-based implementations are the primary ones going forward.
 
 [oxiziding-ubuntu-reference]: https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995
 [uutils-coreutils-manual-reference]: https://uutils.org/coreutils/docs
@@ -25,16 +34,22 @@ This page provides guidance on the new implementations.
 
 This section lists helpful resources and tips regarding the new Rust-based
 implementation of `coreutils`, provided by the `rust-coreutils` package.
+The `rust-coreutils` package is available for install on Ubuntu 24.04 LTS and
+later, but GNU Coreutils remains the default provider on Ubuntu 24.04 LTS.
 
 Refer to the [uutils Coreutils Documentation](https://uutils.org/coreutils/docs/index.html) for information about its usage.
 
 ### Release-specific exceptions
 
-Due to known incompatibilities, some utilities continue to be provided by GNU
-Coreutils instead of `rust-coreutils` in Ubuntu 25.10 and Ubuntu 26.04 LTS.
-The utilities provided by GNU Coreutils in each release are as follows:
+The `rust-coreutils` package provides implementations of all `coreutils`
+utilities (also available through its `coreutils` multi-call binary). However,
+the `coreutils-from-<provider>` packages control which implementation is used
+by the system utility commands such as `cp` and `chmod`.
 
-| Release | Utilities provided by GNU Coreutils |
+Due to known incompatibilities, `coreutils-from-uutils` configures some
+commands to continue using GNU Coreutils in Ubuntu 25.10 and Ubuntu 26.04 LTS.
+
+| Release | Utilities configured to use GNU Coreutils |
 |---|---|
 | **Ubuntu 24.04 LTS and earlier** | **All** |
 | **Ubuntu 25.10** | `chmod`, `chown`, `cp`, `df`, `mv`, `rm`, `true` |
