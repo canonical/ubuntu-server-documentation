@@ -1,49 +1,77 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for migrated tools outlining differences to the former, to guide users of Ubuntu Server on the new implementations."
+    description: "Reference documentation for Ubuntu Server’s Rust-based replacements for sudo and GNU coreutils, highlighting differences, release-specific exceptions, and important changes for users"
 ---
 
-# Migrated tools
+# System utility replacements
 
-The “oxidisation” of Ubuntu (see [Ubuntu Discourse](https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995)) has changed the providers of a number of packages that are installed by default.
-This page provides guidance for Ubuntu Server users on the new implementations
+Starting with Ubuntu 25.10, the "oxidization" of Ubuntu (see [Ubuntu Discourse][oxiziding-ubuntu-reference]) changed the providers of the system utilities
+`coreutils` and `sudo` to new Rust-based implementations. Previous Ubuntu
+releases are unaffected.
+- `coreutils`: changed from [GNU Coreutils][gnu-coreutils-manual-reference] to [uutils Coreutils][uutils-coreutils-manual-reference]
+- `sudo`: changed from [sudo.ws][sudo-ws-manual-reference] to [sudo-rs][sudo-rs-project-reference]
+
+This page provides guidance on the new implementations.
+
+[oxiziding-ubuntu-reference]: https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995
+[uutils-coreutils-manual-reference]: https://uutils.org/coreutils/docs
+[gnu-coreutils-manual-reference]: https://www.gnu.org/software/coreutils/manual
+[sudo-ws-manual-reference]: https://www.sudo.ws/docs/man/sudo.man/
+[sudo-rs-project-reference]: https://github.com/trifectatechfoundation/sudo-rs
 
 (rust-coreutils)=
 ## rust-coreutils
 
-uutils is the default coreutils provider as of Ubuntu 25.10. This section lists
-helpful resources and tips regarding the migration.
+This section lists helpful resources and tips regarding the new Rust-based
+implementation of `coreutils`, provided by the `rust-coreutils` package.
 
-Refer to the [uutils Coreutils Documentation](https://uutils.org/coreutils/docs/index.html) for information about uutils.
+Refer to the [uutils Coreutils Documentation](https://uutils.org/coreutils/docs/index.html) for information about its usage.
 
-### Exceptions per releases
+### Release-specific exceptions
 
-Due to known incompatibilities, some utilities in `rust-coreutils` are still
-provided by GNU for the Ubuntu 25.10 and 26.04 releases. Redirected utilities
-per release are as follows:
+Due to known incompatibilities, some utilities continue to be provided by GNU
+Coreutils instead of `rust-coreutils` in Ubuntu 25.10 and Ubuntu 26.04 LTS.
+The utilities provided by GNU Coreutils in each release are as follows:
 
-| Release | Utilities still provided by GNU |
+| Release | Utilities provided by GNU Coreutils |
 |---|---|
-| **Ubuntu 25.10** ([reference][ubuntu-25.10-reference]) | `chmod`, `chown`, `cp`, `df`, `mv`, `rm`, `true` |
-| **Ubuntu 26.04** ([reference][ubuntu-26.04-reference]) | `cp`, `df`, `mv`, `rm`, `true` |
-| **Ubuntu 26.10 and later** | — |
+| **Ubuntu 24.04 LTS and earlier** | **All** |
+| **Ubuntu 25.10** | `chmod`, `chown`, `cp`, `df`, `mv`, `rm`, `true` |
+| **Ubuntu 26.04 LTS** | `cp`, `df`, `mv`, `rm`, `true` |
+| **Ubuntu 26.10 and later** | **None** |
 
-[ubuntu-25.10-reference]: https://git.launchpad.net/ubuntu/+source/coreutils-from/tree/debian/coreutils-from-uutils.links?h=ubuntu/questing-devel
-[ubuntu-26.04-reference]: https://git.launchpad.net/ubuntu/+source/coreutils-from/tree/debian/coreutils-from-uutils.links?h=ubuntu/resolute-devel
+:::{note}
+Although the `rust-coreutils` package is available in Ubuntu 24.04 LTS, it
+cannot be configured as the default `coreutils`. The
+`coreutils-from-<provider>` packages required to switch the provider are only
+available starting with Ubuntu 26.04 LTS.
+:::
 
-### Changing provider
+### Switching the coreutils provider (Ubuntu 26.04 LTS and later)
 
-The installed `coreutils-from-*` package determines which coreutils provider is
-used on the system.
+The `coreutils-from-<provider>` packages are available starting with Ubuntu
+26.04 LTS and determine which coreutils provider is used on the system. By
+default, the `coreutils-from-uutils` package is installed.
 
-**To switch to GNU coreutils:**
+When switching providers, the `--allow-remove-essential` option is required
+because `apt` sees the currently active `coreutils` package as Essential.
+Switching providers therefore requires explicitly allowing `apt` to remove that
+package.
+
+:::{note} `update-alternatives` is not currently suitable for switching between
+GNU Coreutils and uutils Coreutils, as alternatives are not safe for Essential
+packages. Instead, use the `coreutils-from-<provider>` packages to switch
+providers.
+:::
+
+**To switch to GNU Coreutils:**
 
 ```shell
 sudo apt install coreutils-from-gnu coreutils-from-uutils- --allow-remove-essential
 ```
 
-**To switch to back to rust-coreutils:**
+**To switch back to `rust-coreutils`:**
 
 ```shell
 sudo apt install coreutils-from-uutils coreutils-from-gnu- --allow-remove-essential
