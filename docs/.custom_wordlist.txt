@@ -56,6 +56,8 @@ Conffiles
 conffiles
 configurability
 connectionless
+Coreutils
+coreutils
 cpuset
 cpusets
 CRLs
@@ -329,6 +331,7 @@ usermode
 userspace
 usr
 UUIDs
+uutils
 UVtool
 Valgrind
 validator
