@@ -8,9 +8,10 @@ myst:
 
 Starting with Ubuntu 25.10, the "oxidization" of Ubuntu (see [Ubuntu Discourse][oxiziding-ubuntu-reference]) changed the providers of the system utilities
 `coreutils` and `sudo` to new Rust-based implementations. Previous Ubuntu
-releases are unaffected.
-- `coreutils`: changed from [GNU Coreutils][gnu-coreutils-manual-reference] to [uutils Coreutils][uutils-coreutils-manual-reference]
-- `sudo`: changed from [`sudo.ws`][sudo-ws-manual-reference] to [`sudo-rs`][sudo-rs-project-reference]
+releases retain their existing default providers.
+
+- **`coreutils`**: changed from [GNU Coreutils][gnu-coreutils-manual-reference] to [uutils Coreutils][uutils-coreutils-manual-reference]
+- **`sudo`**: changed from [`sudo.ws`][sudo-ws-manual-reference] to [`sudo-rs`][sudo-rs-project-reference]
 
 For most users, no changes are required for normal usage. The new Rust-based
 implementations are intended to be drop-in replacements for the existing
@@ -20,8 +21,9 @@ considerations that may affect specific use cases.
 
 GNU Coreutils and `sudo.ws` continue to receive maintenance in Ubuntu releases
 where they are the default providers. In newer releases where the Rust-based
-implementations are the default, they remain available as providers, while
-the Rust-based implementations are the primary ones going forward.
+implementations are the default, **GNU Coreutils and sudo.ws remain available
+as providers**, while the Rust-based implementations are the primary ones
+going forward.
 
 [oxiziding-ubuntu-reference]: https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995
 [uutils-coreutils-manual-reference]: https://uutils.org/coreutils/docs
@@ -34,17 +36,18 @@ the Rust-based implementations are the primary ones going forward.
 
 This section lists helpful resources and tips regarding the new Rust-based
 implementation of `coreutils`, provided by the `rust-coreutils` package.
-The `rust-coreutils` package is available for install on Ubuntu 24.04 LTS and
-later, but GNU Coreutils remains the default provider on Ubuntu 24.04 LTS.
+The `rust-coreutils` package is available for installation on Ubuntu 24.04 LTS
+and later.
 
 Refer to the [uutils Coreutils Documentation](https://uutils.org/coreutils/docs/index.html) for information about its usage.
 
 ### Release-specific exceptions
 
 The `rust-coreutils` package provides implementations of all `coreutils`
-utilities (also available through its `coreutils` multi-call binary). However,
-the `coreutils-from-<provider>` packages control which implementation is used
-by the system utility commands such as `cp` and `chmod`.
+utilities, which can also be invoked through its `coreutils` multi-call binary.
+However, starting with Ubuntu 25.10, the `coreutils-from-<provider>` packages
+control which implementation is used by the standard utility commands such as
+`cp` and `chmod`.
 
 Due to known incompatibilities, `coreutils-from-uutils` configures some
 commands to continue using GNU Coreutils in Ubuntu 25.10 and Ubuntu 26.04 LTS.
@@ -60,22 +63,23 @@ commands to continue using GNU Coreutils in Ubuntu 25.10 and Ubuntu 26.04 LTS.
 Although the `rust-coreutils` package is available in Ubuntu 24.04 LTS, it
 cannot be configured as the default `coreutils`. The
 `coreutils-from-<provider>` packages required to switch the provider are only
-available starting with Ubuntu 26.04 LTS.
+available starting with Ubuntu 25.10.
 :::
 
-### Switching the coreutils provider (Ubuntu 26.04 LTS and later)
+### Switching the coreutils provider (Ubuntu 25.10 and later)
 
 The `coreutils-from-<provider>` packages are available starting with Ubuntu
-26.04 LTS and determine which coreutils provider is used on the system. By
+25.10 and determine which coreutils provider is used on the system. By
 default, the `coreutils-from-uutils` package is installed.
 
 When switching providers, the `--allow-remove-essential` option is required
-because `apt` sees the currently active `coreutils` package as Essential.
+because `apt` sees the currently active `coreutils` package as `Essential`.
 Switching providers therefore requires explicitly allowing `apt` to remove that
 package.
 
-:::{note} `update-alternatives` is not currently suitable for switching between
-GNU Coreutils and uutils Coreutils, as alternatives are not safe for Essential
+:::{note}
+`update-alternatives` is not currently suitable for switching between GNU
+Coreutils and uutils Coreutils, as alternatives are not safe for `Essential`
 packages. Instead, use the `coreutils-from-<provider>` packages to switch
 providers.
 :::
@@ -91,6 +95,27 @@ sudo apt install coreutils-from-gnu coreutils-from-uutils- --allow-remove-essent
 ```shell
 sudo apt install coreutils-from-uutils coreutils-from-gnu- --allow-remove-essential
 ```
+
+### `build-essential` dependency
+
+The `build-essential` package has a direct dependency on the package providing
+the default `coreutils` implementation. This ensures that the coreutils
+implementation used in the Ubuntu archive build environment is consistent.
+
+In Ubuntu 25.10 and later, this dependency resolves to `coreutils-from-uutils`.
+In earlier releases, it resolves to the package providing GNU Coreutils.
+This dependency is intentionally specific to `build-essential`: allowing either
+GNU Coreutils or uutils Coreutils could result in build failures or
+inconsistent build behavior due to differences between the two implementations.
+
+Some packages also declare a dependency on `build-essential` without requiring
+its full set of build tools. This can result in an indirect dependency on
+`coreutils-from-uutils` in Ubuntu 25.10 and later.
+
+:::{note}
+As a result, these packages may currently conflict with `coreutils-from-gnu`
+when switching the coreutils provider.
+:::
 
 (sudo-rs)=
 ## sudo-rs
