@@ -21,7 +21,7 @@ file an issue against this repository, or use the "Give feedback" link from the
 documentation. There you can share your comments or let us know about problems
 with any page.
 
-* [Read our Code of Conduct](https://ubuntu.com/community/code-of-conduct)
+  [Read our Code of Conduct](https://ubuntu.com/community/code-of-conduct)
 * [Get support](https://ubuntu.com/support/community-support)
 * [Join the Discourse forum](https://discourse.ubuntu.com/c/server/17)
 * [Download Ubuntu Server](https://ubuntu.com/server)
