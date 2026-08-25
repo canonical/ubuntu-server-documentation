@@ -6,12 +6,14 @@ myst:
 
 # System utility replacements
 
-Starting with Ubuntu 25.10, the "oxidization" of Ubuntu (see [Ubuntu Discourse][oxiziding-ubuntu-reference]) changed the providers of the system utilities
-`coreutils` and `sudo` to new Rust-based implementations. Previous Ubuntu
-releases retain their existing default providers.
+Starting with Ubuntu 25.10, the "oxidization" of Ubuntu (see [Ubuntu
+Discourse](https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995))
+changed the providers of the system utilities `coreutils` and `sudo` to new
+Rust-based implementations. Previous Ubuntu releases retain their existing
+default providers.
 
-- **`coreutils`**: changed from [GNU Coreutils][gnu-coreutils-manual-reference] to [uutils Coreutils][uutils-coreutils-manual-reference]
-- **`sudo`**: changed from [`sudo.ws`][sudo-ws-manual-reference] to [`sudo-rs`][sudo-rs-project-reference]
+- **`coreutils`**: changed from [GNU Coreutils](https://www.gnu.org/software/coreutils/manual) to [uutils Coreutils](https://uutils.org/coreutils/docs)
+- **`sudo`**: changed from [`sudo.ws`](https://www.sudo.ws/docs/man/sudo.man/) to [`sudo-rs`](https://github.com/trifectatechfoundation/sudo-rs)
 
 For most users, no changes are required for normal usage. The new Rust-based
 implementations are intended to be drop-in replacements for the existing
@@ -24,12 +26,6 @@ where they are the default providers. In newer releases where the Rust-based
 implementations are the default, **GNU Coreutils and sudo.ws remain available
 as providers**, while the Rust-based implementations are the primary ones
 going forward.
-
-[oxiziding-ubuntu-reference]: https://discourse.ubuntu.com/t/carefully-but-purposefully-oxidising-ubuntu/56995
-[uutils-coreutils-manual-reference]: https://uutils.org/coreutils/docs
-[gnu-coreutils-manual-reference]: https://www.gnu.org/software/coreutils/manual
-[sudo-ws-manual-reference]: https://www.sudo.ws/docs/man/sudo.man/
-[sudo-rs-project-reference]: https://github.com/trifectatechfoundation/sudo-rs
 
 (rust-coreutils)=
 ## rust-coreutils
@@ -86,13 +82,21 @@ providers.
 
 **To switch to GNU Coreutils:**
 
-```shell
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install coreutils-from-gnu coreutils-from-uutils- --allow-remove-essential
 ```
 
 **To switch back to `rust-coreutils`:**
 
-```shell
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo apt install coreutils-from-uutils coreutils-from-gnu- --allow-remove-essential
 ```
 
