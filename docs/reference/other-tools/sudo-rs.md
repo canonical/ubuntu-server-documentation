@@ -1,7 +1,7 @@
 ---
 myst:
   html_meta:
-    description: "Reference documentation for Ubuntu Server’s Rust-based replacements for sudo and GNU coreutils, highlighting differences, release-specific exceptions, and important changes for users"
+    description: "Reference page for Ubuntu’s Rust-based replacements for sudo and GNU coreutils, highlighting differences, release-specific exceptions, and important changes."
 ---
 
 # System utility replacements
