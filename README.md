@@ -1,7 +1,7 @@
 # Ubuntu Server documentation
 
 Ubuntu Server is a version of the Ubuntu operating system designed and
-engineered as a backbone for the internet.
+engineered as a backbone for the Internet.
 
 Ubuntu Server brings economic and technical scalability to your datacenter,
 public or private. Whether you want to deploy an OpenStack cloud, a Kubernetes
@@ -32,3 +32,15 @@ with any page.
 You can [build this documentation locally](https://ubuntu.com/server/docs/contributing/build-locally), or you can
 access [the PDF version](https://ubuntu.com/server/docs/_/downloads/en/latest/pdf/) of this
 documentation from Read the Docs.
+
+
+## Localization
+
+Selected documentation terms:
+
+| English | Marathi |
+|---|---|
+| Installation Guide | स्थापना मार्गदर्शक |
+| Documentation | दस्तऐवजीकरण |
+| Community | समुदाय |
+| Support | सहाय्य |
