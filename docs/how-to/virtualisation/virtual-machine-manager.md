@@ -113,8 +113,6 @@ Similarly to `virt-manager`, `virt-viewer` can also connect to a remote host usi
 virt-viewer -c qemu+ssh://virtnode1.mydomain.com/system <guestname>
 ```
 
-Be sure to replace `web_devel` with the appropriate virtual machine name.
-
 If configured to use a **bridged** network interface, you can also set up SSH access to the virtual machine.
 
 ## virt-install
