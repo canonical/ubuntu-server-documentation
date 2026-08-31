@@ -237,7 +237,7 @@ Quokka
 RangeSize
 Rediraffe
 ramdisk
-reimplementing
+reimplement
 rollout
 rollouts
 rootfs
