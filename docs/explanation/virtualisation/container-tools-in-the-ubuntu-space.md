@@ -36,3 +36,22 @@ Docker is one of the most popular containerization platforms, which allows devel
 Although Docker is widely used by developers, it can also be used by system administrators to manage resources and applications. For instance, by encapsulating applications (and their libraries and dependencies) in a single package, and providing version control, deployment of software and updates can be simplified. It also helps to optimize resource use - particularly through its alignment with microservices architecture.
 
 To get started with Docker from a system administrator's point of view, check out our {ref}`Docker guide for sysadmins <docker-for-system-admins>`.
+
+## `runc`
+
+**Container type**: Application containers (low-level runtime)
+
+[`runc`](https://github.com/opencontainers/runc) is a lightweight, low-level command-line tool for spawning and running containers according to the [Open Container Initiative (OCI) runtime specification](https://github.com/opencontainers/runtime-spec). Given a bundle containing a root filesystem and a configuration file, `runc` does the work of setting up the Linux namespaces, cgroups, and other kernel isolation features needed to start and supervise a single container process.
+
+Usually, you will not need to invoke `runc` yourself. Instead, higher-level tools such as `containerd` (see below) or Docker will use `runc` internally to create and manage containers. However, if you are debugging or need something bespoke that one of these tools cannot provide, `runc` can be used directly to handle containers at its lower level.
+
+Since `runc` implements the OCI specification, tools built on top of it can swap it out for an alternative runtime such as [`crun`](https://github.com/containers/crun), which is also packaged in Ubuntu.
+
+
+## `containerd`
+
+**Container type**: Application containers
+
+[`containerd`](https://containerd.io/) is a container runtime that manages containers at a higher level: pulling and storing images, creating and supervising containers, and configuring their storage and network attachments. It sits between higher-level platforms, such as Docker and Kubernetes, and low-level runtimes like `runc`, exposing a gRPC Remote Procedure Calls (gRPC) API that these platforms use to create and manage containers without having to reimplement low-level handling themselves.
+
+On Ubuntu Server, `containerd` is encountered as a dependency of Docker, where it is also responsible for Docker's image store; see {ref}`Docker storage, networking, and logging <docker-storage-networking-and-logging>` for more on how the two interact. `containerd` is also the default container runtime used by [Canonical's Kubernetes platform](https://canonical.com/kubernetes).

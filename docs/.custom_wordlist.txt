@@ -36,6 +36,7 @@ Canonical's
 CAs
 CDBs
 Certbot
+cgroups
 checksumming
 chipset
 Chrony
@@ -98,6 +99,7 @@ globbing
 gpasswd
 GPUs
 Graylog
+gRPC
 HBAs
 hostgroup
 hostnames
@@ -235,6 +237,7 @@ Quokka
 RangeSize
 Rediraffe
 ramdisk
+reimplementing
 rollout
 rollouts
 rootfs
@@ -243,6 +246,7 @@ routable
 rsnapshot
 Rsync
 rsync
+runtimes
 sandboxed
 Sandboxing
 Saslauthd
