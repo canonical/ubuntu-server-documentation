@@ -195,31 +195,99 @@ If `virsh` (or other `vir*` tools) connects to something other than the default 
 
 ### `system` and `session` scope
 
-You can pass connection strings to `virsh` - as well as to most other tools for managing virtualisation.
+`libvirt` has two execution contexts for VMs: system mode and session mode. For system mode, the `libvirtd` daemon runs as `root` and VMs run as `libvirt-qemu` user. For the session mode, both the `libvirtd` deamon and VM processes run as the session's user.
+
+When working with virtuazation clients (`virsh`), you can specify the mode by using the appropriate URI:
 
 ```{terminal}
 :copy:
 :user:
 :host:
 :dir:
-virsh --connect qemu:///system
+virsh --connect qemu:///session list
 ```
 
-There are two options for the connection.
+Or set it for the current shell with the `LIBVIRT_DEFAULT_URI` environment variable:
 
-* `qemu:///system` - connect locally as **root** to the daemon supervising QEMU and KVM domains
-* `qemu:///session` - connect locally as a **normal user** to their own set of QEMU and KVM domains
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+export LIBVIRT_DEFAULT_URI=qemu:///session
+```
 
-The *default* is `qemu:///system`, which is the behavior most users expect. However, `qemu:///session` has some benefits (and drawbacks) to consider.
+On Ubuntu, by default, the system mode is used when no mode is specified by the user.
 
-`qemu:///session` is per user and can -- on a multi-user system -- separate users.
-Most importantly, processes run under the permissions of the user, which means no permission struggle on the downloaded image in your `$HOME` or the attached USB stick.
+#### How each mode runs
 
-On the other hand, it cannot access system resources well, which includes network setup that is difficult with `qemu:///session`. It falls back to [SLiRP networking](https://en.wikipedia.org/wiki/Slirp), which is functional but slow and prevents the VM from being reached from other systems.
+In **system mode**, the root daemon sets up resources on the guest's behalf — disk images, networking, and a dynamic AppArmor profile — so that a guest can reach the host devices it needs (disks and I/O devices) even though the QEMU process itself runs as the unprivileged `libvirt-qemu` user. System guests are shared across all users on the host and can auto-start at boot, independently of any login session.
 
-`qemu:///system` is different in that the global system-wide libvirt runs it and can arbitrate resources as needed. However, you might need to `mv` and/or `chown` files to the right places and change permissions to make them usable.
+In **session mode**, both the daemon and the guests run as your unprivileged user, so a guest can only reach what your account can reach. Guest definitions and disk images live in your home directory (`~/.config/libvirt/` and `~/.local/share/libvirt/`) and are not visible to other users. Networking is restricted to user-mode ([SLiRP](https://en.wikipedia.org/wiki/Slirp)): you cannot easily attach guests to host bridges or manipulate system network interfaces without a setuid helper such as `qemu-bridge-helper`.
+
+Because session mode is per user, libvirt runs a separate daemon for each user that connects:
+
+```{terminal}
+:output-only:
+root       11351  0.0  4.3 752264 39292 ?        Ssl  15:15   0:00 /usr/sbin/libvirtd --timeout 120
+ubuntu     13104  0.0  4.3 748272 39360 ?        Sl   23:01   0:00 /usr/sbin/libvirtd --timeout=120
+debian     14364  2.4  4.1 747848 37660 ?        Sl   23:18   0:00 /usr/sbin/libvirtd --timeout=120
+```
+
+The session daemon is started on demand in one of two ways, and exits again after an idle period (the `--timeout` shown above):
+
+- **systemd socket activation** — if the user socket unit is enabled (`systemctl --user enable --now virtqemud.socket`, or `libvirtd.socket` on the monolithic daemon), the per-user `systemd --user` instance listens on `$XDG_RUNTIME_DIR/libvirt/` and launches the daemon on the first connection.
+- **Client auto-spawn** — if no socket is set up, the libvirt client library inside `virsh` starts the daemon itself as a child of your login session. This is why a session daemon can appear even when `systemctl --user list-sockets` shows no libvirt socket.
+
+#### AppArmor differences
+
+AppArmor is less strict — and often effectively absent — for session guests than for system guests.
+
+In system mode, the daemon runs as `root`. Before launching a guest, it dynamically creates, loads, and registers a specialized AppArmor profile under `/etc/apparmor.d/libvirt/`. That profile restricts the QEMU process to only the disk images, ISOs, and sockets defined in the guest's XML.
+
+In session mode, the daemon runs as your unprivileged user. Loading or compiling AppArmor profiles requires `root` (write access to `/etc/apparmor.d/` and kernel security capabilities), so a session daemon cannot generate these per-guest profiles. Isolation then relies entirely on standard Linux file permissions: the QEMU process runs with your user's privileges and can access any file your account owns.
+
+We can see the list of active AppArmor profiles for system guests using `aa-status`:
+
+```{terminal}
+:input: aa-status
+...
+7 processes are in enforce mode.
+  ...
+   /usr/bin/qemu-system-x86_64 (13660) libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921
+   /usr/sbin/libvirtd (11351) libvirtd
+```
+
+The profile `libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921` (`/etc/apparmor.d/libvirt/libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921` on disk) corresponds to a system guest, whose UUID you can confirm with:
+
+```{terminal}
+:input: virsh domuuid tcg-minimal
+03cf1350-1de5-4400-96e3-16dce6a9a921
+```
+
+The same guest run in session mode has no AppArmor profile generated.
+
+#### When to use session mode ?
 
 Applications will usually decide on their primary use-case. Desktop-centric applications often choose `qemu:///session` while most solutions that involve an administrator anyway continue to default to `qemu:///system`.
+
+The two scopes differ in more than permissions. They use separate daemons, configuration directories, storage locations, and defaults, so a domain defined under one scope is not visible under the other:
+
+| Aspect | `qemu:///system` | `qemu:///session` |
+| --- | --- | --- |
+| Runs as | `root` (via a system-wide daemon) | the invoking user |
+| Guest process owner | the `libvirt-qemu` user by default | the invoking user |
+| Configuration directory | `/etc/libvirt/` | `~/.config/libvirt/` |
+| Default storage pool | `/var/lib/libvirt/images/` | `~/.local/share/libvirt/images/` |
+| Default networking | NAT-ed `default` network (`virbr0`) | user-mode ([SLiRP](https://en.wikipedia.org/wiki/Slirp)) only |
+| Bridged networking | managed by libvirt | requires the setuid `qemu-bridge-helper` |
+
+Use qemu:///session if:
+
+-  You are a desktop developer who wants to spin up test VMs without giving elevated/root permissions to libvirt.
+- You want your VM disks and configurations completely confined to your user home directory.
+- Basic outbound access over user-mode networking is enough and you do not need complex virtual networks.
+- You do not need advanced I/O device capabilities such as device passthrough or SR-IOV.
 
 :::{seealso}
 There is more information about this topic in the [libvirt FAQ](https://wiki.libvirt.org/FAQ.html#what-is-the-difference-between-qemu-system-and-qemu-session-which-one-should-i-use) and this [blog post](https://blog.wikichoon.com/2016/01/qemusystem-vs-qemusession.html) about the topic.
