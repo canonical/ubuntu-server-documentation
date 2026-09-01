@@ -254,6 +254,7 @@ Seagate
 searchability
 seccomp
 sendmail
+setuid
 sharding
 Shorewall
 SIDs
