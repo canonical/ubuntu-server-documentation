@@ -55,3 +55,11 @@ Since `runc` implements the OCI specification, tools built on top of it can swap
 [`containerd`](https://containerd.io/) is a container runtime that manages containers at a higher level: pulling and storing images, creating and supervising containers, and configuring their storage and network attachments. It sits between higher-level platforms, such as Docker and Kubernetes, and low-level runtimes like `runc`, exposing a gRPC Remote Procedure Calls (gRPC) API that these platforms use to create and manage containers without having to reimplement low-level handling themselves.
 
 On Ubuntu Server, `containerd` is encountered as a dependency of Docker, where it is also responsible for Docker's image store; see {ref}`Docker storage, networking, and logging <docker-storage-networking-and-logging>` for more on how the two interact. `containerd` is also the default container runtime used by [Canonical's Kubernetes platform](https://canonical.com/kubernetes).
+
+## Skopeo
+
+[Skopeo](https://github.com/containers/skopeo) is a command-line tool for working with container images and image registries. It needs no daemon and no root privileges. Skopeo can copy images between registries and local storage, read the layers and metadata of a remote image without downloading it, sign and verify images, and delete images from a registry.
+
+Since Skopeo talks to registries directly, system administrators can use it to mirror images into an internal registry, check what an image contains before they deploy it, or move images between environments that run different container runtimes.
+
+To get started with Skopeo, check out our {ref}`Skopeo guide for sysadmins <skopeo>`.
