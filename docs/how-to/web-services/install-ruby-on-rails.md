@@ -25,10 +25,10 @@ Once you have a web server and a database service installed and configured, you 
 :user:
 :host:
 :dir:
-sudo apt install rails
+sudo apt install rails ruby-dev build-essential
 ```
 
-This will install both the Ruby base packages, and Ruby on Rails.
+This will install both the Ruby base packages, and Ruby on Rails. `ruby-dev` and `build-essential` are required because a Rails application resolves its own dependencies with {manpage}`bundler(1)`, and several of those gems build C extensions during installation. Without the compiler and the Ruby development headers, `bundle install` can't handle those extensions.
 
 Alternatively, you may want to install it with the `--no-install-recommends` flag to skip pulling in browser related dependencies, which may require additional steps in certain containerized environments.
 
@@ -37,8 +37,44 @@ Alternatively, you may want to install it with the `--no-install-recommends` fla
 :user:
 :host:
 :dir:
-sudo apt install --no-install-recommends rails
+sudo apt install --no-install-recommends rails ruby-dev build-essential
 ```
+
+If your application uses MySQL, install the client development headers as well, so that Bundler can build the `mysql2` gem:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt install libmysqlclient-dev
+```
+
+## Create a new application (optional)
+
+If you don't have an application yet, generate one to follow the rest of this guide. Run the generator as a regular user (not `root`) from the directory where you want the application to live:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+rails new blog --database=mysql --skip-bundle
+```
+
+Then install the application dependencies. A per-application gem path keeps the gems inside the project directory, so `bundle install` does not need write access to the system gem directory, and you do not need to run it with `sudo`:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+cd blog
+bundle config set --local path vendor/bundle
+bundle install
+```
+
+The application is now in the `blog` directory. Use its absolute path wherever the sections below refer to `/path/to/rails/application`.
 
 ## Configure the web server
 
@@ -97,22 +133,24 @@ your application directory:
 :user:
 :host:
 :dir:
-RAILS_ENV=production rake assets:precompile
+RAILS_ENV=production bundle exec rake assets:precompile
 ```
 
 ## Configure the database
 
-With your database service in place, you need to make sure your app database configuration is also correct. For example, if you are using MySQL the your `config/database.yml` should look like this:
+With your database service in place, you need to make sure your app database configuration is also correct. For example, if you are using MySQL, replace the `production` block of your `config/database.yml` so that it looks like this:
 
 ```yaml
-# Mysql 
+# Mysql
 production:
   adapter: mysql2
   username: user
   password: password
-  host: 127.0.0.1 
+  host: 127.0.0.1
   database: app
 ```
+
+The database user (`user` in this example) must already exist in MySQL and have permission to create the database. Refer to {ref}`our MySQL guide <install-mysql>` to create one.
 
 To finally create your application database and apply its migrations you can run the following commands from your app directory:
 
@@ -121,8 +159,8 @@ To finally create your application database and apply its migrations you can run
 :user:
 :host:
 :dir:
-RAILS_ENV=production rake db:create
-RAILS_ENV=production rake db:migrate
+RAILS_ENV=production bundle exec rake db:create
+RAILS_ENV=production bundle exec rake db:migrate
 ```
 
 That's it! Now your Server is ready for your Ruby on Rails application. You can {term}`daemonize` your application as you want.
