@@ -12,6 +12,7 @@ Containers are a lightweight, portable virtualization technology. They package s
 * {ref}`LXD <lxd>`
 * {ref}`Docker for sysadmins <docker-for-system-admins>`
 * {ref}`How to run rocks on your server <run-rocks-on-your-server>`
+* {ref}`Skopeo for sysadmins <skopeo>`
 
 ```{toctree}
 :hidden:
@@ -19,6 +20,7 @@ Containers are a lightweight, portable virtualization technology. They package s
 LXD <virtualisation/lxd>
 Docker for sysadmins <containers/docker-for-system-admins>
 How to run rocks on your server <containers/run-rocks-on-your-server>
+Skopeo for sysadmins <containers/skopeo>
 ```
 
 ## See also
