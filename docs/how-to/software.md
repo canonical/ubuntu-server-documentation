@@ -28,6 +28,7 @@ Snapshot service <software/snapshot-service>
 * {ref}`Automatic updates <automatic-updates>` shows you how to configure (or turn off) automatic updates
 * {ref}`Upgrade your release <upgrade-your-release>` shows you how to upgrade from one Ubuntu release to the next one
 * {ref}`Snapshot service <snapshot-service>` shows you how to use the Ubuntu Snapshot Service to update packages to time-specific archive states.
+* [Enable Proposed](https://ubuntu.com/project/docs/SRU/reference/enable-proposed/) shows you how to enable the -proposed pocket in order to test new packages before they are released to -updates.
 
 ## Troubleshooting
 
