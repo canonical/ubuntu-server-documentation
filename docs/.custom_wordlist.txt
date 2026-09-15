@@ -28,6 +28,7 @@ bootloaders
 Broadwell
 Btrfs
 btrfs
+Buildah
 Bufferbloat
 bufferbloat
 bugfixes
@@ -221,6 +222,7 @@ pingable
 Pluggable
 pluggable
 PMDs
+Podman
 polkit
 Postcopy
 postcopy
@@ -263,6 +265,7 @@ sharding
 Shorewall
 SIDs
 SKUs
+Skopeo
 Slapd
 slapd
 snapshotter
