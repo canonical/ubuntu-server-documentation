@@ -39,7 +39,7 @@ The following DOCA-OFED metapackages are provided:
 ## Install DOCA-OFED
 
 :::{warning}
-To avoid possible conflicts, if you've already installed DOCA-OFED from NVIDIA's repository, please uninstall them before proceeding.
+To avoid possible conflicts, if you've already installed DOCA-OFED from NVIDIA's repository, please uninstall it before proceeding.
 Conversely, if you attempt to install the NVIDIA DOCA-OFED packages and sources in the future, ensure that the packages described in this doc are uninstalled first.
 :::
 
