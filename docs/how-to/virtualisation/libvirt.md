@@ -221,7 +221,7 @@ export LIBVIRT_DEFAULT_URI=qemu:///session
 
 In **system mode**, the root daemon sets up resources on the guest's behalf — disk images, networking, and a dynamic AppArmor profile — so that a guest can reach the host devices it needs (disks and I/O devices) even though the QEMU process itself runs as the unprivileged `libvirt-qemu` user. System guests are shared across all users on the host and can auto-start at boot, independently of any login session.
 
-In **session mode**, both the daemon and the guests run as your unprivileged user, so a guest can only reach what your account can reach. Guest definitions and disk images live in your home directory (`~/.config/libvirt/` and `~/.local/share/libvirt/`) and are not visible to other users. Networking is restricted to user-mode ([SLiRP](https://en.wikipedia.org/wiki/Slirp)): you cannot easily attach guests to host bridges or manipulate system network interfaces without a setuid helper such as `qemu-bridge-helper`.
+In **session mode**, both the daemon and the guests run as your unprivileged user, so a guest can only reach what your account can reach. By default, guest definitions and disk images use your XDG directories (`~/.config/libvirt/` and `~/.local/share/libvirt/images/`), but a guest can reference any path your account can access. Networking is restricted to user-mode ([SLiRP](https://en.wikipedia.org/wiki/Slirp)): you cannot easily attach guests to host bridges or manipulate system network interfaces without a setuid helper such as `qemu-bridge-helper`.
 
 Because session mode is per user, libvirt runs a separate daemon for each user that connects:
 
@@ -241,7 +241,7 @@ The session daemon is started on demand in one of two ways, and exits again afte
 
 Unlike system guests, which have a dedicated and dynamically generated AppArmor profile to control system access, session guests have no AppArmor confinement.
 
-In system mode, the daemon runs as `root`. Before launching a guest, it dynamically creates, loads, and registers a specialized AppArmor profile under `/etc/apparmor.d/libvirt/`. That profile restricts the QEMU process to only the disk images, ISOs, and sockets defined in the guest's XML.
+In system mode, the daemon runs as `root`. Before launching a guest, it dynamically creates, loads, and registers a specialized AppArmor profile under `/etc/apparmor.d/libvirt/`. Together with the static `libvirt-qemu` policy, the profile applies guest-specific rules to the resources declared in the guest's XML.
 
 In session mode, the daemon runs as your unprivileged user. Loading or compiling AppArmor profiles requires `root` (write access to `/etc/apparmor.d/` and kernel security capabilities), so a session daemon cannot generate these per-guest profiles. Isolation then relies entirely on standard Linux file permissions: the QEMU process runs with your user's privileges and can access any file your account owns. For example despite feeling safer by being "only" a normal user, an exploited guest could read your home directory.
 
@@ -259,7 +259,7 @@ We can see the list of active AppArmor profiles for system guests using `aa-stat
 The profile `libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921` (`/etc/apparmor.d/libvirt/libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921` on disk) corresponds to a system guest, whose UUID you can confirm with:
 
 ```{terminal}
-:input: virsh domuuid tcg-minimal
+virsh --connect qemu:///system domuuid tcg-minimal
 03cf1350-1de5-4400-96e3-16dce6a9a921
 ```
 
