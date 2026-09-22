@@ -265,7 +265,7 @@ The profile `libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921` (`/etc/apparmor.d/lib
 
 The same guest run in session mode has no AppArmor profile generated.
 
-#### When to use session mode ?
+#### When to use session mode
 
 Applications will usually decide on their primary use-case. Desktop-centric applications often choose `qemu:///session` while most solutions that involve an administrator anyway continue to default to `qemu:///system`.
 
