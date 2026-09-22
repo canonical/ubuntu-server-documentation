@@ -239,7 +239,7 @@ The session daemon is started on demand in one of two ways, and exits again afte
 
 #### AppArmor differences
 
-In contrary to system guests that have a dedicated and dynamically generated AppArmor profile to control system access, there is no AppArmor confinement for session guests.
+Unlike system guests, which have a dedicated and dynamically generated AppArmor profile to control system access, session guests have no AppArmor confinement.
 
 In system mode, the daemon runs as `root`. Before launching a guest, it dynamically creates, loads, and registers a specialized AppArmor profile under `/etc/apparmor.d/libvirt/`. That profile restricts the QEMU process to only the disk images, ISOs, and sockets defined in the guest's XML.
 
