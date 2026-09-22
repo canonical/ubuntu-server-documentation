@@ -197,7 +197,7 @@ If `virsh` (or other `vir*` tools) connects to something other than the default 
 
 `libvirt` has two execution contexts for VMs: system mode and session mode. For system mode, the `libvirtd` daemon runs as `root` and VMs run as `libvirt-qemu` user. For the session mode, both the `libvirtd` daemon and VM processes run as the session's user.
 
-On Ubuntu, the system mode is used as the default execution context if no mode is explicitly requested. When working with virtualisation clients (`virsh`), you can specify the mode by using the appropriate URI:
+On Ubuntu, the system mode is used as the default execution context if no mode is explicitly requested. When working with virtualization clients (`virsh`), you can specify the mode by using the appropriate URI:
 
 ```{terminal}
 :copy:
@@ -280,7 +280,7 @@ The two execution contexts differ in more than permissions. They use separate da
 | Default networking | NAT-ed `default` network (`virbr0`) | user-mode ([SLiRP](https://en.wikipedia.org/wiki/Slirp)) only |
 | Bridged networking | managed by libvirt | requires the setuid `qemu-bridge-helper` |
 
-Use qemu:///session if:
+Use `qemu:///session` if:
 
 - You are a desktop developer who wants to spin up test VMs without giving elevated/root permissions to libvirt.
 - You want your VM disks and configurations completely confined to your user home directory.
