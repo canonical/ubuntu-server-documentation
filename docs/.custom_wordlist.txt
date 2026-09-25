@@ -55,6 +55,8 @@ Conffiles
 conffiles
 configurability
 connectionless
+Coreutils
+coreutils
 CRLs
 Cron
 cron
@@ -325,6 +327,7 @@ usermode
 userspace
 usr
 UUIDs
+uutils
 UVtool
 Valgrind
 validator
