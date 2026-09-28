@@ -1367,6 +1367,13 @@ IRC
 Internet Relay Chat
     *Work in Progress*
 
+IRQ
+Interrupt Request
+    A hardware signal sent to the processor that temporarily stops a running
+    program and allows a special program, an interrupt handler, to run instead.
+    Hardware interrupts are used to handle events such as receiving data from a
+    network card, key presses, or mouse movements.
+
 ISC
 Internet Systems Consortium
     *Work in Progress*
@@ -1751,7 +1758,10 @@ Network Time Security
 
 NUMA
 Non-Uniform Memory Access
-    *Work in Progress*
+    A memory architecture where processors and system memory are grouped into
+    nodes. A CPU can access memory on remote nodes, but at higher latency than
+    local memory. See {ref}`perf-tune-affinity-numa` for tools that inspect
+    and configure this placement.
 
 Nvidia
     *Work in Progress*
@@ -1869,6 +1879,15 @@ Open vSwitch
 PAM
 Pluggable Authentication Module
     *Work in Progress*
+
+page fault
+page faults
+    An event raised by the memory management unit when a process accesses a
+    virtual memory page not currently mapped to physical RAM. The kernel
+    handles the fault by allocating a physical page frame, loading data from
+    storage, or terminating an invalid access. See the [Linux kernel memory
+    management documentation](https://docs.kernel.org/admin-guide/mm/index.html)
+    for details.
 
 passthrough
     *Work in Progress*

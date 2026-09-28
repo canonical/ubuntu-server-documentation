@@ -32,6 +32,7 @@ To identify those aspects and to then apply static or dynamic tuning Ubuntu carr
 * Understand and directly influence {ref}`perf-p-states`
 * Monitor, analyze and control CPU governors, power and frequency with {ref}`cpupower <perf-tune-cpupower>`
 * Dynamic, adaptive system tuning {ref}`with TuneD <perf-tune-tuned>`
+* Tune thread scheduling and memory locality with {ref}`CPU affinity, NUMA placement, and isolation <perf-tune-affinity-numa>`
 
 ```{toctree}
 :hidden:
@@ -41,4 +42,5 @@ hwloc <performance/perf-tune-hwloc>
 CPU Power (states) <performance/perf-p-states>
 cpupower (tool) <performance/perf-tune-cpupower>
 TuneD <performance/perf-tune-tuned>
+CPU affinity and NUMA <performance/perf-tune-affinity-numa>
 ```

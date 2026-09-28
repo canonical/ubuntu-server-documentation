@@ -38,6 +38,7 @@ Canonical's
 CAs
 CDBs
 Certbot
+cgroup
 cgroups
 checksumming
 chipset
@@ -55,6 +56,8 @@ Conffiles
 conffiles
 configurability
 connectionless
+cpuset
+cpusets
 CRLs
 Cron
 cron
@@ -184,6 +187,7 @@ Multipathing
 multipathing
 multipaths
 multiplatform
+multithreading
 Multiview
 multiviews
 Munin
