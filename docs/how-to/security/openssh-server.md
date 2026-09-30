@@ -38,6 +38,7 @@ To install the OpenSSH server application, and related support files, use this c
 sudo apt install openssh-server
 ```
 
+(openssh-server-configure)=
 ## Configure OpenSSH
 
 To configure the default behavior of the OpenSSH server application, `sshd`,
