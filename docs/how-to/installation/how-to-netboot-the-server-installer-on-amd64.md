@@ -23,6 +23,21 @@ The process for network booting the live server installer is similar for both mo
 
 The difference between UEFI and legacy modes is that in UEFI mode the bootloader is an {term}`EFI` executable, signed so that it is accepted by Secure Boot, and in legacy mode it is [PXELINUX](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX). Most DHCP/BOOTP servers can be configured to serve the right bootloader to a particular machine.
 
+## Prerequisites
+
+Before you start, make sure you have the following:
+
+- A machine to act as the netboot server. This does not have to be a dedicated machine; any Ubuntu machine on the same network as the machine you want to install can do this, as long as it can run `dnsmasq` and serve files over TFTP and HTTP(S).
+- The machine you want to install (the target). It must be an `amd64` system with network-boot (PXE) support in its {term}`firmware <FW>`, and it must be set to boot from the network.
+- Both machines on the same network, so that the target can receive DHCP/BOOTP offers and reach the TFTP server on the netboot server. PXE booting does not work across networks unless DHCP relay and TFTP forwarding are already configured.
+- Enough free disk space on the netboot server for the live server ISO (several gigabytes) plus the kernel, RAM disk, and bootloader files served over TFTP.
+- A location the target can download the ISO from, specified with the `url=` kernel command line option. The examples below use the official Ubuntu image server, but you can host the ISO on your own infrastructure instead.
+- Administrative (`sudo`) access on the netboot server.
+
+:::{note}
+This guide configures `dnsmasq` as the DHCP/BOOTP server for the network. If your network already has a DHCP server, do not run a second one on the same network: two DHCP servers will compete to answer clients and cause IP address and boot-file conflicts. Instead, either configure your existing DHCP server to point clients at this TFTP server (using its `next-server` and boot-file/filename options), or set up the netboot server on an isolated network or VLAN where it is the only DHCP server.
+:::
+
 ## Configure DHCP/BOOTP and TFTP
 
 There are several implementations of the DHCP/BOOTP and TFTP protocols available. This document describes how to configure {term}`dnsmasq` to perform both of these roles.
@@ -250,3 +265,12 @@ Setting `cloud-config-url=/dev/null` on the kernel command line prevents cloud-i
 As you can see, this downloads the ISO from Ubuntu's servers. You may want to host it somewhere on your infrastructure and change the URL to match.
 
 This configuration is very simple. PXELINUX has many, many options, and you can [consult its documentation](https://wiki.syslinux.org/wiki/index.php?title=PXELINUX) for more.
+
+## Troubleshooting
+
+If the target machine does not network-boot, check the following common failure points:
+
+- The target is not attempting a network boot. Enter the system {term}`firmware <FW>` setup and confirm that network/PXE boot is enabled and selected as the boot device. Confirm whether the target boots in UEFI or legacy {term}`BIOS` mode and that you have set up the matching bootloader files (`bootx64.efi` and `grubx64.efi` for UEFI, `pxelinux.0` and `ldlinux.c32` for legacy).
+- No DHCP offer reaches the target. The target and the netboot server must be on the same network, and no other DHCP server may be answering on that network. Check the `interface` and `dhcp-range` settings in `/etc/dnsmasq.d/pxe.conf` and restart `dnsmasq` after changing them.
+- The TFTP service is not running or another TFTP server is already using port 69. This guide enables TFTP in `dnsmasq` and also installs `tftpd-hpa`, so only one of them should provide TFTP. Check both services with `systemctl status dnsmasq.service tftpd-hpa.service` and check for port conflicts (UDP ports 67 for DHCP and 69 for TFTP). Disable or reconfigure the server you do not want to use.
+- The bootloader downloads but the kernel, RAM disk, or ISO does not. Verify that `/srv/tftp/` contains `vmlinuz`, `initrd`, and the bootloader files, that the `url=` address in the bootloader configuration is reachable from the target, and that any firewall on the netboot server allows TFTP and the ISO download.
