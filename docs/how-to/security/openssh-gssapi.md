@@ -41,13 +41,13 @@ To connect to a remote host using GSSAPI/Kerberos authentication, both the clien
 
 ## Configure OpenSSH on the server
 
-GSSAPI/Kerberos support is available on the server, but not enabled by default. To enable it, edit the OpenSSH server configuration file `/etc/ssh/sshd_config` and add or uncomment the following line:
+GSSAPI/Kerberos support is available on the server, but not enabled by default. To enable it, create a configuration file in `/etc/ssh/sshd_config.d/`, for example `/etc/ssh/sshd_config.d/gssapi.conf`, with the following line:
 
 ```text
 GSSAPIAuthentication yes
 ```
 
-See the {manpage}`sshd_config(5)` manual page for other GSSAPI/Kerberos configuration options.
+For more information about configuration snippets, see {ref}`Configure OpenSSH <openssh-server-configure>`. The {manpage}`sshd_config(5)` manual page covers other GSSAPI/Kerberos configuration options.
 
 Restart the OpenSSH server to apply the changes:
 
@@ -122,7 +122,7 @@ The server is now ready to accept GSSAPI/Kerberos authentication from clients th
 
 ## Configure OpenSSH on the client
 
-In Ubuntu, the `openssh-client` (or `openssh-client-gssapi`) package already defaults to allowing GSSAPI/Kerberos authentication, so no additional configuration is needed on the client side. However, you may want to verify that the following line is present in `/etc/ssh/ssh_config`:
+In Ubuntu, the `openssh-client` (or `openssh-client-gssapi`) package already defaults to allowing GSSAPI/Kerberos authentication, so no additional configuration is needed on the client side. However, you may want to verify that the following line is present in `/etc/ssh/ssh_config`, or in a configuration file in `/etc/ssh/ssh_config.d/`:
 
 ```text
 GSSAPIAuthentication yes
