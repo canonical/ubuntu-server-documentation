@@ -11,8 +11,15 @@ myst:
 
 ## Install `apache2`
 
-To install Apache2, enter the following command at the terminal prompt:
+To install Apache2, first refresh the package index, then install the package. Enter the following commands at the terminal prompt:
 
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo apt update
+```
 ```{terminal}
 :copy:
 :user:
