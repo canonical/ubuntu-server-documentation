@@ -23,7 +23,7 @@ considerations that may affect specific use cases.
 
 GNU Coreutils and `sudo.ws` continue to receive maintenance in Ubuntu releases
 where they are the default providers. In newer releases where the Rust-based
-implementations are the default, **GNU Coreutils and sudo.ws remain available
+implementations are the default, **GNU Coreutils and `sudo.ws` remain available
 as providers**, while the Rust-based implementations are the primary ones
 going forward.
 
