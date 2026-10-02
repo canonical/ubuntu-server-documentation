@@ -38,6 +38,7 @@ To install the OpenSSH server application, and related support files, use this c
 sudo apt install openssh-server
 ```
 
+(openssh-server-configure)=
 ## Configure OpenSSH
 
 To configure the default behavior of the OpenSSH server application, `sshd`,
@@ -250,6 +251,10 @@ The prefix `lp:` is implied and means fetching from Launchpad. The alternative `
 
 You can add an extra layer of security to the default key-based authentication using two factor authentication. You can add two factor authentication {ref}`using U2F/FIDO hardware authentication devices <two-factor-authentication-with-u2f-or-fido>`. Alternatively, in cases U2F/FIDO hardware authentication devices are unavailable or impractical for your use case you can add it {ref}`using HMAC/Time based One Time Passwords (HOTP/TOTP) <two-factor-authentication-with-totp-or-hotp>`.
 
+## GSSAPI/Kerberos authentication
+
+If your network uses Kerberos, you can configure OpenSSH to authenticate users with their Kerberos tickets, and to forward those tickets to the server. See {ref}`OpenSSH with GSSAPI/Kerberos authentication <openssh-gssapi>`.
+
 ## Handling unstable connections
 
 When working on remote systems via SSH, unstable network connections or accidental disconnects can interrupt your work and terminate running processes. Terminal multiplexers solve this problem by allowing sessions to persist even after disconnection.
@@ -266,4 +271,5 @@ Using a {ref}`terminal multiplexer <terminal-multiplexers>` like `tmux` or `scre
 :hidden:
 2FA with TOTP/HOTP <two-factor-authentication-with-totp-or-hotp.md>
 2FA with U2F/FIDO <two-factor-authentication-with-u2f-or-fido.md>
+GSSAPI/Kerberos authentication <openssh-gssapi.md>
 ```

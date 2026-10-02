@@ -51,6 +51,7 @@ sudo krb5_newrealm
 
 It will ask you for a database {spellexception}`master` password, which is used to encrypt the local database. Chose a secure password: its strength is not verified for you.
 
+(install-a-kerberos-server-configure)=
 ## Configure the Kerberos server
 
 The questions asked during installation are used to configure the `/etc/krb5.conf` and `/etc/krb5kdc/kdc.conf` files. The former is used by the Kerberos 5 libraries, and the latter configures the KDC. If you need to adjust the KDC settings, edit the file and restart the `krb5-kdc` daemon. If you need to reconfigure Kerberos from scratch, perhaps to change the realm name, you can do so by typing:

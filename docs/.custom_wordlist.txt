@@ -36,6 +36,7 @@ bundler
 Byobu
 Canonical's
 CAs
+ccache
 CDBs
 Certbot
 cgroup
@@ -93,6 +94,7 @@ etckeeper
 failover
 Fileset
 fileset
+forwardable
 FQDN's
 Freenode
 fsck
@@ -368,3 +370,4 @@ Zettabyte
 zfs
 zSeries
 zsh
+
