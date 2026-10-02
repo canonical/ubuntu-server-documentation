@@ -175,7 +175,7 @@ pool 4.ntp.ubuntu.com iburst maxsources 1 nts prefer
 pool ntp-bootstrap.ubuntu.com iburst maxsources 1 nts certset 1
 ```
 
-After adding or removing sources, they can be reloaded using `sudo chrony reload sources`.
+After adding or removing sources, they can be reloaded using `sudo chronyc reload sources`.
 
 Of the pool, `2.ubuntu.pool.ntp.org` and `ntp.ubuntu.com` also support IPv6, if needed. If you need to force IPv6, there is also `ipv6.ntp.ubuntu.com` which is not configured by default.
 
