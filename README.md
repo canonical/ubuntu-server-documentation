@@ -16,9 +16,7 @@ Ubuntu Server is a member of the Ubuntu family. It's an open source project
 that welcomes community projects, contributions, suggestions, fixes and
 constructive feedback.
 
-If you find any errors or have suggestions for improvements to pages, please
-file an issue against this repository, or use the "Give feedback" link from the
-documentation. There you can share your comments or let us know about problems
+If you find an error or have a suggestion for improvement, please file an issue in this repository or use the "Give feedback" link on the documentation page. There you can share your comments or let us know about problems
 with any page.
 
 * [Read our Code of Conduct](https://ubuntu.com/community/code-of-conduct)
