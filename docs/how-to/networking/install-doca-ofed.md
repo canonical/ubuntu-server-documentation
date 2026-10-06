@@ -39,7 +39,7 @@ The following DOCA-OFED metapackages are provided:
 ## Install DOCA-OFED
 
 :::{warning}
-To avoid possible conflicts, if you've already installed DOCA-OFED from NVIDIA's repository, please uninstall that version before proceeding. See the "Uninstalling Software from Host" section [here](https://networking-docs.nvidia.com/doca/archive/3-5-0/doca-host-installation-and-upgrade#Uninstalling-Software-from-Host).
+To avoid possible conflicts, if you've already installed DOCA-OFED from NVIDIA's repository, please uninstall that version before proceeding. See the "[Uninstalling Software from Host" section](https://networking-docs.nvidia.com/doca/archive/3-5-0/doca-host-installation-and-upgrade#Uninstalling-Software-from-Host) of the NVIDIA documentation.
 Conversely, if you attempt to install the NVIDIA DOCA-OFED packages and sources in the future, ensure that the packages described in this doc are uninstalled first.
 :::
 
