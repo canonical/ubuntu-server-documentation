@@ -241,7 +241,8 @@ Otherwise, if you configure the Docker daemon to use a storage driver different 
 - Ensure the required filesystem is available. We will be using the ZFS filesystem.
 
   Set the default mount point:
-  
+
+  ```{terminal}
   :copy:
   :user:
   :host:
