@@ -22,7 +22,10 @@ sudo apt install drbd-utils
 ```
 
 :::{note}
-If you are using the **virtual kernel** as part of a virtual machine you will need to manually compile the `drbd` module. It may be easier to install the `linux-modules-extra-$(uname -r)` package inside the virtual machine.
+If you are using the **virtual kernel** as part of a virtual machine, the `drbd` module may not be available by default. On Ubuntu 25.04 and earlier, you can
+install `linux-modules-extra-$(uname -r)` to obtain additional kernel modules.
+
+Starting with Ubuntu 25.10 (Questing), the `linux-modules-extra-*` packages are no longer provided. All kernel modules are now provided by the `linux-modules-<version>-<flavor>` package, which is installed by default.
 :::
 
 ## Configure DRBD
