@@ -1,12 +1,11 @@
 ---
 myst:
   html_meta:
-    description: Install and configure vsftpd FTP server on Ubuntu with anonymous and authenticated access modes for file transfer over TCP protocol.
+    description: How to set up and run an FTP server on Ubuntu with vsftp. Host files on a network over TCP with anonymous or authenticated access.
 ---
 
 (ftp)=
-# Set up an FTP server
-
+# Host files with an FTP server
 
 File Transfer Protocol (FTP) is a TCP protocol for downloading files between computers. In the past, it has also been used for uploading but, as that method does not use encryption, user credentials as well as data transferred in the clear and are easily intercepted. So if you are here looking for a way to upload and download files securely, see the {ref}`OpenSSH documentation <openssh-server>` instead.
 

@@ -15,12 +15,12 @@ Network configuration in Ubuntu is handled through Netplan. See our general walk
 
 ## Network tools
 
-The File Transfer Protocol (FTP) can be set up to provide files for download.
+With tools like `vsftp`, Ubuntu can run a File Transfer Protocol (FTP) server for hosting files on a network.
 
 ```{toctree}
 :titlesonly:
 
-File transfers with FTP <networking/ftp>
+networking/ftp
 ```
 
 The Domain Name Service (DNS) maps IP addresses to fully qualified domain names (FQDN). The DNS Security Extensions (DNSSEC) allow DNS data to be verified.
