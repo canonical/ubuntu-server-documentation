@@ -15,7 +15,7 @@ Network configuration in Ubuntu is handled through Netplan. See our general walk
 
 ## Network tools
 
-Ubuntu can run a simple File Transfer Protocol (FTP) server for hosting files on a network.
+With tools like vsftp and sftp, Ubuntu can run a File Transfer Protocol (FTP) server for hosting files on a network.
 
 ```{toctree}
 :titlesonly:
