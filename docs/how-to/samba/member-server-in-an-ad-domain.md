@@ -105,28 +105,19 @@ This command also installed the `libpam-winbind` package, **which allows AD user
 If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
 :::
 
-Until {lpbug}`1980246` is fixed, one extra step is needed:
+Now you will be able to query users from the AD domain. Winbind adds the short domain name as a prefix to domain users and groups:
 
-- Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+getent passwd INTEXAMPLE\\Administrator
 
-  ```text 
-  passwd:         files systemd winbind
-  group:          files systemd winbind
-  ```
-
-  Now you will be able to query users from the AD domain. Winbind adds the short domain name as a prefix to domain users and groups:
-
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  getent passwd INTEXAMPLE\\Administrator
-
-  INTEXAMPLE\administrator:*:2000500:2000513::/home/administrator@INTEXAMPLE:/bin/bash
-  ```
+INTEXAMPLE\administrator:*:2000500:2000513::/home/administrator@INTEXAMPLE:/bin/bash
+```
   
-  You can find out the short domain name in the `realm` output shown earlier, or inspect the `workgroup` parameter of `/etc/samba/smb.conf`.
+You can find out the short domain name in the `realm` output shown earlier, or inspect the `workgroup` parameter of `/etc/samba/smb.conf`.
 
 ### Common installation options
 
