@@ -59,3 +59,5 @@ Actions blocked by AppArmor may surface as odd or unrelated errors in the applic
 ## Further reading
 
 - For more information on how to use AppArmor, including details of the profile modes, [the Debian AppArmor guide](https://wiki.debian.org/AppArmor/HowToUse) may be helpful.
+
+- Upstream [AppARmor Documentation](https://apparmor.net/).
