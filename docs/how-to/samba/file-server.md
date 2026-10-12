@@ -123,10 +123,8 @@ The file share named `[share]` and the path `/srv/samba/share` used in this exam
 
 ## Further reading
 
-- For in-depth Samba configurations see the [Samba how-to collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/)
+- [Samba wiki](https://wiki.samba.org/index.php/Main_Page)
 
-- The guide is also available [in printed format](https://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- [Docs and books recommended by upstream](https://www.samba.org/samba/docs/)
 
-- O'Reilly's [Using Samba](https://www.oreilly.com/library/view/using-samba-3rd/0596007698/) is another good reference.
-
-- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- [Samba Experience conference](https://sambaxp.org/), in particular the [Archives](https://sambaxp.org/archive) of past events
