@@ -219,3 +219,11 @@ In `/etc/fstab`:
 ```
 
 You can now manually mount the share after you log in. If you would like the share to be automatically mounted after each login, please see the section above about `libpam-mount`.
+
+## Further reading
+
+- The {manpage}`mount.cifs(8)` manual page
+
+- The {manpage}`pam_mount.conf(5)` manual page
+
+- The {manpage}`pam_mount(8)` manual page
