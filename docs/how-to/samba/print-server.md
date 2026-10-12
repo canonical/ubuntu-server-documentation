@@ -31,10 +31,11 @@ sudo apt install samba
 
 ## Configure Samba
 
-After installing `samba`, edit `/etc/samba/smb.conf`. Change the *workgroup* attribute to what is appropriate for your network:
+After installing `samba`, edit `/etc/samba/smb.conf`. Change the *workgroup* attribute to what is appropriate for your network, and set printing to cups:
 
 ```ini
 workgroup = EXAMPLE
+printing = cups
 ```
 
 In the *`[printers]`* section, change the *guest ok* option to 'yes':
@@ -58,12 +59,8 @@ The default Samba configuration will automatically share any printers installed.
 
 ## Further reading
 
-- For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
+- The `[printers]` section of the {manpage}`smb.conf(5)` manual page
 
-- The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- [Samba wiki](https://wiki.samba.org/index.php/Main_Page)
 
-- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is another good reference.
-
-- Also, see the [CUPS Website](http://www.cups.org/) for more information on configuring CUPS.
-
-- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- The [CUPS Website](http://www.cups.org/) has more information on configuring CUPS
