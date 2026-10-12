@@ -105,28 +105,19 @@ This command also installed the `libpam-winbind` package, **which allows AD user
 If you don't expect or need AD users to log into this system (unless it's via Samba or Windows), then it's safe and probably best to remove the `libpam-winbind` package.
 :::
 
-Until {lpbug}`1980246` is fixed, one extra step is needed:
+Now you will be able to query users from the AD domain. Winbind adds the short domain name as a prefix to domain users and groups:
 
-- Configure `/etc/nsswitch.conf` by adding the word `winbind` to the `passwd` and `group` lines as shown below:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+getent passwd INTEXAMPLE\\Administrator
 
-  ```text 
-  passwd:         files systemd winbind
-  group:          files systemd winbind
-  ```
-
-  Now you will be able to query users from the AD domain. Winbind adds the short domain name as a prefix to domain users and groups:
-
-  ```{terminal}
-  :copy:
-  :user:
-  :host:
-  :dir:
-  getent passwd INTEXAMPLE\\Administrator
-
-  INTEXAMPLE\administrator:*:2000500:2000513::/home/administrator@INTEXAMPLE:/bin/bash
-  ```
+INTEXAMPLE\administrator:*:2000500:2000513::/home/administrator@INTEXAMPLE:/bin/bash
+```
   
-  You can find out the short domain name in the `realm` output shown earlier, or inspect the `workgroup` parameter of `/etc/samba/smb.conf`.
+You can find out the short domain name in the `realm` output shown earlier, or inspect the `workgroup` parameter of `/etc/samba/smb.conf`.
 
 ### Common installation options
 
@@ -233,7 +224,7 @@ You can also restrict access to the share as usual. Just keep in mind the syntax
     comment = Storage share
     writable = yes
     guest ok = no
-    valid users = "@INTEXAMPLE\ LTS Releases"
+    valid users = "@INTEXAMPLE\LTS Releases"
 ```
 
 ### Choose an `idmap` backend
@@ -261,7 +252,7 @@ idmap config intexample : range = 2000000-2999999
 idmap config * : backend = tdb
 ```
 
-Will reserve the `2,000,000` through `2,999,999` range for user and group ID allocations on the Linux side for the `intexample` domain. The default backend (`*`, which acts as a "globbing" catch-all rule) is used for the `BUILTIN` user and groups, and other domains (if they exist). It's important that these ranges do not overlap.
+Will reserve the `2,000,000` through `2,999,999` range for user and group ID allocations on the Linux side for the `intexample` domain. The default backend (`*`), which acts as a "globbing" catch-all rule, is used for the `BUILTIN` user and groups, and other domains (if they exist). It's important that these ranges do not overlap.
 
 The `Administrator` user we inspected before with `getent passwd` can give us a glimpse of how these ranges are used (output format changed for clarity):
 
