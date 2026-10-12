@@ -7,13 +7,13 @@ myst:
 (samba-apparmor-profile)=
 # Create a Samba AppArmor profile
 
-Ubuntu comes with the AppArmor security module, which provides mandatory access controls. The default AppArmor profile for Samba may need to be adapted to your configuration. More details on using AppArmor can be found {ref}`in this guide <apparmor>`.
+Ubuntu comes with the AppArmor security module, which provides mandatory access controls. The default AppArmor profile for Samba may need to be adapted to your configuration. More details on using AppArmor can be found in the {ref}`AppArmor guide <apparmor>`.
 
 There are default AppArmor profiles for `/usr/sbin/smbd` and `/usr/sbin/nmbd`, the Samba daemon binaries, as part of the `apparmor-profiles` package. 
 
-## Install `apparmor-profiles`
+## Install extra profiles and utilities
 
-To install the package, enter the following command from a terminal prompt:
+To install the extra profiles and utilities, enter the following command from a terminal prompt:
 
 ```{terminal}
 :copy:
