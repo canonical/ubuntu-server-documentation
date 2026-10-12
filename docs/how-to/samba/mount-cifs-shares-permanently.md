@@ -69,58 +69,56 @@ After you add the entry to `/etc/fstab`, type:
 :user:
 :host:
 :dir:
+sudo systemctl daemon-reload
+```
+
+And then mount the share:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /media/windowsshare
 ```
 
+Due to the `/etc/fstab` entry, it will also be automatically mounted at boot time.
+
 ## Mount password-protected network folders
 
-To auto-mount a password-protected share, you can edit `/etc/fstab` (with root privileges), and add this line:
+To auto-mount a password-protected share, we will use a credentials file to avoid storing the password in `/etc/fstab`, which everyone on the system can read.
 
-```text
-//servername/sharename /media/windowsshare cifs username=msusername,password=mspassword 0 0
-```
-
-This is not a good idea however: `/etc/fstab` is readable by everyone -- and so is your Windows password within it. The way around this is to use a credentials file. This is a file that contains just the username and password.
-
-### Create a credentials file
-
-Using a text editor, create a file for your remote server’s logon credential:
-
-```{terminal}
-:copy:
-:user:
-:host:
-:dir:
-gedit ~/.smbcredentials
-```
-
-Enter your Windows username and password in the file:
+Using a text editor, create the file `~/.smbcredentials` with the following content:
 
 ```text
 username=msusername
-
 password=mspassword
 ```
 
-Save the file and exit the editor.
-
-Change the permissions of the file to prevent unwanted access to your credentials:
+And change its permissions to prevent unwanted access to your credentials:
 
 ```{terminal}
 :copy:
 :user:
 :host:
 :dir:
-chmod 600 ~/.smbcredentials
+chmod 0600 ~/.smbcredentials
 ```
 
-Then edit your `/etc/fstab` file (with root privileges) to add this line (replacing the insecure line in the example above, if you added it):
+Then edit the `/etc/fstab` file (with root privileges) to add this line:
 
 ```text
 //servername/sharename /media/windowsshare cifs credentials=/home/ubuntuusername/.smbcredentials 0 0
 ```
 
-Save the file and exit the editor.
+Run `systemctl daemon-reload` again:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl daemon-reload
+```
 
 Finally, test mounting the share by running:
 
