@@ -134,14 +134,8 @@ Now from a Windows client you should notice the new file permissions are impleme
 
 ## Further reading
 
-- For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
+- The samba configuration file {manpage}`smb.conf(5)` manual page.
 
-- The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- [Setting up a share using POSIX ACLs](https://wiki.samba.org/index.php/Setting_up_a_Share_Using_POSIX_ACLs) from the Samba Wiki.
 
-- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is also a good reference.
-
-- [Chapter 18](https://www.samba.org/samba/docs/old/Samba3-HOWTO/securing-samba.html) of the Samba HOWTO Collection is devoted to security.
-
-- For more information on Samba and ACLs see the [Samba ACLs page](https://www.samba.org/samba/docs/old/Samba3-HOWTO/AccessControls.html).
-
-- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- [Setting up a share using Windows ACLs](https://wiki.samba.org/index.php/Setting_up_a_Share_Using_Windows_ACLs) from the Samba Wiki.
