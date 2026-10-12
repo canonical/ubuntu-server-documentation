@@ -208,18 +208,6 @@ If you get the error "mount error(13) permission denied", then the server denied
 * Do you have blank space in your credentials file? It should be `password=mspassword`, not `password = mspassword`.
 * Do you need a domain? For example, if you are told that your username is `SALES\sally`, then actually your username is `sally` and your domain is `SALES`. You can add a `domain=SALES` line to the `~/.smbcredentials` file.
 
-### Mount after login instead of boot
-
-If for some reason, such as networking problems, the automatic mounting during boot doesn't work, you can add the `noauto` parameter to your CIFS `fstab` entry and then have the share mounted at login.
-
-In `/etc/fstab`:
-
-```text
-//servername/sharename /media/windowsshare cifs noauto,credentials=/home/ubuntuusername/.smbpasswd 0 0
-```
-
-You can now manually mount the share after you log in. If you would like the share to be automatically mounted after each login, please see the section above about `libpam-mount`.
-
 ## Further reading
 
 - The {manpage}`mount.cifs(8)` manual page
