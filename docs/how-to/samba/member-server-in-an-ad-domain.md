@@ -252,7 +252,7 @@ idmap config intexample : range = 2000000-2999999
 idmap config * : backend = tdb
 ```
 
-Will reserve the `2,000,000` through `2,999,999` range for user and group ID allocations on the Linux side for the `intexample` domain. The default backend (`*`), which acts as a "globbing" catch-all rule) is used for the `BUILTIN` user and groups, and other domains (if they exist). It's important that these ranges do not overlap.
+Will reserve the `2,000,000` through `2,999,999` range for user and group ID allocations on the Linux side for the `intexample` domain. The default backend (`*`), which acts as a "globbing" catch-all rule, is used for the `BUILTIN` user and groups, and other domains (if they exist). It's important that these ranges do not overlap.
 
 The `Administrator` user we inspected before with `getent passwd` can give us a glimpse of how these ranges are used (output format changed for clarity):
 
