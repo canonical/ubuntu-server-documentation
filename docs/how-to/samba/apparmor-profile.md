@@ -29,7 +29,7 @@ This package also contains profiles for several other applications.
 
 ## AppArmor profile modes
 
-By default, the profiles for `smbd` and `nmbd` are set to 'enforce' mode. There is no need to add rules for the shares, as the `smbd` service unit takes care of doing that automatically via a helper script whenever restarted. It will inspect the exported shares in `/etc/samba/smb.conf` and add the necessary AppArmor rules via a profile snippet in `/etc/apparmor.d/samba/smbd-shares`.
+By default, the profiles for `smbd` and `nmbd` are set to "enforce" mode. There is no need to add rules for the shares, as the `smbd` service unit takes care of doing that automatically via a helper script whenever restarted. It will inspect the exported shares in `/etc/samba/smb.conf` and add the necessary AppArmor rules via a profile snippet in `/etc/apparmor.d/samba/smbd-shares`.
 
 It's very likely that the AppArmor profile is not generic enough for all types of Samba deployments. How to develop or adjust an AppArmor profile is out of scope for this documentation, but in order to allow the service to at least run, while at the same time logging security violations, you can switch the profile to "complain" mode.
 
