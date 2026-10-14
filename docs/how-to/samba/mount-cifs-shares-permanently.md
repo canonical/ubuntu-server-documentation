@@ -69,58 +69,56 @@ After you add the entry to `/etc/fstab`, type:
 :user:
 :host:
 :dir:
+sudo systemctl daemon-reload
+```
+
+And then mount the share:
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
 sudo mount /media/windowsshare
 ```
 
+Due to the `/etc/fstab` entry, it will also be automatically mounted at boot time.
+
 ## Mount password-protected network folders
 
-To auto-mount a password-protected share, you can edit `/etc/fstab` (with root privileges), and add this line:
+To auto-mount a password-protected share, we will use a credentials file to avoid storing the password in `/etc/fstab`, which everyone on the system can read.
 
-```text
-//servername/sharename /media/windowsshare cifs username=msusername,password=mspassword 0 0
-```
-
-This is not a good idea however: `/etc/fstab` is readable by everyone -- and so is your Windows password within it. The way around this is to use a credentials file. This is a file that contains just the username and password.
-
-### Create a credentials file
-
-Using a text editor, create a file for your remote server’s logon credential:
-
-```{terminal}
-:copy:
-:user:
-:host:
-:dir:
-gedit ~/.smbcredentials
-```
-
-Enter your Windows username and password in the file:
+Using a text editor, create the file `~/.smbcredentials` with the following content:
 
 ```text
 username=msusername
-
 password=mspassword
 ```
 
-Save the file and exit the editor.
-
-Change the permissions of the file to prevent unwanted access to your credentials:
+And change its permissions to prevent unwanted access to your credentials:
 
 ```{terminal}
 :copy:
 :user:
 :host:
 :dir:
-chmod 600 ~/.smbcredentials
+chmod 0600 ~/.smbcredentials
 ```
 
-Then edit your `/etc/fstab` file (with root privileges) to add this line (replacing the insecure line in the example above, if you added it):
+Then edit the `/etc/fstab` file (with root privileges) to add this line:
 
 ```text
 //servername/sharename /media/windowsshare cifs credentials=/home/ubuntuusername/.smbcredentials 0 0
 ```
 
-Save the file and exit the editor.
+Run `systemctl daemon-reload` again:
+
+```{terminal}
+:copy:
+:user:
+:host:
+:dir:
+sudo systemctl daemon-reload
+```
 
 Finally, test mounting the share by running:
 
@@ -148,9 +146,9 @@ If you use Samba and authd at the same time, you must specify user and group map
 
 If you *are* using Samba with authd, follow the instructions in the [steps for the client](https://documentation.ubuntu.com/authd/edge-docs/howto/use-with-samba/#steps-for-the-client) guide in the authd documentation.
 
-## Mount password-protected shares using `libpam-mount`
+## Mount password-protected shares at login time
 
-In addition to the initial assumptions, we're assuming here that your username and password are the same on both the Ubuntu machine and the network drive.
+This method uses the `libpam-mount` package to mount the network share at login time, using the same password you use to log in to your Ubuntu system. It's convenient, and arguably more secure, because you don't have to store your password in a file. But it can only be used if the password for both is the same.
 
 ### Install `libpam-mount`
 
@@ -193,10 +191,12 @@ Add the following:
 
 <pam_mount>
 
-<volume options="uid=%(USER),gid=100,dir_mode=0700,credentials=/home/ubuntuusername/.smbcredentials,nosuid,nodev" user="*" mountpoint="/media/windowsshare" path="sharename" server="servername" fstype="cifs" />
+<volume options="uid=%(USER),gid=100,dir_mode=0700,nosuid,nodev" user="*" mountpoint="/media/windowsshare" path="sharename" server="servername" fstype="cifs" />
 
 </pam_mount>
 ```
+
+Now when the user logs in, the share will be mounted automatically. And when logging out, the share will be unmounted.
 
 ## Troubleshooting
 
@@ -206,17 +206,12 @@ If you get the error "mount error(13) permission denied", then the server denied
 
 * Are you using a valid username and password? Does that account really have access to this folder?
 * Do you have blank space in your credentials file? It should be `password=mspassword`, not `password = mspassword`.
-* Do you need a domain? For example, if you are told that your username is `SALES\sally`, then actually your username is `sally` and your domain is `SALES`. You can add a `domain=SALES` line to the `~/.credentials` file.
-* The security and version settings are interrelated. SMB1 is insecure and no longer supported. At first, try to not specify either security or version: do not specify `sec=` or `vers=`. If you still have authentication errors then you may need to specify either `sec=` or `vers=` or both. You can try the options listed at the {manpage}`mount.cifs(8)` manual page.
+* Do you need a domain? For example, if you are told that your username is `SALES\sally`, then actually your username is `sally` and your domain is `SALES`. You can add a `domain=SALES` line to the `~/.smbcredentials` file.
 
-### Mount after login instead of boot
+## Further reading
 
-If for some reason, such as networking problems, the automatic mounting during boot doesn't work, you can add the `noauto` parameter to your CIFS `fstab` entry and then have the share mounted at login.
+- The {manpage}`mount.cifs(8)` manual page
 
-In `/etc/fstab`:
+- The {manpage}`pam_mount.conf(5)` manual page
 
-```text
-//servername/sharename /media/windowsshare cifs noauto,credentials=/home/ubuntuusername/.smbpasswd 0 0
-```
-
-You can now manually mount the share after you log in. If you would like the share to be automatically mounted after each login, please see the section above about `libpam-mount`.
+- The {manpage}`pam_mount(8)` manual page
