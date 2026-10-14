@@ -92,25 +92,15 @@ sudo smbcontrol smbd reload-config
 
 Now that Samba has been configured to limit which groups have access to the shared directory, the {term}`filesystem` permissions need to be checked.
 
-Traditional Linux file permissions do not map well to Windows NT Access Control Lists ({term}`ACL`s). Fortunately POSIX ACLs are available on Ubuntu servers, which provides more fine-grained control. For example, to enable ACLs on `/srv` in an EXT3 filesystem, edit `/etc/fstab` and add the *`acl`* option:
-
-```text
-UUID=66bcdd2e-8861-4fb0-b7e4-e61c569fe17d /srv  ext3    noatime,relatime,acl 0       1
-```
-
-Then remount the partition:
+Traditional Linux file permissions do not map well to Windows NT Access Control Lists ({term}`ACL`s). Fortunately POSIX ACLs are available on Ubuntu servers and enabled by default, but you may have to install the `acl` package if it is not already installed:
 
 ```{terminal}
 :copy:
 :user:
 :host:
 :dir:
-sudo mount -v -o remount /srv
+sudo apt install acl
 ```
-
-:::{note}
-This example assumes `/srv` is on a separate partition. If `/srv`, or wherever you have configured your share path, is part of the `/` partition then a reboot may be required.
-:::
 
 To match the Samba configuration above, the "`sysadmin`" group will be given read, write, and execute permissions to `/srv/samba/share`, the "`qa`" group will be given read and execute permissions, and the files will be owned by the username "`melissa`". Enter the following in a terminal:
 
@@ -144,14 +134,8 @@ Now from a Windows client you should notice the new file permissions are impleme
 
 ## Further reading
 
-- For in-depth Samba configurations see the [Samba HOWTO Collection](https://www.samba.org/samba/docs/old/Samba3-HOWTO/).
+- The samba configuration file {manpage}`smb.conf(5)` manual page.
 
-- The guide is also available in [printed format](http://www.amazon.com/exec/obidos/tg/detail/-/0131882228).
+- [Setting up a share using POSIX ACLs](https://wiki.samba.org/index.php/Setting_up_a_Share_Using_POSIX_ACLs) from the Samba Wiki.
 
-- O'Reilly's [Using Samba](http://www.oreilly.com/catalog/9780596007690/) is also a good reference.
-
-- [Chapter 18](https://www.samba.org/samba/docs/old/Samba3-HOWTO/securing-samba.html) of the Samba HOWTO Collection is devoted to security.
-
-- For more information on Samba and ACLs see the [Samba ACLs page](https://www.samba.org/samba/docs/old/Samba3-HOWTO/AccessControls.html).
-
-- The [Ubuntu Wiki Samba](https://help.ubuntu.com/community/Samba) page.
+- [Setting up a share using Windows ACLs](https://wiki.samba.org/index.php/Setting_up_a_Share_Using_Windows_ACLs) from the Samba Wiki.
