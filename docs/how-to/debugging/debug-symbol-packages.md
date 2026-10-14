@@ -40,11 +40,7 @@ sudo apt install ubuntu-dbgsym-keyring
 
 Create an `/etc/apt/sources.list.d/ddebs.list` by running the following line at a terminal:
 
-```{terminal}
-:copy:
-:user:
-:host:
-:dir:
+```sh
 echo "Types: deb
 URIs: http://ddebs.ubuntu.com/
 Suites: $(lsb_release -cs) $(lsb_release -cs)-updates $(lsb_release -cs)-proposed 
