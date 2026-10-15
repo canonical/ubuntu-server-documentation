@@ -248,8 +248,13 @@ In session mode, the daemon runs as your unprivileged user. Loading or compiling
 We can see the list of active AppArmor profiles for system guests using `aa-status`:
 
 ```{terminal}
-:input: aa-status
-...
+:copy:
+:user:
+:host:
+:dir:
+aa-status
+
+[...]
 7 processes are in enforce mode.
   ...
    /usr/bin/qemu-system-x86_64 (13660) libvirt-03cf1350-1de5-4400-96e3-16dce6a9a921
