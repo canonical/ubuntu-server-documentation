@@ -432,6 +432,19 @@ intersphinx_mapping = {
     "sphinxcontrib-mermaid": ("https://sphinxcontrib-mermaid-demo.readthedocs.io/en/latest", None)
 }
 
+# ==============================================================================
+# Site-wide related links
+# ==============================================================================
+
+# Related links shown in the "Related links" sidebar of *every* page, without needing to add a `relatedlinks:` entry to each page's frontmatter. Set to an empty string to disable.
+#
+# The value uses the same format as the per-page `relatedlinks` metadata: a comma-separated list of "[Link text](URL)" items. The related-links extension strips literal spaces and splits on commas, so any spaces, commas or line breaks *inside* the link text must be written as HTML entities (&#32 for a space, &#44 for a comma, <br> for a line break).
+global_relatedlinks = (
+    '[Ubuntu &#32 Summit &#32 &#50 &#54.10 <br> &#32 Register &#32 now &#44 '
+    '&#32 online &#32 Nov &#32 &#49 &#50 - &#49 &#51]'
+    '(https://discourse.ubuntu.com/c/ubuntu-summit)'
+)
+
 # Override canonical_sphinx extension defaults
 # The canonical_sphinx extension sets html_copy_source = False by default.
 # We need to enable it for "View page source" links to work.
@@ -445,6 +458,27 @@ def force_copy_source(app, config):
     config.html_copy_source = True
     config.html_show_sourcelink = True
 
+def add_global_relatedlinks(app, pagename, templatename, context, doctree):
+    """Inject the site-wide related link into every content page's metadata.
+
+    The canonical_sphinx ``page.html`` template renders ``meta.relatedlinks``, so
+    setting it here makes the links appear on every page without editing each
+    page's frontmatter. Pages that define their own ``relatedlinks`` keep them;
+    the global link is appended.
+    """
+    if not global_relatedlinks or doctree is None:
+        return
+    # Read the page's own relatedlinks from the authoritative build metadata and
+    # write the combined value to a *copy* in the render context only, so this
+    # handler never mutates persistent metadata (which would duplicate the link).
+    page_links = app.env.metadata.get(pagename, {}).get("relatedlinks")
+    meta = dict(context.get("meta") or {})
+    meta["relatedlinks"] = (
+        f"{page_links},{global_relatedlinks}" if page_links else global_relatedlinks
+    )
+    context["meta"] = meta
+
 def setup(app):
     """Custom setup to ensure source files are copied."""
     app.connect('config-inited', force_copy_source)
+    app.connect('html-page-context', add_global_relatedlinks)
