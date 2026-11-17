@@ -440,9 +440,9 @@ intersphinx_mapping = {
 #
 # The value uses the same format as the per-page `relatedlinks` metadata: a comma-separated list of "[Link text](URL)" items. The related-links extension strips literal spaces and splits on commas, so any spaces, commas or line breaks *inside* the link text must be written as HTML entities (&#32 for a space, &#44 for a comma, <br> for a line break).
 global_relatedlinks = (
-    '[Ubuntu &#32 Summit &#32 &#50 &#54.10 <br> &#32 Register &#32 now &#44 '
-    '&#32 online &#32 Nov &#32 &#49 &#50 - &#49 &#51]'
-    '(https://discourse.ubuntu.com/c/ubuntu-summit)'
+#    '[Ubuntu &#32 Summit &#32 &#50 &#54.10 <br> &#32 Register &#32 now &#44 '
+#    '&#32 online &#32 Nov &#32 &#49 &#50 - &#49 &#51]'
+#    '(https://discourse.ubuntu.com/c/ubuntu-summit)'
 )
 
 # Override canonical_sphinx extension defaults
