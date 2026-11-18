@@ -43,13 +43,16 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    L1["1 — Network and perimeter"]
-    L2["2 — Userspace<br>(deb packages, systemd services, snaps)"]
-    L3["3 — Linux kernel"]
-    L4["4 — Hardware, firmware, and boot chain"]
-    L1 -->|"Accepted connections"| L2
-    L2 -->|"System calls"| L3
-    L3 -->|"Device and storage access"| L4
+    subgraph MAIN[" "]
+        direction TB
+        L1["1 — Network and perimeter"]
+        L2["2 — Userspace<br>(deb packages, systemd services, snaps)"]
+        L3["3 — Linux kernel"]
+        L4["4 — Hardware, firmware, and boot chain"]
+        L1 -->|"Accepted connections"| L2
+        L2 -->|"System calls"| L3
+        L3 -->|"Device and storage access"| L4
+    end
 
     subgraph LEG["Legend"]
         direction LR
@@ -57,7 +60,7 @@ flowchart TB
         leg1s[" "] --> leg1["Data flow"]
         leg0 ~~~ leg1s
     end
-    L4 ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -71,6 +74,7 @@ flowchart TB
     click L3 href "#security-architecture-layer-kernel"
     click L4 href "#security-architecture-layer-hardware"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 (security-architecture-layer-network)=
@@ -104,18 +108,21 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph L1["1 — Network and perimeter"]
-        direction LR
-        nft["Netfilter and nftables<br>packet filtering"]
-        syn["TCP SYN cookies"]
-        ports["No open ports policy"]
-        ufw["ufw host firewall rules<br>(opt-in)"]
-        nts["chrony with NTS"]
-        dnssec["DNSSEC validation<br>(opt-in)"]
-        nft ~~~ syn ~~~ ports
-        ufw ~~~ nts ~~~ dnssec
+    subgraph MAIN[" "]
+        direction TB
+        subgraph L1["1 — Network and perimeter"]
+            direction LR
+            nft["Netfilter and nftables<br>packet filtering"]
+            syn["TCP SYN cookies"]
+            ports["No open ports policy"]
+            ufw["ufw host firewall rules<br>(opt-in)"]
+            nts["chrony with NTS"]
+            dnssec["DNSSEC validation<br>(opt-in)"]
+            nft ~~~ syn ~~~ ports
+            ufw ~~~ nts ~~~ dnssec
+        end
+        style L1 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    style L1 fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -125,7 +132,7 @@ flowchart TB
         leg0 ~~~ leg1
         leg1 ~~~ leg2
     end
-    L1 ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
@@ -137,6 +144,7 @@ flowchart TB
     class leg1 ubuntu
     class leg2 optin
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-packet-filtering`, {ref}`security-architecture-network-peers`, and {ref}`security-architecture-infrastructure-services`.
@@ -179,20 +187,23 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph L2["2 — Userspace"]
-        direction LR
-        pam["PAM and polkit"]
-        sysd["systemd service sandboxing"]
-        sudo["sudo-rs, root account locked"]
-        apt["APT signature verification,<br>unattended security updates"]
-        aaprof["AppArmor profiles for<br>packaged software"]
-        snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
-        flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
-        audit["auditd, USG hardening profiles<br>(opt-in)"]
-        pam ~~~ sysd ~~~ sudo ~~~ apt
-        aaprof ~~~ snap ~~~ flags ~~~ audit
+    subgraph MAIN[" "]
+        direction TB
+        subgraph L2["2 — Userspace"]
+            direction LR
+            pam["PAM and polkit"]
+            sysd["systemd service sandboxing"]
+            sudo["sudo-rs, root account locked"]
+            apt["APT signature verification,<br>unattended security updates"]
+            aaprof["AppArmor profiles for<br>packaged software"]
+            snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
+            flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
+            audit["auditd, USG hardening profiles<br>(opt-in)"]
+            pam ~~~ sysd ~~~ sudo ~~~ apt
+            aaprof ~~~ snap ~~~ flags ~~~ audit
+        end
+        style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -202,7 +213,7 @@ flowchart TB
         leg0 ~~~ leg1
         leg1 ~~~ leg2
     end
-    L2 ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
@@ -214,6 +225,7 @@ flowchart TB
     class leg1 ubuntu
     class leg2 optin
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-pam`, {ref}`security-architecture-service-sandboxing`, {ref}`security-architecture-sudo-rs`, {ref}`security-architecture-archive`, {ref}`security-architecture-apparmor`, and {ref}`security-architecture-snap-store`.
@@ -258,20 +270,23 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph L3["3 — Linux kernel"]
-        direction LR
-        dac["DAC, POSIX ACLs,<br>capabilities"]
-        nscg["Namespaces, cgroups v2"]
-        seccomp["seccomp-bpf"]
-        khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
-        aa["AppArmor LSM enforced"]
-        yama["Yama ptrace scope"]
-        userns["Unprivileged user<br>namespace restriction"]
-        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-        dac ~~~ nscg ~~~ seccomp ~~~ khard
-        aa ~~~ yama ~~~ userns ~~~ lockdown
+    subgraph MAIN[" "]
+        direction TB
+        subgraph L3["3 — Linux kernel"]
+            direction LR
+            dac["DAC, POSIX ACLs,<br>capabilities"]
+            nscg["Namespaces, cgroups v2"]
+            seccomp["seccomp-bpf"]
+            khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
+            aa["AppArmor LSM enforced"]
+            yama["Yama ptrace scope"]
+            userns["Unprivileged user<br>namespace restriction"]
+            lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
+            dac ~~~ nscg ~~~ seccomp ~~~ khard
+            aa ~~~ yama ~~~ userns ~~~ lockdown
+        end
+        style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -281,7 +296,7 @@ flowchart TB
         leg0 ~~~ leg1
         leg1 ~~~ leg2
     end
-    L3 ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
@@ -293,6 +308,7 @@ flowchart TB
     class leg1 ubuntu
     class leg2 platform
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-dac`, {ref}`security-architecture-namespaces`, {ref}`security-architecture-seccomp`, {ref}`security-architecture-apparmor`, {ref}`security-architecture-yama`, and {ref}`security-architecture-kernel-modules`.
@@ -335,17 +351,20 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph L4["4 — Hardware, firmware, and boot chain"]
-        direction LR
-        sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
-        tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
-        iommu["IOMMU DMA protection<br>(platform-dependent)"]
-        fwupd["fwupd firmware updates"]
-        fde["LUKS full disk encryption<br>(opt-in)"]
-        sb ~~~ tpm ~~~ iommu
-        fwupd ~~~ fde
+    subgraph MAIN[" "]
+        direction TB
+        subgraph L4["4 — Hardware, firmware, and boot chain"]
+            direction LR
+            sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
+            tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
+            iommu["IOMMU DMA protection<br>(platform-dependent)"]
+            fwupd["fwupd firmware updates"]
+            fde["LUKS full disk encryption<br>(opt-in)"]
+            sb ~~~ tpm ~~~ iommu
+            fwupd ~~~ fde
+        end
+        style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -355,7 +374,7 @@ flowchart TB
         leg0 ~~~ leg1
         leg1 ~~~ leg2
     end
-    L4 ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
@@ -367,6 +386,7 @@ flowchart TB
     class leg1 optin
     class leg2 platform
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-boot`, {ref}`security-architecture-dma`, {ref}`security-architecture-firmware-updates`, and {ref}`security-architecture-full-disk-encryption`.

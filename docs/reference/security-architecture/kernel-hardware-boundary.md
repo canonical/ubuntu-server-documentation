@@ -44,25 +44,28 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph HW["Hardware and firmware"]
-        uefi["UEFI firmware, Secure Boot<br>(platform-dependent)"]
-        tpm["TPM 2.0 PCRs<br>(platform-dependent)"]
+    subgraph MAIN[" "]
+        direction TB
+        subgraph HW["Hardware and firmware"]
+            uefi["UEFI firmware, Secure Boot<br>(platform-dependent)"]
+            tpm["TPM 2.0 PCRs<br>(platform-dependent)"]
+        end
+        subgraph BOOT["Boot chain"]
+            shim["shim<br>(signed by Microsoft UEFI CA)"]
+            grub["GRUB<br>(signed by Canonical)"]
+            kernel["Linux kernel<br>(signed by Canonical)"]
+            initrd["initramfs<br>(built locally, not signed)"]
+        end
+        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
+        uefi -->|"Verifies"| shim
+        shim -->|"Verifies"| grub
+        grub -->|"Verifies through shim"| kernel
+        grub -->|"Loads"| initrd
+        uefi -->|"Extends measurements<br>of each stage"| tpm
+        kernel -->|"Enforces at runtime"| lockdown
+        style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    subgraph BOOT["Boot chain"]
-        shim["shim<br>(signed by Microsoft UEFI CA)"]
-        grub["GRUB<br>(signed by Canonical)"]
-        kernel["Linux kernel<br>(signed by Canonical)"]
-        initrd["initramfs<br>(built locally, not signed)"]
-    end
-    lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-    uefi -->|"Verifies"| shim
-    shim -->|"Verifies"| grub
-    grub -->|"Verifies through shim"| kernel
-    grub -->|"Loads"| initrd
-    uefi -->|"Extends measurements<br>of each stage"| tpm
-    kernel -->|"Enforces at runtime"| lockdown
-    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -73,9 +76,10 @@ flowchart TB
         leg4s[" "] --> leg4["Data flow"]
         leg0 ~~~ leg1
         leg1 ~~~ leg2
+        leg2 ~~~ leg3
         leg3 ~~~ leg4s
     end
-    HW ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -100,6 +104,7 @@ flowchart TB
     click initrd href "#security-architecture-boot"
     click lockdown href "#security-architecture-kernel-modules"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 When UEFI Secure Boot is enabled, each boot stage verifies the signature of
@@ -153,31 +158,34 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph UNLOCK["Disk unlock methods"]
-        pass["Passphrase<br>(opt-in)"]
-        clevis["Clevis TPM unlock<br>(opt-in)"]
-        tpmfde["TPM-backed FDE<br>(opt-in, Desktop)"]
+    subgraph MAIN[" "]
+        direction TB
+        subgraph UNLOCK["Disk unlock methods"]
+            pass["Passphrase<br>(opt-in)"]
+            clevis["Clevis TPM unlock<br>(opt-in)"]
+            tpmfde["TPM-backed FDE<br>(opt-in, Desktop)"]
+        end
+        subgraph RUN["Running system"]
+            initrd["initramfs"]
+            dmcrypt["dm-crypt"]
+            keyring[("Kernel keyrings<br>(keyctl)")]
+        end
+        subgraph HW["Hardware"]
+            tpm["TPM 2.0<br>(platform-dependent)"]
+            luks[("LUKS encrypted volume<br>(opt-in)")]
+        end
+        tpm -.->|"Unseals key if<br>PCRs match"| clevis
+        tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
+        pass -.->|"Passphrase"| initrd
+        clevis -.->|"Key"| initrd
+        tpmfde -.->|"Key"| dmcrypt
+        initrd -.->|"Volume key"| dmcrypt
+        dmcrypt -.->|"Volume key"| keyring
+        dmcrypt -.->|"Encrypted blocks"| luks
+        style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
+        style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    subgraph RUN["Running system"]
-        initrd["initramfs"]
-        dmcrypt["dm-crypt"]
-        keyring[("Kernel keyrings<br>(keyctl)")]
-    end
-    subgraph HW["Hardware"]
-        tpm["TPM 2.0<br>(platform-dependent)"]
-        luks[("LUKS encrypted volume<br>(opt-in)")]
-    end
-    tpm -.->|"Unseals key if<br>PCRs match"| clevis
-    tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
-    pass -.->|"Passphrase"| initrd
-    clevis -.->|"Key"| initrd
-    tpmfde -.->|"Key"| dmcrypt
-    initrd -.->|"Volume key"| dmcrypt
-    dmcrypt -.->|"Volume key"| keyring
-    dmcrypt -.->|"Encrypted blocks"| luks
-    style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
-    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -188,9 +196,10 @@ flowchart TB
         leg4s[" "] -.-> leg4["Untrusted or<br>optional flow"]
         leg0 ~~~ leg1
         leg1 ~~~ leg2
+        leg2 ~~~ leg3
         leg3 ~~~ leg4s
     end
-    HW ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -216,6 +225,7 @@ flowchart TB
     click tpm href "#security-architecture-boot"
     click luks href "#security-architecture-full-disk-encryption"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 (security-architecture-full-disk-encryption)=
@@ -280,34 +290,37 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph OUTSIDE["Outside — untrusted"]
-        dev["Peripherals and<br>removable media"]
+    subgraph MAIN[" "]
+        direction TB
+        subgraph OUTSIDE["Outside — untrusted"]
+            dev["Peripherals and<br>removable media"]
+        end
+        subgraph EXTSVC["External services"]
+            lvfs["LVFS<br>(firmware updates)"]
+        end
+        subgraph RUN["Running system"]
+            usbguard["usbguard allow list<br>(opt-in)"]
+            drivers["Kernel drivers and udev"]
+            dkms["Third-party modules<br>(DKMS, signed with MOK)"]
+            modsig["Module signature check<br>(platform-dependent)"]
+            fwupd["fwupd"]
+        end
+        subgraph HW["Hardware and firmware"]
+            iommu["IOMMU<br>(platform-dependent)"]
+            fw["Device and system firmware"]
+        end
+        dev -.->|"Device attach"| drivers
+        usbguard -.->|"Allow or block"| drivers
+        dev -.->|"DMA requests"| iommu
+        dkms -->|"Load request"| modsig
+        modsig -->|"Signed modules"| drivers
+        lvfs -->|"Signed firmware<br>and metadata"| fwupd
+        fwupd -->|"Verified update"| fw
+        style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    subgraph EXTSVC["External services"]
-        lvfs["LVFS<br>(firmware updates)"]
-    end
-    subgraph RUN["Running system"]
-        usbguard["usbguard allow list<br>(opt-in)"]
-        drivers["Kernel drivers and udev"]
-        dkms["Third-party modules<br>(DKMS, signed with MOK)"]
-        modsig["Module signature check<br>(platform-dependent)"]
-        fwupd["fwupd"]
-    end
-    subgraph HW["Hardware and firmware"]
-        iommu["IOMMU<br>(platform-dependent)"]
-        fw["Device and system firmware"]
-    end
-    dev -.->|"Device attach"| drivers
-    usbguard -.->|"Allow or block"| drivers
-    dev -.->|"DMA requests"| iommu
-    dkms -->|"Load request"| modsig
-    modsig -->|"Signed modules"| drivers
-    lvfs -->|"Signed firmware<br>and metadata"| fwupd
-    fwupd -->|"Verified update"| fw
-    style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -328,7 +341,7 @@ flowchart TB
         leg6 ~~~ leg7s
         leg7 ~~~ leg8s
     end
-    HW ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
@@ -365,6 +378,7 @@ flowchart TB
     click fw href "#security-architecture-firmware-updates"
     click iommu href "#security-architecture-dma"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-lvfs`.

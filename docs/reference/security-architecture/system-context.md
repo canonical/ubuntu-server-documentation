@@ -41,41 +41,44 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph OUT["Outside — untrusted"]
-        users["Remote and local users<br>and administrators"]
-        peers["Untrusted network peers<br>(LAN, internet, DHCP)"]
-        media["Removable media and peripherals<br>(USB, Thunderbolt, wireless)"]
-    end
+    subgraph MAIN[" "]
+        direction TB
+        subgraph OUT["Outside — untrusted"]
+            users["Remote and local users<br>and administrators"]
+            peers["Untrusted network peers<br>(LAN, internet, DHCP)"]
+            media["Removable media and peripherals<br>(USB, Thunderbolt, wireless)"]
+        end
 
-    subgraph EXT["External infrastructure services (outside boundary)"]
-        archive["Ubuntu archive and mirrors"]
-        store["Snap Store"]
-        lvfs["LVFS<br>(firmware updates)"]
-        infra["Time, name, and identity services<br>(NTP, DNS, identity providers)"]
-    end
+        subgraph EXT["External infrastructure services (outside boundary)"]
+            archive["Ubuntu archive and mirrors"]
+            store["Snap Store"]
+            lvfs["LVFS<br>(firmware updates)"]
+            infra["Time, name, and identity services<br>(NTP, DNS, identity providers)"]
+        end
 
-    subgraph IN["Inside — Ubuntu system"]
-        net["Network-facing services<br>(SSH and other daemons)"]
-        apps["Services and applications<br>(deb packages and snaps)"]
-        clients["Outbound system clients<br>(APT, snapd, fwupd, chrony, resolver)"]
-        priv["Privileged components<br>(kernel, udev, PAM, root daemons)"]
-        data[("Secrets and configuration<br>(keys, /etc, user data)")]
-    end
+        subgraph IN["Inside — Ubuntu system"]
+            net["Network-facing services<br>(SSH and other daemons)"]
+            apps["Services and applications<br>(deb packages and snaps)"]
+            clients["Outbound system clients<br>(APT, snapd, fwupd, chrony, resolver)"]
+            priv["Privileged components<br>(kernel, udev, PAM, root daemons)"]
+            data[("Secrets and configuration<br>(keys, /etc, user data)")]
+        end
 
-    users -->|"SSH and service requests<br>(encrypted, authenticated)"| net
-    peers -.->|"Untrusted traffic<br>(kernel network stack)"| net
-    media -.->|"Device attach and data<br>(udev, kernel drivers)"| priv
-    archive -->|"Packages<br>(GPG-signed metadata)"| clients
-    store -->|"Snaps<br>(signed assertions)"| clients
-    lvfs -->|"Firmware<br>(signed metadata)"| clients
-    infra -->|"Time (NTS), DNS answers,<br>authentication results"| clients
-    net -->|"Requests"| apps
-    net -->|"Authentication"| priv
-    apps -->|"System calls, D-Bus"| priv
-    priv -->|"Key and file access"| data
-    style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style EXT fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style IN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        users -->|"SSH and service requests<br>(encrypted, authenticated)"| net
+        peers -.->|"Untrusted traffic<br>(kernel network stack)"| net
+        media -.->|"Device attach and data<br>(udev, kernel drivers)"| priv
+        archive -->|"Packages<br>(GPG-signed metadata)"| clients
+        store -->|"Snaps<br>(signed assertions)"| clients
+        lvfs -->|"Firmware<br>(signed metadata)"| clients
+        infra -->|"Time (NTS), DNS answers,<br>authentication results"| clients
+        net -->|"Requests"| apps
+        net -->|"Authentication"| priv
+        apps -->|"System calls, D-Bus"| priv
+        priv -->|"Key and file access"| data
+        style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style EXT fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style IN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    end
 
     subgraph LEG["Legend"]
         direction LR
@@ -91,6 +94,7 @@ flowchart TB
         leg3 ~~~ leg4s
         leg4 ~~~ leg5s
     end
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
@@ -118,6 +122,7 @@ flowchart TB
     click infra href "#security-architecture-infrastructure-services"
     click clients href "#security-architecture-archive"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-network-boundary`, {ref}`security-architecture-layer-userspace`, {ref}`security-architecture-privilege-boundary`, and {ref}`security-architecture-data-at-rest`.

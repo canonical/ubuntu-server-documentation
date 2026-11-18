@@ -46,26 +46,29 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph NETZ["Outside — untrusted"]
-        pkt["Remote clients and<br>untrusted peers"]
-    end
-    subgraph KZ["Linux kernel"]
-        nf["Netfilter hooks,<br>TCP SYN cookies"]
-    end
-    subgraph US["Userspace"]
-        rules["nftables or ufw rules<br>(opt-in)"]
-        subgraph SANDBOX["systemd service sandbox"]
-            svc["Network-facing service<br>(OpenSSH, TLS server)"]
+    subgraph MAIN[" "]
+        direction LR
+        subgraph NETZ["Outside — untrusted"]
+            pkt["Remote clients and<br>untrusted peers"]
         end
+        subgraph KZ["Linux kernel"]
+            nf["Netfilter hooks,<br>TCP SYN cookies"]
+        end
+        subgraph US["Userspace"]
+            rules["nftables or ufw rules<br>(opt-in)"]
+            subgraph SANDBOX["systemd service sandbox"]
+                svc["Network-facing service<br>(OpenSSH, TLS server)"]
+            end
+        end
+        pkt -.->|"Untrusted packets"| nf
+        rules -.->|"Loaded rules"| nf
+        nf -->|"Accepted connections"| svc
+        pkt <-->|"Encrypted, authenticated<br>session"| svc
+        style NETZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style SANDBOX fill:#FFFFFF,stroke:#000000,stroke-width:1px
     end
-    pkt -.->|"Untrusted packets"| nf
-    rules -.->|"Loaded rules"| nf
-    nf -->|"Accepted connections"| svc
-    svc -->|"Encrypted, authenticated<br>session"| pkt
-    style NETZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style SANDBOX fill:#FFFFFF,stroke:#000000,stroke-width:1px
 
     subgraph LEG["Legend"]
         direction LR
@@ -80,7 +83,7 @@ flowchart TB
         leg3 ~~~ leg4s
         leg4 ~~~ leg5s
     end
-    US ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -103,6 +106,7 @@ flowchart TB
     click rules href "#security-architecture-packet-filtering"
     click svc href "#security-architecture-encrypted-access"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-network-peers`.
@@ -158,31 +162,34 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph OUT["Outside — untrusted"]
-        users["Remote and local users"]
+    subgraph MAIN[" "]
+        direction TB
+        subgraph OUT["Outside — untrusted"]
+            users["Remote and local users"]
+        end
+        subgraph UNPRIV["Unprivileged"]
+            user["User session<br>or application"]
+        end
+        subgraph PRIV["Privileged (root)"]
+            login["Login services<br>(console, SSH, display manager)"]
+            sudo["sudo-rs"]
+            daemon["Privileged daemon"]
+            polkit["polkit"]
+            pam["PAM"]
+            mfa["Multi-factor, smart card,<br>network identity (opt-in)"]
+        end
+        users -->|"Credentials"| login
+        login -->|"Authentication"| pam
+        login -->|"Starts session"| user
+        user -->|"Elevation request"| sudo
+        sudo -->|"Authentication"| pam
+        user -->|"D-Bus call"| daemon
+        daemon -->|"Authorization check"| polkit
+        pam -.->|"Additional factors"| mfa
+        style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style UNPRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style PRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
     end
-    subgraph UNPRIV["Unprivileged"]
-        user["User session<br>or application"]
-    end
-    subgraph PRIV["Privileged (root)"]
-        login["Login services<br>(console, SSH, display manager)"]
-        sudo["sudo-rs"]
-        daemon["Privileged daemon"]
-        polkit["polkit"]
-        pam["PAM"]
-        mfa["Multi-factor, smart card,<br>network identity (opt-in)"]
-    end
-    users -->|"Credentials"| login
-    login -->|"Authentication"| pam
-    login -->|"Starts session"| user
-    user -->|"Elevation request"| sudo
-    sudo -->|"Authentication"| pam
-    user -->|"D-Bus call"| daemon
-    daemon -->|"Authorization check"| polkit
-    pam -.->|"Additional factors"| mfa
-    style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style UNPRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style PRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
     subgraph LEG["Legend"]
         direction LR
@@ -199,7 +206,7 @@ flowchart TB
         leg4 ~~~ leg5s
         leg5 ~~~ leg6s
     end
-    PRIV ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -229,6 +236,7 @@ flowchart TB
     click pam href "#security-architecture-pam"
     click mfa href "#security-architecture-pam"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-users`.
@@ -293,32 +301,35 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph US["Userspace"]
-        proc["Userspace process"]
-        policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
-    end
-    subgraph KZ["Linux kernel"]
-        sys["System call entry<br>(argument and user<br>memory checks)"]
-        seccomp["seccomp-bpf filter"]
-        dac["DAC (UID, GID, POSIX ACLs)<br>and capabilities"]
-        subgraph LSM["LSM hooks"]
-            aa["AppArmor MAC<br>(files, sockets,<br>capabilities)"]
-            yama["Yama ptrace scope"]
+    subgraph MAIN[" "]
+        direction TB
+        subgraph US["Userspace"]
+            proc["Userspace process"]
+            policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
         end
-        nscg["Namespaces and cgroups"]
-        obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
+        subgraph KZ["Linux kernel"]
+            sys["System call entry<br>(argument and user<br>memory checks)"]
+            seccomp["seccomp-bpf filter"]
+            dac["DAC (UID, GID, POSIX ACLs)<br>and capabilities"]
+            subgraph LSM["LSM hooks"]
+                aa["AppArmor MAC<br>(files, sockets,<br>capabilities)"]
+                yama["Yama ptrace scope"]
+            end
+            nscg["Namespaces and cgroups"]
+            obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
+        end
+        proc -->|"System call"| sys
+        sys --> seccomp
+        seccomp -->|"Allowed calls"| dac
+        dac -->|"Permitted access"| LSM
+        LSM -->|"Mediated access"| obj
+        nscg -->|"Scope and limit"| obj
+        policy -->|"Profiles"| aa
+        policy -->|"Filters"| seccomp
+        style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+        style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
     end
-    proc -->|"System call"| sys
-    sys --> seccomp
-    seccomp -->|"Allowed calls"| dac
-    dac -->|"Permitted access"| LSM
-    LSM -->|"Mediated access"| obj
-    nscg -->|"Scope and limit"| obj
-    policy -->|"Profiles"| aa
-    policy -->|"Filters"| seccomp
-    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
 
     subgraph LEG["Legend"]
         direction LR
@@ -330,7 +341,7 @@ flowchart TB
         leg1 ~~~ leg2
         leg2 ~~~ leg3s
     end
-    KZ ~~~ LEG
+    MAIN ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
@@ -352,6 +363,7 @@ flowchart TB
     click yama href "#security-architecture-yama"
     click nscg href "#security-architecture-namespaces"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+    style MAIN fill:none,stroke:none
 ```
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-layer-userspace`.
