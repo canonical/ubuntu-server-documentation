@@ -63,24 +63,9 @@ covered here. Components that only exist on Ubuntu Desktop, such as the display
 server and desktop portals, are mentioned only where they change a trust
 boundary.
 
-(security-architecture-legend)=
-## How to read the diagrams
-
-The diagrams on this page use the following conventions. Every label that
-describes a non-default state also carries a text tag, so the meaning does not
-depend on color or line style alone.
-
-| Element | Appearance | Meaning |
-|---|---|---|
-| Trust zone | Box with a thick black border | A region with a common trust level, for example `Outside — untrusted` |
-| Untrusted actor | White box, dashed border | An entity outside the system that you cannot trust |
-| External service | White box, solid border | Infrastructure outside the system that Ubuntu relies on |
-| System component or upstream mechanism | Light gray box, solid border | A component of the system, or a mechanism provided by the upstream Linux kernel or userspace |
-| Ubuntu default | Black box, white text | A mechanism that Ubuntu enables or configures by default |
-| Opt-in | Light gray box, dashed border, tagged `(opt-in)` | A mechanism that you need to choose and enable |
-| Platform-dependent | Black box, dashed border, tagged `(platform-dependent)` | A mechanism that Ubuntu uses by default when the hardware or firmware supports and enables it |
-| Data flow | Solid orange arrow | Data that crosses a boundary, in the direction of the arrow |
-| Untrusted or optional flow | Dashed orange arrow | Untrusted input, or a flow that only exists when you enable an opt-in mechanism |
+Each diagram has a legend for the styles that it uses, and
+{ref}`security-architecture-legend` describes all of them. To go to the
+explanation of a box, select the box in the diagram.
 
 (security-architecture-context)=
 ## System context and external trust boundaries
@@ -93,14 +78,14 @@ trust the transport to these services: it verifies the content it receives
 from them with cryptographic signatures.
 
 ```{mermaid}
-:alt: Context diagram. Three zones: Outside — untrusted (users and administrators, untrusted network peers, removable media and peripherals), External infrastructure services (Ubuntu archive and mirrors, Snap Store, LVFS, time, name, and identity services), and Inside — Ubuntu system (network-facing services, services and applications, outbound system clients, privileged components, and secrets and configuration). Arrows show the data flows that cross the zone boundaries.
+:alt: Context diagram. Three zones: Outside — untrusted (users and administrators, untrusted network peers, removable media and peripherals), External infrastructure services (Ubuntu archive and mirrors, Snap Store, LVFS, time, name, and identity services), and Inside — Ubuntu system (network-facing services, services and applications, outbound system clients, privileged components, and secrets and configuration). Arrows show the data flows that cross the zone boundaries. A legend explains the box and arrow styles.
 :caption: System context and trust boundaries of an Ubuntu system
 
 ---
 config:
   theme: base
   fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
   flowchart:
     curve: linear
   themeVariables:
@@ -146,60 +131,117 @@ flowchart TB
     net -->|"Authentication"| priv
     apps -->|"System calls, D-Bus"| priv
     priv -->|"Key and file access"| data
-
-    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    class users,peers,media untrusted
-    class archive,store,lvfs,infra external
-    class net,apps,clients,priv,data component
     style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style EXT fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style IN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Trust zone"]
+        leg1["Untrusted"]
+        leg2["External service"]
+        leg3["Component"]
+        leg4["Solid arrow: data flow"]
+        leg5["Dashed arrow: untrusted<br>or optional flow"]
+        leg0 ~~~ leg1 ~~~ leg2
+        leg3 ~~~ leg4 ~~~ leg5
+    end
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class users,peers,media untrusted
+    class archive,store,lvfs,infra external
+    class net,apps,clients,priv,data component
+    class leg0 zone
+    class leg1 untrusted
+    class leg2 external
+    class leg3 component
+    class leg4 note
+    class leg5 note
+    click users href "#security-architecture-users"
+    click peers href "#security-architecture-network-peers"
+    click media href "#security-architecture-removable-media"
+    click archive href "#security-architecture-archive"
+    click store href "#security-architecture-snap-store"
+    click lvfs href "#security-architecture-lvfs"
+    click infra href "#security-architecture-infrastructure-services"
+    click net href "#security-architecture-network-boundary"
+    click apps href "#security-architecture-layer-userspace"
+    click clients href "#security-architecture-archive"
+    click priv href "#security-architecture-privilege-boundary"
+    click data href "#security-architecture-data-at-rest"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    click leg5 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
 
-The diagram shows the following boundary crossings:
+The following sections describe the entities and the data flows that cross
+the system boundary.
 
-Users and administrators
-: Reach the system through network-facing services, such as
-  {manpage}`sshd(8)`, or through a local console. Network-facing services hand
-  credentials to privileged components, such as Pluggable Authentication
-  Modules (PAM), to authenticate users. See
-  {ref}`openssh-server` and {ref}`user-management`.
+(security-architecture-users)=
+### Users and administrators
 
-Untrusted network peers
-: Can send arbitrary traffic, which the kernel network stack handles
-  before it reaches a service. Firewall rules, if you configure them, filter
-  this traffic in the kernel. A default installation follows a
-  [no open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/)
-  policy, so only explicitly installed services listen on the network. Network
-  configuration received from a Dynamic Host Configuration Protocol (DHCP)
-  server is also untrusted input.
+Users and administrators reach the system through network-facing services,
+such as {manpage}`sshd(8)`, or through a local console. Network-facing services
+hand credentials to privileged components, such as Pluggable Authentication
+Modules (PAM), to authenticate users. See {ref}`openssh-server` and
+{ref}`user-management`.
 
-Removable media and peripherals
-: Attach directly to privileged components: the kernel and `udev` handle every
-  new device. Data on removable media is untrusted, even when a trusted local
-  user mounts it.
+(security-architecture-network-peers)=
+### Untrusted network peers
 
-Ubuntu archive and mirrors
-: APT verifies packages against signed archive metadata, so mirrors and
-  proxies do not need to be trusted. See
-  [Ubuntu archive integrity verification](https://documentation.ubuntu.com/security/software-integrity/archive-verification/).
+Network peers can send arbitrary traffic, which the kernel network stack
+handles before it reaches a service. Firewall rules, if you configure them,
+filter this traffic in the kernel. A default installation follows a
+[no open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/)
+policy, so only explicitly installed services listen on the network. Network
+configuration received from a Dynamic Host Configuration Protocol (DHCP)
+server is also untrusted input.
 
-Snap Store
-: `snapd` verifies each snap against assertions signed by the store before it
-  installs the snap.
+(security-architecture-removable-media)=
+### Removable media and peripherals
 
-Linux Vendor Firmware Service (LVFS)
-: `fwupd` downloads firmware metadata and updates from the LVFS and verifies
-  their signatures before it applies an update.
+Removable media and peripherals attach directly to privileged components: the
+kernel and `udev` handle every new device. Data on removable media is
+untrusted, even when a trusted local user mounts it.
 
-Time, name, and identity services
-: Ubuntu synchronizes time with `chrony`, which uses Network Time Security
-  (NTS) to authenticate Ubuntu's time servers. DNS answers are not
-  authenticated unless you enable DNS Security Extensions (DNSSEC)
-  validation. Identity providers, such as LDAP, Kerberos, or Active Directory,
-  are only used if you configure them.
+(security-architecture-archive)=
+### Ubuntu archive and mirrors
+
+APT verifies packages against signed archive metadata, so mirrors and proxies
+do not need to be trusted. See
+[Ubuntu archive integrity verification](https://documentation.ubuntu.com/security/software-integrity/archive-verification/).
+
+(security-architecture-snap-store)=
+### Snap Store
+
+`snapd` verifies each snap against assertions signed by the store before it
+installs the snap. Once installed, a strictly confined snap runs with
+AppArmor, seccomp, device cgroup, and mount namespace restrictions that
+`snapd` sets up for it. See
+[snap confinement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/).
+
+(security-architecture-lvfs)=
+### Linux Vendor Firmware Service (LVFS)
+
+`fwupd` downloads firmware metadata and updates from the LVFS and verifies
+their signatures before it applies an update.
+
+(security-architecture-infrastructure-services)=
+### Time, name, and identity services
+
+Ubuntu synchronizes time with `chrony`, which uses Network Time Security (NTS)
+to authenticate Ubuntu's time servers. DNS answers are not authenticated
+unless you enable DNS Security Extensions (DNSSEC) validation. Identity
+providers, such as LDAP, Kerberos, or Active Directory, are only used if you
+configure them.
 
 :::{note}
 Ubuntu 24.04 LTS synchronizes time with `systemd-timesyncd`, which does not
@@ -221,19 +263,18 @@ needs to defeat several independent mechanisms to compromise the system.
 
 Many of these mechanisms are part of the upstream Linux kernel and userspace,
 and are available on any Linux distribution. Ubuntu adds its own defaults and
-integrations on top of them. In the diagram, light gray boxes show upstream
-mechanisms, and black boxes show Ubuntu defaults. The layers are arranged
-clockwise, starting with the network layer at the top left.
+integrations on top of them. In the diagrams of each layer, light gray boxes
+show upstream mechanisms, and black boxes show Ubuntu defaults.
 
 ```{mermaid}
-:alt: Layered diagram with four layers arranged clockwise from the top left. Layer 1, network and perimeter: Netfilter and nftables, TCP SYN cookies, no open ports policy, ufw host firewall (opt-in), chrony with NTS, DNSSEC validation (opt-in). Layer 2, userspace: PAM and polkit, systemd service sandboxing, sudo-rs with the root account locked, APT signature verification and unattended security updates, AppArmor profiles for packaged software, snapd strict confinement, hardened compiler flags, auditd and USG hardening (opt-in). Layer 3, Linux kernel: DAC, ACLs and capabilities, namespaces and cgroups, seccomp-bpf, AppArmor enforced, Yama ptrace scope, unprivileged user namespace restriction, kernel memory hardening, lockdown and module signature enforcement (platform-dependent). Layer 4, hardware, firmware, and boot chain: UEFI Secure Boot chain (platform-dependent), TPM 2.0 measured boot (platform-dependent), IOMMU DMA protection (platform-dependent), fwupd firmware updates, LUKS full disk encryption (opt-in).
-:caption: Layered security mechanisms in Ubuntu
+:alt: Overview of the four security layers, from top to bottom: 1, network and perimeter; 2, userspace; 3, Linux kernel; 4, hardware, firmware, and boot chain. Accepted connections pass from the network layer to userspace, system calls pass from userspace to the kernel, and device and storage access passes from the kernel to the hardware.
+:caption: The four security layers of Ubuntu
 
 ---
 config:
   theme: base
   fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
   flowchart:
     curve: linear
   themeVariables:
@@ -247,114 +288,357 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph TOP[" "]
+    L1["1 — Network and perimeter"]
+    L2["2 — Userspace<br>(deb packages, systemd services, snaps)"]
+    L3["3 — Linux kernel"]
+    L4["4 — Hardware, firmware, and boot chain"]
+    L1 -->|"Accepted connections"| L2
+    L2 -->|"System calls"| L3
+    L3 -->|"Device and storage access"| L4
+
+    subgraph LEG["Legend"]
         direction LR
-        subgraph L1["1 — Network and perimeter"]
-            nft["Netfilter and nftables<br>packet filtering"]
-            syn["TCP SYN cookies"]
-            ports["No open ports policy"]
-            ufw["ufw host firewall rules<br>(opt-in)"]
-            nts["chrony with NTS"]
-            dnssec["DNSSEC validation<br>(opt-in)"]
-            nft ~~~ syn ~~~ ports
-            ufw ~~~ nts ~~~ dnssec
-        end
-        subgraph L2["2 — Userspace"]
-            pam["PAM and polkit"]
-            sysd["systemd service sandboxing"]
-            sudo["sudo-rs, root account locked"]
-            apt["APT signature verification,<br>unattended security updates"]
-            aaprof["AppArmor profiles for<br>packaged software"]
-            snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
-            flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
-            audit["auditd, USG hardening profiles<br>(opt-in)"]
-            pam ~~~ apt
-            sysd ~~~ aaprof
-            sudo ~~~ snap
-            flags ~~~ audit
-        end
-        L1 -->|"Accepted connections"| L2
+        leg0["Layer"]
+        leg1["Solid arrow: data flow"]
+        leg0 ~~~ leg1
     end
-
-    subgraph BOT[" "]
-        direction RL
-        subgraph L3["3 — Linux kernel"]
-            dac["DAC, POSIX ACLs,<br>capabilities"]
-            nscg["Namespaces, cgroups v2"]
-            seccomp["seccomp-bpf"]
-            aa["AppArmor LSM enforced"]
-            yama["Yama ptrace scope"]
-            userns["Unprivileged user<br>namespace restriction"]
-            khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
-            lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-            dac ~~~ aa
-            nscg ~~~ yama
-            seccomp ~~~ userns
-            khard ~~~ lockdown
-        end
-        subgraph L4["4 — Hardware and boot"]
-            sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
-            tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
-            iommu["IOMMU DMA protection<br>(platform-dependent)"]
-            fwupd["fwupd firmware updates"]
-            fde["LUKS full disk encryption<br>(opt-in)"]
-            sb ~~~ tpm ~~~ iommu
-            fwupd ~~~ fde
-        end
-        L3 -->|"Device and storage access"| L4
-    end
-
-    TOP -->|"System calls"| BOT
+    L4 ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    class nft,syn,pam,sysd,dac,nscg,seccomp component
-    class ports,nts,sudo,apt,aaprof,snap,flags,aa,yama,userns,khard,fwupd ubuntu
-    class ufw,dnssec,audit,fde optin
-    class lockdown,sb,tpm,iommu platform
-    style L1 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style TOP fill:none,stroke:none
-    style BOT fill:none,stroke:none
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    class L1,L2,L3,L4 component
+    class leg0 component
+    class leg1 note
+    click L1 href "#security-architecture-layer-network"
+    click L2 href "#security-architecture-layer-userspace"
+    click L3 href "#security-architecture-layer-kernel"
+    click L4 href "#security-architecture-layer-hardware"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
 
-The four layers are:
+(security-architecture-layer-network)=
+### Network and perimeter
 
-Network and perimeter
-: Filters and authenticates traffic before it reaches a service. The kernel's
-  Netfilter framework, configured through `nftables`, filters packets. Ubuntu
-  installs {manpage}`ufw(8)` as a front end to Netfilter, but does not enable
-  it. TCP SYN cookies, enabled by default, protect against SYN flood attacks.
-  See {ref}`firewalls`.
+The network layer filters and authenticates traffic before it reaches a
+service. The kernel's Netfilter framework, configured through `nftables`,
+filters packets. Ubuntu installs {manpage}`ufw(8)` as a front end to
+Netfilter, but does not enable it. TCP SYN cookies, enabled by default,
+protect against SYN flood attacks. See {ref}`firewalls`.
 
-Userspace
-: Runs services and applications from `deb` packages and snaps. Ubuntu
-  verifies every package that it installs from the archive or the Snap Store,
-  and installs security updates automatically with `unattended-upgrades`.
-  Ubuntu builds packages with hardened compiler and linker flags, and ships
-  AppArmor profiles for many packaged services and applications. `snapd`
-  confines each strictly confined snap with several kernel mechanisms at once.
-  See {ref}`automatic-updates` and
-  [snap confinement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/).
+```{mermaid}
+:alt: Network and perimeter layer: Netfilter and nftables packet filtering, TCP SYN cookies, and the no open ports policy; ufw host firewall rules (opt-in), chrony with NTS, and DNSSEC validation (opt-in).
+:caption: Mechanisms of the network and perimeter layer
 
-Linux kernel
-: Enforces access control and isolation for every process. Upstream Linux
-  provides discretionary access control (DAC), capabilities, namespaces,
-  cgroups, and seccomp. Ubuntu enables AppArmor as its Linux Security Module
-  (LSM), restricts `ptrace` with the Yama LSM, restricts unprivileged user
-  namespaces through AppArmor, and configures the kernel to hide kernel
-  addresses and randomize the kernel's location in memory. See
-  [kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/).
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph L1["1 — Network and perimeter"]
+        direction LR
+        nft["Netfilter and nftables<br>packet filtering"]
+        syn["TCP SYN cookies"]
+        ports["No open ports policy"]
+        ufw["ufw host firewall rules<br>(opt-in)"]
+        nts["chrony with NTS"]
+        dnssec["DNSSEC validation<br>(opt-in)"]
+        nft ~~~ syn ~~~ ports
+        ufw ~~~ nts ~~~ dnssec
+    end
+    style L1 fill:#FFFFFF,stroke:#000000,stroke-width:2px
 
-Hardware, firmware, and boot chain
-: Anchors trust in the hardware. When UEFI Secure Boot is enabled, the
-  firmware verifies the boot loader, and the boot loader verifies the kernel. Ubuntu ships
-  {manpage}`fwupdmgr(1)` to install signed firmware updates. Full disk
-  encryption protects data at rest, if you enable it during installation.
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Component"]
+        leg1["Ubuntu default"]
+        leg2["Opt-in"]
+        leg0 ~~~ leg1 ~~~ leg2
+    end
+    L1 ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    class nft,syn component
+    class ports,nts ubuntu
+    class ufw,dnssec optin
+    class leg0 component
+    class leg1 ubuntu
+    class leg2 optin
+    click nft href "#security-architecture-packet-filtering"
+    click syn href "#security-architecture-packet-filtering"
+    click ports href "#security-architecture-network-peers"
+    click ufw href "#security-architecture-packet-filtering"
+    click nts href "#security-architecture-infrastructure-services"
+    click dnssec href "#security-architecture-infrastructure-services"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
+
+Connections that pass the network layer reach a service that listens in
+userspace. Only services that you install listen on the network, and each
+service authenticates its clients and validates their input itself, as
+OpenSSH does. See {ref}`security-architecture-network-boundary`.
+
+(security-architecture-layer-userspace)=
+### Userspace
+
+Userspace runs services and applications from `deb` packages and snaps.
+Ubuntu verifies every package that it installs from the archive or the Snap
+Store, and installs security updates automatically with
+`unattended-upgrades`. Ubuntu builds packages with hardened compiler and linker
+flags, and ships AppArmor profiles for many packaged services and
+applications. `snapd` confines each strictly confined snap with several kernel
+mechanisms at once. See {ref}`automatic-updates`.
+
+```{mermaid}
+:alt: Userspace layer: PAM and polkit, systemd service sandboxing, sudo-rs with the root account locked, APT signature verification and unattended security updates, AppArmor profiles for packaged software, snapd strict confinement, hardened compiler flags, and auditd and USG hardening profiles (opt-in).
+:caption: Mechanisms of the userspace layer
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph L2["2 — Userspace"]
+        direction LR
+        pam["PAM and polkit"]
+        sysd["systemd service sandboxing"]
+        sudo["sudo-rs, root account locked"]
+        apt["APT signature verification,<br>unattended security updates"]
+        aaprof["AppArmor profiles for<br>packaged software"]
+        snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
+        flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
+        audit["auditd, USG hardening profiles<br>(opt-in)"]
+        pam ~~~ sysd ~~~ sudo ~~~ apt
+        aaprof ~~~ snap ~~~ flags ~~~ audit
+    end
+    style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Component"]
+        leg1["Ubuntu default"]
+        leg2["Opt-in"]
+        leg0 ~~~ leg1 ~~~ leg2
+    end
+    L2 ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    class pam,sysd component
+    class sudo,apt,aaprof,snap,flags ubuntu
+    class audit optin
+    class leg0 component
+    class leg1 ubuntu
+    class leg2 optin
+    click pam href "#security-architecture-pam"
+    click sysd href "#security-architecture-service-sandboxing"
+    click sudo href "#security-architecture-sudo-rs"
+    click apt href "#security-architecture-archive"
+    click aaprof href "#security-architecture-apparmor"
+    click snap href "#security-architecture-snap-store"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
+
+Userspace processes cannot access files, devices, the network, or other
+processes directly. To do so, they make a system call: a request that switches
+the CPU from user mode to the kernel at a fixed entry point. The kernel then
+checks the request against the credentials of the process and the loaded
+security policies before it acts on it. See
+{ref}`security-architecture-syscall-boundary`.
+
+(security-architecture-layer-kernel)=
+### Linux kernel
+
+The kernel enforces access control and isolation for every process. Upstream
+Linux provides discretionary access control (DAC), capabilities, namespaces,
+cgroups, and seccomp. Ubuntu enables AppArmor as its Linux Security Module
+(LSM), restricts `ptrace` with the Yama LSM, restricts unprivileged user
+namespaces through AppArmor, and configures the kernel to hide kernel
+addresses and randomize the kernel's location in memory. See
+[kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/).
+
+```{mermaid}
+:alt: Linux kernel layer: DAC, POSIX ACLs and capabilities, namespaces and cgroups v2, seccomp-bpf, AppArmor enforced, Yama ptrace scope, unprivileged user namespace restriction, kernel memory hardening, and lockdown with module signature enforcement (platform-dependent).
+:caption: Mechanisms of the Linux kernel layer
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph L3["3 — Linux kernel"]
+        direction LR
+        dac["DAC, POSIX ACLs,<br>capabilities"]
+        nscg["Namespaces, cgroups v2"]
+        seccomp["seccomp-bpf"]
+        khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
+        aa["AppArmor LSM enforced"]
+        yama["Yama ptrace scope"]
+        userns["Unprivileged user<br>namespace restriction"]
+        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
+        dac ~~~ nscg ~~~ seccomp ~~~ khard
+        aa ~~~ yama ~~~ userns ~~~ lockdown
+    end
+    style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Component"]
+        leg1["Ubuntu default"]
+        leg2["Platform-dependent"]
+        leg0 ~~~ leg1 ~~~ leg2
+    end
+    L3 ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    class dac,nscg,seccomp component
+    class aa,yama,userns,khard ubuntu
+    class lockdown platform
+    class leg0 component
+    class leg1 ubuntu
+    class leg2 platform
+    click dac href "#security-architecture-dac"
+    click nscg href "#security-architecture-namespaces"
+    click seccomp href "#security-architecture-seccomp"
+    click aa href "#security-architecture-apparmor"
+    click yama href "#security-architecture-yama"
+    click userns href "#security-architecture-apparmor"
+    click lockdown href "#security-architecture-kernel-modules"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
+
+Only the kernel accesses the hardware: it drives devices, manages memory, and
+reads and writes storage on behalf of processes. In the other direction,
+devices signal the kernel through interrupts, and can read and write memory
+directly through direct memory access (DMA), which the IOMMU restricts. Which
+kernel runs at all is decided earlier, by the boot chain. See
+{ref}`security-architecture-lower-boundary`.
+
+(security-architecture-layer-hardware)=
+### Hardware, firmware, and boot chain
+
+The lowest layer anchors trust in the hardware. When UEFI Secure Boot is
+enabled, the firmware verifies the boot loader, and the boot loader verifies
+the kernel. Ubuntu ships {manpage}`fwupdmgr(1)` to install signed firmware
+updates. Full disk encryption protects data at rest, if you enable it during
+installation.
+
+```{mermaid}
+:alt: Hardware, firmware, and boot chain layer: UEFI Secure Boot chain (platform-dependent), TPM 2.0 measured boot (platform-dependent), IOMMU DMA protection (platform-dependent), fwupd firmware updates, and LUKS full disk encryption (opt-in).
+:caption: Mechanisms of the hardware, firmware, and boot chain layer
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph L4["4 — Hardware, firmware, and boot chain"]
+        direction LR
+        sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
+        tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
+        iommu["IOMMU DMA protection<br>(platform-dependent)"]
+        fwupd["fwupd firmware updates"]
+        fde["LUKS full disk encryption<br>(opt-in)"]
+        sb ~~~ tpm ~~~ iommu
+        fwupd ~~~ fde
+    end
+    style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Ubuntu default"]
+        leg1["Opt-in"]
+        leg2["Platform-dependent"]
+        leg0 ~~~ leg1 ~~~ leg2
+    end
+    L4 ~~~ LEG
+
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    class fwupd ubuntu
+    class fde optin
+    class sb,tpm,iommu platform
+    class leg0 ubuntu
+    class leg1 optin
+    class leg2 platform
+    click sb href "#security-architecture-boot"
+    click tpm href "#security-architecture-boot"
+    click iommu href "#security-architecture-dma"
+    click fwupd href "#security-architecture-firmware-updates"
+    click fde href "#security-architecture-full-disk-encryption"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
 
 (security-architecture-defaults)=
 ### Default and configurable protections
@@ -391,14 +675,14 @@ the kernel. It shows how Ubuntu validates untrusted input and mediates
 privilege transitions at each boundary.
 
 ```{mermaid}
-:alt: Diagram of the network to userspace and userspace to kernel boundaries. Untrusted packets pass Netfilter in the kernel before reaching network-facing services, which run in a systemd service sandbox. Services pass credentials to PAM, optionally with multi-factor authentication. Unprivileged users and applications elevate privileges through sudo-rs, which uses PAM, or call privileged daemons over D-Bus, which check authorization with polkit. All userspace processes enter the kernel through the system call interface, where seccomp-bpf, DAC and capabilities, and the AppArmor and Yama LSM hooks check each request before the kernel accesses kernel objects, which namespaces and cgroups scope and limit. Policy for AppArmor, seccomp, and nftables is stored in userspace and loaded into the kernel.
+:alt: Diagram of the network to userspace and userspace to kernel boundaries. Untrusted packets pass Netfilter in the kernel before reaching network-facing services, which run in a systemd service sandbox. Services pass credentials to PAM, optionally with multi-factor authentication. Unprivileged users and applications elevate privileges through sudo-rs, which uses PAM, or call privileged daemons over D-Bus, which check authorization with polkit. All userspace processes enter the kernel through the system call interface, where seccomp-bpf, DAC and capabilities, and the AppArmor and Yama LSM hooks check each request before the kernel accesses kernel objects, which namespaces and cgroups scope and limit. Policy for AppArmor, seccomp, and nftables is stored in userspace and loaded into the kernel. A legend explains the box and arrow styles.
 :caption: Mediation at the network, userspace, and kernel boundaries
 
 ---
 config:
   theme: base
   fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
   flowchart:
     curve: linear
   themeVariables:
@@ -459,68 +743,125 @@ flowchart TB
     dac -->|"Permitted access"| LSM
     LSM -->|"Mediated access"| obj
     nscg -->|"Scope and limit"| obj
-
-    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    class pkt untrusted
-    class svc,user,pam,daemon,polkit,policy,nf,sys,seccomp,dac,nscg,obj component
-    class sudo,aa,yama ubuntu
-    class mfa optin
     style NETZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style SANDBOX fill:#FFFFFF,stroke:#000000,stroke-width:1px
     style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Untrusted"]
+        leg1["Component"]
+        leg2["Ubuntu default"]
+        leg3["Opt-in"]
+        leg4["Solid arrow: data flow"]
+        leg5["Dashed arrow: untrusted<br>or optional flow"]
+        leg0 ~~~ leg1 ~~~ leg2
+        leg3 ~~~ leg4 ~~~ leg5
+    end
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    class pkt untrusted
+    class svc,user,pam,daemon,polkit,policy,nf,sys,seccomp,dac,nscg,obj component
+    class sudo,aa,yama ubuntu
+    class mfa optin
+    class leg0 untrusted
+    class leg1 component
+    class leg2 ubuntu
+    class leg3 optin
+    class leg4 note
+    class leg5 note
+    click pkt href "#security-architecture-network-peers"
+    click nf href "#security-architecture-packet-filtering"
+    click svc href "#security-architecture-service-sandboxing"
+    click pam href "#security-architecture-pam"
+    click mfa href "#security-architecture-pam"
+    click sudo href "#security-architecture-sudo-rs"
+    click daemon href "#security-architecture-polkit"
+    click polkit href "#security-architecture-polkit"
+    click policy href "#security-architecture-policy"
+    click sys href "#security-architecture-syscall-boundary"
+    click seccomp href "#security-architecture-seccomp"
+    click dac href "#security-architecture-dac"
+    click aa href "#security-architecture-apparmor"
+    click yama href "#security-architecture-yama"
+    click nscg href "#security-architecture-namespaces"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    click leg5 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
 
 (security-architecture-network-boundary)=
 ### Network to userspace
 
-Packet filtering
-: Netfilter processes every packet in the kernel before a service receives
-  it. Rules defined with {manpage}`nft(8)` or `ufw` can drop or limit traffic.
-  TCP SYN cookies keep services reachable during SYN flood attacks. See
-  [SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/).
+Three mechanisms protect the path from the network to a service.
 
-Encrypted and authenticated access
-: OpenSSH and Transport Layer Security (TLS) libraries protect remote sessions
-  and service traffic. Ubuntu configures these libraries to reject legacy
-  protocol versions and weak algorithms. See
-  {ref}`explanation-cryptography`.
+(security-architecture-packet-filtering)=
+#### Packet filtering
 
-Service sandboxing
-: Network-facing services run as `systemd` units. The unit file can drop
-  privileges and restrict the service, for example with a dedicated user,
-  `NoNewPrivileges=`, `ProtectSystem=`, and system call filters. See
-  {manpage}`systemd.exec(5)`.
+Netfilter processes every packet in the kernel before a service receives it.
+Rules defined with {manpage}`nft(8)` or `ufw` can drop or limit traffic. TCP
+SYN cookies keep services reachable during SYN flood attacks. See
+[SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/).
+
+(security-architecture-encrypted-access)=
+#### Encrypted and authenticated access
+
+OpenSSH and Transport Layer Security (TLS) libraries protect remote sessions
+and service traffic. Ubuntu configures these libraries to reject legacy
+protocol versions and weak algorithms. See {ref}`explanation-cryptography`.
+
+(security-architecture-service-sandboxing)=
+#### Service sandboxing
+
+Network-facing services run as `systemd` units. The unit file can drop
+privileges and restrict the service, for example with a dedicated user,
+`NoNewPrivileges=`, `ProtectSystem=`, and system call filters. See
+{manpage}`systemd.exec(5)`.
 
 (security-architecture-privilege-boundary)=
 ### Privilege elevation and authentication
 
-PAM
-: Login services, such as the console login, SSH, and the display manager,
-  use {manpage}`pam(7)` to authenticate users, check account restrictions,
-  and set up sessions. PAM modules add
-  multi-factor authentication, smart cards, or network identity providers if
-  you configure them. See {ref}`two-factor-authentication-with-totp-or-hotp`,
-  {ref}`smart-card-authentication`, and the
-  [authd documentation](https://documentation.ubuntu.com/authd/).
+Three components mediate the transition from an unprivileged user or service
+to privileged actions.
 
-`sudo-rs`
-: Lets authorized users run commands as root with their own credentials. The
-  root account has no usable password by default. See {ref}`user-management`
-  and {ref}`sudo-rs`.
+(security-architecture-pam)=
+#### PAM
 
-polkit
-: Lets privileged daemons decide whether an unprivileged caller may perform an
-  action, such as mounting a disk or changing network settings. See
-  {manpage}`polkit(8)`.
+Login services, such as the console login, SSH, and the display manager, use
+{manpage}`pam(7)` to authenticate users, check account restrictions, and set up
+sessions. PAM modules add multi-factor authentication, smart cards, or network
+identity providers if you configure them. See
+{ref}`two-factor-authentication-with-totp-or-hotp`,
+{ref}`smart-card-authentication`, and the
+[authd documentation](https://documentation.ubuntu.com/authd/).
+
+(security-architecture-sudo-rs)=
+#### `sudo-rs`
+
+`sudo-rs` lets authorized users run commands as root with their own
+credentials. The root account has no usable password by default. See
+{ref}`user-management` and {ref}`sudo-rs`.
 
 :::{note}
 Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` by default.
 :::
+
+(security-architecture-polkit)=
+#### polkit
+
+polkit lets privileged daemons decide whether an unprivileged caller may
+perform an action, such as mounting a disk or changing network settings. See
+{manpage}`polkit(8)`.
 
 (security-architecture-syscall-boundary)=
 ### Userspace to kernel
@@ -529,35 +870,49 @@ Every request from a userspace process to the kernel passes through the system
 call interface. The kernel validates the arguments of each system call, and
 copies data from and to process memory only through dedicated functions, such
 as `copy_from_user()`, which check that the memory belongs to the calling
-process. The kernel then applies the following checks:
+process. The kernel then applies the following checks.
 
-seccomp-bpf
-: Rejects system calls that the process's filter does not allow. `snapd`,
-  `systemd`, and many applications install filters. See
-  [seccomp filtering](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#seccomp-filtering)
-  and {manpage}`seccomp(2)`.
+(security-architecture-seccomp)=
+#### seccomp-bpf
 
-Discretionary access control and capabilities
-: Checks the process's user and group IDs against file permissions and
-  {manpage}`acl(5)` entries, and checks {manpage}`capabilities(7)` for
-  privileged operations.
+seccomp-bpf rejects system calls that the process's filter does not allow.
+`snapd`, `systemd`, and many applications install filters. See
+[seccomp filtering](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#seccomp-filtering)
+and {manpage}`seccomp(2)`.
 
-AppArmor
-: Restricts each confined program to the files, network access, and
-  capabilities listed in its profile, even if the program runs as root.
-  AppArmor also restricts the use of unprivileged user namespaces. See
-  {ref}`apparmor` and
-  [AppArmor](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/).
+(security-architecture-dac)=
+#### Discretionary access control and capabilities
 
-Yama
-: Allows a process to attach to another process with `ptrace` only if it is
-  an ancestor of that process, or has the required capability. See
-  [`ptrace` scope](https://documentation.ubuntu.com/security/security-features/process-memory/#ptrace-scope).
+The kernel checks the process's user and group IDs against file permissions
+and {manpage}`acl(5)` entries, and checks {manpage}`capabilities(7)` for
+privileged operations.
 
-Namespaces and cgroups
-: Limit which resources a process can see, and how much of them it can use.
-  Containers and snaps build on them. See {manpage}`namespaces(7)` and
-  [cgroups](https://documentation.ubuntu.com/security/security-features/privilege-restriction/cgroups/).
+(security-architecture-apparmor)=
+#### AppArmor
+
+AppArmor restricts each confined program to the files, network access, and
+capabilities listed in its profile, even if the program runs as root.
+AppArmor also restricts the use of unprivileged user namespaces. See
+{ref}`apparmor` and
+[AppArmor](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/).
+
+(security-architecture-yama)=
+#### Yama
+
+Yama allows a process to attach to another process with `ptrace` only if it is
+an ancestor of that process, or has the required capability. See
+[`ptrace` scope](https://documentation.ubuntu.com/security/security-features/process-memory/#ptrace-scope).
+
+(security-architecture-namespaces)=
+#### Namespaces and cgroups
+
+Namespaces and cgroups limit which resources a process can see, and how much
+of them it can use. Containers and snaps build on them. See
+{manpage}`namespaces(7)` and
+[cgroups](https://documentation.ubuntu.com/security/security-features/privilege-restriction/cgroups/).
+
+(security-architecture-policy)=
+#### Security policy
 
 Policies for these mechanisms, such as AppArmor profiles, seccomp filters, and
 `nftables` rules, are written and managed in userspace. Once loaded, the kernel
@@ -572,14 +927,14 @@ code that runs at boot, how it protects data at rest, and how the running
 kernel deals with hardware and firmware.
 
 ```{mermaid}
-:alt: Diagram of the boot chain and the kernel to hardware boundary. UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB loads the locally built initramfs, which is measured but not signed. The firmware and boot chain extend measurements into TPM 2.0 PCRs. The running kernel enforces lockdown and module signatures. An optional LUKS encrypted volume is unlocked with a passphrase, Clevis, or TPM-backed FDE, and dm-crypt holds the volume key in the kernel keyring. Peripherals and removable media are handled by kernel drivers and udev, and their DMA is restricted by the IOMMU. fwupd installs signed firmware from the LVFS.
+:alt: Diagram of the boot chain and the kernel to hardware boundary. UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB loads the locally built initramfs, which is measured but not signed. The firmware and boot chain extend measurements into TPM 2.0 PCRs. The running kernel enforces lockdown and module signatures. An optional LUKS encrypted volume is unlocked with a passphrase, Clevis, or TPM-backed FDE, and dm-crypt holds the volume key in the kernel keyring. Peripherals and removable media are handled by kernel drivers and udev, and their DMA is restricted by the IOMMU. fwupd installs signed firmware from the LVFS. A legend explains the box and arrow styles.
 :caption: Boot chain, data at rest, and the hardware boundary
 
 ---
 config:
   theme: base
   fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
   flowchart:
     curve: linear
   themeVariables:
@@ -649,25 +1004,76 @@ flowchart TB
     dev -.->|"DMA requests"| iommu
     lvfs -->|"Signed firmware<br>and metadata"| fwupd
     fwupd -->|"Verified update"| fw
-
-    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    class dev untrusted
-    class lvfs external
-    class fw,initrd,drivers,dmcrypt,keyring component
-    class shim,grub,kernel,fwupd ubuntu
-    class uefi,tpm,iommu,lockdown platform
-    class pass,clevis,tpmfde,luks optin
     style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Untrusted"]
+        leg1["External service"]
+        leg2["Component"]
+        leg3["Ubuntu default"]
+        leg4["Opt-in"]
+        leg5["Platform-dependent"]
+        leg6["Solid arrow: data flow"]
+        leg7["Dashed arrow: untrusted<br>or optional flow"]
+        leg0 ~~~ leg1 ~~~ leg2 ~~~ leg3
+        leg4 ~~~ leg5 ~~~ leg6 ~~~ leg7
+    end
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    class dev untrusted
+    class lvfs external
+    class fw,initrd,drivers,dmcrypt,keyring component
+    class shim,grub,kernel,fwupd ubuntu
+    class uefi,tpm,iommu,lockdown platform
+    class pass,clevis,tpmfde,luks optin
+    class leg0 untrusted
+    class leg1 external
+    class leg2 component
+    class leg3 ubuntu
+    class leg4 optin
+    class leg5 platform
+    class leg6 note
+    class leg7 note
+    click dev href "#security-architecture-devices"
+    click lvfs href "#security-architecture-lvfs"
+    click uefi href "#security-architecture-boot"
+    click shim href "#security-architecture-boot"
+    click grub href "#security-architecture-boot"
+    click kernel href "#security-architecture-boot"
+    click initrd href "#security-architecture-boot"
+    click tpm href "#security-architecture-boot"
+    click lockdown href "#security-architecture-kernel-modules"
+    click drivers href "#security-architecture-devices"
+    click dmcrypt href "#security-architecture-full-disk-encryption"
+    click keyring href "#security-architecture-keyrings"
+    click fwupd href "#security-architecture-firmware-updates"
+    click fw href "#security-architecture-firmware-updates"
+    click iommu href "#security-architecture-dma"
+    click pass href "#security-architecture-full-disk-encryption"
+    click clevis href "#security-architecture-tpm-unlock"
+    click tpmfde href "#security-architecture-tpm-unlock"
+    click luks href "#security-architecture-full-disk-encryption"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    click leg5 href "#security-architecture-legend"
+    click leg6 href "#security-architecture-legend"
+    click leg7 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
 
 (security-architecture-boot)=
@@ -700,58 +1106,76 @@ and
 (security-architecture-data-at-rest)=
 ### Data at rest and key protection
 
-Full disk encryption
-: Both the Ubuntu Server and the Ubuntu Desktop installers can encrypt the
-  disk with Linux Unified Key Setup (LUKS) and `dm-crypt`, for example by
-  encrypting the Logical Volume Manager (LVM) volume group. By default, you
-  unlock the disk at boot with a passphrase. See
-  [full disk encryption](https://documentation.ubuntu.com/security/security-features/storage/encryption-full-disk/)
-  and [encrypted LVM](https://documentation.ubuntu.com/security/security-features/storage/encrypted-lvm/).
+Encryption protects data on disk, and the kernel protects the keys in memory.
 
-TPM-backed unlocking
-: On supported hardware, which provides UEFI Secure Boot, a TPM 2.0, and an
-  IOMMU, the Ubuntu Desktop installer offers TPM-backed full disk encryption.
-  The kernel and `initramfs` are then delivered as a single signed image, so
-  that Secure Boot verifies both, and the TPM releases the disk key only if
-  the measured boot state matches the expected state. On Ubuntu Server, and
-  on any existing LUKS installation, you can bind the encrypted volume to the
-  TPM with Clevis to unlock it without a passphrase, which suits unattended
-  systems. See {ref}`tpm-backed-luks-decryption-with-clevis`.
+(security-architecture-full-disk-encryption)=
+#### Full disk encryption
 
-Kernel keyrings
-: Hold keys, such as disk encryption keys and authentication tokens, in
-  kernel memory with per-key access control. Processes access them with
-  {manpage}`keyctl(1)`. See {manpage}`keyrings(7)`.
+Both the Ubuntu Server and the Ubuntu Desktop installers can encrypt the disk
+with Linux Unified Key Setup (LUKS) and `dm-crypt`, for example by encrypting
+the Logical Volume Manager (LVM) volume group. By default, you unlock the disk
+at boot with a passphrase. See
+[full disk encryption](https://documentation.ubuntu.com/security/security-features/storage/encryption-full-disk/)
+and [encrypted LVM](https://documentation.ubuntu.com/security/security-features/storage/encrypted-lvm/).
+
+(security-architecture-tpm-unlock)=
+#### TPM-backed unlocking
+
+On supported hardware, which provides UEFI Secure Boot, a TPM 2.0, and an
+IOMMU, the Ubuntu Desktop installer offers TPM-backed full disk encryption.
+The kernel and `initramfs` are then delivered as a single signed image, so
+that Secure Boot verifies both, and the TPM releases the disk key only if the
+measured boot state matches the expected state. On Ubuntu Server, and on any
+existing LUKS installation, you can bind the encrypted volume to the TPM with
+Clevis to unlock it without a passphrase, which suits unattended systems. See
+{ref}`tpm-backed-luks-decryption-with-clevis`.
 
 :::{note}
 In Ubuntu 24.04 LTS, TPM-backed FDE in the Desktop installer is an
 experimental feature.
 :::
 
+(security-architecture-keyrings)=
+#### Kernel keyrings
+
+Kernel keyrings hold keys, such as disk encryption keys and authentication
+tokens, in kernel memory with per-key access control. Processes access them
+with {manpage}`keyctl(1)`. See {manpage}`keyrings(7)`.
+
 (security-architecture-hardware-boundary)=
 ### Runtime hardware and firmware boundary
 
-Kernel modules
-: With Secure Boot enabled, the kernel only loads modules signed by
-  Canonical or with an enrolled MOK. When you install a third-party driver
-  with DKMS, Ubuntu signs the module with a MOK, which you enroll at the next
-  boot.
+At runtime, the kernel controls which code it loads, which devices it accepts,
+and which memory devices can reach.
 
-Devices and removable media
-: The kernel drivers and {manpage}`udev(7)` handle every new device. Data on
-  removable media is untrusted input. To control which USB devices the system
-  accepts, you can install {manpage}`usbguard-daemon(8)`. See
-  [devices](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/).
+(security-architecture-kernel-modules)=
+#### Kernel modules
 
-DMA protection
-: An Input-Output Memory Management Unit (IOMMU) restricts which memory a
-  device can access through direct memory access (DMA). This protects against
-  malicious peripherals, such as Thunderbolt devices. The protection depends
-  on hardware support and firmware settings.
+With Secure Boot enabled, the kernel only loads modules signed by Canonical or
+with an enrolled MOK. When you install a third-party driver with DKMS, Ubuntu
+signs the module with a MOK, which you enroll at the next boot.
 
-Firmware updates
-: `fwupd` downloads firmware from the LVFS, verifies the signed metadata, and
-  installs the update through the device's or system's update mechanism.
+(security-architecture-devices)=
+#### Devices and removable media
+
+The kernel drivers and {manpage}`udev(7)` handle every new device. Data on
+removable media is untrusted input. To control which USB devices the system
+accepts, you can install {manpage}`usbguard-daemon(8)`. See
+[devices](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/).
+
+(security-architecture-dma)=
+#### DMA protection
+
+An Input-Output Memory Management Unit (IOMMU) restricts which memory a device
+can access through DMA. This protects against malicious peripherals, such as
+Thunderbolt devices. The protection depends on hardware support and firmware
+settings.
+
+(security-architecture-firmware-updates)=
+#### Firmware updates
+
+`fwupd` downloads firmware from the LVFS, verifies the signed metadata, and
+installs the update through the device's or system's update mechanism.
 
 (security-architecture-controls)=
 ## Security controls reference
@@ -801,6 +1225,29 @@ with their default state in Ubuntu 26.04 LTS. The default state is one of:
 | {ref}`Whole system <security-architecture-layers>` | Security updates | Installs security updates automatically, and keeps the system on a supported release. | Enabled by default | {ref}`automatic-updates`, {ref}`upgrade-your-release`, [security updates](https://documentation.ubuntu.com/security/security-updates/) |
 | {ref}`Whole system <security-architecture-layers>` | Monitoring and alerting | Collects metrics and logs, and alerts operators to unexpected behavior. | Opt-in | {ref}`how-to-observability`, {ref}`set-up-your-lma-stack`, [Landscape](https://ubuntu.com/landscape/docs/) |
 | {ref}`Whole system <security-architecture-layers>` | Auditing and compliance hardening | Records security-relevant events, and applies and audits hardening profiles such as CIS Benchmarks. | Opt-in | {manpage}`auditd(8)`, [Ubuntu Security Guide](https://documentation.ubuntu.com/security/compliance/usg/) |
+
+(security-architecture-legend)=
+## Diagram conventions
+
+The diagrams on this page use the following conventions. Each diagram shows a
+legend with the conventions that it uses. Every label that describes a
+non-default state also carries a text tag, so the meaning does not depend on
+color or line style alone.
+
+| Element | Appearance | Meaning |
+|---|---|---|
+| Trust zone | Box with a thick black border | A region with a common trust level, for example `Outside — untrusted` |
+| Untrusted actor | White box, dashed border | An entity outside the system that you cannot trust |
+| External service | White box, solid border | Infrastructure outside the system that Ubuntu relies on |
+| Component, layer, or upstream mechanism | Light gray box, solid border | A component or layer of the system, or a mechanism provided by the upstream Linux kernel or userspace |
+| Ubuntu default | Black box, white text | A mechanism that Ubuntu enables or configures by default |
+| Opt-in | Light gray box, dashed border, tagged `(opt-in)` | A mechanism that you need to choose and enable |
+| Platform-dependent | Black box, dashed border, tagged `(platform-dependent)` | A mechanism that Ubuntu uses by default when the hardware or firmware supports and enables it |
+| Data flow | Solid orange arrow | Data that crosses a boundary, in the direction of the arrow |
+| Untrusted or optional flow | Dashed orange arrow | Untrusted input, or a flow that only exists when you enable an opt-in mechanism |
+
+Boxes in the diagrams link to their explanation on this page. Boxes in a
+legend link to this section.
 
 (security-architecture-further-reading)=
 ## Further reading
