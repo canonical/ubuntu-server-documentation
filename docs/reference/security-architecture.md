@@ -28,8 +28,9 @@ Use this page to:
 
 This page explains how Ubuntu achieves a secure-by-default configuration,
 protection against unauthorized access, a limited attack surface, and
-mitigation of exploits. If you build a product on top of Ubuntu, this page
-describes the architecture that your product inherits.
+mitigation of exploits. If you build a product with digital elements or a
+solution with Ubuntu, or derive a flavor or other distribution from it, this
+page describes the security architecture that you build on.
 
 The architecture separates five zones:
 
