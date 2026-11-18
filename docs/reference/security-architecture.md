@@ -141,14 +141,18 @@ flowchart TB
         leg1["Untrusted"]
         leg2["External service"]
         leg3["Component"]
-        leg4["Solid arrow: data flow"]
-        leg5["Dashed arrow: untrusted<br>or optional flow"]
-        leg0 ~~~ leg1 ~~~ leg2
-        leg3 ~~~ leg4 ~~~ leg5
+        leg4s[" "] --> leg4["Data flow"]
+        leg5s[" "] -.-> leg5["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg2 ~~~ leg3
+        leg3 ~~~ leg4s
+        leg4 ~~~ leg5s
     end
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
@@ -160,7 +164,9 @@ flowchart TB
     class leg2 external
     class leg3 component
     class leg4 note
+    class leg4s hidden
     class leg5 note
+    class leg5s hidden
     click users href "#security-architecture-users"
     click peers href "#security-architecture-network-peers"
     click media href "#security-architecture-removable-media"
@@ -299,16 +305,18 @@ flowchart TB
     subgraph LEG["Legend"]
         direction LR
         leg0["Layer"]
-        leg1["Solid arrow: data flow"]
-        leg0 ~~~ leg1
+        leg1s[" "] --> leg1["Data flow"]
+        leg0 ~~~ leg1s
     end
     L4 ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     class L1,L2,L3,L4 component
     class leg0 component
     class leg1 note
+    class leg1s hidden
     click L1 href "#security-architecture-layer-network"
     click L2 href "#security-architecture-layer-userspace"
     click L3 href "#security-architecture-layer-kernel"
@@ -367,7 +375,8 @@ flowchart TB
         leg0["Component"]
         leg1["Ubuntu default"]
         leg2["Opt-in"]
-        leg0 ~~~ leg1 ~~~ leg2
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
     end
     L1 ~~~ LEG
 
@@ -450,7 +459,8 @@ flowchart TB
         leg0["Component"]
         leg1["Ubuntu default"]
         leg2["Opt-in"]
-        leg0 ~~~ leg1 ~~~ leg2
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
     end
     L2 ~~~ LEG
 
@@ -535,7 +545,8 @@ flowchart TB
         leg0["Component"]
         leg1["Ubuntu default"]
         leg2["Platform-dependent"]
-        leg0 ~~~ leg1 ~~~ leg2
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
     end
     L3 ~~~ LEG
 
@@ -616,7 +627,8 @@ flowchart TB
         leg0["Ubuntu default"]
         leg1["Opt-in"]
         leg2["Platform-dependent"]
-        leg0 ~~~ leg1 ~~~ leg2
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
     end
     L4 ~~~ LEG
 
@@ -755,13 +767,16 @@ flowchart TB
         leg1["Component"]
         leg2["Ubuntu default"]
         leg3["Opt-in"]
-        leg4["Solid arrow: data flow"]
-        leg5["Dashed arrow: untrusted<br>or optional flow"]
-        leg0 ~~~ leg1 ~~~ leg2
-        leg3 ~~~ leg4 ~~~ leg5
+        leg4s[" "] --> leg4["Data flow"]
+        leg5s[" "] -.-> leg5["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg3 ~~~ leg4s
+        leg4 ~~~ leg5s
     end
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
@@ -775,7 +790,9 @@ flowchart TB
     class leg2 ubuntu
     class leg3 optin
     class leg4 note
+    class leg4s hidden
     class leg5 note
+    class leg5s hidden
     click pkt href "#security-architecture-network-peers"
     click nf href "#security-architecture-packet-filtering"
     click svc href "#security-architecture-service-sandboxing"
@@ -1019,14 +1036,19 @@ flowchart TB
         leg3["Ubuntu default"]
         leg4["Opt-in"]
         leg5["Platform-dependent"]
-        leg6["Solid arrow: data flow"]
-        leg7["Dashed arrow: untrusted<br>or optional flow"]
-        leg0 ~~~ leg1 ~~~ leg2 ~~~ leg3
-        leg4 ~~~ leg5 ~~~ leg6 ~~~ leg7
+        leg6s[" "] --> leg6["Data flow"]
+        leg7s[" "] -.-> leg7["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg2 ~~~ leg3
+        leg4 ~~~ leg5
+        leg5 ~~~ leg6s
+        leg6 ~~~ leg7s
     end
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
@@ -1045,7 +1067,9 @@ flowchart TB
     class leg4 optin
     class leg5 platform
     class leg6 note
+    class leg6s hidden
     class leg7 note
+    class leg7s hidden
     click dev href "#security-architecture-devices"
     click lvfs href "#security-architecture-lvfs"
     click uefi href "#security-architecture-boot"
