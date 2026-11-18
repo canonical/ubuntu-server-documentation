@@ -95,7 +95,23 @@ from them with cryptographic signatures.
 :alt: Context diagram. Three zones: Outside — untrusted (users and administrators, untrusted network peers, removable media and peripherals), External infrastructure services (Ubuntu archive and mirrors, Snap Store, LVFS, time, name, and identity services), and Inside — Ubuntu system (network-facing services, services and applications, outbound system clients, privileged components, and secrets and configuration). Arrows show the data flows that cross the zone boundaries.
 :caption: System context and trust boundaries of an Ubuntu system
 
-%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
 flowchart TB
     subgraph OUT["Outside — untrusted"]
         users["Remote and local users<br>and administrators"]
@@ -205,70 +221,89 @@ needs to defeat several independent mechanisms to compromise the system.
 Many of these mechanisms are part of the upstream Linux kernel and userspace,
 and are available on any Linux distribution. Ubuntu adds its own defaults and
 integrations on top of them. In the diagram, light gray boxes show upstream
-mechanisms, and black boxes show Ubuntu defaults.
+mechanisms, and black boxes show Ubuntu defaults. The layers are arranged
+clockwise, starting with the network layer at the top left.
 
 ```{mermaid}
-:alt: Layered diagram with four stacked layers. Layer 1, network and perimeter: Netfilter and nftables, TCP SYN cookies, no open ports policy, ufw host firewall (opt-in), chrony with NTS, DNSSEC validation (opt-in). Layer 2, userspace: PAM and polkit, systemd service sandboxing, sudo-rs with the root account locked, APT signature verification and unattended security updates, AppArmor profiles for packaged software, snapd strict confinement, hardened compiler flags, auditd and USG hardening (opt-in). Layer 3, Linux kernel: DAC, ACLs and capabilities, namespaces and cgroups, seccomp-bpf, AppArmor enforced, Yama ptrace scope, unprivileged user namespace restriction, kernel memory hardening, lockdown and module signature enforcement (platform-dependent). Layer 4, hardware, firmware, and boot chain: UEFI Secure Boot chain (platform-dependent), TPM 2.0 measured boot (platform-dependent), IOMMU DMA protection (platform-dependent), fwupd firmware updates, LUKS full disk encryption (opt-in).
+:alt: Layered diagram with four layers arranged clockwise from the top left. Layer 1, network and perimeter: Netfilter and nftables, TCP SYN cookies, no open ports policy, ufw host firewall (opt-in), chrony with NTS, DNSSEC validation (opt-in). Layer 2, userspace: PAM and polkit, systemd service sandboxing, sudo-rs with the root account locked, APT signature verification and unattended security updates, AppArmor profiles for packaged software, snapd strict confinement, hardened compiler flags, auditd and USG hardening (opt-in). Layer 3, Linux kernel: DAC, ACLs and capabilities, namespaces and cgroups, seccomp-bpf, AppArmor enforced, Yama ptrace scope, unprivileged user namespace restriction, kernel memory hardening, lockdown and module signature enforcement (platform-dependent). Layer 4, hardware, firmware, and boot chain: UEFI Secure Boot chain (platform-dependent), TPM 2.0 measured boot (platform-dependent), IOMMU DMA protection (platform-dependent), fwupd firmware updates, LUKS full disk encryption (opt-in).
 :caption: Layered security mechanisms in Ubuntu
 
-%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
 flowchart TB
-    subgraph L1["1 — Network and perimeter"]
-        nft["Netfilter and nftables<br>packet filtering"]
-        syn["TCP SYN cookies"]
-        ports["No open ports policy"]
-        ufw["ufw host firewall rules<br>(opt-in)"]
-        nts["chrony with NTS"]
-        dnssec["DNSSEC validation<br>(opt-in)"]
-        nft ~~~ ufw
-        syn ~~~ nts
-        ports ~~~ dnssec
+    subgraph TOP[" "]
+        direction LR
+        subgraph L1["1 — Network and perimeter"]
+            nft["Netfilter and nftables<br>packet filtering"]
+            syn["TCP SYN cookies"]
+            ports["No open ports policy"]
+            ufw["ufw host firewall rules<br>(opt-in)"]
+            nts["chrony with NTS"]
+            dnssec["DNSSEC validation<br>(opt-in)"]
+            nft ~~~ ufw
+            syn ~~~ nts
+            ports ~~~ dnssec
+        end
+        subgraph L2["2 — Userspace"]
+            pam["PAM and polkit"]
+            sysd["systemd service sandboxing"]
+            sudo["sudo-rs, root account locked"]
+            apt["APT signature verification,<br>unattended security updates"]
+            aaprof["AppArmor profiles for<br>packaged software"]
+            snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
+            flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
+            audit["auditd, USG hardening profiles<br>(opt-in)"]
+            pam ~~~ apt ~~~ flags
+            sysd ~~~ aaprof ~~~ audit
+            sudo ~~~ snap
+        end
+        L1 -->|"Accepted connections"| L2
     end
 
-    subgraph L2["2 — Userspace: deb packages, systemd services, snaps"]
-        pam["PAM and polkit"]
-        sysd["systemd service sandboxing"]
-        sudo["sudo-rs, root account locked"]
-        apt["APT signature verification,<br>unattended security updates"]
-        aaprof["AppArmor profiles for<br>packaged software"]
-        snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
-        flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
-        audit["auditd, USG hardening profiles<br>(opt-in)"]
-        pam ~~~ apt
-        sysd ~~~ aaprof
-        sudo ~~~ snap
-        flags ~~~ audit
+    subgraph BOT[" "]
+        direction RL
+        subgraph L3["3 — Linux kernel"]
+            dac["DAC, POSIX ACLs,<br>capabilities"]
+            nscg["Namespaces, cgroups v2"]
+            seccomp["seccomp-bpf"]
+            aa["AppArmor LSM enforced"]
+            yama["Yama ptrace scope"]
+            userns["Unprivileged user<br>namespace restriction"]
+            khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
+            lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
+            dac ~~~ aa ~~~ khard
+            nscg ~~~ yama ~~~ lockdown
+            seccomp ~~~ userns
+        end
+        subgraph L4["4 — Hardware and boot"]
+            sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
+            tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
+            iommu["IOMMU DMA protection<br>(platform-dependent)"]
+            fwupd["fwupd firmware updates"]
+            fde["LUKS full disk encryption<br>(opt-in)"]
+            sb ~~~ fwupd
+            tpm ~~~ fde
+            iommu
+        end
+        L3 -->|"Device and storage access"| L4
     end
 
-    subgraph L3["3 — Linux kernel"]
-        dac["DAC, POSIX ACLs,<br>capabilities"]
-        nscg["Namespaces, cgroups v2"]
-        seccomp["seccomp-bpf"]
-        aa["AppArmor LSM enforced"]
-        yama["Yama ptrace scope"]
-        userns["Unprivileged user<br>namespace restriction"]
-        khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
-        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-        dac ~~~ aa
-        nscg ~~~ yama
-        seccomp ~~~ userns
-        khard ~~~ lockdown
-    end
-
-    subgraph L4["4 — Hardware, firmware, and boot chain"]
-        sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
-        tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
-        iommu["IOMMU DMA protection<br>(platform-dependent)"]
-        fwupd["fwupd firmware updates"]
-        fde["LUKS full disk encryption<br>(opt-in)"]
-        sb ~~~ fwupd
-        tpm ~~~ fde
-        tpm ~~~ iommu
-    end
-
-    L1 -->|"Accepted connections"| L2
-    L2 -->|"System calls"| L3
-    L3 -->|"Device, memory, and storage access"| L4
+    TOP -->|"System calls"| BOT
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
@@ -282,6 +317,8 @@ flowchart TB
     style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style TOP fill:none,stroke:none
+    style BOT fill:none,stroke:none
 ```
 
 The four layers are:
@@ -356,14 +393,30 @@ privilege transitions at each boundary.
 :alt: Diagram of the network to userspace and userspace to kernel boundaries. Untrusted packets pass Netfilter in the kernel before reaching network-facing services, which run in a systemd service sandbox. Services pass credentials to PAM, optionally with multi-factor authentication. Unprivileged users and applications elevate privileges through sudo-rs, which uses PAM, or call privileged daemons over D-Bus, which check authorization with polkit. All userspace processes enter the kernel through the system call interface, where seccomp-bpf, DAC and capabilities, and the AppArmor and Yama LSM hooks check each request before the kernel accesses kernel objects, which namespaces and cgroups scope and limit. Policy for AppArmor, seccomp, and nftables is stored in userspace and loaded into the kernel.
 :caption: Mediation at the network, userspace, and kernel boundaries
 
-%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
 flowchart TB
     subgraph NETZ["Outside — untrusted network"]
         pkt["Remote clients and<br>untrusted peers"]
     end
 
     subgraph US["Userspace"]
-        subgraph SANDBOX["systemd service sandbox (dropped privileges)"]
+        subgraph SANDBOX["systemd sandbox"]
             svc["Network-facing services<br>(OpenSSH, TLS servers)"]
         end
         user["Unprivileged user session<br>or application"]
@@ -521,14 +574,30 @@ kernel deals with hardware and firmware.
 :alt: Diagram of the boot chain and the kernel to hardware boundary. UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB loads the locally built initramfs, which is measured but not signed. The firmware and boot chain extend measurements into TPM 2.0 PCRs. The running kernel enforces lockdown and module signatures. An optional LUKS encrypted volume is unlocked with a passphrase, Clevis, or TPM-backed FDE, and dm-crypt holds the volume key in the kernel keyring. Peripherals and removable media are handled by kernel drivers and udev, and their DMA is restricted by the IOMMU. fwupd installs signed firmware from the LVFS.
 :caption: Boot chain, data at rest, and the hardware boundary
 
-%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
 flowchart TB
     subgraph OUTSIDE["Outside — untrusted"]
         dev["Peripherals and<br>removable media"]
     end
 
-    subgraph EXTSVC["External services (outside boundary)"]
-        lvfs["LVFS"]
+    subgraph EXTSVC["External services"]
+        lvfs["LVFS<br>(firmware updates)"]
     end
 
     subgraph HW["Hardware and firmware"]
@@ -556,7 +625,7 @@ flowchart TB
     subgraph UNLOCK["Disk unlock methods"]
         pass["Passphrase<br>(opt-in)"]
         clevis["Clevis TPM unlock<br>(opt-in)"]
-        tpmfde["TPM-backed FDE<br>(opt-in, Desktop installer)"]
+        tpmfde["TPM-backed FDE<br>(opt-in, Desktop)"]
     end
 
     luks[("LUKS encrypted volume<br>(opt-in)")]
