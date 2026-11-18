@@ -684,11 +684,18 @@ provider. See {ref}`sudo-rs`.
 This section looks at the two upper boundaries in more detail: where network
 input enters userspace, and where userspace processes request services from
 the kernel. It shows how Ubuntu validates untrusted input and mediates
-privilege transitions at each boundary.
+privilege transitions at each boundary, in three steps: from the network to a
+service, from an unprivileged user to privileged actions, and from a process
+to the kernel.
+
+(security-architecture-network-boundary)=
+### Network to userspace
+
+Three mechanisms protect the path from the network to a service.
 
 ```{mermaid}
-:alt: Diagram of the network to userspace and userspace to kernel boundaries. Untrusted packets pass Netfilter in the kernel before reaching network-facing services, which run in a systemd service sandbox. Services pass credentials to PAM, optionally with multi-factor authentication. Unprivileged users and applications elevate privileges through sudo-rs, which uses PAM, or call privileged daemons over D-Bus, which check authorization with polkit. All userspace processes enter the kernel through the system call interface, where seccomp-bpf, DAC and capabilities, and the AppArmor and Yama LSM hooks check each request before the kernel accesses kernel objects, which namespaces and cgroups scope and limit. Policy for AppArmor, seccomp, and nftables is stored in userspace and loaded into the kernel. A legend explains the box and arrow styles.
-:caption: Mediation at the network, userspace, and kernel boundaries
+:alt: Network to userspace. Untrusted packets from remote clients and peers reach Netfilter hooks in the kernel, which apply TCP SYN cookies and any firewall rules loaded from nftables or ufw (opt-in). Accepted connections reach a network-facing service, such as OpenSSH or a TLS server, which runs inside a systemd service sandbox and encrypts and authenticates the session.
+:caption: From the network to a service
 
 ---
 config:
@@ -708,64 +715,32 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph NETZ["Outside — untrusted network"]
+    subgraph NETZ["Outside — untrusted"]
         pkt["Remote clients and<br>untrusted peers"]
     end
-
-    subgraph US["Userspace"]
-        subgraph SANDBOX["systemd sandbox"]
-            svc["Network-facing services<br>(OpenSSH, TLS servers)"]
-        end
-        user["Unprivileged user session<br>or application"]
-        pam["PAM"]
-        mfa["Multi-factor authentication<br>(opt-in)"]
-        sudo["sudo-rs"]
-        daemon["Privileged daemon"]
-        polkit["polkit"]
-        policy[("Security policy<br>(AppArmor profiles, seccomp<br>filters, nftables rules)")]
-    end
-
     subgraph KZ["Linux kernel"]
         nf["Netfilter hooks,<br>TCP SYN cookies"]
-        sys["System call entry<br>(argument and user<br>memory checks)"]
-        seccomp["seccomp-bpf filter"]
-        dac["DAC (UID, GID, POSIX ACLs)<br>and capabilities"]
-        subgraph LSM["LSM hooks"]
-            aa["AppArmor MAC<br>(files, sockets,<br>capabilities)"]
-            yama["Yama ptrace scope"]
-        end
-        nscg["Namespaces and cgroups"]
-        obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
     end
-
+    subgraph US["Userspace"]
+        rules["nftables or ufw rules<br>(opt-in)"]
+        subgraph SANDBOX["systemd service sandbox"]
+            svc["Network-facing service<br>(OpenSSH, TLS server)"]
+        end
+    end
     pkt -.->|"Untrusted packets"| nf
+    rules -.->|"Loaded rules"| nf
     nf -->|"Accepted connections"| svc
-    svc -->|"Credentials"| pam
-    pam -.->|"Second factor"| mfa
-    user -->|"Elevation request"| sudo
-    sudo -->|"Authentication"| pam
-    user -->|"D-Bus call"| daemon
-    daemon -->|"Authorization check"| polkit
-    policy -->|"Profiles"| aa
-    policy -->|"Filters"| seccomp
-    policy -.->|"Rules (opt-in)"| nf
-    US -->|"System calls"| sys
-    sys --> seccomp
-    seccomp -->|"Allowed calls"| dac
-    dac -->|"Permitted access"| LSM
-    LSM -->|"Mediated access"| obj
-    nscg -->|"Scope and limit"| obj
+    svc -->|"Encrypted, authenticated<br>session"| pkt
     style NETZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style SANDBOX fill:#FFFFFF,stroke:#000000,stroke-width:1px
-    style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
 
     subgraph LEG["Legend"]
         direction LR
-        leg0["Untrusted"]
-        leg1["Component"]
-        leg2["Ubuntu default"]
+        leg0["Trust zone"]
+        leg1["Untrusted"]
+        leg2["Component"]
         leg3["Opt-in"]
         leg4s[" "] --> leg4["Data flow"]
         leg5s[" "] -.-> leg5["Untrusted or<br>optional flow"]
@@ -774,20 +749,20 @@ flowchart TB
         leg3 ~~~ leg4s
         leg4 ~~~ leg5s
     end
+    US ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
     classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
     class pkt untrusted
-    class svc,user,pam,daemon,polkit,policy,nf,sys,seccomp,dac,nscg,obj component
-    class sudo,aa,yama ubuntu
-    class mfa optin
-    class leg0 untrusted
-    class leg1 component
-    class leg2 ubuntu
+    class nf,svc component
+    class rules optin
+    class leg0 zone
+    class leg1 untrusted
+    class leg2 component
     class leg3 optin
     class leg4 note
     class leg4s hidden
@@ -795,19 +770,8 @@ flowchart TB
     class leg5s hidden
     click pkt href "#security-architecture-network-peers"
     click nf href "#security-architecture-packet-filtering"
-    click svc href "#security-architecture-service-sandboxing"
-    click pam href "#security-architecture-pam"
-    click mfa href "#security-architecture-pam"
-    click sudo href "#security-architecture-sudo-rs"
-    click daemon href "#security-architecture-polkit"
-    click polkit href "#security-architecture-polkit"
-    click policy href "#security-architecture-policy"
-    click sys href "#security-architecture-syscall-boundary"
-    click seccomp href "#security-architecture-seccomp"
-    click dac href "#security-architecture-dac"
-    click aa href "#security-architecture-apparmor"
-    click yama href "#security-architecture-yama"
-    click nscg href "#security-architecture-namespaces"
+    click rules href "#security-architecture-packet-filtering"
+    click svc href "#security-architecture-encrypted-access"
     click leg0 href "#security-architecture-legend"
     click leg1 href "#security-architecture-legend"
     click leg2 href "#security-architecture-legend"
@@ -816,11 +780,6 @@ flowchart TB
     click leg5 href "#security-architecture-legend"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
-
-(security-architecture-network-boundary)=
-### Network to userspace
-
-Three mechanisms protect the path from the network to a service.
 
 (security-architecture-packet-filtering)=
 #### Packet filtering
@@ -850,6 +809,109 @@ privileges and restrict the service, for example with a dedicated user,
 
 Three components mediate the transition from an unprivileged user or service
 to privileged actions.
+
+```{mermaid}
+:alt: Privilege elevation and authentication. Users log in through login services, such as the console, SSH, or the display manager, which pass credentials to PAM. PAM can add multi-factor authentication, smart cards, or network identity providers (opt-in). An unprivileged session or application elevates privileges through sudo-rs, which authenticates the user with PAM, or calls a privileged daemon over D-Bus, which checks the authorization of the caller with polkit.
+:caption: From an unprivileged user to privileged actions
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph OUT["Outside — untrusted"]
+        users["Remote and local users"]
+    end
+    subgraph UNPRIV["Unprivileged"]
+        user["User session<br>or application"]
+    end
+    subgraph PRIV["Privileged (root)"]
+        login["Login services<br>(console, SSH, display manager)"]
+        sudo["sudo-rs"]
+        daemon["Privileged daemon"]
+        polkit["polkit"]
+        pam["PAM"]
+        mfa["Multi-factor, smart card,<br>network identity (opt-in)"]
+    end
+    users -->|"Credentials"| login
+    login -->|"Authentication"| pam
+    login -->|"Starts session"| user
+    user -->|"Elevation request"| sudo
+    sudo -->|"Authentication"| pam
+    user -->|"D-Bus call"| daemon
+    daemon -->|"Authorization check"| polkit
+    pam -.->|"Additional factors"| mfa
+    style OUT fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style UNPRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style PRIV fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Trust zone"]
+        leg1["Untrusted"]
+        leg2["Component"]
+        leg3["Ubuntu default"]
+        leg4["Opt-in"]
+        leg5s[" "] --> leg5["Data flow"]
+        leg6s[" "] -.-> leg6["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg2 ~~~ leg3
+        leg4 ~~~ leg5s
+        leg5 ~~~ leg6s
+    end
+    PRIV ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class users untrusted
+    class user,login,daemon,polkit,pam component
+    class sudo ubuntu
+    class mfa optin
+    class leg0 zone
+    class leg1 untrusted
+    class leg2 component
+    class leg3 ubuntu
+    class leg4 optin
+    class leg5 note
+    class leg5s hidden
+    class leg6 note
+    class leg6s hidden
+    click users href "#security-architecture-users"
+    click login href "#security-architecture-pam"
+    click user href "#security-architecture-privilege-boundary"
+    click sudo href "#security-architecture-sudo-rs"
+    click daemon href "#security-architecture-polkit"
+    click polkit href "#security-architecture-polkit"
+    click pam href "#security-architecture-pam"
+    click mfa href "#security-architecture-pam"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    click leg5 href "#security-architecture-legend"
+    click leg6 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
 
 (security-architecture-pam)=
 #### PAM
@@ -888,6 +950,94 @@ call interface. The kernel validates the arguments of each system call, and
 copies data from and to process memory only through dedicated functions, such
 as `copy_from_user()`, which check that the memory belongs to the calling
 process. The kernel then applies the following checks.
+
+```{mermaid}
+:alt: Userspace to kernel. A userspace process makes a system call. The kernel checks the system call entry, its arguments, and access to process memory, then applies the seccomp-bpf filter of the process, discretionary access control and capabilities, and the AppArmor and Yama Linux Security Module hooks, before it accesses kernel objects such as files, sockets, processes, and devices. Namespaces and cgroups scope and limit these objects. AppArmor profiles and seccomp filters are managed in userspace and loaded into the kernel.
+:caption: From a process to the kernel
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph US["Userspace"]
+        proc["Userspace process"]
+        policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
+    end
+    subgraph KZ["Linux kernel"]
+        sys["System call entry<br>(argument and user<br>memory checks)"]
+        seccomp["seccomp-bpf filter"]
+        dac["DAC (UID, GID, POSIX ACLs)<br>and capabilities"]
+        subgraph LSM["LSM hooks"]
+            aa["AppArmor MAC<br>(files, sockets,<br>capabilities)"]
+            yama["Yama ptrace scope"]
+        end
+        nscg["Namespaces and cgroups"]
+        obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
+    end
+    proc -->|"System call"| sys
+    sys --> seccomp
+    seccomp -->|"Allowed calls"| dac
+    dac -->|"Permitted access"| LSM
+    LSM -->|"Mediated access"| obj
+    nscg -->|"Scope and limit"| obj
+    policy -->|"Profiles"| aa
+    policy -->|"Filters"| seccomp
+    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Trust zone"]
+        leg1["Component"]
+        leg2["Ubuntu default"]
+        leg3s[" "] --> leg3["Data flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg2 ~~~ leg3s
+    end
+    KZ ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class proc,policy,sys,seccomp,dac,nscg,obj component
+    class aa,yama ubuntu
+    class leg0 zone
+    class leg1 component
+    class leg2 ubuntu
+    class leg3 note
+    class leg3s hidden
+    click proc href "#security-architecture-layer-userspace"
+    click policy href "#security-architecture-policy"
+    click sys href "#security-architecture-syscall-boundary"
+    click seccomp href "#security-architecture-seccomp"
+    click dac href "#security-architecture-dac"
+    click aa href "#security-architecture-apparmor"
+    click yama href "#security-architecture-yama"
+    click nscg href "#security-architecture-namespaces"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
 
 (security-architecture-seccomp)=
 #### seccomp-bpf
@@ -943,9 +1093,15 @@ This section looks at the lower boundary: how Ubuntu establishes trust in the
 code that runs at boot, how it protects data at rest, and how the running
 kernel deals with hardware and firmware.
 
+(security-architecture-boot)=
+### Verified and measured boot
+
+The boot chain decides which kernel runs. Each stage either verifies or
+measures the next one.
+
 ```{mermaid}
-:alt: Diagram of the boot chain and the kernel to hardware boundary. UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB loads the locally built initramfs, which is measured but not signed. The firmware and boot chain extend measurements into TPM 2.0 PCRs. The running kernel enforces lockdown and module signatures. An optional LUKS encrypted volume is unlocked with a passphrase, Clevis, or TPM-backed FDE, and dm-crypt holds the volume key in the kernel keyring. Peripherals and removable media are handled by kernel drivers and udev, and their DMA is restricted by the IOMMU. fwupd installs signed firmware from the LVFS. A legend explains the box and arrow styles.
-:caption: Boot chain, data at rest, and the hardware boundary
+:alt: Verified and measured boot. With Secure Boot (platform-dependent), the UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB also loads the initramfs, which is built locally and not signed. Through the firmware, each stage extends measurements into the TPM 2.0 PCRs (platform-dependent). The running kernel enforces lockdown and module signatures (platform-dependent).
+:caption: Verified and measured boot chain
 
 ---
 config:
@@ -965,143 +1121,68 @@ config:
     edgeLabelBackground: "#FFFFFF"
 ---
 flowchart TB
-    subgraph OUTSIDE["Outside — untrusted"]
-        dev["Peripherals and<br>removable media"]
-    end
-
-    subgraph EXTSVC["External services"]
-        lvfs["LVFS<br>(firmware updates)"]
-    end
-
     subgraph HW["Hardware and firmware"]
         uefi["UEFI firmware, Secure Boot<br>(platform-dependent)"]
         tpm["TPM 2.0 PCRs<br>(platform-dependent)"]
-        iommu["IOMMU<br>(platform-dependent)"]
-        fw["Device and system firmware"]
     end
-
     subgraph BOOT["Boot chain"]
         shim["shim<br>(signed by Microsoft UEFI CA)"]
         grub["GRUB<br>(signed by Canonical)"]
         kernel["Linux kernel<br>(signed by Canonical)"]
         initrd["initramfs<br>(built locally, not signed)"]
     end
-
-    subgraph RUN["Running system"]
-        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-        drivers["Kernel drivers and udev"]
-        dmcrypt["dm-crypt"]
-        keyring[("Kernel keyrings<br>(keyctl)")]
-        fwupd["fwupd"]
-    end
-
-    subgraph UNLOCK["Disk unlock methods"]
-        pass["Passphrase<br>(opt-in)"]
-        clevis["Clevis TPM unlock<br>(opt-in)"]
-        tpmfde["TPM-backed FDE<br>(opt-in, Desktop)"]
-    end
-
-    luks[("LUKS encrypted volume<br>(opt-in)")]
-
+    lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
     uefi -->|"Verifies"| shim
     shim -->|"Verifies"| grub
     grub -->|"Verifies through shim"| kernel
     grub -->|"Loads"| initrd
-    BOOT -->|"Measurements"| tpm
+    uefi -->|"Extends measurements<br>of each stage"| tpm
     kernel -->|"Enforces at runtime"| lockdown
-    pass -.->|"Passphrase"| initrd
-    tpm -.->|"Unseals key if<br>PCRs match"| clevis
-    tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
-    clevis -.->|"Key"| initrd
-    tpmfde -.->|"Key"| dmcrypt
-    initrd -.->|"Volume key"| dmcrypt
-    dmcrypt -.->|"Volume key"| keyring
-    dmcrypt -.->|"Encrypted blocks"| luks
-    dev -.->|"Device attach"| drivers
-    dev -.->|"DMA requests"| iommu
-    lvfs -->|"Signed firmware<br>and metadata"| fwupd
-    fwupd -->|"Verified update"| fw
-    style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
     style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
 
     subgraph LEG["Legend"]
         direction LR
-        leg0["Untrusted"]
-        leg1["External service"]
-        leg2["Component"]
-        leg3["Ubuntu default"]
-        leg4["Opt-in"]
-        leg5["Platform-dependent"]
-        leg6s[" "] --> leg6["Data flow"]
-        leg7s[" "] -.-> leg7["Untrusted or<br>optional flow"]
+        leg0["Trust zone"]
+        leg1["Component"]
+        leg2["Ubuntu default"]
+        leg3["Platform-dependent"]
+        leg4s[" "] --> leg4["Data flow"]
         leg0 ~~~ leg1
         leg1 ~~~ leg2
-        leg2 ~~~ leg3
-        leg4 ~~~ leg5
-        leg5 ~~~ leg6s
-        leg6 ~~~ leg7s
+        leg3 ~~~ leg4s
     end
+    HW ~~~ LEG
 
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
     classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    class dev untrusted
-    class lvfs external
-    class fw,initrd,drivers,dmcrypt,keyring component
-    class shim,grub,kernel,fwupd ubuntu
-    class uefi,tpm,iommu,lockdown platform
-    class pass,clevis,tpmfde,luks optin
-    class leg0 untrusted
-    class leg1 external
-    class leg2 component
-    class leg3 ubuntu
-    class leg4 optin
-    class leg5 platform
-    class leg6 note
-    class leg6s hidden
-    class leg7 note
-    class leg7s hidden
-    click dev href "#security-architecture-devices"
-    click lvfs href "#security-architecture-lvfs"
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class initrd component
+    class shim,grub,kernel ubuntu
+    class uefi,tpm,lockdown platform
+    class leg0 zone
+    class leg1 component
+    class leg2 ubuntu
+    class leg3 platform
+    class leg4 note
+    class leg4s hidden
     click uefi href "#security-architecture-boot"
+    click tpm href "#security-architecture-boot"
     click shim href "#security-architecture-boot"
     click grub href "#security-architecture-boot"
     click kernel href "#security-architecture-boot"
     click initrd href "#security-architecture-boot"
-    click tpm href "#security-architecture-boot"
     click lockdown href "#security-architecture-kernel-modules"
-    click drivers href "#security-architecture-devices"
-    click dmcrypt href "#security-architecture-full-disk-encryption"
-    click keyring href "#security-architecture-keyrings"
-    click fwupd href "#security-architecture-firmware-updates"
-    click fw href "#security-architecture-firmware-updates"
-    click iommu href "#security-architecture-dma"
-    click pass href "#security-architecture-full-disk-encryption"
-    click clevis href "#security-architecture-tpm-unlock"
-    click tpmfde href "#security-architecture-tpm-unlock"
-    click luks href "#security-architecture-full-disk-encryption"
     click leg0 href "#security-architecture-legend"
     click leg1 href "#security-architecture-legend"
     click leg2 href "#security-architecture-legend"
     click leg3 href "#security-architecture-legend"
     click leg4 href "#security-architecture-legend"
-    click leg5 href "#security-architecture-legend"
-    click leg6 href "#security-architecture-legend"
-    click leg7 href "#security-architecture-legend"
     style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
 ```
-
-(security-architecture-boot)=
-### Verified and measured boot
 
 When UEFI Secure Boot is enabled, each boot stage verifies the signature of
 the next one before running it:
@@ -1131,6 +1212,98 @@ and
 ### Data at rest and key protection
 
 Encryption protects data on disk, and the kernel protects the keys in memory.
+
+```{mermaid}
+:alt: Data at rest and key protection. An optional LUKS encrypted volume on disk is unlocked at boot by one of three methods, all opt-in: a passphrase entered in the initramfs, Clevis, or TPM-backed FDE. Clevis and TPM-backed FDE ask the TPM to unseal the key, which it does only if the PCR values match. dm-crypt receives the volume key, keeps it in the kernel keyrings, and encrypts and decrypts the blocks of the volume.
+:caption: Unlocking encrypted storage
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph UNLOCK["Disk unlock methods"]
+        pass["Passphrase<br>(opt-in)"]
+        clevis["Clevis TPM unlock<br>(opt-in)"]
+        tpmfde["TPM-backed FDE<br>(opt-in, Desktop)"]
+    end
+    subgraph RUN["Running system"]
+        initrd["initramfs"]
+        dmcrypt["dm-crypt"]
+        keyring[("Kernel keyrings<br>(keyctl)")]
+    end
+    subgraph HW["Hardware"]
+        tpm["TPM 2.0<br>(platform-dependent)"]
+        luks[("LUKS encrypted volume<br>(opt-in)")]
+    end
+    tpm -.->|"Unseals key if<br>PCRs match"| clevis
+    tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
+    pass -.->|"Passphrase"| initrd
+    clevis -.->|"Key"| initrd
+    tpmfde -.->|"Key"| dmcrypt
+    initrd -.->|"Volume key"| dmcrypt
+    dmcrypt -.->|"Volume key"| keyring
+    dmcrypt -.->|"Encrypted blocks"| luks
+    style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
+    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Trust zone"]
+        leg1["Component"]
+        leg2["Opt-in"]
+        leg3["Platform-dependent"]
+        leg4s[" "] -.-> leg4["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg3 ~~~ leg4s
+    end
+    HW ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class initrd,dmcrypt,keyring component
+    class tpm platform
+    class pass,clevis,tpmfde,luks optin
+    class leg0 zone
+    class leg1 component
+    class leg2 optin
+    class leg3 platform
+    class leg4 note
+    class leg4s hidden
+    click pass href "#security-architecture-full-disk-encryption"
+    click clevis href "#security-architecture-tpm-unlock"
+    click tpmfde href "#security-architecture-tpm-unlock"
+    click initrd href "#security-architecture-boot"
+    click dmcrypt href "#security-architecture-full-disk-encryption"
+    click keyring href "#security-architecture-keyrings"
+    click tpm href "#security-architecture-boot"
+    click luks href "#security-architecture-full-disk-encryption"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
 
 (security-architecture-full-disk-encryption)=
 #### Full disk encryption
@@ -1171,6 +1344,125 @@ with {manpage}`keyctl(1)`. See {manpage}`keyrings(7)`.
 
 At runtime, the kernel controls which code it loads, which devices it accepts,
 and which memory devices can reach.
+
+```{mermaid}
+:alt: Runtime hardware and firmware boundary. Peripherals and removable media from outside the system attach to the kernel drivers and udev, optionally filtered by a usbguard allow list (opt-in). Their DMA requests pass the IOMMU (platform-dependent). Kernel modules, including third-party modules built with DKMS and signed with a MOK, are loaded only after the module signature check (platform-dependent). fwupd downloads signed firmware and metadata from the LVFS and installs verified updates into the device and system firmware.
+:caption: Devices, kernel modules, and firmware at runtime
+
+---
+config:
+  theme: base
+  fontFamily: Ubuntu variable, Ubuntu, sans-serif
+  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
+  flowchart:
+    curve: linear
+  themeVariables:
+    fontFamily: Ubuntu variable, Ubuntu, sans-serif
+    lineColor: "#E95420"
+    primaryColor: "#F3F3F3"
+    primaryBorderColor: "#000000"
+    primaryTextColor: "#000000"
+    clusterBkg: "#FFFFFF"
+    clusterBorder: "#000000"
+    edgeLabelBackground: "#FFFFFF"
+---
+flowchart TB
+    subgraph OUTSIDE["Outside — untrusted"]
+        dev["Peripherals and<br>removable media"]
+    end
+    subgraph EXTSVC["External services"]
+        lvfs["LVFS<br>(firmware updates)"]
+    end
+    subgraph RUN["Running system"]
+        usbguard["usbguard allow list<br>(opt-in)"]
+        drivers["Kernel drivers and udev"]
+        dkms["Third-party modules<br>(DKMS, signed with MOK)"]
+        modsig["Module signature check<br>(platform-dependent)"]
+        fwupd["fwupd"]
+    end
+    subgraph HW["Hardware and firmware"]
+        iommu["IOMMU<br>(platform-dependent)"]
+        fw["Device and system firmware"]
+    end
+    dev -.->|"Device attach"| drivers
+    usbguard -.->|"Allow or block"| drivers
+    dev -.->|"DMA requests"| iommu
+    dkms -->|"Load request"| modsig
+    modsig -->|"Signed modules"| drivers
+    lvfs -->|"Signed firmware<br>and metadata"| fwupd
+    fwupd -->|"Verified update"| fw
+    style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
+
+    subgraph LEG["Legend"]
+        direction LR
+        leg0["Trust zone"]
+        leg1["Untrusted"]
+        leg2["External service"]
+        leg3["Component"]
+        leg4["Ubuntu default"]
+        leg5["Opt-in"]
+        leg6["Platform-dependent"]
+        leg7s[" "] --> leg7["Data flow"]
+        leg8s[" "] -.-> leg8["Untrusted or<br>optional flow"]
+        leg0 ~~~ leg1
+        leg1 ~~~ leg2
+        leg2 ~~~ leg3
+        leg3 ~~~ leg4
+        leg5 ~~~ leg6
+        leg6 ~~~ leg7s
+        leg7 ~~~ leg8s
+    end
+    HW ~~~ LEG
+
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef hidden fill:none,stroke:none,color:#FFFFFF
+    classDef note fill:#FFFFFF,stroke:none,color:#000000
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
+    class dev untrusted
+    class lvfs external
+    class drivers,dkms,fw component
+    class fwupd ubuntu
+    class iommu,modsig platform
+    class usbguard optin
+    class leg0 zone
+    class leg1 untrusted
+    class leg2 external
+    class leg3 component
+    class leg4 ubuntu
+    class leg5 optin
+    class leg6 platform
+    class leg7 note
+    class leg7s hidden
+    class leg8 note
+    class leg8s hidden
+    click dev href "#security-architecture-devices"
+    click lvfs href "#security-architecture-lvfs"
+    click usbguard href "#security-architecture-devices"
+    click drivers href "#security-architecture-devices"
+    click dkms href "#security-architecture-kernel-modules"
+    click modsig href "#security-architecture-kernel-modules"
+    click fwupd href "#security-architecture-firmware-updates"
+    click fw href "#security-architecture-firmware-updates"
+    click iommu href "#security-architecture-dma"
+    click leg0 href "#security-architecture-legend"
+    click leg1 href "#security-architecture-legend"
+    click leg2 href "#security-architecture-legend"
+    click leg3 href "#security-architecture-legend"
+    click leg4 href "#security-architecture-legend"
+    click leg5 href "#security-architecture-legend"
+    click leg6 href "#security-architecture-legend"
+    click leg7 href "#security-architecture-legend"
+    click leg8 href "#security-architecture-legend"
+    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
+```
 
 (security-architecture-kernel-modules)=
 #### Kernel modules
