@@ -143,6 +143,7 @@ Kerberos
 kexec
 keypair
 keypairs
+keyrings
 keysalt
 keyserver
 keyservers
@@ -224,6 +225,7 @@ parmfiles
 passcodes
 passthrough
 PCIe
+PCRs
 Percona
 Percona's
 performant

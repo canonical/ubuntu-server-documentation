@@ -334,3 +334,394 @@ installation of Ubuntu, and which you need to enable or configure.
 Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` as the default `sudo`
 provider. See {ref}`sudo-rs`.
 :::
+
+(security-architecture-upper-boundaries)=
+## Network, userspace, and kernel boundaries
+
+This section looks at the two upper boundaries in more detail: where network
+input enters userspace, and where userspace processes request services from
+the kernel. It shows how Ubuntu validates untrusted input and mediates
+privilege transitions at each boundary.
+
+```{mermaid}
+:alt: Diagram of the network to userspace and userspace to kernel boundaries. Untrusted packets pass Netfilter in the kernel before reaching network-facing services, which run in a systemd service sandbox. Services pass credentials to PAM, optionally with multi-factor authentication. Unprivileged users and applications elevate privileges through sudo-rs, which uses PAM, or call privileged daemons over D-Bus, which check authorization with polkit. All userspace processes enter the kernel through the system call interface, where seccomp-bpf, DAC and capabilities, and the AppArmor and Yama LSM hooks check each request before the kernel accesses kernel objects, which namespaces and cgroups scope and limit. Policy for AppArmor, seccomp, and nftables is stored in userspace and loaded into the kernel.
+:caption: Mediation at the network, userspace, and kernel boundaries
+
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+flowchart TB
+    subgraph NETZ["Outside — untrusted network"]
+        pkt["Remote clients and<br>untrusted peers"]
+    end
+
+    subgraph US["Userspace"]
+        subgraph SANDBOX["systemd service sandbox (dropped privileges)"]
+            svc["Network-facing services<br>(OpenSSH, TLS servers)"]
+        end
+        user["Unprivileged user session<br>or application"]
+        pam["PAM"]
+        mfa["Multi-factor authentication<br>(opt-in)"]
+        sudo["sudo-rs"]
+        daemon["Privileged daemon"]
+        polkit["polkit"]
+        policy[("Security policy<br>(AppArmor profiles, seccomp<br>filters, nftables rules)")]
+    end
+
+    subgraph KZ["Linux kernel"]
+        nf["Netfilter hooks,<br>TCP SYN cookies"]
+        sys["System call entry<br>(argument and user<br>memory checks)"]
+        seccomp["seccomp-bpf filter"]
+        dac["DAC (UID, GID, POSIX ACLs)<br>and capabilities"]
+        subgraph LSM["LSM hooks"]
+            aa["AppArmor MAC<br>(files, sockets,<br>capabilities)"]
+            yama["Yama ptrace scope"]
+        end
+        nscg["Namespaces and cgroups"]
+        obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
+    end
+
+    pkt -.->|"Untrusted packets"| nf
+    nf -->|"Accepted connections"| svc
+    svc -->|"Credentials"| pam
+    pam -.->|"Second factor"| mfa
+    user -->|"Elevation request"| sudo
+    sudo -->|"Authentication"| pam
+    user -->|"D-Bus call"| daemon
+    daemon -->|"Authorization check"| polkit
+    policy -->|"Profiles"| aa
+    policy -->|"Filters"| seccomp
+    policy -.->|"Rules (opt-in)"| nf
+    US -->|"System calls"| sys
+    sys --> seccomp
+    seccomp -->|"Allowed calls"| dac
+    dac -->|"Permitted access"| LSM
+    LSM -->|"Mediated access"| obj
+    nscg -->|"Scope and limit"| obj
+
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    class pkt untrusted
+    class svc,user,pam,daemon,polkit,policy,nf,sys,seccomp,dac,nscg,obj component
+    class sudo,aa,yama ubuntu
+    class mfa optin
+    style NETZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style SANDBOX fill:#FFFFFF,stroke:#000000,stroke-width:1px
+    style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
+```
+
+(security-architecture-network-boundary)=
+### Network to userspace
+
+Packet filtering
+: Netfilter processes every packet in the kernel before a service receives
+  it. Rules defined with {manpage}`nft(8)` or `ufw` can drop or limit traffic.
+  TCP SYN cookies keep services reachable during SYN flood attacks. See
+  [SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/).
+
+Encrypted and authenticated access
+: OpenSSH and Transport Layer Security (TLS) libraries protect remote sessions
+  and service traffic. Ubuntu configures these libraries to reject legacy
+  protocol versions and weak algorithms. See
+  {ref}`explanation-cryptography`.
+
+Service sandboxing
+: Network-facing services run as `systemd` units. The unit file can drop
+  privileges and restrict the service, for example with a dedicated user,
+  `NoNewPrivileges=`, `ProtectSystem=`, and system call filters. See
+  {manpage}`systemd.exec(5)`.
+
+(security-architecture-privilege-boundary)=
+### Privilege elevation and authentication
+
+PAM
+: Login services, such as the console login, SSH, and the display manager,
+  use {manpage}`pam(7)` to authenticate users, check account restrictions,
+  and set up sessions. PAM modules add
+  multi-factor authentication, smart cards, or network identity providers if
+  you configure them. See {ref}`two-factor-authentication-with-totp-or-hotp`,
+  {ref}`smart-card-authentication`, and the
+  [authd documentation](https://documentation.ubuntu.com/authd/).
+
+`sudo-rs`
+: Lets authorized users run commands as root with their own credentials. The
+  root account has no usable password by default. See {ref}`user-management`
+  and {ref}`sudo-rs`.
+
+polkit
+: Lets privileged daemons decide whether an unprivileged caller may perform an
+  action, such as mounting a disk or changing network settings. See
+  {manpage}`polkit(8)`.
+
+:::{note}
+Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` by default.
+:::
+
+(security-architecture-syscall-boundary)=
+### Userspace to kernel
+
+Every request from a userspace process to the kernel passes through the system
+call interface. The kernel validates the arguments of each system call, and
+copies data from and to process memory only through dedicated functions, such
+as `copy_from_user()`, which check that the memory belongs to the calling
+process. The kernel then applies the following checks:
+
+seccomp-bpf
+: Rejects system calls that the process's filter does not allow. `snapd`,
+  `systemd`, and many applications install filters. See
+  [seccomp filtering](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#seccomp-filtering)
+  and {manpage}`seccomp(2)`.
+
+Discretionary access control and capabilities
+: Checks the process's user and group IDs against file permissions and
+  {manpage}`acl(5)` entries, and checks {manpage}`capabilities(7)` for
+  privileged operations.
+
+AppArmor
+: Restricts each confined program to the files, network access, and
+  capabilities listed in its profile, even if the program runs as root.
+  AppArmor also restricts the use of unprivileged user namespaces. See
+  {ref}`apparmor` and
+  [AppArmor](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/).
+
+Yama
+: Allows a process to attach to another process with `ptrace` only if it is
+  an ancestor of that process, or has the required capability. See
+  [`ptrace` scope](https://documentation.ubuntu.com/security/security-features/process-memory/#ptrace-scope).
+
+Namespaces and cgroups
+: Limit which resources a process can see, and how much of them it can use.
+  Containers and snaps build on them. See {manpage}`namespaces(7)` and
+  [cgroups](https://documentation.ubuntu.com/security/security-features/privilege-restriction/cgroups/).
+
+Policies for these mechanisms, such as AppArmor profiles, seccomp filters, and
+`nftables` rules, are written and managed in userspace. Once loaded, the kernel
+enforces them, and a process cannot bypass them without the privileges to
+replace the policy.
+
+(security-architecture-lower-boundary)=
+## Kernel, hardware, boot, and storage boundary
+
+This section looks at the lower boundary: how Ubuntu establishes trust in the
+code that runs at boot, how it protects data at rest, and how the running
+kernel deals with hardware and firmware.
+
+```{mermaid}
+:alt: Diagram of the boot chain and the kernel to hardware boundary. UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB loads the locally built initramfs, which is measured but not signed. The firmware and boot chain extend measurements into TPM 2.0 PCRs. The running kernel enforces lockdown and module signatures. An optional LUKS encrypted volume is unlocked with a passphrase, Clevis, or TPM-backed FDE, and dm-crypt holds the volume key in the kernel keyring. Peripherals and removable media are handled by kernel drivers and udev, and their DMA is restricted by the IOMMU. fwupd installs signed firmware from the LVFS.
+:caption: Boot chain, data at rest, and the hardware boundary
+
+%%{init: {"theme": "base", "themeVariables": {"fontFamily": "Ubuntu Sans, Ubuntu, sans-serif", "lineColor": "#E95420", "primaryColor": "#F3F3F3", "primaryBorderColor": "#000000", "primaryTextColor": "#000000", "clusterBkg": "#FFFFFF", "clusterBorder": "#000000", "titleColor": "#000000", "edgeLabelBackground": "#FFFFFF"}, "flowchart": {"curve": "linear"}}}%%
+flowchart TB
+    subgraph OUTSIDE["Outside — untrusted"]
+        dev["Peripherals and<br>removable media"]
+    end
+
+    subgraph EXTSVC["External services (outside boundary)"]
+        lvfs["LVFS"]
+    end
+
+    subgraph HW["Hardware and firmware"]
+        uefi["UEFI firmware, Secure Boot<br>(platform-dependent)"]
+        tpm["TPM 2.0 PCRs<br>(platform-dependent)"]
+        iommu["IOMMU<br>(platform-dependent)"]
+        fw["Device and system firmware"]
+    end
+
+    subgraph BOOT["Boot chain"]
+        shim["shim<br>(signed by Microsoft UEFI CA)"]
+        grub["GRUB<br>(signed by Canonical)"]
+        kernel["Linux kernel<br>(signed by Canonical)"]
+        initrd["initramfs<br>(built locally, not signed)"]
+    end
+
+    subgraph RUN["Running system"]
+        lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
+        drivers["Kernel drivers and udev"]
+        dmcrypt["dm-crypt"]
+        keyring[("Kernel keyrings<br>(keyctl)")]
+        fwupd["fwupd"]
+    end
+
+    subgraph UNLOCK["Disk unlock methods"]
+        pass["Passphrase<br>(opt-in)"]
+        clevis["Clevis TPM unlock<br>(opt-in)"]
+        tpmfde["TPM-backed FDE<br>(opt-in, Desktop installer)"]
+    end
+
+    luks[("LUKS encrypted volume<br>(opt-in)")]
+
+    uefi -->|"Verifies"| shim
+    shim -->|"Verifies"| grub
+    grub -->|"Verifies through shim"| kernel
+    grub -->|"Loads"| initrd
+    BOOT -->|"Measurements"| tpm
+    kernel -->|"Enforces at runtime"| lockdown
+    pass -.->|"Passphrase"| initrd
+    tpm -.->|"Unseals key if<br>PCRs match"| clevis
+    tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
+    clevis -.->|"Key"| initrd
+    tpmfde -.->|"Key"| dmcrypt
+    initrd -.->|"Volume key"| dmcrypt
+    dmcrypt -.->|"Volume key"| keyring
+    dmcrypt -.->|"Encrypted blocks"| luks
+    dev -.->|"Device attach"| drivers
+    dev -.->|"DMA requests"| iommu
+    lvfs -->|"Signed firmware<br>and metadata"| fwupd
+    fwupd -->|"Verified update"| fw
+
+    classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef external fill:#FFFFFF,stroke:#000000,stroke-width:1px,color:#000000
+    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
+    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
+    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
+    class dev untrusted
+    class lvfs external
+    class fw,initrd,drivers,dmcrypt,keyring component
+    class shim,grub,kernel,fwupd ubuntu
+    class uefi,tpm,iommu,lockdown platform
+    class pass,clevis,tpmfde,luks optin
+    style OUTSIDE fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style EXTSVC fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style RUN fill:#FFFFFF,stroke:#000000,stroke-width:2px
+    style UNLOCK fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4
+```
+
+(security-architecture-boot)=
+### Verified and measured boot
+
+When UEFI Secure Boot is enabled, each boot stage verifies the signature of
+the next one before running it:
+
+1. The UEFI firmware verifies `shim`, which is signed by the Microsoft UEFI
+   certificate authority (CA).
+1. `shim` verifies GRUB, which is signed by Canonical. `shim` also accepts
+   code signed with a Machine Owner Key (MOK) that you enrolled.
+1. GRUB asks `shim` to verify the Linux kernel, which is signed by Canonical.
+1. The kernel enables lockdown in integrity mode, and only loads kernel
+   modules with a valid signature.
+
+GRUB also loads the initial RAM file system (`initramfs`). Ubuntu generates
+the `initramfs` on the system when you install or update a kernel, so it is not
+signed, and Secure Boot does not verify it.
+
+If the system has a Trusted Platform Module (TPM) 2.0, the firmware and the
+boot chain extend a measurement of each stage, its configuration, and the
+`initramfs` into the TPM's Platform Configuration Registers (PCRs). The PCR
+values do not stop a modified system from booting, but the TPM only releases
+secrets sealed to the expected PCR values. See
+[UEFI Secure Boot](https://documentation.ubuntu.com/security/security-features/platform-protections/secure-boot/)
+and
+[Trusted Platform Module](https://documentation.ubuntu.com/security/security-features/platform-protections/trusted-platform-module/).
+
+(security-architecture-data-at-rest)=
+### Data at rest and key protection
+
+Full disk encryption
+: Ubuntu encrypts disks with Linux Unified Key Setup (LUKS) and `dm-crypt`,
+  if you select encryption during installation. You unlock the disk at boot
+  with a passphrase. To unlock the disk with the TPM instead, you can bind it
+  to TPM PCR values with Clevis. See
+  [full disk encryption](https://documentation.ubuntu.com/security/security-features/storage/encryption-full-disk/)
+  and {ref}`tpm-backed-luks-decryption-with-clevis`.
+
+TPM-backed FDE
+: The Ubuntu Desktop installer offers TPM-backed full disk encryption on
+  supported hardware, which requires UEFI Secure Boot, a TPM 2.0, and an
+  IOMMU. With TPM-backed FDE, the kernel and `initramfs` are delivered as a
+  single signed image, so that Secure Boot verifies both. The TPM releases the
+  disk key only if the measured boot state matches the expected state.
+
+Kernel keyrings
+: Hold keys, such as disk encryption keys and authentication tokens, in
+  kernel memory with per-key access control. Processes access them with
+  {manpage}`keyctl(1)`. See {manpage}`keyrings(7)`.
+
+:::{note}
+In Ubuntu 24.04 LTS, TPM-backed FDE in the Desktop installer is an
+experimental feature.
+:::
+
+(security-architecture-hardware-boundary)=
+### Runtime hardware and firmware boundary
+
+Kernel modules
+: With Secure Boot enabled, the kernel only loads modules signed by
+  Canonical or with an enrolled MOK. When you install a third-party driver
+  with DKMS, Ubuntu signs the module with a MOK, which you enroll at the next
+  boot.
+
+Devices and removable media
+: The kernel drivers and {manpage}`udev(7)` handle every new device. Data on
+  removable media is untrusted input. To control which USB devices the system
+  accepts, you can install {manpage}`usbguard-daemon(8)`. See
+  [devices](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/).
+
+DMA protection
+: An Input-Output Memory Management Unit (IOMMU) restricts which memory a
+  device can access through direct memory access (DMA). This protects against
+  malicious peripherals, such as Thunderbolt devices. The protection depends
+  on hardware support and firmware settings.
+
+Firmware updates
+: `fwupd` downloads firmware from the LVFS, verifies the signed metadata, and
+  installs the update through the device's or system's update mechanism.
+
+(security-architecture-controls)=
+## Security controls reference
+
+The following table lists the security mechanisms on this page by boundary,
+with their default state in Ubuntu 26.04 LTS. The default state is one of:
+
+* **Enabled by default**: active on a new installation
+* **Opt-in**: you need to choose and enable the mechanism
+* **Platform-dependent**: active by default if the hardware or firmware
+  supports and enables it
+
+| Boundary | Mechanism | Purpose and function | Default state | Details |
+|---|---|---|---|---|
+| Network to userspace | Host firewall (Netfilter, `nftables`, `ufw`) | Blocks or limits network traffic to and from the system before it reaches a service. | Opt-in | {ref}`firewalls`, [firewall](https://documentation.ubuntu.com/security/security-features/network/firewall/) |
+| Network to userspace | No open ports policy | Keeps a new installation free of listening network services, with few documented exceptions. | Enabled by default | [No open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/) |
+| Network to userspace | TCP SYN cookies | Keeps TCP services reachable during SYN flood attacks. | Enabled by default | [SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/) |
+| Network to userspace | Encrypted and authenticated communications | Protects remote sessions and service traffic with SSH and TLS, using modern protocol versions and algorithms. | Enabled by default | {ref}`openssh-server`, {ref}`explanation-cryptography` |
+| Network to userspace | Service sandboxing (`systemd`) | Drops privileges and restricts filesystem, device, and kernel access for services whose unit file configures it. | Enabled by default | {manpage}`systemd.exec(5)` |
+| Outbound | Authenticated time synchronization (NTS) | Prevents attackers on the network from changing the system time. | Enabled by default | {ref}`about-time-synchronisation` |
+| Outbound | DNSSEC validation | Rejects forged DNS answers for signed domains. | Opt-in | {ref}`dnssec`, {ref}`install-dnssec` |
+| Outbound | Entropy seeding (Pollinate) | On Ubuntu Server and cloud images, seeds the random number generator from Ubuntu's entropy service on first boot. Removal from the default installation is proposed in {lpbug}`2158262`. | Enabled by default | [Cloud PRNG seed](https://documentation.ubuntu.com/security/security-features/cryptography/cloud-prng-seed/), [Pollinate analysis](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-16-does-pollinate-still-earn-its-place-on-every-ubuntu-boot-in-2026/84735/1) |
+| Outbound | System telemetry (Ubuntu Desktop) | Shares non-identifying system information with Canonical only after you consent, and keeps a local copy of each report for inspection. | Opt-in | [Product data collection notice](https://canonical.com/legal/systems-information-notice), [Ubuntu Insights](https://discourse.ubuntu.com/t/ubuntu-insights-how-telemetry-is-changing-on-ubuntu-desktop/73442) |
+| Privilege elevation | Authentication (PAM) | Verifies user identity for all login paths, with optional multi-factor authentication, smart cards, or network identity providers. | Enabled by default | {ref}`explanation-security`, {ref}`smart-card-authentication`, [authd](https://documentation.ubuntu.com/authd/) |
+| Privilege elevation | Locked root account | Prevents direct logins as root, so that administrative actions are tied to a user account. | Enabled by default | {ref}`user-management` |
+| Privilege elevation | `sudo-rs` and polkit | Lets authorized users run administrative tasks with their own credentials, and lets privileged daemons authorize unprivileged callers. | Enabled by default | {ref}`sudo-rs`, {manpage}`polkit(8)` |
+| Userspace to kernel | File permissions and ACLs | Restricts access to files and devices based on owner, group, and access control lists. | Enabled by default | [File handling](https://documentation.ubuntu.com/security/security-features/process-memory/file-handling/), {manpage}`acl(5)` |
+| Userspace to kernel | Capabilities | Splits root privileges into separate units, so that a process holds only the privileges it needs. | Enabled by default | [Filesystem capabilities](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#filesystem-capabilities), {manpage}`capabilities(7)` |
+| Userspace to kernel | seccomp-bpf | Limits the system calls that a process can make. | Enabled by default | [Seccomp filtering](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#seccomp-filtering) |
+| Userspace to kernel | AppArmor | Confines programs to the resources listed in their profile, even when they run as root, and restricts unprivileged user namespaces. | Enabled by default | {ref}`apparmor`, [AppArmor](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/) |
+| Userspace to kernel | Yama `ptrace` scope | Prevents a process from inspecting or modifying the memory of processes other than its descendants. | Enabled by default | [`ptrace` scope](https://documentation.ubuntu.com/security/security-features/process-memory/#ptrace-scope) |
+| Userspace to kernel | Namespaces and cgroups | Isolate processes from each other and limit their resource use. | Enabled by default | [cgroups](https://documentation.ubuntu.com/security/security-features/privilege-restriction/cgroups/), {manpage}`namespaces(7)` |
+| Userspace to kernel | Snap confinement | Combines AppArmor, seccomp, device cgroups, and mount namespaces to isolate each strictly confined snap. | Enabled by default | [Snap confinement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/) |
+| Userspace to kernel | Kernel memory hardening | Makes kernel exploits harder by hiding kernel addresses, randomizing the kernel location, and write-protecting kernel code and data. | Enabled by default | [Kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/) |
+| Userspace to kernel | Process memory protections | Makes exploits of applications harder with hardened compiler flags and address space layout randomization (ASLR). | Enabled by default | [Compiler flags](https://documentation.ubuntu.com/security/security-features/process-memory/compiler-flags/), [ASLR](https://documentation.ubuntu.com/security/security-features/process-memory/aslr/) |
+| Kernel to hardware | UEFI Secure Boot | Verifies the signatures of the boot loader and kernel before running them. | Platform-dependent | [UEFI Secure Boot](https://documentation.ubuntu.com/security/security-features/platform-protections/secure-boot/) |
+| Kernel to hardware | Kernel lockdown and module signatures | Prevents root from modifying the running kernel, and rejects unsigned kernel modules. | Platform-dependent | [Kernel lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) |
+| Kernel to hardware | TPM measured boot | Records each boot stage in the TPM, so that secrets are only released to an unmodified system. | Platform-dependent | [Trusted Platform Module](https://documentation.ubuntu.com/security/security-features/platform-protections/trusted-platform-module/) |
+| Kernel to hardware | Full disk encryption | Protects data at rest if a disk is lost or stolen. | Opt-in | [Full disk encryption](https://documentation.ubuntu.com/security/security-features/storage/encryption-full-disk/), {ref}`tpm-backed-luks-decryption-with-clevis` |
+| Kernel to hardware | Kernel keyrings | Hold keys in kernel memory with per-key access control. | Enabled by default | {manpage}`keyrings(7)`, [kernel key retention service](https://docs.kernel.org/security/keys/core.html) |
+| Kernel to hardware | IOMMU DMA protection | Restricts the memory that devices can access through DMA. | Platform-dependent | [Devices](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/), [x86 IOMMU support](https://docs.kernel.org/arch/x86/iommu.html) |
+| Kernel to hardware | USB device authorization (`usbguard`) | Blocks USB devices that are not on an allow list. | Opt-in | [`usbguard`](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/#usbguard) |
+| Kernel to hardware | Memory encryption (AMD SEV, Intel TDX) | Encrypts the memory of virtual machines, to protect it from the host. | Platform-dependent | [CPU features](https://documentation.ubuntu.com/security/security-features/platform-protections/cpu/) |
+| Kernel to hardware | Firmware updates (`fwupd`) | Installs signed firmware updates from the LVFS. | Enabled by default | {manpage}`fwupdmgr(1)` |
+| Kernel to hardware | Physical access control | Restricts physical and console access to the system. | Opt-in | {ref}`console-security` |
+| Whole system | Signed packages and images | Verifies the integrity of packages, snaps, and installation images, independently of the download source. | Enabled by default | [Archive verification](https://documentation.ubuntu.com/security/software-integrity/archive-verification/), [image verification](https://documentation.ubuntu.com/security/software-integrity/image-verification/) |
+| Whole system | Security updates | Installs security updates automatically, and keeps the system on a supported release. | Enabled by default | {ref}`automatic-updates`, {ref}`upgrade-your-release`, [security updates](https://documentation.ubuntu.com/security/security-updates/) |
+| Whole system | Monitoring and alerting | Collects metrics and logs, and alerts operators to unexpected behavior. | Opt-in | {ref}`how-to-observability`, {ref}`set-up-your-lma-stack`, [Landscape](https://ubuntu.com/landscape/docs/) |
+| Whole system | Auditing and compliance hardening | Records security-relevant events, and applies and audits hardening profiles such as CIS Benchmarks. | Opt-in | {manpage}`auditd(8)`, [Ubuntu Security Guide](https://documentation.ubuntu.com/security/compliance/usg/) |
+
+(security-architecture-further-reading)=
+## Further reading
+
+* [Ubuntu security documentation](https://documentation.ubuntu.com/security/)
+* [Overview of security features by release](https://documentation.ubuntu.com/security/security-features/security-features-overview/)
