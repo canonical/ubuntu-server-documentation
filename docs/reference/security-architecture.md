@@ -255,9 +255,8 @@ flowchart TB
             ufw["ufw host firewall rules<br>(opt-in)"]
             nts["chrony with NTS"]
             dnssec["DNSSEC validation<br>(opt-in)"]
-            nft ~~~ ufw
-            syn ~~~ nts
-            ports ~~~ dnssec
+            nft ~~~ syn ~~~ ports
+            ufw ~~~ nts ~~~ dnssec
         end
         subgraph L2["2 — Userspace"]
             pam["PAM and polkit"]
@@ -268,9 +267,10 @@ flowchart TB
             snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
             flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
             audit["auditd, USG hardening profiles<br>(opt-in)"]
-            pam ~~~ apt ~~~ flags
-            sysd ~~~ aaprof ~~~ audit
+            pam ~~~ apt
+            sysd ~~~ aaprof
             sudo ~~~ snap
+            flags ~~~ audit
         end
         L1 -->|"Accepted connections"| L2
     end
@@ -286,9 +286,10 @@ flowchart TB
             userns["Unprivileged user<br>namespace restriction"]
             khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
             lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-            dac ~~~ aa ~~~ khard
-            nscg ~~~ yama ~~~ lockdown
+            dac ~~~ aa
+            nscg ~~~ yama
             seccomp ~~~ userns
+            khard ~~~ lockdown
         end
         subgraph L4["4 — Hardware and boot"]
             sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
@@ -296,9 +297,8 @@ flowchart TB
             iommu["IOMMU DMA protection<br>(platform-dependent)"]
             fwupd["fwupd firmware updates"]
             fde["LUKS full disk encryption<br>(opt-in)"]
-            sb ~~~ fwupd
-            tpm ~~~ fde
-            iommu
+            sb ~~~ tpm ~~~ iommu
+            fwupd ~~~ fde
         end
         L3 -->|"Device and storage access"| L4
     end
