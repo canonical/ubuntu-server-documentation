@@ -66,6 +66,8 @@ Cron
 cron
 crypto
 css
+Cyber
+cybersecurity
 Danika
 Datagram
 datagram

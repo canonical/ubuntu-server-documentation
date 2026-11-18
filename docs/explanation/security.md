@@ -65,3 +65,4 @@ OpenVPN clients <security/openvpn-client-implementations>
 ## See also
 
 * How-to: {ref}`how-to-security`
+* Reference: {ref}`security-architecture`
