@@ -169,9 +169,12 @@ support NTS. New installations use `chrony` with NTS starting with Ubuntu
 DNS Security Extensions (DNSSEC) let a resolver verify that DNS answers for a
 signed domain come from the domain owner and were not modified. Ubuntu's stub
 resolver, `systemd-resolved`, supports DNSSEC validation but ships with it
-disabled, because broken DNSSEC setups on networks and domains can make names
-fail to resolve. To reject forged answers for signed domains, enable
-validation in the resolver. See {ref}`dnssec` and {ref}`install-dnssec`.
+disabled, because validation can affect name resolution in some environments,
+for example with DNS servers that do not fully follow the specification. For
+background, see
+[testing the waters with DNSSEC](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-9-testing-the-waters-with-dnssec/72073).
+To reject forged answers for signed domains, enable validation in the
+resolver. See {ref}`dnssec` and {ref}`install-dnssec`.
 
 Connections that pass the network layer reach a service that listens in
 userspace. Only services that you install listen on the network, and each
