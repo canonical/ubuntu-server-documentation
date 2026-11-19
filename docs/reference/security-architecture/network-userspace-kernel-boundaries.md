@@ -141,7 +141,7 @@ Three components mediate the transition from an unprivileged user or service
 to privileged actions.
 
 ```{mermaid}
-:alt: Privilege elevation and authentication. Users log in through login services, such as the console, SSH, or the display manager, which pass credentials to PAM. PAM can add multi-factor authentication, smart cards, or network identity providers (opt-in). An unprivileged session or application elevates privileges through sudo-rs, which authenticates the user with PAM, or calls a privileged daemon over D-Bus, which checks the authorization of the caller with polkit.
+:alt: Privilege elevation and authentication. Users log in through login services, such as the console, SSH, or the display manager, which pass credentials to PAM and start the user session. PAM can add multi-factor authentication, smart cards, or network identity providers (opt-in). An unprivileged session or application elevates privileges through sudo-rs, which authenticates the user with PAM, or calls a privileged daemon over D-Bus, which checks the authorization of the caller with polkit.
 :caption: From an unprivileged user to privileged actions
 
 ---
@@ -168,7 +168,7 @@ flowchart TB
             users["Remote and local users"]
         end
         subgraph UNPRIV["Unprivileged"]
-            user["User session<br>or application"]
+            user["User session or application<br>(started by login services)"]
         end
         subgraph PRIV["Privileged (root)"]
             login["Login services<br>(console, SSH, display manager)"]
@@ -180,7 +180,6 @@ flowchart TB
         end
         users -->|"Credentials"| login
         login -->|"Authentication"| pam
-        login -->|"Starts session"| user
         user -->|"Elevation request"| sudo
         sudo -->|"Authentication"| pam
         user -->|"D-Bus call"| daemon
@@ -280,7 +279,7 @@ as `copy_from_user()`, which check that the memory belongs to the calling
 process. The kernel then applies the following checks.
 
 ```{mermaid}
-:alt: Userspace to kernel. A userspace process makes a system call. The kernel checks the system call entry, its arguments, and access to process memory, then applies the seccomp-bpf filter of the process, discretionary access control and capabilities, and the AppArmor and Yama Linux Security Module hooks, before it accesses kernel objects such as files, sockets, processes, and devices. Namespaces and cgroups scope and limit these objects. AppArmor profiles and seccomp filters are managed in userspace and loaded into the kernel.
+:alt: Userspace to kernel. A userspace process makes a system call and receives its result. The kernel checks the system call entry, its arguments, and access to process memory, then applies the seccomp-bpf filter of the process, discretionary access control and capabilities, and the AppArmor and Yama Linux Security Module hooks, before it accesses kernel objects such as files, sockets, processes, and devices. Namespaces and cgroups scope and limit these objects. AppArmor profiles and seccomp filters are managed in userspace and loaded into the kernel.
 :caption: From a process to the kernel
 
 ---
@@ -303,10 +302,6 @@ config:
 flowchart TB
     subgraph MAIN[" "]
         direction TB
-        subgraph US["Userspace"]
-            proc["Userspace process"]
-            policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
-        end
         subgraph KZ["Linux kernel"]
             sys["System call entry<br>(argument and user<br>memory checks)"]
             seccomp["seccomp-bpf filter"]
@@ -318,12 +313,16 @@ flowchart TB
             nscg["Namespaces and cgroups"]
             obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
         end
-        proc -->|"System call"| sys
+        subgraph US["Userspace"]
+            proc["Userspace process"]
+            policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
+        end
         sys --> seccomp
         seccomp -->|"Allowed calls"| dac
         dac -->|"Permitted access"| LSM
         LSM -->|"Mediated access"| obj
         nscg -->|"Scope and limit"| obj
+        sys <-->|"System call<br>and result"| proc
         policy -->|"Profiles"| aa
         policy -->|"Filters"| seccomp
         style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
