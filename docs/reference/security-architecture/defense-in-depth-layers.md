@@ -12,14 +12,9 @@ Ubuntu protects the system with four layers of security mechanisms. Each layer
 assumes that the layer above it can fail or be compromised, so an attacker
 needs to defeat several independent mechanisms to compromise the system.
 
-The diagrams on this page follow the
+The diagram on this page follows the
 {ref}`diagram conventions <security-architecture-legend>`. To go to the
-explanation of a box, select the box in the diagram.
-
-Many of these mechanisms are part of the upstream Linux kernel and userspace,
-and are available on any Linux distribution. Ubuntu adds its own defaults and
-integrations on top of them. In the diagrams of each layer, light gray boxes
-show upstream mechanisms, and black boxes show Ubuntu defaults.
+description of a layer, select the layer in the diagram.
 
 ```{mermaid}
 :alt: Overview of the four security layers, from top to bottom: 1, network and perimeter; 2, userspace; 3, Linux kernel; 4, hardware, firmware, and boot chain. Accepted connections pass from the network layer to userspace, system calls pass from userspace to the kernel, and device and storage access passes from the kernel to the hardware.
@@ -77,77 +72,106 @@ flowchart TB
     style MAIN fill:none,stroke:none
 ```
 
+Many of these mechanisms are part of the upstream Linux kernel and userspace,
+and are available on any Linux distribution. Ubuntu adds its own defaults and
+integrations on top of them. Each mechanism below states its default state as
+one of the following:
+
+* **Ubuntu default**: Ubuntu enables or configures the mechanism, beyond what
+  upstream Linux does
+* **Upstream, enabled by default**: an upstream Linux mechanism that is active
+  on a new installation of Ubuntu
+* **Opt-in**: Ubuntu provides the mechanism, but you need to choose and enable
+  it
+* **Platform-dependent**: Ubuntu uses the mechanism by default when the
+  hardware or firmware supports and enables it
+
 (security-architecture-layer-network)=
 ## Network and perimeter
 
 The network layer filters and authenticates traffic before it reaches a
-service. The kernel's Netfilter framework, configured through `nftables`,
-filters packets. Ubuntu installs {manpage}`ufw(8)` as a front end to
-Netfilter, but does not enable it. TCP SYN cookies, enabled by default,
-protect against SYN flood attacks. See {ref}`firewalls`.
+service, and authenticates the network services that the system itself relies
+on.
 
-```{mermaid}
-:alt: Network and perimeter layer: Netfilter and nftables packet filtering, TCP SYN cookies, and the no open ports policy; ufw host firewall rules (opt-in), chrony with NTS, and DNSSEC validation (opt-in).
-:caption: Mechanisms of the network and perimeter layer
+(security-architecture-netfilter)=
+### Netfilter and `nftables`
 
----
-config:
-  theme: base
-  fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
-  flowchart:
-    curve: linear
-  themeVariables:
-    fontFamily: Ubuntu variable, Ubuntu, sans-serif
-    lineColor: "#E95420"
-    primaryColor: "#F3F3F3"
-    primaryBorderColor: "#000000"
-    primaryTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#000000"
-    edgeLabelBackground: "#FFFFFF"
----
-flowchart TB
-    subgraph MAIN[" "]
-        direction TB
-        subgraph L1["1 — Network and perimeter"]
-            direction LR
-            nft["Netfilter and nftables<br>packet filtering"]
-            syn["TCP SYN cookies"]
-            ports["No open ports policy"]
-            ufw["ufw host firewall rules<br>(opt-in)"]
-            nts["chrony with NTS"]
-            dnssec["DNSSEC validation<br>(opt-in)"]
-            nft ~~~ syn ~~~ ports
-            ufw ~~~ nts ~~~ dnssec
-        end
-        style L1 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    end
+**Default state:** Upstream, enabled by default, with no filtering rules
 
-    subgraph LEG["Legend"]
-        direction LR
-        leg0["Component"]
-        leg1["Ubuntu default"]
-        leg2["Opt-in"]
-        leg0 ~~~ leg1
-        leg1 ~~~ leg2
-    end
-    MAIN ~~~ LEG
+Netfilter is the packet filtering framework of the Linux kernel. Every packet
+that the system receives, sends, or forwards passes its hooks, where rules can
+accept, drop, or rate-limit it. You manage the rules with {manpage}`nft(8)`.
+Without rules, Netfilter accepts all traffic, so the
+{ref}`no open ports policy <security-architecture-no-open-ports>` is what
+limits exposure on a new installation. See
+{ref}`security-architecture-packet-filtering`.
 
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    class nft,syn component
-    class ports,nts ubuntu
-    class ufw,dnssec optin
-    class leg0 component
-    class leg1 ubuntu
-    class leg2 optin
-    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
-    style MAIN fill:none,stroke:none
-```
+(security-architecture-syn-cookies)=
+### TCP SYN cookies
 
-Other pages describe further elements of this diagram. See {ref}`security-architecture-packet-filtering`, {ref}`security-architecture-network-peers`, and {ref}`security-architecture-infrastructure-services`.
+**Default state:** Upstream, enabled by default
+
+In a SYN flood attack, an attacker opens many half-completed TCP connections
+to exhaust the connection queue of a service. With SYN cookies, the kernel
+encodes the connection state in its reply instead of storing it, so legitimate
+clients can still connect while the queue is full. Ubuntu has set
+`net.ipv4.tcp_syncookies` to `1` since Ubuntu 9.04. See
+[SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/).
+
+(security-architecture-no-open-ports)=
+### No open ports policy
+
+**Default state:** Ubuntu default
+
+A new installation of Ubuntu has no listening network services, with a small
+number of documented exceptions that must follow strict guidelines, such as
+not exposing application data to the network. A service only listens on the
+network after you install it, which keeps the attack surface of a new system
+small. To list the services that listen on your system, use {manpage}`ss(8)`.
+See
+[no open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/).
+
+(security-architecture-ufw)=
+### `ufw` host firewall
+
+**Default state:** Opt-in
+
+Ubuntu installs {manpage}`ufw(8)`, the Uncomplicated Firewall, as a front end
+that writes Netfilter rules from short commands, but does not enable it. To
+restrict which traffic reaches the services that you install, enable `ufw` and
+add rules for those services, or write `nftables` rules directly. See
+{ref}`firewalls` and
+[firewall](https://documentation.ubuntu.com/security/security-features/network/firewall/).
+
+(security-architecture-nts)=
+### Authenticated time synchronization
+
+**Default state:** Ubuntu default
+
+Correct time is a security property: certificate validity, Kerberos tickets,
+and log timestamps all depend on it. Ubuntu synchronizes time with `chrony`,
+configured to use Ubuntu's time servers with Network Time Security (NTS), which
+authenticates the time servers so that an attacker on the network cannot
+change the system time. See {ref}`about-time-synchronisation` and
+{ref}`security-architecture-infrastructure-services`.
+
+:::{note}
+Ubuntu 24.04 LTS synchronizes time with `systemd-timesyncd`, which does not
+support NTS. New installations use `chrony` with NTS starting with Ubuntu
+25.10.
+:::
+
+(security-architecture-dnssec-validation)=
+### DNSSEC validation
+
+**Default state:** Opt-in
+
+DNS Security Extensions (DNSSEC) let a resolver verify that DNS answers for a
+signed domain come from the domain owner and were not modified. Ubuntu's stub
+resolver, `systemd-resolved`, supports DNSSEC validation but ships with it
+disabled, because broken DNSSEC setups on networks and domains can make names
+fail to resolve. To reject forged answers for signed domains, enable
+validation in the resolver. See {ref}`dnssec` and {ref}`install-dnssec`.
 
 Connections that pass the network layer reach a service that listens in
 userspace. Only services that you install listen on the network, and each
@@ -157,78 +181,113 @@ OpenSSH does. See {ref}`security-architecture-network-boundary`.
 (security-architecture-layer-userspace)=
 ## Userspace
 
-Userspace runs services and applications from `deb` packages and snaps.
-Ubuntu verifies every package that it installs from the archive or the Snap
-Store, and installs security updates automatically with
-`unattended-upgrades`. Ubuntu builds packages with hardened compiler and linker
-flags, and ships AppArmor profiles for many packaged services and
-applications. `snapd` confines each strictly confined snap with several kernel
-mechanisms at once. See {ref}`automatic-updates`.
+Userspace runs services and applications from `deb` packages and snaps. The
+mechanisms in this layer control which software is installed, how it was
+built, what it can access, and who can act with administrative privileges.
 
-```{mermaid}
-:alt: Userspace layer: PAM and polkit, systemd service sandboxing, sudo-rs with the root account locked, APT signature verification and unattended security updates, AppArmor profiles for packaged software, snapd strict confinement, hardened compiler flags, and auditd and USG hardening profiles (opt-in).
-:caption: Mechanisms of the userspace layer
+(security-architecture-pam-polkit)=
+### PAM and polkit
 
----
-config:
-  theme: base
-  fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
-  flowchart:
-    curve: linear
-  themeVariables:
-    fontFamily: Ubuntu variable, Ubuntu, sans-serif
-    lineColor: "#E95420"
-    primaryColor: "#F3F3F3"
-    primaryBorderColor: "#000000"
-    primaryTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#000000"
-    edgeLabelBackground: "#FFFFFF"
----
-flowchart TB
-    subgraph MAIN[" "]
-        direction TB
-        subgraph L2["2 — Userspace"]
-            direction LR
-            pam["PAM and polkit"]
-            sysd["systemd service sandboxing"]
-            sudo["sudo-rs, root account locked"]
-            apt["APT signature verification,<br>unattended security updates"]
-            aaprof["AppArmor profiles for<br>packaged software"]
-            snap["snapd strict confinement<br>(AppArmor, seccomp, device<br>cgroup, mount namespace)"]
-            flags["Hardened compiler flags<br>(PIE, stack protector, FORTIFY)"]
-            audit["auditd, USG hardening profiles<br>(opt-in)"]
-            pam ~~~ sysd ~~~ sudo ~~~ apt
-            aaprof ~~~ snap ~~~ flags ~~~ audit
-        end
-        style L2 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    end
+**Default state:** Upstream, enabled by default
 
-    subgraph LEG["Legend"]
-        direction LR
-        leg0["Component"]
-        leg1["Ubuntu default"]
-        leg2["Opt-in"]
-        leg0 ~~~ leg1
-        leg1 ~~~ leg2
-    end
-    MAIN ~~~ LEG
+Pluggable Authentication Modules (PAM) authenticate users for every login
+service, and polkit lets privileged daemons decide whether an unprivileged
+caller may perform an action. Both are upstream components that Ubuntu
+configures for its login services and desktop. See
+{ref}`security-architecture-pam` and {ref}`security-architecture-polkit`.
 
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    class pam,sysd component
-    class sudo,apt,aaprof,snap,flags ubuntu
-    class audit optin
-    class leg0 component
-    class leg1 ubuntu
-    class leg2 optin
-    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
-    style MAIN fill:none,stroke:none
-```
+(security-architecture-systemd-sandboxing)=
+### `systemd` service sandboxing
 
-Other pages describe further elements of this diagram. See {ref}`security-architecture-pam`, {ref}`security-architecture-service-sandboxing`, {ref}`security-architecture-sudo-rs`, {ref}`security-architecture-archive`, {ref}`security-architecture-apparmor`, and {ref}`security-architecture-snap-store`.
+**Default state:** Upstream, enabled by default for services whose unit file
+configures it
+
+`systemd` can start each service with a dedicated user, without the ability to
+gain privileges, and with restricted access to the file system, devices, and
+kernel interfaces. Which restrictions apply depends on the unit file of each
+service. To check a service, run `systemd-analyze security <unit>`. See
+{ref}`security-architecture-service-sandboxing`.
+
+(security-architecture-sudo-root)=
+### `sudo-rs` and the locked root account
+
+**Default state:** Ubuntu default
+
+The root account of a new installation has no usable password, so nobody can
+log in as root directly. Administrators run commands as root through
+`sudo-rs`, a memory-safe implementation of `sudo`, using their own
+credentials, so that administrative actions are tied to a user account. Grant
+administrative rights only to users who need them. See
+{ref}`security-architecture-sudo-rs` and {ref}`user-management`.
+
+:::{note}
+Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` as the default `sudo`
+provider. See {ref}`sudo-rs`.
+:::
+
+(security-architecture-apt-updates)=
+### Package signature verification and automatic security updates
+
+**Default state:** Ubuntu default
+
+APT verifies every package that it installs from a configured repository
+against signed repository metadata, and `snapd` verifies every snap against
+signed assertions. Ubuntu also installs and enables `unattended-upgrades`,
+which installs security updates automatically. Only add package sources that
+you trust, because packages run their installation scripts as root, and plan
+reboots, because kernel updates take effect after a reboot. See
+{ref}`automatic-updates`, {ref}`third-party-repository-usage`, and
+{ref}`security-architecture-archive`.
+
+(security-architecture-apparmor-profiles)=
+### AppArmor profiles for packaged software
+
+**Default state:** Ubuntu default
+
+Ubuntu enforces AppArmor and ships AppArmor profiles for many services and
+applications in the archive, which confine them even when they run as root.
+Each release adds more profiles. Do not disable AppArmor, and write profiles
+for the services that you add yourself. See {ref}`apparmor`,
+[disabling AppArmor](https://documentation.ubuntu.com/security/common-mistakes/disabling-apparmor/),
+and {ref}`security-architecture-apparmor`.
+
+(security-architecture-snap-confinement)=
+### Snap strict confinement
+
+**Default state:** Ubuntu default
+
+`snapd` runs each strictly confined snap with its own AppArmor profile,
+seccomp filter, device cgroup, and mount namespace, so that the snap can only
+access the resources that its connected interfaces allow. Review the
+interfaces that a snap requests, and avoid `classic` or `devmode` confinement
+for snaps that you do not trust, because they turn off this confinement. See
+[snap confinement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/)
+and {ref}`security-architecture-snap-store`.
+
+(security-architecture-compiler-flags)=
+### Hardened compiler and linker flags
+
+**Default state:** Ubuntu default
+
+Ubuntu builds the packages in its archive as position-independent executables
+(PIE), which take full advantage of address space layout randomization, with
+stack protection, and with checks of buffer sizes in common C library
+functions (`_FORTIFY_SOURCE`). These make memory corruption bugs harder to
+exploit. Ubuntu configures its compiler to enable many of these flags by
+default, so they also apply to software that you build on Ubuntu. See
+[default compiler and linker flags](https://documentation.ubuntu.com/security/security-features/process-memory/compiler-flags/).
+
+(security-architecture-auditing)=
+### Auditing and compliance hardening
+
+**Default state:** Opt-in
+
+Ubuntu does not record security-relevant events, such as file access or
+privilege changes, unless you install the {manpage}`auditd(8)` audit daemon.
+To apply and audit a hardening profile, such as the CIS Benchmarks or
+DISA-STIG, use the
+[Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/),
+which is available with an Ubuntu Pro subscription.
 
 Userspace processes cannot access files, devices, the network, or other
 processes directly. To do so, they make a system call: a request that switches
@@ -240,78 +299,98 @@ security policies before it acts on it. See
 (security-architecture-layer-kernel)=
 ## Linux kernel
 
-The kernel enforces access control and isolation for every process. Upstream
-Linux provides discretionary access control (DAC), capabilities, namespaces,
-cgroups, and seccomp. Ubuntu enables AppArmor as its Linux Security Module
-(LSM), restricts `ptrace` with the Yama LSM, restricts unprivileged user
-namespaces through AppArmor, and configures the kernel to hide kernel
-addresses and randomize the kernel's location in memory. See
-[kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/).
+The kernel enforces access control and isolation for every process, and
+protects itself against exploitation.
 
-```{mermaid}
-:alt: Linux kernel layer: DAC, POSIX ACLs and capabilities, namespaces and cgroups v2, seccomp-bpf, AppArmor enforced, Yama ptrace scope, unprivileged user namespace restriction, kernel memory hardening, and lockdown with module signature enforcement (platform-dependent).
-:caption: Mechanisms of the Linux kernel layer
+(security-architecture-dac-capabilities)=
+### Discretionary access control and capabilities
 
----
-config:
-  theme: base
-  fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
-  flowchart:
-    curve: linear
-  themeVariables:
-    fontFamily: Ubuntu variable, Ubuntu, sans-serif
-    lineColor: "#E95420"
-    primaryColor: "#F3F3F3"
-    primaryBorderColor: "#000000"
-    primaryTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#000000"
-    edgeLabelBackground: "#FFFFFF"
----
-flowchart TB
-    subgraph MAIN[" "]
-        direction TB
-        subgraph L3["3 — Linux kernel"]
-            direction LR
-            dac["DAC, POSIX ACLs,<br>capabilities"]
-            nscg["Namespaces, cgroups v2"]
-            seccomp["seccomp-bpf"]
-            khard["Kernel memory hardening<br>(KASLR, kptr_restrict, RO/NX)"]
-            aa["AppArmor LSM enforced"]
-            yama["Yama ptrace scope"]
-            userns["Unprivileged user<br>namespace restriction"]
-            lockdown["Lockdown, module signature<br>enforcement (platform-dependent)"]
-            dac ~~~ nscg ~~~ seccomp ~~~ khard
-            aa ~~~ yama ~~~ userns ~~~ lockdown
-        end
-        style L3 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    end
+**Default state:** Upstream, enabled by default
 
-    subgraph LEG["Legend"]
-        direction LR
-        leg0["Component"]
-        leg1["Ubuntu default"]
-        leg2["Platform-dependent"]
-        leg0 ~~~ leg1
-        leg1 ~~~ leg2
-    end
-    MAIN ~~~ LEG
+The kernel checks every access against the owner, group, and permissions of
+the file or device, and its access control lists. Capabilities split the
+privileges of root into separate units, so that a process can hold only the
+privileges that it needs. See {ref}`security-architecture-dac`.
 
-    classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
-    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    class dac,nscg,seccomp component
-    class aa,yama,userns,khard ubuntu
-    class lockdown platform
-    class leg0 component
-    class leg1 ubuntu
-    class leg2 platform
-    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
-    style MAIN fill:none,stroke:none
-```
+(security-architecture-namespaces-cgroups)=
+### Namespaces and cgroups
 
-Other pages describe further elements of this diagram. See {ref}`security-architecture-dac`, {ref}`security-architecture-namespaces`, {ref}`security-architecture-seccomp`, {ref}`security-architecture-apparmor`, {ref}`security-architecture-yama`, and {ref}`security-architecture-kernel-modules`.
+**Default state:** Upstream, enabled by default
+
+Namespaces limit which resources a process can see, such as other processes,
+mounts, and network interfaces, and cgroups limit how much CPU, memory, and
+I/O it can use. Containers, snaps, and `systemd` services build on them. See
+{ref}`security-architecture-namespaces`.
+
+(security-architecture-seccomp-filtering)=
+### seccomp-bpf
+
+**Default state:** Upstream, enabled by default for processes that install a
+filter
+
+A seccomp filter limits which system calls a process can make, which reduces
+the kernel attack surface that a compromised process can reach. `snapd`,
+`systemd`, container runtimes, and many applications install filters. See
+{ref}`security-architecture-seccomp`.
+
+(security-architecture-apparmor-lsm)=
+### AppArmor
+
+**Default state:** Ubuntu default
+
+Ubuntu enables AppArmor as its Linux Security Module (LSM). AppArmor enforces
+mandatory access control: it restricts each confined program to the files,
+network access, and capabilities listed in its profile, regardless of the
+permissions of the user that runs it. See {ref}`security-architecture-apparmor`.
+
+(security-architecture-yama-ptrace)=
+### Yama `ptrace` scope
+
+**Default state:** Ubuntu default
+
+By default, a process can inspect and modify the memory of any other process
+of the same user with `ptrace`, so one compromised application could read the
+secrets of all others. Ubuntu enables the Yama LSM and limits `ptrace` to a
+process's own descendants. See {ref}`security-architecture-yama`.
+
+(security-architecture-userns-restriction)=
+### Unprivileged user namespace restriction
+
+**Default state:** Ubuntu default
+
+Unprivileged user namespaces let a process gain capabilities inside a
+namespace, which exposes kernel code that otherwise only root can reach.
+Starting with Ubuntu 24.04 LTS, the kernel and AppArmor restrict them:
+unconfined, unprivileged applications can still create user namespaces, but
+cannot use capabilities inside them. AppArmor profiles allow full use for
+applications that need it, such as browsers and container tools. See
+[AppArmor unprivileged user namespace restrictions](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/#apparmor-unprivileged-user-namespace-restrictions).
+
+(security-architecture-kernel-hardening)=
+### Kernel memory hardening
+
+**Default state:** Ubuntu default
+
+Ubuntu configures its kernel to make kernel exploits harder. Kernel address
+space layout randomization (KASLR) places the kernel at a different address on
+every boot, `kernel.kptr_restrict` and `kernel.dmesg_restrict` hide kernel
+addresses and messages from unprivileged users, and kernel code and read-only
+data are write-protected. Avoid weakening these protections with sysctl
+settings. See
+[kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/)
+and
+[dangerous sysctls](https://documentation.ubuntu.com/security/common-mistakes/dangerous-sysctls/).
+
+(security-architecture-lockdown)=
+### Kernel lockdown and module signatures
+
+**Default state:** Platform-dependent
+
+When UEFI Secure Boot is enabled, the kernel enables lockdown in integrity
+mode, which prevents even root from modifying the running kernel, and only
+loads signed kernel modules. This extends the verified boot chain into the
+running system. See {ref}`security-architecture-kernel-modules` and
+[kernel lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown).
 
 Only the kernel accesses the hardware: it drives devices, manages memory, and
 reads and writes storage on behalf of processes. In the other direction,
@@ -323,96 +402,58 @@ kernel runs at all is decided earlier, by the boot chain. See
 (security-architecture-layer-hardware)=
 ## Hardware, firmware, and boot chain
 
-The lowest layer anchors trust in the hardware. When UEFI Secure Boot is
-enabled, the firmware verifies the boot loader, and the boot loader verifies
-the kernel. Ubuntu ships {manpage}`fwupdmgr(1)` to install signed firmware
-updates. Full disk encryption protects data at rest, if you enable it during
-installation.
+The lowest layer anchors trust in the hardware: it decides which code runs at
+boot, protects data at rest, and keeps firmware up to date.
 
-```{mermaid}
-:alt: Hardware, firmware, and boot chain layer: UEFI Secure Boot chain (platform-dependent), TPM 2.0 measured boot (platform-dependent), IOMMU DMA protection (platform-dependent), fwupd firmware updates, and LUKS full disk encryption (opt-in).
-:caption: Mechanisms of the hardware, firmware, and boot chain layer
+(security-architecture-secure-boot)=
+### UEFI Secure Boot
 
----
-config:
-  theme: base
-  fontFamily: Ubuntu variable, Ubuntu, sans-serif
-  themeCSS: 'svg, svg * { font-family: Ubuntu variable, Ubuntu, sans-serif !important; } .flowchart-link { stroke-width: 3px !important; } .edge-pattern-dotted { stroke-dasharray: 8 5 !important; }'
-  flowchart:
-    curve: linear
-  themeVariables:
-    fontFamily: Ubuntu variable, Ubuntu, sans-serif
-    lineColor: "#E95420"
-    primaryColor: "#F3F3F3"
-    primaryBorderColor: "#000000"
-    primaryTextColor: "#000000"
-    clusterBkg: "#FFFFFF"
-    clusterBorder: "#000000"
-    edgeLabelBackground: "#FFFFFF"
----
-flowchart TB
-    subgraph MAIN[" "]
-        direction TB
-        subgraph L4["4 — Hardware, firmware, and boot chain"]
-            direction LR
-            sb["UEFI Secure Boot: shim, GRUB,<br>kernel (platform-dependent)"]
-            tpm["TPM 2.0 measured boot<br>(platform-dependent)"]
-            iommu["IOMMU DMA protection<br>(platform-dependent)"]
-            fwupd["fwupd firmware updates"]
-            fde["LUKS full disk encryption<br>(opt-in)"]
-            sb ~~~ tpm ~~~ iommu
-            fwupd ~~~ fde
-        end
-        style L4 fill:#FFFFFF,stroke:#000000,stroke-width:2px
-    end
+**Default state:** Platform-dependent
 
-    subgraph LEG["Legend"]
-        direction LR
-        leg0["Ubuntu default"]
-        leg1["Opt-in"]
-        leg2["Platform-dependent"]
-        leg0 ~~~ leg1
-        leg1 ~~~ leg2
-    end
-    MAIN ~~~ LEG
+When Secure Boot is enabled in the firmware, the firmware verifies the boot
+loader, and the boot loader verifies the kernel, so that only signed code runs
+at boot. Ubuntu ships a signed boot chain, so Secure Boot works without
+changes. Enable Secure Boot in the firmware of your system. See
+{ref}`security-architecture-boot`.
 
-    classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
-    class fwupd ubuntu
-    class fde optin
-    class sb,tpm,iommu platform
-    class leg0 ubuntu
-    class leg1 optin
-    class leg2 platform
-    style LEG fill:#FFFFFF,stroke:#666666,stroke-width:1px
-    style MAIN fill:none,stroke:none
-```
+(security-architecture-measured-boot)=
+### TPM measured boot
 
-Other pages describe further elements of this diagram. See {ref}`security-architecture-boot`, {ref}`security-architecture-dma`, {ref}`security-architecture-firmware-updates`, and {ref}`security-architecture-full-disk-encryption`.
+**Default state:** Platform-dependent
 
-(security-architecture-defaults)=
-## Default and configurable protections
+If the system has a Trusted Platform Module (TPM) 2.0, the firmware records a
+measurement of each boot stage in the TPM. The TPM can then release secrets,
+such as a disk encryption key, only to a system that booted the expected
+software. See {ref}`security-architecture-boot`.
 
-The following table summarizes which protections are active on a new
-installation of Ubuntu, and which you need to enable or configure.
+(security-architecture-iommu)=
+### IOMMU DMA protection
 
-| Protection | Default state | What you need to do |
-|---|---|---|
-| AppArmor enforced, with profiles for packaged software | Enabled by default | Do not disable AppArmor. Write profiles for your own services. See {ref}`apparmor`. |
-| snap confinement | Enabled by default | Review the interfaces that snaps request, and avoid `classic` or `devmode` confinement for untrusted snaps. |
-| Yama `ptrace` scope, kernel memory hardening, unprivileged user namespace restriction | Enabled by default | Avoid weakening these protections. See [dangerous sysctls](https://documentation.ubuntu.com/security/common-mistakes/dangerous-sysctls/). |
-| Archive signature verification and unattended security updates | Enabled by default | Only add trusted package sources. Plan reboots for kernel updates. |
-| Root account locked, administration through `sudo` | Enabled by default | Grant administrative rights only to users who need them. |
-| Authenticated time synchronization (NTS) | Enabled by default | No action needed for new installations. |
-| UEFI Secure Boot, kernel lockdown, module signature enforcement | Platform-dependent | Enable Secure Boot in the firmware. |
-| TPM measured boot and IOMMU DMA protection | Platform-dependent | Use hardware that provides them, and enable them in the firmware. |
-| Host firewall rules | Opt-in | Enable `ufw` or write `nftables` rules. See {ref}`firewalls`. |
-| Full disk encryption | Opt-in | Select encryption during installation. To unlock with the TPM, use TPM-backed FDE on Ubuntu Desktop, or Clevis on Ubuntu Server. |
-| DNSSEC validation | Opt-in | Enable validation in the resolver. See {ref}`install-dnssec`. |
-| System auditing and compliance hardening | Opt-in | Install `auditd`, or apply a hardening profile with the [Ubuntu Security Guide (USG)](https://documentation.ubuntu.com/security/compliance/usg/). |
+**Default state:** Platform-dependent
 
-:::{note}
-Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` as the default `sudo`
-provider. See {ref}`sudo-rs`.
-:::
+An Input-Output Memory Management Unit (IOMMU) restricts which memory a device
+can access through DMA, which protects against malicious peripherals. Use
+hardware that provides an IOMMU, and enable it in the firmware. See
+{ref}`security-architecture-dma`.
+
+(security-architecture-fwupd)=
+### Firmware updates
+
+**Default state:** Ubuntu default
+
+Ubuntu ships `fwupd`, which downloads firmware updates from the Linux Vendor
+Firmware Service (LVFS), verifies their signatures, and installs them. Firmware
+vulnerabilities can undermine every layer above, so keep firmware up to date
+with {manpage}`fwupdmgr(1)`. See {ref}`security-architecture-firmware-updates`.
+
+(security-architecture-fde)=
+### Full disk encryption
+
+**Default state:** Opt-in
+
+Full disk encryption with LUKS protects data at rest if a disk is lost or
+stolen. Select encryption during installation. To unlock the disk with the
+TPM instead of a passphrase, use TPM-backed full disk encryption on Ubuntu
+Desktop, or Clevis on Ubuntu Server. See
+{ref}`security-architecture-full-disk-encryption` and
+{ref}`security-architecture-tpm-unlock`.
