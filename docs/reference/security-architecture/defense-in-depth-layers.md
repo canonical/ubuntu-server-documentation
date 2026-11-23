@@ -4,8 +4,7 @@ myst:
     description: "The four layers of security mechanisms in Ubuntu, from the network to the hardware, and which of them are enabled by default."
 ---
 
-(security-architecture-layers)=
-(defense-in-depth-layers)=
+(layered-defense-in-depth-architecture)=
 # Layered defense-in-depth architecture
 
 Ubuntu protects the system with four layers of security mechanisms. Each layer
@@ -400,7 +399,7 @@ reads and writes storage on behalf of processes. In the other direction,
 devices signal the kernel through interrupts, and can read and write memory
 directly through direct memory access (DMA), which the IOMMU restricts. Which
 kernel runs at all is decided earlier, by the boot chain. See
-{ref}`security-architecture-lower-boundary`.
+{ref}`kernel-hardware-boundary`.
 
 (security-architecture-layer-hardware)=
 ## Hardware, firmware, and boot chain

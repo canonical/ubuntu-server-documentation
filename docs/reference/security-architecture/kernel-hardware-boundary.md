@@ -4,7 +4,6 @@ myst:
     description: "How Ubuntu verifies the boot chain, protects data at rest, and controls devices, kernel modules, and firmware."
 ---
 
-(security-architecture-lower-boundary)=
 (kernel-hardware-boundary)=
 # Kernel, hardware, boot, and storage boundary
 

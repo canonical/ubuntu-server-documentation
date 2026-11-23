@@ -4,8 +4,7 @@ myst:
     description: "Trust boundaries between an Ubuntu system, untrusted entities, and the external infrastructure services that Ubuntu relies on."
 ---
 
-(security-architecture-context)=
-(system-context)=
+(security-system-context)=
 # System context and external trust boundaries
 
 An Ubuntu system interacts with two kinds of external entities:

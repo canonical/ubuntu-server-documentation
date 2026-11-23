@@ -4,7 +4,6 @@ myst:
     description: "How Ubuntu mediates network input, privilege elevation, and system calls at the network, userspace, and kernel boundaries."
 ---
 
-(security-architecture-upper-boundaries)=
 (network-userspace-kernel-boundaries)=
 # Network, userspace, and kernel boundaries
 
