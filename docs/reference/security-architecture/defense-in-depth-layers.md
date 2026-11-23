@@ -82,8 +82,8 @@ one of the following:
   on a new installation of Ubuntu
 * **Opt-in**: Ubuntu provides the mechanism, but you need to choose and enable
   it
-* **Platform-dependent**: Ubuntu uses the mechanism by default when the
-  hardware or firmware supports and enables it
+* **Platform-dependent**: Ubuntu can use the mechanism when the
+  hardware or firmware supports and enables it.
 
 (security-architecture-layer-network)=
 ## Network and perimeter
@@ -140,7 +140,7 @@ that writes Netfilter rules from short commands, but does not enable it. To
 restrict which traffic reaches the services that you install, enable `ufw` and
 add rules for those services, or write `nftables` rules directly. See
 {ref}`firewalls` and
-[firewall](https://documentation.ubuntu.com/security/security-features/network/firewall/).
+[netfilter subsystem](https://documentation.ubuntu.com/security/security-features/network/firewall/).
 
 (security-architecture-nts)=
 ### Authenticated time synchronization
@@ -219,12 +219,11 @@ The root account of a new installation has no usable password, so nobody can
 log in as root directly. Administrators run commands as root through
 `sudo-rs`, a memory-safe implementation of `sudo`, using their own
 credentials, so that administrative actions are tied to a user account. Grant
-administrative rights only to users who need them. See
-{ref}`security-architecture-sudo-rs` and {ref}`user-management`.
+administrative rights only to users who need them. See and {ref}`user-management`.
 
 :::{note}
 Ubuntu 24.04 LTS uses `sudo` instead of `sudo-rs` as the default `sudo`
-provider. See {ref}`sudo-rs`.
+provider. See the sudo-rs {ref}`replacement <sudo-rs>` and [announcement](https://discourse.ubuntu.com/t/sudo-rs-is-now-default-for-questing-quokka/66497) pages.
 :::
 
 (security-architecture-apt-updates)=
@@ -309,7 +308,7 @@ protects itself against exploitation.
 
 **Default state:** Upstream, enabled by default
 
-The kernel checks every access against the owner, group, and permissions of
+The kernel checks every access attempt against the owner, group, and permissions of
 the file or device, and its access control lists. Capabilities split the
 privileges of root into separate units, so that a process can hold only the
 privileges that it needs. See {ref}`security-architecture-dac`.
@@ -350,7 +349,7 @@ permissions of the user that runs it. See {ref}`security-architecture-apparmor`.
 
 **Default state:** Ubuntu default
 
-By default, a process can inspect and modify the memory of any other process
+Normally a process can inspect and modify the memory of any other process
 of the same user with `ptrace`, so one compromised application could read the
 secrets of all others. Ubuntu enables the Yama LSM and limits `ptrace` to a
 process's own descendants. See {ref}`security-architecture-yama`.
@@ -391,8 +390,8 @@ and
 When UEFI Secure Boot is enabled, the kernel enables lockdown in integrity
 mode, which prevents even root from modifying the running kernel, and only
 loads signed kernel modules. This extends the verified boot chain into the
-running system. See {ref}`security-architecture-kernel-modules` and
-[kernel lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown).
+running system. See [Kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-protections),
+[kernel lockdown](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-lockdown) and {ref}`module-signature-check`).
 
 Only the kernel accesses the hardware: it drives devices, manages memory, and
 reads and writes storage on behalf of processes. In the other direction,

@@ -7,7 +7,7 @@ myst:
 (kernel-hardware-boundary)=
 # Kernel, hardware, boot, and storage boundary
 
-This page looks at the lower boundary: how Ubuntu establishes trust in the
+This page looks at the lower (see {ref}`layered-defense-in-depth-architecture`) boundary: how Ubuntu establishes trust in the
 code that runs at boot, how it protects data at rest, and how the running
 kernel deals with hardware and firmware.
 
@@ -18,8 +18,8 @@ explanation of a box, select the box in the diagram.
 (security-architecture-boot)=
 ## Verified and measured boot
 
-The boot chain decides which kernel runs. Each stage either verifies or
-measures the next one.
+The boot chain decides which kernel runs. With secure boot enabled each stage
+either verifies or measures the next one.
 
 ```{mermaid}
 :alt: Verified and measured boot. With Secure Boot (platform-dependent), the UEFI firmware verifies shim, which is signed by the Microsoft UEFI CA. shim verifies GRUB, and GRUB verifies the Linux kernel through shim; both are signed by Canonical. GRUB also loads the initramfs, which is built locally and not signed. Through the firmware, each stage extends measurements into the TPM 2.0 PCRs (platform-dependent). The running kernel enforces lockdown and module signatures (platform-dependent).
@@ -60,7 +60,7 @@ flowchart TB
         shim -->|"Verifies"| grub
         grub -->|"Verifies through shim"| kernel
         grub -->|"Loads"| initrd
-        uefi -->|"Extends measurements<br>of each stage"| tpm
+        uefi -->|"Can extend measurements<br>of each stage"| tpm
         kernel -->|"Enforces at runtime"| lockdown
         style HW fill:#FFFFFF,stroke:#000000,stroke-width:2px
         style BOOT fill:#FFFFFF,stroke:#000000,stroke-width:2px
@@ -70,13 +70,11 @@ flowchart TB
         direction LR
         leg0["Trust zone"]
         leg1["Component"]
-        leg2["Ubuntu default"]
-        leg3["Platform-dependent"]
-        leg4s[" "] --> leg4["Data flow"]
+        leg2["Platform-dependent"]
+        leg3s[" "] --> leg4["Data flow"]
         leg0 ~~~ leg1
         leg1 ~~~ leg2
-        leg2 ~~~ leg3
-        leg3 ~~~ leg4s
+        leg2 ~~~ leg3s
     end
     MAIN ~~~ LEG
 
@@ -84,17 +82,16 @@ flowchart TB
     classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef ubuntu fill:#737373,stroke:#000000,stroke-width:1px,color:#FFFFFF
     classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
     class initrd component
-    class shim,grub,kernel ubuntu
-    class uefi,tpm,lockdown platform
+    class shim,grub,kernel,lockdown component
+    class uefi,tpm platform
     class leg0 zone
     class leg1 component
-    class leg2 ubuntu
-    class leg3 platform
-    class leg4 note
-    class leg4s hidden
+    class leg2 platform
+    class leg3 note
+    class leg3s hidden
     click uefi href "#security-architecture-boot"
     click tpm href "#security-architecture-boot"
     click shim href "#security-architecture-boot"
@@ -120,6 +117,10 @@ the next one before running it:
 GRUB also loads the initial RAM file system (`initramfs`). Ubuntu generates
 the `initramfs` on the system when you install or update a kernel, so it is not
 signed, and Secure Boot does not verify it.
+
+Without UEFI Secure Boot the chain of trust is not complete, and therefore
+kernel lockdown and module signature enforcement are not enabled by default.
+They work independently though and can still be enabled.
 
 If the system has a Trusted Platform Module (TPM) 2.0, the firmware and the
 boot chain extend a measurement of each stage, its configuration, and the
@@ -167,11 +168,11 @@ flowchart TB
         subgraph RUN["Running system"]
             initrd["initramfs"]
             dmcrypt["dm-crypt"]
-            keyring[("Kernel keyrings<br>(keyctl)")]
+            keyring["Kernel keyrings<br>(keyctl)"]
         end
         subgraph HW["Hardware"]
             tpm["TPM 2.0<br>(platform-dependent)"]
-            luks[("LUKS encrypted volume<br>(opt-in)")]
+            luks["LUKS encrypted volume<br>(opt-in)"]
         end
         tpm -.->|"Unseals key if<br>PCRs match"| clevis
         tpm -.->|"Unseals key if<br>PCRs match"| tpmfde
@@ -348,7 +349,7 @@ flowchart TB
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef platform fill:#000000,stroke:#666666,stroke-width:2px,stroke-dasharray:4 4,color:#FFFFFF
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef ubuntu fill:#737373,stroke:#000000,stroke-width:1px,color:#FFFFFF
     classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
     class dev untrusted
@@ -382,15 +383,24 @@ flowchart TB
 
 Other pages describe further elements of this diagram. See {ref}`security-architecture-lvfs`.
 
-(security-architecture-kernel-modules)=
-### Kernel modules
+(module-signature-check)=
+### Module signature check
 
-With Secure Boot enabled, the kernel only loads modules signed by Canonical or
-with an enrolled MOK. When you install a third-party driver with DKMS, Ubuntu
-signs the module with a MOK, which you enroll at the next boot.
+* Stock modules
+
+  Modules represent code running with kernel privileges, but are artifacts on disk that
+  could be tampered with. Therefore there are multiple [Kernel protections](https://documentation.ubuntu.com/security/security-features/kernel-protections/#kernel-protections)
+  that help to control module loading.
+  With Secure Boot enabled, the kernel only loads modules signed by Canonical.
+
+* Third party kernel modules
+
+  The kernel can also load modules signed with an enrolled MOK. When you install
+  a third-party driver with DKMS, Ubuntu signs the module with a MOK, which you
+  enroll at the next boot.
 
 (security-architecture-devices)=
-### Devices and removable media
+### Kernel drivers and udev
 
 The kernel drivers and {manpage}`udev(7)` handle every new device. Data on
 removable media is untrusted input. To control which USB devices the system
@@ -398,7 +408,7 @@ accepts, you can install {manpage}`usbguard-daemon(8)`. See
 [devices](https://documentation.ubuntu.com/security/security-features/platform-protections/devices/).
 
 (security-architecture-dma)=
-### DMA protection
+### IOMMU
 
 An Input-Output Memory Management Unit (IOMMU) restricts which memory a device
 can access through DMA. This protects against malicious peripherals, such as
@@ -406,7 +416,7 @@ Thunderbolt devices. The protection depends on hardware support and firmware
 settings.
 
 (security-architecture-firmware-updates)=
-### Firmware updates
+### Firmware updates (fwupd)
 
 `fwupd` downloads firmware from the LVFS, verifies the signed metadata, and
 installs the update through the device's or system's update mechanism.

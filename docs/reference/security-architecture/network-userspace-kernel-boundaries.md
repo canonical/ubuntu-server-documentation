@@ -7,7 +7,7 @@ myst:
 (network-userspace-kernel-boundaries)=
 # Network, userspace, and kernel boundaries
 
-This page looks at the two upper boundaries in more detail: where network
+This page looks at the two upper (see {ref}`layered-defense-in-depth-architecture`) boundaries in more detail: where network
 input enters userspace, and where userspace processes request services from
 the kernel. It shows how Ubuntu validates untrusted input and mediates
 privilege transitions at each boundary, in three steps: from the network to a
@@ -21,7 +21,7 @@ explanation of a box, select the box in the diagram.
 (security-architecture-network-boundary)=
 ## Network to userspace
 
-Three mechanisms protect the path from the network to a service.
+Three main mechanisms - packet filtering, encrypted and authenticated access and service sandboxing - protect the path from the network to a service.
 
 ```{mermaid}
 :alt: Network to userspace. Untrusted packets from remote clients and peers reach Netfilter hooks in the kernel, which apply TCP SYN cookies and any firewall rules loaded from nftables or ufw (opt-in). Accepted connections reach a network-facing service, such as OpenSSH or a TLS server, which runs inside a systemd service sandbox and encrypts and authenticates the session.
@@ -56,7 +56,7 @@ flowchart TB
         subgraph US["Userspace"]
             rules["nftables or ufw rules<br>(opt-in)"]
             subgraph SANDBOX["systemd service sandbox"]
-                svc["Network-facing service<br>(OpenSSH, TLS server)"]
+                svc["Network-facing service<br>(OpenSSH, TLS server, ...)"]
             end
         end
         pkt -.->|"Untrusted packets"| nf
@@ -128,10 +128,10 @@ protocol versions and weak algorithms. See {ref}`explanation-cryptography`.
 (security-architecture-service-sandboxing)=
 ### Service sandboxing
 
-Network-facing services run as `systemd` units. The unit file can drop
-privileges and restrict the service, for example with a dedicated user,
-`NoNewPrivileges=`, `ProtectSystem=`, and system call filters. See
-{manpage}`systemd.exec(5)`.
+Network-facing services usually run as `systemd` units. The unit file can
+declare the dropping privileges and thereby have systemd restrict the service,
+for example with a dedicated user, `NoNewPrivileges=`, `ProtectSystem=`, and
+system call filters. See {manpage}`systemd.exec(5)`.
 
 (security-architecture-privilege-boundary)=
 ## Privilege elevation and authentication
@@ -194,13 +194,12 @@ flowchart TB
         leg0["Trust zone"]
         leg1["Untrusted"]
         leg2["Component"]
-        leg3["Ubuntu default"]
         leg4["Opt-in"]
         leg5s[" "] --> leg5["Data flow"]
         leg6s[" "] -.-> leg6["Untrusted or<br>optional flow"]
         leg0 ~~~ leg1
         leg1 ~~~ leg2
-        leg2 ~~~ leg3
+        leg2 ~~~ leg4
         leg4 ~~~ leg5s
         leg5 ~~~ leg6s
     end
@@ -210,17 +209,14 @@ flowchart TB
     classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
     classDef optin fill:#F3F3F3,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
     classDef untrusted fill:#FFFFFF,stroke:#000000,stroke-width:1px,stroke-dasharray:4 4,color:#000000
     classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
     class users untrusted
-    class user,login,daemon,polkit,pam component
-    class sudo ubuntu
+    class user,login,daemon,polkit,pam,sudo component
     class mfa optin
     class leg0 zone
     class leg1 untrusted
     class leg2 component
-    class leg3 ubuntu
     class leg4 optin
     class leg5 note
     class leg5s hidden
@@ -310,20 +306,21 @@ flowchart TB
                 yama["Yama ptrace scope"]
             end
             nscg["Namespaces and cgroups"]
-            obj[("Kernel objects<br>(files, sockets,<br>processes, devices)")]
+            obj["Kernel objects<br>(files, sockets,<br>processes, devices)"]
         end
         subgraph US["Userspace"]
             proc["Userspace process"]
-            policy[("Security policy<br>(AppArmor profiles,<br>seccomp filters)")]
+            policy["Security policy<br>(AppArmor profiles,<br>seccomp filters)"]
         end
         sys --> seccomp
         seccomp -->|"Allowed calls"| dac
         dac -->|"Permitted access"| LSM
         LSM -->|"Mediated access"| obj
         nscg -->|"Scope and limit"| obj
-        sys <-->|"System call<br>and result"| proc
-        policy -->|"Profiles"| aa
-        policy -->|"Filters"| seccomp
+        proc <-->|"System call<br>and result"| sys
+        policy -->|"Define filters"| seccomp
+        policy -->|"Control hooks"| LSM
+        policy -->|"Control"| nscg
         style US fill:#FFFFFF,stroke:#000000,stroke-width:2px
         style KZ fill:#FFFFFF,stroke:#000000,stroke-width:2px
         style LSM fill:#FFFFFF,stroke:#000000,stroke-width:1px
@@ -344,7 +341,7 @@ flowchart TB
     classDef component fill:#F3F3F3,stroke:#000000,stroke-width:1px,color:#000000
     classDef hidden fill:none,stroke:none,color:#FFFFFF
     classDef note fill:#FFFFFF,stroke:none,color:#000000
-    classDef ubuntu fill:#000000,stroke:#000000,stroke-width:1px,color:#FFFFFF
+    classDef ubuntu fill:#737373,stroke:#000000,stroke-width:1px,color:#FFFFFF
     classDef zone fill:#FFFFFF,stroke:#000000,stroke-width:2px,color:#000000
     class proc,policy,sys,seccomp,dac,nscg,obj component
     class aa,yama ubuntu

@@ -53,16 +53,16 @@ This section describes the security architecture of Ubuntu: its trust
 boundaries, the mechanisms that protect them, and which of those mechanisms are
 enabled by default.
 
-* For background on security concepts, refer to our
-  {ref}`security explanations <explanation-security>`.
-* For step-by-step instructions to configure security features, refer to our
-  {ref}`security how-to guides <how-to-security>`.
-
 ```{toctree}
 :titlesonly:
 
 security-architecture
 ```
+
+* For background on security concepts, refer to our
+  {ref}`security explanations <explanation-security>`.
+* For step-by-step instructions to configure security features, refer to our
+  {ref}`security how-to guides <how-to-security>`.
 
 ## Other tools
 

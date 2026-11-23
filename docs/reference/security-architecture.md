@@ -13,7 +13,7 @@ with software delivered as `deb` packages and snaps. It identifies: the trust
 boundaries of an Ubuntu system; the mechanisms that protect each boundary; which of those mechanisms are active by default, and which you need to enable. The same architecture
 largely applies to other forms of Ubuntu that build on this platform, such as
 cloud images, Ubuntu on WSL, and Ubuntu container images, although some of
-them omit or delegate components, for example the boot chain. 
+them omit or delegate components, for example the boot chain.
 
 Use this page to:
 
@@ -34,8 +34,7 @@ security architecture that you build on and inherit.
 The architecture separates five zones:
 
 * **Untrusted external entities**, such as network peers and attached devices
-* **External infrastructure services** that Ubuntu relies on, such as the Ubuntu
-  archive and the Snap Store
+* **External infrastructure services** that Ubuntu relies on, such as the Ubuntu archive and the Snap Store
 * **Userspace workloads**, services and applications from `deb` packages and snaps
 * **The Linux kernel**, which enforces access control and isolation
 * **Hardware, firmware, and the boot chain**, which anchor trust in the system
@@ -44,11 +43,12 @@ The mechanisms described in this section protect the system regardless of where 
 software comes from: the kernel confines third-party services in the same way
 as packages from the Ubuntu archive, and `snapd` confines third-party snaps in
 the same way as any other snap. However, Canonical does not review, maintain,
-or provide security updates for third-party software, so the protection that
-such software itself provides is outside the scope of this reference. Packages from
-third-party APT repositories also run their installation scripts as root,
-without any security boundary between them and the rest of the system. See
-{ref}`third-party-repository-usage`.
+or provide security updates for third-party software, so the delivered configuration,
+content and behavior that such third-party software provides is outside the
+scope of this reference.
+Packages from third-party APT repositories also run their installation scripts
+as root, without any security boundary between them and the rest of the system.
+See {ref}`third-party-repository-usage`.
 
 Canonical maintains a detailed threat model for the Ubuntu platform, which
 lists the assets of the system, the data flows between them, and the controls
@@ -102,14 +102,14 @@ with their default state in Ubuntu 26.04 LTS. The default state is one of:
 
 | Boundary | Mechanism | Purpose and function | Default state | Details |
 |---|---|---|---|---|
-| {ref}`Network to userspace <security-architecture-network-boundary>` | Host firewall (Netfilter, `nftables`, `ufw`) | Blocks or limits network traffic to and from the system before it reaches a service. | Opt-in | {ref}`firewalls`, [firewall](https://documentation.ubuntu.com/security/security-features/network/firewall/) |
-| {ref}`Network to userspace <security-architecture-network-boundary>` | No open ports policy | Keeps a new installation free of listening network services, with few documented exceptions. | Enabled by default | [No open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/) |
+| {ref}`Network to userspace <security-architecture-network-boundary>` | Host firewall (Netfilter, `nftables`, `ufw`) | Blocks or limits network traffic to and from the system before it reaches a service. | Opt-in | {ref}`firewalls`, [netfilter subsystem](https://documentation.ubuntu.com/security/security-features/network/firewall/) |
+| {ref}`Network to userspace <security-architecture-network-boundary>` | No open ports policy | Keeps a new installation free of listening network services, with few documented [exceptions](https://documentation.ubuntu.com/security/security-features/network/open-ports/#exceptions-to-the-no-open-ports-policy). | Enabled by default | [No open ports](https://documentation.ubuntu.com/security/security-features/network/open-ports/) |
 | {ref}`Network to userspace <security-architecture-network-boundary>` | TCP SYN cookies | Keeps TCP services reachable during SYN flood attacks. | Enabled by default | [SYN cookies](https://documentation.ubuntu.com/security/security-features/network/syn-cookies/) |
 | {ref}`Network to userspace <security-architecture-network-boundary>` | Encrypted and authenticated communications | Protects remote sessions and service traffic with SSH and TLS, using modern protocol versions and algorithms. | Enabled by default | {ref}`openssh-server`, {ref}`explanation-cryptography` |
-| {ref}`Network to userspace <security-architecture-network-boundary>` | Service sandboxing (`systemd`) | Drops privileges and restricts filesystem, device, and kernel access for services whose unit file configures it. | Enabled by default | {manpage}`systemd.exec(5)` |
+| {ref}`Network to userspace <security-architecture-network-boundary>` | Service sandboxing (`systemd`) | Drops privileges and restricts filesystem, device, and kernel access for services whose unit file configure such restrictions. | Enabled by default | {manpage}`systemd.exec(5)` |
 | {ref}`Outbound <security-system-context>` | Authenticated time synchronization (NTS) | Prevents attackers on the network from changing the system time. | Enabled by default | {ref}`about-time-synchronisation` |
 | {ref}`Outbound <security-system-context>` | DNSSEC validation | Rejects forged DNS answers for signed domains. | Opt-in | {ref}`dnssec`, {ref}`install-dnssec` |
-| {ref}`Outbound <security-system-context>` | Entropy seeding (Pollinate) | On Ubuntu Server and cloud images, seeds the random number generator from Ubuntu's entropy service on first boot. Removal from the default installation is proposed in {lpbug}`2158262`. | Enabled by default | [Cloud PRNG seed](https://documentation.ubuntu.com/security/security-features/cryptography/cloud-prng-seed/), [Pollinate analysis](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-16-does-pollinate-still-earn-its-place-on-every-ubuntu-boot-in-2026/84735/1) |
+| {ref}`Outbound <security-system-context>` | Entropy seeding (Pollinate) | On Ubuntu Server and cloud images, seeds the random number generator from Ubuntu's entropy service on first boot. Removal from the default installation since 26.04. | Enabled by default prior to 26.04 | [Cloud PRNG seed](https://documentation.ubuntu.com/security/security-features/cryptography/cloud-prng-seed/), [Pollinate analysis](https://discourse.ubuntu.com/t/ubuntu-server-gazette-issue-16-does-pollinate-still-earn-its-place-on-every-ubuntu-boot-in-2026/84735/1) |
 | {ref}`Outbound <security-system-context>` | System telemetry (Ubuntu Desktop) | Shares non-identifying system information with Canonical only after you consent, and keeps a local copy of each report for inspection. | Opt-in | [Product data collection notice](https://canonical.com/legal/systems-information-notice), [Ubuntu Insights](https://discourse.ubuntu.com/t/ubuntu-insights-how-telemetry-is-changing-on-ubuntu-desktop/73442) |
 | {ref}`Privilege elevation <security-architecture-privilege-boundary>` | Authentication (PAM) | Verifies user identity for all login paths, with optional multi-factor authentication, smart cards, or network identity providers. | Enabled by default | {ref}`explanation-security`, {ref}`smart-card-authentication`, [authd](https://documentation.ubuntu.com/authd/) |
 | {ref}`Privilege elevation <security-architecture-privilege-boundary>` | Locked root account | Prevents direct logins as root, so that administrative actions are tied to a user account. | Enabled by default | {ref}`user-management` |
@@ -117,7 +117,7 @@ with their default state in Ubuntu 26.04 LTS. The default state is one of:
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | File permissions and ACLs | Restricts access to files and devices based on owner, group, and access control lists. | Enabled by default | [File handling](https://documentation.ubuntu.com/security/security-features/process-memory/file-handling/), {manpage}`acl(5)` |
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | Capabilities | Splits root privileges into separate units, so that a process holds only the privileges it needs. | Enabled by default | [Filesystem capabilities](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#filesystem-capabilities), {manpage}`capabilities(7)` |
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | seccomp-bpf | Limits the system calls that a process can make. | Enabled by default | [Seccomp filtering](https://documentation.ubuntu.com/security/security-features/privilege-restriction/#seccomp-filtering) |
-| {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | AppArmor | Confines programs to the resources listed in their profile, even when they run as root, and restricts unprivileged user namespaces. | Enabled by default | {ref}`apparmor`, [AppArmor](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/) |
+| {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | AppArmor | Confines programs to the resources listed in their profile, even when they run as root, and restricts unprivileged user namespaces. | Enabled by default | {ref}`Using AppArmor <apparmor>`, [AppArmor enforcement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/apparmor/) |
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | Yama `ptrace` scope | Prevents a process from inspecting or modifying the memory of processes other than its descendants. | Enabled by default | [`ptrace` scope](https://documentation.ubuntu.com/security/security-features/process-memory/#ptrace-scope) |
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | Namespaces and cgroups | Isolate processes from each other and limit their resource use. | Enabled by default | [cgroups](https://documentation.ubuntu.com/security/security-features/privilege-restriction/cgroups/), {manpage}`namespaces(7)` |
 | {ref}`Userspace to kernel <security-architecture-syscall-boundary>` | Snap confinement | Combines AppArmor, seccomp, device cgroups, and mount namespaces to isolate each strictly confined snap. | Enabled by default | [Snap confinement](https://documentation.ubuntu.com/security/security-features/privilege-restriction/snap-confinement/) |
@@ -152,7 +152,7 @@ color or line style alone.
 | Untrusted actor | White box, dashed border | An entity outside the system that you cannot trust |
 | External service | White box, solid border | Infrastructure outside the system that Ubuntu relies on |
 | Component, layer, or upstream mechanism | Light gray box, solid border | A component or layer of the system, or a mechanism provided by the upstream Linux kernel or userspace |
-| Ubuntu default | Black box, white text | A mechanism that Ubuntu enables or configures by default |
+| Ubuntu default | Dark grey box, white text | A mechanism that Ubuntu enables or configures by default |
 | Opt-in | Light gray box, dashed border, tagged `(opt-in)` | A mechanism that you need to choose and enable |
 | Platform-dependent | Black box, dashed border, tagged `(platform-dependent)` | A mechanism that Ubuntu uses by default when the hardware or firmware supports and enables it |
 | Data flow | Solid orange arrow | Data that crosses a boundary, in the direction of the arrow |
