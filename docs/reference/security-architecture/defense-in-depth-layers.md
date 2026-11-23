@@ -237,7 +237,7 @@ APT verifies every package that it installs from a configured repository
 against signed repository metadata, and `snapd` verifies every snap against
 signed assertions. Ubuntu also installs and enables `unattended-upgrades`,
 which installs security updates automatically. Only add package sources that
-you trust, because packages run their installation scripts as root, and plan
+you trust, because packages run their installation scripts as root. Plan your scheduled
 reboots, because kernel updates take effect after a reboot. See
 {ref}`automatic-updates`, {ref}`third-party-repository-usage`, and
 {ref}`security-architecture-archive`.
@@ -247,8 +247,8 @@ reboots, because kernel updates take effect after a reboot. See
 
 **Default state:** Ubuntu default
 
-Ubuntu enforces AppArmor and ships AppArmor profiles for many services and
-applications in the archive, which confine them even when they run as root.
+Ubuntu enforces AppArmor, and ships AppArmor profiles for many services and
+applications in the archive, to confine them even when they run as root.
 Each release adds more profiles. Do not disable AppArmor, and write profiles
 for the services that you add yourself. See {ref}`apparmor`,
 [disabling AppArmor](https://documentation.ubuntu.com/security/common-mistakes/disabling-apparmor/),
@@ -322,7 +322,7 @@ privileges that it needs. See {ref}`security-architecture-dac`.
 
 Namespaces limit which resources a process can see, such as other processes,
 mounts, and network interfaces, and cgroups limit how much CPU, memory, and
-I/O it can use. Containers, snaps, and `systemd` services build on them. See
+I/O the process can use. Containers, snaps, and `systemd` services build on them. See
 {ref}`security-architecture-namespaces`.
 
 (security-architecture-seccomp-filtering)=

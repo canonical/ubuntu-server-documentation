@@ -8,12 +8,12 @@ myst:
 (system-context)=
 # System context and external trust boundaries
 
-An Ubuntu system interacts with two kinds of external entity. Untrusted
-entities, such as users, network peers, and attached devices, can send
-arbitrary input to the system. External infrastructure services, such as the
-Ubuntu archive, provide content that the system depends on. Ubuntu does not
-trust the transport to these services: it verifies the content it receives
-from them with cryptographic signatures.
+An Ubuntu system interacts with two kinds of external entities:
+
+* **Untrusted entities**, such as users, network peers, and attached devices, can send arbitrary input to the system. 
+* **External infrastructure services**, such as the Ubuntu archive, provide content that the system depends on.
+
+Ubuntu does not trust the transport to these services: it verifies the content it receives from them with cryptographic signatures.
 
 The diagrams on this page follow the
 {ref}`diagram conventions <security-architecture-legend>`. To go to the

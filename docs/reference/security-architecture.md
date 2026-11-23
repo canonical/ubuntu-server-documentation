@@ -9,12 +9,11 @@ myst:
 
 This page describes the security architecture of Ubuntu as a general-purpose
 operating system: the platform that Ubuntu Server and Ubuntu Desktop share,
-with software delivered as `deb` packages and snaps. The same architecture
+with software delivered as `deb` packages and snaps. It identifies: the trust
+boundaries of an Ubuntu system; the mechanisms that protect each boundary; which of those mechanisms are active by default, and which you need to enable. The same architecture
 largely applies to other forms of Ubuntu that build on this platform, such as
 cloud images, Ubuntu on WSL, and Ubuntu container images, although some of
-them omit or delegate components, for example the boot chain. It identifies the trust
-boundaries of an Ubuntu system, the mechanisms that protect each boundary, and
-which of those mechanisms are active by default and which you need to enable.
+them omit or delegate components, for example the boot chain. 
 
 Use this page to:
 
@@ -34,14 +33,14 @@ security architecture that you build on and inherit.
 
 The architecture separates five zones:
 
-* untrusted external entities, such as network peers and attached devices
-* external infrastructure services that Ubuntu relies on, such as the Ubuntu
+* **Untrusted external entities**, such as network peers and attached devices
+* **External infrastructure services** that Ubuntu relies on, such as the Ubuntu
   archive and the Snap Store
-* userspace workloads: services and applications from `deb` packages and snaps
-* the Linux kernel, which enforces access control and isolation
-* hardware, firmware, and the boot chain, which anchor trust in the system
+* **Userspace workloads**, services and applications from `deb` packages and snaps
+* **The Linux kernel**, which enforces access control and isolation
+* **Hardware, firmware, and the boot chain**, which anchor trust in the system
 
-The mechanisms in this reference protect the system regardless of where its
+The mechanisms described in this section protect the system regardless of where its
 software comes from: the kernel confines third-party services in the same way
 as packages from the Ubuntu archive, and `snapd` confines third-party snaps in
 the same way as any other snap. However, Canonical does not review, maintain,
