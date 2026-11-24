@@ -148,15 +148,15 @@ color or line style alone.
 
 | Element | Appearance | Meaning |
 |---|---|---|
-| Trust zone | Box with a thick black border | A region with a common trust level, for example `Outside — untrusted` |
-| Untrusted actor | White box, dashed border | An entity outside the system that you cannot trust |
-| External service | White box, solid border | Infrastructure outside the system that Ubuntu relies on |
-| Component, layer, or upstream mechanism | Light gray box, solid border | A component or layer of the system, or a mechanism provided by the upstream Linux kernel or userspace |
-| Ubuntu default | Dark grey box, white text | A mechanism that Ubuntu enables or configures by default |
-| Opt-in | Light gray box, dashed border, tagged `(opt-in)` | A mechanism that you need to choose and enable |
-| Platform-dependent | Black box, dashed border, tagged `(platform-dependent)` | A mechanism that Ubuntu uses by default when the hardware or firmware supports and enables it |
-| Data flow | Solid orange arrow | Data that crosses a boundary, in the direction of the arrow |
-| Untrusted or optional flow | Dashed orange arrow | Untrusted input, or a flow that only exists when you enable an opt-in mechanism |
+| Trust zone | <span style="background-color: transparent; border: 2px solid #000000; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Box</span> with a thick black border containing other elements | A region with a common trust level, for example `Outside — untrusted` |
+| Untrusted actor | <span style="background-color: #FFFFFF; color: #000000; border: 1px dashed #000000; padding: 2px 6px; border-radius: 4px; font-family: monospace;">White box</span>, dashed border | An entity outside the system that you cannot trust |
+| External service | <span style="background-color: #FFFFFF; color: #000000; border: 1px solid #000000; padding: 2px 6px; border-radius: 4px; font-family: monospace;">White box</span>, solid border | Infrastructure outside the system that Ubuntu relies on |
+| Component, layer, or upstream mechanism | <span style="background-color: #F3F3F3; color: #000000; border: 1px solid #737373; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Light gray box</span>, solid border | A component or layer of the system, or a mechanism provided by the upstream Linux kernel or userspace |
+| Ubuntu default | <span style="background-color: #737373; color: #FFFFFF; border: 1px solid #333333; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Dark grey box</span>, white text | A mechanism that Ubuntu enables or configures by default |
+| Opt-in | <span style="background-color: #F3F3F3; color: #000000; border: 1px dashed #737373; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Light gray box</span>, dashed border, white text | A mechanism that you need to choose and enable |
+| Platform-dependent | <span style="background-color: #000000; color: #FFFFFF; border: 1px dashed #737373; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Black box</span>, dashed border | A mechanism that Ubuntu uses by default when the hardware or firmware supports and enables it |
+| Data flow | <span style="color: #E95420; font-weight: bold;">───▶</span> Solid orange arrow | Data that crosses a boundary, in the direction of the arrow |
+| Untrusted or optional flow | <span style="color: #E95420; font-weight: bold;">╌╌▶</span> Dashed orange arrow | Untrusted input, or a flow that only exists when you enable an opt-in mechanism |
 
 Boxes in the diagrams link to their explanation when it is on the same page.
 Below a diagram, links point to the explanations of its other elements.
