@@ -75,3 +75,4 @@ wireguard-vpn
 
 * Explanation: {ref}`Introduction to security <introduction-to-security>`
 * Explanation: {ref}`Security topics <explanation-security>`
+* Reference: {ref}`security-architecture`
